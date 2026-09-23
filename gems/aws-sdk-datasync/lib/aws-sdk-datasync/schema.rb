@@ -289,8 +289,8 @@ module Aws::DataSync
     Long = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.datasync#long", name: "Long", traits: {"smithy.api#default" => 0})
     String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.datasync#string", name: "String")
 
-    AgentArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArn, name: "member")
-    AgentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentListEntry, name: "member")
+    AgentArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArn, name: "member"))
+    AgentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentListEntry, name: "member"))
     AgentListEntry.add_member(:agent_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArn, name: "AgentArn"))
     AgentListEntry.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Name"))
     AgentListEntry.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatus, name: "Status"))
@@ -649,24 +649,24 @@ module Aws::DataSync
     DescribeTaskResponse.add_member(:schedule_details, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskScheduleDetails, name: "ScheduleDetails"))
     DescribeTaskResponse.add_member(:task_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskMode, name: "TaskMode"))
     DescribeTaskResponse.type = Types::DescribeTaskResponse
-    DestinationNetworkInterfaceArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceArn, name: "member")
-    DnsIpList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServerIpAddress, name: "member")
+    DestinationNetworkInterfaceArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceArn, name: "member"))
+    DnsIpList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerIpAddress, name: "member"))
     Ec2Config.add_member(:subnet_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2SubnetArn, name: "SubnetArn", traits: {"smithy.api#required" => {}}))
     Ec2Config.add_member(:security_group_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2SecurityGroupArnList, name: "SecurityGroupArns", traits: {"smithy.api#required" => {}}))
     Ec2Config.type = Types::Ec2Config
-    Ec2SecurityGroupArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2SecurityGroupArn, name: "member")
+    Ec2SecurityGroupArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2SecurityGroupArn, name: "member"))
     EfsInTransitEncryption.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     EfsInTransitEncryption.add_member(:tls1_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLS1_2", traits: {"smithy.api#enumValue" => "TLS1_2"}))
     EndpointType.add_member(:public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLIC", traits: {"smithy.api#enumValue" => "PUBLIC"}))
     EndpointType.add_member(:private_link, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIVATE_LINK", traits: {"smithy.api#enumValue" => "PRIVATE_LINK"}))
     EndpointType.add_member(:fips, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIPS", traits: {"smithy.api#enumValue" => "FIPS"}))
     EndpointType.add_member(:fips_private_link, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIPS_PRIVATE_LINK", traits: {"smithy.api#enumValue" => "FIPS_PRIVATE_LINK"}))
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterRule, name: "member")
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterRule, name: "member"))
     FilterRule.add_member(:filter_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterType, name: "FilterType"))
     FilterRule.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "Value"))
     FilterRule.type = Types::FilterRule
     FilterType.add_member(:simple_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SIMPLE_PATTERN", traits: {"smithy.api#enumValue" => "SIMPLE_PATTERN"}))
-    FilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterAttributeValue, name: "member")
+    FilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterAttributeValue, name: "member"))
     FsxProtocol.add_member(:nfs, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxProtocolNfs, name: "NFS"))
     FsxProtocol.add_member(:smb, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxProtocolSmb, name: "SMB"))
     FsxProtocol.type = Types::FsxProtocol
@@ -698,12 +698,12 @@ module Aws::DataSync
     HdfsNameNode.add_member(:hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsServerHostname, name: "Hostname", traits: {"smithy.api#required" => {}}))
     HdfsNameNode.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsServerPort, name: "Port", traits: {"smithy.api#required" => {}}))
     HdfsNameNode.type = Types::HdfsNameNode
-    HdfsNameNodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsNameNode, name: "member")
+    HdfsNameNodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HdfsNameNode, name: "member"))
     HdfsRpcProtection.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     HdfsRpcProtection.add_member(:authentication, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTHENTICATION", traits: {"smithy.api#enumValue" => "AUTHENTICATION"}))
     HdfsRpcProtection.add_member(:integrity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTEGRITY", traits: {"smithy.api#enumValue" => "INTEGRITY"}))
     HdfsRpcProtection.add_member(:privacy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIVACY", traits: {"smithy.api#enumValue" => "PRIVACY"}))
-    InputTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagListEntry, name: "member")
+    InputTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagListEntry, name: "member"))
     InternalException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     InternalException.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "errorCode"))
     InternalException.type = Types::InternalException
@@ -752,8 +752,8 @@ module Aws::DataSync
     LocationFilterName.add_member(:location_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LocationUri", traits: {"smithy.api#enumValue" => "LocationUri"}))
     LocationFilterName.add_member(:location_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LocationType", traits: {"smithy.api#enumValue" => "LocationType"}))
     LocationFilterName.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CreationTime", traits: {"smithy.api#enumValue" => "CreationTime"}))
-    LocationFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LocationFilter, name: "member")
-    LocationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LocationListEntry, name: "member")
+    LocationFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationFilter, name: "member"))
+    LocationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationListEntry, name: "member"))
     LocationListEntry.add_member(:location_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationArn, name: "LocationArn"))
     LocationListEntry.add_member(:location_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationUri, name: "LocationUri"))
     LocationListEntry.type = Types::LocationListEntry
@@ -810,11 +810,11 @@ module Aws::DataSync
     Options.add_member(:security_descriptor_copy_flags, ::Smithy::Schema::Shapes::MemberShape.new(target: SmbSecurityDescriptorCopyFlags, name: "SecurityDescriptorCopyFlags"))
     Options.add_member(:object_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectTags, name: "ObjectTags"))
     Options.type = Types::Options
-    OutputTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagListEntry, name: "member")
+    OutputTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagListEntry, name: "member"))
     OverwriteMode.add_member(:always, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALWAYS", traits: {"smithy.api#enumValue" => "ALWAYS"}))
     OverwriteMode.add_member(:never, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEVER", traits: {"smithy.api#enumValue" => "NEVER"}))
-    PLSecurityGroupArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2SecurityGroupArn, name: "member")
-    PLSubnetArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2SubnetArn, name: "member")
+    PLSecurityGroupArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2SecurityGroupArn, name: "member"))
+    PLSubnetArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2SubnetArn, name: "member"))
     PhaseStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     PhaseStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
     PhaseStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
@@ -888,7 +888,7 @@ module Aws::DataSync
     SmbVersion.add_member(:smb2_0, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMB2_0", traits: {"smithy.api#enumValue" => "SMB2_0"}))
     SourceManifestConfig.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ManifestConfig, name: "S3", traits: {"smithy.api#required" => {}}))
     SourceManifestConfig.type = Types::SourceManifestConfig
-    SourceNetworkInterfaceArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceArn, name: "member")
+    SourceNetworkInterfaceArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceArn, name: "member"))
     StartTaskExecutionRequest.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskArn, name: "TaskArn", traits: {"smithy.api#required" => {}}))
     StartTaskExecutionRequest.add_member(:override_options, ::Smithy::Schema::Shapes::MemberShape.new(target: Options, name: "OverrideOptions"))
     StartTaskExecutionRequest.add_member(:includes, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, name: "Includes"))
@@ -899,7 +899,7 @@ module Aws::DataSync
     StartTaskExecutionRequest.type = Types::StartTaskExecutionRequest
     StartTaskExecutionResponse.add_member(:task_execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskExecutionArn, name: "TaskExecutionArn"))
     StartTaskExecutionResponse.type = Types::StartTaskExecutionResponse
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagListEntry.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     TagListEntry.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     TagListEntry.type = Types::TagListEntry
@@ -915,7 +915,7 @@ module Aws::DataSync
     TaskExecutionFilesListedDetail.add_member(:at_source, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "AtSource", traits: {"smithy.api#default" => 0}))
     TaskExecutionFilesListedDetail.add_member(:at_destination_for_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "AtDestinationForDelete", traits: {"smithy.api#default" => 0}))
     TaskExecutionFilesListedDetail.type = Types::TaskExecutionFilesListedDetail
-    TaskExecutionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskExecutionListEntry, name: "member")
+    TaskExecutionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskExecutionListEntry, name: "member"))
     TaskExecutionListEntry.add_member(:task_execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskExecutionArn, name: "TaskExecutionArn"))
     TaskExecutionListEntry.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskExecutionStatus, name: "Status"))
     TaskExecutionListEntry.add_member(:task_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskMode, name: "TaskMode"))
@@ -944,8 +944,8 @@ module Aws::DataSync
     TaskFilter.type = Types::TaskFilter
     TaskFilterName.add_member(:location_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LocationId", traits: {"smithy.api#enumValue" => "LocationId"}))
     TaskFilterName.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CreationTime", traits: {"smithy.api#enumValue" => "CreationTime"}))
-    TaskFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskFilter, name: "member")
-    TaskList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskListEntry, name: "member")
+    TaskFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskFilter, name: "member"))
+    TaskList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskListEntry, name: "member"))
     TaskListEntry.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskArn, name: "TaskArn"))
     TaskListEntry.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskStatus, name: "Status"))
     TaskListEntry.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Name"))

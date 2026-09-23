@@ -600,7 +600,7 @@ module Aws::Kendra
 
     AccessControlConfigurationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlConfigurationId, name: "Id", traits: {"smithy.api#required" => {}}))
     AccessControlConfigurationSummary.type = Types::AccessControlConfigurationSummary
-    AccessControlConfigurationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlConfigurationSummary, name: "member")
+    AccessControlConfigurationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlConfigurationSummary, name: "member"))
     AccessControlListConfiguration.add_member(:key_path, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectKey, name: "KeyPath"))
     AccessControlListConfiguration.type = Types::AccessControlListConfiguration
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -611,7 +611,7 @@ module Aws::Kendra
     AdditionalResultAttribute.add_member(:value_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalResultAttributeValueType, name: "ValueType", traits: {"smithy.api#required" => {}}))
     AdditionalResultAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalResultAttributeValue, name: "Value", traits: {"smithy.api#required" => {}}))
     AdditionalResultAttribute.type = Types::AdditionalResultAttribute
-    AdditionalResultAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalResultAttribute, name: "member")
+    AdditionalResultAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalResultAttribute, name: "member"))
     AdditionalResultAttributeValue.add_member(:text_with_highlights_value, ::Smithy::Schema::Shapes::MemberShape.new(target: TextWithHighlights, name: "TextWithHighlightsValue"))
     AdditionalResultAttributeValue.type = Types::AdditionalResultAttributeValue
     AdditionalResultAttributeValueType.add_member(:text_with_highlights_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXT_WITH_HIGHLIGHTS_VALUE", traits: {"smithy.api#enumValue" => "TEXT_WITH_HIGHLIGHTS_VALUE"}))
@@ -632,14 +632,14 @@ module Aws::Kendra
     AlfrescoEntity.add_member(:wiki, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "wiki", traits: {"smithy.api#enumValue" => "wiki"}))
     AlfrescoEntity.add_member(:blog, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "blog", traits: {"smithy.api#enumValue" => "blog"}))
     AlfrescoEntity.add_member(:document_library, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "documentLibrary", traits: {"smithy.api#enumValue" => "documentLibrary"}))
-    AssociateEntitiesToExperienceFailedEntityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedEntity, name: "member")
+    AssociateEntitiesToExperienceFailedEntityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedEntity, name: "member"))
     AssociateEntitiesToExperienceRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperienceId, name: "Id", traits: {"smithy.api#required" => {}}))
     AssociateEntitiesToExperienceRequest.add_member(:index_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexId, name: "IndexId", traits: {"smithy.api#required" => {}}))
     AssociateEntitiesToExperienceRequest.add_member(:entity_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociateEntityList, name: "EntityList", traits: {"smithy.api#required" => {}}))
     AssociateEntitiesToExperienceRequest.type = Types::AssociateEntitiesToExperienceRequest
     AssociateEntitiesToExperienceResponse.add_member(:failed_entity_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociateEntitiesToExperienceFailedEntityList, name: "FailedEntityList"))
     AssociateEntitiesToExperienceResponse.type = Types::AssociateEntitiesToExperienceResponse
-    AssociateEntityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityConfiguration, name: "member")
+    AssociateEntityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityConfiguration, name: "member"))
     AssociatePersonasToEntitiesRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperienceId, name: "Id", traits: {"smithy.api#required" => {}}))
     AssociatePersonasToEntitiesRequest.add_member(:index_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexId, name: "IndexId", traits: {"smithy.api#required" => {}}))
     AssociatePersonasToEntitiesRequest.add_member(:personas, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityPersonaConfigurationList, name: "Personas", traits: {"smithy.api#required" => {}}))
@@ -657,7 +657,7 @@ module Aws::Kendra
     AttributeFilter.add_member(:less_than, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttribute, name: "LessThan"))
     AttributeFilter.add_member(:less_than_or_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttribute, name: "LessThanOrEquals"))
     AttributeFilter.type = Types::AttributeFilter
-    AttributeFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeFilter, name: "member")
+    AttributeFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeFilter, name: "member"))
     AttributeSuggestionsDescribeConfig.add_member(:suggestable_config_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestableConfigList, name: "SuggestableConfigList"))
     AttributeSuggestionsDescribeConfig.add_member(:attribute_suggestions_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeSuggestionsMode, name: "AttributeSuggestionsMode"))
     AttributeSuggestionsDescribeConfig.type = Types::AttributeSuggestionsDescribeConfig
@@ -677,7 +677,7 @@ module Aws::Kendra
     BasicAuthenticationConfiguration.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "Port", traits: {"smithy.api#required" => {}}))
     BasicAuthenticationConfiguration.add_member(:credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "Credentials", traits: {"smithy.api#required" => {}}))
     BasicAuthenticationConfiguration.type = Types::BasicAuthenticationConfiguration
-    BasicAuthenticationConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BasicAuthenticationConfiguration, name: "member")
+    BasicAuthenticationConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BasicAuthenticationConfiguration, name: "member"))
     BatchDeleteDocumentRequest.add_member(:index_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexId, name: "IndexId", traits: {"smithy.api#required" => {}}))
     BatchDeleteDocumentRequest.add_member(:document_id_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentIdList, name: "DocumentIdList", traits: {"smithy.api#required" => {}}))
     BatchDeleteDocumentRequest.add_member(:data_source_sync_job_metric_target, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceSyncJobMetricTarget, name: "DataSourceSyncJobMetricTarget"))
@@ -689,12 +689,12 @@ module Aws::Kendra
     BatchDeleteDocumentResponseFailedDocument.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     BatchDeleteDocumentResponseFailedDocument.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage"))
     BatchDeleteDocumentResponseFailedDocument.type = Types::BatchDeleteDocumentResponseFailedDocument
-    BatchDeleteDocumentResponseFailedDocuments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteDocumentResponseFailedDocument, name: "member")
+    BatchDeleteDocumentResponseFailedDocuments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteDocumentResponseFailedDocument, name: "member"))
     BatchDeleteFeaturedResultsSetError.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturedResultsSetId, name: "Id", traits: {"smithy.api#required" => {}}))
     BatchDeleteFeaturedResultsSetError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode", traits: {"smithy.api#required" => {}}))
     BatchDeleteFeaturedResultsSetError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage", traits: {"smithy.api#required" => {}}))
     BatchDeleteFeaturedResultsSetError.type = Types::BatchDeleteFeaturedResultsSetError
-    BatchDeleteFeaturedResultsSetErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteFeaturedResultsSetError, name: "member")
+    BatchDeleteFeaturedResultsSetErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteFeaturedResultsSetError, name: "member"))
     BatchDeleteFeaturedResultsSetRequest.add_member(:index_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexId, name: "IndexId", traits: {"smithy.api#required" => {}}))
     BatchDeleteFeaturedResultsSetRequest.add_member(:featured_results_set_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturedResultsSetIdList, name: "FeaturedResultsSetIds", traits: {"smithy.api#required" => {}}))
     BatchDeleteFeaturedResultsSetRequest.type = Types::BatchDeleteFeaturedResultsSetRequest
@@ -711,7 +711,7 @@ module Aws::Kendra
     BatchGetDocumentStatusResponseError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     BatchGetDocumentStatusResponseError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage"))
     BatchGetDocumentStatusResponseError.type = Types::BatchGetDocumentStatusResponseError
-    BatchGetDocumentStatusResponseErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetDocumentStatusResponseError, name: "member")
+    BatchGetDocumentStatusResponseErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetDocumentStatusResponseError, name: "member"))
     BatchPutDocumentRequest.add_member(:index_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexId, name: "IndexId", traits: {"smithy.api#required" => {}}))
     BatchPutDocumentRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn"))
     BatchPutDocumentRequest.add_member(:documents, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentList, name: "Documents", traits: {"smithy.api#required" => {}}))
@@ -724,7 +724,7 @@ module Aws::Kendra
     BatchPutDocumentResponseFailedDocument.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     BatchPutDocumentResponseFailedDocument.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage"))
     BatchPutDocumentResponseFailedDocument.type = Types::BatchPutDocumentResponseFailedDocument
-    BatchPutDocumentResponseFailedDocuments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutDocumentResponseFailedDocument, name: "member")
+    BatchPutDocumentResponseFailedDocuments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutDocumentResponseFailedDocument, name: "member"))
     BoxConfiguration.add_member(:enterprise_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnterpriseId, name: "EnterpriseId", traits: {"smithy.api#required" => {}}))
     BoxConfiguration.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "SecretArn", traits: {"smithy.api#required" => {}}))
     BoxConfiguration.add_member(:use_change_log, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "UseChangeLog", traits: {"smithy.api#default" => false}))
@@ -742,13 +742,13 @@ module Aws::Kendra
     CapacityUnitsConfiguration.add_member(:storage_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageCapacityUnit, name: "StorageCapacityUnits", traits: {"smithy.api#required" => {}}))
     CapacityUnitsConfiguration.add_member(:query_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryCapacityUnit, name: "QueryCapacityUnits", traits: {"smithy.api#required" => {}}))
     CapacityUnitsConfiguration.type = Types::CapacityUnitsConfiguration
-    ChangeDetectingColumns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "member")
+    ChangeDetectingColumns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "member"))
     ClearQuerySuggestionsRequest.add_member(:index_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexId, name: "IndexId", traits: {"smithy.api#required" => {}}))
     ClearQuerySuggestionsRequest.type = Types::ClearQuerySuggestionsRequest
     ClickFeedback.add_member(:result_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultId, name: "ResultId", traits: {"smithy.api#required" => {}}))
     ClickFeedback.add_member(:click_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ClickTime", traits: {"smithy.api#required" => {}}))
     ClickFeedback.type = Types::ClickFeedback
-    ClickFeedbackList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClickFeedback, name: "member")
+    ClickFeedbackList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClickFeedback, name: "member"))
     CollapseConfiguration.add_member(:document_attribute_key, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeKey, name: "DocumentAttributeKey", traits: {"smithy.api#required" => {}}))
     CollapseConfiguration.add_member(:sorting_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SortingConfigurationList, name: "SortingConfigurations"))
     CollapseConfiguration.add_member(:missing_attribute_key_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: MissingAttributeKeyStrategy, name: "MissingAttributeKeyStrategy"))
@@ -781,11 +781,11 @@ module Aws::Kendra
     ConflictingItem.add_member(:set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SetName"))
     ConflictingItem.add_member(:set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SetId"))
     ConflictingItem.type = Types::ConflictingItem
-    ConflictingItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictingItem, name: "member")
+    ConflictingItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictingItem, name: "member"))
     ConfluenceAttachmentConfiguration.add_member(:crawl_attachments, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "CrawlAttachments", traits: {"smithy.api#default" => false}))
     ConfluenceAttachmentConfiguration.add_member(:attachment_field_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfluenceAttachmentFieldMappingsList, name: "AttachmentFieldMappings"))
     ConfluenceAttachmentConfiguration.type = Types::ConfluenceAttachmentConfiguration
-    ConfluenceAttachmentFieldMappingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfluenceAttachmentToIndexFieldMapping, name: "member")
+    ConfluenceAttachmentFieldMappingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfluenceAttachmentToIndexFieldMapping, name: "member"))
     ConfluenceAttachmentFieldName.add_member(:author, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTHOR", traits: {"smithy.api#enumValue" => "AUTHOR"}))
     ConfluenceAttachmentFieldName.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTENT_TYPE", traits: {"smithy.api#enumValue" => "CONTENT_TYPE"}))
     ConfluenceAttachmentFieldName.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED_DATE", traits: {"smithy.api#enumValue" => "CREATED_DATE"}))
@@ -805,7 +805,7 @@ module Aws::Kendra
     ConfluenceAuthenticationType.add_member(:pat, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PAT", traits: {"smithy.api#enumValue" => "PAT"}))
     ConfluenceBlogConfiguration.add_member(:blog_field_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfluenceBlogFieldMappingsList, name: "BlogFieldMappings"))
     ConfluenceBlogConfiguration.type = Types::ConfluenceBlogConfiguration
-    ConfluenceBlogFieldMappingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfluenceBlogToIndexFieldMapping, name: "member")
+    ConfluenceBlogFieldMappingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfluenceBlogToIndexFieldMapping, name: "member"))
     ConfluenceBlogFieldName.add_member(:author, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTHOR", traits: {"smithy.api#enumValue" => "AUTHOR"}))
     ConfluenceBlogFieldName.add_member(:display_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISPLAY_URL", traits: {"smithy.api#enumValue" => "DISPLAY_URL"}))
     ConfluenceBlogFieldName.add_member(:item_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ITEM_TYPE", traits: {"smithy.api#enumValue" => "ITEM_TYPE"}))
@@ -834,7 +834,7 @@ module Aws::Kendra
     ConfluenceConfiguration.type = Types::ConfluenceConfiguration
     ConfluencePageConfiguration.add_member(:page_field_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfluencePageFieldMappingsList, name: "PageFieldMappings"))
     ConfluencePageConfiguration.type = Types::ConfluencePageConfiguration
-    ConfluencePageFieldMappingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfluencePageToIndexFieldMapping, name: "member")
+    ConfluencePageFieldMappingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfluencePageToIndexFieldMapping, name: "member"))
     ConfluencePageFieldName.add_member(:author, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTHOR", traits: {"smithy.api#enumValue" => "AUTHOR"}))
     ConfluencePageFieldName.add_member(:content_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTENT_STATUS", traits: {"smithy.api#enumValue" => "CONTENT_STATUS"}))
     ConfluencePageFieldName.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED_DATE", traits: {"smithy.api#enumValue" => "CREATED_DATE"}))
@@ -857,12 +857,12 @@ module Aws::Kendra
     ConfluenceSpaceConfiguration.add_member(:exclude_spaces, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfluenceSpaceList, name: "ExcludeSpaces"))
     ConfluenceSpaceConfiguration.add_member(:space_field_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfluenceSpaceFieldMappingsList, name: "SpaceFieldMappings"))
     ConfluenceSpaceConfiguration.type = Types::ConfluenceSpaceConfiguration
-    ConfluenceSpaceFieldMappingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfluenceSpaceToIndexFieldMapping, name: "member")
+    ConfluenceSpaceFieldMappingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfluenceSpaceToIndexFieldMapping, name: "member"))
     ConfluenceSpaceFieldName.add_member(:display_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISPLAY_URL", traits: {"smithy.api#enumValue" => "DISPLAY_URL"}))
     ConfluenceSpaceFieldName.add_member(:item_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ITEM_TYPE", traits: {"smithy.api#enumValue" => "ITEM_TYPE"}))
     ConfluenceSpaceFieldName.add_member(:space_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPACE_KEY", traits: {"smithy.api#enumValue" => "SPACE_KEY"}))
     ConfluenceSpaceFieldName.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "URL", traits: {"smithy.api#enumValue" => "URL"}))
-    ConfluenceSpaceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfluenceSpaceIdentifier, name: "member")
+    ConfluenceSpaceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfluenceSpaceIdentifier, name: "member"))
     ConfluenceSpaceToIndexFieldMapping.add_member(:data_source_field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfluenceSpaceFieldName, name: "DataSourceFieldName"))
     ConfluenceSpaceToIndexFieldMapping.add_member(:date_field_format, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceDateFieldFormat, name: "DateFieldFormat"))
     ConfluenceSpaceToIndexFieldMapping.add_member(:index_field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexFieldName, name: "IndexFieldName"))
@@ -896,7 +896,7 @@ module Aws::Kendra
     Correction.add_member(:term, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Term"))
     Correction.add_member(:corrected_term, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CorrectedTerm"))
     Correction.type = Types::Correction
-    CorrectionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Correction, name: "member")
+    CorrectionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Correction, name: "member"))
     CreateAccessControlConfigurationRequest.add_member(:index_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexId, name: "IndexId", traits: {"smithy.api#required" => {}}))
     CreateAccessControlConfigurationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlConfigurationName, name: "Name", traits: {"smithy.api#required" => {}}))
     CreateAccessControlConfigurationRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
@@ -1013,9 +1013,9 @@ module Aws::Kendra
     DataSourceGroup.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalName, name: "GroupId", traits: {"smithy.api#required" => {}}))
     DataSourceGroup.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceId, name: "DataSourceId", traits: {"smithy.api#required" => {}}))
     DataSourceGroup.type = Types::DataSourceGroup
-    DataSourceGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceGroup, name: "member")
-    DataSourceIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceId, name: "member")
-    DataSourceInclusionsExclusionsStrings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceInclusionsExclusionsStringsMember, name: "member")
+    DataSourceGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceGroup, name: "member"))
+    DataSourceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceId, name: "member"))
+    DataSourceInclusionsExclusionsStrings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceInclusionsExclusionsStringsMember, name: "member"))
     DataSourceStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     DataSourceStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     DataSourceStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -1029,7 +1029,7 @@ module Aws::Kendra
     DataSourceSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceStatus, name: "Status"))
     DataSourceSummary.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "LanguageCode"))
     DataSourceSummary.type = Types::DataSourceSummary
-    DataSourceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceSummary, name: "member")
+    DataSourceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceSummary, name: "member"))
     DataSourceSyncJob.add_member(:execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ExecutionId"))
     DataSourceSyncJob.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime"))
     DataSourceSyncJob.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
@@ -1039,7 +1039,7 @@ module Aws::Kendra
     DataSourceSyncJob.add_member(:data_source_error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DataSourceErrorCode"))
     DataSourceSyncJob.add_member(:metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceSyncJobMetrics, name: "Metrics"))
     DataSourceSyncJob.type = Types::DataSourceSyncJob
-    DataSourceSyncJobHistoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceSyncJob, name: "member")
+    DataSourceSyncJobHistoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceSyncJob, name: "member"))
     DataSourceSyncJobMetricTarget.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceId, name: "DataSourceId", traits: {"smithy.api#required" => {}}))
     DataSourceSyncJobMetricTarget.add_member(:data_source_sync_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceSyncJobId, name: "DataSourceSyncJobId"))
     DataSourceSyncJobMetricTarget.type = Types::DataSourceSyncJobMetricTarget
@@ -1060,7 +1060,7 @@ module Aws::Kendra
     DataSourceToIndexFieldMapping.add_member(:date_field_format, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceDateFieldFormat, name: "DateFieldFormat"))
     DataSourceToIndexFieldMapping.add_member(:index_field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexFieldName, name: "IndexFieldName", traits: {"smithy.api#required" => {}}))
     DataSourceToIndexFieldMapping.type = Types::DataSourceToIndexFieldMapping
-    DataSourceToIndexFieldMappingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceToIndexFieldMapping, name: "member")
+    DataSourceToIndexFieldMappingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceToIndexFieldMapping, name: "member"))
     DataSourceType.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3", traits: {"smithy.api#enumValue" => "S3"}))
     DataSourceType.add_member(:sharepoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHAREPOINT", traits: {"smithy.api#enumValue" => "SHAREPOINT"}))
     DataSourceType.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATABASE", traits: {"smithy.api#enumValue" => "DATABASE"}))
@@ -1273,7 +1273,7 @@ module Aws::Kendra
     DisassociateEntitiesFromExperienceRequest.type = Types::DisassociateEntitiesFromExperienceRequest
     DisassociateEntitiesFromExperienceResponse.add_member(:failed_entity_list, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedEntityList, name: "FailedEntityList"))
     DisassociateEntitiesFromExperienceResponse.type = Types::DisassociateEntitiesFromExperienceResponse
-    DisassociateEntityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityConfiguration, name: "member")
+    DisassociateEntityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityConfiguration, name: "member"))
     DisassociatePersonasFromEntitiesRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperienceId, name: "Id", traits: {"smithy.api#required" => {}}))
     DisassociatePersonasFromEntitiesRequest.add_member(:index_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexId, name: "IndexId", traits: {"smithy.api#required" => {}}))
     DisassociatePersonasFromEntitiesRequest.add_member(:entity_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdsList, name: "EntityIds", traits: {"smithy.api#required" => {}}))
@@ -1297,9 +1297,9 @@ module Aws::Kendra
     DocumentAttributeCondition.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionOperator, name: "Operator", traits: {"smithy.api#required" => {}}))
     DocumentAttributeCondition.add_member(:condition_on_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeValue, name: "ConditionOnValue"))
     DocumentAttributeCondition.type = Types::DocumentAttributeCondition
-    DocumentAttributeKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeKey, name: "member")
-    DocumentAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttribute, name: "member")
-    DocumentAttributeStringListValue.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    DocumentAttributeKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeKey, name: "member"))
+    DocumentAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttribute, name: "member"))
+    DocumentAttributeStringListValue.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     DocumentAttributeTarget.add_member(:target_document_attribute_key, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeKey, name: "TargetDocumentAttributeKey"))
     DocumentAttributeTarget.add_member(:target_document_attribute_value_deletion, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "TargetDocumentAttributeValueDeletion", traits: {"smithy.api#default" => false}))
     DocumentAttributeTarget.add_member(:target_document_attribute_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeValue, name: "TargetDocumentAttributeValue"))
@@ -1313,34 +1313,34 @@ module Aws::Kendra
     DocumentAttributeValueCountPair.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Count"))
     DocumentAttributeValueCountPair.add_member(:facet_results, ::Smithy::Schema::Shapes::MemberShape.new(target: FacetResultList, name: "FacetResults"))
     DocumentAttributeValueCountPair.type = Types::DocumentAttributeValueCountPair
-    DocumentAttributeValueCountPairList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeValueCountPair, name: "member")
+    DocumentAttributeValueCountPairList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeValueCountPair, name: "member"))
     DocumentAttributeValueType.add_member(:string_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING_VALUE", traits: {"smithy.api#enumValue" => "STRING_VALUE"}))
     DocumentAttributeValueType.add_member(:string_list_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING_LIST_VALUE", traits: {"smithy.api#enumValue" => "STRING_LIST_VALUE"}))
     DocumentAttributeValueType.add_member(:long_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LONG_VALUE", traits: {"smithy.api#enumValue" => "LONG_VALUE"}))
     DocumentAttributeValueType.add_member(:date_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATE_VALUE", traits: {"smithy.api#enumValue" => "DATE_VALUE"}))
-    DocumentIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentId, name: "member")
+    DocumentIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentId, name: "member"))
     DocumentInfo.add_member(:document_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentId, name: "DocumentId", traits: {"smithy.api#required" => {}}))
     DocumentInfo.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeList, name: "Attributes"))
     DocumentInfo.type = Types::DocumentInfo
-    DocumentInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentInfo, name: "member")
-    DocumentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Document, name: "member")
+    DocumentInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentInfo, name: "member"))
+    DocumentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Document, name: "member"))
     DocumentMetadataConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentMetadataConfigurationName, name: "Name", traits: {"smithy.api#required" => {}}))
     DocumentMetadataConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeValueType, name: "Type", traits: {"smithy.api#required" => {}}))
     DocumentMetadataConfiguration.add_member(:relevance, ::Smithy::Schema::Shapes::MemberShape.new(target: Relevance, name: "Relevance"))
     DocumentMetadataConfiguration.add_member(:search, ::Smithy::Schema::Shapes::MemberShape.new(target: Search, name: "Search"))
     DocumentMetadataConfiguration.type = Types::DocumentMetadataConfiguration
-    DocumentMetadataConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentMetadataConfiguration, name: "member")
+    DocumentMetadataConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentMetadataConfiguration, name: "member"))
     DocumentRelevanceConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentMetadataConfigurationName, name: "Name", traits: {"smithy.api#required" => {}}))
     DocumentRelevanceConfiguration.add_member(:relevance, ::Smithy::Schema::Shapes::MemberShape.new(target: Relevance, name: "Relevance", traits: {"smithy.api#required" => {}}))
     DocumentRelevanceConfiguration.type = Types::DocumentRelevanceConfiguration
-    DocumentRelevanceOverrideConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentRelevanceConfiguration, name: "member")
+    DocumentRelevanceOverrideConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentRelevanceConfiguration, name: "member"))
     DocumentStatus.add_member(:not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_FOUND", traits: {"smithy.api#enumValue" => "NOT_FOUND"}))
     DocumentStatus.add_member(:processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROCESSING", traits: {"smithy.api#enumValue" => "PROCESSING"}))
     DocumentStatus.add_member(:indexed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INDEXED", traits: {"smithy.api#enumValue" => "INDEXED"}))
     DocumentStatus.add_member(:updated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATED", traits: {"smithy.api#enumValue" => "UPDATED"}))
     DocumentStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     DocumentStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
-    DocumentStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "member")
+    DocumentStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "member"))
     DocumentsMetadataConfiguration.add_member(:s3_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectKey, name: "S3Prefix"))
     DocumentsMetadataConfiguration.type = Types::DocumentsMetadataConfiguration
     EndpointType.add_member(:home, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOME", traits: {"smithy.api#enumValue" => "HOME"}))
@@ -1353,19 +1353,19 @@ module Aws::Kendra
     EntityDisplayData.add_member(:first_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameType, name: "FirstName"))
     EntityDisplayData.add_member(:last_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameType, name: "LastName"))
     EntityDisplayData.type = Types::EntityDisplayData
-    EntityFilter.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AlfrescoEntity, name: "member")
-    EntityIdsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "member")
+    EntityFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AlfrescoEntity, name: "member"))
+    EntityIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "member"))
     EntityPersonaConfiguration.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "EntityId", traits: {"smithy.api#required" => {}}))
     EntityPersonaConfiguration.add_member(:persona, ::Smithy::Schema::Shapes::MemberShape.new(target: Persona, name: "Persona", traits: {"smithy.api#required" => {}}))
     EntityPersonaConfiguration.type = Types::EntityPersonaConfiguration
-    EntityPersonaConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityPersonaConfiguration, name: "member")
+    EntityPersonaConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityPersonaConfiguration, name: "member"))
     EntityType.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
     EntityType.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GROUP", traits: {"smithy.api#enumValue" => "GROUP"}))
     ErrorCode.add_member(:internal_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "InternalError"}))
     ErrorCode.add_member(:invalid_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_REQUEST", traits: {"smithy.api#enumValue" => "InvalidRequest"}))
-    ExcludeMimeTypesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MimeType, name: "member")
-    ExcludeSharedDrivesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SharedDriveId, name: "member")
-    ExcludeUserAccountsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserAccount, name: "member")
+    ExcludeMimeTypesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MimeType, name: "member"))
+    ExcludeSharedDrivesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SharedDriveId, name: "member"))
+    ExcludeUserAccountsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAccount, name: "member"))
     ExpandConfiguration.add_member(:max_result_items_to_expand, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "MaxResultItemsToExpand"))
     ExpandConfiguration.add_member(:max_expanded_results_per_item, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "MaxExpandedResultsPerItem"))
     ExpandConfiguration.type = Types::ExpandConfiguration
@@ -1376,19 +1376,19 @@ module Aws::Kendra
     ExpandedResultItem.add_member(:document_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "DocumentURI"))
     ExpandedResultItem.add_member(:document_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeList, name: "DocumentAttributes"))
     ExpandedResultItem.type = Types::ExpandedResultItem
-    ExpandedResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExpandedResultItem, name: "member")
+    ExpandedResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpandedResultItem, name: "member"))
     ExperienceConfiguration.add_member(:content_source_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentSourceConfiguration, name: "ContentSourceConfiguration"))
     ExperienceConfiguration.add_member(:user_identity_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: UserIdentityConfiguration, name: "UserIdentityConfiguration"))
     ExperienceConfiguration.type = Types::ExperienceConfiguration
     ExperienceEndpoint.add_member(:endpoint_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointType, name: "EndpointType"))
     ExperienceEndpoint.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "Endpoint"))
     ExperienceEndpoint.type = Types::ExperienceEndpoint
-    ExperienceEndpoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperienceEndpoint, name: "member")
+    ExperienceEndpoints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperienceEndpoint, name: "member"))
     ExperienceEntitiesSummary.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "EntityId"))
     ExperienceEntitiesSummary.add_member(:entity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, name: "EntityType"))
     ExperienceEntitiesSummary.add_member(:display_data, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDisplayData, name: "DisplayData"))
     ExperienceEntitiesSummary.type = Types::ExperienceEntitiesSummary
-    ExperienceEntitiesSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperienceEntitiesSummary, name: "member")
+    ExperienceEntitiesSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperienceEntitiesSummary, name: "member"))
     ExperienceStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     ExperienceStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     ExperienceStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -1399,25 +1399,25 @@ module Aws::Kendra
     ExperiencesSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperienceStatus, name: "Status"))
     ExperiencesSummary.add_member(:endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperienceEndpoints, name: "Endpoints"))
     ExperiencesSummary.type = Types::ExperiencesSummary
-    ExperiencesSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperiencesSummary, name: "member")
+    ExperiencesSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperiencesSummary, name: "member"))
     Facet.add_member(:document_attribute_key, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeKey, name: "DocumentAttributeKey"))
     Facet.add_member(:facets, ::Smithy::Schema::Shapes::MemberShape.new(target: FacetList, name: "Facets"))
     Facet.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: TopDocumentAttributeValueCountPairsSize, name: "MaxResults", traits: {"smithy.api#default" => 0}))
     Facet.type = Types::Facet
-    FacetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Facet, name: "member")
+    FacetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Facet, name: "member"))
     FacetResult.add_member(:document_attribute_key, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeKey, name: "DocumentAttributeKey"))
     FacetResult.add_member(:document_attribute_value_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeValueType, name: "DocumentAttributeValueType"))
     FacetResult.add_member(:document_attribute_value_count_pairs, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeValueCountPairList, name: "DocumentAttributeValueCountPairs"))
     FacetResult.type = Types::FacetResult
-    FacetResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FacetResult, name: "member")
+    FacetResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FacetResult, name: "member"))
     FailedEntity.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "EntityId"))
     FailedEntity.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage"))
     FailedEntity.type = Types::FailedEntity
-    FailedEntityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedEntity, name: "member")
+    FailedEntityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedEntity, name: "member"))
     FaqFileFormat.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
     FaqFileFormat.add_member(:csv_with_header, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CSV_WITH_HEADER", traits: {"smithy.api#enumValue" => "CSV_WITH_HEADER"}))
     FaqFileFormat.add_member(:json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON", traits: {"smithy.api#enumValue" => "JSON"}))
-    FaqIdsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FaqId, name: "member")
+    FaqIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FaqId, name: "member"))
     FaqStatistics.add_member(:indexed_question_answers_count, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexedQuestionAnswersCount, name: "IndexedQuestionAnswersCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     FaqStatistics.type = Types::FaqStatistics
     FaqStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
@@ -1433,18 +1433,18 @@ module Aws::Kendra
     FaqSummary.add_member(:file_format, ::Smithy::Schema::Shapes::MemberShape.new(target: FaqFileFormat, name: "FileFormat"))
     FaqSummary.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "LanguageCode"))
     FaqSummary.type = Types::FaqSummary
-    FaqSummaryItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FaqSummary, name: "member")
+    FaqSummaryItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FaqSummary, name: "member"))
     FeaturedDocument.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentId, name: "Id"))
     FeaturedDocument.type = Types::FeaturedDocument
-    FeaturedDocumentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturedDocument, name: "member")
+    FeaturedDocumentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturedDocument, name: "member"))
     FeaturedDocumentMissing.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentId, name: "Id"))
     FeaturedDocumentMissing.type = Types::FeaturedDocumentMissing
-    FeaturedDocumentMissingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturedDocumentMissing, name: "member")
+    FeaturedDocumentMissingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturedDocumentMissing, name: "member"))
     FeaturedDocumentWithMetadata.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentId, name: "Id"))
     FeaturedDocumentWithMetadata.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Title"))
     FeaturedDocumentWithMetadata.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "URI"))
     FeaturedDocumentWithMetadata.type = Types::FeaturedDocumentWithMetadata
-    FeaturedDocumentWithMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturedDocumentWithMetadata, name: "member")
+    FeaturedDocumentWithMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturedDocumentWithMetadata, name: "member"))
     FeaturedResultsConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     FeaturedResultsConflictException.add_member(:conflicting_items, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictingItems, name: "ConflictingItems"))
     FeaturedResultsConflictException.type = Types::FeaturedResultsConflictException
@@ -1458,7 +1458,7 @@ module Aws::Kendra
     FeaturedResultsItem.add_member(:document_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeList, name: "DocumentAttributes"))
     FeaturedResultsItem.add_member(:feedback_token, ::Smithy::Schema::Shapes::MemberShape.new(target: FeedbackToken, name: "FeedbackToken"))
     FeaturedResultsItem.type = Types::FeaturedResultsItem
-    FeaturedResultsItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturedResultsItem, name: "member")
+    FeaturedResultsItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturedResultsItem, name: "member"))
     FeaturedResultsSet.add_member(:featured_results_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturedResultsSetId, name: "FeaturedResultsSetId"))
     FeaturedResultsSet.add_member(:featured_results_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturedResultsSetName, name: "FeaturedResultsSetName"))
     FeaturedResultsSet.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturedResultsSetDescription, name: "Description"))
@@ -1468,7 +1468,7 @@ module Aws::Kendra
     FeaturedResultsSet.add_member(:last_updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "LastUpdatedTimestamp"))
     FeaturedResultsSet.add_member(:creation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "CreationTimestamp"))
     FeaturedResultsSet.type = Types::FeaturedResultsSet
-    FeaturedResultsSetIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturedResultsSetId, name: "member")
+    FeaturedResultsSetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturedResultsSetId, name: "member"))
     FeaturedResultsSetStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     FeaturedResultsSetStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     FeaturedResultsSetSummary.add_member(:featured_results_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturedResultsSetId, name: "FeaturedResultsSetId"))
@@ -1477,8 +1477,8 @@ module Aws::Kendra
     FeaturedResultsSetSummary.add_member(:last_updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "LastUpdatedTimestamp"))
     FeaturedResultsSetSummary.add_member(:creation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "CreationTimestamp"))
     FeaturedResultsSetSummary.type = Types::FeaturedResultsSetSummary
-    FeaturedResultsSetSummaryItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturedResultsSetSummary, name: "member")
-    FolderIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FolderId, name: "member")
+    FeaturedResultsSetSummaryItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturedResultsSetSummary, name: "member"))
+    FolderIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FolderId, name: "member"))
     FsxConfiguration.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, name: "FileSystemId", traits: {"smithy.api#required" => {}}))
     FsxConfiguration.add_member(:file_system_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxFileSystemType, name: "FileSystemType", traits: {"smithy.api#required" => {}}))
     FsxConfiguration.add_member(:vpc_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceVpcConfiguration, name: "VpcConfiguration", traits: {"smithy.api#required" => {}}))
@@ -1551,7 +1551,7 @@ module Aws::Kendra
     GroupMembers.add_member(:member_users, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberUsers, name: "MemberUsers"))
     GroupMembers.add_member(:s3_pathfor_group_members, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Path, name: "S3PathforGroupMembers"))
     GroupMembers.type = Types::GroupMembers
-    GroupOrderingIdSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupOrderingIdSummary, name: "member")
+    GroupOrderingIdSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupOrderingIdSummary, name: "member"))
     GroupOrderingIdSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalMappingStatus, name: "Status"))
     GroupOrderingIdSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedAt"))
     GroupOrderingIdSummary.add_member(:received_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ReceivedAt"))
@@ -1561,16 +1561,16 @@ module Aws::Kendra
     GroupSummary.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupId, name: "GroupId"))
     GroupSummary.add_member(:ordering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalOrderingId, name: "OrderingId"))
     GroupSummary.type = Types::GroupSummary
-    Groups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalName, name: "member")
+    Groups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalName, name: "member"))
     HierarchicalPrincipal.add_member(:principal_list, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalList, name: "PrincipalList", traits: {"smithy.api#required" => {}}))
     HierarchicalPrincipal.type = Types::HierarchicalPrincipal
-    HierarchicalPrincipalList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchicalPrincipal, name: "member")
+    HierarchicalPrincipalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchicalPrincipal, name: "member"))
     Highlight.add_member(:begin_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "BeginOffset", traits: {"smithy.api#required" => {}}))
     Highlight.add_member(:end_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "EndOffset", traits: {"smithy.api#required" => {}}))
     Highlight.add_member(:top_answer, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "TopAnswer", traits: {"smithy.api#default" => false}))
     Highlight.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightType, name: "Type"))
     Highlight.type = Types::Highlight
-    HighlightList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Highlight, name: "member")
+    HighlightList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Highlight, name: "member"))
     HighlightType.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
     HighlightType.add_member(:thesaurus_synonym, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THESAURUS_SYNONYM", traits: {"smithy.api#enumValue" => "THESAURUS_SYNONYM"}))
     HookConfiguration.add_member(:invocation_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeCondition, name: "InvocationCondition"))
@@ -1584,7 +1584,7 @@ module Aws::Kendra
     IndexConfigurationSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt", traits: {"smithy.api#required" => {}}))
     IndexConfigurationSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     IndexConfigurationSummary.type = Types::IndexConfigurationSummary
-    IndexConfigurationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IndexConfigurationSummary, name: "member")
+    IndexConfigurationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexConfigurationSummary, name: "member"))
     IndexEdition.add_member(:developer_edition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEVELOPER_EDITION", traits: {"smithy.api#enumValue" => "DEVELOPER_EDITION"}))
     IndexEdition.add_member(:enterprise_edition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENTERPRISE_EDITION", traits: {"smithy.api#enumValue" => "ENTERPRISE_EDITION"}))
     IndexEdition.add_member(:gen_ai_enterprise_edition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GEN_AI_ENTERPRISE_EDITION", traits: {"smithy.api#enumValue" => "GEN_AI_ENTERPRISE_EDITION"}))
@@ -1601,7 +1601,7 @@ module Aws::Kendra
     InlineCustomDocumentEnrichmentConfiguration.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeTarget, name: "Target"))
     InlineCustomDocumentEnrichmentConfiguration.add_member(:document_content_deletion, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "DocumentContentDeletion", traits: {"smithy.api#default" => false}))
     InlineCustomDocumentEnrichmentConfiguration.type = Types::InlineCustomDocumentEnrichmentConfiguration
-    InlineCustomDocumentEnrichmentConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InlineCustomDocumentEnrichmentConfiguration, name: "member")
+    InlineCustomDocumentEnrichmentConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InlineCustomDocumentEnrichmentConfiguration, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InternalServerException.type = Types::InternalServerException
     Interval.add_member(:this_month, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THIS_MONTH", traits: {"smithy.api#enumValue" => "THIS_MONTH"}))
@@ -1615,8 +1615,8 @@ module Aws::Kendra
     IssueSubEntity.add_member(:comments, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMMENTS", traits: {"smithy.api#enumValue" => "COMMENTS"}))
     IssueSubEntity.add_member(:attachments, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ATTACHMENTS", traits: {"smithy.api#enumValue" => "ATTACHMENTS"}))
     IssueSubEntity.add_member(:worklogs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WORKLOGS", traits: {"smithy.api#enumValue" => "WORKLOGS"}))
-    IssueSubEntityFilter.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IssueSubEntity, name: "member")
-    IssueType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    IssueSubEntityFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IssueSubEntity, name: "member"))
+    IssueType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     JiraConfiguration.add_member(:jira_account_url, ::Smithy::Schema::Shapes::MemberShape.new(target: JiraAccountUrl, name: "JiraAccountUrl", traits: {"smithy.api#required" => {}}))
     JiraConfiguration.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "SecretArn", traits: {"smithy.api#required" => {}}))
     JiraConfiguration.add_member(:use_change_log, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "UseChangeLog", traits: {"smithy.api#default" => false}))
@@ -1633,7 +1633,7 @@ module Aws::Kendra
     JiraConfiguration.add_member(:exclusion_patterns, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceInclusionsExclusionsStrings, name: "ExclusionPatterns"))
     JiraConfiguration.add_member(:vpc_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceVpcConfiguration, name: "VpcConfiguration"))
     JiraConfiguration.type = Types::JiraConfiguration
-    JiraStatus.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    JiraStatus.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     JsonTokenTypeConfiguration.add_member(:user_name_attribute_field, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "UserNameAttributeField", traits: {"smithy.api#required" => {}}))
     JsonTokenTypeConfiguration.add_member(:group_attribute_field, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "GroupAttributeField", traits: {"smithy.api#required" => {}}))
     JsonTokenTypeConfiguration.type = Types::JsonTokenTypeConfiguration
@@ -1722,7 +1722,7 @@ module Aws::Kendra
     ListIndicesResponse.add_member(:index_configuration_summary_items, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexConfigurationSummaryList, name: "IndexConfigurationSummaryItems"))
     ListIndicesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListIndicesResponse.type = Types::ListIndicesResponse
-    ListOfGroupSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSummary, name: "member")
+    ListOfGroupSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSummary, name: "member"))
     ListQuerySuggestionsBlockListsRequest.add_member(:index_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexId, name: "IndexId", traits: {"smithy.api#required" => {}}))
     ListQuerySuggestionsBlockListsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListQuerySuggestionsBlockListsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsIntegerForListQuerySuggestionsBlockLists, name: "MaxResults"))
@@ -1744,10 +1744,10 @@ module Aws::Kendra
     MemberGroup.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupId, name: "GroupId", traits: {"smithy.api#required" => {}}))
     MemberGroup.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceId, name: "DataSourceId"))
     MemberGroup.type = Types::MemberGroup
-    MemberGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemberGroup, name: "member")
+    MemberGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberGroup, name: "member"))
     MemberUser.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "UserId", traits: {"smithy.api#required" => {}}))
     MemberUser.type = Types::MemberUser
-    MemberUsers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemberUser, name: "member")
+    MemberUsers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberUser, name: "member"))
     MetricType.add_member(:queries_by_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUERIES_BY_COUNT", traits: {"smithy.api#enumValue" => "QUERIES_BY_COUNT"}))
     MetricType.add_member(:queries_by_zero_click_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUERIES_BY_ZERO_CLICK_RATE", traits: {"smithy.api#enumValue" => "QUERIES_BY_ZERO_CLICK_RATE"}))
     MetricType.add_member(:queries_by_zero_result_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUERIES_BY_ZERO_RESULT_RATE", traits: {"smithy.api#enumValue" => "QUERIES_BY_ZERO_RESULT_RATE"}))
@@ -1771,7 +1771,7 @@ module Aws::Kendra
     OneDriveConfiguration.add_member(:field_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceToIndexFieldMappingList, name: "FieldMappings"))
     OneDriveConfiguration.add_member(:disable_local_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "DisableLocalGroups", traits: {"smithy.api#default" => false}))
     OneDriveConfiguration.type = Types::OneDriveConfiguration
-    OneDriveUserList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OneDriveUser, name: "member")
+    OneDriveUserList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OneDriveUser, name: "member"))
     OneDriveUsers.add_member(:one_drive_user_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OneDriveUserList, name: "OneDriveUserList"))
     OneDriveUsers.add_member(:one_drive_user_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Path, name: "OneDriveUserS3Path"))
     OneDriveUsers.type = Types::OneDriveUsers
@@ -1784,13 +1784,13 @@ module Aws::Kendra
     PersonasSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
     PersonasSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt"))
     PersonasSummary.type = Types::PersonasSummary
-    PersonasSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PersonasSummary, name: "member")
+    PersonasSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonasSummary, name: "member"))
     Principal.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalName, name: "Name", traits: {"smithy.api#required" => {}}))
     Principal.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalType, name: "Type", traits: {"smithy.api#required" => {}}))
     Principal.add_member(:access, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadAccessType, name: "Access", traits: {"smithy.api#required" => {}}))
     Principal.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceId, name: "DataSourceId"))
     Principal.type = Types::Principal
-    PrincipalList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Principal, name: "member")
+    PrincipalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Principal, name: "member"))
     PrincipalMappingStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     PrincipalMappingStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
     PrincipalMappingStatus.add_member(:processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROCESSING", traits: {"smithy.api#enumValue" => "PROCESSING"}))
@@ -1798,13 +1798,13 @@ module Aws::Kendra
     PrincipalMappingStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
     PrincipalType.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
     PrincipalType.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GROUP", traits: {"smithy.api#enumValue" => "GROUP"}))
-    PrivateChannelFilter.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    Project.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    PrivateChannelFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    Project.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ProxyConfiguration.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: Host, name: "Host", traits: {"smithy.api#required" => {}}))
     ProxyConfiguration.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "Port", traits: {"smithy.api#required" => {}}))
     ProxyConfiguration.add_member(:credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "Credentials"))
     ProxyConfiguration.type = Types::ProxyConfiguration
-    PublicChannelFilter.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    PublicChannelFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     PutPrincipalMappingRequest.add_member(:index_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexId, name: "IndexId", traits: {"smithy.api#required" => {}}))
     PutPrincipalMappingRequest.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceId, name: "DataSourceId"))
     PutPrincipalMappingRequest.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupId, name: "GroupId", traits: {"smithy.api#required" => {}}))
@@ -1854,7 +1854,7 @@ module Aws::Kendra
     QueryResultItem.add_member(:table_excerpt, ::Smithy::Schema::Shapes::MemberShape.new(target: TableExcerpt, name: "TableExcerpt"))
     QueryResultItem.add_member(:collapsed_result_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: CollapsedResultDetail, name: "CollapsedResultDetail"))
     QueryResultItem.type = Types::QueryResultItem
-    QueryResultItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryResultItem, name: "member")
+    QueryResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryResultItem, name: "member"))
     QueryResultType.add_member(:document, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOCUMENT", traits: {"smithy.api#enumValue" => "DOCUMENT"}))
     QueryResultType.add_member(:question_answer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUESTION_ANSWER", traits: {"smithy.api#enumValue" => "QUESTION_ANSWER"}))
     QueryResultType.add_member(:answer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANSWER", traits: {"smithy.api#enumValue" => "ANSWER"}))
@@ -1871,10 +1871,10 @@ module Aws::Kendra
     QuerySuggestionsBlockListSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt"))
     QuerySuggestionsBlockListSummary.add_member(:item_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ItemCount"))
     QuerySuggestionsBlockListSummary.type = Types::QuerySuggestionsBlockListSummary
-    QuerySuggestionsBlockListSummaryItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuerySuggestionsBlockListSummary, name: "member")
+    QuerySuggestionsBlockListSummaryItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuerySuggestionsBlockListSummary, name: "member"))
     QuerySuggestionsStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     QuerySuggestionsStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
-    QueryTextList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryText, name: "member")
+    QueryTextList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryText, name: "member"))
     QuipConfiguration.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: Domain, name: "Domain", traits: {"smithy.api#required" => {}}))
     QuipConfiguration.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "SecretArn", traits: {"smithy.api#required" => {}}))
     QuipConfiguration.add_member(:crawl_file_comments, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "CrawlFileComments", traits: {"smithy.api#default" => false}))
@@ -1899,10 +1899,10 @@ module Aws::Kendra
     RelevanceFeedback.add_member(:result_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultId, name: "ResultId", traits: {"smithy.api#required" => {}}))
     RelevanceFeedback.add_member(:relevance_value, ::Smithy::Schema::Shapes::MemberShape.new(target: RelevanceType, name: "RelevanceValue", traits: {"smithy.api#required" => {}}))
     RelevanceFeedback.type = Types::RelevanceFeedback
-    RelevanceFeedbackList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RelevanceFeedback, name: "member")
+    RelevanceFeedbackList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RelevanceFeedback, name: "member"))
     RelevanceType.add_member(:relevant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RELEVANT", traits: {"smithy.api#enumValue" => "RELEVANT"}))
     RelevanceType.add_member(:not_relevant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_RELEVANT", traits: {"smithy.api#enumValue" => "NOT_RELEVANT"}))
-    RepositoryNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "member")
+    RepositoryNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "member"))
     ResourceAlreadyExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ResourceAlreadyExistException.type = Types::ResourceAlreadyExistException
     ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -1931,7 +1931,7 @@ module Aws::Kendra
     RetrieveResultItem.add_member(:document_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeList, name: "DocumentAttributes"))
     RetrieveResultItem.add_member(:score_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ScoreAttributes, name: "ScoreAttributes"))
     RetrieveResultItem.type = Types::RetrieveResultItem
-    RetrieveResultItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RetrieveResultItem, name: "member")
+    RetrieveResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrieveResultItem, name: "member"))
     S3DataSourceConfiguration.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, name: "BucketName", traits: {"smithy.api#required" => {}}))
     S3DataSourceConfiguration.add_member(:inclusion_prefixes, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceInclusionsExclusionsStrings, name: "InclusionPrefixes"))
     S3DataSourceConfiguration.add_member(:inclusion_patterns, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceInclusionsExclusionsStrings, name: "InclusionPatterns"))
@@ -1952,7 +1952,7 @@ module Aws::Kendra
     SalesforceChatterFeedConfiguration.type = Types::SalesforceChatterFeedConfiguration
     SalesforceChatterFeedIncludeFilterType.add_member(:active_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE_USER", traits: {"smithy.api#enumValue" => "ACTIVE_USER"}))
     SalesforceChatterFeedIncludeFilterType.add_member(:standard_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD_USER", traits: {"smithy.api#enumValue" => "STANDARD_USER"}))
-    SalesforceChatterFeedIncludeFilterTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SalesforceChatterFeedIncludeFilterType, name: "member")
+    SalesforceChatterFeedIncludeFilterTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SalesforceChatterFeedIncludeFilterType, name: "member"))
     SalesforceConfiguration.add_member(:server_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "ServerUrl", traits: {"smithy.api#required" => {}}))
     SalesforceConfiguration.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "SecretArn", traits: {"smithy.api#required" => {}}))
     SalesforceConfiguration.add_member(:standard_object_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SalesforceStandardObjectConfigurationList, name: "StandardObjectConfigurations"))
@@ -1968,7 +1968,7 @@ module Aws::Kendra
     SalesforceCustomKnowledgeArticleTypeConfiguration.add_member(:document_title_field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceFieldName, name: "DocumentTitleFieldName"))
     SalesforceCustomKnowledgeArticleTypeConfiguration.add_member(:field_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceToIndexFieldMappingList, name: "FieldMappings"))
     SalesforceCustomKnowledgeArticleTypeConfiguration.type = Types::SalesforceCustomKnowledgeArticleTypeConfiguration
-    SalesforceCustomKnowledgeArticleTypeConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SalesforceCustomKnowledgeArticleTypeConfiguration, name: "member")
+    SalesforceCustomKnowledgeArticleTypeConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SalesforceCustomKnowledgeArticleTypeConfiguration, name: "member"))
     SalesforceKnowledgeArticleConfiguration.add_member(:included_states, ::Smithy::Schema::Shapes::MemberShape.new(target: SalesforceKnowledgeArticleStateList, name: "IncludedStates", traits: {"smithy.api#required" => {}}))
     SalesforceKnowledgeArticleConfiguration.add_member(:standard_knowledge_article_type_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SalesforceStandardKnowledgeArticleTypeConfiguration, name: "StandardKnowledgeArticleTypeConfiguration"))
     SalesforceKnowledgeArticleConfiguration.add_member(:custom_knowledge_article_type_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SalesforceCustomKnowledgeArticleTypeConfigurationList, name: "CustomKnowledgeArticleTypeConfigurations"))
@@ -1976,7 +1976,7 @@ module Aws::Kendra
     SalesforceKnowledgeArticleState.add_member(:draft, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DRAFT", traits: {"smithy.api#enumValue" => "DRAFT"}))
     SalesforceKnowledgeArticleState.add_member(:published, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLISHED", traits: {"smithy.api#enumValue" => "PUBLISHED"}))
     SalesforceKnowledgeArticleState.add_member(:archived, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARCHIVED", traits: {"smithy.api#enumValue" => "ARCHIVED"}))
-    SalesforceKnowledgeArticleStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SalesforceKnowledgeArticleState, name: "member")
+    SalesforceKnowledgeArticleStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SalesforceKnowledgeArticleState, name: "member"))
     SalesforceStandardKnowledgeArticleTypeConfiguration.add_member(:document_data_field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceFieldName, name: "DocumentDataFieldName", traits: {"smithy.api#required" => {}}))
     SalesforceStandardKnowledgeArticleTypeConfiguration.add_member(:document_title_field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceFieldName, name: "DocumentTitleFieldName"))
     SalesforceStandardKnowledgeArticleTypeConfiguration.add_member(:field_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceToIndexFieldMappingList, name: "FieldMappings"))
@@ -1989,7 +1989,7 @@ module Aws::Kendra
     SalesforceStandardObjectConfiguration.add_member(:document_title_field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceFieldName, name: "DocumentTitleFieldName"))
     SalesforceStandardObjectConfiguration.add_member(:field_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceToIndexFieldMappingList, name: "FieldMappings"))
     SalesforceStandardObjectConfiguration.type = Types::SalesforceStandardObjectConfiguration
-    SalesforceStandardObjectConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SalesforceStandardObjectConfiguration, name: "member")
+    SalesforceStandardObjectConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SalesforceStandardObjectConfiguration, name: "member"))
     SalesforceStandardObjectName.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
     SalesforceStandardObjectName.add_member(:campaign, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAMPAIGN", traits: {"smithy.api#enumValue" => "CAMPAIGN"}))
     SalesforceStandardObjectName.add_member(:case, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CASE", traits: {"smithy.api#enumValue" => "CASE"}))
@@ -2019,11 +2019,11 @@ module Aws::Kendra
     Search.add_member(:displayable, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Displayable", traits: {"smithy.api#default" => false}))
     Search.add_member(:sortable, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Sortable", traits: {"smithy.api#default" => false}))
     Search.type = Types::Search
-    SecurityGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcSecurityGroupId, name: "member")
+    SecurityGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcSecurityGroupId, name: "member"))
     SeedUrlConfiguration.add_member(:seed_urls, ::Smithy::Schema::Shapes::MemberShape.new(target: SeedUrlList, name: "SeedUrls", traits: {"smithy.api#required" => {}}))
     SeedUrlConfiguration.add_member(:web_crawler_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: WebCrawlerMode, name: "WebCrawlerMode"))
     SeedUrlConfiguration.type = Types::SeedUrlConfiguration
-    SeedUrlList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SeedUrl, name: "member")
+    SeedUrlList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SeedUrl, name: "member"))
     ServerSideEncryptionConfiguration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "KmsKeyId"))
     ServerSideEncryptionConfiguration.type = Types::ServerSideEncryptionConfiguration
     ServiceNowAuthenticationType.add_member(:http_basic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTP_BASIC", traits: {"smithy.api#enumValue" => "HTTP_BASIC"}))
@@ -2071,14 +2071,14 @@ module Aws::Kendra
     SharePointConfiguration.type = Types::SharePointConfiguration
     SharePointOnlineAuthenticationType.add_member(:http_basic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTP_BASIC", traits: {"smithy.api#enumValue" => "HTTP_BASIC"}))
     SharePointOnlineAuthenticationType.add_member(:oauth2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OAUTH2", traits: {"smithy.api#enumValue" => "OAUTH2"}))
-    SharePointUrlList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "member")
+    SharePointUrlList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "member"))
     SharePointVersion.add_member(:sharepoint_2013, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHAREPOINT_2013", traits: {"smithy.api#enumValue" => "SHAREPOINT_2013"}))
     SharePointVersion.add_member(:sharepoint_2016, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHAREPOINT_2016", traits: {"smithy.api#enumValue" => "SHAREPOINT_2016"}))
     SharePointVersion.add_member(:sharepoint_online, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHAREPOINT_ONLINE", traits: {"smithy.api#enumValue" => "SHAREPOINT_ONLINE"}))
     SharePointVersion.add_member(:sharepoint_2019, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHAREPOINT_2019", traits: {"smithy.api#enumValue" => "SHAREPOINT_2019"}))
     SiteMapsConfiguration.add_member(:site_maps, ::Smithy::Schema::Shapes::MemberShape.new(target: SiteMapsList, name: "SiteMaps", traits: {"smithy.api#required" => {}}))
     SiteMapsConfiguration.type = Types::SiteMapsConfiguration
-    SiteMapsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SiteMap, name: "member")
+    SiteMapsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SiteMap, name: "member"))
     SlackConfiguration.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamId, name: "TeamId", traits: {"smithy.api#required" => {}}))
     SlackConfiguration.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "SecretArn", traits: {"smithy.api#required" => {}}))
     SlackConfiguration.add_member(:vpc_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceVpcConfiguration, name: "VpcConfiguration"))
@@ -2098,25 +2098,25 @@ module Aws::Kendra
     SlackEntity.add_member(:private_channel, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIVATE_CHANNEL", traits: {"smithy.api#enumValue" => "PRIVATE_CHANNEL"}))
     SlackEntity.add_member(:group_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GROUP_MESSAGE", traits: {"smithy.api#enumValue" => "GROUP_MESSAGE"}))
     SlackEntity.add_member(:direct_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECT_MESSAGE", traits: {"smithy.api#enumValue" => "DIRECT_MESSAGE"}))
-    SlackEntityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlackEntity, name: "member")
-    SnapshotsDataHeaderFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    SnapshotsDataRecord.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    SnapshotsDataRecords.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotsDataRecord, name: "member")
+    SlackEntityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackEntity, name: "member"))
+    SnapshotsDataHeaderFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    SnapshotsDataRecord.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    SnapshotsDataRecords.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotsDataRecord, name: "member"))
     SortOrder.add_member(:desc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESC", traits: {"smithy.api#enumValue" => "DESC"}))
     SortOrder.add_member(:asc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASC", traits: {"smithy.api#enumValue" => "ASC"}))
     SortingConfiguration.add_member(:document_attribute_key, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeKey, name: "DocumentAttributeKey", traits: {"smithy.api#required" => {}}))
     SortingConfiguration.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "SortOrder", traits: {"smithy.api#required" => {}}))
     SortingConfiguration.type = Types::SortingConfiguration
-    SortingConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SortingConfiguration, name: "member")
+    SortingConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SortingConfiguration, name: "member"))
     SourceDocument.add_member(:document_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DocumentId"))
     SourceDocument.add_member(:suggestion_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeKeyList, name: "SuggestionAttributes"))
     SourceDocument.add_member(:additional_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeList, name: "AdditionalAttributes"))
     SourceDocument.type = Types::SourceDocument
-    SourceDocuments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SourceDocument, name: "member")
+    SourceDocuments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceDocument, name: "member"))
     SpellCorrectedQuery.add_member(:suggested_query_text, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestedQueryText, name: "SuggestedQueryText"))
     SpellCorrectedQuery.add_member(:corrections, ::Smithy::Schema::Shapes::MemberShape.new(target: CorrectionList, name: "Corrections"))
     SpellCorrectedQuery.type = Types::SpellCorrectedQuery
-    SpellCorrectedQueryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SpellCorrectedQuery, name: "member")
+    SpellCorrectedQueryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SpellCorrectedQuery, name: "member"))
     SpellCorrectionConfiguration.add_member(:include_query_spell_check_suggestions, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IncludeQuerySpellCheckSuggestions", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     SpellCorrectionConfiguration.type = Types::SpellCorrectionConfiguration
     SqlConfiguration.add_member(:query_identifiers_enclosing_option, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryIdentifiersEnclosingOption, name: "QueryIdentifiersEnclosingOption"))
@@ -2134,17 +2134,17 @@ module Aws::Kendra
     StopDataSourceSyncJobRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceId, name: "Id", traits: {"smithy.api#required" => {}}))
     StopDataSourceSyncJobRequest.add_member(:index_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexId, name: "IndexId", traits: {"smithy.api#required" => {}}))
     StopDataSourceSyncJobRequest.type = Types::StopDataSourceSyncJobRequest
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     SubmitFeedbackRequest.add_member(:index_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexId, name: "IndexId", traits: {"smithy.api#required" => {}}))
     SubmitFeedbackRequest.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryId, name: "QueryId", traits: {"smithy.api#required" => {}}))
     SubmitFeedbackRequest.add_member(:click_feedback_items, ::Smithy::Schema::Shapes::MemberShape.new(target: ClickFeedbackList, name: "ClickFeedbackItems"))
     SubmitFeedbackRequest.add_member(:relevance_feedback_items, ::Smithy::Schema::Shapes::MemberShape.new(target: RelevanceFeedbackList, name: "RelevanceFeedbackItems"))
     SubmitFeedbackRequest.type = Types::SubmitFeedbackRequest
-    SubnetIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
+    SubnetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
     SuggestableConfig.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeKey, name: "AttributeName"))
     SuggestableConfig.add_member(:suggestable, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectBoolean, name: "Suggestable"))
     SuggestableConfig.type = Types::SuggestableConfig
-    SuggestableConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestableConfig, name: "member")
+    SuggestableConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestableConfig, name: "member"))
     Suggestion.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultId, name: "Id"))
     Suggestion.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestionValue, name: "Value"))
     Suggestion.add_member(:source_documents, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceDocuments, name: "SourceDocuments"))
@@ -2152,14 +2152,14 @@ module Aws::Kendra
     SuggestionHighlight.add_member(:begin_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "BeginOffset"))
     SuggestionHighlight.add_member(:end_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "EndOffset"))
     SuggestionHighlight.type = Types::SuggestionHighlight
-    SuggestionHighlightList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestionHighlight, name: "member")
-    SuggestionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Suggestion, name: "member")
+    SuggestionHighlightList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestionHighlight, name: "member"))
+    SuggestionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Suggestion, name: "member"))
     SuggestionTextWithHighlights.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Text"))
     SuggestionTextWithHighlights.add_member(:highlights, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestionHighlightList, name: "Highlights"))
     SuggestionTextWithHighlights.type = Types::SuggestionTextWithHighlights
     SuggestionType.add_member(:query, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUERY", traits: {"smithy.api#enumValue" => "QUERY"}))
     SuggestionType.add_member(:document_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOCUMENT_ATTRIBUTES", traits: {"smithy.api#enumValue" => "DOCUMENT_ATTRIBUTES"}))
-    SuggestionTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestionType, name: "member")
+    SuggestionTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestionType, name: "member"))
     SuggestionValue.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestionTextWithHighlights, name: "Text"))
     SuggestionValue.type = Types::SuggestionValue
     TableCell.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
@@ -2167,18 +2167,18 @@ module Aws::Kendra
     TableCell.add_member(:highlighted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Highlighted", traits: {"smithy.api#default" => false}))
     TableCell.add_member(:header, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Header", traits: {"smithy.api#default" => false}))
     TableCell.type = Types::TableCell
-    TableCellList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TableCell, name: "member")
+    TableCellList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableCell, name: "member"))
     TableExcerpt.add_member(:rows, ::Smithy::Schema::Shapes::MemberShape.new(target: TableRowList, name: "Rows"))
     TableExcerpt.add_member(:total_number_of_rows, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "TotalNumberOfRows"))
     TableExcerpt.type = Types::TableExcerpt
     TableRow.add_member(:cells, ::Smithy::Schema::Shapes::MemberShape.new(target: TableCellList, name: "Cells"))
     TableRow.type = Types::TableRow
-    TableRowList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TableRow, name: "member")
+    TableRowList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableRow, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -2203,7 +2203,7 @@ module Aws::Kendra
     ThesaurusSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
     ThesaurusSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt"))
     ThesaurusSummary.type = Types::ThesaurusSummary
-    ThesaurusSummaryItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThesaurusSummary, name: "member")
+    ThesaurusSummaryItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThesaurusSummary, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
     TimeRange.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime"))
@@ -2302,16 +2302,16 @@ module Aws::Kendra
     UserTokenConfiguration.add_member(:jwt_token_type_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: JwtTokenTypeConfiguration, name: "JwtTokenTypeConfiguration"))
     UserTokenConfiguration.add_member(:json_token_type_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonTokenTypeConfiguration, name: "JsonTokenTypeConfiguration"))
     UserTokenConfiguration.type = Types::UserTokenConfiguration
-    UserTokenConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserTokenConfiguration, name: "member")
+    UserTokenConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserTokenConfiguration, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ValidationException.type = Types::ValidationException
-    ValueImportanceMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ValueImportanceMapKey, name: "key")
-    ValueImportanceMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Importance, name: "value")
+    ValueImportanceMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueImportanceMapKey, name: "key"))
+    ValueImportanceMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Importance, name: "value"))
     Warning.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: WarningMessage, name: "Message"))
     Warning.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: WarningCode, name: "Code"))
     Warning.type = Types::Warning
     WarningCode.add_member(:query_language_invalid_syntax, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUERY_LANGUAGE_INVALID_SYNTAX", traits: {"smithy.api#enumValue" => "QUERY_LANGUAGE_INVALID_SYNTAX"}))
-    WarningList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Warning, name: "member")
+    WarningList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Warning, name: "member"))
     WebCrawlerConfiguration.add_member(:urls, ::Smithy::Schema::Shapes::MemberShape.new(target: Urls, name: "Urls", traits: {"smithy.api#required" => {}}))
     WebCrawlerConfiguration.add_member(:crawl_depth, ::Smithy::Schema::Shapes::MemberShape.new(target: CrawlDepth, name: "CrawlDepth"))
     WebCrawlerConfiguration.add_member(:max_links_per_page, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxLinksPerPage, name: "MaxLinksPerPage"))

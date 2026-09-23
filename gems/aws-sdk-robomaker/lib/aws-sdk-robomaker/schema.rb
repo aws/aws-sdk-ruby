@@ -300,7 +300,7 @@ module Aws::RoboMaker
     Architecture.add_member(:x86_64, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "X86_64", traits: {"smithy.api#enumValue" => "X86_64"}))
     Architecture.add_member(:arm64, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARM64", traits: {"smithy.api#enumValue" => "ARM64"}))
     Architecture.add_member(:armhf, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARMHF", traits: {"smithy.api#enumValue" => "ARMHF"}))
-    Arns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    Arns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     BatchDeleteWorldsRequest.add_member(:worlds, ::Smithy::Schema::Shapes::MemberShape.new(target: Arns, name: "worlds", traits: {"smithy.api#required" => {}}))
     BatchDeleteWorldsRequest.type = Types::BatchDeleteWorldsRequest
     BatchDeleteWorldsResponse.add_member(:unprocessed_worlds, ::Smithy::Schema::Shapes::MemberShape.new(target: Arns, name: "unprocessedWorlds"))
@@ -328,7 +328,7 @@ module Aws::RoboMaker
     CancelWorldGenerationJobRequest.add_member(:job, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "job", traits: {"smithy.api#required" => {}}))
     CancelWorldGenerationJobRequest.type = Types::CancelWorldGenerationJobRequest
     CancelWorldGenerationJobResponse.type = Types::CancelWorldGenerationJobResponse
-    CommandList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    CommandList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     Compute.add_member(:simulation_unit_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationUnit, name: "simulationUnitLimit"))
     Compute.add_member(:compute_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeType, name: "computeType"))
     Compute.add_member(:gpu_unit_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: GPUUnit, name: "gpuUnitLimit"))
@@ -456,7 +456,7 @@ module Aws::RoboMaker
     CreateSimulationJobRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VPCConfig, name: "vpcConfig"))
     CreateSimulationJobRequest.add_member(:compute, ::Smithy::Schema::Shapes::MemberShape.new(target: Compute, name: "compute"))
     CreateSimulationJobRequest.type = Types::CreateSimulationJobRequest
-    CreateSimulationJobRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationJobRequest, name: "member")
+    CreateSimulationJobRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationJobRequest, name: "member"))
     CreateSimulationJobResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
     CreateSimulationJobResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationJobStatus, name: "status"))
     CreateSimulationJobResponse.add_member(:last_started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: LastStartedAt, name: "lastStartedAt"))
@@ -531,12 +531,12 @@ module Aws::RoboMaker
     DataSourceConfig.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceType, name: "type"))
     DataSourceConfig.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "destination"))
     DataSourceConfig.type = Types::DataSourceConfig
-    DataSourceConfigs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceConfig, name: "member")
-    DataSourceNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "member")
+    DataSourceConfigs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceConfig, name: "member"))
+    DataSourceNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "member"))
     DataSourceType.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Prefix", traits: {"smithy.api#enumValue" => "Prefix"}))
     DataSourceType.add_member(:archive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Archive", traits: {"smithy.api#enumValue" => "Archive"}))
     DataSourceType.add_member(:file, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "File", traits: {"smithy.api#enumValue" => "File"}))
-    DataSources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "member")
+    DataSources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "member"))
     DeleteFleetRequest.add_member(:fleet, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "fleet", traits: {"smithy.api#required" => {}}))
     DeleteFleetRequest.type = Types::DeleteFleetRequest
     DeleteFleetResponse.type = Types::DeleteFleetResponse
@@ -558,7 +558,7 @@ module Aws::RoboMaker
     DeploymentApplicationConfig.add_member(:application_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentVersion, name: "applicationVersion", traits: {"smithy.api#required" => {}}))
     DeploymentApplicationConfig.add_member(:launch_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentLaunchConfig, name: "launchConfig", traits: {"smithy.api#required" => {}}))
     DeploymentApplicationConfig.type = Types::DeploymentApplicationConfig
-    DeploymentApplicationConfigs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentApplicationConfig, name: "member")
+    DeploymentApplicationConfigs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentApplicationConfig, name: "member"))
     DeploymentConfig.add_member(:concurrent_deployment_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, name: "concurrentDeploymentPercentage"))
     DeploymentConfig.add_member(:failure_threshold_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, name: "failureThresholdPercentage"))
     DeploymentConfig.add_member(:robot_deployment_timeout_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentTimeout, name: "robotDeploymentTimeoutInSeconds"))
@@ -597,7 +597,7 @@ module Aws::RoboMaker
     DeploymentJobErrorCode.add_member(:robot_application_does_not_exist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RobotApplicationDoesNotExist", traits: {"smithy.api#enumValue" => "RobotApplicationDoesNotExist"}))
     DeploymentJobErrorCode.add_member(:deployment_fleet_does_not_exist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DeploymentFleetDoesNotExist", traits: {"smithy.api#enumValue" => "DeploymentFleetDoesNotExist"}))
     DeploymentJobErrorCode.add_member(:fleet_deployment_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FleetDeploymentTimeout", traits: {"smithy.api#enumValue" => "FleetDeploymentTimeout"}))
-    DeploymentJobs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentJob, name: "member")
+    DeploymentJobs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentJob, name: "member"))
     DeploymentLaunchConfig.add_member(:package_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Command, name: "packageName", traits: {"smithy.api#required" => {}}))
     DeploymentLaunchConfig.add_member(:pre_launch_file, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "preLaunchFile"))
     DeploymentLaunchConfig.add_member(:launch_file, ::Smithy::Schema::Shapes::MemberShape.new(target: Command, name: "launchFile", traits: {"smithy.api#required" => {}}))
@@ -770,8 +770,8 @@ module Aws::RoboMaker
     DescribeWorldTemplateResponse.type = Types::DescribeWorldTemplateResponse
     Environment.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryUrl, name: "uri"))
     Environment.type = Types::Environment
-    EnvironmentVariableMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableKey, name: "key")
-    EnvironmentVariableMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableValue, name: "value")
+    EnvironmentVariableMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableKey, name: "key"))
+    EnvironmentVariableMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableValue, name: "value"))
     ExitBehavior.add_member(:fail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAIL", traits: {"smithy.api#enumValue" => "FAIL"}))
     ExitBehavior.add_member(:restart, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESTART", traits: {"smithy.api#enumValue" => "RESTART"}))
     FailedCreateSimulationJobRequest.add_member(:request, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationJobRequest, name: "request"))
@@ -779,7 +779,7 @@ module Aws::RoboMaker
     FailedCreateSimulationJobRequest.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationJobErrorCode, name: "failureCode"))
     FailedCreateSimulationJobRequest.add_member(:failed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedAt, name: "failedAt"))
     FailedCreateSimulationJobRequest.type = Types::FailedCreateSimulationJobRequest
-    FailedCreateSimulationJobRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedCreateSimulationJobRequest, name: "member")
+    FailedCreateSimulationJobRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedCreateSimulationJobRequest, name: "member"))
     FailureBehavior.add_member(:fail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Fail", traits: {"smithy.api#enumValue" => "Fail"}))
     FailureBehavior.add_member(:continue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Continue", traits: {"smithy.api#enumValue" => "Continue"}))
     FailureSummary.add_member(:total_failure_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "totalFailureCount", traits: {"smithy.api#default" => 0}))
@@ -788,8 +788,8 @@ module Aws::RoboMaker
     Filter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, name: "values"))
     Filter.type = Types::Filter
-    FilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "member")
-    Filters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
+    FilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "member"))
+    Filters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     FinishedWorldsSummary.add_member(:finished_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "finishedCount", traits: {"smithy.api#default" => 0}))
     FinishedWorldsSummary.add_member(:succeeded_worlds, ::Smithy::Schema::Shapes::MemberShape.new(target: Arns, name: "succeededWorlds"))
     FinishedWorldsSummary.add_member(:failure_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureSummary, name: "failureSummary"))
@@ -801,7 +801,7 @@ module Aws::RoboMaker
     Fleet.add_member(:last_deployment_job, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "lastDeploymentJob"))
     Fleet.add_member(:last_deployment_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "lastDeploymentTime"))
     Fleet.type = Types::Fleet
-    Fleets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Fleet, name: "member")
+    Fleets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Fleet, name: "member"))
     GetWorldTemplateBodyRequest.add_member(:template, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "template"))
     GetWorldTemplateBodyRequest.add_member(:generation_job, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "generationJob"))
     GetWorldTemplateBodyRequest.type = Types::GetWorldTemplateBodyRequest
@@ -919,7 +919,7 @@ module Aws::RoboMaker
     PortMapping.add_member(:application_port, ::Smithy::Schema::Shapes::MemberShape.new(target: NonSystemPort, name: "applicationPort", traits: {"smithy.api#required" => {}}))
     PortMapping.add_member(:enable_on_public_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enableOnPublicIp", traits: {"smithy.api#default" => false}))
     PortMapping.type = Types::PortMapping
-    PortMappingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PortMapping, name: "member")
+    PortMappingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortMapping, name: "member"))
     ProgressDetail.add_member(:current_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: RobotDeploymentStep, name: "currentProgress"))
     ProgressDetail.add_member(:percent_done, ::Smithy::Schema::Shapes::MemberShape.new(target: PercentDone, name: "percentDone"))
     ProgressDetail.add_member(:estimated_time_remaining_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericInteger, name: "estimatedTimeRemainingSeconds"))
@@ -960,9 +960,9 @@ module Aws::RoboMaker
     RobotApplicationConfig.add_member(:tools, ::Smithy::Schema::Shapes::MemberShape.new(target: Tools, name: "tools"))
     RobotApplicationConfig.add_member(:use_default_tools, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "useDefaultTools", traits: {"smithy.api#deprecated" => {"message" => "AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."}}))
     RobotApplicationConfig.type = Types::RobotApplicationConfig
-    RobotApplicationConfigs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RobotApplicationConfig, name: "member")
-    RobotApplicationNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "member")
-    RobotApplicationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RobotApplicationSummary, name: "member")
+    RobotApplicationConfigs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RobotApplicationConfig, name: "member"))
+    RobotApplicationNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "member"))
+    RobotApplicationSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RobotApplicationSummary, name: "member"))
     RobotApplicationSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     RobotApplicationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
     RobotApplicationSummary.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version"))
@@ -984,7 +984,7 @@ module Aws::RoboMaker
     RobotDeploymentStep.add_member(:launching_step, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LaunchingStep", traits: {"smithy.api#enumValue" => "Launching"}))
     RobotDeploymentStep.add_member(:post_launch_step, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PostLaunchStep", traits: {"smithy.api#enumValue" => "ExecutingPostLaunch"}))
     RobotDeploymentStep.add_member(:finished_step, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FinishedStep", traits: {"smithy.api#enumValue" => "Finished"}))
-    RobotDeploymentSummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RobotDeployment, name: "member")
+    RobotDeploymentSummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RobotDeployment, name: "member"))
     RobotSoftwareSuite.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RobotSoftwareSuiteType, name: "name"))
     RobotSoftwareSuite.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: RobotSoftwareSuiteVersionType, name: "version"))
     RobotSoftwareSuite.type = Types::RobotSoftwareSuite
@@ -1002,18 +1002,18 @@ module Aws::RoboMaker
     RobotStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
     RobotStatus.add_member(:in_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InSync", traits: {"smithy.api#enumValue" => "InSync"}))
     RobotStatus.add_member(:no_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NoResponse", traits: {"smithy.api#enumValue" => "NoResponse"}))
-    Robots.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Robot, name: "member")
-    S3Etags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: S3Etag, name: "member")
+    Robots.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Robot, name: "member"))
+    S3Etags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Etag, name: "member"))
     S3KeyOutput.add_member(:s3_key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3KeyOrPrefix, name: "s3Key"))
     S3KeyOutput.add_member(:etag, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Etag, name: "etag"))
     S3KeyOutput.type = Types::S3KeyOutput
-    S3KeyOutputs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: S3KeyOutput, name: "member")
-    S3KeysOrPrefixes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: S3KeyOrPrefix, name: "member")
+    S3KeyOutputs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3KeyOutput, name: "member"))
+    S3KeysOrPrefixes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3KeyOrPrefix, name: "member"))
     S3Object.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Bucket, name: "bucket", traits: {"smithy.api#required" => {}}))
     S3Object.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Key, name: "key", traits: {"smithy.api#required" => {}}))
     S3Object.add_member(:etag, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Etag, name: "etag"))
     S3Object.type = Types::S3Object
-    SecurityGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    SecurityGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
     SimulationApplicationConfig.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "application", traits: {"smithy.api#required" => {}}))
@@ -1025,9 +1025,9 @@ module Aws::RoboMaker
     SimulationApplicationConfig.add_member(:tools, ::Smithy::Schema::Shapes::MemberShape.new(target: Tools, name: "tools"))
     SimulationApplicationConfig.add_member(:use_default_tools, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "useDefaultTools", traits: {"smithy.api#deprecated" => {"message" => "AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html."}}))
     SimulationApplicationConfig.type = Types::SimulationApplicationConfig
-    SimulationApplicationConfigs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationApplicationConfig, name: "member")
-    SimulationApplicationNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "member")
-    SimulationApplicationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationApplicationSummary, name: "member")
+    SimulationApplicationConfigs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationApplicationConfig, name: "member"))
+    SimulationApplicationNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "member"))
+    SimulationApplicationSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationApplicationSummary, name: "member"))
     SimulationApplicationSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     SimulationApplicationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
     SimulationApplicationSummary.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version"))
@@ -1067,7 +1067,7 @@ module Aws::RoboMaker
     SimulationJobBatchStatus.add_member(:completing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Completing", traits: {"smithy.api#enumValue" => "Completing"}))
     SimulationJobBatchStatus.add_member(:timing_out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TimingOut", traits: {"smithy.api#enumValue" => "TimingOut"}))
     SimulationJobBatchStatus.add_member(:timed_out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TimedOut", traits: {"smithy.api#enumValue" => "TimedOut"}))
-    SimulationJobBatchSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationJobBatchSummary, name: "member")
+    SimulationJobBatchSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationJobBatchSummary, name: "member"))
     SimulationJobBatchSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
     SimulationJobBatchSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdatedAt, name: "lastUpdatedAt"))
     SimulationJobBatchSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
@@ -1130,7 +1130,7 @@ module Aws::RoboMaker
     SimulationJobStatus.add_member(:terminating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Terminating", traits: {"smithy.api#enumValue" => "Terminating"}))
     SimulationJobStatus.add_member(:terminated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Terminated", traits: {"smithy.api#enumValue" => "Terminated"}))
     SimulationJobStatus.add_member(:canceled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Canceled", traits: {"smithy.api#enumValue" => "Canceled"}))
-    SimulationJobSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationJobSummary, name: "member")
+    SimulationJobSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationJobSummary, name: "member"))
     SimulationJobSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
     SimulationJobSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdatedAt, name: "lastUpdatedAt"))
     SimulationJobSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
@@ -1140,7 +1140,7 @@ module Aws::RoboMaker
     SimulationJobSummary.add_member(:data_source_names, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceNames, name: "dataSourceNames"))
     SimulationJobSummary.add_member(:compute_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeType, name: "computeType"))
     SimulationJobSummary.type = Types::SimulationJobSummary
-    SimulationJobs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationJob, name: "member")
+    SimulationJobs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationJob, name: "member"))
     SimulationSoftwareSuite.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationSoftwareSuiteType, name: "name"))
     SimulationSoftwareSuite.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationSoftwareSuiteVersionType, name: "version"))
     SimulationSoftwareSuite.type = Types::SimulationSoftwareSuite
@@ -1156,8 +1156,8 @@ module Aws::RoboMaker
     SourceConfig.add_member(:s3_key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Key, name: "s3Key"))
     SourceConfig.add_member(:architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: Architecture, name: "architecture"))
     SourceConfig.type = Types::SourceConfig
-    SourceConfigs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SourceConfig, name: "member")
-    Sources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "member")
+    SourceConfigs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceConfig, name: "member"))
+    Sources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "member"))
     StartSimulationJobBatchRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, name: "clientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
     StartSimulationJobBatchRequest.add_member(:batch_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPolicy, name: "batchPolicy"))
     StartSimulationJobBatchRequest.add_member(:create_simulation_job_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateSimulationJobRequests, name: "createSimulationJobRequests", traits: {"smithy.api#required" => {}}))
@@ -1175,7 +1175,7 @@ module Aws::RoboMaker
     StartSimulationJobBatchResponse.add_member(:created_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationJobSummaries, name: "createdRequests"))
     StartSimulationJobBatchResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     StartSimulationJobBatchResponse.type = Types::StartSimulationJobBatchResponse
-    Subnets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    Subnets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     SyncDeploymentJobRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, name: "clientRequestToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
     SyncDeploymentJobRequest.add_member(:fleet, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "fleet", traits: {"smithy.api#required" => {}}))
     SyncDeploymentJobRequest.type = Types::SyncDeploymentJobRequest
@@ -1188,9 +1188,9 @@ module Aws::RoboMaker
     SyncDeploymentJobResponse.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentJobErrorCode, name: "failureCode"))
     SyncDeploymentJobResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
     SyncDeploymentJobResponse.type = Types::SyncDeploymentJobResponse
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -1198,7 +1198,7 @@ module Aws::RoboMaker
     TemplateLocation.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Bucket, name: "s3Bucket", traits: {"smithy.api#required" => {}}))
     TemplateLocation.add_member(:s3_key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Key, name: "s3Key", traits: {"smithy.api#required" => {}}))
     TemplateLocation.type = Types::TemplateLocation
-    TemplateSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateSummary, name: "member")
+    TemplateSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateSummary, name: "member"))
     TemplateSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
     TemplateSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
     TemplateSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdatedAt, name: "lastUpdatedAt"))
@@ -1213,7 +1213,7 @@ module Aws::RoboMaker
     Tool.add_member(:stream_output_to_cloud_watch, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "streamOutputToCloudWatch"))
     Tool.add_member(:exit_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: ExitBehavior, name: "exitBehavior"))
     Tool.type = Types::Tool
-    Tools.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tool, name: "member")
+    Tools.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tool, name: "member"))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -1268,7 +1268,7 @@ module Aws::RoboMaker
     UploadConfiguration.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "path", traits: {"smithy.api#required" => {}}))
     UploadConfiguration.add_member(:upload_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadBehavior, name: "uploadBehavior", traits: {"smithy.api#required" => {}}))
     UploadConfiguration.type = Types::UploadConfiguration
-    UploadConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UploadConfiguration, name: "member")
+    UploadConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadConfiguration, name: "member"))
     VPCConfig.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnets, name: "subnets", traits: {"smithy.api#required" => {}}))
     VPCConfig.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroups, name: "securityGroups"))
     VPCConfig.add_member(:assign_public_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "assignPublicIp", traits: {"smithy.api#default" => false}))
@@ -1280,7 +1280,7 @@ module Aws::RoboMaker
     VPCConfigResponse.type = Types::VPCConfigResponse
     WorldConfig.add_member(:world, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "world"))
     WorldConfig.type = Types::WorldConfig
-    WorldConfigs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorldConfig, name: "member")
+    WorldConfigs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorldConfig, name: "member"))
     WorldCount.add_member(:floorplan_count, ::Smithy::Schema::Shapes::MemberShape.new(target: FloorplanCount, name: "floorplanCount"))
     WorldCount.add_member(:interior_count_per_floorplan, ::Smithy::Schema::Shapes::MemberShape.new(target: InteriorCountPerFloorplan, name: "interiorCountPerFloorplan"))
     WorldCount.type = Types::WorldCount
@@ -1296,7 +1296,7 @@ module Aws::RoboMaker
     WorldExportJobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
     WorldExportJobStatus.add_member(:canceling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Canceling", traits: {"smithy.api#enumValue" => "Canceling"}))
     WorldExportJobStatus.add_member(:canceled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Canceled", traits: {"smithy.api#enumValue" => "Canceled"}))
-    WorldExportJobSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorldExportJobSummary, name: "member")
+    WorldExportJobSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorldExportJobSummary, name: "member"))
     WorldExportJobSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
     WorldExportJobSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorldExportJobStatus, name: "status"))
     WorldExportJobSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
@@ -1307,7 +1307,7 @@ module Aws::RoboMaker
     WorldFailure.add_member(:sample_failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "sampleFailureReason"))
     WorldFailure.add_member(:failure_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "failureCount", traits: {"smithy.api#default" => 0}))
     WorldFailure.type = Types::WorldFailure
-    WorldFailures.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorldFailure, name: "member")
+    WorldFailures.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorldFailure, name: "member"))
     WorldGenerationJobErrorCode.add_member(:internal_service_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InternalServiceError", traits: {"smithy.api#enumValue" => "InternalServiceError"}))
     WorldGenerationJobErrorCode.add_member(:limit_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LimitExceeded", traits: {"smithy.api#enumValue" => "LimitExceeded"}))
     WorldGenerationJobErrorCode.add_member(:resource_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ResourceNotFound", traits: {"smithy.api#enumValue" => "ResourceNotFound"}))
@@ -1321,7 +1321,7 @@ module Aws::RoboMaker
     WorldGenerationJobStatus.add_member(:partial_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PartialFailed", traits: {"smithy.api#enumValue" => "PartialFailed"}))
     WorldGenerationJobStatus.add_member(:canceling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Canceling", traits: {"smithy.api#enumValue" => "Canceling"}))
     WorldGenerationJobStatus.add_member(:canceled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Canceled", traits: {"smithy.api#enumValue" => "Canceled"}))
-    WorldGenerationJobSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorldGenerationJobSummary, name: "member")
+    WorldGenerationJobSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorldGenerationJobSummary, name: "member"))
     WorldGenerationJobSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
     WorldGenerationJobSummary.add_member(:template, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "template"))
     WorldGenerationJobSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
@@ -1330,7 +1330,7 @@ module Aws::RoboMaker
     WorldGenerationJobSummary.add_member(:succeeded_world_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "succeededWorldCount", traits: {"smithy.api#default" => 0}))
     WorldGenerationJobSummary.add_member(:failed_world_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "failedWorldCount", traits: {"smithy.api#default" => 0}))
     WorldGenerationJobSummary.type = Types::WorldGenerationJobSummary
-    WorldSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorldSummary, name: "member")
+    WorldSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorldSummary, name: "member"))
     WorldSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
     WorldSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "createdAt"))
     WorldSummary.add_member(:generation_job, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "generationJob"))

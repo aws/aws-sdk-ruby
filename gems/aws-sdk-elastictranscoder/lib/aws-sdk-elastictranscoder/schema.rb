@@ -179,7 +179,7 @@ module Aws::ElasticTranscoder
     ZeroTo255String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elastictranscoder#ZeroTo255String", name: "ZeroTo255String", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}})
     ZeroTo512String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elastictranscoder#ZeroTo512String", name: "ZeroTo512String", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}})
 
-    AccessControls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControl, name: "member")
+    AccessControls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControl, name: "member"))
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
     Artwork.add_member(:input_key, ::Smithy::Schema::Shapes::MemberShape.new(target: WatermarkKey, name: "InputKey"))
@@ -190,7 +190,7 @@ module Aws::ElasticTranscoder
     Artwork.add_member(:album_art_format, ::Smithy::Schema::Shapes::MemberShape.new(target: JpgOrPng, name: "AlbumArtFormat"))
     Artwork.add_member(:encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: Encryption, name: "Encryption"))
     Artwork.type = Types::Artwork
-    Artworks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Artwork, name: "member")
+    Artworks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Artwork, name: "member"))
     AudioCodecOptions.add_member(:profile, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioCodecProfile, name: "Profile"))
     AudioCodecOptions.add_member(:bit_depth, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioBitDepth, name: "BitDepth"))
     AudioCodecOptions.add_member(:bit_order, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioBitOrder, name: "BitOrder"))
@@ -210,23 +210,23 @@ module Aws::ElasticTranscoder
     CaptionFormat.add_member(:pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: CaptionFormatPattern, name: "Pattern"))
     CaptionFormat.add_member(:encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: Encryption, name: "Encryption"))
     CaptionFormat.type = Types::CaptionFormat
-    CaptionFormats.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CaptionFormat, name: "member")
+    CaptionFormats.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CaptionFormat, name: "member"))
     CaptionSource.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LongKey, name: "Key"))
     CaptionSource.add_member(:language, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "Language"))
     CaptionSource.add_member(:time_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeOffset, name: "TimeOffset"))
     CaptionSource.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Label"))
     CaptionSource.add_member(:encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: Encryption, name: "Encryption"))
     CaptionSource.type = Types::CaptionSource
-    CaptionSources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CaptionSource, name: "member")
+    CaptionSources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CaptionSource, name: "member"))
     Captions.add_member(:merge_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: CaptionMergePolicy, name: "MergePolicy", traits: {"smithy.api#deprecated" => {}}))
     Captions.add_member(:caption_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: CaptionSources, name: "CaptionSources", traits: {"smithy.api#deprecated" => {}}))
     Captions.add_member(:caption_formats, ::Smithy::Schema::Shapes::MemberShape.new(target: CaptionFormats, name: "CaptionFormats"))
     Captions.type = Types::Captions
     Clip.add_member(:time_span, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSpan, name: "TimeSpan"))
     Clip.type = Types::Clip
-    CodecOptions.key = ::Smithy::Schema::Shapes::MemberShape.new(target: CodecOption, name: "key")
-    CodecOptions.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CodecOption, name: "value")
-    Composition.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Clip, name: "member")
+    CodecOptions.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: CodecOption, name: "key"))
+    CodecOptions.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CodecOption, name: "value"))
+    Composition.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Clip, name: "member"))
     CreateJobOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "Key"))
     CreateJobOutput.add_member(:thumbnail_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: ThumbnailPattern, name: "ThumbnailPattern"))
     CreateJobOutput.add_member(:thumbnail_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: Encryption, name: "ThumbnailEncryption"))
@@ -239,14 +239,14 @@ module Aws::ElasticTranscoder
     CreateJobOutput.add_member(:captions, ::Smithy::Schema::Shapes::MemberShape.new(target: Captions, name: "Captions"))
     CreateJobOutput.add_member(:encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: Encryption, name: "Encryption"))
     CreateJobOutput.type = Types::CreateJobOutput
-    CreateJobOutputs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CreateJobOutput, name: "member")
+    CreateJobOutputs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateJobOutput, name: "member"))
     CreateJobPlaylist.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Filename, name: "Name"))
     CreateJobPlaylist.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaylistFormat, name: "Format"))
     CreateJobPlaylist.add_member(:output_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputKeys, name: "OutputKeys"))
     CreateJobPlaylist.add_member(:hls_content_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: HlsContentProtection, name: "HlsContentProtection"))
     CreateJobPlaylist.add_member(:play_ready_drm, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayReadyDrm, name: "PlayReadyDrm"))
     CreateJobPlaylist.type = Types::CreateJobPlaylist
-    CreateJobPlaylists.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CreateJobPlaylist, name: "member")
+    CreateJobPlaylists.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateJobPlaylist, name: "member"))
     CreateJobRequest.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "PipelineId", traits: {"smithy.api#required" => {}}))
     CreateJobRequest.add_member(:input, ::Smithy::Schema::Shapes::MemberShape.new(target: JobInput, name: "Input"))
     CreateJobRequest.add_member(:inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: JobInputs, name: "Inputs"))
@@ -297,7 +297,7 @@ module Aws::ElasticTranscoder
     Encryption.add_member(:key_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: Base64EncodedString, name: "KeyMd5"))
     Encryption.add_member(:initialization_vector, ::Smithy::Schema::Shapes::MemberShape.new(target: ZeroTo255String, name: "InitializationVector"))
     Encryption.type = Types::Encryption
-    ExceptionMessages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ExceptionMessages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     HlsContentProtection.add_member(:method, ::Smithy::Schema::Shapes::MemberShape.new(target: HlsContentProtectionMethod, name: "Method"))
     HlsContentProtection.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Base64EncodedString, name: "Key"))
     HlsContentProtection.add_member(:key_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: Base64EncodedString, name: "KeyMd5"))
@@ -339,7 +339,7 @@ module Aws::ElasticTranscoder
     JobInput.add_member(:input_captions, ::Smithy::Schema::Shapes::MemberShape.new(target: InputCaptions, name: "InputCaptions"))
     JobInput.add_member(:detected_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectedProperties, name: "DetectedProperties"))
     JobInput.type = Types::JobInput
-    JobInputs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobInput, name: "member")
+    JobInputs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobInput, name: "member"))
     JobOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Id"))
     JobOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "Key"))
     JobOutput.add_member(:thumbnail_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: ThumbnailPattern, name: "ThumbnailPattern"))
@@ -362,13 +362,13 @@ module Aws::ElasticTranscoder
     JobOutput.add_member(:encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: Encryption, name: "Encryption"))
     JobOutput.add_member(:applied_color_space_conversion, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AppliedColorSpaceConversion"))
     JobOutput.type = Types::JobOutput
-    JobOutputs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobOutput, name: "member")
+    JobOutputs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobOutput, name: "member"))
     JobWatermark.add_member(:preset_watermark_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PresetWatermarkId, name: "PresetWatermarkId"))
     JobWatermark.add_member(:input_key, ::Smithy::Schema::Shapes::MemberShape.new(target: WatermarkKey, name: "InputKey"))
     JobWatermark.add_member(:encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: Encryption, name: "Encryption"))
     JobWatermark.type = Types::JobWatermark
-    JobWatermarks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobWatermark, name: "member")
-    Jobs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Job, name: "member")
+    JobWatermarks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobWatermark, name: "member"))
+    Jobs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Job, name: "member"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message", traits: {"smithy.api#required" => {}}))
     LimitExceededException.type = Types::LimitExceededException
     ListJobsByPipelineRequest.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "PipelineId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -402,12 +402,12 @@ module Aws::ElasticTranscoder
     Notifications.add_member(:warning, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopic, name: "Warning"))
     Notifications.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopic, name: "Error"))
     Notifications.type = Types::Notifications
-    OutputKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "member")
+    OutputKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "member"))
     Permission.add_member(:grantee_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GranteeType, name: "GranteeType"))
     Permission.add_member(:grantee, ::Smithy::Schema::Shapes::MemberShape.new(target: Grantee, name: "Grantee"))
     Permission.add_member(:access, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControls, name: "Access"))
     Permission.type = Types::Permission
-    Permissions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Permission, name: "member")
+    Permissions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Permission, name: "member"))
     Pipeline.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "Id"))
     Pipeline.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Arn"))
     Pipeline.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
@@ -424,7 +424,7 @@ module Aws::ElasticTranscoder
     PipelineOutputConfig.add_member(:storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageClass, name: "StorageClass"))
     PipelineOutputConfig.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: Permissions, name: "Permissions"))
     PipelineOutputConfig.type = Types::PipelineOutputConfig
-    Pipelines.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Pipeline, name: "member")
+    Pipelines.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Pipeline, name: "member"))
     PlayReadyDrm.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: PlayReadyDrmFormatString, name: "Format"))
     PlayReadyDrm.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyBase64EncodedString, name: "Key"))
     PlayReadyDrm.add_member(:key_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyBase64EncodedString, name: "KeyMd5"))
@@ -440,7 +440,7 @@ module Aws::ElasticTranscoder
     Playlist.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "Status"))
     Playlist.add_member(:status_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "StatusDetail"))
     Playlist.type = Types::Playlist
-    Playlists.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Playlist, name: "member")
+    Playlists.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Playlist, name: "member"))
     Preset.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "Id"))
     Preset.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Arn"))
     Preset.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
@@ -462,8 +462,8 @@ module Aws::ElasticTranscoder
     PresetWatermark.add_member(:opacity, ::Smithy::Schema::Shapes::MemberShape.new(target: Opacity, name: "Opacity"))
     PresetWatermark.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "Target"))
     PresetWatermark.type = Types::PresetWatermark
-    PresetWatermarks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PresetWatermark, name: "member")
-    Presets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Preset, name: "member")
+    PresetWatermarks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PresetWatermark, name: "member"))
+    Presets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Preset, name: "member"))
     ReadJobRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ReadJobRequest.type = Types::ReadJobRequest
     ReadJobResponse.add_member(:job, ::Smithy::Schema::Shapes::MemberShape.new(target: Job, name: "Job"))
@@ -481,7 +481,7 @@ module Aws::ElasticTranscoder
     ResourceInUseException.type = Types::ResourceInUseException
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    SnsTopics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopic, name: "member")
+    SnsTopics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopic, name: "member"))
     TestRoleRequest.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "Role", traits: {"smithy.api#required" => {}}))
     TestRoleRequest.add_member(:input_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "InputBucket", traits: {"smithy.api#required" => {}}))
     TestRoleRequest.add_member(:output_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "OutputBucket", traits: {"smithy.api#required" => {}}))
@@ -528,8 +528,8 @@ module Aws::ElasticTranscoder
     UpdatePipelineStatusRequest.type = Types::UpdatePipelineStatusRequest
     UpdatePipelineStatusResponse.add_member(:pipeline, ::Smithy::Schema::Shapes::MemberShape.new(target: Pipeline, name: "Pipeline"))
     UpdatePipelineStatusResponse.type = Types::UpdatePipelineStatusResponse
-    UserMetadata.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    UserMetadata.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    UserMetadata.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    UserMetadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
     VideoParameters.add_member(:codec, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoCodec, name: "Codec"))
@@ -551,7 +551,7 @@ module Aws::ElasticTranscoder
     Warning.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     Warning.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     Warning.type = Types::Warning
-    Warnings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Warning, name: "member")
+    Warnings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Warning, name: "member"))
 
     EtsCustomerService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.elastictranscoder#EtsCustomerService"

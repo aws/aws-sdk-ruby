@@ -371,8 +371,8 @@ module Aws::Proton
     CompatibleEnvironmentTemplateInput.add_member(:template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "templateName", traits: {"smithy.api#required" => {}}))
     CompatibleEnvironmentTemplateInput.add_member(:major_version, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateVersionPart, name: "majorVersion", traits: {"smithy.api#required" => {}}))
     CompatibleEnvironmentTemplateInput.type = Types::CompatibleEnvironmentTemplateInput
-    CompatibleEnvironmentTemplateInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CompatibleEnvironmentTemplateInput, name: "member")
-    CompatibleEnvironmentTemplateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CompatibleEnvironmentTemplate, name: "member")
+    CompatibleEnvironmentTemplateInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CompatibleEnvironmentTemplateInput, name: "member"))
+    CompatibleEnvironmentTemplateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CompatibleEnvironmentTemplate, name: "member"))
     Component.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name", traits: {"smithy.api#required" => {}}))
     Component.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     Component.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentArn, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -390,7 +390,7 @@ module Aws::Proton
     Component.add_member(:last_attempted_deployment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentId, name: "lastAttemptedDeploymentId"))
     Component.add_member(:last_succeeded_deployment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentId, name: "lastSucceededDeploymentId"))
     Component.type = Types::Component
-    ComponentDeploymentIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentId, name: "member")
+    ComponentDeploymentIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentId, name: "member"))
     ComponentState.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameOrEmpty, name: "serviceName"))
     ComponentState.add_member(:service_instance_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameOrEmpty, name: "serviceInstanceName"))
     ComponentState.add_member(:service_spec, ::Smithy::Schema::Shapes::MemberShape.new(target: SpecContents, name: "serviceSpec"))
@@ -410,7 +410,7 @@ module Aws::Proton
     ComponentSummary.add_member(:last_attempted_deployment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentId, name: "lastAttemptedDeploymentId"))
     ComponentSummary.add_member(:last_succeeded_deployment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentId, name: "lastSucceededDeploymentId"))
     ComponentSummary.type = Types::ComponentSummary
-    ComponentSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentSummary, name: "member")
+    ComponentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentSummary, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
     CountsSummary.add_member(:components, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCountsSummary, name: "components"))
@@ -640,7 +640,7 @@ module Aws::Proton
     DeploymentSummary.add_member(:last_succeeded_deployment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentId, name: "lastSucceededDeploymentId"))
     DeploymentSummary.add_member(:deployment_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStatus, name: "deploymentStatus", traits: {"smithy.api#required" => {}}))
     DeploymentSummary.type = Types::DeploymentSummary
-    DeploymentSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentSummary, name: "member")
+    DeploymentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentSummary, name: "member"))
     Environment.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name", traits: {"smithy.api#required" => {}}))
     Environment.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     Environment.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
@@ -675,7 +675,7 @@ module Aws::Proton
     EnvironmentAccountConnection.add_member(:component_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "componentRoleArn"))
     EnvironmentAccountConnection.add_member(:codebuild_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "codebuildRoleArn"))
     EnvironmentAccountConnection.type = Types::EnvironmentAccountConnection
-    EnvironmentAccountConnectionStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentAccountConnectionStatus, name: "member")
+    EnvironmentAccountConnectionStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentAccountConnectionStatus, name: "member"))
     EnvironmentAccountConnectionSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentAccountConnectionId, name: "id", traits: {"smithy.api#required" => {}}))
     EnvironmentAccountConnectionSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentAccountConnectionArn, name: "arn", traits: {"smithy.api#required" => {}}))
     EnvironmentAccountConnectionSummary.add_member(:management_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "managementAccountId", traits: {"smithy.api#required" => {}}))
@@ -687,7 +687,7 @@ module Aws::Proton
     EnvironmentAccountConnectionSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentAccountConnectionStatus, name: "status", traits: {"smithy.api#required" => {}}))
     EnvironmentAccountConnectionSummary.add_member(:component_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "componentRoleArn"))
     EnvironmentAccountConnectionSummary.type = Types::EnvironmentAccountConnectionSummary
-    EnvironmentAccountConnectionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentAccountConnectionSummary, name: "member")
+    EnvironmentAccountConnectionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentAccountConnectionSummary, name: "member"))
     EnvironmentState.add_member(:spec, ::Smithy::Schema::Shapes::MemberShape.new(target: SpecContents, name: "spec"))
     EnvironmentState.add_member(:template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "templateName", traits: {"smithy.api#required" => {}}))
     EnvironmentState.add_member(:template_major_version, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateVersionPart, name: "templateMajorVersion", traits: {"smithy.api#required" => {}}))
@@ -712,7 +712,7 @@ module Aws::Proton
     EnvironmentSummary.add_member(:last_attempted_deployment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentId, name: "lastAttemptedDeploymentId"))
     EnvironmentSummary.add_member(:last_succeeded_deployment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentId, name: "lastSucceededDeploymentId"))
     EnvironmentSummary.type = Types::EnvironmentSummary
-    EnvironmentSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentSummary, name: "member")
+    EnvironmentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentSummary, name: "member"))
     EnvironmentTemplate.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name", traits: {"smithy.api#required" => {}}))
     EnvironmentTemplate.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentTemplateArn, name: "arn", traits: {"smithy.api#required" => {}}))
     EnvironmentTemplate.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
@@ -726,7 +726,7 @@ module Aws::Proton
     EnvironmentTemplateFilter.add_member(:template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "templateName", traits: {"smithy.api#required" => {}}))
     EnvironmentTemplateFilter.add_member(:major_version, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateVersionPart, name: "majorVersion", traits: {"smithy.api#required" => {}}))
     EnvironmentTemplateFilter.type = Types::EnvironmentTemplateFilter
-    EnvironmentTemplateFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentTemplateFilter, name: "member")
+    EnvironmentTemplateFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentTemplateFilter, name: "member"))
     EnvironmentTemplateSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name", traits: {"smithy.api#required" => {}}))
     EnvironmentTemplateSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentTemplateArn, name: "arn", traits: {"smithy.api#required" => {}}))
     EnvironmentTemplateSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
@@ -736,7 +736,7 @@ module Aws::Proton
     EnvironmentTemplateSummary.add_member(:recommended_version, ::Smithy::Schema::Shapes::MemberShape.new(target: FullTemplateVersionNumber, name: "recommendedVersion"))
     EnvironmentTemplateSummary.add_member(:provisioning, ::Smithy::Schema::Shapes::MemberShape.new(target: Provisioning, name: "provisioning"))
     EnvironmentTemplateSummary.type = Types::EnvironmentTemplateSummary
-    EnvironmentTemplateSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentTemplateSummary, name: "member")
+    EnvironmentTemplateSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentTemplateSummary, name: "member"))
     EnvironmentTemplateVersion.add_member(:template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "templateName", traits: {"smithy.api#required" => {}}))
     EnvironmentTemplateVersion.add_member(:major_version, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateVersionPart, name: "majorVersion", traits: {"smithy.api#required" => {}}))
     EnvironmentTemplateVersion.add_member(:minor_version, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateVersionPart, name: "minorVersion", traits: {"smithy.api#required" => {}}))
@@ -760,7 +760,7 @@ module Aws::Proton
     EnvironmentTemplateVersionSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
     EnvironmentTemplateVersionSummary.add_member(:last_modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastModifiedAt", traits: {"smithy.api#required" => {}}))
     EnvironmentTemplateVersionSummary.type = Types::EnvironmentTemplateVersionSummary
-    EnvironmentTemplateVersionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentTemplateVersionSummary, name: "member")
+    EnvironmentTemplateVersionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentTemplateVersionSummary, name: "member"))
     GetAccountSettingsOperationInput.type = Types::GetAccountSettingsOperationInput
     GetAccountSettingsOperationOutput.add_member(:account_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountSettings, name: "accountSettings"))
     GetAccountSettingsOperationOutput.type = Types::GetAccountSettingsOperationOutput
@@ -859,7 +859,7 @@ module Aws::Proton
     GetTemplateSyncStatusOperationOutput.type = Types::GetTemplateSyncStatusOperationOutput
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
-    LatestSyncBlockers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SyncBlocker, name: "member")
+    LatestSyncBlockers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SyncBlocker, name: "member"))
     ListComponentOutputsOperationInput.add_member(:component_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "componentName", traits: {"smithy.api#required" => {}}))
     ListComponentOutputsOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: EmptyNextToken, name: "nextToken"))
     ListComponentOutputsOperationInput.add_member(:deployment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentId, name: "deploymentId"))
@@ -967,7 +967,7 @@ module Aws::Proton
     ListServiceInstancesFilter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ListServiceInstancesFilterBy, name: "key"))
     ListServiceInstancesFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ListServiceInstancesFilterValue, name: "value"))
     ListServiceInstancesFilter.type = Types::ListServiceInstancesFilter
-    ListServiceInstancesFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListServiceInstancesFilter, name: "member")
+    ListServiceInstancesFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListServiceInstancesFilter, name: "member"))
     ListServiceInstancesOperationInput.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "serviceName"))
     ListServiceInstancesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListServiceInstancesOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxPageResults, name: "maxResults"))
@@ -1028,12 +1028,12 @@ module Aws::Proton
     Output.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputKey, name: "key"))
     Output.add_member(:value_string, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputValueString, name: "valueString"))
     Output.type = Types::Output
-    OutputsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Output, name: "member")
+    OutputsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Output, name: "member"))
     ProvisionedResource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedResourceName, name: "name"))
     ProvisionedResource.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedResourceIdentifier, name: "identifier"))
     ProvisionedResource.add_member(:provisioning_engine, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedResourceEngine, name: "provisioningEngine"))
     ProvisionedResource.type = Types::ProvisionedResource
-    ProvisionedResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedResource, name: "member")
+    ProvisionedResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedResource, name: "member"))
     RejectEnvironmentAccountConnectionOperationInput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentAccountConnectionId, name: "id", traits: {"smithy.api#required" => {}}))
     RejectEnvironmentAccountConnectionOperationInput.type = Types::RejectEnvironmentAccountConnectionOperationInput
     RejectEnvironmentAccountConnectionOperationOutput.add_member(:environment_account_connection, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentAccountConnection, name: "environmentAccountConnection", traits: {"smithy.api#required" => {}}))
@@ -1058,7 +1058,7 @@ module Aws::Proton
     RepositorySummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "name", traits: {"smithy.api#required" => {}}))
     RepositorySummary.add_member(:connection_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "connectionArn", traits: {"smithy.api#required" => {}}))
     RepositorySummary.type = Types::RepositorySummary
-    RepositorySummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositorySummary, name: "member")
+    RepositorySummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositorySummary, name: "member"))
     RepositorySyncAttempt.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "startedAt", traits: {"smithy.api#required" => {}}))
     RepositorySyncAttempt.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositorySyncStatus, name: "status", traits: {"smithy.api#required" => {}}))
     RepositorySyncAttempt.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositorySyncEvents, name: "events", traits: {"smithy.api#required" => {}}))
@@ -1068,13 +1068,13 @@ module Aws::Proton
     RepositorySyncDefinition.add_member(:branch, ::Smithy::Schema::Shapes::MemberShape.new(target: GitBranchName, name: "branch", traits: {"smithy.api#required" => {}}))
     RepositorySyncDefinition.add_member(:directory, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "directory", traits: {"smithy.api#required" => {}}))
     RepositorySyncDefinition.type = Types::RepositorySyncDefinition
-    RepositorySyncDefinitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositorySyncDefinition, name: "member")
+    RepositorySyncDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositorySyncDefinition, name: "member"))
     RepositorySyncEvent.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "type", traits: {"smithy.api#required" => {}}))
     RepositorySyncEvent.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "externalId"))
     RepositorySyncEvent.add_member(:time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "time", traits: {"smithy.api#required" => {}}))
     RepositorySyncEvent.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "event", traits: {"smithy.api#required" => {}}))
     RepositorySyncEvent.type = Types::RepositorySyncEvent
-    RepositorySyncEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositorySyncEvent, name: "member")
+    RepositorySyncEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositorySyncEvent, name: "member"))
     ResourceCountsSummary.add_member(:total, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "total", traits: {"smithy.api#required" => {}}))
     ResourceCountsSummary.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "failed"))
     ResourceCountsSummary.add_member(:up_to_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "upToDate"))
@@ -1095,7 +1095,7 @@ module Aws::Proton
     ResourceSyncEvent.add_member(:time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "time", traits: {"smithy.api#required" => {}}))
     ResourceSyncEvent.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "event", traits: {"smithy.api#required" => {}}))
     ResourceSyncEvent.type = Types::ResourceSyncEvent
-    ResourceSyncEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSyncEvent, name: "member")
+    ResourceSyncEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSyncEvent, name: "member"))
     Revision.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
     Revision.add_member(:repository_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryProvider, name: "repositoryProvider", traits: {"smithy.api#required" => {}}))
     Revision.add_member(:sha, ::Smithy::Schema::Shapes::MemberShape.new(target: SHA, name: "sha", traits: {"smithy.api#required" => {}}))
@@ -1159,7 +1159,7 @@ module Aws::Proton
     ServiceInstanceSummary.add_member(:last_attempted_deployment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentId, name: "lastAttemptedDeploymentId"))
     ServiceInstanceSummary.add_member(:last_succeeded_deployment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentId, name: "lastSucceededDeploymentId"))
     ServiceInstanceSummary.type = Types::ServiceInstanceSummary
-    ServiceInstanceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceInstanceSummary, name: "member")
+    ServiceInstanceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceInstanceSummary, name: "member"))
     ServicePipeline.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#required" => {}}))
     ServicePipeline.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
     ServicePipeline.add_member(:last_deployment_attempted_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastDeploymentAttemptedAt", traits: {"smithy.api#required" => {}}))
@@ -1189,7 +1189,7 @@ module Aws::Proton
     ServiceSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceStatus, name: "status", traits: {"smithy.api#required" => {}}))
     ServiceSummary.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessage, name: "statusMessage"))
     ServiceSummary.type = Types::ServiceSummary
-    ServiceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceSummary, name: "member")
+    ServiceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceSummary, name: "member"))
     ServiceSyncBlockerSummary.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "serviceName", traits: {"smithy.api#required" => {}}))
     ServiceSyncBlockerSummary.add_member(:service_instance_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "serviceInstanceName"))
     ServiceSyncBlockerSummary.add_member(:latest_blockers, ::Smithy::Schema::Shapes::MemberShape.new(target: LatestSyncBlockers, name: "latestBlockers"))
@@ -1219,8 +1219,8 @@ module Aws::Proton
     ServiceTemplateSummary.add_member(:recommended_version, ::Smithy::Schema::Shapes::MemberShape.new(target: FullTemplateVersionNumber, name: "recommendedVersion"))
     ServiceTemplateSummary.add_member(:pipeline_provisioning, ::Smithy::Schema::Shapes::MemberShape.new(target: Provisioning, name: "pipelineProvisioning"))
     ServiceTemplateSummary.type = Types::ServiceTemplateSummary
-    ServiceTemplateSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceTemplateSummary, name: "member")
-    ServiceTemplateSupportedComponentSourceInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceTemplateSupportedComponentSourceType, name: "member")
+    ServiceTemplateSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceTemplateSummary, name: "member"))
+    ServiceTemplateSupportedComponentSourceInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceTemplateSupportedComponentSourceType, name: "member"))
     ServiceTemplateVersion.add_member(:template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "templateName", traits: {"smithy.api#required" => {}}))
     ServiceTemplateVersion.add_member(:major_version, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateVersionPart, name: "majorVersion", traits: {"smithy.api#required" => {}}))
     ServiceTemplateVersion.add_member(:minor_version, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateVersionPart, name: "minorVersion", traits: {"smithy.api#required" => {}}))
@@ -1246,7 +1246,7 @@ module Aws::Proton
     ServiceTemplateVersionSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
     ServiceTemplateVersionSummary.add_member(:last_modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastModifiedAt", traits: {"smithy.api#required" => {}}))
     ServiceTemplateVersionSummary.type = Types::ServiceTemplateVersionSummary
-    ServiceTemplateVersionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceTemplateVersionSummary, name: "member")
+    ServiceTemplateVersionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceTemplateVersionSummary, name: "member"))
     SyncBlocker.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id", traits: {"smithy.api#required" => {}}))
     SyncBlocker.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockerType, name: "type", traits: {"smithy.api#required" => {}}))
     SyncBlocker.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockerStatus, name: "status", traits: {"smithy.api#required" => {}}))
@@ -1259,12 +1259,12 @@ module Aws::Proton
     SyncBlockerContext.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#required" => {}}))
     SyncBlockerContext.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#required" => {}}))
     SyncBlockerContext.type = Types::SyncBlockerContext
-    SyncBlockerContexts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SyncBlockerContext, name: "member")
+    SyncBlockerContexts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SyncBlockerContext, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpQuery" => "resourceArn", "smithy.api#required" => {}}))
     TagResourceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceOperationInput.type = Types::TagResourceOperationInput

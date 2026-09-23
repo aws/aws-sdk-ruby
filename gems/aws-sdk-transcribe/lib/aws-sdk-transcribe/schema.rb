@@ -276,7 +276,7 @@ module Aws::Transcribe
     CallAnalyticsJobStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     CallAnalyticsJobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     CallAnalyticsJobStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    CallAnalyticsJobSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CallAnalyticsJobSummary, name: "member")
+    CallAnalyticsJobSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CallAnalyticsJobSummary, name: "member"))
     CallAnalyticsJobSummary.add_member(:call_analytics_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CallAnalyticsJobName, name: "CallAnalyticsJobName"))
     CallAnalyticsJobSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "CreationTime"))
     CallAnalyticsJobSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "StartTime"))
@@ -290,7 +290,7 @@ module Aws::Transcribe
     CallAnalyticsSkippedFeature.add_member(:reason_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CallAnalyticsSkippedReasonCode, name: "ReasonCode"))
     CallAnalyticsSkippedFeature.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     CallAnalyticsSkippedFeature.type = Types::CallAnalyticsSkippedFeature
-    CallAnalyticsSkippedFeatureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CallAnalyticsSkippedFeature, name: "member")
+    CallAnalyticsSkippedFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CallAnalyticsSkippedFeature, name: "member"))
     CallAnalyticsSkippedReasonCode.add_member(:insufficient_conversation_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSUFFICIENT_CONVERSATION_CONTENT", traits: {"smithy.api#enumValue" => "INSUFFICIENT_CONVERSATION_CONTENT"}))
     CallAnalyticsSkippedReasonCode.add_member(:failed_safety_guidelines, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED_SAFETY_GUIDELINES", traits: {"smithy.api#enumValue" => "FAILED_SAFETY_GUIDELINES"}))
     CategoryProperties.add_member(:category_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryName, name: "CategoryName"))
@@ -300,11 +300,11 @@ module Aws::Transcribe
     CategoryProperties.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CategoryProperties.add_member(:input_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InputType, name: "InputType"))
     CategoryProperties.type = Types::CategoryProperties
-    CategoryPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryProperties, name: "member")
+    CategoryPropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryProperties, name: "member"))
     ChannelDefinition.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, name: "ChannelId", traits: {"smithy.api#default" => 0}))
     ChannelDefinition.add_member(:participant_role, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantRole, name: "ParticipantRole"))
     ChannelDefinition.type = Types::ChannelDefinition
-    ChannelDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelDefinition, name: "member")
+    ChannelDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelDefinition, name: "member"))
     ClinicalNoteGenerationSettings.add_member(:note_template, ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalScribeNoteTemplate, name: "NoteTemplate"))
     ClinicalNoteGenerationSettings.type = Types::ClinicalNoteGenerationSettings
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
@@ -453,8 +453,8 @@ module Aws::Transcribe
     JobExecutionSettings.add_member(:allow_deferred_execution, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AllowDeferredExecution"))
     JobExecutionSettings.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DataAccessRoleArn, name: "DataAccessRoleArn"))
     JobExecutionSettings.type = Types::JobExecutionSettings
-    KMSEncryptionContextMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key")
-    KMSEncryptionContextMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value")
+    KMSEncryptionContextMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
+    KMSEncryptionContextMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value"))
     LanguageCode.add_member(:af_za, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AF_ZA", traits: {"smithy.api#enumValue" => "af-ZA"}))
     LanguageCode.add_member(:ar_ae, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AR_AE", traits: {"smithy.api#enumValue" => "ar-AE"}))
     LanguageCode.add_member(:ar_sa, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AR_SA", traits: {"smithy.api#enumValue" => "ar-SA"}))
@@ -563,13 +563,13 @@ module Aws::Transcribe
     LanguageCodeItem.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "LanguageCode"))
     LanguageCodeItem.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationInSeconds, name: "DurationInSeconds"))
     LanguageCodeItem.type = Types::LanguageCodeItem
-    LanguageCodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeItem, name: "member")
+    LanguageCodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeItem, name: "member"))
     LanguageIdSettings.add_member(:vocabulary_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyName, name: "VocabularyName"))
     LanguageIdSettings.add_member(:vocabulary_filter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyFilterName, name: "VocabularyFilterName"))
     LanguageIdSettings.add_member(:language_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelName, name: "LanguageModelName"))
     LanguageIdSettings.type = Types::LanguageIdSettings
-    LanguageIdSettingsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "key")
-    LanguageIdSettingsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageIdSettings, name: "value")
+    LanguageIdSettingsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "key"))
+    LanguageIdSettingsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageIdSettings, name: "value"))
     LanguageModel.add_member(:model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelName, name: "ModelName"))
     LanguageModel.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "CreateTime"))
     LanguageModel.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "LastModifiedTime"))
@@ -580,7 +580,7 @@ module Aws::Transcribe
     LanguageModel.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "FailureReason"))
     LanguageModel.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, name: "InputDataConfig"))
     LanguageModel.type = Types::LanguageModel
-    LanguageOptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "member")
+    LanguageOptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "member"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
     ListCallAnalyticsCategoriesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
@@ -678,7 +678,7 @@ module Aws::Transcribe
     MedicalScribeChannelDefinition.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalScribeChannelId, name: "ChannelId", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     MedicalScribeChannelDefinition.add_member(:participant_role, ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalScribeParticipantRole, name: "ParticipantRole", traits: {"smithy.api#required" => {}}))
     MedicalScribeChannelDefinition.type = Types::MedicalScribeChannelDefinition
-    MedicalScribeChannelDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalScribeChannelDefinition, name: "member")
+    MedicalScribeChannelDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalScribeChannelDefinition, name: "member"))
     MedicalScribeContext.add_member(:patient_context, ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalScribePatientContext, name: "PatientContext"))
     MedicalScribeContext.type = Types::MedicalScribeContext
     MedicalScribeJob.add_member(:medical_scribe_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TranscriptionJobName, name: "MedicalScribeJobName"))
@@ -700,7 +700,7 @@ module Aws::Transcribe
     MedicalScribeJobStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     MedicalScribeJobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     MedicalScribeJobStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    MedicalScribeJobSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalScribeJobSummary, name: "member")
+    MedicalScribeJobSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalScribeJobSummary, name: "member"))
     MedicalScribeJobSummary.add_member(:medical_scribe_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TranscriptionJobName, name: "MedicalScribeJobName"))
     MedicalScribeJobSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "CreationTime"))
     MedicalScribeJobSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "StartTime"))
@@ -751,7 +751,7 @@ module Aws::Transcribe
     MedicalTranscriptionJob.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, name: "Type"))
     MedicalTranscriptionJob.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     MedicalTranscriptionJob.type = Types::MedicalTranscriptionJob
-    MedicalTranscriptionJobSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalTranscriptionJobSummary, name: "member")
+    MedicalTranscriptionJobSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalTranscriptionJobSummary, name: "member"))
     MedicalTranscriptionJobSummary.add_member(:medical_transcription_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TranscriptionJobName, name: "MedicalTranscriptionJobName"))
     MedicalTranscriptionJobSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "CreationTime"))
     MedicalTranscriptionJobSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "StartTime"))
@@ -776,7 +776,7 @@ module Aws::Transcribe
     ModelStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     ModelStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     ModelStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    Models.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageModel, name: "member")
+    Models.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageModel, name: "member"))
     NonTalkTimeFilter.add_member(:threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampMilliseconds, name: "Threshold"))
     NonTalkTimeFilter.add_member(:absolute_time_range, ::Smithy::Schema::Shapes::MemberShape.new(target: AbsoluteTimeRange, name: "AbsoluteTimeRange"))
     NonTalkTimeFilter.add_member(:relative_time_range, ::Smithy::Schema::Shapes::MemberShape.new(target: RelativeTimeRange, name: "RelativeTimeRange"))
@@ -788,7 +788,7 @@ module Aws::Transcribe
     OutputLocationType.add_member(:service_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE_BUCKET", traits: {"smithy.api#enumValue" => "SERVICE_BUCKET"}))
     ParticipantRole.add_member(:agent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGENT", traits: {"smithy.api#enumValue" => "AGENT"}))
     ParticipantRole.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER", traits: {"smithy.api#enumValue" => "CUSTOMER"}))
-    Phrases.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Phrase, name: "member")
+    Phrases.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Phrase, name: "member"))
     PiiEntityType.add_member(:bank_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BANK_ACCOUNT_NUMBER", traits: {"smithy.api#enumValue" => "BANK_ACCOUNT_NUMBER"}))
     PiiEntityType.add_member(:bank_routing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BANK_ROUTING", traits: {"smithy.api#enumValue" => "BANK_ROUTING"}))
     PiiEntityType.add_member(:credit_debit_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREDIT_DEBIT_NUMBER", traits: {"smithy.api#enumValue" => "CREDIT_DEBIT_NUMBER"}))
@@ -801,7 +801,7 @@ module Aws::Transcribe
     PiiEntityType.add_member(:phone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PHONE", traits: {"smithy.api#enumValue" => "PHONE"}))
     PiiEntityType.add_member(:ssn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSN", traits: {"smithy.api#enumValue" => "SSN"}))
     PiiEntityType.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
-    PiiEntityTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PiiEntityType, name: "member")
+    PiiEntityTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiEntityType, name: "member"))
     Pronouns.add_member(:he_him, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HE_HIM", traits: {"smithy.api#enumValue" => "HE_HIM"}))
     Pronouns.add_member(:she_her, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHE_HER", traits: {"smithy.api#enumValue" => "SHE_HER"}))
     Pronouns.add_member(:they_them, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THEY_THEM", traits: {"smithy.api#enumValue" => "THEY_THEM"}))
@@ -819,7 +819,7 @@ module Aws::Transcribe
     Rule.add_member(:sentiment_filter, Types::Rule::SentimentFilter, ::Smithy::Schema::Shapes::MemberShape.new(target: SentimentFilter, name: "SentimentFilter"))
     Rule.add_member(:unknown, Types::Rule::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Rule.type = Types::Rule
-    RuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "member")
+    RuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "member"))
     SentimentFilter.add_member(:sentiments, ::Smithy::Schema::Shapes::MemberShape.new(target: SentimentValueList, name: "Sentiments", traits: {"smithy.api#required" => {}}))
     SentimentFilter.add_member(:absolute_time_range, ::Smithy::Schema::Shapes::MemberShape.new(target: AbsoluteTimeRange, name: "AbsoluteTimeRange"))
     SentimentFilter.add_member(:relative_time_range, ::Smithy::Schema::Shapes::MemberShape.new(target: RelativeTimeRange, name: "RelativeTimeRange"))
@@ -830,7 +830,7 @@ module Aws::Transcribe
     SentimentValue.add_member(:negative, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEGATIVE", traits: {"smithy.api#enumValue" => "NEGATIVE"}))
     SentimentValue.add_member(:neutral, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEUTRAL", traits: {"smithy.api#enumValue" => "NEUTRAL"}))
     SentimentValue.add_member(:mixed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIXED", traits: {"smithy.api#enumValue" => "MIXED"}))
-    SentimentValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SentimentValue, name: "member")
+    SentimentValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SentimentValue, name: "member"))
     Settings.add_member(:vocabulary_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyName, name: "VocabularyName"))
     Settings.add_member(:show_speaker_labels, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ShowSpeakerLabels"))
     Settings.add_member(:max_speaker_labels, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSpeakers, name: "MaxSpeakerLabels"))
@@ -905,11 +905,11 @@ module Aws::Transcribe
     StartTranscriptionJobRequest.type = Types::StartTranscriptionJobRequest
     StartTranscriptionJobResponse.add_member(:transcription_job, ::Smithy::Schema::Shapes::MemberShape.new(target: TranscriptionJob, name: "TranscriptionJob"))
     StartTranscriptionJobResponse.type = Types::StartTranscriptionJobResponse
-    StringTargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
-    SubtitleFileUris.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "member")
+    StringTargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
+    SubtitleFileUris.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "member"))
     SubtitleFormat.add_member(:vtt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VTT", traits: {"smithy.api#enumValue" => "vtt"}))
     SubtitleFormat.add_member(:srt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SRT", traits: {"smithy.api#enumValue" => "srt"}))
-    SubtitleFormats.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubtitleFormat, name: "member")
+    SubtitleFormats.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubtitleFormat, name: "member"))
     Subtitles.add_member(:formats, ::Smithy::Schema::Shapes::MemberShape.new(target: SubtitleFormats, name: "Formats"))
     Subtitles.add_member(:output_start_index, ::Smithy::Schema::Shapes::MemberShape.new(target: SubtitleOutputStartIndex, name: "OutputStartIndex"))
     Subtitles.type = Types::Subtitles
@@ -922,15 +922,15 @@ module Aws::Transcribe
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TranscribeArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    ToxicityCategories.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ToxicityCategory, name: "member")
+    ToxicityCategories.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ToxicityCategory, name: "member"))
     ToxicityCategory.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
-    ToxicityDetection.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ToxicityDetectionSettings, name: "member")
+    ToxicityDetection.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ToxicityDetectionSettings, name: "member"))
     ToxicityDetectionSettings.add_member(:toxicity_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: ToxicityCategories, name: "ToxicityCategories", traits: {"smithy.api#required" => {}}))
     ToxicityDetectionSettings.type = Types::ToxicityDetectionSettings
     Transcript.add_member(:transcript_file_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "TranscriptFileUri"))
@@ -973,7 +973,7 @@ module Aws::Transcribe
     TranscriptionJobStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     TranscriptionJobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     TranscriptionJobStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    TranscriptionJobSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TranscriptionJobSummary, name: "member")
+    TranscriptionJobSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TranscriptionJobSummary, name: "member"))
     TranscriptionJobSummary.add_member(:transcription_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TranscriptionJobName, name: "TranscriptionJobName"))
     TranscriptionJobSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "CreationTime"))
     TranscriptionJobSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "StartTime"))
@@ -1031,7 +1031,7 @@ module Aws::Transcribe
     UpdateVocabularyResponse.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "LastModifiedTime"))
     UpdateVocabularyResponse.add_member(:vocabulary_state, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyState, name: "VocabularyState"))
     UpdateVocabularyResponse.type = Types::UpdateVocabularyResponse
-    Vocabularies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyInfo, name: "member")
+    Vocabularies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyInfo, name: "member"))
     VocabularyFilterInfo.add_member(:vocabulary_filter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyFilterName, name: "VocabularyFilterName"))
     VocabularyFilterInfo.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "LanguageCode"))
     VocabularyFilterInfo.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "LastModifiedTime"))
@@ -1039,7 +1039,7 @@ module Aws::Transcribe
     VocabularyFilterMethod.add_member(:remove, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMOVE", traits: {"smithy.api#enumValue" => "remove"}))
     VocabularyFilterMethod.add_member(:mask, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MASK", traits: {"smithy.api#enumValue" => "mask"}))
     VocabularyFilterMethod.add_member(:tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAG", traits: {"smithy.api#enumValue" => "tag"}))
-    VocabularyFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyFilterInfo, name: "member")
+    VocabularyFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyFilterInfo, name: "member"))
     VocabularyInfo.add_member(:vocabulary_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyName, name: "VocabularyName"))
     VocabularyInfo.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "LanguageCode"))
     VocabularyInfo.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "LastModifiedTime"))
@@ -1048,7 +1048,7 @@ module Aws::Transcribe
     VocabularyState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     VocabularyState.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
     VocabularyState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    Words.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Word, name: "member")
+    Words.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Word, name: "member"))
 
     Transcribe = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.transcribe#Transcribe"

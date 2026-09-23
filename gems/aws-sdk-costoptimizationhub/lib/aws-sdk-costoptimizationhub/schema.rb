@@ -126,8 +126,8 @@ module Aws::CostOptimizationHub
     AccountEnrollmentStatus.add_member(:last_updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastUpdatedTimestamp"))
     AccountEnrollmentStatus.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdTimestamp"))
     AccountEnrollmentStatus.type = Types::AccountEnrollmentStatus
-    AccountEnrollmentStatuses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountEnrollmentStatus, name: "member")
-    AccountIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member")
+    AccountEnrollmentStatuses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountEnrollmentStatus, name: "member"))
+    AccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
     ActionType.add_member(:rightsize, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RIGHTSIZE", traits: {"smithy.api#enumValue" => "Rightsize"}))
     ActionType.add_member(:stop, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOP", traits: {"smithy.api#enumValue" => "Stop"}))
     ActionType.add_member(:upgrade, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPGRADE", traits: {"smithy.api#enumValue" => "Upgrade"}))
@@ -136,7 +136,7 @@ module Aws::CostOptimizationHub
     ActionType.add_member(:migrate_to_graviton, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIGRATE_TO_GRAVITON", traits: {"smithy.api#enumValue" => "MigrateToGraviton"}))
     ActionType.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE", traits: {"smithy.api#enumValue" => "Delete"}))
     ActionType.add_member(:scale_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCALE_IN", traits: {"smithy.api#enumValue" => "ScaleIn"}))
-    ActionTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionType, name: "member")
+    ActionTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionType, name: "member"))
     AllocationStrategy.add_member(:prioritized, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIORITIZED", traits: {"smithy.api#enumValue" => "Prioritized"}))
     AllocationStrategy.add_member(:lowest_price, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOWEST_PRICE", traits: {"smithy.api#enumValue" => "LowestPrice"}))
     AuroraDbClusterStorage.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AuroraDbClusterStorageConfiguration, name: "configuration"))
@@ -303,7 +303,7 @@ module Aws::CostOptimizationHub
     ImplementationEffort.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "Medium"}))
     ImplementationEffort.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "High"}))
     ImplementationEffort.add_member(:very_high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERY_HIGH", traits: {"smithy.api#enumValue" => "VeryHigh"}))
-    ImplementationEffortList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImplementationEffort, name: "member")
+    ImplementationEffortList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImplementationEffort, name: "member"))
     InstanceConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "type"))
     InstanceConfiguration.type = Types::InstanceConfiguration
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
@@ -365,7 +365,7 @@ module Aws::CostOptimizationHub
     MemoryDbReservedInstancesConfiguration.type = Types::MemoryDbReservedInstancesConfiguration
     MixedInstanceConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "type"))
     MixedInstanceConfiguration.type = Types::MixedInstanceConfiguration
-    MixedInstanceConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MixedInstanceConfiguration, name: "member")
+    MixedInstanceConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MixedInstanceConfiguration, name: "member"))
     OpenSearchReservedInstances.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenSearchReservedInstancesConfiguration, name: "configuration"))
     OpenSearchReservedInstances.add_member(:cost_calculation, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedInstancesCostCalculation, name: "costCalculation"))
     OpenSearchReservedInstances.type = Types::OpenSearchReservedInstances
@@ -449,9 +449,9 @@ module Aws::CostOptimizationHub
     Recommendation.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "source"))
     Recommendation.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     Recommendation.type = Types::Recommendation
-    RecommendationIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    RecommendationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendation, name: "member")
-    RecommendationSummariesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationSummary, name: "member")
+    RecommendationIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    RecommendationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendation, name: "member"))
+    RecommendationSummariesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationSummary, name: "member"))
     RecommendationSummary.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "group"))
     RecommendationSummary.add_member(:estimated_monthly_savings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "estimatedMonthlySavings"))
     RecommendationSummary.add_member(:recommendation_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "recommendationCount"))
@@ -473,7 +473,7 @@ module Aws::CostOptimizationHub
     RedshiftReservedInstancesConfiguration.add_member(:size_flex_eligible, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "sizeFlexEligible"))
     RedshiftReservedInstancesConfiguration.add_member(:current_generation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "currentGeneration"))
     RedshiftReservedInstancesConfiguration.type = Types::RedshiftReservedInstancesConfiguration
-    RegionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    RegionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     ReservedInstancesCostCalculation.add_member(:pricing, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedInstancesPricing, name: "pricing"))
     ReservedInstancesCostCalculation.type = Types::ReservedInstancesCostCalculation
     ReservedInstancesPricing.add_member(:estimated_on_demand_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "estimatedOnDemandCost"))
@@ -481,7 +481,7 @@ module Aws::CostOptimizationHub
     ReservedInstancesPricing.add_member(:savings_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "savingsPercentage"))
     ReservedInstancesPricing.add_member(:estimated_monthly_amortized_reservation_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "estimatedMonthlyAmortizedReservationCost"))
     ReservedInstancesPricing.type = Types::ReservedInstancesPricing
-    ResourceArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    ResourceArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     ResourceCostCalculation.add_member(:usages, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageList, name: "usages"))
     ResourceCostCalculation.add_member(:pricing, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePricing, name: "pricing"))
     ResourceCostCalculation.type = Types::ResourceCostCalculation
@@ -505,7 +505,7 @@ module Aws::CostOptimizationHub
     ResourceDetails.add_member(:memory_db_reserved_instances, Types::ResourceDetails::MemoryDbReservedInstances, ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryDbReservedInstances, name: "memoryDbReservedInstances"))
     ResourceDetails.add_member(:unknown, Types::ResourceDetails::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ResourceDetails.type = Types::ResourceDetails
-    ResourceIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    ResourceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
@@ -532,7 +532,7 @@ module Aws::CostOptimizationHub
     ResourceType.add_member(:aurora_db_cluster_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AURORA_DB_CLUSTER_STORAGE", traits: {"smithy.api#enumValue" => "AuroraDbClusterStorage", "smithy.api#tags" => ["aurora"]}))
     ResourceType.add_member(:dynamo_db_reserved_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DYNAMO_DB_RESERVED_CAPACITY", traits: {"smithy.api#enumValue" => "DynamoDbReservedCapacity"}))
     ResourceType.add_member(:memory_db_reserved_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEMORY_DB_RESERVED_INSTANCES", traits: {"smithy.api#enumValue" => "MemoryDbReservedInstances"}))
-    ResourceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "member")
+    ResourceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "member"))
     SageMakerSavingsPlans.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerSavingsPlansConfiguration, name: "configuration"))
     SageMakerSavingsPlans.add_member(:cost_calculation, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansCostCalculation, name: "costCalculation"))
     SageMakerSavingsPlans.type = Types::SageMakerSavingsPlans
@@ -556,13 +556,13 @@ module Aws::CostOptimizationHub
     StorageConfiguration.add_member(:size_in_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "sizeInGb"))
     StorageConfiguration.type = Types::StorageConfiguration
     SummaryMetrics.add_member(:savings_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAVINGS_PERCENTAGE", traits: {"smithy.api#enumValue" => "SavingsPercentage"}))
-    SummaryMetricsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SummaryMetrics, name: "member")
+    SummaryMetricsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SummaryMetrics, name: "member"))
     SummaryMetricsResult.add_member(:savings_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "savingsPercentage"))
     SummaryMetricsResult.type = Types::SummaryMetricsResult
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     Tag.type = Types::Tag
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     Term.add_member(:one_year, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONE_YEAR", traits: {"smithy.api#enumValue" => "OneYear"}))
     Term.add_member(:three_years, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THREE_YEARS", traits: {"smithy.api#enumValue" => "ThreeYears"}))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
@@ -586,7 +586,7 @@ module Aws::CostOptimizationHub
     Usage.add_member(:product_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "productCode"))
     Usage.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "unit"))
     Usage.type = Types::Usage
-    UsageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Usage, name: "member")
+    UsageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Usage, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, name: "reason"))
     ValidationException.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionDetails, name: "fields"))
@@ -594,7 +594,7 @@ module Aws::CostOptimizationHub
     ValidationExceptionDetail.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "fieldName", traits: {"smithy.api#required" => {}}))
     ValidationExceptionDetail.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionDetail.type = Types::ValidationExceptionDetail
-    ValidationExceptionDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionDetail, name: "member")
+    ValidationExceptionDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionDetail, name: "member"))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "FieldValidationFailed"}))
     ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTHER", traits: {"smithy.api#enumValue" => "Other"}))
 

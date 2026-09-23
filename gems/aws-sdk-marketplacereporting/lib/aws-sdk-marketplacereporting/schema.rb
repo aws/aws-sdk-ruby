@@ -20,7 +20,7 @@ module Aws::MarketplaceReporting
     AccessDeniedException.type = Types::AccessDeniedException
     BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     BadRequestException.type = Types::BadRequestException
-    EmbeddingDomains.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EmbeddingDomain, name: "member")
+    EmbeddingDomains.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EmbeddingDomain, name: "member"))
     GetBuyerDashboardInput.add_member(:dashboard_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardIdentifier, name: "dashboardIdentifier", traits: {"smithy.api#required" => {}}))
     GetBuyerDashboardInput.add_member(:embedding_domains, ::Smithy::Schema::Shapes::MemberShape.new(target: EmbeddingDomains, name: "embeddingDomains", traits: {"smithy.api#required" => {}}))
     GetBuyerDashboardInput.type = Types::GetBuyerDashboardInput

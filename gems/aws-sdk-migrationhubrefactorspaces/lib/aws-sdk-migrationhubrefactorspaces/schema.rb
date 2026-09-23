@@ -143,8 +143,8 @@ module Aws::MigrationHubRefactorSpaces
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    AdditionalDetails.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalDetailsKey, name: "key")
-    AdditionalDetails.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalDetailsValue, name: "value")
+    AdditionalDetails.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalDetailsKey, name: "key"))
+    AdditionalDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalDetailsValue, name: "value"))
     ApiGatewayProxyConfig.add_member(:proxy_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "ProxyUrl"))
     ApiGatewayProxyConfig.add_member(:api_gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiGatewayId, name: "ApiGatewayId"))
     ApiGatewayProxyConfig.add_member(:vpc_link_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcLinkId, name: "VpcLinkId"))
@@ -164,7 +164,7 @@ module Aws::MigrationHubRefactorSpaces
     ApiGatewayProxySummary.add_member(:endpoint_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiGatewayEndpointType, name: "EndpointType"))
     ApiGatewayProxySummary.add_member(:stage_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StageName, name: "StageName"))
     ApiGatewayProxySummary.type = Types::ApiGatewayProxySummary
-    ApplicationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary, name: "member")
+    ApplicationSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary, name: "member"))
     ApplicationSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "Name"))
     ApplicationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "Arn"))
     ApplicationSummary.add_member(:owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "OwnerAccountId"))
@@ -180,7 +180,7 @@ module Aws::MigrationHubRefactorSpaces
     ApplicationSummary.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedTime"))
     ApplicationSummary.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTime"))
     ApplicationSummary.type = Types::ApplicationSummary
-    CidrBlocks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CidrBlock, name: "member")
+    CidrBlocks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrBlock, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceId", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceType", traits: {"smithy.api#required" => {}}))
@@ -320,7 +320,7 @@ module Aws::MigrationHubRefactorSpaces
     DeleteServiceOutput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceState, name: "State"))
     DeleteServiceOutput.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedTime"))
     DeleteServiceOutput.type = Types::DeleteServiceOutput
-    EnvironmentSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentSummary, name: "member")
+    EnvironmentSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentSummary, name: "member"))
     EnvironmentSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, name: "Name"))
     EnvironmentSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "Arn"))
     EnvironmentSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
@@ -342,7 +342,7 @@ module Aws::MigrationHubRefactorSpaces
     EnvironmentVpc.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedTime"))
     EnvironmentVpc.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTime"))
     EnvironmentVpc.type = Types::EnvironmentVpc
-    EnvironmentVpcs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVpc, name: "member")
+    EnvironmentVpcs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVpc, name: "member"))
     ErrorResponse.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "Code"))
     ErrorResponse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ErrorResponse.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
@@ -432,7 +432,7 @@ module Aws::MigrationHubRefactorSpaces
     GetServiceOutput.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedTime"))
     GetServiceOutput.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTime"))
     GetServiceOutput.type = Types::GetServiceOutput
-    HttpMethods.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HttpMethod, name: "member")
+    HttpMethods.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpMethod, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
     InvalidResourcePolicyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
@@ -483,8 +483,8 @@ module Aws::MigrationHubRefactorSpaces
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
     ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    PathResourceToId.key = ::Smithy::Schema::Shapes::MemberShape.new(target: PathResourceToIdKey, name: "key")
-    PathResourceToId.value = ::Smithy::Schema::Shapes::MemberShape.new(target: PathResourceToIdValue, name: "value")
+    PathResourceToId.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: PathResourceToIdKey, name: "key"))
+    PathResourceToId.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PathResourceToIdValue, name: "value"))
     PutResourcePolicyInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     PutResourcePolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyString, name: "Policy", traits: {"smithy.api#required" => {}}))
     PutResourcePolicyInput.type = Types::PutResourcePolicyInput
@@ -493,7 +493,7 @@ module Aws::MigrationHubRefactorSpaces
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceType", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RouteSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSummary, name: "member")
+    RouteSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSummary, name: "member"))
     RouteSummary.add_member(:route_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteId, name: "RouteId"))
     RouteSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "Arn"))
     RouteSummary.add_member(:owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "OwnerAccountId"))
@@ -519,7 +519,7 @@ module Aws::MigrationHubRefactorSpaces
     ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "QuotaCode"))
     ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServiceCode", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    ServiceSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceSummary, name: "member")
+    ServiceSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceSummary, name: "member"))
     ServiceSummary.add_member(:service_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceId, name: "ServiceId"))
     ServiceSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, name: "Name"))
     ServiceSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "Arn"))
@@ -538,9 +538,9 @@ module Aws::MigrationHubRefactorSpaces
     ServiceSummary.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedTime"))
     ServiceSummary.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTime"))
     ServiceSummary.type = Types::ServiceSummary
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^(?!aws:).+"})
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value", traits: {"smithy.api#length" => {"max" => 256}})
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^(?!aws:).+"}))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value", traits: {"smithy.api#length" => {"max" => 256}}))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput

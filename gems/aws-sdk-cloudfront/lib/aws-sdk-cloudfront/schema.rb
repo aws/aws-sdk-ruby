@@ -769,10 +769,10 @@ module Aws::CloudFront
     String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudfront#string", name: "String")
     Timestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.cloudfront#timestamp", name: "Timestamp")
 
-    AccessControlAllowHeadersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Header"})
-    AccessControlAllowMethodsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseHeadersPolicyAccessControlAllowMethodsValues, name: "member", traits: {"smithy.api#xmlName" => "Method"})
-    AccessControlAllowOriginsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Origin"})
-    AccessControlExposeHeadersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Header"})
+    AccessControlAllowHeadersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Header"}))
+    AccessControlAllowMethodsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseHeadersPolicyAccessControlAllowMethodsValues, name: "member", traits: {"smithy.api#xmlName" => "Method"}))
+    AccessControlAllowOriginsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Origin"}))
+    AccessControlExposeHeadersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Header"}))
     AccessDenied.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     AccessDenied.type = Types::AccessDenied
     ActiveTrustedKeyGroups.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled", traits: {"smithy.api#required" => {}}))
@@ -786,8 +786,8 @@ module Aws::CloudFront
     AliasICPRecordal.add_member(:cname, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CNAME"))
     AliasICPRecordal.add_member(:icp_recordal_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ICPRecordalStatus, name: "ICPRecordalStatus"))
     AliasICPRecordal.type = Types::AliasICPRecordal
-    AliasICPRecordals.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AliasICPRecordal, name: "member", traits: {"smithy.api#xmlName" => "AliasICPRecordal"})
-    AliasList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "CNAME"})
+    AliasICPRecordals.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasICPRecordal, name: "member", traits: {"smithy.api#xmlName" => "AliasICPRecordal"}))
+    AliasList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "CNAME"}))
     Aliases.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     Aliases.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasList, name: "Items"))
     Aliases.type = Types::Aliases
@@ -810,7 +810,7 @@ module Aws::CloudFront
     AnycastIpListCollection.add_member(:is_truncated, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsTruncated", traits: {"smithy.api#required" => {}}))
     AnycastIpListCollection.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     AnycastIpListCollection.type = Types::AnycastIpListCollection
-    AnycastIpListSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnycastIpListSummary, name: "member", traits: {"smithy.api#xmlName" => "AnycastIpListSummary"})
+    AnycastIpListSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnycastIpListSummary, name: "member", traits: {"smithy.api#xmlName" => "AnycastIpListSummary"}))
     AnycastIpListSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Id", traits: {"smithy.api#required" => {}}))
     AnycastIpListSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnycastIpListName, name: "Name", traits: {"smithy.api#required" => {}}))
     AnycastIpListSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status", traits: {"smithy.api#required" => {}}))
@@ -818,7 +818,7 @@ module Aws::CloudFront
     AnycastIpListSummary.add_member(:ip_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "IpCount", traits: {"smithy.api#required" => {}}))
     AnycastIpListSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime", traits: {"smithy.api#required" => {}}))
     AnycastIpListSummary.type = Types::AnycastIpListSummary
-    AnycastIps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "AnycastIp"})
+    AnycastIps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "AnycastIp"}))
     AssociateAliasRequest.add_member(:target_distribution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TargetDistributionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AssociateAliasRequest.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Alias", traits: {"smithy.api#httpQuery" => "Alias", "smithy.api#required" => {}}))
     AssociateAliasRequest.type = Types::AssociateAliasRequest
@@ -838,7 +838,7 @@ module Aws::CloudFront
     AssociateDistributionWebACLResult.add_member(:web_acl_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "WebACLArn"))
     AssociateDistributionWebACLResult.add_member(:e_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ETag", traits: {"smithy.api#httpHeader" => "ETag"}))
     AssociateDistributionWebACLResult.type = Types::AssociateDistributionWebACLResult
-    AwsAccountNumberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "AwsAccountNumber"})
+    AwsAccountNumberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "AwsAccountNumber"}))
     BatchTooLarge.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     BatchTooLarge.type = Types::BatchTooLarge
     CNAMEAlreadyExists.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
@@ -864,7 +864,7 @@ module Aws::CloudFront
     CacheBehavior.add_member(:default_ttl, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "DefaultTTL", traits: {"smithy.api#deprecated" => {}}))
     CacheBehavior.add_member(:max_ttl, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "MaxTTL", traits: {"smithy.api#deprecated" => {}}))
     CacheBehavior.type = Types::CacheBehavior
-    CacheBehaviorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CacheBehavior, name: "member", traits: {"smithy.api#xmlName" => "CacheBehavior"})
+    CacheBehaviorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheBehavior, name: "member", traits: {"smithy.api#xmlName" => "CacheBehavior"}))
     CacheBehaviors.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     CacheBehaviors.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheBehaviorList, name: "Items"))
     CacheBehaviors.type = Types::CacheBehaviors
@@ -910,7 +910,7 @@ module Aws::CloudFront
     CachePolicySummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: CachePolicyType, name: "Type", traits: {"smithy.api#required" => {}}))
     CachePolicySummary.add_member(:cache_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: CachePolicy, name: "CachePolicy", traits: {"smithy.api#required" => {}}))
     CachePolicySummary.type = Types::CachePolicySummary
-    CachePolicySummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CachePolicySummary, name: "member", traits: {"smithy.api#xmlName" => "CachePolicySummary"})
+    CachePolicySummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CachePolicySummary, name: "member", traits: {"smithy.api#xmlName" => "CachePolicySummary"}))
     CachePolicyType.add_member(:managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "managed", traits: {"smithy.api#enumValue" => "managed"}))
     CachePolicyType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "custom", traits: {"smithy.api#enumValue" => "custom"}))
     CachedMethods.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
@@ -951,12 +951,12 @@ module Aws::CloudFront
     CloudFrontOriginAccessIdentitySummary.add_member(:s3_canonical_user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "S3CanonicalUserId", traits: {"smithy.api#required" => {}}))
     CloudFrontOriginAccessIdentitySummary.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Comment", traits: {"smithy.api#required" => {}}))
     CloudFrontOriginAccessIdentitySummary.type = Types::CloudFrontOriginAccessIdentitySummary
-    CloudFrontOriginAccessIdentitySummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CloudFrontOriginAccessIdentitySummary, name: "member", traits: {"smithy.api#xmlName" => "CloudFrontOriginAccessIdentitySummary"})
+    CloudFrontOriginAccessIdentitySummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudFrontOriginAccessIdentitySummary, name: "member", traits: {"smithy.api#xmlName" => "CloudFrontOriginAccessIdentitySummary"}))
     ConflictingAlias.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Alias"))
     ConflictingAlias.add_member(:distribution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DistributionId"))
     ConflictingAlias.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AccountId"))
     ConflictingAlias.type = Types::ConflictingAlias
-    ConflictingAliases.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictingAlias, name: "member", traits: {"smithy.api#xmlName" => "ConflictingAlias"})
+    ConflictingAliases.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictingAlias, name: "member", traits: {"smithy.api#xmlName" => "ConflictingAlias"}))
     ConflictingAliasesList.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextMarker"))
     ConflictingAliasesList.add_member(:max_items, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "MaxItems"))
     ConflictingAliasesList.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity"))
@@ -989,7 +989,7 @@ module Aws::CloudFront
     ConnectionGroupSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     ConnectionGroupSummary.add_member(:is_default, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsDefault"))
     ConnectionGroupSummary.type = Types::ConnectionGroupSummary
-    ConnectionGroupSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionGroupSummary, name: "member", traits: {"smithy.api#xmlName" => "ConnectionGroupSummary"})
+    ConnectionGroupSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionGroupSummary, name: "member", traits: {"smithy.api#xmlName" => "ConnectionGroupSummary"}))
     ConnectionMode.add_member(:direct, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Direct", traits: {"smithy.api#enumValue" => "direct"}))
     ConnectionMode.add_member(:tenant_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TenantOnly", traits: {"smithy.api#enumValue" => "tenant-only"}))
     ContentTypeProfile.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: Format, name: "Format", traits: {"smithy.api#required" => {}}))
@@ -999,7 +999,7 @@ module Aws::CloudFront
     ContentTypeProfileConfig.add_member(:forward_when_content_type_is_unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ForwardWhenContentTypeIsUnknown", traits: {"smithy.api#required" => {}}))
     ContentTypeProfileConfig.add_member(:content_type_profiles, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentTypeProfiles, name: "ContentTypeProfiles"))
     ContentTypeProfileConfig.type = Types::ContentTypeProfileConfig
-    ContentTypeProfileList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContentTypeProfile, name: "member", traits: {"smithy.api#xmlName" => "ContentTypeProfile"})
+    ContentTypeProfileList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentTypeProfile, name: "member", traits: {"smithy.api#xmlName" => "ContentTypeProfile"}))
     ContentTypeProfiles.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     ContentTypeProfiles.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentTypeProfileList, name: "Items"))
     ContentTypeProfiles.type = Types::ContentTypeProfiles
@@ -1022,7 +1022,7 @@ module Aws::CloudFront
     ContinuousDeploymentPolicyList.type = Types::ContinuousDeploymentPolicyList
     ContinuousDeploymentPolicySummary.add_member(:continuous_deployment_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousDeploymentPolicy, name: "ContinuousDeploymentPolicy", traits: {"smithy.api#required" => {}}))
     ContinuousDeploymentPolicySummary.type = Types::ContinuousDeploymentPolicySummary
-    ContinuousDeploymentPolicySummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousDeploymentPolicySummary, name: "member", traits: {"smithy.api#xmlName" => "ContinuousDeploymentPolicySummary"})
+    ContinuousDeploymentPolicySummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousDeploymentPolicySummary, name: "member", traits: {"smithy.api#xmlName" => "ContinuousDeploymentPolicySummary"}))
     ContinuousDeploymentPolicyType.add_member(:single_weight, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SingleWeight", traits: {"smithy.api#enumValue" => "SingleWeight"}))
     ContinuousDeploymentPolicyType.add_member(:single_header, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SingleHeader", traits: {"smithy.api#enumValue" => "SingleHeader"}))
     ContinuousDeploymentSingleHeaderConfig.add_member(:header, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Header", traits: {"smithy.api#required" => {}}))
@@ -1031,7 +1031,7 @@ module Aws::CloudFront
     ContinuousDeploymentSingleWeightConfig.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "Weight", traits: {"smithy.api#required" => {}}))
     ContinuousDeploymentSingleWeightConfig.add_member(:session_stickiness_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionStickinessConfig, name: "SessionStickinessConfig"))
     ContinuousDeploymentSingleWeightConfig.type = Types::ContinuousDeploymentSingleWeightConfig
-    CookieNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Name"})
+    CookieNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Name"}))
     CookieNames.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     CookieNames.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: CookieNameList, name: "Items"))
     CookieNames.type = Types::CookieNames
@@ -1295,7 +1295,7 @@ module Aws::CloudFront
     CustomErrorResponse.add_member(:response_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResponseCode"))
     CustomErrorResponse.add_member(:error_caching_min_ttl, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "ErrorCachingMinTTL"))
     CustomErrorResponse.type = Types::CustomErrorResponse
-    CustomErrorResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomErrorResponse, name: "member", traits: {"smithy.api#xmlName" => "CustomErrorResponse"})
+    CustomErrorResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomErrorResponse, name: "member", traits: {"smithy.api#xmlName" => "CustomErrorResponse"}))
     CustomErrorResponses.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     CustomErrorResponses.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomErrorResponseList, name: "Items"))
     CustomErrorResponses.type = Types::CustomErrorResponses
@@ -1474,7 +1474,7 @@ module Aws::CloudFront
     DistributionIdList.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     DistributionIdList.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: DistributionIdListSummary, name: "Items"))
     DistributionIdList.type = Types::DistributionIdList
-    DistributionIdListSummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "DistributionId"})
+    DistributionIdListSummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "DistributionId"}))
     DistributionList.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker", traits: {"smithy.api#required" => {}}))
     DistributionList.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextMarker"))
     DistributionList.add_member(:max_items, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "MaxItems", traits: {"smithy.api#required" => {}}))
@@ -1514,7 +1514,7 @@ module Aws::CloudFront
     DistributionSummary.add_member(:connection_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionMode, name: "ConnectionMode"))
     DistributionSummary.add_member(:anycast_ip_list_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AnycastIpListId"))
     DistributionSummary.type = Types::DistributionSummary
-    DistributionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DistributionSummary, name: "member", traits: {"smithy.api#xmlName" => "DistributionSummary"})
+    DistributionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DistributionSummary, name: "member", traits: {"smithy.api#xmlName" => "DistributionSummary"}))
     DistributionTenant.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Id"))
     DistributionTenant.add_member(:distribution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DistributionId"))
     DistributionTenant.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
@@ -1532,7 +1532,7 @@ module Aws::CloudFront
     DistributionTenantAssociationFilter.add_member(:distribution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DistributionId"))
     DistributionTenantAssociationFilter.add_member(:connection_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ConnectionGroupId"))
     DistributionTenantAssociationFilter.type = Types::DistributionTenantAssociationFilter
-    DistributionTenantList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DistributionTenantSummary, name: "member", traits: {"smithy.api#xmlName" => "DistributionTenantSummary"})
+    DistributionTenantList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DistributionTenantSummary, name: "member", traits: {"smithy.api#xmlName" => "DistributionTenantSummary"}))
     DistributionTenantSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Id", traits: {"smithy.api#required" => {}}))
     DistributionTenantSummary.add_member(:distribution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DistributionId", traits: {"smithy.api#required" => {}}))
     DistributionTenantSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#required" => {}}))
@@ -1550,7 +1550,7 @@ module Aws::CloudFront
     DnsConfiguration.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsConfigurationStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     DnsConfiguration.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Reason"))
     DnsConfiguration.type = Types::DnsConfiguration
-    DnsConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DnsConfiguration, name: "member", traits: {"smithy.api#xmlName" => "DnsConfiguration"})
+    DnsConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsConfiguration, name: "member", traits: {"smithy.api#xmlName" => "DnsConfiguration"}))
     DnsConfigurationStatus.add_member(:valid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Valid", traits: {"smithy.api#enumValue" => "valid-configuration"}))
     DnsConfigurationStatus.add_member(:invalid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Invalid", traits: {"smithy.api#enumValue" => "invalid-configuration"}))
     DnsConfigurationStatus.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Unknown", traits: {"smithy.api#enumValue" => "unknown-configuration"}))
@@ -1559,14 +1559,14 @@ module Aws::CloudFront
     DomainConflict.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceId", traits: {"smithy.api#required" => {}}))
     DomainConflict.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AccountId", traits: {"smithy.api#required" => {}}))
     DomainConflict.type = Types::DomainConflict
-    DomainConflictsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainConflict, name: "member", traits: {"smithy.api#xmlName" => "DomainConflicts"})
+    DomainConflictsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainConflict, name: "member", traits: {"smithy.api#xmlName" => "DomainConflicts"}))
     DomainItem.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Domain", traits: {"smithy.api#required" => {}}))
     DomainItem.type = Types::DomainItem
-    DomainList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainItem, name: "member")
+    DomainList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainItem, name: "member"))
     DomainResult.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Domain", traits: {"smithy.api#required" => {}}))
     DomainResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainStatus, name: "Status"))
     DomainResult.type = Types::DomainResult
-    DomainResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainResult, name: "member")
+    DomainResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainResult, name: "member"))
     DomainStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Active", traits: {"smithy.api#enumValue" => "active"}))
     DomainStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Inactive", traits: {"smithy.api#enumValue" => "inactive"}))
     EncryptionEntities.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
@@ -1576,11 +1576,11 @@ module Aws::CloudFront
     EncryptionEntity.add_member(:provider_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ProviderId", traits: {"smithy.api#required" => {}}))
     EncryptionEntity.add_member(:field_patterns, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldPatterns, name: "FieldPatterns", traits: {"smithy.api#required" => {}}))
     EncryptionEntity.type = Types::EncryptionEntity
-    EncryptionEntityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionEntity, name: "member", traits: {"smithy.api#xmlName" => "EncryptionEntity"})
+    EncryptionEntityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionEntity, name: "member", traits: {"smithy.api#xmlName" => "EncryptionEntity"}))
     EndPoint.add_member(:stream_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StreamType", traits: {"smithy.api#required" => {}}))
     EndPoint.add_member(:kinesis_stream_config, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisStreamConfig, name: "KinesisStreamConfig"))
     EndPoint.type = Types::EndPoint
-    EndPointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EndPoint, name: "member")
+    EndPointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EndPoint, name: "member"))
     EntityAlreadyExists.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     EntityAlreadyExists.type = Types::EntityAlreadyExists
     EntityLimitExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
@@ -1637,16 +1637,16 @@ module Aws::CloudFront
     FieldLevelEncryptionProfileSummary.add_member(:encryption_entities, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionEntities, name: "EncryptionEntities", traits: {"smithy.api#required" => {}}))
     FieldLevelEncryptionProfileSummary.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Comment"))
     FieldLevelEncryptionProfileSummary.type = Types::FieldLevelEncryptionProfileSummary
-    FieldLevelEncryptionProfileSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldLevelEncryptionProfileSummary, name: "member", traits: {"smithy.api#xmlName" => "FieldLevelEncryptionProfileSummary"})
+    FieldLevelEncryptionProfileSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldLevelEncryptionProfileSummary, name: "member", traits: {"smithy.api#xmlName" => "FieldLevelEncryptionProfileSummary"}))
     FieldLevelEncryptionSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Id", traits: {"smithy.api#required" => {}}))
     FieldLevelEncryptionSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime", traits: {"smithy.api#required" => {}}))
     FieldLevelEncryptionSummary.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Comment"))
     FieldLevelEncryptionSummary.add_member(:query_arg_profile_config, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryArgProfileConfig, name: "QueryArgProfileConfig"))
     FieldLevelEncryptionSummary.add_member(:content_type_profile_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentTypeProfileConfig, name: "ContentTypeProfileConfig"))
     FieldLevelEncryptionSummary.type = Types::FieldLevelEncryptionSummary
-    FieldLevelEncryptionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldLevelEncryptionSummary, name: "member", traits: {"smithy.api#xmlName" => "FieldLevelEncryptionSummary"})
-    FieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Field"})
-    FieldPatternList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "FieldPattern"})
+    FieldLevelEncryptionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldLevelEncryptionSummary, name: "member", traits: {"smithy.api#xmlName" => "FieldLevelEncryptionSummary"}))
+    FieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Field"}))
+    FieldPatternList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "FieldPattern"}))
     FieldPatterns.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     FieldPatterns.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldPatternList, name: "Items"))
     FieldPatterns.type = Types::FieldPatterns
@@ -1663,7 +1663,7 @@ module Aws::CloudFront
     FunctionAssociation.add_member(:function_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionARN, name: "FunctionARN", traits: {"smithy.api#required" => {}}))
     FunctionAssociation.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "EventType", traits: {"smithy.api#required" => {}}))
     FunctionAssociation.type = Types::FunctionAssociation
-    FunctionAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionAssociation, name: "member", traits: {"smithy.api#xmlName" => "FunctionAssociation"})
+    FunctionAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionAssociation, name: "member", traits: {"smithy.api#xmlName" => "FunctionAssociation"}))
     FunctionAssociations.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     FunctionAssociations.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionAssociationList, name: "Items"))
     FunctionAssociations.type = Types::FunctionAssociations
@@ -1671,7 +1671,7 @@ module Aws::CloudFront
     FunctionConfig.add_member(:runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionRuntime, name: "Runtime", traits: {"smithy.api#required" => {}}))
     FunctionConfig.add_member(:key_value_store_associations, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValueStoreAssociations, name: "KeyValueStoreAssociations"))
     FunctionConfig.type = Types::FunctionConfig
-    FunctionExecutionLogList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    FunctionExecutionLogList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     FunctionInUse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     FunctionInUse.type = Types::FunctionInUse
     FunctionList.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextMarker"))
@@ -1695,7 +1695,7 @@ module Aws::CloudFront
     FunctionSummary.add_member(:function_config, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionConfig, name: "FunctionConfig", traits: {"smithy.api#required" => {}}))
     FunctionSummary.add_member(:function_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionMetadata, name: "FunctionMetadata", traits: {"smithy.api#required" => {}}))
     FunctionSummary.type = Types::FunctionSummary
-    FunctionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionSummary, name: "member", traits: {"smithy.api#xmlName" => "FunctionSummary"})
+    FunctionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionSummary, name: "member", traits: {"smithy.api#xmlName" => "FunctionSummary"}))
     GeoRestriction.add_member(:restriction_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoRestrictionType, name: "RestrictionType", traits: {"smithy.api#required" => {}}))
     GeoRestriction.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     GeoRestriction.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationList, name: "Items"))
@@ -1958,7 +1958,7 @@ module Aws::CloudFront
     GetVpcOriginResult.type = Types::GetVpcOriginResult
     GrpcConfig.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled", traits: {"smithy.api#required" => {}}))
     GrpcConfig.type = Types::GrpcConfig
-    HeaderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Name"})
+    HeaderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Name"}))
     Headers.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     Headers.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderList, name: "Items"))
     Headers.type = Types::Headers
@@ -2056,7 +2056,7 @@ module Aws::CloudFront
     InvalidationSummary.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreateTime", traits: {"smithy.api#required" => {}}))
     InvalidationSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status", traits: {"smithy.api#required" => {}}))
     InvalidationSummary.type = Types::InvalidationSummary
-    InvalidationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InvalidationSummary, name: "member", traits: {"smithy.api#xmlName" => "InvalidationSummary"})
+    InvalidationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InvalidationSummary, name: "member", traits: {"smithy.api#xmlName" => "InvalidationSummary"}))
     IpAddressType.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Ipv4", traits: {"smithy.api#enumValue" => "ipv4"}))
     IpAddressType.add_member(:ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Ipv6", traits: {"smithy.api#enumValue" => "ipv6"}))
     IpAddressType.add_member(:dual_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DualStack", traits: {"smithy.api#enumValue" => "dualstack"}))
@@ -2066,7 +2066,7 @@ module Aws::CloudFront
     KGKeyPairIds.add_member(:key_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KeyGroupId"))
     KGKeyPairIds.add_member(:key_pair_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyPairIds, name: "KeyPairIds"))
     KGKeyPairIds.type = Types::KGKeyPairIds
-    KGKeyPairIdsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KGKeyPairIds, name: "member", traits: {"smithy.api#xmlName" => "KeyGroup"})
+    KGKeyPairIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KGKeyPairIds, name: "member", traits: {"smithy.api#xmlName" => "KeyGroup"}))
     KeyGroup.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Id", traits: {"smithy.api#required" => {}}))
     KeyGroup.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime", traits: {"smithy.api#required" => {}}))
     KeyGroup.add_member(:key_group_config, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyGroupConfig, name: "KeyGroupConfig", traits: {"smithy.api#required" => {}}))
@@ -2084,8 +2084,8 @@ module Aws::CloudFront
     KeyGroupList.type = Types::KeyGroupList
     KeyGroupSummary.add_member(:key_group, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyGroup, name: "KeyGroup", traits: {"smithy.api#required" => {}}))
     KeyGroupSummary.type = Types::KeyGroupSummary
-    KeyGroupSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyGroupSummary, name: "member", traits: {"smithy.api#xmlName" => "KeyGroupSummary"})
-    KeyPairIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "KeyPairId"})
+    KeyGroupSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyGroupSummary, name: "member", traits: {"smithy.api#xmlName" => "KeyGroupSummary"}))
+    KeyPairIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "KeyPairId"}))
     KeyPairIds.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     KeyPairIds.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyPairIdList, name: "Items"))
     KeyPairIds.type = Types::KeyPairIds
@@ -2098,7 +2098,7 @@ module Aws::CloudFront
     KeyValueStore.type = Types::KeyValueStore
     KeyValueStoreAssociation.add_member(:key_value_store_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValueStoreARN, name: "KeyValueStoreARN", traits: {"smithy.api#required" => {}}))
     KeyValueStoreAssociation.type = Types::KeyValueStoreAssociation
-    KeyValueStoreAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValueStoreAssociation, name: "member", traits: {"smithy.api#xmlName" => "KeyValueStoreAssociation"})
+    KeyValueStoreAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValueStoreAssociation, name: "member", traits: {"smithy.api#xmlName" => "KeyValueStoreAssociation"}))
     KeyValueStoreAssociations.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     KeyValueStoreAssociations.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValueStoreAssociationList, name: "Items"))
     KeyValueStoreAssociations.type = Types::KeyValueStoreAssociations
@@ -2107,7 +2107,7 @@ module Aws::CloudFront
     KeyValueStoreList.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     KeyValueStoreList.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValueStoreSummaryList, name: "Items"))
     KeyValueStoreList.type = Types::KeyValueStoreList
-    KeyValueStoreSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValueStore, name: "member", traits: {"smithy.api#xmlName" => "KeyValueStore"})
+    KeyValueStoreSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValueStore, name: "member", traits: {"smithy.api#xmlName" => "KeyValueStore"}))
     KinesisStreamConfig.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RoleARN", traits: {"smithy.api#required" => {}}))
     KinesisStreamConfig.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StreamARN", traits: {"smithy.api#required" => {}}))
     KinesisStreamConfig.type = Types::KinesisStreamConfig
@@ -2115,7 +2115,7 @@ module Aws::CloudFront
     LambdaFunctionAssociation.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "EventType", traits: {"smithy.api#required" => {}}))
     LambdaFunctionAssociation.add_member(:include_body, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IncludeBody"))
     LambdaFunctionAssociation.type = Types::LambdaFunctionAssociation
-    LambdaFunctionAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaFunctionAssociation, name: "member", traits: {"smithy.api#xmlName" => "LambdaFunctionAssociation"})
+    LambdaFunctionAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaFunctionAssociation, name: "member", traits: {"smithy.api#xmlName" => "LambdaFunctionAssociation"}))
     LambdaFunctionAssociations.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     LambdaFunctionAssociations.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaFunctionAssociationList, name: "Items"))
     LambdaFunctionAssociations.type = Types::LambdaFunctionAssociations
@@ -2377,7 +2377,7 @@ module Aws::CloudFront
     ListVpcOriginsResult[:http_payload] = :vpc_origin_list
     ListVpcOriginsResult[:http_payload_member] = ListVpcOriginsResult.member(:vpc_origin_list)
     ListVpcOriginsResult.type = Types::ListVpcOriginsResult
-    LocationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Location"})
+    LocationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Location"}))
     LoggingConfig.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => false}))
     LoggingConfig.add_member(:include_cookies, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IncludeCookies", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => false}))
     LoggingConfig.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Bucket", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
@@ -2406,7 +2406,7 @@ module Aws::CloudFront
     Method.add_member(:patch, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PATCH", traits: {"smithy.api#enumValue" => "PATCH"}))
     Method.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPTIONS", traits: {"smithy.api#enumValue" => "OPTIONS"}))
     Method.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE", traits: {"smithy.api#enumValue" => "DELETE"}))
-    MethodsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Method, name: "member", traits: {"smithy.api#xmlName" => "Method"})
+    MethodsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Method, name: "member", traits: {"smithy.api#xmlName" => "Method"}))
     MinimumProtocolVersion.add_member(:ss_lv3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSLv3", traits: {"smithy.api#enumValue" => "SSLv3"}))
     MinimumProtocolVersion.add_member(:tl_sv1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLSv1", traits: {"smithy.api#enumValue" => "TLSv1"}))
     MinimumProtocolVersion.add_member(:tl_sv1_2016, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLSv1_2016", traits: {"smithy.api#enumValue" => "TLSv1_2016"}))
@@ -2503,11 +2503,11 @@ module Aws::CloudFront
     OriginAccessControlSummary.add_member(:signing_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginAccessControlSigningBehaviors, name: "SigningBehavior", traits: {"smithy.api#required" => {}}))
     OriginAccessControlSummary.add_member(:origin_access_control_origin_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginAccessControlOriginTypes, name: "OriginAccessControlOriginType", traits: {"smithy.api#required" => {}}))
     OriginAccessControlSummary.type = Types::OriginAccessControlSummary
-    OriginAccessControlSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OriginAccessControlSummary, name: "member", traits: {"smithy.api#xmlName" => "OriginAccessControlSummary"})
+    OriginAccessControlSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginAccessControlSummary, name: "member", traits: {"smithy.api#xmlName" => "OriginAccessControlSummary"}))
     OriginCustomHeader.add_member(:header_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "HeaderName", traits: {"smithy.api#required" => {}}))
     OriginCustomHeader.add_member(:header_value, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveStringType, name: "HeaderValue", traits: {"smithy.api#required" => {}}))
     OriginCustomHeader.type = Types::OriginCustomHeader
-    OriginCustomHeadersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OriginCustomHeader, name: "member", traits: {"smithy.api#xmlName" => "OriginCustomHeader"})
+    OriginCustomHeadersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginCustomHeader, name: "member", traits: {"smithy.api#xmlName" => "OriginCustomHeader"}))
     OriginGroup.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Id", traits: {"smithy.api#required" => {}}))
     OriginGroup.add_member(:failover_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginGroupFailoverCriteria, name: "FailoverCriteria", traits: {"smithy.api#required" => {}}))
     OriginGroup.add_member(:members, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginGroupMembers, name: "Members", traits: {"smithy.api#required" => {}}))
@@ -2515,10 +2515,10 @@ module Aws::CloudFront
     OriginGroup.type = Types::OriginGroup
     OriginGroupFailoverCriteria.add_member(:status_codes, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusCodes, name: "StatusCodes", traits: {"smithy.api#required" => {}}))
     OriginGroupFailoverCriteria.type = Types::OriginGroupFailoverCriteria
-    OriginGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OriginGroup, name: "member", traits: {"smithy.api#xmlName" => "OriginGroup"})
+    OriginGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginGroup, name: "member", traits: {"smithy.api#xmlName" => "OriginGroup"}))
     OriginGroupMember.add_member(:origin_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "OriginId", traits: {"smithy.api#required" => {}}))
     OriginGroupMember.type = Types::OriginGroupMember
-    OriginGroupMemberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OriginGroupMember, name: "member", traits: {"smithy.api#xmlName" => "OriginGroupMember"})
+    OriginGroupMemberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginGroupMember, name: "member", traits: {"smithy.api#xmlName" => "OriginGroupMember"}))
     OriginGroupMembers.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     OriginGroupMembers.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginGroupMemberList, name: "Items", traits: {"smithy.api#required" => {}}))
     OriginGroupMembers.type = Types::OriginGroupMembers
@@ -2527,7 +2527,7 @@ module Aws::CloudFront
     OriginGroups.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     OriginGroups.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginGroupList, name: "Items"))
     OriginGroups.type = Types::OriginGroups
-    OriginList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Origin, name: "member", traits: {"smithy.api#xmlName" => "Origin"})
+    OriginList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Origin, name: "member", traits: {"smithy.api#xmlName" => "Origin"}))
     OriginProtocolPolicy.add_member(:http_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "http_only", traits: {"smithy.api#enumValue" => "http-only"}))
     OriginProtocolPolicy.add_member(:match_viewer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "match_viewer", traits: {"smithy.api#enumValue" => "match-viewer"}))
     OriginProtocolPolicy.add_member(:https_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "https_only", traits: {"smithy.api#enumValue" => "https-only"}))
@@ -2575,7 +2575,7 @@ module Aws::CloudFront
     OriginRequestPolicySummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginRequestPolicyType, name: "Type", traits: {"smithy.api#required" => {}}))
     OriginRequestPolicySummary.add_member(:origin_request_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginRequestPolicy, name: "OriginRequestPolicy", traits: {"smithy.api#required" => {}}))
     OriginRequestPolicySummary.type = Types::OriginRequestPolicySummary
-    OriginRequestPolicySummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OriginRequestPolicySummary, name: "member", traits: {"smithy.api#xmlName" => "OriginRequestPolicySummary"})
+    OriginRequestPolicySummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginRequestPolicySummary, name: "member", traits: {"smithy.api#xmlName" => "OriginRequestPolicySummary"}))
     OriginRequestPolicyType.add_member(:managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "managed", traits: {"smithy.api#enumValue" => "managed"}))
     OriginRequestPolicyType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "custom", traits: {"smithy.api#enumValue" => "custom"}))
     OriginShield.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled", traits: {"smithy.api#required" => {}}))
@@ -2595,15 +2595,15 @@ module Aws::CloudFront
     ParameterDefinition.type = Types::ParameterDefinition
     ParameterDefinitionSchema.add_member(:string_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: StringSchemaConfig, name: "StringSchema"))
     ParameterDefinitionSchema.type = Types::ParameterDefinitionSchema
-    ParameterDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterDefinition, name: "member")
-    Parameters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Parameter, name: "member")
+    ParameterDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterDefinition, name: "member"))
+    Parameters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameter, name: "member"))
     ParametersInCacheKeyAndForwardedToOrigin.add_member(:enable_accept_encoding_gzip, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableAcceptEncodingGzip", traits: {"smithy.api#required" => {}}))
     ParametersInCacheKeyAndForwardedToOrigin.add_member(:enable_accept_encoding_brotli, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableAcceptEncodingBrotli"))
     ParametersInCacheKeyAndForwardedToOrigin.add_member(:headers_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CachePolicyHeadersConfig, name: "HeadersConfig", traits: {"smithy.api#required" => {}}))
     ParametersInCacheKeyAndForwardedToOrigin.add_member(:cookies_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CachePolicyCookiesConfig, name: "CookiesConfig", traits: {"smithy.api#required" => {}}))
     ParametersInCacheKeyAndForwardedToOrigin.add_member(:query_strings_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CachePolicyQueryStringsConfig, name: "QueryStringsConfig", traits: {"smithy.api#required" => {}}))
     ParametersInCacheKeyAndForwardedToOrigin.type = Types::ParametersInCacheKeyAndForwardedToOrigin
-    PathList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Path"})
+    PathList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Path"}))
     Paths.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     Paths.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: PathList, name: "Items"))
     Paths.type = Types::Paths
@@ -2624,7 +2624,7 @@ module Aws::CloudFront
     PublicKeyConfig.add_member(:encoded_key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EncodedKey", traits: {"smithy.api#required" => {}}))
     PublicKeyConfig.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Comment"))
     PublicKeyConfig.type = Types::PublicKeyConfig
-    PublicKeyIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "PublicKey"})
+    PublicKeyIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "PublicKey"}))
     PublicKeyInUse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     PublicKeyInUse.type = Types::PublicKeyInUse
     PublicKeyList.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextMarker"))
@@ -2638,7 +2638,7 @@ module Aws::CloudFront
     PublicKeySummary.add_member(:encoded_key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EncodedKey", traits: {"smithy.api#required" => {}}))
     PublicKeySummary.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Comment"))
     PublicKeySummary.type = Types::PublicKeySummary
-    PublicKeySummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PublicKeySummary, name: "member", traits: {"smithy.api#xmlName" => "PublicKeySummary"})
+    PublicKeySummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PublicKeySummary, name: "member", traits: {"smithy.api#xmlName" => "PublicKeySummary"}))
     PublishFunctionRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionName, name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PublishFunctionRequest.add_member(:if_match, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IfMatch", traits: {"smithy.api#httpHeader" => "If-Match", "smithy.api#required" => {}}))
     PublishFunctionRequest.type = Types::PublishFunctionRequest
@@ -2654,18 +2654,18 @@ module Aws::CloudFront
     QueryArgProfileConfig.type = Types::QueryArgProfileConfig
     QueryArgProfileEmpty.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     QueryArgProfileEmpty.type = Types::QueryArgProfileEmpty
-    QueryArgProfileList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryArgProfile, name: "member", traits: {"smithy.api#xmlName" => "QueryArgProfile"})
+    QueryArgProfileList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryArgProfile, name: "member", traits: {"smithy.api#xmlName" => "QueryArgProfile"}))
     QueryArgProfiles.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     QueryArgProfiles.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryArgProfileList, name: "Items"))
     QueryArgProfiles.type = Types::QueryArgProfiles
     QueryStringCacheKeys.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     QueryStringCacheKeys.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStringCacheKeysList, name: "Items"))
     QueryStringCacheKeys.type = Types::QueryStringCacheKeys
-    QueryStringCacheKeysList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Name"})
+    QueryStringCacheKeysList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Name"}))
     QueryStringNames.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     QueryStringNames.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStringNamesList, name: "Items"))
     QueryStringNames.type = Types::QueryStringNames
-    QueryStringNamesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Name"})
+    QueryStringNamesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Name"}))
     RealtimeLogConfig.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ARN", traits: {"smithy.api#required" => {}}))
     RealtimeLogConfig.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#required" => {}}))
     RealtimeLogConfig.add_member(:sampling_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "SamplingRate", traits: {"smithy.api#required" => {}}))
@@ -2676,7 +2676,7 @@ module Aws::CloudFront
     RealtimeLogConfigAlreadyExists.type = Types::RealtimeLogConfigAlreadyExists
     RealtimeLogConfigInUse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     RealtimeLogConfigInUse.type = Types::RealtimeLogConfigInUse
-    RealtimeLogConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RealtimeLogConfig, name: "member")
+    RealtimeLogConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RealtimeLogConfig, name: "member"))
     RealtimeLogConfigOwnerMismatch.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     RealtimeLogConfigOwnerMismatch.type = Types::RealtimeLogConfigOwnerMismatch
     RealtimeLogConfigs.add_member(:max_items, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "MaxItems", traits: {"smithy.api#required" => {}}))
@@ -2752,7 +2752,7 @@ module Aws::CloudFront
     ResponseHeadersPolicyCustomHeader.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value", traits: {"smithy.api#required" => {}}))
     ResponseHeadersPolicyCustomHeader.add_member(:override, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Override", traits: {"smithy.api#required" => {}}))
     ResponseHeadersPolicyCustomHeader.type = Types::ResponseHeadersPolicyCustomHeader
-    ResponseHeadersPolicyCustomHeaderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseHeadersPolicyCustomHeader, name: "member", traits: {"smithy.api#xmlName" => "ResponseHeadersPolicyCustomHeader"})
+    ResponseHeadersPolicyCustomHeaderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseHeadersPolicyCustomHeader, name: "member", traits: {"smithy.api#xmlName" => "ResponseHeadersPolicyCustomHeader"}))
     ResponseHeadersPolicyCustomHeadersConfig.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     ResponseHeadersPolicyCustomHeadersConfig.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseHeadersPolicyCustomHeaderList, name: "Items"))
     ResponseHeadersPolicyCustomHeadersConfig.type = Types::ResponseHeadersPolicyCustomHeadersConfig
@@ -2771,7 +2771,7 @@ module Aws::CloudFront
     ResponseHeadersPolicyReferrerPolicy.type = Types::ResponseHeadersPolicyReferrerPolicy
     ResponseHeadersPolicyRemoveHeader.add_member(:header, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Header", traits: {"smithy.api#required" => {}}))
     ResponseHeadersPolicyRemoveHeader.type = Types::ResponseHeadersPolicyRemoveHeader
-    ResponseHeadersPolicyRemoveHeaderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseHeadersPolicyRemoveHeader, name: "member", traits: {"smithy.api#xmlName" => "ResponseHeadersPolicyRemoveHeader"})
+    ResponseHeadersPolicyRemoveHeaderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseHeadersPolicyRemoveHeader, name: "member", traits: {"smithy.api#xmlName" => "ResponseHeadersPolicyRemoveHeader"}))
     ResponseHeadersPolicyRemoveHeadersConfig.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     ResponseHeadersPolicyRemoveHeadersConfig.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseHeadersPolicyRemoveHeaderList, name: "Items"))
     ResponseHeadersPolicyRemoveHeadersConfig.type = Types::ResponseHeadersPolicyRemoveHeadersConfig
@@ -2793,7 +2793,7 @@ module Aws::CloudFront
     ResponseHeadersPolicySummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseHeadersPolicyType, name: "Type", traits: {"smithy.api#required" => {}}))
     ResponseHeadersPolicySummary.add_member(:response_headers_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseHeadersPolicy, name: "ResponseHeadersPolicy", traits: {"smithy.api#required" => {}}))
     ResponseHeadersPolicySummary.type = Types::ResponseHeadersPolicySummary
-    ResponseHeadersPolicySummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseHeadersPolicySummary, name: "member", traits: {"smithy.api#xmlName" => "ResponseHeadersPolicySummary"})
+    ResponseHeadersPolicySummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseHeadersPolicySummary, name: "member", traits: {"smithy.api#xmlName" => "ResponseHeadersPolicySummary"}))
     ResponseHeadersPolicyType.add_member(:managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "managed", traits: {"smithy.api#enumValue" => "managed"}))
     ResponseHeadersPolicyType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "custom", traits: {"smithy.api#enumValue" => "custom"}))
     ResponseHeadersPolicyXSSProtection.add_member(:override, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Override", traits: {"smithy.api#required" => {}}))
@@ -2818,19 +2818,19 @@ module Aws::CloudFront
     Signer.add_member(:aws_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AwsAccountNumber"))
     Signer.add_member(:key_pair_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyPairIds, name: "KeyPairIds"))
     Signer.type = Types::Signer
-    SignerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Signer, name: "member", traits: {"smithy.api#xmlName" => "Signer"})
+    SignerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Signer, name: "member", traits: {"smithy.api#xmlName" => "Signer"}))
     SslProtocol.add_member(:ss_lv3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSLv3", traits: {"smithy.api#enumValue" => "SSLv3"}))
     SslProtocol.add_member(:tl_sv1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLSv1", traits: {"smithy.api#enumValue" => "TLSv1"}))
     SslProtocol.add_member(:tl_sv1_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLSv1_1", traits: {"smithy.api#enumValue" => "TLSv1.1"}))
     SslProtocol.add_member(:tl_sv1_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLSv1_2", traits: {"smithy.api#enumValue" => "TLSv1.2"}))
-    SslProtocolsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SslProtocol, name: "member", traits: {"smithy.api#xmlName" => "SslProtocol"})
-    StagingDistributionDnsNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "DnsName"})
+    SslProtocolsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SslProtocol, name: "member", traits: {"smithy.api#xmlName" => "SslProtocol"}))
+    StagingDistributionDnsNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "DnsName"}))
     StagingDistributionDnsNames.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     StagingDistributionDnsNames.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: StagingDistributionDnsNameList, name: "Items"))
     StagingDistributionDnsNames.type = Types::StagingDistributionDnsNames
     StagingDistributionInUse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     StagingDistributionInUse.type = Types::StagingDistributionInUse
-    StatusCodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "member", traits: {"smithy.api#xmlName" => "StatusCode"})
+    StatusCodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "member", traits: {"smithy.api#xmlName" => "StatusCode"}))
     StatusCodes.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     StatusCodes.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusCodeList, name: "Items", traits: {"smithy.api#required" => {}}))
     StatusCodes.type = Types::StatusCodes
@@ -2877,7 +2877,7 @@ module Aws::CloudFront
     StreamingDistributionSummary.add_member(:price_class, ::Smithy::Schema::Shapes::MemberShape.new(target: PriceClass, name: "PriceClass", traits: {"smithy.api#required" => {}}))
     StreamingDistributionSummary.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled", traits: {"smithy.api#required" => {}}))
     StreamingDistributionSummary.type = Types::StreamingDistributionSummary
-    StreamingDistributionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamingDistributionSummary, name: "member", traits: {"smithy.api#xmlName" => "StreamingDistributionSummary"})
+    StreamingDistributionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamingDistributionSummary, name: "member", traits: {"smithy.api#xmlName" => "StreamingDistributionSummary"}))
     StreamingLoggingConfig.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled", traits: {"smithy.api#required" => {}}))
     StreamingLoggingConfig.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Bucket", traits: {"smithy.api#required" => {}}))
     StreamingLoggingConfig.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Prefix", traits: {"smithy.api#required" => {}}))
@@ -2889,10 +2889,10 @@ module Aws::CloudFront
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member", traits: {"smithy.api#xmlName" => "Key"})
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member", traits: {"smithy.api#xmlName" => "Key"}))
     TagKeys.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "Items"))
     TagKeys.type = Types::TagKeys
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member", traits: {"smithy.api#xmlName" => "Tag"})
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member", traits: {"smithy.api#xmlName" => "Tag"}))
     TagResourceRequest.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "Resource", traits: {"smithy.api#httpQuery" => "Resource", "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}, "smithy.api#xmlName" => "Tags"}))
     TagResourceRequest[:http_payload] = :tags
@@ -3029,7 +3029,7 @@ module Aws::CloudFront
     TrafficConfig.type = Types::TrafficConfig
     TrustedKeyGroupDoesNotExist.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     TrustedKeyGroupDoesNotExist.type = Types::TrustedKeyGroupDoesNotExist
-    TrustedKeyGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "KeyGroup"})
+    TrustedKeyGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "KeyGroup"}))
     TrustedKeyGroups.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled", traits: {"smithy.api#required" => {}}))
     TrustedKeyGroups.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity", traits: {"smithy.api#required" => {}}))
     TrustedKeyGroups.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedKeyGroupIdList, name: "Items"))
@@ -3264,7 +3264,7 @@ module Aws::CloudFront
     ValidationTokenDetail.add_member(:redirect_to, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RedirectTo"))
     ValidationTokenDetail.add_member(:redirect_from, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RedirectFrom"))
     ValidationTokenDetail.type = Types::ValidationTokenDetail
-    ValidationTokenDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationTokenDetail, name: "member")
+    ValidationTokenDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationTokenDetail, name: "member"))
     ValidationTokenHost.add_member(:cloud_front, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CloudFront", traits: {"smithy.api#enumValue" => "cloudfront"}))
     ValidationTokenHost.add_member(:self_hosted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SelfHosted", traits: {"smithy.api#enumValue" => "self-hosted"}))
     VerifyDnsConfigurationRequest.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Domain"))
@@ -3316,7 +3316,7 @@ module Aws::CloudFront
     VpcOriginSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Arn", traits: {"smithy.api#required" => {}}))
     VpcOriginSummary.add_member(:origin_endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "OriginEndpointArn", traits: {"smithy.api#required" => {}}))
     VpcOriginSummary.type = Types::VpcOriginSummary
-    VpcOriginSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcOriginSummary, name: "member", traits: {"smithy.api#xmlName" => "VpcOriginSummary"})
+    VpcOriginSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcOriginSummary, name: "member", traits: {"smithy.api#xmlName" => "VpcOriginSummary"}))
     WebAclCustomization.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomizationActionType, name: "Action", traits: {"smithy.api#required" => {}}))
     WebAclCustomization.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Arn"))
     WebAclCustomization.type = Types::WebAclCustomization

@@ -94,7 +94,7 @@ module Aws::SnowDeviceManagement
     Capacity.add_member(:used, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "used"))
     Capacity.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "available"))
     Capacity.type = Types::Capacity
-    CapacityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Capacity, name: "member")
+    CapacityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Capacity, name: "member"))
     Command.add_member(:unlock, Types::Command::Unlock, ::Smithy::Schema::Shapes::MemberShape.new(target: Unlock, name: "unlock"))
     Command.add_member(:reboot, Types::Command::Reboot, ::Smithy::Schema::Shapes::MemberShape.new(target: Reboot, name: "reboot"))
     Command.add_member(:unknown, Types::Command::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -157,7 +157,7 @@ module Aws::SnowDeviceManagement
     DeviceSummary.add_member(:associated_with_job, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "associatedWithJob"))
     DeviceSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     DeviceSummary.type = Types::DeviceSummary
-    DeviceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceSummary, name: "member")
+    DeviceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceSummary, name: "member"))
     EbsInstanceBlockDevice.add_member(:attach_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "attachTime"))
     EbsInstanceBlockDevice.add_member(:delete_on_termination, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "deleteOnTermination"))
     EbsInstanceBlockDevice.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentStatus, name: "status"))
@@ -168,7 +168,7 @@ module Aws::SnowDeviceManagement
     ExecutionSummary.add_member(:managed_device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedDeviceId, name: "managedDeviceId"))
     ExecutionSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionState, name: "state"))
     ExecutionSummary.type = Types::ExecutionSummary
-    ExecutionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionSummary, name: "member")
+    ExecutionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionSummary, name: "member"))
     Instance.add_member(:image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "imageId"))
     Instance.add_member(:ami_launch_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "amiLaunchIndex"))
     Instance.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "instanceId"))
@@ -186,15 +186,15 @@ module Aws::SnowDeviceManagement
     InstanceBlockDeviceMapping.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "deviceName"))
     InstanceBlockDeviceMapping.add_member(:ebs, ::Smithy::Schema::Shapes::MemberShape.new(target: EbsInstanceBlockDevice, name: "ebs"))
     InstanceBlockDeviceMapping.type = Types::InstanceBlockDeviceMapping
-    InstanceBlockDeviceMappingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceBlockDeviceMapping, name: "member")
-    InstanceIdsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    InstanceBlockDeviceMappingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceBlockDeviceMapping, name: "member"))
+    InstanceIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     InstanceState.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "code"))
     InstanceState.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceStateName, name: "name"))
     InstanceState.type = Types::InstanceState
     InstanceSummary.add_member(:instance, ::Smithy::Schema::Shapes::MemberShape.new(target: Instance, name: "instance"))
     InstanceSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastUpdatedAt"))
     InstanceSummary.type = Types::InstanceSummary
-    InstanceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceSummary, name: "member")
+    InstanceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceSummary, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
     ListDeviceResourcesOperationInput.add_member(:managed_device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedDeviceId, name: "managedDeviceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -239,7 +239,7 @@ module Aws::SnowDeviceManagement
     PhysicalNetworkInterface.add_member(:default_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "defaultGateway"))
     PhysicalNetworkInterface.add_member(:mac_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "macAddress"))
     PhysicalNetworkInterface.type = Types::PhysicalNetworkInterface
-    PhysicalNetworkInterfaceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhysicalNetworkInterface, name: "member")
+    PhysicalNetworkInterfaceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhysicalNetworkInterface, name: "member"))
     Reboot.type = Types::Reboot
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
@@ -247,30 +247,30 @@ module Aws::SnowDeviceManagement
     ResourceSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "arn"))
     ResourceSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id"))
     ResourceSummary.type = Types::ResourceSummary
-    ResourceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSummary, name: "member")
+    ResourceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSummary, name: "member"))
     SecurityGroupIdentifier.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "groupId"))
     SecurityGroupIdentifier.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "groupName"))
     SecurityGroupIdentifier.type = Types::SecurityGroupIdentifier
-    SecurityGroupIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIdentifier, name: "member")
+    SecurityGroupIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIdentifier, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     SoftwareInformation.add_member(:installed_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "installedVersion"))
     SoftwareInformation.add_member(:installing_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "installingVersion"))
     SoftwareInformation.add_member(:install_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "installState"))
     SoftwareInformation.type = Types::SoftwareInformation
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     TagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceOperationInput.type = Types::TagResourceOperationInput
-    TargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    TargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     TaskSummary.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskId, name: "taskId", traits: {"smithy.api#required" => {}}))
     TaskSummary.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "taskArn"))
     TaskSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskState, name: "state"))
     TaskSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     TaskSummary.type = Types::TaskSummary
-    TaskSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSummary, name: "member")
+    TaskSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSummary, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
     Unlock.type = Types::Unlock

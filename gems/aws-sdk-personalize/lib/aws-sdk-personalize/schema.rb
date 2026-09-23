@@ -331,7 +331,7 @@ module Aws::Personalize
     AlgorithmImage.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     AlgorithmImage.add_member(:docker_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: DockerURI, name: "dockerURI", traits: {"smithy.api#required" => {}}))
     AlgorithmImage.type = Types::AlgorithmImage
-    ArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    ArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     AutoMLConfig.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "metricName"))
     AutoMLConfig.add_member(:recipe_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, name: "recipeList"))
     AutoMLConfig.type = Types::AutoMLConfig
@@ -372,7 +372,7 @@ module Aws::Personalize
     BatchInferenceJobSummary.add_member(:solution_version_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "solutionVersionArn"))
     BatchInferenceJobSummary.add_member(:batch_inference_job_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchInferenceJobMode, name: "batchInferenceJobMode"))
     BatchInferenceJobSummary.type = Types::BatchInferenceJobSummary
-    BatchInferenceJobs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchInferenceJobSummary, name: "member")
+    BatchInferenceJobs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchInferenceJobSummary, name: "member"))
     BatchSegmentJob.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "jobName"))
     BatchSegmentJob.add_member(:batch_segment_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "batchSegmentJobArn"))
     BatchSegmentJob.add_member(:filter_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "filterArn"))
@@ -398,7 +398,7 @@ module Aws::Personalize
     BatchSegmentJobSummary.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "failureReason"))
     BatchSegmentJobSummary.add_member(:solution_version_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "solutionVersionArn"))
     BatchSegmentJobSummary.type = Types::BatchSegmentJobSummary
-    BatchSegmentJobs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchSegmentJobSummary, name: "member")
+    BatchSegmentJobs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchSegmentJobSummary, name: "member"))
     Campaign.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     Campaign.add_member(:campaign_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "campaignArn"))
     Campaign.add_member(:solution_version_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "solutionVersionArn"))
@@ -429,18 +429,18 @@ module Aws::Personalize
     CampaignUpdateSummary.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "creationDateTime"))
     CampaignUpdateSummary.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "lastUpdatedDateTime"))
     CampaignUpdateSummary.type = Types::CampaignUpdateSummary
-    Campaigns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignSummary, name: "member")
+    Campaigns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignSummary, name: "member"))
     CategoricalHyperParameterRange.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "name"))
     CategoricalHyperParameterRange.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoricalValues, name: "values"))
     CategoricalHyperParameterRange.type = Types::CategoricalHyperParameterRange
-    CategoricalHyperParameterRanges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CategoricalHyperParameterRange, name: "member")
-    CategoricalValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CategoricalValue, name: "member")
-    ColumnNamesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "member")
+    CategoricalHyperParameterRanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoricalHyperParameterRange, name: "member"))
+    CategoricalValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoricalValue, name: "member"))
+    ColumnNamesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "member"))
     ContinuousHyperParameterRange.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "name"))
     ContinuousHyperParameterRange.add_member(:min_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousMinValue, name: "minValue", traits: {"smithy.api#default" => 0}))
     ContinuousHyperParameterRange.add_member(:max_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousMaxValue, name: "maxValue", traits: {"smithy.api#default" => 0}))
     ContinuousHyperParameterRange.type = Types::ContinuousHyperParameterRange
-    ContinuousHyperParameterRanges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousHyperParameterRange, name: "member")
+    ContinuousHyperParameterRanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousHyperParameterRange, name: "member"))
     CreateBatchInferenceJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "jobName", traits: {"smithy.api#required" => {}}))
     CreateBatchInferenceJobRequest.add_member(:solution_version_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "solutionVersionArn", traits: {"smithy.api#required" => {}}))
     CreateBatchInferenceJobRequest.add_member(:filter_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "filterArn"))
@@ -591,7 +591,7 @@ module Aws::Personalize
     DataDeletionJobSummary.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "lastUpdatedDateTime"))
     DataDeletionJobSummary.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "failureReason"))
     DataDeletionJobSummary.type = Types::DataDeletionJobSummary
-    DataDeletionJobs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataDeletionJobSummary, name: "member")
+    DataDeletionJobs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataDeletionJobSummary, name: "member"))
     DataSource.add_member(:data_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "dataLocation"))
     DataSource.type = Types::DataSource
     Dataset.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
@@ -625,7 +625,7 @@ module Aws::Personalize
     DatasetExportJobSummary.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "lastUpdatedDateTime"))
     DatasetExportJobSummary.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "failureReason"))
     DatasetExportJobSummary.type = Types::DatasetExportJobSummary
-    DatasetExportJobs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetExportJobSummary, name: "member")
+    DatasetExportJobs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetExportJobSummary, name: "member"))
     DatasetGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     DatasetGroup.add_member(:dataset_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "datasetGroupArn"))
     DatasetGroup.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "status"))
@@ -644,7 +644,7 @@ module Aws::Personalize
     DatasetGroupSummary.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "failureReason"))
     DatasetGroupSummary.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: Domain, name: "domain"))
     DatasetGroupSummary.type = Types::DatasetGroupSummary
-    DatasetGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetGroupSummary, name: "member")
+    DatasetGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetGroupSummary, name: "member"))
     DatasetImportJob.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "jobName"))
     DatasetImportJob.add_member(:dataset_import_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "datasetImportJobArn"))
     DatasetImportJob.add_member(:dataset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "datasetArn"))
@@ -665,7 +665,7 @@ module Aws::Personalize
     DatasetImportJobSummary.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "failureReason"))
     DatasetImportJobSummary.add_member(:import_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportMode, name: "importMode"))
     DatasetImportJobSummary.type = Types::DatasetImportJobSummary
-    DatasetImportJobs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetImportJobSummary, name: "member")
+    DatasetImportJobs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetImportJobSummary, name: "member"))
     DatasetSchema.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     DatasetSchema.add_member(:schema_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "schemaArn"))
     DatasetSchema.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: AvroSchema, name: "schema"))
@@ -692,18 +692,18 @@ module Aws::Personalize
     DatasetUpdateSummary.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "creationDateTime"))
     DatasetUpdateSummary.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "lastUpdatedDateTime"))
     DatasetUpdateSummary.type = Types::DatasetUpdateSummary
-    Datasets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetSummary, name: "member")
+    Datasets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetSummary, name: "member"))
     DefaultCategoricalHyperParameterRange.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "name"))
     DefaultCategoricalHyperParameterRange.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoricalValues, name: "values"))
     DefaultCategoricalHyperParameterRange.add_member(:is_tunable, ::Smithy::Schema::Shapes::MemberShape.new(target: Tunable, name: "isTunable", traits: {"smithy.api#default" => false}))
     DefaultCategoricalHyperParameterRange.type = Types::DefaultCategoricalHyperParameterRange
-    DefaultCategoricalHyperParameterRanges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultCategoricalHyperParameterRange, name: "member")
+    DefaultCategoricalHyperParameterRanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultCategoricalHyperParameterRange, name: "member"))
     DefaultContinuousHyperParameterRange.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "name"))
     DefaultContinuousHyperParameterRange.add_member(:min_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousMinValue, name: "minValue", traits: {"smithy.api#default" => 0}))
     DefaultContinuousHyperParameterRange.add_member(:max_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousMaxValue, name: "maxValue", traits: {"smithy.api#default" => 0}))
     DefaultContinuousHyperParameterRange.add_member(:is_tunable, ::Smithy::Schema::Shapes::MemberShape.new(target: Tunable, name: "isTunable", traits: {"smithy.api#default" => false}))
     DefaultContinuousHyperParameterRange.type = Types::DefaultContinuousHyperParameterRange
-    DefaultContinuousHyperParameterRanges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultContinuousHyperParameterRange, name: "member")
+    DefaultContinuousHyperParameterRanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultContinuousHyperParameterRange, name: "member"))
     DefaultHyperParameterRanges.add_member(:integer_hyper_parameter_ranges, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultIntegerHyperParameterRanges, name: "integerHyperParameterRanges"))
     DefaultHyperParameterRanges.add_member(:continuous_hyper_parameter_ranges, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultContinuousHyperParameterRanges, name: "continuousHyperParameterRanges"))
     DefaultHyperParameterRanges.add_member(:categorical_hyper_parameter_ranges, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultCategoricalHyperParameterRanges, name: "categoricalHyperParameterRanges"))
@@ -713,7 +713,7 @@ module Aws::Personalize
     DefaultIntegerHyperParameterRange.add_member(:max_value, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerMaxValue, name: "maxValue", traits: {"smithy.api#default" => 0}))
     DefaultIntegerHyperParameterRange.add_member(:is_tunable, ::Smithy::Schema::Shapes::MemberShape.new(target: Tunable, name: "isTunable", traits: {"smithy.api#default" => false}))
     DefaultIntegerHyperParameterRange.type = Types::DefaultIntegerHyperParameterRange
-    DefaultIntegerHyperParameterRanges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultIntegerHyperParameterRange, name: "member")
+    DefaultIntegerHyperParameterRanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultIntegerHyperParameterRange, name: "member"))
     DeleteCampaignRequest.add_member(:campaign_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "campaignArn", traits: {"smithy.api#required" => {}}))
     DeleteCampaignRequest.type = Types::DeleteCampaignRequest
     DeleteDatasetGroupRequest.add_member(:dataset_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "datasetGroupArn", traits: {"smithy.api#required" => {}}))
@@ -810,7 +810,7 @@ module Aws::Personalize
     EventParameters.add_member(:event_value_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypeThresholdValue, name: "eventValueThreshold"))
     EventParameters.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypeWeight, name: "weight"))
     EventParameters.type = Types::EventParameters
-    EventParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventParameters, name: "member")
+    EventParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventParameters, name: "member"))
     EventTracker.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     EventTracker.add_member(:event_tracker_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "eventTrackerArn"))
     EventTracker.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId"))
@@ -826,11 +826,11 @@ module Aws::Personalize
     EventTrackerSummary.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "creationDateTime"))
     EventTrackerSummary.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "lastUpdatedDateTime"))
     EventTrackerSummary.type = Types::EventTrackerSummary
-    EventTrackers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventTrackerSummary, name: "member")
+    EventTrackers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTrackerSummary, name: "member"))
     EventsConfig.add_member(:event_parameters_list, ::Smithy::Schema::Shapes::MemberShape.new(target: EventParametersList, name: "eventParametersList"))
     EventsConfig.type = Types::EventsConfig
-    ExcludedDatasetColumns.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetType, name: "key")
-    ExcludedDatasetColumns.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnNamesList, name: "value")
+    ExcludedDatasetColumns.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetType, name: "key"))
+    ExcludedDatasetColumns.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnNamesList, name: "value"))
     FeatureTransformation.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     FeatureTransformation.add_member(:feature_transformation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "featureTransformationArn"))
     FeatureTransformation.add_member(:default_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturizationParameters, name: "defaultParameters"))
@@ -838,10 +838,10 @@ module Aws::Personalize
     FeatureTransformation.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "lastUpdatedDateTime"))
     FeatureTransformation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "status"))
     FeatureTransformation.type = Types::FeatureTransformation
-    FeatureTransformationParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "key")
-    FeatureTransformationParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value")
-    FeaturizationParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "key")
-    FeaturizationParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value")
+    FeatureTransformationParameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "key"))
+    FeatureTransformationParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value"))
+    FeaturizationParameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "key"))
+    FeaturizationParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value"))
     FieldsForThemeGeneration.add_member(:item_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "itemName", traits: {"smithy.api#required" => {}}))
     FieldsForThemeGeneration.type = Types::FieldsForThemeGeneration
     Filter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
@@ -861,7 +861,7 @@ module Aws::Personalize
     FilterSummary.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "failureReason"))
     FilterSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "status"))
     FilterSummary.type = Types::FilterSummary
-    Filters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterSummary, name: "member")
+    Filters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterSummary, name: "member"))
     GetSolutionMetricsRequest.add_member(:solution_version_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "solutionVersionArn", traits: {"smithy.api#required" => {}}))
     GetSolutionMetricsRequest.type = Types::GetSolutionMetricsRequest
     GetSolutionMetricsResponse.add_member(:solution_version_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "solutionVersionArn"))
@@ -882,8 +882,8 @@ module Aws::Personalize
     HyperParameterRanges.add_member(:continuous_hyper_parameter_ranges, ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousHyperParameterRanges, name: "continuousHyperParameterRanges"))
     HyperParameterRanges.add_member(:categorical_hyper_parameter_ranges, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoricalHyperParameterRanges, name: "categoricalHyperParameterRanges"))
     HyperParameterRanges.type = Types::HyperParameterRanges
-    HyperParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "key")
-    HyperParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value")
+    HyperParameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "key"))
+    HyperParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value"))
     ImportMode.add_member(:full, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL", traits: {"smithy.api#enumValue" => "FULL"}))
     ImportMode.add_member(:incremental, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCREMENTAL", traits: {"smithy.api#enumValue" => "INCREMENTAL"}))
     IngestionMode.add_member(:bulk, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BULK", traits: {"smithy.api#enumValue" => "BULK"}))
@@ -893,7 +893,7 @@ module Aws::Personalize
     IntegerHyperParameterRange.add_member(:min_value, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerMinValue, name: "minValue", traits: {"smithy.api#default" => 0}))
     IntegerHyperParameterRange.add_member(:max_value, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerMaxValue, name: "maxValue", traits: {"smithy.api#default" => 0}))
     IntegerHyperParameterRange.type = Types::IntegerHyperParameterRange
-    IntegerHyperParameterRanges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerHyperParameterRange, name: "member")
+    IntegerHyperParameterRanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerHyperParameterRange, name: "member"))
     InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InvalidInputException.type = Types::InvalidInputException
     InvalidNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
@@ -1026,8 +1026,8 @@ module Aws::Personalize
     MetricAttribute.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "metricName", traits: {"smithy.api#required" => {}}))
     MetricAttribute.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricExpression, name: "expression", traits: {"smithy.api#required" => {}}))
     MetricAttribute.type = Types::MetricAttribute
-    MetricAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricAttribute, name: "member")
-    MetricAttributesNamesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "member")
+    MetricAttributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricAttribute, name: "member"))
+    MetricAttributesNamesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "member"))
     MetricAttribution.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     MetricAttribution.add_member(:metric_attribution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "metricAttributionArn"))
     MetricAttribution.add_member(:dataset_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "datasetGroupArn"))
@@ -1047,9 +1047,9 @@ module Aws::Personalize
     MetricAttributionSummary.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "lastUpdatedDateTime"))
     MetricAttributionSummary.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "failureReason"))
     MetricAttributionSummary.type = Types::MetricAttributionSummary
-    MetricAttributions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricAttributionSummary, name: "member")
-    Metrics.key = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "key")
-    Metrics.value = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricValue, name: "value")
+    MetricAttributions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricAttributionSummary, name: "member"))
+    Metrics.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "key"))
+    Metrics.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricValue, name: "value"))
     ObjectiveSensitivity.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "LOW"}))
     ObjectiveSensitivity.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "MEDIUM"}))
     ObjectiveSensitivity.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "HIGH"}))
@@ -1075,7 +1075,7 @@ module Aws::Personalize
     RecipeSummary.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "lastUpdatedDateTime"))
     RecipeSummary.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: Domain, name: "domain"))
     RecipeSummary.type = Types::RecipeSummary
-    Recipes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecipeSummary, name: "member")
+    Recipes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecipeSummary, name: "member"))
     Recommender.add_member(:recommender_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "recommenderArn"))
     Recommender.add_member(:dataset_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "datasetGroupArn"))
     Recommender.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
@@ -1108,11 +1108,11 @@ module Aws::Personalize
     RecommenderUpdateSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "status"))
     RecommenderUpdateSummary.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "failureReason"))
     RecommenderUpdateSummary.type = Types::RecommenderUpdateSummary
-    Recommenders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderSummary, name: "member")
+    Recommenders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommenderSummary, name: "member"))
     ResourceAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ResourceAlreadyExistsException.type = Types::ResourceAlreadyExistsException
-    ResourceConfig.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "key")
-    ResourceConfig.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value")
+    ResourceConfig.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "key"))
+    ResourceConfig.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value"))
     ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ResourceInUseException.type = Types::ResourceInUseException
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
@@ -1120,7 +1120,7 @@ module Aws::Personalize
     S3DataConfig.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "path", traits: {"smithy.api#required" => {}}))
     S3DataConfig.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "kmsKeyArn"))
     S3DataConfig.type = Types::S3DataConfig
-    Schemas.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetSchemaSummary, name: "member")
+    Schemas.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetSchemaSummary, name: "member"))
     Solution.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     Solution.add_member(:solution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "solutionArn"))
     Solution.add_member(:perform_hpo, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformHPO, name: "performHPO", traits: {"smithy.api#default" => false}))
@@ -1190,8 +1190,8 @@ module Aws::Personalize
     SolutionVersionSummary.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "lastUpdatedDateTime"))
     SolutionVersionSummary.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "failureReason"))
     SolutionVersionSummary.type = Types::SolutionVersionSummary
-    SolutionVersions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionVersionSummary, name: "member")
-    Solutions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionSummary, name: "member")
+    SolutionVersions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionVersionSummary, name: "member"))
+    Solutions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionSummary, name: "member"))
     StartRecommenderRequest.add_member(:recommender_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "recommenderArn", traits: {"smithy.api#required" => {}}))
     StartRecommenderRequest.type = Types::StartRecommenderRequest
     StartRecommenderResponse.add_member(:recommender_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "recommenderArn"))
@@ -1205,12 +1205,12 @@ module Aws::Personalize
     Tag.add_member(:tag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "tagKey", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:tag_value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "tagValue", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     ThemeGenerationConfig.add_member(:fields_for_theme_generation, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldsForThemeGeneration, name: "fieldsForThemeGeneration", traits: {"smithy.api#required" => {}}))
     ThemeGenerationConfig.type = Types::ThemeGenerationConfig
     TooManyTagKeysException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))

@@ -34,8 +34,8 @@ module Aws::Forecastquery
     DataPoint.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp"))
     DataPoint.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Value"))
     DataPoint.type = Types::DataPoint
-    Filters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
-    Filters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
+    Filters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
+    Filters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     Forecast.add_member(:predictions, ::Smithy::Schema::Shapes::MemberShape.new(target: Predictions, name: "Predictions"))
     Forecast.type = Types::Forecast
     InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -44,8 +44,8 @@ module Aws::Forecastquery
     InvalidNextTokenException.type = Types::InvalidNextTokenException
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
-    Predictions.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Statistic, name: "key")
-    Predictions.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeries, name: "value")
+    Predictions.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Statistic, name: "key"))
+    Predictions.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeries, name: "value"))
     QueryForecastRequest.add_member(:forecast_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ForecastArn", traits: {"smithy.api#required" => {}}))
     QueryForecastRequest.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "StartDate"))
     QueryForecastRequest.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "EndDate"))
@@ -66,7 +66,7 @@ module Aws::Forecastquery
     ResourceInUseException.type = Types::ResourceInUseException
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    TimeSeries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataPoint, name: "member")
+    TimeSeries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataPoint, name: "member"))
 
     AmazonForecastRuntime = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.forecastquery#AmazonForecastRuntime"

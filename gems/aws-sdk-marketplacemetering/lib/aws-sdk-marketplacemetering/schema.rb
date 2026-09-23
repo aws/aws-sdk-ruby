@@ -117,7 +117,7 @@ module Aws::MarketplaceMetering
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ThrottlingException.type = Types::ThrottlingException
     TimestampOutOfBoundsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
@@ -125,7 +125,7 @@ module Aws::MarketplaceMetering
     UsageAllocation.add_member(:allocated_usage_quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: AllocatedUsageQuantity, name: "AllocatedUsageQuantity", traits: {"smithy.api#required" => {}}))
     UsageAllocation.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     UsageAllocation.type = Types::UsageAllocation
-    UsageAllocations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageAllocation, name: "member")
+    UsageAllocations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageAllocation, name: "member"))
     UsageRecord.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp", traits: {"smithy.api#required" => {}}))
     UsageRecord.add_member(:customer_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerIdentifier, name: "CustomerIdentifier", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
     UsageRecord.add_member(:dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageDimension, name: "Dimension", traits: {"smithy.api#required" => {}}))
@@ -133,12 +133,12 @@ module Aws::MarketplaceMetering
     UsageRecord.add_member(:usage_allocations, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageAllocations, name: "UsageAllocations"))
     UsageRecord.add_member(:customer_aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerAWSAccountId, name: "CustomerAWSAccountId"))
     UsageRecord.type = Types::UsageRecord
-    UsageRecordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageRecord, name: "member")
+    UsageRecordList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageRecord, name: "member"))
     UsageRecordResult.add_member(:usage_record, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageRecord, name: "UsageRecord"))
     UsageRecordResult.add_member(:metering_record_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MeteringRecordId"))
     UsageRecordResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageRecordResultStatus, name: "Status"))
     UsageRecordResult.type = Types::UsageRecordResult
-    UsageRecordResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageRecordResult, name: "member")
+    UsageRecordResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageRecordResult, name: "member"))
     UsageRecordResultStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "Success"}))
     UsageRecordResultStatus.add_member(:customer_not_subscribed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER_NOT_SUBSCRIBED", traits: {"smithy.api#enumValue" => "CustomerNotSubscribed"}))
     UsageRecordResultStatus.add_member(:duplicate_record, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUPLICATE_RECORD", traits: {"smithy.api#enumValue" => "DuplicateRecord"}))

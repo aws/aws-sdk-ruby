@@ -49,8 +49,8 @@ module Aws::AppConfigData
     InternalServerException.type = Types::InternalServerException
     InvalidParameterDetail.add_member(:problem, ::Smithy::Schema::Shapes::MemberShape.new(target: InvalidParameterProblem, name: "Problem"))
     InvalidParameterDetail.type = Types::InvalidParameterDetail
-    InvalidParameterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    InvalidParameterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: InvalidParameterDetail, name: "value")
+    InvalidParameterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    InvalidParameterMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: InvalidParameterDetail, name: "value"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
     ResourceNotFoundException.add_member(:referenced_by, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMap, name: "ReferencedBy"))
@@ -62,8 +62,8 @@ module Aws::AppConfigData
     StartConfigurationSessionInput.type = Types::StartConfigurationSessionInput
     StartConfigurationSessionOutput.add_member(:initial_configuration_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "InitialConfigurationToken"))
     StartConfigurationSessionOutput.type = Types::StartConfigurationSessionOutput
-    StringMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    StringMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    StringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    StringMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
 

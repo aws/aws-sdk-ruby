@@ -72,12 +72,12 @@ module Aws::EBS
     Block.add_member(:block_index, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockIndex, name: "BlockIndex"))
     Block.add_member(:block_token, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockToken, name: "BlockToken"))
     Block.type = Types::Block
-    Blocks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Block, name: "member")
+    Blocks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Block, name: "member"))
     ChangedBlock.add_member(:block_index, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockIndex, name: "BlockIndex"))
     ChangedBlock.add_member(:first_block_token, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockToken, name: "FirstBlockToken"))
     ChangedBlock.add_member(:second_block_token, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockToken, name: "SecondBlockToken"))
     ChangedBlock.type = Types::ChangedBlock
-    ChangedBlocks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChangedBlock, name: "member")
+    ChangedBlocks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangedBlock, name: "member"))
     ChecksumAggregationMethod.add_member(:checksum_aggregation_linear, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CHECKSUM_AGGREGATION_LINEAR", traits: {"smithy.api#enumValue" => "LINEAR"}))
     ChecksumAlgorithm.add_member(:checksum_algorithm_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CHECKSUM_ALGORITHM_SHA256", traits: {"smithy.api#enumValue" => "SHA256"}))
     CompleteSnapshotRequest.add_member(:snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId, name: "SnapshotId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -188,7 +188,7 @@ module Aws::EBS
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, name: "Reason"))
     ValidationException.type = Types::ValidationException

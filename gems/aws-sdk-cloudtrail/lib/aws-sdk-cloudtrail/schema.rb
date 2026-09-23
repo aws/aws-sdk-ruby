@@ -391,7 +391,7 @@ module Aws::CloudTrail
     AdvancedEventSelector.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectorName, name: "Name"))
     AdvancedEventSelector.add_member(:field_selectors, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedFieldSelectors, name: "FieldSelectors", traits: {"smithy.api#required" => {}}))
     AdvancedEventSelector.type = Types::AdvancedEventSelector
-    AdvancedEventSelectors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedEventSelector, name: "member")
+    AdvancedEventSelectors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedEventSelector, name: "member"))
     AdvancedFieldSelector.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectorField, name: "Field", traits: {"smithy.api#required" => {}}))
     AdvancedFieldSelector.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: Operator, name: "Equals"))
     AdvancedFieldSelector.add_member(:starts_with, ::Smithy::Schema::Shapes::MemberShape.new(target: Operator, name: "StartsWith"))
@@ -400,7 +400,7 @@ module Aws::CloudTrail
     AdvancedFieldSelector.add_member(:not_starts_with, ::Smithy::Schema::Shapes::MemberShape.new(target: Operator, name: "NotStartsWith"))
     AdvancedFieldSelector.add_member(:not_ends_with, ::Smithy::Schema::Shapes::MemberShape.new(target: Operator, name: "NotEndsWith"))
     AdvancedFieldSelector.type = Types::AdvancedFieldSelector
-    AdvancedFieldSelectors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedFieldSelector, name: "member")
+    AdvancedFieldSelectors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedFieldSelector, name: "member"))
     BillingMode.add_member(:extendable_retention_pricing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXTENDABLE_RETENTION_PRICING", traits: {"smithy.api#enumValue" => "EXTENDABLE_RETENTION_PRICING"}))
     BillingMode.add_member(:fixed_retention_pricing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIXED_RETENTION_PRICING", traits: {"smithy.api#enumValue" => "FIXED_RETENTION_PRICING"}))
     CancelQueryRequest.add_member(:event_data_store, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDataStoreArn, name: "EventDataStore", traits: {"smithy.api#deprecated" => {"message" => "EventDataStore is no longer required by CancelQueryRequest"}}))
@@ -426,7 +426,7 @@ module Aws::CloudTrail
     ChannelMaxLimitExceededException.type = Types::ChannelMaxLimitExceededException
     ChannelNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ChannelNotFoundException.type = Types::ChannelNotFoundException
-    Channels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "member")
+    Channels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "member"))
     CloudTrailARNInvalidException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     CloudTrailARNInvalidException.type = Types::CloudTrailARNInvalidException
     CloudTrailAccessNotEnabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -442,7 +442,7 @@ module Aws::CloudTrail
     ContextKeySelector.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, name: "Type", traits: {"smithy.api#required" => {}}))
     ContextKeySelector.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: OperatorTargetList, name: "Equals", traits: {"smithy.api#required" => {}}))
     ContextKeySelector.type = Types::ContextKeySelector
-    ContextKeySelectors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContextKeySelector, name: "member")
+    ContextKeySelectors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextKeySelector, name: "member"))
     CreateChannelRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, name: "Name", traits: {"smithy.api#required" => {}}))
     CreateChannelRequest.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "Source", traits: {"smithy.api#required" => {}}))
     CreateChannelRequest.add_member(:destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: Destinations, name: "Destinations", traits: {"smithy.api#required" => {}}))
@@ -530,12 +530,12 @@ module Aws::CloudTrail
     DashboardStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     DashboardType.add_member(:managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANAGED", traits: {"smithy.api#enumValue" => "MANAGED"}))
     DashboardType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
-    Dashboards.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardDetail, name: "member")
+    Dashboards.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardDetail, name: "member"))
     DataResource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
     DataResource.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: DataResourceValues, name: "Values"))
     DataResource.type = Types::DataResource
-    DataResourceValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    DataResources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataResource, name: "member")
+    DataResourceValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    DataResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataResource, name: "member"))
     DelegatedAdminAccountLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     DelegatedAdminAccountLimitExceededException.type = Types::DelegatedAdminAccountLimitExceededException
     DeleteChannelRequest.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, name: "Channel", traits: {"smithy.api#required" => {}}))
@@ -591,7 +591,7 @@ module Aws::CloudTrail
     Destination.type = Types::Destination
     DestinationType.add_member(:event_data_store, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVENT_DATA_STORE", traits: {"smithy.api#enumValue" => "EVENT_DATA_STORE"}))
     DestinationType.add_member(:aws_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SERVICE", traits: {"smithy.api#enumValue" => "AWS_SERVICE"}))
-    Destinations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "member")
+    Destinations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "member"))
     DisableFederationRequest.add_member(:event_data_store, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDataStoreArn, name: "EventDataStore", traits: {"smithy.api#required" => {}}))
     DisableFederationRequest.type = Types::DisableFederationRequest
     DisableFederationResponse.add_member(:event_data_store_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDataStoreArn, name: "EventDataStoreArn"))
@@ -634,7 +634,7 @@ module Aws::CloudTrail
     EventDataStoreFederationEnabledException.type = Types::EventDataStoreFederationEnabledException
     EventDataStoreHasOngoingImportException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     EventDataStoreHasOngoingImportException.type = Types::EventDataStoreHasOngoingImportException
-    EventDataStoreList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventDataStoreArn, name: "member")
+    EventDataStoreList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDataStoreArn, name: "member"))
     EventDataStoreMaxLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     EventDataStoreMaxLimitExceededException.type = Types::EventDataStoreMaxLimitExceededException
     EventDataStoreNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -647,15 +647,15 @@ module Aws::CloudTrail
     EventDataStoreStatus.add_member(:stopped_ingestion, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED_INGESTION", traits: {"smithy.api#enumValue" => "STOPPED_INGESTION"}))
     EventDataStoreTerminationProtectedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     EventDataStoreTerminationProtectedException.type = Types::EventDataStoreTerminationProtectedException
-    EventDataStores.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventDataStore, name: "member")
+    EventDataStores.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDataStore, name: "member"))
     EventSelector.add_member(:read_write_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadWriteType, name: "ReadWriteType"))
     EventSelector.add_member(:include_management_events, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IncludeManagementEvents"))
     EventSelector.add_member(:data_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: DataResources, name: "DataResources"))
     EventSelector.add_member(:exclude_management_event_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeManagementEventSources, name: "ExcludeManagementEventSources"))
     EventSelector.type = Types::EventSelector
-    EventSelectors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventSelector, name: "member")
-    EventsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member")
-    ExcludeManagementEventSources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    EventSelectors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSelector, name: "member"))
+    EventsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member"))
+    ExcludeManagementEventSources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     FederationStatus.add_member(:enabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLING", traits: {"smithy.api#enumValue" => "ENABLING"}))
     FederationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     FederationStatus.add_member(:disabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLING", traits: {"smithy.api#enumValue" => "DISABLING"}))
@@ -783,8 +783,8 @@ module Aws::CloudTrail
     GetTrailStatusResponse.add_member(:time_logging_started, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TimeLoggingStarted"))
     GetTrailStatusResponse.add_member(:time_logging_stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TimeLoggingStopped"))
     GetTrailStatusResponse.type = Types::GetTrailStatusResponse
-    ImportDestinations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventDataStoreArn, name: "member")
-    ImportFailureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportFailureListItem, name: "member")
+    ImportDestinations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDataStoreArn, name: "member"))
+    ImportFailureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportFailureListItem, name: "member"))
     ImportFailureListItem.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Location"))
     ImportFailureListItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportFailureStatus, name: "Status"))
     ImportFailureListItem.add_member(:error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorType"))
@@ -809,7 +809,7 @@ module Aws::CloudTrail
     ImportStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     ImportStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
     ImportStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    ImportsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportsListItem, name: "member")
+    ImportsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportsListItem, name: "member"))
     ImportsListItem.add_member(:import_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "ImportId"))
     ImportsListItem.add_member(:import_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportStatus, name: "ImportStatus"))
     ImportsListItem.add_member(:destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportDestinations, name: "Destinations"))
@@ -830,12 +830,12 @@ module Aws::CloudTrail
     InsightNotEnabledException.type = Types::InsightNotEnabledException
     InsightSelector.add_member(:insight_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightType, name: "InsightType"))
     InsightSelector.type = Types::InsightSelector
-    InsightSelectors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InsightSelector, name: "member")
+    InsightSelectors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightSelector, name: "member"))
     InsightType.add_member(:api_call_rate_insight, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ApiCallRateInsight", traits: {"smithy.api#enumValue" => "ApiCallRateInsight"}))
     InsightType.add_member(:api_error_rate_insight, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ApiErrorRateInsight", traits: {"smithy.api#enumValue" => "ApiErrorRateInsight"}))
     InsightsMetricDataType.add_member(:fill_with_zeros, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FILL_WITH_ZEROS", traits: {"smithy.api#enumValue" => "FillWithZeros"}))
     InsightsMetricDataType.add_member(:non_zero_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NON_ZERO_DATA", traits: {"smithy.api#enumValue" => "NonZeroData"}))
-    InsightsMetricValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "member")
+    InsightsMetricValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "member"))
     InsufficientDependencyServiceAccessPermissionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InsufficientDependencyServiceAccessPermissionException.type = Types::InsufficientDependencyServiceAccessPermissionException
     InsufficientEncryptionPolicyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -997,7 +997,7 @@ module Aws::CloudTrail
     LookupAttributeKey.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_NAME", traits: {"smithy.api#enumValue" => "ResourceName"}))
     LookupAttributeKey.add_member(:event_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVENT_SOURCE", traits: {"smithy.api#enumValue" => "EventSource"}))
     LookupAttributeKey.add_member(:access_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS_KEY_ID", traits: {"smithy.api#enumValue" => "AccessKeyId"}))
-    LookupAttributesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LookupAttribute, name: "member")
+    LookupAttributesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LookupAttribute, name: "member"))
     LookupEventsRequest.add_member(:lookup_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: LookupAttributesList, name: "LookupAttributes"))
     LookupEventsRequest.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "StartTime"))
     LookupEventsRequest.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "EndTime"))
@@ -1022,8 +1022,8 @@ module Aws::CloudTrail
     NotOrganizationMasterAccountException.type = Types::NotOrganizationMasterAccountException
     OperationNotPermittedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     OperationNotPermittedException.type = Types::OperationNotPermittedException
-    Operator.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OperatorValue, name: "member")
-    OperatorTargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OperatorTargetListMember, name: "member")
+    Operator.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OperatorValue, name: "member"))
+    OperatorTargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OperatorTargetListMember, name: "member"))
     OrganizationNotInAllFeaturesModeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     OrganizationNotInAllFeaturesModeException.type = Types::OrganizationNotInAllFeaturesModeException
     OrganizationsNotInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -1031,13 +1031,13 @@ module Aws::CloudTrail
     PartitionKey.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionKeyName, name: "Name", traits: {"smithy.api#required" => {}}))
     PartitionKey.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionKeyType, name: "Type", traits: {"smithy.api#required" => {}}))
     PartitionKey.type = Types::PartitionKey
-    PartitionKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionKey, name: "member")
+    PartitionKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionKey, name: "member"))
     PublicKey.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ByteBuffer, name: "Value"))
     PublicKey.add_member(:validity_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "ValidityStartTime"))
     PublicKey.add_member(:validity_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "ValidityEndTime"))
     PublicKey.add_member(:fingerprint, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Fingerprint"))
     PublicKey.type = Types::PublicKey
-    PublicKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PublicKey, name: "member")
+    PublicKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PublicKey, name: "member"))
     PutEventConfigurationRequest.add_member(:event_data_store, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EventDataStore"))
     PutEventConfigurationRequest.add_member(:max_event_size, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxEventSize, name: "MaxEventSize", traits: {"smithy.api#required" => {}}))
     PutEventConfigurationRequest.add_member(:context_key_selectors, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextKeySelectors, name: "ContextKeySelectors", traits: {"smithy.api#required" => {}}))
@@ -1071,20 +1071,20 @@ module Aws::CloudTrail
     PutResourcePolicyResponse.add_member(:resource_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicy, name: "ResourcePolicy"))
     PutResourcePolicyResponse.add_member(:delegated_admin_resource_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicy, name: "DelegatedAdminResourcePolicy"))
     PutResourcePolicyResponse.type = Types::PutResourcePolicyResponse
-    Queries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Query, name: "member")
+    Queries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Query, name: "member"))
     Query.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "QueryId"))
     Query.add_member(:query_status, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStatus, name: "QueryStatus"))
     Query.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreationTime"))
     Query.type = Types::Query
     QueryIdNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     QueryIdNotFoundException.type = Types::QueryIdNotFoundException
-    QueryParameterValues.key = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryParameterKey, name: "key")
-    QueryParameterValues.value = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryParameterValue, name: "value")
-    QueryParameters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryParameter, name: "member")
-    QueryResultColumn.key = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryResultKey, name: "key")
-    QueryResultColumn.value = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryResultValue, name: "value")
-    QueryResultRow.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryResultColumn, name: "member")
-    QueryResultRows.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryResultRow, name: "member")
+    QueryParameterValues.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryParameterKey, name: "key"))
+    QueryParameterValues.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryParameterValue, name: "value"))
+    QueryParameters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryParameter, name: "member"))
+    QueryResultColumn.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryResultKey, name: "key"))
+    QueryResultColumn.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryResultValue, name: "value"))
+    QueryResultRow.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryResultColumn, name: "member"))
+    QueryResultRows.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryResultRow, name: "member"))
     QueryStatistics.add_member(:results_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ResultsCount"))
     QueryStatistics.add_member(:total_results_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "TotalResultsCount"))
     QueryStatistics.add_member(:bytes_scanned, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "BytesScanned"))
@@ -1126,14 +1126,14 @@ module Aws::CloudTrail
     RequestWidget.add_member(:query_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryParameters, name: "QueryParameters"))
     RequestWidget.add_member(:view_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewPropertiesMap, name: "ViewProperties", traits: {"smithy.api#required" => {}}))
     RequestWidget.type = Types::RequestWidget
-    RequestWidgetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RequestWidget, name: "member")
+    RequestWidgetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestWidget, name: "member"))
     Resource.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceType"))
     Resource.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceName"))
     Resource.type = Types::Resource
     ResourceARNNotValidException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ResourceARNNotValidException.type = Types::ResourceARNNotValidException
-    ResourceIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    ResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member")
+    ResourceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    ResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ResourcePolicyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -1143,7 +1143,7 @@ module Aws::CloudTrail
     ResourceTag.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceId"))
     ResourceTag.add_member(:tags_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsList, name: "TagsList"))
     ResourceTag.type = Types::ResourceTag
-    ResourceTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member")
+    ResourceTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member"))
     ResourceTypeNotSupportedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ResourceTypeNotSupportedException.type = Types::ResourceTypeNotSupportedException
     RestoreEventDataStoreRequest.add_member(:event_data_store, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDataStoreArn, name: "EventDataStore", traits: {"smithy.api#required" => {}}))
@@ -1179,7 +1179,7 @@ module Aws::CloudTrail
     SearchSampleQueriesSearchResult.add_member(:sql, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleQuerySQL, name: "SQL"))
     SearchSampleQueriesSearchResult.add_member(:relevance, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleQueryRelevance, name: "Relevance", traits: {"smithy.api#default" => 0}))
     SearchSampleQueriesSearchResult.type = Types::SearchSampleQueriesSearchResult
-    SearchSampleQueriesSearchResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSampleQueriesSearchResult, name: "member")
+    SearchSampleQueriesSearchResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSampleQueriesSearchResult, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     SourceConfig.add_member(:apply_to_all_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ApplyToAllRegions"))
@@ -1243,10 +1243,10 @@ module Aws::CloudTrail
     Tag.type = Types::Tag
     TagsLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     TagsLimitExceededException.type = Types::TagsLimitExceededException
-    TagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
-    Timestamps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "member")
+    Timestamps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "member"))
     Trail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     Trail.add_member(:s3_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "S3BucketName"))
     Trail.add_member(:s3_key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "S3KeyPrefix"))
@@ -1270,13 +1270,13 @@ module Aws::CloudTrail
     TrailInfo.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     TrailInfo.add_member(:home_region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "HomeRegion"))
     TrailInfo.type = Types::TrailInfo
-    TrailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Trail, name: "member")
-    TrailNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    TrailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Trail, name: "member"))
+    TrailNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     TrailNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     TrailNotFoundException.type = Types::TrailNotFoundException
     TrailNotProvidedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     TrailNotProvidedException.type = Types::TrailNotProvidedException
-    Trails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrailInfo, name: "member")
+    Trails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrailInfo, name: "member"))
     Type.add_member(:tag_context, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TagContext", traits: {"smithy.api#enumValue" => "TagContext"}))
     Type.add_member(:request_context, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RequestContext", traits: {"smithy.api#enumValue" => "RequestContext"}))
     UnsupportedOperationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -1355,14 +1355,14 @@ module Aws::CloudTrail
     UpdateTrailResponse.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KmsKeyId"))
     UpdateTrailResponse.add_member(:is_organization_trail, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsOrganizationTrail"))
     UpdateTrailResponse.type = Types::UpdateTrailResponse
-    ViewPropertiesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ViewPropertiesKey, name: "key")
-    ViewPropertiesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ViewPropertiesValue, name: "value")
+    ViewPropertiesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewPropertiesKey, name: "key"))
+    ViewPropertiesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewPropertiesValue, name: "value"))
     Widget.add_member(:query_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryAlias, name: "QueryAlias"))
     Widget.add_member(:query_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStatement, name: "QueryStatement"))
     Widget.add_member(:query_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryParameters, name: "QueryParameters"))
     Widget.add_member(:view_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewPropertiesMap, name: "ViewProperties"))
     Widget.type = Types::Widget
-    WidgetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Widget, name: "member")
+    WidgetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Widget, name: "member"))
 
     CloudTrail20131101 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.cloudtrail#CloudTrail_20131101"

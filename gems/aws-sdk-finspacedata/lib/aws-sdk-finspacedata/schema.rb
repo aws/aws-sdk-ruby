@@ -182,7 +182,7 @@ module Aws::Finspacedata
     ApplicationPermission.add_member(:view_audit_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ViewAuditData", traits: {"smithy.api#enumValue" => "ViewAuditData"}))
     ApplicationPermission.add_member(:access_notebooks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AccessNotebooks", traits: {"smithy.api#enumValue" => "AccessNotebooks"}))
     ApplicationPermission.add_member(:get_temporary_credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GetTemporaryCredentials", traits: {"smithy.api#enumValue" => "GetTemporaryCredentials"}))
-    ApplicationPermissionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationPermission, name: "member")
+    ApplicationPermissionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationPermission, name: "member"))
     AssociateUserToPermissionGroupRequest.add_member(:permission_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionGroupId, name: "permissionGroupId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AssociateUserToPermissionGroupRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "userId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AssociateUserToPermissionGroupRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
@@ -200,7 +200,7 @@ module Aws::Finspacedata
     ChangesetErrorInfo.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
     ChangesetErrorInfo.add_member(:error_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCategory, name: "errorCategory"))
     ChangesetErrorInfo.type = Types::ChangesetErrorInfo
-    ChangesetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChangesetSummary, name: "member")
+    ChangesetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangesetSummary, name: "member"))
     ChangesetSummary.add_member(:changeset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangesetId, name: "changesetId"))
     ChangesetSummary.add_member(:changeset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangesetArn, name: "changesetArn"))
     ChangesetSummary.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetId, name: "datasetId"))
@@ -231,8 +231,8 @@ module Aws::Finspacedata
     ColumnDefinition.add_member(:column_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "columnName"))
     ColumnDefinition.add_member(:column_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnDescription, name: "columnDescription"))
     ColumnDefinition.type = Types::ColumnDefinition
-    ColumnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnDefinition, name: "member")
-    ColumnNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "member")
+    ColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnDefinition, name: "member"))
+    ColumnNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage2, name: "message"))
     ConflictException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage2, name: "reason"))
     ConflictException.type = Types::ConflictException
@@ -295,7 +295,7 @@ module Aws::Finspacedata
     DataViewErrorInfo.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
     DataViewErrorInfo.add_member(:error_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCategory, name: "errorCategory"))
     DataViewErrorInfo.type = Types::DataViewErrorInfo
-    DataViewList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataViewSummary, name: "member")
+    DataViewList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataViewSummary, name: "member"))
     DataViewStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     DataViewStatus.add_member(:starting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTING", traits: {"smithy.api#enumValue" => "STARTING"}))
     DataViewStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -330,7 +330,7 @@ module Aws::Finspacedata
     Dataset.type = Types::Dataset
     DatasetKind.add_member(:tabular, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TABULAR", traits: {"smithy.api#enumValue" => "TABULAR"}))
     DatasetKind.add_member(:non_tabular, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NON_TABULAR", traits: {"smithy.api#enumValue" => "NON_TABULAR"}))
-    DatasetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Dataset, name: "member")
+    DatasetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Dataset, name: "member"))
     DatasetOwnerInfo.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerName, name: "name"))
     DatasetOwnerInfo.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "phoneNumber"))
     DatasetOwnerInfo.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: Email, name: "email"))
@@ -375,8 +375,8 @@ module Aws::Finspacedata
     ErrorCategory.add_member(:user_recoverable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER_RECOVERABLE", traits: {"smithy.api#enumValue" => "USER_RECOVERABLE"}))
     ExportFileFormat.add_member(:parquet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARQUET", traits: {"smithy.api#enumValue" => "PARQUET"}))
     ExportFileFormat.add_member(:delimited_text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELIMITED_TEXT", traits: {"smithy.api#enumValue" => "DELIMITED_TEXT"}))
-    FormatParams.key = ::Smithy::Schema::Shapes::MemberShape.new(target: StringMapKey, name: "key")
-    FormatParams.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringMapValue, name: "value")
+    FormatParams.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMapKey, name: "key"))
+    FormatParams.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMapValue, name: "value"))
     GetChangesetRequest.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetId, name: "datasetId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetChangesetRequest.add_member(:changeset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangesetId, name: "changesetId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetChangesetRequest.type = Types::GetChangesetRequest
@@ -516,7 +516,7 @@ module Aws::Finspacedata
     ListUsersResponse.add_member(:users, ::Smithy::Schema::Shapes::MemberShape.new(target: UserList, name: "users"))
     ListUsersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
     ListUsersResponse.type = Types::ListUsersResponse
-    PartitionColumnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringValueLength1to255, name: "member")
+    PartitionColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValueLength1to255, name: "member"))
     PermissionGroup.add_member(:permission_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionGroupId, name: "permissionGroupId"))
     PermissionGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionGroupName, name: "name"))
     PermissionGroup.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionGroupDescription, name: "description"))
@@ -529,8 +529,8 @@ module Aws::Finspacedata
     PermissionGroupByUser.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionGroupName, name: "name"))
     PermissionGroupByUser.add_member(:membership_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionGroupMembershipStatus, name: "membershipStatus"))
     PermissionGroupByUser.type = Types::PermissionGroupByUser
-    PermissionGroupByUserList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionGroupByUser, name: "member")
-    PermissionGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionGroup, name: "member")
+    PermissionGroupByUserList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionGroupByUser, name: "member"))
+    PermissionGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionGroup, name: "member"))
     PermissionGroupMembershipStatus.add_member(:addition_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADDITION_IN_PROGRESS", traits: {"smithy.api#enumValue" => "ADDITION_IN_PROGRESS"}))
     PermissionGroupMembershipStatus.add_member(:addition_success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADDITION_SUCCESS", traits: {"smithy.api#enumValue" => "ADDITION_SUCCESS"}))
     PermissionGroupMembershipStatus.add_member(:removal_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMOVAL_IN_PROGRESS", traits: {"smithy.api#enumValue" => "REMOVAL_IN_PROGRESS"}))
@@ -548,9 +548,9 @@ module Aws::Finspacedata
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ResourcePermission.add_member(:permission, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValueLength1to250, name: "permission"))
     ResourcePermission.type = Types::ResourcePermission
-    ResourcePermissionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePermission, name: "member")
-    S3DestinationFormatOptions.key = ::Smithy::Schema::Shapes::MemberShape.new(target: StringMapKey, name: "key")
-    S3DestinationFormatOptions.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringMapValue, name: "value")
+    ResourcePermissionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePermission, name: "member"))
+    S3DestinationFormatOptions.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMapKey, name: "key"))
+    S3DestinationFormatOptions.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMapValue, name: "value"))
     S3Location.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, name: "bucket", traits: {"smithy.api#required" => {}}))
     S3Location.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Key, name: "key", traits: {"smithy.api#required" => {}}))
     S3Location.type = Types::S3Location
@@ -559,9 +559,9 @@ module Aws::Finspacedata
     SchemaDefinition.type = Types::SchemaDefinition
     SchemaUnion.add_member(:tabular_schema_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaDefinition, name: "tabularSchemaConfig"))
     SchemaUnion.type = Types::SchemaUnion
-    SortColumnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringValueLength1to255, name: "member")
-    SourceParams.key = ::Smithy::Schema::Shapes::MemberShape.new(target: StringMapKey, name: "key")
-    SourceParams.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringMapValue, name: "value")
+    SortColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValueLength1to255, name: "member"))
+    SourceParams.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMapKey, name: "key"))
+    SourceParams.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMapValue, name: "value"))
     ThrottlingException.type = Types::ThrottlingException
     UpdateChangesetRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     UpdateChangesetRequest.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetId, name: "datasetId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -624,8 +624,8 @@ module Aws::Finspacedata
     UserByPermissionGroup.add_member(:api_access_principal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "apiAccessPrincipalArn"))
     UserByPermissionGroup.add_member(:membership_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionGroupMembershipStatus, name: "membershipStatus"))
     UserByPermissionGroup.type = Types::UserByPermissionGroup
-    UserByPermissionGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserByPermissionGroup, name: "member")
-    UserList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member")
+    UserByPermissionGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserByPermissionGroup, name: "member"))
+    UserList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member"))
     UserStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     UserStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     UserStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))

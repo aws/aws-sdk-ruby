@@ -256,10 +256,10 @@ module Aws::IoTAnalytics
     AddAttributesActivity.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameMapping, name: "attributes", traits: {"smithy.api#required" => {}}))
     AddAttributesActivity.add_member(:next, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivityName, name: "next"))
     AddAttributesActivity.type = Types::AddAttributesActivity
-    AttributeNameMapping.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
-    AttributeNameMapping.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "value")
-    AttributeNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "member")
-    BatchPutMessageErrorEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutMessageErrorEntry, name: "member")
+    AttributeNameMapping.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
+    AttributeNameMapping.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "value"))
+    AttributeNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "member"))
+    BatchPutMessageErrorEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutMessageErrorEntry, name: "member"))
     BatchPutMessageErrorEntry.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageId, name: "messageId"))
     BatchPutMessageErrorEntry.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "errorCode"))
     BatchPutMessageErrorEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
@@ -299,7 +299,7 @@ module Aws::IoTAnalytics
     ChannelStorageSummary.add_member(:service_managed_s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceManagedChannelS3StorageSummary, name: "serviceManagedS3"))
     ChannelStorageSummary.add_member(:customer_managed_s3, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerManagedChannelS3StorageSummary, name: "customerManagedS3"))
     ChannelStorageSummary.type = Types::ChannelStorageSummary
-    ChannelSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSummary, name: "member")
+    ChannelSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSummary, name: "member"))
     ChannelSummary.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, name: "channelName"))
     ChannelSummary.add_member(:channel_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelStorageSummary, name: "channelStorage"))
     ChannelSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelStatus, name: "status"))
@@ -310,7 +310,7 @@ module Aws::IoTAnalytics
     Column.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "name", traits: {"smithy.api#required" => {}}))
     Column.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnDataType, name: "type", traits: {"smithy.api#required" => {}}))
     Column.type = Types::Column
-    Columns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Column, name: "member")
+    Columns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Column, name: "member"))
     ComputeType.add_member(:acu_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACU_1", traits: {"smithy.api#enumValue" => "ACU_1"}))
     ComputeType.add_member(:acu_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACU_2", traits: {"smithy.api#enumValue" => "ACU_2"}))
     ContainerDatasetAction.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: Image, name: "image", traits: {"smithy.api#required" => {}}))
@@ -395,27 +395,27 @@ module Aws::IoTAnalytics
     DatasetAction.add_member(:query_action, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlQueryDatasetAction, name: "queryAction"))
     DatasetAction.add_member(:container_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerDatasetAction, name: "containerAction"))
     DatasetAction.type = Types::DatasetAction
-    DatasetActionSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetActionSummary, name: "member")
+    DatasetActionSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetActionSummary, name: "member"))
     DatasetActionSummary.add_member(:action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetActionName, name: "actionName"))
     DatasetActionSummary.add_member(:action_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetActionType, name: "actionType"))
     DatasetActionSummary.type = Types::DatasetActionSummary
     DatasetActionType.add_member(:query, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUERY", traits: {"smithy.api#enumValue" => "QUERY"}))
     DatasetActionType.add_member(:container, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINER", traits: {"smithy.api#enumValue" => "CONTAINER"}))
-    DatasetActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetAction, name: "member")
+    DatasetActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetAction, name: "member"))
     DatasetContentDeliveryDestination.add_member(:iot_events_destination_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IotEventsDestinationConfiguration, name: "iotEventsDestinationConfiguration"))
     DatasetContentDeliveryDestination.add_member(:s3_destination_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3DestinationConfiguration, name: "s3DestinationConfiguration"))
     DatasetContentDeliveryDestination.type = Types::DatasetContentDeliveryDestination
     DatasetContentDeliveryRule.add_member(:entry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryName, name: "entryName"))
     DatasetContentDeliveryRule.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetContentDeliveryDestination, name: "destination", traits: {"smithy.api#required" => {}}))
     DatasetContentDeliveryRule.type = Types::DatasetContentDeliveryRule
-    DatasetContentDeliveryRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetContentDeliveryRule, name: "member")
+    DatasetContentDeliveryRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetContentDeliveryRule, name: "member"))
     DatasetContentState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     DatasetContentState.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
     DatasetContentState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     DatasetContentStatus.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetContentState, name: "state"))
     DatasetContentStatus.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: Reason, name: "reason"))
     DatasetContentStatus.type = Types::DatasetContentStatus
-    DatasetContentSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetContentSummary, name: "member")
+    DatasetContentSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetContentSummary, name: "member"))
     DatasetContentSummary.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetContentVersion, name: "version"))
     DatasetContentSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetContentStatus, name: "status"))
     DatasetContentSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime"))
@@ -424,14 +424,14 @@ module Aws::IoTAnalytics
     DatasetContentSummary.type = Types::DatasetContentSummary
     DatasetContentVersionValue.add_member(:dataset_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetName, name: "datasetName", traits: {"smithy.api#required" => {}}))
     DatasetContentVersionValue.type = Types::DatasetContentVersionValue
-    DatasetEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetEntry, name: "member")
+    DatasetEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetEntry, name: "member"))
     DatasetEntry.add_member(:entry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryName, name: "entryName"))
     DatasetEntry.add_member(:data_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: PresignedURI, name: "dataURI"))
     DatasetEntry.type = Types::DatasetEntry
     DatasetStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     DatasetStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     DatasetStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    DatasetSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetSummary, name: "member")
+    DatasetSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetSummary, name: "member"))
     DatasetSummary.add_member(:dataset_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetName, name: "datasetName"))
     DatasetSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetStatus, name: "status"))
     DatasetSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime"))
@@ -442,7 +442,7 @@ module Aws::IoTAnalytics
     DatasetTrigger.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: Schedule, name: "schedule"))
     DatasetTrigger.add_member(:dataset, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggeringDataset, name: "dataset"))
     DatasetTrigger.type = Types::DatasetTrigger
-    DatasetTriggers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetTrigger, name: "member")
+    DatasetTriggers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetTrigger, name: "member"))
     Datastore.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreName, name: "name"))
     Datastore.add_member(:storage, ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreStorage, name: "storage"))
     Datastore.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreArn, name: "arn"))
@@ -480,7 +480,7 @@ module Aws::IoTAnalytics
     DatastoreStorageSummary.add_member(:customer_managed_s3, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerManagedDatastoreS3StorageSummary, name: "customerManagedS3"))
     DatastoreStorageSummary.add_member(:iot_site_wise_multi_layer_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreIotSiteWiseMultiLayerStorageSummary, name: "iotSiteWiseMultiLayerStorage"))
     DatastoreStorageSummary.type = Types::DatastoreStorageSummary
-    DatastoreSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreSummary, name: "member")
+    DatastoreSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreSummary, name: "member"))
     DatastoreSummary.add_member(:datastore_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreName, name: "datastoreName"))
     DatastoreSummary.add_member(:datastore_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreStorageSummary, name: "datastoreStorage"))
     DatastoreSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreStatus, name: "status"))
@@ -587,7 +587,7 @@ module Aws::IoTAnalytics
     LateDataRule.type = Types::LateDataRule
     LateDataRuleConfiguration.add_member(:delta_time_session_window_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DeltaTimeSessionWindowConfiguration, name: "deltaTimeSessionWindowConfiguration"))
     LateDataRuleConfiguration.type = Types::LateDataRuleConfiguration
-    LateDataRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LateDataRule, name: "member")
+    LateDataRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LateDataRule, name: "member"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     LimitExceededException.type = Types::LimitExceededException
     ListChannelsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -640,15 +640,15 @@ module Aws::IoTAnalytics
     Message.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageId, name: "messageId", traits: {"smithy.api#required" => {}}))
     Message.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: MessagePayload, name: "payload", traits: {"smithy.api#required" => {}}))
     Message.type = Types::Message
-    MessagePayloads.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MessagePayload, name: "member")
-    Messages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "member")
+    MessagePayloads.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MessagePayload, name: "member"))
+    Messages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "member"))
     OutputFileUriValue.add_member(:file_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputFileName, name: "fileName", traits: {"smithy.api#required" => {}}))
     OutputFileUriValue.type = Types::OutputFileUriValue
     ParquetConfiguration.add_member(:schema_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaDefinition, name: "schemaDefinition"))
     ParquetConfiguration.type = Types::ParquetConfiguration
     Partition.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionAttributeName, name: "attributeName", traits: {"smithy.api#required" => {}}))
     Partition.type = Types::Partition
-    Partitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatastorePartition, name: "member")
+    Partitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatastorePartition, name: "member"))
     Pipeline.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineName, name: "name"))
     Pipeline.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineArn, name: "arn"))
     Pipeline.add_member(:activities, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineActivities, name: "activities"))
@@ -656,7 +656,7 @@ module Aws::IoTAnalytics
     Pipeline.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime"))
     Pipeline.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdateTime"))
     Pipeline.type = Types::Pipeline
-    PipelineActivities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineActivity, name: "member")
+    PipelineActivities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineActivity, name: "member"))
     PipelineActivity.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelActivity, name: "channel"))
     PipelineActivity.add_member(:lambda, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaActivity, name: "lambda"))
     PipelineActivity.add_member(:datastore, ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreActivity, name: "datastore"))
@@ -668,7 +668,7 @@ module Aws::IoTAnalytics
     PipelineActivity.add_member(:device_registry_enrich, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceRegistryEnrichActivity, name: "deviceRegistryEnrich"))
     PipelineActivity.add_member(:device_shadow_enrich, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceShadowEnrichActivity, name: "deviceShadowEnrich"))
     PipelineActivity.type = Types::PipelineActivity
-    PipelineSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineSummary, name: "member")
+    PipelineSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineSummary, name: "member"))
     PipelineSummary.add_member(:pipeline_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineName, name: "pipelineName"))
     PipelineSummary.add_member(:reprocessing_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: ReprocessingSummaries, name: "reprocessingSummaries"))
     PipelineSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime"))
@@ -678,7 +678,7 @@ module Aws::IoTAnalytics
     PutLoggingOptionsRequest.type = Types::PutLoggingOptionsRequest
     QueryFilter.add_member(:delta_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DeltaTime, name: "deltaTime"))
     QueryFilter.type = Types::QueryFilter
-    QueryFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryFilter, name: "member")
+    QueryFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryFilter, name: "member"))
     RemoveAttributesActivity.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivityName, name: "name", traits: {"smithy.api#required" => {}}))
     RemoveAttributesActivity.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNames, name: "attributes", traits: {"smithy.api#required" => {}}))
     RemoveAttributesActivity.add_member(:next, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivityName, name: "next"))
@@ -687,7 +687,7 @@ module Aws::IoTAnalytics
     ReprocessingStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
     ReprocessingStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
     ReprocessingStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    ReprocessingSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReprocessingSummary, name: "member")
+    ReprocessingSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReprocessingSummary, name: "member"))
     ReprocessingSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReprocessingId, name: "id"))
     ReprocessingSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReprocessingStatus, name: "status"))
     ReprocessingSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime"))
@@ -715,7 +715,7 @@ module Aws::IoTAnalytics
     S3DestinationConfiguration.add_member(:glue_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueConfiguration, name: "glueConfiguration"))
     S3DestinationConfiguration.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
     S3DestinationConfiguration.type = Types::S3DestinationConfiguration
-    S3PathChannelMessages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: S3PathChannelMessage, name: "member")
+    S3PathChannelMessages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3PathChannelMessage, name: "member"))
     SampleChannelDataRequest.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, name: "channelName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     SampleChannelDataRequest.add_member(:max_messages, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxMessages, name: "maxMessages", traits: {"smithy.api#httpQuery" => "maxMessages"}))
     SampleChannelDataRequest.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTime, name: "startTime", traits: {"smithy.api#httpQuery" => "startTime"}))
@@ -750,8 +750,8 @@ module Aws::IoTAnalytics
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#httpQuery" => "resourceArn", "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -793,7 +793,7 @@ module Aws::IoTAnalytics
     Variable.add_member(:dataset_content_version_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetContentVersionValue, name: "datasetContentVersionValue"))
     Variable.add_member(:output_file_uri_value, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputFileUriValue, name: "outputFileUriValue"))
     Variable.type = Types::Variable
-    Variables.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Variable, name: "member")
+    Variables.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Variable, name: "member"))
     VersioningConfiguration.add_member(:unlimited, ::Smithy::Schema::Shapes::MemberShape.new(target: UnlimitedVersioning, name: "unlimited", traits: {"smithy.api#default" => false}))
     VersioningConfiguration.add_member(:max_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxVersions, name: "maxVersions"))
     VersioningConfiguration.type = Types::VersioningConfiguration

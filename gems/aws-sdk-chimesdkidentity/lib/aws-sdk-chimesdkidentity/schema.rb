@@ -139,7 +139,7 @@ module Aws::ChimeSDKIdentity
     AppInstanceAdmin.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, name: "AppInstanceArn"))
     AppInstanceAdmin.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTimestamp"))
     AppInstanceAdmin.type = Types::AppInstanceAdmin
-    AppInstanceAdminList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceAdminSummary, name: "member")
+    AppInstanceAdminList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceAdminSummary, name: "member"))
     AppInstanceAdminSummary.add_member(:admin, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "Admin"))
     AppInstanceAdminSummary.type = Types::AppInstanceAdminSummary
     AppInstanceBot.add_member(:app_instance_bot_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, name: "AppInstanceBotArn"))
@@ -149,12 +149,12 @@ module Aws::ChimeSDKIdentity
     AppInstanceBot.add_member(:last_updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedTimestamp"))
     AppInstanceBot.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, name: "Metadata"))
     AppInstanceBot.type = Types::AppInstanceBot
-    AppInstanceBotList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceBotSummary, name: "member")
+    AppInstanceBotList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceBotSummary, name: "member"))
     AppInstanceBotSummary.add_member(:app_instance_bot_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, name: "AppInstanceBotArn"))
     AppInstanceBotSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
     AppInstanceBotSummary.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, name: "Metadata"))
     AppInstanceBotSummary.type = Types::AppInstanceBotSummary
-    AppInstanceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceSummary, name: "member")
+    AppInstanceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceSummary, name: "member"))
     AppInstanceRetentionSettings.add_member(:channel_retention_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelRetentionSettings, name: "ChannelRetentionSettings"))
     AppInstanceRetentionSettings.type = Types::AppInstanceRetentionSettings
     AppInstanceSummary.add_member(:app_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, name: "AppInstanceArn"))
@@ -186,11 +186,11 @@ module Aws::ChimeSDKIdentity
     AppInstanceUserEndpointSummary.add_member(:allow_messages, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowMessages, name: "AllowMessages"))
     AppInstanceUserEndpointSummary.add_member(:endpoint_state, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointState, name: "EndpointState"))
     AppInstanceUserEndpointSummary.type = Types::AppInstanceUserEndpointSummary
-    AppInstanceUserEndpointSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceUserEndpointSummary, name: "member")
+    AppInstanceUserEndpointSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceUserEndpointSummary, name: "member"))
     AppInstanceUserEndpointType.add_member(:apns, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APNS", traits: {"smithy.api#enumValue" => "APNS"}))
     AppInstanceUserEndpointType.add_member(:apns_sandbox, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APNS_SANDBOX", traits: {"smithy.api#enumValue" => "APNS_SANDBOX"}))
     AppInstanceUserEndpointType.add_member(:gcm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GCM", traits: {"smithy.api#enumValue" => "GCM"}))
-    AppInstanceUserList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceUserSummary, name: "member")
+    AppInstanceUserList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceUserSummary, name: "member"))
     AppInstanceUserSummary.add_member(:app_instance_user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, name: "AppInstanceUserArn"))
     AppInstanceUserSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, name: "Name"))
     AppInstanceUserSummary.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, name: "Metadata"))
@@ -404,8 +404,8 @@ module Aws::ChimeSDKIdentity
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest

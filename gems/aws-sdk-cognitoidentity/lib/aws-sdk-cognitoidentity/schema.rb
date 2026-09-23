@@ -128,7 +128,7 @@ module Aws::CognitoIdentity
     CognitoIdentityProvider.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CognitoIdentityProviderClientId, name: "ClientId"))
     CognitoIdentityProvider.add_member(:server_side_token_check, ::Smithy::Schema::Shapes::MemberShape.new(target: CognitoIdentityProviderTokenCheck, name: "ServerSideTokenCheck", traits: {"smithy.api#default" => nil}))
     CognitoIdentityProvider.type = Types::CognitoIdentityProvider
-    CognitoIdentityProviderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CognitoIdentityProvider, name: "member")
+    CognitoIdentityProviderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CognitoIdentityProvider, name: "member"))
     ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ConcurrentModificationException.type = Types::ConcurrentModificationException
     CreateIdentityPoolInput.add_member(:identity_pool_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityPoolName, name: "IdentityPoolName", traits: {"smithy.api#required" => {}}))
@@ -185,7 +185,7 @@ module Aws::CognitoIdentity
     DescribeIdentityPoolOutput.type = Types::DescribeIdentityPoolOutput
     DeveloperUserAlreadyRegisteredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     DeveloperUserAlreadyRegisteredException.type = Types::DeveloperUserAlreadyRegisteredException
-    DeveloperUserIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeveloperUserIdentifier, name: "member")
+    DeveloperUserIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeveloperUserIdentifier, name: "member"))
     ErrorCode.add_member(:access_denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS_DENIED", traits: {"smithy.api#enumValue" => "AccessDenied"}))
     ErrorCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "InternalServerError"}))
     ExternalServiceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
@@ -232,22 +232,22 @@ module Aws::CognitoIdentity
     GetPrincipalTagAttributeMapResponse.add_member(:use_defaults, ::Smithy::Schema::Shapes::MemberShape.new(target: UseDefaults, name: "UseDefaults"))
     GetPrincipalTagAttributeMapResponse.add_member(:principal_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalTags, name: "PrincipalTags"))
     GetPrincipalTagAttributeMapResponse.type = Types::GetPrincipalTagAttributeMapResponse
-    IdentitiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityDescription, name: "member")
+    IdentitiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityDescription, name: "member"))
     IdentityDescription.add_member(:identity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityId, name: "IdentityId"))
     IdentityDescription.add_member(:logins, ::Smithy::Schema::Shapes::MemberShape.new(target: LoginsList, name: "Logins"))
     IdentityDescription.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "CreationDate"))
     IdentityDescription.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "LastModifiedDate"))
     IdentityDescription.type = Types::IdentityDescription
-    IdentityIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityId, name: "member")
+    IdentityIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityId, name: "member"))
     IdentityPoolShortDescription.add_member(:identity_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityPoolId, name: "IdentityPoolId"))
     IdentityPoolShortDescription.add_member(:identity_pool_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityPoolName, name: "IdentityPoolName"))
     IdentityPoolShortDescription.type = Types::IdentityPoolShortDescription
-    IdentityPoolTagsListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeysType, name: "member")
-    IdentityPoolTagsType.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeysType, name: "key")
-    IdentityPoolTagsType.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValueType, name: "value")
-    IdentityPoolsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityPoolShortDescription, name: "member")
-    IdentityProviders.key = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderName, name: "key")
-    IdentityProviders.value = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderId, name: "value")
+    IdentityPoolTagsListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeysType, name: "member"))
+    IdentityPoolTagsType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeysType, name: "key"))
+    IdentityPoolTagsType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValueType, name: "value"))
+    IdentityPoolsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityPoolShortDescription, name: "member"))
+    IdentityProviders.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderName, name: "key"))
+    IdentityProviders.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderId, name: "value"))
     InternalErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     InternalErrorException.type = Types::InternalErrorException
     InvalidIdentityPoolConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
@@ -275,9 +275,9 @@ module Aws::CognitoIdentity
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityPoolTagsType, name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    LoginsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderName, name: "member")
-    LoginsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderName, name: "key")
-    LoginsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderToken, name: "value")
+    LoginsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderName, name: "member"))
+    LoginsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderName, name: "key"))
+    LoginsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderToken, name: "value"))
     LookupDeveloperIdentityInput.add_member(:identity_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityPoolId, name: "IdentityPoolId", traits: {"smithy.api#required" => {}}))
     LookupDeveloperIdentityInput.add_member(:identity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityId, name: "IdentityId"))
     LookupDeveloperIdentityInput.add_member(:developer_user_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DeveloperUserIdentifier, name: "DeveloperUserIdentifier"))
@@ -297,7 +297,7 @@ module Aws::CognitoIdentity
     MappingRuleMatchType.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINS", traits: {"smithy.api#enumValue" => "Contains"}))
     MappingRuleMatchType.add_member(:starts_with, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTS_WITH", traits: {"smithy.api#enumValue" => "StartsWith"}))
     MappingRuleMatchType.add_member(:not_equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_EQUAL", traits: {"smithy.api#enumValue" => "NotEqual"}))
-    MappingRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MappingRule, name: "member")
+    MappingRulesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MappingRule, name: "member"))
     MergeDeveloperIdentitiesInput.add_member(:source_user_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DeveloperUserIdentifier, name: "SourceUserIdentifier", traits: {"smithy.api#required" => {}}))
     MergeDeveloperIdentitiesInput.add_member(:destination_user_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DeveloperUserIdentifier, name: "DestinationUserIdentifier", traits: {"smithy.api#required" => {}}))
     MergeDeveloperIdentitiesInput.add_member(:developer_provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeveloperProviderName, name: "DeveloperProviderName", traits: {"smithy.api#required" => {}}))
@@ -307,9 +307,9 @@ module Aws::CognitoIdentity
     MergeDeveloperIdentitiesResponse.type = Types::MergeDeveloperIdentitiesResponse
     NotAuthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     NotAuthorizedException.type = Types::NotAuthorizedException
-    OIDCProviderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ARNString, name: "member")
-    PrincipalTags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalTagID, name: "key")
-    PrincipalTags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalTagValue, name: "value")
+    OIDCProviderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ARNString, name: "member"))
+    PrincipalTags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalTagID, name: "key"))
+    PrincipalTags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalTagValue, name: "value"))
     ResourceConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ResourceConflictException.type = Types::ResourceConflictException
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
@@ -318,15 +318,15 @@ module Aws::CognitoIdentity
     RoleMapping.add_member(:ambiguous_role_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: AmbiguousRoleResolutionType, name: "AmbiguousRoleResolution"))
     RoleMapping.add_member(:rules_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RulesConfigurationType, name: "RulesConfiguration"))
     RoleMapping.type = Types::RoleMapping
-    RoleMappingMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderName, name: "key")
-    RoleMappingMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RoleMapping, name: "value")
+    RoleMappingMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderName, name: "key"))
+    RoleMappingMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleMapping, name: "value"))
     RoleMappingType.add_member(:token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOKEN", traits: {"smithy.api#enumValue" => "Token"}))
     RoleMappingType.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RULES", traits: {"smithy.api#enumValue" => "Rules"}))
-    RolesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: RoleType, name: "key")
-    RolesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ARNString, name: "value")
+    RolesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleType, name: "key"))
+    RolesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ARNString, name: "value"))
     RulesConfigurationType.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: MappingRulesList, name: "Rules", traits: {"smithy.api#required" => {}}))
     RulesConfigurationType.type = Types::RulesConfigurationType
-    SAMLProviderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ARNString, name: "member")
+    SAMLProviderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ARNString, name: "member"))
     SetIdentityPoolRolesInput.add_member(:identity_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityPoolId, name: "IdentityPoolId", traits: {"smithy.api#required" => {}}))
     SetIdentityPoolRolesInput.add_member(:roles, ::Smithy::Schema::Shapes::MemberShape.new(target: RolesMap, name: "Roles", traits: {"smithy.api#required" => {}}))
     SetIdentityPoolRolesInput.add_member(:role_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleMappingMap, name: "RoleMappings"))
@@ -359,7 +359,7 @@ module Aws::CognitoIdentity
     UnprocessedIdentityId.add_member(:identity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityId, name: "IdentityId"))
     UnprocessedIdentityId.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     UnprocessedIdentityId.type = Types::UnprocessedIdentityId
-    UnprocessedIdentityIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedIdentityId, name: "member")
+    UnprocessedIdentityIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedIdentityId, name: "member"))
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARNString, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityPoolTagsListType, name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput

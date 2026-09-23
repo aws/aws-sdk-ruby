@@ -171,7 +171,7 @@ module Aws::BedrockAgentCore
     AccessDeniedException.type = Types::AccessDeniedException
     ActorSummary.add_member(:actor_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActorId, name: "actorId", traits: {"smithy.api#required" => {}}))
     ActorSummary.type = Types::ActorSummary
-    ActorSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActorSummary, name: "member")
+    ActorSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActorSummary, name: "member"))
     AutomationStream.add_member(:stream_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserStreamEndpoint, name: "streamEndpoint", traits: {"smithy.api#required" => {}}))
     AutomationStream.add_member(:stream_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationStreamStatus, name: "streamStatus", traits: {"smithy.api#required" => {}}))
     AutomationStream.type = Types::AutomationStream
@@ -190,7 +190,7 @@ module Aws::BedrockAgentCore
     BrowserSessionStream.add_member(:automation_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationStream, name: "automationStream", traits: {"smithy.api#required" => {}}))
     BrowserSessionStream.add_member(:live_view_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: LiveViewStream, name: "liveViewStream"))
     BrowserSessionStream.type = Types::BrowserSessionStream
-    BrowserSessionSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserSessionSummary, name: "member")
+    BrowserSessionSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserSessionSummary, name: "member"))
     BrowserSessionSummary.add_member(:browser_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "browserIdentifier", traits: {"smithy.api#required" => {}}))
     BrowserSessionSummary.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserSessionId, name: "sessionId", traits: {"smithy.api#required" => {}}))
     BrowserSessionSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
@@ -204,7 +204,7 @@ module Aws::BedrockAgentCore
     CodeInterpreterResult.type = Types::CodeInterpreterResult
     CodeInterpreterSessionStatus.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
     CodeInterpreterSessionStatus.add_member(:terminated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERMINATED", traits: {"smithy.api#enumValue" => "TERMINATED"}))
-    CodeInterpreterSessionSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CodeInterpreterSessionSummary, name: "member")
+    CodeInterpreterSessionSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeInterpreterSessionSummary, name: "member"))
     CodeInterpreterSessionSummary.add_member(:code_interpreter_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "codeInterpreterIdentifier", traits: {"smithy.api#required" => {}}))
     CodeInterpreterSessionSummary.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeInterpreterSessionId, name: "sessionId", traits: {"smithy.api#required" => {}}))
     CodeInterpreterSessionSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
@@ -237,7 +237,7 @@ module Aws::BedrockAgentCore
     ContentBlock.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "size"))
     ContentBlock.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceContent, name: "resource"))
     ContentBlock.type = Types::ContentBlock
-    ContentBlockList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContentBlock, name: "member")
+    ContentBlockList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentBlock, name: "member"))
     ContentBlockType.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXT", traits: {"smithy.api#enumValue" => "text"}))
     ContentBlockType.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMAGE", traits: {"smithy.api#enumValue" => "image"}))
     ContentBlockType.add_member(:embedded_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMBEDDED_RESOURCE", traits: {"smithy.api#enumValue" => "resource"}))
@@ -255,8 +255,8 @@ module Aws::BedrockAgentCore
     CreateEventInput.type = Types::CreateEventInput
     CreateEventOutput.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "event", traits: {"smithy.api#required" => {}}))
     CreateEventOutput.type = Types::CreateEventOutput
-    CustomRequestParametersType.key = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRequestKeyType, name: "key")
-    CustomRequestParametersType.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRequestValueType, name: "value")
+    CustomRequestParametersType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRequestKeyType, name: "key"))
+    CustomRequestParametersType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRequestValueType, name: "value"))
     DeleteEventInput.add_member(:memory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryId, name: "memoryId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteEventInput.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "sessionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteEventInput.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EventId, name: "eventId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -277,7 +277,7 @@ module Aws::BedrockAgentCore
     Event.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: PayloadTypeList, name: "payload", traits: {"smithy.api#required" => {}}))
     Event.add_member(:branch, ::Smithy::Schema::Shapes::MemberShape.new(target: Branch, name: "branch"))
     Event.type = Types::Event
-    EventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member")
+    EventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member"))
     FilterInput.add_member(:branch, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchFilter, name: "branch"))
     FilterInput.type = Types::FilterInput
     GetBrowserSessionRequest.add_member(:browser_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "browserIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -350,7 +350,7 @@ module Aws::BedrockAgentCore
     InputContentBlock.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxLenString, name: "text"))
     InputContentBlock.add_member(:blob, ::Smithy::Schema::Shapes::MemberShape.new(target: Body, name: "blob"))
     InputContentBlock.type = Types::InputContentBlock
-    InputContentBlockList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InputContentBlock, name: "member")
+    InputContentBlockList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InputContentBlock, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "message"))
     InternalServerException.type = Types::InternalServerException
     InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
@@ -463,15 +463,15 @@ module Aws::BedrockAgentCore
     MemoryRecordSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
     MemoryRecordSummary.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "score"))
     MemoryRecordSummary.type = Types::MemoryRecordSummary
-    MemoryRecordSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryRecordSummary, name: "member")
-    NamespacesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "member")
+    MemoryRecordSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryRecordSummary, name: "member"))
+    NamespacesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "member"))
     Oauth2FlowType.add_member(:user_federation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER_FEDERATION", traits: {"smithy.api#enumValue" => "USER_FEDERATION"}))
     Oauth2FlowType.add_member(:m2_m, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "M2M", traits: {"smithy.api#enumValue" => "M2M"}))
     PayloadType.add_member(:conversational, Types::PayloadType::Conversational, ::Smithy::Schema::Shapes::MemberShape.new(target: Conversational, name: "conversational"))
     PayloadType.add_member(:blob, Types::PayloadType::Blob, ::Smithy::Schema::Shapes::MemberShape.new(target: Document, name: "blob"))
     PayloadType.add_member(:unknown, Types::PayloadType::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     PayloadType.type = Types::PayloadType
-    PayloadTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PayloadType, name: "member")
+    PayloadTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PayloadType, name: "member"))
     ProgrammingLanguage.add_member(:python, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PYTHON", traits: {"smithy.api#enumValue" => "python"}))
     ProgrammingLanguage.add_member(:javascript, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JAVASCRIPT", traits: {"smithy.api#enumValue" => "javascript"}))
     ProgrammingLanguage.add_member(:typescript, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TYPESCRIPT", traits: {"smithy.api#enumValue" => "typescript"}))
@@ -500,7 +500,7 @@ module Aws::BedrockAgentCore
     Role.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTHER", traits: {"smithy.api#enumValue" => "OTHER"}))
     RuntimeClientError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "message"))
     RuntimeClientError.type = Types::RuntimeClientError
-    ScopesListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeType, name: "member")
+    ScopesListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeType, name: "member"))
     SearchCriteria.add_member(:search_query, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "searchQuery", traits: {"smithy.api#length" => {"min" => 1, "max" => 10000}, "smithy.api#required" => {}}))
     SearchCriteria.add_member(:memory_strategy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryStrategyId, name: "memoryStrategyId"))
     SearchCriteria.add_member(:top_k, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "topK", traits: {"smithy.api#default" => 10, "smithy.api#range" => {"min" => 1, "max" => 100}}))
@@ -513,7 +513,7 @@ module Aws::BedrockAgentCore
     SessionSummary.add_member(:actor_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActorId, name: "actorId", traits: {"smithy.api#required" => {}}))
     SessionSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
     SessionSummary.type = Types::SessionSummary
-    SessionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SessionSummary, name: "member")
+    SessionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionSummary, name: "member"))
     StartBrowserSessionRequest.add_member(:browser_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "browserIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartBrowserSessionRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     StartBrowserSessionRequest.add_member(:session_timeout_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserSessionTimeout, name: "sessionTimeoutSeconds", traits: {"smithy.api#default" => 3600}))
@@ -553,7 +553,7 @@ module Aws::BedrockAgentCore
     StreamUpdate.add_member(:automation_stream_update, Types::StreamUpdate::AutomationStreamUpdate, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationStreamUpdate, name: "automationStreamUpdate"))
     StreamUpdate.add_member(:unknown, Types::StreamUpdate::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     StreamUpdate.type = Types::StreamUpdate
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MaxLenString, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxLenString, name: "member"))
     TaskStatus.add_member(:submitted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUBMITTED", traits: {"smithy.api#enumValue" => "submitted"}))
     TaskStatus.add_member(:working, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WORKING", traits: {"smithy.api#enumValue" => "working"}))
     TaskStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "completed"}))
@@ -608,7 +608,7 @@ module Aws::BedrockAgentCore
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "CannotParse"}))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "FieldValidationFailed"}))
     ValidationExceptionReason.add_member(:idempotent_parameter_mismatch_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION", traits: {"smithy.api#enumValue" => "IdempotentParameterMismatchException"}))

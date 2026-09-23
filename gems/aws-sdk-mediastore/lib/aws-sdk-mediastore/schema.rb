@@ -89,9 +89,9 @@ module Aws::MediaStore
     UntagResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediastore#UntagResourceInput", name: "UntagResourceInput")
     UntagResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediastore#UntagResourceOutput", name: "UntagResourceOutput")
 
-    AllowedHeaders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Header, name: "member")
-    AllowedMethods.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MethodName, name: "member")
-    AllowedOrigins.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Origin, name: "member")
+    AllowedHeaders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Header, name: "member"))
+    AllowedMethods.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MethodName, name: "member"))
+    AllowedOrigins.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Origin, name: "member"))
     Container.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "Endpoint"))
     Container.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, name: "CreationTime"))
     Container.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerARN, name: "ARN"))
@@ -103,13 +103,13 @@ module Aws::MediaStore
     ContainerInUseException.type = Types::ContainerInUseException
     ContainerLevelMetrics.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     ContainerLevelMetrics.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    ContainerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Container, name: "member")
+    ContainerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Container, name: "member"))
     ContainerNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ContainerNotFoundException.type = Types::ContainerNotFoundException
     ContainerStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     ContainerStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     ContainerStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    CorsPolicy.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CorsRule, name: "member")
+    CorsPolicy.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CorsRule, name: "member"))
     CorsPolicyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     CorsPolicyNotFoundException.type = Types::CorsPolicyNotFoundException
     CorsRule.add_member(:allowed_origins, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOrigins, name: "AllowedOrigins", traits: {"smithy.api#required" => {}}))
@@ -142,7 +142,7 @@ module Aws::MediaStore
     DescribeContainerInput.type = Types::DescribeContainerInput
     DescribeContainerOutput.add_member(:container, ::Smithy::Schema::Shapes::MemberShape.new(target: Container, name: "Container"))
     DescribeContainerOutput.type = Types::DescribeContainerOutput
-    ExposeHeaders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Header, name: "member")
+    ExposeHeaders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Header, name: "member"))
     GetContainerPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "ContainerName", traits: {"smithy.api#required" => {}}))
     GetContainerPolicyInput.type = Types::GetContainerPolicyInput
     GetContainerPolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerPolicy, name: "Policy", traits: {"smithy.api#required" => {}}))
@@ -183,7 +183,7 @@ module Aws::MediaStore
     MetricPolicyRule.add_member(:object_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectGroup, name: "ObjectGroup", traits: {"smithy.api#required" => {}}))
     MetricPolicyRule.add_member(:object_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectGroupName, name: "ObjectGroupName", traits: {"smithy.api#required" => {}}))
     MetricPolicyRule.type = Types::MetricPolicyRule
-    MetricPolicyRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricPolicyRule, name: "member")
+    MetricPolicyRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricPolicyRule, name: "member"))
     PolicyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     PolicyNotFoundException.type = Types::PolicyNotFoundException
     PutContainerPolicyInput.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "ContainerName", traits: {"smithy.api#required" => {}}))
@@ -211,8 +211,8 @@ module Aws::MediaStore
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceInput.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerARN, name: "Resource", traits: {"smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput

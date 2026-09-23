@@ -114,12 +114,12 @@ module Aws::LexRuntimeV2
     ActiveContext.add_member(:time_to_live, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveContextTimeToLive, name: "timeToLive", traits: {"smithy.api#required" => {}}))
     ActiveContext.add_member(:context_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveContextParametersMap, name: "contextAttributes", traits: {"smithy.api#required" => {}}))
     ActiveContext.type = Types::ActiveContext
-    ActiveContextParametersMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "key")
-    ActiveContextParametersMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "value")
+    ActiveContextParametersMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "key"))
+    ActiveContextParametersMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "value"))
     ActiveContextTimeToLive.add_member(:time_to_live_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveContextTimeToLiveInSeconds, name: "timeToLiveInSeconds", traits: {"smithy.api#required" => {}}))
     ActiveContextTimeToLive.add_member(:turns_to_live, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveContextTurnsToLive, name: "turnsToLive", traits: {"smithy.api#required" => {}}))
     ActiveContextTimeToLive.type = Types::ActiveContextTimeToLive
-    ActiveContextsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveContext, name: "member")
+    ActiveContextsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveContext, name: "member"))
     AudioInputEvent.add_member(:audio_chunk, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioChunk, name: "audioChunk"))
     AudioInputEvent.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "contentType", traits: {"smithy.api#required" => {}}))
     AudioInputEvent.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EventId, name: "eventId"))
@@ -134,7 +134,7 @@ module Aws::LexRuntimeV2
     Button.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ButtonText, name: "text", traits: {"smithy.api#required" => {}}))
     Button.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ButtonValue, name: "value", traits: {"smithy.api#required" => {}}))
     Button.type = Types::Button
-    ButtonsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Button, name: "member")
+    ButtonsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Button, name: "member"))
     ConfidenceScore.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "score", traits: {"smithy.api#default" => 0}))
     ConfidenceScore.type = Types::ConfidenceScore
     ConfigurationEvent.add_member(:request_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMap, name: "requestAttributes"))
@@ -233,7 +233,7 @@ module Aws::LexRuntimeV2
     Interpretation.type = Types::Interpretation
     InterpretationSource.add_member(:bedrock, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BEDROCK", traits: {"smithy.api#enumValue" => "Bedrock"}))
     InterpretationSource.add_member(:lex, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LEX", traits: {"smithy.api#enumValue" => "Lex"}))
-    Interpretations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Interpretation, name: "member")
+    Interpretations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Interpretation, name: "member"))
     Message.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "content"))
     Message.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageContentType, name: "contentType", traits: {"smithy.api#required" => {}}))
     Message.add_member(:image_response_card, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageResponseCard, name: "imageResponseCard"))
@@ -242,7 +242,7 @@ module Aws::LexRuntimeV2
     MessageContentType.add_member(:image_response_card, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMAGE_RESPONSE_CARD", traits: {"smithy.api#enumValue" => "ImageResponseCard"}))
     MessageContentType.add_member(:plain_text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PLAIN_TEXT", traits: {"smithy.api#enumValue" => "PlainText"}))
     MessageContentType.add_member(:ssml, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSML", traits: {"smithy.api#enumValue" => "SSML"}))
-    Messages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "member")
+    Messages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "member"))
     PlaybackCompletionEvent.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EventId, name: "eventId"))
     PlaybackCompletionEvent.add_member(:client_timestamp_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochMillis, name: "clientTimestampMillis", traits: {"smithy.api#default" => 0}))
     PlaybackCompletionEvent.type = Types::PlaybackCompletionEvent
@@ -321,7 +321,7 @@ module Aws::LexRuntimeV2
     RuntimeHintDetails.type = Types::RuntimeHintDetails
     RuntimeHintValue.add_member(:phrase, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeHintPhrase, name: "phrase", traits: {"smithy.api#required" => {}}))
     RuntimeHintValue.type = Types::RuntimeHintValue
-    RuntimeHintValuesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeHintValue, name: "member")
+    RuntimeHintValuesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeHintValue, name: "member"))
     RuntimeHints.add_member(:slot_hints, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotHintsIntentMap, name: "slotHints"))
     RuntimeHints.type = Types::RuntimeHints
     SentimentResponse.add_member(:sentiment, ::Smithy::Schema::Shapes::MemberShape.new(target: SentimentType, name: "sentiment"))
@@ -351,12 +351,12 @@ module Aws::LexRuntimeV2
     Slot.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: Values, name: "values"))
     Slot.add_member(:sub_slots, ::Smithy::Schema::Shapes::MemberShape.new(target: Slots, name: "subSlots"))
     Slot.type = Types::Slot
-    SlotHintsIntentMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "key")
-    SlotHintsIntentMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SlotHintsSlotMap, name: "value")
-    SlotHintsSlotMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "key")
-    SlotHintsSlotMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeHintDetails, name: "value")
-    Slots.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key")
-    Slots.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Slot, name: "value")
+    SlotHintsIntentMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "key"))
+    SlotHintsIntentMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotHintsSlotMap, name: "value"))
+    SlotHintsSlotMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "key"))
+    SlotHintsSlotMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeHintDetails, name: "value"))
+    Slots.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
+    Slots.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Slot, name: "value"))
     StartConversationRequest.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BotIdentifier, name: "botId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartConversationRequest.add_member(:bot_alias_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasIdentifier, name: "botAliasId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartConversationRequest.add_member(:locale_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "localeId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -394,9 +394,9 @@ module Aws::LexRuntimeV2
     StartConversationResponseEventStream.add_member(:bad_gateway_exception, Types::StartConversationResponseEventStream::BadGatewayException, ::Smithy::Schema::Shapes::MemberShape.new(target: BadGatewayException, name: "BadGatewayException"))
     StartConversationResponseEventStream.add_member(:unknown, Types::StartConversationResponseEventStream::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     StartConversationResponseEventStream.type = Types::StartConversationResponseEventStream
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
-    StringMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key")
-    StringMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
+    StringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
+    StringMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     StyleType.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "Default"}))
     StyleType.add_member(:spell_by_letter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPELL_BY_LETTER", traits: {"smithy.api#enumValue" => "SpellByLetter"}))
     StyleType.add_member(:spell_by_word, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPELL_BY_WORD", traits: {"smithy.api#enumValue" => "SpellByWord"}))
@@ -418,7 +418,7 @@ module Aws::LexRuntimeV2
     Value.add_member(:interpreted_value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "interpretedValue", traits: {"smithy.api#required" => {}}))
     Value.add_member(:resolved_values, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "resolvedValues"))
     Value.type = Types::Value
-    Values.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Slot, name: "member")
+    Values.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Slot, name: "member"))
 
     AWSDeepSenseRunTimeServiceApi20 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.lexruntimev2#AWSDeepSenseRunTimeServiceApi2_0"

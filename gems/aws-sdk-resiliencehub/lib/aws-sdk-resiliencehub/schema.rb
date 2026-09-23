@@ -337,7 +337,7 @@ module Aws::Resiliencehub
     Uuid = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.resiliencehub#Uuid", name: "Uuid", traits: {"smithy.api#pattern" => "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$"})
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.resiliencehub#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
 
-    AcceptGroupingRecommendationEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AcceptGroupingRecommendationEntry, name: "member")
+    AcceptGroupingRecommendationEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceptGroupingRecommendationEntry, name: "member"))
     AcceptGroupingRecommendationEntry.add_member(:grouping_recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "groupingRecommendationId", traits: {"smithy.api#required" => {}}))
     AcceptGroupingRecommendationEntry.type = Types::AcceptGroupingRecommendationEntry
     AcceptResourceGroupingRecommendationsRequest.add_member(:app_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "appArn", traits: {"smithy.api#required" => {}}))
@@ -355,9 +355,9 @@ module Aws::Resiliencehub
     AddDraftAppVersionResourceMappingsOutput.add_member(:app_version, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityVersion, name: "appVersion", traits: {"smithy.api#required" => {}}))
     AddDraftAppVersionResourceMappingsOutput.add_member(:resource_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMappingList, name: "resourceMappings", traits: {"smithy.api#required" => {}}))
     AddDraftAppVersionResourceMappingsOutput.type = Types::AddDraftAppVersionResourceMappingsOutput
-    AdditionalInfoMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String128WithoutWhitespace, name: "key")
-    AdditionalInfoMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalInfoValueList, name: "value")
-    AdditionalInfoValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "member")
+    AdditionalInfoMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String128WithoutWhitespace, name: "key"))
+    AdditionalInfoMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalInfoValueList, name: "value"))
+    AdditionalInfoValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "member"))
     Alarm.add_member(:alarm_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "alarmArn"))
     Alarm.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "source"))
     Alarm.type = Types::Alarm
@@ -372,8 +372,8 @@ module Aws::Resiliencehub
     AlarmRecommendation.add_member(:app_component_names, ::Smithy::Schema::Shapes::MemberShape.new(target: AppComponentNameList, name: "appComponentNames"))
     AlarmRecommendation.add_member(:recommendation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationStatus, name: "recommendationStatus"))
     AlarmRecommendation.type = Types::AlarmRecommendation
-    AlarmRecommendationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmRecommendation, name: "member")
-    AlarmReferenceIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String500, name: "member")
+    AlarmRecommendationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmRecommendation, name: "member"))
+    AlarmReferenceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String500, name: "member"))
     AlarmType.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METRIC", traits: {"smithy.api#enumValue" => "Metric"}))
     AlarmType.add_member(:composite, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPOSITE", traits: {"smithy.api#enumValue" => "Composite"}))
     AlarmType.add_member(:canary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANARY", traits: {"smithy.api#enumValue" => "Canary"}))
@@ -436,7 +436,7 @@ module Aws::Resiliencehub
     AppAssessmentSummary.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityVersion, name: "versionName"))
     AppAssessmentSummary.add_member(:drift_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DriftStatus, name: "driftStatus"))
     AppAssessmentSummary.type = Types::AppAssessmentSummary
-    AppAssessmentSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppAssessmentSummary, name: "member")
+    AppAssessmentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppAssessmentSummary, name: "member"))
     AppComplianceStatusType.add_member(:policy_breached, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_BREACHED", traits: {"smithy.api#enumValue" => "PolicyBreached"}))
     AppComplianceStatusType.add_member(:policy_met, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_MET", traits: {"smithy.api#enumValue" => "PolicyMet"}))
     AppComplianceStatusType.add_member(:not_assessed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_ASSESSED", traits: {"smithy.api#enumValue" => "NotAssessed"}))
@@ -455,8 +455,8 @@ module Aws::Resiliencehub
     AppComponentCompliance.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceStatus, name: "status"))
     AppComponentCompliance.add_member(:resiliency_score, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyScore, name: "resiliencyScore"))
     AppComponentCompliance.type = Types::AppComponentCompliance
-    AppComponentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppComponent, name: "member")
-    AppComponentNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "member")
+    AppComponentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppComponent, name: "member"))
+    AppComponentNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "member"))
     AppDriftStatusType.add_member(:not_checked, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_CHECKED", traits: {"smithy.api#enumValue" => "NotChecked"}))
     AppDriftStatusType.add_member(:not_detected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_DETECTED", traits: {"smithy.api#enumValue" => "NotDetected"}))
     AppDriftStatusType.add_member(:detected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DETECTED", traits: {"smithy.api#enumValue" => "Detected"}))
@@ -467,7 +467,7 @@ module Aws::Resiliencehub
     AppInputSource.add_member(:resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "resourceCount", traits: {"smithy.api#default" => 0}))
     AppInputSource.add_member(:eks_source_cluster_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: EksSourceClusterNamespace, name: "eksSourceClusterNamespace"))
     AppInputSource.type = Types::AppInputSource
-    AppInputSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppInputSource, name: "member")
+    AppInputSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInputSource, name: "member"))
     AppStatusType.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "Active"}))
     AppStatusType.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
     AppSummary.add_member(:app_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "appArn", traits: {"smithy.api#required" => {}}))
@@ -484,32 +484,32 @@ module Aws::Resiliencehub
     AppSummary.add_member(:rpo_in_secs, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "rpoInSecs"))
     AppSummary.add_member(:aws_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "awsApplicationArn"))
     AppSummary.type = Types::AppSummary
-    AppSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppSummary, name: "member")
-    AppVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppVersionSummary, name: "member")
+    AppSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppSummary, name: "member"))
+    AppVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppVersionSummary, name: "member"))
     AppVersionSummary.add_member(:app_version, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityVersion, name: "appVersion", traits: {"smithy.api#required" => {}}))
     AppVersionSummary.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: LongOptional, name: "identifier"))
     AppVersionSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, name: "creationTime"))
     AppVersionSummary.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityVersion, name: "versionName"))
     AppVersionSummary.type = Types::AppVersionSummary
-    ArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
-    AssessmentCompliance.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DisruptionType, name: "key")
-    AssessmentCompliance.value = ::Smithy::Schema::Shapes::MemberShape.new(target: DisruptionCompliance, name: "value")
+    ArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
+    AssessmentCompliance.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DisruptionType, name: "key"))
+    AssessmentCompliance.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DisruptionCompliance, name: "value"))
     AssessmentInvoker.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER", traits: {"smithy.api#enumValue" => "User"}))
     AssessmentInvoker.add_member(:system, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYSTEM", traits: {"smithy.api#enumValue" => "System"}))
     AssessmentRiskRecommendation.add_member(:risk, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "risk"))
     AssessmentRiskRecommendation.add_member(:recommendation, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "recommendation"))
     AssessmentRiskRecommendation.add_member(:app_components, ::Smithy::Schema::Shapes::MemberShape.new(target: AppComponentNameList, name: "appComponents"))
     AssessmentRiskRecommendation.type = Types::AssessmentRiskRecommendation
-    AssessmentRiskRecommendationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentRiskRecommendation, name: "member")
+    AssessmentRiskRecommendationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentRiskRecommendation, name: "member"))
     AssessmentStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "Pending"}))
     AssessmentStatus.add_member(:inprogress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INPROGRESS", traits: {"smithy.api#enumValue" => "InProgress"}))
     AssessmentStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
     AssessmentStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "Success"}))
-    AssessmentStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentStatus, name: "member")
+    AssessmentStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentStatus, name: "member"))
     AssessmentSummary.add_member(:summary, ::Smithy::Schema::Shapes::MemberShape.new(target: String500, name: "summary"))
     AssessmentSummary.add_member(:risk_recommendations, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentRiskRecommendationList, name: "riskRecommendations"))
     AssessmentSummary.type = Types::AssessmentSummary
-    BatchUpdateRecommendationStatusFailedEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateRecommendationStatusFailedEntry, name: "member")
+    BatchUpdateRecommendationStatusFailedEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateRecommendationStatusFailedEntry, name: "member"))
     BatchUpdateRecommendationStatusFailedEntry.add_member(:entry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "entryId", traits: {"smithy.api#required" => {}}))
     BatchUpdateRecommendationStatusFailedEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage", traits: {"smithy.api#required" => {}}))
     BatchUpdateRecommendationStatusFailedEntry.type = Types::BatchUpdateRecommendationStatusFailedEntry
@@ -520,7 +520,7 @@ module Aws::Resiliencehub
     BatchUpdateRecommendationStatusResponse.add_member(:successful_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateRecommendationStatusSuccessfulEntries, name: "successfulEntries", traits: {"smithy.api#required" => {}}))
     BatchUpdateRecommendationStatusResponse.add_member(:failed_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateRecommendationStatusFailedEntries, name: "failedEntries", traits: {"smithy.api#required" => {}}))
     BatchUpdateRecommendationStatusResponse.type = Types::BatchUpdateRecommendationStatusResponse
-    BatchUpdateRecommendationStatusSuccessfulEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateRecommendationStatusSuccessfulEntry, name: "member")
+    BatchUpdateRecommendationStatusSuccessfulEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateRecommendationStatusSuccessfulEntry, name: "member"))
     BatchUpdateRecommendationStatusSuccessfulEntry.add_member(:entry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "entryId", traits: {"smithy.api#required" => {}}))
     BatchUpdateRecommendationStatusSuccessfulEntry.add_member(:reference_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpecReferenceId, name: "referenceId", traits: {"smithy.api#required" => {}}))
     BatchUpdateRecommendationStatusSuccessfulEntry.add_member(:item, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateRecommendationStatusItem, name: "item"))
@@ -539,22 +539,22 @@ module Aws::Resiliencehub
     ComplianceDrift.add_member(:actual_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentCompliance, name: "actualValue"))
     ComplianceDrift.add_member(:diff_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DifferenceType, name: "diffType"))
     ComplianceDrift.type = Types::ComplianceDrift
-    ComplianceDriftList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceDrift, name: "member")
+    ComplianceDriftList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceDrift, name: "member"))
     ComplianceStatus.add_member(:policy_breached, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_BREACHED", traits: {"smithy.api#enumValue" => "PolicyBreached"}))
     ComplianceStatus.add_member(:policy_met, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_MET", traits: {"smithy.api#enumValue" => "PolicyMet"}))
     ComplianceStatus.add_member(:not_applicable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_APPLICABLE", traits: {"smithy.api#enumValue" => "NotApplicable"}))
     ComplianceStatus.add_member(:missing_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISSING_POLICY", traits: {"smithy.api#enumValue" => "MissingPolicy"}))
-    ComponentCompliancesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppComponentCompliance, name: "member")
+    ComponentCompliancesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppComponentCompliance, name: "member"))
     ComponentRecommendation.add_member(:app_component_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "appComponentName", traits: {"smithy.api#required" => {}}))
     ComponentRecommendation.add_member(:recommendation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationComplianceStatus, name: "recommendationStatus", traits: {"smithy.api#required" => {}}))
     ComponentRecommendation.add_member(:config_recommendations, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRecommendationList, name: "configRecommendations", traits: {"smithy.api#required" => {}}))
     ComponentRecommendation.type = Types::ComponentRecommendation
-    ComponentRecommendationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentRecommendation, name: "member")
+    ComponentRecommendationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentRecommendation, name: "member"))
     Condition.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "field", traits: {"smithy.api#required" => {}}))
     Condition.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionOperatorType, name: "operator", traits: {"smithy.api#required" => {}}))
     Condition.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "value"))
     Condition.type = Types::Condition
-    ConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "member")
+    ConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "member"))
     ConditionOperatorType.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUALS", traits: {"smithy.api#enumValue" => "Equals"}))
     ConditionOperatorType.add_member(:not_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_EQUALS", traits: {"smithy.api#enumValue" => "NotEquals"}))
     ConditionOperatorType.add_member(:greater_then, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GREATER_THEN", traits: {"smithy.api#enumValue" => "GreaterThen"}))
@@ -572,7 +572,7 @@ module Aws::Resiliencehub
     ConfigRecommendation.add_member(:ha_architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: HaArchitecture, name: "haArchitecture"))
     ConfigRecommendation.add_member(:reference_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpecReferenceId, name: "referenceId", traits: {"smithy.api#required" => {}}))
     ConfigRecommendation.type = Types::ConfigRecommendation
-    ConfigRecommendationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRecommendation, name: "member")
+    ConfigRecommendationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigRecommendation, name: "member"))
     ConfigRecommendationOptimizationType.add_member(:least_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LEAST_COST", traits: {"smithy.api#enumValue" => "LeastCost"}))
     ConfigRecommendationOptimizationType.add_member(:least_change, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LEAST_CHANGE", traits: {"smithy.api#enumValue" => "LeastChange"}))
     ConfigRecommendationOptimizationType.add_member(:best_az_recovery, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BEST_AZ_RECOVERY", traits: {"smithy.api#enumValue" => "BestAZRecovery"}))
@@ -798,10 +798,10 @@ module Aws::Resiliencehub
     DisruptionCompliance.add_member(:achievable_rpo_in_secs, ::Smithy::Schema::Shapes::MemberShape.new(target: Seconds, name: "achievableRpoInSecs", traits: {"smithy.api#default" => 0}))
     DisruptionCompliance.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String500, name: "message"))
     DisruptionCompliance.type = Types::DisruptionCompliance
-    DisruptionPolicy.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DisruptionType, name: "key")
-    DisruptionPolicy.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FailurePolicy, name: "value")
-    DisruptionResiliencyScore.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DisruptionType, name: "key")
-    DisruptionResiliencyScore.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "value")
+    DisruptionPolicy.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DisruptionType, name: "key"))
+    DisruptionPolicy.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FailurePolicy, name: "value"))
+    DisruptionResiliencyScore.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DisruptionType, name: "key"))
+    DisruptionResiliencyScore.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "value"))
     DisruptionType.add_member(:software, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOFTWARE", traits: {"smithy.api#enumValue" => "Software"}))
     DisruptionType.add_member(:hardware, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HARDWARE", traits: {"smithy.api#enumValue" => "Hardware"}))
     DisruptionType.add_member(:az, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AZ", traits: {"smithy.api#enumValue" => "AZ"}))
@@ -811,18 +811,18 @@ module Aws::Resiliencehub
     DriftStatus.add_member(:detected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DETECTED", traits: {"smithy.api#enumValue" => "Detected"}))
     DriftType.add_member(:application_compliance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPLICATION_COMPLIANCE", traits: {"smithy.api#enumValue" => "ApplicationCompliance"}))
     DriftType.add_member(:app_component_resiliency_compliance_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APP_COMPONENT_RESILIENCY_COMPLIANCE_STATUS", traits: {"smithy.api#enumValue" => "AppComponentResiliencyComplianceStatus"}))
-    EksNamespaceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EksNamespace, name: "member")
+    EksNamespaceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EksNamespace, name: "member"))
     EksSource.add_member(:eks_cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "eksClusterArn", traits: {"smithy.api#required" => {}}))
     EksSource.add_member(:namespaces, ::Smithy::Schema::Shapes::MemberShape.new(target: EksNamespaceList, name: "namespaces", traits: {"smithy.api#required" => {}}))
     EksSource.type = Types::EksSource
     EksSourceClusterNamespace.add_member(:eks_cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "eksClusterArn", traits: {"smithy.api#required" => {}}))
     EksSourceClusterNamespace.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: EksNamespace, name: "namespace", traits: {"smithy.api#required" => {}}))
     EksSourceClusterNamespace.type = Types::EksSourceClusterNamespace
-    EksSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EksSource, name: "member")
-    EntityNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "member")
+    EksSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EksSource, name: "member"))
+    EntityNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "member"))
     ErrorDetail.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
     ErrorDetail.type = Types::ErrorDetail
-    ErrorDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail, name: "member")
+    ErrorDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail, name: "member"))
     EstimatedCostTier.add_member(:l1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "L1", traits: {"smithy.api#enumValue" => "L1"}))
     EstimatedCostTier.add_member(:l2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "L2", traits: {"smithy.api#enumValue" => "L2"}))
     EstimatedCostTier.add_member(:l3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "L3", traits: {"smithy.api#enumValue" => "L3"}))
@@ -831,7 +831,7 @@ module Aws::Resiliencehub
     EventSubscription.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "eventType", traits: {"smithy.api#required" => {}}))
     EventSubscription.add_member(:sns_topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "snsTopicArn"))
     EventSubscription.type = Types::EventSubscription
-    EventSubscriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventSubscription, name: "member")
+    EventSubscriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSubscription, name: "member"))
     EventType.add_member(:scheduled_assessment_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHEDULED_ASSESSMENT_FAILURE", traits: {"smithy.api#enumValue" => "ScheduledAssessmentFailure"}))
     EventType.add_member(:drift_detected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DRIFT_DETECTED", traits: {"smithy.api#enumValue" => "DriftDetected"}))
     ExcludeRecommendationReason.add_member(:already_implemented, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALREADY_IMPLEMENTED", traits: {"smithy.api#enumValue" => "AlreadyImplemented"}))
@@ -840,7 +840,7 @@ module Aws::Resiliencehub
     Experiment.add_member(:experiment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "experimentArn"))
     Experiment.add_member(:experiment_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "experimentTemplateId"))
     Experiment.type = Types::Experiment
-    FailedGroupingRecommendationEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedGroupingRecommendationEntry, name: "member")
+    FailedGroupingRecommendationEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedGroupingRecommendationEntry, name: "member"))
     FailedGroupingRecommendationEntry.add_member(:grouping_recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "groupingRecommendationId", traits: {"smithy.api#required" => {}}))
     FailedGroupingRecommendationEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage", traits: {"smithy.api#required" => {}}))
     FailedGroupingRecommendationEntry.type = Types::FailedGroupingRecommendationEntry
@@ -855,7 +855,7 @@ module Aws::Resiliencehub
     FieldAggregationType.add_member(:sum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUM", traits: {"smithy.api#enumValue" => "Sum"}))
     FieldAggregationType.add_member(:avg, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVG", traits: {"smithy.api#enumValue" => "Avg"}))
     FieldAggregationType.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COUNT", traits: {"smithy.api#enumValue" => "Count"}))
-    FieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Field, name: "member")
+    FieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Field, name: "member"))
     GroupingAppComponent.add_member(:app_component_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName255, name: "appComponentId", traits: {"smithy.api#required" => {}}))
     GroupingAppComponent.add_member(:app_component_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "appComponentType", traits: {"smithy.api#required" => {}}))
     GroupingAppComponent.add_member(:app_component_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName255, name: "appComponentName", traits: {"smithy.api#required" => {}}))
@@ -872,7 +872,7 @@ module Aws::Resiliencehub
     GroupingRecommendation.type = Types::GroupingRecommendation
     GroupingRecommendationConfidenceLevel.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "High"}))
     GroupingRecommendationConfidenceLevel.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "Medium"}))
-    GroupingRecommendationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingRecommendation, name: "member")
+    GroupingRecommendationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingRecommendation, name: "member"))
     GroupingRecommendationRejectionReason.add_member(:distinct_business_purpose, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISTINCT_BUSINESS_PURPOSE", traits: {"smithy.api#enumValue" => "DistinctBusinessPurpose"}))
     GroupingRecommendationRejectionReason.add_member(:separate_data_concern, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEPARATE_DATA_CONCERN", traits: {"smithy.api#enumValue" => "SeparateDataConcern"}))
     GroupingRecommendationRejectionReason.add_member(:distinct_user_group_handling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISTINCT_USER_GROUP_HANDLING", traits: {"smithy.api#enumValue" => "DistinctUserGroupHandling"}))
@@ -886,13 +886,13 @@ module Aws::Resiliencehub
     GroupingResource.add_member(:logical_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LogicalResourceId, name: "logicalResourceId", traits: {"smithy.api#required" => {}}))
     GroupingResource.add_member(:source_app_component_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: String255List, name: "sourceAppComponentIds", traits: {"smithy.api#required" => {}}))
     GroupingResource.type = Types::GroupingResource
-    GroupingResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingResource, name: "member")
+    GroupingResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingResource, name: "member"))
     HaArchitecture.add_member(:multi_site, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTI_SITE", traits: {"smithy.api#enumValue" => "MultiSite"}))
     HaArchitecture.add_member(:warm_standby, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WARM_STANDBY", traits: {"smithy.api#enumValue" => "WarmStandby"}))
     HaArchitecture.add_member(:pilot_light, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PILOT_LIGHT", traits: {"smithy.api#enumValue" => "PilotLight"}))
     HaArchitecture.add_member(:backup_and_restore, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BACKUP_AND_RESTORE", traits: {"smithy.api#enumValue" => "BackupAndRestore"}))
     HaArchitecture.add_member(:no_recovery_plan, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_RECOVERY_PLAN", traits: {"smithy.api#enumValue" => "NoRecoveryPlan"}))
-    IamRoleArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "member")
+    IamRoleArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "member"))
     ImportResourcesToDraftAppVersionInput.add_member(:app_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "appArn", traits: {"smithy.api#required" => {}}))
     ImportResourcesToDraftAppVersionInput.add_member(:source_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, name: "sourceArns"))
     ImportResourcesToDraftAppVersionInput.add_member(:terraform_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: TerraformSourceList, name: "terraformSources"))
@@ -1114,7 +1114,7 @@ module Aws::Resiliencehub
     PhysicalResourceId.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, name: "awsRegion"))
     PhysicalResourceId.add_member(:aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerId, name: "awsAccountId"))
     PhysicalResourceId.type = Types::PhysicalResourceId
-    PhysicalResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhysicalResource, name: "member")
+    PhysicalResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhysicalResource, name: "member"))
     PublishAppVersionInput.add_member(:app_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "appArn", traits: {"smithy.api#required" => {}}))
     PublishAppVersionInput.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityVersion, name: "versionName"))
     PublishAppVersionInput.type = Types::PublishAppVersionInput
@@ -1129,8 +1129,8 @@ module Aws::Resiliencehub
     PutDraftAppVersionTemplateOutput.add_member(:app_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "appArn"))
     PutDraftAppVersionTemplateOutput.add_member(:app_version, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityVersion, name: "appVersion"))
     PutDraftAppVersionTemplateOutput.type = Types::PutDraftAppVersionTemplateOutput
-    RecommendationCompliance.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DisruptionType, name: "key")
-    RecommendationCompliance.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationDisruptionCompliance, name: "value")
+    RecommendationCompliance.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DisruptionType, name: "key"))
+    RecommendationCompliance.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationDisruptionCompliance, name: "value"))
     RecommendationComplianceStatus.add_member(:breached_unattainable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BREACHED_UNATTAINABLE", traits: {"smithy.api#enumValue" => "BreachedUnattainable"}))
     RecommendationComplianceStatus.add_member(:breached_can_meet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BREACHED_CAN_MEET", traits: {"smithy.api#enumValue" => "BreachedCanMeet"}))
     RecommendationComplianceStatus.add_member(:met_can_improve, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MET_CAN_IMPROVE", traits: {"smithy.api#enumValue" => "MetCanImprove"}))
@@ -1141,7 +1141,7 @@ module Aws::Resiliencehub
     RecommendationDisruptionCompliance.add_member(:expected_rpo_in_secs, ::Smithy::Schema::Shapes::MemberShape.new(target: Seconds, name: "expectedRpoInSecs", traits: {"smithy.api#default" => 0}))
     RecommendationDisruptionCompliance.add_member(:expected_rpo_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String500, name: "expectedRpoDescription"))
     RecommendationDisruptionCompliance.type = Types::RecommendationDisruptionCompliance
-    RecommendationIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "member")
+    RecommendationIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "member"))
     RecommendationItem.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String500, name: "resourceId"))
     RecommendationItem.add_member(:target_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerId, name: "targetAccountId"))
     RecommendationItem.add_member(:target_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, name: "targetRegion"))
@@ -1151,7 +1151,7 @@ module Aws::Resiliencehub
     RecommendationItem.add_member(:latest_discovered_experiment, ::Smithy::Schema::Shapes::MemberShape.new(target: Experiment, name: "latestDiscoveredExperiment"))
     RecommendationItem.add_member(:discovered_alarm, ::Smithy::Schema::Shapes::MemberShape.new(target: Alarm, name: "discoveredAlarm"))
     RecommendationItem.type = Types::RecommendationItem
-    RecommendationItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationItem, name: "member")
+    RecommendationItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationItem, name: "member"))
     RecommendationStatus.add_member(:implemented, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMPLEMENTED", traits: {"smithy.api#enumValue" => "Implemented"}))
     RecommendationStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "Inactive"}))
     RecommendationStatus.add_member(:not_implemented, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_IMPLEMENTED", traits: {"smithy.api#enumValue" => "NotImplemented"}))
@@ -1171,13 +1171,13 @@ module Aws::Resiliencehub
     RecommendationTemplate.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     RecommendationTemplate.add_member(:needs_replacements, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "needsReplacements"))
     RecommendationTemplate.type = Types::RecommendationTemplate
-    RecommendationTemplateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationTemplate, name: "member")
+    RecommendationTemplateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationTemplate, name: "member"))
     RecommendationTemplateStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "Pending"}))
     RecommendationTemplateStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "InProgress"}))
     RecommendationTemplateStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
     RecommendationTemplateStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "Success"}))
-    RecommendationTemplateStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationTemplateStatus, name: "member")
-    RejectGroupingRecommendationEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RejectGroupingRecommendationEntry, name: "member")
+    RecommendationTemplateStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationTemplateStatus, name: "member"))
+    RejectGroupingRecommendationEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RejectGroupingRecommendationEntry, name: "member"))
     RejectGroupingRecommendationEntry.add_member(:grouping_recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "groupingRecommendationId", traits: {"smithy.api#required" => {}}))
     RejectGroupingRecommendationEntry.add_member(:rejection_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingRecommendationRejectionReason, name: "rejectionReason"))
     RejectGroupingRecommendationEntry.type = Types::RejectGroupingRecommendationEntry
@@ -1201,8 +1201,8 @@ module Aws::Resiliencehub
     RenderRecommendationType.add_member(:alarm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALARM", traits: {"smithy.api#enumValue" => "Alarm"}))
     RenderRecommendationType.add_member(:sop, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOP", traits: {"smithy.api#enumValue" => "Sop"}))
     RenderRecommendationType.add_member(:test, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEST", traits: {"smithy.api#enumValue" => "Test"}))
-    RenderRecommendationTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RenderRecommendationType, name: "member")
-    ResiliencyPolicies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyPolicy, name: "member")
+    RenderRecommendationTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RenderRecommendationType, name: "member"))
+    ResiliencyPolicies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyPolicy, name: "member"))
     ResiliencyPolicy.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "policyArn"))
     ResiliencyPolicy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "policyName"))
     ResiliencyPolicy.add_member(:policy_description, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDescription, name: "policyDescription"))
@@ -1241,12 +1241,12 @@ module Aws::Resiliencehub
     ResourceDrift.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, name: "resourceIdentifier"))
     ResourceDrift.add_member(:diff_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DifferenceType, name: "diffType"))
     ResourceDrift.type = Types::ResourceDrift
-    ResourceDriftList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDrift, name: "member")
+    ResourceDriftList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDrift, name: "member"))
     ResourceError.add_member(:logical_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "logicalResourceId"))
     ResourceError.add_member(:physical_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "physicalResourceId"))
     ResourceError.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "reason"))
     ResourceError.type = Types::ResourceError
-    ResourceErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceError, name: "member")
+    ResourceErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceError, name: "member"))
     ResourceErrorsDetails.add_member(:resource_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceErrorList, name: "resourceErrors"))
     ResourceErrorsDetails.add_member(:has_more_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "hasMoreErrors"))
     ResourceErrorsDetails.type = Types::ResourceErrorsDetails
@@ -1268,7 +1268,7 @@ module Aws::Resiliencehub
     ResourceMapping.add_member(:terraform_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "terraformSourceName"))
     ResourceMapping.add_member(:eks_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "eksSourceName"))
     ResourceMapping.type = Types::ResourceMapping
-    ResourceMappingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMapping, name: "member")
+    ResourceMappingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMapping, name: "member"))
     ResourceMappingType.add_member(:cfn_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CFN_STACK", traits: {"smithy.api#enumValue" => "CfnStack"}))
     ResourceMappingType.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE", traits: {"smithy.api#enumValue" => "Resource"}))
     ResourceMappingType.add_member(:app_registry_app, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APP_REGISTRY_APP", traits: {"smithy.api#enumValue" => "AppRegistryApp"}))
@@ -1289,8 +1289,8 @@ module Aws::Resiliencehub
     ResourcesGroupingRecGenStatusType.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "InProgress"}))
     ResourcesGroupingRecGenStatusType.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
     ResourcesGroupingRecGenStatusType.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "Success"}))
-    Row.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "member")
-    RowList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Row, name: "member")
+    Row.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "member"))
+    RowList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Row, name: "member"))
     S3Location.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: String500, name: "bucket"))
     S3Location.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String500, name: "prefix"))
     S3Location.type = Types::S3Location
@@ -1299,8 +1299,8 @@ module Aws::Resiliencehub
     ScoringComponentResiliencyScore.add_member(:outstanding_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "outstandingCount", traits: {"smithy.api#default" => 0}))
     ScoringComponentResiliencyScore.add_member(:excluded_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "excludedCount", traits: {"smithy.api#default" => 0}))
     ScoringComponentResiliencyScore.type = Types::ScoringComponentResiliencyScore
-    ScoringComponentResiliencyScores.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyScoreType, name: "key")
-    ScoringComponentResiliencyScores.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ScoringComponentResiliencyScore, name: "value")
+    ScoringComponentResiliencyScores.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResiliencyScoreType, name: "key"))
+    ScoringComponentResiliencyScores.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ScoringComponentResiliencyScore, name: "value"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String500, name: "message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     SopRecommendation.add_member(:service_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SopServiceType, name: "serviceType", traits: {"smithy.api#required" => {}}))
@@ -1313,12 +1313,12 @@ module Aws::Resiliencehub
     SopRecommendation.add_member(:prerequisite, ::Smithy::Schema::Shapes::MemberShape.new(target: String500, name: "prerequisite"))
     SopRecommendation.add_member(:recommendation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationStatus, name: "recommendationStatus"))
     SopRecommendation.type = Types::SopRecommendation
-    SopRecommendationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SopRecommendation, name: "member")
+    SopRecommendationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SopRecommendation, name: "member"))
     SopServiceType.add_member(:ssm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSM", traits: {"smithy.api#enumValue" => "SSM"}))
     Sort.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "field", traits: {"smithy.api#required" => {}}))
     Sort.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "ascending"))
     Sort.type = Types::Sort
-    SortList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Sort, name: "member")
+    SortList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Sort, name: "member"))
     StartAppAssessmentInput.add_member(:app_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "appArn", traits: {"smithy.api#required" => {}}))
     StartAppAssessmentInput.add_member(:app_version, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityVersion, name: "appVersion", traits: {"smithy.api#required" => {}}))
     StartAppAssessmentInput.add_member(:assessment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "assessmentName", traits: {"smithy.api#required" => {}}))
@@ -1340,11 +1340,11 @@ module Aws::Resiliencehub
     StartResourceGroupingRecommendationTaskResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesGroupingRecGenStatusType, name: "status", traits: {"smithy.api#required" => {}}))
     StartResourceGroupingRecommendationTaskResponse.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String500, name: "errorMessage"))
     StartResourceGroupingRecommendationTaskResponse.type = Types::StartResourceGroupingRecommendationTaskResponse
-    String255List.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "member")
-    SuggestedChangesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDescription, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    String255List.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "member"))
+    SuggestedChangesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDescription, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -1353,7 +1353,7 @@ module Aws::Resiliencehub
     TemplateFormat.add_member(:cfn_json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CFN_JSON", traits: {"smithy.api#enumValue" => "CfnJson"}))
     TerraformSource.add_member(:s3_state_file_url, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Url, name: "s3StateFileUrl", traits: {"smithy.api#required" => {}}))
     TerraformSource.type = Types::TerraformSource
-    TerraformSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TerraformSource, name: "member")
+    TerraformSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TerraformSource, name: "member"))
     TestRecommendation.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "recommendationId"))
     TestRecommendation.add_member(:reference_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpecReferenceId, name: "referenceId", traits: {"smithy.api#required" => {}}))
     TestRecommendation.add_member(:app_component_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName255, name: "appComponentId"))
@@ -1368,7 +1368,7 @@ module Aws::Resiliencehub
     TestRecommendation.add_member(:depends_on_alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmReferenceIdList, name: "dependsOnAlarms"))
     TestRecommendation.add_member(:recommendation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationStatus, name: "recommendationStatus"))
     TestRecommendation.type = Types::TestRecommendation
-    TestRecommendationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TestRecommendation, name: "member")
+    TestRecommendationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TestRecommendation, name: "member"))
     TestRisk.add_member(:small, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMALL", traits: {"smithy.api#enumValue" => "Small"}))
     TestRisk.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "Medium"}))
     TestRisk.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "High"}))
@@ -1384,7 +1384,7 @@ module Aws::Resiliencehub
     UnsupportedResource.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "resourceType", traits: {"smithy.api#required" => {}}))
     UnsupportedResource.add_member(:unsupported_resource_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "unsupportedResourceStatus"))
     UnsupportedResource.type = Types::UnsupportedResource
-    UnsupportedResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnsupportedResource, name: "member")
+    UnsupportedResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnsupportedResource, name: "member"))
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
@@ -1435,7 +1435,7 @@ module Aws::Resiliencehub
     UpdateRecommendationStatusItem.add_member(:target_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerId, name: "targetAccountId"))
     UpdateRecommendationStatusItem.add_member(:target_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, name: "targetRegion"))
     UpdateRecommendationStatusItem.type = Types::UpdateRecommendationStatusItem
-    UpdateRecommendationStatusRequestEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateRecommendationStatusRequestEntry, name: "member")
+    UpdateRecommendationStatusRequestEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateRecommendationStatusRequestEntry, name: "member"))
     UpdateRecommendationStatusRequestEntry.add_member(:entry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "entryId", traits: {"smithy.api#required" => {}}))
     UpdateRecommendationStatusRequestEntry.add_member(:reference_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpecReferenceId, name: "referenceId", traits: {"smithy.api#required" => {}}))
     UpdateRecommendationStatusRequestEntry.add_member(:item, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateRecommendationStatusItem, name: "item"))

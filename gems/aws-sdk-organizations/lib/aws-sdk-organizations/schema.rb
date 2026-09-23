@@ -299,7 +299,7 @@ module Aws::Organizations
     AccountStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     AccountStatus.add_member(:suspended, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUSPENDED", traits: {"smithy.api#enumValue" => "SUSPENDED"}))
     AccountStatus.add_member(:pending_closure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_CLOSURE", traits: {"smithy.api#enumValue" => "PENDING_CLOSURE"}))
-    Accounts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Account, name: "member")
+    Accounts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Account, name: "member"))
     ActionType.add_member(:invite_account_to_organization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVITE_ACCOUNT_TO_ORGANIZATION", traits: {"smithy.api#enumValue" => "INVITE"}))
     ActionType.add_member(:enable_all_features, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLE_ALL_FEATURES", traits: {"smithy.api#enumValue" => "ENABLE_ALL_FEATURES"}))
     ActionType.add_member(:approve_all_features, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPROVE_ALL_FEATURES", traits: {"smithy.api#enumValue" => "APPROVE_ALL_FEATURES"}))
@@ -320,7 +320,7 @@ module Aws::Organizations
     ChildNotFoundException.type = Types::ChildNotFoundException
     ChildType.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
     ChildType.add_member(:organizational_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ORGANIZATIONAL_UNIT", traits: {"smithy.api#enumValue" => "ORGANIZATIONAL_UNIT"}))
-    Children.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Child, name: "member")
+    Children.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Child, name: "member"))
     CloseAccountRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId", traits: {"smithy.api#required" => {}}))
     CloseAccountRequest.type = Types::CloseAccountRequest
     ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
@@ -393,7 +393,7 @@ module Aws::Organizations
     CreateAccountState.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     CreateAccountState.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
     CreateAccountState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    CreateAccountStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAccountState, name: "member")
+    CreateAccountStates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAccountState, name: "member"))
     CreateAccountStatus.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAccountRequestId, name: "Id"))
     CreateAccountStatus.add_member(:account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAccountName, name: "AccountName"))
     CreateAccountStatus.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAccountState, name: "State"))
@@ -405,7 +405,7 @@ module Aws::Organizations
     CreateAccountStatus.type = Types::CreateAccountStatus
     CreateAccountStatusNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     CreateAccountStatusNotFoundException.type = Types::CreateAccountStatusNotFoundException
-    CreateAccountStatuses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAccountStatus, name: "member")
+    CreateAccountStatuses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAccountStatus, name: "member"))
     CreateGovCloudAccountRequest.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: Email, name: "Email", traits: {"smithy.api#required" => {}}))
     CreateGovCloudAccountRequest.add_member(:account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAccountName, name: "AccountName", traits: {"smithy.api#required" => {}}))
     CreateGovCloudAccountRequest.add_member(:role_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleName, name: "RoleName"))
@@ -445,11 +445,11 @@ module Aws::Organizations
     DelegatedAdministrator.add_member(:joined_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "JoinedTimestamp"))
     DelegatedAdministrator.add_member(:delegation_enabled_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "DelegationEnabledDate"))
     DelegatedAdministrator.type = Types::DelegatedAdministrator
-    DelegatedAdministrators.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DelegatedAdministrator, name: "member")
+    DelegatedAdministrators.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegatedAdministrator, name: "member"))
     DelegatedService.add_member(:service_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipal, name: "ServicePrincipal"))
     DelegatedService.add_member(:delegation_enabled_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "DelegationEnabledDate"))
     DelegatedService.type = Types::DelegatedService
-    DelegatedServices.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DelegatedService, name: "member")
+    DelegatedServices.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegatedService, name: "member"))
     DeleteOrganizationalUnitRequest.add_member(:organizational_unit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitId, name: "OrganizationalUnitId", traits: {"smithy.api#required" => {}}))
     DeleteOrganizationalUnitRequest.type = Types::DeleteOrganizationalUnitRequest
     DeletePolicyRequest.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, name: "PolicyId", traits: {"smithy.api#required" => {}}))
@@ -526,7 +526,7 @@ module Aws::Organizations
     EffectivePolicyValidationError.add_member(:path_to_error, ::Smithy::Schema::Shapes::MemberShape.new(target: PathToError, name: "PathToError"))
     EffectivePolicyValidationError.add_member(:contributing_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyIds, name: "ContributingPolicies"))
     EffectivePolicyValidationError.type = Types::EffectivePolicyValidationError
-    EffectivePolicyValidationErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EffectivePolicyValidationError, name: "member")
+    EffectivePolicyValidationErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EffectivePolicyValidationError, name: "member"))
     EnableAWSServiceAccessRequest.add_member(:service_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipal, name: "ServicePrincipal", traits: {"smithy.api#required" => {}}))
     EnableAWSServiceAccessRequest.type = Types::EnableAWSServiceAccessRequest
     EnableAllFeaturesRequest.type = Types::EnableAllFeaturesRequest
@@ -540,7 +540,7 @@ module Aws::Organizations
     EnabledServicePrincipal.add_member(:service_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipal, name: "ServicePrincipal"))
     EnabledServicePrincipal.add_member(:date_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "DateEnabled"))
     EnabledServicePrincipal.type = Types::EnabledServicePrincipal
-    EnabledServicePrincipals.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledServicePrincipal, name: "member")
+    EnabledServicePrincipals.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledServicePrincipal, name: "member"))
     FinalizingOrganizationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     FinalizingOrganizationException.type = Types::FinalizingOrganizationException
     Handshake.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: HandshakeId, name: "Id"))
@@ -572,7 +572,7 @@ module Aws::Organizations
     HandshakeFilter.type = Types::HandshakeFilter
     HandshakeNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     HandshakeNotFoundException.type = Types::HandshakeNotFoundException
-    HandshakeParties.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HandshakeParty, name: "member")
+    HandshakeParties.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HandshakeParty, name: "member"))
     HandshakeParty.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: HandshakePartyId, name: "Id", traits: {"smithy.api#required" => {}}))
     HandshakeParty.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: HandshakePartyType, name: "Type", traits: {"smithy.api#required" => {}}))
     HandshakeParty.type = Types::HandshakeParty
@@ -591,14 +591,14 @@ module Aws::Organizations
     HandshakeResourceType.add_member(:master_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MASTER_NAME", traits: {"smithy.api#enumValue" => "MASTER_NAME"}))
     HandshakeResourceType.add_member(:notes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOTES", traits: {"smithy.api#enumValue" => "NOTES"}))
     HandshakeResourceType.add_member(:parent_handshake, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARENT_HANDSHAKE", traits: {"smithy.api#enumValue" => "PARENT_HANDSHAKE"}))
-    HandshakeResources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HandshakeResource, name: "member")
+    HandshakeResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HandshakeResource, name: "member"))
     HandshakeState.add_member(:requested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUESTED", traits: {"smithy.api#enumValue" => "REQUESTED"}))
     HandshakeState.add_member(:open, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPEN", traits: {"smithy.api#enumValue" => "OPEN"}))
     HandshakeState.add_member(:canceled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELED", traits: {"smithy.api#enumValue" => "CANCELED"}))
     HandshakeState.add_member(:accepted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCEPTED", traits: {"smithy.api#enumValue" => "ACCEPTED"}))
     HandshakeState.add_member(:declined, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DECLINED", traits: {"smithy.api#enumValue" => "DECLINED"}))
     HandshakeState.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
-    Handshakes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Handshake, name: "member")
+    Handshakes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Handshake, name: "member"))
     IAMUserAccessToBilling.add_member(:allow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOW", traits: {"smithy.api#enumValue" => "ALLOW"}))
     IAMUserAccessToBilling.add_member(:deny, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DENY", traits: {"smithy.api#enumValue" => "DENY"}))
     InvalidHandshakeTransitionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
@@ -800,7 +800,7 @@ module Aws::Organizations
     OrganizationalUnitNotEmptyException.type = Types::OrganizationalUnitNotEmptyException
     OrganizationalUnitNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     OrganizationalUnitNotFoundException.type = Types::OrganizationalUnitNotFoundException
-    OrganizationalUnits.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnit, name: "member")
+    OrganizationalUnits.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnit, name: "member"))
     Parent.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ParentId, name: "Id"))
     Parent.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ParentType, name: "Type"))
     Parent.type = Types::Parent
@@ -808,14 +808,14 @@ module Aws::Organizations
     ParentNotFoundException.type = Types::ParentNotFoundException
     ParentType.add_member(:root, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROOT", traits: {"smithy.api#enumValue" => "ROOT"}))
     ParentType.add_member(:organizational_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ORGANIZATIONAL_UNIT", traits: {"smithy.api#enumValue" => "ORGANIZATIONAL_UNIT"}))
-    Parents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Parent, name: "member")
-    Policies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicySummary, name: "member")
+    Parents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Parent, name: "member"))
+    Policies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicySummary, name: "member"))
     Policy.add_member(:policy_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicySummary, name: "PolicySummary"))
     Policy.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyContent, name: "Content"))
     Policy.type = Types::Policy
     PolicyChangesInProgressException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     PolicyChangesInProgressException.type = Types::PolicyChangesInProgressException
-    PolicyIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, name: "member")
+    PolicyIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, name: "member"))
     PolicyInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     PolicyInUseException.type = Types::PolicyInUseException
     PolicyNotAttachedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
@@ -834,7 +834,7 @@ module Aws::Organizations
     PolicyTargetSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetName, name: "Name"))
     PolicyTargetSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetType, name: "Type"))
     PolicyTargetSummary.type = Types::PolicyTargetSummary
-    PolicyTargets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTargetSummary, name: "member")
+    PolicyTargets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTargetSummary, name: "member"))
     PolicyType.add_member(:service_control_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE_CONTROL_POLICY", traits: {"smithy.api#enumValue" => "SERVICE_CONTROL_POLICY"}))
     PolicyType.add_member(:resource_control_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_CONTROL_POLICY", traits: {"smithy.api#enumValue" => "RESOURCE_CONTROL_POLICY"}))
     PolicyType.add_member(:tag_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAG_POLICY", traits: {"smithy.api#enumValue" => "TAG_POLICY"}))
@@ -855,7 +855,7 @@ module Aws::Organizations
     PolicyTypeSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyType, name: "Type"))
     PolicyTypeSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTypeStatus, name: "Status"))
     PolicyTypeSummary.type = Types::PolicyTypeSummary
-    PolicyTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTypeSummary, name: "member")
+    PolicyTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTypeSummary, name: "member"))
     PutResourcePolicyRequest.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicyContent, name: "Content", traits: {"smithy.api#required" => {}}))
     PutResourcePolicyRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags"))
     PutResourcePolicyRequest.type = Types::PutResourcePolicyRequest
@@ -881,7 +881,7 @@ module Aws::Organizations
     Root.type = Types::Root
     RootNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     RootNotFoundException.type = Types::RootNotFoundException
-    Roots.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Root, name: "member")
+    Roots.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Root, name: "member"))
     ServiceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     ServiceException.type = Types::ServiceException
     SourceParentNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
@@ -889,11 +889,11 @@ module Aws::Organizations
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourceId, name: "ResourceId", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TargetNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     TargetNotFoundException.type = Types::TargetNotFoundException
     TargetType.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))

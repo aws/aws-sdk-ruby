@@ -192,7 +192,7 @@ module Aws::RAM
     AssociatedPermission.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "lastUpdatedTime"))
     AssociatedPermission.add_member(:resource_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceShareArn"))
     AssociatedPermission.type = Types::AssociatedPermission
-    AssociatedPermissionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedPermission, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    AssociatedPermissionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedPermission, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     CreatePermissionRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionName, name: "name", traits: {"smithy.api#required" => {}}))
     CreatePermissionRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceType", traits: {"smithy.api#required" => {}}))
     CreatePermissionRequest.add_member(:policy_template, ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, name: "policyTemplate", traits: {"smithy.api#required" => {}}))
@@ -412,7 +412,7 @@ module Aws::RAM
     OperationNotPermittedException.type = Types::OperationNotPermittedException
     PermissionAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     PermissionAlreadyExistsException.type = Types::PermissionAlreadyExistsException
-    PermissionArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    PermissionArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     PermissionFeatureSet.add_member(:created_from_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED_FROM_POLICY", traits: {"smithy.api#enumValue" => "CREATED_FROM_POLICY"}))
     PermissionFeatureSet.add_member(:promoting_to_standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROMOTING_TO_STANDARD", traits: {"smithy.api#enumValue" => "PROMOTING_TO_STANDARD"}))
     PermissionFeatureSet.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
@@ -429,15 +429,15 @@ module Aws::RAM
     PermissionTypeFilter.add_member(:customer_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER_MANAGED", traits: {"smithy.api#enumValue" => "CUSTOMER_MANAGED"}))
     PermissionVersionsLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     PermissionVersionsLimitExceededException.type = Types::PermissionVersionsLimitExceededException
-    PolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    PolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     Principal.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "id"))
     Principal.add_member(:resource_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceShareArn"))
     Principal.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "creationTime"))
     Principal.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "lastUpdatedTime"))
     Principal.add_member(:external, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "external"))
     Principal.type = Types::Principal
-    PrincipalArnOrIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "item"})
-    PrincipalList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Principal, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    PrincipalArnOrIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "item"}))
+    PrincipalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Principal, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     PromotePermissionCreatedFromPolicyRequest.add_member(:permission_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "permissionArn", traits: {"smithy.api#required" => {}}))
     PromotePermissionCreatedFromPolicyRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#required" => {}}))
     PromotePermissionCreatedFromPolicyRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clientToken"))
@@ -473,8 +473,8 @@ module Aws::RAM
     ReplacePermissionAssociationsWork.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "creationTime"))
     ReplacePermissionAssociationsWork.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "lastUpdatedTime"))
     ReplacePermissionAssociationsWork.type = Types::ReplacePermissionAssociationsWork
-    ReplacePermissionAssociationsWorkIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "item"})
-    ReplacePermissionAssociationsWorkList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplacePermissionAssociationsWork, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    ReplacePermissionAssociationsWorkIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "item"}))
+    ReplacePermissionAssociationsWorkList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplacePermissionAssociationsWork, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     ReplacePermissionAssociationsWorkStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     ReplacePermissionAssociationsWorkStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     ReplacePermissionAssociationsWorkStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -488,10 +488,10 @@ module Aws::RAM
     Resource.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "lastUpdatedTime"))
     Resource.add_member(:resource_region_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceRegionScope, name: "resourceRegionScope"))
     Resource.type = Types::Resource
-    ResourceArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    ResourceArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     ResourceArnNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceArnNotFoundException.type = Types::ResourceArnNotFoundException
-    ResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    ResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     ResourceOwner.add_member(:self, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELF", traits: {"smithy.api#enumValue" => "SELF"}))
     ResourceOwner.add_member(:other_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTHER_ACCOUNTS", traits: {"smithy.api#enumValue" => "OTHER-ACCOUNTS"}))
     ResourceRegionScope.add_member(:regional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGIONAL", traits: {"smithy.api#enumValue" => "REGIONAL"}))
@@ -510,7 +510,7 @@ module Aws::RAM
     ResourceShare.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "lastUpdatedTime"))
     ResourceShare.add_member(:feature_set, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceShareFeatureSet, name: "featureSet"))
     ResourceShare.type = Types::ResourceShare
-    ResourceShareArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    ResourceShareArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     ResourceShareAssociation.add_member(:resource_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceShareArn"))
     ResourceShareAssociation.add_member(:resource_share_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceShareName"))
     ResourceShareAssociation.add_member(:associated_entity, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "associatedEntity"))
@@ -521,7 +521,7 @@ module Aws::RAM
     ResourceShareAssociation.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "lastUpdatedTime"))
     ResourceShareAssociation.add_member(:external, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "external"))
     ResourceShareAssociation.type = Types::ResourceShareAssociation
-    ResourceShareAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceShareAssociation, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    ResourceShareAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceShareAssociation, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     ResourceShareAssociationStatus.add_member(:associating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSOCIATING", traits: {"smithy.api#enumValue" => "ASSOCIATING"}))
     ResourceShareAssociationStatus.add_member(:associated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSOCIATED", traits: {"smithy.api#enumValue" => "ASSOCIATED"}))
     ResourceShareAssociationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -546,19 +546,19 @@ module Aws::RAM
     ResourceShareInvitationAlreadyAcceptedException.type = Types::ResourceShareInvitationAlreadyAcceptedException
     ResourceShareInvitationAlreadyRejectedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceShareInvitationAlreadyRejectedException.type = Types::ResourceShareInvitationAlreadyRejectedException
-    ResourceShareInvitationArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    ResourceShareInvitationArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     ResourceShareInvitationArnNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceShareInvitationArnNotFoundException.type = Types::ResourceShareInvitationArnNotFoundException
     ResourceShareInvitationExpiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceShareInvitationExpiredException.type = Types::ResourceShareInvitationExpiredException
-    ResourceShareInvitationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceShareInvitation, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    ResourceShareInvitationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceShareInvitation, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     ResourceShareInvitationStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     ResourceShareInvitationStatus.add_member(:accepted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCEPTED", traits: {"smithy.api#enumValue" => "ACCEPTED"}))
     ResourceShareInvitationStatus.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
     ResourceShareInvitationStatus.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
     ResourceShareLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceShareLimitExceededException.type = Types::ResourceShareLimitExceededException
-    ResourceShareList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceShare, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    ResourceShareList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceShare, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     ResourceSharePermissionDetail.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
     ResourceSharePermissionDetail.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "version"))
     ResourceSharePermissionDetail.add_member(:default_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "defaultVersion"))
@@ -573,7 +573,7 @@ module Aws::RAM
     ResourceSharePermissionDetail.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionStatus, name: "status"))
     ResourceSharePermissionDetail.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     ResourceSharePermissionDetail.type = Types::ResourceSharePermissionDetail
-    ResourceSharePermissionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSharePermissionSummary, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    ResourceSharePermissionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSharePermissionSummary, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     ResourceSharePermissionSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
     ResourceSharePermissionSummary.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "version"))
     ResourceSharePermissionSummary.add_member(:default_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "defaultVersion"))
@@ -603,7 +603,7 @@ module Aws::RAM
     ServiceNameAndResourceType.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceName"))
     ServiceNameAndResourceType.add_member(:resource_region_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceRegionScope, name: "resourceRegionScope"))
     ServiceNameAndResourceType.type = Types::ServiceNameAndResourceType
-    ServiceNameAndResourceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNameAndResourceType, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    ServiceNameAndResourceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNameAndResourceType, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
     SetDefaultPermissionVersionRequest.add_member(:permission_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "permissionArn", traits: {"smithy.api#required" => {}}))
@@ -613,18 +613,18 @@ module Aws::RAM
     SetDefaultPermissionVersionResponse.add_member(:return_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "returnValue", traits: {"smithy.api#xmlName" => "return"}))
     SetDefaultPermissionVersionResponse.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clientToken"))
     SetDefaultPermissionVersionResponse.type = Types::SetDefaultPermissionVersionResponse
-    SourceArnOrAccountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    SourceArnOrAccountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     Tag.type = Types::Tag
     TagFilter.add_member(:tag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "tagKey"))
     TagFilter.add_member(:tag_values, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValueList, name: "tagValues"))
     TagFilter.type = Types::TagFilter
-    TagFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilter, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilter, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     TagLimitExceededException.type = Types::TagLimitExceededException
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagPolicyViolationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     TagPolicyViolationException.type = Types::TagPolicyViolationException
     TagResourceRequest.add_member(:resource_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceShareArn"))
@@ -632,7 +632,7 @@ module Aws::RAM
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceArn"))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TagValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "member")
+    TagValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
     UnknownResourceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))

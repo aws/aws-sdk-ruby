@@ -89,7 +89,7 @@ module Aws::TrustedAdvisor
     AccountRecommendationLifecycleSummary.add_member(:update_reason_code, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateRecommendationLifecycleStageReasonCode, name: "updateReasonCode"))
     AccountRecommendationLifecycleSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastUpdatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     AccountRecommendationLifecycleSummary.type = Types::AccountRecommendationLifecycleSummary
-    AccountRecommendationLifecycleSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountRecommendationLifecycleSummary, name: "member")
+    AccountRecommendationLifecycleSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountRecommendationLifecycleSummary, name: "member"))
     BatchUpdateRecommendationResourceExclusionRequest.add_member(:recommendation_resource_exclusions, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationResourceExclusionList, name: "recommendationResourceExclusions", traits: {"smithy.api#required" => {}}))
     BatchUpdateRecommendationResourceExclusionRequest.type = Types::BatchUpdateRecommendationResourceExclusionRequest
     BatchUpdateRecommendationResourceExclusionResponse.add_member(:batch_update_recommendation_resource_exclusion_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateRecommendationResourceExclusionErrorList, name: "batchUpdateRecommendationResourceExclusionErrors", traits: {"smithy.api#required" => {}}))
@@ -103,7 +103,7 @@ module Aws::TrustedAdvisor
     CheckSummary.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationSource, name: "source", traits: {"smithy.api#required" => {}}))
     CheckSummary.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMap, name: "metadata", traits: {"smithy.api#required" => {}}))
     CheckSummary.type = Types::CheckSummary
-    CheckSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CheckSummary, name: "member")
+    CheckSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CheckSummary, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
     ExclusionStatus.add_member(:excluded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXCLUDED", traits: {"smithy.api#enumValue" => "excluded"}))
@@ -218,7 +218,7 @@ module Aws::TrustedAdvisor
     OrganizationRecommendationResourceSummary.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId"))
     OrganizationRecommendationResourceSummary.add_member(:recommendation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationRecommendationArn, name: "recommendationArn", traits: {"smithy.api#required" => {}}))
     OrganizationRecommendationResourceSummary.type = Types::OrganizationRecommendationResourceSummary
-    OrganizationRecommendationResourceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationRecommendationResourceSummary, name: "member")
+    OrganizationRecommendationResourceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationRecommendationResourceSummary, name: "member"))
     OrganizationRecommendationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id", traits: {"smithy.api#required" => {}}))
     OrganizationRecommendationSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationType, name: "type", traits: {"smithy.api#required" => {}}))
     OrganizationRecommendationSummary.add_member(:check_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "checkArn"))
@@ -234,7 +234,7 @@ module Aws::TrustedAdvisor
     OrganizationRecommendationSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastUpdatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     OrganizationRecommendationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationRecommendationArn, name: "arn", traits: {"smithy.api#required" => {}}))
     OrganizationRecommendationSummary.type = Types::OrganizationRecommendationSummary
-    OrganizationRecommendationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationRecommendationSummary, name: "member")
+    OrganizationRecommendationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationRecommendationSummary, name: "member"))
     Recommendation.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id", traits: {"smithy.api#required" => {}}))
     Recommendation.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationType, name: "type", traits: {"smithy.api#required" => {}}))
     Recommendation.add_member(:check_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "checkArn"))
@@ -257,7 +257,7 @@ module Aws::TrustedAdvisor
     Recommendation.add_member(:update_reason_code, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateRecommendationLifecycleStageReasonCode, name: "updateReasonCode"))
     Recommendation.add_member(:resolved_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "resolvedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     Recommendation.type = Types::Recommendation
-    RecommendationAwsServiceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationAwsService, name: "member")
+    RecommendationAwsServiceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationAwsService, name: "member"))
     RecommendationCostOptimizingAggregates.add_member(:estimated_monthly_savings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "estimatedMonthlySavings", traits: {"smithy.api#required" => {}}))
     RecommendationCostOptimizingAggregates.add_member(:estimated_percent_monthly_savings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "estimatedPercentMonthlySavings", traits: {"smithy.api#required" => {}}))
     RecommendationCostOptimizingAggregates.type = Types::RecommendationCostOptimizingAggregates
@@ -282,13 +282,13 @@ module Aws::TrustedAdvisor
     RecommendationPillar.add_member(:service_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE_LIMITS", traits: {"smithy.api#enumValue" => "service_limits"}))
     RecommendationPillar.add_member(:fault_tolerance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAULT_TOLERANCE", traits: {"smithy.api#enumValue" => "fault_tolerance"}))
     RecommendationPillar.add_member(:operational_excellence, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPERATIONAL_EXCELLENCE", traits: {"smithy.api#enumValue" => "operational_excellence"}))
-    RecommendationPillarList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationPillar, name: "member")
+    RecommendationPillarList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationPillar, name: "member"))
     RecommendationPillarSpecificAggregates.add_member(:cost_optimizing, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationCostOptimizingAggregates, name: "costOptimizing"))
     RecommendationPillarSpecificAggregates.type = Types::RecommendationPillarSpecificAggregates
     RecommendationResourceExclusion.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationResourceArn, name: "arn", traits: {"smithy.api#required" => {}}))
     RecommendationResourceExclusion.add_member(:is_excluded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isExcluded", traits: {"smithy.api#required" => {}}))
     RecommendationResourceExclusion.type = Types::RecommendationResourceExclusion
-    RecommendationResourceExclusionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationResourceExclusion, name: "member")
+    RecommendationResourceExclusionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationResourceExclusion, name: "member"))
     RecommendationResourceSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id", traits: {"smithy.api#required" => {}}))
     RecommendationResourceSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationResourceArn, name: "arn", traits: {"smithy.api#required" => {}}))
     RecommendationResourceSummary.add_member(:aws_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "awsResourceId", traits: {"smithy.api#required" => {}}))
@@ -299,7 +299,7 @@ module Aws::TrustedAdvisor
     RecommendationResourceSummary.add_member(:exclusion_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExclusionStatus, name: "exclusionStatus", traits: {"smithy.api#default" => "included"}))
     RecommendationResourceSummary.add_member(:recommendation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountRecommendationArn, name: "recommendationArn", traits: {"smithy.api#required" => {}}))
     RecommendationResourceSummary.type = Types::RecommendationResourceSummary
-    RecommendationResourceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationResourceSummary, name: "member")
+    RecommendationResourceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationResourceSummary, name: "member"))
     RecommendationResourcesAggregates.add_member(:ok_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "okCount", traits: {"smithy.api#required" => {}}))
     RecommendationResourcesAggregates.add_member(:warning_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "warningCount", traits: {"smithy.api#required" => {}}))
     RecommendationResourcesAggregates.add_member(:error_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "errorCount", traits: {"smithy.api#required" => {}}))
@@ -335,7 +335,7 @@ module Aws::TrustedAdvisor
     RecommendationSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastUpdatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     RecommendationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountRecommendationArn, name: "arn", traits: {"smithy.api#required" => {}}))
     RecommendationSummary.type = Types::RecommendationSummary
-    RecommendationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationSummary, name: "member")
+    RecommendationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationSummary, name: "member"))
     RecommendationType.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "standard"}))
     RecommendationType.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIORITY", traits: {"smithy.api#enumValue" => "priority"}))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
@@ -343,8 +343,8 @@ module Aws::TrustedAdvisor
     ResourceStatus.add_member(:ok, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OK", traits: {"smithy.api#enumValue" => "ok"}))
     ResourceStatus.add_member(:warning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WARNING", traits: {"smithy.api#enumValue" => "warning"}))
     ResourceStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "error"}))
-    StringMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    StringMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    StringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    StringMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
     UpdateOrganizationRecommendationLifecycleRequest.add_member(:lifecycle_stage, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateRecommendationLifecycleStage, name: "lifecycleStage", traits: {"smithy.api#required" => {}}))
@@ -372,7 +372,7 @@ module Aws::TrustedAdvisor
     UpdateRecommendationResourceExclusionError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorCode"))
     UpdateRecommendationResourceExclusionError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorMessage"))
     UpdateRecommendationResourceExclusionError.type = Types::UpdateRecommendationResourceExclusionError
-    UpdateRecommendationResourceExclusionErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateRecommendationResourceExclusionError, name: "member")
+    UpdateRecommendationResourceExclusionErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateRecommendationResourceExclusionError, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
 

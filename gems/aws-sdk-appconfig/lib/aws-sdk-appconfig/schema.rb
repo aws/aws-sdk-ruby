@@ -191,8 +191,8 @@ module Aws::AppConfig
     ActionInvocation.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorCode"))
     ActionInvocation.add_member(:invocation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "InvocationId"))
     ActionInvocation.type = Types::ActionInvocation
-    ActionInvocations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionInvocation, name: "member")
-    ActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "member")
+    ActionInvocations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionInvocation, name: "member"))
+    ActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "member"))
     ActionPoint.add_member(:pre_create_hosted_configuration_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_CREATE_HOSTED_CONFIGURATION_VERSION", traits: {"smithy.api#enumValue" => "PRE_CREATE_HOSTED_CONFIGURATION_VERSION"}))
     ActionPoint.add_member(:pre_start_deployment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_START_DEPLOYMENT", traits: {"smithy.api#enumValue" => "PRE_START_DEPLOYMENT"}))
     ActionPoint.add_member(:at_deployment_tick, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AT_DEPLOYMENT_TICK", traits: {"smithy.api#enumValue" => "AT_DEPLOYMENT_TICK"}))
@@ -201,19 +201,19 @@ module Aws::AppConfig
     ActionPoint.add_member(:on_deployment_baking, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON_DEPLOYMENT_BAKING", traits: {"smithy.api#enumValue" => "ON_DEPLOYMENT_BAKING"}))
     ActionPoint.add_member(:on_deployment_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON_DEPLOYMENT_COMPLETE", traits: {"smithy.api#enumValue" => "ON_DEPLOYMENT_COMPLETE"}))
     ActionPoint.add_member(:on_deployment_rolled_back, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON_DEPLOYMENT_ROLLED_BACK", traits: {"smithy.api#enumValue" => "ON_DEPLOYMENT_ROLLED_BACK"}))
-    ActionsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionPoint, name: "key")
-    ActionsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionList, name: "value")
+    ActionsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionPoint, name: "key"))
+    ActionsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionList, name: "value"))
     Application.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "Id"))
     Application.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
     Application.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     Application.type = Types::Application
-    ApplicationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Application, name: "member")
+    ApplicationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Application, name: "member"))
     AppliedExtension.add_member(:extension_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ExtensionId"))
     AppliedExtension.add_member(:extension_association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ExtensionAssociationId"))
     AppliedExtension.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "VersionNumber", traits: {"smithy.api#default" => 0}))
     AppliedExtension.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValueMap, name: "Parameters"))
     AppliedExtension.type = Types::AppliedExtension
-    AppliedExtensions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppliedExtension, name: "member")
+    AppliedExtensions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppliedExtension, name: "member"))
     BadRequestDetails.add_member(:invalid_configuration, Types::BadRequestDetails::InvalidConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: InvalidConfigurationDetailList, name: "InvalidConfiguration"))
     BadRequestDetails.add_member(:unknown, Types::BadRequestDetails::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     BadRequestDetails.type = Types::BadRequestDetails
@@ -230,7 +230,7 @@ module Aws::AppConfig
     ConfigurationProfileSummary.add_member(:validator_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidatorTypeList, name: "ValidatorTypes"))
     ConfigurationProfileSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationProfileType, name: "Type"))
     ConfigurationProfileSummary.type = Types::ConfigurationProfileSummary
-    ConfigurationProfileSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationProfileSummary, name: "member")
+    ConfigurationProfileSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationProfileSummary, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ConflictException.type = Types::ConflictException
     CreateApplicationOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "Id"))
@@ -382,8 +382,8 @@ module Aws::AppConfig
     DeploymentEventType.add_member(:deployment_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPLOYMENT_STARTED", traits: {"smithy.api#enumValue" => "DEPLOYMENT_STARTED"}))
     DeploymentEventType.add_member(:deployment_completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPLOYMENT_COMPLETED", traits: {"smithy.api#enumValue" => "DEPLOYMENT_COMPLETED"}))
     DeploymentEventType.add_member(:revert_completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REVERT_COMPLETED", traits: {"smithy.api#enumValue" => "REVERT_COMPLETED"}))
-    DeploymentEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentEvent, name: "member")
-    DeploymentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentSummary, name: "member")
+    DeploymentEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentEvent, name: "member"))
+    DeploymentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentSummary, name: "member"))
     DeploymentState.add_member(:baking, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BAKING", traits: {"smithy.api#enumValue" => "BAKING"}))
     DeploymentState.add_member(:validating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALIDATING", traits: {"smithy.api#enumValue" => "VALIDATING"}))
     DeploymentState.add_member(:deploying, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPLOYING", traits: {"smithy.api#enumValue" => "DEPLOYING"}))
@@ -400,7 +400,7 @@ module Aws::AppConfig
     DeploymentStrategy.add_member(:final_bake_time_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: MinutesBetween0And24Hours, name: "FinalBakeTimeInMinutes", traits: {"smithy.api#default" => 0}))
     DeploymentStrategy.add_member(:replicate_to, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicateTo, name: "ReplicateTo"))
     DeploymentStrategy.type = Types::DeploymentStrategy
-    DeploymentStrategyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStrategy, name: "member")
+    DeploymentStrategyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStrategy, name: "member"))
     DeploymentSummary.add_member(:deployment_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "DeploymentNumber", traits: {"smithy.api#default" => 0}))
     DeploymentSummary.add_member(:configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ConfigurationName"))
     DeploymentSummary.add_member(:configuration_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "ConfigurationVersion"))
@@ -414,8 +414,8 @@ module Aws::AppConfig
     DeploymentSummary.add_member(:completed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "CompletedAt"))
     DeploymentSummary.add_member(:version_label, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionLabel, name: "VersionLabel"))
     DeploymentSummary.type = Types::DeploymentSummary
-    DynamicParameterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DynamicParameterKey, name: "key")
-    DynamicParameterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLengthBetween1And2048, name: "value")
+    DynamicParameterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamicParameterKey, name: "key"))
+    DynamicParameterMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLengthBetween1And2048, name: "value"))
     Environment.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId"))
     Environment.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "Id"))
     Environment.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
@@ -423,18 +423,18 @@ module Aws::AppConfig
     Environment.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentState, name: "State"))
     Environment.add_member(:monitors, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorList, name: "Monitors"))
     Environment.type = Types::Environment
-    EnvironmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Environment, name: "member")
+    EnvironmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Environment, name: "member"))
     EnvironmentState.add_member(:ready_for_deployment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READY_FOR_DEPLOYMENT", traits: {"smithy.api#enumValue" => "READY_FOR_DEPLOYMENT"}))
     EnvironmentState.add_member(:deploying, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPLOYING", traits: {"smithy.api#enumValue" => "DEPLOYING"}))
     EnvironmentState.add_member(:rolling_back, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLING_BACK", traits: {"smithy.api#enumValue" => "ROLLING_BACK"}))
     EnvironmentState.add_member(:rolled_back, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLED_BACK", traits: {"smithy.api#enumValue" => "ROLLED_BACK"}))
     EnvironmentState.add_member(:reverted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REVERTED", traits: {"smithy.api#enumValue" => "REVERTED"}))
-    ExtensionAssociationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExtensionAssociationSummary, name: "member")
+    ExtensionAssociationSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtensionAssociationSummary, name: "member"))
     ExtensionAssociationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "Id"))
     ExtensionAssociationSummary.add_member(:extension_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ExtensionArn"))
     ExtensionAssociationSummary.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn"))
     ExtensionAssociationSummary.type = Types::ExtensionAssociationSummary
-    ExtensionSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExtensionSummary, name: "member")
+    ExtensionSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtensionSummary, name: "member"))
     ExtensionSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "Id"))
     ExtensionSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
     ExtensionSummary.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "VersionNumber", traits: {"smithy.api#default" => 0}))
@@ -568,7 +568,7 @@ module Aws::AppConfig
     HostedConfigurationVersionSummary.add_member(:version_label, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionLabel, name: "VersionLabel"))
     HostedConfigurationVersionSummary.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "KmsKeyArn"))
     HostedConfigurationVersionSummary.type = Types::HostedConfigurationVersionSummary
-    HostedConfigurationVersionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HostedConfigurationVersionSummary, name: "member")
+    HostedConfigurationVersionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HostedConfigurationVersionSummary, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     InternalServerException.type = Types::InternalServerException
     InvalidConfigurationDetail.add_member(:constraint, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Constraint"))
@@ -577,7 +577,7 @@ module Aws::AppConfig
     InvalidConfigurationDetail.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
     InvalidConfigurationDetail.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     InvalidConfigurationDetail.type = Types::InvalidConfigurationDetail
-    InvalidConfigurationDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InvalidConfigurationDetail, name: "member")
+    InvalidConfigurationDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InvalidConfigurationDetail, name: "member"))
     ListApplicationsOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationList, name: "Items"))
     ListApplicationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListApplicationsOutput.type = Types::ListApplicationsOutput
@@ -645,15 +645,15 @@ module Aws::AppConfig
     Monitor.add_member(:alarm_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLengthBetween1And2048, name: "AlarmArn", traits: {"smithy.api#required" => {}}))
     Monitor.add_member(:alarm_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "AlarmRoleArn"))
     Monitor.type = Types::Monitor
-    MonitorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Monitor, name: "member")
+    MonitorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Monitor, name: "member"))
     Parameter.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     Parameter.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Required", traits: {"smithy.api#default" => false}))
     Parameter.add_member(:dynamic, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Dynamic", traits: {"smithy.api#default" => false}))
     Parameter.type = Types::Parameter
-    ParameterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExtensionOrParameterName, name: "key")
-    ParameterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Parameter, name: "value")
-    ParameterValueMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExtensionOrParameterName, name: "key")
-    ParameterValueMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLengthBetween1And2048, name: "value")
+    ParameterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtensionOrParameterName, name: "key"))
+    ParameterMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameter, name: "value"))
+    ParameterValueMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtensionOrParameterName, name: "key"))
+    ParameterValueMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLengthBetween1And2048, name: "value"))
     PayloadTooLargeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     PayloadTooLargeException.add_member(:measure, ::Smithy::Schema::Shapes::MemberShape.new(target: BytesMeasure, name: "Measure"))
     PayloadTooLargeException.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "Limit", traits: {"smithy.api#default" => 0}))
@@ -727,9 +727,9 @@ module Aws::AppConfig
     StopDeploymentRequest.add_member(:deployment_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "DeploymentNumber", traits: {"smithy.api#default" => nil, "smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopDeploymentRequest.add_member(:allow_revert, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AllowRevert", traits: {"smithy.api#default" => nil, "smithy.api#httpHeader" => "Allow-Revert"}))
     StopDeploymentRequest.type = Types::StopDeploymentRequest
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -831,10 +831,10 @@ module Aws::AppConfig
     Validator.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidatorType, name: "Type", traits: {"smithy.api#required" => {}}))
     Validator.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLengthBetween0And32768, name: "Content", traits: {"smithy.api#required" => {}}))
     Validator.type = Types::Validator
-    ValidatorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Validator, name: "member")
+    ValidatorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Validator, name: "member"))
     ValidatorType.add_member(:json_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON_SCHEMA", traits: {"smithy.api#enumValue" => "JSON_SCHEMA"}))
     ValidatorType.add_member(:lambda, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAMBDA", traits: {"smithy.api#enumValue" => "LAMBDA"}))
-    ValidatorTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidatorType, name: "member")
+    ValidatorTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidatorType, name: "member"))
 
     AmazonAppConfig = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.appconfig#AmazonAppConfig"

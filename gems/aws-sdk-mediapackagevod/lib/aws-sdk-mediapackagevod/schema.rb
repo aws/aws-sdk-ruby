@@ -360,8 +360,8 @@ module Aws::MediaPackageVod
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "tags", "smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
     TooManyRequestsException.type = Types::TooManyRequestsException
     UnprocessableEntityException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
@@ -382,17 +382,17 @@ module Aws::MediaPackageVod
     UpdatePackagingGroupResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     UpdatePackagingGroupResponse.type = Types::UpdatePackagingGroupResponse
     Periodtriggerselement.add_member(:ads, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADS", traits: {"smithy.api#enumValue" => "ADS"}))
-    Listofassetshallow.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetShallow, name: "member")
-    Listofdashmanifest.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DashManifest, name: "member")
-    Listofegressendpoint.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EgressEndpoint, name: "member")
-    Listofhlsmanifest.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HlsManifest, name: "member")
-    Listofmssmanifest.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MssManifest, name: "member")
-    Listofpackagingconfiguration.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PackagingConfiguration, name: "member")
-    Listofpackaginggroup.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PackagingGroup, name: "member")
-    ListofPeriodtriggerselement.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Periodtriggerselement, name: "member")
-    ListofString.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    MapofString.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    MapofString.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    Listofassetshallow.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetShallow, name: "member"))
+    Listofdashmanifest.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DashManifest, name: "member"))
+    Listofegressendpoint.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EgressEndpoint, name: "member"))
+    Listofhlsmanifest.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HlsManifest, name: "member"))
+    Listofmssmanifest.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MssManifest, name: "member"))
+    Listofpackagingconfiguration.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PackagingConfiguration, name: "member"))
+    Listofpackaginggroup.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PackagingGroup, name: "member"))
+    ListofPeriodtriggerselement.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Periodtriggerselement, name: "member"))
+    ListofString.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    MapofString.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    MapofString.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
 
     MediaPackageVod = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.mediapackagevod#MediaPackageVod"

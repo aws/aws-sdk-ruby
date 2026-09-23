@@ -121,15 +121,15 @@ module Aws::ChimeSDKMeetings
     AttendeeFeatures.type = Types::AttendeeFeatures
     AttendeeIdItem.add_member(:attendee_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GuidString, name: "AttendeeId", traits: {"smithy.api#required" => {}}))
     AttendeeIdItem.type = Types::AttendeeIdItem
-    AttendeeIdsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttendeeIdItem, name: "member")
-    AttendeeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Attendee, name: "member")
+    AttendeeIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttendeeIdItem, name: "member"))
+    AttendeeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Attendee, name: "member"))
     AudioFeatures.add_member(:echo_reduction, ::Smithy::Schema::Shapes::MemberShape.new(target: MeetingFeatureStatus, name: "EchoReduction"))
     AudioFeatures.type = Types::AudioFeatures
     BadRequestException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     BadRequestException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RequestId"))
     BadRequestException.type = Types::BadRequestException
-    BatchCreateAttendeeErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAttendeeError, name: "member")
+    BatchCreateAttendeeErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAttendeeError, name: "member"))
     BatchCreateAttendeeRequest.add_member(:meeting_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GuidString, name: "MeetingId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BatchCreateAttendeeRequest.add_member(:attendees, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAttendeeRequestItemList, name: "Attendees", traits: {"smithy.api#required" => {}}))
     BatchCreateAttendeeRequest.type = Types::BatchCreateAttendeeRequest
@@ -160,7 +160,7 @@ module Aws::ChimeSDKMeetings
     CreateAttendeeRequestItem.add_member(:external_user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalUserId, name: "ExternalUserId", traits: {"smithy.api#required" => {}}))
     CreateAttendeeRequestItem.add_member(:capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: AttendeeCapabilities, name: "Capabilities"))
     CreateAttendeeRequestItem.type = Types::CreateAttendeeRequestItem
-    CreateAttendeeRequestItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAttendeeRequestItem, name: "member")
+    CreateAttendeeRequestItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAttendeeRequestItem, name: "member"))
     CreateAttendeeResponse.add_member(:attendee, ::Smithy::Schema::Shapes::MemberShape.new(target: Attendee, name: "Attendee"))
     CreateAttendeeResponse.type = Types::CreateAttendeeResponse
     CreateMeetingRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
@@ -188,7 +188,7 @@ module Aws::ChimeSDKMeetings
     CreateMeetingWithAttendeesRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateMeetingWithAttendeesRequest.add_member(:media_placement_network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaPlacementNetworkType, name: "MediaPlacementNetworkType"))
     CreateMeetingWithAttendeesRequest.type = Types::CreateMeetingWithAttendeesRequest
-    CreateMeetingWithAttendeesRequestItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAttendeeRequestItem, name: "member")
+    CreateMeetingWithAttendeesRequestItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAttendeeRequestItem, name: "member"))
     CreateMeetingWithAttendeesResponse.add_member(:meeting, ::Smithy::Schema::Shapes::MemberShape.new(target: Meeting, name: "Meeting"))
     CreateMeetingWithAttendeesResponse.add_member(:attendees, ::Smithy::Schema::Shapes::MemberShape.new(target: AttendeeList, name: "Attendees"))
     CreateMeetingWithAttendeesResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateAttendeeErrorList, name: "Errors"))
@@ -312,13 +312,13 @@ module Aws::ChimeSDKMeetings
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TenantIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TenantId, name: "member")
+    TenantIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantId, name: "member"))
     ThrottlingException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ThrottlingException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RequestId"))

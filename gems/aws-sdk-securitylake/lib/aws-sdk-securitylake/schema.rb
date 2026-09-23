@@ -155,8 +155,8 @@ module Aws::SecurityLake
     AccessDeniedException.type = Types::AccessDeniedException
     AccessType.add_member(:lakeformation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAKEFORMATION", traits: {"smithy.api#enumValue" => "LAKEFORMATION"}))
     AccessType.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3", traits: {"smithy.api#enumValue" => "S3"}))
-    AccessTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessType, name: "member")
-    AccountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "member")
+    AccessTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessType, name: "member"))
+    AccountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "member"))
     AwsIdentity.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsPrincipal, name: "principal", traits: {"smithy.api#required" => {}}))
     AwsIdentity.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalId, name: "externalId", traits: {"smithy.api#required" => {}}))
     AwsIdentity.type = Types::AwsIdentity
@@ -165,7 +165,7 @@ module Aws::SecurityLake
     AwsLogSourceConfiguration.add_member(:source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLogSourceName, name: "sourceName", traits: {"smithy.api#required" => {}}))
     AwsLogSourceConfiguration.add_member(:source_version, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLogSourceVersion, name: "sourceVersion", traits: {"smithy.api#default" => "latest"}))
     AwsLogSourceConfiguration.type = Types::AwsLogSourceConfiguration
-    AwsLogSourceConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLogSourceConfiguration, name: "member")
+    AwsLogSourceConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLogSourceConfiguration, name: "member"))
     AwsLogSourceName.add_member(:route53, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROUTE53", traits: {"smithy.api#enumValue" => "ROUTE53"}))
     AwsLogSourceName.add_member(:vpc_flow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VPC_FLOW", traits: {"smithy.api#enumValue" => "VPC_FLOW"}))
     AwsLogSourceName.add_member(:sh_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SH_FINDINGS", traits: {"smithy.api#enumValue" => "SH_FINDINGS"}))
@@ -177,7 +177,7 @@ module Aws::SecurityLake
     AwsLogSourceResource.add_member(:source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLogSourceName, name: "sourceName"))
     AwsLogSourceResource.add_member(:source_version, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLogSourceVersion, name: "sourceVersion"))
     AwsLogSourceResource.type = Types::AwsLogSourceResource
-    AwsLogSourceResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLogSourceResource, name: "member")
+    AwsLogSourceResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLogSourceResource, name: "member"))
     BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     BadRequestException.type = Types::BadRequestException
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
@@ -243,13 +243,13 @@ module Aws::SecurityLake
     DataLakeAutoEnableNewAccountConfiguration.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "region", traits: {"smithy.api#required" => {}}))
     DataLakeAutoEnableNewAccountConfiguration.add_member(:sources, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLogSourceResourceList, name: "sources", traits: {"smithy.api#required" => {}}))
     DataLakeAutoEnableNewAccountConfiguration.type = Types::DataLakeAutoEnableNewAccountConfiguration
-    DataLakeAutoEnableNewAccountConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeAutoEnableNewAccountConfiguration, name: "member")
+    DataLakeAutoEnableNewAccountConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeAutoEnableNewAccountConfiguration, name: "member"))
     DataLakeConfiguration.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "region", traits: {"smithy.api#required" => {}}))
     DataLakeConfiguration.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeEncryptionConfiguration, name: "encryptionConfiguration"))
     DataLakeConfiguration.add_member(:lifecycle_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeLifecycleConfiguration, name: "lifecycleConfiguration"))
     DataLakeConfiguration.add_member(:replication_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeReplicationConfiguration, name: "replicationConfiguration"))
     DataLakeConfiguration.type = Types::DataLakeConfiguration
-    DataLakeConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeConfiguration, name: "member")
+    DataLakeConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeConfiguration, name: "member"))
     DataLakeEncryptionConfiguration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "kmsKeyId"))
     DataLakeEncryptionConfiguration.type = Types::DataLakeEncryptionConfiguration
     DataLakeException.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "region"))
@@ -257,7 +257,7 @@ module Aws::SecurityLake
     DataLakeException.add_member(:remediation, ::Smithy::Schema::Shapes::MemberShape.new(target: SafeString, name: "remediation"))
     DataLakeException.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "timestamp", traits: {"smithy.api#timestampFormat" => "date-time"}))
     DataLakeException.type = Types::DataLakeException
-    DataLakeExceptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeException, name: "member")
+    DataLakeExceptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeException, name: "member"))
     DataLakeLifecycleConfiguration.add_member(:expiration, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeLifecycleExpiration, name: "expiration"))
     DataLakeLifecycleConfiguration.add_member(:transitions, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeLifecycleTransitionList, name: "transitions"))
     DataLakeLifecycleConfiguration.type = Types::DataLakeLifecycleConfiguration
@@ -266,7 +266,7 @@ module Aws::SecurityLake
     DataLakeLifecycleTransition.add_member(:storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeStorageClass, name: "storageClass"))
     DataLakeLifecycleTransition.add_member(:days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "days", traits: {"smithy.api#range" => {"min" => 1}}))
     DataLakeLifecycleTransition.type = Types::DataLakeLifecycleTransition
-    DataLakeLifecycleTransitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeLifecycleTransition, name: "member")
+    DataLakeLifecycleTransitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeLifecycleTransition, name: "member"))
     DataLakeReplicationConfiguration.add_member(:regions, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionList, name: "regions"))
     DataLakeReplicationConfiguration.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "roleArn"))
     DataLakeReplicationConfiguration.type = Types::DataLakeReplicationConfiguration
@@ -279,17 +279,17 @@ module Aws::SecurityLake
     DataLakeResource.add_member(:create_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeStatus, name: "createStatus"))
     DataLakeResource.add_member(:update_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeUpdateStatus, name: "updateStatus"))
     DataLakeResource.type = Types::DataLakeResource
-    DataLakeResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeResource, name: "member")
+    DataLakeResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeResource, name: "member"))
     DataLakeSource.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "account"))
     DataLakeSource.add_member(:source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "sourceName"))
     DataLakeSource.add_member(:event_classes, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfEventClassList, name: "eventClasses"))
     DataLakeSource.add_member(:source_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeSourceStatusList, name: "sourceStatuses"))
     DataLakeSource.type = Types::DataLakeSource
-    DataLakeSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeSource, name: "member")
+    DataLakeSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeSource, name: "member"))
     DataLakeSourceStatus.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resource"))
     DataLakeSourceStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceCollectionStatus, name: "status"))
     DataLakeSourceStatus.type = Types::DataLakeSourceStatus
-    DataLakeSourceStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeSourceStatus, name: "member")
+    DataLakeSourceStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeSourceStatus, name: "member"))
     DataLakeStatus.add_member(:initialized, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INITIALIZED", traits: {"smithy.api#enumValue" => "INITIALIZED"}))
     DataLakeStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     DataLakeStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
@@ -389,18 +389,18 @@ module Aws::SecurityLake
     LogSource.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "region"))
     LogSource.add_member(:sources, ::Smithy::Schema::Shapes::MemberShape.new(target: LogSourceResourceList, name: "sources"))
     LogSource.type = Types::LogSource
-    LogSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogSource, name: "member")
+    LogSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogSource, name: "member"))
     LogSourceResource.add_member(:aws_log_source, Types::LogSourceResource::AwsLogSource, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLogSourceResource, name: "awsLogSource"))
     LogSourceResource.add_member(:custom_log_source, Types::LogSourceResource::CustomLogSource, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLogSourceResource, name: "customLogSource"))
     LogSourceResource.add_member(:unknown, Types::LogSourceResource::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     LogSourceResource.type = Types::LogSourceResource
-    LogSourceResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogSourceResource, name: "member")
+    LogSourceResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogSourceResource, name: "member"))
     NotificationConfiguration.add_member(:sqs_notification_configuration, Types::NotificationConfiguration::SqsNotificationConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: SqsNotificationConfiguration, name: "sqsNotificationConfiguration"))
     NotificationConfiguration.add_member(:https_notification_configuration, Types::NotificationConfiguration::HttpsNotificationConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpsNotificationConfiguration, name: "httpsNotificationConfiguration"))
     NotificationConfiguration.add_member(:unknown, Types::NotificationConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     NotificationConfiguration.type = Types::NotificationConfiguration
-    OcsfEventClassList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfEventClass, name: "member")
-    RegionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member")
+    OcsfEventClassList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfEventClass, name: "member"))
+    RegionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member"))
     RegisterDataLakeDelegatedAdministratorRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SafeString, name: "accountId", traits: {"smithy.api#required" => {}}))
     RegisterDataLakeDelegatedAdministratorRequest.type = Types::RegisterDataLakeDelegatedAdministratorRequest
     RegisterDataLakeDelegatedAdministratorResponse.type = Types::RegisterDataLakeDelegatedAdministratorResponse
@@ -428,7 +428,7 @@ module Aws::SecurityLake
     SubscriberResource.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     SubscriberResource.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     SubscriberResource.type = Types::SubscriberResource
-    SubscriberResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriberResource, name: "member")
+    SubscriberResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriberResource, name: "member"))
     SubscriberStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     SubscriberStatus.add_member(:deactivated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEACTIVATED", traits: {"smithy.api#enumValue" => "DEACTIVATED"}))
     SubscriberStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
@@ -436,8 +436,8 @@ module Aws::SecurityLake
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest

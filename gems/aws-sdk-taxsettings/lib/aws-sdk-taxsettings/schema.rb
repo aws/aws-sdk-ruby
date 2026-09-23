@@ -196,8 +196,8 @@ module Aws::TaxSettings
     AccountDetails.add_member(:tax_inheritance_details, ::Smithy::Schema::Shapes::MemberShape.new(target: TaxInheritanceDetails, name: "taxInheritanceDetails"))
     AccountDetails.add_member(:account_meta_data, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountMetaData, name: "accountMetaData"))
     AccountDetails.type = Types::AccountDetails
-    AccountDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountDetails, name: "member")
-    AccountIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member")
+    AccountDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountDetails, name: "member"))
+    AccountIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
     AccountMetaData.add_member(:account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountName, name: "accountName"))
     AccountMetaData.add_member(:seller, ::Smithy::Schema::Shapes::MemberShape.new(target: Seller, name: "seller"))
     AccountMetaData.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: Address, name: "address"))
@@ -255,14 +255,14 @@ module Aws::TaxSettings
     Address.add_member(:postal_code, ::Smithy::Schema::Shapes::MemberShape.new(target: PostalCode, name: "postalCode", traits: {"smithy.api#required" => {}}))
     Address.add_member(:country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode, name: "countryCode", traits: {"smithy.api#required" => {}}))
     Address.type = Types::Address
-    AddressRoleMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AddressRoleType, name: "key")
-    AddressRoleMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Jurisdiction, name: "value")
+    AddressRoleMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressRoleType, name: "key"))
+    AddressRoleMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Jurisdiction, name: "value"))
     AddressRoleType.add_member(:tax_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAX_ADDRESS", traits: {"smithy.api#enumValue" => "TaxAddress"}))
     AddressRoleType.add_member(:billing_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BILLING_ADDRESS", traits: {"smithy.api#enumValue" => "BillingAddress"}))
     AddressRoleType.add_member(:contact_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTACT_ADDRESS", traits: {"smithy.api#enumValue" => "ContactAddress"}))
     AttachmentUploadException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     AttachmentUploadException.type = Types::AttachmentUploadException
-    Authorities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Authority, name: "member")
+    Authorities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Authority, name: "member"))
     Authority.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode, name: "country", traits: {"smithy.api#required" => {}}))
     Authority.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: State, name: "state"))
     Authority.type = Types::Authority
@@ -270,7 +270,7 @@ module Aws::TaxSettings
     BatchDeleteTaxRegistrationError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     BatchDeleteTaxRegistrationError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "code"))
     BatchDeleteTaxRegistrationError.type = Types::BatchDeleteTaxRegistrationError
-    BatchDeleteTaxRegistrationErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteTaxRegistrationError, name: "member")
+    BatchDeleteTaxRegistrationErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteTaxRegistrationError, name: "member"))
     BatchDeleteTaxRegistrationRequest.add_member(:account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIds, name: "accountIds", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}, "smithy.api#required" => {}}))
     BatchDeleteTaxRegistrationRequest.type = Types::BatchDeleteTaxRegistrationRequest
     BatchDeleteTaxRegistrationResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteTaxRegistrationErrors, name: "errors", traits: {"smithy.api#required" => {}}))
@@ -284,7 +284,7 @@ module Aws::TaxSettings
     BatchPutTaxRegistrationError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     BatchPutTaxRegistrationError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "code"))
     BatchPutTaxRegistrationError.type = Types::BatchPutTaxRegistrationError
-    BatchPutTaxRegistrationErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutTaxRegistrationError, name: "member")
+    BatchPutTaxRegistrationErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutTaxRegistrationError, name: "member"))
     BatchPutTaxRegistrationRequest.add_member(:account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIds, name: "accountIds", traits: {"smithy.api#length" => {"min" => 1, "max" => 550}, "smithy.api#required" => {}}))
     BatchPutTaxRegistrationRequest.add_member(:tax_registration_entry, ::Smithy::Schema::Shapes::MemberShape.new(target: TaxRegistrationEntry, name: "taxRegistrationEntry", traits: {"smithy.api#required" => {}}))
     BatchPutTaxRegistrationRequest.type = Types::BatchPutTaxRegistrationRequest
@@ -409,7 +409,7 @@ module Aws::TaxSettings
     MalaysiaServiceTaxCode.add_member(:digital_svc_electronic_medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIGITAL_SVC_ELECTRONIC_MEDIUM", traits: {"smithy.api#enumValue" => "Digital Service And Electronic Medium"}))
     MalaysiaServiceTaxCode.add_member(:it_services, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IT_SERVICES", traits: {"smithy.api#enumValue" => "IT Services"}))
     MalaysiaServiceTaxCode.add_member(:training_or_coaching, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRAINING_OR_COACHING", traits: {"smithy.api#enumValue" => "Training Or Coaching"}))
-    MalaysiaServiceTaxCodesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MalaysiaServiceTaxCode, name: "member")
+    MalaysiaServiceTaxCodesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MalaysiaServiceTaxCode, name: "member"))
     PersonType.add_member(:legal_person, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LEGAL_PERSON", traits: {"smithy.api#enumValue" => "Legal Person"}))
     PersonType.add_member(:physical_person, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PHYSICAL_PERSON", traits: {"smithy.api#enumValue" => "Physical Person"}))
     PersonType.add_member(:business, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUSINESS", traits: {"smithy.api#enumValue" => "Business"}))
@@ -472,12 +472,12 @@ module Aws::TaxSettings
     SupplementalTaxRegistrationEntry.add_member(:legal_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LegalName, name: "legalName", traits: {"smithy.api#required" => {}}))
     SupplementalTaxRegistrationEntry.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: Address, name: "address", traits: {"smithy.api#required" => {}}))
     SupplementalTaxRegistrationEntry.type = Types::SupplementalTaxRegistrationEntry
-    SupplementalTaxRegistrationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SupplementalTaxRegistration, name: "member")
+    SupplementalTaxRegistrationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupplementalTaxRegistration, name: "member"))
     SupplementalTaxRegistrationType.add_member(:vat, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VAT", traits: {"smithy.api#enumValue" => "VAT"}))
     TaxDocumentMetadata.add_member(:tax_document_access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TaxDocumentAccessToken, name: "taxDocumentAccessToken", traits: {"smithy.api#required" => {}}))
     TaxDocumentMetadata.add_member(:tax_document_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TaxDocumentName, name: "taxDocumentName", traits: {"smithy.api#required" => {}}))
     TaxDocumentMetadata.type = Types::TaxDocumentMetadata
-    TaxDocumentMetadatas.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaxDocumentMetadata, name: "member")
+    TaxDocumentMetadatas.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaxDocumentMetadata, name: "member"))
     TaxExemption.add_member(:authority, ::Smithy::Schema::Shapes::MemberShape.new(target: Authority, name: "authority", traits: {"smithy.api#required" => {}}))
     TaxExemption.add_member(:tax_exemption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TaxExemptionType, name: "taxExemptionType", traits: {"smithy.api#required" => {}}))
     TaxExemption.add_member(:effective_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "effectiveDate"))
@@ -490,14 +490,14 @@ module Aws::TaxSettings
     TaxExemptionDetails.add_member(:heritage_obtained_parent_entity, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "heritageObtainedParentEntity"))
     TaxExemptionDetails.add_member(:heritage_obtained_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "heritageObtainedReason"))
     TaxExemptionDetails.type = Types::TaxExemptionDetails
-    TaxExemptionDetailsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "key")
-    TaxExemptionDetailsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TaxExemptionDetails, name: "value")
+    TaxExemptionDetailsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "key"))
+    TaxExemptionDetailsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TaxExemptionDetails, name: "value"))
     TaxExemptionType.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "displayName"))
     TaxExemptionType.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "description"))
     TaxExemptionType.add_member(:applicable_jurisdictions, ::Smithy::Schema::Shapes::MemberShape.new(target: Authorities, name: "applicableJurisdictions"))
     TaxExemptionType.type = Types::TaxExemptionType
-    TaxExemptionTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaxExemptionType, name: "member")
-    TaxExemptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaxExemption, name: "member")
+    TaxExemptionTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaxExemptionType, name: "member"))
+    TaxExemptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaxExemption, name: "member"))
     TaxInheritanceDetails.add_member(:parent_entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "parentEntityId"))
     TaxInheritanceDetails.add_member(:inheritance_obtained_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: InheritanceObtainedReason, name: "inheritanceObtainedReason"))
     TaxInheritanceDetails.type = Types::TaxInheritanceDetails
@@ -517,7 +517,7 @@ module Aws::TaxSettings
     TaxRegistrationDocument.add_member(:s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceS3Location, name: "s3Location"))
     TaxRegistrationDocument.add_member(:file, ::Smithy::Schema::Shapes::MemberShape.new(target: TaxRegistrationDocFile, name: "file"))
     TaxRegistrationDocument.type = Types::TaxRegistrationDocument
-    TaxRegistrationDocuments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaxRegistrationDocument, name: "member")
+    TaxRegistrationDocuments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaxRegistrationDocument, name: "member"))
     TaxRegistrationEntry.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationId, name: "registrationId", traits: {"smithy.api#required" => {}}))
     TaxRegistrationEntry.add_member(:registration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TaxRegistrationType, name: "registrationType", traits: {"smithy.api#required" => {}}))
     TaxRegistrationEntry.add_member(:legal_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LegalName, name: "legalName"))
@@ -575,7 +575,7 @@ module Aws::TaxSettings
     ValidationExceptionErrorCode.add_member(:missing_input, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISSING_INPUT", traits: {"smithy.api#enumValue" => "MissingInput"}))
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldName, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     VerificationDetails.add_member(:date_of_birth, ::Smithy::Schema::Shapes::MemberShape.new(target: DateOfBirth, name: "dateOfBirth"))
     VerificationDetails.add_member(:tax_registration_documents, ::Smithy::Schema::Shapes::MemberShape.new(target: TaxRegistrationDocuments, name: "taxRegistrationDocuments"))
     VerificationDetails.type = Types::VerificationDetails

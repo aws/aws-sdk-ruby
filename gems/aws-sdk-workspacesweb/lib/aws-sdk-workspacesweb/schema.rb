@@ -306,7 +306,7 @@ module Aws::WorkSpacesWeb
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    ArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "member")
+    ArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "member"))
     AssociateBrowserSettingsRequest.add_member(:portal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "portalArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AssociateBrowserSettingsRequest.add_member(:browser_settings_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "browserSettingsArn", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#httpQuery" => "browserSettingsArn", "smithy.api#required" => {}}))
     AssociateBrowserSettingsRequest.type = Types::AssociateBrowserSettingsRequest
@@ -361,7 +361,7 @@ module Aws::WorkSpacesWeb
     BrowserSettings.add_member(:customer_managed_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, name: "customerManagedKey"))
     BrowserSettings.add_member(:additional_encryption_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextMap, name: "additionalEncryptionContext"))
     BrowserSettings.type = Types::BrowserSettings
-    BrowserSettingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserSettingsSummary, name: "member")
+    BrowserSettingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserSettingsSummary, name: "member"))
     BrowserSettingsSummary.add_member(:browser_settings_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "browserSettingsArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "browserSettingsArn"}))
     BrowserSettingsSummary.type = Types::BrowserSettingsSummary
     Certificate.add_member(:thumbprint, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateThumbprint, name: "thumbprint"))
@@ -371,15 +371,15 @@ module Aws::WorkSpacesWeb
     Certificate.add_member(:not_valid_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "notValidAfter"))
     Certificate.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateAuthorityBody, name: "body"))
     Certificate.type = Types::Certificate
-    CertificateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateAuthorityBody, name: "member")
+    CertificateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateAuthorityBody, name: "member"))
     CertificateSummary.add_member(:thumbprint, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateThumbprint, name: "thumbprint"))
     CertificateSummary.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificatePrincipal, name: "subject"))
     CertificateSummary.add_member(:issuer, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificatePrincipal, name: "issuer"))
     CertificateSummary.add_member(:not_valid_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "notValidBefore"))
     CertificateSummary.add_member(:not_valid_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "notValidAfter"))
     CertificateSummary.type = Types::CertificateSummary
-    CertificateSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateSummary, name: "member")
-    CertificateThumbprintList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateThumbprint, name: "member")
+    CertificateSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateSummary, name: "member"))
+    CertificateThumbprintList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateThumbprint, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "resourceId"))
     ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType"))
@@ -388,7 +388,7 @@ module Aws::WorkSpacesWeb
     CookieSpecification.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CookieName, name: "name"))
     CookieSpecification.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: CookiePath, name: "path"))
     CookieSpecification.type = Types::CookieSpecification
-    CookieSpecifications.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CookieSpecification, name: "member")
+    CookieSpecifications.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CookieSpecification, name: "member"))
     CookieSynchronizationConfiguration.add_member(:allowlist, ::Smithy::Schema::Shapes::MemberShape.new(target: CookieSpecifications, name: "allowlist", traits: {"smithy.api#required" => {}}))
     CookieSynchronizationConfiguration.add_member(:blocklist, ::Smithy::Schema::Shapes::MemberShape.new(target: CookieSpecifications, name: "blocklist"))
     CookieSynchronizationConfiguration.type = Types::CookieSynchronizationConfiguration
@@ -502,7 +502,7 @@ module Aws::WorkSpacesWeb
     DataProtectionSettings.add_member(:customer_managed_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, name: "customerManagedKey"))
     DataProtectionSettings.add_member(:additional_encryption_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextMap, name: "additionalEncryptionContext"))
     DataProtectionSettings.type = Types::DataProtectionSettings
-    DataProtectionSettingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataProtectionSettingsSummary, name: "member")
+    DataProtectionSettingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProtectionSettingsSummary, name: "member"))
     DataProtectionSettingsSummary.add_member(:data_protection_settings_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "dataProtectionSettingsArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "dataProtectionSettingsArn"}))
     DataProtectionSettingsSummary.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayNameSafe, name: "displayName"))
     DataProtectionSettingsSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionSafe, name: "description"))
@@ -562,8 +562,8 @@ module Aws::WorkSpacesWeb
     DisassociateUserSettingsRequest.add_member(:portal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "portalArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DisassociateUserSettingsRequest.type = Types::DisassociateUserSettingsRequest
     DisassociateUserSettingsResponse.type = Types::DisassociateUserSettingsResponse
-    EncryptionContextMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "key")
-    EncryptionContextMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "value")
+    EncryptionContextMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "key"))
+    EncryptionContextMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "value"))
     Event.add_member(:website_interact, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEBSITE_INTERACT", traits: {"smithy.api#enumValue" => "WebsiteInteract"}))
     Event.add_member(:file_download_from_secure_browser_to_remote_disk, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FILE_DOWNLOAD_FROM_SECURE_BROWSER_TO_REMOTE_DISK", traits: {"smithy.api#enumValue" => "FileDownloadFromSecureBrowserToRemoteDisk"}))
     Event.add_member(:file_transfer_from_remote_to_local_disk, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FILE_TRANSFER_FROM_REMOTE_TO_LOCAL_DISK", traits: {"smithy.api#enumValue" => "FileTransferFromRemoteToLocalDisk"}))
@@ -584,7 +584,7 @@ module Aws::WorkSpacesWeb
     EventFilter.add_member(:include, Types::EventFilter::Include, ::Smithy::Schema::Shapes::MemberShape.new(target: Events, name: "include"))
     EventFilter.add_member(:unknown, Types::EventFilter::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     EventFilter.type = Types::EventFilter
-    Events.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member")
+    Events.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member"))
     ExpireSessionRequest.add_member(:portal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalId, name: "portalId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ExpireSessionRequest.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "sessionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ExpireSessionRequest.type = Types::ExpireSessionRequest
@@ -647,16 +647,16 @@ module Aws::WorkSpacesWeb
     GetUserSettingsRequest.type = Types::GetUserSettingsRequest
     GetUserSettingsResponse.add_member(:user_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: UserSettings, name: "userSettings", traits: {"smithy.api#nestedProperties" => {}}))
     GetUserSettingsResponse.type = Types::GetUserSettingsResponse
-    GlobalInlineRedactionUrls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InlineRedactionUrl, name: "member")
-    HiddenToolbarItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ToolbarItem, name: "member")
+    GlobalInlineRedactionUrls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InlineRedactionUrl, name: "member"))
+    HiddenToolbarItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolbarItem, name: "member"))
     IdentityProvider.add_member(:identity_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubresourceARN, name: "identityProviderArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "identityProviderArn"}))
     IdentityProvider.add_member(:identity_provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderName, name: "identityProviderName"))
     IdentityProvider.add_member(:identity_provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderType, name: "identityProviderType"))
     IdentityProvider.add_member(:identity_provider_details, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderDetails, name: "identityProviderDetails"))
     IdentityProvider.type = Types::IdentityProvider
-    IdentityProviderDetails.key = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "key")
-    IdentityProviderDetails.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "value")
-    IdentityProviderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderSummary, name: "member")
+    IdentityProviderDetails.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "key"))
+    IdentityProviderDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "value"))
+    IdentityProviderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderSummary, name: "member"))
     IdentityProviderSummary.add_member(:identity_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubresourceARN, name: "identityProviderArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "identityProviderArn"}))
     IdentityProviderSummary.add_member(:identity_provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderName, name: "identityProviderName"))
     IdentityProviderSummary.add_member(:identity_provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderType, name: "identityProviderType"))
@@ -673,8 +673,8 @@ module Aws::WorkSpacesWeb
     InlineRedactionPattern.add_member(:exempt_urls, ::Smithy::Schema::Shapes::MemberShape.new(target: InlineRedactionUrls, name: "exemptUrls"))
     InlineRedactionPattern.add_member(:confidence_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfidenceLevel, name: "confidenceLevel"))
     InlineRedactionPattern.type = Types::InlineRedactionPattern
-    InlineRedactionPatterns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InlineRedactionPattern, name: "member")
-    InlineRedactionUrls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InlineRedactionUrl, name: "member")
+    InlineRedactionPatterns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InlineRedactionPattern, name: "member"))
+    InlineRedactionUrls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InlineRedactionUrl, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryAfterSeconds, name: "retryAfterSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Retry-After"}))
     InternalServerException.type = Types::InternalServerException
@@ -687,17 +687,17 @@ module Aws::WorkSpacesWeb
     IpAccessSettings.add_member(:customer_managed_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, name: "customerManagedKey"))
     IpAccessSettings.add_member(:additional_encryption_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextMap, name: "additionalEncryptionContext"))
     IpAccessSettings.type = Types::IpAccessSettings
-    IpAccessSettingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpAccessSettingsSummary, name: "member")
+    IpAccessSettingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAccessSettingsSummary, name: "member"))
     IpAccessSettingsSummary.add_member(:ip_access_settings_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "ipAccessSettingsArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "ipAccessSettingsArn"}))
     IpAccessSettingsSummary.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "displayName"))
     IpAccessSettingsSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     IpAccessSettingsSummary.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDate"))
     IpAccessSettingsSummary.type = Types::IpAccessSettingsSummary
-    IpAddressList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, name: "member")
+    IpAddressList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, name: "member"))
     IpRule.add_member(:ip_range, ::Smithy::Schema::Shapes::MemberShape.new(target: IpRange, name: "ipRange", traits: {"smithy.api#required" => {}}))
     IpRule.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     IpRule.type = Types::IpRule
-    IpRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpRule, name: "member")
+    IpRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpRule, name: "member"))
     ListBrowserSettingsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListBrowserSettingsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListBrowserSettingsRequest.type = Types::ListBrowserSettingsRequest
@@ -792,7 +792,7 @@ module Aws::WorkSpacesWeb
     NetworkSettings.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIdList, name: "subnetIds"))
     NetworkSettings.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIdList, name: "securityGroupIds"))
     NetworkSettings.type = Types::NetworkSettings
-    NetworkSettingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkSettingsSummary, name: "member")
+    NetworkSettingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkSettingsSummary, name: "member"))
     NetworkSettingsSummary.add_member(:network_settings_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "networkSettingsArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "networkSettingsArn"}))
     NetworkSettingsSummary.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "vpcId"))
     NetworkSettingsSummary.type = Types::NetworkSettingsSummary
@@ -818,7 +818,7 @@ module Aws::WorkSpacesWeb
     Portal.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceType, name: "instanceType"))
     Portal.add_member(:max_concurrent_sessions, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxConcurrentSessions, name: "maxConcurrentSessions"))
     Portal.type = Types::Portal
-    PortalList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PortalSummary, name: "member")
+    PortalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalSummary, name: "member"))
     PortalSummary.add_member(:portal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "portalArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "portalArn"}))
     PortalSummary.add_member(:renderer_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RendererType, name: "rendererType"))
     PortalSummary.add_member(:browser_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserType, name: "browserType"))
@@ -851,7 +851,7 @@ module Aws::WorkSpacesWeb
     S3LogConfiguration.add_member(:log_file_format, ::Smithy::Schema::Shapes::MemberShape.new(target: LogFileFormat, name: "logFileFormat", traits: {"smithy.api#required" => {}}))
     S3LogConfiguration.add_member(:folder_structure, ::Smithy::Schema::Shapes::MemberShape.new(target: FolderStructure, name: "folderStructure", traits: {"smithy.api#required" => {}}))
     S3LogConfiguration.type = Types::S3LogConfiguration
-    SecurityGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
+    SecurityGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "resourceId"))
     ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType"))
@@ -875,7 +875,7 @@ module Aws::WorkSpacesWeb
     SessionLogger.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayNameSafe, name: "displayName"))
     SessionLogger.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDate"))
     SessionLogger.type = Types::SessionLogger
-    SessionLoggerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SessionLoggerSummary, name: "member")
+    SessionLoggerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionLoggerSummary, name: "member"))
     SessionLoggerSummary.add_member(:session_logger_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "sessionLoggerArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "sessionLoggerArn"}))
     SessionLoggerSummary.add_member(:log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LogConfiguration, name: "logConfiguration"))
     SessionLoggerSummary.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayNameSafe, name: "displayName"))
@@ -892,13 +892,13 @@ module Aws::WorkSpacesWeb
     SessionSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startTime"))
     SessionSummary.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "endTime"))
     SessionSummary.type = Types::SessionSummary
-    SessionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SessionSummary, name: "member")
-    SubnetIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
+    SessionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionSummary, name: "member"))
+    SubnetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
@@ -922,7 +922,7 @@ module Aws::WorkSpacesWeb
     TrustStore.type = Types::TrustStore
     TrustStoreSummary.add_member(:trust_store_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "trustStoreArn"))
     TrustStoreSummary.type = Types::TrustStoreSummary
-    TrustStoreSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrustStoreSummary, name: "member")
+    TrustStoreSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustStoreSummary, name: "member"))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -1012,7 +1012,7 @@ module Aws::WorkSpacesWeb
     UserAccessLoggingSettings.add_member(:associated_portal_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, name: "associatedPortalArns"))
     UserAccessLoggingSettings.add_member(:kinesis_stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisStreamArn, name: "kinesisStreamArn"))
     UserAccessLoggingSettings.type = Types::UserAccessLoggingSettings
-    UserAccessLoggingSettingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserAccessLoggingSettingsSummary, name: "member")
+    UserAccessLoggingSettingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAccessLoggingSettingsSummary, name: "member"))
     UserAccessLoggingSettingsSummary.add_member(:user_access_logging_settings_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "userAccessLoggingSettingsArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "userAccessLoggingSettingsArn"}))
     UserAccessLoggingSettingsSummary.add_member(:kinesis_stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisStreamArn, name: "kinesisStreamArn"))
     UserAccessLoggingSettingsSummary.type = Types::UserAccessLoggingSettingsSummary
@@ -1031,7 +1031,7 @@ module Aws::WorkSpacesWeb
     UserSettings.add_member(:deep_link_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledType, name: "deepLinkAllowed"))
     UserSettings.add_member(:toolbar_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolbarConfiguration, name: "toolbarConfiguration"))
     UserSettings.type = Types::UserSettings
-    UserSettingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserSettingsSummary, name: "member")
+    UserSettingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserSettingsSummary, name: "member"))
     UserSettingsSummary.add_member(:user_settings_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "userSettingsArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "userSettingsArn"}))
     UserSettingsSummary.add_member(:copy_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledType, name: "copyAllowed"))
     UserSettingsSummary.add_member(:paste_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledType, name: "pasteAllowed"))
@@ -1051,7 +1051,7 @@ module Aws::WorkSpacesWeb
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldName, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
 
     AWSErmineControlPlaneService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.workspacesweb#AWSErmineControlPlaneService"

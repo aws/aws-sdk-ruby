@@ -86,7 +86,7 @@ module Aws::S3Outposts
     EndpointStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
     EndpointStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "Create_Failed"}))
     EndpointStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "Delete_Failed"}))
-    Endpoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "member")
+    Endpoints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "member"))
     FailedReason.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     FailedReason.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     FailedReason.type = Types::FailedReason
@@ -113,7 +113,7 @@ module Aws::S3Outposts
     ListSharedEndpointsResult.type = Types::ListSharedEndpointsResult
     NetworkInterface.add_member(:network_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceId, name: "NetworkInterfaceId"))
     NetworkInterface.type = Types::NetworkInterface
-    NetworkInterfaces.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface, name: "member")
+    NetworkInterfaces.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface, name: "member"))
     Outpost.add_member(:outpost_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: OutpostArn, name: "OutpostArn"))
     Outpost.add_member(:s3_outpost_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3OutpostArn, name: "S3OutpostArn"))
     Outpost.add_member(:outpost_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OutpostId, name: "OutpostId"))
@@ -122,7 +122,7 @@ module Aws::S3Outposts
     Outpost.type = Types::Outpost
     OutpostOfflineException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     OutpostOfflineException.type = Types::OutpostOfflineException
-    Outposts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Outpost, name: "member")
+    Outposts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Outpost, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))

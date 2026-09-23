@@ -392,12 +392,12 @@ module Aws::WorkMail
     AccessControlRule.type = Types::AccessControlRule
     AccessControlRuleEffect.add_member(:allow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOW", traits: {"smithy.api#enumValue" => "ALLOW"}))
     AccessControlRuleEffect.add_member(:deny, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DENY", traits: {"smithy.api#enumValue" => "DENY"}))
-    AccessControlRuleNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRuleName, name: "member")
-    AccessControlRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRule, name: "member")
+    AccessControlRuleNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRuleName, name: "member"))
+    AccessControlRulesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRule, name: "member"))
     AccessEffect.add_member(:allow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOW", traits: {"smithy.api#enumValue" => "ALLOW"}))
     AccessEffect.add_member(:deny, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DENY", traits: {"smithy.api#enumValue" => "DENY"}))
-    ActionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRuleAction, name: "member")
-    Aliases.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "member")
+    ActionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRuleAction, name: "member"))
+    Aliases.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "member"))
     AssociateDelegateToResourceRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, name: "OrganizationId", traits: {"smithy.api#required" => {}}))
     AssociateDelegateToResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, name: "ResourceId", traits: {"smithy.api#required" => {}}))
     AssociateDelegateToResourceRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, name: "EntityId", traits: {"smithy.api#required" => {}}))
@@ -421,7 +421,7 @@ module Aws::WorkMail
     AvailabilityConfiguration.add_member(:date_created, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "DateCreated"))
     AvailabilityConfiguration.add_member(:date_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "DateModified"))
     AvailabilityConfiguration.type = Types::AvailabilityConfiguration
-    AvailabilityConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityConfiguration, name: "member")
+    AvailabilityConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityConfiguration, name: "member"))
     AvailabilityProviderType.add_member(:ews, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EWS", traits: {"smithy.api#enumValue" => "EWS"}))
     AvailabilityProviderType.add_member(:lambda, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAMBDA", traits: {"smithy.api#enumValue" => "LAMBDA"}))
     BookingOptions.add_member(:auto_accept_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AutoAcceptRequests", traits: {"smithy.api#default" => false}))
@@ -697,10 +697,10 @@ module Aws::WorkMail
     DescribeUserResponse.add_member(:identity_provider_user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderUserId, name: "IdentityProviderUserId"))
     DescribeUserResponse.add_member(:identity_provider_identity_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderIdentityStoreId, name: "IdentityProviderIdentityStoreId"))
     DescribeUserResponse.type = Types::DescribeUserResponse
-    DeviceModelList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceModel, name: "member")
-    DeviceOperatingSystemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceOperatingSystem, name: "member")
-    DeviceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceType, name: "member")
-    DeviceUserAgentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceUserAgent, name: "member")
+    DeviceModelList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceModel, name: "member"))
+    DeviceOperatingSystemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceOperatingSystem, name: "member"))
+    DeviceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceType, name: "member"))
+    DeviceUserAgentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceUserAgent, name: "member"))
     DirectoryInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     DirectoryInUseException.type = Types::DirectoryInUseException
     DirectoryServiceAuthenticationFailedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
@@ -724,11 +724,11 @@ module Aws::WorkMail
     DnsRecordVerificationStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     DnsRecordVerificationStatus.add_member(:verified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERIFIED", traits: {"smithy.api#enumValue" => "VERIFIED"}))
     DnsRecordVerificationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    DnsRecords.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DnsRecord, name: "member")
+    DnsRecords.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsRecord, name: "member"))
     Domain.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#required" => {}}))
     Domain.add_member(:hosted_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HostedZoneId, name: "HostedZoneId"))
     Domain.type = Types::Domain
-    Domains.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Domain, name: "member")
+    Domains.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Domain, name: "member"))
     EmailAddressInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     EmailAddressInUseException.type = Types::EmailAddressInUseException
     EntityAlreadyRegisteredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
@@ -751,7 +751,7 @@ module Aws::WorkMail
     FolderConfiguration.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionAction, name: "Action", traits: {"smithy.api#required" => {}}))
     FolderConfiguration.add_member(:period, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriod, name: "Period"))
     FolderConfiguration.type = Types::FolderConfiguration
-    FolderConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FolderConfiguration, name: "member")
+    FolderConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FolderConfiguration, name: "member"))
     FolderName.add_member(:inbox, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INBOX", traits: {"smithy.api#enumValue" => "INBOX"}))
     FolderName.add_member(:deleted_items, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED_ITEMS", traits: {"smithy.api#enumValue" => "DELETED_ITEMS"}))
     FolderName.add_member(:sent_items, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SENT_ITEMS", traits: {"smithy.api#enumValue" => "SENT_ITEMS"}))
@@ -848,8 +848,8 @@ module Aws::WorkMail
     GroupIdentifier.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, name: "GroupId"))
     GroupIdentifier.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, name: "GroupName"))
     GroupIdentifier.type = Types::GroupIdentifier
-    GroupIdentifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupIdentifier, name: "member")
-    Groups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Group, name: "member")
+    GroupIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupIdentifier, name: "member"))
+    Groups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Group, name: "member"))
     IdentityCenterConfiguration.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn", traits: {"smithy.api#required" => {}}))
     IdentityCenterConfiguration.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, name: "ApplicationArn", traits: {"smithy.api#required" => {}}))
     IdentityCenterConfiguration.type = Types::IdentityCenterConfiguration
@@ -858,15 +858,15 @@ module Aws::WorkMail
     ImpersonationMatchedRule.add_member(:impersonation_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRuleId, name: "ImpersonationRuleId"))
     ImpersonationMatchedRule.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRuleName, name: "Name"))
     ImpersonationMatchedRule.type = Types::ImpersonationMatchedRule
-    ImpersonationMatchedRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationMatchedRule, name: "member")
+    ImpersonationMatchedRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationMatchedRule, name: "member"))
     ImpersonationRole.add_member(:impersonation_role_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleId, name: "ImpersonationRoleId"))
     ImpersonationRole.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleName, name: "Name"))
     ImpersonationRole.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleType, name: "Type"))
     ImpersonationRole.add_member(:date_created, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "DateCreated"))
     ImpersonationRole.add_member(:date_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "DateModified"))
     ImpersonationRole.type = Types::ImpersonationRole
-    ImpersonationRoleIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleId, name: "member")
-    ImpersonationRoleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRole, name: "member")
+    ImpersonationRoleIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRoleId, name: "member"))
+    ImpersonationRoleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRole, name: "member"))
     ImpersonationRoleType.add_member(:full_access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL_ACCESS", traits: {"smithy.api#enumValue" => "FULL_ACCESS"}))
     ImpersonationRoleType.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READ_ONLY", traits: {"smithy.api#enumValue" => "READ_ONLY"}))
     ImpersonationRule.add_member(:impersonation_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRuleId, name: "ImpersonationRuleId", traits: {"smithy.api#required" => {}}))
@@ -876,7 +876,7 @@ module Aws::WorkMail
     ImpersonationRule.add_member(:target_users, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetUsers, name: "TargetUsers"))
     ImpersonationRule.add_member(:not_target_users, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetUsers, name: "NotTargetUsers"))
     ImpersonationRule.type = Types::ImpersonationRule
-    ImpersonationRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRule, name: "member")
+    ImpersonationRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpersonationRule, name: "member"))
     InvalidConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     InvalidConfigurationException.type = Types::InvalidConfigurationException
     InvalidCustomSesConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
@@ -885,8 +885,8 @@ module Aws::WorkMail
     InvalidParameterException.type = Types::InvalidParameterException
     InvalidPasswordException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     InvalidPasswordException.type = Types::InvalidPasswordException
-    IpRangeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpRange, name: "member")
-    Jobs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MailboxExportJob, name: "member")
+    IpRangeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpRange, name: "member"))
+    Jobs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MailboxExportJob, name: "member"))
     LambdaAvailabilityProvider.add_member(:lambda_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaArn, name: "LambdaArn", traits: {"smithy.api#required" => {}}))
     LambdaAvailabilityProvider.type = Types::LambdaAvailabilityProvider
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
@@ -1044,7 +1044,7 @@ module Aws::WorkMail
     MailDomainSummary.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName"))
     MailDomainSummary.add_member(:default_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "DefaultDomain", traits: {"smithy.api#default" => false}))
     MailDomainSummary.type = Types::MailDomainSummary
-    MailDomains.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MailDomainSummary, name: "member")
+    MailDomains.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MailDomainSummary, name: "member"))
     MailboxExportJob.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MailboxExportJobId, name: "JobId"))
     MailboxExportJob.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, name: "EntityId"))
     MailboxExportJob.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
@@ -1068,11 +1068,11 @@ module Aws::WorkMail
     Member.type = Types::Member
     MemberType.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GROUP", traits: {"smithy.api#enumValue" => "GROUP"}))
     MemberType.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
-    Members.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Member, name: "member")
+    Members.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Member, name: "member"))
     MobileDeviceAccessMatchedRule.add_member(:mobile_device_access_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleId, name: "MobileDeviceAccessRuleId"))
     MobileDeviceAccessMatchedRule.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleName, name: "Name"))
     MobileDeviceAccessMatchedRule.type = Types::MobileDeviceAccessMatchedRule
-    MobileDeviceAccessMatchedRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessMatchedRule, name: "member")
+    MobileDeviceAccessMatchedRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessMatchedRule, name: "member"))
     MobileDeviceAccessOverride.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, name: "UserId"))
     MobileDeviceAccessOverride.add_member(:device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceId, name: "DeviceId"))
     MobileDeviceAccessOverride.add_member(:effect, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleEffect, name: "Effect"))
@@ -1080,7 +1080,7 @@ module Aws::WorkMail
     MobileDeviceAccessOverride.add_member(:date_created, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "DateCreated"))
     MobileDeviceAccessOverride.add_member(:date_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "DateModified"))
     MobileDeviceAccessOverride.type = Types::MobileDeviceAccessOverride
-    MobileDeviceAccessOverridesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessOverride, name: "member")
+    MobileDeviceAccessOverridesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessOverride, name: "member"))
     MobileDeviceAccessRule.add_member(:mobile_device_access_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleId, name: "MobileDeviceAccessRuleId"))
     MobileDeviceAccessRule.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleName, name: "Name"))
     MobileDeviceAccessRule.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRuleDescription, name: "Description"))
@@ -1098,14 +1098,14 @@ module Aws::WorkMail
     MobileDeviceAccessRule.type = Types::MobileDeviceAccessRule
     MobileDeviceAccessRuleEffect.add_member(:allow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOW", traits: {"smithy.api#enumValue" => "ALLOW"}))
     MobileDeviceAccessRuleEffect.add_member(:deny, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DENY", traits: {"smithy.api#enumValue" => "DENY"}))
-    MobileDeviceAccessRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRule, name: "member")
+    MobileDeviceAccessRulesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MobileDeviceAccessRule, name: "member"))
     NameAvailabilityException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     NameAvailabilityException.type = Types::NameAvailabilityException
     OrganizationNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     OrganizationNotFoundException.type = Types::OrganizationNotFoundException
     OrganizationStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     OrganizationStateException.type = Types::OrganizationStateException
-    OrganizationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationSummary, name: "member")
+    OrganizationSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationSummary, name: "member"))
     OrganizationSummary.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, name: "OrganizationId"))
     OrganizationSummary.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationName, name: "Alias"))
     OrganizationSummary.add_member(:default_mail_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DefaultMailDomain"))
@@ -1119,14 +1119,14 @@ module Aws::WorkMail
     PermissionType.add_member(:full_access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL_ACCESS", traits: {"smithy.api#enumValue" => "FULL_ACCESS"}))
     PermissionType.add_member(:send_as, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEND_AS", traits: {"smithy.api#enumValue" => "SEND_AS"}))
     PermissionType.add_member(:send_on_behalf, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEND_ON_BEHALF", traits: {"smithy.api#enumValue" => "SEND_ON_BEHALF"}))
-    PermissionValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionType, name: "member")
-    Permissions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Permission, name: "member")
+    PermissionValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionType, name: "member"))
+    Permissions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Permission, name: "member"))
     PersonalAccessTokenConfiguration.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenConfigurationStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     PersonalAccessTokenConfiguration.add_member(:lifetime_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenLifetimeInDays, name: "LifetimeInDays"))
     PersonalAccessTokenConfiguration.type = Types::PersonalAccessTokenConfiguration
     PersonalAccessTokenConfigurationStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     PersonalAccessTokenConfigurationStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
-    PersonalAccessTokenScopeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenScope, name: "member")
+    PersonalAccessTokenScopeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenScope, name: "member"))
     PersonalAccessTokenSummary.add_member(:personal_access_token_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenId, name: "PersonalAccessTokenId"))
     PersonalAccessTokenSummary.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, name: "UserId"))
     PersonalAccessTokenSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenName, name: "Name"))
@@ -1135,7 +1135,7 @@ module Aws::WorkMail
     PersonalAccessTokenSummary.add_member(:expires_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ExpiresTime"))
     PersonalAccessTokenSummary.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenScopeList, name: "Scopes"))
     PersonalAccessTokenSummary.type = Types::PersonalAccessTokenSummary
-    PersonalAccessTokenSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenSummary, name: "member")
+    PersonalAccessTokenSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalAccessTokenSummary, name: "member"))
     PutAccessControlRuleRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRuleName, name: "Name", traits: {"smithy.api#required" => {}}))
     PutAccessControlRuleRequest.add_member(:effect, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRuleEffect, name: "Effect", traits: {"smithy.api#required" => {}}))
     PutAccessControlRuleRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlRuleDescription, name: "Description", traits: {"smithy.api#required" => {}}))
@@ -1214,12 +1214,12 @@ module Aws::WorkMail
     Resource.add_member(:disabled_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "DisabledDate"))
     Resource.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, name: "Description"))
     Resource.type = Types::Resource
-    ResourceDelegates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Delegate, name: "member")
+    ResourceDelegates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Delegate, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ResourceType.add_member(:room, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROOM", traits: {"smithy.api#enumValue" => "ROOM"}))
     ResourceType.add_member(:equipment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUIPMENT", traits: {"smithy.api#enumValue" => "EQUIPMENT"}))
-    Resources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member")
+    Resources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
     RetentionAction.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     RetentionAction.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE", traits: {"smithy.api#enumValue" => "DELETE"}))
     RetentionAction.add_member(:permanently_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PERMANENTLY_DELETE", traits: {"smithy.api#enumValue" => "PERMANENTLY_DELETE"}))
@@ -1237,13 +1237,13 @@ module Aws::WorkMail
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TargetUsers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, name: "member")
+    TargetUsers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, name: "member"))
     TestAvailabilityConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, name: "OrganizationId", traits: {"smithy.api#required" => {}}))
     TestAvailabilityConfigurationRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName"))
     TestAvailabilityConfigurationRequest.add_member(:ews_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: EwsAvailabilityProvider, name: "EwsProvider"))
@@ -1348,12 +1348,12 @@ module Aws::WorkMail
     User.add_member(:identity_provider_user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderUserId, name: "IdentityProviderUserId"))
     User.add_member(:identity_provider_identity_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderIdentityStoreId, name: "IdentityProviderIdentityStoreId"))
     User.type = Types::User
-    UserIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, name: "member")
+    UserIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkMailIdentifier, name: "member"))
     UserRole.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
     UserRole.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE", traits: {"smithy.api#enumValue" => "RESOURCE"}))
     UserRole.add_member(:system_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYSTEM_USER", traits: {"smithy.api#enumValue" => "SYSTEM_USER"}))
     UserRole.add_member(:remote_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMOTE_USER", traits: {"smithy.api#enumValue" => "REMOTE_USER"}))
-    Users.member = ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member")
+    Users.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member"))
 
     WorkMailService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.workmail#WorkMailService"

@@ -417,7 +417,7 @@ module Aws::AutoScaling
     AcceleratorManufacturer.add_member(:amd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMD", traits: {"smithy.api#enumValue" => "amd"}))
     AcceleratorManufacturer.add_member(:amazon_web_services, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMAZON_WEB_SERVICES", traits: {"smithy.api#enumValue" => "amazon-web-services"}))
     AcceleratorManufacturer.add_member(:xilinx, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "XILINX", traits: {"smithy.api#enumValue" => "xilinx"}))
-    AcceleratorManufacturers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AcceleratorManufacturer, name: "member")
+    AcceleratorManufacturers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceleratorManufacturer, name: "member"))
     AcceleratorName.add_member(:a100, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "A100", traits: {"smithy.api#enumValue" => "a100"}))
     AcceleratorName.add_member(:v100, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "V100", traits: {"smithy.api#enumValue" => "v100"}))
     AcceleratorName.add_member(:k80, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "K80", traits: {"smithy.api#enumValue" => "k80"}))
@@ -425,17 +425,17 @@ module Aws::AutoScaling
     AcceleratorName.add_member(:m60, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "M60", traits: {"smithy.api#enumValue" => "m60"}))
     AcceleratorName.add_member(:radeon_pro_v520, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RADEON_PRO_V520", traits: {"smithy.api#enumValue" => "radeon-pro-v520"}))
     AcceleratorName.add_member(:vu9_p, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VU9P", traits: {"smithy.api#enumValue" => "vu9p"}))
-    AcceleratorNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AcceleratorName, name: "member")
+    AcceleratorNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceleratorName, name: "member"))
     AcceleratorTotalMemoryMiBRequest.add_member(:min, ::Smithy::Schema::Shapes::MemberShape.new(target: NullablePositiveInteger, name: "Min"))
     AcceleratorTotalMemoryMiBRequest.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: NullablePositiveInteger, name: "Max"))
     AcceleratorTotalMemoryMiBRequest.type = Types::AcceleratorTotalMemoryMiBRequest
     AcceleratorType.add_member(:gpu, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GPU", traits: {"smithy.api#enumValue" => "gpu"}))
     AcceleratorType.add_member(:fpga, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FPGA", traits: {"smithy.api#enumValue" => "fpga"}))
     AcceleratorType.add_member(:inference, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFERENCE", traits: {"smithy.api#enumValue" => "inference"}))
-    AcceleratorTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AcceleratorType, name: "member")
+    AcceleratorTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceleratorType, name: "member"))
     ActiveInstanceRefreshNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "message"))
     ActiveInstanceRefreshNotFoundFault.type = Types::ActiveInstanceRefreshNotFoundFault
-    Activities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Activity, name: "member")
+    Activities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Activity, name: "member"))
     Activity.add_member(:activity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "ActivityId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Activity.add_member(:auto_scaling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "AutoScalingGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Activity.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "Description"))
@@ -449,18 +449,18 @@ module Aws::AutoScaling
     Activity.add_member(:auto_scaling_group_state, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroupState, name: "AutoScalingGroupState"))
     Activity.add_member(:auto_scaling_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "AutoScalingGroupARN"))
     Activity.type = Types::Activity
-    ActivityIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "member")
+    ActivityIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "member"))
     AdjustmentType.add_member(:adjustment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "AdjustmentType"))
     AdjustmentType.type = Types::AdjustmentType
-    AdjustmentTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdjustmentType, name: "member")
+    AdjustmentTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdjustmentType, name: "member"))
     Alarm.add_member(:alarm_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "AlarmName"))
     Alarm.add_member(:alarm_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "AlarmARN"))
     Alarm.type = Types::Alarm
-    AlarmList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member")
+    AlarmList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member"))
     AlarmSpecification.add_member(:alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmList, name: "Alarms"))
     AlarmSpecification.type = Types::AlarmSpecification
-    Alarms.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Alarm, name: "member")
-    AllowedInstanceTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedInstanceType, name: "member")
+    Alarms.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Alarm, name: "member"))
+    AllowedInstanceTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedInstanceType, name: "member"))
     AlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "message"))
     AlreadyExistsFault.type = Types::AlreadyExistsFault
     AttachInstancesInput.add_member(:instance_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceIds, name: "InstanceIds"))
@@ -518,8 +518,8 @@ module Aws::AutoScaling
     AutoScalingGroup.add_member(:availability_zone_impairment_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneImpairmentPolicy, name: "AvailabilityZoneImpairmentPolicy"))
     AutoScalingGroup.add_member(:capacity_reservation_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityReservationSpecification, name: "CapacityReservationSpecification"))
     AutoScalingGroup.type = Types::AutoScalingGroup
-    AutoScalingGroupNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member")
-    AutoScalingGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroup, name: "member")
+    AutoScalingGroupNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member"))
+    AutoScalingGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroup, name: "member"))
     AutoScalingInstanceDetails.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen19, name: "InstanceId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AutoScalingInstanceDetails.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "InstanceType"))
     AutoScalingInstanceDetails.add_member(:auto_scaling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "AutoScalingGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -531,14 +531,14 @@ module Aws::AutoScaling
     AutoScalingInstanceDetails.add_member(:protected_from_scale_in, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceProtected, name: "ProtectedFromScaleIn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AutoScalingInstanceDetails.add_member(:weighted_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen32, name: "WeightedCapacity"))
     AutoScalingInstanceDetails.type = Types::AutoScalingInstanceDetails
-    AutoScalingInstances.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingInstanceDetails, name: "member")
-    AutoScalingNotificationTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member")
+    AutoScalingInstances.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingInstanceDetails, name: "member"))
+    AutoScalingNotificationTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member"))
     AvailabilityZoneDistribution.add_member(:capacity_distribution_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityDistributionStrategy, name: "CapacityDistributionStrategy"))
     AvailabilityZoneDistribution.type = Types::AvailabilityZoneDistribution
     AvailabilityZoneImpairmentPolicy.add_member(:zonal_shift_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftEnabled, name: "ZonalShiftEnabled"))
     AvailabilityZoneImpairmentPolicy.add_member(:impaired_zone_health_check_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpairedZoneHealthCheckBehavior, name: "ImpairedZoneHealthCheckBehavior"))
     AvailabilityZoneImpairmentPolicy.type = Types::AvailabilityZoneImpairmentPolicy
-    AvailabilityZones.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member")
+    AvailabilityZones.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member"))
     BareMetal.add_member(:included, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCLUDED", traits: {"smithy.api#enumValue" => "included"}))
     BareMetal.add_member(:excluded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXCLUDED", traits: {"smithy.api#enumValue" => "excluded"}))
     BareMetal.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUIRED", traits: {"smithy.api#enumValue" => "required"}))
@@ -562,7 +562,7 @@ module Aws::AutoScaling
     BlockDeviceMapping.add_member(:ebs, ::Smithy::Schema::Shapes::MemberShape.new(target: Ebs, name: "Ebs"))
     BlockDeviceMapping.add_member(:no_device, ::Smithy::Schema::Shapes::MemberShape.new(target: NoDevice, name: "NoDevice"))
     BlockDeviceMapping.type = Types::BlockDeviceMapping
-    BlockDeviceMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BlockDeviceMapping, name: "member")
+    BlockDeviceMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockDeviceMapping, name: "member"))
     BurstablePerformance.add_member(:included, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCLUDED", traits: {"smithy.api#enumValue" => "included"}))
     BurstablePerformance.add_member(:excluded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXCLUDED", traits: {"smithy.api#enumValue" => "excluded"}))
     BurstablePerformance.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUIRED", traits: {"smithy.api#enumValue" => "required"}))
@@ -576,20 +576,20 @@ module Aws::AutoScaling
     CapacityForecast.add_member(:timestamps, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingForecastTimestamps, name: "Timestamps", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CapacityForecast.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingForecastValues, name: "Values", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CapacityForecast.type = Types::CapacityForecast
-    CapacityReservationIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AsciiStringMaxLen255, name: "member")
+    CapacityReservationIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AsciiStringMaxLen255, name: "member"))
     CapacityReservationPreference.add_member(:capacity_reservations_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CapacityReservationsOnly", traits: {"smithy.api#enumValue" => "capacity-reservations-only"}))
     CapacityReservationPreference.add_member(:capacity_reservations_first, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CapacityReservationsFirst", traits: {"smithy.api#enumValue" => "capacity-reservations-first"}))
     CapacityReservationPreference.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "None", traits: {"smithy.api#enumValue" => "none"}))
     CapacityReservationPreference.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Default", traits: {"smithy.api#enumValue" => "default"}))
-    CapacityReservationResourceGroupArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "member")
+    CapacityReservationResourceGroupArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "member"))
     CapacityReservationSpecification.add_member(:capacity_reservation_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityReservationPreference, name: "CapacityReservationPreference"))
     CapacityReservationSpecification.add_member(:capacity_reservation_target, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityReservationTarget, name: "CapacityReservationTarget"))
     CapacityReservationSpecification.type = Types::CapacityReservationSpecification
     CapacityReservationTarget.add_member(:capacity_reservation_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityReservationIds, name: "CapacityReservationIds"))
     CapacityReservationTarget.add_member(:capacity_reservation_resource_group_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityReservationResourceGroupArns, name: "CapacityReservationResourceGroupArns"))
     CapacityReservationTarget.type = Types::CapacityReservationTarget
-    CheckpointPercentages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonZeroIntPercent, name: "member")
-    ClassicLinkVPCSecurityGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member")
+    CheckpointPercentages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonZeroIntPercent, name: "member"))
+    ClassicLinkVPCSecurityGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member"))
     CompleteLifecycleActionInput.add_member(:lifecycle_hook_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AsciiStringMaxLen255, name: "LifecycleHookName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CompleteLifecycleActionInput.add_member(:auto_scaling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "AutoScalingGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CompleteLifecycleActionInput.add_member(:lifecycle_action_token, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleActionToken, name: "LifecycleActionToken"))
@@ -601,7 +601,7 @@ module Aws::AutoScaling
     CpuManufacturer.add_member(:amd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMD", traits: {"smithy.api#enumValue" => "amd"}))
     CpuManufacturer.add_member(:amazon_web_services, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMAZON_WEB_SERVICES", traits: {"smithy.api#enumValue" => "amazon-web-services"}))
     CpuManufacturer.add_member(:apple, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPLE", traits: {"smithy.api#enumValue" => "apple"}))
-    CpuManufacturers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CpuManufacturer, name: "member")
+    CpuManufacturers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CpuManufacturer, name: "member"))
     CpuPerformanceFactorRequest.add_member(:references, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceFactorReferenceSetRequest, name: "References", traits: {"smithy.api#xmlName" => "Reference"}))
     CpuPerformanceFactorRequest.type = Types::CpuPerformanceFactorRequest
     CreateAutoScalingGroupInput.add_member(:auto_scaling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "AutoScalingGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -856,14 +856,14 @@ module Aws::AutoScaling
     EnabledMetric.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "Metric"))
     EnabledMetric.add_member(:granularity, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "Granularity"))
     EnabledMetric.type = Types::EnabledMetric
-    EnabledMetrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledMetric, name: "member")
+    EnabledMetrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledMetric, name: "member"))
     EnterStandbyInput.add_member(:instance_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceIds, name: "InstanceIds"))
     EnterStandbyInput.add_member(:auto_scaling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "AutoScalingGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     EnterStandbyInput.add_member(:should_decrement_desired_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ShouldDecrementDesiredCapacity, name: "ShouldDecrementDesiredCapacity", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     EnterStandbyInput.type = Types::EnterStandbyInput
     EnterStandbyOutput.add_member(:activities, ::Smithy::Schema::Shapes::MemberShape.new(target: Activities, name: "Activities"))
     EnterStandbyOutput.type = Types::EnterStandbyOutput
-    ExcludedInstanceTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludedInstance, name: "member")
+    ExcludedInstanceTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludedInstance, name: "member"))
     ExecutePolicyInput.add_member(:auto_scaling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "AutoScalingGroupName"))
     ExecutePolicyInput.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "PolicyName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ExecutePolicyInput.add_member(:honor_cooldown, ::Smithy::Schema::Shapes::MemberShape.new(target: HonorCooldown, name: "HonorCooldown"))
@@ -879,11 +879,11 @@ module Aws::AutoScaling
     FailedScheduledUpdateGroupActionRequest.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen64, name: "ErrorCode"))
     FailedScheduledUpdateGroupActionRequest.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "ErrorMessage"))
     FailedScheduledUpdateGroupActionRequest.type = Types::FailedScheduledUpdateGroupActionRequest
-    FailedScheduledUpdateGroupActionRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedScheduledUpdateGroupActionRequest, name: "member")
+    FailedScheduledUpdateGroupActionRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedScheduledUpdateGroupActionRequest, name: "member"))
     Filter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "Name"))
     Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: Values, name: "Values"))
     Filter.type = Types::Filter
-    Filters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
+    Filters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     GetPredictiveScalingForecastInput.add_member(:auto_scaling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "AutoScalingGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GetPredictiveScalingForecastInput.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "PolicyName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GetPredictiveScalingForecastInput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType, name: "StartTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -907,8 +907,8 @@ module Aws::AutoScaling
     Instance.type = Types::Instance
     InstanceGeneration.add_member(:current, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CURRENT", traits: {"smithy.api#enumValue" => "current"}))
     InstanceGeneration.add_member(:previous, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PREVIOUS", traits: {"smithy.api#enumValue" => "previous"}))
-    InstanceGenerations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGeneration, name: "member")
-    InstanceIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen19, name: "member")
+    InstanceGenerations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGeneration, name: "member"))
+    InstanceIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen19, name: "member"))
     InstanceMaintenancePolicy.add_member(:min_healthy_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: IntPercentResettable, name: "MinHealthyPercentage"))
     InstanceMaintenancePolicy.add_member(:max_healthy_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: IntPercent100To200Resettable, name: "MaxHealthyPercentage"))
     InstanceMaintenancePolicy.type = Types::InstanceMaintenancePolicy
@@ -935,7 +935,7 @@ module Aws::AutoScaling
     InstanceRefresh.add_member(:desired_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DesiredConfiguration, name: "DesiredConfiguration"))
     InstanceRefresh.add_member(:rollback_details, ::Smithy::Schema::Shapes::MemberShape.new(target: RollbackDetails, name: "RollbackDetails"))
     InstanceRefresh.type = Types::InstanceRefresh
-    InstanceRefreshIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member")
+    InstanceRefreshIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member"))
     InstanceRefreshInProgressFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "message"))
     InstanceRefreshInProgressFault.type = Types::InstanceRefreshInProgressFault
     InstanceRefreshLivePoolProgress.add_member(:percentage_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: IntPercent, name: "PercentageComplete"))
@@ -957,7 +957,7 @@ module Aws::AutoScaling
     InstanceRefreshWarmPoolProgress.add_member(:percentage_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: IntPercent, name: "PercentageComplete"))
     InstanceRefreshWarmPoolProgress.add_member(:instances_to_update, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancesToUpdate, name: "InstancesToUpdate"))
     InstanceRefreshWarmPoolProgress.type = Types::InstanceRefreshWarmPoolProgress
-    InstanceRefreshes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceRefresh, name: "member")
+    InstanceRefreshes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceRefresh, name: "member"))
     InstanceRequirements.add_member(:v_cpu_count, ::Smithy::Schema::Shapes::MemberShape.new(target: VCpuCountRequest, name: "VCpuCount", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InstanceRequirements.add_member(:memory_mi_b, ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryMiBRequest, name: "MemoryMiB", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InstanceRequirements.add_member(:cpu_manufacturers, ::Smithy::Schema::Shapes::MemberShape.new(target: CpuManufacturers, name: "CpuManufacturers"))
@@ -986,7 +986,7 @@ module Aws::AutoScaling
     InstanceRequirements.type = Types::InstanceRequirements
     InstanceReusePolicy.add_member(:reuse_on_scale_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ReuseOnScaleIn, name: "ReuseOnScaleIn"))
     InstanceReusePolicy.type = Types::InstanceReusePolicy
-    Instances.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Instance, name: "member")
+    Instances.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Instance, name: "member"))
     InstancesDistribution.add_member(:on_demand_allocation_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "OnDemandAllocationStrategy"))
     InstancesDistribution.add_member(:on_demand_base_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: OnDemandBaseCapacity, name: "OnDemandBaseCapacity"))
     InstancesDistribution.add_member(:on_demand_percentage_above_base_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: OnDemandPercentageAboveBaseCapacity, name: "OnDemandPercentageAboveBaseCapacity"))
@@ -1019,8 +1019,8 @@ module Aws::AutoScaling
     LaunchConfiguration.add_member(:placement_tenancy, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen64, name: "PlacementTenancy"))
     LaunchConfiguration.add_member(:metadata_options, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceMetadataOptions, name: "MetadataOptions"))
     LaunchConfiguration.type = Types::LaunchConfiguration
-    LaunchConfigurationNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member")
-    LaunchConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchConfiguration, name: "member")
+    LaunchConfigurationNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member"))
+    LaunchConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchConfiguration, name: "member"))
     LaunchTemplate.add_member(:launch_template_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplateSpecification, name: "LaunchTemplateSpecification"))
     LaunchTemplate.add_member(:overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: Overrides, name: "Overrides"))
     LaunchTemplate.type = Types::LaunchTemplate
@@ -1043,7 +1043,7 @@ module Aws::AutoScaling
     LifecycleHook.add_member(:global_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalTimeout, name: "GlobalTimeout"))
     LifecycleHook.add_member(:default_result, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleActionResult, name: "DefaultResult"))
     LifecycleHook.type = Types::LifecycleHook
-    LifecycleHookNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AsciiStringMaxLen255, name: "member")
+    LifecycleHookNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AsciiStringMaxLen255, name: "member"))
     LifecycleHookSpecification.add_member(:lifecycle_hook_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AsciiStringMaxLen255, name: "LifecycleHookName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     LifecycleHookSpecification.add_member(:lifecycle_transition, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleTransition, name: "LifecycleTransition", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     LifecycleHookSpecification.add_member(:notification_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: AnyPrintableAsciiStringMaxLen4000, name: "NotificationMetadata"))
@@ -1052,8 +1052,8 @@ module Aws::AutoScaling
     LifecycleHookSpecification.add_member(:notification_target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationTargetResourceName, name: "NotificationTargetARN"))
     LifecycleHookSpecification.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "RoleARN"))
     LifecycleHookSpecification.type = Types::LifecycleHookSpecification
-    LifecycleHookSpecifications.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleHookSpecification, name: "member")
-    LifecycleHooks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleHook, name: "member")
+    LifecycleHookSpecifications.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleHookSpecification, name: "member"))
+    LifecycleHooks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleHook, name: "member"))
     LifecycleState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "Pending"}))
     LifecycleState.add_member(:pending_wait, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_WAIT", traits: {"smithy.api#enumValue" => "Pending:Wait"}))
     LifecycleState.add_member(:pending_proceed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_PROCEED", traits: {"smithy.api#enumValue" => "Pending:Proceed"}))
@@ -1079,26 +1079,26 @@ module Aws::AutoScaling
     LifecycleState.add_member(:warmed_hibernated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WARMED_HIBERNATED", traits: {"smithy.api#enumValue" => "Warmed:Hibernated"}))
     LimitExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "message"))
     LimitExceededFault.type = Types::LimitExceededFault
-    LoadBalancerNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member")
+    LoadBalancerNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member"))
     LoadBalancerState.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "LoadBalancerName"))
     LoadBalancerState.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "State"))
     LoadBalancerState.type = Types::LoadBalancerState
-    LoadBalancerStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerState, name: "member")
+    LoadBalancerStates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerState, name: "member"))
     LoadBalancerTargetGroupState.add_member(:load_balancer_target_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen511, name: "LoadBalancerTargetGroupARN"))
     LoadBalancerTargetGroupState.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "State"))
     LoadBalancerTargetGroupState.type = Types::LoadBalancerTargetGroupState
-    LoadBalancerTargetGroupStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerTargetGroupState, name: "member")
+    LoadBalancerTargetGroupStates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerTargetGroupState, name: "member"))
     LoadForecast.add_member(:timestamps, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingForecastTimestamps, name: "Timestamps", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     LoadForecast.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingForecastValues, name: "Values", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     LoadForecast.add_member(:metric_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMetricSpecification, name: "MetricSpecification", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     LoadForecast.type = Types::LoadForecast
-    LoadForecasts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoadForecast, name: "member")
+    LoadForecasts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadForecast, name: "member"))
     LocalStorage.add_member(:included, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCLUDED", traits: {"smithy.api#enumValue" => "included"}))
     LocalStorage.add_member(:excluded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXCLUDED", traits: {"smithy.api#enumValue" => "excluded"}))
     LocalStorage.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUIRED", traits: {"smithy.api#enumValue" => "required"}))
     LocalStorageType.add_member(:hdd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HDD", traits: {"smithy.api#enumValue" => "hdd"}))
     LocalStorageType.add_member(:ssd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSD", traits: {"smithy.api#enumValue" => "ssd"}))
-    LocalStorageTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LocalStorageType, name: "member")
+    LocalStorageTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalStorageType, name: "member"))
     MemoryGiBPerVCpuRequest.add_member(:min, ::Smithy::Schema::Shapes::MemberShape.new(target: NullablePositiveDouble, name: "Min"))
     MemoryGiBPerVCpuRequest.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: NullablePositiveDouble, name: "Max"))
     MemoryGiBPerVCpuRequest.type = Types::MemoryGiBPerVCpuRequest
@@ -1111,8 +1111,8 @@ module Aws::AutoScaling
     Metric.type = Types::Metric
     MetricCollectionType.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "Metric"))
     MetricCollectionType.type = Types::MetricCollectionType
-    MetricCollectionTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricCollectionType, name: "member")
-    MetricDataQueries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDataQuery, name: "member")
+    MetricCollectionTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricCollectionType, name: "member"))
+    MetricDataQueries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDataQuery, name: "member"))
     MetricDataQuery.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "Id", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     MetricDataQuery.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen1023, name: "Expression"))
     MetricDataQuery.add_member(:metric_stat, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStat, name: "MetricStat"))
@@ -1122,10 +1122,10 @@ module Aws::AutoScaling
     MetricDimension.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimensionName, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     MetricDimension.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimensionValue, name: "Value", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     MetricDimension.type = Types::MetricDimension
-    MetricDimensions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimension, name: "member")
+    MetricDimensions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimension, name: "member"))
     MetricGranularityType.add_member(:granularity, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "Granularity"))
     MetricGranularityType.type = Types::MetricGranularityType
-    MetricGranularityTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricGranularityType, name: "member")
+    MetricGranularityTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricGranularityType, name: "member"))
     MetricStat.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: Metric, name: "Metric", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     MetricStat.add_member(:stat, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMetricStat, name: "Stat", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     MetricStat.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricUnit, name: "Unit"))
@@ -1139,7 +1139,7 @@ module Aws::AutoScaling
     MetricType.add_member(:asg_average_network_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASGAverageNetworkIn", traits: {"smithy.api#enumValue" => "ASGAverageNetworkIn"}))
     MetricType.add_member(:asg_average_network_out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASGAverageNetworkOut", traits: {"smithy.api#enumValue" => "ASGAverageNetworkOut"}))
     MetricType.add_member(:alb_request_count_per_target, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALBRequestCountPerTarget", traits: {"smithy.api#enumValue" => "ALBRequestCountPerTarget"}))
-    Metrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member")
+    Metrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member"))
     MixedInstancesPolicy.add_member(:launch_template, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplate, name: "LaunchTemplate"))
     MixedInstancesPolicy.add_member(:instances_distribution, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancesDistribution, name: "InstancesDistribution"))
     MixedInstancesPolicy.type = Types::MixedInstancesPolicy
@@ -1153,13 +1153,13 @@ module Aws::AutoScaling
     NotificationConfiguration.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "TopicARN"))
     NotificationConfiguration.add_member(:notification_type, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "NotificationType"))
     NotificationConfiguration.type = Types::NotificationConfiguration
-    NotificationConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationConfiguration, name: "member")
-    Overrides.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplateOverrides, name: "member")
+    NotificationConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationConfiguration, name: "member"))
+    Overrides.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplateOverrides, name: "member"))
     PerformanceFactorReferenceRequest.add_member(:instance_family, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "InstanceFamily"))
     PerformanceFactorReferenceRequest.type = Types::PerformanceFactorReferenceRequest
-    PerformanceFactorReferenceSetRequest.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceFactorReferenceRequest, name: "member", traits: {"smithy.api#xmlName" => "item"})
-    PolicyNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "member")
-    PolicyTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen64, name: "member")
+    PerformanceFactorReferenceSetRequest.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceFactorReferenceRequest, name: "member", traits: {"smithy.api#xmlName" => "item"}))
+    PolicyNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "member"))
+    PolicyTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen64, name: "member"))
     PredefinedLoadMetricType.add_member(:asg_total_cpu_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASGTotalCPUUtilization", traits: {"smithy.api#enumValue" => "ASGTotalCPUUtilization"}))
     PredefinedLoadMetricType.add_member(:asg_total_network_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASGTotalNetworkIn", traits: {"smithy.api#enumValue" => "ASGTotalNetworkIn"}))
     PredefinedLoadMetricType.add_member(:asg_total_network_out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASGTotalNetworkOut", traits: {"smithy.api#enumValue" => "ASGTotalNetworkOut"}))
@@ -1187,8 +1187,8 @@ module Aws::AutoScaling
     PredictiveScalingCustomizedLoadMetric.type = Types::PredictiveScalingCustomizedLoadMetric
     PredictiveScalingCustomizedScalingMetric.add_member(:metric_data_queries, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDataQueries, name: "MetricDataQueries", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     PredictiveScalingCustomizedScalingMetric.type = Types::PredictiveScalingCustomizedScalingMetric
-    PredictiveScalingForecastTimestamps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType, name: "member")
-    PredictiveScalingForecastValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricScale, name: "member")
+    PredictiveScalingForecastTimestamps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType, name: "member"))
+    PredictiveScalingForecastValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricScale, name: "member"))
     PredictiveScalingMaxCapacityBreachBehavior.add_member(:honor_max_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HonorMaxCapacity", traits: {"smithy.api#enumValue" => "HonorMaxCapacity"}))
     PredictiveScalingMaxCapacityBreachBehavior.add_member(:increase_max_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IncreaseMaxCapacity", traits: {"smithy.api#enumValue" => "IncreaseMaxCapacity"}))
     PredictiveScalingMetricSpecification.add_member(:target_value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricScale, name: "TargetValue", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1199,7 +1199,7 @@ module Aws::AutoScaling
     PredictiveScalingMetricSpecification.add_member(:customized_load_metric_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingCustomizedLoadMetric, name: "CustomizedLoadMetricSpecification"))
     PredictiveScalingMetricSpecification.add_member(:customized_capacity_metric_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingCustomizedCapacityMetric, name: "CustomizedCapacityMetricSpecification"))
     PredictiveScalingMetricSpecification.type = Types::PredictiveScalingMetricSpecification
-    PredictiveScalingMetricSpecifications.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMetricSpecification, name: "member")
+    PredictiveScalingMetricSpecifications.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingMetricSpecification, name: "member"))
     PredictiveScalingMode.add_member(:forecast_and_scale, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ForecastAndScale", traits: {"smithy.api#enumValue" => "ForecastAndScale"}))
     PredictiveScalingMode.add_member(:forecast_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ForecastOnly", traits: {"smithy.api#enumValue" => "ForecastOnly"}))
     PredictiveScalingPredefinedLoadMetric.add_member(:predefined_metric_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedLoadMetricType, name: "PredefinedMetricType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1211,10 +1211,10 @@ module Aws::AutoScaling
     PredictiveScalingPredefinedScalingMetric.add_member(:predefined_metric_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedScalingMetricType, name: "PredefinedMetricType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     PredictiveScalingPredefinedScalingMetric.add_member(:resource_label, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen1023, name: "ResourceLabel"))
     PredictiveScalingPredefinedScalingMetric.type = Types::PredictiveScalingPredefinedScalingMetric
-    ProcessNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member")
+    ProcessNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member"))
     ProcessType.add_member(:process_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "ProcessName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ProcessType.type = Types::ProcessType
-    Processes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessType, name: "member")
+    Processes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessType, name: "member"))
     PutLifecycleHookInput.add_member(:lifecycle_hook_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AsciiStringMaxLen255, name: "LifecycleHookName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     PutLifecycleHookInput.add_member(:auto_scaling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "AutoScalingGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     PutLifecycleHookInput.add_member(:lifecycle_transition, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleTransition, name: "LifecycleTransition"))
@@ -1319,7 +1319,7 @@ module Aws::AutoScaling
     ScalingActivityStatusCode.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
     ScalingActivityStatusCode.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Cancelled", traits: {"smithy.api#enumValue" => "Cancelled"}))
     ScalingActivityStatusCode.add_member(:waiting_for_connection_draining, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WaitingForConnectionDraining", traits: {"smithy.api#enumValue" => "WaitingForConnectionDraining"}))
-    ScalingPolicies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingPolicy, name: "member")
+    ScalingPolicies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingPolicy, name: "member"))
     ScalingPolicy.add_member(:auto_scaling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "AutoScalingGroupName"))
     ScalingPolicy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "PolicyName"))
     ScalingPolicy.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "PolicyARN"))
@@ -1337,7 +1337,7 @@ module Aws::AutoScaling
     ScalingPolicy.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingPolicyEnabled, name: "Enabled"))
     ScalingPolicy.add_member(:predictive_scaling_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveScalingConfiguration, name: "PredictiveScalingConfiguration"))
     ScalingPolicy.type = Types::ScalingPolicy
-    ScheduledActionNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member")
+    ScheduledActionNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "member"))
     ScheduledUpdateGroupAction.add_member(:auto_scaling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "AutoScalingGroupName"))
     ScheduledUpdateGroupAction.add_member(:scheduled_action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "ScheduledActionName"))
     ScheduledUpdateGroupAction.add_member(:scheduled_action_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "ScheduledActionARN"))
@@ -1359,9 +1359,9 @@ module Aws::AutoScaling
     ScheduledUpdateGroupActionRequest.add_member(:desired_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroupDesiredCapacity, name: "DesiredCapacity"))
     ScheduledUpdateGroupActionRequest.add_member(:time_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "TimeZone"))
     ScheduledUpdateGroupActionRequest.type = Types::ScheduledUpdateGroupActionRequest
-    ScheduledUpdateGroupActionRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledUpdateGroupActionRequest, name: "member")
-    ScheduledUpdateGroupActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledUpdateGroupAction, name: "member")
-    SecurityGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "member")
+    ScheduledUpdateGroupActionRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledUpdateGroupActionRequest, name: "member"))
+    ScheduledUpdateGroupActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledUpdateGroupAction, name: "member"))
+    SecurityGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "member"))
     ServiceLinkedRoleFailure.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "message"))
     ServiceLinkedRoleFailure.type = Types::ServiceLinkedRoleFailure
     SetDesiredCapacityInput.add_member(:auto_scaling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "AutoScalingGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1391,14 +1391,14 @@ module Aws::AutoScaling
     StepAdjustment.add_member(:metric_interval_upper_bound, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricScale, name: "MetricIntervalUpperBound"))
     StepAdjustment.add_member(:scaling_adjustment, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyIncrement, name: "ScalingAdjustment", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StepAdjustment.type = Types::StepAdjustment
-    StepAdjustments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StepAdjustment, name: "member")
+    StepAdjustments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StepAdjustment, name: "member"))
     SuspendProcessesInput.add_member(:auto_scaling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "AutoScalingGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SuspendProcessesInput.add_member(:scaling_processes, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessNames, name: "ScalingProcesses"))
     SuspendProcessesInput.type = Types::SuspendProcessesInput
     SuspendedProcess.add_member(:process_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "ProcessName"))
     SuspendedProcess.add_member(:suspension_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "SuspensionReason"))
     SuspendedProcess.type = Types::SuspendedProcess
-    SuspendedProcesses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuspendedProcess, name: "member")
+    SuspendedProcesses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuspendedProcess, name: "member"))
     Tag.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "ResourceId"))
     Tag.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "ResourceType"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1411,15 +1411,15 @@ module Aws::AutoScaling
     TagDescription.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     TagDescription.add_member(:propagate_at_launch, ::Smithy::Schema::Shapes::MemberShape.new(target: PropagateAtLaunch, name: "PropagateAtLaunch"))
     TagDescription.type = Types::TagDescription
-    TagDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagDescription, name: "member")
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
-    TargetGroupARNs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen511, name: "member")
+    TagDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagDescription, name: "member"))
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    TargetGroupARNs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen511, name: "member"))
     TargetTrackingConfiguration.add_member(:predefined_metric_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedMetricSpecification, name: "PredefinedMetricSpecification"))
     TargetTrackingConfiguration.add_member(:customized_metric_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomizedMetricSpecification, name: "CustomizedMetricSpecification"))
     TargetTrackingConfiguration.add_member(:target_value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricScale, name: "TargetValue", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TargetTrackingConfiguration.add_member(:disable_scale_in, ::Smithy::Schema::Shapes::MemberShape.new(target: DisableScaleIn, name: "DisableScaleIn"))
     TargetTrackingConfiguration.type = Types::TargetTrackingConfiguration
-    TargetTrackingMetricDataQueries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTrackingMetricDataQuery, name: "member")
+    TargetTrackingMetricDataQueries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTrackingMetricDataQuery, name: "member"))
     TargetTrackingMetricDataQuery.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen64, name: "Id", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TargetTrackingMetricDataQuery.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen2047, name: "Expression"))
     TargetTrackingMetricDataQuery.add_member(:metric_stat, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTrackingMetricStat, name: "MetricStat"))
@@ -1437,7 +1437,7 @@ module Aws::AutoScaling
     TerminateInstanceInAutoScalingGroupInput.type = Types::TerminateInstanceInAutoScalingGroupInput
     TerminateInstanceInAutoScalingGroupOutput.add_member(:activity, ::Smithy::Schema::Shapes::MemberShape.new(target: Activity, name: "Activity"))
     TerminateInstanceInAutoScalingGroupOutput.type = Types::TerminateInstanceInAutoScalingGroupOutput
-    TerminationPolicies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen1600, name: "member")
+    TerminationPolicies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen1600, name: "member"))
     TotalLocalStorageGBRequest.add_member(:min, ::Smithy::Schema::Shapes::MemberShape.new(target: NullablePositiveDouble, name: "Min"))
     TotalLocalStorageGBRequest.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: NullablePositiveDouble, name: "Max"))
     TotalLocalStorageGBRequest.type = Types::TotalLocalStorageGBRequest
@@ -1449,8 +1449,8 @@ module Aws::AutoScaling
     TrafficSourceState.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen511, name: "Identifier"))
     TrafficSourceState.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen511, name: "Type"))
     TrafficSourceState.type = Types::TrafficSourceState
-    TrafficSourceStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficSourceState, name: "member")
-    TrafficSources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficSourceIdentifier, name: "member")
+    TrafficSourceStates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficSourceState, name: "member"))
+    TrafficSources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficSourceIdentifier, name: "member"))
     UpdateAutoScalingGroupInput.add_member(:auto_scaling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "AutoScalingGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UpdateAutoScalingGroupInput.add_member(:launch_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen255, name: "LaunchConfigurationName"))
     UpdateAutoScalingGroupInput.add_member(:launch_template, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplateSpecification, name: "LaunchTemplate"))
@@ -1481,7 +1481,7 @@ module Aws::AutoScaling
     VCpuCountRequest.add_member(:min, ::Smithy::Schema::Shapes::MemberShape.new(target: NullablePositiveInteger, name: "Min", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     VCpuCountRequest.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: NullablePositiveInteger, name: "Max"))
     VCpuCountRequest.type = Types::VCpuCountRequest
-    Values.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "member")
+    Values.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "member"))
     WarmPoolConfiguration.add_member(:max_group_prepared_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxGroupPreparedCapacity, name: "MaxGroupPreparedCapacity"))
     WarmPoolConfiguration.add_member(:min_size, ::Smithy::Schema::Shapes::MemberShape.new(target: WarmPoolMinSize, name: "MinSize"))
     WarmPoolConfiguration.add_member(:pool_state, ::Smithy::Schema::Shapes::MemberShape.new(target: WarmPoolState, name: "PoolState"))

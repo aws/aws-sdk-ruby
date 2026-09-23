@@ -382,7 +382,7 @@ module Aws::EventBridge
     ApiDestinationHttpMethod.add_member(:put, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUT", traits: {"smithy.api#enumValue" => "PUT"}))
     ApiDestinationHttpMethod.add_member(:patch, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PATCH", traits: {"smithy.api#enumValue" => "PATCH"}))
     ApiDestinationHttpMethod.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE", traits: {"smithy.api#enumValue" => "DELETE"}))
-    ApiDestinationResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApiDestination, name: "member")
+    ApiDestinationResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiDestination, name: "member"))
     ApiDestinationState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     ApiDestinationState.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     AppSyncParameters.add_member(:graph_ql_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: GraphQLOperation, name: "GraphQLOperation"))
@@ -396,7 +396,7 @@ module Aws::EventBridge
     Archive.add_member(:event_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "EventCount", traits: {"smithy.api#default" => 0}))
     Archive.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
     Archive.type = Types::Archive
-    ArchiveResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Archive, name: "member")
+    ArchiveResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Archive, name: "member"))
     ArchiveState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     ArchiveState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     ArchiveState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
@@ -424,7 +424,7 @@ module Aws::EventBridge
     CancelReplayResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplayState, name: "State"))
     CancelReplayResponse.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplayStateReason, name: "StateReason"))
     CancelReplayResponse.type = Types::CancelReplayResponse
-    CapacityProviderStrategy.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategyItem, name: "member")
+    CapacityProviderStrategy.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategyItem, name: "member"))
     CapacityProviderStrategyItem.add_member(:capacity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProvider, name: "capacityProvider", traits: {"smithy.api#required" => {}}))
     CapacityProviderStrategyItem.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategyItemWeight, name: "weight", traits: {"smithy.api#default" => 0}))
     CapacityProviderStrategyItem.add_member(:base, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategyItemBase, name: "base", traits: {"smithy.api#default" => 0}))
@@ -461,12 +461,12 @@ module Aws::EventBridge
     ConnectionBodyParameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Value"))
     ConnectionBodyParameter.add_member(:is_value_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsValueSecret", traits: {"smithy.api#default" => false}))
     ConnectionBodyParameter.type = Types::ConnectionBodyParameter
-    ConnectionBodyParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionBodyParameter, name: "member")
+    ConnectionBodyParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionBodyParameter, name: "member"))
     ConnectionHeaderParameter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderKey, name: "Key"))
     ConnectionHeaderParameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderValueSensitive, name: "Value"))
     ConnectionHeaderParameter.add_member(:is_value_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsValueSecret", traits: {"smithy.api#default" => false}))
     ConnectionHeaderParameter.type = Types::ConnectionHeaderParameter
-    ConnectionHeaderParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionHeaderParameter, name: "member")
+    ConnectionHeaderParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionHeaderParameter, name: "member"))
     ConnectionHttpParameters.add_member(:header_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionHeaderParametersList, name: "HeaderParameters"))
     ConnectionHttpParameters.add_member(:query_string_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionQueryStringParametersList, name: "QueryStringParameters"))
     ConnectionHttpParameters.add_member(:body_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionBodyParametersList, name: "BodyParameters"))
@@ -485,8 +485,8 @@ module Aws::EventBridge
     ConnectionQueryStringParameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStringValueSensitive, name: "Value"))
     ConnectionQueryStringParameter.add_member(:is_value_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsValueSecret", traits: {"smithy.api#default" => false}))
     ConnectionQueryStringParameter.type = Types::ConnectionQueryStringParameter
-    ConnectionQueryStringParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionQueryStringParameter, name: "member")
-    ConnectionResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Connection, name: "member")
+    ConnectionQueryStringParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionQueryStringParameter, name: "member"))
+    ConnectionResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Connection, name: "member"))
     ConnectionState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     ConnectionState.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
     ConnectionState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -786,8 +786,8 @@ module Aws::EventBridge
     Endpoint.type = Types::Endpoint
     EndpointEventBus.add_member(:event_bus_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonPartnerEventBusArn, name: "EventBusArn", traits: {"smithy.api#required" => {}}))
     EndpointEventBus.type = Types::EndpointEventBus
-    EndpointEventBusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointEventBus, name: "member")
-    EndpointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "member")
+    EndpointEventBusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointEventBus, name: "member"))
+    EndpointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "member"))
     EndpointState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     EndpointState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     EndpointState.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
@@ -802,8 +802,8 @@ module Aws::EventBridge
     EventBus.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
     EventBus.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     EventBus.type = Types::EventBus
-    EventBusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventBus, name: "member")
-    EventResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventResource, name: "member")
+    EventBusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventBus, name: "member"))
+    EventResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventResource, name: "member"))
     EventSource.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Arn"))
     EventSource.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CreatedBy"))
     EventSource.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
@@ -811,15 +811,15 @@ module Aws::EventBridge
     EventSource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     EventSource.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSourceState, name: "State"))
     EventSource.type = Types::EventSource
-    EventSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventSource, name: "member")
+    EventSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSource, name: "member"))
     EventSourceState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     EventSourceState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     EventSourceState.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
     FailoverConfig.add_member(:primary, ::Smithy::Schema::Shapes::MemberShape.new(target: Primary, name: "Primary", traits: {"smithy.api#required" => {}}))
     FailoverConfig.add_member(:secondary, ::Smithy::Schema::Shapes::MemberShape.new(target: Secondary, name: "Secondary", traits: {"smithy.api#required" => {}}))
     FailoverConfig.type = Types::FailoverConfig
-    HeaderParametersMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderKey, name: "key")
-    HeaderParametersMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderValue, name: "value")
+    HeaderParametersMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderKey, name: "key"))
+    HeaderParametersMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderValue, name: "value"))
     HttpParameters.add_member(:path_parameter_values, ::Smithy::Schema::Shapes::MemberShape.new(target: PathParameterList, name: "PathParameterValues"))
     HttpParameters.add_member(:header_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderParametersMap, name: "HeaderParameters"))
     HttpParameters.add_member(:query_string_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStringParametersMap, name: "QueryStringParameters"))
@@ -963,16 +963,16 @@ module Aws::EventBridge
     PartnerEventSourceAccount.add_member(:expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ExpirationTime"))
     PartnerEventSourceAccount.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSourceState, name: "State"))
     PartnerEventSourceAccount.type = Types::PartnerEventSourceAccount
-    PartnerEventSourceAccountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerEventSourceAccount, name: "member")
-    PartnerEventSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerEventSource, name: "member")
-    PathParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PathParameter, name: "member")
+    PartnerEventSourceAccountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerEventSourceAccount, name: "member"))
+    PartnerEventSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerEventSource, name: "member"))
+    PathParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PathParameter, name: "member"))
     PlacementConstraint.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementConstraintType, name: "type"))
     PlacementConstraint.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementConstraintExpression, name: "expression"))
     PlacementConstraint.type = Types::PlacementConstraint
     PlacementConstraintType.add_member(:distinct_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISTINCT_INSTANCE", traits: {"smithy.api#enumValue" => "distinctInstance"}))
     PlacementConstraintType.add_member(:member_of, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEMBER_OF", traits: {"smithy.api#enumValue" => "memberOf"}))
-    PlacementConstraints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementConstraint, name: "member")
-    PlacementStrategies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStrategy, name: "member")
+    PlacementConstraints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementConstraint, name: "member"))
+    PlacementStrategies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStrategy, name: "member"))
     PlacementStrategy.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStrategyType, name: "type"))
     PlacementStrategy.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStrategyField, name: "field"))
     PlacementStrategy.type = Types::PlacementStrategy
@@ -995,7 +995,7 @@ module Aws::EventBridge
     PutEventsRequestEntry.add_member(:event_bus_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonPartnerEventBusNameOrArn, name: "EventBusName"))
     PutEventsRequestEntry.add_member(:trace_header, ::Smithy::Schema::Shapes::MemberShape.new(target: TraceHeader, name: "TraceHeader"))
     PutEventsRequestEntry.type = Types::PutEventsRequestEntry
-    PutEventsRequestEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PutEventsRequestEntry, name: "member")
+    PutEventsRequestEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PutEventsRequestEntry, name: "member"))
     PutEventsResponse.add_member(:failed_entry_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "FailedEntryCount", traits: {"smithy.api#default" => 0}))
     PutEventsResponse.add_member(:entries, ::Smithy::Schema::Shapes::MemberShape.new(target: PutEventsResultEntryList, name: "Entries"))
     PutEventsResponse.type = Types::PutEventsResponse
@@ -1003,7 +1003,7 @@ module Aws::EventBridge
     PutEventsResultEntry.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     PutEventsResultEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage"))
     PutEventsResultEntry.type = Types::PutEventsResultEntry
-    PutEventsResultEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PutEventsResultEntry, name: "member")
+    PutEventsResultEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PutEventsResultEntry, name: "member"))
     PutPartnerEventsRequest.add_member(:entries, ::Smithy::Schema::Shapes::MemberShape.new(target: PutPartnerEventsRequestEntryList, name: "Entries", traits: {"smithy.api#required" => {}}))
     PutPartnerEventsRequest.type = Types::PutPartnerEventsRequest
     PutPartnerEventsRequestEntry.add_member(:time, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTime, name: "Time"))
@@ -1012,7 +1012,7 @@ module Aws::EventBridge
     PutPartnerEventsRequestEntry.add_member(:detail_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DetailType"))
     PutPartnerEventsRequestEntry.add_member(:detail, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Detail"))
     PutPartnerEventsRequestEntry.type = Types::PutPartnerEventsRequestEntry
-    PutPartnerEventsRequestEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PutPartnerEventsRequestEntry, name: "member")
+    PutPartnerEventsRequestEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PutPartnerEventsRequestEntry, name: "member"))
     PutPartnerEventsResponse.add_member(:failed_entry_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "FailedEntryCount", traits: {"smithy.api#default" => 0}))
     PutPartnerEventsResponse.add_member(:entries, ::Smithy::Schema::Shapes::MemberShape.new(target: PutPartnerEventsResultEntryList, name: "Entries"))
     PutPartnerEventsResponse.type = Types::PutPartnerEventsResponse
@@ -1020,7 +1020,7 @@ module Aws::EventBridge
     PutPartnerEventsResultEntry.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     PutPartnerEventsResultEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage"))
     PutPartnerEventsResultEntry.type = Types::PutPartnerEventsResultEntry
-    PutPartnerEventsResultEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PutPartnerEventsResultEntry, name: "member")
+    PutPartnerEventsResultEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PutPartnerEventsResultEntry, name: "member"))
     PutPermissionRequest.add_member(:event_bus_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonPartnerEventBusName, name: "EventBusName"))
     PutPermissionRequest.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "Action"))
     PutPermissionRequest.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: Principal, name: "Principal"))
@@ -1050,9 +1050,9 @@ module Aws::EventBridge
     PutTargetsResultEntry.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     PutTargetsResultEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage"))
     PutTargetsResultEntry.type = Types::PutTargetsResultEntry
-    PutTargetsResultEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PutTargetsResultEntry, name: "member")
-    QueryStringParametersMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStringKey, name: "key")
-    QueryStringParametersMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStringValue, name: "value")
+    PutTargetsResultEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PutTargetsResultEntry, name: "member"))
+    QueryStringParametersMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStringKey, name: "key"))
+    QueryStringParametersMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStringValue, name: "value"))
     RedshiftDataParameters.add_member(:secret_manager_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftSecretManagerArn, name: "SecretManagerArn"))
     RedshiftDataParameters.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: Database, name: "Database", traits: {"smithy.api#required" => {}}))
     RedshiftDataParameters.add_member(:db_user, ::Smithy::Schema::Shapes::MemberShape.new(target: DbUser, name: "DbUser"))
@@ -1077,7 +1077,7 @@ module Aws::EventBridge
     RemoveTargetsResultEntry.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     RemoveTargetsResultEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage"))
     RemoveTargetsResultEntry.type = Types::RemoveTargetsResultEntry
-    RemoveTargetsResultEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RemoveTargetsResultEntry, name: "member")
+    RemoveTargetsResultEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RemoveTargetsResultEntry, name: "member"))
     Replay.add_member(:replay_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplayName, name: "ReplayName"))
     Replay.add_member(:event_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchiveArn, name: "EventSourceArn"))
     Replay.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplayState, name: "State"))
@@ -1091,8 +1091,8 @@ module Aws::EventBridge
     ReplayDestination.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn", traits: {"smithy.api#required" => {}}))
     ReplayDestination.add_member(:filter_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplayDestinationFilters, name: "FilterArns"))
     ReplayDestination.type = Types::ReplayDestination
-    ReplayDestinationFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
-    ReplayList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Replay, name: "member")
+    ReplayDestinationFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
+    ReplayList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Replay, name: "member"))
     ReplayState.add_member(:starting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTING", traits: {"smithy.api#enumValue" => "STARTING"}))
     ReplayState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     ReplayState.add_member(:cancelling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLING", traits: {"smithy.api#enumValue" => "CANCELLING"}))
@@ -1122,8 +1122,8 @@ module Aws::EventBridge
     Rule.add_member(:managed_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedBy, name: "ManagedBy"))
     Rule.add_member(:event_bus_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventBusName, name: "EventBusName"))
     Rule.type = Types::Rule
-    RuleNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleName, name: "member")
-    RuleResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "member")
+    RuleNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleName, name: "member"))
+    RuleResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "member"))
     RuleState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     RuleState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     RuleState.add_member(:enabled_with_all_cloudtrail_management_events, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS", traits: {"smithy.api#enumValue" => "ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS"}))
@@ -1132,17 +1132,17 @@ module Aws::EventBridge
     RunCommandTarget.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCommandTargetKey, name: "Key", traits: {"smithy.api#required" => {}}))
     RunCommandTarget.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCommandTargetValues, name: "Values", traits: {"smithy.api#required" => {}}))
     RunCommandTarget.type = Types::RunCommandTarget
-    RunCommandTargetValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RunCommandTargetValue, name: "member")
-    RunCommandTargets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RunCommandTarget, name: "member")
+    RunCommandTargetValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCommandTargetValue, name: "member"))
+    RunCommandTargets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCommandTarget, name: "member"))
     SageMakerPipelineParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerPipelineParameterName, name: "Name", traits: {"smithy.api#required" => {}}))
     SageMakerPipelineParameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerPipelineParameterValue, name: "Value", traits: {"smithy.api#required" => {}}))
     SageMakerPipelineParameter.type = Types::SageMakerPipelineParameter
-    SageMakerPipelineParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerPipelineParameter, name: "member")
+    SageMakerPipelineParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerPipelineParameter, name: "member"))
     SageMakerPipelineParameters.add_member(:pipeline_parameter_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerPipelineParameterList, name: "PipelineParameterList"))
     SageMakerPipelineParameters.type = Types::SageMakerPipelineParameters
     Secondary.add_member(:route, ::Smithy::Schema::Shapes::MemberShape.new(target: Route, name: "Route", traits: {"smithy.api#required" => {}}))
     Secondary.type = Types::Secondary
-    Sqls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Sql, name: "member")
+    Sqls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Sql, name: "member"))
     SqsParameters.add_member(:message_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageGroupId, name: "MessageGroupId"))
     SqsParameters.type = Types::SqsParameters
     StartReplayRequest.add_member(:replay_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplayName, name: "ReplayName", traits: {"smithy.api#required" => {}}))
@@ -1157,12 +1157,12 @@ module Aws::EventBridge
     StartReplayResponse.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplayStateReason, name: "StateReason"))
     StartReplayResponse.add_member(:replay_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ReplayStartTime"))
     StartReplayResponse.type = Types::StartReplayResponse
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -1185,8 +1185,8 @@ module Aws::EventBridge
     Target.add_member(:retry_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryPolicy, name: "RetryPolicy"))
     Target.add_member(:app_sync_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: AppSyncParameters, name: "AppSyncParameters"))
     Target.type = Types::Target
-    TargetIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetId, name: "member")
-    TargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "member")
+    TargetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetId, name: "member"))
+    TargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "member"))
     TestEventPatternRequest.add_member(:event_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: EventPattern, name: "EventPattern", traits: {"smithy.api#required" => {}}))
     TestEventPatternRequest.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Event", traits: {"smithy.api#required" => {}}))
     TestEventPatternRequest.type = Types::TestEventPatternRequest
@@ -1194,8 +1194,8 @@ module Aws::EventBridge
     TestEventPatternResponse.type = Types::TestEventPatternResponse
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ThrottlingException.type = Types::ThrottlingException
-    TransformerPaths.key = ::Smithy::Schema::Shapes::MemberShape.new(target: InputTransformerPathKey, name: "key")
-    TransformerPaths.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetInputPath, name: "value")
+    TransformerPaths.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: InputTransformerPathKey, name: "key"))
+    TransformerPaths.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetInputPath, name: "value"))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest

@@ -40,7 +40,7 @@ module Aws::BCMRecommendedActions
     ActionFilter.add_member(:match_option, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOption, name: "matchOption", traits: {"smithy.api#required" => {}}))
     ActionFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, name: "values", traits: {"smithy.api#required" => {}}))
     ActionFilter.type = Types::ActionFilter
-    ActionFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionFilter, name: "member")
+    ActionFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionFilter, name: "member"))
     ActionType.add_member(:add_alternate_billing_contact, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADD_ALTERNATE_BILLING_CONTACT", traits: {"smithy.api#enumValue" => "ADD_ALTERNATE_BILLING_CONTACT"}))
     ActionType.add_member(:create_anomaly_monitor, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_ANOMALY_MONITOR", traits: {"smithy.api#enumValue" => "CREATE_ANOMALY_MONITOR"}))
     ActionType.add_member(:create_budget, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_BUDGET", traits: {"smithy.api#enumValue" => "CREATE_BUDGET"}))
@@ -59,8 +59,8 @@ module Aws::BCMRecommendedActions
     ActionType.add_member(:update_invalid_payment_method, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_INVALID_PAYMENT_METHOD", traits: {"smithy.api#enumValue" => "UPDATE_INVALID_PAYMENT_METHOD"}))
     ActionType.add_member(:update_tax_exemption_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_TAX_EXEMPTION_CERTIFICATE", traits: {"smithy.api#enumValue" => "UPDATE_TAX_EXEMPTION_CERTIFICATE"}))
     ActionType.add_member(:update_tax_registration_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_TAX_REGISTRATION_NUMBER", traits: {"smithy.api#enumValue" => "UPDATE_TAX_REGISTRATION_NUMBER"}))
-    Context.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    Context.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    Context.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    Context.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     Feature.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
     Feature.add_member(:budgets, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUDGETS", traits: {"smithy.api#enumValue" => "BUDGETS"}))
     Feature.add_member(:cost_anomaly_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COST_ANOMALY_DETECTION", traits: {"smithy.api#enumValue" => "COST_ANOMALY_DETECTION"}))
@@ -74,7 +74,7 @@ module Aws::BCMRecommendedActions
     FilterName.add_member(:feature, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FEATURE", traits: {"smithy.api#enumValue" => "FEATURE"}))
     FilterName.add_member(:severity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY", traits: {"smithy.api#enumValue" => "SEVERITY"}))
     FilterName.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TYPE", traits: {"smithy.api#enumValue" => "TYPE"}))
-    FilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member")
+    FilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
     ListRecommendedActionsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestFilter, name: "filter"))
@@ -86,7 +86,7 @@ module Aws::BCMRecommendedActions
     ListRecommendedActionsResponse.type = Types::ListRecommendedActionsResponse
     MatchOption.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUALS", traits: {"smithy.api#enumValue" => "EQUALS"}))
     MatchOption.add_member(:not_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_EQUALS", traits: {"smithy.api#enumValue" => "NOT_EQUALS"}))
-    NextSteps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NextStep, name: "member")
+    NextSteps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NextStep, name: "member"))
     RecommendedAction.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id"))
     RecommendedAction.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionType, name: "type"))
     RecommendedAction.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId"))
@@ -96,7 +96,7 @@ module Aws::BCMRecommendedActions
     RecommendedAction.add_member(:next_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: NextSteps, name: "nextSteps"))
     RecommendedAction.add_member(:last_updated_time_stamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "lastUpdatedTimeStamp"))
     RecommendedAction.type = Types::RecommendedAction
-    RecommendedActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendedAction, name: "member")
+    RecommendedActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendedAction, name: "member"))
     RequestFilter.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionFilterList, name: "actions"))
     RequestFilter.type = Types::RequestFilter
     Severity.add_member(:info, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFO", traits: {"smithy.api#enumValue" => "INFO"}))
@@ -111,7 +111,7 @@ module Aws::BCMRecommendedActions
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "unknownOperation"}))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "cannotParse"}))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "fieldValidationFailed"}))

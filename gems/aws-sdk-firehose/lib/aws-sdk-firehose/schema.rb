@@ -409,8 +409,8 @@ module Aws::Firehose
     CloudWatchLoggingOptions.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "LogGroupName"))
     CloudWatchLoggingOptions.add_member(:log_stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogStreamName, name: "LogStreamName"))
     CloudWatchLoggingOptions.type = Types::CloudWatchLoggingOptions
-    ColumnToJsonKeyMappings.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringWithoutWhitespace, name: "key")
-    ColumnToJsonKeyMappings.value = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value")
+    ColumnToJsonKeyMappings.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringWithoutWhitespace, name: "key"))
+    ColumnToJsonKeyMappings.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value"))
     CompressionFormat.add_member(:uncompressed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNCOMPRESSED", traits: {"smithy.api#enumValue" => "UNCOMPRESSED"}))
     CompressionFormat.add_member(:gzip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GZIP", traits: {"smithy.api#enumValue" => "GZIP"}))
     CompressionFormat.add_member(:zip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ZIP", traits: {"smithy.api#enumValue" => "ZIP"}))
@@ -452,11 +452,11 @@ module Aws::Firehose
     DataFormatConversionConfiguration.add_member(:output_format_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputFormatConfiguration, name: "OutputFormatConfiguration"))
     DataFormatConversionConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, name: "Enabled"))
     DataFormatConversionConfiguration.type = Types::DataFormatConversionConfiguration
-    DatabaseColumnIncludeOrExcludeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseColumnName, name: "member")
+    DatabaseColumnIncludeOrExcludeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseColumnName, name: "member"))
     DatabaseColumnList.add_member(:include, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseColumnIncludeOrExcludeList, name: "Include"))
     DatabaseColumnList.add_member(:exclude, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseColumnIncludeOrExcludeList, name: "Exclude"))
     DatabaseColumnList.type = Types::DatabaseColumnList
-    DatabaseIncludeOrExcludeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseName, name: "member")
+    DatabaseIncludeOrExcludeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseName, name: "member"))
     DatabaseList.add_member(:include, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseIncludeOrExcludeList, name: "Include"))
     DatabaseList.add_member(:exclude, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseIncludeOrExcludeList, name: "Exclude"))
     DatabaseList.type = Types::DatabaseList
@@ -467,7 +467,7 @@ module Aws::Firehose
     DatabaseSnapshotInfo.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     DatabaseSnapshotInfo.add_member(:failure_description, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureDescription, name: "FailureDescription"))
     DatabaseSnapshotInfo.type = Types::DatabaseSnapshotInfo
-    DatabaseSnapshotInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseSnapshotInfo, name: "member")
+    DatabaseSnapshotInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseSnapshotInfo, name: "member"))
     DatabaseSourceAuthenticationConfiguration.add_member(:secrets_manager_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretsManagerConfiguration, name: "SecretsManagerConfiguration", traits: {"smithy.api#required" => {}}))
     DatabaseSourceAuthenticationConfiguration.type = Types::DatabaseSourceAuthenticationConfiguration
     DatabaseSourceConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseType, name: "Type", traits: {"smithy.api#required" => {}}))
@@ -497,8 +497,8 @@ module Aws::Firehose
     DatabaseSourceDescription.type = Types::DatabaseSourceDescription
     DatabaseSourceVPCConfiguration.add_member(:vpc_endpoint_service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointServiceName, name: "VpcEndpointServiceName", traits: {"smithy.api#required" => {}}))
     DatabaseSourceVPCConfiguration.type = Types::DatabaseSourceVPCConfiguration
-    DatabaseSurrogateKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringWithoutWhitespace, name: "member")
-    DatabaseTableIncludeOrExcludeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseTableName, name: "member")
+    DatabaseSurrogateKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringWithoutWhitespace, name: "member"))
+    DatabaseTableIncludeOrExcludeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseTableName, name: "member"))
     DatabaseTableList.add_member(:include, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseTableIncludeOrExcludeList, name: "Include"))
     DatabaseTableList.add_member(:exclude, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseTableIncludeOrExcludeList, name: "Exclude"))
     DatabaseTableList.type = Types::DatabaseTableList
@@ -554,7 +554,7 @@ module Aws::Firehose
     DeliveryStreamFailureType.add_member(:subnet_access_denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUBNET_ACCESS_DENIED", traits: {"smithy.api#enumValue" => "SUBNET_ACCESS_DENIED"}))
     DeliveryStreamFailureType.add_member(:security_group_access_denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECURITY_GROUP_ACCESS_DENIED", traits: {"smithy.api#enumValue" => "SECURITY_GROUP_ACCESS_DENIED"}))
     DeliveryStreamFailureType.add_member(:unknown_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_ERROR", traits: {"smithy.api#enumValue" => "UNKNOWN_ERROR"}))
-    DeliveryStreamNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryStreamName, name: "member")
+    DeliveryStreamNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryStreamName, name: "member"))
     DeliveryStreamStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     DeliveryStreamStatus.add_member(:creating_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING_FAILED", traits: {"smithy.api#enumValue" => "CREATING_FAILED"}))
     DeliveryStreamStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -585,14 +585,14 @@ module Aws::Firehose
     DestinationDescription.add_member(:amazon_open_search_serverless_destination_description, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonOpenSearchServerlessDestinationDescription, name: "AmazonOpenSearchServerlessDestinationDescription"))
     DestinationDescription.add_member(:iceberg_destination_description, ::Smithy::Schema::Shapes::MemberShape.new(target: IcebergDestinationDescription, name: "IcebergDestinationDescription"))
     DestinationDescription.type = Types::DestinationDescription
-    DestinationDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationDescription, name: "member")
+    DestinationDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationDescription, name: "member"))
     DestinationTableConfiguration.add_member(:destination_table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLettersDigitsUnderscoresDots, name: "DestinationTableName", traits: {"smithy.api#required" => {}}))
     DestinationTableConfiguration.add_member(:destination_database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLettersDigitsUnderscoresDots, name: "DestinationDatabaseName", traits: {"smithy.api#required" => {}}))
     DestinationTableConfiguration.add_member(:unique_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfNonEmptyStringsWithoutWhitespace, name: "UniqueKeys"))
     DestinationTableConfiguration.add_member(:partition_spec, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionSpec, name: "PartitionSpec"))
     DestinationTableConfiguration.add_member(:s3_error_output_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorOutputPrefix, name: "S3ErrorOutputPrefix"))
     DestinationTableConfiguration.type = Types::DestinationTableConfiguration
-    DestinationTableConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationTableConfiguration, name: "member")
+    DestinationTableConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationTableConfiguration, name: "member"))
     DirectPutSourceConfiguration.add_member(:throughput_hint_in_m_bs, ::Smithy::Schema::Shapes::MemberShape.new(target: ThroughputHintInMBs, name: "ThroughputHintInMBs", traits: {"smithy.api#required" => {}}))
     DirectPutSourceConfiguration.type = Types::DirectPutSourceConfiguration
     DirectPutSourceDescription.add_member(:throughput_hint_in_m_bs, ::Smithy::Schema::Shapes::MemberShape.new(target: ThroughputHintInMBs, name: "ThroughputHintInMBs"))
@@ -721,7 +721,7 @@ module Aws::Firehose
     HttpEndpointCommonAttribute.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpEndpointAttributeName, name: "AttributeName", traits: {"smithy.api#required" => {}}))
     HttpEndpointCommonAttribute.add_member(:attribute_value, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpEndpointAttributeValue, name: "AttributeValue", traits: {"smithy.api#required" => {}}))
     HttpEndpointCommonAttribute.type = Types::HttpEndpointCommonAttribute
-    HttpEndpointCommonAttributesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HttpEndpointCommonAttribute, name: "member")
+    HttpEndpointCommonAttributesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpEndpointCommonAttribute, name: "member"))
     HttpEndpointConfiguration.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpEndpointUrl, name: "Url", traits: {"smithy.api#required" => {}}))
     HttpEndpointConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpEndpointName, name: "Name"))
     HttpEndpointConfiguration.add_member(:access_key, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpEndpointAccessKey, name: "AccessKey"))
@@ -840,8 +840,8 @@ module Aws::Firehose
     ListDeliveryStreamsOutput.add_member(:delivery_stream_names, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryStreamNameList, name: "DeliveryStreamNames", traits: {"smithy.api#required" => {}}))
     ListDeliveryStreamsOutput.add_member(:has_more_delivery_streams, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, name: "HasMoreDeliveryStreams", traits: {"smithy.api#required" => {}}))
     ListDeliveryStreamsOutput.type = Types::ListDeliveryStreamsOutput
-    ListOfNonEmptyStrings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
-    ListOfNonEmptyStringsWithoutWhitespace.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringWithoutWhitespace, name: "member")
+    ListOfNonEmptyStrings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
+    ListOfNonEmptyStringsWithoutWhitespace.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringWithoutWhitespace, name: "member"))
     ListTagsForDeliveryStreamInput.add_member(:delivery_stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryStreamName, name: "DeliveryStreamName", traits: {"smithy.api#required" => {}}))
     ListTagsForDeliveryStreamInput.add_member(:exclusive_start_tag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "ExclusiveStartTagKey"))
     ListTagsForDeliveryStreamInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ListTagsForDeliveryStreamInputLimit, name: "Limit"))
@@ -849,7 +849,7 @@ module Aws::Firehose
     ListTagsForDeliveryStreamOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ListTagsForDeliveryStreamOutputTagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     ListTagsForDeliveryStreamOutput.add_member(:has_more_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, name: "HasMoreTags", traits: {"smithy.api#required" => {}}))
     ListTagsForDeliveryStreamOutput.type = Types::ListTagsForDeliveryStreamOutput
-    ListTagsForDeliveryStreamOutputTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    ListTagsForDeliveryStreamOutputTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     MSKSourceConfiguration.add_member(:msk_cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MSKClusterARN, name: "MSKClusterARN", traits: {"smithy.api#required" => {}}))
     MSKSourceConfiguration.add_member(:topic_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicName, name: "TopicName", traits: {"smithy.api#required" => {}}))
     MSKSourceConfiguration.add_member(:authentication_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationConfiguration, name: "AuthenticationConfiguration", traits: {"smithy.api#required" => {}}))
@@ -898,7 +898,7 @@ module Aws::Firehose
     ParquetWriterVersion.add_member(:v2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "V2", traits: {"smithy.api#enumValue" => "V2"}))
     PartitionField.add_member(:source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringWithoutWhitespace, name: "SourceName", traits: {"smithy.api#required" => {}}))
     PartitionField.type = Types::PartitionField
-    PartitionFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionField, name: "member")
+    PartitionFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionField, name: "member"))
     PartitionSpec.add_member(:identity, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionFields, name: "Identity"))
     PartitionSpec.type = Types::PartitionSpec
     ProcessingConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, name: "Enabled"))
@@ -907,11 +907,11 @@ module Aws::Firehose
     Processor.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessorType, name: "Type", traits: {"smithy.api#required" => {}}))
     Processor.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessorParameterList, name: "Parameters"))
     Processor.type = Types::Processor
-    ProcessorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Processor, name: "member")
+    ProcessorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Processor, name: "member"))
     ProcessorParameter.add_member(:parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessorParameterName, name: "ParameterName", traits: {"smithy.api#required" => {}}))
     ProcessorParameter.add_member(:parameter_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessorParameterValue, name: "ParameterValue", traits: {"smithy.api#required" => {}}))
     ProcessorParameter.type = Types::ProcessorParameter
-    ProcessorParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessorParameter, name: "member")
+    ProcessorParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessorParameter, name: "member"))
     ProcessorParameterName.add_member(:lambda_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAMBDA_ARN", traits: {"smithy.api#enumValue" => "LambdaArn"}))
     ProcessorParameterName.add_member(:lambda_number_of_retries, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAMBDA_NUMBER_OF_RETRIES", traits: {"smithy.api#enumValue" => "NumberOfRetries"}))
     ProcessorParameterName.add_member(:metadata_extraction_query, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METADATA_EXTRACTION_QUERY", traits: {"smithy.api#enumValue" => "MetadataExtractionQuery"}))
@@ -936,12 +936,12 @@ module Aws::Firehose
     PutRecordBatchOutput.add_member(:encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, name: "Encrypted"))
     PutRecordBatchOutput.add_member(:request_responses, ::Smithy::Schema::Shapes::MemberShape.new(target: PutRecordBatchResponseEntryList, name: "RequestResponses", traits: {"smithy.api#required" => {}}))
     PutRecordBatchOutput.type = Types::PutRecordBatchOutput
-    PutRecordBatchRequestEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Record, name: "member")
+    PutRecordBatchRequestEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Record, name: "member"))
     PutRecordBatchResponseEntry.add_member(:record_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PutResponseRecordId, name: "RecordId"))
     PutRecordBatchResponseEntry.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     PutRecordBatchResponseEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage"))
     PutRecordBatchResponseEntry.type = Types::PutRecordBatchResponseEntry
-    PutRecordBatchResponseEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PutRecordBatchResponseEntry, name: "member")
+    PutRecordBatchResponseEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PutRecordBatchResponseEntry, name: "member"))
     PutRecordInput.add_member(:delivery_stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryStreamName, name: "DeliveryStreamName", traits: {"smithy.api#required" => {}}))
     PutRecordInput.add_member(:record, ::Smithy::Schema::Shapes::MemberShape.new(target: Record, name: "Record", traits: {"smithy.api#required" => {}}))
     PutRecordInput.type = Types::PutRecordInput
@@ -1042,7 +1042,7 @@ module Aws::Firehose
     SecretsManagerConfiguration.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleARN, name: "RoleARN"))
     SecretsManagerConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, name: "Enabled", traits: {"smithy.api#required" => {}}))
     SecretsManagerConfiguration.type = Types::SecretsManagerConfiguration
-    SecurityGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringWithoutWhitespace, name: "member")
+    SecurityGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringWithoutWhitespace, name: "member"))
     Serializer.add_member(:parquet_ser_de, ::Smithy::Schema::Shapes::MemberShape.new(target: ParquetSerDe, name: "ParquetSerDe"))
     Serializer.add_member(:orc_ser_de, ::Smithy::Schema::Shapes::MemberShape.new(target: OrcSerDe, name: "OrcSerDe"))
     Serializer.type = Types::Serializer
@@ -1183,7 +1183,7 @@ module Aws::Firehose
     StopDeliveryStreamEncryptionInput.add_member(:delivery_stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryStreamName, name: "DeliveryStreamName", traits: {"smithy.api#required" => {}}))
     StopDeliveryStreamEncryptionInput.type = Types::StopDeliveryStreamEncryptionInput
     StopDeliveryStreamEncryptionOutput.type = Types::StopDeliveryStreamEncryptionOutput
-    SubnetIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringWithoutWhitespace, name: "member")
+    SubnetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringWithoutWhitespace, name: "member"))
     TableCreationConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, name: "Enabled", traits: {"smithy.api#required" => {}}))
     TableCreationConfiguration.type = Types::TableCreationConfiguration
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
@@ -1192,9 +1192,9 @@ module Aws::Firehose
     TagDeliveryStreamInput.add_member(:delivery_stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryStreamName, name: "DeliveryStreamName", traits: {"smithy.api#required" => {}}))
     TagDeliveryStreamInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagDeliveryStreamInputTagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagDeliveryStreamInput.type = Types::TagDeliveryStreamInput
-    TagDeliveryStreamInputTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagDeliveryStreamInputTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagDeliveryStreamOutput.type = Types::TagDeliveryStreamOutput
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     UntagDeliveryStreamInput.add_member(:delivery_stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryStreamName, name: "DeliveryStreamName", traits: {"smithy.api#required" => {}}))
     UntagDeliveryStreamInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagDeliveryStreamInput.type = Types::UntagDeliveryStreamInput

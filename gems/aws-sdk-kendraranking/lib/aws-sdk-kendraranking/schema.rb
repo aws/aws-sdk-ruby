@@ -67,7 +67,7 @@ module Aws::KendraRanking
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    BodyTokensList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tokens, name: "member")
+    BodyTokensList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tokens, name: "member"))
     CapacityUnitsConfiguration.add_member(:rescore_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreCapacityUnit, name: "RescoreCapacityUnits", traits: {"smithy.api#required" => {}}))
     CapacityUnitsConfiguration.type = Types::CapacityUnitsConfiguration
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -103,7 +103,7 @@ module Aws::KendraRanking
     Document.add_member(:tokenized_body, ::Smithy::Schema::Shapes::MemberShape.new(target: BodyTokensList, name: "TokenizedBody"))
     Document.add_member(:original_score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "OriginalScore", traits: {"smithy.api#required" => {}}))
     Document.type = Types::Document
-    DocumentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Document, name: "member")
+    DocumentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Document, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InternalServerException.type = Types::InternalServerException
     ListRescoreExecutionPlansRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -127,7 +127,7 @@ module Aws::KendraRanking
     RescoreExecutionPlanSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt"))
     RescoreExecutionPlanSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreExecutionPlanStatus, name: "Status"))
     RescoreExecutionPlanSummary.type = Types::RescoreExecutionPlanSummary
-    RescoreExecutionPlanSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreExecutionPlanSummary, name: "member")
+    RescoreExecutionPlanSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreExecutionPlanSummary, name: "member"))
     RescoreRequest.add_member(:rescore_execution_plan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreExecutionPlanId, name: "RescoreExecutionPlanId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RescoreRequest.add_member(:search_query, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchQuery, name: "SearchQuery", traits: {"smithy.api#required" => {}}))
     RescoreRequest.add_member(:documents, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentList, name: "Documents", traits: {"smithy.api#required" => {}}))
@@ -138,7 +138,7 @@ module Aws::KendraRanking
     RescoreResultItem.add_member(:document_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentId, name: "DocumentId"))
     RescoreResultItem.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "Score"))
     RescoreResultItem.type = Types::RescoreResultItem
-    RescoreResultItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreResultItem, name: "member")
+    RescoreResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RescoreResultItem, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ResourceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -148,15 +148,15 @@ module Aws::KendraRanking
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
-    TitleTokensList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tokens, name: "member")
+    TitleTokensList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tokens, name: "member"))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest

@@ -546,21 +546,21 @@ module Aws::Omics
     ActivateReadSetJobItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     ActivateReadSetJobItem.add_member(:completion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "completionTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ActivateReadSetJobItem.type = Types::ActivateReadSetJobItem
-    ActivateReadSetJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActivateReadSetJobItem, name: "member")
+    ActivateReadSetJobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivateReadSetJobItem, name: "member"))
     ActivateReadSetSourceItem.add_member(:read_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetId, name: "readSetId", traits: {"smithy.api#required" => {}}))
     ActivateReadSetSourceItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetActivationJobItemStatus, name: "status", traits: {"smithy.api#required" => {}}))
     ActivateReadSetSourceItem.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatusMessage, name: "statusMessage"))
     ActivateReadSetSourceItem.type = Types::ActivateReadSetSourceItem
-    ActivateReadSetSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActivateReadSetSourceItem, name: "member")
-    AnnotationFieldMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 21}})
-    AnnotationFieldMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 21}})
+    ActivateReadSetSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivateReadSetSourceItem, name: "member"))
+    AnnotationFieldMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 21}}))
+    AnnotationFieldMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 21}}))
     AnnotationImportItemDetail.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "source", traits: {"smithy.api#required" => {}}))
     AnnotationImportItemDetail.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "jobStatus", traits: {"smithy.api#required" => {}}))
     AnnotationImportItemDetail.type = Types::AnnotationImportItemDetail
-    AnnotationImportItemDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationImportItemDetail, name: "member")
+    AnnotationImportItemDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationImportItemDetail, name: "member"))
     AnnotationImportItemSource.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "source", traits: {"smithy.api#required" => {}}))
     AnnotationImportItemSource.type = Types::AnnotationImportItemSource
-    AnnotationImportItemSources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationImportItemSource, name: "member")
+    AnnotationImportItemSources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationImportItemSource, name: "member"))
     AnnotationImportJobItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id", traits: {"smithy.api#required" => {}}))
     AnnotationImportJobItem.add_member(:destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "destinationName", traits: {"smithy.api#required" => {}}))
     AnnotationImportJobItem.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, name: "versionName", traits: {"smithy.api#required" => {}}))
@@ -572,7 +572,7 @@ module Aws::Omics
     AnnotationImportJobItem.add_member(:run_left_normalization, ::Smithy::Schema::Shapes::MemberShape.new(target: RunLeftNormalization, name: "runLeftNormalization", traits: {"smithy.api#default" => false}))
     AnnotationImportJobItem.add_member(:annotation_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationFieldMap, name: "annotationFields"))
     AnnotationImportJobItem.type = Types::AnnotationImportJobItem
-    AnnotationImportJobItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationImportJobItem, name: "member")
+    AnnotationImportJobItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationImportJobItem, name: "member"))
     AnnotationStoreItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "id", traits: {"smithy.api#required" => {}}))
     AnnotationStoreItem.add_member(:reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceItem, name: "reference", traits: {"smithy.api#required" => {}}))
     AnnotationStoreItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreStatus, name: "status", traits: {"smithy.api#required" => {}}))
@@ -586,7 +586,7 @@ module Aws::Omics
     AnnotationStoreItem.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessage, name: "statusMessage", traits: {"smithy.api#required" => {}}))
     AnnotationStoreItem.add_member(:store_size_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "storeSizeBytes", traits: {"smithy.api#required" => {}}))
     AnnotationStoreItem.type = Types::AnnotationStoreItem
-    AnnotationStoreItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationStoreItem, name: "member")
+    AnnotationStoreItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationStoreItem, name: "member"))
     AnnotationStoreVersionItem.add_member(:store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "storeId", traits: {"smithy.api#required" => {}}))
     AnnotationStoreVersionItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "id", traits: {"smithy.api#required" => {}}))
     AnnotationStoreVersionItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionStatus, name: "status", traits: {"smithy.api#required" => {}}))
@@ -599,8 +599,8 @@ module Aws::Omics
     AnnotationStoreVersionItem.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessage, name: "statusMessage", traits: {"smithy.api#required" => {}}))
     AnnotationStoreVersionItem.add_member(:version_size_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "versionSizeBytes", traits: {"smithy.api#required" => {}}))
     AnnotationStoreVersionItem.type = Types::AnnotationStoreVersionItem
-    AnnotationStoreVersionItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationStoreVersionItem, name: "member")
-    ArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    AnnotationStoreVersionItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationStoreVersionItem, name: "member"))
+    ArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     BatchDeleteReadSetRequest.add_member(:ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetIdList, name: "ids", traits: {"smithy.api#required" => {}}))
     BatchDeleteReadSetRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BatchDeleteReadSetRequest.type = Types::BatchDeleteReadSetRequest
@@ -620,7 +620,7 @@ module Aws::Omics
     CompleteMultipartReadSetUploadRequest.type = Types::CompleteMultipartReadSetUploadRequest
     CompleteMultipartReadSetUploadResponse.add_member(:read_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetId, name: "readSetId", traits: {"smithy.api#required" => {}}))
     CompleteMultipartReadSetUploadResponse.type = Types::CompleteMultipartReadSetUploadResponse
-    CompleteReadSetUploadPartList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CompleteReadSetUploadPartListItem, name: "member")
+    CompleteReadSetUploadPartList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CompleteReadSetUploadPartListItem, name: "member"))
     CompleteReadSetUploadPartListItem.add_member(:part_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "partNumber", traits: {"smithy.api#range" => {"min" => 1, "max" => 10000}, "smithy.api#required" => {}}))
     CompleteReadSetUploadPartListItem.add_member(:part_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetPartSource, name: "partSource", traits: {"smithy.api#required" => {}}))
     CompleteReadSetUploadPartListItem.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "checksum", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$", "smithy.api#required" => {}}))
@@ -881,14 +881,14 @@ module Aws::Omics
     ETag.add_member(:source1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "source1"))
     ETag.add_member(:source2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "source2"))
     ETag.type = Types::ETag
-    ExcludeFilePatternList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    ExcludeFilePatternList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     ExportReadSet.add_member(:read_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetId, name: "readSetId", traits: {"smithy.api#required" => {}}))
     ExportReadSet.type = Types::ExportReadSet
     ExportReadSetDetail.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetId, name: "id", traits: {"smithy.api#required" => {}}))
     ExportReadSetDetail.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetExportJobItemStatus, name: "status", traits: {"smithy.api#required" => {}}))
     ExportReadSetDetail.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatusMessage, name: "statusMessage"))
     ExportReadSetDetail.type = Types::ExportReadSetDetail
-    ExportReadSetDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportReadSetDetail, name: "member")
+    ExportReadSetDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportReadSetDetail, name: "member"))
     ExportReadSetFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetExportJobStatus, name: "status"))
     ExportReadSetFilter.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ExportReadSetFilter.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
@@ -900,8 +900,8 @@ module Aws::Omics
     ExportReadSetJobDetail.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     ExportReadSetJobDetail.add_member(:completion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "completionTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ExportReadSetJobDetail.type = Types::ExportReadSetJobDetail
-    ExportReadSetJobDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportReadSetJobDetail, name: "member")
-    ExportReadSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportReadSet, name: "member")
+    ExportReadSetJobDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportReadSetJobDetail, name: "member"))
+    ExportReadSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportReadSet, name: "member"))
     FileInformation.add_member(:total_parts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "totalParts", traits: {"smithy.api#range" => {"min" => 1, "max" => 10000}}))
     FileInformation.add_member(:part_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "partSize", traits: {"smithy.api#range" => {"min" => 1, "max" => 5368709120}}))
     FileInformation.add_member(:content_length, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "contentLength", traits: {"smithy.api#range" => {"min" => 1, "max" => 5497558138880}}))
@@ -915,8 +915,8 @@ module Aws::Omics
     FormatOptions.add_member(:vcf_options, Types::FormatOptions::VcfOptions, ::Smithy::Schema::Shapes::MemberShape.new(target: VcfOptions, name: "vcfOptions"))
     FormatOptions.add_member(:unknown, Types::FormatOptions::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     FormatOptions.type = Types::FormatOptions
-    FormatToHeader.key = ::Smithy::Schema::Shapes::MemberShape.new(target: FormatToHeaderKey, name: "key")
-    FormatToHeader.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
+    FormatToHeader.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatToHeaderKey, name: "key"))
+    FormatToHeader.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}}))
     GetAnnotationImportRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAnnotationImportRequest.type = Types::GetAnnotationImportRequest
     GetAnnotationImportResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "id", traits: {"smithy.api#required" => {}}))
@@ -1282,7 +1282,7 @@ module Aws::Omics
     GetWorkflowVersionResponse.add_member(:definition_repository_details, ::Smithy::Schema::Shapes::MemberShape.new(target: DefinitionRepositoryDetails, name: "definitionRepositoryDetails"))
     GetWorkflowVersionResponse.add_member(:readme_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadmePath, name: "readmePath"))
     GetWorkflowVersionResponse.type = Types::GetWorkflowVersionResponse
-    IdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, name: "member")
+    IdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, name: "member"))
     ImageDetails.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "image"))
     ImageDetails.add_member(:image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskImageDigest, name: "imageDigest"))
     ImageDetails.add_member(:source_image, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "sourceImage"))
@@ -1290,7 +1290,7 @@ module Aws::Omics
     ImageMapping.add_member(:source_image, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "sourceImage"))
     ImageMapping.add_member(:destination_image, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "destinationImage"))
     ImageMapping.type = Types::ImageMapping
-    ImageMappingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageMapping, name: "member")
+    ImageMappingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageMapping, name: "member"))
     ImportReadSetFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetImportJobStatus, name: "status"))
     ImportReadSetFilter.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ImportReadSetFilter.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
@@ -1302,7 +1302,7 @@ module Aws::Omics
     ImportReadSetJobItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     ImportReadSetJobItem.add_member(:completion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "completionTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ImportReadSetJobItem.type = Types::ImportReadSetJobItem
-    ImportReadSetJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportReadSetJobItem, name: "member")
+    ImportReadSetJobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportReadSetJobItem, name: "member"))
     ImportReadSetSourceItem.add_member(:source_files, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceFiles, name: "sourceFiles", traits: {"smithy.api#required" => {}}))
     ImportReadSetSourceItem.add_member(:source_file_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FileType, name: "sourceFileType", traits: {"smithy.api#required" => {}}))
     ImportReadSetSourceItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetImportJobItemStatus, name: "status", traits: {"smithy.api#required" => {}}))
@@ -1316,7 +1316,7 @@ module Aws::Omics
     ImportReadSetSourceItem.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     ImportReadSetSourceItem.add_member(:read_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetId, name: "readSetId"))
     ImportReadSetSourceItem.type = Types::ImportReadSetSourceItem
-    ImportReadSetSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportReadSetSourceItem, name: "member")
+    ImportReadSetSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportReadSetSourceItem, name: "member"))
     ImportReferenceFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceImportJobStatus, name: "status"))
     ImportReferenceFilter.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ImportReferenceFilter.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
@@ -1328,7 +1328,7 @@ module Aws::Omics
     ImportReferenceJobItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     ImportReferenceJobItem.add_member(:completion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "completionTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ImportReferenceJobItem.type = Types::ImportReferenceJobItem
-    ImportReferenceJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportReferenceJobItem, name: "member")
+    ImportReferenceJobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportReferenceJobItem, name: "member"))
     ImportReferenceSourceItem.add_member(:source_file, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "sourceFile"))
     ImportReferenceSourceItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceImportJobItemStatus, name: "status", traits: {"smithy.api#required" => {}}))
     ImportReferenceSourceItem.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatusMessage, name: "statusMessage"))
@@ -1337,7 +1337,7 @@ module Aws::Omics
     ImportReferenceSourceItem.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     ImportReferenceSourceItem.add_member(:reference_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceId, name: "referenceId"))
     ImportReferenceSourceItem.type = Types::ImportReferenceSourceItem
-    ImportReferenceSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportReferenceSourceItem, name: "member")
+    ImportReferenceSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportReferenceSourceItem, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
     ListAnnotationImportJobsFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "status"))
@@ -1530,7 +1530,7 @@ module Aws::Omics
     ListWorkflowsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowList, name: "items"))
     ListWorkflowsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowListToken, name: "nextToken"))
     ListWorkflowsResponse.type = Types::ListWorkflowsResponse
-    MultipartReadSetUploadList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MultipartReadSetUploadListItem, name: "member")
+    MultipartReadSetUploadList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MultipartReadSetUploadListItem, name: "member"))
     MultipartReadSetUploadListItem.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
     MultipartReadSetUploadListItem.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadId, name: "uploadId", traits: {"smithy.api#required" => {}}))
     MultipartReadSetUploadListItem.add_member(:source_file_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FileType, name: "sourceFileType", traits: {"smithy.api#required" => {}}))
@@ -1545,7 +1545,7 @@ module Aws::Omics
     MultipartReadSetUploadListItem.type = Types::MultipartReadSetUploadListItem
     NotSupportedOperationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     NotSupportedOperationException.type = Types::NotSupportedOperationException
-    PropagatedSetLevelTags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    PropagatedSetLevelTags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     PutS3AccessPolicyRequest.add_member(:s3_access_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointArn, name: "s3AccessPointArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutS3AccessPolicyRequest.add_member(:s3_access_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPolicy, name: "s3AccessPolicy", traits: {"smithy.api#required" => {}}))
     PutS3AccessPolicyRequest.type = Types::PutS3AccessPolicyRequest
@@ -1569,7 +1569,7 @@ module Aws::Omics
     ReadSetBatchError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "code", traits: {"smithy.api#required" => {}}))
     ReadSetBatchError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ReadSetBatchError.type = Types::ReadSetBatchError
-    ReadSetBatchErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetBatchError, name: "member")
+    ReadSetBatchErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetBatchError, name: "member"))
     ReadSetFiles.add_member(:source1, ::Smithy::Schema::Shapes::MemberShape.new(target: FileInformation, name: "source1"))
     ReadSetFiles.add_member(:source2, ::Smithy::Schema::Shapes::MemberShape.new(target: FileInformation, name: "source2"))
     ReadSetFiles.add_member(:index, ::Smithy::Schema::Shapes::MemberShape.new(target: FileInformation, name: "index"))
@@ -1584,8 +1584,8 @@ module Aws::Omics
     ReadSetFilter.add_member(:generated_from, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedFrom, name: "generatedFrom"))
     ReadSetFilter.add_member(:creation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationType, name: "creationType"))
     ReadSetFilter.type = Types::ReadSetFilter
-    ReadSetIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetId, name: "member")
-    ReadSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetListItem, name: "member")
+    ReadSetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetId, name: "member"))
+    ReadSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetListItem, name: "member"))
     ReadSetListItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetId, name: "id", traits: {"smithy.api#required" => {}}))
     ReadSetListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetArn, name: "arn", traits: {"smithy.api#required" => {}}))
     ReadSetListItem.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, name: "sequenceStoreId", traits: {"smithy.api#required" => {}}))
@@ -1604,7 +1604,7 @@ module Aws::Omics
     ReadSetListItem.type = Types::ReadSetListItem
     ReadSetS3Access.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "s3Uri"))
     ReadSetS3Access.type = Types::ReadSetS3Access
-    ReadSetUploadPartList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetUploadPartListItem, name: "member")
+    ReadSetUploadPartList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetUploadPartListItem, name: "member"))
     ReadSetUploadPartListFilter.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ReadSetUploadPartListFilter.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ReadSetUploadPartListFilter.type = Types::ReadSetUploadPartListFilter
@@ -1626,7 +1626,7 @@ module Aws::Omics
     ReferenceItem.add_member(:reference_arn, Types::ReferenceItem::ReferenceArn, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceArn, name: "referenceArn"))
     ReferenceItem.add_member(:unknown, Types::ReferenceItem::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ReferenceItem.type = Types::ReferenceItem
-    ReferenceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceListItem, name: "member")
+    ReferenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceListItem, name: "member"))
     ReferenceListItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceId, name: "id", traits: {"smithy.api#required" => {}}))
     ReferenceListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceArn, name: "arn", traits: {"smithy.api#required" => {}}))
     ReferenceListItem.add_member(:reference_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreId, name: "referenceStoreId", traits: {"smithy.api#required" => {}}))
@@ -1644,7 +1644,7 @@ module Aws::Omics
     ReferenceStoreDetail.add_member(:sse_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SseConfig, name: "sseConfig"))
     ReferenceStoreDetail.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "creationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     ReferenceStoreDetail.type = Types::ReferenceStoreDetail
-    ReferenceStoreDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreDetail, name: "member")
+    ReferenceStoreDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreDetail, name: "member"))
     ReferenceStoreFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreName, name: "name"))
     ReferenceStoreFilter.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ReferenceStoreFilter.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
@@ -1654,12 +1654,12 @@ module Aws::Omics
     RegistryMapping.add_member(:upstream_repository_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: UpstreamRepositoryPrefix, name: "upstreamRepositoryPrefix"))
     RegistryMapping.add_member(:ecr_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "ecrAccountId"))
     RegistryMapping.type = Types::RegistryMapping
-    RegistryMappingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryMapping, name: "member")
+    RegistryMappingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryMapping, name: "member"))
     RequestTimeoutException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     RequestTimeoutException.type = Types::RequestTimeoutException
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RunCacheList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheListItem, name: "member")
+    RunCacheList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheListItem, name: "member"))
     RunCacheListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheArn, name: "arn"))
     RunCacheListItem.add_member(:cache_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheBehavior, name: "cacheBehavior"))
     RunCacheListItem.add_member(:cache_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3UriForBucketOrObject, name: "cacheS3Uri"))
@@ -1668,8 +1668,8 @@ module Aws::Omics
     RunCacheListItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserCustomName, name: "name"))
     RunCacheListItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheStatus, name: "status"))
     RunCacheListItem.type = Types::RunCacheListItem
-    RunExportList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RunExport, name: "member")
-    RunGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupListItem, name: "member")
+    RunExportList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RunExport, name: "member"))
+    RunGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupListItem, name: "member"))
     RunGroupListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupArn, name: "arn"))
     RunGroupListItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupId, name: "id"))
     RunGroupListItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupName, name: "name"))
@@ -1679,7 +1679,7 @@ module Aws::Omics
     RunGroupListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupTimestamp, name: "creationTime"))
     RunGroupListItem.add_member(:max_gpus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxGpus", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}}))
     RunGroupListItem.type = Types::RunGroupListItem
-    RunList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RunListItem, name: "member")
+    RunList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RunListItem, name: "member"))
     RunListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RunArn, name: "arn"))
     RunListItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunId, name: "id"))
     RunListItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RunStatus, name: "status"))
@@ -1696,13 +1696,13 @@ module Aws::Omics
     RunLogLocation.add_member(:engine_log_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineLogStream, name: "engineLogStream"))
     RunLogLocation.add_member(:run_log_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: RunLogStream, name: "runLogStream"))
     RunLogLocation.type = Types::RunLogLocation
-    RunResourceDigests.key = ::Smithy::Schema::Shapes::MemberShape.new(target: RunResourceDigestKey, name: "key")
-    RunResourceDigests.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RunResourceDigest, name: "value")
+    RunResourceDigests.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RunResourceDigestKey, name: "key"))
+    RunResourceDigests.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RunResourceDigest, name: "value"))
     S3AccessConfig.add_member(:access_log_location, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessLogLocation, name: "accessLogLocation"))
     S3AccessConfig.type = Types::S3AccessConfig
-    Schema.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaItem, name: "member")
-    SchemaItem.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#pattern" => "^[a-z0-9_]{1,255}$"})
-    SchemaItem.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaValueType, name: "value")
+    Schema.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaItem, name: "member"))
+    SchemaItem.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#pattern" => "^[a-z0-9_]{1,255}$"}))
+    SchemaItem.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaValueType, name: "value"))
     SequenceInformation.add_member(:total_read_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "totalReadCount"))
     SequenceInformation.add_member(:total_base_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "totalBaseCount"))
     SequenceInformation.add_member(:generated_from, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedFrom, name: "generatedFrom"))
@@ -1720,7 +1720,7 @@ module Aws::Omics
     SequenceStoreDetail.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreStatusMessage, name: "statusMessage"))
     SequenceStoreDetail.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updateTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
     SequenceStoreDetail.type = Types::SequenceStoreDetail
-    SequenceStoreDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreDetail, name: "member")
+    SequenceStoreDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreDetail, name: "member"))
     SequenceStoreFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreName, name: "name"))
     SequenceStoreFilter.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
     SequenceStoreFilter.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
@@ -1745,7 +1745,7 @@ module Aws::Omics
     ShareDetails.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, name: "creationTime"))
     ShareDetails.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTime, name: "updateTime"))
     ShareDetails.type = Types::ShareDetails
-    ShareDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShareDetails, name: "member")
+    ShareDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareDetails, name: "member"))
     SourceFiles.add_member(:source1, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "source1", traits: {"smithy.api#required" => {}}))
     SourceFiles.add_member(:source2, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "source2"))
     SourceFiles.type = Types::SourceFiles
@@ -1776,7 +1776,7 @@ module Aws::Omics
     StartReadSetActivationJobResponse.type = Types::StartReadSetActivationJobResponse
     StartReadSetActivationJobSourceItem.add_member(:read_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetId, name: "readSetId", traits: {"smithy.api#required" => {}}))
     StartReadSetActivationJobSourceItem.type = Types::StartReadSetActivationJobSourceItem
-    StartReadSetActivationJobSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StartReadSetActivationJobSourceItem, name: "member")
+    StartReadSetActivationJobSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StartReadSetActivationJobSourceItem, name: "member"))
     StartReadSetExportJobRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartReadSetExportJobRequest.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Destination, name: "destination", traits: {"smithy.api#required" => {}}))
     StartReadSetExportJobRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
@@ -1810,7 +1810,7 @@ module Aws::Omics
     StartReadSetImportJobSourceItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetDescription, name: "description"))
     StartReadSetImportJobSourceItem.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     StartReadSetImportJobSourceItem.type = Types::StartReadSetImportJobSourceItem
-    StartReadSetImportJobSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StartReadSetImportJobSourceItem, name: "member")
+    StartReadSetImportJobSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StartReadSetImportJobSourceItem, name: "member"))
     StartReferenceImportJobRequest.add_member(:reference_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreId, name: "referenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartReferenceImportJobRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
     StartReferenceImportJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken"))
@@ -1827,7 +1827,7 @@ module Aws::Omics
     StartReferenceImportJobSourceItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceDescription, name: "description"))
     StartReferenceImportJobSourceItem.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     StartReferenceImportJobSourceItem.type = Types::StartReferenceImportJobSourceItem
-    StartReferenceImportJobSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StartReferenceImportJobSourceItem, name: "member")
+    StartReferenceImportJobSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StartReferenceImportJobSourceItem, name: "member"))
     StartRunRequest.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, name: "workflowId"))
     StartRunRequest.add_member(:workflow_type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowType, name: "workflowType"))
     StartRunRequest.add_member(:run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunId, name: "runId"))
@@ -1863,20 +1863,20 @@ module Aws::Omics
     StartVariantImportRequest.type = Types::StartVariantImportRequest
     StartVariantImportResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "jobId", traits: {"smithy.api#required" => {}}))
     StartVariantImportResponse.type = Types::StartVariantImportResponse
-    StatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShareStatus, name: "member")
+    StatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareStatus, name: "member"))
     StoreOptions.add_member(:tsv_store_options, Types::StoreOptions::TsvStoreOptions, ::Smithy::Schema::Shapes::MemberShape.new(target: TsvStoreOptions, name: "tsvStoreOptions"))
     StoreOptions.add_member(:unknown, Types::StoreOptions::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     StoreOptions.type = Types::StoreOptions
     StoreType.add_member(:sequence_store, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEQUENCE_STORE", traits: {"smithy.api#enumValue" => "SEQUENCE_STORE"}))
     StoreType.add_member(:reference_store, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REFERENCE_STORE", traits: {"smithy.api#enumValue" => "REFERENCE_STORE"}))
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TagArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}, "smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TaskList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskListItem, name: "member")
+    TaskList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskListItem, name: "member"))
     TaskListItem.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskId, name: "taskId"))
     TaskListItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskStatus, name: "status"))
     TaskListItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskName, name: "name"))
@@ -1902,7 +1902,7 @@ module Aws::Omics
     TsvVersionOptions.add_member(:format_to_header, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatToHeader, name: "formatToHeader"))
     TsvVersionOptions.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: Schema, name: "schema", traits: {"smithy.api#length" => {"min" => 1, "max" => 5000}}))
     TsvVersionOptions.type = Types::TsvVersionOptions
-    TypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShareResourceType, name: "member")
+    TypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareResourceType, name: "member"))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TagArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -2008,10 +2008,10 @@ module Aws::Omics
     VariantImportItemDetail.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "jobStatus", traits: {"smithy.api#required" => {}}))
     VariantImportItemDetail.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatusMsg, name: "statusMessage"))
     VariantImportItemDetail.type = Types::VariantImportItemDetail
-    VariantImportItemDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VariantImportItemDetail, name: "member")
+    VariantImportItemDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VariantImportItemDetail, name: "member"))
     VariantImportItemSource.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "source", traits: {"smithy.api#required" => {}}))
     VariantImportItemSource.type = Types::VariantImportItemSource
-    VariantImportItemSources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VariantImportItemSource, name: "member")
+    VariantImportItemSources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VariantImportItemSource, name: "member"))
     VariantImportJobItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id", traits: {"smithy.api#required" => {}}))
     VariantImportJobItem.add_member(:destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "destinationName", traits: {"smithy.api#required" => {}}))
     VariantImportJobItem.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "roleArn", traits: {"smithy.api#required" => {}}))
@@ -2022,7 +2022,7 @@ module Aws::Omics
     VariantImportJobItem.add_member(:run_left_normalization, ::Smithy::Schema::Shapes::MemberShape.new(target: RunLeftNormalization, name: "runLeftNormalization", traits: {"smithy.api#default" => false}))
     VariantImportJobItem.add_member(:annotation_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationFieldMap, name: "annotationFields"))
     VariantImportJobItem.type = Types::VariantImportJobItem
-    VariantImportJobItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VariantImportJobItem, name: "member")
+    VariantImportJobItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VariantImportJobItem, name: "member"))
     VariantStoreItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "id", traits: {"smithy.api#required" => {}}))
     VariantStoreItem.add_member(:reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceItem, name: "reference", traits: {"smithy.api#required" => {}}))
     VariantStoreItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreStatus, name: "status", traits: {"smithy.api#required" => {}}))
@@ -2035,20 +2035,20 @@ module Aws::Omics
     VariantStoreItem.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessage, name: "statusMessage", traits: {"smithy.api#required" => {}}))
     VariantStoreItem.add_member(:store_size_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "storeSizeBytes", traits: {"smithy.api#required" => {}}))
     VariantStoreItem.type = Types::VariantStoreItem
-    VariantStoreItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VariantStoreItem, name: "member")
+    VariantStoreItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VariantStoreItem, name: "member"))
     VcfOptions.add_member(:ignore_qual_field, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "ignoreQualField"))
     VcfOptions.add_member(:ignore_filter_field, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "ignoreFilterField"))
     VcfOptions.type = Types::VcfOptions
     VersionDeleteError.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, name: "versionName", traits: {"smithy.api#required" => {}}))
     VersionDeleteError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     VersionDeleteError.type = Types::VersionDeleteError
-    VersionDeleteErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VersionDeleteError, name: "member")
-    VersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, name: "member")
+    VersionDeleteErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionDeleteError, name: "member"))
+    VersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, name: "member"))
     VersionOptions.add_member(:tsv_version_options, Types::VersionOptions::TsvVersionOptions, ::Smithy::Schema::Shapes::MemberShape.new(target: TsvVersionOptions, name: "tsvVersionOptions"))
     VersionOptions.add_member(:unknown, Types::VersionOptions::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     VersionOptions.type = Types::VersionOptions
-    WorkflowExportList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowExport, name: "member")
-    WorkflowList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowListItem, name: "member")
+    WorkflowExportList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowExport, name: "member"))
+    WorkflowList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowListItem, name: "member"))
     WorkflowListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowArn, name: "arn"))
     WorkflowListItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, name: "id"))
     WorkflowListItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowName, name: "name"))
@@ -2058,14 +2058,14 @@ module Aws::Omics
     WorkflowListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowTimestamp, name: "creationTime"))
     WorkflowListItem.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowMetadata, name: "metadata"))
     WorkflowListItem.type = Types::WorkflowListItem
-    WorkflowMetadata.key = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowMetadataKey, name: "key")
-    WorkflowMetadata.value = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowMetadataValue, name: "value")
+    WorkflowMetadata.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowMetadataKey, name: "key"))
+    WorkflowMetadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowMetadataValue, name: "value"))
     WorkflowParameter.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameterDescription, name: "description"))
     WorkflowParameter.add_member(:optional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "optional"))
     WorkflowParameter.type = Types::WorkflowParameter
-    WorkflowParameterTemplate.key = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameterName, name: "key")
-    WorkflowParameterTemplate.value = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameter, name: "value")
-    WorkflowVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionListItem, name: "member")
+    WorkflowParameterTemplate.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameterName, name: "key"))
+    WorkflowParameterTemplate.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameter, name: "value"))
+    WorkflowVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionListItem, name: "member"))
     WorkflowVersionListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionArn, name: "arn"))
     WorkflowVersionListItem.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, name: "workflowId"))
     WorkflowVersionListItem.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionName, name: "versionName"))

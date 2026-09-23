@@ -140,12 +140,12 @@ module Aws::SecretsManager
     ValidationErrorsEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.secretsmanager#ValidationErrorsEntry", name: "ValidationErrorsEntry")
     ValidationErrorsType = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.secretsmanager#ValidationErrorsType", name: "ValidationErrorsType")
 
-    APIErrorListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: APIErrorType, name: "member")
+    APIErrorListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: APIErrorType, name: "member"))
     APIErrorType.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, name: "SecretId"))
     APIErrorType.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     APIErrorType.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     APIErrorType.type = Types::APIErrorType
-    AddReplicaRegionListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaRegionType, name: "member")
+    AddReplicaRegionListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaRegionType, name: "member"))
     BatchGetSecretValueRequest.add_member(:secret_id_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdListType, name: "SecretIdList"))
     BatchGetSecretValueRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FiltersListType, name: "Filters"))
     BatchGetSecretValueRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsBatchType, name: "MaxResults"))
@@ -224,8 +224,8 @@ module Aws::SecretsManager
     FilterNameStringType.add_member(:primary_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "primary_region", traits: {"smithy.api#enumValue" => "primary-region"}))
     FilterNameStringType.add_member(:owning_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "owning_service", traits: {"smithy.api#enumValue" => "owning-service"}))
     FilterNameStringType.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "all", traits: {"smithy.api#enumValue" => "all"}))
-    FilterValuesStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueStringType, name: "member")
-    FiltersListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
+    FilterValuesStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueStringType, name: "member"))
+    FiltersListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     GetRandomPasswordRequest.add_member(:password_length, ::Smithy::Schema::Shapes::MemberShape.new(target: PasswordLengthType, name: "PasswordLength"))
     GetRandomPasswordRequest.add_member(:exclude_characters, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeCharactersType, name: "ExcludeCharacters"))
     GetRandomPasswordRequest.add_member(:exclude_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeNumbersType, name: "ExcludeNumbers", traits: {"smithy.api#default" => nil}))
@@ -263,7 +263,7 @@ module Aws::SecretsManager
     InvalidParameterException.type = Types::InvalidParameterException
     InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InvalidRequestException.type = Types::InvalidRequestException
-    KmsKeyIdListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdType, name: "member")
+    KmsKeyIdListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdType, name: "member"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
     ListSecretVersionIdsRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, name: "SecretId", traits: {"smithy.api#required" => {}}))
@@ -316,7 +316,7 @@ module Aws::SecretsManager
     RemoveRegionsFromReplicationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, name: "ARN"))
     RemoveRegionsFromReplicationResponse.add_member(:replication_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatusListType, name: "ReplicationStatus"))
     RemoveRegionsFromReplicationResponse.type = Types::RemoveRegionsFromReplicationResponse
-    RemoveReplicaRegionListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegionType, name: "member")
+    RemoveReplicaRegionListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionType, name: "member"))
     ReplicaRegionType.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionType, name: "Region"))
     ReplicaRegionType.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdType, name: "KmsKeyId"))
     ReplicaRegionType.type = Types::ReplicaRegionType
@@ -327,7 +327,7 @@ module Aws::SecretsManager
     ReplicateSecretToRegionsResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, name: "ARN"))
     ReplicateSecretToRegionsResponse.add_member(:replication_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatusListType, name: "ReplicationStatus"))
     ReplicateSecretToRegionsResponse.type = Types::ReplicateSecretToRegionsResponse
-    ReplicationStatusListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatusType, name: "member")
+    ReplicationStatusListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatusType, name: "member"))
     ReplicationStatusType.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionType, name: "Region"))
     ReplicationStatusType.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdType, name: "KmsKeyId"))
     ReplicationStatusType.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusType, name: "Status"))
@@ -357,7 +357,7 @@ module Aws::SecretsManager
     RotationRulesType.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationType, name: "Duration"))
     RotationRulesType.add_member(:schedule_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleExpressionType, name: "ScheduleExpression"))
     RotationRulesType.type = Types::RotationRulesType
-    SecretIdListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, name: "member")
+    SecretIdListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, name: "member"))
     SecretListEntry.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, name: "ARN"))
     SecretListEntry.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretNameType, name: "Name"))
     SecretListEntry.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionType, name: "Description"))
@@ -376,7 +376,7 @@ module Aws::SecretsManager
     SecretListEntry.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType, name: "CreatedDate"))
     SecretListEntry.add_member(:primary_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionType, name: "PrimaryRegion"))
     SecretListEntry.type = Types::SecretListEntry
-    SecretListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecretListEntry, name: "member")
+    SecretListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretListEntry, name: "member"))
     SecretValueEntry.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARNType, name: "ARN"))
     SecretValueEntry.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretNameType, name: "Name"))
     SecretValueEntry.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionIdType, name: "VersionId"))
@@ -385,17 +385,17 @@ module Aws::SecretsManager
     SecretValueEntry.add_member(:version_stages, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionStagesType, name: "VersionStages"))
     SecretValueEntry.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedDateType, name: "CreatedDate"))
     SecretValueEntry.type = Types::SecretValueEntry
-    SecretValuesType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecretValueEntry, name: "member")
-    SecretVersionStagesType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionStageType, name: "member")
+    SecretValuesType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretValueEntry, name: "member"))
+    SecretVersionStagesType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionStageType, name: "member"))
     SecretVersionsListEntry.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionIdType, name: "VersionId"))
     SecretVersionsListEntry.add_member(:version_stages, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionStagesType, name: "VersionStages"))
     SecretVersionsListEntry.add_member(:last_accessed_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastAccessedDateType, name: "LastAccessedDate"))
     SecretVersionsListEntry.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedDateType, name: "CreatedDate"))
     SecretVersionsListEntry.add_member(:kms_key_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdListType, name: "KmsKeyIds"))
     SecretVersionsListEntry.type = Types::SecretVersionsListEntry
-    SecretVersionsListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionsListEntry, name: "member")
-    SecretVersionsToStagesMapType.key = ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionIdType, name: "key")
-    SecretVersionsToStagesMapType.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionStagesType, name: "value")
+    SecretVersionsListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionsListEntry, name: "member"))
+    SecretVersionsToStagesMapType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionIdType, name: "key"))
+    SecretVersionsToStagesMapType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretVersionStagesType, name: "value"))
     SortOrderType.add_member(:asc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "asc", traits: {"smithy.api#enumValue" => "asc"}))
     SortOrderType.add_member(:desc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "desc", traits: {"smithy.api#enumValue" => "desc"}))
     StatusType.add_member(:in_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InSync", traits: {"smithy.api#enumValue" => "InSync"}))
@@ -408,8 +408,8 @@ module Aws::SecretsManager
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyType, name: "Key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValueType, name: "Value"))
     Tag.type = Types::Tag
-    TagKeyListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyType, name: "member")
-    TagListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyType, name: "member"))
+    TagListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdType, name: "SecretId", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagListType, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -444,7 +444,7 @@ module Aws::SecretsManager
     ValidationErrorsEntry.add_member(:check_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameType, name: "CheckName"))
     ValidationErrorsEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage"))
     ValidationErrorsEntry.type = Types::ValidationErrorsEntry
-    ValidationErrorsType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationErrorsEntry, name: "member")
+    ValidationErrorsType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationErrorsEntry, name: "member"))
 
     Secretsmanager = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.secretsmanager#secretsmanager"

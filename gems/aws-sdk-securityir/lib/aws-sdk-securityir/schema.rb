@@ -136,7 +136,7 @@ module Aws::SecurityIR
     Watcher = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.securityir#Watcher", name: "Watcher", traits: {"smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_Watcher.html"}})
     Watchers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.securityir#Watchers", name: "Watchers", traits: {"smithy.api#length" => {"min" => 0, "max" => 30}, "smithy.api#uniqueItems" => {}})
 
-    AWSAccountIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, name: "member")
+    AWSAccountIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, name: "member"))
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
     AwsRegion.add_member(:af_south_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AF_SOUTH_1", traits: {"smithy.api#enumValue" => "af-south-1"}))
@@ -193,13 +193,13 @@ module Aws::SecurityIR
     CaseAttachmentStatus.add_member(:verified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERIFIED", traits: {"smithy.api#enumValue" => "Verified"}))
     CaseAttachmentStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
     CaseAttachmentStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "Pending"}))
-    CaseAttachmentsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CaseAttachmentAttributes, name: "member")
+    CaseAttachmentsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseAttachmentAttributes, name: "member"))
     CaseEditItem.add_member(:event_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "eventTimestamp", traits: {"smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CaseEditItem.html#securityir-Type-CaseEditItem-eventTimestamp"}}))
     CaseEditItem.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "principal", traits: {"smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CaseEditItem.html#securityir-Type-CaseEditItem-principal"}}))
     CaseEditItem.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseEditAction, name: "action", traits: {"smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CaseEditItem.html#securityir-Type-CaseEditItem-action"}}))
     CaseEditItem.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseEditMessage, name: "message", traits: {"smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CaseEditItem.html#securityir-Type-CaseEditItem-message"}}))
     CaseEditItem.type = Types::CaseEditItem
-    CaseEditItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CaseEditItem, name: "member")
+    CaseEditItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseEditItem, name: "member"))
     CaseStatus.add_member(:submitted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUBMITTED", traits: {"smithy.api#enumValue" => "Submitted"}))
     CaseStatus.add_member(:acknowledged, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACKNOWLEDGED", traits: {"smithy.api#enumValue" => "Acknowledged"}))
     CaseStatus.add_member(:detection_and_analysis, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DETECTION_AND_ANALYSIS", traits: {"smithy.api#enumValue" => "Detection and Analysis"}))
@@ -292,12 +292,12 @@ module Aws::SecurityIR
     GetMembershipAccountDetailError.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "error", traits: {"smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetMembershipAccountDetailItem.html#securityir-Type-GetMembershipAccountDetailItem-relationshipStatus"}, "smithy.api#required" => {}}))
     GetMembershipAccountDetailError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetMembershipAccountDetailItem.html#securityir-Type-GetMembershipAccountDetailItem-relationshipType"}, "smithy.api#required" => {}}))
     GetMembershipAccountDetailError.type = Types::GetMembershipAccountDetailError
-    GetMembershipAccountDetailErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GetMembershipAccountDetailError, name: "member")
+    GetMembershipAccountDetailErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GetMembershipAccountDetailError, name: "member"))
     GetMembershipAccountDetailItem.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, name: "accountId", traits: {"smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetMembershipAccountDetailItem.html#securityir-Type-GetMembershipAccountDetailItem-accountId"}}))
     GetMembershipAccountDetailItem.add_member(:relationship_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipAccountRelationshipStatus, name: "relationshipStatus", traits: {"smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetMembershipAccountDetailItem.html#securityir-Type-GetMembershipAccountDetailItem-relationshipStatus"}}))
     GetMembershipAccountDetailItem.add_member(:relationship_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipAccountRelationshipType, name: "relationshipType", traits: {"smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetMembershipAccountDetailItem.html#securityir-Type-GetMembershipAccountDetailItem-relationshipType"}}))
     GetMembershipAccountDetailItem.type = Types::GetMembershipAccountDetailItem
-    GetMembershipAccountDetailItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GetMembershipAccountDetailItem, name: "member")
+    GetMembershipAccountDetailItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GetMembershipAccountDetailItem, name: "member"))
     GetMembershipRequest.add_member(:membership_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipId, name: "membershipId", traits: {"smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetMembership.html#securityir-GetMembership-request-uri-membershipId"}, "smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetMembershipRequest.type = Types::GetMembershipRequest
     GetMembershipResponse.add_member(:membership_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipId, name: "membershipId", traits: {"smithy.api#required" => {}}))
@@ -314,16 +314,16 @@ module Aws::SecurityIR
     GetMembershipResponse.add_member(:opt_in_features, ::Smithy::Schema::Shapes::MemberShape.new(target: OptInFeatures, name: "optInFeatures", traits: {"smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetMembership.html#securityir-GetMembership-response-optInFeatures"}}))
     GetMembershipResponse.add_member(:membership_accounts_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipAccountsConfigurations, name: "membershipAccountsConfigurations", traits: {"smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_GetMembership.html#securityir-GetMembership-response-membershipAccountsConfigurations"}}))
     GetMembershipResponse.type = Types::GetMembershipResponse
-    ImpactedAccounts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, name: "member")
+    ImpactedAccounts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, name: "member"))
     ImpactedAwsRegion.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, name: "region", traits: {"smithy.api#required" => {}}))
     ImpactedAwsRegion.type = Types::ImpactedAwsRegion
-    ImpactedAwsRegionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImpactedAwsRegion, name: "member")
-    ImpactedServicesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsService, name: "member")
+    ImpactedAwsRegionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpactedAwsRegion, name: "member"))
+    ImpactedServicesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsService, name: "member"))
     IncidentResponder.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: IncidentResponderName, name: "name", traits: {"smithy.api#required" => {}}))
     IncidentResponder.add_member(:job_title, ::Smithy::Schema::Shapes::MemberShape.new(target: JobTitle, name: "jobTitle", traits: {"smithy.api#required" => {}}))
     IncidentResponder.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "email", traits: {"smithy.api#required" => {}}))
     IncidentResponder.type = Types::IncidentResponder
-    IncidentResponseTeam.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IncidentResponder, name: "member")
+    IncidentResponseTeam.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IncidentResponder, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     InternalServerException.type = Types::InternalServerException
@@ -348,7 +348,7 @@ module Aws::SecurityIR
     ListCasesItem.add_member(:resolver_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResolverType, name: "resolverType", traits: {"smithy.api#externalDocumentation" => {"API Response" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListCasesItem.html#securityir-Type-ListCasesItem-resolverType"}}))
     ListCasesItem.add_member(:pending_action, ::Smithy::Schema::Shapes::MemberShape.new(target: PendingAction, name: "pendingAction", traits: {"smithy.api#externalDocumentation" => {"API Response" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListCasesItem.html#securityir-Type-ListCasesItem-pendingAction"}}))
     ListCasesItem.type = Types::ListCasesItem
-    ListCasesItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListCasesItem, name: "member")
+    ListCasesItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListCasesItem, name: "member"))
     ListCasesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken", traits: {"smithy.api#clientOptional" => {}, "smithy.api#externalDocumentation" => {"API Response" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListCases.html#securityir-ListCases-request-nextToken"}, "smithy.api#length" => {"max" => 2000}}))
     ListCasesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#clientOptional" => {}, "smithy.api#default" => 25, "smithy.api#externalDocumentation" => {"API Response" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListCases.html#securityir-ListCases-request-maxResults"}, "smithy.api#range" => {"min" => 1, "max" => 25}}))
     ListCasesRequest.type = Types::ListCasesRequest
@@ -363,7 +363,7 @@ module Aws::SecurityIR
     ListCommentsItem.add_member(:last_updated_by, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalId, name: "lastUpdatedBy"))
     ListCommentsItem.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentBody, name: "body", traits: {"smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListCommentsItem.html#securityir-Type-ListCommentsItem-body"}}))
     ListCommentsItem.type = Types::ListCommentsItem
-    ListCommentsItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListCommentsItem, name: "member")
+    ListCommentsItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListCommentsItem, name: "member"))
     ListCommentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken", traits: {"smithy.api#clientOptional" => {}, "smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListComments.html#securityir-ListComments-request-nextToken"}, "smithy.api#length" => {"max" => 2000}}))
     ListCommentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#clientOptional" => {}, "smithy.api#default" => 25, "smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListComments.html#securityir-ListComments-request-maxResults"}, "smithy.api#range" => {"min" => 1, "max" => 25}}))
     ListCommentsRequest.add_member(:case_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseId, name: "caseId", traits: {"smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListComments.html#securityir-ListComments-request-uri-caseId"}, "smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -378,7 +378,7 @@ module Aws::SecurityIR
     ListMembershipItem.add_member(:membership_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipArn, name: "membershipArn", traits: {"smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListMemberships.html#securityir-ListMemberships-response-membershipArn"}}))
     ListMembershipItem.add_member(:membership_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipStatus, name: "membershipStatus", traits: {"smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListMemberships.html#securityir-ListMemberships-response-membershipStatus"}}))
     ListMembershipItem.type = Types::ListMembershipItem
-    ListMembershipItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListMembershipItem, name: "member")
+    ListMembershipItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListMembershipItem, name: "member"))
     ListMembershipsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken", traits: {"smithy.api#clientOptional" => {}, "smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListMemberships.html#securityir-ListMemberships-request-nextToken"}, "smithy.api#length" => {"max" => 2000}}))
     ListMembershipsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#clientOptional" => {}, "smithy.api#default" => 25, "smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_ListMemberships.html#securityir-ListMemberships-request-maxResults"}, "smithy.api#range" => {"min" => 1, "max" => 25}}))
     ListMembershipsRequest.type = Types::ListMembershipsRequest
@@ -408,8 +408,8 @@ module Aws::SecurityIR
     OptInFeature.add_member(:is_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isEnabled", traits: {"smithy.api#required" => {}}))
     OptInFeature.type = Types::OptInFeature
     OptInFeatureName.add_member(:triage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRIAGE", traits: {"smithy.api#enumValue" => "Triage"}))
-    OptInFeatures.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OptInFeature, name: "member")
-    OrganizationalUnits.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitId, name: "member")
+    OptInFeatures.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OptInFeature, name: "member"))
+    OrganizationalUnits.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitId, name: "member"))
     PendingAction.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER", traits: {"smithy.api#enumValue" => "Customer"}))
     PendingAction.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "None"}))
     ResolverType.add_member(:aws, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS", traits: {"smithy.api#enumValue" => "AWS"}))
@@ -428,9 +428,9 @@ module Aws::SecurityIR
     ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "serviceCode", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "quotaCode", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_TagResource.html#securityir-TagResource-request-uri-resourceArn"}, "smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"aws.api#data" => "tagging", "smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_TagResource.html#securityir-TagResource-request-tags"}, "smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -438,7 +438,7 @@ module Aws::SecurityIR
     ThreatActorIp.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IPAddress, name: "ipAddress", traits: {"smithy.api#required" => {}}))
     ThreatActorIp.add_member(:user_agent, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAgent, name: "userAgent"))
     ThreatActorIp.type = Types::ThreatActorIp
-    ThreatActorIpList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThreatActorIp, name: "member")
+    ThreatActorIpList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThreatActorIp, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "serviceCode"))
     ThrottlingException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "quotaCode"))
@@ -500,7 +500,7 @@ module Aws::SecurityIR
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "UNKNOWN_OPERATION"}))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "CANNOT_PARSE"}))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "FIELD_VALIDATION_FAILED"}))
@@ -509,7 +509,7 @@ module Aws::SecurityIR
     Watcher.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonName, name: "name", traits: {"smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_Watcher.html#securityir-Type-Watcher-name"}}))
     Watcher.add_member(:job_title, ::Smithy::Schema::Shapes::MemberShape.new(target: JobTitle, name: "jobTitle", traits: {"smithy.api#externalDocumentation" => {"API Reference" => "https://docs.aws.amazon.com/security-ir/latest/APIReference/API_Watcher.html#securityir-Type-Watcher-jobTitle"}}))
     Watcher.type = Types::Watcher
-    Watchers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Watcher, name: "member")
+    Watchers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Watcher, name: "member"))
 
     SecurityIncidentResponse = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.securityir#SecurityIncidentResponse"

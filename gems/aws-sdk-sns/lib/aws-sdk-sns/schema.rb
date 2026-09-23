@@ -180,7 +180,7 @@ module Aws::SNS
     TopicARN = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sns#topicARN", name: "TopicARN")
     TopicName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sns#topicName", name: "TopicName")
 
-    ActionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "member")
+    ActionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "member"))
     AddPermissionInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, name: "TopicArn", traits: {"smithy.api#required" => {}}))
     AddPermissionInput.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: Label, name: "Label", traits: {"smithy.api#required" => {}}))
     AddPermissionInput.add_member(:aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegatesList, name: "AWSAccountId", traits: {"smithy.api#required" => {}}))
@@ -197,7 +197,7 @@ module Aws::SNS
     BatchResultErrorEntry.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     BatchResultErrorEntry.add_member(:sender_fault, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SenderFault", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     BatchResultErrorEntry.type = Types::BatchResultErrorEntry
-    BatchResultErrorEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchResultErrorEntry, name: "member")
+    BatchResultErrorEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchResultErrorEntry, name: "member"))
     CheckIfPhoneNumberIsOptedOutInput.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "phoneNumber", traits: {"smithy.api#required" => {}}))
     CheckIfPhoneNumberIsOptedOutInput.type = Types::CheckIfPhoneNumberIsOptedOutInput
     CheckIfPhoneNumberIsOptedOutResponse.add_member(:is_opted_out, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isOptedOut", traits: {"smithy.api#default" => false}))
@@ -234,7 +234,7 @@ module Aws::SNS
     CreateTopicInput.type = Types::CreateTopicInput
     CreateTopicResponse.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, name: "TopicArn"))
     CreateTopicResponse.type = Types::CreateTopicResponse
-    DelegatesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Delegate, name: "member")
+    DelegatesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Delegate, name: "member"))
     DeleteEndpointInput.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EndpointArn", traits: {"smithy.api#required" => {}}))
     DeleteEndpointInput.type = Types::DeleteEndpointInput
     DeletePlatformApplicationInput.add_member(:platform_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PlatformApplicationArn", traits: {"smithy.api#required" => {}}))
@@ -323,8 +323,8 @@ module Aws::SNS
     ListEndpointsByPlatformApplicationResponse.add_member(:endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfEndpoints, name: "Endpoints"))
     ListEndpointsByPlatformApplicationResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     ListEndpointsByPlatformApplicationResponse.type = Types::ListEndpointsByPlatformApplicationResponse
-    ListOfEndpoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "member")
-    ListOfPlatformApplications.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformApplication, name: "member")
+    ListOfEndpoints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "member"))
+    ListOfPlatformApplications.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformApplication, name: "member"))
     ListOriginationNumbersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListOriginationNumbersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxItemsListOriginationNumbers, name: "MaxResults"))
     ListOriginationNumbersRequest.type = Types::ListOriginationNumbersRequest
@@ -347,7 +347,7 @@ module Aws::SNS
     ListSMSSandboxPhoneNumbersResult.add_member(:phone_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: SMSSandboxPhoneNumberList, name: "PhoneNumbers", traits: {"smithy.api#required" => {}}))
     ListSMSSandboxPhoneNumbersResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     ListSMSSandboxPhoneNumbersResult.type = Types::ListSMSSandboxPhoneNumbersResult
-    ListString.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ListString.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ListSubscriptionsByTopicInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, name: "TopicArn", traits: {"smithy.api#required" => {}}))
     ListSubscriptionsByTopicInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListSubscriptionsByTopicInput.type = Types::ListSubscriptionsByTopicInput
@@ -368,10 +368,10 @@ module Aws::SNS
     ListTopicsResponse.add_member(:topics, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicsList, name: "Topics"))
     ListTopicsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListTopicsResponse.type = Types::ListTopicsResponse
-    MapStringToString.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    MapStringToString.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
-    MessageAttributeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key", traits: {"smithy.api#xmlName" => "Name"})
-    MessageAttributeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageAttributeValue, name: "value", traits: {"smithy.api#xmlName" => "Value"})
+    MapStringToString.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    MapStringToString.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
+    MessageAttributeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key", traits: {"smithy.api#xmlName" => "Name"}))
+    MessageAttributeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageAttributeValue, name: "value", traits: {"smithy.api#xmlName" => "Value"}))
     MessageAttributeValue.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DataType", traits: {"smithy.api#required" => {}}))
     MessageAttributeValue.add_member(:string_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StringValue"))
     MessageAttributeValue.add_member(:binary_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Binary, name: "BinaryValue"))
@@ -381,7 +381,7 @@ module Aws::SNS
     NumberCapability.add_member(:sms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMS", traits: {"smithy.api#enumValue" => "SMS"}))
     NumberCapability.add_member(:mms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MMS", traits: {"smithy.api#enumValue" => "MMS"}))
     NumberCapability.add_member(:voice, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VOICE", traits: {"smithy.api#enumValue" => "VOICE"}))
-    NumberCapabilityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapability, name: "member")
+    NumberCapabilityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapability, name: "member"))
     OptInPhoneNumberInput.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "phoneNumber", traits: {"smithy.api#required" => {}}))
     OptInPhoneNumberInput.type = Types::OptInPhoneNumberInput
     OptInPhoneNumberResponse.type = Types::OptInPhoneNumberResponse
@@ -394,8 +394,8 @@ module Aws::SNS
     PhoneNumberInformation.add_member(:route_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteType, name: "RouteType"))
     PhoneNumberInformation.add_member(:number_capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapabilityList, name: "NumberCapabilities"))
     PhoneNumberInformation.type = Types::PhoneNumberInformation
-    PhoneNumberInformationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberInformation, name: "member")
-    PhoneNumberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "member")
+    PhoneNumberInformationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberInformation, name: "member"))
+    PhoneNumberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "member"))
     PlatformApplication.add_member(:platform_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PlatformApplicationArn"))
     PlatformApplication.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStringToString, name: "Attributes"))
     PlatformApplication.type = Types::PlatformApplication
@@ -412,7 +412,7 @@ module Aws::SNS
     PublishBatchRequestEntry.add_member(:message_deduplication_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MessageDeduplicationId"))
     PublishBatchRequestEntry.add_member(:message_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MessageGroupId"))
     PublishBatchRequestEntry.type = Types::PublishBatchRequestEntry
-    PublishBatchRequestEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PublishBatchRequestEntry, name: "member")
+    PublishBatchRequestEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishBatchRequestEntry, name: "member"))
     PublishBatchResponse.add_member(:successful, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishBatchResultEntryList, name: "Successful"))
     PublishBatchResponse.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchResultErrorEntryList, name: "Failed"))
     PublishBatchResponse.type = Types::PublishBatchResponse
@@ -420,7 +420,7 @@ module Aws::SNS
     PublishBatchResultEntry.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageId, name: "MessageId"))
     PublishBatchResultEntry.add_member(:sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SequenceNumber"))
     PublishBatchResultEntry.type = Types::PublishBatchResultEntry
-    PublishBatchResultEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PublishBatchResultEntry, name: "member")
+    PublishBatchResultEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishBatchResultEntry, name: "member"))
     PublishInput.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, name: "TopicArn"))
     PublishInput.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TargetArn"))
     PublishInput.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "PhoneNumber"))
@@ -450,7 +450,7 @@ module Aws::SNS
     SMSSandboxPhoneNumber.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberString, name: "PhoneNumber"))
     SMSSandboxPhoneNumber.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SMSSandboxPhoneNumberVerificationStatus, name: "Status"))
     SMSSandboxPhoneNumber.type = Types::SMSSandboxPhoneNumber
-    SMSSandboxPhoneNumberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SMSSandboxPhoneNumber, name: "member")
+    SMSSandboxPhoneNumberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SMSSandboxPhoneNumber, name: "member"))
     SMSSandboxPhoneNumberVerificationStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Pending", traits: {"smithy.api#enumValue" => "Pending"}))
     SMSSandboxPhoneNumberVerificationStatus.add_member(:verified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Verified", traits: {"smithy.api#enumValue" => "Verified"}))
     SetEndpointAttributesInput.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EndpointArn", traits: {"smithy.api#required" => {}}))
@@ -486,18 +486,18 @@ module Aws::SNS
     Subscription.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint2, name: "Endpoint"))
     Subscription.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, name: "TopicArn"))
     Subscription.type = Types::Subscription
-    SubscriptionAttributesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
-    SubscriptionAttributesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
+    SubscriptionAttributesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
+    SubscriptionAttributesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     SubscriptionLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     SubscriptionLimitExceededException.type = Types::SubscriptionLimitExceededException
-    SubscriptionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Subscription, name: "member")
+    SubscriptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Subscription, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     TagLimitExceededException.type = Types::TagLimitExceededException
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagPolicyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     TagPolicyException.type = Types::TagPolicyException
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
@@ -510,11 +510,11 @@ module Aws::SNS
     TooManyEntriesInBatchRequestException.type = Types::TooManyEntriesInBatchRequestException
     Topic.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicARN, name: "TopicArn"))
     Topic.type = Types::Topic
-    TopicAttributesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
-    TopicAttributesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
+    TopicAttributesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
+    TopicAttributesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     TopicLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     TopicLimitExceededException.type = Types::TopicLimitExceededException
-    TopicsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Topic, name: "member")
+    TopicsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Topic, name: "member"))
     UnsubscribeInput.add_member(:subscription_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionARN, name: "SubscriptionArn", traits: {"smithy.api#required" => {}}))
     UnsubscribeInput.type = Types::UnsubscribeInput
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceArn", traits: {"smithy.api#required" => {}}))

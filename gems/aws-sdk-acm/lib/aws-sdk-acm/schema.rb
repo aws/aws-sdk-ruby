@@ -160,7 +160,7 @@ module Aws::ACM
     CertificateStatus.add_member(:validation_timed_out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALIDATION_TIMED_OUT", traits: {"smithy.api#enumValue" => "VALIDATION_TIMED_OUT"}))
     CertificateStatus.add_member(:revoked, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REVOKED", traits: {"smithy.api#enumValue" => "REVOKED"}))
     CertificateStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    CertificateStatuses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateStatus, name: "member")
+    CertificateStatuses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateStatus, name: "member"))
     CertificateSummary.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "CertificateArn"))
     CertificateSummary.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainNameString, name: "DomainName"))
     CertificateSummary.add_member(:subject_alternative_name_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainList, name: "SubjectAlternativeNameSummaries"))
@@ -182,7 +182,7 @@ module Aws::ACM
     CertificateSummary.add_member(:revoked_at, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "RevokedAt"))
     CertificateSummary.add_member(:managed_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateManagedBy, name: "ManagedBy"))
     CertificateSummary.type = Types::CertificateSummary
-    CertificateSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateSummary, name: "member")
+    CertificateSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateSummary, name: "member"))
     CertificateTransparencyLoggingPreference.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     CertificateTransparencyLoggingPreference.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     CertificateType.add_member(:imported, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMPORTED", traits: {"smithy.api#enumValue" => "IMPORTED"}))
@@ -196,7 +196,7 @@ module Aws::ACM
     DescribeCertificateRequest.type = Types::DescribeCertificateRequest
     DescribeCertificateResponse.add_member(:certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateDetail, name: "Certificate"))
     DescribeCertificateResponse.type = Types::DescribeCertificateResponse
-    DomainList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainNameString, name: "member")
+    DomainList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainNameString, name: "member"))
     DomainStatus.add_member(:pending_validation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_VALIDATION", traits: {"smithy.api#enumValue" => "PENDING_VALIDATION"}))
     DomainStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
     DomainStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -208,11 +208,11 @@ module Aws::ACM
     DomainValidation.add_member(:http_redirect, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRedirect, name: "HttpRedirect"))
     DomainValidation.add_member(:validation_method, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationMethod, name: "ValidationMethod"))
     DomainValidation.type = Types::DomainValidation
-    DomainValidationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainValidation, name: "member")
+    DomainValidationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainValidation, name: "member"))
     DomainValidationOption.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainNameString, name: "DomainName", traits: {"smithy.api#required" => {}}))
     DomainValidationOption.add_member(:validation_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainNameString, name: "ValidationDomain", traits: {"smithy.api#required" => {}}))
     DomainValidationOption.type = Types::DomainValidationOption
-    DomainValidationOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainValidationOption, name: "member")
+    DomainValidationOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainValidationOption, name: "member"))
     ExpiryEventsConfiguration.add_member(:days_before_expiry, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "DaysBeforeExpiry"))
     ExpiryEventsConfiguration.type = Types::ExpiryEventsConfiguration
     ExportCertificateRequest.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "CertificateArn", traits: {"smithy.api#required" => {}}))
@@ -225,8 +225,8 @@ module Aws::ACM
     ExtendedKeyUsage.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtendedKeyUsageName, name: "Name"))
     ExtendedKeyUsage.add_member(:oid, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "OID"))
     ExtendedKeyUsage.type = Types::ExtendedKeyUsage
-    ExtendedKeyUsageFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExtendedKeyUsageName, name: "member")
-    ExtendedKeyUsageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExtendedKeyUsage, name: "member")
+    ExtendedKeyUsageFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtendedKeyUsageName, name: "member"))
+    ExtendedKeyUsageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtendedKeyUsage, name: "member"))
     ExtendedKeyUsageName.add_member(:tls_web_server_authentication, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLS_WEB_SERVER_AUTHENTICATION", traits: {"smithy.api#enumValue" => "TLS_WEB_SERVER_AUTHENTICATION"}))
     ExtendedKeyUsageName.add_member(:tls_web_client_authentication, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLS_WEB_CLIENT_AUTHENTICATION", traits: {"smithy.api#enumValue" => "TLS_WEB_CLIENT_AUTHENTICATION"}))
     ExtendedKeyUsageName.add_member(:code_signing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CODE_SIGNING", traits: {"smithy.api#enumValue" => "CODE_SIGNING"}))
@@ -239,7 +239,7 @@ module Aws::ACM
     ExtendedKeyUsageName.add_member(:any, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANY", traits: {"smithy.api#enumValue" => "ANY"}))
     ExtendedKeyUsageName.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     ExtendedKeyUsageName.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
-    ExtendedKeyUsageNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExtendedKeyUsageName, name: "member")
+    ExtendedKeyUsageNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtendedKeyUsageName, name: "member"))
     FailureReason.add_member(:no_available_contacts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_AVAILABLE_CONTACTS", traits: {"smithy.api#enumValue" => "NO_AVAILABLE_CONTACTS"}))
     FailureReason.add_member(:additional_verification_required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADDITIONAL_VERIFICATION_REQUIRED", traits: {"smithy.api#enumValue" => "ADDITIONAL_VERIFICATION_REQUIRED"}))
     FailureReason.add_member(:domain_not_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOMAIN_NOT_ALLOWED", traits: {"smithy.api#enumValue" => "DOMAIN_NOT_ALLOWED"}))
@@ -281,7 +281,7 @@ module Aws::ACM
     ImportCertificateRequest.type = Types::ImportCertificateRequest
     ImportCertificateResponse.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "CertificateArn"))
     ImportCertificateResponse.type = Types::ImportCertificateResponse
-    InUseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    InUseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     InvalidArgsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     InvalidArgsException.type = Types::InvalidArgsException
     InvalidArnException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
@@ -301,11 +301,11 @@ module Aws::ACM
     KeyAlgorithm.add_member(:ec_prime256v1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EC_prime256v1", traits: {"smithy.api#enumValue" => "EC_prime256v1"}))
     KeyAlgorithm.add_member(:ec_secp384r1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EC_secp384r1", traits: {"smithy.api#enumValue" => "EC_secp384r1"}))
     KeyAlgorithm.add_member(:ec_secp521r1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EC_secp521r1", traits: {"smithy.api#enumValue" => "EC_secp521r1"}))
-    KeyAlgorithmList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAlgorithm, name: "member")
+    KeyAlgorithmList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAlgorithm, name: "member"))
     KeyUsage.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyUsageName, name: "Name"))
     KeyUsage.type = Types::KeyUsage
-    KeyUsageFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyUsageName, name: "member")
-    KeyUsageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyUsage, name: "member")
+    KeyUsageFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyUsageName, name: "member"))
+    KeyUsageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyUsage, name: "member"))
     KeyUsageName.add_member(:digital_signature, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIGITAL_SIGNATURE", traits: {"smithy.api#enumValue" => "DIGITAL_SIGNATURE"}))
     KeyUsageName.add_member(:non_repudation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NON_REPUDATION", traits: {"smithy.api#enumValue" => "NON_REPUDIATION"}))
     KeyUsageName.add_member(:key_encipherment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KEY_ENCIPHERMENT", traits: {"smithy.api#enumValue" => "KEY_ENCIPHERMENT"}))
@@ -317,7 +317,7 @@ module Aws::ACM
     KeyUsageName.add_member(:decipher_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DECIPHER_ONLY", traits: {"smithy.api#enumValue" => "DECIPHER_ONLY"}))
     KeyUsageName.add_member(:any, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANY", traits: {"smithy.api#enumValue" => "ANY"}))
     KeyUsageName.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
-    KeyUsageNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyUsageName, name: "member")
+    KeyUsageNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyUsageName, name: "member"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     LimitExceededException.type = Types::LimitExceededException
     ListCertificatesRequest.add_member(:certificate_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateStatuses, name: "CertificateStatuses"))
@@ -403,7 +403,7 @@ module Aws::ACM
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagPolicyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     TagPolicyException.type = Types::TagPolicyException
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityErrorMessage, name: "message"))
@@ -413,7 +413,7 @@ module Aws::ACM
     UpdateCertificateOptionsRequest.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "CertificateArn", traits: {"smithy.api#required" => {}}))
     UpdateCertificateOptionsRequest.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateOptions, name: "Options", traits: {"smithy.api#required" => {}}))
     UpdateCertificateOptionsRequest.type = Types::UpdateCertificateOptionsRequest
-    ValidationEmailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ValidationEmailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionMessage, name: "message"))
     ValidationException.type = Types::ValidationException
     ValidationMethod.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMAIL", traits: {"smithy.api#enumValue" => "EMAIL"}))

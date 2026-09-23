@@ -172,8 +172,8 @@ module Aws::ServiceQuotas
     GetServiceQuotaResponse.type = Types::GetServiceQuotaResponse
     IllegalArgumentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     IllegalArgumentException.type = Types::IllegalArgumentException
-    InputTagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    InputTags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    InputTagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    InputTags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     InvalidPaginationTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     InvalidPaginationTokenException.type = Types::InvalidPaginationTokenException
     InvalidResourceStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
@@ -231,8 +231,8 @@ module Aws::ServiceQuotas
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputTags, name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    MetricDimensionsMapDefinition.key = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimensionName, name: "key")
-    MetricDimensionsMapDefinition.value = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimensionValue, name: "value")
+    MetricDimensionsMapDefinition.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimensionName, name: "key"))
+    MetricDimensionsMapDefinition.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimensionValue, name: "value"))
     MetricInfo.add_member(:metric_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaMetricNamespace, name: "MetricNamespace"))
     MetricInfo.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaMetricName, name: "MetricName"))
     MetricInfo.add_member(:metric_dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimensionsMapDefinition, name: "MetricDimensions"))
@@ -244,7 +244,7 @@ module Aws::ServiceQuotas
     NoSuchResourceException.type = Types::NoSuchResourceException
     OrganizationNotInAllFeaturesModeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     OrganizationNotInAllFeaturesModeException.type = Types::OrganizationNotInAllFeaturesModeException
-    OutputTags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    OutputTags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     PeriodUnit.add_member(:microsecond, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MICROSECOND", traits: {"smithy.api#enumValue" => "MICROSECOND"}))
     PeriodUnit.add_member(:millisecond, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MILLISECOND", traits: {"smithy.api#enumValue" => "MILLISECOND"}))
     PeriodUnit.add_member(:second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECOND", traits: {"smithy.api#enumValue" => "SECOND"}))
@@ -302,7 +302,7 @@ module Aws::ServiceQuotas
     RequestedServiceQuotaChange.add_member(:quota_requested_at_level, ::Smithy::Schema::Shapes::MemberShape.new(target: AppliedLevelEnum, name: "QuotaRequestedAtLevel"))
     RequestedServiceQuotaChange.add_member(:quota_context, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaContextInfo, name: "QuotaContext"))
     RequestedServiceQuotaChange.type = Types::RequestedServiceQuotaChange
-    RequestedServiceQuotaChangeHistoryListDefinition.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RequestedServiceQuotaChange, name: "member")
+    RequestedServiceQuotaChangeHistoryListDefinition.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestedServiceQuotaChange, name: "member"))
     ResourceAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     ResourceAlreadyExistsException.type = Types::ResourceAlreadyExistsException
     ServiceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
@@ -310,7 +310,7 @@ module Aws::ServiceQuotas
     ServiceInfo.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, name: "ServiceCode"))
     ServiceInfo.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, name: "ServiceName"))
     ServiceInfo.type = Types::ServiceInfo
-    ServiceInfoListDefinition.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceInfo, name: "member")
+    ServiceInfoListDefinition.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceInfo, name: "member"))
     ServiceQuota.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, name: "ServiceCode"))
     ServiceQuota.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, name: "ServiceName"))
     ServiceQuota.add_member(:quota_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaArn, name: "QuotaArn"))
@@ -336,8 +336,8 @@ module Aws::ServiceQuotas
     ServiceQuotaIncreaseRequestInTemplate.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaUnit, name: "Unit"))
     ServiceQuotaIncreaseRequestInTemplate.add_member(:global_quota, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalQuota, name: "GlobalQuota", traits: {"smithy.api#default" => false}))
     ServiceQuotaIncreaseRequestInTemplate.type = Types::ServiceQuotaIncreaseRequestInTemplate
-    ServiceQuotaIncreaseRequestInTemplateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuotaIncreaseRequestInTemplate, name: "member")
-    ServiceQuotaListDefinition.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuota, name: "member")
+    ServiceQuotaIncreaseRequestInTemplateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuotaIncreaseRequestInTemplate, name: "member"))
+    ServiceQuotaListDefinition.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuota, name: "member"))
     ServiceQuotaTemplateAssociationStatus.add_member(:associated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSOCIATED", traits: {"smithy.api#enumValue" => "ASSOCIATED"}))
     ServiceQuotaTemplateAssociationStatus.add_member(:disassociated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISASSOCIATED", traits: {"smithy.api#enumValue" => "DISASSOCIATED"}))
     ServiceQuotaTemplateNotInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))

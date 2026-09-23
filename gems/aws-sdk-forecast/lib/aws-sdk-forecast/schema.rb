@@ -292,12 +292,12 @@ module Aws::Forecast
     AdditionalDataset.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name", traits: {"smithy.api#required" => {}}))
     AdditionalDataset.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, name: "Configuration"))
     AdditionalDataset.type = Types::AdditionalDataset
-    AdditionalDatasets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalDataset, name: "member")
-    ArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    AdditionalDatasets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalDataset, name: "member"))
+    ArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     AttributeConfig.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "AttributeName", traits: {"smithy.api#required" => {}}))
     AttributeConfig.add_member(:transformations, ::Smithy::Schema::Shapes::MemberShape.new(target: Transformations, name: "Transformations", traits: {"smithy.api#required" => {}}))
     AttributeConfig.type = Types::AttributeConfig
-    AttributeConfigs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeConfig, name: "member")
+    AttributeConfigs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeConfig, name: "member"))
     AttributeType.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING", traits: {"smithy.api#enumValue" => "string"}))
     AttributeType.add_member(:integer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTEGER", traits: {"smithy.api#enumValue" => "integer"}))
     AttributeType.add_member(:float, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLOAT", traits: {"smithy.api#enumValue" => "float"}))
@@ -310,23 +310,23 @@ module Aws::Forecast
     BaselineMetric.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
     BaselineMetric.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Value"))
     BaselineMetric.type = Types::BaselineMetric
-    BaselineMetrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BaselineMetric, name: "member")
+    BaselineMetrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BaselineMetric, name: "member"))
     CategoricalParameterRange.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name", traits: {"smithy.api#required" => {}}))
     CategoricalParameterRange.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: Values, name: "Values", traits: {"smithy.api#required" => {}}))
     CategoricalParameterRange.type = Types::CategoricalParameterRange
-    CategoricalParameterRanges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CategoricalParameterRange, name: "member")
+    CategoricalParameterRanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoricalParameterRange, name: "member"))
     Condition.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUALS", traits: {"smithy.api#enumValue" => "EQUALS"}))
     Condition.add_member(:not_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_EQUALS", traits: {"smithy.api#enumValue" => "NOT_EQUALS"}))
     Condition.add_member(:less_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LESS_THAN", traits: {"smithy.api#enumValue" => "LESS_THAN"}))
     Condition.add_member(:greater_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GREATER_THAN", traits: {"smithy.api#enumValue" => "GREATER_THAN"}))
-    Configuration.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "key")
-    Configuration.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Values, name: "value")
+    Configuration.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "key"))
+    Configuration.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Values, name: "value"))
     ContinuousParameterRange.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name", traits: {"smithy.api#required" => {}}))
     ContinuousParameterRange.add_member(:max_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "MaxValue", traits: {"smithy.api#required" => {}}))
     ContinuousParameterRange.add_member(:min_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "MinValue", traits: {"smithy.api#required" => {}}))
     ContinuousParameterRange.add_member(:scaling_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingType, name: "ScalingType"))
     ContinuousParameterRange.type = Types::ContinuousParameterRange
-    ContinuousParameterRanges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousParameterRange, name: "member")
+    ContinuousParameterRanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousParameterRange, name: "member"))
     CreateAutoPredictorRequest.add_member(:predictor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "PredictorName", traits: {"smithy.api#required" => {}}))
     CreateAutoPredictorRequest.add_member(:forecast_horizon, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ForecastHorizon"))
     CreateAutoPredictorRequest.add_member(:forecast_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ForecastTypes, name: "ForecastTypes"))
@@ -477,7 +477,7 @@ module Aws::Forecast
     DatasetGroupSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
     DatasetGroupSummary.add_member(:last_modification_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModificationTime"))
     DatasetGroupSummary.type = Types::DatasetGroupSummary
-    DatasetGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetGroupSummary, name: "member")
+    DatasetGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetGroupSummary, name: "member"))
     DatasetImportJobSummary.add_member(:dataset_import_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "DatasetImportJobArn"))
     DatasetImportJobSummary.add_member(:dataset_import_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DatasetImportJobName"))
     DatasetImportJobSummary.add_member(:data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "DataSource"))
@@ -487,7 +487,7 @@ module Aws::Forecast
     DatasetImportJobSummary.add_member(:last_modification_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModificationTime"))
     DatasetImportJobSummary.add_member(:import_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportMode, name: "ImportMode"))
     DatasetImportJobSummary.type = Types::DatasetImportJobSummary
-    DatasetImportJobs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetImportJobSummary, name: "member")
+    DatasetImportJobs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetImportJobSummary, name: "member"))
     DatasetSummary.add_member(:dataset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "DatasetArn"))
     DatasetSummary.add_member(:dataset_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "DatasetName"))
     DatasetSummary.add_member(:dataset_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetType, name: "DatasetType"))
@@ -498,7 +498,7 @@ module Aws::Forecast
     DatasetType.add_member(:target_time_series, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TARGET_TIME_SERIES", traits: {"smithy.api#enumValue" => "TARGET_TIME_SERIES"}))
     DatasetType.add_member(:related_time_series, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RELATED_TIME_SERIES", traits: {"smithy.api#enumValue" => "RELATED_TIME_SERIES"}))
     DatasetType.add_member(:item_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ITEM_METADATA", traits: {"smithy.api#enumValue" => "ITEM_METADATA"}))
-    Datasets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetSummary, name: "member")
+    Datasets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetSummary, name: "member"))
     DayOfWeek.add_member(:monday, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MONDAY", traits: {"smithy.api#enumValue" => "MONDAY"}))
     DayOfWeek.add_member(:tuesday, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TUESDAY", traits: {"smithy.api#enumValue" => "TUESDAY"}))
     DayOfWeek.add_member(:wednesday, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEDNESDAY", traits: {"smithy.api#enumValue" => "WEDNESDAY"}))
@@ -762,7 +762,7 @@ module Aws::Forecast
     ErrorMetric.add_member(:mase, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "MASE"))
     ErrorMetric.add_member(:mape, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "MAPE"))
     ErrorMetric.type = Types::ErrorMetric
-    ErrorMetrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMetric, name: "member")
+    ErrorMetrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMetric, name: "member"))
     EvaluationParameters.add_member(:number_of_backtest_windows, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "NumberOfBacktestWindows"))
     EvaluationParameters.add_member(:back_test_window_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "BackTestWindowOffset"))
     EvaluationParameters.type = Types::EvaluationParameters
@@ -771,7 +771,7 @@ module Aws::Forecast
     EvaluationResult.type = Types::EvaluationResult
     EvaluationType.add_member(:summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUMMARY", traits: {"smithy.api#enumValue" => "SUMMARY"}))
     EvaluationType.add_member(:computed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPUTED", traits: {"smithy.api#enumValue" => "COMPUTED"}))
-    Explainabilities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExplainabilitySummary, name: "member")
+    Explainabilities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExplainabilitySummary, name: "member"))
     ExplainabilityConfig.add_member(:time_series_granularity, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesGranularity, name: "TimeSeriesGranularity", traits: {"smithy.api#required" => {}}))
     ExplainabilityConfig.add_member(:time_point_granularity, ::Smithy::Schema::Shapes::MemberShape.new(target: TimePointGranularity, name: "TimePointGranularity", traits: {"smithy.api#required" => {}}))
     ExplainabilityConfig.type = Types::ExplainabilityConfig
@@ -783,7 +783,7 @@ module Aws::Forecast
     ExplainabilityExportSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
     ExplainabilityExportSummary.add_member(:last_modification_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModificationTime"))
     ExplainabilityExportSummary.type = Types::ExplainabilityExportSummary
-    ExplainabilityExports.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExplainabilityExportSummary, name: "member")
+    ExplainabilityExports.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExplainabilityExportSummary, name: "member"))
     ExplainabilityInfo.add_member(:explainability_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ExplainabilityArn"))
     ExplainabilityInfo.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "Status"))
     ExplainabilityInfo.type = Types::ExplainabilityInfo
@@ -807,20 +807,20 @@ module Aws::Forecast
     FeaturizationMethod.add_member(:featurization_method_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturizationMethodParameters, name: "FeaturizationMethodParameters"))
     FeaturizationMethod.type = Types::FeaturizationMethod
     FeaturizationMethodName.add_member(:filling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "filling", traits: {"smithy.api#enumValue" => "filling"}))
-    FeaturizationMethodParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterKey, name: "key")
-    FeaturizationMethodParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value")
-    FeaturizationPipeline.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturizationMethod, name: "member")
-    Featurizations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Featurization, name: "member")
-    FieldStatistics.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    FieldStatistics.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Statistics, name: "value")
+    FeaturizationMethodParameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterKey, name: "key"))
+    FeaturizationMethodParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value"))
+    FeaturizationPipeline.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FeaturizationMethod, name: "member"))
+    Featurizations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Featurization, name: "member"))
+    FieldStatistics.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    FieldStatistics.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Statistics, name: "value"))
     Filter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Key", traits: {"smithy.api#required" => {}}))
     Filter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Value", traits: {"smithy.api#required" => {}}))
     Filter.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterConditionString, name: "Condition", traits: {"smithy.api#required" => {}}))
     Filter.type = Types::Filter
     FilterConditionString.add_member(:is, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IS", traits: {"smithy.api#enumValue" => "IS"}))
     FilterConditionString.add_member(:is_not, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IS_NOT", traits: {"smithy.api#enumValue" => "IS_NOT"}))
-    Filters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
-    ForecastDimensions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "member")
+    Filters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
+    ForecastDimensions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "member"))
     ForecastExportJobSummary.add_member(:forecast_export_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ForecastExportJobArn"))
     ForecastExportJobSummary.add_member(:forecast_export_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ForecastExportJobName"))
     ForecastExportJobSummary.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: DataDestination, name: "Destination"))
@@ -829,7 +829,7 @@ module Aws::Forecast
     ForecastExportJobSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
     ForecastExportJobSummary.add_member(:last_modification_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModificationTime"))
     ForecastExportJobSummary.type = Types::ForecastExportJobSummary
-    ForecastExportJobs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ForecastExportJobSummary, name: "member")
+    ForecastExportJobs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ForecastExportJobSummary, name: "member"))
     ForecastSummary.add_member(:forecast_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ForecastArn"))
     ForecastSummary.add_member(:forecast_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ForecastName"))
     ForecastSummary.add_member(:predictor_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PredictorArn"))
@@ -840,8 +840,8 @@ module Aws::Forecast
     ForecastSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
     ForecastSummary.add_member(:last_modification_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModificationTime"))
     ForecastSummary.type = Types::ForecastSummary
-    ForecastTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ForecastType, name: "member")
-    Forecasts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ForecastSummary, name: "member")
+    ForecastTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ForecastType, name: "member"))
+    Forecasts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ForecastSummary, name: "member"))
     GetAccuracyMetricsRequest.add_member(:predictor_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "PredictorArn", traits: {"smithy.api#required" => {}}))
     GetAccuracyMetricsRequest.type = Types::GetAccuracyMetricsRequest
     GetAccuracyMetricsResponse.add_member(:predictor_evaluation_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictorEvaluationResults, name: "PredictorEvaluationResults"))
@@ -861,7 +861,7 @@ module Aws::Forecast
     IntegerParameterRange.add_member(:min_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "MinValue", traits: {"smithy.api#required" => {}}))
     IntegerParameterRange.add_member(:scaling_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingType, name: "ScalingType"))
     IntegerParameterRange.type = Types::IntegerParameterRange
-    IntegerParameterRanges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerParameterRange, name: "member")
+    IntegerParameterRanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerParameterRange, name: "member"))
     InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InvalidInputException.type = Types::InvalidInputException
     InvalidNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -969,11 +969,11 @@ module Aws::Forecast
     ListWhatIfForecastsResponse.add_member(:what_if_forecasts, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatIfForecasts, name: "WhatIfForecasts"))
     ListWhatIfForecastsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListWhatIfForecastsResponse.type = Types::ListWhatIfForecastsResponse
-    LongArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LongArn, name: "member")
+    LongArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LongArn, name: "member"))
     MetricResult.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "MetricName"))
     MetricResult.add_member(:metric_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "MetricValue"))
     MetricResult.type = Types::MetricResult
-    MetricResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricResult, name: "member")
+    MetricResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricResult, name: "member"))
     Metrics.add_member(:rmse, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "RMSE", traits: {"smithy.api#deprecated" => {"message" => "This property is deprecated, please refer to ErrorMetrics for both RMSE and WAPE"}}))
     Metrics.add_member(:weighted_quantile_losses, ::Smithy::Schema::Shapes::MemberShape.new(target: WeightedQuantileLosses, name: "WeightedQuantileLosses"))
     Metrics.add_member(:error_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMetrics, name: "ErrorMetrics"))
@@ -995,7 +995,7 @@ module Aws::Forecast
     MonitorSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
     MonitorSummary.add_member(:last_modification_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModificationTime"))
     MonitorSummary.type = Types::MonitorSummary
-    Monitors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorSummary, name: "member")
+    Monitors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorSummary, name: "member"))
     Month.add_member(:january, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JANUARY", traits: {"smithy.api#enumValue" => "JANUARY"}))
     Month.add_member(:february, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FEBRUARY", traits: {"smithy.api#enumValue" => "FEBRUARY"}))
     Month.add_member(:march, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MARCH", traits: {"smithy.api#enumValue" => "MARCH"}))
@@ -1029,10 +1029,10 @@ module Aws::Forecast
     PredictorBacktestExportJobSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
     PredictorBacktestExportJobSummary.add_member(:last_modification_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModificationTime"))
     PredictorBacktestExportJobSummary.type = Types::PredictorBacktestExportJobSummary
-    PredictorBacktestExportJobs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PredictorBacktestExportJobSummary, name: "member")
+    PredictorBacktestExportJobs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictorBacktestExportJobSummary, name: "member"))
     PredictorBaseline.add_member(:baseline_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: BaselineMetrics, name: "BaselineMetrics"))
     PredictorBaseline.type = Types::PredictorBaseline
-    PredictorEvaluationResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationResult, name: "member")
+    PredictorEvaluationResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationResult, name: "member"))
     PredictorEvent.add_member(:detail, ::Smithy::Schema::Shapes::MemberShape.new(target: Detail, name: "Detail"))
     PredictorEvent.add_member(:datetime, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Datetime"))
     PredictorEvent.type = Types::PredictorEvent
@@ -1041,7 +1041,7 @@ module Aws::Forecast
     PredictorExecution.type = Types::PredictorExecution
     PredictorExecutionDetails.add_member(:predictor_executions, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictorExecutions, name: "PredictorExecutions"))
     PredictorExecutionDetails.type = Types::PredictorExecutionDetails
-    PredictorExecutions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PredictorExecution, name: "member")
+    PredictorExecutions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictorExecution, name: "member"))
     PredictorMonitorEvaluation.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn"))
     PredictorMonitorEvaluation.add_member(:monitor_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "MonitorArn"))
     PredictorMonitorEvaluation.add_member(:evaluation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EvaluationTime"))
@@ -1054,7 +1054,7 @@ module Aws::Forecast
     PredictorMonitorEvaluation.add_member(:num_items_evaluated, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "NumItemsEvaluated"))
     PredictorMonitorEvaluation.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     PredictorMonitorEvaluation.type = Types::PredictorMonitorEvaluation
-    PredictorMonitorEvaluations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PredictorMonitorEvaluation, name: "member")
+    PredictorMonitorEvaluations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictorMonitorEvaluation, name: "member"))
     PredictorSummary.add_member(:predictor_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "PredictorArn"))
     PredictorSummary.add_member(:predictor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "PredictorName"))
     PredictorSummary.add_member(:dataset_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "DatasetGroupArn"))
@@ -1065,7 +1065,7 @@ module Aws::Forecast
     PredictorSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
     PredictorSummary.add_member(:last_modification_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModificationTime"))
     PredictorSummary.type = Types::PredictorSummary
-    Predictors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PredictorSummary, name: "member")
+    Predictors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictorSummary, name: "member"))
     ReferencePredictorSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     ReferencePredictorSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: State, name: "State"))
     ReferencePredictorSummary.type = Types::ReferencePredictorSummary
@@ -1090,7 +1090,7 @@ module Aws::Forecast
     SchemaAttribute.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "AttributeName"))
     SchemaAttribute.add_member(:attribute_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeType, name: "AttributeType"))
     SchemaAttribute.type = Types::SchemaAttribute
-    SchemaAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaAttribute, name: "member")
+    SchemaAttributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaAttribute, name: "member"))
     State.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Active", traits: {"smithy.api#enumValue" => "Active"}))
     State.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Deleted", traits: {"smithy.api#enumValue" => "Deleted"}))
     Statistics.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Count"))
@@ -1111,23 +1111,23 @@ module Aws::Forecast
     SupplementaryFeature.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name", traits: {"smithy.api#required" => {}}))
     SupplementaryFeature.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "Value", traits: {"smithy.api#required" => {}}))
     SupplementaryFeature.type = Types::SupplementaryFeature
-    SupplementaryFeatures.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SupplementaryFeature, name: "member")
+    SupplementaryFeatures.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupplementaryFeature, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
-    TestWindowDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TestWindowSummary, name: "member")
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    TestWindowDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TestWindowSummary, name: "member"))
     TestWindowSummary.add_member(:test_window_start, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "TestWindowStart"))
     TestWindowSummary.add_member(:test_window_end, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "TestWindowEnd"))
     TestWindowSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "Status"))
     TestWindowSummary.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     TestWindowSummary.type = Types::TestWindowSummary
-    TestWindows.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WindowSummary, name: "member")
+    TestWindows.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowSummary, name: "member"))
     TimeAlignmentBoundary.add_member(:month, ::Smithy::Schema::Shapes::MemberShape.new(target: Month, name: "Month"))
     TimeAlignmentBoundary.add_member(:day_of_month, ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfMonth, name: "DayOfMonth"))
     TimeAlignmentBoundary.add_member(:day_of_week, ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfWeek, name: "DayOfWeek"))
@@ -1139,7 +1139,7 @@ module Aws::Forecast
     TimeSeriesCondition.add_member(:attribute_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "AttributeValue", traits: {"smithy.api#required" => {}}))
     TimeSeriesCondition.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "Condition", traits: {"smithy.api#required" => {}}))
     TimeSeriesCondition.type = Types::TimeSeriesCondition
-    TimeSeriesConditions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesCondition, name: "member")
+    TimeSeriesConditions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesCondition, name: "member"))
     TimeSeriesGranularity.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
     TimeSeriesGranularity.add_member(:specific, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPECIFIC", traits: {"smithy.api#enumValue" => "SPECIFIC"}))
     TimeSeriesIdentifiers.add_member(:data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "DataSource"))
@@ -1156,11 +1156,11 @@ module Aws::Forecast
     TimeSeriesTransformation.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "Action"))
     TimeSeriesTransformation.add_member(:time_series_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesConditions, name: "TimeSeriesConditions"))
     TimeSeriesTransformation.type = Types::TimeSeriesTransformation
-    TimeSeriesTransformations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesTransformation, name: "member")
-    TrainingParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterKey, name: "key")
-    TrainingParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value")
-    Transformations.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "key")
-    Transformations.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "value")
+    TimeSeriesTransformations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesTransformation, name: "member"))
+    TrainingParameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterKey, name: "key"))
+    TrainingParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value"))
+    Transformations.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "key"))
+    Transformations.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "value"))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeys, name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -1169,12 +1169,12 @@ module Aws::Forecast
     UpdateDatasetGroupRequest.add_member(:dataset_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, name: "DatasetArns", traits: {"smithy.api#required" => {}}))
     UpdateDatasetGroupRequest.type = Types::UpdateDatasetGroupRequest
     UpdateDatasetGroupResponse.type = Types::UpdateDatasetGroupResponse
-    Values.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "member")
+    Values.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "member"))
     WeightedQuantileLoss.add_member(:quantile, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Quantile"))
     WeightedQuantileLoss.add_member(:loss_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "LossValue"))
     WeightedQuantileLoss.type = Types::WeightedQuantileLoss
-    WeightedQuantileLosses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WeightedQuantileLoss, name: "member")
-    WhatIfAnalyses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WhatIfAnalysisSummary, name: "member")
+    WeightedQuantileLosses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WeightedQuantileLoss, name: "member"))
+    WhatIfAnalyses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatIfAnalysisSummary, name: "member"))
     WhatIfAnalysisSummary.add_member(:what_if_analysis_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "WhatIfAnalysisArn"))
     WhatIfAnalysisSummary.add_member(:what_if_analysis_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "WhatIfAnalysisName"))
     WhatIfAnalysisSummary.add_member(:forecast_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ForecastArn"))
@@ -1183,7 +1183,7 @@ module Aws::Forecast
     WhatIfAnalysisSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
     WhatIfAnalysisSummary.add_member(:last_modification_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModificationTime"))
     WhatIfAnalysisSummary.type = Types::WhatIfAnalysisSummary
-    WhatIfForecastArnListForExport.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LongArn, name: "member")
+    WhatIfForecastArnListForExport.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LongArn, name: "member"))
     WhatIfForecastExportSummary.add_member(:what_if_forecast_export_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LongArn, name: "WhatIfForecastExportArn"))
     WhatIfForecastExportSummary.add_member(:what_if_forecast_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatIfForecastArnListForExport, name: "WhatIfForecastArns"))
     WhatIfForecastExportSummary.add_member(:what_if_forecast_export_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "WhatIfForecastExportName"))
@@ -1193,7 +1193,7 @@ module Aws::Forecast
     WhatIfForecastExportSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
     WhatIfForecastExportSummary.add_member(:last_modification_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModificationTime"))
     WhatIfForecastExportSummary.type = Types::WhatIfForecastExportSummary
-    WhatIfForecastExports.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WhatIfForecastExportSummary, name: "member")
+    WhatIfForecastExports.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatIfForecastExportSummary, name: "member"))
     WhatIfForecastSummary.add_member(:what_if_forecast_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LongArn, name: "WhatIfForecastArn"))
     WhatIfForecastSummary.add_member(:what_if_forecast_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "WhatIfForecastName"))
     WhatIfForecastSummary.add_member(:what_if_analysis_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "WhatIfAnalysisArn"))
@@ -1202,7 +1202,7 @@ module Aws::Forecast
     WhatIfForecastSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
     WhatIfForecastSummary.add_member(:last_modification_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModificationTime"))
     WhatIfForecastSummary.type = Types::WhatIfForecastSummary
-    WhatIfForecasts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WhatIfForecastSummary, name: "member")
+    WhatIfForecasts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatIfForecastSummary, name: "member"))
     WindowSummary.add_member(:test_window_start, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "TestWindowStart"))
     WindowSummary.add_member(:test_window_end, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "TestWindowEnd"))
     WindowSummary.add_member(:item_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ItemCount"))

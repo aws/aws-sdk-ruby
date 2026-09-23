@@ -65,7 +65,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "Values"))
     Filter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: Operator, name: "Operator"))
     Filter.type = Types::Filter
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     GetRegisteredSubscriptionProviderRequest.add_member(:subscription_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderArn, name: "SubscriptionProviderArn", traits: {"smithy.api#required" => {}}))
     GetRegisteredSubscriptionProviderRequest.type = Types::GetRegisteredSubscriptionProviderRequest
     GetRegisteredSubscriptionProviderResponse.add_member(:subscription_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderArn, name: "SubscriptionProviderArn"))
@@ -98,7 +98,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     Instance.add_member(:dual_subscription, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "DualSubscription"))
     Instance.add_member(:registered_with_subscription_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RegisteredWithSubscriptionProvider"))
     Instance.type = Types::Instance
-    InstanceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Instance, name: "member")
+    InstanceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Instance, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     InternalServerException.type = Types::InternalServerException
     LinuxSubscriptionsDiscoverySettings.add_member(:source_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "SourceRegions", traits: {"smithy.api#required" => {}}))
@@ -129,7 +129,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    ProductCodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    ProductCodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     RegisterSubscriptionProviderRequest.add_member(:subscription_provider_source, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderSource, name: "SubscriptionProviderSource", traits: {"smithy.api#required" => {}}))
     RegisterSubscriptionProviderRequest.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "SecretArn", traits: {"smithy.api#required" => {}}))
     RegisterSubscriptionProviderRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags"))
@@ -145,25 +145,25 @@ module Aws::LicenseManagerLinuxSubscriptions
     RegisteredSubscriptionProvider.add_member(:subscription_provider_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "SubscriptionProviderStatusMessage"))
     RegisteredSubscriptionProvider.add_member(:last_successful_data_retrieval_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "LastSuccessfulDataRetrievalTime"))
     RegisteredSubscriptionProvider.type = Types::RegisteredSubscriptionProvider
-    RegisteredSubscriptionProviderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegisteredSubscriptionProvider, name: "member")
+    RegisteredSubscriptionProviderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegisteredSubscriptionProvider, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
-    StringMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    StringMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}}))
+    StringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    StringMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     Subscription.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name"))
     Subscription.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Type"))
     Subscription.add_member(:instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxLong, name: "InstanceCount"))
     Subscription.type = Types::Subscription
-    SubscriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Subscription, name: "member")
-    SubscriptionProviderSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderSource, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    SubscriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Subscription, name: "member"))
+    SubscriptionProviderSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderSource, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ThrottlingException.type = Types::ThrottlingException
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProviderArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))

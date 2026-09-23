@@ -403,7 +403,7 @@ module Aws::MigrationHubOrchestrator
     ListWorkflowsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListWorkflowsOutput.add_member(:migration_workflow_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationWorkflowSummaryList, name: "migrationWorkflowSummary", traits: {"smithy.api#required" => {}}))
     ListWorkflowsOutput.type = Types::ListWorkflowsOutput
-    MaxStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MaxStringValue, name: "member")
+    MaxStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxStringValue, name: "member"))
     MigrationWorkflowSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationWorkflowId, name: "id"))
     MigrationWorkflowSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name"))
     MigrationWorkflowSummary.add_member(:template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "templateId"))
@@ -415,14 +415,14 @@ module Aws::MigrationHubOrchestrator
     MigrationWorkflowSummary.add_member(:completed_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "completedSteps"))
     MigrationWorkflowSummary.add_member(:total_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "totalSteps"))
     MigrationWorkflowSummary.type = Types::MigrationWorkflowSummary
-    MigrationWorkflowSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationWorkflowSummary, name: "member")
+    MigrationWorkflowSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationWorkflowSummary, name: "member"))
     PlatformCommand.add_member(:linux, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "linux"))
     PlatformCommand.add_member(:windows, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "windows"))
     PlatformCommand.type = Types::PlatformCommand
     PlatformScriptKey.add_member(:linux, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Key, name: "linux"))
     PlatformScriptKey.add_member(:windows, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Key, name: "windows"))
     PlatformScriptKey.type = Types::PlatformScriptKey
-    PluginSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PluginSummary, name: "member")
+    PluginSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PluginSummary, name: "member"))
     PluginSummary.add_member(:plugin_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PluginId, name: "pluginId"))
     PluginSummary.add_member(:hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "hostname"))
     PluginSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PluginHealth, name: "status"))
@@ -461,13 +461,13 @@ module Aws::MigrationHubOrchestrator
     StepInput.add_member(:map_of_string_value, Types::StepInput::MapOfStringValue, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMap, name: "mapOfStringValue"))
     StepInput.add_member(:unknown, Types::StepInput::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     StepInput.type = Types::StepInput
-    StepInputParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: StepInputParametersKey, name: "key")
-    StepInputParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StepInput, name: "value")
+    StepInputParameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: StepInputParametersKey, name: "key"))
+    StepInputParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StepInput, name: "value"))
     StepOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name"))
     StepOutput.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataType, name: "dataType"))
     StepOutput.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "required"))
     StepOutput.type = Types::StepOutput
-    StepOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StepOutput, name: "member")
+    StepOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StepOutput, name: "member"))
     StopWorkflowInput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationWorkflowId, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopWorkflowInput.type = Types::StopWorkflowInput
     StopWorkflowOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationWorkflowId, name: "id"))
@@ -476,12 +476,12 @@ module Aws::MigrationHubOrchestrator
     StopWorkflowOutput.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusMessage"))
     StopWorkflowOutput.add_member(:last_stop_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastStopTime"))
     StopWorkflowOutput.type = Types::StopWorkflowOutput
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringListMember, name: "member")
-    StringMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: StringMapKey, name: "key")
-    StringMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringMapValue, name: "value")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringListMember, name: "member"))
+    StringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMapKey, name: "key"))
+    StringMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMapValue, name: "value"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -490,7 +490,7 @@ module Aws::MigrationHubOrchestrator
     TemplateInput.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataType, name: "dataType"))
     TemplateInput.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "required"))
     TemplateInput.type = Types::TemplateInput
-    TemplateInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateInput, name: "member")
+    TemplateInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateInput, name: "member"))
     TemplateSource.add_member(:workflow_id, Types::TemplateSource::WorkflowId, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationWorkflowId, name: "workflowId"))
     TemplateSource.add_member(:unknown, Types::TemplateSource::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     TemplateSource.type = Types::TemplateSource
@@ -499,7 +499,7 @@ module Aws::MigrationHubOrchestrator
     TemplateStepGroupSummary.add_member(:previous, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "previous"))
     TemplateStepGroupSummary.add_member(:next, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "next"))
     TemplateStepGroupSummary.type = Types::TemplateStepGroupSummary
-    TemplateStepGroupSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateStepGroupSummary, name: "member")
+    TemplateStepGroupSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateStepGroupSummary, name: "member"))
     TemplateStepSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id"))
     TemplateStepSummary.add_member(:step_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "stepGroupId"))
     TemplateStepSummary.add_member(:template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "templateId"))
@@ -510,19 +510,19 @@ module Aws::MigrationHubOrchestrator
     TemplateStepSummary.add_member(:previous, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "previous"))
     TemplateStepSummary.add_member(:next, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "next"))
     TemplateStepSummary.type = Types::TemplateStepSummary
-    TemplateStepSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateStepSummary, name: "member")
+    TemplateStepSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateStepSummary, name: "member"))
     TemplateSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id"))
     TemplateSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name"))
     TemplateSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "arn"))
     TemplateSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
     TemplateSummary.type = Types::TemplateSummary
-    TemplateSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateSummary, name: "member")
+    TemplateSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateSummary, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
     Tool.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name"))
     Tool.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "url"))
     Tool.type = Types::Tool
-    ToolsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tool, name: "member")
+    ToolsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tool, name: "member"))
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
@@ -604,13 +604,13 @@ module Aws::MigrationHubOrchestrator
     WorkflowStepGroupSummary.add_member(:previous, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "previous"))
     WorkflowStepGroupSummary.add_member(:next, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "next"))
     WorkflowStepGroupSummary.type = Types::WorkflowStepGroupSummary
-    WorkflowStepGroupsSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStepGroupSummary, name: "member")
+    WorkflowStepGroupsSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStepGroupSummary, name: "member"))
     WorkflowStepOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStepOutputName, name: "name"))
     WorkflowStepOutput.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataType, name: "dataType"))
     WorkflowStepOutput.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "required"))
     WorkflowStepOutput.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStepOutputUnion, name: "value"))
     WorkflowStepOutput.type = Types::WorkflowStepOutput
-    WorkflowStepOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStepOutput, name: "member")
+    WorkflowStepOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStepOutput, name: "member"))
     WorkflowStepOutputUnion.add_member(:integer_value, Types::WorkflowStepOutputUnion::IntegerValue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "integerValue"))
     WorkflowStepOutputUnion.add_member(:string_value, Types::WorkflowStepOutputUnion::StringValue, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxStringValue, name: "stringValue"))
     WorkflowStepOutputUnion.add_member(:list_of_string_value, Types::WorkflowStepOutputUnion::ListOfStringValue, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxStringList, name: "listOfStringValue"))
@@ -630,7 +630,7 @@ module Aws::MigrationHubOrchestrator
     WorkflowStepSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
     WorkflowStepSummary.add_member(:script_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "scriptLocation"))
     WorkflowStepSummary.type = Types::WorkflowStepSummary
-    WorkflowStepsSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStepSummary, name: "member")
+    WorkflowStepsSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStepSummary, name: "member"))
 
     AWSMigrationHubOrchestrator = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.migrationhuborchestrator#AWSMigrationHubOrchestrator"

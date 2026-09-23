@@ -156,7 +156,7 @@ module Aws::ECRPUBLIC
     Url = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecrpublic#Url", name: "Url")
     UsageText = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecrpublic#UsageText", name: "UsageText", traits: {"smithy.api#length" => {"min" => 0, "max" => 25600}})
 
-    ArchitectureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Architecture, name: "member")
+    ArchitectureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Architecture, name: "member"))
     AuthorizationData.add_member(:authorization_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Base64, name: "authorizationToken"))
     AuthorizationData.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpirationTimestamp, name: "expiresAt"))
     AuthorizationData.type = Types::AuthorizationData
@@ -174,7 +174,7 @@ module Aws::ECRPUBLIC
     BatchDeleteImageResponse.add_member(:image_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdentifierList, name: "imageIds"))
     BatchDeleteImageResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageFailureList, name: "failures"))
     BatchDeleteImageResponse.type = Types::BatchDeleteImageResponse
-    BatchedOperationLayerDigestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchedOperationLayerDigest, name: "member")
+    BatchedOperationLayerDigestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchedOperationLayerDigest, name: "member"))
     CompleteLayerUploadRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryIdOrAlias, name: "registryId"))
     CompleteLayerUploadRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
     CompleteLayerUploadRequest.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadId, name: "uploadId", traits: {"smithy.api#required" => {}}))
@@ -273,7 +273,7 @@ module Aws::ECRPUBLIC
     ImageDetail.add_member(:image_manifest_media_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaType, name: "imageManifestMediaType"))
     ImageDetail.add_member(:artifact_media_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaType, name: "artifactMediaType"))
     ImageDetail.type = Types::ImageDetail
-    ImageDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDetail, name: "member")
+    ImageDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDetail, name: "member"))
     ImageDigestDoesNotMatchException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ImageDigestDoesNotMatchException.type = Types::ImageDigestDoesNotMatchException
     ImageFailure.add_member(:image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdentifier, name: "imageId"))
@@ -287,11 +287,11 @@ module Aws::ECRPUBLIC
     ImageFailureCode.add_member(:missing_digest_and_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MissingDigestAndTag", traits: {"smithy.api#enumValue" => "MissingDigestAndTag"}))
     ImageFailureCode.add_member(:image_referenced_by_manifest_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ImageReferencedByManifestList", traits: {"smithy.api#enumValue" => "ImageReferencedByManifestList"}))
     ImageFailureCode.add_member(:kms_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KmsError", traits: {"smithy.api#enumValue" => "KmsError"}))
-    ImageFailureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageFailure, name: "member")
+    ImageFailureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageFailure, name: "member"))
     ImageIdentifier.add_member(:image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDigest, name: "imageDigest"))
     ImageIdentifier.add_member(:image_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTag, name: "imageTag"))
     ImageIdentifier.type = Types::ImageIdentifier
-    ImageIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdentifier, name: "member")
+    ImageIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdentifier, name: "member"))
     ImageNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ImageNotFoundException.type = Types::ImageNotFoundException
     ImageTagAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -300,8 +300,8 @@ module Aws::ECRPUBLIC
     ImageTagDetail.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTimestamp, name: "createdAt"))
     ImageTagDetail.add_member(:image_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferencedImageDetail, name: "imageDetail"))
     ImageTagDetail.type = Types::ImageTagDetail
-    ImageTagDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTagDetail, name: "member")
-    ImageTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTag, name: "member")
+    ImageTagDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTagDetail, name: "member"))
+    ImageTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTag, name: "member"))
     InitiateLayerUploadRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryIdOrAlias, name: "registryId"))
     InitiateLayerUploadRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
     InitiateLayerUploadRequest.type = Types::InitiateLayerUploadRequest
@@ -329,15 +329,15 @@ module Aws::ECRPUBLIC
     LayerAlreadyExistsException.type = Types::LayerAlreadyExistsException
     LayerAvailability.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     LayerAvailability.add_member(:unavailable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNAVAILABLE", traits: {"smithy.api#enumValue" => "UNAVAILABLE"}))
-    LayerDigestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LayerDigest, name: "member")
+    LayerDigestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerDigest, name: "member"))
     LayerFailure.add_member(:layer_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchedOperationLayerDigest, name: "layerDigest"))
     LayerFailure.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerFailureCode, name: "failureCode"))
     LayerFailure.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerFailureReason, name: "failureReason"))
     LayerFailure.type = Types::LayerFailure
     LayerFailureCode.add_member(:invalid_layer_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InvalidLayerDigest", traits: {"smithy.api#enumValue" => "InvalidLayerDigest"}))
     LayerFailureCode.add_member(:missing_layer_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MissingLayerDigest", traits: {"smithy.api#enumValue" => "MissingLayerDigest"}))
-    LayerFailureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LayerFailure, name: "member")
-    LayerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Layer, name: "member")
+    LayerFailureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerFailure, name: "member"))
+    LayerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Layer, name: "member"))
     LayerPartTooSmallException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     LayerPartTooSmallException.type = Types::LayerPartTooSmallException
     LayersNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -348,7 +348,7 @@ module Aws::ECRPUBLIC
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    OperatingSystemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OperatingSystem, name: "member")
+    OperatingSystemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OperatingSystem, name: "member"))
     PutImageRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryIdOrAlias, name: "registryId"))
     PutImageRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
     PutImageRequest.add_member(:image_manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageManifest, name: "imageManifest", traits: {"smithy.api#required" => {}}))
@@ -387,13 +387,13 @@ module Aws::ECRPUBLIC
     RegistryAlias.add_member(:primary_registry_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryRegistryAliasFlag, name: "primaryRegistryAlias", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     RegistryAlias.add_member(:default_registry_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultRegistryAliasFlag, name: "defaultRegistryAlias", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     RegistryAlias.type = Types::RegistryAlias
-    RegistryAliasList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryAlias, name: "member")
+    RegistryAliasList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryAlias, name: "member"))
     RegistryAliasStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     RegistryAliasStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     RegistryAliasStatus.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
     RegistryCatalogData.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryDisplayName, name: "displayName"))
     RegistryCatalogData.type = Types::RegistryCatalogData
-    RegistryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Registry, name: "member")
+    RegistryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Registry, name: "member"))
     RegistryNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     RegistryNotFoundException.type = Types::RegistryNotFoundException
     Repository.add_member(:repository_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "repositoryArn"))
@@ -421,8 +421,8 @@ module Aws::ECRPUBLIC
     RepositoryCatalogDataInput.type = Types::RepositoryCatalogDataInput
     RepositoryCatalogDataNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     RepositoryCatalogDataNotFoundException.type = Types::RepositoryCatalogDataNotFoundException
-    RepositoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Repository, name: "member")
-    RepositoryNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "member")
+    RepositoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Repository, name: "member"))
+    RepositoryNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "member"))
     RepositoryNotEmptyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     RepositoryNotEmptyException.type = Types::RepositoryNotEmptyException
     RepositoryNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -443,8 +443,8 @@ module Aws::ECRPUBLIC
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest

@@ -146,7 +146,7 @@ module Aws::PcaConnectorAd
     AccessControlEntry.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedAt"))
     AccessControlEntry.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "UpdatedAt"))
     AccessControlEntry.type = Types::AccessControlEntry
-    AccessControlEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlEntrySummary, name: "member")
+    AccessControlEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlEntrySummary, name: "member"))
     AccessControlEntrySummary.add_member(:group_display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "GroupDisplayName"))
     AccessControlEntrySummary.add_member(:group_security_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSecurityIdentifier, name: "GroupSecurityIdentifier"))
     AccessControlEntrySummary.add_member(:access_rights, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessRights, name: "AccessRights"))
@@ -168,7 +168,7 @@ module Aws::PcaConnectorAd
     ApplicationPolicy.add_member(:policy_object_identifier, Types::ApplicationPolicy::PolicyObjectIdentifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomObjectIdentifier, name: "PolicyObjectIdentifier"))
     ApplicationPolicy.add_member(:unknown, Types::ApplicationPolicy::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ApplicationPolicy.type = Types::ApplicationPolicy
-    ApplicationPolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationPolicy, name: "member")
+    ApplicationPolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationPolicy, name: "member"))
     ApplicationPolicyType.add_member(:all_application_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL_APPLICATION_POLICIES", traits: {"smithy.api#enumValue" => "ALL_APPLICATION_POLICIES"}))
     ApplicationPolicyType.add_member(:any_purpose, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANY_PURPOSE", traits: {"smithy.api#enumValue" => "ANY_PURPOSE"}))
     ApplicationPolicyType.add_member(:attestation_identity_key_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ATTESTATION_IDENTITY_KEY_CERTIFICATE", traits: {"smithy.api#enumValue" => "ATTESTATION_IDENTITY_KEY_CERTIFICATE"}))
@@ -267,7 +267,7 @@ module Aws::PcaConnectorAd
     Connector.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedAt"))
     Connector.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "UpdatedAt"))
     Connector.type = Types::Connector
-    ConnectorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorSummary, name: "member")
+    ConnectorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorSummary, name: "member"))
     ConnectorStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     ConnectorStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     ConnectorStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -325,7 +325,7 @@ module Aws::PcaConnectorAd
     CreateTemplateRequest.type = Types::CreateTemplateRequest
     CreateTemplateResponse.add_member(:template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateArn, name: "TemplateArn"))
     CreateTemplateResponse.type = Types::CreateTemplateResponse
-    CryptoProvidersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    CryptoProvidersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}}))
     DeleteConnectorRequest.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArn, name: "ConnectorArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteConnectorRequest.type = Types::DeleteConnectorRequest
     DeleteDirectoryRegistrationRequest.add_member(:directory_registration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryRegistrationArn, name: "DirectoryRegistrationArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -345,7 +345,7 @@ module Aws::PcaConnectorAd
     DirectoryRegistration.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedAt"))
     DirectoryRegistration.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "UpdatedAt"))
     DirectoryRegistration.type = Types::DirectoryRegistration
-    DirectoryRegistrationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryRegistrationSummary, name: "member")
+    DirectoryRegistrationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryRegistrationSummary, name: "member"))
     DirectoryRegistrationStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     DirectoryRegistrationStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     DirectoryRegistrationStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -525,7 +525,7 @@ module Aws::PcaConnectorAd
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResourceType", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    SecurityGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
+    SecurityGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     ServicePrincipalName.add_member(:directory_registration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryRegistrationArn, name: "DirectoryRegistrationArn"))
     ServicePrincipalName.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArn, name: "ConnectorArn"))
     ServicePrincipalName.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipalNameStatus, name: "Status"))
@@ -533,7 +533,7 @@ module Aws::PcaConnectorAd
     ServicePrincipalName.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedAt"))
     ServicePrincipalName.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "UpdatedAt"))
     ServicePrincipalName.type = Types::ServicePrincipalName
-    ServicePrincipalNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipalNameSummary, name: "member")
+    ServicePrincipalNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipalNameSummary, name: "member"))
     ServicePrincipalNameStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     ServicePrincipalNameStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     ServicePrincipalNameStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -590,12 +590,12 @@ module Aws::PcaConnectorAd
     SubjectNameFlagsV4.add_member(:require_common_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "RequireCommonName"))
     SubjectNameFlagsV4.add_member(:require_directory_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "RequireDirectoryPath"))
     SubjectNameFlagsV4.type = Types::SubjectNameFlagsV4
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     Template.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateArn, name: "Arn"))
     Template.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArn, name: "ConnectorArn"))
     Template.add_member(:definition, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateDefinition, name: "Definition"))
@@ -612,8 +612,8 @@ module Aws::PcaConnectorAd
     TemplateDefinition.add_member(:template_v4, Types::TemplateDefinition::TemplateV4, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateV4, name: "TemplateV4"))
     TemplateDefinition.add_member(:unknown, Types::TemplateDefinition::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     TemplateDefinition.type = Types::TemplateDefinition
-    TemplateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateSummary, name: "member")
-    TemplateNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateName, name: "member")
+    TemplateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateSummary, name: "member"))
+    TemplateNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateName, name: "member"))
     TemplateRevision.add_member(:major_revision, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MajorRevision", traits: {"smithy.api#required" => {}}))
     TemplateRevision.add_member(:minor_revision, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MinorRevision", traits: {"smithy.api#required" => {}}))
     TemplateRevision.type = Types::TemplateRevision

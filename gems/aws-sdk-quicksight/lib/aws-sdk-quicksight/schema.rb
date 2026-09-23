@@ -2186,21 +2186,21 @@ module Aws::QuickSight
     AccountSettings.add_member(:public_sharing_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "PublicSharingEnabled", traits: {"smithy.api#default" => false}))
     AccountSettings.add_member(:termination_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "TerminationProtectionEnabled", traits: {"smithy.api#default" => false}))
     AccountSettings.type = Types::AccountSettings
-    ActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ActiveIAMPolicyAssignment.add_member(:assignment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMPolicyAssignmentName, name: "AssignmentName"))
     ActiveIAMPolicyAssignment.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "PolicyArn"))
     ActiveIAMPolicyAssignment.type = Types::ActiveIAMPolicyAssignment
-    ActiveIAMPolicyAssignmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveIAMPolicyAssignment, name: "member")
+    ActiveIAMPolicyAssignmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveIAMPolicyAssignment, name: "member"))
     AdHocFilteringOption.add_member(:availability_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardBehavior, name: "AvailabilityStatus"))
     AdHocFilteringOption.type = Types::AdHocFilteringOption
-    AdditionalDashboardIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "member")
+    AdditionalDashboardIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "member"))
     AggFunction.add_member(:aggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: AggType, name: "Aggregation"))
     AggFunction.add_member(:aggregation_function_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: AggFunctionParamMap, name: "AggregationFunctionParameters"))
     AggFunction.add_member(:period, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicTimeGranularity, name: "Period"))
     AggFunction.add_member(:period_field, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "PeriodField"))
     AggFunction.type = Types::AggFunction
-    AggFunctionParamMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AggFunctionParamKey, name: "key")
-    AggFunctionParamMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AggFunctionParamValue, name: "value")
+    AggFunctionParamMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AggFunctionParamKey, name: "key"))
+    AggFunctionParamMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AggFunctionParamValue, name: "value"))
     AggType.add_member(:sum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUM", traits: {"smithy.api#enumValue" => "SUM"}))
     AggType.add_member(:min, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIN", traits: {"smithy.api#enumValue" => "MIN"}))
     AggType.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAX", traits: {"smithy.api#enumValue" => "MAX"}))
@@ -2226,17 +2226,17 @@ module Aws::QuickSight
     AggregationFunction.add_member(:date_aggregation_function, ::Smithy::Schema::Shapes::MemberShape.new(target: DateAggregationFunction, name: "DateAggregationFunction"))
     AggregationFunction.add_member(:attribute_aggregation_function, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeAggregationFunction, name: "AttributeAggregationFunction"))
     AggregationFunction.type = Types::AggregationFunction
-    AggregationFunctionParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "key")
-    AggregationFunctionParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "value")
+    AggregationFunctionParameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "key"))
+    AggregationFunctionParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "value"))
     AggregationPartitionBy.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "FieldName"))
     AggregationPartitionBy.add_member(:time_granularity, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeGranularity, name: "TimeGranularity"))
     AggregationPartitionBy.type = Types::AggregationPartitionBy
-    AggregationPartitionByList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationPartitionBy, name: "member")
+    AggregationPartitionByList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationPartitionBy, name: "member"))
     AggregationSortConfiguration.add_member(:column, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnIdentifier, name: "Column", traits: {"smithy.api#required" => {}}))
     AggregationSortConfiguration.add_member(:sort_direction, ::Smithy::Schema::Shapes::MemberShape.new(target: SortDirection, name: "SortDirection", traits: {"smithy.api#required" => {}}))
     AggregationSortConfiguration.add_member(:aggregation_function, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationFunction, name: "AggregationFunction"))
     AggregationSortConfiguration.type = Types::AggregationSortConfiguration
-    AggregationSortConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationSortConfiguration, name: "member")
+    AggregationSortConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationSortConfiguration, name: "member"))
     AllSheetsFilterScopeConfiguration.type = Types::AllSheetsFilterScopeConfiguration
     AmazonElasticsearchParameters.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: Domain, name: "Domain", traits: {"smithy.api#required" => {}}))
     AmazonElasticsearchParameters.type = Types::AmazonElasticsearchParameters
@@ -2277,7 +2277,7 @@ module Aws::QuickSight
     AnalysisError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     AnalysisError.add_member(:violated_entities, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityList, name: "ViolatedEntities"))
     AnalysisError.type = Types::AnalysisError
-    AnalysisErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisError, name: "member")
+    AnalysisErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisError, name: "member"))
     AnalysisErrorType.add_member(:access_denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS_DENIED", traits: {"smithy.api#enumValue" => "ACCESS_DENIED"}))
     AnalysisErrorType.add_member(:source_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOURCE_NOT_FOUND", traits: {"smithy.api#enumValue" => "SOURCE_NOT_FOUND"}))
     AnalysisErrorType.add_member(:data_set_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATA_SET_NOT_FOUND", traits: {"smithy.api#enumValue" => "DATA_SET_NOT_FOUND"}))
@@ -2299,7 +2299,7 @@ module Aws::QuickSight
     AnalysisSearchFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisFilterAttribute, name: "Name"))
     AnalysisSearchFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     AnalysisSearchFilter.type = Types::AnalysisSearchFilter
-    AnalysisSearchFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisSearchFilter, name: "member")
+    AnalysisSearchFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisSearchFilter, name: "member"))
     AnalysisSourceEntity.add_member(:source_template, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisSourceTemplate, name: "SourceTemplate"))
     AnalysisSourceEntity.type = Types::AnalysisSourceEntity
     AnalysisSourceTemplate.add_member(:data_set_references, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetReferenceList, name: "DataSetReferences", traits: {"smithy.api#required" => {}}))
@@ -2312,7 +2312,7 @@ module Aws::QuickSight
     AnalysisSummary.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTime"))
     AnalysisSummary.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedTime"))
     AnalysisSummary.type = Types::AnalysisSummary
-    AnalysisSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisSummary, name: "member")
+    AnalysisSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisSummary, name: "member"))
     Anchor.add_member(:anchor_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AnchorType, name: "AnchorType"))
     Anchor.add_member(:time_granularity, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeGranularity, name: "TimeGranularity"))
     Anchor.add_member(:offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Offset", traits: {"smithy.api#default" => 0}))
@@ -2328,9 +2328,9 @@ module Aws::QuickSight
     AnonymousUserDashboardEmbeddingConfiguration.add_member(:feature_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: AnonymousUserDashboardFeatureConfigurations, name: "FeatureConfigurations"))
     AnonymousUserDashboardEmbeddingConfiguration.type = Types::AnonymousUserDashboardEmbeddingConfiguration
     AnonymousUserDashboardEmbeddingConfigurationDisabledFeature.add_member(:shared_view, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHARED_VIEW", traits: {"smithy.api#enumValue" => "SHARED_VIEW"}))
-    AnonymousUserDashboardEmbeddingConfigurationDisabledFeatures.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnonymousUserDashboardEmbeddingConfigurationDisabledFeature, name: "member")
+    AnonymousUserDashboardEmbeddingConfigurationDisabledFeatures.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnonymousUserDashboardEmbeddingConfigurationDisabledFeature, name: "member"))
     AnonymousUserDashboardEmbeddingConfigurationEnabledFeature.add_member(:shared_view, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHARED_VIEW", traits: {"smithy.api#enumValue" => "SHARED_VIEW"}))
-    AnonymousUserDashboardEmbeddingConfigurationEnabledFeatures.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnonymousUserDashboardEmbeddingConfigurationEnabledFeature, name: "member")
+    AnonymousUserDashboardEmbeddingConfigurationEnabledFeatures.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnonymousUserDashboardEmbeddingConfigurationEnabledFeature, name: "member"))
     AnonymousUserDashboardFeatureConfigurations.add_member(:shared_view, ::Smithy::Schema::Shapes::MemberShape.new(target: SharedViewConfigurations, name: "SharedView"))
     AnonymousUserDashboardFeatureConfigurations.type = Types::AnonymousUserDashboardFeatureConfigurations
     AnonymousUserDashboardVisualEmbeddingConfiguration.add_member(:initial_dashboard_visual_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardVisualId, name: "InitialDashboardVisualId", traits: {"smithy.api#required" => {}}))
@@ -2346,8 +2346,8 @@ module Aws::QuickSight
     AnonymousUserQSearchBarEmbeddingConfiguration.type = Types::AnonymousUserQSearchBarEmbeddingConfiguration
     AnonymousUserSnapshotJobResult.add_member(:file_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotJobResultFileGroupList, name: "FileGroups"))
     AnonymousUserSnapshotJobResult.type = Types::AnonymousUserSnapshotJobResult
-    AnonymousUserSnapshotJobResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnonymousUserSnapshotJobResult, name: "member")
-    AnswerIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnswerId, name: "member")
+    AnonymousUserSnapshotJobResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnonymousUserSnapshotJobResult, name: "member"))
+    AnswerIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnswerId, name: "member"))
     ApplicationTheme.add_member(:brand_color_palette, ::Smithy::Schema::Shapes::MemberShape.new(target: BrandColorPalette, name: "BrandColorPalette"))
     ApplicationTheme.add_member(:brand_element_style, ::Smithy::Schema::Shapes::MemberShape.new(target: BrandElementStyle, name: "BrandElementStyle"))
     ApplicationTheme.type = Types::ApplicationTheme
@@ -2369,7 +2369,7 @@ module Aws::QuickSight
     ArcThicknessOptions.add_member(:small, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMALL", traits: {"smithy.api#enumValue" => "SMALL"}))
     ArcThicknessOptions.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "MEDIUM"}))
     ArcThicknessOptions.add_member(:large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LARGE", traits: {"smithy.api#enumValue" => "LARGE"}))
-    ArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    ArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     AssetBundleCloudFormationOverridePropertyConfiguration.add_member(:resource_id_override_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobResourceIdOverrideConfiguration, name: "ResourceIdOverrideConfiguration"))
     AssetBundleCloudFormationOverridePropertyConfiguration.add_member(:vpc_connections, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobVPCConnectionOverridePropertiesList, name: "VPCConnections"))
     AssetBundleCloudFormationOverridePropertyConfiguration.add_member(:refresh_schedules, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobRefreshScheduleOverridePropertiesList, name: "RefreshSchedules"))
@@ -2385,26 +2385,26 @@ module Aws::QuickSight
     AssetBundleExportJobAnalysisOverrideProperties.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn", traits: {"smithy.api#required" => {}}))
     AssetBundleExportJobAnalysisOverrideProperties.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobAnalysisPropertyToOverrideList, name: "Properties", traits: {"smithy.api#required" => {}}))
     AssetBundleExportJobAnalysisOverrideProperties.type = Types::AssetBundleExportJobAnalysisOverrideProperties
-    AssetBundleExportJobAnalysisOverridePropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobAnalysisOverrideProperties, name: "member")
+    AssetBundleExportJobAnalysisOverridePropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobAnalysisOverrideProperties, name: "member"))
     AssetBundleExportJobAnalysisPropertyToOverride.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
-    AssetBundleExportJobAnalysisPropertyToOverrideList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobAnalysisPropertyToOverride, name: "member")
+    AssetBundleExportJobAnalysisPropertyToOverrideList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobAnalysisPropertyToOverride, name: "member"))
     AssetBundleExportJobDashboardOverrideProperties.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn", traits: {"smithy.api#required" => {}}))
     AssetBundleExportJobDashboardOverrideProperties.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobDashboardPropertyToOverrideList, name: "Properties", traits: {"smithy.api#required" => {}}))
     AssetBundleExportJobDashboardOverrideProperties.type = Types::AssetBundleExportJobDashboardOverrideProperties
-    AssetBundleExportJobDashboardOverridePropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobDashboardOverrideProperties, name: "member")
+    AssetBundleExportJobDashboardOverridePropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobDashboardOverrideProperties, name: "member"))
     AssetBundleExportJobDashboardPropertyToOverride.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
-    AssetBundleExportJobDashboardPropertyToOverrideList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobDashboardPropertyToOverride, name: "member")
+    AssetBundleExportJobDashboardPropertyToOverrideList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobDashboardPropertyToOverride, name: "member"))
     AssetBundleExportJobDataSetOverrideProperties.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn", traits: {"smithy.api#required" => {}}))
     AssetBundleExportJobDataSetOverrideProperties.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobDataSetPropertyToOverrideList, name: "Properties", traits: {"smithy.api#required" => {}}))
     AssetBundleExportJobDataSetOverrideProperties.type = Types::AssetBundleExportJobDataSetOverrideProperties
-    AssetBundleExportJobDataSetOverridePropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobDataSetOverrideProperties, name: "member")
+    AssetBundleExportJobDataSetOverridePropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobDataSetOverrideProperties, name: "member"))
     AssetBundleExportJobDataSetPropertyToOverride.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
     AssetBundleExportJobDataSetPropertyToOverride.add_member(:refresh_failure_email_alert_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REFRESH_FAILURE_EMAIL_ALERT_STATUS", traits: {"smithy.api#enumValue" => "RefreshFailureEmailAlertStatus"}))
-    AssetBundleExportJobDataSetPropertyToOverrideList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobDataSetPropertyToOverride, name: "member")
+    AssetBundleExportJobDataSetPropertyToOverrideList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobDataSetPropertyToOverride, name: "member"))
     AssetBundleExportJobDataSourceOverrideProperties.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn", traits: {"smithy.api#required" => {}}))
     AssetBundleExportJobDataSourceOverrideProperties.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobDataSourcePropertyToOverrideList, name: "Properties", traits: {"smithy.api#required" => {}}))
     AssetBundleExportJobDataSourceOverrideProperties.type = Types::AssetBundleExportJobDataSourceOverrideProperties
-    AssetBundleExportJobDataSourceOverridePropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobDataSourceOverrideProperties, name: "member")
+    AssetBundleExportJobDataSourceOverridePropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobDataSourceOverrideProperties, name: "member"))
     AssetBundleExportJobDataSourcePropertyToOverride.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
     AssetBundleExportJobDataSourcePropertyToOverride.add_member(:disable_ssl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLE_SSL", traits: {"smithy.api#enumValue" => "DisableSsl"}))
     AssetBundleExportJobDataSourcePropertyToOverride.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECRET_ARN", traits: {"smithy.api#enumValue" => "SecretArn"}))
@@ -2423,25 +2423,25 @@ module Aws::QuickSight
     AssetBundleExportJobDataSourcePropertyToOverride.add_member(:warehouse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WAREHOUSE", traits: {"smithy.api#enumValue" => "Warehouse"}))
     AssetBundleExportJobDataSourcePropertyToOverride.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLE_ARN", traits: {"smithy.api#enumValue" => "RoleArn"}))
     AssetBundleExportJobDataSourcePropertyToOverride.add_member(:product_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRODUCT_TYPE", traits: {"smithy.api#enumValue" => "ProductType"}))
-    AssetBundleExportJobDataSourcePropertyToOverrideList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobDataSourcePropertyToOverride, name: "member")
+    AssetBundleExportJobDataSourcePropertyToOverrideList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobDataSourcePropertyToOverride, name: "member"))
     AssetBundleExportJobError.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     AssetBundleExportJobError.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AssetBundleExportJobError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     AssetBundleExportJobError.type = Types::AssetBundleExportJobError
-    AssetBundleExportJobErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobError, name: "member")
+    AssetBundleExportJobErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobError, name: "member"))
     AssetBundleExportJobFolderOverrideProperties.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn", traits: {"smithy.api#required" => {}}))
     AssetBundleExportJobFolderOverrideProperties.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobFolderPropertyToOverrideList, name: "Properties", traits: {"smithy.api#required" => {}}))
     AssetBundleExportJobFolderOverrideProperties.type = Types::AssetBundleExportJobFolderOverrideProperties
-    AssetBundleExportJobFolderOverridePropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobFolderOverrideProperties, name: "member")
+    AssetBundleExportJobFolderOverridePropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobFolderOverrideProperties, name: "member"))
     AssetBundleExportJobFolderPropertyToOverride.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
     AssetBundleExportJobFolderPropertyToOverride.add_member(:parent_folder_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARENT_FOLDER_ARN", traits: {"smithy.api#enumValue" => "ParentFolderArn"}))
-    AssetBundleExportJobFolderPropertyToOverrideList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobFolderPropertyToOverride, name: "member")
+    AssetBundleExportJobFolderPropertyToOverrideList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobFolderPropertyToOverride, name: "member"))
     AssetBundleExportJobRefreshScheduleOverrideProperties.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn", traits: {"smithy.api#required" => {}}))
     AssetBundleExportJobRefreshScheduleOverrideProperties.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobRefreshSchedulePropertyToOverrideList, name: "Properties", traits: {"smithy.api#required" => {}}))
     AssetBundleExportJobRefreshScheduleOverrideProperties.type = Types::AssetBundleExportJobRefreshScheduleOverrideProperties
-    AssetBundleExportJobRefreshScheduleOverridePropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobRefreshScheduleOverrideProperties, name: "member")
+    AssetBundleExportJobRefreshScheduleOverridePropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobRefreshScheduleOverrideProperties, name: "member"))
     AssetBundleExportJobRefreshSchedulePropertyToOverride.add_member(:start_after_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "START_AFTER_DATE_TIME", traits: {"smithy.api#enumValue" => "StartAfterDateTime"}))
-    AssetBundleExportJobRefreshSchedulePropertyToOverrideList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobRefreshSchedulePropertyToOverride, name: "member")
+    AssetBundleExportJobRefreshSchedulePropertyToOverrideList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobRefreshSchedulePropertyToOverride, name: "member"))
     AssetBundleExportJobResourceIdOverrideConfiguration.add_member(:prefix_for_all_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "PrefixForAllResources", traits: {"smithy.api#default" => false}))
     AssetBundleExportJobResourceIdOverrideConfiguration.type = Types::AssetBundleExportJobResourceIdOverrideConfiguration
     AssetBundleExportJobStatus.add_member(:queued_for_immediate_execution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUEUED_FOR_IMMEDIATE_EXECUTION", traits: {"smithy.api#enumValue" => "QUEUED_FOR_IMMEDIATE_EXECUTION"}))
@@ -2457,67 +2457,67 @@ module Aws::QuickSight
     AssetBundleExportJobSummary.add_member(:include_permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IncludePermissions", traits: {"smithy.api#default" => false}))
     AssetBundleExportJobSummary.add_member(:include_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IncludeTags", traits: {"smithy.api#default" => false}))
     AssetBundleExportJobSummary.type = Types::AssetBundleExportJobSummary
-    AssetBundleExportJobSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobSummary, name: "member")
+    AssetBundleExportJobSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobSummary, name: "member"))
     AssetBundleExportJobThemeOverrideProperties.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn", traits: {"smithy.api#required" => {}}))
     AssetBundleExportJobThemeOverrideProperties.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobThemePropertyToOverrideList, name: "Properties", traits: {"smithy.api#required" => {}}))
     AssetBundleExportJobThemeOverrideProperties.type = Types::AssetBundleExportJobThemeOverrideProperties
-    AssetBundleExportJobThemeOverridePropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobThemeOverrideProperties, name: "member")
+    AssetBundleExportJobThemeOverridePropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobThemeOverrideProperties, name: "member"))
     AssetBundleExportJobThemePropertyToOverride.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
-    AssetBundleExportJobThemePropertyToOverrideList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobThemePropertyToOverride, name: "member")
+    AssetBundleExportJobThemePropertyToOverrideList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobThemePropertyToOverride, name: "member"))
     AssetBundleExportJobVPCConnectionOverrideProperties.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn", traits: {"smithy.api#required" => {}}))
     AssetBundleExportJobVPCConnectionOverrideProperties.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobVPCConnectionPropertyToOverrideList, name: "Properties", traits: {"smithy.api#required" => {}}))
     AssetBundleExportJobVPCConnectionOverrideProperties.type = Types::AssetBundleExportJobVPCConnectionOverrideProperties
-    AssetBundleExportJobVPCConnectionOverridePropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobVPCConnectionOverrideProperties, name: "member")
+    AssetBundleExportJobVPCConnectionOverridePropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobVPCConnectionOverrideProperties, name: "member"))
     AssetBundleExportJobVPCConnectionPropertyToOverride.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
     AssetBundleExportJobVPCConnectionPropertyToOverride.add_member(:dns_resolvers, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DNS_RESOLVERS", traits: {"smithy.api#enumValue" => "DnsResolvers"}))
     AssetBundleExportJobVPCConnectionPropertyToOverride.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLE_ARN", traits: {"smithy.api#enumValue" => "RoleArn"}))
-    AssetBundleExportJobVPCConnectionPropertyToOverrideList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobVPCConnectionPropertyToOverride, name: "member")
+    AssetBundleExportJobVPCConnectionPropertyToOverrideList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobVPCConnectionPropertyToOverride, name: "member"))
     AssetBundleExportJobValidationStrategy.add_member(:strict_mode_for_all_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "StrictModeForAllResources", traits: {"smithy.api#default" => false}))
     AssetBundleExportJobValidationStrategy.type = Types::AssetBundleExportJobValidationStrategy
     AssetBundleExportJobWarning.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     AssetBundleExportJobWarning.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     AssetBundleExportJobWarning.type = Types::AssetBundleExportJobWarning
-    AssetBundleExportJobWarningList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobWarning, name: "member")
+    AssetBundleExportJobWarningList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleExportJobWarning, name: "member"))
     AssetBundleImportFailureAction.add_member(:do_nothing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DO_NOTHING", traits: {"smithy.api#enumValue" => "DO_NOTHING"}))
     AssetBundleImportFailureAction.add_member(:rollback, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLBACK", traits: {"smithy.api#enumValue" => "ROLLBACK"}))
     AssetBundleImportJobAnalysisOverrideParameters.add_member(:analysis_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "AnalysisId", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobAnalysisOverrideParameters.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
     AssetBundleImportJobAnalysisOverrideParameters.type = Types::AssetBundleImportJobAnalysisOverrideParameters
-    AssetBundleImportJobAnalysisOverrideParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobAnalysisOverrideParameters, name: "member")
+    AssetBundleImportJobAnalysisOverrideParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobAnalysisOverrideParameters, name: "member"))
     AssetBundleImportJobAnalysisOverridePermissions.add_member(:analysis_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleRestrictiveResourceIdList, name: "AnalysisIds", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobAnalysisOverridePermissions.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleResourcePermissions, name: "Permissions", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobAnalysisOverridePermissions.type = Types::AssetBundleImportJobAnalysisOverridePermissions
-    AssetBundleImportJobAnalysisOverridePermissionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobAnalysisOverridePermissions, name: "member")
+    AssetBundleImportJobAnalysisOverridePermissionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobAnalysisOverridePermissions, name: "member"))
     AssetBundleImportJobAnalysisOverrideTags.add_member(:analysis_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleRestrictiveResourceIdList, name: "AnalysisIds", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobAnalysisOverrideTags.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobAnalysisOverrideTags.type = Types::AssetBundleImportJobAnalysisOverrideTags
-    AssetBundleImportJobAnalysisOverrideTagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobAnalysisOverrideTags, name: "member")
+    AssetBundleImportJobAnalysisOverrideTagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobAnalysisOverrideTags, name: "member"))
     AssetBundleImportJobDashboardOverrideParameters.add_member(:dashboard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "DashboardId", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobDashboardOverrideParameters.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
     AssetBundleImportJobDashboardOverrideParameters.type = Types::AssetBundleImportJobDashboardOverrideParameters
-    AssetBundleImportJobDashboardOverrideParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobDashboardOverrideParameters, name: "member")
+    AssetBundleImportJobDashboardOverrideParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobDashboardOverrideParameters, name: "member"))
     AssetBundleImportJobDashboardOverridePermissions.add_member(:dashboard_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleRestrictiveResourceIdList, name: "DashboardIds", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobDashboardOverridePermissions.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleResourcePermissions, name: "Permissions"))
     AssetBundleImportJobDashboardOverridePermissions.add_member(:link_sharing_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleResourceLinkSharingConfiguration, name: "LinkSharingConfiguration"))
     AssetBundleImportJobDashboardOverridePermissions.type = Types::AssetBundleImportJobDashboardOverridePermissions
-    AssetBundleImportJobDashboardOverridePermissionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobDashboardOverridePermissions, name: "member")
+    AssetBundleImportJobDashboardOverridePermissionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobDashboardOverridePermissions, name: "member"))
     AssetBundleImportJobDashboardOverrideTags.add_member(:dashboard_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleRestrictiveResourceIdList, name: "DashboardIds", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobDashboardOverrideTags.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobDashboardOverrideTags.type = Types::AssetBundleImportJobDashboardOverrideTags
-    AssetBundleImportJobDashboardOverrideTagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobDashboardOverrideTags, name: "member")
+    AssetBundleImportJobDashboardOverrideTagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobDashboardOverrideTags, name: "member"))
     AssetBundleImportJobDataSetOverrideParameters.add_member(:data_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "DataSetId", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobDataSetOverrideParameters.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
     AssetBundleImportJobDataSetOverrideParameters.add_member(:data_set_refresh_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetRefreshProperties, name: "DataSetRefreshProperties"))
     AssetBundleImportJobDataSetOverrideParameters.type = Types::AssetBundleImportJobDataSetOverrideParameters
-    AssetBundleImportJobDataSetOverrideParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobDataSetOverrideParameters, name: "member")
+    AssetBundleImportJobDataSetOverrideParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobDataSetOverrideParameters, name: "member"))
     AssetBundleImportJobDataSetOverridePermissions.add_member(:data_set_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleRestrictiveResourceIdList, name: "DataSetIds", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobDataSetOverridePermissions.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleResourcePermissions, name: "Permissions", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobDataSetOverridePermissions.type = Types::AssetBundleImportJobDataSetOverridePermissions
-    AssetBundleImportJobDataSetOverridePermissionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobDataSetOverridePermissions, name: "member")
+    AssetBundleImportJobDataSetOverridePermissionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobDataSetOverridePermissions, name: "member"))
     AssetBundleImportJobDataSetOverrideTags.add_member(:data_set_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleRestrictiveResourceIdList, name: "DataSetIds", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobDataSetOverrideTags.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobDataSetOverrideTags.type = Types::AssetBundleImportJobDataSetOverrideTags
-    AssetBundleImportJobDataSetOverrideTagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobDataSetOverrideTags, name: "member")
+    AssetBundleImportJobDataSetOverrideTagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobDataSetOverrideTags, name: "member"))
     AssetBundleImportJobDataSourceCredentialPair.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: DbUsername, name: "Username", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobDataSourceCredentialPair.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: Password, name: "Password", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobDataSourceCredentialPair.type = Types::AssetBundleImportJobDataSourceCredentialPair
@@ -2531,33 +2531,33 @@ module Aws::QuickSight
     AssetBundleImportJobDataSourceOverrideParameters.add_member(:ssl_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: SslProperties, name: "SslProperties"))
     AssetBundleImportJobDataSourceOverrideParameters.add_member(:credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobDataSourceCredentials, name: "Credentials"))
     AssetBundleImportJobDataSourceOverrideParameters.type = Types::AssetBundleImportJobDataSourceOverrideParameters
-    AssetBundleImportJobDataSourceOverrideParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobDataSourceOverrideParameters, name: "member")
+    AssetBundleImportJobDataSourceOverrideParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobDataSourceOverrideParameters, name: "member"))
     AssetBundleImportJobDataSourceOverridePermissions.add_member(:data_source_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleRestrictiveResourceIdList, name: "DataSourceIds", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobDataSourceOverridePermissions.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleResourcePermissions, name: "Permissions", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobDataSourceOverridePermissions.type = Types::AssetBundleImportJobDataSourceOverridePermissions
-    AssetBundleImportJobDataSourceOverridePermissionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobDataSourceOverridePermissions, name: "member")
+    AssetBundleImportJobDataSourceOverridePermissionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobDataSourceOverridePermissions, name: "member"))
     AssetBundleImportJobDataSourceOverrideTags.add_member(:data_source_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleRestrictiveResourceIdList, name: "DataSourceIds", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobDataSourceOverrideTags.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobDataSourceOverrideTags.type = Types::AssetBundleImportJobDataSourceOverrideTags
-    AssetBundleImportJobDataSourceOverrideTagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobDataSourceOverrideTags, name: "member")
+    AssetBundleImportJobDataSourceOverrideTagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobDataSourceOverrideTags, name: "member"))
     AssetBundleImportJobError.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     AssetBundleImportJobError.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AssetBundleImportJobError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     AssetBundleImportJobError.type = Types::AssetBundleImportJobError
-    AssetBundleImportJobErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobError, name: "member")
+    AssetBundleImportJobErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobError, name: "member"))
     AssetBundleImportJobFolderOverrideParameters.add_member(:folder_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "FolderId", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobFolderOverrideParameters.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
     AssetBundleImportJobFolderOverrideParameters.add_member(:parent_folder_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ParentFolderArn"))
     AssetBundleImportJobFolderOverrideParameters.type = Types::AssetBundleImportJobFolderOverrideParameters
-    AssetBundleImportJobFolderOverrideParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobFolderOverrideParameters, name: "member")
+    AssetBundleImportJobFolderOverrideParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobFolderOverrideParameters, name: "member"))
     AssetBundleImportJobFolderOverridePermissions.add_member(:folder_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleRestrictiveResourceIdList, name: "FolderIds", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobFolderOverridePermissions.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleResourcePermissions, name: "Permissions"))
     AssetBundleImportJobFolderOverridePermissions.type = Types::AssetBundleImportJobFolderOverridePermissions
-    AssetBundleImportJobFolderOverridePermissionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobFolderOverridePermissions, name: "member")
+    AssetBundleImportJobFolderOverridePermissionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobFolderOverridePermissions, name: "member"))
     AssetBundleImportJobFolderOverrideTags.add_member(:folder_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleRestrictiveResourceIdList, name: "FolderIds", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobFolderOverrideTags.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobFolderOverrideTags.type = Types::AssetBundleImportJobFolderOverrideTags
-    AssetBundleImportJobFolderOverrideTagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobFolderOverrideTags, name: "member")
+    AssetBundleImportJobFolderOverrideTagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobFolderOverrideTags, name: "member"))
     AssetBundleImportJobOverrideParameters.add_member(:resource_id_override_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobResourceIdOverrideConfiguration, name: "ResourceIdOverrideConfiguration"))
     AssetBundleImportJobOverrideParameters.add_member(:vpc_connections, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobVPCConnectionOverrideParametersList, name: "VPCConnections"))
     AssetBundleImportJobOverrideParameters.add_member(:refresh_schedules, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobRefreshScheduleOverrideParametersList, name: "RefreshSchedules"))
@@ -2589,7 +2589,7 @@ module Aws::QuickSight
     AssetBundleImportJobRefreshScheduleOverrideParameters.add_member(:schedule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ScheduleId", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobRefreshScheduleOverrideParameters.add_member(:start_after_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartAfterDateTime"))
     AssetBundleImportJobRefreshScheduleOverrideParameters.type = Types::AssetBundleImportJobRefreshScheduleOverrideParameters
-    AssetBundleImportJobRefreshScheduleOverrideParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobRefreshScheduleOverrideParameters, name: "member")
+    AssetBundleImportJobRefreshScheduleOverrideParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobRefreshScheduleOverrideParameters, name: "member"))
     AssetBundleImportJobResourceIdOverrideConfiguration.add_member(:prefix_for_all_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PrefixForAllResources"))
     AssetBundleImportJobResourceIdOverrideConfiguration.type = Types::AssetBundleImportJobResourceIdOverrideConfiguration
     AssetBundleImportJobStatus.add_member(:queued_for_immediate_execution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUEUED_FOR_IMMEDIATE_EXECUTION", traits: {"smithy.api#enumValue" => "QUEUED_FOR_IMMEDIATE_EXECUTION"}))
@@ -2605,19 +2605,19 @@ module Aws::QuickSight
     AssetBundleImportJobSummary.add_member(:asset_bundle_import_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "AssetBundleImportJobId"))
     AssetBundleImportJobSummary.add_member(:failure_action, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportFailureAction, name: "FailureAction"))
     AssetBundleImportJobSummary.type = Types::AssetBundleImportJobSummary
-    AssetBundleImportJobSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobSummary, name: "member")
+    AssetBundleImportJobSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobSummary, name: "member"))
     AssetBundleImportJobThemeOverrideParameters.add_member(:theme_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "ThemeId", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobThemeOverrideParameters.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
     AssetBundleImportJobThemeOverrideParameters.type = Types::AssetBundleImportJobThemeOverrideParameters
-    AssetBundleImportJobThemeOverrideParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobThemeOverrideParameters, name: "member")
+    AssetBundleImportJobThemeOverrideParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobThemeOverrideParameters, name: "member"))
     AssetBundleImportJobThemeOverridePermissions.add_member(:theme_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleRestrictiveResourceIdList, name: "ThemeIds", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobThemeOverridePermissions.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleResourcePermissions, name: "Permissions", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobThemeOverridePermissions.type = Types::AssetBundleImportJobThemeOverridePermissions
-    AssetBundleImportJobThemeOverridePermissionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobThemeOverridePermissions, name: "member")
+    AssetBundleImportJobThemeOverridePermissionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobThemeOverridePermissions, name: "member"))
     AssetBundleImportJobThemeOverrideTags.add_member(:theme_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleRestrictiveResourceIdList, name: "ThemeIds", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobThemeOverrideTags.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobThemeOverrideTags.type = Types::AssetBundleImportJobThemeOverrideTags
-    AssetBundleImportJobThemeOverrideTagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobThemeOverrideTags, name: "member")
+    AssetBundleImportJobThemeOverrideTagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobThemeOverrideTags, name: "member"))
     AssetBundleImportJobVPCConnectionOverrideParameters.add_member(:vpc_connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VPCConnectionResourceIdUnrestricted, name: "VPCConnectionId", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobVPCConnectionOverrideParameters.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
     AssetBundleImportJobVPCConnectionOverrideParameters.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIdList, name: "SubnetIds"))
@@ -2625,29 +2625,29 @@ module Aws::QuickSight
     AssetBundleImportJobVPCConnectionOverrideParameters.add_member(:dns_resolvers, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsResolverList, name: "DnsResolvers"))
     AssetBundleImportJobVPCConnectionOverrideParameters.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn"))
     AssetBundleImportJobVPCConnectionOverrideParameters.type = Types::AssetBundleImportJobVPCConnectionOverrideParameters
-    AssetBundleImportJobVPCConnectionOverrideParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobVPCConnectionOverrideParameters, name: "member")
+    AssetBundleImportJobVPCConnectionOverrideParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobVPCConnectionOverrideParameters, name: "member"))
     AssetBundleImportJobVPCConnectionOverrideTags.add_member(:vpc_connection_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleRestrictiveResourceIdList, name: "VPCConnectionIds", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobVPCConnectionOverrideTags.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     AssetBundleImportJobVPCConnectionOverrideTags.type = Types::AssetBundleImportJobVPCConnectionOverrideTags
-    AssetBundleImportJobVPCConnectionOverrideTagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobVPCConnectionOverrideTags, name: "member")
+    AssetBundleImportJobVPCConnectionOverrideTagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobVPCConnectionOverrideTags, name: "member"))
     AssetBundleImportJobWarning.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     AssetBundleImportJobWarning.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     AssetBundleImportJobWarning.type = Types::AssetBundleImportJobWarning
-    AssetBundleImportJobWarningList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobWarning, name: "member")
+    AssetBundleImportJobWarningList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportJobWarning, name: "member"))
     AssetBundleImportSource.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleImportBodyBlob, name: "Body"))
     AssetBundleImportSource.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "S3Uri"))
     AssetBundleImportSource.type = Types::AssetBundleImportSource
     AssetBundleImportSourceDescription.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveS3Uri, name: "Body"))
     AssetBundleImportSourceDescription.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "S3Uri"))
     AssetBundleImportSourceDescription.type = Types::AssetBundleImportSourceDescription
-    AssetBundlePrincipalList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Principal, name: "member")
-    AssetBundleResourceArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    AssetBundlePrincipalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Principal, name: "member"))
+    AssetBundleResourceArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     AssetBundleResourceLinkSharingConfiguration.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleResourcePermissions, name: "Permissions"))
     AssetBundleResourceLinkSharingConfiguration.type = Types::AssetBundleResourceLinkSharingConfiguration
     AssetBundleResourcePermissions.add_member(:principals, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundlePrincipalList, name: "Principals", traits: {"smithy.api#required" => {}}))
     AssetBundleResourcePermissions.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionList, name: "Actions", traits: {"smithy.api#required" => {}}))
     AssetBundleResourcePermissions.type = Types::AssetBundleResourcePermissions
-    AssetBundleRestrictiveResourceIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleRestrictiveResourceId, name: "member")
+    AssetBundleRestrictiveResourceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetBundleRestrictiveResourceId, name: "member"))
     AssetOptions.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Timezone"))
     AssetOptions.add_member(:week_start, ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfTheWeek, name: "WeekStart"))
     AssetOptions.add_member(:q_business_insights_status, ::Smithy::Schema::Shapes::MemberShape.new(target: QBusinessInsightsStatus, name: "QBusinessInsightsStatus"))
@@ -2691,12 +2691,12 @@ module Aws::QuickSight
     AuthorSpecifiedAggregation.add_member(:var, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VAR", traits: {"smithy.api#enumValue" => "VAR"}))
     AuthorSpecifiedAggregation.add_member(:varp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VARP", traits: {"smithy.api#enumValue" => "VARP"}))
     AuthorSpecifiedAggregation.add_member(:percentile, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PERCENTILE", traits: {"smithy.api#enumValue" => "PERCENTILE"}))
-    AuthorSpecifiedAggregations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorSpecifiedAggregation, name: "member")
+    AuthorSpecifiedAggregations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorSpecifiedAggregation, name: "member"))
     AuthorizedTargetsByService.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceType, name: "Service"))
     AuthorizedTargetsByService.add_member(:authorized_targets, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizedTargetsList, name: "AuthorizedTargets"))
     AuthorizedTargetsByService.type = Types::AuthorizedTargetsByService
-    AuthorizedTargetsByServices.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizedTargetsByService, name: "member")
-    AuthorizedTargetsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    AuthorizedTargetsByServices.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizedTargetsByService, name: "member"))
+    AuthorizedTargetsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     AwsIotAnalyticsParameters.add_member(:data_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetName, name: "DataSetName", traits: {"smithy.api#required" => {}}))
     AwsIotAnalyticsParameters.type = Types::AwsIotAnalyticsParameters
     AxisBinding.add_member(:primary_yaxis, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIMARY_YAXIS", traits: {"smithy.api#enumValue" => "PRIMARY_YAXIS"}))
@@ -2722,7 +2722,7 @@ module Aws::QuickSight
     AxisLabelOptions.add_member(:custom_label, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CustomLabel"))
     AxisLabelOptions.add_member(:apply_to, ::Smithy::Schema::Shapes::MemberShape.new(target: AxisLabelReferenceOptions, name: "ApplyTo"))
     AxisLabelOptions.type = Types::AxisLabelOptions
-    AxisLabelOptionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AxisLabelOptions, name: "member")
+    AxisLabelOptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AxisLabelOptions, name: "member"))
     AxisLabelReferenceOptions.add_member(:field_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "FieldId", traits: {"smithy.api#required" => {}}))
     AxisLabelReferenceOptions.add_member(:column, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnIdentifier, name: "Column", traits: {"smithy.api#required" => {}}))
     AxisLabelReferenceOptions.type = Types::AxisLabelReferenceOptions
@@ -2822,14 +2822,14 @@ module Aws::QuickSight
     BodySectionConfiguration.add_member(:page_break_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SectionPageBreakConfiguration, name: "PageBreakConfiguration"))
     BodySectionConfiguration.add_member(:repeat_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BodySectionRepeatConfiguration, name: "RepeatConfiguration"))
     BodySectionConfiguration.type = Types::BodySectionConfiguration
-    BodySectionConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BodySectionConfiguration, name: "member")
+    BodySectionConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BodySectionConfiguration, name: "member"))
     BodySectionContent.add_member(:layout, ::Smithy::Schema::Shapes::MemberShape.new(target: SectionLayoutConfiguration, name: "Layout"))
     BodySectionContent.type = Types::BodySectionContent
     BodySectionDynamicCategoryDimensionConfiguration.add_member(:column, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnIdentifier, name: "Column", traits: {"smithy.api#required" => {}}))
     BodySectionDynamicCategoryDimensionConfiguration.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: BodySectionDynamicDimensionLimit, name: "Limit"))
     BodySectionDynamicCategoryDimensionConfiguration.add_member(:sort_by_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: BodySectionDynamicDimensionSortConfigurationList, name: "SortByMetrics"))
     BodySectionDynamicCategoryDimensionConfiguration.type = Types::BodySectionDynamicCategoryDimensionConfiguration
-    BodySectionDynamicDimensionSortConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnSort, name: "member")
+    BodySectionDynamicDimensionSortConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnSort, name: "member"))
     BodySectionDynamicNumericDimensionConfiguration.add_member(:column, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnIdentifier, name: "Column", traits: {"smithy.api#required" => {}}))
     BodySectionDynamicNumericDimensionConfiguration.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: BodySectionDynamicDimensionLimit, name: "Limit"))
     BodySectionDynamicNumericDimensionConfiguration.add_member(:sort_by_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: BodySectionDynamicDimensionSortConfigurationList, name: "SortByMetrics"))
@@ -2841,7 +2841,7 @@ module Aws::QuickSight
     BodySectionRepeatDimensionConfiguration.add_member(:dynamic_category_dimension_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BodySectionDynamicCategoryDimensionConfiguration, name: "DynamicCategoryDimensionConfiguration"))
     BodySectionRepeatDimensionConfiguration.add_member(:dynamic_numeric_dimension_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BodySectionDynamicNumericDimensionConfiguration, name: "DynamicNumericDimensionConfiguration"))
     BodySectionRepeatDimensionConfiguration.type = Types::BodySectionRepeatDimensionConfiguration
-    BodySectionRepeatDimensionConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BodySectionRepeatDimensionConfiguration, name: "member")
+    BodySectionRepeatDimensionConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BodySectionRepeatDimensionConfiguration, name: "member"))
     BodySectionRepeatPageBreakConfiguration.add_member(:after, ::Smithy::Schema::Shapes::MemberShape.new(target: SectionAfterPageBreak, name: "After"))
     BodySectionRepeatPageBreakConfiguration.type = Types::BodySectionRepeatPageBreakConfiguration
     BookmarksConfigurations.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
@@ -2864,12 +2864,12 @@ module Aws::QuickSight
     BoxPlotChartConfiguration.add_member(:visual_palette, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualPalette, name: "VisualPalette"))
     BoxPlotChartConfiguration.add_member(:interactions, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualInteractionOptions, name: "Interactions"))
     BoxPlotChartConfiguration.type = Types::BoxPlotChartConfiguration
-    BoxPlotDimensionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member")
+    BoxPlotDimensionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member"))
     BoxPlotFieldWells.add_member(:box_plot_aggregated_field_wells, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxPlotAggregatedFieldWells, name: "BoxPlotAggregatedFieldWells"))
     BoxPlotFieldWells.type = Types::BoxPlotFieldWells
     BoxPlotFillStyle.add_member(:solid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOLID", traits: {"smithy.api#enumValue" => "SOLID"}))
     BoxPlotFillStyle.add_member(:transparent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRANSPARENT", traits: {"smithy.api#enumValue" => "TRANSPARENT"}))
-    BoxPlotMeasureFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member")
+    BoxPlotMeasureFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member"))
     BoxPlotOptions.add_member(:style_options, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxPlotStyleOptions, name: "StyleOptions"))
     BoxPlotOptions.add_member(:outlier_visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: Visibility, name: "OutlierVisibility"))
     BoxPlotOptions.add_member(:all_data_points_visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: Visibility, name: "AllDataPointsVisibility"))
@@ -2927,7 +2927,7 @@ module Aws::QuickSight
     BrandSummary.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTime"))
     BrandSummary.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "LastUpdatedTime"))
     BrandSummary.type = Types::BrandSummary
-    BrandSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BrandSummary, name: "member")
+    BrandSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BrandSummary, name: "member"))
     BrandVersionStatus.add_member(:create_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
     BrandVersionStatus.add_member(:create_succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_SUCCEEDED", traits: {"smithy.api#enumValue" => "CREATE_SUCCEEDED"}))
     BrandVersionStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
@@ -2935,13 +2935,13 @@ module Aws::QuickSight
     CalculatedColumn.add_member(:column_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnId, name: "ColumnId", traits: {"smithy.api#required" => {}}))
     CalculatedColumn.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetCalculatedFieldExpression, name: "Expression", traits: {"smithy.api#required" => {}}))
     CalculatedColumn.type = Types::CalculatedColumn
-    CalculatedColumnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CalculatedColumn, name: "member")
+    CalculatedColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CalculatedColumn, name: "member"))
     CalculatedField.add_member(:data_set_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetIdentifier, name: "DataSetIdentifier", traits: {"smithy.api#required" => {}}))
     CalculatedField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "Name", traits: {"smithy.api#required" => {}}))
     CalculatedField.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: CalculatedFieldExpression, name: "Expression", traits: {"smithy.api#required" => {}}))
     CalculatedField.type = Types::CalculatedField
-    CalculatedFieldReferenceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "member")
-    CalculatedFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CalculatedField, name: "member")
+    CalculatedFieldReferenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "member"))
+    CalculatedFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CalculatedField, name: "member"))
     CalculatedMeasureField.add_member(:field_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "FieldId", traits: {"smithy.api#required" => {}}))
     CalculatedMeasureField.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "Expression", traits: {"smithy.api#required" => {}}))
     CalculatedMeasureField.type = Types::CalculatedMeasureField
@@ -2986,7 +2986,7 @@ module Aws::QuickSight
     CascadingControlSource.add_member(:source_sheet_control_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceSheetControlId"))
     CascadingControlSource.add_member(:column_to_match, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnIdentifier, name: "ColumnToMatch"))
     CascadingControlSource.type = Types::CascadingControlSource
-    CascadingControlSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CascadingControlSource, name: "member")
+    CascadingControlSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CascadingControlSource, name: "member"))
     CastColumnTypeOperation.add_member(:column_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "ColumnName", traits: {"smithy.api#required" => {}}))
     CastColumnTypeOperation.add_member(:new_column_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnDataType, name: "NewColumnType", traits: {"smithy.api#required" => {}}))
     CastColumnTypeOperation.add_member(:sub_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnDataSubType, name: "SubType"))
@@ -3032,11 +3032,11 @@ module Aws::QuickSight
     CategoryInnerFilter.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryFilterConfiguration, name: "Configuration", traits: {"smithy.api#required" => {}}))
     CategoryInnerFilter.add_member(:default_filter_control_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultFilterControlConfiguration, name: "DefaultFilterControlConfiguration"))
     CategoryInnerFilter.type = Types::CategoryInnerFilter
-    CategoryValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryValue, name: "member")
+    CategoryValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryValue, name: "member"))
     CellValueSynonym.add_member(:cell_value, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "CellValue"))
     CellValueSynonym.add_member(:synonyms, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "Synonyms"))
     CellValueSynonym.type = Types::CellValueSynonym
-    CellValueSynonyms.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CellValueSynonym, name: "member")
+    CellValueSynonyms.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CellValueSynonym, name: "member"))
     ChartAxisLabelOptions.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: Visibility, name: "Visibility"))
     ChartAxisLabelOptions.add_member(:sort_icon_visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: Visibility, name: "SortIconVisibility"))
     ChartAxisLabelOptions.add_member(:axis_label_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AxisLabelOptionsList, name: "AxisLabelOptions"))
@@ -3050,15 +3050,15 @@ module Aws::QuickSight
     CollectiveConstantEntry.add_member(:constant_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstantType, name: "ConstantType"))
     CollectiveConstantEntry.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstantValueString, name: "Value"))
     CollectiveConstantEntry.type = Types::CollectiveConstantEntry
-    CollectiveConstantEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CollectiveConstantEntry, name: "member")
+    CollectiveConstantEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectiveConstantEntry, name: "member"))
     ColorFillType.add_member(:discrete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISCRETE", traits: {"smithy.api#enumValue" => "DISCRETE"}))
     ColorFillType.add_member(:gradient, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GRADIENT", traits: {"smithy.api#enumValue" => "GRADIENT"}))
-    ColorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HexColor, name: "member")
+    ColorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HexColor, name: "member"))
     ColorScale.add_member(:colors, ::Smithy::Schema::Shapes::MemberShape.new(target: ColorScaleColorList, name: "Colors", traits: {"smithy.api#required" => {}}))
     ColorScale.add_member(:color_fill_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ColorFillType, name: "ColorFillType", traits: {"smithy.api#required" => {}}))
     ColorScale.add_member(:null_value_color, ::Smithy::Schema::Shapes::MemberShape.new(target: DataColor, name: "NullValueColor"))
     ColorScale.type = Types::ColorScale
-    ColorScaleColorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataColor, name: "member")
+    ColorScaleColorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataColor, name: "member"))
     ColorsConfiguration.add_member(:custom_colors, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomColorsList, name: "CustomColors"))
     ColorsConfiguration.type = Types::ColorsConfiguration
     ColumnConfiguration.add_member(:column, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnIdentifier, name: "Column", traits: {"smithy.api#required" => {}}))
@@ -3066,7 +3066,7 @@ module Aws::QuickSight
     ColumnConfiguration.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnRole, name: "Role"))
     ColumnConfiguration.add_member(:colors_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ColorsConfiguration, name: "ColorsConfiguration"))
     ColumnConfiguration.type = Types::ColumnConfiguration
-    ColumnConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnConfiguration, name: "member")
+    ColumnConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnConfiguration, name: "member"))
     ColumnDataRole.add_member(:dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIMENSION", traits: {"smithy.api#enumValue" => "DIMENSION"}))
     ColumnDataRole.add_member(:measure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEASURE", traits: {"smithy.api#enumValue" => "MEASURE"}))
     ColumnDataSubType.add_member(:float, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLOAT", traits: {"smithy.api#enumValue" => "FLOAT"}))
@@ -3081,26 +3081,26 @@ module Aws::QuickSight
     ColumnGroup.type = Types::ColumnGroup
     ColumnGroupColumnSchema.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     ColumnGroupColumnSchema.type = Types::ColumnGroupColumnSchema
-    ColumnGroupColumnSchemaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnGroupColumnSchema, name: "member")
-    ColumnGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnGroup, name: "member")
+    ColumnGroupColumnSchemaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnGroupColumnSchema, name: "member"))
+    ColumnGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnGroup, name: "member"))
     ColumnGroupSchema.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     ColumnGroupSchema.add_member(:column_group_column_schema_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnGroupColumnSchemaList, name: "ColumnGroupColumnSchemaList"))
     ColumnGroupSchema.type = Types::ColumnGroupSchema
-    ColumnGroupSchemaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnGroupSchema, name: "member")
+    ColumnGroupSchemaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnGroupSchema, name: "member"))
     ColumnHierarchy.add_member(:explicit_hierarchy, ::Smithy::Schema::Shapes::MemberShape.new(target: ExplicitHierarchy, name: "ExplicitHierarchy"))
     ColumnHierarchy.add_member(:date_time_hierarchy, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeHierarchy, name: "DateTimeHierarchy"))
     ColumnHierarchy.add_member(:predefined_hierarchy, ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedHierarchy, name: "PredefinedHierarchy"))
     ColumnHierarchy.type = Types::ColumnHierarchy
-    ColumnHierarchyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnHierarchy, name: "member")
+    ColumnHierarchyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnHierarchy, name: "member"))
     ColumnIdentifier.add_member(:data_set_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetIdentifier, name: "DataSetIdentifier", traits: {"smithy.api#required" => {}}))
     ColumnIdentifier.add_member(:column_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "ColumnName", traits: {"smithy.api#required" => {}}))
     ColumnIdentifier.type = Types::ColumnIdentifier
     ColumnLevelPermissionRule.add_member(:principals, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalList, name: "Principals"))
     ColumnLevelPermissionRule.add_member(:column_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnNameList, name: "ColumnNames"))
     ColumnLevelPermissionRule.type = Types::ColumnLevelPermissionRule
-    ColumnLevelPermissionRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnLevelPermissionRule, name: "member")
-    ColumnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "member")
-    ColumnNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ColumnLevelPermissionRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnLevelPermissionRule, name: "member"))
+    ColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "member"))
+    ColumnNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ColumnOrderingType.add_member(:greater_is_better, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GREATER_IS_BETTER", traits: {"smithy.api#enumValue" => "GREATER_IS_BETTER"}))
     ColumnOrderingType.add_member(:lesser_is_better, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LESSER_IS_BETTER", traits: {"smithy.api#enumValue" => "LESSER_IS_BETTER"}))
     ColumnOrderingType.add_member(:specified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPECIFIED", traits: {"smithy.api#enumValue" => "SPECIFIED"}))
@@ -3110,7 +3110,7 @@ module Aws::QuickSight
     ColumnSchema.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DataType"))
     ColumnSchema.add_member(:geographic_role, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "GeographicRole"))
     ColumnSchema.type = Types::ColumnSchema
-    ColumnSchemaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnSchema, name: "member")
+    ColumnSchemaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnSchema, name: "member"))
     ColumnSort.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnIdentifier, name: "SortBy", traits: {"smithy.api#required" => {}}))
     ColumnSort.add_member(:direction, ::Smithy::Schema::Shapes::MemberShape.new(target: SortDirection, name: "Direction", traits: {"smithy.api#required" => {}}))
     ColumnSort.add_member(:aggregation_function, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationFunction, name: "AggregationFunction"))
@@ -3118,10 +3118,10 @@ module Aws::QuickSight
     ColumnTag.add_member(:column_geographic_role, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoSpatialDataRole, name: "ColumnGeographicRole"))
     ColumnTag.add_member(:column_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnDescription, name: "ColumnDescription"))
     ColumnTag.type = Types::ColumnTag
-    ColumnTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnTag, name: "member")
+    ColumnTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnTag, name: "member"))
     ColumnTagName.add_member(:column_geographic_role, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COLUMN_GEOGRAPHIC_ROLE", traits: {"smithy.api#enumValue" => "COLUMN_GEOGRAPHIC_ROLE"}))
     ColumnTagName.add_member(:column_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COLUMN_DESCRIPTION", traits: {"smithy.api#enumValue" => "COLUMN_DESCRIPTION"}))
-    ColumnTagNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnTagName, name: "member")
+    ColumnTagNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnTagName, name: "member"))
     ColumnTooltipItem.add_member(:column, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnIdentifier, name: "Column", traits: {"smithy.api#required" => {}}))
     ColumnTooltipItem.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Label"))
     ColumnTooltipItem.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: Visibility, name: "Visibility"))
@@ -3203,7 +3203,7 @@ module Aws::QuickSight
     Computation.add_member(:unique_values, ::Smithy::Schema::Shapes::MemberShape.new(target: UniqueValuesComputation, name: "UniqueValues"))
     Computation.add_member(:forecast, ::Smithy::Schema::Shapes::MemberShape.new(target: ForecastComputation, name: "Forecast"))
     Computation.type = Types::Computation
-    ComputationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Computation, name: "member")
+    ComputationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Computation, name: "member"))
     ConcurrentUpdatingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ConcurrentUpdatingException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RequestId"))
     ConcurrentUpdatingException.type = Types::ConcurrentUpdatingException
@@ -3255,13 +3255,13 @@ module Aws::QuickSight
     ContributionAnalysisDefault.add_member(:measure_field_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "MeasureFieldId", traits: {"smithy.api#required" => {}}))
     ContributionAnalysisDefault.add_member(:contributor_dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: ContributorDimensionList, name: "ContributorDimensions", traits: {"smithy.api#required" => {}}))
     ContributionAnalysisDefault.type = Types::ContributionAnalysisDefault
-    ContributionAnalysisDefaultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContributionAnalysisDefault, name: "member")
+    ContributionAnalysisDefaultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContributionAnalysisDefault, name: "member"))
     ContributionAnalysisDirection.add_member(:increase, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCREASE", traits: {"smithy.api#enumValue" => "INCREASE"}))
     ContributionAnalysisDirection.add_member(:decrease, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DECREASE", traits: {"smithy.api#enumValue" => "DECREASE"}))
     ContributionAnalysisDirection.add_member(:neutral, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEUTRAL", traits: {"smithy.api#enumValue" => "NEUTRAL"}))
     ContributionAnalysisFactor.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "FieldName"))
     ContributionAnalysisFactor.type = Types::ContributionAnalysisFactor
-    ContributionAnalysisFactorsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContributionAnalysisFactor, name: "member")
+    ContributionAnalysisFactorsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContributionAnalysisFactor, name: "member"))
     ContributionAnalysisSortType.add_member(:absolute_difference, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ABSOLUTE_DIFFERENCE", traits: {"smithy.api#enumValue" => "ABSOLUTE_DIFFERENCE"}))
     ContributionAnalysisSortType.add_member(:contribution_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTRIBUTION_PERCENTAGE", traits: {"smithy.api#enumValue" => "CONTRIBUTION_PERCENTAGE"}))
     ContributionAnalysisSortType.add_member(:deviation_from_expected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEVIATION_FROM_EXPECTED", traits: {"smithy.api#enumValue" => "DEVIATION_FROM_EXPECTED"}))
@@ -3269,7 +3269,7 @@ module Aws::QuickSight
     ContributionAnalysisTimeRanges.add_member(:start_range, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicIRFilterOption, name: "StartRange"))
     ContributionAnalysisTimeRanges.add_member(:end_range, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicIRFilterOption, name: "EndRange"))
     ContributionAnalysisTimeRanges.type = Types::ContributionAnalysisTimeRanges
-    ContributorDimensionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnIdentifier, name: "member")
+    ContributorDimensionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnIdentifier, name: "member"))
     CreateAccountCustomizationRequest.add_member(:aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "AwsAccountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateAccountCustomizationRequest.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "Namespace", traits: {"smithy.api#httpQuery" => "namespace"}))
     CreateAccountCustomizationRequest.add_member(:account_customization, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountCustomization, name: "AccountCustomization", traits: {"smithy.api#required" => {}}))
@@ -3591,7 +3591,7 @@ module Aws::QuickSight
     CreateTopicReviewedAnswer.add_member(:primary_visual, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicVisual, name: "PrimaryVisual"))
     CreateTopicReviewedAnswer.add_member(:template, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicTemplate, name: "Template"))
     CreateTopicReviewedAnswer.type = Types::CreateTopicReviewedAnswer
-    CreateTopicReviewedAnswers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CreateTopicReviewedAnswer, name: "member")
+    CreateTopicReviewedAnswers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateTopicReviewedAnswer, name: "member"))
     CreateVPCConnectionRequest.add_member(:aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "AwsAccountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateVPCConnectionRequest.add_member(:vpc_connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VPCConnectionResourceIdRestricted, name: "VPCConnectionId", traits: {"smithy.api#required" => {}}))
     CreateVPCConnectionRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name", traits: {"smithy.api#required" => {}}))
@@ -3623,7 +3623,7 @@ module Aws::QuickSight
     CurrencyDisplayFormatConfiguration.add_member(:negative_value_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NegativeValueConfiguration, name: "NegativeValueConfiguration"))
     CurrencyDisplayFormatConfiguration.add_member(:null_value_format_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NullValueFormatConfiguration, name: "NullValueFormatConfiguration"))
     CurrencyDisplayFormatConfiguration.type = Types::CurrencyDisplayFormatConfiguration
-    CustomActionColumnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnIdentifier, name: "member")
+    CustomActionColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnIdentifier, name: "member"))
     CustomActionFilterOperation.add_member(:selected_fields_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterOperationSelectedFieldsConfiguration, name: "SelectedFieldsConfiguration", traits: {"smithy.api#required" => {}}))
     CustomActionFilterOperation.add_member(:target_visuals_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterOperationTargetVisualsConfiguration, name: "TargetVisualsConfiguration", traits: {"smithy.api#required" => {}}))
     CustomActionFilterOperation.type = Types::CustomActionFilterOperation
@@ -3638,7 +3638,7 @@ module Aws::QuickSight
     CustomColor.add_member(:color, ::Smithy::Schema::Shapes::MemberShape.new(target: HexColor, name: "Color", traits: {"smithy.api#required" => {}}))
     CustomColor.add_member(:special_value, ::Smithy::Schema::Shapes::MemberShape.new(target: SpecialValue, name: "SpecialValue"))
     CustomColor.type = Types::CustomColor
-    CustomColorsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomColor, name: "member")
+    CustomColorsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomColor, name: "member"))
     CustomConnectionParameters.add_member(:connection_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ConnectionType"))
     CustomConnectionParameters.type = Types::CustomConnectionParameters
     CustomContentConfiguration.add_member(:content_url, ::Smithy::Schema::Shapes::MemberShape.new(target: URLOperationTemplate, name: "ContentUrl"))
@@ -3684,7 +3684,7 @@ module Aws::QuickSight
     CustomPermissions.add_member(:custom_permissions_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPermissionsName, name: "CustomPermissionsName"))
     CustomPermissions.add_member(:capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: Capabilities, name: "Capabilities"))
     CustomPermissions.type = Types::CustomPermissions
-    CustomPermissionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPermissions, name: "member")
+    CustomPermissionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPermissions, name: "member"))
     CustomSql.add_member(:data_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "DataSourceArn", traits: {"smithy.api#required" => {}}))
     CustomSql.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomSqlName, name: "Name", traits: {"smithy.api#required" => {}}))
     CustomSql.add_member(:sql_query, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlQuery, name: "SqlQuery", traits: {"smithy.api#required" => {}}))
@@ -3711,7 +3711,7 @@ module Aws::QuickSight
     DashboardError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     DashboardError.add_member(:violated_entities, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityList, name: "ViolatedEntities"))
     DashboardError.type = Types::DashboardError
-    DashboardErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardError, name: "member")
+    DashboardErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardError, name: "member"))
     DashboardErrorType.add_member(:access_denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS_DENIED", traits: {"smithy.api#enumValue" => "ACCESS_DENIED"}))
     DashboardErrorType.add_member(:source_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOURCE_NOT_FOUND", traits: {"smithy.api#enumValue" => "SOURCE_NOT_FOUND"}))
     DashboardErrorType.add_member(:data_set_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATA_SET_NOT_FOUND", traits: {"smithy.api#enumValue" => "DATA_SET_NOT_FOUND"}))
@@ -3748,7 +3748,7 @@ module Aws::QuickSight
     DashboardSearchFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardFilterAttribute, name: "Name"))
     DashboardSearchFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     DashboardSearchFilter.type = Types::DashboardSearchFilter
-    DashboardSearchFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardSearchFilter, name: "member")
+    DashboardSearchFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardSearchFilter, name: "member"))
     DashboardSourceEntity.add_member(:source_template, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardSourceTemplate, name: "SourceTemplate"))
     DashboardSourceEntity.type = Types::DashboardSourceEntity
     DashboardSourceTemplate.add_member(:data_set_references, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetReferenceList, name: "DataSetReferences", traits: {"smithy.api#required" => {}}))
@@ -3762,7 +3762,7 @@ module Aws::QuickSight
     DashboardSummary.add_member(:published_version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionNumber, name: "PublishedVersionNumber"))
     DashboardSummary.add_member(:last_published_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastPublishedTime"))
     DashboardSummary.type = Types::DashboardSummary
-    DashboardSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardSummary, name: "member")
+    DashboardSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardSummary, name: "member"))
     DashboardUIState.add_member(:expanded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPANDED", traits: {"smithy.api#enumValue" => "EXPANDED"}))
     DashboardUIState.add_member(:collapsed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COLLAPSED", traits: {"smithy.api#enumValue" => "COLLAPSED"}))
     DashboardVersion.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTime"))
@@ -3793,7 +3793,7 @@ module Aws::QuickSight
     DashboardVersionSummary.add_member(:source_entity_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "SourceEntityArn"))
     DashboardVersionSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionDescription, name: "Description"))
     DashboardVersionSummary.type = Types::DashboardVersionSummary
-    DashboardVersionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardVersionSummary, name: "member")
+    DashboardVersionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardVersionSummary, name: "member"))
     DashboardVisualId.add_member(:dashboard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "DashboardId", traits: {"smithy.api#required" => {}}))
     DashboardVisualId.add_member(:sheet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "SheetId", traits: {"smithy.api#required" => {}}))
     DashboardVisualId.add_member(:visual_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "VisualId", traits: {"smithy.api#required" => {}}))
@@ -3858,12 +3858,12 @@ module Aws::QuickSight
     DataLabelType.add_member(:minimum_label_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MinimumLabelType, name: "MinimumLabelType"))
     DataLabelType.add_member(:maximum_label_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MaximumLabelType, name: "MaximumLabelType"))
     DataLabelType.type = Types::DataLabelType
-    DataLabelTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataLabelType, name: "member")
+    DataLabelTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLabelType, name: "member"))
     DataPathColor.add_member(:element, ::Smithy::Schema::Shapes::MemberShape.new(target: DataPathValue, name: "Element", traits: {"smithy.api#required" => {}}))
     DataPathColor.add_member(:color, ::Smithy::Schema::Shapes::MemberShape.new(target: HexColor, name: "Color", traits: {"smithy.api#required" => {}}))
     DataPathColor.add_member(:time_granularity, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeGranularity, name: "TimeGranularity"))
     DataPathColor.type = Types::DataPathColor
-    DataPathColorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataPathColor, name: "member")
+    DataPathColorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataPathColor, name: "member"))
     DataPathLabelType.add_member(:field_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "FieldId"))
     DataPathLabelType.add_member(:field_value, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValue, name: "FieldValue"))
     DataPathLabelType.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: Visibility, name: "Visibility"))
@@ -3877,7 +3877,7 @@ module Aws::QuickSight
     DataPathValue.add_member(:field_value, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValue, name: "FieldValue"))
     DataPathValue.add_member(:data_path_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataPathType, name: "DataPathType"))
     DataPathValue.type = Types::DataPathValue
-    DataPathValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataPathValue, name: "member")
+    DataPathValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataPathValue, name: "member"))
     DataPointDrillUpDownOption.add_member(:availability_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardBehavior, name: "AvailabilityStatus"))
     DataPointDrillUpDownOption.type = Types::DataPointDrillUpDownOption
     DataPointMenuLabelOption.add_member(:availability_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardBehavior, name: "AvailabilityStatus"))
@@ -3908,12 +3908,12 @@ module Aws::QuickSight
     DataSet.add_member(:performance_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceConfiguration, name: "PerformanceConfiguration"))
     DataSet.add_member(:use_as, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetUseAs, name: "UseAs"))
     DataSet.type = Types::DataSet
-    DataSetArnsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    DataSetArnsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     DataSetConfiguration.add_member(:placeholder, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Placeholder"))
     DataSetConfiguration.add_member(:data_set_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetSchema, name: "DataSetSchema"))
     DataSetConfiguration.add_member(:column_group_schema_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnGroupSchemaList, name: "ColumnGroupSchemaList"))
     DataSetConfiguration.type = Types::DataSetConfiguration
-    DataSetConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetConfiguration, name: "member")
+    DataSetConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetConfiguration, name: "member"))
     DataSetFilterAttribute.add_member(:quicksight_viewer_or_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUICKSIGHT_VIEWER_OR_OWNER", traits: {"smithy.api#enumValue" => "QUICKSIGHT_VIEWER_OR_OWNER"}))
     DataSetFilterAttribute.add_member(:quicksight_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUICKSIGHT_OWNER", traits: {"smithy.api#enumValue" => "QUICKSIGHT_OWNER"}))
     DataSetFilterAttribute.add_member(:direct_quicksight_viewer_or_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER", traits: {"smithy.api#enumValue" => "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"}))
@@ -3923,13 +3923,13 @@ module Aws::QuickSight
     DataSetIdentifierDeclaration.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetIdentifier, name: "Identifier", traits: {"smithy.api#required" => {}}))
     DataSetIdentifierDeclaration.add_member(:data_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "DataSetArn", traits: {"smithy.api#required" => {}}))
     DataSetIdentifierDeclaration.type = Types::DataSetIdentifierDeclaration
-    DataSetIdentifierDeclarationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetIdentifierDeclaration, name: "member")
+    DataSetIdentifierDeclarationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetIdentifierDeclaration, name: "member"))
     DataSetImportMode.add_member(:spice, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPICE", traits: {"smithy.api#enumValue" => "SPICE"}))
     DataSetImportMode.add_member(:direct_query, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECT_QUERY", traits: {"smithy.api#enumValue" => "DIRECT_QUERY"}))
     DataSetReference.add_member(:data_set_placeholder, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DataSetPlaceholder", traits: {"smithy.api#required" => {}}))
     DataSetReference.add_member(:data_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "DataSetArn", traits: {"smithy.api#required" => {}}))
     DataSetReference.type = Types::DataSetReference
-    DataSetReferenceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetReference, name: "member")
+    DataSetReferenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetReference, name: "member"))
     DataSetRefreshProperties.add_member(:refresh_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RefreshConfiguration, name: "RefreshConfiguration"))
     DataSetRefreshProperties.add_member(:failure_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RefreshFailureConfiguration, name: "FailureConfiguration"))
     DataSetRefreshProperties.type = Types::DataSetRefreshProperties
@@ -3939,7 +3939,7 @@ module Aws::QuickSight
     DataSetSearchFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetFilterAttribute, name: "Name", traits: {"smithy.api#required" => {}}))
     DataSetSearchFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value", traits: {"smithy.api#required" => {}}))
     DataSetSearchFilter.type = Types::DataSetSearchFilter
-    DataSetSearchFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetSearchFilter, name: "member")
+    DataSetSearchFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetSearchFilter, name: "member"))
     DataSetSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     DataSetSummary.add_member(:data_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "DataSetId"))
     DataSetSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
@@ -3951,7 +3951,7 @@ module Aws::QuickSight
     DataSetSummary.add_member(:column_level_permission_rules_applied, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ColumnLevelPermissionRulesApplied", traits: {"smithy.api#default" => false}))
     DataSetSummary.add_member(:use_as, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetUseAs, name: "UseAs"))
     DataSetSummary.type = Types::DataSetSummary
-    DataSetSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetSummary, name: "member")
+    DataSetSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetSummary, name: "member"))
     DataSetUsageConfiguration.add_member(:disable_use_as_direct_query_source, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "DisableUseAsDirectQuerySource", traits: {"smithy.api#default" => false}))
     DataSetUsageConfiguration.add_member(:disable_use_as_imported_source, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "DisableUseAsImportedSource", traits: {"smithy.api#default" => false}))
     DataSetUsageConfiguration.type = Types::DataSetUsageConfiguration
@@ -3989,7 +3989,7 @@ module Aws::QuickSight
     DataSourceFilterAttribute.add_member(:direct_quicksight_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECT_QUICKSIGHT_OWNER", traits: {"smithy.api#enumValue" => "DIRECT_QUICKSIGHT_OWNER"}))
     DataSourceFilterAttribute.add_member(:direct_quicksight_sole_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECT_QUICKSIGHT_SOLE_OWNER", traits: {"smithy.api#enumValue" => "DIRECT_QUICKSIGHT_SOLE_OWNER"}))
     DataSourceFilterAttribute.add_member(:datasource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATASOURCE_NAME", traits: {"smithy.api#enumValue" => "DATASOURCE_NAME"}))
-    DataSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "member")
+    DataSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "member"))
     DataSourceParameters.add_member(:amazon_elasticsearch_parameters, Types::DataSourceParameters::AmazonElasticsearchParameters, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonElasticsearchParameters, name: "AmazonElasticsearchParameters"))
     DataSourceParameters.add_member(:athena_parameters, Types::DataSourceParameters::AthenaParameters, ::Smithy::Schema::Shapes::MemberShape.new(target: AthenaParameters, name: "AthenaParameters"))
     DataSourceParameters.add_member(:aurora_parameters, Types::DataSourceParameters::AuroraParameters, ::Smithy::Schema::Shapes::MemberShape.new(target: AuroraParameters, name: "AuroraParameters"))
@@ -4020,12 +4020,12 @@ module Aws::QuickSight
     DataSourceParameters.add_member(:custom_connection_parameters, Types::DataSourceParameters::CustomConnectionParameters, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomConnectionParameters, name: "CustomConnectionParameters"))
     DataSourceParameters.add_member(:unknown, Types::DataSourceParameters::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     DataSourceParameters.type = Types::DataSourceParameters
-    DataSourceParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceParameters, name: "member")
+    DataSourceParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceParameters, name: "member"))
     DataSourceSearchFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterOperator, name: "Operator", traits: {"smithy.api#required" => {}}))
     DataSourceSearchFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceFilterAttribute, name: "Name", traits: {"smithy.api#required" => {}}))
     DataSourceSearchFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value", traits: {"smithy.api#required" => {}}))
     DataSourceSearchFilter.type = Types::DataSourceSearchFilter
-    DataSourceSearchFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceSearchFilter, name: "member")
+    DataSourceSearchFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceSearchFilter, name: "member"))
     DataSourceSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     DataSourceSummary.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "DataSourceId"))
     DataSourceSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
@@ -4033,7 +4033,7 @@ module Aws::QuickSight
     DataSourceSummary.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTime"))
     DataSourceSummary.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedTime"))
     DataSourceSummary.type = Types::DataSourceSummary
-    DataSourceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceSummary, name: "member")
+    DataSourceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceSummary, name: "member"))
     DataSourceType.add_member(:adobe_analytics, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADOBE_ANALYTICS", traits: {"smithy.api#enumValue" => "ADOBE_ANALYTICS"}))
     DataSourceType.add_member(:amazon_elasticsearch, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMAZON_ELASTICSEARCH", traits: {"smithy.api#enumValue" => "AMAZON_ELASTICSEARCH"}))
     DataSourceType.add_member(:athena, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ATHENA", traits: {"smithy.api#enumValue" => "ATHENA"}))
@@ -4068,7 +4068,7 @@ module Aws::QuickSight
     DataStoriesConfigurations.type = Types::DataStoriesConfigurations
     DataStoriesSharingOption.add_member(:availability_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardBehavior, name: "AvailabilityStatus"))
     DataStoriesSharingOption.type = Types::DataStoriesSharingOption
-    DatabaseGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseGroup, name: "member")
+    DatabaseGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseGroup, name: "member"))
     DatabricksParameters.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: Host, name: "Host", traits: {"smithy.api#required" => {}}))
     DatabricksParameters.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "Port", traits: {"smithy.api#required" => {}}))
     DatabricksParameters.add_member(:sql_endpoint_path, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlEndpointPath, name: "SqlEndpointPath", traits: {"smithy.api#required" => {}}))
@@ -4087,10 +4087,10 @@ module Aws::QuickSight
     DatasetParameter.add_member(:integer_dataset_parameter, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerDatasetParameter, name: "IntegerDatasetParameter"))
     DatasetParameter.add_member(:date_time_dataset_parameter, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeDatasetParameter, name: "DateTimeDatasetParameter"))
     DatasetParameter.type = Types::DatasetParameter
-    DatasetParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetParameter, name: "member")
+    DatasetParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetParameter, name: "member"))
     DatasetParameterValueType.add_member(:multi_valued, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTI_VALUED", traits: {"smithy.api#enumValue" => "MULTI_VALUED"}))
     DatasetParameterValueType.add_member(:single_valued, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE_VALUED", traits: {"smithy.api#enumValue" => "SINGLE_VALUED"}))
-    Datasets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetMetadata, name: "member")
+    Datasets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetMetadata, name: "member"))
     DateAggregationFunction.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COUNT", traits: {"smithy.api#enumValue" => "COUNT"}))
     DateAggregationFunction.add_member(:distinct_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISTINCT_COUNT", traits: {"smithy.api#enumValue" => "DISTINCT_COUNT"}))
     DateAggregationFunction.add_member(:min, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIN", traits: {"smithy.api#enumValue" => "MIN"}))
@@ -4116,8 +4116,8 @@ module Aws::QuickSight
     DateTimeDatasetParameter.type = Types::DateTimeDatasetParameter
     DateTimeDatasetParameterDefaultValues.add_member(:static_values, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeDatasetParameterValueList, name: "StaticValues"))
     DateTimeDatasetParameterDefaultValues.type = Types::DateTimeDatasetParameterDefaultValues
-    DateTimeDatasetParameterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeDatasetParameterDefaultValue, name: "member")
-    DateTimeDefaultValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveTimestamp, name: "member")
+    DateTimeDatasetParameterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeDatasetParameterDefaultValue, name: "member"))
+    DateTimeDefaultValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveTimestamp, name: "member"))
     DateTimeDefaultValues.add_member(:dynamic_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamicDefaultValue, name: "DynamicValue"))
     DateTimeDefaultValues.add_member(:static_values, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeDefaultValueList, name: "StaticValues"))
     DateTimeDefaultValues.add_member(:rolling_date, ::Smithy::Schema::Shapes::MemberShape.new(target: RollingDateConfiguration, name: "RollingDate"))
@@ -4138,7 +4138,7 @@ module Aws::QuickSight
     DateTimeParameterDeclaration.add_member(:value_when_unset, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeValueWhenUnsetConfiguration, name: "ValueWhenUnset"))
     DateTimeParameterDeclaration.add_member(:mapped_data_set_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: MappedDataSetParameters, name: "MappedDataSetParameters"))
     DateTimeParameterDeclaration.type = Types::DateTimeParameterDeclaration
-    DateTimeParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeParameter, name: "member")
+    DateTimeParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeParameter, name: "member"))
     DateTimePickerControlDisplayOptions.add_member(:title_options, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelOptions, name: "TitleOptions"))
     DateTimePickerControlDisplayOptions.add_member(:date_time_format, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeFormat, name: "DateTimeFormat"))
     DateTimePickerControlDisplayOptions.add_member(:info_icon_label_options, ::Smithy::Schema::Shapes::MemberShape.new(target: SheetControlInfoIconLabelOptions, name: "InfoIconLabelOptions"))
@@ -4169,8 +4169,8 @@ module Aws::QuickSight
     DecimalDatasetParameter.type = Types::DecimalDatasetParameter
     DecimalDatasetParameterDefaultValues.add_member(:static_values, ::Smithy::Schema::Shapes::MemberShape.new(target: DecimalDatasetParameterValueList, name: "StaticValues"))
     DecimalDatasetParameterDefaultValues.type = Types::DecimalDatasetParameterDefaultValues
-    DecimalDatasetParameterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DecimalDatasetParameterDefaultValue, name: "member")
-    DecimalDefaultValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDoubleObject, name: "member")
+    DecimalDatasetParameterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DecimalDatasetParameterDefaultValue, name: "member"))
+    DecimalDefaultValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDoubleObject, name: "member"))
     DecimalDefaultValues.add_member(:dynamic_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamicDefaultValue, name: "DynamicValue"))
     DecimalDefaultValues.add_member(:static_values, ::Smithy::Schema::Shapes::MemberShape.new(target: DecimalDefaultValueList, name: "StaticValues"))
     DecimalDefaultValues.type = Types::DecimalDefaultValues
@@ -4183,7 +4183,7 @@ module Aws::QuickSight
     DecimalParameterDeclaration.add_member(:value_when_unset, ::Smithy::Schema::Shapes::MemberShape.new(target: DecimalValueWhenUnsetConfiguration, name: "ValueWhenUnset"))
     DecimalParameterDeclaration.add_member(:mapped_data_set_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: MappedDataSetParameters, name: "MappedDataSetParameters"))
     DecimalParameterDeclaration.type = Types::DecimalParameterDeclaration
-    DecimalParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DecimalParameter, name: "member")
+    DecimalParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DecimalParameter, name: "member"))
     DecimalPlacesConfiguration.add_member(:decimal_places, ::Smithy::Schema::Shapes::MemberShape.new(target: DecimalPlaces, name: "DecimalPlaces", traits: {"smithy.api#required" => {}}))
     DecimalPlacesConfiguration.type = Types::DecimalPlacesConfiguration
     DecimalValueWhenUnsetConfiguration.add_member(:value_when_unset_option, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueWhenUnsetOption, name: "ValueWhenUnsetOption"))
@@ -4992,7 +4992,7 @@ module Aws::QuickSight
     DimensionField.add_member(:categorical_dimension_field, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoricalDimensionField, name: "CategoricalDimensionField"))
     DimensionField.add_member(:date_dimension_field, ::Smithy::Schema::Shapes::MemberShape.new(target: DateDimensionField, name: "DateDimensionField"))
     DimensionField.type = Types::DimensionField
-    DimensionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member")
+    DimensionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member"))
     DisplayFormat.add_member(:auto, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTO", traits: {"smithy.api#enumValue" => "AUTO"}))
     DisplayFormat.add_member(:percent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PERCENT", traits: {"smithy.api#enumValue" => "PERCENT"}))
     DisplayFormat.add_member(:currency, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CURRENCY", traits: {"smithy.api#enumValue" => "CURRENCY"}))
@@ -5012,7 +5012,7 @@ module Aws::QuickSight
     DisplayFormatOptions.add_member(:negative_format, ::Smithy::Schema::Shapes::MemberShape.new(target: NegativeFormat, name: "NegativeFormat"))
     DisplayFormatOptions.add_member(:currency_symbol, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "CurrencySymbol"))
     DisplayFormatOptions.type = Types::DisplayFormatOptions
-    DnsResolverList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IPv4Address, name: "member")
+    DnsResolverList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IPv4Address, name: "member"))
     DomainNotWhitelistedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     DomainNotWhitelistedException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RequestId"))
     DomainNotWhitelistedException.type = Types::DomainNotWhitelistedException
@@ -5025,7 +5025,7 @@ module Aws::QuickSight
     DrillDownFilter.add_member(:category_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryDrillDownFilter, name: "CategoryFilter"))
     DrillDownFilter.add_member(:time_range_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeRangeDrillDownFilter, name: "TimeRangeFilter"))
     DrillDownFilter.type = Types::DrillDownFilter
-    DrillDownFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DrillDownFilter, name: "member")
+    DrillDownFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DrillDownFilter, name: "member"))
     DropDownControlDisplayOptions.add_member(:select_all_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ListControlSelectAllOptions, name: "SelectAllOptions"))
     DropDownControlDisplayOptions.add_member(:title_options, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelOptions, name: "TitleOptions"))
     DropDownControlDisplayOptions.add_member(:info_icon_label_options, ::Smithy::Schema::Shapes::MemberShape.new(target: SheetControlInfoIconLabelOptions, name: "InfoIconLabelOptions"))
@@ -5046,11 +5046,11 @@ module Aws::QuickSight
     EmptyVisual.type = Types::EmptyVisual
     Entity.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Path"))
     Entity.type = Types::Entity
-    EntityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Entity, name: "member")
+    EntityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Entity, name: "member"))
     ErrorInfo.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: IngestionErrorType, name: "Type"))
     ErrorInfo.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ErrorInfo.type = Types::ErrorInfo
-    ErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "member")
+    ErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "member"))
     ExasolParameters.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: Host, name: "Host", traits: {"smithy.api#required" => {}}))
     ExasolParameters.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "Port", traits: {"smithy.api#required" => {}}))
     ExasolParameters.type = Types::ExasolParameters
@@ -5075,14 +5075,14 @@ module Aws::QuickSight
     ExplicitHierarchy.add_member(:columns, ::Smithy::Schema::Shapes::MemberShape.new(target: ExplicitHierarchyColumnList, name: "Columns", traits: {"smithy.api#required" => {}}))
     ExplicitHierarchy.add_member(:drill_down_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: DrillDownFilterList, name: "DrillDownFilters"))
     ExplicitHierarchy.type = Types::ExplicitHierarchy
-    ExplicitHierarchyColumnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnIdentifier, name: "member")
+    ExplicitHierarchyColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnIdentifier, name: "member"))
     ExportHiddenFieldsOption.add_member(:availability_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardBehavior, name: "AvailabilityStatus"))
     ExportHiddenFieldsOption.type = Types::ExportHiddenFieldsOption
     ExportToCSVOption.add_member(:availability_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardBehavior, name: "AvailabilityStatus"))
     ExportToCSVOption.type = Types::ExportToCSVOption
     ExportWithHiddenFieldsOption.add_member(:availability_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardBehavior, name: "AvailabilityStatus"))
     ExportWithHiddenFieldsOption.type = Types::ExportWithHiddenFieldsOption
-    FailedKeyRegistrationEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedKeyRegistrationEntry, name: "member")
+    FailedKeyRegistrationEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedKeyRegistrationEntry, name: "member"))
     FailedKeyRegistrationEntry.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KeyArn"))
     FailedKeyRegistrationEntry.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message", traits: {"smithy.api#required" => {}}))
     FailedKeyRegistrationEntry.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusCode, name: "StatusCode", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
@@ -5095,12 +5095,12 @@ module Aws::QuickSight
     FieldFolder.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldFolderDescription, name: "description"))
     FieldFolder.add_member(:columns, ::Smithy::Schema::Shapes::MemberShape.new(target: FolderColumnList, name: "columns"))
     FieldFolder.type = Types::FieldFolder
-    FieldFolderMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldFolderPath, name: "key")
-    FieldFolderMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldFolder, name: "value")
+    FieldFolderMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldFolderPath, name: "key"))
+    FieldFolderMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldFolder, name: "value"))
     FieldLabelType.add_member(:field_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "FieldId"))
     FieldLabelType.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: Visibility, name: "Visibility"))
     FieldLabelType.type = Types::FieldLabelType
-    FieldOrderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "member")
+    FieldOrderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "member"))
     FieldSeriesItem.add_member(:field_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "FieldId", traits: {"smithy.api#required" => {}}))
     FieldSeriesItem.add_member(:axis_binding, ::Smithy::Schema::Shapes::MemberShape.new(target: AxisBinding, name: "AxisBinding", traits: {"smithy.api#required" => {}}))
     FieldSeriesItem.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: LineChartSeriesSettings, name: "Settings"))
@@ -5111,7 +5111,7 @@ module Aws::QuickSight
     FieldSortOptions.add_member(:field_sort, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldSort, name: "FieldSort"))
     FieldSortOptions.add_member(:column_sort, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnSort, name: "ColumnSort"))
     FieldSortOptions.type = Types::FieldSortOptions
-    FieldSortOptionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldSortOptions, name: "member")
+    FieldSortOptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldSortOptions, name: "member"))
     FieldTooltipItem.add_member(:field_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "FieldId", traits: {"smithy.api#required" => {}}))
     FieldTooltipItem.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Label"))
     FieldTooltipItem.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: Visibility, name: "Visibility"))
@@ -5130,7 +5130,7 @@ module Aws::QuickSight
     FilledMapConditionalFormatting.type = Types::FilledMapConditionalFormatting
     FilledMapConditionalFormattingOption.add_member(:shape, ::Smithy::Schema::Shapes::MemberShape.new(target: FilledMapShapeConditionalFormatting, name: "Shape", traits: {"smithy.api#required" => {}}))
     FilledMapConditionalFormattingOption.type = Types::FilledMapConditionalFormattingOption
-    FilledMapConditionalFormattingOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilledMapConditionalFormattingOption, name: "member")
+    FilledMapConditionalFormattingOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilledMapConditionalFormattingOption, name: "member"))
     FilledMapConfiguration.add_member(:field_wells, ::Smithy::Schema::Shapes::MemberShape.new(target: FilledMapFieldWells, name: "FieldWells"))
     FilledMapConfiguration.add_member(:sort_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FilledMapSortConfiguration, name: "SortConfiguration"))
     FilledMapConfiguration.add_member(:legend, ::Smithy::Schema::Shapes::MemberShape.new(target: LegendOptions, name: "Legend"))
@@ -5139,10 +5139,10 @@ module Aws::QuickSight
     FilledMapConfiguration.add_member(:map_style_options, ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialMapStyleOptions, name: "MapStyleOptions"))
     FilledMapConfiguration.add_member(:interactions, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualInteractionOptions, name: "Interactions"))
     FilledMapConfiguration.type = Types::FilledMapConfiguration
-    FilledMapDimensionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member")
+    FilledMapDimensionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member"))
     FilledMapFieldWells.add_member(:filled_map_aggregated_field_wells, ::Smithy::Schema::Shapes::MemberShape.new(target: FilledMapAggregatedFieldWells, name: "FilledMapAggregatedFieldWells"))
     FilledMapFieldWells.type = Types::FilledMapFieldWells
-    FilledMapMeasureFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member")
+    FilledMapMeasureFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member"))
     FilledMapShapeConditionalFormatting.add_member(:field_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "FieldId", traits: {"smithy.api#required" => {}}))
     FilledMapShapeConditionalFormatting.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: ShapeConditionalFormat, name: "Format"))
     FilledMapShapeConditionalFormatting.type = Types::FilledMapShapeConditionalFormatting
@@ -5170,7 +5170,7 @@ module Aws::QuickSight
     FilterAggMetrics.add_member(:function, ::Smithy::Schema::Shapes::MemberShape.new(target: AggType, name: "Function"))
     FilterAggMetrics.add_member(:sort_direction, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicSortDirection, name: "SortDirection"))
     FilterAggMetrics.type = Types::FilterAggMetrics
-    FilterAggMetricsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterAggMetrics, name: "member")
+    FilterAggMetricsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterAggMetrics, name: "member"))
     FilterClass.add_member(:enforced_value_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENFORCED_VALUE_FILTER", traits: {"smithy.api#enumValue" => "ENFORCED_VALUE_FILTER"}))
     FilterClass.add_member(:conditional_value_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONDITIONAL_VALUE_FILTER", traits: {"smithy.api#enumValue" => "CONDITIONAL_VALUE_FILTER"}))
     FilterClass.add_member(:named_value_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAMED_VALUE_FILTER", traits: {"smithy.api#enumValue" => "NAMED_VALUE_FILTER"}))
@@ -5183,7 +5183,7 @@ module Aws::QuickSight
     FilterControl.add_member(:relative_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterRelativeDateTimeControl, name: "RelativeDateTime"))
     FilterControl.add_member(:cross_sheet, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterCrossSheetControl, name: "CrossSheet"))
     FilterControl.type = Types::FilterControl
-    FilterControlList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterControl, name: "member")
+    FilterControlList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterControl, name: "member"))
     FilterCrossSheetControl.add_member(:filter_control_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "FilterControlId", traits: {"smithy.api#required" => {}}))
     FilterCrossSheetControl.add_member(:source_filter_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "SourceFilterId", traits: {"smithy.api#required" => {}}))
     FilterCrossSheetControl.add_member(:cascading_control_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CascadingControlConfiguration, name: "CascadingControlConfiguration"))
@@ -5210,8 +5210,8 @@ module Aws::QuickSight
     FilterGroup.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WidgetStatus, name: "Status"))
     FilterGroup.add_member(:cross_dataset, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossDatasetTypes, name: "CrossDataset", traits: {"smithy.api#required" => {}}))
     FilterGroup.type = Types::FilterGroup
-    FilterGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterGroup, name: "member")
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
+    FilterGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterGroup, name: "member"))
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     FilterListConfiguration.add_member(:match_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryFilterMatchOperator, name: "MatchOperator", traits: {"smithy.api#required" => {}}))
     FilterListConfiguration.add_member(:category_values, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryValueList, name: "CategoryValues"))
     FilterListConfiguration.add_member(:select_all_options, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryFilterSelectAllOptions, name: "SelectAllOptions"))
@@ -5271,7 +5271,7 @@ module Aws::QuickSight
     FilterTextFieldControl.type = Types::FilterTextFieldControl
     FilterVisualScope.add_member(:all_visuals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL_VISUALS", traits: {"smithy.api#enumValue" => "ALL_VISUALS"}))
     FilterVisualScope.add_member(:selected_visuals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELECTED_VISUALS", traits: {"smithy.api#enumValue" => "SELECTED_VISUALS"}))
-    FilteredVisualsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "member")
+    FilteredVisualsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "member"))
     Folder.add_member(:folder_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictiveResourceId, name: "FolderId"))
     Folder.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     Folder.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FolderName, name: "Name"))
@@ -5281,8 +5281,8 @@ module Aws::QuickSight
     Folder.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedTime"))
     Folder.add_member(:sharing_model, ::Smithy::Schema::Shapes::MemberShape.new(target: SharingModel, name: "SharingModel"))
     Folder.type = Types::Folder
-    FolderArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
-    FolderColumnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    FolderArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
+    FolderColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     FolderFilterAttribute.add_member(:parent_folder_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARENT_FOLDER_ARN", traits: {"smithy.api#enumValue" => "PARENT_FOLDER_ARN"}))
     FolderFilterAttribute.add_member(:direct_quicksight_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECT_QUICKSIGHT_OWNER", traits: {"smithy.api#enumValue" => "DIRECT_QUICKSIGHT_OWNER"}))
     FolderFilterAttribute.add_member(:direct_quicksight_sole_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECT_QUICKSIGHT_SOLE_OWNER", traits: {"smithy.api#enumValue" => "DIRECT_QUICKSIGHT_SOLE_OWNER"}))
@@ -5293,12 +5293,12 @@ module Aws::QuickSight
     FolderMember.add_member(:member_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictiveResourceId, name: "MemberId"))
     FolderMember.add_member(:member_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberType, name: "MemberType"))
     FolderMember.type = Types::FolderMember
-    FolderMemberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemberIdArnPair, name: "member")
+    FolderMemberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberIdArnPair, name: "member"))
     FolderSearchFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterOperator, name: "Operator"))
     FolderSearchFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FolderFilterAttribute, name: "Name"))
     FolderSearchFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     FolderSearchFilter.type = Types::FolderSearchFilter
-    FolderSearchFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FolderSearchFilter, name: "member")
+    FolderSearchFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FolderSearchFilter, name: "member"))
     FolderSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     FolderSummary.add_member(:folder_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictiveResourceId, name: "FolderId"))
     FolderSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FolderName, name: "Name"))
@@ -5307,10 +5307,10 @@ module Aws::QuickSight
     FolderSummary.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedTime"))
     FolderSummary.add_member(:sharing_model, ::Smithy::Schema::Shapes::MemberShape.new(target: SharingModel, name: "SharingModel"))
     FolderSummary.type = Types::FolderSummary
-    FolderSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FolderSummary, name: "member")
+    FolderSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FolderSummary, name: "member"))
     FolderType.add_member(:shared, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHARED", traits: {"smithy.api#enumValue" => "SHARED"}))
     FolderType.add_member(:restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESTRICTED", traits: {"smithy.api#enumValue" => "RESTRICTED"}))
-    FoldersForResourceArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    FoldersForResourceArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     Font.add_member(:font_family, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FontFamily"))
     Font.type = Types::Font
     FontConfiguration.add_member(:font_size, ::Smithy::Schema::Shapes::MemberShape.new(target: FontSize, name: "FontSize"))
@@ -5322,7 +5322,7 @@ module Aws::QuickSight
     FontConfiguration.type = Types::FontConfiguration
     FontDecoration.add_member(:underline, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNDERLINE", traits: {"smithy.api#enumValue" => "UNDERLINE"}))
     FontDecoration.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    FontList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Font, name: "member")
+    FontList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Font, name: "member"))
     FontSize.add_member(:relative, ::Smithy::Schema::Shapes::MemberShape.new(target: RelativeFontSize, name: "Relative"))
     FontSize.add_member(:absolute, ::Smithy::Schema::Shapes::MemberShape.new(target: PixelLength, name: "Absolute"))
     FontSize.type = Types::FontSize
@@ -5349,7 +5349,7 @@ module Aws::QuickSight
     ForecastConfiguration.add_member(:forecast_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeBasedForecastProperties, name: "ForecastProperties"))
     ForecastConfiguration.add_member(:scenario, ::Smithy::Schema::Shapes::MemberShape.new(target: ForecastScenario, name: "Scenario"))
     ForecastConfiguration.type = Types::ForecastConfiguration
-    ForecastConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ForecastConfiguration, name: "member")
+    ForecastConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ForecastConfiguration, name: "member"))
     ForecastScenario.add_member(:what_if_point_scenario, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatIfPointScenario, name: "WhatIfPointScenario"))
     ForecastScenario.add_member(:what_if_range_scenario, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatIfRangeScenario, name: "WhatIfRangeScenario"))
     ForecastScenario.type = Types::ForecastScenario
@@ -5385,7 +5385,7 @@ module Aws::QuickSight
     FreeFormLayoutScreenCanvasSizeOptions.type = Types::FreeFormLayoutScreenCanvasSizeOptions
     FreeFormSectionLayoutConfiguration.add_member(:elements, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeFromLayoutElementList, name: "Elements", traits: {"smithy.api#required" => {}}))
     FreeFormSectionLayoutConfiguration.type = Types::FreeFormSectionLayoutConfiguration
-    FreeFromLayoutElementList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FreeFormLayoutElement, name: "member")
+    FreeFromLayoutElementList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeFormLayoutElement, name: "member"))
     FunnelChartAggregatedFieldWells.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: FunnelChartDimensionFieldList, name: "Category"))
     FunnelChartAggregatedFieldWells.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FunnelChartMeasureFieldList, name: "Values"))
     FunnelChartAggregatedFieldWells.type = Types::FunnelChartAggregatedFieldWells
@@ -5406,7 +5406,7 @@ module Aws::QuickSight
     FunnelChartDataLabelOptions.add_member(:label_color, ::Smithy::Schema::Shapes::MemberShape.new(target: HexColor, name: "LabelColor"))
     FunnelChartDataLabelOptions.add_member(:measure_data_label_style, ::Smithy::Schema::Shapes::MemberShape.new(target: FunnelChartMeasureDataLabelStyle, name: "MeasureDataLabelStyle"))
     FunnelChartDataLabelOptions.type = Types::FunnelChartDataLabelOptions
-    FunnelChartDimensionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member")
+    FunnelChartDimensionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member"))
     FunnelChartFieldWells.add_member(:funnel_chart_aggregated_field_wells, ::Smithy::Schema::Shapes::MemberShape.new(target: FunnelChartAggregatedFieldWells, name: "FunnelChartAggregatedFieldWells"))
     FunnelChartFieldWells.type = Types::FunnelChartFieldWells
     FunnelChartMeasureDataLabelStyle.add_member(:value_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALUE_ONLY", traits: {"smithy.api#enumValue" => "VALUE_ONLY"}))
@@ -5414,7 +5414,7 @@ module Aws::QuickSight
     FunnelChartMeasureDataLabelStyle.add_member(:percentage_by_previous_stage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PERCENTAGE_BY_PREVIOUS_STAGE", traits: {"smithy.api#enumValue" => "PERCENTAGE_BY_PREVIOUS_STAGE"}))
     FunnelChartMeasureDataLabelStyle.add_member(:value_and_percentage_by_first_stage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALUE_AND_PERCENTAGE_BY_FIRST_STAGE", traits: {"smithy.api#enumValue" => "VALUE_AND_PERCENTAGE_BY_FIRST_STAGE"}))
     FunnelChartMeasureDataLabelStyle.add_member(:value_and_percentage_by_previous_stage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALUE_AND_PERCENTAGE_BY_PREVIOUS_STAGE", traits: {"smithy.api#enumValue" => "VALUE_AND_PERCENTAGE_BY_PREVIOUS_STAGE"}))
-    FunnelChartMeasureFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member")
+    FunnelChartMeasureFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member"))
     FunnelChartSortConfiguration.add_member(:category_sort, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldSortOptionsList, name: "CategorySort"))
     FunnelChartSortConfiguration.add_member(:category_items_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemsLimitConfiguration, name: "CategoryItemsLimit"))
     FunnelChartSortConfiguration.type = Types::FunnelChartSortConfiguration
@@ -5436,7 +5436,7 @@ module Aws::QuickSight
     GaugeChartConditionalFormattingOption.add_member(:primary_value, ::Smithy::Schema::Shapes::MemberShape.new(target: GaugeChartPrimaryValueConditionalFormatting, name: "PrimaryValue"))
     GaugeChartConditionalFormattingOption.add_member(:arc, ::Smithy::Schema::Shapes::MemberShape.new(target: GaugeChartArcConditionalFormatting, name: "Arc"))
     GaugeChartConditionalFormattingOption.type = Types::GaugeChartConditionalFormattingOption
-    GaugeChartConditionalFormattingOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GaugeChartConditionalFormattingOption, name: "member")
+    GaugeChartConditionalFormattingOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GaugeChartConditionalFormattingOption, name: "member"))
     GaugeChartConfiguration.add_member(:field_wells, ::Smithy::Schema::Shapes::MemberShape.new(target: GaugeChartFieldWells, name: "FieldWells"))
     GaugeChartConfiguration.add_member(:gauge_chart_options, ::Smithy::Schema::Shapes::MemberShape.new(target: GaugeChartOptions, name: "GaugeChartOptions"))
     GaugeChartConfiguration.add_member(:data_labels, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLabelOptions, name: "DataLabels"))
@@ -5531,7 +5531,7 @@ module Aws::QuickSight
     GeospatialCategoricalDataColor.add_member(:color, ::Smithy::Schema::Shapes::MemberShape.new(target: HexColorWithTransparency, name: "Color", traits: {"smithy.api#required" => {}}))
     GeospatialCategoricalDataColor.add_member(:data_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DataValue", traits: {"smithy.api#required" => {}}))
     GeospatialCategoricalDataColor.type = Types::GeospatialCategoricalDataColor
-    GeospatialCategoricalDataColorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialCategoricalDataColor, name: "member")
+    GeospatialCategoricalDataColorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialCategoricalDataColor, name: "member"))
     GeospatialCircleRadius.add_member(:radius, ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialRadius, name: "Radius"))
     GeospatialCircleRadius.type = Types::GeospatialCircleRadius
     GeospatialCircleSymbolStyle.add_member(:fill_color, ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialColor, name: "FillColor"))
@@ -5560,14 +5560,14 @@ module Aws::QuickSight
     GeospatialGradientStepColor.add_member(:color, ::Smithy::Schema::Shapes::MemberShape.new(target: HexColorWithTransparency, name: "Color", traits: {"smithy.api#required" => {}}))
     GeospatialGradientStepColor.add_member(:data_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "DataValue", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     GeospatialGradientStepColor.type = Types::GeospatialGradientStepColor
-    GeospatialGradientStepColorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialGradientStepColor, name: "member")
+    GeospatialGradientStepColorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialGradientStepColor, name: "member"))
     GeospatialHeatmapColorScale.add_member(:colors, ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialHeatmapDataColorList, name: "Colors"))
     GeospatialHeatmapColorScale.type = Types::GeospatialHeatmapColorScale
     GeospatialHeatmapConfiguration.add_member(:heatmap_color, ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialHeatmapColorScale, name: "HeatmapColor"))
     GeospatialHeatmapConfiguration.type = Types::GeospatialHeatmapConfiguration
     GeospatialHeatmapDataColor.add_member(:color, ::Smithy::Schema::Shapes::MemberShape.new(target: HexColor, name: "Color", traits: {"smithy.api#required" => {}}))
     GeospatialHeatmapDataColor.type = Types::GeospatialHeatmapDataColor
-    GeospatialHeatmapDataColorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialHeatmapDataColor, name: "member")
+    GeospatialHeatmapDataColorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialHeatmapDataColor, name: "member"))
     GeospatialLayerColorField.add_member(:color_dimensions_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialLayerDimensionFieldList, name: "ColorDimensionsFields"))
     GeospatialLayerColorField.add_member(:color_values_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialLayerMeasureFieldList, name: "ColorValuesFields"))
     GeospatialLayerColorField.type = Types::GeospatialLayerColorField
@@ -5575,7 +5575,7 @@ module Aws::QuickSight
     GeospatialLayerDefinition.add_member(:line_layer, ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialLineLayer, name: "LineLayer"))
     GeospatialLayerDefinition.add_member(:polygon_layer, ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialPolygonLayer, name: "PolygonLayer"))
     GeospatialLayerDefinition.type = Types::GeospatialLayerDefinition
-    GeospatialLayerDimensionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member")
+    GeospatialLayerDimensionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member"))
     GeospatialLayerItem.add_member(:layer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LayerId", traits: {"smithy.api#required" => {}}))
     GeospatialLayerItem.add_member(:layer_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialLayerType, name: "LayerType"))
     GeospatialLayerItem.add_member(:data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialDataSourceItem, name: "DataSource"))
@@ -5596,7 +5596,7 @@ module Aws::QuickSight
     GeospatialLayerMapConfiguration.add_member(:map_style, ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialMapStyle, name: "MapStyle"))
     GeospatialLayerMapConfiguration.add_member(:interactions, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualInteractionOptions, name: "Interactions"))
     GeospatialLayerMapConfiguration.type = Types::GeospatialLayerMapConfiguration
-    GeospatialLayerMeasureFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member")
+    GeospatialLayerMeasureFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member"))
     GeospatialLayerType.add_member(:point, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POINT", traits: {"smithy.api#enumValue" => "POINT"}))
     GeospatialLayerType.add_member(:line, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINE", traits: {"smithy.api#enumValue" => "LINE"}))
     GeospatialLayerType.add_member(:polygon, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLYGON", traits: {"smithy.api#enumValue" => "POLYGON"}))
@@ -5624,7 +5624,7 @@ module Aws::QuickSight
     GeospatialMapConfiguration.type = Types::GeospatialMapConfiguration
     GeospatialMapFieldWells.add_member(:geospatial_map_aggregated_field_wells, ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialMapAggregatedFieldWells, name: "GeospatialMapAggregatedFieldWells"))
     GeospatialMapFieldWells.type = Types::GeospatialMapFieldWells
-    GeospatialMapLayerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialLayerItem, name: "member")
+    GeospatialMapLayerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialLayerItem, name: "member"))
     GeospatialMapNavigation.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     GeospatialMapNavigation.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     GeospatialMapState.add_member(:bounds, ::Smithy::Schema::Shapes::MemberShape.new(target: GeospatialCoordinateBounds, name: "Bounds"))
@@ -5710,7 +5710,7 @@ module Aws::QuickSight
     GradientStop.add_member(:data_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "DataValue", traits: {"smithy.api#default" => nil}))
     GradientStop.add_member(:color, ::Smithy::Schema::Shapes::MemberShape.new(target: HexColor, name: "Color"))
     GradientStop.type = Types::GradientStop
-    GradientStopList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GradientStop, name: "member")
+    GradientStopList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GradientStop, name: "member"))
     GridLayoutCanvasSizeOptions.add_member(:screen_canvas_size_options, ::Smithy::Schema::Shapes::MemberShape.new(target: GridLayoutScreenCanvasSizeOptions, name: "ScreenCanvasSizeOptions"))
     GridLayoutCanvasSizeOptions.type = Types::GridLayoutCanvasSizeOptions
     GridLayoutConfiguration.add_member(:elements, ::Smithy::Schema::Shapes::MemberShape.new(target: GridLayoutElementList, name: "Elements", traits: {"smithy.api#required" => {}}))
@@ -5723,7 +5723,7 @@ module Aws::QuickSight
     GridLayoutElement.add_member(:row_index, ::Smithy::Schema::Shapes::MemberShape.new(target: GridLayoutElementRowIndex, name: "RowIndex"))
     GridLayoutElement.add_member(:row_span, ::Smithy::Schema::Shapes::MemberShape.new(target: GridLayoutElementRowSpan, name: "RowSpan", traits: {"smithy.api#required" => {}}))
     GridLayoutElement.type = Types::GridLayoutElement
-    GridLayoutElementList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GridLayoutElement, name: "member")
+    GridLayoutElementList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GridLayoutElement, name: "member"))
     GridLayoutScreenCanvasSizeOptions.add_member(:resize_option, ::Smithy::Schema::Shapes::MemberShape.new(target: ResizeOption, name: "ResizeOption", traits: {"smithy.api#required" => {}}))
     GridLayoutScreenCanvasSizeOptions.add_member(:optimized_view_port_width, ::Smithy::Schema::Shapes::MemberShape.new(target: PixelLength, name: "OptimizedViewPortWidth"))
     GridLayoutScreenCanvasSizeOptions.type = Types::GridLayoutScreenCanvasSizeOptions
@@ -5734,17 +5734,17 @@ module Aws::QuickSight
     Group.type = Types::Group
     GroupFilterAttribute.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GROUP_NAME", traits: {"smithy.api#enumValue" => "GROUP_NAME"}))
     GroupFilterOperator.add_member(:starts_with, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "StartsWith", traits: {"smithy.api#enumValue" => "StartsWith"}))
-    GroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Group, name: "member")
+    GroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Group, name: "member"))
     GroupMember.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     GroupMember.add_member(:member_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupMemberName, name: "MemberName"))
     GroupMember.type = Types::GroupMember
-    GroupMemberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupMember, name: "member")
+    GroupMemberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupMember, name: "member"))
     GroupSearchFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupFilterOperator, name: "Operator", traits: {"smithy.api#required" => {}}))
     GroupSearchFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupFilterAttribute, name: "Name", traits: {"smithy.api#required" => {}}))
     GroupSearchFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value", traits: {"smithy.api#required" => {}}))
     GroupSearchFilter.type = Types::GroupSearchFilter
-    GroupSearchFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSearchFilter, name: "member")
-    GroupsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    GroupSearchFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSearchFilter, name: "member"))
+    GroupsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     GrowthRateComputation.add_member(:computation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "ComputationId", traits: {"smithy.api#required" => {}}))
     GrowthRateComputation.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     GrowthRateComputation.add_member(:time, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "Time"))
@@ -5757,7 +5757,7 @@ module Aws::QuickSight
     HeaderFooterSectionConfiguration.add_member(:layout, ::Smithy::Schema::Shapes::MemberShape.new(target: SectionLayoutConfiguration, name: "Layout", traits: {"smithy.api#required" => {}}))
     HeaderFooterSectionConfiguration.add_member(:style, ::Smithy::Schema::Shapes::MemberShape.new(target: SectionStyle, name: "Style"))
     HeaderFooterSectionConfiguration.type = Types::HeaderFooterSectionConfiguration
-    HeaderFooterSectionConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderFooterSectionConfiguration, name: "member")
+    HeaderFooterSectionConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderFooterSectionConfiguration, name: "member"))
     HeatMapAggregatedFieldWells.add_member(:rows, ::Smithy::Schema::Shapes::MemberShape.new(target: HeatMapDimensionFieldList, name: "Rows"))
     HeatMapAggregatedFieldWells.add_member(:columns, ::Smithy::Schema::Shapes::MemberShape.new(target: HeatMapDimensionFieldList, name: "Columns"))
     HeatMapAggregatedFieldWells.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: HeatMapMeasureFieldList, name: "Values"))
@@ -5774,10 +5774,10 @@ module Aws::QuickSight
     HeatMapConfiguration.add_member(:tooltip, ::Smithy::Schema::Shapes::MemberShape.new(target: TooltipOptions, name: "Tooltip"))
     HeatMapConfiguration.add_member(:interactions, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualInteractionOptions, name: "Interactions"))
     HeatMapConfiguration.type = Types::HeatMapConfiguration
-    HeatMapDimensionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member")
+    HeatMapDimensionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member"))
     HeatMapFieldWells.add_member(:heat_map_aggregated_field_wells, ::Smithy::Schema::Shapes::MemberShape.new(target: HeatMapAggregatedFieldWells, name: "HeatMapAggregatedFieldWells"))
     HeatMapFieldWells.type = Types::HeatMapFieldWells
-    HeatMapMeasureFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member")
+    HeatMapMeasureFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member"))
     HeatMapSortConfiguration.add_member(:heat_map_row_sort, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldSortOptionsList, name: "HeatMapRowSort"))
     HeatMapSortConfiguration.add_member(:heat_map_column_sort, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldSortOptionsList, name: "HeatMapColumnSort"))
     HeatMapSortConfiguration.add_member(:heat_map_row_items_limit_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemsLimitConfiguration, name: "HeatMapRowItemsLimitConfiguration"))
@@ -5812,7 +5812,7 @@ module Aws::QuickSight
     HistogramConfiguration.type = Types::HistogramConfiguration
     HistogramFieldWells.add_member(:histogram_aggregated_field_wells, ::Smithy::Schema::Shapes::MemberShape.new(target: HistogramAggregatedFieldWells, name: "HistogramAggregatedFieldWells"))
     HistogramFieldWells.type = Types::HistogramFieldWells
-    HistogramMeasureFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member")
+    HistogramMeasureFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member"))
     HistogramVisual.add_member(:visual_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "VisualId", traits: {"smithy.api#required" => {}}))
     HistogramVisual.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualTitleLabelOptions, name: "Title"))
     HistogramVisual.add_member(:subtitle, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualSubtitleLabelOptions, name: "Subtitle"))
@@ -5834,7 +5834,7 @@ module Aws::QuickSight
     IAMPolicyAssignmentSummary.add_member(:assignment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMPolicyAssignmentName, name: "AssignmentName"))
     IAMPolicyAssignmentSummary.add_member(:assignment_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AssignmentStatus, name: "AssignmentStatus"))
     IAMPolicyAssignmentSummary.type = Types::IAMPolicyAssignmentSummary
-    IAMPolicyAssignmentSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IAMPolicyAssignmentSummary, name: "member")
+    IAMPolicyAssignmentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMPolicyAssignmentSummary, name: "member"))
     Icon.add_member(:caret_up, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CARET_UP", traits: {"smithy.api#enumValue" => "CARET_UP"}))
     Icon.add_member(:caret_down, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CARET_DOWN", traits: {"smithy.api#enumValue" => "CARET_DOWN"}))
     Icon.add_member(:plus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PLUS", traits: {"smithy.api#enumValue" => "PLUS"}))
@@ -5865,9 +5865,9 @@ module Aws::QuickSight
     Identifier.type = Types::Identifier
     IdentityCenterConfiguration.add_member(:enable_identity_propagation, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableIdentityPropagation", traits: {"smithy.api#default" => nil}))
     IdentityCenterConfiguration.type = Types::IdentityCenterConfiguration
-    IdentityMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    IdentityMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityNameList, name: "value")
-    IdentityNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityName, name: "member")
+    IdentityMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    IdentityMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityNameList, name: "value"))
+    IdentityNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityName, name: "member"))
     IdentityStore.add_member(:quicksight, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUICKSIGHT", traits: {"smithy.api#enumValue" => "QUICKSIGHT"}))
     IdentityType.add_member(:iam, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IAM", traits: {"smithy.api#enumValue" => "IAM"}))
     IdentityType.add_member(:quicksight, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUICKSIGHT", traits: {"smithy.api#enumValue" => "QUICKSIGHT"}))
@@ -5886,12 +5886,12 @@ module Aws::QuickSight
     ImageCustomAction.add_member(:trigger, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageCustomActionTrigger, name: "Trigger", traits: {"smithy.api#required" => {}}))
     ImageCustomAction.add_member(:action_operations, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageCustomActionOperationList, name: "ActionOperations", traits: {"smithy.api#required" => {}}))
     ImageCustomAction.type = Types::ImageCustomAction
-    ImageCustomActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageCustomAction, name: "member")
+    ImageCustomActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageCustomAction, name: "member"))
     ImageCustomActionOperation.add_member(:navigation_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionNavigationOperation, name: "NavigationOperation"))
     ImageCustomActionOperation.add_member(:url_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionURLOperation, name: "URLOperation"))
     ImageCustomActionOperation.add_member(:set_parameters_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionSetParametersOperation, name: "SetParametersOperation"))
     ImageCustomActionOperation.type = Types::ImageCustomActionOperation
-    ImageCustomActionOperationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageCustomActionOperation, name: "member")
+    ImageCustomActionOperationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageCustomActionOperation, name: "member"))
     ImageCustomActionTrigger.add_member(:click, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLICK", traits: {"smithy.api#enumValue" => "CLICK"}))
     ImageCustomActionTrigger.add_member(:menu, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MENU", traits: {"smithy.api#enumValue" => "MENU"}))
     ImageInteractionOptions.add_member(:image_menu_option, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageMenuOption, name: "ImageMenuOption"))
@@ -5996,7 +5996,7 @@ module Aws::QuickSight
     IngestionStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
     IngestionType.add_member(:incremental_refresh, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCREMENTAL_REFRESH", traits: {"smithy.api#enumValue" => "INCREMENTAL_REFRESH"}))
     IngestionType.add_member(:full_refresh, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL_REFRESH", traits: {"smithy.api#enumValue" => "FULL_REFRESH"}))
-    Ingestions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ingestion, name: "member")
+    Ingestions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ingestion, name: "member"))
     InnerFilter.add_member(:category_inner_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryInnerFilter, name: "CategoryInnerFilter"))
     InnerFilter.type = Types::InnerFilter
     InputColumn.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "Name", traits: {"smithy.api#required" => {}}))
@@ -6010,7 +6010,7 @@ module Aws::QuickSight
     InputColumnDataType.add_member(:bit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BIT", traits: {"smithy.api#enumValue" => "BIT"}))
     InputColumnDataType.add_member(:boolean, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BOOLEAN", traits: {"smithy.api#enumValue" => "BOOLEAN"}))
     InputColumnDataType.add_member(:json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON", traits: {"smithy.api#enumValue" => "JSON"}))
-    InputColumnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InputColumn, name: "member")
+    InputColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InputColumn, name: "member"))
     InsightConfiguration.add_member(:computations, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationList, name: "Computations"))
     InsightConfiguration.add_member(:custom_narrative, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomNarrativeOptions, name: "CustomNarrative"))
     InsightConfiguration.add_member(:interactions, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualInteractionOptions, name: "Interactions"))
@@ -6030,8 +6030,8 @@ module Aws::QuickSight
     IntegerDatasetParameter.type = Types::IntegerDatasetParameter
     IntegerDatasetParameterDefaultValues.add_member(:static_values, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerDatasetParameterValueList, name: "StaticValues"))
     IntegerDatasetParameterDefaultValues.type = Types::IntegerDatasetParameterDefaultValues
-    IntegerDatasetParameterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerDatasetParameterDefaultValue, name: "member")
-    IntegerDefaultValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveLongObject, name: "member")
+    IntegerDatasetParameterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerDatasetParameterDefaultValue, name: "member"))
+    IntegerDefaultValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveLongObject, name: "member"))
     IntegerDefaultValues.add_member(:dynamic_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamicDefaultValue, name: "DynamicValue"))
     IntegerDefaultValues.add_member(:static_values, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerDefaultValueList, name: "StaticValues"))
     IntegerDefaultValues.type = Types::IntegerDefaultValues
@@ -6044,7 +6044,7 @@ module Aws::QuickSight
     IntegerParameterDeclaration.add_member(:value_when_unset, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerValueWhenUnsetConfiguration, name: "ValueWhenUnset"))
     IntegerParameterDeclaration.add_member(:mapped_data_set_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: MappedDataSetParameters, name: "MappedDataSetParameters"))
     IntegerParameterDeclaration.type = Types::IntegerParameterDeclaration
-    IntegerParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerParameter, name: "member")
+    IntegerParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerParameter, name: "member"))
     IntegerValueWhenUnsetConfiguration.add_member(:value_when_unset_option, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueWhenUnsetOption, name: "ValueWhenUnsetOption"))
     IntegerValueWhenUnsetConfiguration.add_member(:custom_value, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveLong, name: "CustomValue", traits: {"smithy.api#default" => nil}))
     IntegerValueWhenUnsetConfiguration.type = Types::IntegerValueWhenUnsetConfiguration
@@ -6065,9 +6065,9 @@ module Aws::QuickSight
     InvalidTopicReviewedAnswer.add_member(:answer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnswerId, name: "AnswerId"))
     InvalidTopicReviewedAnswer.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ReviewedAnswerErrorCode, name: "Error"))
     InvalidTopicReviewedAnswer.type = Types::InvalidTopicReviewedAnswer
-    InvalidTopicReviewedAnswers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InvalidTopicReviewedAnswer, name: "member")
-    IpRestrictionRuleMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: CIDR, name: "key")
-    IpRestrictionRuleMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: IpRestrictionRuleDescription, name: "value")
+    InvalidTopicReviewedAnswers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InvalidTopicReviewedAnswer, name: "member"))
+    IpRestrictionRuleMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: CIDR, name: "key"))
+    IpRestrictionRuleMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: IpRestrictionRuleDescription, name: "value"))
     ItemsLimitConfiguration.add_member(:items_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "ItemsLimit", traits: {"smithy.api#default" => nil}))
     ItemsLimitConfiguration.add_member(:other_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: OtherCategories, name: "OtherCategories"))
     ItemsLimitConfiguration.type = Types::ItemsLimitConfiguration
@@ -6099,7 +6099,7 @@ module Aws::QuickSight
     KPIConditionalFormattingOption.add_member(:actual_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KPIActualValueConditionalFormatting, name: "ActualValue"))
     KPIConditionalFormattingOption.add_member(:comparison_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KPIComparisonValueConditionalFormatting, name: "ComparisonValue"))
     KPIConditionalFormattingOption.type = Types::KPIConditionalFormattingOption
-    KPIConditionalFormattingOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KPIConditionalFormattingOption, name: "member")
+    KPIConditionalFormattingOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KPIConditionalFormattingOption, name: "member"))
     KPIConfiguration.add_member(:field_wells, ::Smithy::Schema::Shapes::MemberShape.new(target: KPIFieldWells, name: "FieldWells"))
     KPIConfiguration.add_member(:sort_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: KPISortConfiguration, name: "SortConfiguration"))
     KPIConfiguration.add_member(:kpi_options, ::Smithy::Schema::Shapes::MemberShape.new(target: KPIOptions, name: "KPIOptions"))
@@ -6148,7 +6148,7 @@ module Aws::QuickSight
     KPIVisualStandardLayout.type = Types::KPIVisualStandardLayout
     KPIVisualStandardLayoutType.add_member(:classic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLASSIC", traits: {"smithy.api#enumValue" => "CLASSIC"}))
     KPIVisualStandardLayoutType.add_member(:vertical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERTICAL", traits: {"smithy.api#enumValue" => "VERTICAL"}))
-    KeyRegistration.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegisteredCustomerManagedKey, name: "member")
+    KeyRegistration.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegisteredCustomerManagedKey, name: "member"))
     LabelOptions.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: Visibility, name: "Visibility"))
     LabelOptions.add_member(:font_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FontConfiguration, name: "FontConfiguration"))
     LabelOptions.add_member(:custom_label, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CustomLabel"))
@@ -6159,13 +6159,13 @@ module Aws::QuickSight
     LayerCustomAction.add_member(:trigger, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerCustomActionTrigger, name: "Trigger", traits: {"smithy.api#required" => {}}))
     LayerCustomAction.add_member(:action_operations, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerCustomActionOperationList, name: "ActionOperations", traits: {"smithy.api#required" => {}}))
     LayerCustomAction.type = Types::LayerCustomAction
-    LayerCustomActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LayerCustomAction, name: "member")
+    LayerCustomActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerCustomAction, name: "member"))
     LayerCustomActionOperation.add_member(:filter_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionFilterOperation, name: "FilterOperation"))
     LayerCustomActionOperation.add_member(:navigation_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionNavigationOperation, name: "NavigationOperation"))
     LayerCustomActionOperation.add_member(:url_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionURLOperation, name: "URLOperation"))
     LayerCustomActionOperation.add_member(:set_parameters_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionSetParametersOperation, name: "SetParametersOperation"))
     LayerCustomActionOperation.type = Types::LayerCustomActionOperation
-    LayerCustomActionOperationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LayerCustomActionOperation, name: "member")
+    LayerCustomActionOperationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerCustomActionOperation, name: "member"))
     LayerCustomActionTrigger.add_member(:data_point_click, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATA_POINT_CLICK", traits: {"smithy.api#enumValue" => "DATA_POINT_CLICK"}))
     LayerCustomActionTrigger.add_member(:data_point_menu, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATA_POINT_MENU", traits: {"smithy.api#enumValue" => "DATA_POINT_MENU"}))
     LayerMapVisual.add_member(:visual_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "VisualId", traits: {"smithy.api#required" => {}}))
@@ -6186,7 +6186,7 @@ module Aws::QuickSight
     LayoutElementType.add_member(:parameter_control, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARAMETER_CONTROL", traits: {"smithy.api#enumValue" => "PARAMETER_CONTROL"}))
     LayoutElementType.add_member(:text_box, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXT_BOX", traits: {"smithy.api#enumValue" => "TEXT_BOX"}))
     LayoutElementType.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMAGE", traits: {"smithy.api#enumValue" => "IMAGE"}))
-    LayoutList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Layout, name: "member")
+    LayoutList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Layout, name: "member"))
     LegendOptions.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: Visibility, name: "Visibility"))
     LegendOptions.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelOptions, name: "Title"))
     LegendOptions.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: LegendPosition, name: "Position"))
@@ -6279,7 +6279,7 @@ module Aws::QuickSight
     LineSeriesAxisDisplayOptions.add_member(:axis_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AxisDisplayOptions, name: "AxisOptions"))
     LineSeriesAxisDisplayOptions.add_member(:missing_data_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: MissingDataConfigurationList, name: "MissingDataConfigurations"))
     LineSeriesAxisDisplayOptions.type = Types::LineSeriesAxisDisplayOptions
-    LinkEntityArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LinkEntityArn, name: "member")
+    LinkEntityArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkEntityArn, name: "member"))
     LinkSharingConfiguration.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePermissionList, name: "Permissions"))
     LinkSharingConfiguration.type = Types::LinkSharingConfiguration
     ListAnalysesRequest.add_member(:aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "AwsAccountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -6619,8 +6619,8 @@ module Aws::QuickSight
     LogicalTable.add_member(:data_transforms, ::Smithy::Schema::Shapes::MemberShape.new(target: TransformOperationList, name: "DataTransforms"))
     LogicalTable.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: LogicalTableSource, name: "Source", traits: {"smithy.api#required" => {}}))
     LogicalTable.type = Types::LogicalTable
-    LogicalTableMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: LogicalTableId, name: "key")
-    LogicalTableMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: LogicalTable, name: "value")
+    LogicalTableMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LogicalTableId, name: "key"))
+    LogicalTableMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LogicalTable, name: "value"))
     LogicalTableSource.add_member(:join_instruction, ::Smithy::Schema::Shapes::MemberShape.new(target: JoinInstruction, name: "JoinInstruction"))
     LogicalTableSource.add_member(:physical_table_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PhysicalTableId, name: "PhysicalTableId"))
     LogicalTableSource.add_member(:data_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "DataSetArn"))
@@ -6655,7 +6655,7 @@ module Aws::QuickSight
     MappedDataSetParameter.add_member(:data_set_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetIdentifier, name: "DataSetIdentifier", traits: {"smithy.api#required" => {}}))
     MappedDataSetParameter.add_member(:data_set_parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "DataSetParameterName", traits: {"smithy.api#required" => {}}))
     MappedDataSetParameter.type = Types::MappedDataSetParameter
-    MappedDataSetParameters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MappedDataSetParameter, name: "member")
+    MappedDataSetParameters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MappedDataSetParameter, name: "member"))
     MarginStyle.add_member(:show, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Show", traits: {"smithy.api#default" => nil}))
     MarginStyle.type = Types::MarginStyle
     MariaDbParameters.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: Host, name: "Host", traits: {"smithy.api#required" => {}}))
@@ -6677,7 +6677,7 @@ module Aws::QuickSight
     MeasureField.add_member(:date_measure_field, ::Smithy::Schema::Shapes::MemberShape.new(target: DateMeasureField, name: "DateMeasureField"))
     MeasureField.add_member(:calculated_measure_field, ::Smithy::Schema::Shapes::MemberShape.new(target: CalculatedMeasureField, name: "CalculatedMeasureField"))
     MeasureField.type = Types::MeasureField
-    MeasureFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member")
+    MeasureFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member"))
     MemberIdArnPair.add_member(:member_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictiveResourceId, name: "MemberId"))
     MemberIdArnPair.add_member(:member_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "MemberArn"))
     MemberIdArnPair.type = Types::MemberIdArnPair
@@ -6696,7 +6696,7 @@ module Aws::QuickSight
     MinimumLabelType.type = Types::MinimumLabelType
     MissingDataConfiguration.add_member(:treatment_option, ::Smithy::Schema::Shapes::MemberShape.new(target: MissingDataTreatmentOption, name: "TreatmentOption"))
     MissingDataConfiguration.type = Types::MissingDataConfiguration
-    MissingDataConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MissingDataConfiguration, name: "member")
+    MissingDataConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MissingDataConfiguration, name: "member"))
     MissingDataTreatmentOption.add_member(:interpolate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERPOLATE", traits: {"smithy.api#enumValue" => "INTERPOLATE"}))
     MissingDataTreatmentOption.add_member(:show_as_zero, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHOW_AS_ZERO", traits: {"smithy.api#enumValue" => "SHOW_AS_ZERO"}))
     MissingDataTreatmentOption.add_member(:show_as_blank, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHOW_AS_BLANK", traits: {"smithy.api#enumValue" => "SHOW_AS_BLANK"}))
@@ -6726,7 +6726,7 @@ module Aws::QuickSight
     NamedEntityDefinitionMetric.add_member(:aggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: NamedEntityAggType, name: "Aggregation"))
     NamedEntityDefinitionMetric.add_member(:aggregation_function_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationFunctionParameters, name: "AggregationFunctionParameters"))
     NamedEntityDefinitionMetric.type = Types::NamedEntityDefinitionMetric
-    NamedEntityDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NamedEntityDefinition, name: "member")
+    NamedEntityDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NamedEntityDefinition, name: "member"))
     NamedEntityRef.add_member(:named_entity_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "NamedEntityName"))
     NamedEntityRef.type = Types::NamedEntityRef
     NamedFilterAggType.add_member(:no_aggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_AGGREGATION", traits: {"smithy.api#enumValue" => "NO_AGGREGATION"}))
@@ -6766,7 +6766,7 @@ module Aws::QuickSight
     NamespaceStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     NamespaceStatus.add_member(:retryable_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RETRYABLE_FAILURE", traits: {"smithy.api#enumValue" => "RETRYABLE_FAILURE"}))
     NamespaceStatus.add_member(:non_retryable_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NON_RETRYABLE_FAILURE", traits: {"smithy.api#enumValue" => "NON_RETRYABLE_FAILURE"}))
-    Namespaces.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceInfoV2, name: "member")
+    Namespaces.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceInfoV2, name: "member"))
     NavbarStyle.add_member(:global_navbar, ::Smithy::Schema::Shapes::MemberShape.new(target: Palette, name: "GlobalNavbar"))
     NavbarStyle.add_member(:contextual_navbar, ::Smithy::Schema::Shapes::MemberShape.new(target: Palette, name: "ContextualNavbar"))
     NavbarStyle.type = Types::NavbarStyle
@@ -6788,7 +6788,7 @@ module Aws::QuickSight
     NetworkInterface.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceStatus, name: "Status"))
     NetworkInterface.add_member(:network_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceId, name: "NetworkInterfaceId"))
     NetworkInterface.type = Types::NetworkInterface
-    NetworkInterfaceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface, name: "member")
+    NetworkInterfaceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface, name: "member"))
     NetworkInterfaceStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     NetworkInterfaceStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     NetworkInterfaceStatus.add_member(:creation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATION_FAILED", traits: {"smithy.api#enumValue" => "CREATION_FAILED"}))
@@ -6804,7 +6804,7 @@ module Aws::QuickSight
     NewDefaultValues.add_member(:date_time_static_values, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeDatasetParameterValueList, name: "DateTimeStaticValues"))
     NewDefaultValues.add_member(:integer_static_values, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerDatasetParameterValueList, name: "IntegerStaticValues"))
     NewDefaultValues.type = Types::NewDefaultValues
-    NonRepeatingVisualsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "member")
+    NonRepeatingVisualsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "member"))
     NullFilterOption.add_member(:all_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL_VALUES", traits: {"smithy.api#enumValue" => "ALL_VALUES"}))
     NullFilterOption.add_member(:non_nulls_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NON_NULLS_ONLY", traits: {"smithy.api#enumValue" => "NON_NULLS_ONLY"}))
     NullFilterOption.add_member(:nulls_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NULLS_ONLY", traits: {"smithy.api#enumValue" => "NULLS_ONLY"}))
@@ -6892,7 +6892,7 @@ module Aws::QuickSight
     OAuthParameters.add_member(:identity_provider_vpc_connection_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConnectionProperties, name: "IdentityProviderVpcConnectionProperties"))
     OAuthParameters.add_member(:identity_provider_resource_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderResourceUri, name: "IdentityProviderResourceUri"))
     OAuthParameters.type = Types::OAuthParameters
-    OperandList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "member")
+    OperandList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "member"))
     OracleParameters.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: Host, name: "Host", traits: {"smithy.api#required" => {}}))
     OracleParameters.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "Port", traits: {"smithy.api#required" => {}}))
     OracleParameters.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: Database, name: "Database", traits: {"smithy.api#required" => {}}))
@@ -6905,7 +6905,7 @@ module Aws::QuickSight
     OutputColumn.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnDataType, name: "Type"))
     OutputColumn.add_member(:sub_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnDataSubType, name: "SubType"))
     OutputColumn.type = Types::OutputColumn
-    OutputColumnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OutputColumn, name: "member")
+    OutputColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputColumn, name: "member"))
     OverrideDatasetParameterOperation.add_member(:parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetParameterName, name: "ParameterName", traits: {"smithy.api#required" => {}}))
     OverrideDatasetParameterOperation.add_member(:new_parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetParameterName, name: "NewParameterName"))
     OverrideDatasetParameterOperation.add_member(:new_default_values, ::Smithy::Schema::Shapes::MemberShape.new(target: NewDefaultValues, name: "NewDefaultValues"))
@@ -6953,7 +6953,7 @@ module Aws::QuickSight
     ParameterControl.add_member(:text_area, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterTextAreaControl, name: "TextArea"))
     ParameterControl.add_member(:slider, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterSliderControl, name: "Slider"))
     ParameterControl.type = Types::ParameterControl
-    ParameterControlList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterControl, name: "member")
+    ParameterControlList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterControl, name: "member"))
     ParameterDateTimePickerControl.add_member(:parameter_control_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "ParameterControlId", traits: {"smithy.api#required" => {}}))
     ParameterDateTimePickerControl.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: SheetControlTitle, name: "Title", traits: {"smithy.api#required" => {}}))
     ParameterDateTimePickerControl.add_member(:source_parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "SourceParameterName", traits: {"smithy.api#required" => {}}))
@@ -6964,7 +6964,7 @@ module Aws::QuickSight
     ParameterDeclaration.add_member(:integer_parameter_declaration, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerParameterDeclaration, name: "IntegerParameterDeclaration"))
     ParameterDeclaration.add_member(:date_time_parameter_declaration, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeParameterDeclaration, name: "DateTimeParameterDeclaration"))
     ParameterDeclaration.type = Types::ParameterDeclaration
-    ParameterDeclarationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterDeclaration, name: "member")
+    ParameterDeclarationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterDeclaration, name: "member"))
     ParameterDropDownControl.add_member(:parameter_control_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "ParameterControlId", traits: {"smithy.api#required" => {}}))
     ParameterDropDownControl.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: SheetControlTitle, name: "Title", traits: {"smithy.api#required" => {}}))
     ParameterDropDownControl.add_member(:source_parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "SourceParameterName", traits: {"smithy.api#required" => {}}))
@@ -6982,7 +6982,7 @@ module Aws::QuickSight
     ParameterListControl.add_member(:selectable_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterSelectableValues, name: "SelectableValues"))
     ParameterListControl.add_member(:cascading_control_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CascadingControlConfiguration, name: "CascadingControlConfiguration"))
     ParameterListControl.type = Types::ParameterListControl
-    ParameterSelectableValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ParameterSelectableValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ParameterSelectableValues.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterSelectableValueList, name: "Values"))
     ParameterSelectableValues.add_member(:link_to_data_set_column, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnIdentifier, name: "LinkToDataSetColumn"))
     ParameterSelectableValues.type = Types::ParameterSelectableValues
@@ -7012,7 +7012,7 @@ module Aws::QuickSight
     Parameters.add_member(:decimal_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: DecimalParameterList, name: "DecimalParameters"))
     Parameters.add_member(:date_time_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeParameterList, name: "DateTimeParameters"))
     Parameters.type = Types::Parameters
-    Path.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    Path.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     PercentVisibleRange.add_member(:from, ::Smithy::Schema::Shapes::MemberShape.new(target: PercentNumber, name: "From", traits: {"smithy.api#default" => nil}))
     PercentVisibleRange.add_member(:to, ::Smithy::Schema::Shapes::MemberShape.new(target: PercentNumber, name: "To", traits: {"smithy.api#default" => nil}))
     PercentVisibleRange.type = Types::PercentVisibleRange
@@ -7045,8 +7045,8 @@ module Aws::QuickSight
     PhysicalTable.add_member(:s3_source, Types::PhysicalTable::S3Source, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Source, name: "S3Source"))
     PhysicalTable.add_member(:unknown, Types::PhysicalTable::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     PhysicalTable.type = Types::PhysicalTable
-    PhysicalTableMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: PhysicalTableId, name: "key")
-    PhysicalTableMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: PhysicalTable, name: "value")
+    PhysicalTableMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: PhysicalTableId, name: "key"))
+    PhysicalTableMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PhysicalTable, name: "value"))
     PieChartAggregatedFieldWells.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionFieldList, name: "Category"))
     PieChartAggregatedFieldWells.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureFieldList, name: "Values"))
     PieChartAggregatedFieldWells.add_member(:small_multiples, ::Smithy::Schema::Shapes::MemberShape.new(target: SmallMultiplesDimensionFieldList, name: "SmallMultiples"))
@@ -7082,8 +7082,8 @@ module Aws::QuickSight
     PivotFieldSortOptions.add_member(:field_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "FieldId", traits: {"smithy.api#required" => {}}))
     PivotFieldSortOptions.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableSortBy, name: "SortBy", traits: {"smithy.api#required" => {}}))
     PivotFieldSortOptions.type = Types::PivotFieldSortOptions
-    PivotFieldSortOptionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PivotFieldSortOptions, name: "member")
-    PivotMeasureFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member")
+    PivotFieldSortOptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PivotFieldSortOptions, name: "member"))
+    PivotMeasureFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member"))
     PivotTableAggregatedFieldWells.add_member(:rows, ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableDimensionList, name: "Rows"))
     PivotTableAggregatedFieldWells.add_member(:columns, ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableDimensionList, name: "Columns"))
     PivotTableAggregatedFieldWells.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: PivotMeasureFieldList, name: "Values"))
@@ -7097,10 +7097,10 @@ module Aws::QuickSight
     PivotTableConditionalFormatting.type = Types::PivotTableConditionalFormatting
     PivotTableConditionalFormattingOption.add_member(:cell, ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableCellConditionalFormatting, name: "Cell"))
     PivotTableConditionalFormattingOption.type = Types::PivotTableConditionalFormattingOption
-    PivotTableConditionalFormattingOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableConditionalFormattingOption, name: "member")
+    PivotTableConditionalFormattingOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableConditionalFormattingOption, name: "member"))
     PivotTableConditionalFormattingScope.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableConditionalFormattingScopeRole, name: "Role"))
     PivotTableConditionalFormattingScope.type = Types::PivotTableConditionalFormattingScope
-    PivotTableConditionalFormattingScopeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableConditionalFormattingScope, name: "member")
+    PivotTableConditionalFormattingScopeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableConditionalFormattingScope, name: "member"))
     PivotTableConditionalFormattingScopeRole.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD", traits: {"smithy.api#enumValue" => "FIELD"}))
     PivotTableConditionalFormattingScopeRole.add_member(:field_total, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_TOTAL", traits: {"smithy.api#enumValue" => "FIELD_TOTAL"}))
     PivotTableConditionalFormattingScopeRole.add_member(:grand_total, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GRAND_TOTAL", traits: {"smithy.api#enumValue" => "GRAND_TOTAL"}))
@@ -7115,18 +7115,18 @@ module Aws::QuickSight
     PivotTableDataPathOption.add_member(:data_path_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DataPathValueList, name: "DataPathList", traits: {"smithy.api#required" => {}}))
     PivotTableDataPathOption.add_member(:width, ::Smithy::Schema::Shapes::MemberShape.new(target: PixelLength, name: "Width"))
     PivotTableDataPathOption.type = Types::PivotTableDataPathOption
-    PivotTableDataPathOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableDataPathOption, name: "member")
+    PivotTableDataPathOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableDataPathOption, name: "member"))
     PivotTableDataPathType.add_member(:hierarchy_rows_layout_column, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIERARCHY_ROWS_LAYOUT_COLUMN", traits: {"smithy.api#enumValue" => "HIERARCHY_ROWS_LAYOUT_COLUMN"}))
     PivotTableDataPathType.add_member(:multiple_row_metrics_column, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTIPLE_ROW_METRICS_COLUMN", traits: {"smithy.api#enumValue" => "MULTIPLE_ROW_METRICS_COLUMN"}))
     PivotTableDataPathType.add_member(:empty_column_header, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMPTY_COLUMN_HEADER", traits: {"smithy.api#enumValue" => "EMPTY_COLUMN_HEADER"}))
     PivotTableDataPathType.add_member(:count_metric_column, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COUNT_METRIC_COLUMN", traits: {"smithy.api#enumValue" => "COUNT_METRIC_COLUMN"}))
-    PivotTableDimensionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member")
+    PivotTableDimensionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member"))
     PivotTableFieldCollapseState.add_member(:collapsed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COLLAPSED", traits: {"smithy.api#enumValue" => "COLLAPSED"}))
     PivotTableFieldCollapseState.add_member(:expanded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPANDED", traits: {"smithy.api#enumValue" => "EXPANDED"}))
     PivotTableFieldCollapseStateOption.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableFieldCollapseStateTarget, name: "Target", traits: {"smithy.api#required" => {}}))
     PivotTableFieldCollapseStateOption.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableFieldCollapseState, name: "State"))
     PivotTableFieldCollapseStateOption.type = Types::PivotTableFieldCollapseStateOption
-    PivotTableFieldCollapseStateOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableFieldCollapseStateOption, name: "member")
+    PivotTableFieldCollapseStateOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableFieldCollapseStateOption, name: "member"))
     PivotTableFieldCollapseStateTarget.add_member(:field_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FieldId"))
     PivotTableFieldCollapseStateTarget.add_member(:field_data_path_values, ::Smithy::Schema::Shapes::MemberShape.new(target: DataPathValueList, name: "FieldDataPathValues"))
     PivotTableFieldCollapseStateTarget.type = Types::PivotTableFieldCollapseStateTarget
@@ -7134,14 +7134,14 @@ module Aws::QuickSight
     PivotTableFieldOption.add_member(:custom_label, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLabel, name: "CustomLabel"))
     PivotTableFieldOption.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: Visibility, name: "Visibility"))
     PivotTableFieldOption.type = Types::PivotTableFieldOption
-    PivotTableFieldOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableFieldOption, name: "member")
+    PivotTableFieldOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableFieldOption, name: "member"))
     PivotTableFieldOptions.add_member(:selected_field_options, ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableFieldOptionList, name: "SelectedFieldOptions"))
     PivotTableFieldOptions.add_member(:data_path_options, ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableDataPathOptionList, name: "DataPathOptions"))
     PivotTableFieldOptions.add_member(:collapse_state_options, ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableFieldCollapseStateOptionList, name: "CollapseStateOptions"))
     PivotTableFieldOptions.type = Types::PivotTableFieldOptions
     PivotTableFieldSubtotalOptions.add_member(:field_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "FieldId"))
     PivotTableFieldSubtotalOptions.type = Types::PivotTableFieldSubtotalOptions
-    PivotTableFieldSubtotalOptionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableFieldSubtotalOptions, name: "member")
+    PivotTableFieldSubtotalOptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableFieldSubtotalOptions, name: "member"))
     PivotTableFieldWells.add_member(:pivot_table_aggregated_field_wells, ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableAggregatedFieldWells, name: "PivotTableAggregatedFieldWells"))
     PivotTableFieldWells.type = Types::PivotTableFieldWells
     PivotTableMetricPlacement.add_member(:row, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROW", traits: {"smithy.api#enumValue" => "ROW"}))
@@ -7218,12 +7218,12 @@ module Aws::QuickSight
     PluginVisualFieldWell.add_member(:measures, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureFieldList, name: "Measures"))
     PluginVisualFieldWell.add_member(:unaggregated, ::Smithy::Schema::Shapes::MemberShape.new(target: UnaggregatedFieldList, name: "Unaggregated"))
     PluginVisualFieldWell.type = Types::PluginVisualFieldWell
-    PluginVisualFieldWells.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PluginVisualFieldWell, name: "member")
+    PluginVisualFieldWells.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PluginVisualFieldWell, name: "member"))
     PluginVisualItemsLimitConfiguration.add_member(:items_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "ItemsLimit", traits: {"smithy.api#default" => nil}))
     PluginVisualItemsLimitConfiguration.type = Types::PluginVisualItemsLimitConfiguration
     PluginVisualOptions.add_member(:visual_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PluginVisualPropertiesList, name: "VisualProperties"))
     PluginVisualOptions.type = Types::PluginVisualOptions
-    PluginVisualPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PluginVisualProperty, name: "member")
+    PluginVisualPropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PluginVisualProperty, name: "member"))
     PluginVisualProperty.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     PluginVisualProperty.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     PluginVisualProperty.type = Types::PluginVisualProperty
@@ -7243,7 +7243,7 @@ module Aws::QuickSight
     PredefinedHierarchy.add_member(:columns, ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedHierarchyColumnList, name: "Columns", traits: {"smithy.api#required" => {}}))
     PredefinedHierarchy.add_member(:drill_down_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: DrillDownFilterList, name: "DrillDownFilters"))
     PredefinedHierarchy.type = Types::PredefinedHierarchy
-    PredefinedHierarchyColumnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnIdentifier, name: "member")
+    PredefinedHierarchyColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnIdentifier, name: "member"))
     PredictQAResultsRequest.add_member(:aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "AwsAccountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PredictQAResultsRequest.add_member(:query_text, ::Smithy::Schema::Shapes::MemberShape.new(target: QAQueryText, name: "QueryText", traits: {"smithy.api#required" => {}}))
     PredictQAResultsRequest.add_member(:include_quick_sight_q_index, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludeQuickSightQIndex, name: "IncludeQuickSightQIndex"))
@@ -7262,12 +7262,12 @@ module Aws::QuickSight
     PrimaryValueDisplayType.add_member(:hidden, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIDDEN", traits: {"smithy.api#enumValue" => "HIDDEN"}))
     PrimaryValueDisplayType.add_member(:comparison, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPARISON", traits: {"smithy.api#enumValue" => "COMPARISON"}))
     PrimaryValueDisplayType.add_member(:actual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTUAL", traits: {"smithy.api#enumValue" => "ACTUAL"}))
-    PrincipalList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    PrincipalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ProgressBarOptions.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: Visibility, name: "Visibility"))
     ProgressBarOptions.type = Types::ProgressBarOptions
     ProjectOperation.add_member(:projected_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectedColumnList, name: "ProjectedColumns", traits: {"smithy.api#required" => {}}))
     ProjectOperation.type = Types::ProjectOperation
-    ProjectedColumnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ProjectedColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     PropertyRole.add_member(:primary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIMARY", traits: {"smithy.api#enumValue" => "PRIMARY"}))
     PropertyRole.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ID", traits: {"smithy.api#enumValue" => "ID"}))
     PropertyUsage.add_member(:inherit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INHERIT", traits: {"smithy.api#enumValue" => "INHERIT"}))
@@ -7289,7 +7289,7 @@ module Aws::QuickSight
     QAResultType.add_member(:dashboard_visual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DASHBOARD_VISUAL", traits: {"smithy.api#enumValue" => "DASHBOARD_VISUAL"}))
     QAResultType.add_member(:generated_answer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GENERATED_ANSWER", traits: {"smithy.api#enumValue" => "GENERATED_ANSWER"}))
     QAResultType.add_member(:no_answer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_ANSWER", traits: {"smithy.api#enumValue" => "NO_ANSWER"}))
-    QAResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QAResult, name: "member")
+    QAResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QAResult, name: "member"))
     QBusinessInsightsStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     QBusinessInsightsStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     QDataKey.add_member(:q_data_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "QDataKeyArn"))
@@ -7318,8 +7318,8 @@ module Aws::QuickSight
     RadarChartAxesRangeScale.add_member(:auto, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTO", traits: {"smithy.api#enumValue" => "AUTO"}))
     RadarChartAxesRangeScale.add_member(:independent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INDEPENDENT", traits: {"smithy.api#enumValue" => "INDEPENDENT"}))
     RadarChartAxesRangeScale.add_member(:shared, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHARED", traits: {"smithy.api#enumValue" => "SHARED"}))
-    RadarChartCategoryFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member")
-    RadarChartColorFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member")
+    RadarChartCategoryFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member"))
+    RadarChartColorFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member"))
     RadarChartConfiguration.add_member(:field_wells, ::Smithy::Schema::Shapes::MemberShape.new(target: RadarChartFieldWells, name: "FieldWells"))
     RadarChartConfiguration.add_member(:sort_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RadarChartSortConfiguration, name: "SortConfiguration"))
     RadarChartConfiguration.add_member(:shape, ::Smithy::Schema::Shapes::MemberShape.new(target: RadarChartShape, name: "Shape"))
@@ -7348,7 +7348,7 @@ module Aws::QuickSight
     RadarChartSortConfiguration.add_member(:color_sort, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldSortOptionsList, name: "ColorSort"))
     RadarChartSortConfiguration.add_member(:color_items_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemsLimitConfiguration, name: "ColorItemsLimit"))
     RadarChartSortConfiguration.type = Types::RadarChartSortConfiguration
-    RadarChartValuesFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member")
+    RadarChartValuesFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member"))
     RadarChartVisual.add_member(:visual_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "VisualId", traits: {"smithy.api#required" => {}}))
     RadarChartVisual.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualTitleLabelOptions, name: "Title"))
     RadarChartVisual.add_member(:subtitle, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualSubtitleLabelOptions, name: "Subtitle"))
@@ -7407,7 +7407,7 @@ module Aws::QuickSight
     ReferenceLineLabelHorizontalPosition.add_member(:right, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RIGHT", traits: {"smithy.api#enumValue" => "RIGHT"}))
     ReferenceLineLabelVerticalPosition.add_member(:above, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ABOVE", traits: {"smithy.api#enumValue" => "ABOVE"}))
     ReferenceLineLabelVerticalPosition.add_member(:below, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BELOW", traits: {"smithy.api#enumValue" => "BELOW"}))
-    ReferenceLineList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceLine, name: "member")
+    ReferenceLineList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceLine, name: "member"))
     ReferenceLinePatternType.add_member(:solid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOLID", traits: {"smithy.api#enumValue" => "SOLID"}))
     ReferenceLinePatternType.add_member(:dashed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DASHED", traits: {"smithy.api#enumValue" => "DASHED"}))
     ReferenceLinePatternType.add_member(:dotted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOTTED", traits: {"smithy.api#enumValue" => "DOTTED"}))
@@ -7448,7 +7448,7 @@ module Aws::QuickSight
     RefreshSchedule.add_member(:refresh_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IngestionType, name: "RefreshType", traits: {"smithy.api#required" => {}}))
     RefreshSchedule.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     RefreshSchedule.type = Types::RefreshSchedule
-    RefreshSchedules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RefreshSchedule, name: "member")
+    RefreshSchedules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RefreshSchedule, name: "member"))
     RegisterUserRequest.add_member(:identity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityType, name: "IdentityType", traits: {"smithy.api#required" => {}}))
     RegisterUserRequest.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Email", traits: {"smithy.api#required" => {}}))
     RegisterUserRequest.add_member(:user_role, ::Smithy::Schema::Shapes::MemberShape.new(target: UserRole, name: "UserRole", traits: {"smithy.api#required" => {}}))
@@ -7552,7 +7552,7 @@ module Aws::QuickSight
     ResourcePermission.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: Principal, name: "Principal", traits: {"smithy.api#required" => {}}))
     ResourcePermission.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionList, name: "Actions", traits: {"smithy.api#required" => {}}))
     ResourcePermission.type = Types::ResourcePermission
-    ResourcePermissionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePermission, name: "member")
+    ResourcePermissionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePermission, name: "member"))
     ResourceStatus.add_member(:creation_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATION_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATION_IN_PROGRESS"}))
     ResourceStatus.add_member(:creation_successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATION_SUCCESSFUL", traits: {"smithy.api#enumValue" => "CREATION_SUCCESSFUL"}))
     ResourceStatus.add_member(:creation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATION_FAILED", traits: {"smithy.api#enumValue" => "CREATION_FAILED"}))
@@ -7590,7 +7590,7 @@ module Aws::QuickSight
     RollingDateConfiguration.add_member(:data_set_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetIdentifier, name: "DataSetIdentifier"))
     RollingDateConfiguration.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "Expression", traits: {"smithy.api#required" => {}}))
     RollingDateConfiguration.type = Types::RollingDateConfiguration
-    RowAlternateColorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HexColor, name: "member")
+    RowAlternateColorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HexColor, name: "member"))
     RowAlternateColorOptions.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WidgetStatus, name: "Status"))
     RowAlternateColorOptions.add_member(:row_alternate_colors, ::Smithy::Schema::Shapes::MemberShape.new(target: RowAlternateColorList, name: "RowAlternateColors"))
     RowAlternateColorOptions.add_member(:use_primary_background_color, ::Smithy::Schema::Shapes::MemberShape.new(target: WidgetStatus, name: "UsePrimaryBackgroundColor"))
@@ -7618,10 +7618,10 @@ module Aws::QuickSight
     RowLevelPermissionTagRule.add_member(:tag_multi_value_delimiter, ::Smithy::Schema::Shapes::MemberShape.new(target: RowLevelPermissionTagDelimiter, name: "TagMultiValueDelimiter"))
     RowLevelPermissionTagRule.add_member(:match_all_value, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionTagValue, name: "MatchAllValue"))
     RowLevelPermissionTagRule.type = Types::RowLevelPermissionTagRule
-    RowLevelPermissionTagRuleConfiguration.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SessionTagKey, name: "member")
-    RowLevelPermissionTagRuleConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RowLevelPermissionTagRuleConfiguration, name: "member")
-    RowLevelPermissionTagRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RowLevelPermissionTagRule, name: "member")
-    RowSortList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldSortOptions, name: "member")
+    RowLevelPermissionTagRuleConfiguration.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionTagKey, name: "member"))
+    RowLevelPermissionTagRuleConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RowLevelPermissionTagRuleConfiguration, name: "member"))
+    RowLevelPermissionTagRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RowLevelPermissionTagRule, name: "member"))
+    RowSortList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldSortOptions, name: "member"))
     S3BucketConfiguration.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "BucketName", traits: {"smithy.api#required" => {}}))
     S3BucketConfiguration.add_member(:bucket_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "BucketPrefix", traits: {"smithy.api#required" => {}}))
     S3BucketConfiguration.add_member(:bucket_region, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "BucketRegion", traits: {"smithy.api#required" => {}}))
@@ -7798,9 +7798,9 @@ module Aws::QuickSight
     SectionStyle.add_member(:height, ::Smithy::Schema::Shapes::MemberShape.new(target: PixelLength, name: "Height"))
     SectionStyle.add_member(:padding, ::Smithy::Schema::Shapes::MemberShape.new(target: Spacing, name: "Padding"))
     SectionStyle.type = Types::SectionStyle
-    SecurityGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
+    SecurityGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     SelectAllValueOptions.add_member(:all_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL_VALUES", traits: {"smithy.api#enumValue" => "ALL_VALUES"}))
-    SelectedFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "member")
+    SelectedFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "member"))
     SelectedFieldOptions.add_member(:all_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL_FIELDS", traits: {"smithy.api#enumValue" => "ALL_FIELDS"}))
     SelectedSheetsFilterScopeConfiguration.add_member(:sheet_visual_scoping_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: SheetVisualScopingConfigurations, name: "SheetVisualScopingConfigurations"))
     SelectedSheetsFilterScopeConfiguration.type = Types::SelectedSheetsFilterScopeConfiguration
@@ -7818,14 +7818,14 @@ module Aws::QuickSight
     SemanticType.add_member(:falsey_cell_value, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "FalseyCellValue"))
     SemanticType.add_member(:falsey_cell_value_synonyms, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveStringList, name: "FalseyCellValueSynonyms"))
     SemanticType.type = Types::SemanticType
-    SensitiveDoubleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDouble, name: "member")
-    SensitiveLongList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveLong, name: "member")
-    SensitiveStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "member")
-    SensitiveTimestampList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveTimestamp, name: "member")
+    SensitiveDoubleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDouble, name: "member"))
+    SensitiveLongList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveLong, name: "member"))
+    SensitiveStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "member"))
+    SensitiveTimestampList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveTimestamp, name: "member"))
     SeriesItem.add_member(:field_series_item, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldSeriesItem, name: "FieldSeriesItem"))
     SeriesItem.add_member(:data_field_series_item, ::Smithy::Schema::Shapes::MemberShape.new(target: DataFieldSeriesItem, name: "DataFieldSeriesItem"))
     SeriesItem.type = Types::SeriesItem
-    SeriesItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SeriesItem, name: "member")
+    SeriesItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SeriesItem, name: "member"))
     ServiceNowParameters.add_member(:site_base_url, ::Smithy::Schema::Shapes::MemberShape.new(target: SiteBaseUrl, name: "SiteBaseUrl", traits: {"smithy.api#required" => {}}))
     ServiceNowParameters.type = Types::ServiceNowParameters
     ServiceType.add_member(:redshift, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REDSHIFT", traits: {"smithy.api#enumValue" => "REDSHIFT"}))
@@ -7837,12 +7837,12 @@ module Aws::QuickSight
     SessionTag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionTagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     SessionTag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionTagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     SessionTag.type = Types::SessionTag
-    SessionTagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SessionTagKey, name: "member")
-    SessionTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SessionTag, name: "member")
+    SessionTagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionTagKey, name: "member"))
+    SessionTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionTag, name: "member"))
     SetParameterValueConfiguration.add_member(:destination_parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "DestinationParameterName", traits: {"smithy.api#required" => {}}))
     SetParameterValueConfiguration.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationParameterValueConfiguration, name: "Value", traits: {"smithy.api#required" => {}}))
     SetParameterValueConfiguration.type = Types::SetParameterValueConfiguration
-    SetParameterValueConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SetParameterValueConfiguration, name: "member")
+    SetParameterValueConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SetParameterValueConfiguration, name: "member"))
     ShapeConditionalFormat.add_member(:background_color, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionalFormattingColor, name: "BackgroundColor", traits: {"smithy.api#required" => {}}))
     ShapeConditionalFormat.type = Types::ShapeConditionalFormat
     SharedViewConfigurations.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
@@ -7864,7 +7864,7 @@ module Aws::QuickSight
     SheetControlLayout.type = Types::SheetControlLayout
     SheetControlLayoutConfiguration.add_member(:grid_layout, ::Smithy::Schema::Shapes::MemberShape.new(target: GridLayoutConfiguration, name: "GridLayout"))
     SheetControlLayoutConfiguration.type = Types::SheetControlLayoutConfiguration
-    SheetControlLayoutList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SheetControlLayout, name: "member")
+    SheetControlLayoutList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SheetControlLayout, name: "member"))
     SheetControlListType.add_member(:multi_select, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTI_SELECT", traits: {"smithy.api#enumValue" => "MULTI_SELECT"}))
     SheetControlListType.add_member(:single_select, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE_SELECT", traits: {"smithy.api#enumValue" => "SINGLE_SELECT"}))
     SheetControlSliderType.add_member(:single_point, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE_POINT", traits: {"smithy.api#enumValue" => "SINGLE_POINT"}))
@@ -7885,13 +7885,13 @@ module Aws::QuickSight
     SheetDefinition.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SheetContentType, name: "ContentType"))
     SheetDefinition.add_member(:custom_action_defaults, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualCustomActionDefaults, name: "CustomActionDefaults"))
     SheetDefinition.type = Types::SheetDefinition
-    SheetDefinitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SheetDefinition, name: "member")
+    SheetDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SheetDefinition, name: "member"))
     SheetElementConfigurationOverrides.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: Visibility, name: "Visibility"))
     SheetElementConfigurationOverrides.type = Types::SheetElementConfigurationOverrides
     SheetElementRenderingRule.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "Expression", traits: {"smithy.api#required" => {}}))
     SheetElementRenderingRule.add_member(:configuration_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: SheetElementConfigurationOverrides, name: "ConfigurationOverrides", traits: {"smithy.api#required" => {}}))
     SheetElementRenderingRule.type = Types::SheetElementRenderingRule
-    SheetElementRenderingRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SheetElementRenderingRule, name: "member")
+    SheetElementRenderingRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SheetElementRenderingRule, name: "member"))
     SheetImage.add_member(:sheet_image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "SheetImageId", traits: {"smithy.api#required" => {}}))
     SheetImage.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: SheetImageSource, name: "Source", traits: {"smithy.api#required" => {}}))
     SheetImage.add_member(:scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: SheetImageScalingConfiguration, name: "Scaling"))
@@ -7900,7 +7900,7 @@ module Aws::QuickSight
     SheetImage.add_member(:interactions, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageInteractionOptions, name: "Interactions"))
     SheetImage.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageCustomActionList, name: "Actions"))
     SheetImage.type = Types::SheetImage
-    SheetImageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SheetImage, name: "member")
+    SheetImageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SheetImage, name: "member"))
     SheetImageScalingConfiguration.add_member(:scaling_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SheetImageScalingType, name: "ScalingType"))
     SheetImageScalingConfiguration.type = Types::SheetImageScalingConfiguration
     SheetImageScalingType.add_member(:scale_to_width, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCALE_TO_WIDTH", traits: {"smithy.api#enumValue" => "SCALE_TO_WIDTH"}))
@@ -7918,7 +7918,7 @@ module Aws::QuickSight
     SheetImageTooltipText.type = Types::SheetImageTooltipText
     SheetLayoutElementMaximizationOption.add_member(:availability_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardBehavior, name: "AvailabilityStatus"))
     SheetLayoutElementMaximizationOption.type = Types::SheetLayoutElementMaximizationOption
-    SheetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Sheet, name: "member")
+    SheetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Sheet, name: "member"))
     SheetStyle.add_member(:tile, ::Smithy::Schema::Shapes::MemberShape.new(target: TileStyle, name: "Tile"))
     SheetStyle.add_member(:tile_layout, ::Smithy::Schema::Shapes::MemberShape.new(target: TileLayoutStyle, name: "TileLayout"))
     SheetStyle.type = Types::SheetStyle
@@ -7926,12 +7926,12 @@ module Aws::QuickSight
     SheetTextBox.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: SheetTextBoxContent, name: "Content"))
     SheetTextBox.add_member(:interactions, ::Smithy::Schema::Shapes::MemberShape.new(target: TextBoxInteractionOptions, name: "Interactions"))
     SheetTextBox.type = Types::SheetTextBox
-    SheetTextBoxList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SheetTextBox, name: "member")
+    SheetTextBoxList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SheetTextBox, name: "member"))
     SheetVisualScopingConfiguration.add_member(:sheet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "SheetId", traits: {"smithy.api#required" => {}}))
     SheetVisualScopingConfiguration.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterVisualScope, name: "Scope", traits: {"smithy.api#required" => {}}))
     SheetVisualScopingConfiguration.add_member(:visual_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: FilteredVisualsList, name: "VisualIds"))
     SheetVisualScopingConfiguration.type = Types::SheetVisualScopingConfiguration
-    SheetVisualScopingConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SheetVisualScopingConfiguration, name: "member")
+    SheetVisualScopingConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SheetVisualScopingConfiguration, name: "member"))
     ShortFormatText.add_member(:plain_text, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortPlainText, name: "PlainText"))
     ShortFormatText.add_member(:rich_text, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRichText, name: "RichText"))
     ShortFormatText.type = Types::ShortFormatText
@@ -7969,7 +7969,7 @@ module Aws::QuickSight
     Slot.add_member(:slot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "SlotId"))
     Slot.add_member(:visual_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "VisualId"))
     Slot.type = Types::Slot
-    Slots.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Slot, name: "member")
+    Slots.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Slot, name: "member"))
     SmallMultiplesAxisPlacement.add_member(:outside, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OUTSIDE", traits: {"smithy.api#enumValue" => "OUTSIDE"}))
     SmallMultiplesAxisPlacement.add_member(:inside, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSIDE", traits: {"smithy.api#enumValue" => "INSIDE"}))
     SmallMultiplesAxisProperties.add_member(:scale, ::Smithy::Schema::Shapes::MemberShape.new(target: SmallMultiplesAxisScale, name: "Scale"))
@@ -7977,7 +7977,7 @@ module Aws::QuickSight
     SmallMultiplesAxisProperties.type = Types::SmallMultiplesAxisProperties
     SmallMultiplesAxisScale.add_member(:shared, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHARED", traits: {"smithy.api#enumValue" => "SHARED"}))
     SmallMultiplesAxisScale.add_member(:independent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INDEPENDENT", traits: {"smithy.api#enumValue" => "INDEPENDENT"}))
-    SmallMultiplesDimensionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member")
+    SmallMultiplesDimensionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member"))
     SmallMultiplesOptions.add_member(:max_visible_rows, ::Smithy::Schema::Shapes::MemberShape.new(target: VisiblePanelRows, name: "MaxVisibleRows"))
     SmallMultiplesOptions.add_member(:max_visible_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: VisiblePanelColumns, name: "MaxVisibleColumns"))
     SmallMultiplesOptions.add_member(:panel_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PanelConfiguration, name: "PanelConfiguration"))
@@ -7986,10 +7986,10 @@ module Aws::QuickSight
     SmallMultiplesOptions.type = Types::SmallMultiplesOptions
     SnapshotAnonymousUser.add_member(:row_level_permission_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionTagList, name: "RowLevelPermissionTags"))
     SnapshotAnonymousUser.type = Types::SnapshotAnonymousUser
-    SnapshotAnonymousUserList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotAnonymousUser, name: "member")
+    SnapshotAnonymousUserList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotAnonymousUser, name: "member"))
     SnapshotAnonymousUserRedacted.add_member(:row_level_permission_tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionTagKeyList, name: "RowLevelPermissionTagKeys"))
     SnapshotAnonymousUserRedacted.type = Types::SnapshotAnonymousUserRedacted
-    SnapshotAnonymousUserRedactedList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotAnonymousUserRedacted, name: "member")
+    SnapshotAnonymousUserRedactedList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotAnonymousUserRedacted, name: "member"))
     SnapshotConfiguration.add_member(:file_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotFileGroupList, name: "FileGroups", traits: {"smithy.api#required" => {}}))
     SnapshotConfiguration.add_member(:destination_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotDestinationConfiguration, name: "DestinationConfiguration"))
     SnapshotConfiguration.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameters, name: "Parameters"))
@@ -8004,16 +8004,16 @@ module Aws::QuickSight
     SnapshotFileFormatType.add_member(:excel, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXCEL", traits: {"smithy.api#enumValue" => "EXCEL"}))
     SnapshotFileGroup.add_member(:files, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotFileList, name: "Files"))
     SnapshotFileGroup.type = Types::SnapshotFileGroup
-    SnapshotFileGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotFileGroup, name: "member")
-    SnapshotFileList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotFile, name: "member")
+    SnapshotFileGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotFileGroup, name: "member"))
+    SnapshotFileList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotFile, name: "member"))
     SnapshotFileSheetSelection.add_member(:sheet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "SheetId", traits: {"smithy.api#required" => {}}))
     SnapshotFileSheetSelection.add_member(:selection_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotFileSheetSelectionScope, name: "SelectionScope", traits: {"smithy.api#required" => {}}))
     SnapshotFileSheetSelection.add_member(:visual_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotFileSheetSelectionVisualIdList, name: "VisualIds"))
     SnapshotFileSheetSelection.type = Types::SnapshotFileSheetSelection
-    SnapshotFileSheetSelectionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotFileSheetSelection, name: "member")
+    SnapshotFileSheetSelectionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotFileSheetSelection, name: "member"))
     SnapshotFileSheetSelectionScope.add_member(:all_visuals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL_VISUALS", traits: {"smithy.api#enumValue" => "ALL_VISUALS"}))
     SnapshotFileSheetSelectionScope.add_member(:selected_visuals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELECTED_VISUALS", traits: {"smithy.api#enumValue" => "SELECTED_VISUALS"}))
-    SnapshotFileSheetSelectionVisualIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "member")
+    SnapshotFileSheetSelectionVisualIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "member"))
     SnapshotJobErrorInfo.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorMessage"))
     SnapshotJobErrorInfo.add_member(:error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorType"))
     SnapshotJobErrorInfo.type = Types::SnapshotJobErrorInfo
@@ -8022,23 +8022,23 @@ module Aws::QuickSight
     SnapshotJobResultErrorInfo.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorMessage"))
     SnapshotJobResultErrorInfo.add_member(:error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorType"))
     SnapshotJobResultErrorInfo.type = Types::SnapshotJobResultErrorInfo
-    SnapshotJobResultErrorInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotJobResultErrorInfo, name: "member")
+    SnapshotJobResultErrorInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotJobResultErrorInfo, name: "member"))
     SnapshotJobResultFileGroup.add_member(:files, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotFileList, name: "Files"))
     SnapshotJobResultFileGroup.add_member(:s3_results, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotJobS3ResultList, name: "S3Results"))
     SnapshotJobResultFileGroup.type = Types::SnapshotJobResultFileGroup
-    SnapshotJobResultFileGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotJobResultFileGroup, name: "member")
+    SnapshotJobResultFileGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotJobResultFileGroup, name: "member"))
     SnapshotJobS3Result.add_member(:s3_destination_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotS3DestinationConfiguration, name: "S3DestinationConfiguration"))
     SnapshotJobS3Result.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveS3Uri, name: "S3Uri"))
     SnapshotJobS3Result.add_member(:error_info, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotJobResultErrorInfoList, name: "ErrorInfo"))
     SnapshotJobS3Result.type = Types::SnapshotJobS3Result
-    SnapshotJobS3ResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotJobS3Result, name: "member")
+    SnapshotJobS3ResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotJobS3Result, name: "member"))
     SnapshotJobStatus.add_member(:queued, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUEUED", traits: {"smithy.api#enumValue" => "QUEUED"}))
     SnapshotJobStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     SnapshotJobStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     SnapshotJobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     SnapshotS3DestinationConfiguration.add_member(:bucket_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketConfiguration, name: "BucketConfiguration", traits: {"smithy.api#required" => {}}))
     SnapshotS3DestinationConfiguration.type = Types::SnapshotS3DestinationConfiguration
-    SnapshotS3DestinationConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotS3DestinationConfiguration, name: "member")
+    SnapshotS3DestinationConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotS3DestinationConfiguration, name: "member"))
     SnapshotUserConfiguration.add_member(:anonymous_users, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotAnonymousUserList, name: "AnonymousUsers"))
     SnapshotUserConfiguration.type = Types::SnapshotUserConfiguration
     SnapshotUserConfigurationRedacted.add_member(:anonymous_users, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotAnonymousUserRedactedList, name: "AnonymousUsers"))
@@ -8136,7 +8136,7 @@ module Aws::QuickSight
     StaticFile.add_member(:image_static_file, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageStaticFile, name: "ImageStaticFile"))
     StaticFile.add_member(:spatial_static_file, ::Smithy::Schema::Shapes::MemberShape.new(target: SpatialStaticFile, name: "SpatialStaticFile"))
     StaticFile.type = Types::StaticFile
-    StaticFileList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StaticFile, name: "member")
+    StaticFileList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StaticFile, name: "member"))
     StaticFileS3SourceOptions.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BucketName", traits: {"smithy.api#required" => {}}))
     StaticFileS3SourceOptions.add_member(:object_key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ObjectKey", traits: {"smithy.api#required" => {}}))
     StaticFileS3SourceOptions.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Region", traits: {"smithy.api#required" => {}}))
@@ -8155,15 +8155,15 @@ module Aws::QuickSight
     StringDatasetParameter.type = Types::StringDatasetParameter
     StringDatasetParameterDefaultValues.add_member(:static_values, ::Smithy::Schema::Shapes::MemberShape.new(target: StringDatasetParameterValueList, name: "StaticValues"))
     StringDatasetParameterDefaultValues.type = Types::StringDatasetParameterDefaultValues
-    StringDatasetParameterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringDatasetParameterDefaultValue, name: "member")
-    StringDefaultValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveStringObject, name: "member")
+    StringDatasetParameterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringDatasetParameterDefaultValue, name: "member"))
+    StringDefaultValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveStringObject, name: "member"))
     StringDefaultValues.add_member(:dynamic_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamicDefaultValue, name: "DynamicValue"))
     StringDefaultValues.add_member(:static_values, ::Smithy::Schema::Shapes::MemberShape.new(target: StringDefaultValueList, name: "StaticValues"))
     StringDefaultValues.type = Types::StringDefaultValues
     StringFormatConfiguration.add_member(:null_value_format_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NullValueFormatConfiguration, name: "NullValueFormatConfiguration"))
     StringFormatConfiguration.add_member(:numeric_format_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NumericFormatConfiguration, name: "NumericFormatConfiguration"))
     StringFormatConfiguration.type = Types::StringFormatConfiguration
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     StringParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name", traits: {"smithy.api#required" => {}}))
     StringParameter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveStringList, name: "Values", traits: {"smithy.api#required" => {}}))
     StringParameter.type = Types::StringParameter
@@ -8173,14 +8173,14 @@ module Aws::QuickSight
     StringParameterDeclaration.add_member(:value_when_unset, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValueWhenUnsetConfiguration, name: "ValueWhenUnset"))
     StringParameterDeclaration.add_member(:mapped_data_set_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: MappedDataSetParameters, name: "MappedDataSetParameters"))
     StringParameterDeclaration.type = Types::StringParameterDeclaration
-    StringParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringParameter, name: "member")
+    StringParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringParameter, name: "member"))
     StringValueWhenUnsetConfiguration.add_member(:value_when_unset_option, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueWhenUnsetOption, name: "ValueWhenUnsetOption"))
     StringValueWhenUnsetConfiguration.add_member(:custom_value, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "CustomValue"))
     StringValueWhenUnsetConfiguration.type = Types::StringValueWhenUnsetConfiguration
     StyledCellType.add_member(:total, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOTAL", traits: {"smithy.api#enumValue" => "TOTAL"}))
     StyledCellType.add_member(:metric_header, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METRIC_HEADER", traits: {"smithy.api#enumValue" => "METRIC_HEADER"}))
     StyledCellType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALUE", traits: {"smithy.api#enumValue" => "VALUE"}))
-    SubnetIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
+    SubnetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
     SubtotalOptions.add_member(:totals_visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: Visibility, name: "TotalsVisibility"))
     SubtotalOptions.add_member(:custom_label, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CustomLabel"))
     SubtotalOptions.add_member(:field_level, ::Smithy::Schema::Shapes::MemberShape.new(target: PivotTableSubtotalLevel, name: "FieldLevel"))
@@ -8192,12 +8192,12 @@ module Aws::QuickSight
     SubtotalOptions.type = Types::SubtotalOptions
     SucceededTopicReviewedAnswer.add_member(:answer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnswerId, name: "AnswerId"))
     SucceededTopicReviewedAnswer.type = Types::SucceededTopicReviewedAnswer
-    SucceededTopicReviewedAnswers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SucceededTopicReviewedAnswer, name: "member")
-    SuccessfulKeyRegistrationEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulKeyRegistrationEntry, name: "member")
+    SucceededTopicReviewedAnswers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SucceededTopicReviewedAnswer, name: "member"))
+    SuccessfulKeyRegistrationEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulKeyRegistrationEntry, name: "member"))
     SuccessfulKeyRegistrationEntry.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KeyArn", traits: {"smithy.api#required" => {}}))
     SuccessfulKeyRegistrationEntry.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusCode, name: "StatusCode", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     SuccessfulKeyRegistrationEntry.type = Types::SuccessfulKeyRegistrationEntry
-    Synonyms.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "member")
+    Synonyms.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "member"))
     TableAggregatedFieldWells.add_member(:group_by, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionFieldList, name: "GroupBy"))
     TableAggregatedFieldWells.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureFieldList, name: "Values"))
     TableAggregatedFieldWells.type = Types::TableAggregatedFieldWells
@@ -8229,7 +8229,7 @@ module Aws::QuickSight
     TableConditionalFormattingOption.add_member(:cell, ::Smithy::Schema::Shapes::MemberShape.new(target: TableCellConditionalFormatting, name: "Cell"))
     TableConditionalFormattingOption.add_member(:row, ::Smithy::Schema::Shapes::MemberShape.new(target: TableRowConditionalFormatting, name: "Row"))
     TableConditionalFormattingOption.type = Types::TableConditionalFormattingOption
-    TableConditionalFormattingOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TableConditionalFormattingOption, name: "member")
+    TableConditionalFormattingOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableConditionalFormattingOption, name: "member"))
     TableConfiguration.add_member(:field_wells, ::Smithy::Schema::Shapes::MemberShape.new(target: TableFieldWells, name: "FieldWells"))
     TableConfiguration.add_member(:sort_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TableSortConfiguration, name: "SortConfiguration"))
     TableConfiguration.add_member(:table_options, ::Smithy::Schema::Shapes::MemberShape.new(target: TableOptions, name: "TableOptions"))
@@ -8259,13 +8259,13 @@ module Aws::QuickSight
     TableFieldOption.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: Visibility, name: "Visibility"))
     TableFieldOption.add_member(:url_styling, ::Smithy::Schema::Shapes::MemberShape.new(target: TableFieldURLConfiguration, name: "URLStyling"))
     TableFieldOption.type = Types::TableFieldOption
-    TableFieldOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TableFieldOption, name: "member")
+    TableFieldOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableFieldOption, name: "member"))
     TableFieldOptions.add_member(:selected_field_options, ::Smithy::Schema::Shapes::MemberShape.new(target: TableFieldOptionList, name: "SelectedFieldOptions"))
     TableFieldOptions.add_member(:order, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldOrderList, name: "Order"))
     TableFieldOptions.add_member(:pinned_field_options, ::Smithy::Schema::Shapes::MemberShape.new(target: TablePinnedFieldOptions, name: "PinnedFieldOptions"))
     TableFieldOptions.add_member(:transposed_table_options, ::Smithy::Schema::Shapes::MemberShape.new(target: TransposedTableOptionList, name: "TransposedTableOptions"))
     TableFieldOptions.type = Types::TableFieldOptions
-    TableFieldOrderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "member")
+    TableFieldOrderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "member"))
     TableFieldURLConfiguration.add_member(:link_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TableFieldLinkConfiguration, name: "LinkConfiguration"))
     TableFieldURLConfiguration.add_member(:image_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TableFieldImageConfiguration, name: "ImageConfiguration"))
     TableFieldURLConfiguration.type = Types::TableFieldURLConfiguration
@@ -8274,7 +8274,7 @@ module Aws::QuickSight
     TableFieldWells.type = Types::TableFieldWells
     TableInlineVisualization.add_member(:data_bars, ::Smithy::Schema::Shapes::MemberShape.new(target: DataBarsOptions, name: "DataBars"))
     TableInlineVisualization.type = Types::TableInlineVisualization
-    TableInlineVisualizationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TableInlineVisualization, name: "member")
+    TableInlineVisualizationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableInlineVisualization, name: "member"))
     TableOptions.add_member(:orientation, ::Smithy::Schema::Shapes::MemberShape.new(target: TableOrientation, name: "Orientation"))
     TableOptions.add_member(:header_style, ::Smithy::Schema::Shapes::MemberShape.new(target: TableCellStyle, name: "HeaderStyle"))
     TableOptions.add_member(:cell_style, ::Smithy::Schema::Shapes::MemberShape.new(target: TableCellStyle, name: "CellStyle"))
@@ -8302,13 +8302,13 @@ module Aws::QuickSight
     TableSortConfiguration.type = Types::TableSortConfiguration
     TableStyleTarget.add_member(:cell_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StyledCellType, name: "CellType", traits: {"smithy.api#required" => {}}))
     TableStyleTarget.type = Types::TableStyleTarget
-    TableStyleTargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TableStyleTarget, name: "member")
+    TableStyleTargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableStyleTarget, name: "member"))
     TableTotalsPlacement.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "START", traits: {"smithy.api#enumValue" => "START"}))
     TableTotalsPlacement.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "END", traits: {"smithy.api#enumValue" => "END"}))
     TableTotalsPlacement.add_member(:auto, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTO", traits: {"smithy.api#enumValue" => "AUTO"}))
     TableTotalsScrollStatus.add_member(:pinned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PINNED", traits: {"smithy.api#enumValue" => "PINNED"}))
     TableTotalsScrollStatus.add_member(:scrolled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCROLLED", traits: {"smithy.api#enumValue" => "SCROLLED"}))
-    TableUnaggregatedFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnaggregatedField, name: "member")
+    TableUnaggregatedFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnaggregatedField, name: "member"))
     TableUnaggregatedFieldWells.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: TableUnaggregatedFieldList, name: "Values"))
     TableUnaggregatedFieldWells.type = Types::TableUnaggregatedFieldWells
     TableVisual.add_member(:visual_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "VisualId", traits: {"smithy.api#required" => {}}))
@@ -8325,15 +8325,15 @@ module Aws::QuickSight
     TagColumnOperation.add_member(:column_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "ColumnName", traits: {"smithy.api#required" => {}}))
     TagColumnOperation.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnTagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagColumnOperation.type = Types::TagColumnOperation
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RequestId"))
     TagResourceResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusCode, name: "Status", traits: {"smithy.api#default" => 0, "smithy.api#httpResponseCode" => {}}))
     TagResourceResponse.type = Types::TagResourceResponse
-    TargetVisualList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "member")
+    TargetVisualList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "member"))
     TargetVisualOptions.add_member(:all_visuals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL_VISUALS", traits: {"smithy.api#enumValue" => "ALL_VISUALS"}))
     Template.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     Template.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateName, name: "Name"))
@@ -8346,12 +8346,12 @@ module Aws::QuickSight
     TemplateAlias.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     TemplateAlias.add_member(:template_version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionNumber, name: "TemplateVersionNumber"))
     TemplateAlias.type = Types::TemplateAlias
-    TemplateAliasList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateAlias, name: "member")
+    TemplateAliasList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateAlias, name: "member"))
     TemplateError.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateErrorType, name: "Type"))
     TemplateError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     TemplateError.add_member(:violated_entities, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityList, name: "ViolatedEntities"))
     TemplateError.type = Types::TemplateError
-    TemplateErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateError, name: "member")
+    TemplateErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateError, name: "member"))
     TemplateErrorType.add_member(:source_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOURCE_NOT_FOUND", traits: {"smithy.api#enumValue" => "SOURCE_NOT_FOUND"}))
     TemplateErrorType.add_member(:data_set_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATA_SET_NOT_FOUND", traits: {"smithy.api#enumValue" => "DATA_SET_NOT_FOUND"}))
     TemplateErrorType.add_member(:internal_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_FAILURE", traits: {"smithy.api#enumValue" => "INTERNAL_FAILURE"}))
@@ -8371,7 +8371,7 @@ module Aws::QuickSight
     TemplateSummary.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTime"))
     TemplateSummary.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedTime"))
     TemplateSummary.type = Types::TemplateSummary
-    TemplateSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateSummary, name: "member")
+    TemplateSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateSummary, name: "member"))
     TemplateVersion.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTime"))
     TemplateVersion.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateErrorList, name: "Errors"))
     TemplateVersion.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionNumber, name: "VersionNumber"))
@@ -8399,7 +8399,7 @@ module Aws::QuickSight
     TemplateVersionSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatus, name: "Status"))
     TemplateVersionSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionDescription, name: "Description"))
     TemplateVersionSummary.type = Types::TemplateVersionSummary
-    TemplateVersionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateVersionSummary, name: "member")
+    TemplateVersionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateVersionSummary, name: "member"))
     TeradataParameters.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: Host, name: "Host", traits: {"smithy.api#required" => {}}))
     TeradataParameters.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "Port", traits: {"smithy.api#required" => {}}))
     TeradataParameters.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: Database, name: "Database", traits: {"smithy.api#required" => {}}))
@@ -8438,7 +8438,7 @@ module Aws::QuickSight
     ThemeAlias.add_member(:alias_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, name: "AliasName"))
     ThemeAlias.add_member(:theme_version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionNumber, name: "ThemeVersionNumber"))
     ThemeAlias.type = Types::ThemeAlias
-    ThemeAliasList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThemeAlias, name: "member")
+    ThemeAliasList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThemeAlias, name: "member"))
     ThemeConfiguration.add_member(:data_color_palette, ::Smithy::Schema::Shapes::MemberShape.new(target: DataColorPalette, name: "DataColorPalette"))
     ThemeConfiguration.add_member(:ui_color_palette, ::Smithy::Schema::Shapes::MemberShape.new(target: UIColorPalette, name: "UIColorPalette"))
     ThemeConfiguration.add_member(:sheet, ::Smithy::Schema::Shapes::MemberShape.new(target: SheetStyle, name: "Sheet"))
@@ -8447,7 +8447,7 @@ module Aws::QuickSight
     ThemeError.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ThemeErrorType, name: "Type"))
     ThemeError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     ThemeError.type = Types::ThemeError
-    ThemeErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThemeError, name: "member")
+    ThemeErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThemeError, name: "member"))
     ThemeErrorType.add_member(:internal_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_FAILURE", traits: {"smithy.api#enumValue" => "INTERNAL_FAILURE"}))
     ThemeSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     ThemeSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ThemeName, name: "Name"))
@@ -8456,7 +8456,7 @@ module Aws::QuickSight
     ThemeSummary.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTime"))
     ThemeSummary.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedTime"))
     ThemeSummary.type = Types::ThemeSummary
-    ThemeSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThemeSummary, name: "member")
+    ThemeSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThemeSummary, name: "member"))
     ThemeType.add_member(:quicksight, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUICKSIGHT", traits: {"smithy.api#enumValue" => "QUICKSIGHT"}))
     ThemeType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
     ThemeType.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
@@ -8475,7 +8475,7 @@ module Aws::QuickSight
     ThemeVersionSummary.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTime"))
     ThemeVersionSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatus, name: "Status"))
     ThemeVersionSummary.type = Types::ThemeVersionSummary
-    ThemeVersionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThemeVersionSummary, name: "member")
+    ThemeVersionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThemeVersionSummary, name: "member"))
     ThousandSeparatorOptions.add_member(:symbol, ::Smithy::Schema::Shapes::MemberShape.new(target: NumericSeparatorSymbol, name: "Symbol"))
     ThousandSeparatorOptions.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: Visibility, name: "Visibility"))
     ThousandSeparatorOptions.add_member(:grouping_style, ::Smithy::Schema::Shapes::MemberShape.new(target: DigitGroupingStyle, name: "GroupingStyle"))
@@ -8537,7 +8537,7 @@ module Aws::QuickSight
     TooltipItem.add_member(:field_tooltip_item, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldTooltipItem, name: "FieldTooltipItem"))
     TooltipItem.add_member(:column_tooltip_item, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnTooltipItem, name: "ColumnTooltipItem"))
     TooltipItem.type = Types::TooltipItem
-    TooltipItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TooltipItem, name: "member")
+    TooltipItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TooltipItem, name: "member"))
     TooltipOptions.add_member(:tooltip_visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: Visibility, name: "TooltipVisibility"))
     TooltipOptions.add_member(:selected_tooltip_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectedTooltipType, name: "SelectedTooltipType"))
     TooltipOptions.add_member(:field_based_tooltip, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldBasedTooltip, name: "FieldBasedTooltip"))
@@ -8593,7 +8593,7 @@ module Aws::QuickSight
     TopicCalculatedField.add_member(:cell_value_synonyms, ::Smithy::Schema::Shapes::MemberShape.new(target: CellValueSynonyms, name: "CellValueSynonyms"))
     TopicCalculatedField.add_member(:non_additive, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "NonAdditive"))
     TopicCalculatedField.type = Types::TopicCalculatedField
-    TopicCalculatedFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TopicCalculatedField, name: "member")
+    TopicCalculatedFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicCalculatedField, name: "member"))
     TopicCategoryFilter.add_member(:category_filter_function, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryFilterFunction, name: "CategoryFilterFunction"))
     TopicCategoryFilter.add_member(:category_filter_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryFilterType, name: "CategoryFilterType"))
     TopicCategoryFilter.add_member(:constant, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicCategoryFilterConstant, name: "Constant"))
@@ -8621,7 +8621,7 @@ module Aws::QuickSight
     TopicColumn.add_member(:cell_value_synonyms, ::Smithy::Schema::Shapes::MemberShape.new(target: CellValueSynonyms, name: "CellValueSynonyms"))
     TopicColumn.add_member(:non_additive, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "NonAdditive"))
     TopicColumn.type = Types::TopicColumn
-    TopicColumns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TopicColumn, name: "member")
+    TopicColumns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicColumn, name: "member"))
     TopicConfigOptions.add_member(:q_business_insights_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "QBusinessInsightsEnabled"))
     TopicConfigOptions.type = Types::TopicConfigOptions
     TopicConstantValue.add_member(:constant_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstantType, name: "ConstantType"))
@@ -8661,7 +8661,7 @@ module Aws::QuickSight
     TopicFilterAttribute.add_member(:topic_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOPIC_NAME", traits: {"smithy.api#enumValue" => "TOPIC_NAME"}))
     TopicFilterOperator.add_member(:string_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "StringEquals", traits: {"smithy.api#enumValue" => "StringEquals"}))
     TopicFilterOperator.add_member(:string_like, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "StringLike", traits: {"smithy.api#enumValue" => "StringLike"}))
-    TopicFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TopicFilter, name: "member")
+    TopicFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicFilter, name: "member"))
     TopicIR.add_member(:metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicIRMetricList, name: "Metrics"))
     TopicIR.add_member(:group_by_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicIRGroupByList, name: "GroupByList"))
     TopicIR.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicIRFilterList, name: "Filters"))
@@ -8678,7 +8678,7 @@ module Aws::QuickSight
     TopicIRContributionAnalysis.add_member(:direction, ::Smithy::Schema::Shapes::MemberShape.new(target: ContributionAnalysisDirection, name: "Direction"))
     TopicIRContributionAnalysis.add_member(:sort_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContributionAnalysisSortType, name: "SortType"))
     TopicIRContributionAnalysis.type = Types::TopicIRContributionAnalysis
-    TopicIRFilterEntry.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TopicIRFilterOption, name: "member")
+    TopicIRFilterEntry.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicIRFilterOption, name: "member"))
     TopicIRFilterFunction.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINS", traits: {"smithy.api#enumValue" => "CONTAINS"}))
     TopicIRFilterFunction.add_member(:exact, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXACT", traits: {"smithy.api#enumValue" => "EXACT"}))
     TopicIRFilterFunction.add_member(:starts_with, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTS_WITH", traits: {"smithy.api#enumValue" => "STARTS_WITH"}))
@@ -8689,7 +8689,7 @@ module Aws::QuickSight
     TopicIRFilterFunction.add_member(:last, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAST", traits: {"smithy.api#enumValue" => "LAST"}))
     TopicIRFilterFunction.add_member(:next, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEXT", traits: {"smithy.api#enumValue" => "NEXT"}))
     TopicIRFilterFunction.add_member(:now, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOW", traits: {"smithy.api#enumValue" => "NOW"}))
-    TopicIRFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TopicIRFilterEntry, name: "member")
+    TopicIRFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicIRFilterEntry, name: "member"))
     TopicIRFilterOption.add_member(:filter_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicIRFilterType, name: "FilterType"))
     TopicIRFilterOption.add_member(:filter_class, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterClass, name: "FilterClass"))
     TopicIRFilterOption.add_member(:operand_field, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "OperandField"))
@@ -8725,7 +8725,7 @@ module Aws::QuickSight
     TopicIRGroupBy.add_member(:display_format_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayFormatOptions, name: "DisplayFormatOptions"))
     TopicIRGroupBy.add_member(:named_entity, ::Smithy::Schema::Shapes::MemberShape.new(target: NamedEntityRef, name: "NamedEntity"))
     TopicIRGroupBy.type = Types::TopicIRGroupBy
-    TopicIRGroupByList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TopicIRGroupBy, name: "member")
+    TopicIRGroupByList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicIRGroupBy, name: "member"))
     TopicIRMetric.add_member(:metric_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "MetricId"))
     TopicIRMetric.add_member(:function, ::Smithy::Schema::Shapes::MemberShape.new(target: AggFunction, name: "Function"))
     TopicIRMetric.add_member(:operands, ::Smithy::Schema::Shapes::MemberShape.new(target: OperandList, name: "Operands"))
@@ -8736,8 +8736,8 @@ module Aws::QuickSight
     TopicIRMetric.add_member(:display_format_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayFormatOptions, name: "DisplayFormatOptions"))
     TopicIRMetric.add_member(:named_entity, ::Smithy::Schema::Shapes::MemberShape.new(target: NamedEntityRef, name: "NamedEntity"))
     TopicIRMetric.type = Types::TopicIRMetric
-    TopicIRMetricList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TopicIRMetric, name: "member")
-    TopicNamedEntities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TopicNamedEntity, name: "member")
+    TopicIRMetricList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicIRMetric, name: "member"))
+    TopicNamedEntities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicNamedEntity, name: "member"))
     TopicNamedEntity.add_member(:entity_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "EntityName", traits: {"smithy.api#required" => {}}))
     TopicNamedEntity.add_member(:entity_description, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "EntityDescription"))
     TopicNamedEntity.add_member(:entity_synonyms, ::Smithy::Schema::Shapes::MemberShape.new(target: Synonyms, name: "EntitySynonyms"))
@@ -8771,7 +8771,7 @@ module Aws::QuickSight
     TopicRefreshSchedule.add_member(:repeat_at, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "RepeatAt"))
     TopicRefreshSchedule.add_member(:topic_schedule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicScheduleType, name: "TopicScheduleType"))
     TopicRefreshSchedule.type = Types::TopicRefreshSchedule
-    TopicRefreshScheduleSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TopicRefreshScheduleSummary, name: "member")
+    TopicRefreshScheduleSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicRefreshScheduleSummary, name: "member"))
     TopicRefreshScheduleSummary.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "DatasetId"))
     TopicRefreshScheduleSummary.add_member(:dataset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "DatasetArn"))
     TopicRefreshScheduleSummary.add_member(:dataset_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "DatasetName"))
@@ -8799,7 +8799,7 @@ module Aws::QuickSight
     TopicReviewedAnswer.add_member(:primary_visual, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicVisual, name: "PrimaryVisual"))
     TopicReviewedAnswer.add_member(:template, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicTemplate, name: "Template"))
     TopicReviewedAnswer.type = Types::TopicReviewedAnswer
-    TopicReviewedAnswers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TopicReviewedAnswer, name: "member")
+    TopicReviewedAnswers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicReviewedAnswer, name: "member"))
     TopicScheduleType.add_member(:hourly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOURLY", traits: {"smithy.api#enumValue" => "HOURLY"}))
     TopicScheduleType.add_member(:daily, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DAILY", traits: {"smithy.api#enumValue" => "DAILY"}))
     TopicScheduleType.add_member(:weekly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEEKLY", traits: {"smithy.api#enumValue" => "WEEKLY"}))
@@ -8808,7 +8808,7 @@ module Aws::QuickSight
     TopicSearchFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicFilterAttribute, name: "Name", traits: {"smithy.api#required" => {}}))
     TopicSearchFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value", traits: {"smithy.api#required" => {}}))
     TopicSearchFilter.type = Types::TopicSearchFilter
-    TopicSearchFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TopicSearchFilter, name: "member")
+    TopicSearchFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicSearchFilter, name: "member"))
     TopicSingularFilterConstant.add_member(:constant_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstantType, name: "ConstantType"))
     TopicSingularFilterConstant.add_member(:singular_constant, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "SingularConstant"))
     TopicSingularFilterConstant.type = Types::TopicSingularFilterConstant
@@ -8817,7 +8817,7 @@ module Aws::QuickSight
     TopicSortClause.type = Types::TopicSortClause
     TopicSortDirection.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASCENDING", traits: {"smithy.api#enumValue" => "ASCENDING"}))
     TopicSortDirection.add_member(:descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESCENDING", traits: {"smithy.api#enumValue" => "DESCENDING"}))
-    TopicSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TopicSummary, name: "member")
+    TopicSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicSummary, name: "member"))
     TopicSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     TopicSummary.add_member(:topic_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicId, name: "TopicId"))
     TopicSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
@@ -8841,7 +8841,7 @@ module Aws::QuickSight
     TopicVisual.add_member(:ir, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicIR, name: "Ir"))
     TopicVisual.add_member(:supporting_visuals, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicVisuals, name: "SupportingVisuals"))
     TopicVisual.type = Types::TopicVisual
-    TopicVisuals.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TopicVisual, name: "member")
+    TopicVisuals.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicVisual, name: "member"))
     TotalAggregationComputation.add_member(:computation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "ComputationId", traits: {"smithy.api#required" => {}}))
     TotalAggregationComputation.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     TotalAggregationComputation.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "Value"))
@@ -8851,7 +8851,7 @@ module Aws::QuickSight
     TotalAggregationOption.add_member(:field_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldId, name: "FieldId", traits: {"smithy.api#required" => {}}))
     TotalAggregationOption.add_member(:total_aggregation_function, ::Smithy::Schema::Shapes::MemberShape.new(target: TotalAggregationFunction, name: "TotalAggregationFunction", traits: {"smithy.api#required" => {}}))
     TotalAggregationOption.type = Types::TotalAggregationOption
-    TotalAggregationOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TotalAggregationOption, name: "member")
+    TotalAggregationOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TotalAggregationOption, name: "member"))
     TotalOptions.add_member(:totals_visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: Visibility, name: "TotalsVisibility"))
     TotalOptions.add_member(:placement, ::Smithy::Schema::Shapes::MemberShape.new(target: TableTotalsPlacement, name: "Placement"))
     TotalOptions.add_member(:scroll_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TableTotalsScrollStatus, name: "ScrollStatus"))
@@ -8869,14 +8869,14 @@ module Aws::QuickSight
     TransformOperation.add_member(:override_dataset_parameter_operation, Types::TransformOperation::OverrideDatasetParameterOperation, ::Smithy::Schema::Shapes::MemberShape.new(target: OverrideDatasetParameterOperation, name: "OverrideDatasetParameterOperation"))
     TransformOperation.add_member(:unknown, Types::TransformOperation::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     TransformOperation.type = Types::TransformOperation
-    TransformOperationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TransformOperation, name: "member")
+    TransformOperationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TransformOperation, name: "member"))
     TransposedColumnType.add_member(:row_header_column, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROW_HEADER_COLUMN", traits: {"smithy.api#enumValue" => "ROW_HEADER_COLUMN"}))
     TransposedColumnType.add_member(:value_column, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALUE_COLUMN", traits: {"smithy.api#enumValue" => "VALUE_COLUMN"}))
     TransposedTableOption.add_member(:column_index, ::Smithy::Schema::Shapes::MemberShape.new(target: TransposedColumnIndex, name: "ColumnIndex"))
     TransposedTableOption.add_member(:column_width, ::Smithy::Schema::Shapes::MemberShape.new(target: PixelLength, name: "ColumnWidth"))
     TransposedTableOption.add_member(:column_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TransposedColumnType, name: "ColumnType", traits: {"smithy.api#required" => {}}))
     TransposedTableOption.type = Types::TransposedTableOption
-    TransposedTableOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TransposedTableOption, name: "member")
+    TransposedTableOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TransposedTableOption, name: "member"))
     TreeMapAggregatedFieldWells.add_member(:groups, ::Smithy::Schema::Shapes::MemberShape.new(target: TreeMapDimensionFieldList, name: "Groups"))
     TreeMapAggregatedFieldWells.add_member(:sizes, ::Smithy::Schema::Shapes::MemberShape.new(target: TreeMapMeasureFieldList, name: "Sizes"))
     TreeMapAggregatedFieldWells.add_member(:colors, ::Smithy::Schema::Shapes::MemberShape.new(target: TreeMapMeasureFieldList, name: "Colors"))
@@ -8892,10 +8892,10 @@ module Aws::QuickSight
     TreeMapConfiguration.add_member(:tooltip, ::Smithy::Schema::Shapes::MemberShape.new(target: TooltipOptions, name: "Tooltip"))
     TreeMapConfiguration.add_member(:interactions, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualInteractionOptions, name: "Interactions"))
     TreeMapConfiguration.type = Types::TreeMapConfiguration
-    TreeMapDimensionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member")
+    TreeMapDimensionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member"))
     TreeMapFieldWells.add_member(:tree_map_aggregated_field_wells, ::Smithy::Schema::Shapes::MemberShape.new(target: TreeMapAggregatedFieldWells, name: "TreeMapAggregatedFieldWells"))
     TreeMapFieldWells.type = Types::TreeMapFieldWells
-    TreeMapMeasureFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member")
+    TreeMapMeasureFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member"))
     TreeMapSortConfiguration.add_member(:tree_map_sort, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldSortOptionsList, name: "TreeMapSort"))
     TreeMapSortConfiguration.add_member(:tree_map_group_items_limit_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemsLimitConfiguration, name: "TreeMapGroupItemsLimitConfiguration"))
     TreeMapSortConfiguration.type = Types::TreeMapSortConfiguration
@@ -8916,8 +8916,8 @@ module Aws::QuickSight
     TwitterParameters.add_member(:query, ::Smithy::Schema::Shapes::MemberShape.new(target: Query, name: "Query", traits: {"smithy.api#required" => {}}))
     TwitterParameters.add_member(:max_rows, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "MaxRows", traits: {"smithy.api#required" => {}}))
     TwitterParameters.type = Types::TwitterParameters
-    TypeParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "key")
-    TypeParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "value")
+    TypeParameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "key"))
+    TypeParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "value"))
     Typography.add_member(:font_families, ::Smithy::Schema::Shapes::MemberShape.new(target: FontList, name: "FontFamilies"))
     Typography.type = Types::Typography
     UIColorPalette.add_member(:primary_foreground, ::Smithy::Schema::Shapes::MemberShape.new(target: HexColor, name: "PrimaryForeground"))
@@ -8944,13 +8944,13 @@ module Aws::QuickSight
     UnaggregatedField.add_member(:column, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnIdentifier, name: "Column", traits: {"smithy.api#required" => {}}))
     UnaggregatedField.add_member(:format_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatConfiguration, name: "FormatConfiguration"))
     UnaggregatedField.type = Types::UnaggregatedField
-    UnaggregatedFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnaggregatedField, name: "member")
+    UnaggregatedFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnaggregatedField, name: "member"))
     UndefinedSpecifiedValueType.add_member(:least, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LEAST", traits: {"smithy.api#enumValue" => "LEAST"}))
     UndefinedSpecifiedValueType.add_member(:most, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MOST", traits: {"smithy.api#enumValue" => "MOST"}))
     UniqueKey.add_member(:column_names, ::Smithy::Schema::Shapes::MemberShape.new(target: UniqueKeyColumnNameList, name: "ColumnNames", traits: {"smithy.api#required" => {}}))
     UniqueKey.type = Types::UniqueKey
-    UniqueKeyColumnNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "member")
-    UniqueKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UniqueKey, name: "member")
+    UniqueKeyColumnNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "member"))
+    UniqueKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UniqueKey, name: "member"))
     UniqueValuesComputation.add_member(:computation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShortRestrictiveResourceId, name: "ComputationId", traits: {"smithy.api#required" => {}}))
     UniqueValuesComputation.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     UniqueValuesComputation.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "Category"))
@@ -9244,7 +9244,7 @@ module Aws::QuickSight
     UpdateKeyRegistrationResponse.add_member(:successful_key_registration, ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulKeyRegistrationEntries, name: "SuccessfulKeyRegistration"))
     UpdateKeyRegistrationResponse.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RequestId"))
     UpdateKeyRegistrationResponse.type = Types::UpdateKeyRegistrationResponse
-    UpdateLinkPermissionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePermission, name: "member")
+    UpdateLinkPermissionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePermission, name: "member"))
     UpdatePublicSharingSettingsRequest.add_member(:aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "AwsAccountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdatePublicSharingSettingsRequest.add_member(:public_sharing_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "PublicSharingEnabled", traits: {"smithy.api#default" => false}))
     UpdatePublicSharingSettingsRequest.type = Types::UpdatePublicSharingSettingsRequest
@@ -9274,7 +9274,7 @@ module Aws::QuickSight
     UpdateRefreshScheduleResponse.add_member(:schedule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ScheduleId"))
     UpdateRefreshScheduleResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     UpdateRefreshScheduleResponse.type = Types::UpdateRefreshScheduleResponse
-    UpdateResourcePermissionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePermission, name: "member")
+    UpdateResourcePermissionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePermission, name: "member"))
     UpdateRoleCustomPermissionRequest.add_member(:custom_permissions_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleName, name: "CustomPermissionsName", traits: {"smithy.api#required" => {}}))
     UpdateRoleCustomPermissionRequest.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "Role", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateRoleCustomPermissionRequest.add_member(:aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "AwsAccountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -9447,7 +9447,7 @@ module Aws::QuickSight
     User.add_member(:external_login_federation_provider_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ExternalLoginFederationProviderUrl"))
     User.add_member(:external_login_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ExternalLoginId"))
     User.type = Types::User
-    UserList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member")
+    UserList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member"))
     UserRole.add_member(:admin, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADMIN", traits: {"smithy.api#enumValue" => "ADMIN"}))
     UserRole.add_member(:author, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTHOR", traits: {"smithy.api#enumValue" => "AUTHOR"}))
     UserRole.add_member(:reader, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READER", traits: {"smithy.api#enumValue" => "READER"}))
@@ -9494,7 +9494,7 @@ module Aws::QuickSight
     VPCConnectionSummary.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTime"))
     VPCConnectionSummary.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedTime"))
     VPCConnectionSummary.type = Types::VPCConnectionSummary
-    VPCConnectionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VPCConnectionSummary, name: "member")
+    VPCConnectionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VPCConnectionSummary, name: "member"))
     ValidationStrategy.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationStrategyMode, name: "Mode", traits: {"smithy.api#required" => {}}))
     ValidationStrategy.type = Types::ValidationStrategy
     ValidationStrategyMode.add_member(:strict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRICT", traits: {"smithy.api#enumValue" => "STRICT"}))
@@ -9545,13 +9545,13 @@ module Aws::QuickSight
     VisualCustomAction.type = Types::VisualCustomAction
     VisualCustomActionDefaults.add_member(:highlight_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualHighlightOperation, name: "highlightOperation"))
     VisualCustomActionDefaults.type = Types::VisualCustomActionDefaults
-    VisualCustomActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VisualCustomAction, name: "member")
+    VisualCustomActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualCustomAction, name: "member"))
     VisualCustomActionOperation.add_member(:filter_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionFilterOperation, name: "FilterOperation"))
     VisualCustomActionOperation.add_member(:navigation_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionNavigationOperation, name: "NavigationOperation"))
     VisualCustomActionOperation.add_member(:url_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionURLOperation, name: "URLOperation"))
     VisualCustomActionOperation.add_member(:set_parameters_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionSetParametersOperation, name: "SetParametersOperation"))
     VisualCustomActionOperation.type = Types::VisualCustomActionOperation
-    VisualCustomActionOperationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VisualCustomActionOperation, name: "member")
+    VisualCustomActionOperationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualCustomActionOperation, name: "member"))
     VisualCustomActionTrigger.add_member(:data_point_click, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATA_POINT_CLICK", traits: {"smithy.api#enumValue" => "DATA_POINT_CLICK"}))
     VisualCustomActionTrigger.add_member(:data_point_menu, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATA_POINT_MENU", traits: {"smithy.api#enumValue" => "DATA_POINT_MENU"}))
     VisualHighlightOperation.add_member(:trigger, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualHighlightTrigger, name: "Trigger", traits: {"smithy.api#required" => {}}))
@@ -9562,7 +9562,7 @@ module Aws::QuickSight
     VisualInteractionOptions.add_member(:visual_menu_option, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualMenuOption, name: "VisualMenuOption"))
     VisualInteractionOptions.add_member(:context_menu_option, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextMenuOption, name: "ContextMenuOption"))
     VisualInteractionOptions.type = Types::VisualInteractionOptions
-    VisualList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Visual, name: "member")
+    VisualList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Visual, name: "member"))
     VisualMenuOption.add_member(:availability_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardBehavior, name: "AvailabilityStatus"))
     VisualMenuOption.type = Types::VisualMenuOption
     VisualOptions.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitedString, name: "type"))
@@ -9583,10 +9583,10 @@ module Aws::QuickSight
     VisualTitleLabelOptions.type = Types::VisualTitleLabelOptions
     VpcConnectionProperties.add_member(:vpc_connection_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "VpcConnectionArn", traits: {"smithy.api#required" => {}}))
     VpcConnectionProperties.type = Types::VpcConnectionProperties
-    VpcEndpointIdRestrictionRuleMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointId, name: "key")
-    VpcEndpointIdRestrictionRuleMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointIdRestrictionRuleDescription, name: "value")
-    VpcIdRestrictionRuleMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "key")
-    VpcIdRestrictionRuleMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcIdRestrictionRuleDescription, name: "value")
+    VpcEndpointIdRestrictionRuleMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointId, name: "key"))
+    VpcEndpointIdRestrictionRuleMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointIdRestrictionRuleDescription, name: "value"))
+    VpcIdRestrictionRuleMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "key"))
+    VpcIdRestrictionRuleMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcIdRestrictionRuleDescription, name: "value"))
     WaterfallChartAggregatedFieldWells.add_member(:categories, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionFieldList, name: "Categories"))
     WaterfallChartAggregatedFieldWells.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureFieldList, name: "Values"))
     WaterfallChartAggregatedFieldWells.add_member(:breakdowns, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionFieldList, name: "Breakdowns"))
@@ -9645,10 +9645,10 @@ module Aws::QuickSight
     WordCloudChartConfiguration.type = Types::WordCloudChartConfiguration
     WordCloudCloudLayout.add_member(:fluid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLUID", traits: {"smithy.api#enumValue" => "FLUID"}))
     WordCloudCloudLayout.add_member(:normal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NORMAL", traits: {"smithy.api#enumValue" => "NORMAL"}))
-    WordCloudDimensionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member")
+    WordCloudDimensionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "member"))
     WordCloudFieldWells.add_member(:word_cloud_aggregated_field_wells, ::Smithy::Schema::Shapes::MemberShape.new(target: WordCloudAggregatedFieldWells, name: "WordCloudAggregatedFieldWells"))
     WordCloudFieldWells.type = Types::WordCloudFieldWells
-    WordCloudMeasureFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member")
+    WordCloudMeasureFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureField, name: "member"))
     WordCloudOptions.add_member(:word_orientation, ::Smithy::Schema::Shapes::MemberShape.new(target: WordCloudWordOrientation, name: "WordOrientation"))
     WordCloudOptions.add_member(:word_scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: WordCloudWordScaling, name: "WordScaling"))
     WordCloudOptions.add_member(:cloud_layout, ::Smithy::Schema::Shapes::MemberShape.new(target: WordCloudCloudLayout, name: "CloudLayout"))

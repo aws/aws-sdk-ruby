@@ -89,8 +89,8 @@ module Aws::KeyspacesStreams
     KeyspacesCell.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCellValue, name: "value"))
     KeyspacesCell.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesMetadata, name: "metadata"))
     KeyspacesCell.type = Types::KeyspacesCell
-    KeyspacesCellList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCell, name: "member")
-    KeyspacesCellMap.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCellMapDefinition, name: "member")
+    KeyspacesCellList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCell, name: "member"))
+    KeyspacesCellMap.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCellMapDefinition, name: "member"))
     KeyspacesCellMapDefinition.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCellValue, name: "key"))
     KeyspacesCellMapDefinition.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCellValue, name: "value"))
     KeyspacesCellMapDefinition.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesMetadata, name: "metadata"))
@@ -122,10 +122,10 @@ module Aws::KeyspacesStreams
     KeyspacesCellValue.add_member(:udt_t, Types::KeyspacesCellValue::UdtT, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesUdtMap, name: "udtT"))
     KeyspacesCellValue.add_member(:unknown, Types::KeyspacesCellValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     KeyspacesCellValue.type = Types::KeyspacesCellValue
-    KeyspacesCells.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    KeyspacesCells.value = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCell, name: "value")
-    KeyspacesKeysMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    KeyspacesKeysMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCellValue, name: "value")
+    KeyspacesCells.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    KeyspacesCells.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCell, name: "value"))
+    KeyspacesKeysMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    KeyspacesKeysMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCellValue, name: "value"))
     KeyspacesMetadata.add_member(:expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "expirationTime"))
     KeyspacesMetadata.add_member(:write_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "writeTime"))
     KeyspacesMetadata.type = Types::KeyspacesMetadata
@@ -133,8 +133,8 @@ module Aws::KeyspacesStreams
     KeyspacesRow.add_member(:static_cells, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCells, name: "staticCells"))
     KeyspacesRow.add_member(:row_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesMetadata, name: "rowMetadata"))
     KeyspacesRow.type = Types::KeyspacesRow
-    KeyspacesUdtMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    KeyspacesUdtMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCell, name: "value")
+    KeyspacesUdtMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    KeyspacesUdtMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCell, name: "value"))
     ListStreamsInput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, name: "keyspaceName"))
     ListStreamsInput.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, name: "tableName"))
     ListStreamsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
@@ -155,7 +155,7 @@ module Aws::KeyspacesStreams
     Record.add_member(:old_image, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesRow, name: "oldImage"))
     Record.add_member(:sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumber, name: "sequenceNumber"))
     Record.type = Types::Record
-    RecordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Record, name: "member")
+    RecordList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Record, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     SequenceNumberRange.add_member(:starting_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumber, name: "startingSequenceNumber"))
@@ -165,12 +165,12 @@ module Aws::KeyspacesStreams
     Shard.add_member(:sequence_number_range, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumberRange, name: "sequenceNumberRange"))
     Shard.add_member(:parent_shard_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardIdList, name: "parentShardIds"))
     Shard.type = Types::Shard
-    ShardDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Shard, name: "member")
+    ShardDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Shard, name: "member"))
     ShardFilter.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardFilterType, name: "type"))
     ShardFilter.add_member(:shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, name: "shardId"))
     ShardFilter.type = Types::ShardFilter
     ShardFilterType.add_member(:child_shards, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CHILD_SHARDS", traits: {"smithy.api#enumValue" => "CHILD_SHARDS"}))
-    ShardIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, name: "member")
+    ShardIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, name: "member"))
     ShardIteratorType.add_member(:trim_horizon, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRIM_HORIZON", traits: {"smithy.api#enumValue" => "TRIM_HORIZON"}))
     ShardIteratorType.add_member(:latest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LATEST", traits: {"smithy.api#enumValue" => "LATEST"}))
     ShardIteratorType.add_member(:at_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AT_SEQUENCE_NUMBER", traits: {"smithy.api#enumValue" => "AT_SEQUENCE_NUMBER"}))
@@ -180,7 +180,7 @@ module Aws::KeyspacesStreams
     Stream.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, name: "tableName", traits: {"smithy.api#required" => {}}))
     Stream.add_member(:stream_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "streamLabel", traits: {"smithy.api#required" => {}}))
     Stream.type = Types::Stream
-    StreamList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Stream, name: "member")
+    StreamList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Stream, name: "member"))
     StreamStatus.add_member(:enabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLING", traits: {"smithy.api#enumValue" => "ENABLING"}))
     StreamStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     StreamStatus.add_member(:disabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLING", traits: {"smithy.api#enumValue" => "DISABLING"}))

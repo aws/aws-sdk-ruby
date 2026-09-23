@@ -211,7 +211,7 @@ module Aws::GroundStation
     NoradSatelliteID = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.groundstation#noradSatelliteID", name: "NoradSatelliteID", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 99999}})
     SatelliteArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.groundstation#satelliteArn", name: "SatelliteArn", traits: {"aws.api#arnReference" => {"type" => "AWS::GroundStation::Satellite", "service" => "com.amazon.awsgsaascontrolplanelambda.r20190311#GroundStation", "resource" => "com.amazon.awsgsaascontrolplanelambda.r20190311#Satellite"}, "smithy.api#length" => {"min" => 82, "max" => 132}, "smithy.api#pattern" => "^arn:aws:groundstation:([-a-z0-9]{1,50})?:[0-9]{12}:satellite/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"})
 
-    AgentCpuCoresList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "member")
+    AgentCpuCoresList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "member"))
     AgentDetails.add_member(:agent_version, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionString, name: "agentVersion", traits: {"smithy.api#required" => {}}))
     AgentDetails.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "instanceId", traits: {"smithy.api#required" => {}}))
     AgentDetails.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceType, name: "instanceType", traits: {"smithy.api#required" => {}}))
@@ -255,7 +255,7 @@ module Aws::GroundStation
     CancelContactInput.type = Types::CancelContactInput
     CancelContactOutput.add_member(:contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "contactId"))
     CancelContactOutput.type = Types::CancelContactOutput
-    CapabilityArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityArn, name: "member")
+    CapabilityArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityArn, name: "member"))
     CapabilityHealth.add_member(:healthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HEALTHY", traits: {"smithy.api#enumValue" => "HEALTHY"}))
     CapabilityHealth.add_member(:unhealthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNHEALTHY", traits: {"smithy.api#enumValue" => "UNHEALTHY"}))
     CapabilityHealthReason.add_member(:no_registered_agent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_REGISTERED_AGENT", traits: {"smithy.api#enumValue" => "NO_REGISTERED_AGENT"}))
@@ -265,7 +265,7 @@ module Aws::GroundStation
     CapabilityHealthReason.add_member(:initializing_dataplane, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INITIALIZING_DATAPLANE", traits: {"smithy.api#enumValue" => "INITIALIZING_DATAPLANE"}))
     CapabilityHealthReason.add_member(:dataplane_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATAPLANE_FAILURE", traits: {"smithy.api#enumValue" => "DATAPLANE_FAILURE"}))
     CapabilityHealthReason.add_member(:healthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HEALTHY", traits: {"smithy.api#enumValue" => "HEALTHY"}))
-    CapabilityHealthReasonList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityHealthReason, name: "member")
+    CapabilityHealthReasonList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityHealthReason, name: "member"))
     ComponentStatusData.add_member(:component_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentTypeString, name: "componentType", traits: {"smithy.api#required" => {}}))
     ComponentStatusData.add_member(:capability_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityArn, name: "capabilityArn", traits: {"smithy.api#required" => {}}))
     ComponentStatusData.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatus, name: "status", traits: {"smithy.api#required" => {}}))
@@ -274,11 +274,11 @@ module Aws::GroundStation
     ComponentStatusData.add_member(:packets_dropped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "packetsDropped"))
     ComponentStatusData.add_member(:dataflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "dataflowId", traits: {"smithy.api#required" => {}}))
     ComponentStatusData.type = Types::ComponentStatusData
-    ComponentStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentStatusData, name: "member")
+    ComponentStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentStatusData, name: "member"))
     ComponentVersion.add_member(:component_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentTypeString, name: "componentType", traits: {"smithy.api#required" => {}}))
     ComponentVersion.add_member(:versions, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionStringList, name: "versions", traits: {"smithy.api#required" => {}}))
     ComponentVersion.type = Types::ComponentVersion
-    ComponentVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentVersion, name: "member")
+    ComponentVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentVersion, name: "member"))
     ConfigCapabilityType.add_member(:antenna_downlink, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANTENNA_DOWNLINK", traits: {"smithy.api#enumValue" => "antenna-downlink"}))
     ConfigCapabilityType.add_member(:antenna_downlink_demod_decode, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANTENNA_DOWNLINK_DEMOD_DECODE", traits: {"smithy.api#enumValue" => "antenna-downlink-demod-decode"}))
     ConfigCapabilityType.add_member(:tracking, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRACKING", traits: {"smithy.api#enumValue" => "tracking"}))
@@ -291,7 +291,7 @@ module Aws::GroundStation
     ConfigDetails.add_member(:s3_recording_details, Types::ConfigDetails::S3RecordingDetails, ::Smithy::Schema::Shapes::MemberShape.new(target: S3RecordingDetails, name: "s3RecordingDetails"))
     ConfigDetails.add_member(:unknown, Types::ConfigDetails::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ConfigDetails.type = Types::ConfigDetails
-    ConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigListItem, name: "member")
+    ConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigListItem, name: "member"))
     ConfigListItem.add_member(:config_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "configId"))
     ConfigListItem.add_member(:config_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigCapabilityType, name: "configType"))
     ConfigListItem.add_member(:config_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigArn, name: "configArn"))
@@ -325,7 +325,7 @@ module Aws::GroundStation
     ContactData.add_member(:visibility_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "visibilityStartTime"))
     ContactData.add_member(:visibility_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "visibilityEndTime"))
     ContactData.type = Types::ContactData
-    ContactList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactData, name: "member")
+    ContactList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactData, name: "member"))
     ContactStatus.add_member(:scheduling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHEDULING", traits: {"smithy.api#enumValue" => "SCHEDULING"}))
     ContactStatus.add_member(:failed_to_schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED_TO_SCHEDULE", traits: {"smithy.api#enumValue" => "FAILED_TO_SCHEDULE"}))
     ContactStatus.add_member(:scheduled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHEDULED", traits: {"smithy.api#enumValue" => "SCHEDULED"}))
@@ -384,8 +384,8 @@ module Aws::GroundStation
     DataflowDetail.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "destination"))
     DataflowDetail.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorMessage"))
     DataflowDetail.type = Types::DataflowDetail
-    DataflowEdge.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigArn, name: "member")
-    DataflowEdgeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataflowEdge, name: "member")
+    DataflowEdge.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigArn, name: "member"))
+    DataflowEdgeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataflowEdge, name: "member"))
     DataflowEndpoint.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SafeName, name: "name"))
     DataflowEndpoint.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: SocketAddress, name: "address"))
     DataflowEndpoint.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointStatus, name: "status"))
@@ -394,11 +394,11 @@ module Aws::GroundStation
     DataflowEndpointConfig.add_member(:dataflow_endpoint_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "dataflowEndpointName", traits: {"smithy.api#required" => {}}))
     DataflowEndpointConfig.add_member(:dataflow_endpoint_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "dataflowEndpointRegion"))
     DataflowEndpointConfig.type = Types::DataflowEndpointConfig
-    DataflowEndpointGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataflowEndpointListItem, name: "member")
+    DataflowEndpointGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataflowEndpointListItem, name: "member"))
     DataflowEndpointListItem.add_member(:dataflow_endpoint_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "dataflowEndpointGroupId"))
     DataflowEndpointListItem.add_member(:dataflow_endpoint_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DataflowEndpointGroupArn, name: "dataflowEndpointGroupArn"))
     DataflowEndpointListItem.type = Types::DataflowEndpointListItem
-    DataflowList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataflowDetail, name: "member")
+    DataflowList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataflowDetail, name: "member"))
     DecodeConfig.add_member(:unvalidated_json, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonString, name: "unvalidatedJSON", traits: {"smithy.api#required" => {}}))
     DecodeConfig.type = Types::DecodeConfig
     DeleteConfigInput.add_member(:config_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "configId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -479,13 +479,13 @@ module Aws::GroundStation
     EndpointDetails.add_member(:health_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityHealth, name: "healthStatus"))
     EndpointDetails.add_member(:health_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityHealthReasonList, name: "healthReasons"))
     EndpointDetails.type = Types::EndpointDetails
-    EndpointDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointDetails, name: "member")
+    EndpointDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointDetails, name: "member"))
     EndpointStatus.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "created", traits: {"smithy.api#enumValue" => "created"}))
     EndpointStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "creating", traits: {"smithy.api#enumValue" => "creating"}))
     EndpointStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "deleted", traits: {"smithy.api#enumValue" => "deleted"}))
     EndpointStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "deleting", traits: {"smithy.api#enumValue" => "deleting"}))
     EndpointStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "failed", traits: {"smithy.api#enumValue" => "failed"}))
-    EphemeridesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EphemerisItem, name: "member")
+    EphemeridesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EphemerisItem, name: "member"))
     EphemerisData.add_member(:tle, Types::EphemerisData::Tle, ::Smithy::Schema::Shapes::MemberShape.new(target: TLEEphemeris, name: "tle"))
     EphemerisData.add_member(:oem, Types::EphemerisData::Oem, ::Smithy::Schema::Shapes::MemberShape.new(target: OEMEphemeris, name: "oem"))
     EphemerisData.add_member(:unknown, Types::EphemerisData::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -519,7 +519,7 @@ module Aws::GroundStation
     EphemerisStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     EphemerisStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     EphemerisStatus.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
-    EphemerisStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EphemerisStatus, name: "member")
+    EphemerisStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EphemerisStatus, name: "member"))
     EphemerisTypeDescription.add_member(:tle, Types::EphemerisTypeDescription::Tle, ::Smithy::Schema::Shapes::MemberShape.new(target: EphemerisDescription, name: "tle"))
     EphemerisTypeDescription.add_member(:oem, Types::EphemerisTypeDescription::Oem, ::Smithy::Schema::Shapes::MemberShape.new(target: EphemerisDescription, name: "oem"))
     EphemerisTypeDescription.add_member(:unknown, Types::EphemerisTypeDescription::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -593,15 +593,15 @@ module Aws::GroundStation
     GroundStationData.add_member(:ground_station_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroundStationName, name: "groundStationName"))
     GroundStationData.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSRegion, name: "region"))
     GroundStationData.type = Types::GroundStationData
-    GroundStationIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroundStationName, name: "member")
-    GroundStationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroundStationData, name: "member")
+    GroundStationIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroundStationName, name: "member"))
+    GroundStationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroundStationData, name: "member"))
     IntegerRange.add_member(:minimum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "minimum", traits: {"smithy.api#required" => {}}))
     IntegerRange.add_member(:maximum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maximum", traits: {"smithy.api#required" => {}}))
     IntegerRange.type = Types::IntegerRange
     InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     InvalidParameterException.add_member(:parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "parameterName"))
     InvalidParameterException.type = Types::InvalidParameterException
-    IpAddressList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpV4Address, name: "member")
+    IpAddressList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpV4Address, name: "member"))
     KmsKey.add_member(:kms_key_arn, Types::KmsKey::KmsKeyArn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, name: "kmsKeyArn"))
     KmsKey.add_member(:kms_alias_arn, Types::KmsKey::KmsAliasArn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAliasArn, name: "kmsAliasArn"))
     KmsKey.add_member(:kms_alias_name, Types::KmsKey::KmsAliasName, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAliasName, name: "kmsAliasName"))
@@ -664,7 +664,7 @@ module Aws::GroundStation
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
     ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    MissionProfileList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MissionProfileListItem, name: "member")
+    MissionProfileList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MissionProfileListItem, name: "member"))
     MissionProfileListItem.add_member(:mission_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "missionProfileId"))
     MissionProfileListItem.add_member(:mission_profile_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MissionProfileArn, name: "missionProfileArn"))
     MissionProfileListItem.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSRegion, name: "region"))
@@ -713,7 +713,7 @@ module Aws::GroundStation
     S3RecordingDetails.add_member(:bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketArn, name: "bucketArn"))
     S3RecordingDetails.add_member(:key_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "keyTemplate"))
     S3RecordingDetails.type = Types::S3RecordingDetails
-    SatelliteList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SatelliteListItem, name: "member")
+    SatelliteList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SatelliteListItem, name: "member"))
     SatelliteListItem.add_member(:satellite_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "satelliteId"))
     SatelliteListItem.add_member(:satellite_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SatelliteArn, name: "satelliteArn"))
     SatelliteListItem.add_member(:norad_satellite_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NoradSatelliteID, name: "noradSatelliteID", traits: {"smithy.api#default" => 0}))
@@ -724,9 +724,9 @@ module Aws::GroundStation
     SecurityDetails.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIdList, name: "securityGroupIds", traits: {"smithy.api#required" => {}}))
     SecurityDetails.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
     SecurityDetails.type = Types::SecurityDetails
-    SecurityGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    SignatureMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    SignatureMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "value")
+    SecurityGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    SignatureMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    SignatureMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "value"))
     SocketAddress.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     SocketAddress.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "port", traits: {"smithy.api#required" => {}}))
     SocketAddress.type = Types::SocketAddress
@@ -739,23 +739,23 @@ module Aws::GroundStation
     SpectrumConfig.add_member(:bandwidth, ::Smithy::Schema::Shapes::MemberShape.new(target: FrequencyBandwidth, name: "bandwidth", traits: {"smithy.api#required" => {}}))
     SpectrumConfig.add_member(:polarization, ::Smithy::Schema::Shapes::MemberShape.new(target: Polarization, name: "polarization", traits: {"smithy.api#addedDefault" => {}, "smithy.api#clientOptional" => {}, "smithy.api#default" => "NONE"}))
     SpectrumConfig.type = Types::SpectrumConfig
-    StatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactStatus, name: "member")
-    SubnetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    StatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactStatus, name: "member"))
+    SubnetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     TLEData.add_member(:tle_line1, ::Smithy::Schema::Shapes::MemberShape.new(target: TleLineOne, name: "tleLine1", traits: {"smithy.api#required" => {}}))
     TLEData.add_member(:tle_line2, ::Smithy::Schema::Shapes::MemberShape.new(target: TleLineTwo, name: "tleLine2", traits: {"smithy.api#required" => {}}))
     TLEData.add_member(:valid_time_range, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeRange, name: "validTimeRange", traits: {"smithy.api#required" => {}}))
     TLEData.type = Types::TLEData
-    TLEDataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TLEData, name: "member")
+    TLEDataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TLEData, name: "member"))
     TLEEphemeris.add_member(:s3_object, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Object, name: "s3Object"))
     TLEEphemeris.add_member(:tle_data, ::Smithy::Schema::Shapes::MemberShape.new(target: TLEDataList, name: "tleData"))
     TLEEphemeris.type = Types::TLEEphemeris
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnboundedString, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnboundedString, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AnyArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    TagsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    TagsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    TagsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    TagsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     TimeRange.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "startTime", traits: {"smithy.api#required" => {}}))
     TimeRange.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "endTime", traits: {"smithy.api#required" => {}}))
     TimeRange.type = Types::TimeRange
@@ -806,7 +806,7 @@ module Aws::GroundStation
     UplinkSpectrumConfig.add_member(:center_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: Frequency, name: "centerFrequency", traits: {"smithy.api#required" => {}}))
     UplinkSpectrumConfig.add_member(:polarization, ::Smithy::Schema::Shapes::MemberShape.new(target: Polarization, name: "polarization"))
     UplinkSpectrumConfig.type = Types::UplinkSpectrumConfig
-    VersionStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VersionString, name: "member")
+    VersionStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionString, name: "member"))
 
     GroundStation = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.groundstation#GroundStation"

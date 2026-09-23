@@ -645,13 +645,13 @@ module Aws::GuardDuty
     AccountDetail.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "accountId", "smithy.api#required" => {}}))
     AccountDetail.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: Email, name: "Email", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "email", "smithy.api#required" => {}}))
     AccountDetail.type = Types::AccountDetail
-    AccountDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountDetail, name: "member")
+    AccountDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountDetail, name: "member"))
     AccountFreeTrialInfo.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AccountId", traits: {"smithy.api#jsonName" => "accountId"}))
     AccountFreeTrialInfo.add_member(:data_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourcesFreeTrial, name: "DataSources", traits: {"smithy.api#deprecated" => {"message" => "This parameter is deprecated, use Features instead"}, "smithy.api#jsonName" => "dataSources"}))
     AccountFreeTrialInfo.add_member(:features, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialFeatureConfigurationsResults, name: "Features", traits: {"smithy.api#jsonName" => "features"}))
     AccountFreeTrialInfo.type = Types::AccountFreeTrialInfo
-    AccountFreeTrialInfos.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountFreeTrialInfo, name: "member")
-    AccountIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member")
+    AccountFreeTrialInfos.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountFreeTrialInfo, name: "member"))
+    AccountIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
     AccountLevelPermissions.add_member(:block_public_access, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockPublicAccess, name: "BlockPublicAccess", traits: {"smithy.api#jsonName" => "blockPublicAccess"}))
     AccountLevelPermissions.type = Types::AccountLevelPermissions
     AccountStatistics.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AccountId", traits: {"smithy.api#jsonName" => "accountId"}))
@@ -674,20 +674,20 @@ module Aws::GuardDuty
     Actor.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: Session, name: "Session", traits: {"smithy.api#jsonName" => "session"}))
     Actor.add_member(:process, ::Smithy::Schema::Shapes::MemberShape.new(target: ActorProcess, name: "Process", traits: {"smithy.api#jsonName" => "process"}))
     Actor.type = Types::Actor
-    ActorIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ActorIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ActorProcess.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessName, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "name", "smithy.api#required" => {}}))
     ActorProcess.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessPath, name: "Path", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "path", "smithy.api#required" => {}}))
     ActorProcess.add_member(:sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessSha256, name: "Sha256", traits: {"smithy.api#jsonName" => "sha256"}))
     ActorProcess.type = Types::ActorProcess
-    Actors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Actor, name: "member")
-    AdditionalSequenceTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingType, name: "member")
+    Actors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Actor, name: "member"))
+    AdditionalSequenceTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingType, name: "member"))
     AddonDetails.add_member(:addon_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AddonVersion", traits: {"smithy.api#jsonName" => "addonVersion"}))
     AddonDetails.add_member(:addon_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AddonStatus", traits: {"smithy.api#jsonName" => "addonStatus"}))
     AddonDetails.type = Types::AddonDetails
     AdminAccount.add_member(:admin_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AdminAccountId", traits: {"smithy.api#jsonName" => "adminAccountId"}))
     AdminAccount.add_member(:admin_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminStatus, name: "AdminStatus", traits: {"smithy.api#jsonName" => "adminStatus"}))
     AdminAccount.type = Types::AdminAccount
-    AdminAccounts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdminAccount, name: "member")
+    AdminAccounts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminAccount, name: "member"))
     AdminStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     AdminStatus.add_member(:disable_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DISABLE_IN_PROGRESS"}))
     Administrator.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId", traits: {"smithy.api#jsonName" => "accountId"}))
@@ -695,8 +695,8 @@ module Aws::GuardDuty
     Administrator.add_member(:relationship_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RelationshipStatus", traits: {"smithy.api#jsonName" => "relationshipStatus"}))
     Administrator.add_member(:invited_at, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "InvitedAt", traits: {"smithy.api#jsonName" => "invitedAt"}))
     Administrator.type = Types::Administrator
-    AffectedResources.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    AffectedResources.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    AffectedResources.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    AffectedResources.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     AgentDetails.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Version", traits: {"smithy.api#jsonName" => "version"}))
     AgentDetails.type = Types::AgentDetails
     Anomaly.add_member(:profiles, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyProfiles, name: "Profiles", traits: {"smithy.api#jsonName" => "profiles"}))
@@ -706,15 +706,15 @@ module Aws::GuardDuty
     AnomalyObject.add_member(:profile_subtype, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileSubtype, name: "ProfileSubtype", traits: {"smithy.api#jsonName" => "profileSubtype"}))
     AnomalyObject.add_member(:observations, ::Smithy::Schema::Shapes::MemberShape.new(target: Observations, name: "Observations", traits: {"smithy.api#jsonName" => "observations"}))
     AnomalyObject.type = Types::AnomalyObject
-    AnomalyProfileFeatureObjects.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyObject, name: "member")
-    AnomalyProfileFeatures.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    AnomalyProfileFeatures.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyProfileFeatureObjects, name: "value")
-    AnomalyProfiles.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    AnomalyProfiles.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyProfileFeatures, name: "value")
+    AnomalyProfileFeatureObjects.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyObject, name: "member"))
+    AnomalyProfileFeatures.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    AnomalyProfileFeatures.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyProfileFeatureObjects, name: "value"))
+    AnomalyProfiles.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    AnomalyProfiles.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyProfileFeatures, name: "value"))
     AnomalyUnusual.add_member(:behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: Behavior, name: "Behavior", traits: {"smithy.api#jsonName" => "behavior"}))
     AnomalyUnusual.type = Types::AnomalyUnusual
-    AnomalyUnusualBehaviorFeature.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    AnomalyUnusualBehaviorFeature.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyObject, name: "value")
+    AnomalyUnusualBehaviorFeature.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    AnomalyUnusualBehaviorFeature.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyObject, name: "value"))
     ArchiveFindingsRequest.add_member(:detector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorId, name: "DetectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "detectorId", "smithy.api#required" => {}}))
     ArchiveFindingsRequest.add_member(:finding_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingIds, name: "FindingIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "findingIds", "smithy.api#required" => {}}))
     ArchiveFindingsRequest.type = Types::ArchiveFindingsRequest
@@ -738,8 +738,8 @@ module Aws::GuardDuty
     BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
     BadRequestException.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type", traits: {"smithy.api#jsonName" => "__type"}))
     BadRequestException.type = Types::BadRequestException
-    Behavior.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    Behavior.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyUnusualBehaviorFeature, name: "value")
+    Behavior.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    Behavior.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyUnusualBehaviorFeature, name: "value"))
     BlockPublicAccess.add_member(:ignore_public_acls, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IgnorePublicAcls", traits: {"smithy.api#jsonName" => "ignorePublicAcls"}))
     BlockPublicAccess.add_member(:restrict_public_buckets, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "RestrictPublicBuckets", traits: {"smithy.api#jsonName" => "restrictPublicBuckets"}))
     BlockPublicAccess.add_member(:block_public_acls, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "BlockPublicAcls", traits: {"smithy.api#jsonName" => "blockPublicAcls"}))
@@ -792,14 +792,14 @@ module Aws::GuardDuty
     ContainerInstanceDetails.add_member(:covered_container_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "CoveredContainerInstances", traits: {"smithy.api#jsonName" => "coveredContainerInstances"}))
     ContainerInstanceDetails.add_member(:compatible_container_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "CompatibleContainerInstances", traits: {"smithy.api#jsonName" => "compatibleContainerInstances"}))
     ContainerInstanceDetails.type = Types::ContainerInstanceDetails
-    ContainerUids.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerUid, name: "member")
-    Containers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Container, name: "member")
-    CountByCoverageStatus.key = ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStatus, name: "key")
-    CountByCoverageStatus.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "value")
-    CountByResourceType.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "key")
-    CountByResourceType.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "value")
-    CountBySeverity.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    CountBySeverity.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "value")
+    ContainerUids.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerUid, name: "member"))
+    Containers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Container, name: "member"))
+    CountByCoverageStatus.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStatus, name: "key"))
+    CountByCoverageStatus.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "value"))
+    CountByResourceType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "key"))
+    CountByResourceType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "value"))
+    CountBySeverity.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    CountBySeverity.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "value"))
     Country.add_member(:country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CountryCode", traits: {"smithy.api#jsonName" => "countryCode"}))
     Country.add_member(:country_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CountryName", traits: {"smithy.api#jsonName" => "countryName"}))
     Country.type = Types::Country
@@ -838,7 +838,7 @@ module Aws::GuardDuty
     CoverageFilterCriterionKey.add_member(:agent_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGENT_VERSION", traits: {"smithy.api#enumValue" => "AGENT_VERSION"}))
     CoverageFilterCriterionKey.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE_ID", traits: {"smithy.api#enumValue" => "INSTANCE_ID"}))
     CoverageFilterCriterionKey.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLUSTER_ARN", traits: {"smithy.api#enumValue" => "CLUSTER_ARN"}))
-    CoverageFilterCriterionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageFilterCriterion, name: "member")
+    CoverageFilterCriterionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageFilterCriterion, name: "member"))
     CoverageResource.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceId", traits: {"smithy.api#jsonName" => "resourceId"}))
     CoverageResource.add_member(:detector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorId, name: "DetectorId", traits: {"smithy.api#jsonName" => "detectorId"}))
     CoverageResource.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId", traits: {"smithy.api#jsonName" => "accountId"}))
@@ -852,7 +852,7 @@ module Aws::GuardDuty
     CoverageResourceDetails.add_member(:ecs_cluster_details, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageEcsClusterDetails, name: "EcsClusterDetails", traits: {"smithy.api#jsonName" => "ecsClusterDetails"}))
     CoverageResourceDetails.add_member(:ec2_instance_details, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageEc2InstanceDetails, name: "Ec2InstanceDetails", traits: {"smithy.api#jsonName" => "ec2InstanceDetails"}))
     CoverageResourceDetails.type = Types::CoverageResourceDetails
-    CoverageResources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageResource, name: "member")
+    CoverageResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageResource, name: "member"))
     CoverageSortCriteria.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageSortKey, name: "AttributeName", traits: {"smithy.api#jsonName" => "attributeName"}))
     CoverageSortCriteria.add_member(:order_by, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderBy, name: "OrderBy", traits: {"smithy.api#jsonName" => "orderBy"}))
     CoverageSortCriteria.type = Types::CoverageSortCriteria
@@ -870,7 +870,7 @@ module Aws::GuardDuty
     CoverageStatistics.type = Types::CoverageStatistics
     CoverageStatisticsType.add_member(:count_by_resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COUNT_BY_RESOURCE_TYPE", traits: {"smithy.api#enumValue" => "COUNT_BY_RESOURCE_TYPE"}))
     CoverageStatisticsType.add_member(:count_by_coverage_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COUNT_BY_COVERAGE_STATUS", traits: {"smithy.api#enumValue" => "COUNT_BY_COVERAGE_STATUS"}))
-    CoverageStatisticsTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStatisticsType, name: "member")
+    CoverageStatisticsTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStatisticsType, name: "member"))
     CoverageStatus.add_member(:healthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HEALTHY", traits: {"smithy.api#enumValue" => "HEALTHY"}))
     CoverageStatus.add_member(:unhealthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNHEALTHY", traits: {"smithy.api#enumValue" => "UNHEALTHY"}))
     CreateDetectorRequest.add_member(:enable, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enable", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "enable", "smithy.api#required" => {}}))
@@ -967,8 +967,8 @@ module Aws::GuardDuty
     CreateTrustedEntitySetRequest.type = Types::CreateTrustedEntitySetRequest
     CreateTrustedEntitySetResponse.add_member(:trusted_entity_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TrustedEntitySetId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "trustedEntitySetId", "smithy.api#required" => {}}))
     CreateTrustedEntitySetResponse.type = Types::CreateTrustedEntitySetResponse
-    Criterion.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    Criterion.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "value")
+    Criterion.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    Criterion.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "value"))
     CriterionKey.add_member(:ec2_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EC2_INSTANCE_ARN", traits: {"smithy.api#enumValue" => "EC2_INSTANCE_ARN"}))
     CriterionKey.add_member(:scan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCAN_ID", traits: {"smithy.api#enumValue" => "SCAN_ID"}))
     CriterionKey.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_ID", traits: {"smithy.api#enumValue" => "ACCOUNT_ID"}))
@@ -997,7 +997,7 @@ module Aws::GuardDuty
     DataSourceConfigurationsResult.type = Types::DataSourceConfigurationsResult
     DataSourceFreeTrial.add_member(:free_trial_days_remaining, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "FreeTrialDaysRemaining", traits: {"smithy.api#jsonName" => "freeTrialDaysRemaining"}))
     DataSourceFreeTrial.type = Types::DataSourceFreeTrial
-    DataSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "member")
+    DataSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "member"))
     DataSourceStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     DataSourceStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     DataSourcesFreeTrial.add_member(:cloud_trail, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceFreeTrial, name: "CloudTrail", traits: {"smithy.api#jsonName" => "cloudTrail"}))
@@ -1094,7 +1094,7 @@ module Aws::GuardDuty
     DestinationProperties.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KmsKeyArn", traits: {"smithy.api#jsonName" => "kmsKeyArn"}))
     DestinationProperties.type = Types::DestinationProperties
     DestinationType.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3", traits: {"smithy.api#enumValue" => "S3"}))
-    Destinations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "member")
+    Destinations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "member"))
     Detection.add_member(:anomaly, ::Smithy::Schema::Shapes::MemberShape.new(target: Anomaly, name: "Anomaly", traits: {"smithy.api#jsonName" => "anomaly"}))
     Detection.add_member(:sequence, ::Smithy::Schema::Shapes::MemberShape.new(target: Sequence, name: "Sequence", traits: {"smithy.api#jsonName" => "sequence"}))
     Detection.type = Types::Detection
@@ -1105,8 +1105,8 @@ module Aws::GuardDuty
     DetectorAdditionalConfigurationResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureStatus, name: "Status", traits: {"smithy.api#jsonName" => "status"}))
     DetectorAdditionalConfigurationResult.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt", traits: {"smithy.api#jsonName" => "updatedAt"}))
     DetectorAdditionalConfigurationResult.type = Types::DetectorAdditionalConfigurationResult
-    DetectorAdditionalConfigurationResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorAdditionalConfigurationResult, name: "member")
-    DetectorAdditionalConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorAdditionalConfiguration, name: "member")
+    DetectorAdditionalConfigurationResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorAdditionalConfigurationResult, name: "member"))
+    DetectorAdditionalConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorAdditionalConfiguration, name: "member"))
     DetectorFeature.add_member(:s3_data_events, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3_DATA_EVENTS", traits: {"smithy.api#enumValue" => "S3_DATA_EVENTS"}))
     DetectorFeature.add_member(:eks_audit_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EKS_AUDIT_LOGS", traits: {"smithy.api#enumValue" => "EKS_AUDIT_LOGS"}))
     DetectorFeature.add_member(:ebs_malware_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EBS_MALWARE_PROTECTION", traits: {"smithy.api#enumValue" => "EBS_MALWARE_PROTECTION"}))
@@ -1123,8 +1123,8 @@ module Aws::GuardDuty
     DetectorFeatureConfigurationResult.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt", traits: {"smithy.api#jsonName" => "updatedAt"}))
     DetectorFeatureConfigurationResult.add_member(:additional_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorAdditionalConfigurationResults, name: "AdditionalConfiguration", traits: {"smithy.api#jsonName" => "additionalConfiguration"}))
     DetectorFeatureConfigurationResult.type = Types::DetectorFeatureConfigurationResult
-    DetectorFeatureConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorFeatureConfiguration, name: "member")
-    DetectorFeatureConfigurationsResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorFeatureConfigurationResult, name: "member")
+    DetectorFeatureConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorFeatureConfiguration, name: "member"))
+    DetectorFeatureConfigurationsResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorFeatureConfigurationResult, name: "member"))
     DetectorFeatureResult.add_member(:flow_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLOW_LOGS", traits: {"smithy.api#enumValue" => "FLOW_LOGS"}))
     DetectorFeatureResult.add_member(:cloud_trail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUD_TRAIL", traits: {"smithy.api#enumValue" => "CLOUD_TRAIL"}))
     DetectorFeatureResult.add_member(:dns_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DNS_LOGS", traits: {"smithy.api#enumValue" => "DNS_LOGS"}))
@@ -1135,7 +1135,7 @@ module Aws::GuardDuty
     DetectorFeatureResult.add_member(:eks_runtime_monitoring, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EKS_RUNTIME_MONITORING", traits: {"smithy.api#enumValue" => "EKS_RUNTIME_MONITORING"}))
     DetectorFeatureResult.add_member(:lambda_network_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAMBDA_NETWORK_LOGS", traits: {"smithy.api#enumValue" => "LAMBDA_NETWORK_LOGS"}))
     DetectorFeatureResult.add_member(:runtime_monitoring, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNTIME_MONITORING", traits: {"smithy.api#enumValue" => "RUNTIME_MONITORING"}))
-    DetectorIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorId, name: "member")
+    DetectorIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorId, name: "member"))
     DetectorStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     DetectorStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     DisableOrganizationAdminAccountRequest.add_member(:admin_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AdminAccountId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "adminAccountId", "smithy.api#required" => {}}))
@@ -1186,7 +1186,7 @@ module Aws::GuardDuty
     Ec2Instance.add_member(:product_codes, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCodes, name: "ProductCodes", traits: {"smithy.api#jsonName" => "productCodes"}))
     Ec2Instance.add_member(:ec2_network_interface_uids, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2NetworkInterfaceUids, name: "Ec2NetworkInterfaceUids", traits: {"smithy.api#jsonName" => "ec2NetworkInterfaceUids"}))
     Ec2Instance.type = Types::Ec2Instance
-    Ec2InstanceUids.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2InstanceUid, name: "member")
+    Ec2InstanceUids.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2InstanceUid, name: "member"))
     Ec2NetworkInterface.add_member(:ipv6_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6Addresses, name: "Ipv6Addresses", traits: {"smithy.api#jsonName" => "ipv6Addresses"}))
     Ec2NetworkInterface.add_member(:private_ip_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateIpAddresses, name: "PrivateIpAddresses", traits: {"smithy.api#jsonName" => "privateIpAddresses"}))
     Ec2NetworkInterface.add_member(:public_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PublicIp", traits: {"smithy.api#jsonName" => "publicIp"}))
@@ -1194,7 +1194,7 @@ module Aws::GuardDuty
     Ec2NetworkInterface.add_member(:sub_net_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SubNetId", traits: {"smithy.api#jsonName" => "subNetId"}))
     Ec2NetworkInterface.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VpcId", traits: {"smithy.api#jsonName" => "vpcId"}))
     Ec2NetworkInterface.type = Types::Ec2NetworkInterface
-    Ec2NetworkInterfaceUids.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    Ec2NetworkInterfaceUids.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     EcsClusterDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#jsonName" => "name"}))
     EcsClusterDetails.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Arn", traits: {"smithy.api#jsonName" => "arn"}))
     EcsClusterDetails.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status", traits: {"smithy.api#jsonName" => "status"}))
@@ -1232,9 +1232,9 @@ module Aws::GuardDuty
     EnableOrganizationAdminAccountRequest.add_member(:admin_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AdminAccountId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "adminAccountId", "smithy.api#required" => {}}))
     EnableOrganizationAdminAccountRequest.type = Types::EnableOrganizationAdminAccountRequest
     EnableOrganizationAdminAccountResponse.type = Types::EnableOrganizationAdminAccountResponse
-    EndpointIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    Eq.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    Equals.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    EndpointIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    Eq.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    Equals.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Evidence.add_member(:threat_intelligence_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ThreatIntelligenceDetails, name: "ThreatIntelligenceDetails", traits: {"smithy.api#jsonName" => "threatIntelligenceDetails"}))
     Evidence.type = Types::Evidence
     FargateDetails.add_member(:issues, ::Smithy::Schema::Shapes::MemberShape.new(target: Issues, name: "Issues", traits: {"smithy.api#jsonName" => "issues"}))
@@ -1247,7 +1247,7 @@ module Aws::GuardDuty
     FeatureStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     Feedback.add_member(:useful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USEFUL", traits: {"smithy.api#enumValue" => "USEFUL"}))
     Feedback.add_member(:not_useful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_USEFUL", traits: {"smithy.api#enumValue" => "NOT_USEFUL"}))
-    FilePaths.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScanFilePath, name: "member")
+    FilePaths.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanFilePath, name: "member"))
     FilterAction.add_member(:noop, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOOP", traits: {"smithy.api#enumValue" => "NOOP"}))
     FilterAction.add_member(:archive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARCHIVE", traits: {"smithy.api#enumValue" => "ARCHIVE"}))
     FilterCondition.add_member(:equals_value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "EqualsValue", traits: {"smithy.api#jsonName" => "equalsValue"}))
@@ -1259,8 +1259,8 @@ module Aws::GuardDuty
     FilterCriterion.add_member(:criterion_key, ::Smithy::Schema::Shapes::MemberShape.new(target: CriterionKey, name: "CriterionKey", traits: {"smithy.api#jsonName" => "criterionKey"}))
     FilterCriterion.add_member(:filter_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterCondition, name: "FilterCondition", traits: {"smithy.api#jsonName" => "filterCondition"}))
     FilterCriterion.type = Types::FilterCriterion
-    FilterCriterionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterCriterion, name: "member")
-    FilterNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, name: "member")
+    FilterCriterionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterCriterion, name: "member"))
+    FilterNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, name: "member"))
     Finding.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AccountId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "accountId", "smithy.api#required" => {}}))
     Finding.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Arn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "arn", "smithy.api#required" => {}}))
     Finding.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Confidence", traits: {"smithy.api#jsonName" => "confidence"}))
@@ -1280,7 +1280,7 @@ module Aws::GuardDuty
     Finding.type = Types::Finding
     FindingCriteria.add_member(:criterion, ::Smithy::Schema::Shapes::MemberShape.new(target: Criterion, name: "Criterion", traits: {"smithy.api#jsonName" => "criterion"}))
     FindingCriteria.type = Types::FindingCriteria
-    FindingIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingId, name: "member")
+    FindingIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingId, name: "member"))
     FindingPublishingFrequency.add_member(:fifteen_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIFTEEN_MINUTES", traits: {"smithy.api#enumValue" => "FIFTEEN_MINUTES"}))
     FindingPublishingFrequency.add_member(:one_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONE_HOUR", traits: {"smithy.api#enumValue" => "ONE_HOUR"}))
     FindingPublishingFrequency.add_member(:six_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SIX_HOURS", traits: {"smithy.api#enumValue" => "SIX_HOURS"}))
@@ -1293,7 +1293,7 @@ module Aws::GuardDuty
     FindingResourceType.add_member(:kubernetes_workload, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KUBERNETES_WORKLOAD", traits: {"smithy.api#enumValue" => "KUBERNETES_WORKLOAD"}))
     FindingResourceType.add_member(:container, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINER", traits: {"smithy.api#enumValue" => "CONTAINER"}))
     FindingStatisticType.add_member(:count_by_severity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COUNT_BY_SEVERITY", traits: {"smithy.api#enumValue" => "COUNT_BY_SEVERITY"}))
-    FindingStatisticTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingStatisticType, name: "member")
+    FindingStatisticTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingStatisticType, name: "member"))
     FindingStatistics.add_member(:count_by_severity, ::Smithy::Schema::Shapes::MemberShape.new(target: CountBySeverity, name: "CountBySeverity", traits: {"smithy.api#deprecated" => {"message" => "This parameter is deprecated. Please set GroupBy to 'SEVERITY' to return GroupedBySeverity instead."}, "smithy.api#jsonName" => "countBySeverity"}))
     FindingStatistics.add_member(:grouped_by_account, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupedByAccount, name: "GroupedByAccount", traits: {"smithy.api#jsonName" => "groupedByAccount"}))
     FindingStatistics.add_member(:grouped_by_date, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupedByDate, name: "GroupedByDate", traits: {"smithy.api#jsonName" => "groupedByDate"}))
@@ -1305,15 +1305,15 @@ module Aws::GuardDuty
     FindingTypeStatistics.add_member(:last_generated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastGeneratedAt", traits: {"smithy.api#jsonName" => "lastGeneratedAt"}))
     FindingTypeStatistics.add_member(:total_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "TotalFindings", traits: {"smithy.api#jsonName" => "totalFindings"}))
     FindingTypeStatistics.type = Types::FindingTypeStatistics
-    FindingTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingType, name: "member")
-    Findings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Finding, name: "member")
-    FlagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    FindingTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingType, name: "member"))
+    Findings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Finding, name: "member"))
+    FlagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     FlowLogsConfigurationResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceStatus, name: "Status", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "status", "smithy.api#required" => {}}))
     FlowLogsConfigurationResult.type = Types::FlowLogsConfigurationResult
     FreeTrialFeatureConfigurationResult.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialFeatureResult, name: "Name", traits: {"smithy.api#jsonName" => "name"}))
     FreeTrialFeatureConfigurationResult.add_member(:free_trial_days_remaining, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "FreeTrialDaysRemaining", traits: {"smithy.api#jsonName" => "freeTrialDaysRemaining"}))
     FreeTrialFeatureConfigurationResult.type = Types::FreeTrialFeatureConfigurationResult
-    FreeTrialFeatureConfigurationsResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialFeatureConfigurationResult, name: "member")
+    FreeTrialFeatureConfigurationsResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialFeatureConfigurationResult, name: "member"))
     FreeTrialFeatureResult.add_member(:flow_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLOW_LOGS", traits: {"smithy.api#enumValue" => "FLOW_LOGS"}))
     FreeTrialFeatureResult.add_member(:cloud_trail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUD_TRAIL", traits: {"smithy.api#enumValue" => "CLOUD_TRAIL"}))
     FreeTrialFeatureResult.add_member(:dns_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DNS_LOGS", traits: {"smithy.api#enumValue" => "DNS_LOGS"}))
@@ -1479,12 +1479,12 @@ module Aws::GuardDuty
     GroupByType.add_member(:finding_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_TYPE", traits: {"smithy.api#enumValue" => "FINDING_TYPE"}))
     GroupByType.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE", traits: {"smithy.api#enumValue" => "RESOURCE"}))
     GroupByType.add_member(:severity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY", traits: {"smithy.api#enumValue" => "SEVERITY"}))
-    GroupedByAccount.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountStatistics, name: "member")
-    GroupedByDate.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DateStatistics, name: "member")
-    GroupedByFindingType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingTypeStatistics, name: "member")
-    GroupedByResource.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatistics, name: "member")
-    GroupedBySeverity.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityStatistics, name: "member")
-    Groups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    GroupedByAccount.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountStatistics, name: "member"))
+    GroupedByDate.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DateStatistics, name: "member"))
+    GroupedByFindingType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingTypeStatistics, name: "member"))
+    GroupedByResource.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatistics, name: "member"))
+    GroupedBySeverity.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityStatistics, name: "member"))
+    Groups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     HighestSeverityThreatDetails.add_member(:severity, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Severity", traits: {"smithy.api#jsonName" => "severity"}))
     HighestSeverityThreatDetails.add_member(:threat_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ThreatName", traits: {"smithy.api#jsonName" => "threatName"}))
     HighestSeverityThreatDetails.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Count", traits: {"smithy.api#jsonName" => "count"}))
@@ -1517,8 +1517,8 @@ module Aws::GuardDuty
     IndicatorType.add_member(:cryptomining_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CRYPTOMINING_IP", traits: {"smithy.api#enumValue" => "CRYPTOMINING_IP"}))
     IndicatorType.add_member(:cryptomining_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CRYPTOMINING_DOMAIN", traits: {"smithy.api#enumValue" => "CRYPTOMINING_DOMAIN"}))
     IndicatorType.add_member(:cryptomining_process, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CRYPTOMINING_PROCESS", traits: {"smithy.api#enumValue" => "CRYPTOMINING_PROCESS"}))
-    IndicatorValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IndicatorValueString, name: "member")
-    Indicators.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Indicator, name: "member")
+    IndicatorValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IndicatorValueString, name: "member"))
+    Indicators.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Indicator, name: "member"))
     InstanceDetails.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AvailabilityZone", traits: {"smithy.api#jsonName" => "availabilityZone"}))
     InstanceDetails.add_member(:iam_instance_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: IamInstanceProfile, name: "IamInstanceProfile", traits: {"smithy.api#jsonName" => "iamInstanceProfile"}))
     InstanceDetails.add_member(:image_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ImageDescription", traits: {"smithy.api#jsonName" => "imageDescription"}))
@@ -1541,7 +1541,7 @@ module Aws::GuardDuty
     Invitation.add_member(:relationship_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RelationshipStatus", traits: {"smithy.api#jsonName" => "relationshipStatus"}))
     Invitation.add_member(:invited_at, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "InvitedAt", traits: {"smithy.api#jsonName" => "invitedAt"}))
     Invitation.type = Types::Invitation
-    Invitations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Invitation, name: "member")
+    Invitations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Invitation, name: "member"))
     InviteMembersRequest.add_member(:detector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorId, name: "DetectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "detectorId", "smithy.api#required" => {}}))
     InviteMembersRequest.add_member(:account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIds, name: "AccountIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "accountIds", "smithy.api#required" => {}}))
     InviteMembersRequest.add_member(:disable_email_notification, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "DisableEmailNotification", traits: {"smithy.api#jsonName" => "disableEmailNotification"}))
@@ -1555,7 +1555,7 @@ module Aws::GuardDuty
     IpSetFormat.add_member(:alien_vault, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALIEN_VAULT", traits: {"smithy.api#enumValue" => "ALIEN_VAULT"}))
     IpSetFormat.add_member(:proof_point, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROOF_POINT", traits: {"smithy.api#enumValue" => "PROOF_POINT"}))
     IpSetFormat.add_member(:fire_eye, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIRE_EYE", traits: {"smithy.api#enumValue" => "FIRE_EYE"}))
-    IpSetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    IpSetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     IpSetStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     IpSetStatus.add_member(:activating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVATING", traits: {"smithy.api#enumValue" => "ACTIVATING"}))
     IpSetStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
@@ -1563,12 +1563,12 @@ module Aws::GuardDuty
     IpSetStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
     IpSetStatus.add_member(:delete_pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_PENDING", traits: {"smithy.api#enumValue" => "DELETE_PENDING"}))
     IpSetStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
-    Ipv6Addresses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    Issues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    Ipv6Addresses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    Issues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ItemPath.add_member(:nested_item_path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NestedItemPath", traits: {"smithy.api#jsonName" => "nestedItemPath"}))
     ItemPath.add_member(:hash, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Hash", traits: {"smithy.api#jsonName" => "hash"}))
     ItemPath.type = Types::ItemPath
-    ItemPaths.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ItemPath, name: "member")
+    ItemPaths.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemPath, name: "member"))
     KubernetesApiCallAction.add_member(:request_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RequestUri", traits: {"smithy.api#jsonName" => "requestUri"}))
     KubernetesApiCallAction.add_member(:verb, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Verb", traits: {"smithy.api#jsonName" => "verb"}))
     KubernetesApiCallAction.add_member(:source_ips, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceIps, name: "SourceIps", traits: {"smithy.api#jsonName" => "sourceIPs"}))
@@ -1648,7 +1648,7 @@ module Aws::GuardDuty
     LambdaDetails.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "VpcConfig", traits: {"smithy.api#jsonName" => "vpcConfig"}))
     LambdaDetails.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     LambdaDetails.type = Types::LambdaDetails
-    Lineage.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LineageObject, name: "member")
+    Lineage.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LineageObject, name: "member"))
     LineageObject.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime", traits: {"smithy.api#jsonName" => "startTime"}))
     LineageObject.add_member(:namespace_pid, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "NamespacePid", traits: {"smithy.api#jsonName" => "namespacePid"}))
     LineageObject.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "UserId", traits: {"smithy.api#jsonName" => "userId"}))
@@ -1765,7 +1765,7 @@ module Aws::GuardDuty
     LoginAttribute.add_member(:failed_login_attempts, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "FailedLoginAttempts", traits: {"smithy.api#jsonName" => "failedLoginAttempts"}))
     LoginAttribute.add_member(:successful_login_attempts, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "SuccessfulLoginAttempts", traits: {"smithy.api#jsonName" => "successfulLoginAttempts"}))
     LoginAttribute.type = Types::LoginAttribute
-    LoginAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoginAttribute, name: "member")
+    LoginAttributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoginAttribute, name: "member"))
     MalwareProtectionConfiguration.add_member(:scan_ec2_instance_with_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanEc2InstanceWithFindings, name: "ScanEc2InstanceWithFindings", traits: {"smithy.api#jsonName" => "scanEc2InstanceWithFindings"}))
     MalwareProtectionConfiguration.type = Types::MalwareProtectionConfiguration
     MalwareProtectionConfigurationResult.add_member(:scan_ec2_instance_with_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanEc2InstanceWithFindingsResult, name: "ScanEc2InstanceWithFindings", traits: {"smithy.api#jsonName" => "scanEc2InstanceWithFindings"}))
@@ -1775,27 +1775,27 @@ module Aws::GuardDuty
     MalwareProtectionDataSourceFreeTrial.type = Types::MalwareProtectionDataSourceFreeTrial
     MalwareProtectionPlanActions.add_member(:tagging, ::Smithy::Schema::Shapes::MemberShape.new(target: MalwareProtectionPlanTaggingAction, name: "Tagging", traits: {"smithy.api#jsonName" => "tagging"}))
     MalwareProtectionPlanActions.type = Types::MalwareProtectionPlanActions
-    MalwareProtectionPlanObjectPrefixesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    MalwareProtectionPlanObjectPrefixesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     MalwareProtectionPlanStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     MalwareProtectionPlanStatus.add_member(:warning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WARNING", traits: {"smithy.api#enumValue" => "WARNING"}))
     MalwareProtectionPlanStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
     MalwareProtectionPlanStatusReason.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code", traits: {"smithy.api#jsonName" => "code"}))
     MalwareProtectionPlanStatusReason.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
     MalwareProtectionPlanStatusReason.type = Types::MalwareProtectionPlanStatusReason
-    MalwareProtectionPlanStatusReasonsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MalwareProtectionPlanStatusReason, name: "member")
+    MalwareProtectionPlanStatusReasonsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MalwareProtectionPlanStatusReason, name: "member"))
     MalwareProtectionPlanSummary.add_member(:malware_protection_plan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MalwareProtectionPlanId", traits: {"smithy.api#jsonName" => "malwareProtectionPlanId"}))
     MalwareProtectionPlanSummary.type = Types::MalwareProtectionPlanSummary
     MalwareProtectionPlanTaggingAction.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MalwareProtectionPlanTaggingActionStatus, name: "Status", traits: {"smithy.api#jsonName" => "status"}))
     MalwareProtectionPlanTaggingAction.type = Types::MalwareProtectionPlanTaggingAction
     MalwareProtectionPlanTaggingActionStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     MalwareProtectionPlanTaggingActionStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    MalwareProtectionPlansSummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MalwareProtectionPlanSummary, name: "member")
+    MalwareProtectionPlansSummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MalwareProtectionPlanSummary, name: "member"))
     MalwareScanDetails.add_member(:threats, ::Smithy::Schema::Shapes::MemberShape.new(target: Threats, name: "Threats", traits: {"smithy.api#jsonName" => "threats"}))
     MalwareScanDetails.type = Types::MalwareScanDetails
     ManagementType.add_member(:auto_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTO_MANAGED", traits: {"smithy.api#enumValue" => "AUTO_MANAGED"}))
     ManagementType.add_member(:manual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANUAL", traits: {"smithy.api#enumValue" => "MANUAL"}))
     ManagementType.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    MapEquals.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScanConditionPair, name: "member")
+    MapEquals.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanConditionPair, name: "member"))
     Master.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId", traits: {"smithy.api#jsonName" => "accountId"}))
     Master.add_member(:invitation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "InvitationId", traits: {"smithy.api#jsonName" => "invitationId"}))
     Master.add_member(:relationship_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RelationshipStatus", traits: {"smithy.api#jsonName" => "relationshipStatus"}))
@@ -1817,13 +1817,13 @@ module Aws::GuardDuty
     MemberAdditionalConfigurationResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureStatus, name: "Status", traits: {"smithy.api#jsonName" => "status"}))
     MemberAdditionalConfigurationResult.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt", traits: {"smithy.api#jsonName" => "updatedAt"}))
     MemberAdditionalConfigurationResult.type = Types::MemberAdditionalConfigurationResult
-    MemberAdditionalConfigurationResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemberAdditionalConfigurationResult, name: "member")
-    MemberAdditionalConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemberAdditionalConfiguration, name: "member")
+    MemberAdditionalConfigurationResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberAdditionalConfigurationResult, name: "member"))
+    MemberAdditionalConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberAdditionalConfiguration, name: "member"))
     MemberDataSourceConfiguration.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "accountId", "smithy.api#required" => {}}))
     MemberDataSourceConfiguration.add_member(:data_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceConfigurationsResult, name: "DataSources", traits: {"smithy.api#deprecated" => {"message" => "This parameter is deprecated, use Features instead"}, "smithy.api#jsonName" => "dataSources"}))
     MemberDataSourceConfiguration.add_member(:features, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberFeaturesConfigurationsResults, name: "Features", traits: {"smithy.api#jsonName" => "features"}))
     MemberDataSourceConfiguration.type = Types::MemberDataSourceConfiguration
-    MemberDataSourceConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemberDataSourceConfiguration, name: "member")
+    MemberDataSourceConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberDataSourceConfiguration, name: "member"))
     MemberFeaturesConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrgFeature, name: "Name", traits: {"smithy.api#jsonName" => "name"}))
     MemberFeaturesConfiguration.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureStatus, name: "Status", traits: {"smithy.api#jsonName" => "status"}))
     MemberFeaturesConfiguration.add_member(:additional_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberAdditionalConfigurations, name: "AdditionalConfiguration", traits: {"smithy.api#jsonName" => "additionalConfiguration"}))
@@ -1833,13 +1833,13 @@ module Aws::GuardDuty
     MemberFeaturesConfigurationResult.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt", traits: {"smithy.api#jsonName" => "updatedAt"}))
     MemberFeaturesConfigurationResult.add_member(:additional_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberAdditionalConfigurationResults, name: "AdditionalConfiguration", traits: {"smithy.api#jsonName" => "additionalConfiguration"}))
     MemberFeaturesConfigurationResult.type = Types::MemberFeaturesConfigurationResult
-    MemberFeaturesConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemberFeaturesConfiguration, name: "member")
-    MemberFeaturesConfigurationsResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemberFeaturesConfigurationResult, name: "member")
-    Members.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Member, name: "member")
-    MemoryRegionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    MemberFeaturesConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberFeaturesConfiguration, name: "member"))
+    MemberFeaturesConfigurationsResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberFeaturesConfigurationResult, name: "member"))
+    Members.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Member, name: "member"))
+    MemoryRegionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     MfaStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     MfaStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    Neq.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    Neq.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     NetworkConnection.add_member(:direction, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkDirection, name: "Direction", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "direction", "smithy.api#required" => {}}))
     NetworkConnection.type = Types::NetworkConnection
     NetworkConnectionAction.add_member(:blocked, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Blocked", traits: {"smithy.api#jsonName" => "blocked"}))
@@ -1861,7 +1861,7 @@ module Aws::GuardDuty
     NetworkEndpoint.add_member(:autonomous_system, ::Smithy::Schema::Shapes::MemberShape.new(target: AutonomousSystem, name: "AutonomousSystem", traits: {"smithy.api#jsonName" => "autonomousSystem"}))
     NetworkEndpoint.add_member(:connection, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkConnection, name: "Connection", traits: {"smithy.api#jsonName" => "connection"}))
     NetworkEndpoint.type = Types::NetworkEndpoint
-    NetworkEndpoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkEndpoint, name: "member")
+    NetworkEndpoints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkEndpoint, name: "member"))
     NetworkGeoLocation.add_member(:city, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "City", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "city", "smithy.api#required" => {}}))
     NetworkGeoLocation.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Country", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "country", "smithy.api#required" => {}}))
     NetworkGeoLocation.add_member(:latitude, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Latitude", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "lat", "smithy.api#required" => {}}))
@@ -1878,9 +1878,9 @@ module Aws::GuardDuty
     NetworkInterface.add_member(:subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SubnetId", traits: {"smithy.api#jsonName" => "subnetId"}))
     NetworkInterface.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VpcId", traits: {"smithy.api#jsonName" => "vpcId"}))
     NetworkInterface.type = Types::NetworkInterface
-    NetworkInterfaces.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface, name: "member")
-    NotEquals.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    ObservationTexts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    NetworkInterfaces.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface, name: "member"))
+    NotEquals.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    ObservationTexts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Observations.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ObservationTexts, name: "Text", traits: {"smithy.api#jsonName" => "text"}))
     Observations.type = Types::Observations
     OrderBy.add_member(:asc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASC", traits: {"smithy.api#enumValue" => "ASC"}))
@@ -1909,8 +1909,8 @@ module Aws::GuardDuty
     OrganizationAdditionalConfigurationResult.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrgFeatureAdditionalConfiguration, name: "Name", traits: {"smithy.api#jsonName" => "name"}))
     OrganizationAdditionalConfigurationResult.add_member(:auto_enable, ::Smithy::Schema::Shapes::MemberShape.new(target: OrgFeatureStatus, name: "AutoEnable", traits: {"smithy.api#jsonName" => "autoEnable"}))
     OrganizationAdditionalConfigurationResult.type = Types::OrganizationAdditionalConfigurationResult
-    OrganizationAdditionalConfigurationResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationAdditionalConfigurationResult, name: "member")
-    OrganizationAdditionalConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationAdditionalConfiguration, name: "member")
+    OrganizationAdditionalConfigurationResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationAdditionalConfigurationResult, name: "member"))
+    OrganizationAdditionalConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationAdditionalConfiguration, name: "member"))
     OrganizationDataSourceConfigurations.add_member(:s3_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationS3LogsConfiguration, name: "S3Logs", traits: {"smithy.api#jsonName" => "s3Logs"}))
     OrganizationDataSourceConfigurations.add_member(:kubernetes, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationKubernetesConfiguration, name: "Kubernetes", traits: {"smithy.api#jsonName" => "kubernetes"}))
     OrganizationDataSourceConfigurations.add_member(:malware_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationMalwareProtectionConfiguration, name: "MalwareProtection", traits: {"smithy.api#jsonName" => "malwareProtection"}))
@@ -1941,10 +1941,10 @@ module Aws::GuardDuty
     OrganizationFeatureStatisticsAdditionalConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrgFeatureAdditionalConfiguration, name: "Name", traits: {"smithy.api#jsonName" => "name"}))
     OrganizationFeatureStatisticsAdditionalConfiguration.add_member(:enabled_accounts_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "EnabledAccountsCount", traits: {"smithy.api#jsonName" => "enabledAccountsCount"}))
     OrganizationFeatureStatisticsAdditionalConfiguration.type = Types::OrganizationFeatureStatisticsAdditionalConfiguration
-    OrganizationFeatureStatisticsAdditionalConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationFeatureStatisticsAdditionalConfiguration, name: "member")
-    OrganizationFeatureStatisticsResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationFeatureStatistics, name: "member")
-    OrganizationFeaturesConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationFeatureConfiguration, name: "member")
-    OrganizationFeaturesConfigurationsResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationFeatureConfigurationResult, name: "member")
+    OrganizationFeatureStatisticsAdditionalConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationFeatureStatisticsAdditionalConfiguration, name: "member"))
+    OrganizationFeatureStatisticsResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationFeatureStatistics, name: "member"))
+    OrganizationFeaturesConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationFeatureConfiguration, name: "member"))
+    OrganizationFeaturesConfigurationsResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationFeatureConfigurationResult, name: "member"))
     OrganizationKubernetesAuditLogsConfiguration.add_member(:auto_enable, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AutoEnable", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "autoEnable", "smithy.api#required" => {}}))
     OrganizationKubernetesAuditLogsConfiguration.type = Types::OrganizationKubernetesAuditLogsConfiguration
     OrganizationKubernetesAuditLogsConfigurationResult.add_member(:auto_enable, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AutoEnable", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "autoEnable", "smithy.api#required" => {}}))
@@ -1983,11 +1983,11 @@ module Aws::GuardDuty
     PortProbeDetail.add_member(:local_ip_details, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalIpDetails, name: "LocalIpDetails", traits: {"smithy.api#jsonName" => "localIpDetails"}))
     PortProbeDetail.add_member(:remote_ip_details, ::Smithy::Schema::Shapes::MemberShape.new(target: RemoteIpDetails, name: "RemoteIpDetails", traits: {"smithy.api#jsonName" => "remoteIpDetails"}))
     PortProbeDetail.type = Types::PortProbeDetail
-    PortProbeDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PortProbeDetail, name: "member")
+    PortProbeDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortProbeDetail, name: "member"))
     PrivateIpAddressDetails.add_member(:private_dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PrivateDnsName", traits: {"smithy.api#jsonName" => "privateDnsName"}))
     PrivateIpAddressDetails.add_member(:private_ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "PrivateIpAddress", traits: {"smithy.api#jsonName" => "privateIpAddress"}))
     PrivateIpAddressDetails.type = Types::PrivateIpAddressDetails
-    PrivateIpAddresses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateIpAddressDetails, name: "member")
+    PrivateIpAddresses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateIpAddressDetails, name: "member"))
     ProcessDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#jsonName" => "name"}))
     ProcessDetails.add_member(:executable_path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ExecutablePath", traits: {"smithy.api#jsonName" => "executablePath"}))
     ProcessDetails.add_member(:executable_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ExecutableSha256", traits: {"smithy.api#jsonName" => "executableSha256"}))
@@ -2005,7 +2005,7 @@ module Aws::GuardDuty
     ProductCode.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code", traits: {"smithy.api#jsonName" => "productCodeId"}))
     ProductCode.add_member(:product_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ProductType", traits: {"smithy.api#jsonName" => "productCodeType"}))
     ProductCode.type = Types::ProductCode
-    ProductCodes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCode, name: "member")
+    ProductCodes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCode, name: "member"))
     ProfileSubtype.add_member(:frequent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FREQUENT", traits: {"smithy.api#enumValue" => "FREQUENT"}))
     ProfileSubtype.add_member(:infrequent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFREQUENT", traits: {"smithy.api#enumValue" => "INFREQUENT"}))
     ProfileSubtype.add_member(:unseen, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNSEEN", traits: {"smithy.api#enumValue" => "UNSEEN"}))
@@ -2091,7 +2091,7 @@ module Aws::GuardDuty
     ResourceData.type = Types::ResourceData
     ResourceDetails.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn", traits: {"smithy.api#jsonName" => "instanceArn"}))
     ResourceDetails.type = Types::ResourceDetails
-    ResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
     ResourceNotFoundException.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type", traits: {"smithy.api#jsonName" => "__type"}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
@@ -2104,7 +2104,7 @@ module Aws::GuardDuty
     ResourceType.add_member(:eks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EKS", traits: {"smithy.api#enumValue" => "EKS"}))
     ResourceType.add_member(:ecs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ECS", traits: {"smithy.api#enumValue" => "ECS"}))
     ResourceType.add_member(:ec2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EC2", traits: {"smithy.api#enumValue" => "EC2"}))
-    ResourceUids.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ResourceUids.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ResourceV2.add_member(:uid, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Uid", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "uid", "smithy.api#required" => {}}))
     ResourceV2.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#jsonName" => "name"}))
     ResourceV2.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AccountId", traits: {"smithy.api#jsonName" => "accountId"}))
@@ -2115,7 +2115,7 @@ module Aws::GuardDuty
     ResourceV2.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     ResourceV2.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceData, name: "Data", traits: {"smithy.api#jsonName" => "data"}))
     ResourceV2.type = Types::ResourceV2
-    Resources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceV2, name: "member")
+    Resources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceV2, name: "member"))
     RuntimeContext.add_member(:modifying_process, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessDetails, name: "ModifyingProcess", traits: {"smithy.api#jsonName" => "modifyingProcess"}))
     RuntimeContext.add_member(:modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ModifiedAt", traits: {"smithy.api#jsonName" => "modifiedAt"}))
     RuntimeContext.add_member(:script_path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ScriptPath", traits: {"smithy.api#jsonName" => "scriptPath"}))
@@ -2166,7 +2166,7 @@ module Aws::GuardDuty
     S3BucketDetail.add_member(:public_access, ::Smithy::Schema::Shapes::MemberShape.new(target: PublicAccess, name: "PublicAccess", traits: {"smithy.api#jsonName" => "publicAccess"}))
     S3BucketDetail.add_member(:s3_object_details, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectDetails, name: "S3ObjectDetails", traits: {"smithy.api#jsonName" => "s3ObjectDetails"}))
     S3BucketDetail.type = Types::S3BucketDetail
-    S3BucketDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketDetail, name: "member")
+    S3BucketDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketDetail, name: "member"))
     S3LogsConfiguration.add_member(:enable, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enable", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "enable", "smithy.api#required" => {}}))
     S3LogsConfiguration.type = Types::S3LogsConfiguration
     S3LogsConfigurationResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceStatus, name: "Status", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "status", "smithy.api#required" => {}}))
@@ -2181,8 +2181,8 @@ module Aws::GuardDuty
     S3ObjectDetail.add_member(:hash, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Hash", traits: {"smithy.api#jsonName" => "hash"}))
     S3ObjectDetail.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VersionId", traits: {"smithy.api#jsonName" => "versionId"}))
     S3ObjectDetail.type = Types::S3ObjectDetail
-    S3ObjectDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectDetail, name: "member")
-    S3ObjectUids.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    S3ObjectDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectDetail, name: "member"))
+    S3ObjectUids.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Scan.add_member(:detector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorId, name: "DetectorId", traits: {"smithy.api#jsonName" => "detectorId"}))
     Scan.add_member(:admin_detector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorId, name: "AdminDetectorId", traits: {"smithy.api#jsonName" => "adminDetectorId"}))
     Scan.add_member(:scan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ScanId", traits: {"smithy.api#jsonName" => "scanId"}))
@@ -2204,8 +2204,8 @@ module Aws::GuardDuty
     ScanConditionPair.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "key", "smithy.api#required" => {}}))
     ScanConditionPair.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#jsonName" => "value"}))
     ScanConditionPair.type = Types::ScanConditionPair
-    ScanCriterion.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ScanCriterionKey, name: "key")
-    ScanCriterion.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ScanCondition, name: "value")
+    ScanCriterion.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanCriterionKey, name: "key"))
+    ScanCriterion.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanCondition, name: "value"))
     ScanCriterionKey.add_member(:ec2_instance_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EC2_INSTANCE_TAG", traits: {"smithy.api#enumValue" => "EC2_INSTANCE_TAG"}))
     ScanDetections.add_member(:scanned_item_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ScannedItemCount, name: "ScannedItemCount", traits: {"smithy.api#jsonName" => "scannedItemCount"}))
     ScanDetections.add_member(:threats_detected_item_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ThreatsDetectedItemCount, name: "ThreatsDetectedItemCount", traits: {"smithy.api#jsonName" => "threatsDetectedItemCount"}))
@@ -2237,21 +2237,21 @@ module Aws::GuardDuty
     ScanThreatName.add_member(:item_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ItemCount", traits: {"smithy.api#jsonName" => "itemCount"}))
     ScanThreatName.add_member(:file_paths, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePaths, name: "FilePaths", traits: {"smithy.api#jsonName" => "filePaths"}))
     ScanThreatName.type = Types::ScanThreatName
-    ScanThreatNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScanThreatName, name: "member")
+    ScanThreatNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanThreatName, name: "member"))
     ScanType.add_member(:guardduty_initiated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GUARDDUTY_INITIATED", traits: {"smithy.api#enumValue" => "GUARDDUTY_INITIATED"}))
     ScanType.add_member(:on_demand, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON_DEMAND", traits: {"smithy.api#enumValue" => "ON_DEMAND"}))
     ScannedItemCount.add_member(:total_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "TotalGb", traits: {"smithy.api#jsonName" => "totalGb"}))
     ScannedItemCount.add_member(:files, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Files", traits: {"smithy.api#jsonName" => "files"}))
     ScannedItemCount.add_member(:volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Volumes", traits: {"smithy.api#jsonName" => "volumes"}))
     ScannedItemCount.type = Types::ScannedItemCount
-    Scans.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Scan, name: "member")
+    Scans.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Scan, name: "member"))
     SecurityContext.add_member(:privileged, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Privileged", traits: {"smithy.api#jsonName" => "privileged"}))
     SecurityContext.add_member(:allow_privilege_escalation, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AllowPrivilegeEscalation", traits: {"smithy.api#jsonName" => "allowPrivilegeEscalation"}))
     SecurityContext.type = Types::SecurityContext
     SecurityGroup.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "GroupId", traits: {"smithy.api#jsonName" => "groupId"}))
     SecurityGroup.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "GroupName", traits: {"smithy.api#jsonName" => "groupName"}))
     SecurityGroup.type = Types::SecurityGroup
-    SecurityGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroup, name: "member")
+    SecurityGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroup, name: "member"))
     Sequence.add_member(:uid, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Uid", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "uid", "smithy.api#required" => {}}))
     Sequence.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceDescription, name: "Description", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "description", "smithy.api#required" => {}}))
     Sequence.add_member(:actors, ::Smithy::Schema::Shapes::MemberShape.new(target: Actors, name: "Actors", traits: {"smithy.api#jsonName" => "actors"}))
@@ -2286,7 +2286,7 @@ module Aws::GuardDuty
     Session.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTime", traits: {"smithy.api#jsonName" => "createdTime"}))
     Session.add_member(:issuer, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Issuer", traits: {"smithy.api#jsonName" => "issuer"}))
     Session.type = Types::Session
-    SessionNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    SessionNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     SeverityStatistics.add_member(:last_generated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastGeneratedAt", traits: {"smithy.api#jsonName" => "lastGeneratedAt"}))
     SeverityStatistics.add_member(:severity, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Severity", traits: {"smithy.api#jsonName" => "severity"}))
     SeverityStatistics.add_member(:total_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "TotalFindings", traits: {"smithy.api#jsonName" => "totalFindings"}))
@@ -2313,12 +2313,12 @@ module Aws::GuardDuty
     SignalType.add_member(:flow_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLOW_LOGS", traits: {"smithy.api#enumValue" => "FLOW_LOGS"}))
     SignalType.add_member(:dns_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DNS_LOGS", traits: {"smithy.api#enumValue" => "DNS_LOGS"}))
     SignalType.add_member(:runtime_monitoring, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNTIME_MONITORING", traits: {"smithy.api#enumValue" => "RUNTIME_MONITORING"}))
-    Signals.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Signal, name: "member")
+    Signals.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Signal, name: "member"))
     SortCriteria.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AttributeName", traits: {"smithy.api#jsonName" => "attributeName"}))
     SortCriteria.add_member(:order_by, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderBy, name: "OrderBy", traits: {"smithy.api#jsonName" => "orderBy"}))
     SortCriteria.type = Types::SortCriteria
-    SourceIps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    Sources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    SourceIps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    Sources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     StartMalwareScanRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "resourceArn", "smithy.api#required" => {}}))
     StartMalwareScanRequest.type = Types::StartMalwareScanRequest
     StartMalwareScanResponse.add_member(:scan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ScanId", traits: {"smithy.api#jsonName" => "scanId"}))
@@ -2333,18 +2333,18 @@ module Aws::GuardDuty
     StopMonitoringMembersRequest.type = Types::StopMonitoringMembersRequest
     StopMonitoringMembersResponse.add_member(:unprocessed_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedAccounts, name: "UnprocessedAccounts", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "unprocessedAccounts", "smithy.api#required" => {}}))
     StopMonitoringMembersResponse.type = Types::StopMonitoringMembersResponse
-    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    SubnetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Key", traits: {"smithy.api#jsonName" => "key"}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value", traits: {"smithy.api#jsonName" => "value"}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardDutyArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "resourceArn", "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "tags", "smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     Threat.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#jsonName" => "name"}))
     Threat.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Source", traits: {"smithy.api#jsonName" => "source"}))
     Threat.add_member(:item_paths, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemPaths, name: "ItemPaths", traits: {"smithy.api#jsonName" => "itemPaths"}))
@@ -2360,7 +2360,7 @@ module Aws::GuardDuty
     ThreatEntitySetFormat.add_member(:alien_vault, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALIEN_VAULT", traits: {"smithy.api#enumValue" => "ALIEN_VAULT"}))
     ThreatEntitySetFormat.add_member(:proof_point, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROOF_POINT", traits: {"smithy.api#enumValue" => "PROOF_POINT"}))
     ThreatEntitySetFormat.add_member(:fire_eye, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIRE_EYE", traits: {"smithy.api#enumValue" => "FIRE_EYE"}))
-    ThreatEntitySetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ThreatEntitySetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ThreatEntitySetStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     ThreatEntitySetStatus.add_member(:activating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVATING", traits: {"smithy.api#enumValue" => "ACTIVATING"}))
     ThreatEntitySetStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
@@ -2374,7 +2374,7 @@ module Aws::GuardDuty
     ThreatIntelSetFormat.add_member(:alien_vault, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALIEN_VAULT", traits: {"smithy.api#enumValue" => "ALIEN_VAULT"}))
     ThreatIntelSetFormat.add_member(:proof_point, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROOF_POINT", traits: {"smithy.api#enumValue" => "PROOF_POINT"}))
     ThreatIntelSetFormat.add_member(:fire_eye, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIRE_EYE", traits: {"smithy.api#enumValue" => "FIRE_EYE"}))
-    ThreatIntelSetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ThreatIntelSetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ThreatIntelSetStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     ThreatIntelSetStatus.add_member(:activating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVATING", traits: {"smithy.api#enumValue" => "ACTIVATING"}))
     ThreatIntelSetStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
@@ -2386,9 +2386,9 @@ module Aws::GuardDuty
     ThreatIntelligenceDetail.add_member(:threat_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ThreatNames, name: "ThreatNames", traits: {"smithy.api#jsonName" => "threatNames"}))
     ThreatIntelligenceDetail.add_member(:threat_file_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ThreatFileSha256", traits: {"smithy.api#jsonName" => "threatFileSha256"}))
     ThreatIntelligenceDetail.type = Types::ThreatIntelligenceDetail
-    ThreatIntelligenceDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThreatIntelligenceDetail, name: "member")
-    ThreatNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    Threats.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Threat, name: "member")
+    ThreatIntelligenceDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThreatIntelligenceDetail, name: "member"))
+    ThreatNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    Threats.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Threat, name: "member"))
     ThreatsDetectedItemCount.add_member(:files, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Files", traits: {"smithy.api#jsonName" => "files"}))
     ThreatsDetectedItemCount.type = Types::ThreatsDetectedItemCount
     Total.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Amount", traits: {"smithy.api#jsonName" => "amount"}))
@@ -2403,7 +2403,7 @@ module Aws::GuardDuty
     TrustedEntitySetFormat.add_member(:alien_vault, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALIEN_VAULT", traits: {"smithy.api#enumValue" => "ALIEN_VAULT"}))
     TrustedEntitySetFormat.add_member(:proof_point, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROOF_POINT", traits: {"smithy.api#enumValue" => "PROOF_POINT"}))
     TrustedEntitySetFormat.add_member(:fire_eye, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIRE_EYE", traits: {"smithy.api#enumValue" => "FIRE_EYE"}))
-    TrustedEntitySetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    TrustedEntitySetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     TrustedEntitySetStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     TrustedEntitySetStatus.add_member(:activating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVATING", traits: {"smithy.api#enumValue" => "ACTIVATING"}))
     TrustedEntitySetStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
@@ -2418,7 +2418,7 @@ module Aws::GuardDuty
     UnprocessedAccount.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "accountId", "smithy.api#required" => {}}))
     UnprocessedAccount.add_member(:result, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Result", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "result", "smithy.api#required" => {}}))
     UnprocessedAccount.type = Types::UnprocessedAccount
-    UnprocessedAccounts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedAccount, name: "member")
+    UnprocessedAccounts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedAccount, name: "member"))
     UnprocessedDataSourcesResult.add_member(:malware_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: MalwareProtectionConfigurationResult, name: "MalwareProtection", traits: {"smithy.api#jsonName" => "malwareProtection"}))
     UnprocessedDataSourcesResult.type = Types::UnprocessedDataSourcesResult
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardDutyArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "resourceArn", "smithy.api#required" => {}}))
@@ -2515,7 +2515,7 @@ module Aws::GuardDuty
     UsageAccountResult.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId", traits: {"smithy.api#jsonName" => "accountId"}))
     UsageAccountResult.add_member(:total, ::Smithy::Schema::Shapes::MemberShape.new(target: Total, name: "Total", traits: {"smithy.api#jsonName" => "total"}))
     UsageAccountResult.type = Types::UsageAccountResult
-    UsageAccountResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageAccountResult, name: "member")
+    UsageAccountResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageAccountResult, name: "member"))
     UsageCriteria.add_member(:account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIds, name: "AccountIds", traits: {"smithy.api#jsonName" => "accountIds"}))
     UsageCriteria.add_member(:data_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceList, name: "DataSources", traits: {"smithy.api#deprecated" => {"message" => "This parameter is deprecated, use Features instead"}, "smithy.api#jsonName" => "dataSources"}))
     UsageCriteria.add_member(:resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceList, name: "Resources", traits: {"smithy.api#jsonName" => "resources"}))
@@ -2524,7 +2524,7 @@ module Aws::GuardDuty
     UsageDataSourceResult.add_member(:data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "DataSource", traits: {"smithy.api#jsonName" => "dataSource"}))
     UsageDataSourceResult.add_member(:total, ::Smithy::Schema::Shapes::MemberShape.new(target: Total, name: "Total", traits: {"smithy.api#jsonName" => "total"}))
     UsageDataSourceResult.type = Types::UsageDataSourceResult
-    UsageDataSourceResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageDataSourceResult, name: "member")
+    UsageDataSourceResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageDataSourceResult, name: "member"))
     UsageFeature.add_member(:flow_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLOW_LOGS", traits: {"smithy.api#enumValue" => "FLOW_LOGS"}))
     UsageFeature.add_member(:cloud_trail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUD_TRAIL", traits: {"smithy.api#enumValue" => "CLOUD_TRAIL"}))
     UsageFeature.add_member(:dns_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DNS_LOGS", traits: {"smithy.api#enumValue" => "DNS_LOGS"}))
@@ -2538,15 +2538,15 @@ module Aws::GuardDuty
     UsageFeature.add_member(:ec2_runtime_monitoring, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EC2_RUNTIME_MONITORING", traits: {"smithy.api#enumValue" => "EC2_RUNTIME_MONITORING"}))
     UsageFeature.add_member(:rds_dbi_protection_provisioned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RDS_DBI_PROTECTION_PROVISIONED", traits: {"smithy.api#enumValue" => "RDS_DBI_PROTECTION_PROVISIONED"}))
     UsageFeature.add_member(:rds_dbi_protection_serverless, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RDS_DBI_PROTECTION_SERVERLESS", traits: {"smithy.api#enumValue" => "RDS_DBI_PROTECTION_SERVERLESS"}))
-    UsageFeatureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageFeature, name: "member")
+    UsageFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageFeature, name: "member"))
     UsageFeatureResult.add_member(:feature, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageFeature, name: "Feature", traits: {"smithy.api#jsonName" => "feature"}))
     UsageFeatureResult.add_member(:total, ::Smithy::Schema::Shapes::MemberShape.new(target: Total, name: "Total", traits: {"smithy.api#jsonName" => "total"}))
     UsageFeatureResult.type = Types::UsageFeatureResult
-    UsageFeatureResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageFeatureResult, name: "member")
+    UsageFeatureResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageFeatureResult, name: "member"))
     UsageResourceResult.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Resource", traits: {"smithy.api#jsonName" => "resource"}))
     UsageResourceResult.add_member(:total, ::Smithy::Schema::Shapes::MemberShape.new(target: Total, name: "Total", traits: {"smithy.api#jsonName" => "total"}))
     UsageResourceResult.type = Types::UsageResourceResult
-    UsageResourceResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageResourceResult, name: "member")
+    UsageResourceResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageResourceResult, name: "member"))
     UsageStatisticType.add_member(:sum_by_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUM_BY_ACCOUNT", traits: {"smithy.api#enumValue" => "SUM_BY_ACCOUNT"}))
     UsageStatisticType.add_member(:sum_by_data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUM_BY_DATA_SOURCE", traits: {"smithy.api#enumValue" => "SUM_BY_DATA_SOURCE"}))
     UsageStatisticType.add_member(:sum_by_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUM_BY_RESOURCE", traits: {"smithy.api#enumValue" => "SUM_BY_RESOURCE"}))
@@ -2563,11 +2563,11 @@ module Aws::GuardDuty
     UsageTopAccountResult.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId", traits: {"smithy.api#jsonName" => "accountId"}))
     UsageTopAccountResult.add_member(:total, ::Smithy::Schema::Shapes::MemberShape.new(target: Total, name: "Total", traits: {"smithy.api#jsonName" => "total"}))
     UsageTopAccountResult.type = Types::UsageTopAccountResult
-    UsageTopAccountsByFeatureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageTopAccountResult, name: "member")
+    UsageTopAccountsByFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageTopAccountResult, name: "member"))
     UsageTopAccountsResult.add_member(:feature, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageFeature, name: "Feature", traits: {"smithy.api#jsonName" => "feature"}))
     UsageTopAccountsResult.add_member(:accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageTopAccountsByFeatureList, name: "Accounts", traits: {"smithy.api#jsonName" => "accounts"}))
     UsageTopAccountsResult.type = Types::UsageTopAccountsResult
-    UsageTopAccountsResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageTopAccountsResult, name: "member")
+    UsageTopAccountsResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageTopAccountsResult, name: "member"))
     User.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "name", "smithy.api#required" => {}}))
     User.add_member(:uid, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Uid", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "uid", "smithy.api#required" => {}}))
     User.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "type", "smithy.api#required" => {}}))
@@ -2585,12 +2585,12 @@ module Aws::GuardDuty
     VolumeDetail.add_member(:snapshot_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SnapshotArn", traits: {"smithy.api#jsonName" => "snapshotArn"}))
     VolumeDetail.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KmsKeyArn", traits: {"smithy.api#jsonName" => "kmsKeyArn"}))
     VolumeDetail.type = Types::VolumeDetail
-    VolumeDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeDetail, name: "member")
+    VolumeDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeDetail, name: "member"))
     VolumeMount.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#jsonName" => "name"}))
     VolumeMount.add_member(:mount_path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MountPath", traits: {"smithy.api#jsonName" => "mountPath"}))
     VolumeMount.type = Types::VolumeMount
-    VolumeMounts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeMount, name: "member")
-    Volumes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, name: "member")
+    VolumeMounts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeMount, name: "member"))
+    Volumes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, name: "member"))
     VpcConfig.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, name: "SubnetIds", traits: {"smithy.api#jsonName" => "subnetIds"}))
     VpcConfig.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VpcId", traits: {"smithy.api#jsonName" => "vpcId"}))
     VpcConfig.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroups, name: "SecurityGroups", traits: {"smithy.api#jsonName" => "securityGroups"}))

@@ -542,8 +542,8 @@ module Aws::CloudWatchLogs
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AccountIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member")
-    AccountPolicies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountPolicy, name: "member")
+    AccountIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
+    AccountPolicies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountPolicy, name: "member"))
     AccountPolicy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "policyName"))
     AccountPolicy.add_member(:policy_document, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountPolicyDocument, name: "policyDocument"))
     AccountPolicy.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedTime"))
@@ -552,16 +552,16 @@ module Aws::CloudWatchLogs
     AccountPolicy.add_member(:selection_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectionCriteria, name: "selectionCriteria"))
     AccountPolicy.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId"))
     AccountPolicy.type = Types::AccountPolicy
-    AddKeyEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AddKeyEntry, name: "member")
+    AddKeyEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AddKeyEntry, name: "member"))
     AddKeyEntry.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "key", traits: {"smithy.api#required" => {}}))
     AddKeyEntry.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AddKeyValue, name: "value", traits: {"smithy.api#required" => {}}))
     AddKeyEntry.add_member(:overwrite_if_exists, ::Smithy::Schema::Shapes::MemberShape.new(target: OverwriteIfExists, name: "overwriteIfExists", traits: {"smithy.api#default" => false}))
     AddKeyEntry.type = Types::AddKeyEntry
     AddKeys.add_member(:entries, ::Smithy::Schema::Shapes::MemberShape.new(target: AddKeyEntries, name: "entries", traits: {"smithy.api#required" => {}}))
     AddKeys.type = Types::AddKeys
-    AllowedFieldDelimiters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldDelimiter, name: "member")
-    AllowedFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecordField, name: "member")
-    Anomalies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Anomaly, name: "member")
+    AllowedFieldDelimiters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldDelimiter, name: "member"))
+    AllowedFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordField, name: "member"))
+    Anomalies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Anomaly, name: "member"))
     Anomaly.add_member(:anomaly_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyId, name: "anomalyId", traits: {"smithy.api#required" => {}}))
     Anomaly.add_member(:pattern_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PatternId, name: "patternId", traits: {"smithy.api#required" => {}}))
     Anomaly.add_member(:anomaly_detector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorArn, name: "anomalyDetectorArn", traits: {"smithy.api#required" => {}}))
@@ -599,7 +599,7 @@ module Aws::CloudWatchLogs
     AnomalyDetectorStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     AnomalyDetectorStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
     AnomalyDetectorStatus.add_member(:paused, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PAUSED", traits: {"smithy.api#enumValue" => "PAUSED"}))
-    AnomalyDetectors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetector, name: "member")
+    AnomalyDetectors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetector, name: "member"))
     AssociateKmsKeyRequest.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName"))
     AssociateKmsKeyRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "kmsKeyId", traits: {"smithy.api#required" => {}}))
     AssociateKmsKeyRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, name: "resourceIdentifier"))
@@ -611,7 +611,7 @@ module Aws::CloudWatchLogs
     CSV.type = Types::CSV
     CancelExportTaskRequest.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportTaskId, name: "taskId", traits: {"smithy.api#required" => {}}))
     CancelExportTaskRequest.type = Types::CancelExportTaskRequest
-    Columns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Column, name: "member")
+    Columns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Column, name: "member"))
     ConfigurationTemplate.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "service"))
     ConfigurationTemplate.add_member(:log_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogType, name: "logType"))
     ConfigurationTemplate.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType"))
@@ -627,12 +627,12 @@ module Aws::CloudWatchLogs
     ConfigurationTemplateDeliveryConfigValues.add_member(:field_delimiter, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldDelimiter, name: "fieldDelimiter"))
     ConfigurationTemplateDeliveryConfigValues.add_member(:s3_delivery_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3DeliveryConfiguration, name: "s3DeliveryConfiguration"))
     ConfigurationTemplateDeliveryConfigValues.type = Types::ConfigurationTemplateDeliveryConfigValues
-    ConfigurationTemplates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationTemplate, name: "member")
+    ConfigurationTemplates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationTemplate, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ConflictException.type = Types::ConflictException
     CopyValue.add_member(:entries, ::Smithy::Schema::Shapes::MemberShape.new(target: CopyValueEntries, name: "entries", traits: {"smithy.api#required" => {}}))
     CopyValue.type = Types::CopyValue
-    CopyValueEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CopyValueEntry, name: "member")
+    CopyValueEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CopyValueEntry, name: "member"))
     CopyValueEntry.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "source", traits: {"smithy.api#required" => {}}))
     CopyValueEntry.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "target", traits: {"smithy.api#required" => {}}))
     CopyValueEntry.add_member(:overwrite_if_exists, ::Smithy::Schema::Shapes::MemberShape.new(target: OverwriteIfExists, name: "overwriteIfExists", traits: {"smithy.api#default" => false}))
@@ -674,7 +674,7 @@ module Aws::CloudWatchLogs
     CreateLogStreamRequest.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName", traits: {"smithy.api#required" => {}}))
     CreateLogStreamRequest.add_member(:log_stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogStreamName, name: "logStreamName", traits: {"smithy.api#required" => {}}))
     CreateLogStreamRequest.type = Types::CreateLogStreamRequest
-    DashboardViewerPrincipals.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    DashboardViewerPrincipals.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     DataAlreadyAcceptedException.add_member(:expected_sequence_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceToken, name: "expectedSequenceToken"))
     DataAlreadyAcceptedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     DataAlreadyAcceptedException.type = Types::DataAlreadyAcceptedException
@@ -739,8 +739,8 @@ module Aws::CloudWatchLogs
     DeleteSubscriptionFilterRequest.type = Types::DeleteSubscriptionFilterRequest
     DeleteTransformerRequest.add_member(:log_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "logGroupIdentifier", traits: {"smithy.api#required" => {}}))
     DeleteTransformerRequest.type = Types::DeleteTransformerRequest
-    DeleteWithKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WithKey, name: "member")
-    Deliveries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Delivery, name: "member")
+    DeleteWithKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WithKey, name: "member"))
+    Deliveries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Delivery, name: "member"))
     Delivery.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryId, name: "id"))
     Delivery.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
     Delivery.add_member(:delivery_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySourceName, name: "deliverySourceName"))
@@ -764,8 +764,8 @@ module Aws::CloudWatchLogs
     DeliveryDestinationType.add_member(:cwl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CWL", traits: {"smithy.api#enumValue" => "CWL"}))
     DeliveryDestinationType.add_member(:fh, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FH", traits: {"smithy.api#enumValue" => "FH"}))
     DeliveryDestinationType.add_member(:xray, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "XRAY", traits: {"smithy.api#enumValue" => "XRAY"}))
-    DeliveryDestinationTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryDestinationType, name: "member")
-    DeliveryDestinations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryDestination, name: "member")
+    DeliveryDestinationTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryDestinationType, name: "member"))
+    DeliveryDestinations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryDestination, name: "member"))
     DeliverySource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySourceName, name: "name"))
     DeliverySource.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
     DeliverySource.add_member(:resource_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArns, name: "resourceArns"))
@@ -773,7 +773,7 @@ module Aws::CloudWatchLogs
     DeliverySource.add_member(:log_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogType, name: "logType"))
     DeliverySource.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     DeliverySource.type = Types::DeliverySource
-    DeliverySources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySource, name: "member")
+    DeliverySources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySource, name: "member"))
     DescribeAccountPoliciesRequest.add_member(:policy_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyType, name: "policyType", traits: {"smithy.api#required" => {}}))
     DescribeAccountPoliciesRequest.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "policyName"))
     DescribeAccountPoliciesRequest.add_member(:account_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIds, name: "accountIdentifiers"))
@@ -825,21 +825,21 @@ module Aws::CloudWatchLogs
     DescribeExportTasksResponse.add_member(:export_tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportTasks, name: "exportTasks"))
     DescribeExportTasksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     DescribeExportTasksResponse.type = Types::DescribeExportTasksResponse
-    DescribeFieldIndexesLogGroupIdentifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "member")
+    DescribeFieldIndexesLogGroupIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "member"))
     DescribeFieldIndexesRequest.add_member(:log_group_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeFieldIndexesLogGroupIdentifiers, name: "logGroupIdentifiers", traits: {"smithy.api#required" => {}}))
     DescribeFieldIndexesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     DescribeFieldIndexesRequest.type = Types::DescribeFieldIndexesRequest
     DescribeFieldIndexesResponse.add_member(:field_indexes, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldIndexes, name: "fieldIndexes"))
     DescribeFieldIndexesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     DescribeFieldIndexesResponse.type = Types::DescribeFieldIndexesResponse
-    DescribeIndexPoliciesLogGroupIdentifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "member")
+    DescribeIndexPoliciesLogGroupIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "member"))
     DescribeIndexPoliciesRequest.add_member(:log_group_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeIndexPoliciesLogGroupIdentifiers, name: "logGroupIdentifiers", traits: {"smithy.api#required" => {}}))
     DescribeIndexPoliciesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     DescribeIndexPoliciesRequest.type = Types::DescribeIndexPoliciesRequest
     DescribeIndexPoliciesResponse.add_member(:index_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexPolicies, name: "indexPolicies"))
     DescribeIndexPoliciesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     DescribeIndexPoliciesResponse.type = Types::DescribeIndexPoliciesResponse
-    DescribeLogGroupsLogGroupIdentifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "member")
+    DescribeLogGroupsLogGroupIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "member"))
     DescribeLogGroupsRequest.add_member(:account_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIds, name: "accountIdentifiers"))
     DescribeLogGroupsRequest.add_member(:log_group_name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupNamePrefix"))
     DescribeLogGroupsRequest.add_member(:log_group_name_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupNamePattern, name: "logGroupNamePattern"))
@@ -913,22 +913,22 @@ module Aws::CloudWatchLogs
     Destination.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
     Destination.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime"))
     Destination.type = Types::Destination
-    Destinations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "member")
-    Dimensions.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionsKey, name: "key")
-    Dimensions.value = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionsValue, name: "value")
+    Destinations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "member"))
+    Dimensions.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionsKey, name: "key"))
+    Dimensions.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionsValue, name: "value"))
     DisassociateKmsKeyRequest.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName"))
     DisassociateKmsKeyRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, name: "resourceIdentifier"))
     DisassociateKmsKeyRequest.type = Types::DisassociateKmsKeyRequest
     Distribution.add_member(:random, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Random", traits: {"smithy.api#enumValue" => "Random"}))
     Distribution.add_member(:by_log_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ByLogStream", traits: {"smithy.api#enumValue" => "ByLogStream"}))
-    EmitSystemFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SystemField, name: "member")
+    EmitSystemFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemField, name: "member"))
     Entity.add_member(:key_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityKeyAttributes, name: "keyAttributes"))
     Entity.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityAttributes, name: "attributes"))
     Entity.type = Types::Entity
-    EntityAttributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityAttributesKey, name: "key")
-    EntityAttributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityAttributesValue, name: "value")
-    EntityKeyAttributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityKeyAttributesKey, name: "key")
-    EntityKeyAttributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityKeyAttributesValue, name: "value")
+    EntityAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityAttributesKey, name: "key"))
+    EntityAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityAttributesValue, name: "value"))
+    EntityKeyAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityKeyAttributesKey, name: "key"))
+    EntityKeyAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityKeyAttributesValue, name: "value"))
     EntityRejectionErrorType.add_member(:invalid_entity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_ENTITY", traits: {"smithy.api#enumValue" => "InvalidEntity"}))
     EntityRejectionErrorType.add_member(:invalid_type_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_TYPE_VALUE", traits: {"smithy.api#enumValue" => "InvalidTypeValue"}))
     EntityRejectionErrorType.add_member(:invalid_key_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_KEY_ATTRIBUTE", traits: {"smithy.api#enumValue" => "InvalidKeyAttributes"}))
@@ -936,8 +936,8 @@ module Aws::CloudWatchLogs
     EntityRejectionErrorType.add_member(:entity_size_too_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENTITY_SIZE_TOO_LARGE", traits: {"smithy.api#enumValue" => "EntitySizeTooLarge"}))
     EntityRejectionErrorType.add_member(:unsupported_log_group_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNSUPPORTED_LOG_GROUP_TYPE", traits: {"smithy.api#enumValue" => "UnsupportedLogGroupType"}))
     EntityRejectionErrorType.add_member(:missing_required_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISSING_REQUIRED_FIELDS", traits: {"smithy.api#enumValue" => "MissingRequiredFields"}))
-    Enumerations.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TokenString, name: "key")
-    Enumerations.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TokenValue, name: "value")
+    Enumerations.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenString, name: "key"))
+    Enumerations.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenValue, name: "value"))
     EvaluationFrequency.add_member(:one_min, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONE_MIN", traits: {"smithy.api#enumValue" => "ONE_MIN"}))
     EvaluationFrequency.add_member(:five_min, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIVE_MIN", traits: {"smithy.api#enumValue" => "FIVE_MIN"}))
     EvaluationFrequency.add_member(:ten_min, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEN_MIN", traits: {"smithy.api#enumValue" => "TEN_MIN"}))
@@ -971,16 +971,16 @@ module Aws::CloudWatchLogs
     ExportTaskStatusCode.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     ExportTaskStatusCode.add_member(:pending_cancel, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_CANCEL", traits: {"smithy.api#enumValue" => "PENDING_CANCEL"}))
     ExportTaskStatusCode.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
-    ExportTasks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportTask, name: "member")
-    ExtractedValues.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "key")
-    ExtractedValues.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "value")
+    ExportTasks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportTask, name: "member"))
+    ExtractedValues.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "key"))
+    ExtractedValues.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "value"))
     FieldIndex.add_member(:log_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "logGroupIdentifier"))
     FieldIndex.add_member(:field_index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldIndexName, name: "fieldIndexName"))
     FieldIndex.add_member(:last_scan_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastScanTime"))
     FieldIndex.add_member(:first_event_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "firstEventTime"))
     FieldIndex.add_member(:last_event_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastEventTime"))
     FieldIndex.type = Types::FieldIndex
-    FieldIndexes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldIndex, name: "member")
+    FieldIndexes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldIndex, name: "member"))
     FieldsData.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: Data, name: "data"))
     FieldsData.type = Types::FieldsData
     FilterLogEventsRequest.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName"))
@@ -1005,7 +1005,7 @@ module Aws::CloudWatchLogs
     FilteredLogEvent.add_member(:ingestion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ingestionTime"))
     FilteredLogEvent.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EventId, name: "eventId"))
     FilteredLogEvent.type = Types::FilteredLogEvent
-    FilteredLogEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilteredLogEvent, name: "member")
+    FilteredLogEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilteredLogEvent, name: "member"))
     FlattenedElement.add_member(:first, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIRST", traits: {"smithy.api#enumValue" => "first"}))
     FlattenedElement.add_member(:last, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAST", traits: {"smithy.api#enumValue" => "last"}))
     GetDataProtectionPolicyRequest.add_member(:log_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "logGroupIdentifier", traits: {"smithy.api#required" => {}}))
@@ -1101,9 +1101,9 @@ module Aws::CloudWatchLogs
     Grok.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "source"))
     Grok.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: GrokMatch, name: "match", traits: {"smithy.api#required" => {}}))
     Grok.type = Types::Grok
-    Histogram.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "key")
-    Histogram.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "value")
-    IndexPolicies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IndexPolicy, name: "member")
+    Histogram.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "key"))
+    Histogram.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "value"))
+    IndexPolicies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexPolicy, name: "member"))
     IndexPolicy.add_member(:log_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "logGroupIdentifier"))
     IndexPolicy.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdateTime"))
     IndexPolicy.add_member(:policy_document, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDocument, name: "policyDocument"))
@@ -1112,20 +1112,20 @@ module Aws::CloudWatchLogs
     IndexPolicy.type = Types::IndexPolicy
     IndexSource.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
     IndexSource.add_member(:log_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOG_GROUP", traits: {"smithy.api#enumValue" => "LOG_GROUP"}))
-    InheritedProperties.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InheritedProperty, name: "member")
+    InheritedProperties.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InheritedProperty, name: "member"))
     InheritedProperty.add_member(:account_data_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_DATA_PROTECTION", traits: {"smithy.api#enumValue" => "ACCOUNT_DATA_PROTECTION"}))
     InputLogEvent.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "timestamp", traits: {"smithy.api#required" => {}}))
     InputLogEvent.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: EventMessage, name: "message", traits: {"smithy.api#required" => {}}))
     InputLogEvent.type = Types::InputLogEvent
-    InputLogEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InputLogEvent, name: "member")
-    InputLogStreamNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogStreamName, name: "member")
+    InputLogEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InputLogEvent, name: "member"))
+    InputLogStreamNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogStreamName, name: "member"))
     IntegrationDetails.add_member(:open_search_integration_details, Types::IntegrationDetails::OpenSearchIntegrationDetails, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenSearchIntegrationDetails, name: "openSearchIntegrationDetails"))
     IntegrationDetails.add_member(:unknown, Types::IntegrationDetails::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     IntegrationDetails.type = Types::IntegrationDetails
     IntegrationStatus.add_member(:provisioning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROVISIONING", traits: {"smithy.api#enumValue" => "PROVISIONING"}))
     IntegrationStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     IntegrationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    IntegrationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationSummary, name: "member")
+    IntegrationSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationSummary, name: "member"))
     IntegrationSummary.add_member(:integration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationName, name: "integrationName"))
     IntegrationSummary.add_member(:integration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationType, name: "integrationType"))
     IntegrationSummary.add_member(:integration_status, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationStatus, name: "integrationStatus"))
@@ -1203,7 +1203,7 @@ module Aws::CloudWatchLogs
     LiveTailSessionLogEvent.type = Types::LiveTailSessionLogEvent
     LiveTailSessionMetadata.add_member(:sampled, ::Smithy::Schema::Shapes::MemberShape.new(target: IsSampled, name: "sampled", traits: {"smithy.api#default" => false}))
     LiveTailSessionMetadata.type = Types::LiveTailSessionMetadata
-    LiveTailSessionResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LiveTailSessionLogEvent, name: "member")
+    LiveTailSessionResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LiveTailSessionLogEvent, name: "member"))
     LiveTailSessionStart.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "requestId"))
     LiveTailSessionStart.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "sessionId"))
     LiveTailSessionStart.add_member(:log_group_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: StartLiveTailLogGroupIdentifiers, name: "logGroupIdentifiers"))
@@ -1229,25 +1229,25 @@ module Aws::CloudWatchLogs
     LogGroup.add_member(:log_group_class, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupClass, name: "logGroupClass"))
     LogGroup.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "logGroupArn"))
     LogGroup.type = Types::LogGroup
-    LogGroupArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupArn, name: "member")
+    LogGroupArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupArn, name: "member"))
     LogGroupClass.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
     LogGroupClass.add_member(:infrequent_access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFREQUENT_ACCESS", traits: {"smithy.api#enumValue" => "INFREQUENT_ACCESS"}))
     LogGroupClass.add_member(:delivery, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELIVERY", traits: {"smithy.api#enumValue" => "DELIVERY"}))
     LogGroupField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Field, name: "name"))
     LogGroupField.add_member(:percent, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, name: "percent", traits: {"smithy.api#default" => 0}))
     LogGroupField.type = Types::LogGroupField
-    LogGroupFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupField, name: "member")
-    LogGroupIdentifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "member")
-    LogGroupNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "member")
-    LogGroupSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupSummary, name: "member")
+    LogGroupFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupField, name: "member"))
+    LogGroupIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "member"))
+    LogGroupNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "member"))
+    LogGroupSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupSummary, name: "member"))
     LogGroupSummary.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName"))
     LogGroupSummary.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "logGroupArn"))
     LogGroupSummary.add_member(:log_group_class, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupClass, name: "logGroupClass"))
     LogGroupSummary.type = Types::LogGroupSummary
-    LogGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroup, name: "member")
-    LogRecord.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Field, name: "key")
-    LogRecord.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "value")
-    LogSamples.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogEvent, name: "member")
+    LogGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroup, name: "member"))
+    LogRecord.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Field, name: "key"))
+    LogRecord.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "value"))
+    LogSamples.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogEvent, name: "member"))
     LogStream.add_member(:log_stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogStreamName, name: "logStreamName"))
     LogStream.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime"))
     LogStream.add_member(:first_event_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "firstEventTimestamp"))
@@ -1257,15 +1257,15 @@ module Aws::CloudWatchLogs
     LogStream.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
     LogStream.add_member(:stored_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: StoredBytes, name: "storedBytes", traits: {"smithy.api#deprecated" => {"message" => "Starting on June 17, 2019, this parameter will be deprecated for log streams, and will be reported as zero. This change applies only to log streams. The storedBytes parameter for log groups is not affected."}}))
     LogStream.type = Types::LogStream
-    LogStreams.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogStream, name: "member")
-    LogTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogType, name: "member")
+    LogStreams.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogStream, name: "member"))
+    LogTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogType, name: "member"))
     LowerCaseString.add_member(:with_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: LowerCaseStringWithKeys, name: "withKeys", traits: {"smithy.api#required" => {}}))
     LowerCaseString.type = Types::LowerCaseString
-    LowerCaseStringWithKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WithKey, name: "member")
+    LowerCaseStringWithKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WithKey, name: "member"))
     MalformedQueryException.add_member(:query_compile_error, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryCompileError, name: "queryCompileError"))
     MalformedQueryException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     MalformedQueryException.type = Types::MalformedQueryException
-    MatchPatterns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MatchPattern, name: "member")
+    MatchPatterns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchPattern, name: "member"))
     MetricFilter.add_member(:filter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, name: "filterName"))
     MetricFilter.add_member(:filter_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterPattern, name: "filterPattern"))
     MetricFilter.add_member(:metric_transformations, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricTransformations, name: "metricTransformations"))
@@ -1279,8 +1279,8 @@ module Aws::CloudWatchLogs
     MetricFilterMatchRecord.add_member(:event_message, ::Smithy::Schema::Shapes::MemberShape.new(target: EventMessage, name: "eventMessage"))
     MetricFilterMatchRecord.add_member(:extracted_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtractedValues, name: "extractedValues"))
     MetricFilterMatchRecord.type = Types::MetricFilterMatchRecord
-    MetricFilterMatches.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricFilterMatchRecord, name: "member")
-    MetricFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricFilter, name: "member")
+    MetricFilterMatches.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricFilterMatchRecord, name: "member"))
+    MetricFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricFilter, name: "member"))
     MetricTransformation.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "metricName", traits: {"smithy.api#required" => {}}))
     MetricTransformation.add_member(:metric_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricNamespace, name: "metricNamespace", traits: {"smithy.api#required" => {}}))
     MetricTransformation.add_member(:metric_value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricValue, name: "metricValue", traits: {"smithy.api#required" => {}}))
@@ -1288,8 +1288,8 @@ module Aws::CloudWatchLogs
     MetricTransformation.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimensions, name: "dimensions"))
     MetricTransformation.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardUnit, name: "unit"))
     MetricTransformation.type = Types::MetricTransformation
-    MetricTransformations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricTransformation, name: "member")
-    MoveKeyEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MoveKeyEntry, name: "member")
+    MetricTransformations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricTransformation, name: "member"))
+    MoveKeyEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MoveKeyEntry, name: "member"))
     MoveKeyEntry.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "source", traits: {"smithy.api#required" => {}}))
     MoveKeyEntry.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "target", traits: {"smithy.api#required" => {}}))
     MoveKeyEntry.add_member(:overwrite_if_exists, ::Smithy::Schema::Shapes::MemberShape.new(target: OverwriteIfExists, name: "overwriteIfExists", traits: {"smithy.api#default" => false}))
@@ -1354,12 +1354,12 @@ module Aws::CloudWatchLogs
     OutputFormat.add_member(:w3_c, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "W3C", traits: {"smithy.api#enumValue" => "w3c"}))
     OutputFormat.add_member(:raw, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RAW", traits: {"smithy.api#enumValue" => "raw"}))
     OutputFormat.add_member(:parquet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARQUET", traits: {"smithy.api#enumValue" => "parquet"}))
-    OutputFormats.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OutputFormat, name: "member")
+    OutputFormats.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputFormat, name: "member"))
     OutputLogEvent.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "timestamp"))
     OutputLogEvent.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: EventMessage, name: "message"))
     OutputLogEvent.add_member(:ingestion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ingestionTime"))
     OutputLogEvent.type = Types::OutputLogEvent
-    OutputLogEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OutputLogEvent, name: "member")
+    OutputLogEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputLogEvent, name: "member"))
     ParseCloudfront.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "source"))
     ParseCloudfront.type = Types::ParseCloudfront
     ParseJSON.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "source"))
@@ -1391,7 +1391,7 @@ module Aws::CloudWatchLogs
     PatternToken.add_member(:enumerations, ::Smithy::Schema::Shapes::MemberShape.new(target: Enumerations, name: "enumerations"))
     PatternToken.add_member(:inferred_token_name, ::Smithy::Schema::Shapes::MemberShape.new(target: InferredTokenName, name: "inferredTokenName"))
     PatternToken.type = Types::PatternToken
-    PatternTokens.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PatternToken, name: "member")
+    PatternTokens.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PatternToken, name: "member"))
     Policy.add_member(:delivery_destination_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryDestinationPolicy, name: "deliveryDestinationPolicy"))
     Policy.type = Types::Policy
     PolicyScope.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
@@ -1425,7 +1425,7 @@ module Aws::CloudWatchLogs
     Processor.add_member(:type_converter, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeConverter, name: "typeConverter"))
     Processor.add_member(:upper_case_string, ::Smithy::Schema::Shapes::MemberShape.new(target: UpperCaseString, name: "upperCaseString"))
     Processor.type = Types::Processor
-    Processors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Processor, name: "member")
+    Processors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Processor, name: "member"))
     PutAccountPolicyRequest.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "policyName", traits: {"smithy.api#required" => {}}))
     PutAccountPolicyRequest.add_member(:policy_document, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountPolicyDocument, name: "policyDocument", traits: {"smithy.api#required" => {}}))
     PutAccountPolicyRequest.add_member(:policy_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyType, name: "policyType", traits: {"smithy.api#required" => {}}))
@@ -1548,7 +1548,7 @@ module Aws::CloudWatchLogs
     QueryDefinition.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastModified"))
     QueryDefinition.add_member(:log_group_names, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupNames, name: "logGroupNames"))
     QueryDefinition.type = Types::QueryDefinition
-    QueryDefinitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryDefinition, name: "member")
+    QueryDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryDefinition, name: "member"))
     QueryInfo.add_member(:query_language, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryLanguage, name: "queryLanguage"))
     QueryInfo.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryId, name: "queryId"))
     QueryInfo.add_member(:query_string, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryString, name: "queryString"))
@@ -1556,11 +1556,11 @@ module Aws::CloudWatchLogs
     QueryInfo.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createTime"))
     QueryInfo.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName"))
     QueryInfo.type = Types::QueryInfo
-    QueryInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryInfo, name: "member")
+    QueryInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryInfo, name: "member"))
     QueryLanguage.add_member(:cwli, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CWLI", traits: {"smithy.api#enumValue" => "CWLI"}))
     QueryLanguage.add_member(:sql, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SQL", traits: {"smithy.api#enumValue" => "SQL"}))
     QueryLanguage.add_member(:ppl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PPL", traits: {"smithy.api#enumValue" => "PPL"}))
-    QueryResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResultRows, name: "member")
+    QueryResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultRows, name: "member"))
     QueryStatistics.add_member(:records_matched, ::Smithy::Schema::Shapes::MemberShape.new(target: StatsValue, name: "recordsMatched", traits: {"smithy.api#default" => 0}))
     QueryStatistics.add_member(:records_scanned, ::Smithy::Schema::Shapes::MemberShape.new(target: StatsValue, name: "recordsScanned", traits: {"smithy.api#default" => 0}))
     QueryStatistics.add_member(:estimated_records_skipped, ::Smithy::Schema::Shapes::MemberShape.new(target: StatsValue, name: "estimatedRecordsSkipped", traits: {"smithy.api#default" => 0}))
@@ -1578,14 +1578,14 @@ module Aws::CloudWatchLogs
     RecordField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldHeader, name: "name"))
     RecordField.add_member(:mandatory, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "mandatory"))
     RecordField.type = Types::RecordField
-    RecordFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldHeader, name: "member")
+    RecordFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldHeader, name: "member"))
     RejectedEntityInfo.add_member(:error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRejectionErrorType, name: "errorType", traits: {"smithy.api#required" => {}}))
     RejectedEntityInfo.type = Types::RejectedEntityInfo
     RejectedLogEventsInfo.add_member(:too_new_log_event_start_index, ::Smithy::Schema::Shapes::MemberShape.new(target: LogEventIndex, name: "tooNewLogEventStartIndex"))
     RejectedLogEventsInfo.add_member(:too_old_log_event_end_index, ::Smithy::Schema::Shapes::MemberShape.new(target: LogEventIndex, name: "tooOldLogEventEndIndex"))
     RejectedLogEventsInfo.add_member(:expired_log_event_end_index, ::Smithy::Schema::Shapes::MemberShape.new(target: LogEventIndex, name: "expiredLogEventEndIndex"))
     RejectedLogEventsInfo.type = Types::RejectedLogEventsInfo
-    RenameKeyEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RenameKeyEntry, name: "member")
+    RenameKeyEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RenameKeyEntry, name: "member"))
     RenameKeyEntry.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "key", traits: {"smithy.api#required" => {}}))
     RenameKeyEntry.add_member(:rename_to, ::Smithy::Schema::Shapes::MemberShape.new(target: RenameTo, name: "renameTo", traits: {"smithy.api#required" => {}}))
     RenameKeyEntry.add_member(:overwrite_if_exists, ::Smithy::Schema::Shapes::MemberShape.new(target: OverwriteIfExists, name: "overwriteIfExists", traits: {"smithy.api#default" => false}))
@@ -1594,13 +1594,13 @@ module Aws::CloudWatchLogs
     RenameKeys.type = Types::RenameKeys
     ResourceAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ResourceAlreadyExistsException.type = Types::ResourceAlreadyExistsException
-    ResourceArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    ResourceArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     ResourceConfig.add_member(:open_search_resource_config, Types::ResourceConfig::OpenSearchResourceConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenSearchResourceConfig, name: "openSearchResourceConfig"))
     ResourceConfig.add_member(:unknown, Types::ResourceConfig::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ResourceConfig.type = Types::ResourceConfig
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourcePolicies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicy, name: "member")
+    ResourcePolicies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicy, name: "member"))
     ResourcePolicy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "policyName"))
     ResourcePolicy.add_member(:policy_document, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDocument, name: "policyDocument"))
     ResourcePolicy.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedTime"))
@@ -1608,11 +1608,11 @@ module Aws::CloudWatchLogs
     ResourcePolicy.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn"))
     ResourcePolicy.add_member(:revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpectedRevisionId, name: "revisionId"))
     ResourcePolicy.type = Types::ResourcePolicy
-    ResourceTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "member")
+    ResourceTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "member"))
     ResultField.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: Field, name: "field"))
     ResultField.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "value"))
     ResultField.type = Types::ResultField
-    ResultRows.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResultField, name: "member")
+    ResultRows.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultField, name: "member"))
     S3DeliveryConfiguration.add_member(:suffix_path, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverySuffixPath, name: "suffixPath"))
     S3DeliveryConfiguration.add_member(:enable_hive_compatible_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enableHiveCompatiblePath"))
     S3DeliveryConfiguration.type = Types::S3DeliveryConfiguration
@@ -1620,7 +1620,7 @@ module Aws::CloudWatchLogs
     SearchedLogStream.add_member(:log_stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogStreamName, name: "logStreamName"))
     SearchedLogStream.add_member(:searched_completely, ::Smithy::Schema::Shapes::MemberShape.new(target: LogStreamSearchedCompletely, name: "searchedCompletely"))
     SearchedLogStream.type = Types::SearchedLogStream
-    SearchedLogStreams.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchedLogStream, name: "member")
+    SearchedLogStreams.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchedLogStream, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -1631,7 +1631,7 @@ module Aws::CloudWatchLogs
     SessionTimeoutException.type = Types::SessionTimeoutException
     SplitString.add_member(:entries, ::Smithy::Schema::Shapes::MemberShape.new(target: SplitStringEntries, name: "entries", traits: {"smithy.api#required" => {}}))
     SplitString.type = Types::SplitString
-    SplitStringEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SplitStringEntry, name: "member")
+    SplitStringEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SplitStringEntry, name: "member"))
     SplitStringEntry.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "source", traits: {"smithy.api#required" => {}}))
     SplitStringEntry.add_member(:delimiter, ::Smithy::Schema::Shapes::MemberShape.new(target: SplitStringDelimiter, name: "delimiter", traits: {"smithy.api#required" => {}}))
     SplitStringEntry.type = Types::SplitStringEntry
@@ -1662,7 +1662,7 @@ module Aws::CloudWatchLogs
     StandardUnit.add_member(:terabits_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TerabitsSecond", traits: {"smithy.api#enumValue" => "Terabits/Second"}))
     StandardUnit.add_member(:count_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CountSecond", traits: {"smithy.api#enumValue" => "Count/Second"}))
     StandardUnit.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "None", traits: {"smithy.api#enumValue" => "None"}))
-    StartLiveTailLogGroupIdentifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "member")
+    StartLiveTailLogGroupIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "member"))
     StartLiveTailRequest.add_member(:log_group_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: StartLiveTailLogGroupIdentifiers, name: "logGroupIdentifiers", traits: {"smithy.api#required" => {}}))
     StartLiveTailRequest.add_member(:log_stream_names, ::Smithy::Schema::Shapes::MemberShape.new(target: InputLogStreamNames, name: "logStreamNames"))
     StartLiveTailRequest.add_member(:log_stream_name_prefixes, ::Smithy::Schema::Shapes::MemberShape.new(target: InputLogStreamNames, name: "logStreamNamePrefixes"))
@@ -1705,10 +1705,10 @@ module Aws::CloudWatchLogs
     SubscriptionFilter.add_member(:field_selection_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldSelectionCriteria, name: "fieldSelectionCriteria"))
     SubscriptionFilter.add_member(:emit_system_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: EmitSystemFields, name: "emitSystemFields"))
     SubscriptionFilter.type = Types::SubscriptionFilter
-    SubscriptionFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionFilter, name: "member")
+    SubscriptionFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionFilter, name: "member"))
     SubstituteString.add_member(:entries, ::Smithy::Schema::Shapes::MemberShape.new(target: SubstituteStringEntries, name: "entries", traits: {"smithy.api#required" => {}}))
     SubstituteString.type = Types::SubstituteString
-    SubstituteStringEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubstituteStringEntry, name: "member")
+    SubstituteStringEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubstituteStringEntry, name: "member"))
     SubstituteStringEntry.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "source", traits: {"smithy.api#required" => {}}))
     SubstituteStringEntry.add_member(:from, ::Smithy::Schema::Shapes::MemberShape.new(target: FromKey, name: "from", traits: {"smithy.api#required" => {}}))
     SubstituteStringEntry.add_member(:to, ::Smithy::Schema::Shapes::MemberShape.new(target: ToKey, name: "to", traits: {"smithy.api#required" => {}}))
@@ -1723,17 +1723,17 @@ module Aws::CloudWatchLogs
     SuppressionUnit.add_member(:seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECONDS", traits: {"smithy.api#enumValue" => "SECONDS"}))
     SuppressionUnit.add_member(:minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MINUTES", traits: {"smithy.api#enumValue" => "MINUTES"}))
     SuppressionUnit.add_member(:hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOURS", traits: {"smithy.api#enumValue" => "HOURS"}))
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagLogGroupRequest.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName", traits: {"smithy.api#required" => {}}))
     TagLogGroupRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#required" => {}}))
     TagLogGroupRequest.type = Types::TagLogGroupRequest
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
-    TestEventMessages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventMessage, name: "member")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
+    TestEventMessages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventMessage, name: "member"))
     TestMetricFilterRequest.add_member(:filter_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterPattern, name: "filterPattern", traits: {"smithy.api#required" => {}}))
     TestMetricFilterRequest.add_member(:log_event_messages, ::Smithy::Schema::Shapes::MemberShape.new(target: TestEventMessages, name: "logEventMessages", traits: {"smithy.api#required" => {}}))
     TestMetricFilterRequest.type = Types::TestMetricFilterRequest
@@ -1753,17 +1753,17 @@ module Aws::CloudWatchLogs
     TransformedLogRecord.add_member(:event_message, ::Smithy::Schema::Shapes::MemberShape.new(target: EventMessage, name: "eventMessage"))
     TransformedLogRecord.add_member(:transformed_event_message, ::Smithy::Schema::Shapes::MemberShape.new(target: TransformedEventMessage, name: "transformedEventMessage"))
     TransformedLogRecord.type = Types::TransformedLogRecord
-    TransformedLogs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TransformedLogRecord, name: "member")
+    TransformedLogs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TransformedLogRecord, name: "member"))
     TrimString.add_member(:with_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TrimStringWithKeys, name: "withKeys", traits: {"smithy.api#required" => {}}))
     TrimString.type = Types::TrimString
-    TrimStringWithKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WithKey, name: "member")
+    TrimStringWithKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WithKey, name: "member"))
     Type.add_member(:boolean, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BOOLEAN", traits: {"smithy.api#enumValue" => "boolean"}))
     Type.add_member(:integer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTEGER", traits: {"smithy.api#enumValue" => "integer"}))
     Type.add_member(:double, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOUBLE", traits: {"smithy.api#enumValue" => "double"}))
     Type.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING", traits: {"smithy.api#enumValue" => "string"}))
     TypeConverter.add_member(:entries, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeConverterEntries, name: "entries", traits: {"smithy.api#required" => {}}))
     TypeConverter.type = Types::TypeConverter
-    TypeConverterEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TypeConverterEntry, name: "member")
+    TypeConverterEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeConverterEntry, name: "member"))
     TypeConverterEntry.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "key", traits: {"smithy.api#required" => {}}))
     TypeConverterEntry.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, name: "type", traits: {"smithy.api#required" => {}}))
     TypeConverterEntry.type = Types::TypeConverterEntry
@@ -1796,7 +1796,7 @@ module Aws::CloudWatchLogs
     UpdateLogAnomalyDetectorRequest.type = Types::UpdateLogAnomalyDetectorRequest
     UpperCaseString.add_member(:with_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: UpperCaseStringWithKeys, name: "withKeys", traits: {"smithy.api#required" => {}}))
     UpperCaseString.type = Types::UpperCaseString
-    UpperCaseStringWithKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WithKey, name: "member")
+    UpperCaseStringWithKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WithKey, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ValidationException.type = Types::ValidationException
 

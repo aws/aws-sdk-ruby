@@ -1366,15 +1366,15 @@ module Aws::SecurityHub
     AccountDetails.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AccountDetails.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Email"))
     AccountDetails.type = Types::AccountDetails
-    AccountDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountDetails, name: "member")
-    AccountIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    AccountDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountDetails, name: "member"))
+    AccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     Action.add_member(:action_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ActionType"))
     Action.add_member(:network_connection_action, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkConnectionAction, name: "NetworkConnectionAction"))
     Action.add_member(:aws_api_call_action, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsApiCallAction, name: "AwsApiCallAction"))
     Action.add_member(:dns_request_action, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsRequestAction, name: "DnsRequestAction"))
     Action.add_member(:port_probe_action, ::Smithy::Schema::Shapes::MemberShape.new(target: PortProbeAction, name: "PortProbeAction"))
     Action.type = Types::Action
-    ActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesAction, name: "member")
+    ActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesAction, name: "member"))
     ActionLocalIpDetails.add_member(:ip_address_v4, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "IpAddressV4"))
     ActionLocalIpDetails.type = Types::ActionLocalIpDetails
     ActionLocalPortDetails.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Port"))
@@ -1393,7 +1393,7 @@ module Aws::SecurityHub
     ActionTarget.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ActionTarget.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ActionTarget.type = Types::ActionTarget
-    ActionTargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionTarget, name: "member")
+    ActionTargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionTarget, name: "member"))
     Actor.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Id"))
     Actor.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ActorUser, name: "User"))
     Actor.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: ActorSession, name: "Session"))
@@ -1411,26 +1411,26 @@ module Aws::SecurityHub
     ActorUser.add_member(:credential_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CredentialUid"))
     ActorUser.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAccount, name: "Account"))
     ActorUser.type = Types::ActorUser
-    ActorsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Actor, name: "member")
+    ActorsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Actor, name: "member"))
     Adjustment.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Metric"))
     Adjustment.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Reason"))
     Adjustment.type = Types::Adjustment
-    AdjustmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Adjustment, name: "member")
+    AdjustmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Adjustment, name: "member"))
     AdminAccount.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AccountId"))
     AdminAccount.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminStatus, name: "Status"))
     AdminAccount.type = Types::AdminAccount
-    AdminAccounts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdminAccount, name: "member")
+    AdminAccounts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminAccount, name: "member"))
     AdminStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     AdminStatus.add_member(:disable_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DISABLE_IN_PROGRESS"}))
     AggregatorV2.add_member(:aggregator_v2_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AggregatorV2Arn"))
     AggregatorV2.type = Types::AggregatorV2
-    AggregatorV2List.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatorV2, name: "member")
+    AggregatorV2List.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatorV2, name: "member"))
     AllowedOperators.add_member(:and, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AND", traits: {"smithy.api#enumValue" => "AND"}))
     AllowedOperators.add_member(:or, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OR", traits: {"smithy.api#enumValue" => "OR"}))
-    ArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    ArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     AssociatedStandard.add_member(:standards_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "StandardsId"))
     AssociatedStandard.type = Types::AssociatedStandard
-    AssociatedStandardsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedStandard, name: "member")
+    AssociatedStandardsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedStandard, name: "member"))
     AssociationFilters.add_member(:configuration_policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConfigurationPolicyId"))
     AssociationFilters.add_member(:association_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationType, name: "AssociationType"))
     AssociationFilters.add_member(:association_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationPolicyAssociationStatus, name: "AssociationStatus"))
@@ -1442,7 +1442,7 @@ module Aws::SecurityHub
     AssociationSetDetails.add_member(:route_table_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RouteTableId"))
     AssociationSetDetails.add_member(:subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SubnetId"))
     AssociationSetDetails.type = Types::AssociationSetDetails
-    AssociationSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationSetDetails, name: "member")
+    AssociationSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationSetDetails, name: "member"))
     AssociationStateDetails.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "State"))
     AssociationStateDetails.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "StatusMessage"))
     AssociationStateDetails.type = Types::AssociationStateDetails
@@ -1455,9 +1455,9 @@ module Aws::SecurityHub
     AutomationRulesAction.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesActionType, name: "Type"))
     AutomationRulesAction.add_member(:finding_fields_update, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesFindingFieldsUpdate, name: "FindingFieldsUpdate"))
     AutomationRulesAction.type = Types::AutomationRulesAction
-    AutomationRulesActionListV2.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesActionV2, name: "member")
+    AutomationRulesActionListV2.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesActionV2, name: "member"))
     AutomationRulesActionType.add_member(:finding_fields_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_FIELDS_UPDATE", traits: {"smithy.api#enumValue" => "FINDING_FIELDS_UPDATE"}))
-    AutomationRulesActionTypeListV2.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesActionTypeObjectV2, name: "member")
+    AutomationRulesActionTypeListV2.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesActionTypeObjectV2, name: "member"))
     AutomationRulesActionTypeObjectV2.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesActionTypeV2, name: "Type"))
     AutomationRulesActionTypeObjectV2.type = Types::AutomationRulesActionTypeObjectV2
     AutomationRulesActionTypeV2.add_member(:finding_fields_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_FIELDS_UPDATE", traits: {"smithy.api#enumValue" => "FINDING_FIELDS_UPDATE"}))
@@ -1466,7 +1466,7 @@ module Aws::SecurityHub
     AutomationRulesActionV2.add_member(:finding_fields_update, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesFindingFieldsUpdateV2, name: "FindingFieldsUpdate"))
     AutomationRulesActionV2.add_member(:external_integration_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalIntegrationConfiguration, name: "ExternalIntegrationConfiguration"))
     AutomationRulesActionV2.type = Types::AutomationRulesActionV2
-    AutomationRulesArnsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    AutomationRulesArnsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     AutomationRulesConfig.add_member(:rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RuleArn"))
     AutomationRulesConfig.add_member(:rule_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleStatus, name: "RuleStatus"))
     AutomationRulesConfig.add_member(:rule_order, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleOrderValue, name: "RuleOrder"))
@@ -1479,7 +1479,7 @@ module Aws::SecurityHub
     AutomationRulesConfig.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt"))
     AutomationRulesConfig.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CreatedBy"))
     AutomationRulesConfig.type = Types::AutomationRulesConfig
-    AutomationRulesConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesConfig, name: "member")
+    AutomationRulesConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesConfig, name: "member"))
     AutomationRulesFindingFieldsUpdate.add_member(:note, ::Smithy::Schema::Shapes::MemberShape.new(target: NoteUpdate, name: "Note"))
     AutomationRulesFindingFieldsUpdate.add_member(:severity, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityUpdate, name: "Severity"))
     AutomationRulesFindingFieldsUpdate.add_member(:verification_state, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationState, name: "VerificationState"))
@@ -1543,8 +1543,8 @@ module Aws::SecurityHub
     AutomationRulesMetadata.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt"))
     AutomationRulesMetadata.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CreatedBy"))
     AutomationRulesMetadata.type = Types::AutomationRulesMetadata
-    AutomationRulesMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesMetadata, name: "member")
-    AutomationRulesMetadataListV2.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesMetadataV2, name: "member")
+    AutomationRulesMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesMetadata, name: "member"))
+    AutomationRulesMetadataListV2.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesMetadataV2, name: "member"))
     AutomationRulesMetadataV2.add_member(:rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RuleArn"))
     AutomationRulesMetadataV2.add_member(:rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RuleId"))
     AutomationRulesMetadataV2.add_member(:rule_order, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleOrderValueV2, name: "RuleOrder"))
@@ -1558,7 +1558,7 @@ module Aws::SecurityHub
     AvailabilityZone.add_member(:zone_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ZoneName"))
     AvailabilityZone.add_member(:subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SubnetId"))
     AvailabilityZone.type = Types::AvailabilityZone
-    AvailabilityZones.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "member")
+    AvailabilityZones.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "member"))
     AwsAmazonMqBrokerDetails.add_member(:authentication_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AuthenticationStrategy"))
     AwsAmazonMqBrokerDetails.add_member(:auto_minor_version_upgrade, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AutoMinorVersionUpgrade"))
     AwsAmazonMqBrokerDetails.add_member(:broker_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "BrokerArn"))
@@ -1608,7 +1608,7 @@ module Aws::SecurityHub
     AwsAmazonMqBrokerUsersDetails.add_member(:pending_change, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "PendingChange"))
     AwsAmazonMqBrokerUsersDetails.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Username"))
     AwsAmazonMqBrokerUsersDetails.type = Types::AwsAmazonMqBrokerUsersDetails
-    AwsAmazonMqBrokerUsersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAmazonMqBrokerUsersDetails, name: "member")
+    AwsAmazonMqBrokerUsersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAmazonMqBrokerUsersDetails, name: "member"))
     AwsApiCallAction.add_member(:api, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Api"))
     AwsApiCallAction.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ServiceName"))
     AwsApiCallAction.add_member(:caller_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CallerType"))
@@ -1643,7 +1643,7 @@ module Aws::SecurityHub
     AwsApiGatewayMethodSettings.add_member(:http_method, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "HttpMethod"))
     AwsApiGatewayMethodSettings.add_member(:resource_path, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourcePath"))
     AwsApiGatewayMethodSettings.type = Types::AwsApiGatewayMethodSettings
-    AwsApiGatewayMethodSettingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsApiGatewayMethodSettings, name: "member")
+    AwsApiGatewayMethodSettingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsApiGatewayMethodSettings, name: "member"))
     AwsApiGatewayRestApiDetails.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Id"))
     AwsApiGatewayRestApiDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     AwsApiGatewayRestApiDetails.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description"))
@@ -1707,7 +1707,7 @@ module Aws::SecurityHub
     AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails.add_member(:open_id_connect_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAppSyncGraphQlApiOpenIdConnectConfigDetails, name: "OpenIdConnectConfig"))
     AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails.add_member(:user_pool_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAppSyncGraphQlApiUserPoolConfigDetails, name: "UserPoolConfig"))
     AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails.type = Types::AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails
-    AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails, name: "member")
+    AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails, name: "member"))
     AwsAppSyncGraphQlApiDetails.add_member(:api_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ApiId"))
     AwsAppSyncGraphQlApiDetails.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Id"))
     AwsAppSyncGraphQlApiDetails.add_member(:open_id_connect_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAppSyncGraphQlApiOpenIdConnectConfigDetails, name: "OpenIdConnectConfig"))
@@ -1751,7 +1751,7 @@ module Aws::SecurityHub
     AwsAthenaWorkGroupDetails.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "State"))
     AwsAthenaWorkGroupDetails.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAthenaWorkGroupConfigurationDetails, name: "Configuration"))
     AwsAthenaWorkGroupDetails.type = Types::AwsAthenaWorkGroupDetails
-    AwsAutoScalingAutoScalingGroupAvailabilityZonesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails, name: "member")
+    AwsAutoScalingAutoScalingGroupAvailabilityZonesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails, name: "member"))
     AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Value"))
     AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails.type = Types::AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails
     AwsAutoScalingAutoScalingGroupDetails.add_member(:launch_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "LaunchConfigurationName"))
@@ -1785,7 +1785,7 @@ module Aws::SecurityHub
     AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification.add_member(:launch_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "LaunchTemplateName"))
     AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Version"))
     AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification.type = Types::AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification
-    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails, name: "member")
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails, name: "member"))
     AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "InstanceType"))
     AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails.add_member(:weighted_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "WeightedCapacity"))
     AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails.type = Types::AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails
@@ -1801,7 +1801,7 @@ module Aws::SecurityHub
     AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails.add_member(:volume_size, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "VolumeSize"))
     AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails.add_member(:volume_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VolumeType"))
     AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails.type = Types::AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails
-    AwsAutoScalingLaunchConfigurationBlockDeviceMappingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails, name: "member")
+    AwsAutoScalingLaunchConfigurationBlockDeviceMappingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails, name: "member"))
     AwsAutoScalingLaunchConfigurationDetails.add_member(:associate_public_ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AssociatePublicIpAddress"))
     AwsAutoScalingLaunchConfigurationDetails.add_member(:block_device_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAutoScalingLaunchConfigurationBlockDeviceMappingsList, name: "BlockDeviceMappings"))
     AwsAutoScalingLaunchConfigurationDetails.add_member(:classic_link_vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ClassicLinkVpcId"))
@@ -1831,7 +1831,7 @@ module Aws::SecurityHub
     AwsBackupBackupPlanAdvancedBackupSettingsDetails.add_member(:backup_options, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldMap, name: "BackupOptions"))
     AwsBackupBackupPlanAdvancedBackupSettingsDetails.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceType"))
     AwsBackupBackupPlanAdvancedBackupSettingsDetails.type = Types::AwsBackupBackupPlanAdvancedBackupSettingsDetails
-    AwsBackupBackupPlanAdvancedBackupSettingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsBackupBackupPlanAdvancedBackupSettingsDetails, name: "member")
+    AwsBackupBackupPlanAdvancedBackupSettingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsBackupBackupPlanAdvancedBackupSettingsDetails, name: "member"))
     AwsBackupBackupPlanBackupPlanDetails.add_member(:backup_plan_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "BackupPlanName"))
     AwsBackupBackupPlanBackupPlanDetails.add_member(:advanced_backup_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsBackupBackupPlanAdvancedBackupSettingsList, name: "AdvancedBackupSettings"))
     AwsBackupBackupPlanBackupPlanDetails.add_member(:backup_plan_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsBackupBackupPlanRuleList, name: "BackupPlanRule"))
@@ -1847,7 +1847,7 @@ module Aws::SecurityHub
     AwsBackupBackupPlanRuleCopyActionsDetails.add_member(:destination_backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DestinationBackupVaultArn"))
     AwsBackupBackupPlanRuleCopyActionsDetails.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsBackupBackupPlanLifecycleDetails, name: "Lifecycle"))
     AwsBackupBackupPlanRuleCopyActionsDetails.type = Types::AwsBackupBackupPlanRuleCopyActionsDetails
-    AwsBackupBackupPlanRuleCopyActionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsBackupBackupPlanRuleCopyActionsDetails, name: "member")
+    AwsBackupBackupPlanRuleCopyActionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsBackupBackupPlanRuleCopyActionsDetails, name: "member"))
     AwsBackupBackupPlanRuleDetails.add_member(:target_backup_vault, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "TargetBackupVault"))
     AwsBackupBackupPlanRuleDetails.add_member(:start_window_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "StartWindowMinutes"))
     AwsBackupBackupPlanRuleDetails.add_member(:schedule_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ScheduleExpression"))
@@ -1858,7 +1858,7 @@ module Aws::SecurityHub
     AwsBackupBackupPlanRuleDetails.add_member(:copy_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsBackupBackupPlanRuleCopyActionsList, name: "CopyActions"))
     AwsBackupBackupPlanRuleDetails.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsBackupBackupPlanLifecycleDetails, name: "Lifecycle"))
     AwsBackupBackupPlanRuleDetails.type = Types::AwsBackupBackupPlanRuleDetails
-    AwsBackupBackupPlanRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsBackupBackupPlanRuleDetails, name: "member")
+    AwsBackupBackupPlanRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsBackupBackupPlanRuleDetails, name: "member"))
     AwsBackupBackupVaultDetails.add_member(:backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "BackupVaultArn"))
     AwsBackupBackupVaultDetails.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "BackupVaultName"))
     AwsBackupBackupVaultDetails.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "EncryptionKeyArn"))
@@ -1930,14 +1930,14 @@ module Aws::SecurityHub
     AwsCertificateManagerCertificateDomainValidationOption.add_member(:validation_method, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ValidationMethod"))
     AwsCertificateManagerCertificateDomainValidationOption.add_member(:validation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ValidationStatus"))
     AwsCertificateManagerCertificateDomainValidationOption.type = Types::AwsCertificateManagerCertificateDomainValidationOption
-    AwsCertificateManagerCertificateDomainValidationOptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCertificateManagerCertificateDomainValidationOption, name: "member")
+    AwsCertificateManagerCertificateDomainValidationOptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCertificateManagerCertificateDomainValidationOption, name: "member"))
     AwsCertificateManagerCertificateExtendedKeyUsage.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     AwsCertificateManagerCertificateExtendedKeyUsage.add_member(:o_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "OId"))
     AwsCertificateManagerCertificateExtendedKeyUsage.type = Types::AwsCertificateManagerCertificateExtendedKeyUsage
-    AwsCertificateManagerCertificateExtendedKeyUsages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCertificateManagerCertificateExtendedKeyUsage, name: "member")
+    AwsCertificateManagerCertificateExtendedKeyUsages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCertificateManagerCertificateExtendedKeyUsage, name: "member"))
     AwsCertificateManagerCertificateKeyUsage.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     AwsCertificateManagerCertificateKeyUsage.type = Types::AwsCertificateManagerCertificateKeyUsage
-    AwsCertificateManagerCertificateKeyUsages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCertificateManagerCertificateKeyUsage, name: "member")
+    AwsCertificateManagerCertificateKeyUsages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCertificateManagerCertificateKeyUsage, name: "member"))
     AwsCertificateManagerCertificateOptions.add_member(:certificate_transparency_logging_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CertificateTransparencyLoggingPreference"))
     AwsCertificateManagerCertificateOptions.type = Types::AwsCertificateManagerCertificateOptions
     AwsCertificateManagerCertificateRenewalSummary.add_member(:domain_validation_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCertificateManagerCertificateDomainValidationOptions, name: "DomainValidationOptions"))
@@ -1971,12 +1971,12 @@ module Aws::SecurityHub
     AwsCloudFormationStackOutputsDetails.add_member(:output_key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "OutputKey"))
     AwsCloudFormationStackOutputsDetails.add_member(:output_value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "OutputValue"))
     AwsCloudFormationStackOutputsDetails.type = Types::AwsCloudFormationStackOutputsDetails
-    AwsCloudFormationStackOutputsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudFormationStackOutputsDetails, name: "member")
+    AwsCloudFormationStackOutputsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudFormationStackOutputsDetails, name: "member"))
     AwsCloudFrontDistributionCacheBehavior.add_member(:viewer_protocol_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ViewerProtocolPolicy"))
     AwsCloudFrontDistributionCacheBehavior.type = Types::AwsCloudFrontDistributionCacheBehavior
     AwsCloudFrontDistributionCacheBehaviors.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudFrontDistributionCacheBehaviorsItemList, name: "Items"))
     AwsCloudFrontDistributionCacheBehaviors.type = Types::AwsCloudFrontDistributionCacheBehaviors
-    AwsCloudFrontDistributionCacheBehaviorsItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudFrontDistributionCacheBehavior, name: "member")
+    AwsCloudFrontDistributionCacheBehaviorsItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudFrontDistributionCacheBehavior, name: "member"))
     AwsCloudFrontDistributionDefaultCacheBehavior.add_member(:viewer_protocol_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ViewerProtocolPolicy"))
     AwsCloudFrontDistributionDefaultCacheBehavior.type = Types::AwsCloudFrontDistributionDefaultCacheBehavior
     AwsCloudFrontDistributionDetails.add_member(:cache_behaviors, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudFrontDistributionCacheBehaviors, name: "CacheBehaviors"))
@@ -2011,17 +2011,17 @@ module Aws::SecurityHub
     AwsCloudFrontDistributionOriginGroupFailoverStatusCodes.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudFrontDistributionOriginGroupFailoverStatusCodesItemList, name: "Items"))
     AwsCloudFrontDistributionOriginGroupFailoverStatusCodes.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Quantity"))
     AwsCloudFrontDistributionOriginGroupFailoverStatusCodes.type = Types::AwsCloudFrontDistributionOriginGroupFailoverStatusCodes
-    AwsCloudFrontDistributionOriginGroupFailoverStatusCodesItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "member")
+    AwsCloudFrontDistributionOriginGroupFailoverStatusCodesItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "member"))
     AwsCloudFrontDistributionOriginGroups.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudFrontDistributionOriginGroupsItemList, name: "Items"))
     AwsCloudFrontDistributionOriginGroups.type = Types::AwsCloudFrontDistributionOriginGroups
-    AwsCloudFrontDistributionOriginGroupsItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudFrontDistributionOriginGroup, name: "member")
+    AwsCloudFrontDistributionOriginGroupsItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudFrontDistributionOriginGroup, name: "member"))
     AwsCloudFrontDistributionOriginItem.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DomainName"))
     AwsCloudFrontDistributionOriginItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Id"))
     AwsCloudFrontDistributionOriginItem.add_member(:origin_path, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "OriginPath"))
     AwsCloudFrontDistributionOriginItem.add_member(:s3_origin_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudFrontDistributionOriginS3OriginConfig, name: "S3OriginConfig"))
     AwsCloudFrontDistributionOriginItem.add_member(:custom_origin_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudFrontDistributionOriginCustomOriginConfig, name: "CustomOriginConfig"))
     AwsCloudFrontDistributionOriginItem.type = Types::AwsCloudFrontDistributionOriginItem
-    AwsCloudFrontDistributionOriginItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudFrontDistributionOriginItem, name: "member")
+    AwsCloudFrontDistributionOriginItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudFrontDistributionOriginItem, name: "member"))
     AwsCloudFrontDistributionOriginS3OriginConfig.add_member(:origin_access_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "OriginAccessIdentity"))
     AwsCloudFrontDistributionOriginS3OriginConfig.type = Types::AwsCloudFrontDistributionOriginS3OriginConfig
     AwsCloudFrontDistributionOriginSslProtocols.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "Items"))
@@ -2079,7 +2079,7 @@ module Aws::SecurityHub
     AwsCloudWatchAlarmDimensionsDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     AwsCloudWatchAlarmDimensionsDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Value"))
     AwsCloudWatchAlarmDimensionsDetails.type = Types::AwsCloudWatchAlarmDimensionsDetails
-    AwsCloudWatchAlarmDimensionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudWatchAlarmDimensionsDetails, name: "member")
+    AwsCloudWatchAlarmDimensionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudWatchAlarmDimensionsDetails, name: "member"))
     AwsCodeBuildProjectArtifactsDetails.add_member(:artifact_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ArtifactIdentifier"))
     AwsCodeBuildProjectArtifactsDetails.add_member(:encryption_disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EncryptionDisabled"))
     AwsCodeBuildProjectArtifactsDetails.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Location"))
@@ -2090,7 +2090,7 @@ module Aws::SecurityHub
     AwsCodeBuildProjectArtifactsDetails.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Path"))
     AwsCodeBuildProjectArtifactsDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AwsCodeBuildProjectArtifactsDetails.type = Types::AwsCodeBuildProjectArtifactsDetails
-    AwsCodeBuildProjectArtifactsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCodeBuildProjectArtifactsDetails, name: "member")
+    AwsCodeBuildProjectArtifactsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCodeBuildProjectArtifactsDetails, name: "member"))
     AwsCodeBuildProjectDetails.add_member(:encryption_key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "EncryptionKey"))
     AwsCodeBuildProjectDetails.add_member(:artifacts, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCodeBuildProjectArtifactsList, name: "Artifacts"))
     AwsCodeBuildProjectDetails.add_member(:environment, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCodeBuildProjectEnvironment, name: "Environment"))
@@ -2112,7 +2112,7 @@ module Aws::SecurityHub
     AwsCodeBuildProjectEnvironmentEnvironmentVariablesDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AwsCodeBuildProjectEnvironmentEnvironmentVariablesDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Value"))
     AwsCodeBuildProjectEnvironmentEnvironmentVariablesDetails.type = Types::AwsCodeBuildProjectEnvironmentEnvironmentVariablesDetails
-    AwsCodeBuildProjectEnvironmentEnvironmentVariablesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCodeBuildProjectEnvironmentEnvironmentVariablesDetails, name: "member")
+    AwsCodeBuildProjectEnvironmentEnvironmentVariablesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCodeBuildProjectEnvironmentEnvironmentVariablesDetails, name: "member"))
     AwsCodeBuildProjectEnvironmentRegistryCredential.add_member(:credential, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Credential"))
     AwsCodeBuildProjectEnvironmentRegistryCredential.add_member(:credential_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CredentialProvider"))
     AwsCodeBuildProjectEnvironmentRegistryCredential.type = Types::AwsCodeBuildProjectEnvironmentRegistryCredential
@@ -2174,7 +2174,7 @@ module Aws::SecurityHub
     AwsDmsReplicationInstanceReplicationSubnetGroupDetails.type = Types::AwsDmsReplicationInstanceReplicationSubnetGroupDetails
     AwsDmsReplicationInstanceVpcSecurityGroupsDetails.add_member(:vpc_security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VpcSecurityGroupId"))
     AwsDmsReplicationInstanceVpcSecurityGroupsDetails.type = Types::AwsDmsReplicationInstanceVpcSecurityGroupsDetails
-    AwsDmsReplicationInstanceVpcSecurityGroupsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDmsReplicationInstanceVpcSecurityGroupsDetails, name: "member")
+    AwsDmsReplicationInstanceVpcSecurityGroupsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDmsReplicationInstanceVpcSecurityGroupsDetails, name: "member"))
     AwsDmsReplicationTaskDetails.add_member(:cdc_start_position, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CdcStartPosition"))
     AwsDmsReplicationTaskDetails.add_member(:cdc_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CdcStartTime"))
     AwsDmsReplicationTaskDetails.add_member(:cdc_stop_position, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CdcStopPosition"))
@@ -2192,7 +2192,7 @@ module Aws::SecurityHub
     AwsDynamoDbTableAttributeDefinition.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AttributeName"))
     AwsDynamoDbTableAttributeDefinition.add_member(:attribute_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AttributeType"))
     AwsDynamoDbTableAttributeDefinition.type = Types::AwsDynamoDbTableAttributeDefinition
-    AwsDynamoDbTableAttributeDefinitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDynamoDbTableAttributeDefinition, name: "member")
+    AwsDynamoDbTableAttributeDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDynamoDbTableAttributeDefinition, name: "member"))
     AwsDynamoDbTableBillingModeSummary.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "BillingMode"))
     AwsDynamoDbTableBillingModeSummary.add_member(:last_update_to_pay_per_request_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "LastUpdateToPayPerRequestDateTime"))
     AwsDynamoDbTableBillingModeSummary.type = Types::AwsDynamoDbTableBillingModeSummary
@@ -2227,17 +2227,17 @@ module Aws::SecurityHub
     AwsDynamoDbTableGlobalSecondaryIndex.add_member(:projection, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDynamoDbTableProjection, name: "Projection"))
     AwsDynamoDbTableGlobalSecondaryIndex.add_member(:provisioned_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDynamoDbTableProvisionedThroughput, name: "ProvisionedThroughput"))
     AwsDynamoDbTableGlobalSecondaryIndex.type = Types::AwsDynamoDbTableGlobalSecondaryIndex
-    AwsDynamoDbTableGlobalSecondaryIndexList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDynamoDbTableGlobalSecondaryIndex, name: "member")
+    AwsDynamoDbTableGlobalSecondaryIndexList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDynamoDbTableGlobalSecondaryIndex, name: "member"))
     AwsDynamoDbTableKeySchema.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AttributeName"))
     AwsDynamoDbTableKeySchema.add_member(:key_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "KeyType"))
     AwsDynamoDbTableKeySchema.type = Types::AwsDynamoDbTableKeySchema
-    AwsDynamoDbTableKeySchemaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDynamoDbTableKeySchema, name: "member")
+    AwsDynamoDbTableKeySchemaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDynamoDbTableKeySchema, name: "member"))
     AwsDynamoDbTableLocalSecondaryIndex.add_member(:index_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "IndexArn"))
     AwsDynamoDbTableLocalSecondaryIndex.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "IndexName"))
     AwsDynamoDbTableLocalSecondaryIndex.add_member(:key_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDynamoDbTableKeySchemaList, name: "KeySchema"))
     AwsDynamoDbTableLocalSecondaryIndex.add_member(:projection, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDynamoDbTableProjection, name: "Projection"))
     AwsDynamoDbTableLocalSecondaryIndex.type = Types::AwsDynamoDbTableLocalSecondaryIndex
-    AwsDynamoDbTableLocalSecondaryIndexList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDynamoDbTableLocalSecondaryIndex, name: "member")
+    AwsDynamoDbTableLocalSecondaryIndexList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDynamoDbTableLocalSecondaryIndex, name: "member"))
     AwsDynamoDbTableProjection.add_member(:non_key_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "NonKeyAttributes"))
     AwsDynamoDbTableProjection.add_member(:projection_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ProjectionType"))
     AwsDynamoDbTableProjection.type = Types::AwsDynamoDbTableProjection
@@ -2259,8 +2259,8 @@ module Aws::SecurityHub
     AwsDynamoDbTableReplicaGlobalSecondaryIndex.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "IndexName"))
     AwsDynamoDbTableReplicaGlobalSecondaryIndex.add_member(:provisioned_throughput_override, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDynamoDbTableProvisionedThroughputOverride, name: "ProvisionedThroughputOverride"))
     AwsDynamoDbTableReplicaGlobalSecondaryIndex.type = Types::AwsDynamoDbTableReplicaGlobalSecondaryIndex
-    AwsDynamoDbTableReplicaGlobalSecondaryIndexList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDynamoDbTableReplicaGlobalSecondaryIndex, name: "member")
-    AwsDynamoDbTableReplicaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDynamoDbTableReplica, name: "member")
+    AwsDynamoDbTableReplicaGlobalSecondaryIndexList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDynamoDbTableReplicaGlobalSecondaryIndex, name: "member"))
+    AwsDynamoDbTableReplicaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDynamoDbTableReplica, name: "member"))
     AwsDynamoDbTableRestoreSummary.add_member(:source_backup_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SourceBackupArn"))
     AwsDynamoDbTableRestoreSummary.add_member(:source_table_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SourceTableArn"))
     AwsDynamoDbTableRestoreSummary.add_member(:restore_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RestoreDateTime"))
@@ -2284,7 +2284,7 @@ module Aws::SecurityHub
     AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails.add_member(:saml_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SamlProviderArn"))
     AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails.add_member(:self_service_saml_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SelfServiceSamlProviderArn"))
     AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails.type = Types::AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails
-    AwsEc2ClientVpnEndpointAuthenticationOptionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2ClientVpnEndpointAuthenticationOptionsDetails, name: "member")
+    AwsEc2ClientVpnEndpointAuthenticationOptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2ClientVpnEndpointAuthenticationOptionsDetails, name: "member"))
     AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails.add_member(:client_root_certificate_chain, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ClientRootCertificateChain"))
     AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails.type = Types::AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails
     AwsEc2ClientVpnEndpointClientConnectOptionsDetails.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled"))
@@ -2353,7 +2353,7 @@ module Aws::SecurityHub
     AwsEc2InstanceMonitoringDetails.type = Types::AwsEc2InstanceMonitoringDetails
     AwsEc2InstanceNetworkInterfacesDetails.add_member(:network_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "NetworkInterfaceId"))
     AwsEc2InstanceNetworkInterfacesDetails.type = Types::AwsEc2InstanceNetworkInterfacesDetails
-    AwsEc2InstanceNetworkInterfacesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2InstanceNetworkInterfacesDetails, name: "member")
+    AwsEc2InstanceNetworkInterfacesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2InstanceNetworkInterfacesDetails, name: "member"))
     AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DeviceName"))
     AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails.add_member(:ebs, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails, name: "Ebs"))
     AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails.add_member(:no_device, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "NoDevice"))
@@ -2368,7 +2368,7 @@ module Aws::SecurityHub
     AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails.add_member(:volume_size, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "VolumeSize"))
     AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails.add_member(:volume_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VolumeType"))
     AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails.type = Types::AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails
-    AwsEc2LaunchTemplateDataBlockDeviceMappingSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails, name: "member")
+    AwsEc2LaunchTemplateDataBlockDeviceMappingSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails, name: "member"))
     AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails.add_member(:capacity_reservation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CapacityReservationId"))
     AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails.add_member(:capacity_reservation_resource_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CapacityReservationResourceGroupArn"))
     AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails.type = Types::AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails
@@ -2413,11 +2413,11 @@ module Aws::SecurityHub
     AwsEc2LaunchTemplateDataDetails.type = Types::AwsEc2LaunchTemplateDataDetails
     AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails.type = Types::AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails
-    AwsEc2LaunchTemplateDataElasticGpuSpecificationSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails, name: "member")
+    AwsEc2LaunchTemplateDataElasticGpuSpecificationSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails, name: "member"))
     AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Count"))
     AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails.type = Types::AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails
-    AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails, name: "member")
+    AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails, name: "member"))
     AwsEc2LaunchTemplateDataEnclaveOptionsDetails.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled"))
     AwsEc2LaunchTemplateDataEnclaveOptionsDetails.type = Types::AwsEc2LaunchTemplateDataEnclaveOptionsDetails
     AwsEc2LaunchTemplateDataHibernationOptionsDetails.add_member(:configured, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Configured"))
@@ -2482,7 +2482,7 @@ module Aws::SecurityHub
     AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails.type = Types::AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails
     AwsEc2LaunchTemplateDataLicenseSetDetails.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "LicenseConfigurationArn"))
     AwsEc2LaunchTemplateDataLicenseSetDetails.type = Types::AwsEc2LaunchTemplateDataLicenseSetDetails
-    AwsEc2LaunchTemplateDataLicenseSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2LaunchTemplateDataLicenseSetDetails, name: "member")
+    AwsEc2LaunchTemplateDataLicenseSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2LaunchTemplateDataLicenseSetDetails, name: "member"))
     AwsEc2LaunchTemplateDataMaintenanceOptionsDetails.add_member(:auto_recovery, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AutoRecovery"))
     AwsEc2LaunchTemplateDataMaintenanceOptionsDetails.type = Types::AwsEc2LaunchTemplateDataMaintenanceOptionsDetails
     AwsEc2LaunchTemplateDataMetadataOptionsDetails.add_member(:http_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "HttpEndpoint"))
@@ -2515,18 +2515,18 @@ module Aws::SecurityHub
     AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails.type = Types::AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails
     AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails.add_member(:ipv4_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Ipv4Prefix"))
     AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails.type = Types::AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails
-    AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails, name: "member")
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails, name: "member"))
     AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails.add_member(:ipv6_address, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Ipv6Address"))
     AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails.type = Types::AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails
-    AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails, name: "member")
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails, name: "member"))
     AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails.add_member(:ipv6_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Ipv6Prefix"))
     AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails.type = Types::AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails
-    AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails, name: "member")
-    AwsEc2LaunchTemplateDataNetworkInterfaceSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails, name: "member")
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails, name: "member"))
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails, name: "member"))
     AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails.add_member(:primary, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Primary"))
     AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails.add_member(:private_ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "PrivateIpAddress"))
     AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails.type = Types::AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails
-    AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails, name: "member")
+    AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails, name: "member"))
     AwsEc2LaunchTemplateDataPlacementDetails.add_member(:affinity, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Affinity"))
     AwsEc2LaunchTemplateDataPlacementDetails.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AvailabilityZone"))
     AwsEc2LaunchTemplateDataPlacementDetails.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "GroupName"))
@@ -2550,7 +2550,7 @@ module Aws::SecurityHub
     AwsEc2NetworkAclAssociation.add_member(:network_acl_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "NetworkAclId"))
     AwsEc2NetworkAclAssociation.add_member(:subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SubnetId"))
     AwsEc2NetworkAclAssociation.type = Types::AwsEc2NetworkAclAssociation
-    AwsEc2NetworkAclAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2NetworkAclAssociation, name: "member")
+    AwsEc2NetworkAclAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2NetworkAclAssociation, name: "member"))
     AwsEc2NetworkAclDetails.add_member(:is_default, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsDefault"))
     AwsEc2NetworkAclDetails.add_member(:network_acl_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "NetworkAclId"))
     AwsEc2NetworkAclDetails.add_member(:owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "OwnerId"))
@@ -2567,7 +2567,7 @@ module Aws::SecurityHub
     AwsEc2NetworkAclEntry.add_member(:rule_action, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RuleAction"))
     AwsEc2NetworkAclEntry.add_member(:rule_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "RuleNumber"))
     AwsEc2NetworkAclEntry.type = Types::AwsEc2NetworkAclEntry
-    AwsEc2NetworkAclEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2NetworkAclEntry, name: "member")
+    AwsEc2NetworkAclEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2NetworkAclEntry, name: "member"))
     AwsEc2NetworkInterfaceAttachment.add_member(:attach_time, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AttachTime"))
     AwsEc2NetworkInterfaceAttachment.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AttachmentId"))
     AwsEc2NetworkInterfaceAttachment.add_member(:delete_on_termination, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "DeleteOnTermination"))
@@ -2587,15 +2587,15 @@ module Aws::SecurityHub
     AwsEc2NetworkInterfaceDetails.type = Types::AwsEc2NetworkInterfaceDetails
     AwsEc2NetworkInterfaceIpV6AddressDetail.add_member(:ip_v6_address, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "IpV6Address"))
     AwsEc2NetworkInterfaceIpV6AddressDetail.type = Types::AwsEc2NetworkInterfaceIpV6AddressDetail
-    AwsEc2NetworkInterfaceIpV6AddressList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2NetworkInterfaceIpV6AddressDetail, name: "member")
+    AwsEc2NetworkInterfaceIpV6AddressList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2NetworkInterfaceIpV6AddressDetail, name: "member"))
     AwsEc2NetworkInterfacePrivateIpAddressDetail.add_member(:private_ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "PrivateIpAddress"))
     AwsEc2NetworkInterfacePrivateIpAddressDetail.add_member(:private_dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "PrivateDnsName"))
     AwsEc2NetworkInterfacePrivateIpAddressDetail.type = Types::AwsEc2NetworkInterfacePrivateIpAddressDetail
-    AwsEc2NetworkInterfacePrivateIpAddressList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2NetworkInterfacePrivateIpAddressDetail, name: "member")
+    AwsEc2NetworkInterfacePrivateIpAddressList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2NetworkInterfacePrivateIpAddressDetail, name: "member"))
     AwsEc2NetworkInterfaceSecurityGroup.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "GroupName"))
     AwsEc2NetworkInterfaceSecurityGroup.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "GroupId"))
     AwsEc2NetworkInterfaceSecurityGroup.type = Types::AwsEc2NetworkInterfaceSecurityGroup
-    AwsEc2NetworkInterfaceSecurityGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2NetworkInterfaceSecurityGroup, name: "member")
+    AwsEc2NetworkInterfaceSecurityGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2NetworkInterfaceSecurityGroup, name: "member"))
     AwsEc2RouteTableDetails.add_member(:association_set, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationSetList, name: "AssociationSet"))
     AwsEc2RouteTableDetails.add_member(:owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "OwnerId"))
     AwsEc2RouteTableDetails.add_member(:propagating_vgw_set, ::Smithy::Schema::Shapes::MemberShape.new(target: PropagatingVgwSetList, name: "PropagatingVgwSet"))
@@ -2618,16 +2618,16 @@ module Aws::SecurityHub
     AwsEc2SecurityGroupIpPermission.add_member(:ipv6_ranges, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2SecurityGroupIpv6RangeList, name: "Ipv6Ranges"))
     AwsEc2SecurityGroupIpPermission.add_member(:prefix_list_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2SecurityGroupPrefixListIdList, name: "PrefixListIds"))
     AwsEc2SecurityGroupIpPermission.type = Types::AwsEc2SecurityGroupIpPermission
-    AwsEc2SecurityGroupIpPermissionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2SecurityGroupIpPermission, name: "member")
+    AwsEc2SecurityGroupIpPermissionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2SecurityGroupIpPermission, name: "member"))
     AwsEc2SecurityGroupIpRange.add_member(:cidr_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CidrIp"))
     AwsEc2SecurityGroupIpRange.type = Types::AwsEc2SecurityGroupIpRange
-    AwsEc2SecurityGroupIpRangeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2SecurityGroupIpRange, name: "member")
+    AwsEc2SecurityGroupIpRangeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2SecurityGroupIpRange, name: "member"))
     AwsEc2SecurityGroupIpv6Range.add_member(:cidr_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CidrIpv6"))
     AwsEc2SecurityGroupIpv6Range.type = Types::AwsEc2SecurityGroupIpv6Range
-    AwsEc2SecurityGroupIpv6RangeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2SecurityGroupIpv6Range, name: "member")
+    AwsEc2SecurityGroupIpv6RangeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2SecurityGroupIpv6Range, name: "member"))
     AwsEc2SecurityGroupPrefixListId.add_member(:prefix_list_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "PrefixListId"))
     AwsEc2SecurityGroupPrefixListId.type = Types::AwsEc2SecurityGroupPrefixListId
-    AwsEc2SecurityGroupPrefixListIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2SecurityGroupPrefixListId, name: "member")
+    AwsEc2SecurityGroupPrefixListIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2SecurityGroupPrefixListId, name: "member"))
     AwsEc2SecurityGroupUserIdGroupPair.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "GroupId"))
     AwsEc2SecurityGroupUserIdGroupPair.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "GroupName"))
     AwsEc2SecurityGroupUserIdGroupPair.add_member(:peering_status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "PeeringStatus"))
@@ -2635,7 +2635,7 @@ module Aws::SecurityHub
     AwsEc2SecurityGroupUserIdGroupPair.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VpcId"))
     AwsEc2SecurityGroupUserIdGroupPair.add_member(:vpc_peering_connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VpcPeeringConnectionId"))
     AwsEc2SecurityGroupUserIdGroupPair.type = Types::AwsEc2SecurityGroupUserIdGroupPair
-    AwsEc2SecurityGroupUserIdGroupPairList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2SecurityGroupUserIdGroupPair, name: "member")
+    AwsEc2SecurityGroupUserIdGroupPairList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2SecurityGroupUserIdGroupPair, name: "member"))
     AwsEc2SubnetDetails.add_member(:assign_ipv6_address_on_creation, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AssignIpv6AddressOnCreation"))
     AwsEc2SubnetDetails.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AvailabilityZone"))
     AwsEc2SubnetDetails.add_member(:availability_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AvailabilityZoneId"))
@@ -2668,7 +2668,7 @@ module Aws::SecurityHub
     AwsEc2VolumeAttachment.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "InstanceId"))
     AwsEc2VolumeAttachment.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Status"))
     AwsEc2VolumeAttachment.type = Types::AwsEc2VolumeAttachment
-    AwsEc2VolumeAttachmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2VolumeAttachment, name: "member")
+    AwsEc2VolumeAttachmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2VolumeAttachment, name: "member"))
     AwsEc2VolumeDetails.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CreateTime"))
     AwsEc2VolumeDetails.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DeviceName"))
     AwsEc2VolumeDetails.add_member(:encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Encrypted"))
@@ -2700,7 +2700,7 @@ module Aws::SecurityHub
     AwsEc2VpcEndpointServiceDetails.type = Types::AwsEc2VpcEndpointServiceDetails
     AwsEc2VpcEndpointServiceServiceTypeDetails.add_member(:service_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ServiceType"))
     AwsEc2VpcEndpointServiceServiceTypeDetails.type = Types::AwsEc2VpcEndpointServiceServiceTypeDetails
-    AwsEc2VpcEndpointServiceServiceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2VpcEndpointServiceServiceTypeDetails, name: "member")
+    AwsEc2VpcEndpointServiceServiceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2VpcEndpointServiceServiceTypeDetails, name: "member"))
     AwsEc2VpcPeeringConnectionDetails.add_member(:accepter_vpc_info, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2VpcPeeringConnectionVpcInfoDetails, name: "AccepterVpcInfo"))
     AwsEc2VpcPeeringConnectionDetails.add_member(:expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ExpirationTime"))
     AwsEc2VpcPeeringConnectionDetails.add_member(:requester_vpc_info, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2VpcPeeringConnectionVpcInfoDetails, name: "RequesterVpcInfo"))
@@ -2750,11 +2750,11 @@ module Aws::SecurityHub
     AwsEc2VpnConnectionOptionsTunnelOptionsDetails.add_member(:replay_window_size, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ReplayWindowSize"))
     AwsEc2VpnConnectionOptionsTunnelOptionsDetails.add_member(:tunnel_inside_cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "TunnelInsideCidr"))
     AwsEc2VpnConnectionOptionsTunnelOptionsDetails.type = Types::AwsEc2VpnConnectionOptionsTunnelOptionsDetails
-    AwsEc2VpnConnectionOptionsTunnelOptionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2VpnConnectionOptionsTunnelOptionsDetails, name: "member")
+    AwsEc2VpnConnectionOptionsTunnelOptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2VpnConnectionOptionsTunnelOptionsDetails, name: "member"))
     AwsEc2VpnConnectionRoutesDetails.add_member(:destination_cidr_block, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DestinationCidrBlock"))
     AwsEc2VpnConnectionRoutesDetails.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "State"))
     AwsEc2VpnConnectionRoutesDetails.type = Types::AwsEc2VpnConnectionRoutesDetails
-    AwsEc2VpnConnectionRoutesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2VpnConnectionRoutesDetails, name: "member")
+    AwsEc2VpnConnectionRoutesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2VpnConnectionRoutesDetails, name: "member"))
     AwsEc2VpnConnectionVgwTelemetryDetails.add_member(:accepted_route_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "AcceptedRouteCount"))
     AwsEc2VpnConnectionVgwTelemetryDetails.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CertificateArn"))
     AwsEc2VpnConnectionVgwTelemetryDetails.add_member(:last_status_change, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "LastStatusChange"))
@@ -2762,7 +2762,7 @@ module Aws::SecurityHub
     AwsEc2VpnConnectionVgwTelemetryDetails.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Status"))
     AwsEc2VpnConnectionVgwTelemetryDetails.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "StatusMessage"))
     AwsEc2VpnConnectionVgwTelemetryDetails.type = Types::AwsEc2VpnConnectionVgwTelemetryDetails
-    AwsEc2VpnConnectionVgwTelemetryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2VpnConnectionVgwTelemetryDetails, name: "member")
+    AwsEc2VpnConnectionVgwTelemetryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2VpnConnectionVgwTelemetryDetails, name: "member"))
     AwsEcrContainerImageDetails.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RegistryId"))
     AwsEcrContainerImageDetails.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RepositoryName"))
     AwsEcrContainerImageDetails.add_member(:architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Architecture"))
@@ -2785,7 +2785,7 @@ module Aws::SecurityHub
     AwsEcsClusterClusterSettingsDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     AwsEcsClusterClusterSettingsDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Value"))
     AwsEcsClusterClusterSettingsDetails.type = Types::AwsEcsClusterClusterSettingsDetails
-    AwsEcsClusterClusterSettingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsClusterClusterSettingsDetails, name: "member")
+    AwsEcsClusterClusterSettingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsClusterClusterSettingsDetails, name: "member"))
     AwsEcsClusterConfigurationDetails.add_member(:execute_command_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsClusterConfigurationExecuteCommandConfigurationDetails, name: "ExecuteCommandConfiguration"))
     AwsEcsClusterConfigurationDetails.type = Types::AwsEcsClusterConfigurationDetails
     AwsEcsClusterConfigurationExecuteCommandConfigurationDetails.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "KmsKeyId"))
@@ -2802,7 +2802,7 @@ module Aws::SecurityHub
     AwsEcsClusterDefaultCapacityProviderStrategyDetails.add_member(:capacity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CapacityProvider"))
     AwsEcsClusterDefaultCapacityProviderStrategyDetails.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Weight"))
     AwsEcsClusterDefaultCapacityProviderStrategyDetails.type = Types::AwsEcsClusterDefaultCapacityProviderStrategyDetails
-    AwsEcsClusterDefaultCapacityProviderStrategyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsClusterDefaultCapacityProviderStrategyDetails, name: "member")
+    AwsEcsClusterDefaultCapacityProviderStrategyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsClusterDefaultCapacityProviderStrategyDetails, name: "member"))
     AwsEcsClusterDetails.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ClusterArn"))
     AwsEcsClusterDetails.add_member(:active_services_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ActiveServicesCount"))
     AwsEcsClusterDetails.add_member(:capacity_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "CapacityProviders"))
@@ -2819,12 +2819,12 @@ module Aws::SecurityHub
     AwsEcsContainerDetails.add_member(:mount_points, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMountPointList, name: "MountPoints"))
     AwsEcsContainerDetails.add_member(:privileged, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Privileged"))
     AwsEcsContainerDetails.type = Types::AwsEcsContainerDetails
-    AwsEcsContainerDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsContainerDetails, name: "member")
+    AwsEcsContainerDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsContainerDetails, name: "member"))
     AwsEcsServiceCapacityProviderStrategyDetails.add_member(:base, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Base"))
     AwsEcsServiceCapacityProviderStrategyDetails.add_member(:capacity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CapacityProvider"))
     AwsEcsServiceCapacityProviderStrategyDetails.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Weight"))
     AwsEcsServiceCapacityProviderStrategyDetails.type = Types::AwsEcsServiceCapacityProviderStrategyDetails
-    AwsEcsServiceCapacityProviderStrategyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsServiceCapacityProviderStrategyDetails, name: "member")
+    AwsEcsServiceCapacityProviderStrategyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsServiceCapacityProviderStrategyDetails, name: "member"))
     AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails.add_member(:enable, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enable"))
     AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails.add_member(:rollback, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Rollback"))
     AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails.type = Types::AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails
@@ -2862,7 +2862,7 @@ module Aws::SecurityHub
     AwsEcsServiceLoadBalancersDetails.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "LoadBalancerName"))
     AwsEcsServiceLoadBalancersDetails.add_member(:target_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "TargetGroupArn"))
     AwsEcsServiceLoadBalancersDetails.type = Types::AwsEcsServiceLoadBalancersDetails
-    AwsEcsServiceLoadBalancersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsServiceLoadBalancersDetails, name: "member")
+    AwsEcsServiceLoadBalancersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsServiceLoadBalancersDetails, name: "member"))
     AwsEcsServiceNetworkConfigurationAwsVpcConfigurationDetails.add_member(:assign_public_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AssignPublicIp"))
     AwsEcsServiceNetworkConfigurationAwsVpcConfigurationDetails.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "SecurityGroups"))
     AwsEcsServiceNetworkConfigurationAwsVpcConfigurationDetails.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "Subnets"))
@@ -2872,21 +2872,21 @@ module Aws::SecurityHub
     AwsEcsServicePlacementConstraintsDetails.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Expression"))
     AwsEcsServicePlacementConstraintsDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AwsEcsServicePlacementConstraintsDetails.type = Types::AwsEcsServicePlacementConstraintsDetails
-    AwsEcsServicePlacementConstraintsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsServicePlacementConstraintsDetails, name: "member")
+    AwsEcsServicePlacementConstraintsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsServicePlacementConstraintsDetails, name: "member"))
     AwsEcsServicePlacementStrategiesDetails.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Field"))
     AwsEcsServicePlacementStrategiesDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AwsEcsServicePlacementStrategiesDetails.type = Types::AwsEcsServicePlacementStrategiesDetails
-    AwsEcsServicePlacementStrategiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsServicePlacementStrategiesDetails, name: "member")
+    AwsEcsServicePlacementStrategiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsServicePlacementStrategiesDetails, name: "member"))
     AwsEcsServiceServiceRegistriesDetails.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ContainerName"))
     AwsEcsServiceServiceRegistriesDetails.add_member(:container_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ContainerPort"))
     AwsEcsServiceServiceRegistriesDetails.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Port"))
     AwsEcsServiceServiceRegistriesDetails.add_member(:registry_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RegistryArn"))
     AwsEcsServiceServiceRegistriesDetails.type = Types::AwsEcsServiceServiceRegistriesDetails
-    AwsEcsServiceServiceRegistriesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsServiceServiceRegistriesDetails, name: "member")
+    AwsEcsServiceServiceRegistriesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsServiceServiceRegistriesDetails, name: "member"))
     AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Condition"))
     AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ContainerName"))
     AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails.type = Types::AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails
-    AwsEcsTaskDefinitionContainerDefinitionsDependsOnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails, name: "member")
+    AwsEcsTaskDefinitionContainerDefinitionsDependsOnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails, name: "member"))
     AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:command, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "Command"))
     AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:cpu, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Cpu"))
     AwsEcsTaskDefinitionContainerDefinitionsDetails.add_member(:depends_on, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsDependsOnList, name: "DependsOn"))
@@ -2933,12 +2933,12 @@ module Aws::SecurityHub
     AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Value"))
     AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails.type = Types::AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails
-    AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails, name: "member")
-    AwsEcsTaskDefinitionContainerDefinitionsEnvironmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails, name: "member")
+    AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails, name: "member"))
+    AwsEcsTaskDefinitionContainerDefinitionsEnvironmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails, name: "member"))
     AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails.add_member(:hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Hostname"))
     AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "IpAddress"))
     AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails.type = Types::AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails
-    AwsEcsTaskDefinitionContainerDefinitionsExtraHostsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails, name: "member")
+    AwsEcsTaskDefinitionContainerDefinitionsExtraHostsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails, name: "member"))
     AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldMap, name: "Options"))
     AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails.type = Types::AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails
@@ -2963,13 +2963,13 @@ module Aws::SecurityHub
     AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails.add_member(:host_path, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "HostPath"))
     AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "Permissions"))
     AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails.type = Types::AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails
-    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails, name: "member")
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails, name: "member"))
     AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails.add_member(:container_path, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ContainerPath"))
     AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails.add_member(:mount_options, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "MountOptions"))
     AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Size"))
     AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails.type = Types::AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails
-    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails, name: "member")
-    AwsEcsTaskDefinitionContainerDefinitionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsDetails, name: "member")
+    AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails, name: "member"))
+    AwsEcsTaskDefinitionContainerDefinitionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsDetails, name: "member"))
     AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails.add_member(:log_driver, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "LogDriver"))
     AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldMap, name: "Options"))
     AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails.add_member(:secret_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsList, name: "SecretOptions"))
@@ -2977,40 +2977,40 @@ module Aws::SecurityHub
     AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails.add_member(:value_from, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ValueFrom"))
     AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails.type = Types::AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails
-    AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails, name: "member")
+    AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails, name: "member"))
     AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails.add_member(:container_path, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ContainerPath"))
     AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ReadOnly"))
     AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails.add_member(:source_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SourceVolume"))
     AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails.type = Types::AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails
-    AwsEcsTaskDefinitionContainerDefinitionsMountPointsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails, name: "member")
+    AwsEcsTaskDefinitionContainerDefinitionsMountPointsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails, name: "member"))
     AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails.add_member(:container_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ContainerPort"))
     AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails.add_member(:host_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "HostPort"))
     AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Protocol"))
     AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails.type = Types::AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails
-    AwsEcsTaskDefinitionContainerDefinitionsPortMappingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails, name: "member")
+    AwsEcsTaskDefinitionContainerDefinitionsPortMappingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails, name: "member"))
     AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails.add_member(:credentials_parameter, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CredentialsParameter"))
     AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails.type = Types::AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails
     AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Value"))
     AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails.type = Types::AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails
-    AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails, name: "member")
+    AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails, name: "member"))
     AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails.add_member(:value_from, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ValueFrom"))
     AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails.type = Types::AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails
-    AwsEcsTaskDefinitionContainerDefinitionsSecretsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails, name: "member")
+    AwsEcsTaskDefinitionContainerDefinitionsSecretsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails, name: "member"))
     AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Namespace"))
     AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Value"))
     AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails.type = Types::AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails
-    AwsEcsTaskDefinitionContainerDefinitionsSystemControlsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails, name: "member")
+    AwsEcsTaskDefinitionContainerDefinitionsSystemControlsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails, name: "member"))
     AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails.add_member(:hard_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "HardLimit"))
     AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails.add_member(:soft_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "SoftLimit"))
     AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails.type = Types::AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails
-    AwsEcsTaskDefinitionContainerDefinitionsUlimitsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails, name: "member")
+    AwsEcsTaskDefinitionContainerDefinitionsUlimitsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails, name: "member"))
     AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ReadOnly"))
     AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails.add_member(:source_container, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SourceContainer"))
     AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails.type = Types::AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails
-    AwsEcsTaskDefinitionContainerDefinitionsVolumesFromList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails, name: "member")
+    AwsEcsTaskDefinitionContainerDefinitionsVolumesFromList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails, name: "member"))
     AwsEcsTaskDefinitionDetails.add_member(:container_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionContainerDefinitionsList, name: "ContainerDefinitions"))
     AwsEcsTaskDefinitionDetails.add_member(:cpu, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Cpu"))
     AwsEcsTaskDefinitionDetails.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ExecutionRoleArn"))
@@ -3030,11 +3030,11 @@ module Aws::SecurityHub
     AwsEcsTaskDefinitionInferenceAcceleratorsDetails.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DeviceName"))
     AwsEcsTaskDefinitionInferenceAcceleratorsDetails.add_member(:device_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DeviceType"))
     AwsEcsTaskDefinitionInferenceAcceleratorsDetails.type = Types::AwsEcsTaskDefinitionInferenceAcceleratorsDetails
-    AwsEcsTaskDefinitionInferenceAcceleratorsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionInferenceAcceleratorsDetails, name: "member")
+    AwsEcsTaskDefinitionInferenceAcceleratorsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionInferenceAcceleratorsDetails, name: "member"))
     AwsEcsTaskDefinitionPlacementConstraintsDetails.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Expression"))
     AwsEcsTaskDefinitionPlacementConstraintsDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AwsEcsTaskDefinitionPlacementConstraintsDetails.type = Types::AwsEcsTaskDefinitionPlacementConstraintsDetails
-    AwsEcsTaskDefinitionPlacementConstraintsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionPlacementConstraintsDetails, name: "member")
+    AwsEcsTaskDefinitionPlacementConstraintsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionPlacementConstraintsDetails, name: "member"))
     AwsEcsTaskDefinitionProxyConfigurationDetails.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ContainerName"))
     AwsEcsTaskDefinitionProxyConfigurationDetails.add_member(:proxy_configuration_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesList, name: "ProxyConfigurationProperties"))
     AwsEcsTaskDefinitionProxyConfigurationDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
@@ -3042,7 +3042,7 @@ module Aws::SecurityHub
     AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Value"))
     AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails.type = Types::AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails
-    AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails, name: "member")
+    AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails, name: "member"))
     AwsEcsTaskDefinitionVolumesDetails.add_member(:docker_volume_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails, name: "DockerVolumeConfiguration"))
     AwsEcsTaskDefinitionVolumesDetails.add_member(:efs_volume_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails, name: "EfsVolumeConfiguration"))
     AwsEcsTaskDefinitionVolumesDetails.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionVolumesHostDetails, name: "Host"))
@@ -3065,7 +3065,7 @@ module Aws::SecurityHub
     AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails.type = Types::AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails
     AwsEcsTaskDefinitionVolumesHostDetails.add_member(:source_path, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SourcePath"))
     AwsEcsTaskDefinitionVolumesHostDetails.type = Types::AwsEcsTaskDefinitionVolumesHostDetails
-    AwsEcsTaskDefinitionVolumesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionVolumesDetails, name: "member")
+    AwsEcsTaskDefinitionVolumesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskDefinitionVolumesDetails, name: "member"))
     AwsEcsTaskDetails.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ClusterArn"))
     AwsEcsTaskDetails.add_member(:task_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "TaskDefinitionArn"))
     AwsEcsTaskDetails.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Version"))
@@ -3079,7 +3079,7 @@ module Aws::SecurityHub
     AwsEcsTaskVolumeDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     AwsEcsTaskVolumeDetails.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskVolumeHostDetails, name: "Host"))
     AwsEcsTaskVolumeDetails.type = Types::AwsEcsTaskVolumeDetails
-    AwsEcsTaskVolumeDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskVolumeDetails, name: "member")
+    AwsEcsTaskVolumeDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsTaskVolumeDetails, name: "member"))
     AwsEcsTaskVolumeHostDetails.add_member(:source_path, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SourcePath"))
     AwsEcsTaskVolumeHostDetails.type = Types::AwsEcsTaskVolumeHostDetails
     AwsEfsAccessPointDetails.add_member(:access_point_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AccessPointId"))
@@ -3113,7 +3113,7 @@ module Aws::SecurityHub
     AwsEksClusterLoggingClusterLoggingDetails.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled"))
     AwsEksClusterLoggingClusterLoggingDetails.add_member(:types, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "Types"))
     AwsEksClusterLoggingClusterLoggingDetails.type = Types::AwsEksClusterLoggingClusterLoggingDetails
-    AwsEksClusterLoggingClusterLoggingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEksClusterLoggingClusterLoggingDetails, name: "member")
+    AwsEksClusterLoggingClusterLoggingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEksClusterLoggingClusterLoggingDetails, name: "member"))
     AwsEksClusterLoggingDetails.add_member(:cluster_logging, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEksClusterLoggingClusterLoggingList, name: "ClusterLogging"))
     AwsEksClusterLoggingDetails.type = Types::AwsEksClusterLoggingDetails
     AwsEksClusterResourcesVpcConfigDetails.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "SecurityGroupIds"))
@@ -3140,13 +3140,13 @@ module Aws::SecurityHub
     AwsElasticBeanstalkEnvironmentEnvironmentLink.add_member(:environment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "EnvironmentName"))
     AwsElasticBeanstalkEnvironmentEnvironmentLink.add_member(:link_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "LinkName"))
     AwsElasticBeanstalkEnvironmentEnvironmentLink.type = Types::AwsElasticBeanstalkEnvironmentEnvironmentLink
-    AwsElasticBeanstalkEnvironmentEnvironmentLinks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElasticBeanstalkEnvironmentEnvironmentLink, name: "member")
+    AwsElasticBeanstalkEnvironmentEnvironmentLinks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElasticBeanstalkEnvironmentEnvironmentLink, name: "member"))
     AwsElasticBeanstalkEnvironmentOptionSetting.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Namespace"))
     AwsElasticBeanstalkEnvironmentOptionSetting.add_member(:option_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "OptionName"))
     AwsElasticBeanstalkEnvironmentOptionSetting.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceName"))
     AwsElasticBeanstalkEnvironmentOptionSetting.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Value"))
     AwsElasticBeanstalkEnvironmentOptionSetting.type = Types::AwsElasticBeanstalkEnvironmentOptionSetting
-    AwsElasticBeanstalkEnvironmentOptionSettings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElasticBeanstalkEnvironmentOptionSetting, name: "member")
+    AwsElasticBeanstalkEnvironmentOptionSettings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElasticBeanstalkEnvironmentOptionSetting, name: "member"))
     AwsElasticBeanstalkEnvironmentTier.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     AwsElasticBeanstalkEnvironmentTier.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AwsElasticBeanstalkEnvironmentTier.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Version"))
@@ -3203,11 +3203,11 @@ module Aws::SecurityHub
     AwsElasticsearchDomainVPCOptions.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "SubnetIds"))
     AwsElasticsearchDomainVPCOptions.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VPCId"))
     AwsElasticsearchDomainVPCOptions.type = Types::AwsElasticsearchDomainVPCOptions
-    AwsElbAppCookieStickinessPolicies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElbAppCookieStickinessPolicy, name: "member")
+    AwsElbAppCookieStickinessPolicies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElbAppCookieStickinessPolicy, name: "member"))
     AwsElbAppCookieStickinessPolicy.add_member(:cookie_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CookieName"))
     AwsElbAppCookieStickinessPolicy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "PolicyName"))
     AwsElbAppCookieStickinessPolicy.type = Types::AwsElbAppCookieStickinessPolicy
-    AwsElbLbCookieStickinessPolicies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElbLbCookieStickinessPolicy, name: "member")
+    AwsElbLbCookieStickinessPolicies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElbLbCookieStickinessPolicy, name: "member"))
     AwsElbLbCookieStickinessPolicy.add_member(:cookie_expiration_period, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "CookieExpirationPeriod"))
     AwsElbLbCookieStickinessPolicy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "PolicyName"))
     AwsElbLbCookieStickinessPolicy.type = Types::AwsElbLbCookieStickinessPolicy
@@ -3219,7 +3219,7 @@ module Aws::SecurityHub
     AwsElbLoadBalancerAdditionalAttribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Key"))
     AwsElbLoadBalancerAdditionalAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Value"))
     AwsElbLoadBalancerAdditionalAttribute.type = Types::AwsElbLoadBalancerAdditionalAttribute
-    AwsElbLoadBalancerAdditionalAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElbLoadBalancerAdditionalAttribute, name: "member")
+    AwsElbLoadBalancerAdditionalAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElbLoadBalancerAdditionalAttribute, name: "member"))
     AwsElbLoadBalancerAttributes.add_member(:access_log, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElbLoadBalancerAccessLog, name: "AccessLog"))
     AwsElbLoadBalancerAttributes.add_member(:connection_draining, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElbLoadBalancerConnectionDraining, name: "ConnectionDraining"))
     AwsElbLoadBalancerAttributes.add_member(:connection_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElbLoadBalancerConnectionSettings, name: "ConnectionSettings"))
@@ -3229,7 +3229,7 @@ module Aws::SecurityHub
     AwsElbLoadBalancerBackendServerDescription.add_member(:instance_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "InstancePort"))
     AwsElbLoadBalancerBackendServerDescription.add_member(:policy_names, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "PolicyNames"))
     AwsElbLoadBalancerBackendServerDescription.type = Types::AwsElbLoadBalancerBackendServerDescription
-    AwsElbLoadBalancerBackendServerDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElbLoadBalancerBackendServerDescription, name: "member")
+    AwsElbLoadBalancerBackendServerDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElbLoadBalancerBackendServerDescription, name: "member"))
     AwsElbLoadBalancerConnectionDraining.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled"))
     AwsElbLoadBalancerConnectionDraining.add_member(:timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Timeout"))
     AwsElbLoadBalancerConnectionDraining.type = Types::AwsElbLoadBalancerConnectionDraining
@@ -3263,7 +3263,7 @@ module Aws::SecurityHub
     AwsElbLoadBalancerHealthCheck.type = Types::AwsElbLoadBalancerHealthCheck
     AwsElbLoadBalancerInstance.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "InstanceId"))
     AwsElbLoadBalancerInstance.type = Types::AwsElbLoadBalancerInstance
-    AwsElbLoadBalancerInstances.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElbLoadBalancerInstance, name: "member")
+    AwsElbLoadBalancerInstances.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElbLoadBalancerInstance, name: "member"))
     AwsElbLoadBalancerListener.add_member(:instance_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "InstancePort"))
     AwsElbLoadBalancerListener.add_member(:instance_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "InstanceProtocol"))
     AwsElbLoadBalancerListener.add_member(:load_balancer_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "LoadBalancerPort"))
@@ -3273,7 +3273,7 @@ module Aws::SecurityHub
     AwsElbLoadBalancerListenerDescription.add_member(:listener, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElbLoadBalancerListener, name: "Listener"))
     AwsElbLoadBalancerListenerDescription.add_member(:policy_names, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "PolicyNames"))
     AwsElbLoadBalancerListenerDescription.type = Types::AwsElbLoadBalancerListenerDescription
-    AwsElbLoadBalancerListenerDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElbLoadBalancerListenerDescription, name: "member")
+    AwsElbLoadBalancerListenerDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElbLoadBalancerListenerDescription, name: "member"))
     AwsElbLoadBalancerPolicies.add_member(:app_cookie_stickiness_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElbAppCookieStickinessPolicies, name: "AppCookieStickinessPolicies"))
     AwsElbLoadBalancerPolicies.add_member(:lb_cookie_stickiness_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElbLbCookieStickinessPolicies, name: "LbCookieStickinessPolicies"))
     AwsElbLoadBalancerPolicies.add_member(:other_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "OtherPolicies"))
@@ -3284,7 +3284,7 @@ module Aws::SecurityHub
     AwsElbv2LoadBalancerAttribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Key"))
     AwsElbv2LoadBalancerAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Value"))
     AwsElbv2LoadBalancerAttribute.type = Types::AwsElbv2LoadBalancerAttribute
-    AwsElbv2LoadBalancerAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElbv2LoadBalancerAttribute, name: "member")
+    AwsElbv2LoadBalancerAttributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsElbv2LoadBalancerAttribute, name: "member"))
     AwsElbv2LoadBalancerDetails.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZones, name: "AvailabilityZones"))
     AwsElbv2LoadBalancerDetails.add_member(:canonical_hosted_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CanonicalHostedZoneId"))
     AwsElbv2LoadBalancerDetails.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CreatedTime"))
@@ -3315,7 +3315,7 @@ module Aws::SecurityHub
     AwsEventsEndpointDetails.type = Types::AwsEventsEndpointDetails
     AwsEventsEndpointEventBusesDetails.add_member(:event_bus_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "EventBusArn"))
     AwsEventsEndpointEventBusesDetails.type = Types::AwsEventsEndpointEventBusesDetails
-    AwsEventsEndpointEventBusesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEventsEndpointEventBusesDetails, name: "member")
+    AwsEventsEndpointEventBusesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEventsEndpointEventBusesDetails, name: "member"))
     AwsEventsEndpointReplicationConfigDetails.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "State"))
     AwsEventsEndpointReplicationConfigDetails.type = Types::AwsEventsEndpointReplicationConfigDetails
     AwsEventsEndpointRoutingConfigDetails.add_member(:failover_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEventsEndpointRoutingConfigFailoverConfigDetails, name: "FailoverConfig"))
@@ -3367,7 +3367,7 @@ module Aws::SecurityHub
     AwsGuardDutyDetectorFeaturesDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     AwsGuardDutyDetectorFeaturesDetails.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Status"))
     AwsGuardDutyDetectorFeaturesDetails.type = Types::AwsGuardDutyDetectorFeaturesDetails
-    AwsGuardDutyDetectorFeaturesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsGuardDutyDetectorFeaturesDetails, name: "member")
+    AwsGuardDutyDetectorFeaturesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsGuardDutyDetectorFeaturesDetails, name: "member"))
     AwsIamAccessKeyDetails.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "UserName", traits: {"smithy.api#deprecated" => {"message" => "This filter is deprecated. Instead, use PrincipalName."}}))
     AwsIamAccessKeyDetails.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsIamAccessKeyStatus, name: "Status"))
     AwsIamAccessKeyDetails.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CreatedAt"))
@@ -3395,7 +3395,7 @@ module Aws::SecurityHub
     AwsIamAttachedManagedPolicy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "PolicyName"))
     AwsIamAttachedManagedPolicy.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "PolicyArn"))
     AwsIamAttachedManagedPolicy.type = Types::AwsIamAttachedManagedPolicy
-    AwsIamAttachedManagedPolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsIamAttachedManagedPolicy, name: "member")
+    AwsIamAttachedManagedPolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsIamAttachedManagedPolicy, name: "member"))
     AwsIamGroupDetails.add_member(:attached_managed_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsIamAttachedManagedPolicyList, name: "AttachedManagedPolicies"))
     AwsIamGroupDetails.add_member(:create_date, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CreateDate"))
     AwsIamGroupDetails.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "GroupId"))
@@ -3405,7 +3405,7 @@ module Aws::SecurityHub
     AwsIamGroupDetails.type = Types::AwsIamGroupDetails
     AwsIamGroupPolicy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "PolicyName"))
     AwsIamGroupPolicy.type = Types::AwsIamGroupPolicy
-    AwsIamGroupPolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsIamGroupPolicy, name: "member")
+    AwsIamGroupPolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsIamGroupPolicy, name: "member"))
     AwsIamInstanceProfile.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Arn"))
     AwsIamInstanceProfile.add_member(:create_date, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CreateDate"))
     AwsIamInstanceProfile.add_member(:instance_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "InstanceProfileId"))
@@ -3413,7 +3413,7 @@ module Aws::SecurityHub
     AwsIamInstanceProfile.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Path"))
     AwsIamInstanceProfile.add_member(:roles, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsIamInstanceProfileRoles, name: "Roles"))
     AwsIamInstanceProfile.type = Types::AwsIamInstanceProfile
-    AwsIamInstanceProfileList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsIamInstanceProfile, name: "member")
+    AwsIamInstanceProfileList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsIamInstanceProfile, name: "member"))
     AwsIamInstanceProfileRole.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Arn"))
     AwsIamInstanceProfileRole.add_member(:assume_role_policy_document, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsIamRoleAssumeRolePolicyDocument, name: "AssumeRolePolicyDocument"))
     AwsIamInstanceProfileRole.add_member(:create_date, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CreateDate"))
@@ -3421,7 +3421,7 @@ module Aws::SecurityHub
     AwsIamInstanceProfileRole.add_member(:role_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RoleId"))
     AwsIamInstanceProfileRole.add_member(:role_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RoleName"))
     AwsIamInstanceProfileRole.type = Types::AwsIamInstanceProfileRole
-    AwsIamInstanceProfileRoles.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsIamInstanceProfileRole, name: "member")
+    AwsIamInstanceProfileRoles.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsIamInstanceProfileRole, name: "member"))
     AwsIamPermissionsBoundary.add_member(:permissions_boundary_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "PermissionsBoundaryArn"))
     AwsIamPermissionsBoundary.add_member(:permissions_boundary_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "PermissionsBoundaryType"))
     AwsIamPermissionsBoundary.type = Types::AwsIamPermissionsBoundary
@@ -3441,7 +3441,7 @@ module Aws::SecurityHub
     AwsIamPolicyVersion.add_member(:is_default_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsDefaultVersion"))
     AwsIamPolicyVersion.add_member(:create_date, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CreateDate"))
     AwsIamPolicyVersion.type = Types::AwsIamPolicyVersion
-    AwsIamPolicyVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsIamPolicyVersion, name: "member")
+    AwsIamPolicyVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsIamPolicyVersion, name: "member"))
     AwsIamRoleDetails.add_member(:assume_role_policy_document, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsIamRoleAssumeRolePolicyDocument, name: "AssumeRolePolicyDocument"))
     AwsIamRoleDetails.add_member(:attached_managed_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsIamAttachedManagedPolicyList, name: "AttachedManagedPolicies"))
     AwsIamRoleDetails.add_member(:create_date, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CreateDate"))
@@ -3455,7 +3455,7 @@ module Aws::SecurityHub
     AwsIamRoleDetails.type = Types::AwsIamRoleDetails
     AwsIamRolePolicy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "PolicyName"))
     AwsIamRolePolicy.type = Types::AwsIamRolePolicy
-    AwsIamRolePolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsIamRolePolicy, name: "member")
+    AwsIamRolePolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsIamRolePolicy, name: "member"))
     AwsIamUserDetails.add_member(:attached_managed_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsIamAttachedManagedPolicyList, name: "AttachedManagedPolicies"))
     AwsIamUserDetails.add_member(:create_date, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CreateDate"))
     AwsIamUserDetails.add_member(:group_list, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "GroupList"))
@@ -3467,7 +3467,7 @@ module Aws::SecurityHub
     AwsIamUserDetails.type = Types::AwsIamUserDetails
     AwsIamUserPolicy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "PolicyName"))
     AwsIamUserPolicy.type = Types::AwsIamUserPolicy
-    AwsIamUserPolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsIamUserPolicy, name: "member")
+    AwsIamUserPolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsIamUserPolicy, name: "member"))
     AwsKinesisStreamDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     AwsKinesisStreamDetails.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Arn"))
     AwsKinesisStreamDetails.add_member(:stream_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsKinesisStreamStreamEncryptionDetails, name: "StreamEncryption"))
@@ -3523,7 +3523,7 @@ module Aws::SecurityHub
     AwsLambdaFunctionLayer.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Arn"))
     AwsLambdaFunctionLayer.add_member(:code_size, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "CodeSize"))
     AwsLambdaFunctionLayer.type = Types::AwsLambdaFunctionLayer
-    AwsLambdaFunctionLayerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLambdaFunctionLayer, name: "member")
+    AwsLambdaFunctionLayerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLambdaFunctionLayer, name: "member"))
     AwsLambdaFunctionTracingConfig.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Mode"))
     AwsLambdaFunctionTracingConfig.type = Types::AwsLambdaFunctionTracingConfig
     AwsLambdaFunctionVpcConfig.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "SecurityGroupIds"))
@@ -3537,7 +3537,7 @@ module Aws::SecurityHub
     AwsMountPoint.add_member(:source_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SourceVolume"))
     AwsMountPoint.add_member(:container_path, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ContainerPath"))
     AwsMountPoint.type = Types::AwsMountPoint
-    AwsMountPointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMountPoint, name: "member")
+    AwsMountPointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMountPoint, name: "member"))
     AwsMskClusterClusterInfoClientAuthenticationDetails.add_member(:sasl, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMskClusterClusterInfoClientAuthenticationSaslDetails, name: "Sasl"))
     AwsMskClusterClusterInfoClientAuthenticationDetails.add_member(:unauthenticated, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails, name: "Unauthenticated"))
     AwsMskClusterClusterInfoClientAuthenticationDetails.add_member(:tls, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMskClusterClusterInfoClientAuthenticationTlsDetails, name: "Tls"))
@@ -3590,7 +3590,7 @@ module Aws::SecurityHub
     AwsNetworkFirewallFirewallPolicyDetails.type = Types::AwsNetworkFirewallFirewallPolicyDetails
     AwsNetworkFirewallFirewallSubnetMappingsDetails.add_member(:subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SubnetId"))
     AwsNetworkFirewallFirewallSubnetMappingsDetails.type = Types::AwsNetworkFirewallFirewallSubnetMappingsDetails
-    AwsNetworkFirewallFirewallSubnetMappingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsNetworkFirewallFirewallSubnetMappingsDetails, name: "member")
+    AwsNetworkFirewallFirewallSubnetMappingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsNetworkFirewallFirewallSubnetMappingsDetails, name: "member"))
     AwsNetworkFirewallRuleGroupDetails.add_member(:capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Capacity"))
     AwsNetworkFirewallRuleGroupDetails.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description"))
     AwsNetworkFirewallRuleGroupDetails.add_member(:rule_group, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupDetails, name: "RuleGroup"))
@@ -3669,7 +3669,7 @@ module Aws::SecurityHub
     AwsRdsDbClusterAssociatedRole.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RoleArn"))
     AwsRdsDbClusterAssociatedRole.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Status"))
     AwsRdsDbClusterAssociatedRole.type = Types::AwsRdsDbClusterAssociatedRole
-    AwsRdsDbClusterAssociatedRoles.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbClusterAssociatedRole, name: "member")
+    AwsRdsDbClusterAssociatedRoles.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbClusterAssociatedRole, name: "member"))
     AwsRdsDbClusterDetails.add_member(:allocated_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "AllocatedStorage"))
     AwsRdsDbClusterDetails.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "AvailabilityZones"))
     AwsRdsDbClusterDetails.add_member(:backup_retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "BackupRetentionPeriod"))
@@ -3714,15 +3714,15 @@ module Aws::SecurityHub
     AwsRdsDbClusterMember.add_member(:db_instance_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DbInstanceIdentifier"))
     AwsRdsDbClusterMember.add_member(:db_cluster_parameter_group_status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DbClusterParameterGroupStatus"))
     AwsRdsDbClusterMember.type = Types::AwsRdsDbClusterMember
-    AwsRdsDbClusterMembers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbClusterMember, name: "member")
+    AwsRdsDbClusterMembers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbClusterMember, name: "member"))
     AwsRdsDbClusterOptionGroupMembership.add_member(:db_cluster_option_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DbClusterOptionGroupName"))
     AwsRdsDbClusterOptionGroupMembership.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Status"))
     AwsRdsDbClusterOptionGroupMembership.type = Types::AwsRdsDbClusterOptionGroupMembership
-    AwsRdsDbClusterOptionGroupMemberships.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbClusterOptionGroupMembership, name: "member")
+    AwsRdsDbClusterOptionGroupMemberships.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbClusterOptionGroupMembership, name: "member"))
     AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AttributeName"))
     AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute.add_member(:attribute_values, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "AttributeValues"))
     AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute.type = Types::AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute
-    AwsRdsDbClusterSnapshotDbClusterSnapshotAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute, name: "member")
+    AwsRdsDbClusterSnapshotDbClusterSnapshotAttributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute, name: "member"))
     AwsRdsDbClusterSnapshotDetails.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "AvailabilityZones"))
     AwsRdsDbClusterSnapshotDetails.add_member(:snapshot_create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SnapshotCreateTime"))
     AwsRdsDbClusterSnapshotDetails.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Engine"))
@@ -3748,12 +3748,12 @@ module Aws::SecurityHub
     AwsRdsDbDomainMembership.add_member(:fqdn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Fqdn"))
     AwsRdsDbDomainMembership.add_member(:iam_role_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "IamRoleName"))
     AwsRdsDbDomainMembership.type = Types::AwsRdsDbDomainMembership
-    AwsRdsDbDomainMemberships.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbDomainMembership, name: "member")
+    AwsRdsDbDomainMemberships.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbDomainMembership, name: "member"))
     AwsRdsDbInstanceAssociatedRole.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RoleArn"))
     AwsRdsDbInstanceAssociatedRole.add_member(:feature_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "FeatureName"))
     AwsRdsDbInstanceAssociatedRole.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Status"))
     AwsRdsDbInstanceAssociatedRole.type = Types::AwsRdsDbInstanceAssociatedRole
-    AwsRdsDbInstanceAssociatedRoles.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbInstanceAssociatedRole, name: "member")
+    AwsRdsDbInstanceAssociatedRoles.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbInstanceAssociatedRole, name: "member"))
     AwsRdsDbInstanceDetails.add_member(:associated_roles, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbInstanceAssociatedRoles, name: "AssociatedRoles"))
     AwsRdsDbInstanceDetails.add_member(:ca_certificate_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CACertificateIdentifier"))
     AwsRdsDbInstanceDetails.add_member(:db_cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DBClusterIdentifier"))
@@ -3819,15 +3819,15 @@ module Aws::SecurityHub
     AwsRdsDbInstanceVpcSecurityGroup.add_member(:vpc_security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VpcSecurityGroupId"))
     AwsRdsDbInstanceVpcSecurityGroup.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Status"))
     AwsRdsDbInstanceVpcSecurityGroup.type = Types::AwsRdsDbInstanceVpcSecurityGroup
-    AwsRdsDbInstanceVpcSecurityGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbInstanceVpcSecurityGroup, name: "member")
+    AwsRdsDbInstanceVpcSecurityGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbInstanceVpcSecurityGroup, name: "member"))
     AwsRdsDbOptionGroupMembership.add_member(:option_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "OptionGroupName"))
     AwsRdsDbOptionGroupMembership.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Status"))
     AwsRdsDbOptionGroupMembership.type = Types::AwsRdsDbOptionGroupMembership
-    AwsRdsDbOptionGroupMemberships.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbOptionGroupMembership, name: "member")
+    AwsRdsDbOptionGroupMemberships.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbOptionGroupMembership, name: "member"))
     AwsRdsDbParameterGroup.add_member(:db_parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DbParameterGroupName"))
     AwsRdsDbParameterGroup.add_member(:parameter_apply_status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ParameterApplyStatus"))
     AwsRdsDbParameterGroup.type = Types::AwsRdsDbParameterGroup
-    AwsRdsDbParameterGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbParameterGroup, name: "member")
+    AwsRdsDbParameterGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbParameterGroup, name: "member"))
     AwsRdsDbPendingModifiedValues.add_member(:db_instance_class, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DbInstanceClass"))
     AwsRdsDbPendingModifiedValues.add_member(:allocated_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "AllocatedStorage"))
     AwsRdsDbPendingModifiedValues.add_member(:master_user_password, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "MasterUserPassword"))
@@ -3847,7 +3847,7 @@ module Aws::SecurityHub
     AwsRdsDbProcessorFeature.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     AwsRdsDbProcessorFeature.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Value"))
     AwsRdsDbProcessorFeature.type = Types::AwsRdsDbProcessorFeature
-    AwsRdsDbProcessorFeatures.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbProcessorFeature, name: "member")
+    AwsRdsDbProcessorFeatures.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbProcessorFeature, name: "member"))
     AwsRdsDbSecurityGroupDetails.add_member(:db_security_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DbSecurityGroupArn"))
     AwsRdsDbSecurityGroupDetails.add_member(:db_security_group_description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DbSecurityGroupDescription"))
     AwsRdsDbSecurityGroupDetails.add_member(:db_security_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DbSecurityGroupName"))
@@ -3861,11 +3861,11 @@ module Aws::SecurityHub
     AwsRdsDbSecurityGroupEc2SecurityGroup.add_member(:ec2_security_group_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Ec2SecurityGroupOwnerId"))
     AwsRdsDbSecurityGroupEc2SecurityGroup.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Status"))
     AwsRdsDbSecurityGroupEc2SecurityGroup.type = Types::AwsRdsDbSecurityGroupEc2SecurityGroup
-    AwsRdsDbSecurityGroupEc2SecurityGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbSecurityGroupEc2SecurityGroup, name: "member")
+    AwsRdsDbSecurityGroupEc2SecurityGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbSecurityGroupEc2SecurityGroup, name: "member"))
     AwsRdsDbSecurityGroupIpRange.add_member(:cidr_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CidrIp"))
     AwsRdsDbSecurityGroupIpRange.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Status"))
     AwsRdsDbSecurityGroupIpRange.type = Types::AwsRdsDbSecurityGroupIpRange
-    AwsRdsDbSecurityGroupIpRanges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbSecurityGroupIpRange, name: "member")
+    AwsRdsDbSecurityGroupIpRanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbSecurityGroupIpRange, name: "member"))
     AwsRdsDbSnapshotDetails.add_member(:db_snapshot_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DbSnapshotIdentifier"))
     AwsRdsDbSnapshotDetails.add_member(:db_instance_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DbInstanceIdentifier"))
     AwsRdsDbSnapshotDetails.add_member(:snapshot_create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SnapshotCreateTime"))
@@ -3899,7 +3899,7 @@ module Aws::SecurityHub
     AwsRdsDbStatusInfo.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Status"))
     AwsRdsDbStatusInfo.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     AwsRdsDbStatusInfo.type = Types::AwsRdsDbStatusInfo
-    AwsRdsDbStatusInfos.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbStatusInfo, name: "member")
+    AwsRdsDbStatusInfos.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbStatusInfo, name: "member"))
     AwsRdsDbSubnetGroup.add_member(:db_subnet_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DbSubnetGroupName"))
     AwsRdsDbSubnetGroup.add_member(:db_subnet_group_description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DbSubnetGroupDescription"))
     AwsRdsDbSubnetGroup.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VpcId"))
@@ -3913,7 +3913,7 @@ module Aws::SecurityHub
     AwsRdsDbSubnetGroupSubnet.type = Types::AwsRdsDbSubnetGroupSubnet
     AwsRdsDbSubnetGroupSubnetAvailabilityZone.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     AwsRdsDbSubnetGroupSubnetAvailabilityZone.type = Types::AwsRdsDbSubnetGroupSubnetAvailabilityZone
-    AwsRdsDbSubnetGroupSubnets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbSubnetGroupSubnet, name: "member")
+    AwsRdsDbSubnetGroupSubnets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRdsDbSubnetGroupSubnet, name: "member"))
     AwsRdsEventSubscriptionDetails.add_member(:cust_subscription_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CustSubscriptionId"))
     AwsRdsEventSubscriptionDetails.add_member(:customer_aws_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CustomerAwsId"))
     AwsRdsEventSubscriptionDetails.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled"))
@@ -3932,21 +3932,21 @@ module Aws::SecurityHub
     AwsRedshiftClusterClusterNode.add_member(:private_ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "PrivateIpAddress"))
     AwsRedshiftClusterClusterNode.add_member(:public_ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "PublicIpAddress"))
     AwsRedshiftClusterClusterNode.type = Types::AwsRedshiftClusterClusterNode
-    AwsRedshiftClusterClusterNodes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRedshiftClusterClusterNode, name: "member")
+    AwsRedshiftClusterClusterNodes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRedshiftClusterClusterNode, name: "member"))
     AwsRedshiftClusterClusterParameterGroup.add_member(:cluster_parameter_status_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRedshiftClusterClusterParameterStatusList, name: "ClusterParameterStatusList"))
     AwsRedshiftClusterClusterParameterGroup.add_member(:parameter_apply_status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ParameterApplyStatus"))
     AwsRedshiftClusterClusterParameterGroup.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ParameterGroupName"))
     AwsRedshiftClusterClusterParameterGroup.type = Types::AwsRedshiftClusterClusterParameterGroup
-    AwsRedshiftClusterClusterParameterGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRedshiftClusterClusterParameterGroup, name: "member")
+    AwsRedshiftClusterClusterParameterGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRedshiftClusterClusterParameterGroup, name: "member"))
     AwsRedshiftClusterClusterParameterStatus.add_member(:parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ParameterName"))
     AwsRedshiftClusterClusterParameterStatus.add_member(:parameter_apply_status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ParameterApplyStatus"))
     AwsRedshiftClusterClusterParameterStatus.add_member(:parameter_apply_error_description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ParameterApplyErrorDescription"))
     AwsRedshiftClusterClusterParameterStatus.type = Types::AwsRedshiftClusterClusterParameterStatus
-    AwsRedshiftClusterClusterParameterStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRedshiftClusterClusterParameterStatus, name: "member")
+    AwsRedshiftClusterClusterParameterStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRedshiftClusterClusterParameterStatus, name: "member"))
     AwsRedshiftClusterClusterSecurityGroup.add_member(:cluster_security_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ClusterSecurityGroupName"))
     AwsRedshiftClusterClusterSecurityGroup.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Status"))
     AwsRedshiftClusterClusterSecurityGroup.type = Types::AwsRedshiftClusterClusterSecurityGroup
-    AwsRedshiftClusterClusterSecurityGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRedshiftClusterClusterSecurityGroup, name: "member")
+    AwsRedshiftClusterClusterSecurityGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRedshiftClusterClusterSecurityGroup, name: "member"))
     AwsRedshiftClusterClusterSnapshotCopyStatus.add_member(:destination_region, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DestinationRegion"))
     AwsRedshiftClusterClusterSnapshotCopyStatus.add_member(:manual_snapshot_retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ManualSnapshotRetentionPeriod"))
     AwsRedshiftClusterClusterSnapshotCopyStatus.add_member(:retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "RetentionPeriod"))
@@ -3956,7 +3956,7 @@ module Aws::SecurityHub
     AwsRedshiftClusterDeferredMaintenanceWindow.add_member(:defer_maintenance_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DeferMaintenanceIdentifier"))
     AwsRedshiftClusterDeferredMaintenanceWindow.add_member(:defer_maintenance_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DeferMaintenanceStartTime"))
     AwsRedshiftClusterDeferredMaintenanceWindow.type = Types::AwsRedshiftClusterDeferredMaintenanceWindow
-    AwsRedshiftClusterDeferredMaintenanceWindows.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRedshiftClusterDeferredMaintenanceWindow, name: "member")
+    AwsRedshiftClusterDeferredMaintenanceWindows.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRedshiftClusterDeferredMaintenanceWindow, name: "member"))
     AwsRedshiftClusterDetails.add_member(:allow_version_upgrade, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AllowVersionUpgrade"))
     AwsRedshiftClusterDetails.add_member(:automated_snapshot_retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "AutomatedSnapshotRetentionPeriod"))
     AwsRedshiftClusterDetails.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AvailabilityZone"))
@@ -4015,7 +4015,7 @@ module Aws::SecurityHub
     AwsRedshiftClusterIamRole.add_member(:apply_status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ApplyStatus"))
     AwsRedshiftClusterIamRole.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "IamRoleArn"))
     AwsRedshiftClusterIamRole.type = Types::AwsRedshiftClusterIamRole
-    AwsRedshiftClusterIamRoles.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRedshiftClusterIamRole, name: "member")
+    AwsRedshiftClusterIamRoles.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRedshiftClusterIamRole, name: "member"))
     AwsRedshiftClusterLoggingStatus.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "BucketName"))
     AwsRedshiftClusterLoggingStatus.add_member(:last_failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "LastFailureMessage"))
     AwsRedshiftClusterLoggingStatus.add_member(:last_failure_time, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "LastFailureTime"))
@@ -4048,7 +4048,7 @@ module Aws::SecurityHub
     AwsRedshiftClusterVpcSecurityGroup.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Status"))
     AwsRedshiftClusterVpcSecurityGroup.add_member(:vpc_security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VpcSecurityGroupId"))
     AwsRedshiftClusterVpcSecurityGroup.type = Types::AwsRedshiftClusterVpcSecurityGroup
-    AwsRedshiftClusterVpcSecurityGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRedshiftClusterVpcSecurityGroup, name: "member")
+    AwsRedshiftClusterVpcSecurityGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRedshiftClusterVpcSecurityGroup, name: "member"))
     AwsRoute53HostedZoneConfigDetails.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Comment"))
     AwsRoute53HostedZoneConfigDetails.type = Types::AwsRoute53HostedZoneConfigDetails
     AwsRoute53HostedZoneDetails.add_member(:hosted_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRoute53HostedZoneObjectDetails, name: "HostedZone"))
@@ -4056,7 +4056,7 @@ module Aws::SecurityHub
     AwsRoute53HostedZoneDetails.add_member(:name_servers, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRoute53HostedZoneNameServersList, name: "NameServers"))
     AwsRoute53HostedZoneDetails.add_member(:query_logging_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRoute53QueryLoggingConfigDetails, name: "QueryLoggingConfig"))
     AwsRoute53HostedZoneDetails.type = Types::AwsRoute53HostedZoneDetails
-    AwsRoute53HostedZoneNameServersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    AwsRoute53HostedZoneNameServersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     AwsRoute53HostedZoneObjectDetails.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Id"))
     AwsRoute53HostedZoneObjectDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     AwsRoute53HostedZoneObjectDetails.add_member(:config, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRoute53HostedZoneConfigDetails, name: "Config"))
@@ -4064,7 +4064,7 @@ module Aws::SecurityHub
     AwsRoute53HostedZoneVpcDetails.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Id"))
     AwsRoute53HostedZoneVpcDetails.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Region"))
     AwsRoute53HostedZoneVpcDetails.type = Types::AwsRoute53HostedZoneVpcDetails
-    AwsRoute53HostedZoneVpcsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRoute53HostedZoneVpcDetails, name: "member")
+    AwsRoute53HostedZoneVpcsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRoute53HostedZoneVpcDetails, name: "member"))
     AwsRoute53QueryLoggingConfigDetails.add_member(:cloud_watch_logs_log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogsLogGroupArnConfigDetails, name: "CloudWatchLogsLogGroupArn"))
     AwsRoute53QueryLoggingConfigDetails.type = Types::AwsRoute53QueryLoggingConfigDetails
     AwsS3AccessPointDetails.add_member(:access_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AccessPointArn"))
@@ -4110,23 +4110,23 @@ module Aws::SecurityHub
     AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails.add_member(:tag, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails, name: "Tag"))
     AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails.type = Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails
-    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails, name: "member")
+    AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails, name: "member"))
     AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Key"))
     AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Value"))
     AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails.type = Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails
     AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Key"))
     AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Value"))
     AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails.type = Types::AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails
-    AwsS3BucketBucketLifecycleConfigurationRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketBucketLifecycleConfigurationRulesDetails, name: "member")
+    AwsS3BucketBucketLifecycleConfigurationRulesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketBucketLifecycleConfigurationRulesDetails, name: "member"))
     AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails.add_member(:days, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Days"))
     AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails.add_member(:storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "StorageClass"))
     AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails.type = Types::AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails
-    AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails, name: "member")
+    AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails, name: "member"))
     AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails.add_member(:date, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Date"))
     AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails.add_member(:days, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Days"))
     AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails.add_member(:storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "StorageClass"))
     AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails.type = Types::AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails
-    AwsS3BucketBucketLifecycleConfigurationRulesTransitionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails, name: "member")
+    AwsS3BucketBucketLifecycleConfigurationRulesTransitionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails, name: "member"))
     AwsS3BucketBucketVersioningConfiguration.add_member(:is_mfa_delete_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsMfaDeleteEnabled"))
     AwsS3BucketBucketVersioningConfiguration.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Status"))
     AwsS3BucketBucketVersioningConfiguration.type = Types::AwsS3BucketBucketVersioningConfiguration
@@ -4155,8 +4155,8 @@ module Aws::SecurityHub
     AwsS3BucketNotificationConfigurationDetail.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Destination"))
     AwsS3BucketNotificationConfigurationDetail.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AwsS3BucketNotificationConfigurationDetail.type = Types::AwsS3BucketNotificationConfigurationDetail
-    AwsS3BucketNotificationConfigurationDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketNotificationConfigurationDetail, name: "member")
-    AwsS3BucketNotificationConfigurationEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    AwsS3BucketNotificationConfigurationDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketNotificationConfigurationDetail, name: "member"))
+    AwsS3BucketNotificationConfigurationEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     AwsS3BucketNotificationConfigurationFilter.add_member(:s3_key_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketNotificationConfigurationS3KeyFilter, name: "S3KeyFilter"))
     AwsS3BucketNotificationConfigurationFilter.type = Types::AwsS3BucketNotificationConfigurationFilter
     AwsS3BucketNotificationConfigurationS3KeyFilter.add_member(:filter_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketNotificationConfigurationS3KeyFilterRules, name: "FilterRules"))
@@ -4166,7 +4166,7 @@ module Aws::SecurityHub
     AwsS3BucketNotificationConfigurationS3KeyFilterRule.type = Types::AwsS3BucketNotificationConfigurationS3KeyFilterRule
     AwsS3BucketNotificationConfigurationS3KeyFilterRuleName.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PREFIX", traits: {"smithy.api#enumValue" => "Prefix"}))
     AwsS3BucketNotificationConfigurationS3KeyFilterRuleName.add_member(:suffix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUFFIX", traits: {"smithy.api#enumValue" => "Suffix"}))
-    AwsS3BucketNotificationConfigurationS3KeyFilterRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketNotificationConfigurationS3KeyFilterRule, name: "member")
+    AwsS3BucketNotificationConfigurationS3KeyFilterRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketNotificationConfigurationS3KeyFilterRule, name: "member"))
     AwsS3BucketObjectLockConfiguration.add_member(:object_lock_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ObjectLockEnabled"))
     AwsS3BucketObjectLockConfiguration.add_member(:rule, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketObjectLockConfigurationRuleDetails, name: "Rule"))
     AwsS3BucketObjectLockConfiguration.type = Types::AwsS3BucketObjectLockConfiguration
@@ -4183,7 +4183,7 @@ module Aws::SecurityHub
     AwsS3BucketServerSideEncryptionConfiguration.type = Types::AwsS3BucketServerSideEncryptionConfiguration
     AwsS3BucketServerSideEncryptionRule.add_member(:apply_server_side_encryption_by_default, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketServerSideEncryptionByDefault, name: "ApplyServerSideEncryptionByDefault"))
     AwsS3BucketServerSideEncryptionRule.type = Types::AwsS3BucketServerSideEncryptionRule
-    AwsS3BucketServerSideEncryptionRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketServerSideEncryptionRule, name: "member")
+    AwsS3BucketServerSideEncryptionRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketServerSideEncryptionRule, name: "member"))
     AwsS3BucketWebsiteConfiguration.add_member(:error_document, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ErrorDocument"))
     AwsS3BucketWebsiteConfiguration.add_member(:index_document_suffix, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "IndexDocumentSuffix"))
     AwsS3BucketWebsiteConfiguration.add_member(:redirect_all_requests_to, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketWebsiteConfigurationRedirectTo, name: "RedirectAllRequestsTo"))
@@ -4204,7 +4204,7 @@ module Aws::SecurityHub
     AwsS3BucketWebsiteConfigurationRoutingRuleRedirect.add_member(:replace_key_prefix_with, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ReplaceKeyPrefixWith"))
     AwsS3BucketWebsiteConfigurationRoutingRuleRedirect.add_member(:replace_key_with, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ReplaceKeyWith"))
     AwsS3BucketWebsiteConfigurationRoutingRuleRedirect.type = Types::AwsS3BucketWebsiteConfigurationRoutingRuleRedirect
-    AwsS3BucketWebsiteConfigurationRoutingRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketWebsiteConfigurationRoutingRule, name: "member")
+    AwsS3BucketWebsiteConfigurationRoutingRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsS3BucketWebsiteConfigurationRoutingRule, name: "member"))
     AwsS3ObjectDetails.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "LastModified"))
     AwsS3ObjectDetails.add_member(:e_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ETag"))
     AwsS3ObjectDetails.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VersionId"))
@@ -4400,8 +4400,8 @@ module Aws::SecurityHub
     AwsSecurityFindingIdentifier.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Id", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AwsSecurityFindingIdentifier.add_member(:product_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ProductArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AwsSecurityFindingIdentifier.type = Types::AwsSecurityFindingIdentifier
-    AwsSecurityFindingIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsSecurityFindingIdentifier, name: "member")
-    AwsSecurityFindingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsSecurityFinding, name: "member")
+    AwsSecurityFindingIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsSecurityFindingIdentifier, name: "member"))
+    AwsSecurityFindingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsSecurityFinding, name: "member"))
     AwsSnsTopicDetails.add_member(:kms_master_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "KmsMasterKeyId"))
     AwsSnsTopicDetails.add_member(:subscription, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsSnsTopicSubscriptionList, name: "Subscription"))
     AwsSnsTopicDetails.add_member(:topic_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "TopicName"))
@@ -4417,7 +4417,7 @@ module Aws::SecurityHub
     AwsSnsTopicSubscription.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Endpoint"))
     AwsSnsTopicSubscription.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Protocol"))
     AwsSnsTopicSubscription.type = Types::AwsSnsTopicSubscription
-    AwsSnsTopicSubscriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsSnsTopicSubscription, name: "member")
+    AwsSnsTopicSubscriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsSnsTopicSubscription, name: "member"))
     AwsSqsQueueDetails.add_member(:kms_data_key_reuse_period_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "KmsDataKeyReusePeriodSeconds"))
     AwsSqsQueueDetails.add_member(:kms_master_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "KmsMasterKeyId"))
     AwsSqsQueueDetails.add_member(:queue_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "QueueName"))
@@ -4459,7 +4459,7 @@ module Aws::SecurityHub
     AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails.type = Types::AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails
     AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails.add_member(:cloud_watch_logs_log_group, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails, name: "CloudWatchLogsLogGroup"))
     AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails.type = Types::AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails
-    AwsStepFunctionStateMachineLoggingConfigurationDestinationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails, name: "member")
+    AwsStepFunctionStateMachineLoggingConfigurationDestinationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails, name: "member"))
     AwsStepFunctionStateMachineLoggingConfigurationDetails.add_member(:destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsStepFunctionStateMachineLoggingConfigurationDestinationsList, name: "Destinations"))
     AwsStepFunctionStateMachineLoggingConfigurationDetails.add_member(:include_execution_data, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IncludeExecutionData"))
     AwsStepFunctionStateMachineLoggingConfigurationDetails.add_member(:level, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Level"))
@@ -4477,7 +4477,7 @@ module Aws::SecurityHub
     AwsWafRateBasedRuleMatchPredicate.add_member(:negated, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Negated"))
     AwsWafRateBasedRuleMatchPredicate.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AwsWafRateBasedRuleMatchPredicate.type = Types::AwsWafRateBasedRuleMatchPredicate
-    AwsWafRateBasedRuleMatchPredicateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafRateBasedRuleMatchPredicate, name: "member")
+    AwsWafRateBasedRuleMatchPredicateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafRateBasedRuleMatchPredicate, name: "member"))
     AwsWafRegionalRateBasedRuleDetails.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "MetricName"))
     AwsWafRegionalRateBasedRuleDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     AwsWafRegionalRateBasedRuleDetails.add_member(:rate_key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RateKey"))
@@ -4489,7 +4489,7 @@ module Aws::SecurityHub
     AwsWafRegionalRateBasedRuleMatchPredicate.add_member(:negated, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Negated"))
     AwsWafRegionalRateBasedRuleMatchPredicate.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AwsWafRegionalRateBasedRuleMatchPredicate.type = Types::AwsWafRegionalRateBasedRuleMatchPredicate
-    AwsWafRegionalRateBasedRuleMatchPredicateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafRegionalRateBasedRuleMatchPredicate, name: "member")
+    AwsWafRegionalRateBasedRuleMatchPredicateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafRegionalRateBasedRuleMatchPredicate, name: "member"))
     AwsWafRegionalRuleDetails.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "MetricName"))
     AwsWafRegionalRuleDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     AwsWafRegionalRuleDetails.add_member(:predicate_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafRegionalRulePredicateList, name: "PredicateList"))
@@ -4507,8 +4507,8 @@ module Aws::SecurityHub
     AwsWafRegionalRuleGroupRulesDetails.add_member(:rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RuleId"))
     AwsWafRegionalRuleGroupRulesDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AwsWafRegionalRuleGroupRulesDetails.type = Types::AwsWafRegionalRuleGroupRulesDetails
-    AwsWafRegionalRuleGroupRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafRegionalRuleGroupRulesDetails, name: "member")
-    AwsWafRegionalRulePredicateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafRegionalRulePredicateListDetails, name: "member")
+    AwsWafRegionalRuleGroupRulesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafRegionalRuleGroupRulesDetails, name: "member"))
+    AwsWafRegionalRulePredicateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafRegionalRulePredicateListDetails, name: "member"))
     AwsWafRegionalRulePredicateListDetails.add_member(:data_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DataId"))
     AwsWafRegionalRulePredicateListDetails.add_member(:negated, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Negated"))
     AwsWafRegionalRulePredicateListDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
@@ -4519,7 +4519,7 @@ module Aws::SecurityHub
     AwsWafRegionalWebAclDetails.add_member(:rules_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafRegionalWebAclRulesList, name: "RulesList"))
     AwsWafRegionalWebAclDetails.add_member(:web_acl_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "WebAclId"))
     AwsWafRegionalWebAclDetails.type = Types::AwsWafRegionalWebAclDetails
-    AwsWafRegionalWebAclRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafRegionalWebAclRulesListDetails, name: "member")
+    AwsWafRegionalWebAclRulesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafRegionalWebAclRulesListDetails, name: "member"))
     AwsWafRegionalWebAclRulesListActionDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AwsWafRegionalWebAclRulesListActionDetails.type = Types::AwsWafRegionalWebAclRulesListActionDetails
     AwsWafRegionalWebAclRulesListDetails.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafRegionalWebAclRulesListActionDetails, name: "Action"))
@@ -4547,8 +4547,8 @@ module Aws::SecurityHub
     AwsWafRuleGroupRulesDetails.add_member(:rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RuleId"))
     AwsWafRuleGroupRulesDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AwsWafRuleGroupRulesDetails.type = Types::AwsWafRuleGroupRulesDetails
-    AwsWafRuleGroupRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafRuleGroupRulesDetails, name: "member")
-    AwsWafRulePredicateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafRulePredicateListDetails, name: "member")
+    AwsWafRuleGroupRulesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafRuleGroupRulesDetails, name: "member"))
+    AwsWafRulePredicateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafRulePredicateListDetails, name: "member"))
     AwsWafRulePredicateListDetails.add_member(:data_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DataId"))
     AwsWafRulePredicateListDetails.add_member(:negated, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Negated"))
     AwsWafRulePredicateListDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
@@ -4565,7 +4565,7 @@ module Aws::SecurityHub
     AwsWafWebAclRule.add_member(:rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RuleId"))
     AwsWafWebAclRule.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     AwsWafWebAclRule.type = Types::AwsWafWebAclRule
-    AwsWafWebAclRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafWebAclRule, name: "member")
+    AwsWafWebAclRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafWebAclRule, name: "member"))
     AwsWafv2ActionAllowDetails.add_member(:custom_request_handling, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafv2CustomRequestHandlingDetails, name: "CustomRequestHandling"))
     AwsWafv2ActionAllowDetails.type = Types::AwsWafv2ActionAllowDetails
     AwsWafv2ActionBlockDetails.add_member(:custom_response, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafv2CustomResponseDetails, name: "CustomResponse"))
@@ -4579,7 +4579,7 @@ module Aws::SecurityHub
     AwsWafv2CustomResponseDetails.add_member(:response_code, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ResponseCode"))
     AwsWafv2CustomResponseDetails.add_member(:response_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafv2InsertHeadersList, name: "ResponseHeaders"))
     AwsWafv2CustomResponseDetails.type = Types::AwsWafv2CustomResponseDetails
-    AwsWafv2InsertHeadersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafv2CustomHttpHeader, name: "member")
+    AwsWafv2InsertHeadersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafv2CustomHttpHeader, name: "member"))
     AwsWafv2RuleGroupDetails.add_member(:capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "Capacity"))
     AwsWafv2RuleGroupDetails.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description"))
     AwsWafv2RuleGroupDetails.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Id"))
@@ -4604,7 +4604,7 @@ module Aws::SecurityHub
     AwsWafv2RulesDetails.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Priority"))
     AwsWafv2RulesDetails.add_member(:visibility_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafv2VisibilityConfigDetails, name: "VisibilityConfig"))
     AwsWafv2RulesDetails.type = Types::AwsWafv2RulesDetails
-    AwsWafv2RulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafv2RulesDetails, name: "member")
+    AwsWafv2RulesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsWafv2RulesDetails, name: "member"))
     AwsWafv2VisibilityConfigDetails.add_member(:cloud_watch_metrics_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "CloudWatchMetricsEnabled"))
     AwsWafv2VisibilityConfigDetails.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "MetricName"))
     AwsWafv2VisibilityConfigDetails.add_member(:sampled_requests_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SampledRequestsEnabled"))
@@ -4666,7 +4666,7 @@ module Aws::SecurityHub
     BatchGetStandardsControlAssociationsResponse.type = Types::BatchGetStandardsControlAssociationsResponse
     BatchImportFindingsRequest.add_member(:findings, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchImportFindingsRequestFindingList, name: "Findings", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BatchImportFindingsRequest.type = Types::BatchImportFindingsRequest
-    BatchImportFindingsRequestFindingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsSecurityFinding, name: "member")
+    BatchImportFindingsRequestFindingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsSecurityFinding, name: "member"))
     BatchImportFindingsResponse.add_member(:failed_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "FailedCount", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BatchImportFindingsResponse.add_member(:success_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "SuccessCount", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BatchImportFindingsResponse.add_member(:failed_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportFindingsErrorList, name: "FailedFindings"))
@@ -4694,11 +4694,11 @@ module Aws::SecurityHub
     BatchUpdateFindingsUnprocessedFinding.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ErrorCode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BatchUpdateFindingsUnprocessedFinding.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ErrorMessage", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BatchUpdateFindingsUnprocessedFinding.type = Types::BatchUpdateFindingsUnprocessedFinding
-    BatchUpdateFindingsUnprocessedFindingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateFindingsUnprocessedFinding, name: "member")
+    BatchUpdateFindingsUnprocessedFindingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateFindingsUnprocessedFinding, name: "member"))
     BatchUpdateFindingsV2ProcessedFinding.add_member(:finding_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfFindingIdentifier, name: "FindingIdentifier"))
     BatchUpdateFindingsV2ProcessedFinding.add_member(:metadata_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "MetadataUid"))
     BatchUpdateFindingsV2ProcessedFinding.type = Types::BatchUpdateFindingsV2ProcessedFinding
-    BatchUpdateFindingsV2ProcessedFindingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateFindingsV2ProcessedFinding, name: "member")
+    BatchUpdateFindingsV2ProcessedFindingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateFindingsV2ProcessedFinding, name: "member"))
     BatchUpdateFindingsV2Request.add_member(:metadata_uids, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataUidList, name: "MetadataUids"))
     BatchUpdateFindingsV2Request.add_member(:finding_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfFindingIdentifierList, name: "FindingIdentifiers"))
     BatchUpdateFindingsV2Request.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Comment"))
@@ -4717,7 +4717,7 @@ module Aws::SecurityHub
     BatchUpdateFindingsV2UnprocessedFindingErrorCode.add_member(:validation_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ValidationException", traits: {"smithy.api#enumValue" => "ValidationException"}))
     BatchUpdateFindingsV2UnprocessedFindingErrorCode.add_member(:internal_server_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InternalServerException", traits: {"smithy.api#enumValue" => "InternalServerException"}))
     BatchUpdateFindingsV2UnprocessedFindingErrorCode.add_member(:conflict_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ConflictException", traits: {"smithy.api#enumValue" => "ConflictException"}))
-    BatchUpdateFindingsV2UnprocessedFindingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateFindingsV2UnprocessedFinding, name: "member")
+    BatchUpdateFindingsV2UnprocessedFindingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateFindingsV2UnprocessedFinding, name: "member"))
     BatchUpdateStandardsControlAssociationsRequest.add_member(:standards_control_association_updates, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsControlAssociationUpdates, name: "StandardsControlAssociationUpdates", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BatchUpdateStandardsControlAssociationsRequest.type = Types::BatchUpdateStandardsControlAssociationsRequest
     BatchUpdateStandardsControlAssociationsResponse.add_member(:unprocessed_association_updates, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedStandardsControlAssociationUpdates, name: "UnprocessedAssociationUpdates"))
@@ -4726,19 +4726,19 @@ module Aws::SecurityHub
     BooleanConfigurationOptions.type = Types::BooleanConfigurationOptions
     BooleanFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Value"))
     BooleanFilter.type = Types::BooleanFilter
-    BooleanFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanFilter, name: "member")
-    CategoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    BooleanFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanFilter, name: "member"))
+    CategoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     Cell.add_member(:column, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "Column"))
     Cell.add_member(:row, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "Row"))
     Cell.add_member(:column_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ColumnName"))
     Cell.add_member(:cell_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CellReference"))
     Cell.type = Types::Cell
-    Cells.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Cell, name: "member")
+    Cells.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Cell, name: "member"))
     CidrBlockAssociation.add_member(:association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AssociationId"))
     CidrBlockAssociation.add_member(:cidr_block, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CidrBlock"))
     CidrBlockAssociation.add_member(:cidr_block_state, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CidrBlockState"))
     CidrBlockAssociation.type = Types::CidrBlockAssociation
-    CidrBlockAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CidrBlockAssociation, name: "member")
+    CidrBlockAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrBlockAssociation, name: "member"))
     City.add_member(:city_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CityName"))
     City.type = Types::City
     ClassificationResult.add_member(:mime_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "MimeType"))
@@ -4782,7 +4782,7 @@ module Aws::SecurityHub
     CompositeFilter.add_member(:map_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfMapFilterList, name: "MapFilters"))
     CompositeFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOperators, name: "Operator"))
     CompositeFilter.type = Types::CompositeFilter
-    CompositeFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CompositeFilter, name: "member")
+    CompositeFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CompositeFilter, name: "member"))
     ConfigurationOptions.add_member(:integer, Types::ConfigurationOptions::Integer, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerConfigurationOptions, name: "Integer"))
     ConfigurationOptions.add_member(:integer_list, Types::ConfigurationOptions::IntegerList, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerListConfigurationOptions, name: "IntegerList"))
     ConfigurationOptions.add_member(:double, Types::ConfigurationOptions::Double, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleConfigurationOptions, name: "Double"))
@@ -4795,7 +4795,7 @@ module Aws::SecurityHub
     ConfigurationOptions.type = Types::ConfigurationOptions
     ConfigurationPolicyAssociation.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "Target"))
     ConfigurationPolicyAssociation.type = Types::ConfigurationPolicyAssociation
-    ConfigurationPolicyAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationPolicyAssociationSummary, name: "member")
+    ConfigurationPolicyAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationPolicyAssociationSummary, name: "member"))
     ConfigurationPolicyAssociationStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     ConfigurationPolicyAssociationStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
     ConfigurationPolicyAssociationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -4807,8 +4807,8 @@ module Aws::SecurityHub
     ConfigurationPolicyAssociationSummary.add_member(:association_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationPolicyAssociationStatus, name: "AssociationStatus"))
     ConfigurationPolicyAssociationSummary.add_member(:association_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AssociationStatusMessage"))
     ConfigurationPolicyAssociationSummary.type = Types::ConfigurationPolicyAssociationSummary
-    ConfigurationPolicyAssociationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationPolicyAssociationSummary, name: "member")
-    ConfigurationPolicyAssociationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationPolicyAssociation, name: "member")
+    ConfigurationPolicyAssociationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationPolicyAssociationSummary, name: "member"))
+    ConfigurationPolicyAssociationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationPolicyAssociation, name: "member"))
     ConfigurationPolicySummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Arn"))
     ConfigurationPolicySummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Id"))
     ConfigurationPolicySummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
@@ -4816,7 +4816,7 @@ module Aws::SecurityHub
     ConfigurationPolicySummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt"))
     ConfigurationPolicySummary.add_member(:service_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ServiceEnabled"))
     ConfigurationPolicySummary.type = Types::ConfigurationPolicySummary
-    ConfigurationPolicySummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationPolicySummary, name: "member")
+    ConfigurationPolicySummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationPolicySummary, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     ConflictException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Code"))
     ConflictException.type = Types::ConflictException
@@ -4843,7 +4843,7 @@ module Aws::SecurityHub
     ConnectorSummary.add_member(:provider_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderSummary, name: "ProviderSummary", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ConnectorSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ConnectorSummary.type = Types::ConnectorSummary
-    ConnectorSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorSummary, name: "member")
+    ConnectorSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorSummary, name: "member"))
     ContainerDetails.add_member(:container_runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ContainerRuntime"))
     ContainerDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     ContainerDetails.add_member(:image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ImageId"))
@@ -4955,18 +4955,18 @@ module Aws::SecurityHub
     CustomDataIdentifiersDetections.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     CustomDataIdentifiersDetections.add_member(:occurrences, ::Smithy::Schema::Shapes::MemberShape.new(target: Occurrences, name: "Occurrences"))
     CustomDataIdentifiersDetections.type = Types::CustomDataIdentifiersDetections
-    CustomDataIdentifiersDetectionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDataIdentifiersDetections, name: "member")
+    CustomDataIdentifiersDetectionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDataIdentifiersDetections, name: "member"))
     CustomDataIdentifiersResult.add_member(:detections, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDataIdentifiersDetectionsList, name: "Detections"))
     CustomDataIdentifiersResult.add_member(:total_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "TotalCount"))
     CustomDataIdentifiersResult.type = Types::CustomDataIdentifiersResult
-    CustomizableProperties.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityControlProperty, name: "member")
+    CustomizableProperties.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityControlProperty, name: "member"))
     Cvss.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Version"))
     Cvss.add_member(:base_score, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "BaseScore"))
     Cvss.add_member(:base_vector, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "BaseVector"))
     Cvss.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Source"))
     Cvss.add_member(:adjustments, ::Smithy::Schema::Shapes::MemberShape.new(target: AdjustmentList, name: "Adjustments"))
     Cvss.type = Types::Cvss
-    CvssList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Cvss, name: "member")
+    CvssList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Cvss, name: "member"))
     DataClassificationDetails.add_member(:detailed_results_location, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DetailedResultsLocation"))
     DataClassificationDetails.add_member(:result, ::Smithy::Schema::Shapes::MemberShape.new(target: ClassificationResult, name: "Result"))
     DataClassificationDetails.type = Types::DataClassificationDetails
@@ -4974,7 +4974,7 @@ module Aws::SecurityHub
     DateFilter.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "End"))
     DateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::MemberShape.new(target: DateRange, name: "DateRange"))
     DateFilter.type = Types::DateFilter
-    DateFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DateFilter, name: "member")
+    DateFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DateFilter, name: "member"))
     DateRange.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Value"))
     DateRange.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: DateRangeUnit, name: "Unit"))
     DateRange.type = Types::DateRange
@@ -5077,7 +5077,7 @@ module Aws::SecurityHub
     DisableSecurityHubResponse.type = Types::DisableSecurityHubResponse
     DisableSecurityHubV2Request.type = Types::DisableSecurityHubV2Request
     DisableSecurityHubV2Response.type = Types::DisableSecurityHubV2Response
-    DisabledSecurityControlIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    DisabledSecurityControlIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     DisassociateFromAdministratorAccountRequest.type = Types::DisassociateFromAdministratorAccountRequest
     DisassociateFromAdministratorAccountResponse.type = Types::DisassociateFromAdministratorAccountResponse
     DisassociateFromMasterAccountRequest.type = Types::DisassociateFromMasterAccountRequest
@@ -5112,8 +5112,8 @@ module Aws::SecurityHub
     EnableSecurityHubV2Request.type = Types::EnableSecurityHubV2Request
     EnableSecurityHubV2Response.add_member(:hub_v2_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "HubV2Arn"))
     EnableSecurityHubV2Response.type = Types::EnableSecurityHubV2Response
-    EnabledSecurityControlIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
-    EnabledStandardIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    EnabledSecurityControlIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
+    EnabledStandardIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     EnumConfigurationOptions.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DefaultValue"))
     EnumConfigurationOptions.add_member(:allowed_values, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "AllowedValues"))
     EnumConfigurationOptions.type = Types::EnumConfigurationOptions
@@ -5123,9 +5123,9 @@ module Aws::SecurityHub
     EnumListConfigurationOptions.type = Types::EnumListConfigurationOptions
     ExternalIntegrationConfiguration.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConnectorArn"))
     ExternalIntegrationConfiguration.type = Types::ExternalIntegrationConfiguration
-    FieldMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key")
-    FieldMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value")
-    FilePathList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilePaths, name: "member")
+    FieldMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
+    FieldMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value"))
+    FilePathList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePaths, name: "member"))
     FilePaths.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "FilePath"))
     FilePaths.add_member(:file_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "FileName"))
     FilePaths.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceId"))
@@ -5133,7 +5133,7 @@ module Aws::SecurityHub
     FilePaths.type = Types::FilePaths
     FindingAggregator.add_member(:finding_aggregator_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "FindingAggregatorArn"))
     FindingAggregator.type = Types::FindingAggregator
-    FindingAggregatorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingAggregator, name: "member")
+    FindingAggregatorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingAggregator, name: "member"))
     FindingHistoryRecord.add_member(:finding_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsSecurityFindingIdentifier, name: "FindingIdentifier"))
     FindingHistoryRecord.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdateTime"))
     FindingHistoryRecord.add_member(:finding_created, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "FindingCreated"))
@@ -5141,7 +5141,7 @@ module Aws::SecurityHub
     FindingHistoryRecord.add_member(:updates, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingHistoryUpdatesList, name: "Updates"))
     FindingHistoryRecord.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     FindingHistoryRecord.type = Types::FindingHistoryRecord
-    FindingHistoryRecordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingHistoryRecord, name: "member")
+    FindingHistoryRecordList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingHistoryRecord, name: "member"))
     FindingHistoryUpdate.add_member(:updated_field, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "UpdatedField"))
     FindingHistoryUpdate.add_member(:old_value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "OldValue"))
     FindingHistoryUpdate.add_member(:new_value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "NewValue"))
@@ -5151,7 +5151,7 @@ module Aws::SecurityHub
     FindingHistoryUpdateSource.type = Types::FindingHistoryUpdateSource
     FindingHistoryUpdateSourceType.add_member(:batch_update_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BATCH_UPDATE_FINDINGS", traits: {"smithy.api#enumValue" => "BATCH_UPDATE_FINDINGS"}))
     FindingHistoryUpdateSourceType.add_member(:batch_import_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BATCH_IMPORT_FINDINGS", traits: {"smithy.api#enumValue" => "BATCH_IMPORT_FINDINGS"}))
-    FindingHistoryUpdatesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingHistoryUpdate, name: "member")
+    FindingHistoryUpdatesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingHistoryUpdate, name: "member"))
     FindingProviderFields.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: RatioScale, name: "Confidence"))
     FindingProviderFields.add_member(:criticality, ::Smithy::Schema::Shapes::MemberShape.new(target: RatioScale, name: "Criticality"))
     FindingProviderFields.add_member(:related_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedFindingList, name: "RelatedFindings"))
@@ -5169,15 +5169,15 @@ module Aws::SecurityHub
     FirewallPolicyDetails.type = Types::FirewallPolicyDetails
     FirewallPolicyStatefulRuleGroupReferencesDetails.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceArn"))
     FirewallPolicyStatefulRuleGroupReferencesDetails.type = Types::FirewallPolicyStatefulRuleGroupReferencesDetails
-    FirewallPolicyStatefulRuleGroupReferencesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallPolicyStatefulRuleGroupReferencesDetails, name: "member")
+    FirewallPolicyStatefulRuleGroupReferencesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallPolicyStatefulRuleGroupReferencesDetails, name: "member"))
     FirewallPolicyStatelessCustomActionsDetails.add_member(:action_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: StatelessCustomActionDefinition, name: "ActionDefinition"))
     FirewallPolicyStatelessCustomActionsDetails.add_member(:action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ActionName"))
     FirewallPolicyStatelessCustomActionsDetails.type = Types::FirewallPolicyStatelessCustomActionsDetails
-    FirewallPolicyStatelessCustomActionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallPolicyStatelessCustomActionsDetails, name: "member")
+    FirewallPolicyStatelessCustomActionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallPolicyStatelessCustomActionsDetails, name: "member"))
     FirewallPolicyStatelessRuleGroupReferencesDetails.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Priority"))
     FirewallPolicyStatelessRuleGroupReferencesDetails.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceArn"))
     FirewallPolicyStatelessRuleGroupReferencesDetails.type = Types::FirewallPolicyStatelessRuleGroupReferencesDetails
-    FirewallPolicyStatelessRuleGroupReferencesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallPolicyStatelessRuleGroupReferencesDetails, name: "member")
+    FirewallPolicyStatelessRuleGroupReferencesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallPolicyStatelessRuleGroupReferencesDetails, name: "member"))
     GeneratorDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     GeneratorDetails.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description"))
     GeneratorDetails.add_member(:labels, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeList, name: "Labels"))
@@ -5345,15 +5345,15 @@ module Aws::SecurityHub
     GroupByResult.add_member(:group_by_field, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "GroupByField"))
     GroupByResult.add_member(:group_by_values, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByValues, name: "GroupByValues"))
     GroupByResult.type = Types::GroupByResult
-    GroupByResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByResult, name: "member")
+    GroupByResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByResult, name: "member"))
     GroupByRule.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfFindingFilters, name: "Filters"))
     GroupByRule.add_member(:group_by_field, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByField, name: "GroupByField", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GroupByRule.type = Types::GroupByRule
-    GroupByRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByRule, name: "member")
+    GroupByRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByRule, name: "member"))
     GroupByValue.add_member(:field_value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "FieldValue"))
     GroupByValue.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Count"))
     GroupByValue.type = Types::GroupByValue
-    GroupByValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByValue, name: "member")
+    GroupByValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByValue, name: "member"))
     HealthCheck.add_member(:connector_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorStatus, name: "ConnectorStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     HealthCheck.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     HealthCheck.add_member(:last_checked_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastCheckedAt", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -5365,23 +5365,23 @@ module Aws::SecurityHub
     ImportFindingsError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ErrorCode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ImportFindingsError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ErrorMessage", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ImportFindingsError.type = Types::ImportFindingsError
-    ImportFindingsErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportFindingsError, name: "member")
+    ImportFindingsErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportFindingsError, name: "member"))
     Indicator.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Key"))
     Indicator.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "Values"))
     Indicator.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Title"))
     Indicator.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     Indicator.type = Types::Indicator
-    IndicatorsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Indicator, name: "member")
+    IndicatorsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Indicator, name: "member"))
     Insight.add_member(:insight_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "InsightArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Insight.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Insight.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsSecurityFindingFilters, name: "Filters", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Insight.add_member(:group_by_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "GroupByAttribute", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Insight.type = Types::Insight
-    InsightList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Insight, name: "member")
+    InsightList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Insight, name: "member"))
     InsightResultValue.add_member(:group_by_attribute_value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "GroupByAttributeValue", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InsightResultValue.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Count", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InsightResultValue.type = Types::InsightResultValue
-    InsightResultValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InsightResultValue, name: "member")
+    InsightResultValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightResultValue, name: "member"))
     InsightResults.add_member(:insight_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "InsightArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InsightResults.add_member(:group_by_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "GroupByAttribute", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InsightResults.add_member(:result_values, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightResultValueList, name: "ResultValues", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -5390,7 +5390,7 @@ module Aws::SecurityHub
     IntegerConfigurationOptions.add_member(:min, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Min"))
     IntegerConfigurationOptions.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Max"))
     IntegerConfigurationOptions.type = Types::IntegerConfigurationOptions
-    IntegerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "member")
+    IntegerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "member"))
     IntegerListConfigurationOptions.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerList, name: "DefaultValue"))
     IntegerListConfigurationOptions.add_member(:min, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Min"))
     IntegerListConfigurationOptions.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Max"))
@@ -5399,11 +5399,11 @@ module Aws::SecurityHub
     IntegrationType.add_member(:send_findings_to_security_hub, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEND_FINDINGS_TO_SECURITY_HUB", traits: {"smithy.api#enumValue" => "SEND_FINDINGS_TO_SECURITY_HUB"}))
     IntegrationType.add_member(:receive_findings_from_security_hub, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECEIVE_FINDINGS_FROM_SECURITY_HUB", traits: {"smithy.api#enumValue" => "RECEIVE_FINDINGS_FROM_SECURITY_HUB"}))
     IntegrationType.add_member(:update_findings_in_security_hub, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_FINDINGS_IN_SECURITY_HUB", traits: {"smithy.api#enumValue" => "UPDATE_FINDINGS_IN_SECURITY_HUB"}))
-    IntegrationTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationType, name: "member")
+    IntegrationTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationType, name: "member"))
     IntegrationV2Type.add_member(:send_findings_to_security_hub, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEND_FINDINGS_TO_SECURITY_HUB", traits: {"smithy.api#enumValue" => "SEND_FINDINGS_TO_SECURITY_HUB"}))
     IntegrationV2Type.add_member(:receive_findings_from_security_hub, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECEIVE_FINDINGS_FROM_SECURITY_HUB", traits: {"smithy.api#enumValue" => "RECEIVE_FINDINGS_FROM_SECURITY_HUB"}))
     IntegrationV2Type.add_member(:update_findings_in_security_hub, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_FINDINGS_IN_SECURITY_HUB", traits: {"smithy.api#enumValue" => "UPDATE_FINDINGS_IN_SECURITY_HUB"}))
-    IntegrationV2TypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationV2Type, name: "member")
+    IntegrationV2TypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationV2Type, name: "member"))
     InternalException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     InternalException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Code"))
     InternalException.type = Types::InternalException
@@ -5421,14 +5421,14 @@ module Aws::SecurityHub
     Invitation.add_member(:invited_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "InvitedAt"))
     Invitation.add_member(:member_status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "MemberStatus"))
     Invitation.type = Types::Invitation
-    InvitationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Invitation, name: "member")
+    InvitationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Invitation, name: "member"))
     InviteMembersRequest.add_member(:account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdList, name: "AccountIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InviteMembersRequest.type = Types::InviteMembersRequest
     InviteMembersResponse.add_member(:unprocessed_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultList, name: "UnprocessedAccounts"))
     InviteMembersResponse.type = Types::InviteMembersResponse
     IpFilter.add_member(:cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Cidr"))
     IpFilter.type = Types::IpFilter
-    IpFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpFilter, name: "member")
+    IpFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpFilter, name: "member"))
     IpOrganizationDetails.add_member(:asn, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Asn"))
     IpOrganizationDetails.add_member(:asn_org, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AsnOrg"))
     IpOrganizationDetails.add_member(:isp, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Isp"))
@@ -5438,7 +5438,7 @@ module Aws::SecurityHub
     Ipv6CidrBlockAssociation.add_member(:ipv6_cidr_block, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Ipv6CidrBlock"))
     Ipv6CidrBlockAssociation.add_member(:cidr_block_state, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CidrBlockState"))
     Ipv6CidrBlockAssociation.type = Types::Ipv6CidrBlockAssociation
-    Ipv6CidrBlockAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6CidrBlockAssociation, name: "member")
+    Ipv6CidrBlockAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6CidrBlockAssociation, name: "member"))
     JiraCloudDetail.add_member(:cloud_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CloudId"))
     JiraCloudDetail.add_member(:project_key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ProjectKey"))
     JiraCloudDetail.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Domain"))
@@ -5451,7 +5451,7 @@ module Aws::SecurityHub
     JiraCloudUpdateConfiguration.type = Types::JiraCloudUpdateConfiguration
     KeywordFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Value"))
     KeywordFilter.type = Types::KeywordFilter
-    KeywordFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordFilter, name: "member")
+    KeywordFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordFilter, name: "member"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     LimitExceededException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Code"))
     LimitExceededException.type = Types::LimitExceededException
@@ -5553,7 +5553,7 @@ module Aws::SecurityHub
     Malware.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Path"))
     Malware.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: MalwareState, name: "State"))
     Malware.type = Types::Malware
-    MalwareList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Malware, name: "member")
+    MalwareList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Malware, name: "member"))
     MalwareState.add_member(:observed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OBSERVED", traits: {"smithy.api#enumValue" => "OBSERVED"}))
     MalwareState.add_member(:removal_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMOVAL_FAILED", traits: {"smithy.api#enumValue" => "REMOVAL_FAILED"}))
     MalwareState.add_member(:removed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMOVED", traits: {"smithy.api#enumValue" => "REMOVED"}))
@@ -5580,7 +5580,7 @@ module Aws::SecurityHub
     MapFilterComparison.add_member(:not_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_EQUALS", traits: {"smithy.api#enumValue" => "NOT_EQUALS"}))
     MapFilterComparison.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINS", traits: {"smithy.api#enumValue" => "CONTAINS"}))
     MapFilterComparison.add_member(:not_contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_CONTAINS", traits: {"smithy.api#enumValue" => "NOT_CONTAINS"}))
-    MapFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MapFilter, name: "member")
+    MapFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MapFilter, name: "member"))
     Member.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     Member.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Email"))
     Member.add_member(:master_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "MasterId", traits: {"smithy.api#deprecated" => {"message" => "This field is deprecated, use AdministratorId instead."}}))
@@ -5589,8 +5589,8 @@ module Aws::SecurityHub
     Member.add_member(:invited_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "InvitedAt"))
     Member.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt"))
     Member.type = Types::Member
-    MemberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Member, name: "member")
-    MetadataUidList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    MemberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Member, name: "member"))
+    MetadataUidList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     Network.add_member(:direction, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkDirection, name: "Direction"))
     Network.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Protocol"))
     Network.add_member(:open_port_range, ::Smithy::Schema::Shapes::MemberShape.new(target: PortRange, name: "OpenPortRange"))
@@ -5626,7 +5626,7 @@ module Aws::SecurityHub
     NetworkEndpoint.add_member(:autonomous_system, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkAutonomousSystem, name: "AutonomousSystem"))
     NetworkEndpoint.add_member(:connection, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkConnection, name: "Connection"))
     NetworkEndpoint.type = Types::NetworkEndpoint
-    NetworkEndpointsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkEndpoint, name: "member")
+    NetworkEndpointsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkEndpoint, name: "member"))
     NetworkGeoLocation.add_member(:city, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "City"))
     NetworkGeoLocation.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Country"))
     NetworkGeoLocation.add_member(:lat, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Lat"))
@@ -5644,8 +5644,8 @@ module Aws::SecurityHub
     NetworkPathComponentDetails.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "Address"))
     NetworkPathComponentDetails.add_member(:port_ranges, ::Smithy::Schema::Shapes::MemberShape.new(target: PortRangeList, name: "PortRanges"))
     NetworkPathComponentDetails.type = Types::NetworkPathComponentDetails
-    NetworkPathList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkPathComponent, name: "member")
-    NonEmptyStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    NetworkPathList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkPathComponent, name: "member"))
+    NonEmptyStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     Note.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Text", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Note.add_member(:updated_by, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "UpdatedBy", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Note.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "UpdatedAt", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -5659,7 +5659,7 @@ module Aws::SecurityHub
     NumberFilter.add_member(:gt, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Gt"))
     NumberFilter.add_member(:lt, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Lt"))
     NumberFilter.type = Types::NumberFilter
-    NumberFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NumberFilter, name: "member")
+    NumberFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberFilter, name: "member"))
     Occurrences.add_member(:line_ranges, ::Smithy::Schema::Shapes::MemberShape.new(target: Ranges, name: "LineRanges"))
     Occurrences.add_member(:offset_ranges, ::Smithy::Schema::Shapes::MemberShape.new(target: Ranges, name: "OffsetRanges"))
     Occurrences.add_member(:pages, ::Smithy::Schema::Shapes::MemberShape.new(target: Pages, name: "Pages"))
@@ -5672,7 +5672,7 @@ module Aws::SecurityHub
     OcsfBooleanFilter.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfBooleanField, name: "FieldName"))
     OcsfBooleanFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanFilter, name: "Filter"))
     OcsfBooleanFilter.type = Types::OcsfBooleanFilter
-    OcsfBooleanFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfBooleanFilter, name: "member")
+    OcsfBooleanFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfBooleanFilter, name: "member"))
     OcsfDateField.add_member(:finding_info_created_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_CREATED_TIME_DT", traits: {"smithy.api#enumValue" => "finding_info.created_time_dt"}))
     OcsfDateField.add_member(:finding_info_first_seen_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_FIRST_SEEN_TIME_DT", traits: {"smithy.api#enumValue" => "finding_info.first_seen_time_dt"}))
     OcsfDateField.add_member(:finding_info_last_seen_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDING_INFO_LAST_SEEN_TIME_DT", traits: {"smithy.api#enumValue" => "finding_info.last_seen_time_dt"}))
@@ -5680,7 +5680,7 @@ module Aws::SecurityHub
     OcsfDateFilter.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfDateField, name: "FieldName"))
     OcsfDateFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: DateFilter, name: "Filter"))
     OcsfDateFilter.type = Types::OcsfDateFilter
-    OcsfDateFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfDateFilter, name: "member")
+    OcsfDateFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfDateFilter, name: "member"))
     OcsfFindingFilters.add_member(:composite_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: CompositeFilterList, name: "CompositeFilters"))
     OcsfFindingFilters.add_member(:composite_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOperators, name: "CompositeOperator"))
     OcsfFindingFilters.type = Types::OcsfFindingFilters
@@ -5688,13 +5688,13 @@ module Aws::SecurityHub
     OcsfFindingIdentifier.add_member(:finding_info_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "FindingInfoUid", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     OcsfFindingIdentifier.add_member(:metadata_product_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "MetadataProductUid", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     OcsfFindingIdentifier.type = Types::OcsfFindingIdentifier
-    OcsfFindingIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfFindingIdentifier, name: "member")
-    OcsfFindingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfFinding, name: "member")
+    OcsfFindingIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfFindingIdentifier, name: "member"))
+    OcsfFindingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfFinding, name: "member"))
     OcsfMapField.add_member(:resources_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES_TAGS", traits: {"smithy.api#enumValue" => "resources.tags"}))
     OcsfMapFilter.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfMapField, name: "FieldName"))
     OcsfMapFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: MapFilter, name: "Filter"))
     OcsfMapFilter.type = Types::OcsfMapFilter
-    OcsfMapFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfMapFilter, name: "member")
+    OcsfMapFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfMapFilter, name: "member"))
     OcsfNumberField.add_member(:activity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVITY_ID", traits: {"smithy.api#enumValue" => "activity_id"}))
     OcsfNumberField.add_member(:compliance_status_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLIANCE_STATUS_ID", traits: {"smithy.api#enumValue" => "compliance.status_id"}))
     OcsfNumberField.add_member(:confidence_score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONFIDENCE_SCORE", traits: {"smithy.api#enumValue" => "confidence_score"}))
@@ -5704,7 +5704,7 @@ module Aws::SecurityHub
     OcsfNumberFilter.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfNumberField, name: "FieldName"))
     OcsfNumberFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberFilter, name: "Filter"))
     OcsfNumberFilter.type = Types::OcsfNumberFilter
-    OcsfNumberFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfNumberFilter, name: "member")
+    OcsfNumberFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfNumberFilter, name: "member"))
     OcsfStringField.add_member(:metadata_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METADATA_UID", traits: {"smithy.api#enumValue" => "metadata.uid"}))
     OcsfStringField.add_member(:activity_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVITY_NAME", traits: {"smithy.api#enumValue" => "activity_name"}))
     OcsfStringField.add_member(:cloud_account_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUD_ACCOUNT_UID", traits: {"smithy.api#enumValue" => "cloud.account.uid"}))
@@ -5740,7 +5740,7 @@ module Aws::SecurityHub
     OcsfStringFilter.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfStringField, name: "FieldName"))
     OcsfStringFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilter, name: "Filter"))
     OcsfStringFilter.type = Types::OcsfStringFilter
-    OcsfStringFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfStringFilter, name: "member")
+    OcsfStringFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OcsfStringFilter, name: "member"))
     OrganizationConfiguration.add_member(:configuration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfigurationConfigurationType, name: "ConfigurationType"))
     OrganizationConfiguration.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfigurationStatus, name: "Status"))
     OrganizationConfiguration.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "StatusMessage"))
@@ -5754,15 +5754,15 @@ module Aws::SecurityHub
     Page.add_member(:line_range, ::Smithy::Schema::Shapes::MemberShape.new(target: Range, name: "LineRange"))
     Page.add_member(:offset_range, ::Smithy::Schema::Shapes::MemberShape.new(target: Range, name: "OffsetRange"))
     Page.type = Types::Page
-    Pages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Page, name: "member")
+    Pages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Page, name: "member"))
     ParameterConfiguration.add_member(:value_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValueType, name: "ValueType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ParameterConfiguration.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "Value"))
     ParameterConfiguration.type = Types::ParameterConfiguration
     ParameterDefinition.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ParameterDefinition.add_member(:configuration_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOptions, name: "ConfigurationOptions", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ParameterDefinition.type = Types::ParameterDefinition
-    ParameterDefinitions.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key")
-    ParameterDefinitions.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterDefinition, name: "value")
+    ParameterDefinitions.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
+    ParameterDefinitions.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterDefinition, name: "value"))
     ParameterValue.add_member(:integer, Types::ParameterValue::Integer, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Integer"))
     ParameterValue.add_member(:integer_list, Types::ParameterValue::IntegerList, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerList, name: "IntegerList"))
     ParameterValue.add_member(:double, Types::ParameterValue::Double, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Double"))
@@ -5775,8 +5775,8 @@ module Aws::SecurityHub
     ParameterValue.type = Types::ParameterValue
     ParameterValueType.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "DEFAULT"}))
     ParameterValueType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
-    Parameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key")
-    Parameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterConfiguration, name: "value")
+    Parameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
+    Parameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterConfiguration, name: "value"))
     Partition.add_member(:aws, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS", traits: {"smithy.api#enumValue" => "aws"}))
     Partition.add_member(:aws_cn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_CN", traits: {"smithy.api#enumValue" => "aws-cn"}))
     Partition.add_member(:aws_us_gov, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_US_GOV", traits: {"smithy.api#enumValue" => "aws-us-gov"}))
@@ -5802,14 +5802,14 @@ module Aws::SecurityHub
     PortProbeDetail.add_member(:local_ip_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionLocalIpDetails, name: "LocalIpDetails"))
     PortProbeDetail.add_member(:remote_ip_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionRemoteIpDetails, name: "RemoteIpDetails"))
     PortProbeDetail.type = Types::PortProbeDetail
-    PortProbeDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PortProbeDetail, name: "member")
+    PortProbeDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortProbeDetail, name: "member"))
     PortRange.add_member(:begin, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Begin"))
     PortRange.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "End"))
     PortRange.type = Types::PortRange
     PortRangeFromTo.add_member(:from, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "From"))
     PortRangeFromTo.add_member(:to, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "To"))
     PortRangeFromTo.type = Types::PortRangeFromTo
-    PortRangeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PortRange, name: "member")
+    PortRangeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortRange, name: "member"))
     ProcessDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     ProcessDetails.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Path"))
     ProcessDetails.add_member(:pid, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Pid"))
@@ -5827,7 +5827,7 @@ module Aws::SecurityHub
     Product.add_member(:activation_url, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ActivationUrl"))
     Product.add_member(:product_subscription_resource_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ProductSubscriptionResourcePolicy"))
     Product.type = Types::Product
-    ProductSubscriptionArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    ProductSubscriptionArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     ProductV2.add_member(:product_v2_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ProductV2Name"))
     ProductV2.add_member(:company_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CompanyName"))
     ProductV2.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description"))
@@ -5836,11 +5836,11 @@ module Aws::SecurityHub
     ProductV2.add_member(:marketplace_url, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "MarketplaceUrl"))
     ProductV2.add_member(:activation_url, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ActivationUrl"))
     ProductV2.type = Types::ProductV2
-    ProductsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Product, name: "member")
-    ProductsV2List.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProductV2, name: "member")
+    ProductsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Product, name: "member"))
+    ProductsV2List.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductV2, name: "member"))
     PropagatingVgwSetDetails.add_member(:gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "GatewayId"))
     PropagatingVgwSetDetails.type = Types::PropagatingVgwSetDetails
-    PropagatingVgwSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PropagatingVgwSetDetails, name: "member")
+    PropagatingVgwSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PropagatingVgwSetDetails, name: "member"))
     ProviderConfiguration.add_member(:jira_cloud, Types::ProviderConfiguration::JiraCloud, ::Smithy::Schema::Shapes::MemberShape.new(target: JiraCloudProviderConfiguration, name: "JiraCloud"))
     ProviderConfiguration.add_member(:service_now, Types::ProviderConfiguration::ServiceNow, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNowProviderConfiguration, name: "ServiceNow"))
     ProviderConfiguration.add_member(:unknown, Types::ProviderConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -5859,7 +5859,7 @@ module Aws::SecurityHub
     Range.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "End"))
     Range.add_member(:start_column, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "StartColumn"))
     Range.type = Types::Range
-    Ranges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Range, name: "member")
+    Ranges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Range, name: "member"))
     Recommendation.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Text"))
     Recommendation.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Url"))
     Recommendation.type = Types::Recommendation
@@ -5868,14 +5868,14 @@ module Aws::SecurityHub
     Record.type = Types::Record
     RecordState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     RecordState.add_member(:archived, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARCHIVED", traits: {"smithy.api#enumValue" => "ARCHIVED"}))
-    Records.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Record, name: "member")
+    Records.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Record, name: "member"))
     RegionAvailabilityStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     RegionAvailabilityStatus.add_member(:unavailable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNAVAILABLE", traits: {"smithy.api#enumValue" => "UNAVAILABLE"}))
     RelatedFinding.add_member(:product_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ProductArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RelatedFinding.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Id", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RelatedFinding.type = Types::RelatedFinding
-    RelatedFindingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedFinding, name: "member")
-    RelatedRequirementsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    RelatedFindingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedFinding, name: "member"))
+    RelatedRequirementsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     Remediation.add_member(:recommendation, ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendation, name: "Recommendation"))
     Remediation.type = Types::Remediation
     Resource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -6006,7 +6006,7 @@ module Aws::SecurityHub
     ResourceFindingsSummary.add_member(:total_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "TotalFindings", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ResourceFindingsSummary.add_member(:severities, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSeverityBreakdown, name: "Severities"))
     ResourceFindingsSummary.type = Types::ResourceFindingsSummary
-    ResourceFindingsSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceFindingsSummary, name: "member")
+    ResourceFindingsSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceFindingsSummary, name: "member"))
     ResourceGroupByField.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_ID", traits: {"smithy.api#enumValue" => "account_id"}))
     ResourceGroupByField.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGION", traits: {"smithy.api#enumValue" => "region"}))
     ResourceGroupByField.add_member(:resource_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_CATEGORY", traits: {"smithy.api#enumValue" => "resource_category"}))
@@ -6016,11 +6016,11 @@ module Aws::SecurityHub
     ResourceGroupByRule.add_member(:group_by_field, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGroupByField, name: "GroupByField", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ResourceGroupByRule.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesFilters, name: "Filters"))
     ResourceGroupByRule.type = Types::ResourceGroupByRule
-    ResourceGroupByRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGroupByRule, name: "member")
+    ResourceGroupByRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGroupByRule, name: "member"))
     ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     ResourceInUseException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Code"))
     ResourceInUseException.type = Types::ResourceInUseException
-    ResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member")
+    ResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     ResourceNotFoundException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Code"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
@@ -6049,21 +6049,21 @@ module Aws::SecurityHub
     ResourceTag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Key", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ResourceTag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Value", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ResourceTag.type = Types::ResourceTag
-    ResourceTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member")
-    Resources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceResult, name: "member")
+    ResourceTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member"))
+    Resources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceResult, name: "member"))
     ResourcesCompositeFilter.add_member(:string_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesStringFilterList, name: "StringFilters"))
     ResourcesCompositeFilter.add_member(:date_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesDateFilterList, name: "DateFilters"))
     ResourcesCompositeFilter.add_member(:number_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesNumberFilterList, name: "NumberFilters"))
     ResourcesCompositeFilter.add_member(:map_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesMapFilterList, name: "MapFilters"))
     ResourcesCompositeFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOperators, name: "Operator"))
     ResourcesCompositeFilter.type = Types::ResourcesCompositeFilter
-    ResourcesCompositeFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesCompositeFilter, name: "member")
+    ResourcesCompositeFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesCompositeFilter, name: "member"))
     ResourcesDateField.add_member(:resource_detail_capture_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_DETAIL_CAPTURE_TIME_DT", traits: {"smithy.api#enumValue" => "resource_detail_capture_time_dt"}))
     ResourcesDateField.add_member(:resource_creation_time_dt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_CREATION_TIME_DT", traits: {"smithy.api#enumValue" => "resource_creation_time_dt"}))
     ResourcesDateFilter.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesDateField, name: "FieldName"))
     ResourcesDateFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: DateFilter, name: "Filter"))
     ResourcesDateFilter.type = Types::ResourcesDateFilter
-    ResourcesDateFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesDateFilter, name: "member")
+    ResourcesDateFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesDateFilter, name: "member"))
     ResourcesFilters.add_member(:composite_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesCompositeFilterList, name: "CompositeFilters"))
     ResourcesFilters.add_member(:composite_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOperators, name: "CompositeOperator"))
     ResourcesFilters.type = Types::ResourcesFilters
@@ -6071,7 +6071,7 @@ module Aws::SecurityHub
     ResourcesMapFilter.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesMapField, name: "FieldName"))
     ResourcesMapFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: MapFilter, name: "Filter"))
     ResourcesMapFilter.type = Types::ResourcesMapFilter
-    ResourcesMapFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesMapFilter, name: "member")
+    ResourcesMapFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesMapFilter, name: "member"))
     ResourcesNumberField.add_member(:total_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOTAL_FINDINGS", traits: {"smithy.api#enumValue" => "findings_summary.total_findings"}))
     ResourcesNumberField.add_member(:severity_other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY_OTHER", traits: {"smithy.api#enumValue" => "findings_summary.severities.other"}))
     ResourcesNumberField.add_member(:severity_fatal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY_FATAL", traits: {"smithy.api#enumValue" => "findings_summary.severities.fatal"}))
@@ -6084,7 +6084,7 @@ module Aws::SecurityHub
     ResourcesNumberFilter.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesNumberField, name: "FieldName"))
     ResourcesNumberFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberFilter, name: "Filter"))
     ResourcesNumberFilter.type = Types::ResourcesNumberFilter
-    ResourcesNumberFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesNumberFilter, name: "member")
+    ResourcesNumberFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesNumberFilter, name: "member"))
     ResourcesStringField.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_ARN", traits: {"smithy.api#enumValue" => "resource_arn"}))
     ResourcesStringField.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_ID", traits: {"smithy.api#enumValue" => "resource_id"}))
     ResourcesStringField.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_ID", traits: {"smithy.api#enumValue" => "account_id"}))
@@ -6097,11 +6097,11 @@ module Aws::SecurityHub
     ResourcesStringFilter.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesStringField, name: "FieldName"))
     ResourcesStringFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilter, name: "Filter"))
     ResourcesStringFilter.type = Types::ResourcesStringFilter
-    ResourcesStringFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesStringFilter, name: "member")
+    ResourcesStringFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesStringFilter, name: "member"))
     Result.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     Result.add_member(:processing_result, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ProcessingResult"))
     Result.type = Types::Result
-    ResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Result, name: "member")
+    ResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Result, name: "member"))
     RouteSetDetails.add_member(:carrier_gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CarrierGatewayId"))
     RouteSetDetails.add_member(:core_network_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CoreNetworkArn"))
     RouteSetDetails.add_member(:destination_cidr_block, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DestinationCidrBlock"))
@@ -6119,7 +6119,7 @@ module Aws::SecurityHub
     RouteSetDetails.add_member(:transit_gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "TransitGatewayId"))
     RouteSetDetails.add_member(:vpc_peering_connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VpcPeeringConnectionId"))
     RouteSetDetails.type = Types::RouteSetDetails
-    RouteSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSetDetails, name: "member")
+    RouteSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSetDetails, name: "member"))
     RuleGroupDetails.add_member(:rule_variables, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupVariables, name: "RuleVariables"))
     RuleGroupDetails.add_member(:rules_source, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSource, name: "RulesSource"))
     RuleGroupDetails.type = Types::RuleGroupDetails
@@ -6131,7 +6131,7 @@ module Aws::SecurityHub
     RuleGroupSourceCustomActionsDetails.add_member(:action_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: StatelessCustomActionDefinition, name: "ActionDefinition"))
     RuleGroupSourceCustomActionsDetails.add_member(:action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ActionName"))
     RuleGroupSourceCustomActionsDetails.type = Types::RuleGroupSourceCustomActionsDetails
-    RuleGroupSourceCustomActionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceCustomActionsDetails, name: "member")
+    RuleGroupSourceCustomActionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceCustomActionsDetails, name: "member"))
     RuleGroupSourceListDetails.add_member(:generated_rules_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "GeneratedRulesType"))
     RuleGroupSourceListDetails.add_member(:target_types, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "TargetTypes"))
     RuleGroupSourceListDetails.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "Targets"))
@@ -6147,12 +6147,12 @@ module Aws::SecurityHub
     RuleGroupSourceStatefulRulesHeaderDetails.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Source"))
     RuleGroupSourceStatefulRulesHeaderDetails.add_member(:source_port, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SourcePort"))
     RuleGroupSourceStatefulRulesHeaderDetails.type = Types::RuleGroupSourceStatefulRulesHeaderDetails
-    RuleGroupSourceStatefulRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceStatefulRulesDetails, name: "member")
+    RuleGroupSourceStatefulRulesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceStatefulRulesDetails, name: "member"))
     RuleGroupSourceStatefulRulesOptionsDetails.add_member(:keyword, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Keyword"))
     RuleGroupSourceStatefulRulesOptionsDetails.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceStatefulRulesRuleOptionsSettingsList, name: "Settings"))
     RuleGroupSourceStatefulRulesOptionsDetails.type = Types::RuleGroupSourceStatefulRulesOptionsDetails
-    RuleGroupSourceStatefulRulesOptionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceStatefulRulesOptionsDetails, name: "member")
-    RuleGroupSourceStatefulRulesRuleOptionsSettingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    RuleGroupSourceStatefulRulesOptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceStatefulRulesOptionsDetails, name: "member"))
+    RuleGroupSourceStatefulRulesRuleOptionsSettingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     RuleGroupSourceStatelessRuleDefinition.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "Actions"))
     RuleGroupSourceStatelessRuleDefinition.add_member(:match_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceStatelessRuleMatchAttributes, name: "MatchAttributes"))
     RuleGroupSourceStatelessRuleDefinition.type = Types::RuleGroupSourceStatelessRuleDefinition
@@ -6166,29 +6166,29 @@ module Aws::SecurityHub
     RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts.add_member(:from_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "FromPort"))
     RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts.add_member(:to_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ToPort"))
     RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts.type = Types::RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts
-    RuleGroupSourceStatelessRuleMatchAttributesDestinationPortsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts, name: "member")
+    RuleGroupSourceStatelessRuleMatchAttributesDestinationPortsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts, name: "member"))
     RuleGroupSourceStatelessRuleMatchAttributesDestinations.add_member(:address_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AddressDefinition"))
     RuleGroupSourceStatelessRuleMatchAttributesDestinations.type = Types::RuleGroupSourceStatelessRuleMatchAttributesDestinations
-    RuleGroupSourceStatelessRuleMatchAttributesDestinationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceStatelessRuleMatchAttributesDestinations, name: "member")
-    RuleGroupSourceStatelessRuleMatchAttributesProtocolsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "member")
+    RuleGroupSourceStatelessRuleMatchAttributesDestinationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceStatelessRuleMatchAttributesDestinations, name: "member"))
+    RuleGroupSourceStatelessRuleMatchAttributesProtocolsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "member"))
     RuleGroupSourceStatelessRuleMatchAttributesSourcePorts.add_member(:from_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "FromPort"))
     RuleGroupSourceStatelessRuleMatchAttributesSourcePorts.add_member(:to_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ToPort"))
     RuleGroupSourceStatelessRuleMatchAttributesSourcePorts.type = Types::RuleGroupSourceStatelessRuleMatchAttributesSourcePorts
-    RuleGroupSourceStatelessRuleMatchAttributesSourcePortsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceStatelessRuleMatchAttributesSourcePorts, name: "member")
+    RuleGroupSourceStatelessRuleMatchAttributesSourcePortsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceStatelessRuleMatchAttributesSourcePorts, name: "member"))
     RuleGroupSourceStatelessRuleMatchAttributesSources.add_member(:address_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AddressDefinition"))
     RuleGroupSourceStatelessRuleMatchAttributesSources.type = Types::RuleGroupSourceStatelessRuleMatchAttributesSources
-    RuleGroupSourceStatelessRuleMatchAttributesSourcesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceStatelessRuleMatchAttributesSources, name: "member")
+    RuleGroupSourceStatelessRuleMatchAttributesSourcesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceStatelessRuleMatchAttributesSources, name: "member"))
     RuleGroupSourceStatelessRuleMatchAttributesTcpFlags.add_member(:flags, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "Flags"))
     RuleGroupSourceStatelessRuleMatchAttributesTcpFlags.add_member(:masks, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "Masks"))
     RuleGroupSourceStatelessRuleMatchAttributesTcpFlags.type = Types::RuleGroupSourceStatelessRuleMatchAttributesTcpFlags
-    RuleGroupSourceStatelessRuleMatchAttributesTcpFlagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceStatelessRuleMatchAttributesTcpFlags, name: "member")
+    RuleGroupSourceStatelessRuleMatchAttributesTcpFlagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceStatelessRuleMatchAttributesTcpFlags, name: "member"))
     RuleGroupSourceStatelessRulesAndCustomActionsDetails.add_member(:custom_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceCustomActionsList, name: "CustomActions"))
     RuleGroupSourceStatelessRulesAndCustomActionsDetails.add_member(:stateless_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceStatelessRulesList, name: "StatelessRules"))
     RuleGroupSourceStatelessRulesAndCustomActionsDetails.type = Types::RuleGroupSourceStatelessRulesAndCustomActionsDetails
     RuleGroupSourceStatelessRulesDetails.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Priority"))
     RuleGroupSourceStatelessRulesDetails.add_member(:rule_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceStatelessRuleDefinition, name: "RuleDefinition"))
     RuleGroupSourceStatelessRulesDetails.type = Types::RuleGroupSourceStatelessRulesDetails
-    RuleGroupSourceStatelessRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceStatelessRulesDetails, name: "member")
+    RuleGroupSourceStatelessRulesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSourceStatelessRulesDetails, name: "member"))
     RuleGroupVariables.add_member(:ip_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupVariablesIpSetsDetails, name: "IpSets"))
     RuleGroupVariables.add_member(:port_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupVariablesPortSetsDetails, name: "PortSets"))
     RuleGroupVariables.type = Types::RuleGroupVariables
@@ -6214,7 +6214,7 @@ module Aws::SecurityHub
     SecurityControlCustomParameter.add_member(:security_control_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SecurityControlId"))
     SecurityControlCustomParameter.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameters, name: "Parameters"))
     SecurityControlCustomParameter.type = Types::SecurityControlCustomParameter
-    SecurityControlCustomParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityControlCustomParameter, name: "member")
+    SecurityControlCustomParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityControlCustomParameter, name: "member"))
     SecurityControlDefinition.add_member(:security_control_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SecurityControlId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SecurityControlDefinition.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Title", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SecurityControlDefinition.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -6224,18 +6224,18 @@ module Aws::SecurityHub
     SecurityControlDefinition.add_member(:customizable_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomizableProperties, name: "CustomizableProperties"))
     SecurityControlDefinition.add_member(:parameter_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterDefinitions, name: "ParameterDefinitions"))
     SecurityControlDefinition.type = Types::SecurityControlDefinition
-    SecurityControlDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityControlDefinition, name: "member")
+    SecurityControlDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityControlDefinition, name: "member"))
     SecurityControlParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     SecurityControlParameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeList, name: "Value"))
     SecurityControlParameter.type = Types::SecurityControlParameter
-    SecurityControlParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityControlParameter, name: "member")
+    SecurityControlParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityControlParameter, name: "member"))
     SecurityControlProperty.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Parameters", traits: {"smithy.api#enumValue" => "Parameters"}))
-    SecurityControls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityControl, name: "member")
+    SecurityControls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityControl, name: "member"))
     SecurityControlsConfiguration.add_member(:enabled_security_control_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledSecurityControlIdentifierList, name: "EnabledSecurityControlIdentifiers"))
     SecurityControlsConfiguration.add_member(:disabled_security_control_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: DisabledSecurityControlIdentifierList, name: "DisabledSecurityControlIdentifiers"))
     SecurityControlsConfiguration.add_member(:security_control_custom_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityControlCustomParametersList, name: "SecurityControlCustomParameters"))
     SecurityControlsConfiguration.type = Types::SecurityControlsConfiguration
-    SecurityGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    SecurityGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     SecurityHubFeature.add_member(:security_hub, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECURITY_HUB", traits: {"smithy.api#enumValue" => "SecurityHub"}))
     SecurityHubFeature.add_member(:security_hub_v2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECURITY_HUB_V2", traits: {"smithy.api#enumValue" => "SecurityHubV2"}))
     SecurityHubPolicy.add_member(:service_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ServiceEnabled"))
@@ -6246,12 +6246,12 @@ module Aws::SecurityHub
     SensitiveDataDetections.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     SensitiveDataDetections.add_member(:occurrences, ::Smithy::Schema::Shapes::MemberShape.new(target: Occurrences, name: "Occurrences"))
     SensitiveDataDetections.type = Types::SensitiveDataDetections
-    SensitiveDataDetectionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDataDetections, name: "member")
+    SensitiveDataDetectionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDataDetections, name: "member"))
     SensitiveDataResult.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Category"))
     SensitiveDataResult.add_member(:detections, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDataDetectionsList, name: "Detections"))
     SensitiveDataResult.add_member(:total_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "TotalCount"))
     SensitiveDataResult.type = Types::SensitiveDataResult
-    SensitiveDataResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDataResult, name: "member")
+    SensitiveDataResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDataResult, name: "member"))
     Sequence.add_member(:uid, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Uid"))
     Sequence.add_member(:actors, ::Smithy::Schema::Shapes::MemberShape.new(target: ActorsList, name: "Actors"))
     Sequence.add_member(:endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkEndpointsList, name: "Endpoints"))
@@ -6300,7 +6300,7 @@ module Aws::SecurityHub
     Signal.add_member(:actor_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "ActorIds"))
     Signal.add_member(:endpoint_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "EndpointIds"))
     Signal.type = Types::Signal
-    SignalsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Signal, name: "member")
+    SignalsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Signal, name: "member"))
     SoftwarePackage.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     SoftwarePackage.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Version"))
     SoftwarePackage.add_member(:epoch, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Epoch"))
@@ -6313,8 +6313,8 @@ module Aws::SecurityHub
     SoftwarePackage.add_member(:source_layer_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SourceLayerHash"))
     SoftwarePackage.add_member(:source_layer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SourceLayerArn"))
     SoftwarePackage.type = Types::SoftwarePackage
-    SoftwarePackageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwarePackage, name: "member")
-    SortCriteria.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SortCriterion, name: "member")
+    SoftwarePackageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwarePackage, name: "member"))
+    SortCriteria.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SortCriterion, name: "member"))
     SortCriterion.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Field"))
     SortCriterion.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "SortOrder"))
     SortCriterion.type = Types::SortCriterion
@@ -6326,7 +6326,7 @@ module Aws::SecurityHub
     Standard.add_member(:enabled_by_default, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnabledByDefault"))
     Standard.add_member(:standards_managed_by, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsManagedBy, name: "StandardsManagedBy"))
     Standard.type = Types::Standard
-    Standards.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Standard, name: "member")
+    Standards.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Standard, name: "member"))
     StandardsControl.add_member(:standards_control_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "StandardsControlArn"))
     StandardsControl.add_member(:control_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlStatus, name: "ControlStatus"))
     StandardsControl.add_member(:disabled_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DisabledReason"))
@@ -6338,7 +6338,7 @@ module Aws::SecurityHub
     StandardsControl.add_member(:severity_rating, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityRating, name: "SeverityRating"))
     StandardsControl.add_member(:related_requirements, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedRequirementsList, name: "RelatedRequirements"))
     StandardsControl.type = Types::StandardsControl
-    StandardsControlArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    StandardsControlArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     StandardsControlAssociationDetail.add_member(:standards_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "StandardsArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StandardsControlAssociationDetail.add_member(:security_control_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SecurityControlId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StandardsControlAssociationDetail.add_member(:security_control_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SecurityControlArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -6350,12 +6350,12 @@ module Aws::SecurityHub
     StandardsControlAssociationDetail.add_member(:standards_control_description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "StandardsControlDescription"))
     StandardsControlAssociationDetail.add_member(:standards_control_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsControlArnList, name: "StandardsControlArns"))
     StandardsControlAssociationDetail.type = Types::StandardsControlAssociationDetail
-    StandardsControlAssociationDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsControlAssociationDetail, name: "member")
+    StandardsControlAssociationDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsControlAssociationDetail, name: "member"))
     StandardsControlAssociationId.add_member(:security_control_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SecurityControlId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StandardsControlAssociationId.add_member(:standards_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "StandardsArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StandardsControlAssociationId.type = Types::StandardsControlAssociationId
-    StandardsControlAssociationIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsControlAssociationId, name: "member")
-    StandardsControlAssociationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsControlAssociationSummary, name: "member")
+    StandardsControlAssociationIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsControlAssociationId, name: "member"))
+    StandardsControlAssociationSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsControlAssociationSummary, name: "member"))
     StandardsControlAssociationSummary.add_member(:standards_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "StandardsArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StandardsControlAssociationSummary.add_member(:security_control_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SecurityControlId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StandardsControlAssociationSummary.add_member(:security_control_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SecurityControlArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -6371,12 +6371,12 @@ module Aws::SecurityHub
     StandardsControlAssociationUpdate.add_member(:association_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationStatus, name: "AssociationStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StandardsControlAssociationUpdate.add_member(:updated_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "UpdatedReason"))
     StandardsControlAssociationUpdate.type = Types::StandardsControlAssociationUpdate
-    StandardsControlAssociationUpdates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsControlAssociationUpdate, name: "member")
-    StandardsControls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsControl, name: "member")
+    StandardsControlAssociationUpdates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsControlAssociationUpdate, name: "member"))
+    StandardsControls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsControl, name: "member"))
     StandardsControlsUpdatable.add_member(:ready_for_updates, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READY_FOR_UPDATES", traits: {"smithy.api#enumValue" => "READY_FOR_UPDATES"}))
     StandardsControlsUpdatable.add_member(:not_ready_for_updates, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_READY_FOR_UPDATES", traits: {"smithy.api#enumValue" => "NOT_READY_FOR_UPDATES"}))
-    StandardsInputParameterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key")
-    StandardsInputParameterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value")
+    StandardsInputParameterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
+    StandardsInputParameterMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value"))
     StandardsManagedBy.add_member(:company, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Company"))
     StandardsManagedBy.add_member(:product, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Product"))
     StandardsManagedBy.type = Types::StandardsManagedBy
@@ -6394,12 +6394,12 @@ module Aws::SecurityHub
     StandardsSubscription.add_member(:standards_controls_updatable, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsControlsUpdatable, name: "StandardsControlsUpdatable"))
     StandardsSubscription.add_member(:standards_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsStatusReason, name: "StandardsStatusReason"))
     StandardsSubscription.type = Types::StandardsSubscription
-    StandardsSubscriptionArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    StandardsSubscriptionArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     StandardsSubscriptionRequest.add_member(:standards_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "StandardsArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StandardsSubscriptionRequest.add_member(:standards_input, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsInputParameterMap, name: "StandardsInput"))
     StandardsSubscriptionRequest.type = Types::StandardsSubscriptionRequest
-    StandardsSubscriptionRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsSubscriptionRequest, name: "member")
-    StandardsSubscriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsSubscription, name: "member")
+    StandardsSubscriptionRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsSubscriptionRequest, name: "member"))
+    StandardsSubscriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsSubscription, name: "member"))
     StartConfigurationPolicyAssociationRequest.add_member(:configuration_policy_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ConfigurationPolicyIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StartConfigurationPolicyAssociationRequest.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "Target", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StartConfigurationPolicyAssociationRequest.type = Types::StartConfigurationPolicyAssociationRequest
@@ -6421,14 +6421,14 @@ module Aws::SecurityHub
     StatelessCustomPublishMetricAction.type = Types::StatelessCustomPublishMetricAction
     StatelessCustomPublishMetricActionDimension.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Value"))
     StatelessCustomPublishMetricActionDimension.type = Types::StatelessCustomPublishMetricActionDimension
-    StatelessCustomPublishMetricActionDimensionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StatelessCustomPublishMetricActionDimension, name: "member")
+    StatelessCustomPublishMetricActionDimensionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StatelessCustomPublishMetricActionDimension, name: "member"))
     StatusReason.add_member(:reason_code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ReasonCode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StatusReason.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description"))
     StatusReason.type = Types::StatusReason
     StatusReasonCode.add_member(:no_available_configuration_recorder, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_AVAILABLE_CONFIGURATION_RECORDER", traits: {"smithy.api#enumValue" => "NO_AVAILABLE_CONFIGURATION_RECORDER"}))
     StatusReasonCode.add_member(:maximum_number_of_config_rules_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", traits: {"smithy.api#enumValue" => "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED"}))
     StatusReasonCode.add_member(:internal_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_ERROR"}))
-    StatusReasonsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StatusReason, name: "member")
+    StatusReasonsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusReason, name: "member"))
     StringConfigurationOptions.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "DefaultValue"))
     StringConfigurationOptions.add_member(:re2_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Re2Expression"))
     StringConfigurationOptions.add_member(:expression_description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ExpressionDescription"))
@@ -6443,16 +6443,16 @@ module Aws::SecurityHub
     StringFilterComparison.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINS", traits: {"smithy.api#enumValue" => "CONTAINS"}))
     StringFilterComparison.add_member(:not_contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_CONTAINS", traits: {"smithy.api#enumValue" => "NOT_CONTAINS"}))
     StringFilterComparison.add_member(:contains_word, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINS_WORD", traits: {"smithy.api#enumValue" => "CONTAINS_WORD"}))
-    StringFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilter, name: "member")
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    StringFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilter, name: "member"))
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     StringListConfigurationOptions.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "DefaultValue"))
     StringListConfigurationOptions.add_member(:re2_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Re2Expression"))
     StringListConfigurationOptions.add_member(:max_items, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "MaxItems"))
     StringListConfigurationOptions.add_member(:expression_description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ExpressionDescription"))
     StringListConfigurationOptions.type = Types::StringListConfigurationOptions
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -6483,7 +6483,7 @@ module Aws::SecurityHub
     ThreatIntelIndicatorCategory.add_member(:drop_site, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DROP_SITE", traits: {"smithy.api#enumValue" => "DROP_SITE"}))
     ThreatIntelIndicatorCategory.add_member(:exploit_site, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPLOIT_SITE", traits: {"smithy.api#enumValue" => "EXPLOIT_SITE"}))
     ThreatIntelIndicatorCategory.add_member(:keylogger, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KEYLOGGER", traits: {"smithy.api#enumValue" => "KEYLOGGER"}))
-    ThreatIntelIndicatorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThreatIntelIndicator, name: "member")
+    ThreatIntelIndicatorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThreatIntelIndicator, name: "member"))
     ThreatIntelIndicatorType.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOMAIN", traits: {"smithy.api#enumValue" => "DOMAIN"}))
     ThreatIntelIndicatorType.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMAIL_ADDRESS", traits: {"smithy.api#enumValue" => "EMAIL_ADDRESS"}))
     ThreatIntelIndicatorType.add_member(:hash_md5, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HASH_MD5", traits: {"smithy.api#enumValue" => "HASH_MD5"}))
@@ -6495,21 +6495,21 @@ module Aws::SecurityHub
     ThreatIntelIndicatorType.add_member(:mutex, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MUTEX", traits: {"smithy.api#enumValue" => "MUTEX"}))
     ThreatIntelIndicatorType.add_member(:process, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROCESS", traits: {"smithy.api#enumValue" => "PROCESS"}))
     ThreatIntelIndicatorType.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "URL", traits: {"smithy.api#enumValue" => "URL"}))
-    ThreatList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Threat, name: "member")
+    ThreatList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Threat, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     ThrottlingException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Code"))
     ThrottlingException.type = Types::ThrottlingException
-    TypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    TypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     UnprocessedAutomationRule.add_member(:rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RuleArn"))
     UnprocessedAutomationRule.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ErrorCode"))
     UnprocessedAutomationRule.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ErrorMessage"))
     UnprocessedAutomationRule.type = Types::UnprocessedAutomationRule
-    UnprocessedAutomationRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedAutomationRule, name: "member")
+    UnprocessedAutomationRulesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedAutomationRule, name: "member"))
     UnprocessedConfigurationPolicyAssociation.add_member(:configuration_policy_association_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationPolicyAssociation, name: "ConfigurationPolicyAssociationIdentifiers"))
     UnprocessedConfigurationPolicyAssociation.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ErrorCode"))
     UnprocessedConfigurationPolicyAssociation.add_member(:error_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ErrorReason"))
     UnprocessedConfigurationPolicyAssociation.type = Types::UnprocessedConfigurationPolicyAssociation
-    UnprocessedConfigurationPolicyAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedConfigurationPolicyAssociation, name: "member")
+    UnprocessedConfigurationPolicyAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedConfigurationPolicyAssociation, name: "member"))
     UnprocessedErrorCode.add_member(:invalid_input, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_INPUT", traits: {"smithy.api#enumValue" => "INVALID_INPUT"}))
     UnprocessedErrorCode.add_member(:access_denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS_DENIED", traits: {"smithy.api#enumValue" => "ACCESS_DENIED"}))
     UnprocessedErrorCode.add_member(:not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_FOUND", traits: {"smithy.api#enumValue" => "NOT_FOUND"}))
@@ -6519,7 +6519,7 @@ module Aws::SecurityHub
     UnprocessedSecurityControl.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedErrorCode, name: "ErrorCode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UnprocessedSecurityControl.add_member(:error_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ErrorReason"))
     UnprocessedSecurityControl.type = Types::UnprocessedSecurityControl
-    UnprocessedSecurityControls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedSecurityControl, name: "member")
+    UnprocessedSecurityControls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedSecurityControl, name: "member"))
     UnprocessedStandardsControlAssociation.add_member(:standards_control_association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardsControlAssociationId, name: "StandardsControlAssociationId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UnprocessedStandardsControlAssociation.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedErrorCode, name: "ErrorCode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UnprocessedStandardsControlAssociation.add_member(:error_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ErrorReason"))
@@ -6528,8 +6528,8 @@ module Aws::SecurityHub
     UnprocessedStandardsControlAssociationUpdate.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedErrorCode, name: "ErrorCode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UnprocessedStandardsControlAssociationUpdate.add_member(:error_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ErrorReason"))
     UnprocessedStandardsControlAssociationUpdate.type = Types::UnprocessedStandardsControlAssociationUpdate
-    UnprocessedStandardsControlAssociationUpdates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedStandardsControlAssociationUpdate, name: "member")
-    UnprocessedStandardsControlAssociations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedStandardsControlAssociation, name: "member")
+    UnprocessedStandardsControlAssociationUpdates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedStandardsControlAssociationUpdate, name: "member"))
+    UnprocessedStandardsControlAssociations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedStandardsControlAssociation, name: "member"))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#clientOptional" => {}, "smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -6566,7 +6566,7 @@ module Aws::SecurityHub
     UpdateAutomationRulesRequestItem.add_member(:criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationRulesFindingFilters, name: "Criteria"))
     UpdateAutomationRulesRequestItem.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionList, name: "Actions"))
     UpdateAutomationRulesRequestItem.type = Types::UpdateAutomationRulesRequestItem
-    UpdateAutomationRulesRequestItemsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateAutomationRulesRequestItem, name: "member")
+    UpdateAutomationRulesRequestItemsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateAutomationRulesRequestItem, name: "member"))
     UpdateConfigurationPolicyRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateConfigurationPolicyRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     UpdateConfigurationPolicyRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Description"))
@@ -6641,13 +6641,13 @@ module Aws::SecurityHub
     VolumeMount.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     VolumeMount.add_member(:mount_path, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "MountPath"))
     VolumeMount.type = Types::VolumeMount
-    VolumeMountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeMount, name: "member")
+    VolumeMountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeMount, name: "member"))
     VpcInfoCidrBlockSetDetails.add_member(:cidr_block, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CidrBlock"))
     VpcInfoCidrBlockSetDetails.type = Types::VpcInfoCidrBlockSetDetails
-    VpcInfoCidrBlockSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcInfoCidrBlockSetDetails, name: "member")
+    VpcInfoCidrBlockSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcInfoCidrBlockSetDetails, name: "member"))
     VpcInfoIpv6CidrBlockSetDetails.add_member(:ipv6_cidr_block, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Ipv6CidrBlock"))
     VpcInfoIpv6CidrBlockSetDetails.type = Types::VpcInfoIpv6CidrBlockSetDetails
-    VpcInfoIpv6CidrBlockSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcInfoIpv6CidrBlockSetDetails, name: "member")
+    VpcInfoIpv6CidrBlockSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcInfoIpv6CidrBlockSetDetails, name: "member"))
     VpcInfoPeeringOptionsDetails.add_member(:allow_dns_resolution_from_remote_vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AllowDnsResolutionFromRemoteVpc"))
     VpcInfoPeeringOptionsDetails.add_member(:allow_egress_from_local_classic_link_to_remote_vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AllowEgressFromLocalClassicLinkToRemoteVpc"))
     VpcInfoPeeringOptionsDetails.add_member(:allow_egress_from_local_vpc_to_remote_classic_link, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AllowEgressFromLocalVpcToRemoteClassicLink"))
@@ -6668,13 +6668,13 @@ module Aws::SecurityHub
     VulnerabilityCodeVulnerabilities.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeVulnerabilitiesFilePath, name: "FilePath"))
     VulnerabilityCodeVulnerabilities.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SourceArn"))
     VulnerabilityCodeVulnerabilities.type = Types::VulnerabilityCodeVulnerabilities
-    VulnerabilityCodeVulnerabilitiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VulnerabilityCodeVulnerabilities, name: "member")
+    VulnerabilityCodeVulnerabilitiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VulnerabilityCodeVulnerabilities, name: "member"))
     VulnerabilityExploitAvailable.add_member(:yes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "YES", traits: {"smithy.api#enumValue" => "YES"}))
     VulnerabilityExploitAvailable.add_member(:no, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO", traits: {"smithy.api#enumValue" => "NO"}))
     VulnerabilityFixAvailable.add_member(:yes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "YES", traits: {"smithy.api#enumValue" => "YES"}))
     VulnerabilityFixAvailable.add_member(:no, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO", traits: {"smithy.api#enumValue" => "NO"}))
     VulnerabilityFixAvailable.add_member(:partial, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARTIAL", traits: {"smithy.api#enumValue" => "PARTIAL"}))
-    VulnerabilityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Vulnerability, name: "member")
+    VulnerabilityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Vulnerability, name: "member"))
     VulnerabilityVendor.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     VulnerabilityVendor.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Url"))
     VulnerabilityVendor.add_member(:vendor_severity, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VendorSeverity"))
@@ -6685,7 +6685,7 @@ module Aws::SecurityHub
     WafAction.type = Types::WafAction
     WafExcludedRule.add_member(:rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RuleId"))
     WafExcludedRule.type = Types::WafExcludedRule
-    WafExcludedRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WafExcludedRule, name: "member")
+    WafExcludedRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WafExcludedRule, name: "member"))
     WafOverrideAction.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Type"))
     WafOverrideAction.type = Types::WafOverrideAction
     Workflow.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStatus, name: "Status"))

@@ -188,7 +188,7 @@ module Aws::ManagedBlockchain
     AccessorSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnString, name: "Arn"))
     AccessorSummary.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessorNetworkType, name: "NetworkType"))
     AccessorSummary.type = Types::AccessorSummary
-    AccessorSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessorSummary, name: "member")
+    AccessorSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessorSummary, name: "member"))
     AccessorType.add_member(:billing_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BILLING_TOKEN", traits: {"smithy.api#enumValue" => "BILLING_TOKEN"}))
     ApprovalThresholdPolicy.add_member(:threshold_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: ThresholdPercentageInt, name: "ThresholdPercentage"))
     ApprovalThresholdPolicy.add_member(:proposal_duration_in_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ProposalDurationInt, name: "ProposalDurationInHours"))
@@ -282,8 +282,8 @@ module Aws::ManagedBlockchain
     GetProposalOutput.type = Types::GetProposalOutput
     IllegalActionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     IllegalActionException.type = Types::IllegalActionException
-    InputTagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    InputTagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    InputTagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    InputTagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     InternalServiceErrorException.type = Types::InternalServiceErrorException
     InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     InvalidRequestException.type = Types::InvalidRequestException
@@ -294,7 +294,7 @@ module Aws::ManagedBlockchain
     Invitation.add_member(:network_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkSummary, name: "NetworkSummary"))
     Invitation.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnString, name: "Arn"))
     Invitation.type = Types::Invitation
-    InvitationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Invitation, name: "member")
+    InvitationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Invitation, name: "member"))
     InvitationStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     InvitationStatus.add_member(:accepted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCEPTED", traits: {"smithy.api#enumValue" => "ACCEPTED"}))
     InvitationStatus.add_member(:accepting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCEPTING", traits: {"smithy.api#enumValue" => "ACCEPTING"}))
@@ -302,7 +302,7 @@ module Aws::ManagedBlockchain
     InvitationStatus.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
     InviteAction.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalString, name: "Principal", traits: {"smithy.api#required" => {}}))
     InviteAction.type = Types::InviteAction
-    InviteActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InviteAction, name: "member")
+    InviteActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InviteAction, name: "member"))
     ListAccessorsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessorListMaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListAccessorsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListAccessorsInput.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessorNetworkType, name: "NetworkType", traits: {"smithy.api#httpQuery" => "networkType"}))
@@ -415,7 +415,7 @@ module Aws::ManagedBlockchain
     MemberSummary.add_member(:is_owned, ::Smithy::Schema::Shapes::MemberShape.new(target: IsOwned, name: "IsOwned"))
     MemberSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnString, name: "Arn"))
     MemberSummary.type = Types::MemberSummary
-    MemberSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemberSummary, name: "member")
+    MemberSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberSummary, name: "member"))
     Network.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "Id"))
     Network.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name"))
     Network.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionString, name: "Description"))
@@ -455,7 +455,7 @@ module Aws::ManagedBlockchain
     NetworkSummary.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationDate"))
     NetworkSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnString, name: "Arn"))
     NetworkSummary.type = Types::NetworkSummary
-    NetworkSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkSummary, name: "member")
+    NetworkSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkSummary, name: "member"))
     Node.add_member(:network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "NetworkId"))
     Node.add_member(:member_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "MemberId"))
     Node.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "Id"))
@@ -505,9 +505,9 @@ module Aws::ManagedBlockchain
     NodeSummary.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceTypeString, name: "InstanceType"))
     NodeSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnString, name: "Arn"))
     NodeSummary.type = Types::NodeSummary
-    NodeSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NodeSummary, name: "member")
-    OutputTagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    OutputTagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    NodeSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeSummary, name: "member"))
+    OutputTagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    OutputTagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     Proposal.add_member(:proposal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "ProposalId"))
     Proposal.add_member(:network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "NetworkId"))
     Proposal.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionString, name: "Description"))
@@ -540,14 +540,14 @@ module Aws::ManagedBlockchain
     ProposalSummary.add_member(:expiration_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ExpirationDate"))
     ProposalSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnString, name: "Arn"))
     ProposalSummary.type = Types::ProposalSummary
-    ProposalSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProposalSummary, name: "member")
-    ProposalVoteList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VoteSummary, name: "member")
+    ProposalSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProposalSummary, name: "member"))
+    ProposalVoteList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VoteSummary, name: "member"))
     RejectInvitationInput.add_member(:invitation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "InvitationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RejectInvitationInput.type = Types::RejectInvitationInput
     RejectInvitationOutput.type = Types::RejectInvitationOutput
     RemoveAction.add_member(:member_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "MemberId", traits: {"smithy.api#required" => {}}))
     RemoveAction.type = Types::RemoveAction
-    RemoveActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RemoveAction, name: "member")
+    RemoveActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RemoveAction, name: "member"))
     ResourceAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ResourceAlreadyExistsException.type = Types::ResourceAlreadyExistsException
     ResourceLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
@@ -559,7 +559,7 @@ module Aws::ManagedBlockchain
     ResourceNotReadyException.type = Types::ResourceNotReadyException
     StateDBType.add_member(:level_db, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LevelDB", traits: {"smithy.api#enumValue" => "LevelDB"}))
     StateDBType.add_member(:couch_db, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CouchDB", traits: {"smithy.api#enumValue" => "CouchDB"}))
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnString, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: InputTagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest

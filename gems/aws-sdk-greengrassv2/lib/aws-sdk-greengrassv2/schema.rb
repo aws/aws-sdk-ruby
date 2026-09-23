@@ -226,12 +226,12 @@ module Aws::GreengrassV2
     AccessDeniedException.type = Types::AccessDeniedException
     AssociateClientDeviceWithCoreDeviceEntry.add_member(:thing_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IoTThingName, name: "thingName", traits: {"smithy.api#required" => {}}))
     AssociateClientDeviceWithCoreDeviceEntry.type = Types::AssociateClientDeviceWithCoreDeviceEntry
-    AssociateClientDeviceWithCoreDeviceEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociateClientDeviceWithCoreDeviceEntry, name: "member")
+    AssociateClientDeviceWithCoreDeviceEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociateClientDeviceWithCoreDeviceEntry, name: "member"))
     AssociateClientDeviceWithCoreDeviceErrorEntry.add_member(:thing_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IoTThingName, name: "thingName"))
     AssociateClientDeviceWithCoreDeviceErrorEntry.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "code"))
     AssociateClientDeviceWithCoreDeviceErrorEntry.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "message"))
     AssociateClientDeviceWithCoreDeviceErrorEntry.type = Types::AssociateClientDeviceWithCoreDeviceErrorEntry
-    AssociateClientDeviceWithCoreDeviceErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociateClientDeviceWithCoreDeviceErrorEntry, name: "member")
+    AssociateClientDeviceWithCoreDeviceErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociateClientDeviceWithCoreDeviceErrorEntry, name: "member"))
     AssociateServiceRoleToAccountRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "roleArn", traits: {"smithy.api#jsonName" => "RoleArn", "smithy.api#required" => {}}))
     AssociateServiceRoleToAccountRequest.type = Types::AssociateServiceRoleToAccountRequest
     AssociateServiceRoleToAccountResponse.add_member(:associated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "associatedAt", traits: {"smithy.api#jsonName" => "AssociatedAt"}))
@@ -239,7 +239,7 @@ module Aws::GreengrassV2
     AssociatedClientDevice.add_member(:thing_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IoTThingName, name: "thingName"))
     AssociatedClientDevice.add_member(:association_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "associationTimestamp"))
     AssociatedClientDevice.type = Types::AssociatedClientDevice
-    AssociatedClientDeviceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedClientDevice, name: "member")
+    AssociatedClientDeviceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedClientDevice, name: "member"))
     BatchAssociateClientDeviceWithCoreDeviceRequest.add_member(:entries, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociateClientDeviceWithCoreDeviceEntryList, name: "entries"))
     BatchAssociateClientDeviceWithCoreDeviceRequest.add_member(:core_device_thing_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IoTThingName, name: "coreDeviceThingName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BatchAssociateClientDeviceWithCoreDeviceRequest.type = Types::BatchAssociateClientDeviceWithCoreDeviceRequest
@@ -273,13 +273,13 @@ module Aws::GreengrassV2
     ComponentCandidate.add_member(:component_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentVersionString, name: "componentVersion"))
     ComponentCandidate.add_member(:version_requirements, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentVersionRequirementMap, name: "versionRequirements"))
     ComponentCandidate.type = Types::ComponentCandidate
-    ComponentCandidateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentCandidate, name: "member")
-    ComponentConfigurationPathList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentConfigurationPath, name: "member")
+    ComponentCandidateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentCandidate, name: "member"))
+    ComponentConfigurationPathList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentConfigurationPath, name: "member"))
     ComponentConfigurationUpdate.add_member(:merge, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentConfigurationString, name: "merge"))
     ComponentConfigurationUpdate.add_member(:reset, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentConfigurationPathList, name: "reset"))
     ComponentConfigurationUpdate.type = Types::ComponentConfigurationUpdate
-    ComponentDependencyMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key")
-    ComponentDependencyMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentDependencyRequirement, name: "value")
+    ComponentDependencyMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
+    ComponentDependencyMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentDependencyRequirement, name: "value"))
     ComponentDependencyRequirement.add_member(:version_requirement, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "versionRequirement"))
     ComponentDependencyRequirement.add_member(:dependency_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentDependencyType, name: "dependencyType"))
     ComponentDependencyRequirement.type = Types::ComponentDependencyRequirement
@@ -289,8 +289,8 @@ module Aws::GreengrassV2
     ComponentDeploymentSpecification.add_member(:configuration_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentConfigurationUpdate, name: "configurationUpdate"))
     ComponentDeploymentSpecification.add_member(:run_with, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentRunWith, name: "runWith"))
     ComponentDeploymentSpecification.type = Types::ComponentDeploymentSpecification
-    ComponentDeploymentSpecifications.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key")
-    ComponentDeploymentSpecifications.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentDeploymentSpecification, name: "value")
+    ComponentDeploymentSpecifications.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
+    ComponentDeploymentSpecifications.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentDeploymentSpecification, name: "value"))
     ComponentLatestVersion.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentVersionARN, name: "arn"))
     ComponentLatestVersion.add_member(:component_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentVersionString, name: "componentVersion"))
     ComponentLatestVersion.add_member(:creation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTimestamp"))
@@ -298,22 +298,22 @@ module Aws::GreengrassV2
     ComponentLatestVersion.add_member(:publisher, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "publisher"))
     ComponentLatestVersion.add_member(:platforms, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentPlatformList, name: "platforms"))
     ComponentLatestVersion.type = Types::ComponentLatestVersion
-    ComponentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Component, name: "member")
+    ComponentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Component, name: "member"))
     ComponentPlatform.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "name"))
     ComponentPlatform.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformAttributesMap, name: "attributes"))
     ComponentPlatform.type = Types::ComponentPlatform
-    ComponentPlatformList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentPlatform, name: "member")
+    ComponentPlatformList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentPlatform, name: "member"))
     ComponentRunWith.add_member(:posix_user, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "posixUser"))
     ComponentRunWith.add_member(:system_resource_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemResourceLimits, name: "systemResourceLimits"))
     ComponentRunWith.add_member(:windows_user, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "windowsUser"))
     ComponentRunWith.type = Types::ComponentRunWith
-    ComponentVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentVersionListItem, name: "member")
+    ComponentVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentVersionListItem, name: "member"))
     ComponentVersionListItem.add_member(:component_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentNameString, name: "componentName"))
     ComponentVersionListItem.add_member(:component_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentVersionString, name: "componentVersion"))
     ComponentVersionListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "arn"))
     ComponentVersionListItem.type = Types::ComponentVersionListItem
-    ComponentVersionRequirementMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key")
-    ComponentVersionRequirementMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value")
+    ComponentVersionRequirementMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
+    ComponentVersionRequirementMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value"))
     ComponentVisibilityScope.add_member(:private, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIVATE", traits: {"smithy.api#enumValue" => "PRIVATE"}))
     ComponentVisibilityScope.add_member(:public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLIC", traits: {"smithy.api#enumValue" => "PUBLIC"}))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
@@ -334,7 +334,7 @@ module Aws::GreengrassV2
     CoreDevice.type = Types::CoreDevice
     CoreDeviceStatus.add_member(:healthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HEALTHY", traits: {"smithy.api#enumValue" => "HEALTHY"}))
     CoreDeviceStatus.add_member(:unhealthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNHEALTHY", traits: {"smithy.api#enumValue" => "UNHEALTHY"}))
-    CoreDevicesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CoreDevice, name: "member")
+    CoreDevicesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreDevice, name: "member"))
     CreateComponentVersionRequest.add_member(:inline_recipe, ::Smithy::Schema::Shapes::MemberShape.new(target: RecipeBlob, name: "inlineRecipe"))
     CreateComponentVersionRequest.add_member(:lambda_function, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaFunctionRecipeSource, name: "lambdaFunction"))
     CreateComponentVersionRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
@@ -389,7 +389,7 @@ module Aws::GreengrassV2
     DeploymentIoTJobConfiguration.add_member(:abort_config, ::Smithy::Schema::Shapes::MemberShape.new(target: IoTJobAbortConfig, name: "abortConfig"))
     DeploymentIoTJobConfiguration.add_member(:timeout_config, ::Smithy::Schema::Shapes::MemberShape.new(target: IoTJobTimeoutConfig, name: "timeoutConfig"))
     DeploymentIoTJobConfiguration.type = Types::DeploymentIoTJobConfiguration
-    DeploymentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Deployment, name: "member")
+    DeploymentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Deployment, name: "member"))
     DeploymentPolicies.add_member(:failure_handling_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentFailureHandlingPolicy, name: "failureHandlingPolicy"))
     DeploymentPolicies.add_member(:component_update_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentComponentUpdatePolicy, name: "componentUpdatePolicy"))
     DeploymentPolicies.add_member(:configuration_validation_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentConfigurationValidationPolicy, name: "configurationValidationPolicy"))
@@ -413,12 +413,12 @@ module Aws::GreengrassV2
     DescribeComponentResponse.type = Types::DescribeComponentResponse
     DisassociateClientDeviceFromCoreDeviceEntry.add_member(:thing_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IoTThingName, name: "thingName", traits: {"smithy.api#required" => {}}))
     DisassociateClientDeviceFromCoreDeviceEntry.type = Types::DisassociateClientDeviceFromCoreDeviceEntry
-    DisassociateClientDeviceFromCoreDeviceEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DisassociateClientDeviceFromCoreDeviceEntry, name: "member")
+    DisassociateClientDeviceFromCoreDeviceEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DisassociateClientDeviceFromCoreDeviceEntry, name: "member"))
     DisassociateClientDeviceFromCoreDeviceErrorEntry.add_member(:thing_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IoTThingName, name: "thingName"))
     DisassociateClientDeviceFromCoreDeviceErrorEntry.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "code"))
     DisassociateClientDeviceFromCoreDeviceErrorEntry.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "message"))
     DisassociateClientDeviceFromCoreDeviceErrorEntry.type = Types::DisassociateClientDeviceFromCoreDeviceErrorEntry
-    DisassociateClientDeviceFromCoreDeviceErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DisassociateClientDeviceFromCoreDeviceErrorEntry, name: "member")
+    DisassociateClientDeviceFromCoreDeviceErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DisassociateClientDeviceFromCoreDeviceErrorEntry, name: "member"))
     DisassociateServiceRoleFromAccountRequest.type = Types::DisassociateServiceRoleFromAccountRequest
     DisassociateServiceRoleFromAccountResponse.add_member(:disassociated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "disassociatedAt", traits: {"smithy.api#jsonName" => "DisassociatedAt"}))
     DisassociateServiceRoleFromAccountResponse.type = Types::DisassociateServiceRoleFromAccountResponse
@@ -434,8 +434,8 @@ module Aws::GreengrassV2
     EffectiveDeployment.add_member(:modified_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "modifiedTimestamp", traits: {"smithy.api#required" => {}}))
     EffectiveDeployment.add_member(:status_details, ::Smithy::Schema::Shapes::MemberShape.new(target: EffectiveDeploymentStatusDetails, name: "statusDetails"))
     EffectiveDeployment.type = Types::EffectiveDeployment
-    EffectiveDeploymentErrorStack.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EffectiveDeploymentErrorCode, name: "member")
-    EffectiveDeploymentErrorTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EffectiveDeploymentErrorType, name: "member")
+    EffectiveDeploymentErrorStack.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EffectiveDeploymentErrorCode, name: "member"))
+    EffectiveDeploymentErrorTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EffectiveDeploymentErrorType, name: "member"))
     EffectiveDeploymentExecutionStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     EffectiveDeploymentExecutionStatus.add_member(:queued, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUEUED", traits: {"smithy.api#enumValue" => "QUEUED"}))
     EffectiveDeploymentExecutionStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -447,7 +447,7 @@ module Aws::GreengrassV2
     EffectiveDeploymentStatusDetails.add_member(:error_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: EffectiveDeploymentErrorStack, name: "errorStack"))
     EffectiveDeploymentStatusDetails.add_member(:error_types, ::Smithy::Schema::Shapes::MemberShape.new(target: EffectiveDeploymentErrorTypeList, name: "errorTypes"))
     EffectiveDeploymentStatusDetails.type = Types::EffectiveDeploymentStatusDetails
-    EffectiveDeploymentsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EffectiveDeployment, name: "member")
+    EffectiveDeploymentsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EffectiveDeployment, name: "member"))
     GetComponentRequest.add_member(:recipe_output_format, ::Smithy::Schema::Shapes::MemberShape.new(target: RecipeOutputFormat, name: "recipeOutputFormat", traits: {"smithy.api#httpQuery" => "recipeOutputFormat"}))
     GetComponentRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentVersionARN, name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetComponentRequest.type = Types::GetComponentRequest
@@ -517,8 +517,8 @@ module Aws::GreengrassV2
     InstalledComponentLifecycleState.add_member(:errored, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERRORED", traits: {"smithy.api#enumValue" => "ERRORED"}))
     InstalledComponentLifecycleState.add_member(:broken, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BROKEN", traits: {"smithy.api#enumValue" => "BROKEN"}))
     InstalledComponentLifecycleState.add_member(:finished, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINISHED", traits: {"smithy.api#enumValue" => "FINISHED"}))
-    InstalledComponentLifecycleStatusCodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstalledComponentLifecycleStatusCode, name: "member")
-    InstalledComponentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstalledComponent, name: "member")
+    InstalledComponentLifecycleStatusCodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstalledComponentLifecycleStatusCode, name: "member"))
+    InstalledComponentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstalledComponent, name: "member"))
     InstalledComponentTopologyFilter.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
     InstalledComponentTopologyFilter.add_member(:root, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROOT", traits: {"smithy.api#enumValue" => "ROOT"}))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
@@ -532,7 +532,7 @@ module Aws::GreengrassV2
     IoTJobAbortCriteria.add_member(:threshold_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: IoTJobAbortThresholdPercentage, name: "thresholdPercentage", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     IoTJobAbortCriteria.add_member(:min_number_of_executed_things, ::Smithy::Schema::Shapes::MemberShape.new(target: IoTJobMinimumNumberOfExecutedThings, name: "minNumberOfExecutedThings", traits: {"smithy.api#required" => {}}))
     IoTJobAbortCriteria.type = Types::IoTJobAbortCriteria
-    IoTJobAbortCriteriaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IoTJobAbortCriteria, name: "member")
+    IoTJobAbortCriteriaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IoTJobAbortCriteria, name: "member"))
     IoTJobExecutionFailureType.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     IoTJobExecutionFailureType.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
     IoTJobExecutionFailureType.add_member(:timed_out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMED_OUT", traits: {"smithy.api#enumValue" => "TIMED_OUT"}))
@@ -556,20 +556,20 @@ module Aws::GreengrassV2
     LambdaContainerParams.add_member(:volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaVolumeList, name: "volumes"))
     LambdaContainerParams.add_member(:devices, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaDeviceList, name: "devices"))
     LambdaContainerParams.type = Types::LambdaContainerParams
-    LambdaDeviceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaDeviceMount, name: "member")
+    LambdaDeviceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaDeviceMount, name: "member"))
     LambdaDeviceMount.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemPath, name: "path", traits: {"smithy.api#required" => {}}))
     LambdaDeviceMount.add_member(:permission, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaFilesystemPermission, name: "permission"))
     LambdaDeviceMount.add_member(:add_group_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalBoolean, name: "addGroupOwner", traits: {"smithy.api#default" => nil}))
     LambdaDeviceMount.type = Types::LambdaDeviceMount
-    LambdaEnvironmentVariables.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key")
-    LambdaEnvironmentVariables.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    LambdaEnvironmentVariables.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
+    LambdaEnvironmentVariables.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     LambdaEventSource.add_member(:topic, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicString, name: "topic", traits: {"smithy.api#required" => {}}))
     LambdaEventSource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaEventSourceType, name: "type", traits: {"smithy.api#required" => {}}))
     LambdaEventSource.type = Types::LambdaEventSource
-    LambdaEventSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaEventSource, name: "member")
+    LambdaEventSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaEventSource, name: "member"))
     LambdaEventSourceType.add_member(:pub_sub, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUB_SUB", traits: {"smithy.api#enumValue" => "PUB_SUB"}))
     LambdaEventSourceType.add_member(:iot_core, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IOT_CORE", traits: {"smithy.api#enumValue" => "IOT_CORE"}))
-    LambdaExecArgsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaExecArg, name: "member")
+    LambdaExecArgsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaExecArg, name: "member"))
     LambdaExecutionParameters.add_member(:event_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaEventSourceList, name: "eventSources"))
     LambdaExecutionParameters.add_member(:max_queue_size, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalInteger, name: "maxQueueSize", traits: {"smithy.api#default" => nil}))
     LambdaExecutionParameters.add_member(:max_instances_count, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalInteger, name: "maxInstancesCount", traits: {"smithy.api#default" => nil}))
@@ -598,7 +598,7 @@ module Aws::GreengrassV2
     LambdaLinuxProcessParams.add_member(:isolation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaIsolationMode, name: "isolationMode"))
     LambdaLinuxProcessParams.add_member(:container_params, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaContainerParams, name: "containerParams"))
     LambdaLinuxProcessParams.type = Types::LambdaLinuxProcessParams
-    LambdaVolumeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaVolumeMount, name: "member")
+    LambdaVolumeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaVolumeMount, name: "member"))
     LambdaVolumeMount.add_member(:source_path, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemPath, name: "sourcePath", traits: {"smithy.api#required" => {}}))
     LambdaVolumeMount.add_member(:destination_path, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemPath, name: "destinationPath", traits: {"smithy.api#required" => {}}))
     LambdaVolumeMount.add_member(:permission, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaFilesystemPermission, name: "permission"))
@@ -662,8 +662,8 @@ module Aws::GreengrassV2
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    PlatformAttributesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key")
-    PlatformAttributesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value")
+    PlatformAttributesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
+    PlatformAttributesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value"))
     RecipeOutputFormat.add_member(:json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON", traits: {"smithy.api#enumValue" => "JSON"}))
     RecipeOutputFormat.add_member(:yaml, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "YAML", traits: {"smithy.api#enumValue" => "YAML"}))
     RequestAlreadyInProgressException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
@@ -680,7 +680,7 @@ module Aws::GreengrassV2
     ResolvedComponentVersion.add_member(:vendor_guidance, ::Smithy::Schema::Shapes::MemberShape.new(target: VendorGuidance, name: "vendorGuidance"))
     ResolvedComponentVersion.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "message"))
     ResolvedComponentVersion.type = Types::ResolvedComponentVersion
-    ResolvedComponentVersionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResolvedComponentVersion, name: "member")
+    ResolvedComponentVersionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResolvedComponentVersion, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceType", traits: {"smithy.api#required" => {}}))
@@ -693,14 +693,14 @@ module Aws::GreengrassV2
     ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "quotaCode", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceCode", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    StringMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key")
-    StringMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value")
+    StringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
+    StringMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value"))
     SystemResourceLimits.add_member(:memory, ::Smithy::Schema::Shapes::MemberShape.new(target: Memory, name: "memory", traits: {"smithy.api#default" => 0}))
     SystemResourceLimits.add_member(:cpus, ::Smithy::Schema::Shapes::MemberShape.new(target: CPU, name: "cpus", traits: {"smithy.api#default" => 0}))
     SystemResourceLimits.type = Types::SystemResourceLimits
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericV2ARN, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -727,7 +727,7 @@ module Aws::GreengrassV2
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "UNKNOWN_OPERATION"}))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "CANNOT_PARSE"}))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "FIELD_VALIDATION_FAILED"}))
@@ -735,7 +735,7 @@ module Aws::GreengrassV2
     VendorGuidance.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     VendorGuidance.add_member(:discontinued, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISCONTINUED", traits: {"smithy.api#enumValue" => "DISCONTINUED"}))
     VendorGuidance.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
-    ConnectivityInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectivityInfo, name: "member")
+    ConnectivityInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectivityInfo, name: "member"))
 
     GreengrassV2 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.greengrassv2#GreengrassV2"

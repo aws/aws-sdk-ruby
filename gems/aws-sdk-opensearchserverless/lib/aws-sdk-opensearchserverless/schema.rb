@@ -214,7 +214,7 @@ module Aws::OpenSearchServerless
     AccessPolicyDetail.type = Types::AccessPolicyDetail
     AccessPolicyStats.add_member(:data_policy_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "DataPolicyCount"))
     AccessPolicyStats.type = Types::AccessPolicyStats
-    AccessPolicySummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPolicySummary, name: "member")
+    AccessPolicySummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPolicySummary, name: "member"))
     AccessPolicySummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPolicyType, name: "type"))
     AccessPolicySummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "name"))
     AccessPolicySummary.add_member(:policy_version, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyVersion, name: "policyVersion"))
@@ -264,19 +264,19 @@ module Aws::OpenSearchServerless
     CollectionDetail.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureCode"))
     CollectionDetail.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureMessage"))
     CollectionDetail.type = Types::CollectionDetail
-    CollectionDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionDetail, name: "member")
+    CollectionDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionDetail, name: "member"))
     CollectionErrorDetail.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionId, name: "id"))
     CollectionErrorDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionName, name: "name"))
     CollectionErrorDetail.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorMessage"))
     CollectionErrorDetail.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorCode"))
     CollectionErrorDetail.type = Types::CollectionErrorDetail
-    CollectionErrorDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionErrorDetail, name: "member")
+    CollectionErrorDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionErrorDetail, name: "member"))
     CollectionFilters.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionName, name: "name"))
     CollectionFilters.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionStatus, name: "status"))
     CollectionFilters.type = Types::CollectionFilters
-    CollectionIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionId, name: "member")
-    CollectionNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionName, name: "member")
-    CollectionSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionSummary, name: "member")
+    CollectionIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionId, name: "member"))
+    CollectionNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionName, name: "member"))
+    CollectionSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionSummary, name: "member"))
     CollectionSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionId, name: "id"))
     CollectionSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionName, name: "name"))
     CollectionSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionStatus, name: "status"))
@@ -407,13 +407,13 @@ module Aws::OpenSearchServerless
     EffectiveLifecyclePolicyDetail.add_member(:retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "retentionPeriod"))
     EffectiveLifecyclePolicyDetail.add_member(:no_min_retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "noMinRetentionPeriod"))
     EffectiveLifecyclePolicyDetail.type = Types::EffectiveLifecyclePolicyDetail
-    EffectiveLifecyclePolicyDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EffectiveLifecyclePolicyDetail, name: "member")
+    EffectiveLifecyclePolicyDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EffectiveLifecyclePolicyDetail, name: "member"))
     EffectiveLifecyclePolicyErrorDetail.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyType, name: "type"))
     EffectiveLifecyclePolicyErrorDetail.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "resource"))
     EffectiveLifecyclePolicyErrorDetail.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorMessage"))
     EffectiveLifecyclePolicyErrorDetail.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorCode"))
     EffectiveLifecyclePolicyErrorDetail.type = Types::EffectiveLifecyclePolicyErrorDetail
-    EffectiveLifecyclePolicyErrorDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EffectiveLifecyclePolicyErrorDetail, name: "member")
+    EffectiveLifecyclePolicyErrorDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EffectiveLifecyclePolicyErrorDetail, name: "member"))
     FipsEndpoints.add_member(:collection_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "collectionEndpoint"))
     FipsEndpoints.add_member(:dashboard_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "dashboardEndpoint"))
     FipsEndpoints.type = Types::FipsEndpoints
@@ -466,24 +466,24 @@ module Aws::OpenSearchServerless
     LifecyclePolicyDetail.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "createdDate"))
     LifecyclePolicyDetail.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "lastModifiedDate"))
     LifecyclePolicyDetail.type = Types::LifecyclePolicyDetail
-    LifecyclePolicyDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyDetail, name: "member")
+    LifecyclePolicyDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyDetail, name: "member"))
     LifecyclePolicyErrorDetail.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyType, name: "type"))
     LifecyclePolicyErrorDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "name"))
     LifecyclePolicyErrorDetail.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorMessage"))
     LifecyclePolicyErrorDetail.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorCode"))
     LifecyclePolicyErrorDetail.type = Types::LifecyclePolicyErrorDetail
-    LifecyclePolicyErrorDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyErrorDetail, name: "member")
+    LifecyclePolicyErrorDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyErrorDetail, name: "member"))
     LifecyclePolicyIdentifier.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyType, name: "type", traits: {"smithy.api#required" => {}}))
     LifecyclePolicyIdentifier.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "name", traits: {"smithy.api#required" => {}}))
     LifecyclePolicyIdentifier.type = Types::LifecyclePolicyIdentifier
-    LifecyclePolicyIdentifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyIdentifier, name: "member")
+    LifecyclePolicyIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyIdentifier, name: "member"))
     LifecyclePolicyResourceIdentifier.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyType, name: "type", traits: {"smithy.api#required" => {}}))
     LifecyclePolicyResourceIdentifier.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "resource", traits: {"smithy.api#required" => {}}))
     LifecyclePolicyResourceIdentifier.type = Types::LifecyclePolicyResourceIdentifier
-    LifecyclePolicyResourceIdentifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyResourceIdentifier, name: "member")
+    LifecyclePolicyResourceIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyResourceIdentifier, name: "member"))
     LifecyclePolicyStats.add_member(:retention_policy_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "RetentionPolicyCount"))
     LifecyclePolicyStats.type = Types::LifecyclePolicyStats
-    LifecyclePolicySummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicySummary, name: "member")
+    LifecyclePolicySummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicySummary, name: "member"))
     LifecyclePolicySummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyType, name: "type"))
     LifecyclePolicySummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "name"))
     LifecyclePolicySummary.add_member(:policy_version, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyVersion, name: "policyVersion"))
@@ -491,7 +491,7 @@ module Aws::OpenSearchServerless
     LifecyclePolicySummary.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "createdDate"))
     LifecyclePolicySummary.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "lastModifiedDate"))
     LifecyclePolicySummary.type = Types::LifecyclePolicySummary
-    LifecycleResourceFilter.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleResource, name: "member")
+    LifecycleResourceFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleResource, name: "member"))
     ListAccessPoliciesInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPolicyType, name: "type", traits: {"smithy.api#required" => {}}))
     ListAccessPoliciesInput.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceFilter, name: "resource", traits: {"smithy.api#length" => {"min" => 1, "max" => 1000}}))
     ListAccessPoliciesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
@@ -543,7 +543,7 @@ module Aws::OpenSearchServerless
     ListVpcEndpointsOutput.type = Types::ListVpcEndpointsOutput
     OcuLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     OcuLimitExceededException.type = Types::OcuLimitExceededException
-    ResourceFilter.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member")
+    ResourceFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     SamlConfigOptions.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: SamlMetadata, name: "metadata", traits: {"smithy.api#required" => {}}))
@@ -564,7 +564,7 @@ module Aws::OpenSearchServerless
     SecurityConfigDetail.type = Types::SecurityConfigDetail
     SecurityConfigStats.add_member(:saml_config_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "SamlConfigCount"))
     SecurityConfigStats.type = Types::SecurityConfigStats
-    SecurityConfigSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityConfigSummary, name: "member")
+    SecurityConfigSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityConfigSummary, name: "member"))
     SecurityConfigSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityConfigId, name: "id"))
     SecurityConfigSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityConfigType, name: "type"))
     SecurityConfigSummary.add_member(:config_version, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyVersion, name: "configVersion"))
@@ -572,7 +572,7 @@ module Aws::OpenSearchServerless
     SecurityConfigSummary.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "createdDate"))
     SecurityConfigSummary.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "lastModifiedDate"))
     SecurityConfigSummary.type = Types::SecurityConfigSummary
-    SecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
+    SecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     SecurityPolicyDetail.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicyType, name: "type"))
     SecurityPolicyDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "name"))
     SecurityPolicyDetail.add_member(:policy_version, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyVersion, name: "policyVersion"))
@@ -584,7 +584,7 @@ module Aws::OpenSearchServerless
     SecurityPolicyStats.add_member(:encryption_policy_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "EncryptionPolicyCount"))
     SecurityPolicyStats.add_member(:network_policy_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "NetworkPolicyCount"))
     SecurityPolicyStats.type = Types::SecurityPolicyStats
-    SecurityPolicySummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicySummary, name: "member")
+    SecurityPolicySummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicySummary, name: "member"))
     SecurityPolicySummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicyType, name: "type"))
     SecurityPolicySummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "name"))
     SecurityPolicySummary.add_member(:policy_version, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyVersion, name: "policyVersion"))
@@ -598,16 +598,16 @@ module Aws::OpenSearchServerless
     ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "serviceCode", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "quotaCode"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
+    SubnetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeys, name: "tagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
@@ -704,16 +704,16 @@ module Aws::OpenSearchServerless
     VpcEndpointDetail.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureCode"))
     VpcEndpointDetail.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureMessage"))
     VpcEndpointDetail.type = Types::VpcEndpointDetail
-    VpcEndpointDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointDetail, name: "member")
+    VpcEndpointDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointDetail, name: "member"))
     VpcEndpointErrorDetail.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointId, name: "id"))
     VpcEndpointErrorDetail.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorMessage"))
     VpcEndpointErrorDetail.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorCode"))
     VpcEndpointErrorDetail.type = Types::VpcEndpointErrorDetail
-    VpcEndpointErrorDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointErrorDetail, name: "member")
+    VpcEndpointErrorDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointErrorDetail, name: "member"))
     VpcEndpointFilters.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointStatus, name: "status"))
     VpcEndpointFilters.type = Types::VpcEndpointFilters
-    VpcEndpointIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointId, name: "member")
-    VpcEndpointSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointSummary, name: "member")
+    VpcEndpointIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointId, name: "member"))
+    VpcEndpointSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointSummary, name: "member"))
     VpcEndpointSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointId, name: "id"))
     VpcEndpointSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointName, name: "name"))
     VpcEndpointSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointStatus, name: "status"))

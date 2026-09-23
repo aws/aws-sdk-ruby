@@ -323,9 +323,9 @@ module Aws::Evidently
     DeleteSegmentInput.add_member(:segment, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentRef, name: "segment", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteSegmentInput.type = Types::DeleteSegmentInput
     DeleteSegmentOutput.type = Types::DeleteSegmentOutput
-    DoubleValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member")
-    EntityOverrideMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "key")
-    EntityOverrideMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: VariationName, name: "value")
+    DoubleValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member"))
+    EntityOverrideMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "key"))
+    EntityOverrideMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: VariationName, name: "value"))
     EvaluateFeatureInput.add_member(:project, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectRef, name: "project", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     EvaluateFeatureInput.add_member(:feature, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureName, name: "feature", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     EvaluateFeatureInput.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "entityId", traits: {"smithy.api#required" => {}}))
@@ -340,7 +340,7 @@ module Aws::Evidently
     EvaluationRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "entityId", traits: {"smithy.api#required" => {}}))
     EvaluationRequest.add_member(:evaluation_context, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonValue, name: "evaluationContext"))
     EvaluationRequest.type = Types::EvaluationRequest
-    EvaluationRequestsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationRequest, name: "member")
+    EvaluationRequestsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationRequest, name: "member"))
     EvaluationResult.add_member(:project, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "project"))
     EvaluationResult.add_member(:feature, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureName, name: "feature", traits: {"smithy.api#required" => {}}))
     EvaluationResult.add_member(:variation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "variation"))
@@ -349,16 +349,16 @@ module Aws::Evidently
     EvaluationResult.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "reason"))
     EvaluationResult.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonValue, name: "details"))
     EvaluationResult.type = Types::EvaluationResult
-    EvaluationResultsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationResult, name: "member")
+    EvaluationResultsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationResult, name: "member"))
     EvaluationRule.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleName, name: "name"))
     EvaluationRule.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleType, name: "type", traits: {"smithy.api#required" => {}}))
     EvaluationRule.type = Types::EvaluationRule
-    EvaluationRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationRule, name: "member")
+    EvaluationRulesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationRule, name: "member"))
     Event.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "timestamp", traits: {"smithy.api#required" => {}}))
     Event.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "type", traits: {"smithy.api#required" => {}}))
     Event.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonValue, name: "data", traits: {"smithy.api#required" => {}}))
     Event.type = Types::Event
-    EventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member")
+    EventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member"))
     Experiment.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentArn, name: "arn", traits: {"smithy.api#required" => {}}))
     Experiment.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentName, name: "name", traits: {"smithy.api#required" => {}}))
     Experiment.add_member(:project, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectArn, name: "project"))
@@ -381,21 +381,21 @@ module Aws::Evidently
     ExperimentExecution.add_member(:started_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "startedTime"))
     ExperimentExecution.add_member(:ended_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "endedTime"))
     ExperimentExecution.type = Types::ExperimentExecution
-    ExperimentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Experiment, name: "member")
+    ExperimentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Experiment, name: "member"))
     ExperimentReport.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CwDimensionSafeName, name: "metricName"))
     ExperimentReport.add_member(:treatment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentName, name: "treatmentName"))
     ExperimentReport.add_member(:report_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentReportName, name: "reportName"))
     ExperimentReport.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonValue, name: "content"))
     ExperimentReport.type = Types::ExperimentReport
-    ExperimentReportList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentReport, name: "member")
-    ExperimentReportNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentReportName, name: "member")
-    ExperimentResultRequestTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentResultRequestType, name: "member")
+    ExperimentReportList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentReport, name: "member"))
+    ExperimentReportNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentReportName, name: "member"))
+    ExperimentResultRequestTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentResultRequestType, name: "member"))
     ExperimentResultsData.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CwDimensionSafeName, name: "metricName"))
     ExperimentResultsData.add_member(:treatment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentName, name: "treatmentName"))
     ExperimentResultsData.add_member(:result_stat, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentResultResponseType, name: "resultStat"))
     ExperimentResultsData.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleValueList, name: "values"))
     ExperimentResultsData.type = Types::ExperimentResultsData
-    ExperimentResultsDataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentResultsData, name: "member")
+    ExperimentResultsDataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentResultsData, name: "member"))
     ExperimentSchedule.add_member(:analysis_complete_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "analysisCompleteTime"))
     ExperimentSchedule.type = Types::ExperimentSchedule
     Feature.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureArn, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -413,7 +413,7 @@ module Aws::Evidently
     Feature.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     Feature.add_member(:entity_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityOverrideMap, name: "entityOverrides"))
     Feature.type = Types::Feature
-    FeatureSummariesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureSummary, name: "member")
+    FeatureSummariesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureSummary, name: "member"))
     FeatureSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#required" => {}}))
     FeatureSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureName, name: "name", traits: {"smithy.api#required" => {}}))
     FeatureSummary.add_member(:project, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectRef, name: "project"))
@@ -425,8 +425,8 @@ module Aws::Evidently
     FeatureSummary.add_member(:default_variation, ::Smithy::Schema::Shapes::MemberShape.new(target: VariationName, name: "defaultVariation"))
     FeatureSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     FeatureSummary.type = Types::FeatureSummary
-    FeatureToVariationMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureName, name: "key")
-    FeatureToVariationMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: VariationName, name: "value")
+    FeatureToVariationMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureName, name: "key"))
+    FeatureToVariationMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: VariationName, name: "value"))
     GetExperimentInput.add_member(:project, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectRef, name: "project", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetExperimentInput.add_member(:experiment, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentName, name: "experiment", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetExperimentInput.type = Types::GetExperimentInput
@@ -466,8 +466,8 @@ module Aws::Evidently
     GetSegmentInput.type = Types::GetSegmentInput
     GetSegmentOutput.add_member(:segment, ::Smithy::Schema::Shapes::MemberShape.new(target: Segment, name: "segment", traits: {"smithy.api#required" => {}}))
     GetSegmentOutput.type = Types::GetSegmentOutput
-    GroupToWeightMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, name: "key")
-    GroupToWeightMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SplitWeight, name: "value")
+    GroupToWeightMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, name: "key"))
+    GroupToWeightMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SplitWeight, name: "value"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     InternalServerException.type = Types::InternalServerException
     Launch.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchArn, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -498,9 +498,9 @@ module Aws::Evidently
     LaunchGroupConfig.add_member(:feature, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureName, name: "feature", traits: {"smithy.api#required" => {}}))
     LaunchGroupConfig.add_member(:variation, ::Smithy::Schema::Shapes::MemberShape.new(target: VariationName, name: "variation", traits: {"smithy.api#required" => {}}))
     LaunchGroupConfig.type = Types::LaunchGroupConfig
-    LaunchGroupConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchGroupConfig, name: "member")
-    LaunchGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchGroup, name: "member")
-    LaunchesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Launch, name: "member")
+    LaunchGroupConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchGroupConfig, name: "member"))
+    LaunchGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchGroup, name: "member"))
+    LaunchesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Launch, name: "member"))
     ListExperimentsInput.add_member(:project, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectRef, name: "project", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListExperimentsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxExperiments, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListExperimentsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -566,15 +566,15 @@ module Aws::Evidently
     MetricGoalConfig.add_member(:metric_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDefinitionConfig, name: "metricDefinition", traits: {"smithy.api#required" => {}}))
     MetricGoalConfig.add_member(:desired_change, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeDirectionEnum, name: "desiredChange"))
     MetricGoalConfig.type = Types::MetricGoalConfig
-    MetricGoalConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricGoalConfig, name: "member")
-    MetricGoalsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricGoal, name: "member")
+    MetricGoalConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricGoalConfig, name: "member"))
+    MetricGoalsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricGoal, name: "member"))
     MetricMonitor.add_member(:metric_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDefinition, name: "metricDefinition", traits: {"smithy.api#required" => {}}))
     MetricMonitor.type = Types::MetricMonitor
     MetricMonitorConfig.add_member(:metric_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDefinitionConfig, name: "metricDefinition", traits: {"smithy.api#required" => {}}))
     MetricMonitorConfig.type = Types::MetricMonitorConfig
-    MetricMonitorConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricMonitorConfig, name: "member")
-    MetricMonitorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricMonitor, name: "member")
-    MetricNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CwDimensionSafeName, name: "member")
+    MetricMonitorConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricMonitorConfig, name: "member"))
+    MetricMonitorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricMonitor, name: "member"))
+    MetricNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CwDimensionSafeName, name: "member"))
     OnlineAbConfig.add_member(:control_treatment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentName, name: "controlTreatmentName"))
     OnlineAbConfig.add_member(:treatment_weights, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentToWeightMap, name: "treatmentWeights"))
     OnlineAbConfig.type = Types::OnlineAbConfig
@@ -609,7 +609,7 @@ module Aws::Evidently
     ProjectDataDeliveryConfig.add_member(:s3_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: S3DestinationConfig, name: "s3Destination"))
     ProjectDataDeliveryConfig.add_member(:cloud_watch_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogsDestinationConfig, name: "cloudWatchLogs"))
     ProjectDataDeliveryConfig.type = Types::ProjectDataDeliveryConfig
-    ProjectSummariesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectSummary, name: "member")
+    ProjectSummariesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectSummary, name: "member"))
     ProjectSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectArn, name: "arn", traits: {"smithy.api#required" => {}}))
     ProjectSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectName, name: "name", traits: {"smithy.api#required" => {}}))
     ProjectSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectStatus, name: "status", traits: {"smithy.api#required" => {}}))
@@ -633,7 +633,7 @@ module Aws::Evidently
     PutProjectEventsResultEntry.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCodeEnum, name: "errorCode"))
     PutProjectEventsResultEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
     PutProjectEventsResultEntry.type = Types::PutProjectEventsResultEntry
-    PutProjectEventsResultEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PutProjectEventsResultEntry, name: "member")
+    PutProjectEventsResultEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PutProjectEventsResultEntry, name: "member"))
     RefResource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     RefResource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "type", traits: {"smithy.api#required" => {}}))
     RefResource.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "arn"))
@@ -642,7 +642,7 @@ module Aws::Evidently
     RefResource.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "endTime"))
     RefResource.add_member(:last_updated_on, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "lastUpdatedOn"))
     RefResource.type = Types::RefResource
-    RefResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RefResource, name: "member")
+    RefResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RefResource, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId"))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType"))
@@ -661,12 +661,12 @@ module Aws::Evidently
     ScheduledSplitConfig.add_member(:group_weights, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupToWeightMap, name: "groupWeights", traits: {"smithy.api#required" => {}}))
     ScheduledSplitConfig.add_member(:segment_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentOverridesList, name: "segmentOverrides"))
     ScheduledSplitConfig.type = Types::ScheduledSplitConfig
-    ScheduledSplitConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledSplitConfig, name: "member")
+    ScheduledSplitConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledSplitConfig, name: "member"))
     ScheduledSplitsLaunchConfig.add_member(:steps, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledSplitConfigList, name: "steps", traits: {"smithy.api#required" => {}}))
     ScheduledSplitsLaunchConfig.type = Types::ScheduledSplitsLaunchConfig
     ScheduledSplitsLaunchDefinition.add_member(:steps, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledStepList, name: "steps"))
     ScheduledSplitsLaunchDefinition.type = Types::ScheduledSplitsLaunchDefinition
-    ScheduledStepList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledSplit, name: "member")
+    ScheduledStepList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledSplit, name: "member"))
     Segment.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentArn, name: "arn", traits: {"smithy.api#required" => {}}))
     Segment.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentName, name: "name", traits: {"smithy.api#required" => {}}))
     Segment.add_member(:pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentPattern, name: "pattern", traits: {"smithy.api#required" => {}}))
@@ -677,12 +677,12 @@ module Aws::Evidently
     Segment.add_member(:launch_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "launchCount"))
     Segment.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     Segment.type = Types::Segment
-    SegmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Segment, name: "member")
+    SegmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Segment, name: "member"))
     SegmentOverride.add_member(:segment, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentRef, name: "segment", traits: {"smithy.api#required" => {}}))
     SegmentOverride.add_member(:evaluation_order, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "evaluationOrder", traits: {"smithy.api#required" => {}}))
     SegmentOverride.add_member(:weights, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupToWeightMap, name: "weights", traits: {"smithy.api#required" => {}}))
     SegmentOverride.type = Types::SegmentOverride
-    SegmentOverridesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentOverride, name: "member")
+    SegmentOverridesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentOverride, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId"))
     ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType"))
@@ -716,9 +716,9 @@ module Aws::Evidently
     StopLaunchInput.type = Types::StopLaunchInput
     StopLaunchOutput.add_member(:ended_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "endedTime"))
     StopLaunchOutput.type = Types::StopLaunchOutput
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -732,7 +732,7 @@ module Aws::Evidently
     ThrottlingException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "serviceCode"))
     ThrottlingException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "quotaCode"))
     ThrottlingException.type = Types::ThrottlingException
-    TimestampList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "member")
+    TimestampList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "member"))
     Treatment.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentName, name: "name", traits: {"smithy.api#required" => {}}))
     Treatment.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     Treatment.add_member(:feature_variations, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureToVariationMap, name: "featureVariations"))
@@ -742,11 +742,11 @@ module Aws::Evidently
     TreatmentConfig.add_member(:feature, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureName, name: "feature", traits: {"smithy.api#required" => {}}))
     TreatmentConfig.add_member(:variation, ::Smithy::Schema::Shapes::MemberShape.new(target: VariationName, name: "variation", traits: {"smithy.api#required" => {}}))
     TreatmentConfig.type = Types::TreatmentConfig
-    TreatmentConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentConfig, name: "member")
-    TreatmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Treatment, name: "member")
-    TreatmentNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentName, name: "member")
-    TreatmentToWeightMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentName, name: "key")
-    TreatmentToWeightMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SplitWeight, name: "value")
+    TreatmentConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentConfig, name: "member"))
+    TreatmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Treatment, name: "member"))
+    TreatmentNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentName, name: "member"))
+    TreatmentToWeightMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentName, name: "key"))
+    TreatmentToWeightMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SplitWeight, name: "value"))
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
@@ -804,7 +804,7 @@ module Aws::Evidently
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     VariableValue.add_member(:bool_value, Types::VariableValue::BoolValue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "boolValue"))
     VariableValue.add_member(:string_value, Types::VariableValue::StringValue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "stringValue", traits: {"smithy.api#length" => {"max" => 512}}))
     VariableValue.add_member(:long_value, Types::VariableValue::LongValue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "longValue", traits: {"smithy.api#range" => {"min" => -9007199254740991, "max" => 9007199254740991}}))
@@ -817,9 +817,9 @@ module Aws::Evidently
     VariationConfig.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VariationName, name: "name", traits: {"smithy.api#required" => {}}))
     VariationConfig.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableValue, name: "value", traits: {"smithy.api#required" => {}}))
     VariationConfig.type = Types::VariationConfig
-    VariationConfigsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VariationConfig, name: "member")
-    VariationNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VariationName, name: "member")
-    VariationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Variation, name: "member")
+    VariationConfigsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VariationConfig, name: "member"))
+    VariationNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VariationName, name: "member"))
+    VariationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Variation, name: "member"))
 
     Evidently = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.evidently#Evidently"

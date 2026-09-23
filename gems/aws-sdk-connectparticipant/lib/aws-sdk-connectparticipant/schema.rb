@@ -115,13 +115,13 @@ module Aws::ConnectParticipant
     ArtifactStatus.add_member(:approved, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPROVED", traits: {"smithy.api#enumValue" => "APPROVED"}))
     ArtifactStatus.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
     ArtifactStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    AttachmentIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactId, name: "member")
+    AttachmentIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactId, name: "member"))
     AttachmentItem.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentType, name: "ContentType"))
     AttachmentItem.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactId, name: "AttachmentId"))
     AttachmentItem.add_member(:attachment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentName, name: "AttachmentName"))
     AttachmentItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactStatus, name: "Status"))
     AttachmentItem.type = Types::AttachmentItem
-    Attachments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentItem, name: "member")
+    Attachments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentItem, name: "member"))
     Attendee.add_member(:attendee_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AttendeeId, name: "AttendeeId"))
     Attendee.add_member(:join_token, ::Smithy::Schema::Shapes::MemberShape.new(target: JoinToken, name: "JoinToken"))
     Attendee.type = Types::Attendee
@@ -156,7 +156,7 @@ module Aws::ConnectParticipant
     ConnectionType.add_member(:websocket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEBSOCKET", traits: {"smithy.api#enumValue" => "WEBSOCKET"}))
     ConnectionType.add_member(:connection_credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECTION_CREDENTIALS", traits: {"smithy.api#enumValue" => "CONNECTION_CREDENTIALS"}))
     ConnectionType.add_member(:webrtc_connection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEBRTC_CONNECTION", traits: {"smithy.api#enumValue" => "WEBRTC_CONNECTION"}))
-    ConnectionTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionType, name: "member")
+    ConnectionTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionType, name: "member"))
     CreateParticipantConnectionRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionTypeList, name: "Type"))
     CreateParticipantConnectionRequest.add_member(:participant_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantToken, name: "ParticipantToken", traits: {"smithy.api#httpHeader" => "X-Amz-Bearer", "smithy.api#required" => {}}))
     CreateParticipantConnectionRequest.add_member(:connect_participant, ::Smithy::Schema::Shapes::MemberShape.new(target: Bool, name: "ConnectParticipant"))
@@ -231,7 +231,7 @@ module Aws::ConnectParticipant
     Receipt.add_member(:read_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Instant, name: "ReadTimestamp"))
     Receipt.add_member(:recipient_participant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantId, name: "RecipientParticipantId"))
     Receipt.type = Types::Receipt
-    Receipts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Receipt, name: "member")
+    Receipts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Receipt, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "ResourceId"))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
@@ -281,13 +281,13 @@ module Aws::ConnectParticipant
     StartPosition.type = Types::StartPosition
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
-    Transcript.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Item, name: "member")
+    Transcript.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Item, name: "member"))
     UploadMetadata.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadMetadataUrl, name: "Url"))
     UploadMetadata.add_member(:url_expiry, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601Datetime, name: "UrlExpiry"))
     UploadMetadata.add_member(:headers_to_include, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadMetadataSignedHeaders, name: "HeadersToInclude"))
     UploadMetadata.type = Types::UploadMetadata
-    UploadMetadataSignedHeaders.key = ::Smithy::Schema::Shapes::MemberShape.new(target: UploadMetadataSignedHeadersKey, name: "key")
-    UploadMetadataSignedHeaders.value = ::Smithy::Schema::Shapes::MemberShape.new(target: UploadMetadataSignedHeadersValue, name: "value")
+    UploadMetadataSignedHeaders.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadMetadataSignedHeadersKey, name: "key"))
+    UploadMetadataSignedHeaders.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadMetadataSignedHeadersValue, name: "value"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Reason, name: "Message", traits: {"smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
     View.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewId, name: "Id"))
@@ -296,7 +296,7 @@ module Aws::ConnectParticipant
     View.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewVersion, name: "Version"))
     View.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewContent, name: "Content"))
     View.type = Types::View
-    ViewActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ViewAction, name: "member")
+    ViewActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewAction, name: "member"))
     ViewContent.add_member(:input_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewInputSchema, name: "InputSchema"))
     ViewContent.add_member(:template, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewTemplate, name: "Template"))
     ViewContent.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewActions, name: "Actions"))

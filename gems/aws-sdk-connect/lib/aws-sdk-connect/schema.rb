@@ -1589,7 +1589,7 @@ module Aws::Connect
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    ActionSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionSummary, name: "member")
+    ActionSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionSummary, name: "member"))
     ActionSummary.add_member(:action_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionType, name: "ActionType", traits: {"smithy.api#required" => {}}))
     ActionSummary.type = Types::ActionSummary
     ActionType.add_member(:create_task, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_TASK", traits: {"smithy.api#enumValue" => "CREATE_TASK"}))
@@ -1624,7 +1624,7 @@ module Aws::Connect
     AgentContactReference.add_member(:connected_to_agent_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ConnectedToAgentTimestamp"))
     AgentContactReference.add_member(:queue, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueReference, name: "Queue"))
     AgentContactReference.type = Types::AgentContactReference
-    AgentContactReferenceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentContactReference, name: "member")
+    AgentContactReferenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentContactReference, name: "member"))
     AgentHierarchyGroup.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "Arn"))
     AgentHierarchyGroup.type = Types::AgentHierarchyGroup
     AgentHierarchyGroups.add_member(:l1_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyGroupIdList, name: "L1Ids"))
@@ -1633,7 +1633,7 @@ module Aws::Connect
     AgentHierarchyGroups.add_member(:l4_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyGroupIdList, name: "L4Ids"))
     AgentHierarchyGroups.add_member(:l5_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyGroupIdList, name: "L5Ids"))
     AgentHierarchyGroups.type = Types::AgentHierarchyGroups
-    AgentIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentId, name: "member")
+    AgentIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentId, name: "member"))
     AgentInfo.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentResourceId, name: "Id"))
     AgentInfo.add_member(:connected_to_agent_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ConnectedToAgentTimestamp"))
     AgentInfo.add_member(:agent_pause_duration_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentPauseDurationInSeconds, name: "AgentPauseDurationInSeconds"))
@@ -1648,7 +1648,7 @@ module Aws::Connect
     AgentInfo.type = Types::AgentInfo
     AgentQualityMetrics.add_member(:audio, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioQualityMetricsInfo, name: "Audio"))
     AgentQualityMetrics.type = Types::AgentQualityMetrics
-    AgentResourceIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentResourceId, name: "member")
+    AgentResourceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentResourceId, name: "member"))
     AgentStatus.add_member(:agent_status_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "AgentStatusARN"))
     AgentStatus.add_member(:agent_status_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatusId, name: "AgentStatusId"))
     AgentStatus.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatusName, name: "Name"))
@@ -1663,12 +1663,12 @@ module Aws::Connect
     AgentStatusIdentifier.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "Arn"))
     AgentStatusIdentifier.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatusId, name: "Id"))
     AgentStatusIdentifier.type = Types::AgentStatusIdentifier
-    AgentStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatus, name: "member")
+    AgentStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatus, name: "member"))
     AgentStatusReference.add_member(:status_start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StatusStartTimestamp"))
     AgentStatusReference.add_member(:status_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "StatusArn"))
     AgentStatusReference.add_member(:status_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatusName, name: "StatusName"))
     AgentStatusReference.type = Types::AgentStatusReference
-    AgentStatusSearchConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatusSearchCriteria, name: "member")
+    AgentStatusSearchConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatusSearchCriteria, name: "member"))
     AgentStatusSearchCriteria.add_member(:or_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatusSearchConditionList, name: "OrConditions"))
     AgentStatusSearchCriteria.add_member(:and_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatusSearchConditionList, name: "AndConditions"))
     AgentStatusSearchCriteria.add_member(:string_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: StringCondition, name: "StringCondition"))
@@ -1684,32 +1684,32 @@ module Aws::Connect
     AgentStatusSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     AgentStatusSummary.add_member(:last_modified_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "LastModifiedRegion"))
     AgentStatusSummary.type = Types::AgentStatusSummary
-    AgentStatusSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatusSummary, name: "member")
+    AgentStatusSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatusSummary, name: "member"))
     AgentStatusType.add_member(:routable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROUTABLE", traits: {"smithy.api#enumValue" => "ROUTABLE"}))
     AgentStatusType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
     AgentStatusType.add_member(:offline, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OFFLINE", traits: {"smithy.api#enumValue" => "OFFLINE"}))
-    AgentStatusTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatusType, name: "member")
-    AgentStatuses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatusId, name: "member")
+    AgentStatusTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatusType, name: "member"))
+    AgentStatuses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatusId, name: "member"))
     AgentsCriteria.add_member(:agent_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentIds, name: "AgentIds"))
     AgentsCriteria.type = Types::AgentsCriteria
-    AgentsMinOneMaxHundred.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "member")
-    AllowedAccessControlTags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfilePolicyKey, name: "key")
-    AllowedAccessControlTags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfilePolicyValue, name: "value")
+    AgentsMinOneMaxHundred.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "member"))
+    AllowedAccessControlTags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfilePolicyKey, name: "key"))
+    AllowedAccessControlTags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfilePolicyValue, name: "value"))
     AllowedCapabilities.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantCapabilities, name: "Customer"))
     AllowedCapabilities.add_member(:agent, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantCapabilities, name: "Agent"))
     AllowedCapabilities.type = Types::AllowedCapabilities
-    AllowedMonitorCapabilities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorCapability, name: "member")
+    AllowedMonitorCapabilities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorCapability, name: "member"))
     AnalyticsDataAssociationResult.add_member(:data_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetId, name: "DataSetId"))
     AnalyticsDataAssociationResult.add_member(:target_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, name: "TargetAccountId"))
     AnalyticsDataAssociationResult.add_member(:resource_share_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceShareId"))
     AnalyticsDataAssociationResult.add_member(:resource_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "ResourceShareArn"))
     AnalyticsDataAssociationResult.add_member(:resource_share_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceShareStatus"))
     AnalyticsDataAssociationResult.type = Types::AnalyticsDataAssociationResult
-    AnalyticsDataAssociationResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsDataAssociationResult, name: "member")
+    AnalyticsDataAssociationResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsDataAssociationResult, name: "member"))
     AnalyticsDataSetsResult.add_member(:data_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetId, name: "DataSetId"))
     AnalyticsDataSetsResult.add_member(:data_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DataSetName"))
     AnalyticsDataSetsResult.type = Types::AnalyticsDataSetsResult
-    AnalyticsDataSetsResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsDataSetsResult, name: "member")
+    AnalyticsDataSetsResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsDataSetsResult, name: "member"))
     AnswerMachineDetectionConfig.add_member(:enable_answer_machine_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableAnswerMachineDetection", traits: {"smithy.api#default" => false}))
     AnswerMachineDetectionConfig.add_member(:await_answer_machine_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AwaitAnswerMachinePrompt", traits: {"smithy.api#default" => false}))
     AnswerMachineDetectionConfig.type = Types::AnswerMachineDetectionConfig
@@ -1730,8 +1730,8 @@ module Aws::Connect
     Application.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "Namespace"))
     Application.add_member(:application_permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationPermissions, name: "ApplicationPermissions"))
     Application.type = Types::Application
-    ApplicationPermissions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Permission, name: "member")
-    Applications.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Application, name: "member")
+    ApplicationPermissions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Permission, name: "member"))
+    Applications.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Application, name: "member"))
     ArtifactStatus.add_member(:approved, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPROVED", traits: {"smithy.api#enumValue" => "APPROVED"}))
     ArtifactStatus.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
     ArtifactStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
@@ -1826,8 +1826,8 @@ module Aws::Connect
     AssociatedContactSummary.add_member(:initiation_method, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactInitiationMethod, name: "InitiationMethod"))
     AssociatedContactSummary.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "Channel"))
     AssociatedContactSummary.type = Types::AssociatedContactSummary
-    AssociatedContactSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedContactSummary, name: "member")
-    AssociatedQueueIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueueId, name: "member")
+    AssociatedContactSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedContactSummary, name: "member"))
+    AssociatedQueueIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueId, name: "member"))
     AttachedFile.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601Datetime, name: "CreationTime", traits: {"smithy.api#required" => {}}))
     AttachedFile.add_member(:file_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "FileArn", traits: {"smithy.api#required" => {}}))
     AttachedFile.add_member(:file_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileId, name: "FileId", traits: {"smithy.api#required" => {}}))
@@ -1843,13 +1843,13 @@ module Aws::Connect
     AttachedFileError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage"))
     AttachedFileError.add_member(:file_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileId, name: "FileId"))
     AttachedFileError.type = Types::AttachedFileError
-    AttachedFileErrorsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttachedFileError, name: "member")
+    AttachedFileErrorsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachedFileError, name: "member"))
     AttachedFileInvalidRequestExceptionReason.add_member(:invalid_file_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_FILE_SIZE", traits: {"smithy.api#enumValue" => "INVALID_FILE_SIZE"}))
     AttachedFileInvalidRequestExceptionReason.add_member(:invalid_file_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_FILE_TYPE", traits: {"smithy.api#enumValue" => "INVALID_FILE_TYPE"}))
     AttachedFileInvalidRequestExceptionReason.add_member(:invalid_file_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_FILE_NAME", traits: {"smithy.api#enumValue" => "INVALID_FILE_NAME"}))
     AttachedFileServiceQuotaExceededExceptionReason.add_member(:total_file_size_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOTAL_FILE_SIZE_EXCEEDED", traits: {"smithy.api#enumValue" => "TOTAL_FILE_SIZE_EXCEEDED"}))
     AttachedFileServiceQuotaExceededExceptionReason.add_member(:total_file_count_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOTAL_FILE_COUNT_EXCEEDED", traits: {"smithy.api#enumValue" => "TOTAL_FILE_COUNT_EXCEEDED"}))
-    AttachedFilesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttachedFile, name: "member")
+    AttachedFilesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachedFile, name: "member"))
     AttachmentReference.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceKey, name: "Name"))
     AttachmentReference.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceValue, name: "Value"))
     AttachmentReference.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStatus, name: "Status"))
@@ -1871,10 +1871,10 @@ module Aws::Connect
     AttributeCondition.add_member(:match_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchCriteria, name: "MatchCriteria"))
     AttributeCondition.add_member(:comparison_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonOperator, name: "ComparisonOperator"))
     AttributeCondition.type = Types::AttributeCondition
-    AttributeOrConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeAndCondition, name: "member")
-    Attributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
-    Attributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
-    AttributesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member")
+    AttributeOrConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeAndCondition, name: "member"))
+    Attributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
+    Attributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
+    AttributesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member"))
     AudioFeatures.add_member(:echo_reduction, ::Smithy::Schema::Shapes::MemberShape.new(target: MeetingFeatureStatus, name: "EchoReduction"))
     AudioFeatures.type = Types::AudioFeatures
     AudioQualityMetricsInfo.add_member(:quality_score, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioQualityScore, name: "QualityScore", traits: {"smithy.api#default" => 0}))
@@ -1900,12 +1900,12 @@ module Aws::Connect
     AuthenticationProfileSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     AuthenticationProfileSummary.add_member(:last_modified_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "LastModifiedRegion"))
     AuthenticationProfileSummary.type = Types::AuthenticationProfileSummary
-    AuthenticationProfileSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationProfileSummary, name: "member")
+    AuthenticationProfileSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationProfileSummary, name: "member"))
     AvailableNumberSummary.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "PhoneNumber"))
     AvailableNumberSummary.add_member(:phone_number_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberCountryCode, name: "PhoneNumberCountryCode"))
     AvailableNumberSummary.add_member(:phone_number_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberType, name: "PhoneNumberType"))
     AvailableNumberSummary.type = Types::AvailableNumberSummary
-    AvailableNumbersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailableNumberSummary, name: "member")
+    AvailableNumbersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailableNumberSummary, name: "member"))
     BatchAssociateAnalyticsDataSetRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BatchAssociateAnalyticsDataSetRequest.add_member(:data_set_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetIds, name: "DataSetIds", traits: {"smithy.api#required" => {}}))
     BatchAssociateAnalyticsDataSetRequest.add_member(:target_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, name: "TargetAccountId"))
@@ -1954,10 +1954,10 @@ module Aws::Connect
     Channel.add_member(:chat, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CHAT", traits: {"smithy.api#enumValue" => "CHAT"}))
     Channel.add_member(:task, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TASK", traits: {"smithy.api#enumValue" => "TASK"}))
     Channel.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMAIL", traits: {"smithy.api#enumValue" => "EMAIL"}))
-    ChannelList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "member")
-    ChannelToCountMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "key")
-    ChannelToCountMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerCount, name: "value")
-    Channels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "member")
+    ChannelList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "member"))
+    ChannelToCountMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "key"))
+    ChannelToCountMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerCount, name: "value"))
+    Channels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "member"))
     ChatContactMetrics.add_member(:multi_party, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "MultiParty"))
     ChatContactMetrics.add_member(:total_messages, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "TotalMessages"))
     ChatContactMetrics.add_member(:total_bot_messages, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "TotalBotMessages"))
@@ -2009,7 +2009,7 @@ module Aws::Connect
     ClaimedPhoneNumberSummary.type = Types::ClaimedPhoneNumberSummary
     CommonAttributeAndCondition.add_member(:tag_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: TagAndConditionList, name: "TagConditions"))
     CommonAttributeAndCondition.type = Types::CommonAttributeAndCondition
-    CommonAttributeOrConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CommonAttributeAndCondition, name: "member")
+    CommonAttributeOrConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CommonAttributeAndCondition, name: "member"))
     Comparison.add_member(:lt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LT", traits: {"smithy.api#enumValue" => "LT"}))
     CompleteAttachedFileUploadRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CompleteAttachedFileUploadRequest.add_member(:file_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileId, name: "FileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -2021,7 +2021,7 @@ module Aws::Connect
     Condition.type = Types::Condition
     ConditionalOperationFailedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     ConditionalOperationFailedException.type = Types::ConditionalOperationFailedException
-    Conditions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "member")
+    Conditions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     ConflictException.type = Types::ConflictException
     ConnectionData.add_member(:attendee, ::Smithy::Schema::Shapes::MemberShape.new(target: Attendee, name: "Attendee"))
@@ -2084,7 +2084,7 @@ module Aws::Connect
     ContactDataRequest.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "Attributes"))
     ContactDataRequest.add_member(:campaign, ::Smithy::Schema::Shapes::MemberShape.new(target: Campaign, name: "Campaign"))
     ContactDataRequest.type = Types::ContactDataRequest
-    ContactDataRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactDataRequest, name: "member")
+    ContactDataRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactDataRequest, name: "member"))
     ContactDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactDetailName, name: "Name"))
     ContactDetails.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactDetailDescription, name: "Description"))
     ContactDetails.type = Types::ContactDetails
@@ -2096,8 +2096,8 @@ module Aws::Connect
     ContactEvaluation.add_member(:delete_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "DeleteTimestamp"))
     ContactEvaluation.add_member(:export_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportLocation, name: "ExportLocation"))
     ContactEvaluation.type = Types::ContactEvaluation
-    ContactEvaluations.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationId, name: "key")
-    ContactEvaluations.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactEvaluation, name: "value")
+    ContactEvaluations.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationId, name: "key"))
+    ContactEvaluations.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactEvaluation, name: "value"))
     ContactFilter.add_member(:contact_states, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactStates, name: "ContactStates"))
     ContactFilter.type = Types::ContactFilter
     ContactFlow.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "Arn"))
@@ -2124,7 +2124,7 @@ module Aws::Connect
     ContactFlowModule.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowModuleStatus, name: "Status"))
     ContactFlowModule.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     ContactFlowModule.type = Types::ContactFlowModule
-    ContactFlowModuleSearchConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowModuleSearchCriteria, name: "member")
+    ContactFlowModuleSearchConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowModuleSearchCriteria, name: "member"))
     ContactFlowModuleSearchCriteria.add_member(:or_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowModuleSearchConditionList, name: "OrConditions"))
     ContactFlowModuleSearchCriteria.add_member(:and_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowModuleSearchConditionList, name: "AndConditions"))
     ContactFlowModuleSearchCriteria.add_member(:string_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: StringCondition, name: "StringCondition"))
@@ -2133,7 +2133,7 @@ module Aws::Connect
     ContactFlowModuleSearchCriteria.type = Types::ContactFlowModuleSearchCriteria
     ContactFlowModuleSearchFilter.add_member(:tag_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlPlaneTagFilter, name: "TagFilter"))
     ContactFlowModuleSearchFilter.type = Types::ContactFlowModuleSearchFilter
-    ContactFlowModuleSearchSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowModule, name: "member")
+    ContactFlowModuleSearchSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowModule, name: "member"))
     ContactFlowModuleState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     ContactFlowModuleState.add_member(:archived, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARCHIVED", traits: {"smithy.api#enumValue" => "ARCHIVED"}))
     ContactFlowModuleStatus.add_member(:published, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLISHED", traits: {"smithy.api#enumValue" => "PUBLISHED"}))
@@ -2143,10 +2143,10 @@ module Aws::Connect
     ContactFlowModuleSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowModuleName, name: "Name"))
     ContactFlowModuleSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowModuleState, name: "State"))
     ContactFlowModuleSummary.type = Types::ContactFlowModuleSummary
-    ContactFlowModulesSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowModuleSummary, name: "member")
+    ContactFlowModulesSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowModuleSummary, name: "member"))
     ContactFlowNotPublishedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     ContactFlowNotPublishedException.type = Types::ContactFlowNotPublishedException
-    ContactFlowSearchConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowSearchCriteria, name: "member")
+    ContactFlowSearchConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowSearchCriteria, name: "member"))
     ContactFlowSearchCriteria.add_member(:or_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowSearchConditionList, name: "OrConditions"))
     ContactFlowSearchCriteria.add_member(:and_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowSearchConditionList, name: "AndConditions"))
     ContactFlowSearchCriteria.add_member(:string_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: StringCondition, name: "StringCondition"))
@@ -2156,7 +2156,7 @@ module Aws::Connect
     ContactFlowSearchCriteria.type = Types::ContactFlowSearchCriteria
     ContactFlowSearchFilter.add_member(:tag_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlPlaneTagFilter, name: "TagFilter"))
     ContactFlowSearchFilter.type = Types::ContactFlowSearchFilter
-    ContactFlowSearchSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlow, name: "member")
+    ContactFlowSearchSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlow, name: "member"))
     ContactFlowState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     ContactFlowState.add_member(:archived, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARCHIVED", traits: {"smithy.api#enumValue" => "ARCHIVED"}))
     ContactFlowStatus.add_member(:published, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLISHED", traits: {"smithy.api#enumValue" => "PUBLISHED"}))
@@ -2168,7 +2168,7 @@ module Aws::Connect
     ContactFlowSummary.add_member(:contact_flow_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowState, name: "ContactFlowState"))
     ContactFlowSummary.add_member(:contact_flow_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowStatus, name: "ContactFlowStatus"))
     ContactFlowSummary.type = Types::ContactFlowSummary
-    ContactFlowSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowSummary, name: "member")
+    ContactFlowSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowSummary, name: "member"))
     ContactFlowType.add_member(:contact_flow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTACT_FLOW", traits: {"smithy.api#enumValue" => "CONTACT_FLOW"}))
     ContactFlowType.add_member(:customer_queue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER_QUEUE", traits: {"smithy.api#enumValue" => "CUSTOMER_QUEUE"}))
     ContactFlowType.add_member(:customer_hold, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER_HOLD", traits: {"smithy.api#enumValue" => "CUSTOMER_HOLD"}))
@@ -2179,12 +2179,12 @@ module Aws::Connect
     ContactFlowType.add_member(:agent_transfer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGENT_TRANSFER", traits: {"smithy.api#enumValue" => "AGENT_TRANSFER"}))
     ContactFlowType.add_member(:queue_transfer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUEUE_TRANSFER", traits: {"smithy.api#enumValue" => "QUEUE_TRANSFER"}))
     ContactFlowType.add_member(:campaign, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAMPAIGN", traits: {"smithy.api#enumValue" => "CAMPAIGN"}))
-    ContactFlowTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowType, name: "member")
+    ContactFlowTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowType, name: "member"))
     ContactFlowVersionSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "Arn"))
     ContactFlowVersionSummary.add_member(:version_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowDescription, name: "VersionDescription"))
     ContactFlowVersionSummary.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceVersion, name: "Version"))
     ContactFlowVersionSummary.type = Types::ContactFlowVersionSummary
-    ContactFlowVersionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowVersionSummary, name: "member")
+    ContactFlowVersionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowVersionSummary, name: "member"))
     ContactInitiationMethod.add_member(:inbound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INBOUND", traits: {"smithy.api#enumValue" => "INBOUND"}))
     ContactInitiationMethod.add_member(:outbound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OUTBOUND", traits: {"smithy.api#enumValue" => "OUTBOUND"}))
     ContactInitiationMethod.add_member(:transfer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRANSFER", traits: {"smithy.api#enumValue" => "TRANSFER"}))
@@ -2203,18 +2203,18 @@ module Aws::Connect
     ContactMetricResult.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactMetricName, name: "Name", traits: {"smithy.api#required" => {}}))
     ContactMetricResult.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactMetricValue, name: "Value", traits: {"smithy.api#required" => {}}))
     ContactMetricResult.type = Types::ContactMetricResult
-    ContactMetricResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactMetricResult, name: "member")
+    ContactMetricResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactMetricResult, name: "member"))
     ContactMetricValue.add_member(:number, Types::ContactMetricValue::Number, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Number"))
     ContactMetricValue.add_member(:unknown, Types::ContactMetricValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ContactMetricValue.type = Types::ContactMetricValue
-    ContactMetrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactMetricInfo, name: "member")
+    ContactMetrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactMetricInfo, name: "member"))
     ContactNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     ContactNotFoundException.type = Types::ContactNotFoundException
     ContactRecordingType.add_member(:agent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGENT", traits: {"smithy.api#enumValue" => "AGENT"}))
     ContactRecordingType.add_member(:ivr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IVR", traits: {"smithy.api#enumValue" => "IVR"}))
     ContactRecordingType.add_member(:screen, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCREEN", traits: {"smithy.api#enumValue" => "SCREEN"}))
-    ContactReferences.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceKey, name: "key")
-    ContactReferences.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Reference, name: "value")
+    ContactReferences.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceKey, name: "key"))
+    ContactReferences.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Reference, name: "value"))
     ContactSearchSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "Arn"))
     ContactSearchSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactId, name: "Id"))
     ContactSearchSummary.add_member(:initial_contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactId, name: "InitialContactId"))
@@ -2239,8 +2239,8 @@ module Aws::Connect
     ContactSearchSummarySegmentAttributeValue.add_member(:value_string, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentAttributeValueString, name: "ValueString"))
     ContactSearchSummarySegmentAttributeValue.add_member(:value_map, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentAttributeValueMap, name: "ValueMap"))
     ContactSearchSummarySegmentAttributeValue.type = Types::ContactSearchSummarySegmentAttributeValue
-    ContactSearchSummarySegmentAttributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentAttributeName, name: "key")
-    ContactSearchSummarySegmentAttributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactSearchSummarySegmentAttributeValue, name: "value")
+    ContactSearchSummarySegmentAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentAttributeName, name: "key"))
+    ContactSearchSummarySegmentAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactSearchSummarySegmentAttributeValue, name: "value"))
     ContactState.add_member(:incoming, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCOMING", traits: {"smithy.api#enumValue" => "INCOMING"}))
     ContactState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     ContactState.add_member(:connecting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECTING", traits: {"smithy.api#enumValue" => "CONNECTING"}))
@@ -2250,11 +2250,11 @@ module Aws::Connect
     ContactState.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
     ContactState.add_member(:ended, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENDED", traits: {"smithy.api#enumValue" => "ENDED"}))
     ContactState.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
-    ContactStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactState, name: "member")
-    ContactTagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactTagKey, name: "member")
-    ContactTagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactTagKey, name: "key")
-    ContactTagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactTagValue, name: "value")
-    Contacts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactSearchSummary, name: "member")
+    ContactStates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactState, name: "member"))
+    ContactTagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactTagKey, name: "member"))
+    ContactTagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactTagKey, name: "key"))
+    ContactTagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactTagValue, name: "value"))
+    Contacts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactSearchSummary, name: "member"))
     ControlPlaneAttributeFilter.add_member(:or_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: CommonAttributeOrConditionList, name: "OrConditions"))
     ControlPlaneAttributeFilter.add_member(:and_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: CommonAttributeAndCondition, name: "AndCondition"))
     ControlPlaneAttributeFilter.add_member(:tag_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: TagCondition, name: "TagCondition"))
@@ -2592,7 +2592,7 @@ module Aws::Connect
     CurrentMetricData.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrentMetric, name: "Metric"))
     CurrentMetricData.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "Value"))
     CurrentMetricData.type = Types::CurrentMetricData
-    CurrentMetricDataCollections.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CurrentMetricData, name: "member")
+    CurrentMetricDataCollections.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrentMetricData, name: "member"))
     CurrentMetricName.add_member(:agents_online, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGENTS_ONLINE", traits: {"smithy.api#enumValue" => "AGENTS_ONLINE"}))
     CurrentMetricName.add_member(:agents_available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGENTS_AVAILABLE", traits: {"smithy.api#enumValue" => "AGENTS_AVAILABLE"}))
     CurrentMetricName.add_member(:agents_on_call, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGENTS_ON_CALL", traits: {"smithy.api#enumValue" => "AGENTS_ON_CALL"}))
@@ -2609,12 +2609,12 @@ module Aws::Connect
     CurrentMetricResult.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimensions, name: "Dimensions"))
     CurrentMetricResult.add_member(:collections, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrentMetricDataCollections, name: "Collections"))
     CurrentMetricResult.type = Types::CurrentMetricResult
-    CurrentMetricResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CurrentMetricResult, name: "member")
+    CurrentMetricResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrentMetricResult, name: "member"))
     CurrentMetricSortCriteria.add_member(:sort_by_metric, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrentMetricName, name: "SortByMetric"))
     CurrentMetricSortCriteria.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "SortOrder"))
     CurrentMetricSortCriteria.type = Types::CurrentMetricSortCriteria
-    CurrentMetricSortCriteriaMaxOne.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CurrentMetricSortCriteria, name: "member")
-    CurrentMetrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CurrentMetric, name: "member")
+    CurrentMetricSortCriteriaMaxOne.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrentMetricSortCriteria, name: "member"))
+    CurrentMetrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrentMetric, name: "member"))
     Customer.add_member(:device_info, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceInfo, name: "DeviceInfo"))
     Customer.add_member(:capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantCapabilities, name: "Capabilities"))
     Customer.type = Types::Customer
@@ -2623,7 +2623,7 @@ module Aws::Connect
     CustomerVoiceActivity.add_member(:greeting_start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "GreetingStartTimestamp"))
     CustomerVoiceActivity.add_member(:greeting_end_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "GreetingEndTimestamp"))
     CustomerVoiceActivity.type = Types::CustomerVoiceActivity
-    DataSetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetId, name: "member")
+    DataSetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetId, name: "member"))
     DateComparisonType.add_member(:greater_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GREATER_THAN", traits: {"smithy.api#enumValue" => "GREATER_THAN"}))
     DateComparisonType.add_member(:less_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LESS_THAN", traits: {"smithy.api#enumValue" => "LESS_THAN"}))
     DateComparisonType.add_member(:greater_than_or_equal_to, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GREATER_THAN_OR_EQUAL_TO", traits: {"smithy.api#enumValue" => "GREATER_THAN_OR_EQUAL_TO"}))
@@ -2649,7 +2649,7 @@ module Aws::Connect
     DefaultVocabulary.add_member(:vocabulary_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyId, name: "VocabularyId", traits: {"smithy.api#required" => {}}))
     DefaultVocabulary.add_member(:vocabulary_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyName, name: "VocabularyName", traits: {"smithy.api#required" => {}}))
     DefaultVocabulary.type = Types::DefaultVocabulary
-    DefaultVocabularyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultVocabulary, name: "member")
+    DefaultVocabularyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultVocabulary, name: "member"))
     DeleteAttachedFileRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAttachedFileRequest.add_member(:file_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileId, name: "FileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAttachedFileRequest.add_member(:associated_resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "AssociatedResourceArn", traits: {"smithy.api#httpQuery" => "associatedResourceArn", "smithy.api#required" => {}}))
@@ -2909,8 +2909,8 @@ module Aws::Connect
     Dimensions.add_member(:routing_step_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingExpression, name: "RoutingStepExpression"))
     Dimensions.add_member(:agent_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatusIdentifier, name: "AgentStatus"))
     Dimensions.type = Types::Dimensions
-    DimensionsV2Map.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionsV2Key, name: "key")
-    DimensionsV2Map.value = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionsV2Value, name: "value")
+    DimensionsV2Map.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionsV2Key, name: "key"))
+    DimensionsV2Map.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionsV2Value, name: "value"))
     DirectoryType.add_member(:saml, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAML", traits: {"smithy.api#enumValue" => "SAML"}))
     DirectoryType.add_member(:connect_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECT_MANAGED", traits: {"smithy.api#enumValue" => "CONNECT_MANAGED"}))
     DirectoryType.add_member(:existing_directory, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXISTING_DIRECTORY", traits: {"smithy.api#enumValue" => "EXISTING_DIRECTORY"}))
@@ -2983,28 +2983,28 @@ module Aws::Connect
     Distribution.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, name: "Region", traits: {"smithy.api#required" => {}}))
     Distribution.add_member(:percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, name: "Percentage", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     Distribution.type = Types::Distribution
-    DistributionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Distribution, name: "member")
+    DistributionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Distribution, name: "member"))
     DownloadUrlMetadata.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataUrl, name: "Url"))
     DownloadUrlMetadata.add_member(:url_expiry, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601Datetime, name: "UrlExpiry"))
     DownloadUrlMetadata.type = Types::DownloadUrlMetadata
     DuplicateResourceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     DuplicateResourceException.type = Types::DuplicateResourceException
-    EffectiveHoursOfOperationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EffectiveHoursOfOperations, name: "member")
+    EffectiveHoursOfOperationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EffectiveHoursOfOperations, name: "member"))
     EffectiveHoursOfOperations.add_member(:date, ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationOverrideYearMonthDayDateFormat, name: "Date"))
     EffectiveHoursOfOperations.add_member(:operational_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationalHours, name: "OperationalHours"))
     EffectiveHoursOfOperations.type = Types::EffectiveHoursOfOperations
     EmailAddressInfo.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "EmailAddress", traits: {"smithy.api#required" => {}}))
     EmailAddressInfo.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressDisplayName, name: "DisplayName"))
     EmailAddressInfo.type = Types::EmailAddressInfo
-    EmailAddressList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressMetadata, name: "member")
+    EmailAddressList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressMetadata, name: "member"))
     EmailAddressMetadata.add_member(:email_address_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressId, name: "EmailAddressId"))
     EmailAddressMetadata.add_member(:email_address_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressArn, name: "EmailAddressArn"))
     EmailAddressMetadata.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "EmailAddress"))
     EmailAddressMetadata.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     EmailAddressMetadata.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressDisplayName, name: "DisplayName"))
     EmailAddressMetadata.type = Types::EmailAddressMetadata
-    EmailAddressRecipientList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressInfo, name: "member")
-    EmailAddressSearchConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressSearchCriteria, name: "member")
+    EmailAddressRecipientList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressInfo, name: "member"))
+    EmailAddressSearchConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressSearchCriteria, name: "member"))
     EmailAddressSearchCriteria.add_member(:or_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressSearchConditionList, name: "OrConditions"))
     EmailAddressSearchCriteria.add_member(:and_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressSearchConditionList, name: "AndConditions"))
     EmailAddressSearchCriteria.add_member(:string_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: StringCondition, name: "StringCondition"))
@@ -3014,21 +3014,21 @@ module Aws::Connect
     EmailAttachment.add_member(:file_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FileName, name: "FileName", traits: {"smithy.api#required" => {}}))
     EmailAttachment.add_member(:s3_url, ::Smithy::Schema::Shapes::MemberShape.new(target: PreSignedAttachmentUrl, name: "S3Url", traits: {"smithy.api#required" => {}}))
     EmailAttachment.type = Types::EmailAttachment
-    EmailAttachments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAttachment, name: "member")
+    EmailAttachments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAttachment, name: "member"))
     EmailHeaderType.add_member(:references, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REFERENCES", traits: {"smithy.api#enumValue" => "REFERENCES"}))
     EmailHeaderType.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MESSAGE_ID", traits: {"smithy.api#enumValue" => "MESSAGE_ID"}))
     EmailHeaderType.add_member(:in_reply_to, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_REPLY_TO", traits: {"smithy.api#enumValue" => "IN_REPLY_TO"}))
     EmailHeaderType.add_member(:x_ses_spam_verdict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "X_SES_SPAM_VERDICT", traits: {"smithy.api#enumValue" => "X_SES_SPAM_VERDICT"}))
     EmailHeaderType.add_member(:x_ses_virus_verdict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "X_SES_VIRUS_VERDICT", traits: {"smithy.api#enumValue" => "X_SES_VIRUS_VERDICT"}))
-    EmailHeaders.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EmailHeaderType, name: "key")
-    EmailHeaders.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EmailHeaderValue, name: "value")
+    EmailHeaders.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailHeaderType, name: "key"))
+    EmailHeaders.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailHeaderValue, name: "value"))
     EmailMessageReference.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceKey, name: "Name"))
     EmailMessageReference.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceArn, name: "Arn"))
     EmailMessageReference.type = Types::EmailMessageReference
     EmailRecipient.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointAddress, name: "Address"))
     EmailRecipient.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointDisplayName, name: "DisplayName"))
     EmailRecipient.type = Types::EmailRecipient
-    EmailRecipientsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EmailRecipient, name: "member")
+    EmailRecipientsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailRecipient, name: "member"))
     EmailReference.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceKey, name: "Name"))
     EmailReference.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceValue, name: "Value"))
     EmailReference.type = Types::EmailReference
@@ -3053,7 +3053,7 @@ module Aws::Connect
     ErrorResult.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorCode"))
     ErrorResult.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorMessage"))
     ErrorResult.type = Types::ErrorResult
-    ErrorResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorResult, name: "member")
+    ErrorResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorResult, name: "member"))
     Evaluation.add_member(:evaluation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "EvaluationId", traits: {"smithy.api#required" => {}}))
     Evaluation.add_member(:evaluation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "EvaluationArn", traits: {"smithy.api#required" => {}}))
     Evaluation.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationMetadata, name: "Metadata", traits: {"smithy.api#required" => {}}))
@@ -3075,10 +3075,10 @@ module Aws::Connect
     EvaluationAnswerOutput.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationAnswerData, name: "Value"))
     EvaluationAnswerOutput.add_member(:system_suggested_value, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationAnswerData, name: "SystemSuggestedValue"))
     EvaluationAnswerOutput.type = Types::EvaluationAnswerOutput
-    EvaluationAnswersInputMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "key")
-    EvaluationAnswersInputMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationAnswerInput, name: "value")
-    EvaluationAnswersOutputMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "key")
-    EvaluationAnswersOutputMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationAnswerOutput, name: "value")
+    EvaluationAnswersInputMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "key"))
+    EvaluationAnswersInputMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationAnswerInput, name: "value"))
+    EvaluationAnswersOutputMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "key"))
+    EvaluationAnswersOutputMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationAnswerOutput, name: "value"))
     EvaluationForm.add_member(:evaluation_form_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "EvaluationFormId", traits: {"smithy.api#required" => {}}))
     EvaluationForm.add_member(:evaluation_form_version, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionNumber, name: "EvaluationFormVersion", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     EvaluationForm.add_member(:locked, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFormVersionIsLocked, name: "Locked", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
@@ -3106,7 +3106,7 @@ module Aws::Connect
     EvaluationFormItem.add_member(:question, Types::EvaluationFormItem::Question, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFormQuestion, name: "Question"))
     EvaluationFormItem.add_member(:unknown, Types::EvaluationFormItem::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     EvaluationFormItem.type = Types::EvaluationFormItem
-    EvaluationFormItemsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFormItem, name: "member")
+    EvaluationFormItemsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFormItem, name: "member"))
     EvaluationFormNumericQuestionAutomation.add_member(:property_value, Types::EvaluationFormNumericQuestionAutomation::PropertyValue, ::Smithy::Schema::Shapes::MemberShape.new(target: NumericQuestionPropertyValueAutomation, name: "PropertyValue"))
     EvaluationFormNumericQuestionAutomation.add_member(:unknown, Types::EvaluationFormNumericQuestionAutomation::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     EvaluationFormNumericQuestionAutomation.type = Types::EvaluationFormNumericQuestionAutomation
@@ -3115,7 +3115,7 @@ module Aws::Connect
     EvaluationFormNumericQuestionOption.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFormQuestionAnswerScore, name: "Score", traits: {"smithy.api#default" => 0}))
     EvaluationFormNumericQuestionOption.add_member(:automatic_fail, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AutomaticFail", traits: {"smithy.api#default" => false}))
     EvaluationFormNumericQuestionOption.type = Types::EvaluationFormNumericQuestionOption
-    EvaluationFormNumericQuestionOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFormNumericQuestionOption, name: "member")
+    EvaluationFormNumericQuestionOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFormNumericQuestionOption, name: "member"))
     EvaluationFormNumericQuestionProperties.add_member(:min_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "MinValue", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     EvaluationFormNumericQuestionProperties.add_member(:max_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "MaxValue", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     EvaluationFormNumericQuestionProperties.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFormNumericQuestionOptionList, name: "Options"))
@@ -3155,7 +3155,7 @@ module Aws::Connect
     EvaluationFormSingleSelectQuestionAutomationOption.add_member(:rule_category, Types::EvaluationFormSingleSelectQuestionAutomationOption::RuleCategory, ::Smithy::Schema::Shapes::MemberShape.new(target: SingleSelectQuestionRuleCategoryAutomation, name: "RuleCategory"))
     EvaluationFormSingleSelectQuestionAutomationOption.add_member(:unknown, Types::EvaluationFormSingleSelectQuestionAutomationOption::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     EvaluationFormSingleSelectQuestionAutomationOption.type = Types::EvaluationFormSingleSelectQuestionAutomationOption
-    EvaluationFormSingleSelectQuestionAutomationOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFormSingleSelectQuestionAutomationOption, name: "member")
+    EvaluationFormSingleSelectQuestionAutomationOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFormSingleSelectQuestionAutomationOption, name: "member"))
     EvaluationFormSingleSelectQuestionDisplayMode.add_member(:dropdown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DROPDOWN", traits: {"smithy.api#enumValue" => "DROPDOWN"}))
     EvaluationFormSingleSelectQuestionDisplayMode.add_member(:radio, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RADIO", traits: {"smithy.api#enumValue" => "RADIO"}))
     EvaluationFormSingleSelectQuestionOption.add_member(:ref_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceId, name: "RefId", traits: {"smithy.api#required" => {}}))
@@ -3163,7 +3163,7 @@ module Aws::Connect
     EvaluationFormSingleSelectQuestionOption.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFormQuestionAnswerScore, name: "Score", traits: {"smithy.api#default" => 0}))
     EvaluationFormSingleSelectQuestionOption.add_member(:automatic_fail, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AutomaticFail", traits: {"smithy.api#default" => false}))
     EvaluationFormSingleSelectQuestionOption.type = Types::EvaluationFormSingleSelectQuestionOption
-    EvaluationFormSingleSelectQuestionOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFormSingleSelectQuestionOption, name: "member")
+    EvaluationFormSingleSelectQuestionOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFormSingleSelectQuestionOption, name: "member"))
     EvaluationFormSingleSelectQuestionProperties.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFormSingleSelectQuestionOptionList, name: "Options", traits: {"smithy.api#required" => {}}))
     EvaluationFormSingleSelectQuestionProperties.add_member(:display_as, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFormSingleSelectQuestionDisplayMode, name: "DisplayAs"))
     EvaluationFormSingleSelectQuestionProperties.add_member(:automation, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFormSingleSelectQuestionAutomation, name: "Automation"))
@@ -3180,7 +3180,7 @@ module Aws::Connect
     EvaluationFormSummary.add_member(:latest_version, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionNumber, name: "LatestVersion", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     EvaluationFormSummary.add_member(:active_version, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionNumber, name: "ActiveVersion", traits: {"smithy.api#default" => nil}))
     EvaluationFormSummary.type = Types::EvaluationFormSummary
-    EvaluationFormSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFormSummary, name: "member")
+    EvaluationFormSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFormSummary, name: "member"))
     EvaluationFormVersionStatus.add_member(:draft, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DRAFT", traits: {"smithy.api#enumValue" => "DRAFT"}))
     EvaluationFormVersionStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     EvaluationFormVersionSummary.add_member(:evaluation_form_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "EvaluationFormArn", traits: {"smithy.api#required" => {}}))
@@ -3193,7 +3193,7 @@ module Aws::Connect
     EvaluationFormVersionSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime", traits: {"smithy.api#required" => {}}))
     EvaluationFormVersionSummary.add_member(:last_modified_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "LastModifiedBy", traits: {"smithy.api#required" => {}}))
     EvaluationFormVersionSummary.type = Types::EvaluationFormVersionSummary
-    EvaluationFormVersionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFormVersionSummary, name: "member")
+    EvaluationFormVersionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationFormVersionSummary, name: "member"))
     EvaluationMetadata.add_member(:contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactId, name: "ContactId", traits: {"smithy.api#required" => {}}))
     EvaluationMetadata.add_member(:evaluator_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "EvaluatorArn", traits: {"smithy.api#required" => {}}))
     EvaluationMetadata.add_member(:contact_agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "ContactAgentId"))
@@ -3201,14 +3201,14 @@ module Aws::Connect
     EvaluationMetadata.type = Types::EvaluationMetadata
     EvaluationNote.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationNoteString, name: "Value"))
     EvaluationNote.type = Types::EvaluationNote
-    EvaluationNotesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "key")
-    EvaluationNotesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationNote, name: "value")
+    EvaluationNotesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "key"))
+    EvaluationNotesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationNote, name: "value"))
     EvaluationScore.add_member(:percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationScorePercentage, name: "Percentage", traits: {"smithy.api#default" => 0}))
     EvaluationScore.add_member(:not_applicable, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "NotApplicable", traits: {"smithy.api#default" => false}))
     EvaluationScore.add_member(:automatic_fail, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AutomaticFail", traits: {"smithy.api#default" => false}))
     EvaluationScore.type = Types::EvaluationScore
-    EvaluationScoresMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "key")
-    EvaluationScoresMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationScore, name: "value")
+    EvaluationScoresMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "key"))
+    EvaluationScoresMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationScore, name: "value"))
     EvaluationStatus.add_member(:draft, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DRAFT", traits: {"smithy.api#enumValue" => "DRAFT"}))
     EvaluationStatus.add_member(:submitted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUBMITTED", traits: {"smithy.api#enumValue" => "SUBMITTED"}))
     EvaluationSummary.add_member(:evaluation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "EvaluationId", traits: {"smithy.api#required" => {}}))
@@ -3221,7 +3221,7 @@ module Aws::Connect
     EvaluationSummary.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTime", traits: {"smithy.api#required" => {}}))
     EvaluationSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime", traits: {"smithy.api#required" => {}}))
     EvaluationSummary.type = Types::EvaluationSummary
-    EvaluationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationSummary, name: "member")
+    EvaluationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationSummary, name: "member"))
     EventBridgeActionDefinition.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventBridgeActionName, name: "Name", traits: {"smithy.api#required" => {}}))
     EventBridgeActionDefinition.type = Types::EventBridgeActionDefinition
     EventSourceName.add_member(:on_post_call_analysis_available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OnPostCallAnalysisAvailable", traits: {"smithy.api#enumValue" => "OnPostCallAnalysisAvailable"}))
@@ -3244,12 +3244,12 @@ module Aws::Connect
     Expression.add_member(:or_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: Expressions, name: "OrExpression"))
     Expression.add_member(:not_attribute_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeCondition, name: "NotAttributeCondition"))
     Expression.type = Types::Expression
-    Expressions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "member")
+    Expressions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "member"))
     FailedRequest.add_member(:request_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestIdentifier, name: "RequestIdentifier"))
     FailedRequest.add_member(:failure_reason_code, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReasonCode, name: "FailureReasonCode"))
     FailedRequest.add_member(:failure_reason_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FailureReasonMessage"))
     FailedRequest.type = Types::FailedRequest
-    FailedRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedRequest, name: "member")
+    FailedRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedRequest, name: "member"))
     FailureReasonCode.add_member(:invalid_attribute_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_ATTRIBUTE_KEY", traits: {"smithy.api#enumValue" => "INVALID_ATTRIBUTE_KEY"}))
     FailureReasonCode.add_member(:invalid_customer_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_CUSTOMER_ENDPOINT", traits: {"smithy.api#enumValue" => "INVALID_CUSTOMER_ENDPOINT"}))
     FailureReasonCode.add_member(:invalid_system_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_SYSTEM_ENDPOINT", traits: {"smithy.api#enumValue" => "INVALID_SYSTEM_ENDPOINT"}))
@@ -3268,8 +3268,8 @@ module Aws::Connect
     FieldValueUnion.add_member(:empty_value, ::Smithy::Schema::Shapes::MemberShape.new(target: EmptyFieldValue, name: "EmptyValue"))
     FieldValueUnion.add_member(:string_value, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldStringValue, name: "StringValue"))
     FieldValueUnion.type = Types::FieldValueUnion
-    FieldValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValue, name: "member")
-    FileIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileId, name: "member")
+    FieldValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValue, name: "member"))
+    FileIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FileId, name: "member"))
     FileStatusType.add_member(:approved, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPROVED", traits: {"smithy.api#enumValue" => "APPROVED"}))
     FileStatusType.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
     FileStatusType.add_member(:processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROCESSING", traits: {"smithy.api#enumValue" => "PROCESSING"}))
@@ -3279,14 +3279,14 @@ module Aws::Connect
     FilterV2.add_member(:filter_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArnOrId, name: "FilterKey"))
     FilterV2.add_member(:filter_values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, name: "FilterValues"))
     FilterV2.type = Types::FilterV2
-    FilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArnOrId, name: "member")
+    FilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArnOrId, name: "member"))
     Filters.add_member(:queues, ::Smithy::Schema::Shapes::MemberShape.new(target: Queues, name: "Queues"))
     Filters.add_member(:channels, ::Smithy::Schema::Shapes::MemberShape.new(target: Channels, name: "Channels"))
     Filters.add_member(:routing_profiles, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfiles, name: "RoutingProfiles"))
     Filters.add_member(:routing_step_expressions, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingExpressions, name: "RoutingStepExpressions"))
     Filters.add_member(:agent_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatuses, name: "AgentStatuses"))
     Filters.type = Types::Filters
-    FiltersV2List.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterV2, name: "member")
+    FiltersV2List.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterV2, name: "member"))
     FlowAssociationResourceType.add_member(:sms_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMS_PHONE_NUMBER", traits: {"smithy.api#enumValue" => "SMS_PHONE_NUMBER"}))
     FlowAssociationResourceType.add_member(:inbound_email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INBOUND_EMAIL", traits: {"smithy.api#enumValue" => "INBOUND_EMAIL"}))
     FlowAssociationResourceType.add_member(:outbound_email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OUTBOUND_EMAIL", traits: {"smithy.api#enumValue" => "OUTBOUND_EMAIL"}))
@@ -3296,8 +3296,8 @@ module Aws::Connect
     FlowAssociationSummary.add_member(:flow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "FlowId"))
     FlowAssociationSummary.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ListFlowAssociationResourceType, name: "ResourceType"))
     FlowAssociationSummary.type = Types::FlowAssociationSummary
-    FlowAssociationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FlowAssociationSummary, name: "member")
-    FunctionArnsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionArn, name: "member")
+    FlowAssociationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowAssociationSummary, name: "member"))
+    FunctionArnsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionArn, name: "member"))
     GetAttachedFileRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAttachedFileRequest.add_member(:file_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileId, name: "FileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAttachedFileRequest.add_member(:url_expiry_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: URLExpiryInSeconds, name: "UrlExpiryInSeconds", traits: {"smithy.api#httpQuery" => "urlExpiryInSeconds"}))
@@ -3437,8 +3437,8 @@ module Aws::Connect
     Grouping.add_member(:routing_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROUTING_PROFILE", traits: {"smithy.api#enumValue" => "ROUTING_PROFILE"}))
     Grouping.add_member(:routing_step_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROUTING_STEP_EXPRESSION", traits: {"smithy.api#enumValue" => "ROUTING_STEP_EXPRESSION"}))
     Grouping.add_member(:agent_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGENT_STATUS", traits: {"smithy.api#enumValue" => "AGENT_STATUS"}))
-    Groupings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Grouping, name: "member")
-    GroupingsV2.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingV2, name: "member")
+    Groupings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Grouping, name: "member"))
+    GroupingsV2.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingV2, name: "member"))
     HierarchyGroup.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyGroupId, name: "Id"))
     HierarchyGroup.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "Arn"))
     HierarchyGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyGroupName, name: "Name"))
@@ -3451,7 +3451,7 @@ module Aws::Connect
     HierarchyGroupCondition.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     HierarchyGroupCondition.add_member(:hierarchy_group_match_type, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyGroupMatchType, name: "HierarchyGroupMatchType"))
     HierarchyGroupCondition.type = Types::HierarchyGroupCondition
-    HierarchyGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyGroupId, name: "member")
+    HierarchyGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyGroupId, name: "member"))
     HierarchyGroupMatchType.add_member(:exact, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXACT", traits: {"smithy.api#enumValue" => "EXACT"}))
     HierarchyGroupMatchType.add_member(:with_child_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WITH_CHILD_GROUPS", traits: {"smithy.api#enumValue" => "WITH_CHILD_GROUPS"}))
     HierarchyGroupSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyGroupId, name: "Id"))
@@ -3460,7 +3460,7 @@ module Aws::Connect
     HierarchyGroupSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     HierarchyGroupSummary.add_member(:last_modified_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "LastModifiedRegion"))
     HierarchyGroupSummary.type = Types::HierarchyGroupSummary
-    HierarchyGroupSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyGroupSummary, name: "member")
+    HierarchyGroupSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyGroupSummary, name: "member"))
     HierarchyGroupSummaryReference.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyGroupId, name: "Id"))
     HierarchyGroupSummaryReference.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "Arn"))
     HierarchyGroupSummaryReference.type = Types::HierarchyGroupSummaryReference
@@ -3490,7 +3490,7 @@ module Aws::Connect
     HierarchyPathReference.add_member(:level_four, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyGroupSummaryReference, name: "LevelFour"))
     HierarchyPathReference.add_member(:level_five, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyGroupSummaryReference, name: "LevelFive"))
     HierarchyPathReference.type = Types::HierarchyPathReference
-    HierarchyRestrictedResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyRestrictedResourceName, name: "member")
+    HierarchyRestrictedResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyRestrictedResourceName, name: "member"))
     HierarchyStructure.add_member(:level_one, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyLevel, name: "LevelOne"))
     HierarchyStructure.add_member(:level_two, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyLevel, name: "LevelTwo"))
     HierarchyStructure.add_member(:level_three, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyLevel, name: "LevelThree"))
@@ -3511,7 +3511,7 @@ module Aws::Connect
     HistoricalMetricData.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: HistoricalMetric, name: "Metric"))
     HistoricalMetricData.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "Value"))
     HistoricalMetricData.type = Types::HistoricalMetricData
-    HistoricalMetricDataCollections.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HistoricalMetricData, name: "member")
+    HistoricalMetricDataCollections.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HistoricalMetricData, name: "member"))
     HistoricalMetricName.add_member(:contacts_queued, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTACTS_QUEUED", traits: {"smithy.api#enumValue" => "CONTACTS_QUEUED"}))
     HistoricalMetricName.add_member(:contacts_handled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTACTS_HANDLED", traits: {"smithy.api#enumValue" => "CONTACTS_HANDLED"}))
     HistoricalMetricName.add_member(:contacts_abandoned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTACTS_ABANDONED", traits: {"smithy.api#enumValue" => "CONTACTS_ABANDONED"}))
@@ -3540,8 +3540,8 @@ module Aws::Connect
     HistoricalMetricResult.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimensions, name: "Dimensions"))
     HistoricalMetricResult.add_member(:collections, ::Smithy::Schema::Shapes::MemberShape.new(target: HistoricalMetricDataCollections, name: "Collections"))
     HistoricalMetricResult.type = Types::HistoricalMetricResult
-    HistoricalMetricResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HistoricalMetricResult, name: "member")
-    HistoricalMetrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HistoricalMetric, name: "member")
+    HistoricalMetricResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HistoricalMetricResult, name: "member"))
+    HistoricalMetrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HistoricalMetric, name: "member"))
     HoursOfOperation.add_member(:hours_of_operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationId, name: "HoursOfOperationId"))
     HoursOfOperation.add_member(:hours_of_operation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "HoursOfOperationArn"))
     HoursOfOperation.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CommonNameLength127, name: "Name"))
@@ -3556,7 +3556,7 @@ module Aws::Connect
     HoursOfOperationConfig.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationTimeSlice, name: "StartTime", traits: {"smithy.api#required" => {}}))
     HoursOfOperationConfig.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationTimeSlice, name: "EndTime", traits: {"smithy.api#required" => {}}))
     HoursOfOperationConfig.type = Types::HoursOfOperationConfig
-    HoursOfOperationConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationConfig, name: "member")
+    HoursOfOperationConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationConfig, name: "member"))
     HoursOfOperationDays.add_member(:sunday, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUNDAY", traits: {"smithy.api#enumValue" => "SUNDAY"}))
     HoursOfOperationDays.add_member(:monday, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MONDAY", traits: {"smithy.api#enumValue" => "MONDAY"}))
     HoursOfOperationDays.add_member(:tuesday, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TUESDAY", traits: {"smithy.api#enumValue" => "TUESDAY"}))
@@ -3564,7 +3564,7 @@ module Aws::Connect
     HoursOfOperationDays.add_member(:thursday, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THURSDAY", traits: {"smithy.api#enumValue" => "THURSDAY"}))
     HoursOfOperationDays.add_member(:friday, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FRIDAY", traits: {"smithy.api#enumValue" => "FRIDAY"}))
     HoursOfOperationDays.add_member(:saturday, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SATURDAY", traits: {"smithy.api#enumValue" => "SATURDAY"}))
-    HoursOfOperationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperation, name: "member")
+    HoursOfOperationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperation, name: "member"))
     HoursOfOperationOverride.add_member(:hours_of_operation_override_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationOverrideId, name: "HoursOfOperationOverrideId"))
     HoursOfOperationOverride.add_member(:hours_of_operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationId, name: "HoursOfOperationId"))
     HoursOfOperationOverride.add_member(:hours_of_operation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "HoursOfOperationArn"))
@@ -3578,15 +3578,15 @@ module Aws::Connect
     HoursOfOperationOverrideConfig.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: OverrideTimeSlice, name: "StartTime"))
     HoursOfOperationOverrideConfig.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: OverrideTimeSlice, name: "EndTime"))
     HoursOfOperationOverrideConfig.type = Types::HoursOfOperationOverrideConfig
-    HoursOfOperationOverrideConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationOverrideConfig, name: "member")
-    HoursOfOperationOverrideList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationOverride, name: "member")
-    HoursOfOperationOverrideSearchConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationOverrideSearchCriteria, name: "member")
+    HoursOfOperationOverrideConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationOverrideConfig, name: "member"))
+    HoursOfOperationOverrideList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationOverride, name: "member"))
+    HoursOfOperationOverrideSearchConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationOverrideSearchCriteria, name: "member"))
     HoursOfOperationOverrideSearchCriteria.add_member(:or_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationOverrideSearchConditionList, name: "OrConditions"))
     HoursOfOperationOverrideSearchCriteria.add_member(:and_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationOverrideSearchConditionList, name: "AndConditions"))
     HoursOfOperationOverrideSearchCriteria.add_member(:string_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: StringCondition, name: "StringCondition"))
     HoursOfOperationOverrideSearchCriteria.add_member(:date_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: DateCondition, name: "DateCondition"))
     HoursOfOperationOverrideSearchCriteria.type = Types::HoursOfOperationOverrideSearchCriteria
-    HoursOfOperationSearchConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationSearchCriteria, name: "member")
+    HoursOfOperationSearchConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationSearchCriteria, name: "member"))
     HoursOfOperationSearchCriteria.add_member(:or_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationSearchConditionList, name: "OrConditions"))
     HoursOfOperationSearchCriteria.add_member(:and_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationSearchConditionList, name: "AndConditions"))
     HoursOfOperationSearchCriteria.add_member(:string_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: StringCondition, name: "StringCondition"))
@@ -3599,7 +3599,7 @@ module Aws::Connect
     HoursOfOperationSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     HoursOfOperationSummary.add_member(:last_modified_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "LastModifiedRegion"))
     HoursOfOperationSummary.type = Types::HoursOfOperationSummary
-    HoursOfOperationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationSummary, name: "member")
+    HoursOfOperationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HoursOfOperationSummary, name: "member"))
     HoursOfOperationTimeSlice.add_member(:hours, ::Smithy::Schema::Shapes::MemberShape.new(target: Hours24Format, name: "Hours", traits: {"smithy.api#default" => nil, "smithy.api#required" => {}}))
     HoursOfOperationTimeSlice.add_member(:minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: MinutesLimit60, name: "Minutes", traits: {"smithy.api#default" => nil, "smithy.api#required" => {}}))
     HoursOfOperationTimeSlice.type = Types::HoursOfOperationTimeSlice
@@ -3628,7 +3628,7 @@ module Aws::Connect
     InboundRawMessage.type = Types::InboundRawMessage
     InitiateAs.add_member(:connected_to_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECTED_TO_USER", traits: {"smithy.api#enumValue" => "CONNECTED_TO_USER"}))
     InitiateAs.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    InitiationMethodList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactInitiationMethod, name: "member")
+    InitiationMethodList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactInitiationMethod, name: "member"))
     InputPredefinedAttributeConfiguration.add_member(:enable_value_validation_on_association, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableValueValidationOnAssociation, name: "EnableValueValidationOnAssociation", traits: {"smithy.api#default" => false}))
     InputPredefinedAttributeConfiguration.type = Types::InputPredefinedAttributeConfiguration
     Instance.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "Id"))
@@ -3674,7 +3674,7 @@ module Aws::Connect
     InstanceStorageConfig.add_member(:kinesis_stream_config, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisStreamConfig, name: "KinesisStreamConfig"))
     InstanceStorageConfig.add_member(:kinesis_firehose_config, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisFirehoseConfig, name: "KinesisFirehoseConfig"))
     InstanceStorageConfig.type = Types::InstanceStorageConfig
-    InstanceStorageConfigs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceStorageConfig, name: "member")
+    InstanceStorageConfigs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceStorageConfig, name: "member"))
     InstanceStorageResourceType.add_member(:chat_transcripts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CHAT_TRANSCRIPTS", traits: {"smithy.api#enumValue" => "CHAT_TRANSCRIPTS"}))
     InstanceStorageResourceType.add_member(:call_recordings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CALL_RECORDINGS", traits: {"smithy.api#enumValue" => "CALL_RECORDINGS"}))
     InstanceStorageResourceType.add_member(:scheduled_reports, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHEDULED_REPORTS", traits: {"smithy.api#enumValue" => "SCHEDULED_REPORTS"}))
@@ -3699,7 +3699,7 @@ module Aws::Connect
     InstanceSummary.add_member(:outbound_calls_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: OutboundCallsEnabled, name: "OutboundCallsEnabled"))
     InstanceSummary.add_member(:instance_access_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "InstanceAccessUrl"))
     InstanceSummary.type = Types::InstanceSummary
-    InstanceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceSummary, name: "member")
+    InstanceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceSummary, name: "member"))
     IntegrationAssociationSummary.add_member(:integration_association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationAssociationId, name: "IntegrationAssociationId"))
     IntegrationAssociationSummary.add_member(:integration_association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "IntegrationAssociationArn"))
     IntegrationAssociationSummary.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId"))
@@ -3709,7 +3709,7 @@ module Aws::Connect
     IntegrationAssociationSummary.add_member(:source_application_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceApplicationName, name: "SourceApplicationName"))
     IntegrationAssociationSummary.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceType, name: "SourceType"))
     IntegrationAssociationSummary.type = Types::IntegrationAssociationSummary
-    IntegrationAssociationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationAssociationSummary, name: "member")
+    IntegrationAssociationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationAssociationSummary, name: "member"))
     IntegrationType.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVENT", traits: {"smithy.api#enumValue" => "EVENT"}))
     IntegrationType.add_member(:voice_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VOICE_ID", traits: {"smithy.api#enumValue" => "VOICE_ID"}))
     IntegrationType.add_member(:pinpoint_app, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PINPOINT_APP", traits: {"smithy.api#enumValue" => "PINPOINT_APP"}))
@@ -3749,8 +3749,8 @@ module Aws::Connect
     InvalidRequestExceptionReason.type = Types::InvalidRequestExceptionReason
     InvisibleFieldInfo.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTemplateFieldIdentifier, name: "Id"))
     InvisibleFieldInfo.type = Types::InvisibleFieldInfo
-    InvisibleTaskTemplateFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InvisibleFieldInfo, name: "member")
-    IpCidrList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpCidr, name: "member")
+    InvisibleTaskTemplateFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InvisibleFieldInfo, name: "member"))
+    IpCidrList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpCidr, name: "member"))
     IvrRecordingTrack.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
     KinesisFirehoseConfig.add_member(:firehose_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "FirehoseArn", traits: {"smithy.api#required" => {}}))
     KinesisFirehoseConfig.type = Types::KinesisFirehoseConfig
@@ -3766,8 +3766,8 @@ module Aws::Connect
     LexBotConfig.add_member(:lex_bot, ::Smithy::Schema::Shapes::MemberShape.new(target: LexBot, name: "LexBot"))
     LexBotConfig.add_member(:lex_v2_bot, ::Smithy::Schema::Shapes::MemberShape.new(target: LexV2Bot, name: "LexV2Bot"))
     LexBotConfig.type = Types::LexBotConfig
-    LexBotConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LexBotConfig, name: "member")
-    LexBotsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LexBot, name: "member")
+    LexBotConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LexBotConfig, name: "member"))
+    LexBotsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LexBot, name: "member"))
     LexV2Bot.add_member(:alias_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasArn, name: "AliasArn"))
     LexV2Bot.type = Types::LexV2Bot
     LexVersion.add_member(:v1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "V1", traits: {"smithy.api#enumValue" => "V1"}))
@@ -3985,7 +3985,7 @@ module Aws::Connect
     ListPhoneNumbersSummary.add_member(:phone_number_description, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberDescription, name: "PhoneNumberDescription"))
     ListPhoneNumbersSummary.add_member(:source_phone_number_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "SourcePhoneNumberArn"))
     ListPhoneNumbersSummary.type = Types::ListPhoneNumbersSummary
-    ListPhoneNumbersSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListPhoneNumbersSummary, name: "member")
+    ListPhoneNumbersSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListPhoneNumbersSummary, name: "member"))
     ListPhoneNumbersV2Request.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "TargetArn"))
     ListPhoneNumbersV2Request.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId"))
     ListPhoneNumbersV2Request.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResult1000, name: "MaxResults"))
@@ -4198,7 +4198,7 @@ module Aws::Connect
     MatchCriteria.type = Types::MatchCriteria
     MaximumResultReturnedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     MaximumResultReturnedException.type = Types::MaximumResultReturnedException
-    MediaConcurrencies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MediaConcurrency, name: "member")
+    MediaConcurrencies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaConcurrency, name: "member"))
     MediaConcurrency.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "Channel", traits: {"smithy.api#required" => {}}))
     MediaConcurrency.add_member(:concurrency, ::Smithy::Schema::Shapes::MemberShape.new(target: Concurrency, name: "Concurrency", traits: {"smithy.api#required" => {}}))
     MediaConcurrency.add_member(:cross_channel_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossChannelBehavior, name: "CrossChannelBehavior"))
@@ -4220,7 +4220,7 @@ module Aws::Connect
     MeetingFeatureStatus.add_member(:unavailable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNAVAILABLE", traits: {"smithy.api#enumValue" => "UNAVAILABLE"}))
     MeetingFeaturesConfiguration.add_member(:audio, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioFeatures, name: "Audio"))
     MeetingFeaturesConfiguration.type = Types::MeetingFeaturesConfiguration
-    MetricDataCollectionsV2.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDataV2, name: "member")
+    MetricDataCollectionsV2.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDataV2, name: "member"))
     MetricDataV2.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricV2, name: "Metric"))
     MetricDataV2.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "Value"))
     MetricDataV2.type = Types::MetricDataV2
@@ -4228,8 +4228,8 @@ module Aws::Connect
     MetricFilterV2.add_member(:metric_filter_values, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricFilterValueList, name: "MetricFilterValues"))
     MetricFilterV2.add_member(:negate, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Negate", traits: {"smithy.api#default" => false}))
     MetricFilterV2.type = Types::MetricFilterV2
-    MetricFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    MetricFiltersV2List.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricFilterV2, name: "member")
+    MetricFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    MetricFiltersV2List.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricFilterV2, name: "member"))
     MetricInterval.add_member(:interval, ::Smithy::Schema::Shapes::MemberShape.new(target: IntervalPeriod, name: "Interval"))
     MetricInterval.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime"))
     MetricInterval.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
@@ -4238,12 +4238,12 @@ module Aws::Connect
     MetricResultV2.add_member(:metric_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricInterval, name: "MetricInterval"))
     MetricResultV2.add_member(:collections, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDataCollectionsV2, name: "Collections"))
     MetricResultV2.type = Types::MetricResultV2
-    MetricResultsV2.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricResultV2, name: "member")
+    MetricResultsV2.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricResultV2, name: "member"))
     MetricV2.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricNameV2, name: "Name"))
     MetricV2.add_member(:threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ThresholdCollections, name: "Threshold"))
     MetricV2.add_member(:metric_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricFiltersV2List, name: "MetricFilters"))
     MetricV2.type = Types::MetricV2
-    MetricsV2.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricV2, name: "member")
+    MetricsV2.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricV2, name: "member"))
     MonitorCapability.add_member(:silent_monitor, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SILENT_MONITOR", traits: {"smithy.api#enumValue" => "SILENT_MONITOR"}))
     MonitorCapability.add_member(:barge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BARGE", traits: {"smithy.api#enumValue" => "BARGE"}))
     MonitorContactRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId", traits: {"smithy.api#required" => {}}))
@@ -4296,8 +4296,8 @@ module Aws::Connect
     OperationalHour.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: OverrideTimeSlice, name: "Start"))
     OperationalHour.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: OverrideTimeSlice, name: "End"))
     OperationalHour.type = Types::OperationalHour
-    OperationalHours.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OperationalHour, name: "member")
-    OriginsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Origin, name: "member")
+    OperationalHours.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationalHour, name: "member"))
+    OriginsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Origin, name: "member"))
     OutboundAdditionalRecipients.add_member(:cc_email_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressRecipientList, name: "CcEmailAddresses"))
     OutboundAdditionalRecipients.type = Types::OutboundAdditionalRecipients
     OutboundCallerConfig.add_member(:outbound_caller_id_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OutboundCallerIdName, name: "OutboundCallerIdName"))
@@ -4359,7 +4359,7 @@ module Aws::Connect
     ParticipantState.add_member(:disconnected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISCONNECTED", traits: {"smithy.api#enumValue" => "DISCONNECTED"}))
     ParticipantState.add_member(:missed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISSED", traits: {"smithy.api#enumValue" => "MISSED"}))
     ParticipantTimerAction.add_member(:unset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Unset", traits: {"smithy.api#enumValue" => "Unset"}))
-    ParticipantTimerConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantTimerConfiguration, name: "member")
+    ParticipantTimerConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantTimerConfiguration, name: "member"))
     ParticipantTimerConfiguration.add_member(:participant_role, ::Smithy::Schema::Shapes::MemberShape.new(target: TimerEligibleParticipantRoles, name: "ParticipantRole", traits: {"smithy.api#required" => {}}))
     ParticipantTimerConfiguration.add_member(:timer_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantTimerType, name: "TimerType", traits: {"smithy.api#required" => {}}))
     ParticipantTimerConfiguration.add_member(:timer_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantTimerValue, name: "TimerValue", traits: {"smithy.api#required" => {}}))
@@ -4383,7 +4383,7 @@ module Aws::Connect
     PauseContactRequest.add_member(:contact_flow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowId, name: "ContactFlowId"))
     PauseContactRequest.type = Types::PauseContactRequest
     PauseContactResponse.type = Types::PauseContactResponse
-    PermissionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfilePermission, name: "member")
+    PermissionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfilePermission, name: "member"))
     PersistentChat.add_member(:rehydration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RehydrationType, name: "RehydrationType"))
     PersistentChat.add_member(:source_contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactId, name: "SourceContactId"))
     PersistentChat.type = Types::PersistentChat
@@ -4624,7 +4624,7 @@ module Aws::Connect
     PhoneNumberCountryCode.add_member(:ye, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "YE", traits: {"smithy.api#enumValue" => "YE"}))
     PhoneNumberCountryCode.add_member(:zm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ZM", traits: {"smithy.api#enumValue" => "ZM"}))
     PhoneNumberCountryCode.add_member(:zw, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ZW", traits: {"smithy.api#enumValue" => "ZW"}))
-    PhoneNumberCountryCodes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberCountryCode, name: "member")
+    PhoneNumberCountryCodes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberCountryCode, name: "member"))
     PhoneNumberQuickConnectConfig.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "PhoneNumber", traits: {"smithy.api#required" => {}}))
     PhoneNumberQuickConnectConfig.type = Types::PhoneNumberQuickConnectConfig
     PhoneNumberStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberWorkflowStatus, name: "Status"))
@@ -4636,7 +4636,7 @@ module Aws::Connect
     PhoneNumberSummary.add_member(:phone_number_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberType, name: "PhoneNumberType"))
     PhoneNumberSummary.add_member(:phone_number_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberCountryCode, name: "PhoneNumberCountryCode"))
     PhoneNumberSummary.type = Types::PhoneNumberSummary
-    PhoneNumberSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberSummary, name: "member")
+    PhoneNumberSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberSummary, name: "member"))
     PhoneNumberType.add_member(:toll_free, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOLL_FREE", traits: {"smithy.api#enumValue" => "TOLL_FREE"}))
     PhoneNumberType.add_member(:did, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DID", traits: {"smithy.api#enumValue" => "DID"}))
     PhoneNumberType.add_member(:uifn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UIFN", traits: {"smithy.api#enumValue" => "UIFN"}))
@@ -4644,13 +4644,13 @@ module Aws::Connect
     PhoneNumberType.add_member(:third_party_tf, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THIRD_PARTY_TF", traits: {"smithy.api#enumValue" => "THIRD_PARTY_TF"}))
     PhoneNumberType.add_member(:third_party_did, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THIRD_PARTY_DID", traits: {"smithy.api#enumValue" => "THIRD_PARTY_DID"}))
     PhoneNumberType.add_member(:short_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHORT_CODE", traits: {"smithy.api#enumValue" => "SHORT_CODE"}))
-    PhoneNumberTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberType, name: "member")
+    PhoneNumberTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberType, name: "member"))
     PhoneNumberWorkflowStatus.add_member(:claimed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Claimed", traits: {"smithy.api#enumValue" => "CLAIMED"}))
     PhoneNumberWorkflowStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InProgress", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     PhoneNumberWorkflowStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "FAILED"}))
     PhoneType.add_member(:soft_phone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOFT_PHONE", traits: {"smithy.api#enumValue" => "SOFT_PHONE"}))
     PhoneType.add_member(:desk_phone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESK_PHONE", traits: {"smithy.api#enumValue" => "DESK_PHONE"}))
-    PotentialAudioQualityIssues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PotentialAudioQualityIssue, name: "member")
+    PotentialAudioQualityIssues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PotentialAudioQualityIssue, name: "member"))
     PredefinedAttribute.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedAttributeName, name: "Name"))
     PredefinedAttribute.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedAttributeValues, name: "Values"))
     PredefinedAttribute.add_member(:purposes, ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedAttributePurposeNameList, name: "Purposes"))
@@ -4661,25 +4661,25 @@ module Aws::Connect
     PredefinedAttributeConfiguration.add_member(:enable_value_validation_on_association, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableValueValidationOnAssociation, name: "EnableValueValidationOnAssociation", traits: {"smithy.api#default" => false}))
     PredefinedAttributeConfiguration.add_member(:is_read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: IsReadOnly, name: "IsReadOnly", traits: {"smithy.api#default" => false}))
     PredefinedAttributeConfiguration.type = Types::PredefinedAttributeConfiguration
-    PredefinedAttributePurposeNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedAttributePurposeName, name: "member")
-    PredefinedAttributeSearchConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedAttributeSearchCriteria, name: "member")
+    PredefinedAttributePurposeNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedAttributePurposeName, name: "member"))
+    PredefinedAttributeSearchConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedAttributeSearchCriteria, name: "member"))
     PredefinedAttributeSearchCriteria.add_member(:or_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedAttributeSearchConditionList, name: "OrConditions"))
     PredefinedAttributeSearchCriteria.add_member(:and_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedAttributeSearchConditionList, name: "AndConditions"))
     PredefinedAttributeSearchCriteria.add_member(:string_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: StringCondition, name: "StringCondition"))
     PredefinedAttributeSearchCriteria.type = Types::PredefinedAttributeSearchCriteria
-    PredefinedAttributeSearchSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedAttribute, name: "member")
-    PredefinedAttributeStringValuesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedAttributeStringValue, name: "member")
+    PredefinedAttributeSearchSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedAttribute, name: "member"))
+    PredefinedAttributeStringValuesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedAttributeStringValue, name: "member"))
     PredefinedAttributeSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedAttributeName, name: "Name"))
     PredefinedAttributeSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     PredefinedAttributeSummary.add_member(:last_modified_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "LastModifiedRegion"))
     PredefinedAttributeSummary.type = Types::PredefinedAttributeSummary
-    PredefinedAttributeSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedAttributeSummary, name: "member")
+    PredefinedAttributeSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedAttributeSummary, name: "member"))
     PredefinedAttributeValues.add_member(:string_list, Types::PredefinedAttributeValues::StringList, ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedAttributeStringValuesList, name: "StringList"))
     PredefinedAttributeValues.add_member(:unknown, Types::PredefinedAttributeValues::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     PredefinedAttributeValues.type = Types::PredefinedAttributeValues
     ProblemDetail.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ProblemMessageString, name: "message"))
     ProblemDetail.type = Types::ProblemDetail
-    Problems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProblemDetail, name: "member")
+    Problems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProblemDetail, name: "member"))
     Prompt.add_member(:prompt_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "PromptARN"))
     Prompt.add_member(:prompt_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptId, name: "PromptId"))
     Prompt.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CommonNameLength127, name: "Name"))
@@ -4688,8 +4688,8 @@ module Aws::Connect
     Prompt.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     Prompt.add_member(:last_modified_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "LastModifiedRegion"))
     Prompt.type = Types::Prompt
-    PromptList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Prompt, name: "member")
-    PromptSearchConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PromptSearchCriteria, name: "member")
+    PromptList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Prompt, name: "member"))
+    PromptSearchConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptSearchCriteria, name: "member"))
     PromptSearchCriteria.add_member(:or_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptSearchConditionList, name: "OrConditions"))
     PromptSearchCriteria.add_member(:and_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptSearchConditionList, name: "AndConditions"))
     PromptSearchCriteria.add_member(:string_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: StringCondition, name: "StringCondition"))
@@ -4702,7 +4702,7 @@ module Aws::Connect
     PromptSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     PromptSummary.add_member(:last_modified_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "LastModifiedRegion"))
     PromptSummary.type = Types::PromptSummary
-    PromptSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PromptSummary, name: "member")
+    PromptSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptSummary, name: "member"))
     PropertyValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message", traits: {"smithy.api#required" => {}}))
     PropertyValidationException.add_member(:property_list, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyValidationExceptionPropertyList, name: "PropertyList"))
     PropertyValidationException.type = Types::PropertyValidationException
@@ -4710,7 +4710,7 @@ module Aws::Connect
     PropertyValidationExceptionProperty.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyValidationExceptionReason, name: "Reason", traits: {"smithy.api#required" => {}}))
     PropertyValidationExceptionProperty.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message", traits: {"smithy.api#required" => {}}))
     PropertyValidationExceptionProperty.type = Types::PropertyValidationExceptionProperty
-    PropertyValidationExceptionPropertyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyValidationExceptionProperty, name: "member")
+    PropertyValidationExceptionPropertyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyValidationExceptionProperty, name: "member"))
     PropertyValidationExceptionReason.add_member(:invalid_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_FORMAT", traits: {"smithy.api#enumValue" => "INVALID_FORMAT"}))
     PropertyValidationExceptionReason.add_member(:unique_constraint_violated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNIQUE_CONSTRAINT_VIOLATED", traits: {"smithy.api#enumValue" => "UNIQUE_CONSTRAINT_VIOLATED"}))
     PropertyValidationExceptionReason.add_member(:referenced_resource_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REFERENCED_RESOURCE_NOT_FOUND", traits: {"smithy.api#enumValue" => "REFERENCED_RESOURCE_NOT_FOUND"}))
@@ -4738,7 +4738,7 @@ module Aws::Connect
     Queue.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     Queue.add_member(:last_modified_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "LastModifiedRegion"))
     Queue.type = Types::Queue
-    QueueIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueueId, name: "member")
+    QueueIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueId, name: "member"))
     QueueInfo.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueId, name: "Id"))
     QueueInfo.add_member(:enqueue_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EnqueueTimestamp"))
     QueueInfo.type = Types::QueueInfo
@@ -4750,7 +4750,7 @@ module Aws::Connect
     QueueReference.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueId, name: "Id"))
     QueueReference.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "Arn"))
     QueueReference.type = Types::QueueReference
-    QueueSearchConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueueSearchCriteria, name: "member")
+    QueueSearchConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueSearchCriteria, name: "member"))
     QueueSearchCriteria.add_member(:or_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueSearchConditionList, name: "OrConditions"))
     QueueSearchCriteria.add_member(:and_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueSearchConditionList, name: "AndConditions"))
     QueueSearchCriteria.add_member(:string_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: StringCondition, name: "StringCondition"))
@@ -4758,7 +4758,7 @@ module Aws::Connect
     QueueSearchCriteria.type = Types::QueueSearchCriteria
     QueueSearchFilter.add_member(:tag_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlPlaneTagFilter, name: "TagFilter"))
     QueueSearchFilter.type = Types::QueueSearchFilter
-    QueueSearchSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Queue, name: "member")
+    QueueSearchSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Queue, name: "member"))
     QueueStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     QueueStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     QueueSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueId, name: "Id"))
@@ -4768,11 +4768,11 @@ module Aws::Connect
     QueueSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     QueueSummary.add_member(:last_modified_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "LastModifiedRegion"))
     QueueSummary.type = Types::QueueSummary
-    QueueSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueueSummary, name: "member")
+    QueueSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueSummary, name: "member"))
     QueueType.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
     QueueType.add_member(:agent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGENT", traits: {"smithy.api#enumValue" => "AGENT"}))
-    QueueTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueueType, name: "member")
-    Queues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueueId, name: "member")
+    QueueTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueType, name: "member"))
+    Queues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueId, name: "member"))
     QuickConnect.add_member(:quick_connect_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "QuickConnectARN"))
     QuickConnect.add_member(:quick_connect_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickConnectId, name: "QuickConnectId"))
     QuickConnect.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickConnectName, name: "Name"))
@@ -4787,14 +4787,14 @@ module Aws::Connect
     QuickConnectConfig.add_member(:queue_config, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueQuickConnectConfig, name: "QueueConfig"))
     QuickConnectConfig.add_member(:phone_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberQuickConnectConfig, name: "PhoneConfig"))
     QuickConnectConfig.type = Types::QuickConnectConfig
-    QuickConnectSearchConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuickConnectSearchCriteria, name: "member")
+    QuickConnectSearchConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickConnectSearchCriteria, name: "member"))
     QuickConnectSearchCriteria.add_member(:or_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickConnectSearchConditionList, name: "OrConditions"))
     QuickConnectSearchCriteria.add_member(:and_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickConnectSearchConditionList, name: "AndConditions"))
     QuickConnectSearchCriteria.add_member(:string_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: StringCondition, name: "StringCondition"))
     QuickConnectSearchCriteria.type = Types::QuickConnectSearchCriteria
     QuickConnectSearchFilter.add_member(:tag_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlPlaneTagFilter, name: "TagFilter"))
     QuickConnectSearchFilter.type = Types::QuickConnectSearchFilter
-    QuickConnectSearchSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuickConnect, name: "member")
+    QuickConnectSearchSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickConnect, name: "member"))
     QuickConnectSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickConnectId, name: "Id"))
     QuickConnectSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "Arn"))
     QuickConnectSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickConnectName, name: "Name"))
@@ -4802,40 +4802,40 @@ module Aws::Connect
     QuickConnectSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     QuickConnectSummary.add_member(:last_modified_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "LastModifiedRegion"))
     QuickConnectSummary.type = Types::QuickConnectSummary
-    QuickConnectSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuickConnectSummary, name: "member")
+    QuickConnectSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickConnectSummary, name: "member"))
     QuickConnectType.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
     QuickConnectType.add_member(:queue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUEUE", traits: {"smithy.api#enumValue" => "QUEUE"}))
     QuickConnectType.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PHONE_NUMBER", traits: {"smithy.api#enumValue" => "PHONE_NUMBER"}))
-    QuickConnectTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuickConnectType, name: "member")
-    QuickConnectsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuickConnectId, name: "member")
+    QuickConnectTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickConnectType, name: "member"))
+    QuickConnectsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickConnectId, name: "member"))
     Range.add_member(:min_proficiency_level, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableProficiencyLevel, name: "MinProficiencyLevel"))
     Range.add_member(:max_proficiency_level, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableProficiencyLevel, name: "MaxProficiencyLevel"))
     Range.type = Types::Range
     ReadOnlyFieldInfo.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTemplateFieldIdentifier, name: "Id"))
     ReadOnlyFieldInfo.type = Types::ReadOnlyFieldInfo
-    ReadOnlyTaskTemplateFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReadOnlyFieldInfo, name: "member")
+    ReadOnlyTaskTemplateFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadOnlyFieldInfo, name: "member"))
     RealTimeContactAnalysisAttachment.add_member(:attachment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentName, name: "AttachmentName", traits: {"smithy.api#required" => {}}))
     RealTimeContactAnalysisAttachment.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentType, name: "ContentType"))
     RealTimeContactAnalysisAttachment.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactId, name: "AttachmentId", traits: {"smithy.api#required" => {}}))
     RealTimeContactAnalysisAttachment.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactStatus, name: "Status"))
     RealTimeContactAnalysisAttachment.type = Types::RealTimeContactAnalysisAttachment
-    RealTimeContactAnalysisAttachments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisAttachment, name: "member")
+    RealTimeContactAnalysisAttachments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisAttachment, name: "member"))
     RealTimeContactAnalysisCategoryDetails.add_member(:points_of_interest, ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisPointsOfInterest, name: "PointsOfInterest", traits: {"smithy.api#required" => {}}))
     RealTimeContactAnalysisCategoryDetails.type = Types::RealTimeContactAnalysisCategoryDetails
     RealTimeContactAnalysisCharacterInterval.add_member(:begin_offset_char, ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisOffset, name: "BeginOffsetChar", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     RealTimeContactAnalysisCharacterInterval.add_member(:end_offset_char, ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisOffset, name: "EndOffsetChar", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     RealTimeContactAnalysisCharacterInterval.type = Types::RealTimeContactAnalysisCharacterInterval
-    RealTimeContactAnalysisCharacterIntervals.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisCharacterInterval, name: "member")
+    RealTimeContactAnalysisCharacterIntervals.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisCharacterInterval, name: "member"))
     RealTimeContactAnalysisIssueDetected.add_member(:transcript_items, ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisTranscriptItemsWithContent, name: "TranscriptItems", traits: {"smithy.api#required" => {}}))
     RealTimeContactAnalysisIssueDetected.type = Types::RealTimeContactAnalysisIssueDetected
-    RealTimeContactAnalysisIssuesDetected.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisIssueDetected, name: "member")
-    RealTimeContactAnalysisMatchedDetails.key = ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisCategoryName, name: "key")
-    RealTimeContactAnalysisMatchedDetails.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisCategoryDetails, name: "value")
+    RealTimeContactAnalysisIssuesDetected.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisIssueDetected, name: "member"))
+    RealTimeContactAnalysisMatchedDetails.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisCategoryName, name: "key"))
+    RealTimeContactAnalysisMatchedDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisCategoryDetails, name: "value"))
     RealTimeContactAnalysisOutputType.add_member(:raw, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Raw", traits: {"smithy.api#enumValue" => "Raw"}))
     RealTimeContactAnalysisOutputType.add_member(:redacted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Redacted", traits: {"smithy.api#enumValue" => "Redacted"}))
     RealTimeContactAnalysisPointOfInterest.add_member(:transcript_items, ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisTranscriptItemsWithCharacterOffsets, name: "TranscriptItems"))
     RealTimeContactAnalysisPointOfInterest.type = Types::RealTimeContactAnalysisPointOfInterest
-    RealTimeContactAnalysisPointsOfInterest.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisPointOfInterest, name: "member")
+    RealTimeContactAnalysisPointsOfInterest.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisPointOfInterest, name: "member"))
     RealTimeContactAnalysisPostContactSummaryFailureCode.add_member(:quota_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUOTA_EXCEEDED", traits: {"smithy.api#enumValue" => "QUOTA_EXCEEDED"}))
     RealTimeContactAnalysisPostContactSummaryFailureCode.add_member(:insufficient_conversation_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSUFFICIENT_CONVERSATION_CONTENT", traits: {"smithy.api#enumValue" => "INSUFFICIENT_CONVERSATION_CONTENT"}))
     RealTimeContactAnalysisPostContactSummaryFailureCode.add_member(:failed_safety_guidelines, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED_SAFETY_GUIDELINES", traits: {"smithy.api#enumValue" => "FAILED_SAFETY_GUIDELINES"}))
@@ -4881,7 +4881,7 @@ module Aws::Connect
     RealTimeContactAnalysisSegmentType.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Event", traits: {"smithy.api#enumValue" => "Event"}))
     RealTimeContactAnalysisSegmentType.add_member(:attachments, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Attachments", traits: {"smithy.api#enumValue" => "Attachments"}))
     RealTimeContactAnalysisSegmentType.add_member(:post_contact_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PostContactSummary", traits: {"smithy.api#enumValue" => "PostContactSummary"}))
-    RealTimeContactAnalysisSegmentTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisSegmentType, name: "member")
+    RealTimeContactAnalysisSegmentTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisSegmentType, name: "member"))
     RealTimeContactAnalysisSentimentLabel.add_member(:positive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POSITIVE", traits: {"smithy.api#enumValue" => "POSITIVE"}))
     RealTimeContactAnalysisSentimentLabel.add_member(:negative, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEGATIVE", traits: {"smithy.api#enumValue" => "NEGATIVE"}))
     RealTimeContactAnalysisSentimentLabel.add_member(:neutral, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEUTRAL", traits: {"smithy.api#enumValue" => "NEUTRAL"}))
@@ -4902,8 +4902,8 @@ module Aws::Connect
     RealTimeContactAnalysisTranscriptItemWithContent.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisId256, name: "Id", traits: {"smithy.api#required" => {}}))
     RealTimeContactAnalysisTranscriptItemWithContent.add_member(:character_offsets, ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisCharacterInterval, name: "CharacterOffsets"))
     RealTimeContactAnalysisTranscriptItemWithContent.type = Types::RealTimeContactAnalysisTranscriptItemWithContent
-    RealTimeContactAnalysisTranscriptItemsWithCharacterOffsets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisTranscriptItemWithCharacterOffsets, name: "member")
-    RealTimeContactAnalysisTranscriptItemsWithContent.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisTranscriptItemWithContent, name: "member")
+    RealTimeContactAnalysisTranscriptItemsWithCharacterOffsets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisTranscriptItemWithCharacterOffsets, name: "member"))
+    RealTimeContactAnalysisTranscriptItemsWithContent.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisTranscriptItemWithContent, name: "member"))
     RealtimeContactAnalysisSegment.add_member(:transcript, Types::RealtimeContactAnalysisSegment::Transcript, ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisSegmentTranscript, name: "Transcript"))
     RealtimeContactAnalysisSegment.add_member(:categories, Types::RealtimeContactAnalysisSegment::Categories, ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisSegmentCategories, name: "Categories"))
     RealtimeContactAnalysisSegment.add_member(:issues, Types::RealtimeContactAnalysisSegment::Issues, ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisSegmentIssues, name: "Issues"))
@@ -4912,7 +4912,7 @@ module Aws::Connect
     RealtimeContactAnalysisSegment.add_member(:post_contact_summary, Types::RealtimeContactAnalysisSegment::PostContactSummary, ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeContactAnalysisSegmentPostContactSummary, name: "PostContactSummary"))
     RealtimeContactAnalysisSegment.add_member(:unknown, Types::RealtimeContactAnalysisSegment::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RealtimeContactAnalysisSegment.type = Types::RealtimeContactAnalysisSegment
-    RealtimeContactAnalysisSegments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RealtimeContactAnalysisSegment, name: "member")
+    RealtimeContactAnalysisSegments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RealtimeContactAnalysisSegment, name: "member"))
     RecordingInfo.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, name: "StorageType"))
     RecordingInfo.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingLocation, name: "Location"))
     RecordingInfo.add_member(:media_stream_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaStreamType, name: "MediaStreamType"))
@@ -4926,7 +4926,7 @@ module Aws::Connect
     RecordingInfo.type = Types::RecordingInfo
     RecordingStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     RecordingStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
-    Recordings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingInfo, name: "member")
+    Recordings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingInfo, name: "member"))
     Reference.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceValue, name: "Value", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
     Reference.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceType, name: "Type", traits: {"smithy.api#required" => {}}))
     Reference.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStatus, name: "Status"))
@@ -4948,7 +4948,7 @@ module Aws::Connect
     ReferenceSummary.add_member(:email, Types::ReferenceSummary::Email, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailReference, name: "Email"))
     ReferenceSummary.add_member(:unknown, Types::ReferenceSummary::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ReferenceSummary.type = Types::ReferenceSummary
-    ReferenceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceSummary, name: "member")
+    ReferenceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceSummary, name: "member"))
     ReferenceType.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "URL", traits: {"smithy.api#enumValue" => "URL"}))
     ReferenceType.add_member(:attachment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ATTACHMENT", traits: {"smithy.api#enumValue" => "ATTACHMENT"}))
     ReferenceType.add_member(:contact_analysis, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTACT_ANALYSIS", traits: {"smithy.api#enumValue" => "CONTACT_ANALYSIS"}))
@@ -4957,7 +4957,7 @@ module Aws::Connect
     ReferenceType.add_member(:date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATE", traits: {"smithy.api#enumValue" => "DATE"}))
     ReferenceType.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMAIL", traits: {"smithy.api#enumValue" => "EMAIL"}))
     ReferenceType.add_member(:email_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMAIL_MESSAGE", traits: {"smithy.api#enumValue" => "EMAIL_MESSAGE"}))
-    ReferenceTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceType, name: "member")
+    ReferenceTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceType, name: "member"))
     RehydrationType.add_member(:entire_past_session, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENTIRE_PAST_SESSION", traits: {"smithy.api#enumValue" => "ENTIRE_PAST_SESSION"}))
     RehydrationType.add_member(:from_segment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FROM_SEGMENT", traits: {"smithy.api#enumValue" => "FROM_SEGMENT"}))
     ReleasePhoneNumberRequest.add_member(:phone_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberId, name: "PhoneNumberId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -4979,10 +4979,10 @@ module Aws::Connect
     ReplicationStatusSummary.add_member(:replication_status, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceReplicationStatus, name: "ReplicationStatus"))
     ReplicationStatusSummary.add_member(:replication_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatusReason, name: "ReplicationStatusReason"))
     ReplicationStatusSummary.type = Types::ReplicationStatusSummary
-    ReplicationStatusSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatusSummary, name: "member")
+    ReplicationStatusSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatusSummary, name: "member"))
     RequiredFieldInfo.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTemplateFieldIdentifier, name: "Id"))
     RequiredFieldInfo.type = Types::RequiredFieldInfo
-    RequiredTaskTemplateFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RequiredFieldInfo, name: "member")
+    RequiredTaskTemplateFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RequiredFieldInfo, name: "member"))
     ResourceConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     ResourceConflictException.type = Types::ResourceConflictException
     ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
@@ -5003,7 +5003,7 @@ module Aws::Connect
     ResourceType.add_member(:hierarchy_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIERARCHY_GROUP", traits: {"smithy.api#enumValue" => "HIERARCHY_GROUP"}))
     ResourceType.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
     ResourceType.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PHONE_NUMBER", traits: {"smithy.api#enumValue" => "PHONE_NUMBER"}))
-    ResourceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ResourceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ResumeContactRecordingRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId", traits: {"smithy.api#required" => {}}))
     ResumeContactRecordingRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactId, name: "ContactId", traits: {"smithy.api#required" => {}}))
     ResumeContactRecordingRequest.add_member(:initial_contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactId, name: "InitialContactId", traits: {"smithy.api#required" => {}}))
@@ -5026,12 +5026,12 @@ module Aws::Connect
     RoutingCriteriaInputStep.type = Types::RoutingCriteriaInputStep
     RoutingCriteriaInputStepExpiry.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationInSeconds, name: "DurationInSeconds"))
     RoutingCriteriaInputStepExpiry.type = Types::RoutingCriteriaInputStepExpiry
-    RoutingCriteriaInputSteps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingCriteriaInputStep, name: "member")
+    RoutingCriteriaInputSteps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingCriteriaInputStep, name: "member"))
     RoutingCriteriaStepStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     RoutingCriteriaStepStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     RoutingCriteriaStepStatus.add_member(:joined, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JOINED", traits: {"smithy.api#enumValue" => "JOINED"}))
     RoutingCriteriaStepStatus.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
-    RoutingExpressions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingExpression, name: "member")
+    RoutingExpressions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingExpression, name: "member"))
     RoutingProfile.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId"))
     RoutingProfile.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileName, name: "Name"))
     RoutingProfile.add_member(:routing_profile_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "RoutingProfileArn"))
@@ -5050,21 +5050,21 @@ module Aws::Connect
     RoutingProfile.add_member(:associated_queue_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedQueueIdList, name: "AssociatedQueueIds"))
     RoutingProfile.add_member(:associated_manual_assignment_queue_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedQueueIdList, name: "AssociatedManualAssignmentQueueIds"))
     RoutingProfile.type = Types::RoutingProfile
-    RoutingProfileList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfile, name: "member")
+    RoutingProfileList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfile, name: "member"))
     RoutingProfileManualAssignmentQueueConfig.add_member(:queue_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileQueueReference, name: "QueueReference", traits: {"smithy.api#required" => {}}))
     RoutingProfileManualAssignmentQueueConfig.type = Types::RoutingProfileManualAssignmentQueueConfig
-    RoutingProfileManualAssignmentQueueConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileManualAssignmentQueueConfig, name: "member")
+    RoutingProfileManualAssignmentQueueConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileManualAssignmentQueueConfig, name: "member"))
     RoutingProfileManualAssignmentQueueConfigSummary.add_member(:queue_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueId, name: "QueueId", traits: {"smithy.api#required" => {}}))
     RoutingProfileManualAssignmentQueueConfigSummary.add_member(:queue_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "QueueArn", traits: {"smithy.api#required" => {}}))
     RoutingProfileManualAssignmentQueueConfigSummary.add_member(:queue_name, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueName, name: "QueueName", traits: {"smithy.api#required" => {}}))
     RoutingProfileManualAssignmentQueueConfigSummary.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "Channel", traits: {"smithy.api#required" => {}}))
     RoutingProfileManualAssignmentQueueConfigSummary.type = Types::RoutingProfileManualAssignmentQueueConfigSummary
-    RoutingProfileManualAssignmentQueueConfigSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileManualAssignmentQueueConfigSummary, name: "member")
+    RoutingProfileManualAssignmentQueueConfigSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileManualAssignmentQueueConfigSummary, name: "member"))
     RoutingProfileQueueConfig.add_member(:queue_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileQueueReference, name: "QueueReference", traits: {"smithy.api#required" => {}}))
     RoutingProfileQueueConfig.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: Priority, name: "Priority", traits: {"smithy.api#required" => {}}))
     RoutingProfileQueueConfig.add_member(:delay, ::Smithy::Schema::Shapes::MemberShape.new(target: Delay, name: "Delay", traits: {"smithy.api#default" => nil, "smithy.api#required" => {}}))
     RoutingProfileQueueConfig.type = Types::RoutingProfileQueueConfig
-    RoutingProfileQueueConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileQueueConfig, name: "member")
+    RoutingProfileQueueConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileQueueConfig, name: "member"))
     RoutingProfileQueueConfigSummary.add_member(:queue_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueId, name: "QueueId", traits: {"smithy.api#required" => {}}))
     RoutingProfileQueueConfigSummary.add_member(:queue_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "QueueArn", traits: {"smithy.api#required" => {}}))
     RoutingProfileQueueConfigSummary.add_member(:queue_name, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueName, name: "QueueName", traits: {"smithy.api#required" => {}}))
@@ -5072,15 +5072,15 @@ module Aws::Connect
     RoutingProfileQueueConfigSummary.add_member(:delay, ::Smithy::Schema::Shapes::MemberShape.new(target: Delay, name: "Delay", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     RoutingProfileQueueConfigSummary.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "Channel", traits: {"smithy.api#required" => {}}))
     RoutingProfileQueueConfigSummary.type = Types::RoutingProfileQueueConfigSummary
-    RoutingProfileQueueConfigSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileQueueConfigSummary, name: "member")
+    RoutingProfileQueueConfigSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileQueueConfigSummary, name: "member"))
     RoutingProfileQueueReference.add_member(:queue_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueId, name: "QueueId", traits: {"smithy.api#required" => {}}))
     RoutingProfileQueueReference.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "Channel", traits: {"smithy.api#required" => {}}))
     RoutingProfileQueueReference.type = Types::RoutingProfileQueueReference
-    RoutingProfileQueueReferenceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileQueueReference, name: "member")
+    RoutingProfileQueueReferenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileQueueReference, name: "member"))
     RoutingProfileReference.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileId, name: "Id"))
     RoutingProfileReference.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "Arn"))
     RoutingProfileReference.type = Types::RoutingProfileReference
-    RoutingProfileSearchConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileSearchCriteria, name: "member")
+    RoutingProfileSearchConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileSearchCriteria, name: "member"))
     RoutingProfileSearchCriteria.add_member(:or_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileSearchConditionList, name: "OrConditions"))
     RoutingProfileSearchCriteria.add_member(:and_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileSearchConditionList, name: "AndConditions"))
     RoutingProfileSearchCriteria.add_member(:string_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: StringCondition, name: "StringCondition"))
@@ -5093,8 +5093,8 @@ module Aws::Connect
     RoutingProfileSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     RoutingProfileSummary.add_member(:last_modified_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "LastModifiedRegion"))
     RoutingProfileSummary.type = Types::RoutingProfileSummary
-    RoutingProfileSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileSummary, name: "member")
-    RoutingProfiles.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileId, name: "member")
+    RoutingProfileSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileSummary, name: "member"))
+    RoutingProfiles.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingProfileId, name: "member"))
     Rule.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleName, name: "Name", traits: {"smithy.api#required" => {}}))
     Rule.add_member(:rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleId, name: "RuleId", traits: {"smithy.api#required" => {}}))
     Rule.add_member(:rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "RuleArn", traits: {"smithy.api#required" => {}}))
@@ -5118,7 +5118,7 @@ module Aws::Connect
     RuleAction.add_member(:end_associated_tasks_action, ::Smithy::Schema::Shapes::MemberShape.new(target: EndAssociatedTasksActionDefinition, name: "EndAssociatedTasksAction"))
     RuleAction.add_member(:submit_auto_evaluation_action, ::Smithy::Schema::Shapes::MemberShape.new(target: SubmitAutoEvaluationActionDefinition, name: "SubmitAutoEvaluationAction"))
     RuleAction.type = Types::RuleAction
-    RuleActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleAction, name: "member")
+    RuleActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleAction, name: "member"))
     RulePublishStatus.add_member(:draft, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DRAFT", traits: {"smithy.api#enumValue" => "DRAFT"}))
     RulePublishStatus.add_member(:published, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLISHED", traits: {"smithy.api#enumValue" => "PUBLISHED"}))
     RuleSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleName, name: "Name", traits: {"smithy.api#required" => {}}))
@@ -5130,7 +5130,7 @@ module Aws::Connect
     RuleSummary.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTime", traits: {"smithy.api#required" => {}}))
     RuleSummary.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedTime", traits: {"smithy.api#required" => {}}))
     RuleSummary.type = Types::RuleSummary
-    RuleSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSummary, name: "member")
+    RuleSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSummary, name: "member"))
     RuleTriggerEventSource.add_member(:event_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSourceName, name: "EventSourceName", traits: {"smithy.api#required" => {}}))
     RuleTriggerEventSource.add_member(:integration_association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationAssociationId, name: "IntegrationAssociationId"))
     RuleTriggerEventSource.type = Types::RuleTriggerEventSource
@@ -5186,7 +5186,7 @@ module Aws::Connect
     SearchContactsAdditionalTimeRangeCriteria.add_member(:time_range, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchContactsTimeRange, name: "TimeRange"))
     SearchContactsAdditionalTimeRangeCriteria.add_member(:timestamp_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchContactsTimestampCondition, name: "TimestampCondition"))
     SearchContactsAdditionalTimeRangeCriteria.type = Types::SearchContactsAdditionalTimeRangeCriteria
-    SearchContactsAdditionalTimeRangeCriteriaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchContactsAdditionalTimeRangeCriteria, name: "member")
+    SearchContactsAdditionalTimeRangeCriteriaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchContactsAdditionalTimeRangeCriteria, name: "member"))
     SearchContactsMatchType.add_member(:match_all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MATCH_ALL", traits: {"smithy.api#enumValue" => "MATCH_ALL"}))
     SearchContactsMatchType.add_member(:match_any, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MATCH_ANY", traits: {"smithy.api#enumValue" => "MATCH_ANY"}))
     SearchContactsMatchType.add_member(:match_exact, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MATCH_EXACT", traits: {"smithy.api#enumValue" => "MATCH_EXACT"}))
@@ -5325,7 +5325,7 @@ module Aws::Connect
     SearchSecurityProfilesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken2500, name: "NextToken"))
     SearchSecurityProfilesResponse.add_member(:approximate_total_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ApproximateTotalCount, name: "ApproximateTotalCount"))
     SearchSecurityProfilesResponse.type = Types::SearchSecurityProfilesResponse
-    SearchTextList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchText, name: "member")
+    SearchTextList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchText, name: "member"))
     SearchUserHierarchyGroupsRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId", traits: {"smithy.api#required" => {}}))
     SearchUserHierarchyGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken2500, name: "NextToken"))
     SearchUserHierarchyGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResult100, name: "MaxResults"))
@@ -5359,33 +5359,33 @@ module Aws::Connect
     SearchableAgentCriteriaStep.add_member(:agent_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentResourceIdList, name: "AgentIds"))
     SearchableAgentCriteriaStep.add_member(:match_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchContactsMatchType, name: "MatchType"))
     SearchableAgentCriteriaStep.type = Types::SearchableAgentCriteriaStep
-    SearchableContactAttributeValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchableContactAttributeValue, name: "member")
+    SearchableContactAttributeValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchableContactAttributeValue, name: "member"))
     SearchableContactAttributes.add_member(:criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchableContactAttributesCriteriaList, name: "Criteria", traits: {"smithy.api#required" => {}}))
     SearchableContactAttributes.add_member(:match_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchContactsMatchType, name: "MatchType"))
     SearchableContactAttributes.type = Types::SearchableContactAttributes
     SearchableContactAttributesCriteria.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchableContactAttributeKey, name: "Key", traits: {"smithy.api#required" => {}}))
     SearchableContactAttributesCriteria.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchableContactAttributeValueList, name: "Values", traits: {"smithy.api#required" => {}}))
     SearchableContactAttributesCriteria.type = Types::SearchableContactAttributesCriteria
-    SearchableContactAttributesCriteriaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchableContactAttributesCriteria, name: "member")
+    SearchableContactAttributesCriteriaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchableContactAttributesCriteria, name: "member"))
     SearchableQueueType.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
     SearchableRoutingCriteria.add_member(:steps, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchableRoutingCriteriaStepList, name: "Steps"))
     SearchableRoutingCriteria.type = Types::SearchableRoutingCriteria
     SearchableRoutingCriteriaStep.add_member(:agent_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchableAgentCriteriaStep, name: "AgentCriteria"))
     SearchableRoutingCriteriaStep.type = Types::SearchableRoutingCriteriaStep
-    SearchableRoutingCriteriaStepList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchableRoutingCriteriaStep, name: "member")
-    SearchableSegmentAttributeValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchableSegmentAttributeValue, name: "member")
+    SearchableRoutingCriteriaStepList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchableRoutingCriteriaStep, name: "member"))
+    SearchableSegmentAttributeValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchableSegmentAttributeValue, name: "member"))
     SearchableSegmentAttributes.add_member(:criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchableSegmentAttributesCriteriaList, name: "Criteria", traits: {"smithy.api#required" => {}}))
     SearchableSegmentAttributes.add_member(:match_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchContactsMatchType, name: "MatchType"))
     SearchableSegmentAttributes.type = Types::SearchableSegmentAttributes
     SearchableSegmentAttributesCriteria.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchableSegmentAttributeKey, name: "Key", traits: {"smithy.api#required" => {}}))
     SearchableSegmentAttributesCriteria.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchableSegmentAttributeValueList, name: "Values", traits: {"smithy.api#required" => {}}))
     SearchableSegmentAttributesCriteria.type = Types::SearchableSegmentAttributesCriteria
-    SearchableSegmentAttributesCriteriaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchableSegmentAttributesCriteria, name: "member")
+    SearchableSegmentAttributesCriteriaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchableSegmentAttributesCriteria, name: "member"))
     SecurityKey.add_member(:association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationId, name: "AssociationId"))
     SecurityKey.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: PEM, name: "Key"))
     SecurityKey.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
     SecurityKey.type = Types::SecurityKey
-    SecurityKeysList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityKey, name: "member")
+    SecurityKeysList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityKey, name: "member"))
     SecurityProfile.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileId, name: "Id"))
     SecurityProfile.add_member(:organization_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "OrganizationResourceId"))
     SecurityProfile.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "Arn"))
@@ -5399,8 +5399,8 @@ module Aws::Connect
     SecurityProfile.add_member(:hierarchy_restricted_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyRestrictedResourceList, name: "HierarchyRestrictedResources"))
     SecurityProfile.add_member(:allowed_access_control_hierarchy_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyGroupId, name: "AllowedAccessControlHierarchyGroupId"))
     SecurityProfile.type = Types::SecurityProfile
-    SecurityProfileIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileId, name: "member")
-    SecurityProfileSearchConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileSearchCriteria, name: "member")
+    SecurityProfileIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileId, name: "member"))
+    SecurityProfileSearchConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileSearchCriteria, name: "member"))
     SecurityProfileSearchCriteria.add_member(:or_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileSearchConditionList, name: "OrConditions"))
     SecurityProfileSearchCriteria.add_member(:and_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileSearchConditionList, name: "AndConditions"))
     SecurityProfileSearchCriteria.add_member(:string_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: StringCondition, name: "StringCondition"))
@@ -5418,21 +5418,21 @@ module Aws::Connect
     SecurityProfileSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     SecurityProfileSummary.add_member(:last_modified_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "LastModifiedRegion"))
     SecurityProfileSummary.type = Types::SecurityProfileSummary
-    SecurityProfileSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileSummary, name: "member")
+    SecurityProfileSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileSummary, name: "member"))
     SecurityProfilesSearchFilter.add_member(:tag_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlPlaneTagFilter, name: "TagFilter"))
     SecurityProfilesSearchFilter.type = Types::SecurityProfilesSearchFilter
-    SecurityProfilesSearchSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileSearchSummary, name: "member")
+    SecurityProfilesSearchSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileSearchSummary, name: "member"))
     SegmentAttributeValue.add_member(:value_string, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentAttributeValueString, name: "ValueString"))
     SegmentAttributeValue.add_member(:value_map, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentAttributeValueMap, name: "ValueMap"))
     SegmentAttributeValue.add_member(:value_integer, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentAttributeValueInteger, name: "ValueInteger"))
     SegmentAttributeValue.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentAttributeValueList, name: "ValueList"))
     SegmentAttributeValue.add_member(:value_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentAttributeValueString, name: "ValueArn"))
     SegmentAttributeValue.type = Types::SegmentAttributeValue
-    SegmentAttributeValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentAttributeValue, name: "member")
-    SegmentAttributeValueMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentAttributeName, name: "key")
-    SegmentAttributeValueMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentAttributeValue, name: "value")
-    SegmentAttributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentAttributeName, name: "key")
-    SegmentAttributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentAttributeValue, name: "value")
+    SegmentAttributeValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentAttributeValue, name: "member"))
+    SegmentAttributeValueMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentAttributeName, name: "key"))
+    SegmentAttributeValueMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentAttributeValue, name: "value"))
+    SegmentAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentAttributeName, name: "key"))
+    SegmentAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentAttributeValue, name: "value"))
     SendChatIntegrationEventRequest.add_member(:source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceId, name: "SourceId", traits: {"smithy.api#required" => {}}))
     SendChatIntegrationEventRequest.add_member(:destination_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationId, name: "DestinationId", traits: {"smithy.api#required" => {}}))
     SendChatIntegrationEventRequest.add_member(:subtype, ::Smithy::Schema::Shapes::MemberShape.new(target: Subtype, name: "Subtype"))
@@ -5469,8 +5469,8 @@ module Aws::Connect
     SignInDistribution.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, name: "Region", traits: {"smithy.api#required" => {}}))
     SignInDistribution.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     SignInDistribution.type = Types::SignInDistribution
-    SignInDistributionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SignInDistribution, name: "member")
-    SingleSelectOptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTemplateSingleSelectOption, name: "member")
+    SignInDistributionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SignInDistribution, name: "member"))
+    SingleSelectOptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTemplateSingleSelectOption, name: "member"))
     SingleSelectQuestionRuleCategoryAutomation.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: SingleSelectQuestionRuleCategoryAutomationLabel, name: "Category", traits: {"smithy.api#required" => {}}))
     SingleSelectQuestionRuleCategoryAutomation.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: SingleSelectQuestionRuleCategoryAutomationCondition, name: "Condition", traits: {"smithy.api#required" => {}}))
     SingleSelectQuestionRuleCategoryAutomation.add_member(:option_ref_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceId, name: "OptionRefId", traits: {"smithy.api#required" => {}}))
@@ -5478,7 +5478,7 @@ module Aws::Connect
     SingleSelectQuestionRuleCategoryAutomationCondition.add_member(:present, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRESENT", traits: {"smithy.api#enumValue" => "PRESENT"}))
     SingleSelectQuestionRuleCategoryAutomationCondition.add_member(:not_present, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_PRESENT", traits: {"smithy.api#enumValue" => "NOT_PRESENT"}))
     SlaAssignmentType.add_member(:cases, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CASES", traits: {"smithy.api#enumValue" => "CASES"}))
-    SlaFieldValueUnionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValueUnion, name: "member")
+    SlaFieldValueUnionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValueUnion, name: "member"))
     SlaType.add_member(:case_field, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CASE_FIELD", traits: {"smithy.api#enumValue" => "CaseField"}))
     Sort.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SortableFieldName, name: "FieldName", traits: {"smithy.api#required" => {}}))
     Sort.add_member(:order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "Order", traits: {"smithy.api#required" => {}}))
@@ -5653,7 +5653,7 @@ module Aws::Connect
     StateTransition.add_member(:state_start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StateStartTimestamp"))
     StateTransition.add_member(:state_end_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StateEndTimestamp"))
     StateTransition.type = Types::StateTransition
-    StateTransitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StateTransition, name: "member")
+    StateTransitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StateTransition, name: "member"))
     Statistic.add_member(:sum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUM", traits: {"smithy.api#enumValue" => "SUM"}))
     Statistic.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAX", traits: {"smithy.api#enumValue" => "MAX"}))
     Statistic.add_member(:avg, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVG", traits: {"smithy.api#enumValue" => "AVG"}))
@@ -5664,7 +5664,7 @@ module Aws::Connect
     Step.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "Expression"))
     Step.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingCriteriaStepStatus, name: "Status"))
     Step.type = Types::Step
-    Steps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Step, name: "member")
+    Steps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Step, name: "member"))
     StopContactRecordingRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId", traits: {"smithy.api#required" => {}}))
     StopContactRecordingRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactId, name: "ContactId", traits: {"smithy.api#required" => {}}))
     StopContactRecordingRequest.add_member(:initial_contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactId, name: "InitialContactId", traits: {"smithy.api#required" => {}}))
@@ -5708,15 +5708,15 @@ module Aws::Connect
     SuccessfulRequest.add_member(:request_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestIdentifier, name: "RequestIdentifier"))
     SuccessfulRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactId, name: "ContactId"))
     SuccessfulRequest.type = Types::SuccessfulRequest
-    SuccessfulRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulRequest, name: "member")
-    SupportedMessagingContentTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedMessagingContentType, name: "member")
+    SuccessfulRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulRequest, name: "member"))
+    SupportedMessagingContentTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedMessagingContentType, name: "member"))
     SuspendContactRecordingRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId", traits: {"smithy.api#required" => {}}))
     SuspendContactRecordingRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactId, name: "ContactId", traits: {"smithy.api#required" => {}}))
     SuspendContactRecordingRequest.add_member(:initial_contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactId, name: "InitialContactId", traits: {"smithy.api#required" => {}}))
     SuspendContactRecordingRequest.add_member(:contact_recording_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactRecordingType, name: "ContactRecordingType"))
     SuspendContactRecordingRequest.type = Types::SuspendContactRecordingRequest
     SuspendContactRecordingResponse.type = Types::SuspendContactRecordingResponse
-    TagAndConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagCondition, name: "member")
+    TagAndConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagCondition, name: "member"))
     TagCondition.add_member(:tag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TagKey"))
     TagCondition.add_member(:tag_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TagValue"))
     TagCondition.type = Types::TagCondition
@@ -5725,14 +5725,14 @@ module Aws::Connect
     TagContactRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactTagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagContactRequest.type = Types::TagContactRequest
     TagContactResponse.type = Types::TagContactResponse
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
-    TagOrConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagAndConditionList, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
+    TagOrConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagAndConditionList, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
-    TagRestrictedResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagRestrictedResourceName, name: "member")
+    TagRestrictedResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagRestrictedResourceName, name: "member"))
     TagSearchCondition.add_member(:tag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyString, name: "tagKey"))
     TagSearchCondition.add_member(:tag_value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValueString, name: "tagValue"))
     TagSearchCondition.add_member(:tag_key_comparison_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringComparisonType, name: "tagKeyComparisonType"))
@@ -5741,7 +5741,7 @@ module Aws::Connect
     TagSet.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
     TagSet.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagSet.type = Types::TagSet
-    TagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagSet, name: "member")
+    TagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagSet, name: "member"))
     TargetListType.add_member(:proficiencies, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROFICIENCIES", traits: {"smithy.api#enumValue" => "PROFICIENCIES"}))
     TaskActionDefinition.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskNameExpression, name: "Name", traits: {"smithy.api#required" => {}}))
     TaskActionDefinition.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskDescriptionExpression, name: "Description"))
@@ -5755,7 +5755,7 @@ module Aws::Connect
     TaskTemplateDefaultFieldValue.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTemplateFieldIdentifier, name: "Id"))
     TaskTemplateDefaultFieldValue.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTemplateFieldValue, name: "DefaultValue"))
     TaskTemplateDefaultFieldValue.type = Types::TaskTemplateDefaultFieldValue
-    TaskTemplateDefaultFieldValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTemplateDefaultFieldValue, name: "member")
+    TaskTemplateDefaultFieldValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTemplateDefaultFieldValue, name: "member"))
     TaskTemplateDefaults.add_member(:default_field_values, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTemplateDefaultFieldValueList, name: "DefaultFieldValues"))
     TaskTemplateDefaults.type = Types::TaskTemplateDefaults
     TaskTemplateField.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTemplateFieldIdentifier, name: "Id", traits: {"smithy.api#required" => {}}))
@@ -5779,8 +5779,8 @@ module Aws::Connect
     TaskTemplateFieldType.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMAIL", traits: {"smithy.api#enumValue" => "EMAIL"}))
     TaskTemplateFieldType.add_member(:self_assign, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELF_ASSIGN", traits: {"smithy.api#enumValue" => "SELF_ASSIGN"}))
     TaskTemplateFieldType.add_member(:expiry_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRY_DURATION", traits: {"smithy.api#enumValue" => "EXPIRY_DURATION"}))
-    TaskTemplateFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTemplateField, name: "member")
-    TaskTemplateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTemplateMetadata, name: "member")
+    TaskTemplateFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTemplateField, name: "member"))
+    TaskTemplateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTemplateMetadata, name: "member"))
     TaskTemplateMetadata.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTemplateId, name: "Id"))
     TaskTemplateMetadata.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTemplateArn, name: "Arn"))
     TaskTemplateMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTemplateName, name: "Name"))
@@ -5803,7 +5803,7 @@ module Aws::Connect
     Threshold.add_member(:comparison, ::Smithy::Schema::Shapes::MemberShape.new(target: Comparison, name: "Comparison"))
     Threshold.add_member(:threshold_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ThresholdValue, name: "ThresholdValue"))
     Threshold.type = Types::Threshold
-    ThresholdCollections.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThresholdV2, name: "member")
+    ThresholdCollections.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThresholdV2, name: "member"))
     ThresholdV2.add_member(:comparison, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArnOrId, name: "Comparison"))
     ThresholdV2.add_member(:threshold_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ThresholdValue, name: "ThresholdValue"))
     ThresholdV2.type = Types::ThresholdV2
@@ -5835,10 +5835,10 @@ module Aws::Connect
     TrafficDistributionGroupSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficDistributionGroupStatus, name: "Status"))
     TrafficDistributionGroupSummary.add_member(:is_default, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsDefault", traits: {"smithy.api#default" => false}))
     TrafficDistributionGroupSummary.type = Types::TrafficDistributionGroupSummary
-    TrafficDistributionGroupSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficDistributionGroupSummary, name: "member")
+    TrafficDistributionGroupSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficDistributionGroupSummary, name: "member"))
     TrafficDistributionGroupUserSummary.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "UserId"))
     TrafficDistributionGroupUserSummary.type = Types::TrafficDistributionGroupUserSummary
-    TrafficDistributionGroupUserSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficDistributionGroupUserSummary, name: "member")
+    TrafficDistributionGroupUserSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficDistributionGroupUserSummary, name: "member"))
     TrafficType.add_member(:general, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GENERAL", traits: {"smithy.api#enumValue" => "GENERAL"}))
     TrafficType.add_member(:campaign, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAMPAIGN", traits: {"smithy.api#enumValue" => "CAMPAIGN"}))
     Transcript.add_member(:criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: TranscriptCriteriaList, name: "Criteria", traits: {"smithy.api#required" => {}}))
@@ -5848,7 +5848,7 @@ module Aws::Connect
     TranscriptCriteria.add_member(:search_text, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchTextList, name: "SearchText", traits: {"smithy.api#required" => {}}))
     TranscriptCriteria.add_member(:match_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchContactsMatchType, name: "MatchType", traits: {"smithy.api#required" => {}}))
     TranscriptCriteria.type = Types::TranscriptCriteria
-    TranscriptCriteriaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TranscriptCriteria, name: "member")
+    TranscriptCriteriaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TranscriptCriteria, name: "member"))
     TransferContactRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId", traits: {"smithy.api#required" => {}}))
     TransferContactRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactId, name: "ContactId", traits: {"smithy.api#required" => {}}))
     TransferContactRequest.add_member(:queue_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueId, name: "QueueId"))
@@ -6198,8 +6198,8 @@ module Aws::Connect
     UploadUrlMetadata.add_member(:url_expiry, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601Datetime, name: "UrlExpiry"))
     UploadUrlMetadata.add_member(:headers_to_include, ::Smithy::Schema::Shapes::MemberShape.new(target: UrlMetadataSignedHeaders, name: "HeadersToInclude"))
     UploadUrlMetadata.type = Types::UploadUrlMetadata
-    UrlMetadataSignedHeaders.key = ::Smithy::Schema::Shapes::MemberShape.new(target: UrlMetadataSignedHeadersKey, name: "key")
-    UrlMetadataSignedHeaders.value = ::Smithy::Schema::Shapes::MemberShape.new(target: UrlMetadataSignedHeadersValue, name: "value")
+    UrlMetadataSignedHeaders.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: UrlMetadataSignedHeadersKey, name: "key"))
+    UrlMetadataSignedHeaders.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: UrlMetadataSignedHeadersValue, name: "value"))
     UrlReference.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceKey, name: "Name"))
     UrlReference.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceValue, name: "Value"))
     UrlReference.type = Types::UrlReference
@@ -6207,7 +6207,7 @@ module Aws::Connect
     UseCase.add_member(:use_case_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "UseCaseArn"))
     UseCase.add_member(:use_case_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UseCaseType, name: "UseCaseType"))
     UseCase.type = Types::UseCase
-    UseCaseSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UseCase, name: "member")
+    UseCaseSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UseCase, name: "member"))
     UseCaseType.add_member(:rules_evaluation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RULES_EVALUATION", traits: {"smithy.api#enumValue" => "RULES_EVALUATION"}))
     UseCaseType.add_member(:connect_campaigns, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECT_CAMPAIGNS", traits: {"smithy.api#enumValue" => "CONNECT_CAMPAIGNS"}))
     User.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "Id"))
@@ -6239,17 +6239,17 @@ module Aws::Connect
     UserDataFilters.add_member(:agents, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentsMinOneMaxHundred, name: "Agents"))
     UserDataFilters.add_member(:user_hierarchy_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: UserDataHierarchyGroups, name: "UserHierarchyGroups"))
     UserDataFilters.type = Types::UserDataFilters
-    UserDataHierarchyGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyGroupId, name: "member")
-    UserDataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserData, name: "member")
-    UserHierarchyGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyGroup, name: "member")
-    UserHierarchyGroupSearchConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserHierarchyGroupSearchCriteria, name: "member")
+    UserDataHierarchyGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyGroupId, name: "member"))
+    UserDataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserData, name: "member"))
+    UserHierarchyGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyGroup, name: "member"))
+    UserHierarchyGroupSearchConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserHierarchyGroupSearchCriteria, name: "member"))
     UserHierarchyGroupSearchCriteria.add_member(:or_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: UserHierarchyGroupSearchConditionList, name: "OrConditions"))
     UserHierarchyGroupSearchCriteria.add_member(:and_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: UserHierarchyGroupSearchConditionList, name: "AndConditions"))
     UserHierarchyGroupSearchCriteria.add_member(:string_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: StringCondition, name: "StringCondition"))
     UserHierarchyGroupSearchCriteria.type = Types::UserHierarchyGroupSearchCriteria
     UserHierarchyGroupSearchFilter.add_member(:attribute_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlPlaneAttributeFilter, name: "AttributeFilter"))
     UserHierarchyGroupSearchFilter.type = Types::UserHierarchyGroupSearchFilter
-    UserIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "member")
+    UserIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "member"))
     UserIdentityInfo.add_member(:first_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentFirstName, name: "FirstName"))
     UserIdentityInfo.add_member(:last_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentLastName, name: "LastName"))
     UserIdentityInfo.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: Email, name: "Email"))
@@ -6276,15 +6276,15 @@ module Aws::Connect
     UserProficiencyDisassociate.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedAttributeName, name: "AttributeName", traits: {"smithy.api#required" => {}}))
     UserProficiencyDisassociate.add_member(:attribute_value, ::Smithy::Schema::Shapes::MemberShape.new(target: PredefinedAttributeStringValue, name: "AttributeValue", traits: {"smithy.api#required" => {}}))
     UserProficiencyDisassociate.type = Types::UserProficiencyDisassociate
-    UserProficiencyDisassociateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserProficiencyDisassociate, name: "member")
-    UserProficiencyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserProficiency, name: "member")
+    UserProficiencyDisassociateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProficiencyDisassociate, name: "member"))
+    UserProficiencyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProficiency, name: "member"))
     UserQuickConnectConfig.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "UserId", traits: {"smithy.api#required" => {}}))
     UserQuickConnectConfig.add_member(:contact_flow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactFlowId, name: "ContactFlowId", traits: {"smithy.api#required" => {}}))
     UserQuickConnectConfig.type = Types::UserQuickConnectConfig
     UserReference.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "Id"))
     UserReference.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "Arn"))
     UserReference.type = Types::UserReference
-    UserSearchConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserSearchCriteria, name: "member")
+    UserSearchConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserSearchCriteria, name: "member"))
     UserSearchCriteria.add_member(:or_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: UserSearchConditionList, name: "OrConditions"))
     UserSearchCriteria.add_member(:and_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: UserSearchConditionList, name: "AndConditions"))
     UserSearchCriteria.add_member(:string_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: StringCondition, name: "StringCondition"))
@@ -6305,16 +6305,16 @@ module Aws::Connect
     UserSearchSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     UserSearchSummary.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentUsername, name: "Username"))
     UserSearchSummary.type = Types::UserSearchSummary
-    UserSearchSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserSearchSummary, name: "member")
+    UserSearchSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserSearchSummary, name: "member"))
     UserSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "Id"))
     UserSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "Arn"))
     UserSummary.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentUsername, name: "Username"))
     UserSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     UserSummary.add_member(:last_modified_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "LastModifiedRegion"))
     UserSummary.type = Types::UserSummary
-    UserSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserSummary, name: "member")
-    UserTagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    UserTagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    UserSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserSummary, name: "member"))
+    UserTagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    UserTagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     VideoCapability.add_member(:send, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEND", traits: {"smithy.api#enumValue" => "SEND"}))
     View.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewId, name: "Id"))
     View.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "Arn"))
@@ -6330,7 +6330,7 @@ module Aws::Connect
     View.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     View.add_member(:view_content_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewContentSha256, name: "ViewContentSha256"))
     View.type = Types::View
-    ViewActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ViewAction, name: "member")
+    ViewActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewAction, name: "member"))
     ViewContent.add_member(:input_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewInputSchema, name: "InputSchema"))
     ViewContent.add_member(:template, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewTemplate, name: "Template"))
     ViewContent.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewActions, name: "Actions"))
@@ -6357,8 +6357,8 @@ module Aws::Connect
     ViewVersionSummary.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewVersion, name: "Version", traits: {"smithy.api#default" => 0}))
     ViewVersionSummary.add_member(:version_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewDescription, name: "VersionDescription"))
     ViewVersionSummary.type = Types::ViewVersionSummary
-    ViewVersionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ViewVersionSummary, name: "member")
-    ViewsSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ViewSummary, name: "member")
+    ViewVersionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewVersionSummary, name: "member"))
+    ViewsSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewSummary, name: "member"))
     Vocabulary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyName, name: "Name", traits: {"smithy.api#required" => {}}))
     Vocabulary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyId, name: "Id", traits: {"smithy.api#required" => {}}))
     Vocabulary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "Arn", traits: {"smithy.api#required" => {}}))
@@ -6414,7 +6414,7 @@ module Aws::Connect
     VocabularySummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyLastModifiedTime, name: "LastModifiedTime", traits: {"smithy.api#required" => {}}))
     VocabularySummary.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyFailureReason, name: "FailureReason"))
     VocabularySummary.type = Types::VocabularySummary
-    VocabularySummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularySummary, name: "member")
+    VocabularySummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularySummary, name: "member"))
     VoiceRecordingConfiguration.add_member(:voice_recording_track, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceRecordingTrack, name: "VoiceRecordingTrack"))
     VoiceRecordingConfiguration.add_member(:ivr_recording_track, ::Smithy::Schema::Shapes::MemberShape.new(target: IvrRecordingTrack, name: "IvrRecordingTrack"))
     VoiceRecordingConfiguration.type = Types::VoiceRecordingConfiguration
@@ -6423,7 +6423,7 @@ module Aws::Connect
     VoiceRecordingTrack.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
     WisdomInfo.add_member(:session_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "SessionArn"))
     WisdomInfo.type = Types::WisdomInfo
-    ResourceArnListMaxLimit100.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "member")
+    ResourceArnListMaxLimit100.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "member"))
 
     AmazonConnectService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.connect#AmazonConnectService"

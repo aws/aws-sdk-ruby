@@ -685,9 +685,9 @@ module Aws::S3
     AccessControlPolicy.type = Types::AccessControlPolicy
     AccessControlTranslation.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerOverride, name: "Owner", traits: {"smithy.api#required" => {}}))
     AccessControlTranslation.type = Types::AccessControlTranslation
-    AllowedHeaders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedHeader, name: "member")
-    AllowedMethods.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedMethod, name: "member")
-    AllowedOrigins.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOrigin, name: "member")
+    AllowedHeaders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedHeader, name: "member"))
+    AllowedMethods.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedMethod, name: "member"))
+    AllowedOrigins.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOrigin, name: "member"))
     AnalyticsAndOperator.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: Prefix, name: "Prefix"))
     AnalyticsAndOperator.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagSet, name: "Tags", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Tag"}))
     AnalyticsAndOperator.type = Types::AnalyticsAndOperator
@@ -695,7 +695,7 @@ module Aws::S3
     AnalyticsConfiguration.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsFilter, name: "Filter"))
     AnalyticsConfiguration.add_member(:storage_class_analysis, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageClassAnalysis, name: "StorageClassAnalysis", traits: {"smithy.api#required" => {}}))
     AnalyticsConfiguration.type = Types::AnalyticsConfiguration
-    AnalyticsConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsConfiguration, name: "member")
+    AnalyticsConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsConfiguration, name: "member"))
     AnalyticsExportDestination.add_member(:s3_bucket_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsS3BucketDestination, name: "S3BucketDestination", traits: {"smithy.api#required" => {}}))
     AnalyticsExportDestination.type = Types::AnalyticsExportDestination
     AnalyticsFilter.add_member(:prefix, Types::AnalyticsFilter::Prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: Prefix, name: "Prefix"))
@@ -770,7 +770,7 @@ module Aws::S3
     BucketType.add_member(:directory, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Directory", traits: {"smithy.api#enumValue" => "Directory"}))
     BucketVersioningStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
     BucketVersioningStatus.add_member(:suspended, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Suspended", traits: {"smithy.api#enumValue" => "Suspended"}))
-    Buckets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Bucket, name: "member", traits: {"smithy.api#xmlName" => "Bucket"})
+    Buckets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Bucket, name: "member", traits: {"smithy.api#xmlName" => "Bucket"}))
     CORSConfiguration.add_member(:cors_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: CORSRules, name: "CORSRules", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "CORSRule"}))
     CORSConfiguration.type = Types::CORSConfiguration
     CORSRule.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "ID"))
@@ -780,7 +780,7 @@ module Aws::S3
     CORSRule.add_member(:expose_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: ExposeHeaders, name: "ExposeHeaders", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "ExposeHeader"}))
     CORSRule.add_member(:max_age_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxAgeSeconds, name: "MaxAgeSeconds"))
     CORSRule.type = Types::CORSRule
-    CORSRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CORSRule, name: "member")
+    CORSRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CORSRule, name: "member"))
     CSVInput.add_member(:file_header_info, ::Smithy::Schema::Shapes::MemberShape.new(target: FileHeaderInfo, name: "FileHeaderInfo"))
     CSVInput.add_member(:comments, ::Smithy::Schema::Shapes::MemberShape.new(target: Comments, name: "Comments"))
     CSVInput.add_member(:quote_escape_character, ::Smithy::Schema::Shapes::MemberShape.new(target: QuoteEscapeCharacter, name: "QuoteEscapeCharacter"))
@@ -807,13 +807,13 @@ module Aws::S3
     ChecksumAlgorithm.add_member(:sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHA1", traits: {"smithy.api#enumValue" => "SHA1"}))
     ChecksumAlgorithm.add_member(:sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHA256", traits: {"smithy.api#enumValue" => "SHA256"}))
     ChecksumAlgorithm.add_member(:crc64_nvme, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CRC64NVME", traits: {"smithy.api#enumValue" => "CRC64NVME"}))
-    ChecksumAlgorithmList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumAlgorithm, name: "member")
+    ChecksumAlgorithmList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumAlgorithm, name: "member"))
     ChecksumMode.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     ChecksumType.add_member(:composite, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPOSITE", traits: {"smithy.api#enumValue" => "COMPOSITE"}))
     ChecksumType.add_member(:full_object, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL_OBJECT", traits: {"smithy.api#enumValue" => "FULL_OBJECT"}))
     CommonPrefix.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: Prefix, name: "Prefix"))
     CommonPrefix.type = Types::CommonPrefix
-    CommonPrefixList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CommonPrefix, name: "member")
+    CommonPrefixList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CommonPrefix, name: "member"))
     CompleteMultipartUploadOutput.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: Location, name: "Location"))
     CompleteMultipartUploadOutput.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "Bucket"))
     CompleteMultipartUploadOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectKey, name: "Key"))
@@ -862,7 +862,7 @@ module Aws::S3
     CompletedPart.add_member(:checksum_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumSHA256, name: "ChecksumSHA256"))
     CompletedPart.add_member(:part_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PartNumber, name: "PartNumber"))
     CompletedPart.type = Types::CompletedPart
-    CompletedPartList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CompletedPart, name: "member")
+    CompletedPartList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CompletedPart, name: "member"))
     CompressionType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     CompressionType.add_member(:gzip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GZIP", traits: {"smithy.api#enumValue" => "GZIP"}))
     CompressionType.add_member(:bzip2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BZIP2", traits: {"smithy.api#enumValue" => "BZIP2"}))
@@ -1108,7 +1108,7 @@ module Aws::S3
     DeleteMarkerReplication.type = Types::DeleteMarkerReplication
     DeleteMarkerReplicationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
     DeleteMarkerReplicationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
-    DeleteMarkers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteMarkerEntry, name: "member")
+    DeleteMarkers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteMarkerEntry, name: "member"))
     DeleteObjectOutput.add_member(:delete_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteMarker, name: "DeleteMarker", traits: {"smithy.api#httpHeader" => "x-amz-delete-marker"}))
     DeleteObjectOutput.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectVersionId, name: "VersionId", traits: {"smithy.api#httpHeader" => "x-amz-version-id"}))
     DeleteObjectOutput.add_member(:request_charged, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestCharged, name: "RequestCharged", traits: {"smithy.api#httpHeader" => "x-amz-request-charged"}))
@@ -1153,7 +1153,7 @@ module Aws::S3
     DeletedObject.add_member(:delete_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteMarker, name: "DeleteMarker"))
     DeletedObject.add_member(:delete_marker_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteMarkerVersionId, name: "DeleteMarkerVersionId"))
     DeletedObject.type = Types::DeletedObject
-    DeletedObjects.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeletedObject, name: "member")
+    DeletedObjects.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletedObject, name: "member"))
     Destination.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "Bucket", traits: {"smithy.api#required" => {}}))
     Destination.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "Account"))
     Destination.add_member(:storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageClass, name: "StorageClass"))
@@ -1185,7 +1185,7 @@ module Aws::S3
     ErrorDetails.type = Types::ErrorDetails
     ErrorDocument.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectKey, name: "Key", traits: {"smithy.api#required" => {}}))
     ErrorDocument.type = Types::ErrorDocument
-    Errors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Error, name: "member")
+    Errors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Error, name: "member"))
     Event.add_member(:s3_reduced_redundancy_lost_object, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "s3_ReducedRedundancyLostObject", traits: {"smithy.api#enumValue" => "s3:ReducedRedundancyLostObject"}))
     Event.add_member(:s3_object_created_, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "s3_ObjectCreated_", traits: {"smithy.api#enumValue" => "s3:ObjectCreated:*"}))
     Event.add_member(:s3_object_created_put, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "s3_ObjectCreated_Put", traits: {"smithy.api#enumValue" => "s3:ObjectCreated:Put"}))
@@ -1214,7 +1214,7 @@ module Aws::S3
     Event.add_member(:s3_object_tagging_put, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "s3_ObjectTagging_Put", traits: {"smithy.api#enumValue" => "s3:ObjectTagging:Put"}))
     Event.add_member(:s3_object_tagging_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "s3_ObjectTagging_Delete", traits: {"smithy.api#enumValue" => "s3:ObjectTagging:Delete"}))
     EventBridgeConfiguration.type = Types::EventBridgeConfiguration
-    EventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member")
+    EventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member"))
     ExistingObjectReplication.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExistingObjectReplicationStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     ExistingObjectReplication.type = Types::ExistingObjectReplication
     ExistingObjectReplicationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
@@ -1223,7 +1223,7 @@ module Aws::S3
     ExpirationState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     ExpirationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
     ExpirationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
-    ExposeHeaders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExposeHeader, name: "member")
+    ExposeHeaders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExposeHeader, name: "member"))
     ExpressionType.add_member(:sql, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SQL", traits: {"smithy.api#enumValue" => "SQL"}))
     FileHeaderInfo.add_member(:use, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USE", traits: {"smithy.api#enumValue" => "USE"}))
     FileHeaderInfo.add_member(:ignore, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IGNORE", traits: {"smithy.api#enumValue" => "IGNORE"}))
@@ -1231,7 +1231,7 @@ module Aws::S3
     FilterRule.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterRuleName, name: "Name"))
     FilterRule.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterRuleValue, name: "Value"))
     FilterRule.type = Types::FilterRule
-    FilterRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterRule, name: "member")
+    FilterRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterRule, name: "member"))
     FilterRuleName.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "prefix", traits: {"smithy.api#enumValue" => "prefix"}))
     FilterRuleName.add_member(:suffix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "suffix", traits: {"smithy.api#enumValue" => "suffix"}))
     GetBucketAccelerateConfigurationOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketAccelerateStatus, name: "Status"))
@@ -1553,7 +1553,7 @@ module Aws::S3
     Grantee.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: URI, name: "URI"))
     Grantee.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, name: "Type", traits: {"smithy.api#required" => {}, "smithy.api#xmlAttribute" => {}, "smithy.api#xmlName" => "xsi:type"}))
     Grantee.type = Types::Grantee
-    Grants.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Grant, name: "member", traits: {"smithy.api#xmlName" => "Grant"})
+    Grants.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Grant, name: "member", traits: {"smithy.api#xmlName" => "Grant"}))
     HeadBucketOutput.add_member(:bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3RegionalOrS3ExpressBucketArnString, name: "BucketArn", traits: {"smithy.api#httpHeader" => "x-amz-bucket-arn"}))
     HeadBucketOutput.add_member(:bucket_location_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationType, name: "BucketLocationType", traits: {"smithy.api#httpHeader" => "x-amz-bucket-location-type"}))
     HeadBucketOutput.add_member(:bucket_location_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketLocationName, name: "BucketLocationName", traits: {"smithy.api#httpHeader" => "x-amz-bucket-location-name"}))
@@ -1645,7 +1645,7 @@ module Aws::S3
     IntelligentTieringConfiguration.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: IntelligentTieringStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     IntelligentTieringConfiguration.add_member(:tierings, ::Smithy::Schema::Shapes::MemberShape.new(target: TieringList, name: "Tierings", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Tiering"}))
     IntelligentTieringConfiguration.type = Types::IntelligentTieringConfiguration
-    IntelligentTieringConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IntelligentTieringConfiguration, name: "member")
+    IntelligentTieringConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntelligentTieringConfiguration, name: "member"))
     IntelligentTieringFilter.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: Prefix, name: "Prefix"))
     IntelligentTieringFilter.add_member(:tag, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "Tag"))
     IntelligentTieringFilter.add_member(:and, ::Smithy::Schema::Shapes::MemberShape.new(target: IntelligentTieringAndOperator, name: "And"))
@@ -1665,7 +1665,7 @@ module Aws::S3
     InventoryConfiguration.add_member(:optional_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryOptionalFields, name: "OptionalFields"))
     InventoryConfiguration.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: InventorySchedule, name: "Schedule", traits: {"smithy.api#required" => {}}))
     InventoryConfiguration.type = Types::InventoryConfiguration
-    InventoryConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryConfiguration, name: "member")
+    InventoryConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryConfiguration, name: "member"))
     InventoryConfigurationState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     InventoryConfigurationState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     InventoryDestination.add_member(:s3_bucket_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryS3BucketDestination, name: "S3BucketDestination", traits: {"smithy.api#required" => {}}))
@@ -1697,7 +1697,7 @@ module Aws::S3
     InventoryOptionalField.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ChecksumAlgorithm", traits: {"smithy.api#enumValue" => "ChecksumAlgorithm"}))
     InventoryOptionalField.add_member(:object_access_control_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ObjectAccessControlList", traits: {"smithy.api#enumValue" => "ObjectAccessControlList"}))
     InventoryOptionalField.add_member(:object_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ObjectOwner", traits: {"smithy.api#enumValue" => "ObjectOwner"}))
-    InventoryOptionalFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryOptionalField, name: "member", traits: {"smithy.api#xmlName" => "Field"})
+    InventoryOptionalFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryOptionalField, name: "member", traits: {"smithy.api#xmlName" => "Field"}))
     InventoryS3BucketDestination.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     InventoryS3BucketDestination.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "Bucket", traits: {"smithy.api#required" => {}}))
     InventoryS3BucketDestination.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryFormat, name: "Format", traits: {"smithy.api#required" => {}}))
@@ -1740,7 +1740,7 @@ module Aws::S3
     LambdaFunctionConfiguration.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: EventList, name: "Events", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Event"}))
     LambdaFunctionConfiguration.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationConfigurationFilter, name: "Filter"))
     LambdaFunctionConfiguration.type = Types::LambdaFunctionConfiguration
-    LambdaFunctionConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaFunctionConfiguration, name: "member")
+    LambdaFunctionConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaFunctionConfiguration, name: "member"))
     LifecycleExpiration.add_member(:date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "Date"))
     LifecycleExpiration.add_member(:days, ::Smithy::Schema::Shapes::MemberShape.new(target: Days, name: "Days"))
     LifecycleExpiration.add_member(:expired_object_delete_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpiredObjectDeleteMarker, name: "ExpiredObjectDeleteMarker"))
@@ -1766,7 +1766,7 @@ module Aws::S3
     LifecycleRuleFilter.add_member(:object_size_less_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectSizeLessThanBytes, name: "ObjectSizeLessThan"))
     LifecycleRuleFilter.add_member(:and, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleRuleAndOperator, name: "And"))
     LifecycleRuleFilter.type = Types::LifecycleRuleFilter
-    LifecycleRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleRule, name: "member")
+    LifecycleRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleRule, name: "member"))
     ListBucketAnalyticsConfigurationsOutput.add_member(:is_truncated, ::Smithy::Schema::Shapes::MemberShape.new(target: IsTruncated, name: "IsTruncated"))
     ListBucketAnalyticsConfigurationsOutput.add_member(:continuation_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "ContinuationToken"))
     ListBucketAnalyticsConfigurationsOutput.add_member(:next_continuation_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextContinuationToken"))
@@ -1959,8 +1959,8 @@ module Aws::S3
     MFADelete.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
     MFADeleteStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
     MFADeleteStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
-    Metadata.key = ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataKey, name: "key")
-    Metadata.value = ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataValue, name: "value")
+    Metadata.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataKey, name: "key"))
+    Metadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataValue, name: "value"))
     MetadataConfiguration.add_member(:journal_table_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: JournalTableConfiguration, name: "JournalTableConfiguration", traits: {"smithy.api#required" => {}}))
     MetadataConfiguration.add_member(:inventory_table_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryTableConfiguration, name: "InventoryTableConfiguration"))
     MetadataConfiguration.type = Types::MetadataConfiguration
@@ -1990,7 +1990,7 @@ module Aws::S3
     MetricsConfiguration.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsId, name: "Id", traits: {"smithy.api#required" => {}}))
     MetricsConfiguration.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsFilter, name: "Filter"))
     MetricsConfiguration.type = Types::MetricsConfiguration
-    MetricsConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsConfiguration, name: "member")
+    MetricsConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsConfiguration, name: "member"))
     MetricsFilter.add_member(:prefix, Types::MetricsFilter::Prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: Prefix, name: "Prefix"))
     MetricsFilter.add_member(:tag, Types::MetricsFilter::Tag, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "Tag"))
     MetricsFilter.add_member(:access_point_arn, Types::MetricsFilter::AccessPointArn, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointArn, name: "AccessPointArn"))
@@ -2008,7 +2008,7 @@ module Aws::S3
     MultipartUpload.add_member(:checksum_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumAlgorithm, name: "ChecksumAlgorithm"))
     MultipartUpload.add_member(:checksum_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChecksumType, name: "ChecksumType"))
     MultipartUpload.type = Types::MultipartUpload
-    MultipartUploadList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MultipartUpload, name: "member")
+    MultipartUploadList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MultipartUpload, name: "member"))
     NoSuchBucket.type = Types::NoSuchBucket
     NoSuchKey.type = Types::NoSuchKey
     NoSuchUpload.type = Types::NoSuchUpload
@@ -2019,7 +2019,7 @@ module Aws::S3
     NoncurrentVersionTransition.add_member(:storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitionStorageClass, name: "StorageClass"))
     NoncurrentVersionTransition.add_member(:newer_noncurrent_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionCount, name: "NewerNoncurrentVersions"))
     NoncurrentVersionTransition.type = Types::NoncurrentVersionTransition
-    NoncurrentVersionTransitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NoncurrentVersionTransition, name: "member")
+    NoncurrentVersionTransitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NoncurrentVersionTransition, name: "member"))
     NotFound.type = Types::NotFound
     NotificationConfiguration.add_member(:topic_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicConfigurationList, name: "TopicConfigurations", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "TopicConfiguration"}))
     NotificationConfiguration.add_member(:queue_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueConfigurationList, name: "QueueConfigurations", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "QueueConfiguration"}))
@@ -2044,7 +2044,7 @@ module Aws::S3
     ObjectAttributes.add_member(:object_parts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OBJECT_PARTS", traits: {"smithy.api#enumValue" => "ObjectParts"}))
     ObjectAttributes.add_member(:storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STORAGE_CLASS", traits: {"smithy.api#enumValue" => "StorageClass"}))
     ObjectAttributes.add_member(:object_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OBJECT_SIZE", traits: {"smithy.api#enumValue" => "ObjectSize"}))
-    ObjectAttributesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectAttributes, name: "member")
+    ObjectAttributesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectAttributes, name: "member"))
     ObjectCannedACL.add_member(:private, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "private", traits: {"smithy.api#enumValue" => "private"}))
     ObjectCannedACL.add_member(:public_read, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "public_read", traits: {"smithy.api#enumValue" => "public-read"}))
     ObjectCannedACL.add_member(:public_read_write, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "public_read_write", traits: {"smithy.api#enumValue" => "public-read-write"}))
@@ -2058,8 +2058,8 @@ module Aws::S3
     ObjectIdentifier.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModifiedTime, name: "LastModifiedTime"))
     ObjectIdentifier.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: Size, name: "Size"))
     ObjectIdentifier.type = Types::ObjectIdentifier
-    ObjectIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectIdentifier, name: "member")
-    ObjectList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Object, name: "member")
+    ObjectIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectIdentifier, name: "member"))
+    ObjectList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Object, name: "member"))
     ObjectLockConfiguration.add_member(:object_lock_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockEnabled, name: "ObjectLockEnabled"))
     ObjectLockConfiguration.add_member(:rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectLockRule, name: "Rule"))
     ObjectLockConfiguration.type = Types::ObjectLockConfiguration
@@ -2113,10 +2113,10 @@ module Aws::S3
     ObjectVersion.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: Owner, name: "Owner"))
     ObjectVersion.add_member(:restore_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreStatus, name: "RestoreStatus"))
     ObjectVersion.type = Types::ObjectVersion
-    ObjectVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectVersion, name: "member")
+    ObjectVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectVersion, name: "member"))
     ObjectVersionStorageClass.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
     OptionalObjectAttributes.add_member(:restore_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESTORE_STATUS", traits: {"smithy.api#enumValue" => "RestoreStatus"}))
-    OptionalObjectAttributesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalObjectAttributes, name: "member")
+    OptionalObjectAttributesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalObjectAttributes, name: "member"))
     OutputLocation.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "S3"))
     OutputLocation.type = Types::OutputLocation
     OutputSerialization.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: CSVOutput, name: "CSV"))
@@ -2130,7 +2130,7 @@ module Aws::S3
     OwnershipControls.type = Types::OwnershipControls
     OwnershipControlsRule.add_member(:object_ownership, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectOwnership, name: "ObjectOwnership", traits: {"smithy.api#required" => {}}))
     OwnershipControlsRule.type = Types::OwnershipControlsRule
-    OwnershipControlsRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OwnershipControlsRule, name: "member")
+    OwnershipControlsRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnershipControlsRule, name: "member"))
     ParquetInput.type = Types::ParquetInput
     Part.add_member(:part_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PartNumber, name: "PartNumber"))
     Part.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModified, name: "LastModified"))
@@ -2146,8 +2146,8 @@ module Aws::S3
     PartitionDateSource.add_member(:delivery_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DeliveryTime", traits: {"smithy.api#enumValue" => "DeliveryTime"}))
     PartitionedPrefix.add_member(:partition_date_source, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionDateSource, name: "PartitionDateSource"))
     PartitionedPrefix.type = Types::PartitionedPrefix
-    Parts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Part, name: "member")
-    PartsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectPart, name: "member")
+    Parts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Part, name: "member"))
+    PartsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectPart, name: "member"))
     Payer.add_member(:requester, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Requester", traits: {"smithy.api#enumValue" => "Requester"}))
     Payer.add_member(:bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BucketOwner", traits: {"smithy.api#enumValue" => "BucketOwner"}))
     Permission.add_member(:full_control, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL_CONTROL", traits: {"smithy.api#enumValue" => "FULL_CONTROL"}))
@@ -2465,7 +2465,7 @@ module Aws::S3
     QueueConfiguration.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: EventList, name: "Events", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Event"}))
     QueueConfiguration.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationConfigurationFilter, name: "Filter"))
     QueueConfiguration.type = Types::QueueConfiguration
-    QueueConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueueConfiguration, name: "member")
+    QueueConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueConfiguration, name: "member"))
     QuoteFields.add_member(:always, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALWAYS", traits: {"smithy.api#enumValue" => "ALWAYS"}))
     QuoteFields.add_member(:asneeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASNEEDED", traits: {"smithy.api#enumValue" => "ASNEEDED"}))
     RecordExpiration.add_member(:expiration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpirationState, name: "Expiration", traits: {"smithy.api#required" => {}}))
@@ -2522,7 +2522,7 @@ module Aws::S3
     ReplicationRuleFilter.type = Types::ReplicationRuleFilter
     ReplicationRuleStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
     ReplicationRuleStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
-    ReplicationRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationRule, name: "member")
+    ReplicationRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationRule, name: "member"))
     ReplicationStatus.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
     ReplicationStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     ReplicationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -2569,7 +2569,7 @@ module Aws::S3
     RoutingRule.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "Condition"))
     RoutingRule.add_member(:redirect, ::Smithy::Schema::Shapes::MemberShape.new(target: Redirect, name: "Redirect", traits: {"smithy.api#required" => {}}))
     RoutingRule.type = Types::RoutingRule
-    RoutingRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingRule, name: "member", traits: {"smithy.api#xmlName" => "RoutingRule"})
+    RoutingRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingRule, name: "member", traits: {"smithy.api#xmlName" => "RoutingRule"}))
     S3KeyFilter.add_member(:filter_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterRuleList, name: "FilterRules", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "FilterRule"}))
     S3KeyFilter.type = Types::S3KeyFilter
     S3Location.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "BucketName", traits: {"smithy.api#required" => {}}))
@@ -2638,7 +2638,7 @@ module Aws::S3
     ServerSideEncryptionRule.add_member(:apply_server_side_encryption_by_default, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideEncryptionByDefault, name: "ApplyServerSideEncryptionByDefault"))
     ServerSideEncryptionRule.add_member(:bucket_key_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketKeyEnabled, name: "BucketKeyEnabled"))
     ServerSideEncryptionRule.type = Types::ServerSideEncryptionRule
-    ServerSideEncryptionRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideEncryptionRule, name: "member")
+    ServerSideEncryptionRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideEncryptionRule, name: "member"))
     SessionCredentials.add_member(:access_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessKeyIdValue, name: "AccessKeyId", traits: {"smithy.api#required" => {}, "smithy.api#xmlName" => "AccessKeyId"}))
     SessionCredentials.add_member(:secret_access_key, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionCredentialValue, name: "SecretAccessKey", traits: {"smithy.api#required" => {}, "smithy.api#xmlName" => "SecretAccessKey"}))
     SessionCredentials.add_member(:session_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionCredentialValue, name: "SessionToken", traits: {"smithy.api#required" => {}, "smithy.api#xmlName" => "SessionToken"}))
@@ -2683,7 +2683,7 @@ module Aws::S3
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member", traits: {"smithy.api#xmlName" => "Tag"})
+    TagSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member", traits: {"smithy.api#xmlName" => "Tag"}))
     Tagging.add_member(:tag_set, ::Smithy::Schema::Shapes::MemberShape.new(target: TagSet, name: "TagSet", traits: {"smithy.api#required" => {}}))
     Tagging.type = Types::Tagging
     TaggingDirective.add_member(:copy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COPY", traits: {"smithy.api#enumValue" => "COPY"}))
@@ -2691,7 +2691,7 @@ module Aws::S3
     TargetGrant.add_member(:grantee, ::Smithy::Schema::Shapes::MemberShape.new(target: Grantee, name: "Grantee", traits: {"smithy.api#xmlNamespace" => {"uri" => "http://www.w3.org/2001/XMLSchema-instance", "prefix" => "xsi"}}))
     TargetGrant.add_member(:permission, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketLogsPermission, name: "Permission"))
     TargetGrant.type = Types::TargetGrant
-    TargetGrants.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGrant, name: "member", traits: {"smithy.api#xmlName" => "Grant"})
+    TargetGrants.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGrant, name: "member", traits: {"smithy.api#xmlName" => "Grant"}))
     TargetObjectKeyFormat.add_member(:simple_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: SimplePrefix, name: "SimplePrefix", traits: {"smithy.api#xmlName" => "SimplePrefix"}))
     TargetObjectKeyFormat.add_member(:partitioned_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionedPrefix, name: "PartitionedPrefix", traits: {"smithy.api#xmlName" => "PartitionedPrefix"}))
     TargetObjectKeyFormat.type = Types::TargetObjectKeyFormat
@@ -2701,21 +2701,21 @@ module Aws::S3
     Tiering.add_member(:days, ::Smithy::Schema::Shapes::MemberShape.new(target: IntelligentTieringDays, name: "Days", traits: {"smithy.api#required" => {}}))
     Tiering.add_member(:access_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: IntelligentTieringAccessTier, name: "AccessTier", traits: {"smithy.api#required" => {}}))
     Tiering.type = Types::Tiering
-    TieringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tiering, name: "member")
+    TieringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tiering, name: "member"))
     TooManyParts.type = Types::TooManyParts
     TopicConfiguration.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationId, name: "Id"))
     TopicConfiguration.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicArn, name: "TopicArn", traits: {"smithy.api#required" => {}, "smithy.api#xmlName" => "Topic"}))
     TopicConfiguration.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: EventList, name: "Events", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Event"}))
     TopicConfiguration.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationConfigurationFilter, name: "Filter"))
     TopicConfiguration.type = Types::TopicConfiguration
-    TopicConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TopicConfiguration, name: "member")
+    TopicConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicConfiguration, name: "member"))
     Transition.add_member(:date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "Date"))
     Transition.add_member(:days, ::Smithy::Schema::Shapes::MemberShape.new(target: Days, name: "Days"))
     Transition.add_member(:storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitionStorageClass, name: "StorageClass"))
     Transition.type = Types::Transition
     TransitionDefaultMinimumObjectSize.add_member(:varies_by_storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "varies_by_storage_class", traits: {"smithy.api#enumValue" => "varies_by_storage_class"}))
     TransitionDefaultMinimumObjectSize.add_member(:all_storage_classes_128_k, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "all_storage_classes_128K", traits: {"smithy.api#enumValue" => "all_storage_classes_128K"}))
-    TransitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Transition, name: "member")
+    TransitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Transition, name: "member"))
     TransitionStorageClass.add_member(:glacier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GLACIER", traits: {"smithy.api#enumValue" => "GLACIER"}))
     TransitionStorageClass.add_member(:standard_ia, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD_IA", traits: {"smithy.api#enumValue" => "STANDARD_IA"}))
     TransitionStorageClass.add_member(:onezone_ia, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONEZONE_IA", traits: {"smithy.api#enumValue" => "ONEZONE_IA"}))
@@ -2806,7 +2806,7 @@ module Aws::S3
     UploadPartRequest[:http_payload] = :body
     UploadPartRequest[:http_payload_member] = UploadPartRequest.member(:body)
     UploadPartRequest.type = Types::UploadPartRequest
-    UserMetadata.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataEntry, name: "member", traits: {"smithy.api#xmlName" => "MetadataEntry"})
+    UserMetadata.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataEntry, name: "member", traits: {"smithy.api#xmlName" => "MetadataEntry"}))
     VersioningConfiguration.add_member(:mfa_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: MFADelete, name: "MFADelete", traits: {"smithy.api#xmlName" => "MfaDelete"}))
     VersioningConfiguration.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketVersioningStatus, name: "Status"))
     VersioningConfiguration.type = Types::VersioningConfiguration

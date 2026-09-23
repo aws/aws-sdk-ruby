@@ -107,8 +107,8 @@ module Aws::KinesisVideoArchivedMedia
     DASHTimestampRange.type = Types::DASHTimestampRange
     Format.add_member(:jpeg, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JPEG", traits: {"smithy.api#enumValue" => "JPEG"}))
     Format.add_member(:png, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PNG", traits: {"smithy.api#enumValue" => "PNG"}))
-    FormatConfig.key = ::Smithy::Schema::Shapes::MemberShape.new(target: FormatConfigKey, name: "key")
-    FormatConfig.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FormatConfigValue, name: "value")
+    FormatConfig.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatConfigKey, name: "key"))
+    FormatConfig.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatConfigValue, name: "value"))
     FormatConfigKey.add_member(:jpeg_quality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JPEGQuality", traits: {"smithy.api#enumValue" => "JPEGQuality"}))
     Fragment.add_member(:fragment_number, ::Smithy::Schema::Shapes::MemberShape.new(target: FragmentNumberString, name: "FragmentNumber"))
     Fragment.add_member(:fragment_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "FragmentSizeInBytes", traits: {"smithy.api#default" => 0}))
@@ -116,8 +116,8 @@ module Aws::KinesisVideoArchivedMedia
     Fragment.add_member(:server_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ServerTimestamp"))
     Fragment.add_member(:fragment_length_in_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "FragmentLengthInMilliseconds", traits: {"smithy.api#default" => 0}))
     Fragment.type = Types::Fragment
-    FragmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Fragment, name: "member")
-    FragmentNumberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FragmentNumberString, name: "member")
+    FragmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Fragment, name: "member"))
+    FragmentNumberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FragmentNumberString, name: "member"))
     FragmentSelector.add_member(:fragment_selector_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FragmentSelectorType, name: "FragmentSelectorType", traits: {"smithy.api#required" => {}}))
     FragmentSelector.add_member(:timestamp_range, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampRange, name: "TimestampRange", traits: {"smithy.api#required" => {}}))
     FragmentSelector.type = Types::FragmentSelector
@@ -204,7 +204,7 @@ module Aws::KinesisVideoArchivedMedia
     ImageError.add_member(:media_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIA_ERROR", traits: {"smithy.api#enumValue" => "MEDIA_ERROR"}))
     ImageSelectorType.add_member(:producer_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRODUCER_TIMESTAMP", traits: {"smithy.api#enumValue" => "PRODUCER_TIMESTAMP"}))
     ImageSelectorType.add_member(:server_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVER_TIMESTAMP", traits: {"smithy.api#enumValue" => "SERVER_TIMESTAMP"}))
-    Images.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Image, name: "member")
+    Images.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Image, name: "member"))
     InvalidArgumentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InvalidArgumentException.type = Types::InvalidArgumentException
     InvalidCodecPrivateDataException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))

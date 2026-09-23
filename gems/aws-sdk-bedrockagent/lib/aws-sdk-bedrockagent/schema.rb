@@ -686,19 +686,19 @@ module Aws::BedrockAgent
     ActionGroupSignature.add_member(:anthropic_computer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANTHROPIC_COMPUTER", traits: {"smithy.api#enumValue" => "ANTHROPIC.Computer"}))
     ActionGroupSignature.add_member(:anthropic_bash, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANTHROPIC_BASH", traits: {"smithy.api#enumValue" => "ANTHROPIC.Bash"}))
     ActionGroupSignature.add_member(:anthropic_texteditor, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANTHROPIC_TEXTEDITOR", traits: {"smithy.api#enumValue" => "ANTHROPIC.TextEditor"}))
-    ActionGroupSignatureParams.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"max" => 100}})
-    ActionGroupSignatureParams.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"max" => 100}})
+    ActionGroupSignatureParams.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"max" => 100}}))
+    ActionGroupSignatureParams.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"max" => 100}}))
     ActionGroupState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     ActionGroupState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    ActionGroupSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionGroupSummary, name: "member")
+    ActionGroupSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionGroupSummary, name: "member"))
     ActionGroupSummary.add_member(:action_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "actionGroupId", traits: {"smithy.api#required" => {}}))
     ActionGroupSummary.add_member(:action_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "actionGroupName", traits: {"smithy.api#required" => {}}))
     ActionGroupSummary.add_member(:action_group_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionGroupState, name: "actionGroupState", traits: {"smithy.api#required" => {}}))
     ActionGroupSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     ActionGroupSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
     ActionGroupSummary.type = Types::ActionGroupSummary
-    AdditionalModelRequestFields.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalModelRequestFieldsKey, name: "key")
-    AdditionalModelRequestFields.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalModelRequestFieldsValue, name: "value")
+    AdditionalModelRequestFields.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalModelRequestFieldsKey, name: "key"))
+    AdditionalModelRequestFields.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalModelRequestFieldsValue, name: "value"))
     Agent.add_member(:agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "agentId", traits: {"smithy.api#required" => {}}))
     Agent.add_member(:agent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "agentName", traits: {"smithy.api#required" => {}}))
     Agent.add_member(:agent_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentArn, name: "agentArn", traits: {"smithy.api#required" => {}}))
@@ -756,8 +756,8 @@ module Aws::BedrockAgent
     AgentAliasHistoryEvent.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimestamp, name: "endDate"))
     AgentAliasHistoryEvent.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimestamp, name: "startDate"))
     AgentAliasHistoryEvent.type = Types::AgentAliasHistoryEvent
-    AgentAliasHistoryEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentAliasHistoryEvent, name: "member")
-    AgentAliasRoutingConfiguration.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentAliasRoutingConfigurationListItem, name: "member")
+    AgentAliasHistoryEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentAliasHistoryEvent, name: "member"))
+    AgentAliasRoutingConfiguration.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentAliasRoutingConfigurationListItem, name: "member"))
     AgentAliasRoutingConfigurationListItem.add_member(:agent_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "agentVersion"))
     AgentAliasRoutingConfigurationListItem.add_member(:provisioned_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedModelIdentifier, name: "provisionedThroughput"))
     AgentAliasRoutingConfigurationListItem.type = Types::AgentAliasRoutingConfigurationListItem
@@ -767,7 +767,7 @@ module Aws::BedrockAgent
     AgentAliasStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
     AgentAliasStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     AgentAliasStatus.add_member(:dissociated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISSOCIATED", traits: {"smithy.api#enumValue" => "DISSOCIATED"}))
-    AgentAliasSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentAliasSummary, name: "member")
+    AgentAliasSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentAliasSummary, name: "member"))
     AgentAliasSummary.add_member(:agent_alias_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentAliasId, name: "agentAliasId", traits: {"smithy.api#required" => {}}))
     AgentAliasSummary.add_member(:agent_alias_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "agentAliasName", traits: {"smithy.api#required" => {}}))
     AgentAliasSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
@@ -791,7 +791,7 @@ module Aws::BedrockAgent
     AgentCollaborator.add_member(:relay_conversation_history, ::Smithy::Schema::Shapes::MemberShape.new(target: RelayConversationHistory, name: "relayConversationHistory"))
     AgentCollaborator.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken"))
     AgentCollaborator.type = Types::AgentCollaborator
-    AgentCollaboratorSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentCollaboratorSummary, name: "member")
+    AgentCollaboratorSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentCollaboratorSummary, name: "member"))
     AgentCollaboratorSummary.add_member(:agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "agentId", traits: {"smithy.api#required" => {}}))
     AgentCollaboratorSummary.add_member(:agent_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "agentVersion", traits: {"smithy.api#required" => {}}))
     AgentCollaboratorSummary.add_member(:collaborator_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "collaboratorId", traits: {"smithy.api#required" => {}}))
@@ -814,7 +814,7 @@ module Aws::BedrockAgent
     AgentKnowledgeBase.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
     AgentKnowledgeBase.add_member(:knowledge_base_state, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseState, name: "knowledgeBaseState", traits: {"smithy.api#required" => {}}))
     AgentKnowledgeBase.type = Types::AgentKnowledgeBase
-    AgentKnowledgeBaseSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentKnowledgeBaseSummary, name: "member")
+    AgentKnowledgeBaseSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentKnowledgeBaseSummary, name: "member"))
     AgentKnowledgeBaseSummary.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "knowledgeBaseId", traits: {"smithy.api#required" => {}}))
     AgentKnowledgeBaseSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     AgentKnowledgeBaseSummary.add_member(:knowledge_base_state, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseState, name: "knowledgeBaseState", traits: {"smithy.api#required" => {}}))
@@ -828,7 +828,7 @@ module Aws::BedrockAgent
     AgentStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     AgentStatus.add_member(:versioning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERSIONING", traits: {"smithy.api#enumValue" => "VERSIONING"}))
     AgentStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
-    AgentSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentSummary, name: "member")
+    AgentSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentSummary, name: "member"))
     AgentSummary.add_member(:agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "agentId", traits: {"smithy.api#required" => {}}))
     AgentSummary.add_member(:agent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "agentName", traits: {"smithy.api#required" => {}}))
     AgentSummary.add_member(:agent_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatus, name: "agentStatus", traits: {"smithy.api#required" => {}}))
@@ -857,7 +857,7 @@ module Aws::BedrockAgent
     AgentVersion.add_member(:memory_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryConfiguration, name: "memoryConfiguration"))
     AgentVersion.add_member(:agent_collaboration, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentCollaboration, name: "agentCollaboration"))
     AgentVersion.type = Types::AgentVersion
-    AgentVersionSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentVersionSummary, name: "member")
+    AgentVersionSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentVersionSummary, name: "member"))
     AgentVersionSummary.add_member(:agent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "agentName", traits: {"smithy.api#required" => {}}))
     AgentVersionSummary.add_member(:agent_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentStatus, name: "agentStatus", traits: {"smithy.api#required" => {}}))
     AgentVersionSummary.add_member(:agent_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "agentVersion", traits: {"smithy.api#required" => {}}))
@@ -888,7 +888,7 @@ module Aws::BedrockAgent
     AssociateAgentKnowledgeBaseResponse.add_member(:agent_knowledge_base, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentKnowledgeBase, name: "agentKnowledgeBase", traits: {"smithy.api#required" => {}}))
     AssociateAgentKnowledgeBaseResponse.type = Types::AssociateAgentKnowledgeBaseResponse
     AutoToolChoice.type = Types::AutoToolChoice
-    AwsDataCatalogTableNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDataCatalogTableName, name: "member")
+    AwsDataCatalogTableNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDataCatalogTableName, name: "member"))
     BedrockDataAutomationConfiguration.add_member(:parsing_modality, ::Smithy::Schema::Shapes::MemberShape.new(target: ParsingModality, name: "parsingModality"))
     BedrockDataAutomationConfiguration.type = Types::BedrockDataAutomationConfiguration
     BedrockEmbeddingModelConfiguration.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimensions, name: "dimensions"))
@@ -945,7 +945,7 @@ module Aws::BedrockAgent
     ContentBlock.add_member(:cache_point, Types::ContentBlock::CachePoint, ::Smithy::Schema::Shapes::MemberShape.new(target: CachePointBlock, name: "cachePoint"))
     ContentBlock.add_member(:unknown, Types::ContentBlock::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ContentBlock.type = Types::ContentBlock
-    ContentBlocks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContentBlock, name: "member")
+    ContentBlocks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentBlock, name: "member"))
     ContentDataSourceType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
     ContentDataSourceType.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3", traits: {"smithy.api#enumValue" => "S3"}))
     ContextEnrichmentConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextEnrichmentType, name: "type", traits: {"smithy.api#required" => {}}))
@@ -1110,7 +1110,7 @@ module Aws::BedrockAgent
     CreatePromptVersionResponse.type = Types::CreatePromptVersionResponse
     CreationMode.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "DEFAULT"}))
     CreationMode.add_member(:overridden, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OVERRIDDEN", traits: {"smithy.api#enumValue" => "OVERRIDDEN"}))
-    CuratedQueries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CuratedQuery, name: "member")
+    CuratedQueries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CuratedQuery, name: "member"))
     CuratedQuery.add_member(:natural_language, ::Smithy::Schema::Shapes::MemberShape.new(target: NaturalLanguageString, name: "naturalLanguage", traits: {"smithy.api#required" => {}}))
     CuratedQuery.add_member(:sql, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlString, name: "sql", traits: {"smithy.api#required" => {}}))
     CuratedQuery.type = Types::CuratedQuery
@@ -1159,7 +1159,7 @@ module Aws::BedrockAgent
     DataSourceStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     DataSourceStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     DataSourceStatus.add_member(:delete_unsuccessful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_UNSUCCESSFUL", traits: {"smithy.api#enumValue" => "DELETE_UNSUCCESSFUL"}))
-    DataSourceSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceSummary, name: "member")
+    DataSourceSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceSummary, name: "member"))
     DataSourceSummary.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "knowledgeBaseId", traits: {"smithy.api#required" => {}}))
     DataSourceSummary.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "dataSourceId", traits: {"smithy.api#required" => {}}))
     DataSourceSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
@@ -1262,7 +1262,7 @@ module Aws::BedrockAgent
     DocumentIdentifier.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "s3"))
     DocumentIdentifier.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDocumentIdentifier, name: "custom"))
     DocumentIdentifier.type = Types::DocumentIdentifier
-    DocumentIdentifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentIdentifier, name: "member")
+    DocumentIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentIdentifier, name: "member"))
     DocumentMetadata.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataSourceType, name: "type", traits: {"smithy.api#required" => {}}))
     DocumentMetadata.add_member(:inline_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataAttributes, name: "inlineAttributes", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}}))
     DocumentMetadata.add_member(:s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomS3Location, name: "s3Location"))
@@ -1289,25 +1289,25 @@ module Aws::BedrockAgent
     EmbeddingDataType.add_member(:binary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BINARY", traits: {"smithy.api#enumValue" => "BINARY"}))
     EmbeddingModelConfiguration.add_member(:bedrock_embedding_model_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BedrockEmbeddingModelConfiguration, name: "bedrockEmbeddingModelConfiguration"))
     EmbeddingModelConfiguration.type = Types::EmbeddingModelConfiguration
-    EnabledMemoryTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryType, name: "member")
+    EnabledMemoryTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryType, name: "member"))
     EnrichmentStrategyConfiguration.add_member(:method, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrichmentStrategyMethod, name: "method", traits: {"smithy.api#required" => {}}))
     EnrichmentStrategyConfiguration.type = Types::EnrichmentStrategyConfiguration
     EnrichmentStrategyMethod.add_member(:chunk_entity_extraction, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CHUNK_ENTITY_EXTRACTION", traits: {"smithy.api#enumValue" => "CHUNK_ENTITY_EXTRACTION"}))
-    FailureReasons.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "member")
+    FailureReasons.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "member"))
     FieldForReranking.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "fieldName", traits: {"smithy.api#length" => {"min" => 1, "max" => 2000}, "smithy.api#required" => {}}))
     FieldForReranking.type = Types::FieldForReranking
-    FieldsForReranking.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldForReranking, name: "member")
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterPattern, name: "member")
+    FieldsForReranking.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldForReranking, name: "member"))
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterPattern, name: "member"))
     FixedSizeChunkingConfiguration.add_member(:max_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxTokens", traits: {"smithy.api#range" => {"min" => 1}, "smithy.api#required" => {}}))
     FixedSizeChunkingConfiguration.add_member(:overlap_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "overlapPercentage", traits: {"smithy.api#range" => {"min" => 1, "max" => 99}, "smithy.api#required" => {}}))
     FixedSizeChunkingConfiguration.type = Types::FixedSizeChunkingConfiguration
     FlowAliasConcurrencyConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConcurrencyType, name: "type", traits: {"smithy.api#required" => {}}))
     FlowAliasConcurrencyConfiguration.add_member(:max_concurrency, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxConcurrency", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
     FlowAliasConcurrencyConfiguration.type = Types::FlowAliasConcurrencyConfiguration
-    FlowAliasRoutingConfiguration.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FlowAliasRoutingConfigurationListItem, name: "member")
+    FlowAliasRoutingConfiguration.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowAliasRoutingConfigurationListItem, name: "member"))
     FlowAliasRoutingConfigurationListItem.add_member(:flow_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "flowVersion"))
     FlowAliasRoutingConfigurationListItem.type = Types::FlowAliasRoutingConfigurationListItem
-    FlowAliasSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FlowAliasSummary, name: "member")
+    FlowAliasSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowAliasSummary, name: "member"))
     FlowAliasSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
     FlowAliasSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     FlowAliasSummary.add_member(:routing_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowAliasRoutingConfiguration, name: "routingConfiguration", traits: {"smithy.api#required" => {}}))
@@ -1323,7 +1323,7 @@ module Aws::BedrockAgent
     FlowCondition.type = Types::FlowCondition
     FlowConditionalConnectionConfiguration.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowConditionName, name: "condition", traits: {"smithy.api#required" => {}}))
     FlowConditionalConnectionConfiguration.type = Types::FlowConditionalConnectionConfiguration
-    FlowConditions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FlowCondition, name: "member")
+    FlowConditions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowCondition, name: "member"))
     FlowConnection.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowConnectionType, name: "type", traits: {"smithy.api#required" => {}}))
     FlowConnection.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowConnectionName, name: "name", traits: {"smithy.api#required" => {}}))
     FlowConnection.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowNodeName, name: "source", traits: {"smithy.api#required" => {}}))
@@ -1336,7 +1336,7 @@ module Aws::BedrockAgent
     FlowConnectionConfiguration.type = Types::FlowConnectionConfiguration
     FlowConnectionType.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATA", traits: {"smithy.api#enumValue" => "Data"}))
     FlowConnectionType.add_member(:conditional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONDITIONAL", traits: {"smithy.api#enumValue" => "Conditional"}))
-    FlowConnections.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FlowConnection, name: "member")
+    FlowConnections.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowConnection, name: "member"))
     FlowDataConnectionConfiguration.add_member(:source_output, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowNodeOutputName, name: "sourceOutput", traits: {"smithy.api#required" => {}}))
     FlowDataConnectionConfiguration.add_member(:target_input, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowNodeInputName, name: "targetInput", traits: {"smithy.api#required" => {}}))
     FlowDataConnectionConfiguration.type = Types::FlowDataConnectionConfiguration
@@ -1380,11 +1380,11 @@ module Aws::BedrockAgent
     FlowNodeInputCategory.add_member(:loop_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOOP_CONDITION", traits: {"smithy.api#enumValue" => "LoopCondition"}))
     FlowNodeInputCategory.add_member(:return_value_to_loop_start, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RETURN_VALUE_TO_LOOP_START", traits: {"smithy.api#enumValue" => "ReturnValueToLoopStart"}))
     FlowNodeInputCategory.add_member(:exit_loop, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXIT_LOOP", traits: {"smithy.api#enumValue" => "ExitLoop"}))
-    FlowNodeInputs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FlowNodeInput, name: "member")
+    FlowNodeInputs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowNodeInput, name: "member"))
     FlowNodeOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowNodeOutputName, name: "name", traits: {"smithy.api#required" => {}}))
     FlowNodeOutput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowNodeIODataType, name: "type", traits: {"smithy.api#required" => {}}))
     FlowNodeOutput.type = Types::FlowNodeOutput
-    FlowNodeOutputs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FlowNodeOutput, name: "member")
+    FlowNodeOutputs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowNodeOutput, name: "member"))
     FlowNodeType.add_member(:input, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INPUT", traits: {"smithy.api#enumValue" => "Input"}))
     FlowNodeType.add_member(:output, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OUTPUT", traits: {"smithy.api#enumValue" => "Output"}))
     FlowNodeType.add_member(:knowledge_base, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KNOWLEDGE_BASE", traits: {"smithy.api#enumValue" => "KnowledgeBase"}))
@@ -1401,12 +1401,12 @@ module Aws::BedrockAgent
     FlowNodeType.add_member(:loop, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOOP", traits: {"smithy.api#enumValue" => "Loop"}))
     FlowNodeType.add_member(:loop_input, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOOP_INPUT", traits: {"smithy.api#enumValue" => "LoopInput"}))
     FlowNodeType.add_member(:loop_controller, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOOP_CONTROLLER", traits: {"smithy.api#enumValue" => "LoopController"}))
-    FlowNodes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FlowNode, name: "member")
+    FlowNodes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowNode, name: "member"))
     FlowStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
     FlowStatus.add_member(:prepared, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PREPARED", traits: {"smithy.api#enumValue" => "Prepared"}))
     FlowStatus.add_member(:preparing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PREPARING", traits: {"smithy.api#enumValue" => "Preparing"}))
     FlowStatus.add_member(:not_prepared, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_PREPARED", traits: {"smithy.api#enumValue" => "NotPrepared"}))
-    FlowSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FlowSummary, name: "member")
+    FlowSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowSummary, name: "member"))
     FlowSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowName, name: "name", traits: {"smithy.api#required" => {}}))
     FlowSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowDescription, name: "description"))
     FlowSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowId, name: "id", traits: {"smithy.api#required" => {}}))
@@ -1491,8 +1491,8 @@ module Aws::BedrockAgent
     FlowValidationType.add_member(:multiple_loop_controller_nodes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTIPLE_LOOP_CONTROLLER_NODES", traits: {"smithy.api#enumValue" => "MultipleLoopControllerNodes"}))
     FlowValidationType.add_member(:loop_incompatible_node_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOOP_INCOMPATIBLE_NODE_TYPE", traits: {"smithy.api#enumValue" => "LoopIncompatibleNodeType"}))
     FlowValidationType.add_member(:invalid_loop_boundary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_LOOP_BOUNDARY", traits: {"smithy.api#enumValue" => "InvalidLoopBoundary"}))
-    FlowValidations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FlowValidation, name: "member")
-    FlowVersionSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FlowVersionSummary, name: "member")
+    FlowValidations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowValidation, name: "member"))
+    FlowVersionSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowVersionSummary, name: "member"))
     FlowVersionSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowId, name: "id", traits: {"smithy.api#required" => {}}))
     FlowVersionSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowArn, name: "arn", traits: {"smithy.api#required" => {}}))
     FlowVersionSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowStatus, name: "status", traits: {"smithy.api#required" => {}}))
@@ -1507,7 +1507,7 @@ module Aws::BedrockAgent
     FunctionSchema.add_member(:functions, Types::FunctionSchema::Functions, ::Smithy::Schema::Shapes::MemberShape.new(target: Functions, name: "functions"))
     FunctionSchema.add_member(:unknown, Types::FunctionSchema::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     FunctionSchema.type = Types::FunctionSchema
-    Functions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Function, name: "member")
+    Functions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Function, name: "member"))
     GetAgentActionGroupRequest.add_member(:agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "agentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAgentActionGroupRequest.add_member(:agent_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "agentVersion", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAgentActionGroupRequest.add_member(:action_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "actionGroupId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1625,7 +1625,7 @@ module Aws::BedrockAgent
     HierarchicalChunkingConfiguration.type = Types::HierarchicalChunkingConfiguration
     HierarchicalChunkingLevelConfiguration.add_member(:max_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxTokens", traits: {"smithy.api#range" => {"min" => 1, "max" => 8192}, "smithy.api#required" => {}}))
     HierarchicalChunkingLevelConfiguration.type = Types::HierarchicalChunkingLevelConfiguration
-    HierarchicalChunkingLevelConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchicalChunkingLevelConfiguration, name: "member")
+    HierarchicalChunkingLevelConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchicalChunkingLevelConfiguration, name: "member"))
     IncludeExclude.add_member(:include, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCLUDE", traits: {"smithy.api#enumValue" => "INCLUDE"}))
     IncludeExclude.add_member(:exclude, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXCLUDE", traits: {"smithy.api#enumValue" => "EXCLUDE"}))
     IncompatibleConnectionDataTypeFlowValidationDetails.add_member(:connection, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowConnectionName, name: "connection", traits: {"smithy.api#required" => {}}))
@@ -1663,8 +1663,8 @@ module Aws::BedrockAgent
     IngestionJobFilter.type = Types::IngestionJobFilter
     IngestionJobFilterAttribute.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATUS", traits: {"smithy.api#enumValue" => "STATUS"}))
     IngestionJobFilterOperator.add_member(:eq, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQ", traits: {"smithy.api#enumValue" => "EQ"}))
-    IngestionJobFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IngestionJobFilterValue, name: "member")
-    IngestionJobFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IngestionJobFilter, name: "member")
+    IngestionJobFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IngestionJobFilterValue, name: "member"))
+    IngestionJobFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IngestionJobFilter, name: "member"))
     IngestionJobSortBy.add_member(:attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: IngestionJobSortByAttribute, name: "attribute", traits: {"smithy.api#required" => {}}))
     IngestionJobSortBy.add_member(:order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "order", traits: {"smithy.api#required" => {}}))
     IngestionJobSortBy.type = Types::IngestionJobSortBy
@@ -1684,7 +1684,7 @@ module Aws::BedrockAgent
     IngestionJobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     IngestionJobStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPING", traits: {"smithy.api#enumValue" => "STOPPING"}))
     IngestionJobStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
-    IngestionJobSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IngestionJobSummary, name: "member")
+    IngestionJobSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IngestionJobSummary, name: "member"))
     IngestionJobSummary.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "knowledgeBaseId", traits: {"smithy.api#required" => {}}))
     IngestionJobSummary.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "dataSourceId", traits: {"smithy.api#required" => {}}))
     IngestionJobSummary.add_member(:ingestion_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ingestionJobId", traits: {"smithy.api#required" => {}}))
@@ -1742,8 +1742,8 @@ module Aws::BedrockAgent
     KnowledgeBaseDocumentDetail.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
     KnowledgeBaseDocumentDetail.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimestamp, name: "updatedAt"))
     KnowledgeBaseDocumentDetail.type = Types::KnowledgeBaseDocumentDetail
-    KnowledgeBaseDocumentDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseDocumentDetail, name: "member")
-    KnowledgeBaseDocuments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseDocument, name: "member")
+    KnowledgeBaseDocumentDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseDocumentDetail, name: "member"))
+    KnowledgeBaseDocuments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseDocument, name: "member"))
     KnowledgeBaseFlowNodeConfiguration.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowKnowledgeBaseId, name: "knowledgeBaseId", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => "", "smithy.api#required" => {}}))
     KnowledgeBaseFlowNodeConfiguration.add_member(:model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseModelIdentifier, name: "modelId"))
     KnowledgeBaseFlowNodeConfiguration.add_member(:guardrail_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailConfiguration, name: "guardrailConfiguration"))
@@ -1776,7 +1776,7 @@ module Aws::BedrockAgent
     KnowledgeBaseStorageType.add_member(:neptune_analytics, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEPTUNE_ANALYTICS", traits: {"smithy.api#enumValue" => "NEPTUNE_ANALYTICS"}))
     KnowledgeBaseStorageType.add_member(:opensearch_managed_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPENSEARCH_MANAGED_CLUSTER", traits: {"smithy.api#enumValue" => "OPENSEARCH_MANAGED_CLUSTER"}))
     KnowledgeBaseStorageType.add_member(:s3_vectors, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3_VECTORS", traits: {"smithy.api#enumValue" => "S3_VECTORS"}))
-    KnowledgeBaseSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseSummary, name: "member")
+    KnowledgeBaseSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseSummary, name: "member"))
     KnowledgeBaseSummary.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "knowledgeBaseId", traits: {"smithy.api#required" => {}}))
     KnowledgeBaseSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
     KnowledgeBaseSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
@@ -1923,7 +1923,7 @@ module Aws::BedrockAgent
     Message.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationRole, name: "role", traits: {"smithy.api#required" => {}}))
     Message.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentBlocks, name: "content", traits: {"smithy.api#required" => {}}))
     Message.type = Types::Message
-    Messages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "member")
+    Messages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "member"))
     MetadataAttribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "key", traits: {"smithy.api#required" => {}}))
     MetadataAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataAttributeValue, name: "value", traits: {"smithy.api#required" => {}}))
     MetadataAttribute.type = Types::MetadataAttribute
@@ -1933,7 +1933,7 @@ module Aws::BedrockAgent
     MetadataAttributeValue.add_member(:string_value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue, name: "stringValue"))
     MetadataAttributeValue.add_member(:string_list_value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringListValue, name: "stringListValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}}))
     MetadataAttributeValue.type = Types::MetadataAttributeValue
-    MetadataAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataAttribute, name: "member")
+    MetadataAttributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataAttribute, name: "member"))
     MetadataConfigurationForReranking.add_member(:selection_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RerankingMetadataSelectionMode, name: "selectionMode", traits: {"smithy.api#required" => {}}))
     MetadataConfigurationForReranking.add_member(:selective_mode_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RerankingMetadataSelectiveModeConfiguration, name: "selectiveModeConfiguration"))
     MetadataConfigurationForReranking.type = Types::MetadataConfigurationForReranking
@@ -2022,8 +2022,8 @@ module Aws::BedrockAgent
     ParameterDetail.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, name: "type", traits: {"smithy.api#required" => {}}))
     ParameterDetail.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "required"))
     ParameterDetail.type = Types::ParameterDetail
-    ParameterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "key")
-    ParameterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterDetail, name: "value")
+    ParameterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "key"))
+    ParameterMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterDetail, name: "value"))
     ParsingConfiguration.add_member(:parsing_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ParsingStrategy, name: "parsingStrategy", traits: {"smithy.api#required" => {}}))
     ParsingConfiguration.add_member(:bedrock_foundation_model_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BedrockFoundationModelConfiguration, name: "bedrockFoundationModelConfiguration"))
     ParsingConfiguration.add_member(:bedrock_data_automation_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BedrockDataAutomationConfiguration, name: "bedrockDataAutomationConfiguration"))
@@ -2039,7 +2039,7 @@ module Aws::BedrockAgent
     PatternObjectFilter.type = Types::PatternObjectFilter
     PatternObjectFilterConfiguration.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: PatternObjectFilterList, name: "filters", traits: {"smithy.api#required" => {}}))
     PatternObjectFilterConfiguration.type = Types::PatternObjectFilterConfiguration
-    PatternObjectFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PatternObjectFilter, name: "member")
+    PatternObjectFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PatternObjectFilter, name: "member"))
     PerformanceConfigLatency.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "standard"}))
     PerformanceConfigLatency.add_member(:optimized, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPTIMIZED", traits: {"smithy.api#enumValue" => "optimized"}))
     PerformanceConfiguration.add_member(:latency, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceConfigLatency, name: "latency", traits: {"smithy.api#default" => "standard"}))
@@ -2075,7 +2075,7 @@ module Aws::BedrockAgent
     PromptConfiguration.add_member(:foundation_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelIdentifier, name: "foundationModel"))
     PromptConfiguration.add_member(:additional_model_request_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Document, name: "additionalModelRequestFields"))
     PromptConfiguration.type = Types::PromptConfiguration
-    PromptConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PromptConfiguration, name: "member")
+    PromptConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptConfiguration, name: "member"))
     PromptFlowNodeConfiguration.add_member(:source_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptFlowNodeSourceConfiguration, name: "sourceConfiguration", traits: {"smithy.api#required" => {}}))
     PromptFlowNodeConfiguration.add_member(:guardrail_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailConfiguration, name: "guardrailConfiguration"))
     PromptFlowNodeConfiguration.type = Types::PromptFlowNodeConfiguration
@@ -2099,11 +2099,11 @@ module Aws::BedrockAgent
     PromptInferenceConfiguration.type = Types::PromptInferenceConfiguration
     PromptInputVariable.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptInputVariableName, name: "name"))
     PromptInputVariable.type = Types::PromptInputVariable
-    PromptInputVariablesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PromptInputVariable, name: "member")
+    PromptInputVariablesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptInputVariable, name: "member"))
     PromptMetadataEntry.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptMetadataKey, name: "key", traits: {"smithy.api#required" => {}}))
     PromptMetadataEntry.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptMetadataValue, name: "value", traits: {"smithy.api#required" => {}}))
     PromptMetadataEntry.type = Types::PromptMetadataEntry
-    PromptMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PromptMetadataEntry, name: "member")
+    PromptMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptMetadataEntry, name: "member"))
     PromptModelInferenceConfiguration.add_member(:temperature, ::Smithy::Schema::Shapes::MemberShape.new(target: Temperature, name: "temperature"))
     PromptModelInferenceConfiguration.add_member(:top_p, ::Smithy::Schema::Shapes::MemberShape.new(target: TopP, name: "topP"))
     PromptModelInferenceConfiguration.add_member(:max_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: MaximumLength, name: "maxTokens"))
@@ -2114,7 +2114,7 @@ module Aws::BedrockAgent
     PromptOverrideConfiguration.type = Types::PromptOverrideConfiguration
     PromptState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     PromptState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    PromptSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PromptSummary, name: "member")
+    PromptSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptSummary, name: "member"))
     PromptSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptName, name: "name", traits: {"smithy.api#required" => {}}))
     PromptSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptDescription, name: "description"))
     PromptSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptId, name: "id", traits: {"smithy.api#required" => {}}))
@@ -2143,13 +2143,13 @@ module Aws::BedrockAgent
     PromptVariant.add_member(:additional_model_request_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Document, name: "additionalModelRequestFields"))
     PromptVariant.add_member(:gen_ai_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptGenAiResource, name: "genAiResource"))
     PromptVariant.type = Types::PromptVariant
-    PromptVariantList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PromptVariant, name: "member")
+    PromptVariantList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptVariant, name: "member"))
     QueryEngineType.add_member(:redshift, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REDSHIFT", traits: {"smithy.api#enumValue" => "REDSHIFT"}))
     QueryGenerationColumn.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryGenerationColumnName, name: "name"))
     QueryGenerationColumn.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionString, name: "description"))
     QueryGenerationColumn.add_member(:inclusion, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludeExclude, name: "inclusion"))
     QueryGenerationColumn.type = Types::QueryGenerationColumn
-    QueryGenerationColumns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryGenerationColumn, name: "member")
+    QueryGenerationColumns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryGenerationColumn, name: "member"))
     QueryGenerationConfiguration.add_member(:execution_timeout_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryExecutionTimeoutSeconds, name: "executionTimeoutSeconds"))
     QueryGenerationConfiguration.add_member(:generation_context, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryGenerationContext, name: "generationContext"))
     QueryGenerationConfiguration.type = Types::QueryGenerationConfiguration
@@ -2161,7 +2161,7 @@ module Aws::BedrockAgent
     QueryGenerationTable.add_member(:inclusion, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludeExclude, name: "inclusion"))
     QueryGenerationTable.add_member(:columns, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryGenerationColumns, name: "columns"))
     QueryGenerationTable.type = Types::QueryGenerationTable
-    QueryGenerationTables.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryGenerationTable, name: "member")
+    QueryGenerationTables.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryGenerationTable, name: "member"))
     RdsConfiguration.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     RdsConfiguration.add_member(:credentials_secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "credentialsSecretArn", traits: {"smithy.api#required" => {}}))
     RdsConfiguration.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDatabaseName, name: "databaseName", traits: {"smithy.api#required" => {}}))
@@ -2174,7 +2174,7 @@ module Aws::BedrockAgent
     RdsFieldMapping.add_member(:metadata_field, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "metadataField", traits: {"smithy.api#required" => {}}))
     RdsFieldMapping.add_member(:custom_metadata_field, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "customMetadataField"))
     RdsFieldMapping.type = Types::RdsFieldMapping
-    RecommendedActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendedAction, name: "member")
+    RecommendedActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendedAction, name: "member"))
     RedisEnterpriseCloudConfiguration.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: RedisEnterpriseCloudEndpoint, name: "endpoint", traits: {"smithy.api#required" => {}}))
     RedisEnterpriseCloudConfiguration.add_member(:vector_index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RedisEnterpriseCloudIndexName, name: "vectorIndexName", traits: {"smithy.api#required" => {}}))
     RedisEnterpriseCloudConfiguration.add_member(:credentials_secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "credentialsSecretArn", traits: {"smithy.api#required" => {}}))
@@ -2210,7 +2210,7 @@ module Aws::BedrockAgent
     RedshiftQueryEngineStorageConfiguration.add_member(:aws_data_catalog_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftQueryEngineAwsDataCatalogStorageConfiguration, name: "awsDataCatalogConfiguration"))
     RedshiftQueryEngineStorageConfiguration.add_member(:redshift_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftQueryEngineRedshiftStorageConfiguration, name: "redshiftConfiguration"))
     RedshiftQueryEngineStorageConfiguration.type = Types::RedshiftQueryEngineStorageConfiguration
-    RedshiftQueryEngineStorageConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftQueryEngineStorageConfiguration, name: "member")
+    RedshiftQueryEngineStorageConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftQueryEngineStorageConfiguration, name: "member"))
     RedshiftQueryEngineStorageType.add_member(:redshift, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REDSHIFT", traits: {"smithy.api#enumValue" => "REDSHIFT"}))
     RedshiftQueryEngineStorageType.add_member(:aws_data_catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_DATA_CATALOG", traits: {"smithy.api#enumValue" => "AWS_DATA_CATALOG"}))
     RedshiftQueryEngineType.add_member(:serverless, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVERLESS", traits: {"smithy.api#enumValue" => "SERVERLESS"}))
@@ -2253,7 +2253,7 @@ module Aws::BedrockAgent
     S3Identifier.type = Types::S3Identifier
     S3Location.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketUri, name: "uri", traits: {"smithy.api#required" => {}}))
     S3Location.type = Types::S3Location
-    S3Prefixes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: S3Prefix, name: "member")
+    S3Prefixes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Prefix, name: "member"))
     S3VectorsConfiguration.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketArn, name: "vectorBucketArn"))
     S3VectorsConfiguration.add_member(:index_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexArn, name: "indexArn"))
     S3VectorsConfiguration.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "indexName"))
@@ -2270,7 +2270,7 @@ module Aws::BedrockAgent
     SalesforceSourceConfiguration.type = Types::SalesforceSourceConfiguration
     SeedUrl.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "url"))
     SeedUrl.type = Types::SeedUrl
-    SeedUrls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SeedUrl, name: "member")
+    SeedUrls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SeedUrl, name: "member"))
     SemanticChunkingConfiguration.add_member(:max_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxTokens", traits: {"smithy.api#range" => {"min" => 1}, "smithy.api#required" => {}}))
     SemanticChunkingConfiguration.add_member(:buffer_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "bufferSize", traits: {"smithy.api#range" => {"min" => 0, "max" => 1}, "smithy.api#required" => {}}))
     SemanticChunkingConfiguration.add_member(:breakpoint_percentile_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "breakpointPercentileThreshold", traits: {"smithy.api#range" => {"min" => 50, "max" => 99}, "smithy.api#required" => {}}))
@@ -2289,7 +2289,7 @@ module Aws::BedrockAgent
     SharePointDataSourceConfiguration.add_member(:crawler_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SharePointCrawlerConfiguration, name: "crawlerConfiguration"))
     SharePointDataSourceConfiguration.type = Types::SharePointDataSourceConfiguration
     SharePointHostType.add_member(:online, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONLINE", traits: {"smithy.api#enumValue" => "ONLINE"}))
-    SharePointSiteUrls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HttpsUrl, name: "member")
+    SharePointSiteUrls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpsUrl, name: "member"))
     SharePointSourceConfiguration.add_member(:tenant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Microsoft365TenantId, name: "tenantId"))
     SharePointSourceConfiguration.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: SharePointDomain, name: "domain", traits: {"smithy.api#required" => {}}))
     SharePointSourceConfiguration.add_member(:site_urls, ::Smithy::Schema::Shapes::MemberShape.new(target: SharePointSiteUrls, name: "siteUrls", traits: {"smithy.api#required" => {}}))
@@ -2318,7 +2318,7 @@ module Aws::BedrockAgent
     StopIngestionJobRequest.type = Types::StopIngestionJobRequest
     StopIngestionJobResponse.add_member(:ingestion_job, ::Smithy::Schema::Shapes::MemberShape.new(target: IngestionJob, name: "ingestionJob", traits: {"smithy.api#required" => {}}))
     StopIngestionJobResponse.type = Types::StopIngestionJobResponse
-    StopSequences.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    StopSequences.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     StorageConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseStorageType, name: "type", traits: {"smithy.api#required" => {}}))
     StorageConfiguration.add_member(:opensearch_serverless_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenSearchServerlessConfiguration, name: "opensearchServerlessConfiguration"))
     StorageConfiguration.add_member(:opensearch_managed_cluster_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenSearchManagedClusterConfiguration, name: "opensearchManagedClusterConfiguration"))
@@ -2336,27 +2336,27 @@ module Aws::BedrockAgent
     StorageFlowNodeServiceConfiguration.add_member(:s3, Types::StorageFlowNodeServiceConfiguration::S3, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageFlowNodeS3Configuration, name: "s3"))
     StorageFlowNodeServiceConfiguration.add_member(:unknown, Types::StorageFlowNodeServiceConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     StorageFlowNodeServiceConfiguration.type = Types::StorageFlowNodeServiceConfiguration
-    StringListValue.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue, name: "member")
+    StringListValue.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue, name: "member"))
     SupplementalDataStorageConfiguration.add_member(:storage_locations, ::Smithy::Schema::Shapes::MemberShape.new(target: SupplementalDataStorageLocations, name: "storageLocations", traits: {"smithy.api#required" => {}}))
     SupplementalDataStorageConfiguration.type = Types::SupplementalDataStorageConfiguration
     SupplementalDataStorageLocation.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: SupplementalDataStorageLocationType, name: "type", traits: {"smithy.api#required" => {}}))
     SupplementalDataStorageLocation.add_member(:s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "s3Location"))
     SupplementalDataStorageLocation.type = Types::SupplementalDataStorageLocation
     SupplementalDataStorageLocationType.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3", traits: {"smithy.api#enumValue" => "S3"}))
-    SupplementalDataStorageLocations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SupplementalDataStorageLocation, name: "member")
+    SupplementalDataStorageLocations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupplementalDataStorageLocation, name: "member"))
     SupportedLanguages.add_member(:python_3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PYTHON_3", traits: {"smithy.api#enumValue" => "Python_3"}))
     SystemContentBlock.add_member(:text, Types::SystemContentBlock::Text, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "text"))
     SystemContentBlock.add_member(:cache_point, Types::SystemContentBlock::CachePoint, ::Smithy::Schema::Shapes::MemberShape.new(target: CachePointBlock, name: "cachePoint"))
     SystemContentBlock.add_member(:unknown, Types::SystemContentBlock::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     SystemContentBlock.type = Types::SystemContentBlock
-    SystemContentBlocks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SystemContentBlock, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    SystemContentBlocks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemContentBlock, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourcesArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TagsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TextContentDoc.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: Data, name: "data", traits: {"smithy.api#required" => {}}))
     TextContentDoc.type = Types::TextContentDoc
     TextPromptTemplateConfiguration.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: TextPrompt, name: "text", traits: {"smithy.api#required" => {}}))
@@ -2384,7 +2384,7 @@ module Aws::BedrockAgent
     ToolSpecification.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "description"))
     ToolSpecification.add_member(:input_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolInputSchema, name: "inputSchema", traits: {"smithy.api#required" => {}}))
     ToolSpecification.type = Types::ToolSpecification
-    Tools.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tool, name: "member")
+    Tools.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tool, name: "member"))
     Transformation.add_member(:transformation_function, ::Smithy::Schema::Shapes::MemberShape.new(target: TransformationFunction, name: "transformationFunction", traits: {"smithy.api#required" => {}}))
     Transformation.add_member(:step_to_apply, ::Smithy::Schema::Shapes::MemberShape.new(target: StepType, name: "stepToApply", traits: {"smithy.api#required" => {}}))
     Transformation.type = Types::Transformation
@@ -2392,7 +2392,7 @@ module Aws::BedrockAgent
     TransformationFunction.type = Types::TransformationFunction
     TransformationLambdaConfiguration.add_member(:lambda_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaArn, name: "lambdaArn", traits: {"smithy.api#required" => {}}))
     TransformationLambdaConfiguration.type = Types::TransformationLambdaConfiguration
-    Transformations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Transformation, name: "member")
+    Transformations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Transformation, name: "member"))
     Type.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING", traits: {"smithy.api#enumValue" => "string"}))
     Type.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NUMBER", traits: {"smithy.api#enumValue" => "number"}))
     Type.add_member(:integer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTEGER", traits: {"smithy.api#enumValue" => "integer"}))
@@ -2570,7 +2570,7 @@ module Aws::BedrockAgent
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     VectorIngestionConfiguration.add_member(:chunking_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ChunkingConfiguration, name: "chunkingConfiguration"))
     VectorIngestionConfiguration.add_member(:custom_transformation_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomTransformationConfiguration, name: "customTransformationConfiguration"))
     VectorIngestionConfiguration.add_member(:parsing_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ParsingConfiguration, name: "parsingConfiguration"))

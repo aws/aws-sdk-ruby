@@ -277,7 +277,7 @@ module Aws::SFN
     ActivityFailedEventDetails.type = Types::ActivityFailedEventDetails
     ActivityLimitExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ActivityLimitExceeded.type = Types::ActivityLimitExceeded
-    ActivityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActivityListItem, name: "member")
+    ActivityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivityListItem, name: "member"))
     ActivityListItem.add_member(:activity_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "activityArn", traits: {"smithy.api#required" => {}}))
     ActivityListItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
     ActivityListItem.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDate", traits: {"smithy.api#required" => {}}))
@@ -301,8 +301,8 @@ module Aws::SFN
     ActivityTimedOutEventDetails.type = Types::ActivityTimedOutEventDetails
     ActivityWorkerLimitExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ActivityWorkerLimitExceeded.type = Types::ActivityWorkerLimitExceeded
-    AssignedVariables.key = ::Smithy::Schema::Shapes::MemberShape.new(target: VariableName, name: "key")
-    AssignedVariables.value = ::Smithy::Schema::Shapes::MemberShape.new(target: VariableValue, name: "value")
+    AssignedVariables.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableName, name: "key"))
+    AssignedVariables.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableValue, name: "value"))
     AssignedVariablesDetails.add_member(:truncated, ::Smithy::Schema::Shapes::MemberShape.new(target: Truncated, name: "truncated", traits: {"smithy.api#default" => false}))
     AssignedVariablesDetails.type = Types::AssignedVariablesDetails
     BillingDetails.add_member(:billed_memory_used_in_mb, ::Smithy::Schema::Shapes::MemberShape.new(target: BilledMemoryUsed, name: "billedMemoryUsedInMB", traits: {"smithy.api#default" => 0}))
@@ -467,7 +467,7 @@ module Aws::SFN
     ExecutionFailedEventDetails.type = Types::ExecutionFailedEventDetails
     ExecutionLimitExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ExecutionLimitExceeded.type = Types::ExecutionLimitExceeded
-    ExecutionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionListItem, name: "member")
+    ExecutionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionListItem, name: "member"))
     ExecutionListItem.add_member(:execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "executionArn", traits: {"smithy.api#required" => {}}))
     ExecutionListItem.add_member(:state_machine_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "stateMachineArn", traits: {"smithy.api#required" => {}}))
     ExecutionListItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
@@ -567,7 +567,7 @@ module Aws::SFN
     HistoryEvent.type = Types::HistoryEvent
     HistoryEventExecutionDataDetails.add_member(:truncated, ::Smithy::Schema::Shapes::MemberShape.new(target: Truncated, name: "truncated", traits: {"smithy.api#default" => false}))
     HistoryEventExecutionDataDetails.type = Types::HistoryEventExecutionDataDetails
-    HistoryEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HistoryEvent, name: "member")
+    HistoryEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HistoryEvent, name: "member"))
     HistoryEventType.add_member(:activity_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ActivityFailed", traits: {"smithy.api#enumValue" => "ActivityFailed"}))
     HistoryEventType.add_member(:activity_scheduled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ActivityScheduled", traits: {"smithy.api#enumValue" => "ActivityScheduled"}))
     HistoryEventType.add_member(:activity_schedule_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ActivityScheduleFailed", traits: {"smithy.api#enumValue" => "ActivityScheduleFailed"}))
@@ -758,7 +758,7 @@ module Aws::SFN
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
     LogDestination.add_member(:cloud_watch_logs_log_group, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogsLogGroup, name: "cloudWatchLogsLogGroup"))
     LogDestination.type = Types::LogDestination
-    LogDestinationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogDestination, name: "member")
+    LogDestinationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDestination, name: "member"))
     LogLevel.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
     LogLevel.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
     LogLevel.add_member(:fatal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FATAL", traits: {"smithy.api#enumValue" => "FATAL"}))
@@ -795,7 +795,7 @@ module Aws::SFN
     MapRunItemCounts.add_member(:failures_not_redrivable, ::Smithy::Schema::Shapes::MemberShape.new(target: LongObject, name: "failuresNotRedrivable"))
     MapRunItemCounts.add_member(:pending_redrive, ::Smithy::Schema::Shapes::MemberShape.new(target: LongObject, name: "pendingRedrive"))
     MapRunItemCounts.type = Types::MapRunItemCounts
-    MapRunList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MapRunListItem, name: "member")
+    MapRunList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MapRunListItem, name: "member"))
     MapRunListItem.add_member(:execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "executionArn", traits: {"smithy.api#required" => {}}))
     MapRunListItem.add_member(:map_run_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LongArn, name: "mapRunArn", traits: {"smithy.api#required" => {}}))
     MapRunListItem.add_member(:state_machine_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "stateMachineArn", traits: {"smithy.api#required" => {}}))
@@ -830,7 +830,7 @@ module Aws::SFN
     ResourceNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ResourceNotFound.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceName"))
     ResourceNotFound.type = Types::ResourceNotFound
-    RoutingConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingConfigurationListItem, name: "member")
+    RoutingConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingConfigurationListItem, name: "member"))
     RoutingConfigurationListItem.add_member(:state_machine_version_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "stateMachineVersionArn", traits: {"smithy.api#required" => {}}))
     RoutingConfigurationListItem.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionWeight, name: "weight", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     RoutingConfigurationListItem.type = Types::RoutingConfigurationListItem
@@ -887,7 +887,7 @@ module Aws::SFN
     StateExitedEventDetails.add_member(:assigned_variables, ::Smithy::Schema::Shapes::MemberShape.new(target: AssignedVariables, name: "assignedVariables"))
     StateExitedEventDetails.add_member(:assigned_variables_details, ::Smithy::Schema::Shapes::MemberShape.new(target: AssignedVariablesDetails, name: "assignedVariablesDetails"))
     StateExitedEventDetails.type = Types::StateExitedEventDetails
-    StateMachineAliasList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StateMachineAliasListItem, name: "member")
+    StateMachineAliasList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StateMachineAliasListItem, name: "member"))
     StateMachineAliasListItem.add_member(:state_machine_alias_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LongArn, name: "stateMachineAliasArn", traits: {"smithy.api#required" => {}}))
     StateMachineAliasListItem.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDate", traits: {"smithy.api#required" => {}}))
     StateMachineAliasListItem.type = Types::StateMachineAliasListItem
@@ -899,7 +899,7 @@ module Aws::SFN
     StateMachineDoesNotExist.type = Types::StateMachineDoesNotExist
     StateMachineLimitExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     StateMachineLimitExceeded.type = Types::StateMachineLimitExceeded
-    StateMachineList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StateMachineListItem, name: "member")
+    StateMachineList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StateMachineListItem, name: "member"))
     StateMachineListItem.add_member(:state_machine_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "stateMachineArn", traits: {"smithy.api#required" => {}}))
     StateMachineListItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
     StateMachineListItem.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: StateMachineType, name: "type", traits: {"smithy.api#required" => {}}))
@@ -911,7 +911,7 @@ module Aws::SFN
     StateMachineType.add_member(:express, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPRESS", traits: {"smithy.api#enumValue" => "EXPRESS"}))
     StateMachineTypeNotSupported.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     StateMachineTypeNotSupported.type = Types::StateMachineTypeNotSupported
-    StateMachineVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StateMachineVersionListItem, name: "member")
+    StateMachineVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StateMachineVersionListItem, name: "member"))
     StateMachineVersionListItem.add_member(:state_machine_version_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LongArn, name: "stateMachineVersionArn", traits: {"smithy.api#required" => {}}))
     StateMachineVersionListItem.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDate", traits: {"smithy.api#required" => {}}))
     StateMachineVersionListItem.type = Types::StateMachineVersionListItem
@@ -927,8 +927,8 @@ module Aws::SFN
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -1037,7 +1037,7 @@ module Aws::SFN
     ValidateStateMachineDefinitionDiagnostic.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidateStateMachineDefinitionMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ValidateStateMachineDefinitionDiagnostic.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidateStateMachineDefinitionLocation, name: "location"))
     ValidateStateMachineDefinitionDiagnostic.type = Types::ValidateStateMachineDefinitionDiagnostic
-    ValidateStateMachineDefinitionDiagnosticList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidateStateMachineDefinitionDiagnostic, name: "member")
+    ValidateStateMachineDefinitionDiagnosticList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidateStateMachineDefinitionDiagnostic, name: "member"))
     ValidateStateMachineDefinitionInput.add_member(:definition, ::Smithy::Schema::Shapes::MemberShape.new(target: Definition, name: "definition", traits: {"smithy.api#required" => {}}))
     ValidateStateMachineDefinitionInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: StateMachineType, name: "type"))
     ValidateStateMachineDefinitionInput.add_member(:severity, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidateStateMachineDefinitionSeverity, name: "severity"))
@@ -1058,9 +1058,9 @@ module Aws::SFN
     ValidationExceptionReason.add_member(:missing_required_parameter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISSING_REQUIRED_PARAMETER", traits: {"smithy.api#enumValue" => "MISSING_REQUIRED_PARAMETER"}))
     ValidationExceptionReason.add_member(:cannot_update_completed_map_run, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_UPDATE_COMPLETED_MAP_RUN", traits: {"smithy.api#enumValue" => "CANNOT_UPDATE_COMPLETED_MAP_RUN"}))
     ValidationExceptionReason.add_member(:invalid_routing_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_ROUTING_CONFIGURATION", traits: {"smithy.api#enumValue" => "INVALID_ROUTING_CONFIGURATION"}))
-    VariableNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VariableName, name: "member")
-    VariableReferences.key = ::Smithy::Schema::Shapes::MemberShape.new(target: StateName, name: "key")
-    VariableReferences.value = ::Smithy::Schema::Shapes::MemberShape.new(target: VariableNameList, name: "value")
+    VariableNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableName, name: "member"))
+    VariableReferences.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: StateName, name: "key"))
+    VariableReferences.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableNameList, name: "value"))
 
     AWSStepFunctions = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.sfn#AWSStepFunctions"

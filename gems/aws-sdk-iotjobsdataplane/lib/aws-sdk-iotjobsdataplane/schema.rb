@@ -70,8 +70,8 @@ module Aws::IoTJobsDataPlane
 
     CertificateValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     CertificateValidationException.type = Types::CertificateValidationException
-    CommandExecutionParameterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: CommandParameterName, name: "key")
-    CommandExecutionParameterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CommandParameterValue, name: "value")
+    CommandExecutionParameterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: CommandParameterName, name: "key"))
+    CommandExecutionParameterMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CommandParameterValue, name: "value"))
     CommandParameterValue.add_member(:s, ::Smithy::Schema::Shapes::MemberShape.new(target: StringParameterValue, name: "S"))
     CommandParameterValue.add_member(:b, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanParameterValue, name: "B"))
     CommandParameterValue.add_member(:i, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerParameterValue, name: "I"))
@@ -90,8 +90,8 @@ module Aws::IoTJobsDataPlane
     DescribeJobExecutionRequest.type = Types::DescribeJobExecutionRequest
     DescribeJobExecutionResponse.add_member(:execution, ::Smithy::Schema::Shapes::MemberShape.new(target: JobExecution, name: "execution"))
     DescribeJobExecutionResponse.type = Types::DescribeJobExecutionResponse
-    DetailsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DetailsKey, name: "key")
-    DetailsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: DetailsValue, name: "value")
+    DetailsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DetailsKey, name: "key"))
+    DetailsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DetailsValue, name: "value"))
     GetPendingJobExecutionsRequest.add_member(:thing_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingName, name: "thingName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetPendingJobExecutionsRequest.type = Types::GetPendingJobExecutionsRequest
     GetPendingJobExecutionsResponse.add_member(:in_progress_jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: JobExecutionSummaryList, name: "inProgressJobs"))
@@ -134,7 +134,7 @@ module Aws::IoTJobsDataPlane
     JobExecutionSummary.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionNumber, name: "versionNumber", traits: {"smithy.api#default" => 0}))
     JobExecutionSummary.add_member(:execution_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionNumber, name: "executionNumber"))
     JobExecutionSummary.type = Types::JobExecutionSummary
-    JobExecutionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobExecutionSummary, name: "member")
+    JobExecutionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobExecutionSummary, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))

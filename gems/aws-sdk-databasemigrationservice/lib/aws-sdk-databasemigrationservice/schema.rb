@@ -497,7 +497,7 @@ module Aws::DatabaseMigrationService
     AccountQuota.add_member(:used, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "Used", traits: {"smithy.api#default" => 0}))
     AccountQuota.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "Max", traits: {"smithy.api#default" => 0}))
     AccountQuota.type = Types::AccountQuota
-    AccountQuotaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountQuota, name: "member", traits: {"smithy.api#xmlName" => "AccountQuota"})
+    AccountQuotaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountQuota, name: "member", traits: {"smithy.api#xmlName" => "AccountQuota"}))
     AddTagsToResourceMessage.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     AddTagsToResourceMessage.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     AddTagsToResourceMessage.type = Types::AddTagsToResourceMessage
@@ -508,10 +508,10 @@ module Aws::DatabaseMigrationService
     ApplyPendingMaintenanceActionMessage.type = Types::ApplyPendingMaintenanceActionMessage
     ApplyPendingMaintenanceActionResponse.add_member(:resource_pending_maintenance_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePendingMaintenanceActions, name: "ResourcePendingMaintenanceActions"))
     ApplyPendingMaintenanceActionResponse.type = Types::ApplyPendingMaintenanceActionResponse
-    ArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     AssessmentReportType.add_member(:pdf, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PDF", traits: {"smithy.api#enumValue" => "pdf"}))
     AssessmentReportType.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CSV", traits: {"smithy.api#enumValue" => "csv"}))
-    AssessmentReportTypesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentReportType, name: "member")
+    AssessmentReportTypesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentReportType, name: "member"))
     AuthMechanismValue.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "default"}))
     AuthMechanismValue.add_member(:mongodb_cr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MONGODB_CR", traits: {"smithy.api#enumValue" => "mongodb_cr"}))
     AuthMechanismValue.add_member(:scram_sha_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCRAM_SHA_1", traits: {"smithy.api#enumValue" => "scram_sha_1"}))
@@ -519,13 +519,13 @@ module Aws::DatabaseMigrationService
     AuthTypeValue.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASSWORD", traits: {"smithy.api#enumValue" => "password"}))
     AvailabilityZone.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     AvailabilityZone.type = Types::AvailabilityZone
-    AvailabilityZonesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    AvailableUpgradesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    AvailabilityZonesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    AvailableUpgradesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     BatchStartRecommendationsErrorEntry.add_member(:database_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseId"))
     BatchStartRecommendationsErrorEntry.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     BatchStartRecommendationsErrorEntry.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     BatchStartRecommendationsErrorEntry.type = Types::BatchStartRecommendationsErrorEntry
-    BatchStartRecommendationsErrorEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStartRecommendationsErrorEntry, name: "member")
+    BatchStartRecommendationsErrorEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStartRecommendationsErrorEntry, name: "member"))
     BatchStartRecommendationsRequest.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: StartRecommendationsRequestEntryList, name: "Data"))
     BatchStartRecommendationsRequest.type = Types::BatchStartRecommendationsRequest
     BatchStartRecommendationsResponse.add_member(:error_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStartRecommendationsErrorEntryList, name: "ErrorEntries"))
@@ -553,7 +553,7 @@ module Aws::DatabaseMigrationService
     Certificate.add_member(:signing_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SigningAlgorithm"))
     Certificate.add_member(:key_length, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "KeyLength"))
     Certificate.type = Types::Certificate
-    CertificateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Certificate, name: "member", traits: {"smithy.api#xmlName" => "Certificate"})
+    CertificateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Certificate, name: "member", traits: {"smithy.api#xmlName" => "Certificate"}))
     CharLengthSemantics.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "default"}))
     CharLengthSemantics.add_member(:char, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CHAR", traits: {"smithy.api#enumValue" => "char"}))
     CharLengthSemantics.add_member(:byte, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BYTE", traits: {"smithy.api#enumValue" => "byte"}))
@@ -578,13 +578,13 @@ module Aws::DatabaseMigrationService
     CollectorResponse.add_member(:modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ModifiedDate"))
     CollectorResponse.add_member(:inventory_data, ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryData, name: "InventoryData"))
     CollectorResponse.type = Types::CollectorResponse
-    CollectorResponses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CollectorResponse, name: "member")
+    CollectorResponses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectorResponse, name: "member"))
     CollectorShortInfoResponse.add_member(:collector_referenced_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CollectorReferencedId"))
     CollectorShortInfoResponse.add_member(:collector_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CollectorName"))
     CollectorShortInfoResponse.type = Types::CollectorShortInfoResponse
     CollectorStatus.add_member(:unregistered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNREGISTERED", traits: {"smithy.api#enumValue" => "UNREGISTERED"}))
     CollectorStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    CollectorsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CollectorShortInfoResponse, name: "member")
+    CollectorsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectorShortInfoResponse, name: "member"))
     CompressionTypeValue.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "none"}))
     CompressionTypeValue.add_member(:gzip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GZIP", traits: {"smithy.api#enumValue" => "gzip"}))
     ComputeConfig.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AvailabilityZone"))
@@ -604,7 +604,7 @@ module Aws::DatabaseMigrationService
     Connection.add_member(:endpoint_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EndpointIdentifier"))
     Connection.add_member(:replication_instance_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationInstanceIdentifier"))
     Connection.type = Types::Connection
-    ConnectionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Connection, name: "member", traits: {"smithy.api#xmlName" => "Connection"})
+    ConnectionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Connection, name: "member", traits: {"smithy.api#xmlName" => "Connection"}))
     CreateDataMigrationMessage.add_member(:data_migration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DataMigrationName"))
     CreateDataMigrationMessage.add_member(:migration_project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MigrationProjectIdentifier", traits: {"smithy.api#required" => {}}))
     CreateDataMigrationMessage.add_member(:data_migration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTypeValue, name: "DataMigrationType", traits: {"smithy.api#required" => {}}))
@@ -785,7 +785,7 @@ module Aws::DatabaseMigrationService
     DataMigration.add_member(:last_failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LastFailureMessage"))
     DataMigration.add_member(:stop_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StopReason"))
     DataMigration.type = Types::DataMigration
-    DataMigrationCidrBlock.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    DataMigrationCidrBlock.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     DataMigrationSettings.add_member(:number_of_jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "NumberOfJobs"))
     DataMigrationSettings.add_member(:cloudwatch_logs_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "CloudwatchLogsEnabled"))
     DataMigrationSettings.add_member(:selection_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretString, name: "SelectionRules"))
@@ -800,7 +800,7 @@ module Aws::DatabaseMigrationService
     DataMigrationStatistics.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "StartTime"))
     DataMigrationStatistics.add_member(:stop_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "StopTime"))
     DataMigrationStatistics.type = Types::DataMigrationStatistics
-    DataMigrations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataMigration, name: "member")
+    DataMigrations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataMigration, name: "member"))
     DataProvider.add_member(:data_provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DataProviderName"))
     DataProvider.add_member(:data_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DataProviderArn"))
     DataProvider.add_member(:data_provider_creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "DataProviderCreationTime"))
@@ -818,9 +818,9 @@ module Aws::DatabaseMigrationService
     DataProviderDescriptorDefinition.add_member(:secrets_manager_secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SecretsManagerSecretId"))
     DataProviderDescriptorDefinition.add_member(:secrets_manager_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SecretsManagerAccessRoleArn"))
     DataProviderDescriptorDefinition.type = Types::DataProviderDescriptorDefinition
-    DataProviderDescriptorDefinitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataProviderDescriptorDefinition, name: "member")
-    DataProviderDescriptorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataProviderDescriptor, name: "member")
-    DataProviderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataProvider, name: "member", traits: {"smithy.api#xmlName" => "DataProvider"})
+    DataProviderDescriptorDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProviderDescriptorDefinition, name: "member"))
+    DataProviderDescriptorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProviderDescriptor, name: "member"))
+    DataProviderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProvider, name: "member", traits: {"smithy.api#xmlName" => "DataProvider"}))
     DataProviderSettings.add_member(:redshift_settings, Types::DataProviderSettings::RedshiftSettings, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftDataProviderSettings, name: "RedshiftSettings"))
     DataProviderSettings.add_member(:postgre_sql_settings, Types::DataProviderSettings::PostgreSqlSettings, ::Smithy::Schema::Shapes::MemberShape.new(target: PostgreSqlDataProviderSettings, name: "PostgreSqlSettings"))
     DataProviderSettings.add_member(:my_sql_settings, Types::DataProviderSettings::MySqlSettings, ::Smithy::Schema::Shapes::MemberShape.new(target: MySqlDataProviderSettings, name: "MySqlSettings"))
@@ -841,7 +841,7 @@ module Aws::DatabaseMigrationService
     DatabaseInstanceSoftwareDetailsResponse.add_member(:os_architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "OsArchitecture"))
     DatabaseInstanceSoftwareDetailsResponse.add_member(:tooltip, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Tooltip"))
     DatabaseInstanceSoftwareDetailsResponse.type = Types::DatabaseInstanceSoftwareDetailsResponse
-    DatabaseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseResponse, name: "member")
+    DatabaseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseResponse, name: "member"))
     DatabaseMode.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "default"}))
     DatabaseMode.add_member(:babelfish, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BABELFISH", traits: {"smithy.api#enumValue" => "babelfish"}))
     DatabaseResponse.add_member(:database_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseId"))
@@ -1326,7 +1326,7 @@ module Aws::DatabaseMigrationService
     Endpoint.add_member(:gcp_my_sql_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: GcpMySQLSettings, name: "GcpMySQLSettings"))
     Endpoint.add_member(:timestream_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestreamSettings, name: "TimestreamSettings"))
     Endpoint.type = Types::Endpoint
-    EndpointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "member", traits: {"smithy.api#xmlName" => "Endpoint"})
+    EndpointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "member", traits: {"smithy.api#xmlName" => "Endpoint"}))
     EndpointSetting.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     EndpointSetting.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointSettingTypeValue, name: "Type"))
     EndpointSetting.add_member(:enum_values, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointSettingEnumValues, name: "EnumValues"))
@@ -1337,12 +1337,12 @@ module Aws::DatabaseMigrationService
     EndpointSetting.add_member(:int_value_max, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "IntValueMax"))
     EndpointSetting.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DefaultValue"))
     EndpointSetting.type = Types::EndpointSetting
-    EndpointSettingEnumValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    EndpointSettingEnumValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     EndpointSettingTypeValue.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING", traits: {"smithy.api#enumValue" => "string"}))
     EndpointSettingTypeValue.add_member(:boolean, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BOOLEAN", traits: {"smithy.api#enumValue" => "boolean"}))
     EndpointSettingTypeValue.add_member(:integer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTEGER", traits: {"smithy.api#enumValue" => "integer"}))
     EndpointSettingTypeValue.add_member(:enum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENUM", traits: {"smithy.api#enumValue" => "enum"}))
-    EndpointSettingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointSetting, name: "member")
+    EndpointSettingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointSetting, name: "member"))
     EngineVersion.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Version"))
     EngineVersion.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Lifecycle"))
     EngineVersion.add_member(:release_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseStatusValues, name: "ReleaseStatus"))
@@ -1352,7 +1352,7 @@ module Aws::DatabaseMigrationService
     EngineVersion.add_member(:force_upgrade_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "ForceUpgradeDate"))
     EngineVersion.add_member(:available_upgrades, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailableUpgradesList, name: "AvailableUpgrades"))
     EngineVersion.type = Types::EngineVersion
-    EngineVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EngineVersion, name: "member", traits: {"smithy.api#xmlName" => "EngineVersion"})
+    EngineVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineVersion, name: "member", traits: {"smithy.api#xmlName" => "EngineVersion"}))
     ErrorDetails.add_member(:default_error_details, Types::ErrorDetails::DefaultErrorDetails, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultErrorDetails, name: "defaultErrorDetails"))
     ErrorDetails.add_member(:unknown, Types::ErrorDetails::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ErrorDetails.type = Types::ErrorDetails
@@ -1362,12 +1362,12 @@ module Aws::DatabaseMigrationService
     Event.add_member(:event_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: EventCategoriesList, name: "EventCategories"))
     Event.add_member(:date, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "Date"))
     Event.type = Types::Event
-    EventCategoriesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "EventCategory"})
+    EventCategoriesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "EventCategory"}))
     EventCategoryGroup.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceType"))
     EventCategoryGroup.add_member(:event_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: EventCategoriesList, name: "EventCategories"))
     EventCategoryGroup.type = Types::EventCategoryGroup
-    EventCategoryGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventCategoryGroup, name: "member", traits: {"smithy.api#xmlName" => "EventCategoryGroup"})
-    EventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member", traits: {"smithy.api#xmlName" => "Event"})
+    EventCategoryGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventCategoryGroup, name: "member", traits: {"smithy.api#xmlName" => "EventCategoryGroup"}))
+    EventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member", traits: {"smithy.api#xmlName" => "Event"}))
     EventSubscription.add_member(:customer_aws_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CustomerAwsId"))
     EventSubscription.add_member(:cust_subscription_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CustSubscriptionId"))
     EventSubscription.add_member(:sns_topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SnsTopicArn"))
@@ -1378,8 +1378,8 @@ module Aws::DatabaseMigrationService
     EventSubscription.add_member(:event_categories_list, ::Smithy::Schema::Shapes::MemberShape.new(target: EventCategoriesList, name: "EventCategoriesList"))
     EventSubscription.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled", traits: {"smithy.api#default" => false}))
     EventSubscription.type = Types::EventSubscription
-    EventSubscriptionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventSubscription, name: "member", traits: {"smithy.api#xmlName" => "EventSubscription"})
-    ExcludeTestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    EventSubscriptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSubscription, name: "member", traits: {"smithy.api#xmlName" => "EventSubscription"}))
+    ExcludeTestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ExportMetadataModelAssessmentMessage.add_member(:migration_project_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationProjectIdentifier, name: "MigrationProjectIdentifier", traits: {"smithy.api#required" => {}}))
     ExportMetadataModelAssessmentMessage.add_member(:selection_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SelectionRules", traits: {"smithy.api#required" => {}}))
     ExportMetadataModelAssessmentMessage.add_member(:file_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FileName"))
@@ -1399,14 +1399,14 @@ module Aws::DatabaseMigrationService
     Filter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#required" => {}}))
     Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, name: "Values", traits: {"smithy.api#required" => {}}))
     Filter.type = Types::Filter
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member", traits: {"smithy.api#xmlName" => "Filter"})
-    FilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Value"})
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member", traits: {"smithy.api#xmlName" => "Filter"}))
+    FilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Value"}))
     FleetAdvisorLsaAnalysisResponse.add_member(:lsa_analysis_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LsaAnalysisId"))
     FleetAdvisorLsaAnalysisResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     FleetAdvisorLsaAnalysisResponse.type = Types::FleetAdvisorLsaAnalysisResponse
-    FleetAdvisorLsaAnalysisResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FleetAdvisorLsaAnalysisResponse, name: "member")
-    FleetAdvisorSchemaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaResponse, name: "member")
-    FleetAdvisorSchemaObjectList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FleetAdvisorSchemaObjectResponse, name: "member")
+    FleetAdvisorLsaAnalysisResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FleetAdvisorLsaAnalysisResponse, name: "member"))
+    FleetAdvisorSchemaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaResponse, name: "member"))
+    FleetAdvisorSchemaObjectList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FleetAdvisorSchemaObjectResponse, name: "member"))
     FleetAdvisorSchemaObjectResponse.add_member(:schema_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SchemaId"))
     FleetAdvisorSchemaObjectResponse.add_member(:object_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ObjectType"))
     FleetAdvisorSchemaObjectResponse.add_member(:number_of_objects, ::Smithy::Schema::Shapes::MemberShape.new(target: LongOptional, name: "NumberOfObjects"))
@@ -1466,8 +1466,8 @@ module Aws::DatabaseMigrationService
     ImportCertificateMessage.type = Types::ImportCertificateMessage
     ImportCertificateResponse.add_member(:certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: Certificate, name: "Certificate"))
     ImportCertificateResponse.type = Types::ImportCertificateResponse
-    IncludeTestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    IndividualAssessmentNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    IncludeTestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    IndividualAssessmentNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     InstanceProfile.add_member(:instance_profile_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "InstanceProfileArn"))
     InstanceProfile.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AvailabilityZone"))
     InstanceProfile.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KmsKeyArn"))
@@ -1479,10 +1479,10 @@ module Aws::DatabaseMigrationService
     InstanceProfile.add_member(:subnet_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SubnetGroupIdentifier"))
     InstanceProfile.add_member(:vpc_security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "VpcSecurityGroups"))
     InstanceProfile.type = Types::InstanceProfile
-    InstanceProfileList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceProfile, name: "member", traits: {"smithy.api#xmlName" => "InstanceProfile"})
+    InstanceProfileList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceProfile, name: "member", traits: {"smithy.api#xmlName" => "InstanceProfile"}))
     InsufficientResourceCapacityFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     InsufficientResourceCapacityFault.type = Types::InsufficientResourceCapacityFault
-    IntegerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "member")
+    IntegerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "member"))
     InvalidCertificateFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     InvalidCertificateFault.type = Types::InvalidCertificateFault
     InvalidOperationFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -1542,7 +1542,7 @@ module Aws::DatabaseMigrationService
     KerberosAuthenticationSettings.add_member(:key_cache_secret_iam_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KeyCacheSecretIamArn"))
     KerberosAuthenticationSettings.add_member(:krb5_file_contents, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Krb5FileContents"))
     KerberosAuthenticationSettings.type = Types::KerberosAuthenticationSettings
-    KeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    KeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     KinesisSettings.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StreamArn"))
     KinesisSettings.add_member(:message_format, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageFormatValue, name: "MessageFormat"))
     KinesisSettings.add_member(:service_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServiceAccessRoleArn"))
@@ -1562,7 +1562,7 @@ module Aws::DatabaseMigrationService
     Limitation.add_member(:impact, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Impact"))
     Limitation.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
     Limitation.type = Types::Limitation
-    LimitationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Limitation, name: "member")
+    LimitationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Limitation, name: "member"))
     ListTagsForResourceMessage.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn"))
     ListTagsForResourceMessage.add_member(:resource_arn_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, name: "ResourceArnList"))
     ListTagsForResourceMessage.type = Types::ListTagsForResourceMessage
@@ -1618,7 +1618,7 @@ module Aws::DatabaseMigrationService
     MigrationProject.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
     MigrationProject.add_member(:schema_conversion_application_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: SCApplicationAttributes, name: "SchemaConversionApplicationAttributes"))
     MigrationProject.type = Types::MigrationProject
-    MigrationProjectList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationProject, name: "member", traits: {"smithy.api#xmlName" => "MigrationProject"})
+    MigrationProjectList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationProject, name: "member", traits: {"smithy.api#xmlName" => "MigrationProject"}))
     MigrationTypeValue.add_member(:full_load, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL_LOAD", traits: {"smithy.api#enumValue" => "full-load"}))
     MigrationTypeValue.add_member(:cdc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CDC", traits: {"smithy.api#enumValue" => "cdc"}))
     MigrationTypeValue.add_member(:full_load_and_cdc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL_LOAD_AND_CDC", traits: {"smithy.api#enumValue" => "full-load-and-cdc"}))
@@ -1901,7 +1901,7 @@ module Aws::DatabaseMigrationService
     OrderableReplicationInstance.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZonesList, name: "AvailabilityZones"))
     OrderableReplicationInstance.add_member(:release_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseStatusValues, name: "ReleaseStatus"))
     OrderableReplicationInstance.type = Types::OrderableReplicationInstance
-    OrderableReplicationInstanceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrderableReplicationInstance, name: "member", traits: {"smithy.api#xmlName" => "OrderableReplicationInstance"})
+    OrderableReplicationInstanceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderableReplicationInstance, name: "member", traits: {"smithy.api#xmlName" => "OrderableReplicationInstance"}))
     OriginTypeValue.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOURCE", traits: {"smithy.api#enumValue" => "SOURCE"}))
     OriginTypeValue.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TARGET", traits: {"smithy.api#enumValue" => "TARGET"}))
     ParquetVersionValue.add_member(:parquet_1_0, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARQUET_1_0", traits: {"smithy.api#enumValue" => "parquet-1-0"}))
@@ -1913,8 +1913,8 @@ module Aws::DatabaseMigrationService
     PendingMaintenanceAction.add_member(:current_apply_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "CurrentApplyDate"))
     PendingMaintenanceAction.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
     PendingMaintenanceAction.type = Types::PendingMaintenanceAction
-    PendingMaintenanceActionDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PendingMaintenanceAction, name: "member", traits: {"smithy.api#xmlName" => "PendingMaintenanceAction"})
-    PendingMaintenanceActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePendingMaintenanceActions, name: "member", traits: {"smithy.api#xmlName" => "ResourcePendingMaintenanceActions"})
+    PendingMaintenanceActionDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PendingMaintenanceAction, name: "member", traits: {"smithy.api#xmlName" => "PendingMaintenanceAction"}))
+    PendingMaintenanceActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePendingMaintenanceActions, name: "member", traits: {"smithy.api#xmlName" => "ResourcePendingMaintenanceActions"}))
     PluginNameValue.add_member(:no_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_PREFERENCE", traits: {"smithy.api#enumValue" => "no-preference"}))
     PluginNameValue.add_member(:test_decoding, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEST_DECODING", traits: {"smithy.api#enumValue" => "test-decoding"}))
     PluginNameValue.add_member(:pglogical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PGLOGICAL", traits: {"smithy.api#enumValue" => "pglogical"}))
@@ -1968,7 +1968,7 @@ module Aws::DatabaseMigrationService
     PremigrationAssessmentStatus.add_member(:result_kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResultKmsKeyArn"))
     PremigrationAssessmentStatus.add_member(:result_statistic, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationTaskAssessmentRunResultStatistic, name: "ResultStatistic"))
     PremigrationAssessmentStatus.type = Types::PremigrationAssessmentStatus
-    PremigrationAssessmentStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PremigrationAssessmentStatus, name: "member")
+    PremigrationAssessmentStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PremigrationAssessmentStatus, name: "member"))
     ProvisionData.add_member(:provision_state, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ProvisionState"))
     ProvisionData.add_member(:provisioned_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ProvisionedCapacityUnits", traits: {"smithy.api#default" => 0}))
     ProvisionData.add_member(:date_provisioned, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "DateProvisioned"))
@@ -1976,7 +1976,7 @@ module Aws::DatabaseMigrationService
     ProvisionData.add_member(:date_new_provisioning_data_available, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "DateNewProvisioningDataAvailable"))
     ProvisionData.add_member(:reason_for_new_provisioning_data, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReasonForNewProvisioningData"))
     ProvisionData.type = Types::ProvisionData
-    PublicIpAddressList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    PublicIpAddressList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     RdsConfiguration.add_member(:engine_edition, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineEdition"))
     RdsConfiguration.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "InstanceType"))
     RdsConfiguration.add_member(:instance_vcpu, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleOptional, name: "InstanceVcpu"))
@@ -2014,7 +2014,7 @@ module Aws::DatabaseMigrationService
     Recommendation.type = Types::Recommendation
     RecommendationData.add_member(:rds_engine, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsRecommendation, name: "RdsEngine"))
     RecommendationData.type = Types::RecommendationData
-    RecommendationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendation, name: "member")
+    RecommendationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendation, name: "member"))
     RecommendationSettings.add_member(:instance_sizing_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "InstanceSizingType", traits: {"smithy.api#required" => {}}))
     RecommendationSettings.add_member(:workload_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "WorkloadType", traits: {"smithy.api#required" => {}}))
     RecommendationSettings.type = Types::RecommendationSettings
@@ -2134,7 +2134,7 @@ module Aws::DatabaseMigrationService
     ReplicationConfig.add_member(:replication_config_create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "ReplicationConfigCreateTime"))
     ReplicationConfig.add_member(:replication_config_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "ReplicationConfigUpdateTime"))
     ReplicationConfig.type = Types::ReplicationConfig
-    ReplicationConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfig, name: "member", traits: {"smithy.api#xmlName" => "ReplicationConfig"})
+    ReplicationConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfig, name: "member", traits: {"smithy.api#xmlName" => "ReplicationConfig"}))
     ReplicationEndpointTypeValue.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOURCE", traits: {"smithy.api#enumValue" => "source"}))
     ReplicationEndpointTypeValue.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TARGET", traits: {"smithy.api#enumValue" => "target"}))
     ReplicationInstance.add_member(:replication_instance_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationInstanceIdentifier"))
@@ -2164,16 +2164,16 @@ module Aws::DatabaseMigrationService
     ReplicationInstance.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NetworkType"))
     ReplicationInstance.add_member(:kerberos_authentication_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: KerberosAuthenticationSettings, name: "KerberosAuthenticationSettings"))
     ReplicationInstance.type = Types::ReplicationInstance
-    ReplicationInstanceIpv6AddressList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    ReplicationInstanceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationInstance, name: "member", traits: {"smithy.api#xmlName" => "ReplicationInstance"})
-    ReplicationInstancePrivateIpAddressList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    ReplicationInstancePublicIpAddressList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ReplicationInstanceIpv6AddressList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    ReplicationInstanceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationInstance, name: "member", traits: {"smithy.api#xmlName" => "ReplicationInstance"}))
+    ReplicationInstancePrivateIpAddressList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    ReplicationInstancePublicIpAddressList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ReplicationInstanceTaskLog.add_member(:replication_task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationTaskName"))
     ReplicationInstanceTaskLog.add_member(:replication_task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationTaskArn"))
     ReplicationInstanceTaskLog.add_member(:replication_instance_task_log_size, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "ReplicationInstanceTaskLogSize", traits: {"smithy.api#default" => 0}))
     ReplicationInstanceTaskLog.type = Types::ReplicationInstanceTaskLog
-    ReplicationInstanceTaskLogsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationInstanceTaskLog, name: "member")
-    ReplicationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Replication, name: "member", traits: {"smithy.api#xmlName" => "Replication"})
+    ReplicationInstanceTaskLogsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationInstanceTaskLog, name: "member"))
+    ReplicationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Replication, name: "member", traits: {"smithy.api#xmlName" => "Replication"}))
     ReplicationPendingModifiedValues.add_member(:replication_instance_class, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationInstanceClass, name: "ReplicationInstanceClass"))
     ReplicationPendingModifiedValues.add_member(:allocated_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "AllocatedStorage"))
     ReplicationPendingModifiedValues.add_member(:multi_az, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "MultiAZ"))
@@ -2201,8 +2201,8 @@ module Aws::DatabaseMigrationService
     ReplicationSubnetGroup.type = Types::ReplicationSubnetGroup
     ReplicationSubnetGroupDoesNotCoverEnoughAZs.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ReplicationSubnetGroupDoesNotCoverEnoughAZs.type = Types::ReplicationSubnetGroupDoesNotCoverEnoughAZs
-    ReplicationSubnetGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationSubnetGroup, name: "member", traits: {"smithy.api#xmlName" => "ReplicationSubnetGroup"})
-    ReplicationTableStatisticsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TableStatistics, name: "member")
+    ReplicationSubnetGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationSubnetGroup, name: "member", traits: {"smithy.api#xmlName" => "ReplicationSubnetGroup"}))
+    ReplicationTableStatisticsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableStatistics, name: "member"))
     ReplicationTask.add_member(:replication_task_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationTaskIdentifier"))
     ReplicationTask.add_member(:source_endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceEndpointArn"))
     ReplicationTask.add_member(:target_endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TargetEndpointArn"))
@@ -2231,7 +2231,7 @@ module Aws::DatabaseMigrationService
     ReplicationTaskAssessmentResult.add_member(:assessment_results, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AssessmentResults"))
     ReplicationTaskAssessmentResult.add_member(:s3_object_url, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretString, name: "S3ObjectUrl"))
     ReplicationTaskAssessmentResult.type = Types::ReplicationTaskAssessmentResult
-    ReplicationTaskAssessmentResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationTaskAssessmentResult, name: "member", traits: {"smithy.api#xmlName" => "ReplicationTaskAssessmentResult"})
+    ReplicationTaskAssessmentResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationTaskAssessmentResult, name: "member", traits: {"smithy.api#xmlName" => "ReplicationTaskAssessmentResult"}))
     ReplicationTaskAssessmentRun.add_member(:replication_task_assessment_run_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationTaskAssessmentRunArn"))
     ReplicationTaskAssessmentRun.add_member(:replication_task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationTaskArn"))
     ReplicationTaskAssessmentRun.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
@@ -2247,7 +2247,7 @@ module Aws::DatabaseMigrationService
     ReplicationTaskAssessmentRun.add_member(:is_latest_task_assessment_run, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsLatestTaskAssessmentRun", traits: {"smithy.api#default" => false}))
     ReplicationTaskAssessmentRun.add_member(:result_statistic, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationTaskAssessmentRunResultStatistic, name: "ResultStatistic"))
     ReplicationTaskAssessmentRun.type = Types::ReplicationTaskAssessmentRun
-    ReplicationTaskAssessmentRunList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationTaskAssessmentRun, name: "member")
+    ReplicationTaskAssessmentRunList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationTaskAssessmentRun, name: "member"))
     ReplicationTaskAssessmentRunProgress.add_member(:individual_assessment_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "IndividualAssessmentCount", traits: {"smithy.api#default" => 0}))
     ReplicationTaskAssessmentRunProgress.add_member(:individual_assessment_completed_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "IndividualAssessmentCompletedCount", traits: {"smithy.api#default" => 0}))
     ReplicationTaskAssessmentRunProgress.type = Types::ReplicationTaskAssessmentRunProgress
@@ -2264,8 +2264,8 @@ module Aws::DatabaseMigrationService
     ReplicationTaskIndividualAssessment.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     ReplicationTaskIndividualAssessment.add_member(:replication_task_individual_assessment_start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "ReplicationTaskIndividualAssessmentStartDate"))
     ReplicationTaskIndividualAssessment.type = Types::ReplicationTaskIndividualAssessment
-    ReplicationTaskIndividualAssessmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationTaskIndividualAssessment, name: "member")
-    ReplicationTaskList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationTask, name: "member", traits: {"smithy.api#xmlName" => "ReplicationTask"})
+    ReplicationTaskIndividualAssessmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationTaskIndividualAssessment, name: "member"))
+    ReplicationTaskList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationTask, name: "member", traits: {"smithy.api#xmlName" => "ReplicationTask"}))
     ReplicationTaskStats.add_member(:full_load_progress_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "FullLoadProgressPercent", traits: {"smithy.api#default" => 0}))
     ReplicationTaskStats.add_member(:elapsed_time_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "ElapsedTimeMillis", traits: {"smithy.api#default" => 0}))
     ReplicationTaskStats.add_member(:tables_loaded, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "TablesLoaded", traits: {"smithy.api#default" => 0}))
@@ -2353,8 +2353,8 @@ module Aws::DatabaseMigrationService
     SchemaConversionRequest.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetails, name: "Error"))
     SchemaConversionRequest.add_member(:export_sql_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportSqlDetails, name: "ExportSqlDetails"))
     SchemaConversionRequest.type = Types::SchemaConversionRequest
-    SchemaConversionRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaConversionRequest, name: "member")
-    SchemaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    SchemaConversionRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaConversionRequest, name: "member"))
+    SchemaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     SchemaResponse.add_member(:code_line_count, ::Smithy::Schema::Shapes::MemberShape.new(target: LongOptional, name: "CodeLineCount"))
     SchemaResponse.add_member(:code_size, ::Smithy::Schema::Shapes::MemberShape.new(target: LongOptional, name: "CodeSize"))
     SchemaResponse.add_member(:complexity, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Complexity"))
@@ -2380,8 +2380,8 @@ module Aws::DatabaseMigrationService
     SourceDataSetting.add_member(:cdc_stop_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "CDCStopTime"))
     SourceDataSetting.add_member(:slot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SlotName"))
     SourceDataSetting.type = Types::SourceDataSetting
-    SourceDataSettings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SourceDataSetting, name: "member")
-    SourceIdsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SourceId"})
+    SourceDataSettings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceDataSetting, name: "member"))
+    SourceIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SourceId"}))
     SourceType.add_member(:replication_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "replication_instance", traits: {"smithy.api#enumValue" => "replication-instance"}))
     SqlServerAuthenticationMethod.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Password", traits: {"smithy.api#enumValue" => "password"}))
     SqlServerAuthenticationMethod.add_member(:kerberos, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Kerberos", traits: {"smithy.api#enumValue" => "kerberos"}))
@@ -2432,7 +2432,7 @@ module Aws::DatabaseMigrationService
     StartRecommendationsRequestEntry.add_member(:database_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseId", traits: {"smithy.api#required" => {}}))
     StartRecommendationsRequestEntry.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationSettings, name: "Settings", traits: {"smithy.api#required" => {}}))
     StartRecommendationsRequestEntry.type = Types::StartRecommendationsRequestEntry
-    StartRecommendationsRequestEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StartRecommendationsRequestEntry, name: "member")
+    StartRecommendationsRequestEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StartRecommendationsRequestEntry, name: "member"))
     StartReplicationMessage.add_member(:replication_config_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationConfigArn", traits: {"smithy.api#required" => {}}))
     StartReplicationMessage.add_member(:start_replication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StartReplicationType", traits: {"smithy.api#required" => {}}))
     StartReplicationMessage.add_member(:premigration_assessment_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PremigrationAssessmentSettings"))
@@ -2487,22 +2487,22 @@ module Aws::DatabaseMigrationService
     StopReplicationTaskResponse.type = Types::StopReplicationTaskResponse
     StorageQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     StorageQuotaExceededFault.type = Types::StorageQuotaExceededFault
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Subnet.add_member(:subnet_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SubnetIdentifier"))
     Subnet.add_member(:subnet_availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "SubnetAvailabilityZone"))
     Subnet.add_member(:subnet_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SubnetStatus"))
     Subnet.type = Types::Subnet
     SubnetAlreadyInUse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SubnetAlreadyInUse.type = Types::SubnetAlreadyInUse
-    SubnetIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SubnetIdentifier"})
-    SubnetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Subnet, name: "member", traits: {"smithy.api#xmlName" => "Subnet"})
+    SubnetIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SubnetIdentifier"}))
+    SubnetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnet, name: "member", traits: {"smithy.api#xmlName" => "Subnet"}))
     SupportedEndpointType.add_member(:engine_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineName"))
     SupportedEndpointType.add_member(:supports_cdc, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SupportsCDC", traits: {"smithy.api#default" => false}))
     SupportedEndpointType.add_member(:endpoint_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationEndpointTypeValue, name: "EndpointType"))
     SupportedEndpointType.add_member(:replication_instance_engine_minimum_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationInstanceEngineMinimumVersion"))
     SupportedEndpointType.add_member(:engine_display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineDisplayName"))
     SupportedEndpointType.type = Types::SupportedEndpointType
-    SupportedEndpointTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedEndpointType, name: "member", traits: {"smithy.api#xmlName" => "SupportedEndpointType"})
+    SupportedEndpointTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedEndpointType, name: "member", traits: {"smithy.api#xmlName" => "SupportedEndpointType"}))
     SybaseSettings.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DatabaseName"))
     SybaseSettings.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretString, name: "Password"))
     SybaseSettings.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "Port"))
@@ -2511,7 +2511,7 @@ module Aws::DatabaseMigrationService
     SybaseSettings.add_member(:secrets_manager_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SecretsManagerAccessRoleArn"))
     SybaseSettings.add_member(:secrets_manager_secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SecretsManagerSecretId"))
     SybaseSettings.type = Types::SybaseSettings
-    TableListToReload.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TableToReload, name: "member")
+    TableListToReload.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableToReload, name: "member"))
     TablePreparationMode.add_member(:do_nothing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DO_NOTHING", traits: {"smithy.api#enumValue" => "do-nothing"}))
     TablePreparationMode.add_member(:truncate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRUNCATE", traits: {"smithy.api#enumValue" => "truncate"}))
     TablePreparationMode.add_member(:drop_tables_on_target, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DROP_TABLES_ON_TARGET", traits: {"smithy.api#enumValue" => "drop-tables-on-target"}))
@@ -2544,7 +2544,7 @@ module Aws::DatabaseMigrationService
     TableStatistics.add_member(:resync_rows_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: LongOptional, name: "ResyncRowsFailed"))
     TableStatistics.add_member(:resync_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleOptional, name: "ResyncProgress"))
     TableStatistics.type = Types::TableStatistics
-    TableStatisticsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TableStatistics, name: "member")
+    TableStatisticsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableStatistics, name: "member"))
     TableToReload.add_member(:schema_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SchemaName", traits: {"smithy.api#required" => {}}))
     TableToReload.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TableName", traits: {"smithy.api#required" => {}}))
     TableToReload.type = Types::TableToReload
@@ -2552,10 +2552,10 @@ module Aws::DatabaseMigrationService
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     Tag.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn"))
     Tag.type = Types::Tag
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member", traits: {"smithy.api#xmlName" => "Tag"})
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member", traits: {"smithy.api#xmlName" => "Tag"}))
     TargetDataSetting.add_member(:table_preparation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: TablePreparationMode, name: "TablePreparationMode"))
     TargetDataSetting.type = Types::TargetDataSetting
-    TargetDataSettings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetDataSetting, name: "member")
+    TargetDataSettings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetDataSetting, name: "member"))
     TargetDbType.add_member(:specific_database, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPECIFIC_DATABASE", traits: {"smithy.api#enumValue" => "specific-database"}))
     TargetDbType.add_member(:multiple_databases, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTIPLE_DATABASES", traits: {"smithy.api#enumValue" => "multiple-databases"}))
     TestConnectionMessage.add_member(:replication_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationInstanceArn", traits: {"smithy.api#required" => {}}))
@@ -2582,11 +2582,11 @@ module Aws::DatabaseMigrationService
     VersionStatus.add_member(:up_to_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UP_TO_DATE", traits: {"smithy.api#enumValue" => "UP_TO_DATE"}))
     VersionStatus.add_member(:outdated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OUTDATED", traits: {"smithy.api#enumValue" => "OUTDATED"}))
     VersionStatus.add_member(:unsupported, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNSUPPORTED", traits: {"smithy.api#enumValue" => "UNSUPPORTED"}))
-    VpcSecurityGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "VpcSecurityGroupId"})
+    VpcSecurityGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "VpcSecurityGroupId"}))
     VpcSecurityGroupMembership.add_member(:vpc_security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VpcSecurityGroupId"))
     VpcSecurityGroupMembership.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     VpcSecurityGroupMembership.type = Types::VpcSecurityGroupMembership
-    VpcSecurityGroupMembershipList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcSecurityGroupMembership, name: "member", traits: {"smithy.api#xmlName" => "VpcSecurityGroupMembership"})
+    VpcSecurityGroupMembershipList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcSecurityGroupMembership, name: "member", traits: {"smithy.api#xmlName" => "VpcSecurityGroupMembership"}))
 
     AmazonDMSv20160101 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.databasemigrationservice#AmazonDMSv20160101"

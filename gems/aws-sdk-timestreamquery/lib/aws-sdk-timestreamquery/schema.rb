@@ -158,7 +158,7 @@ module Aws::TimestreamQuery
     ColumnInfo.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     ColumnInfo.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, name: "Type", traits: {"smithy.api#required" => {}}))
     ColumnInfo.type = Types::ColumnInfo
-    ColumnInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnInfo, name: "member")
+    ColumnInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnInfo, name: "member"))
     ComputeMode.add_member(:on_demand, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON_DEMAND", traits: {"smithy.api#enumValue" => "ON_DEMAND"}))
     ComputeMode.add_member(:provisioned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROVISIONED", traits: {"smithy.api#enumValue" => "PROVISIONED"}))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -182,7 +182,7 @@ module Aws::TimestreamQuery
     Datum.add_member(:row_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Row, name: "RowValue"))
     Datum.add_member(:null_value, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "NullValue"))
     Datum.type = Types::Datum
-    DatumList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Datum, name: "member")
+    DatumList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Datum, name: "member"))
     DeleteScheduledQueryRequest.add_member(:scheduled_query_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ScheduledQueryArn", traits: {"smithy.api#required" => {}}))
     DeleteScheduledQueryRequest.type = Types::DeleteScheduledQueryRequest
     DescribeAccountSettingsRequest.type = Types::DescribeAccountSettingsRequest
@@ -200,12 +200,12 @@ module Aws::TimestreamQuery
     DimensionMapping.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, name: "Name", traits: {"smithy.api#required" => {}}))
     DimensionMapping.add_member(:dimension_value_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValueType, name: "DimensionValueType", traits: {"smithy.api#required" => {}}))
     DimensionMapping.type = Types::DimensionMapping
-    DimensionMappingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionMapping, name: "member")
+    DimensionMappingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionMapping, name: "member"))
     DimensionValueType.add_member(:varchar, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VARCHAR", traits: {"smithy.api#enumValue" => "VARCHAR"}))
     Endpoint.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Address", traits: {"smithy.api#required" => {}}))
     Endpoint.add_member(:cache_period_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "CachePeriodInMinutes", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     Endpoint.type = Types::Endpoint
-    Endpoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "member")
+    Endpoints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "member"))
     ErrorReportConfiguration.add_member(:s3_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Configuration, name: "S3Configuration", traits: {"smithy.api#required" => {}}))
     ErrorReportConfiguration.type = Types::ErrorReportConfiguration
     ErrorReportLocation.add_member(:s3_report_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ReportLocation, name: "S3ReportLocation"))
@@ -257,12 +257,12 @@ module Aws::TimestreamQuery
     MixedMeasureMapping.add_member(:measure_value_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureValueType, name: "MeasureValueType", traits: {"smithy.api#required" => {}}))
     MixedMeasureMapping.add_member(:multi_measure_attribute_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiMeasureAttributeMappingList, name: "MultiMeasureAttributeMappings"))
     MixedMeasureMapping.type = Types::MixedMeasureMapping
-    MixedMeasureMappingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MixedMeasureMapping, name: "member")
+    MixedMeasureMappingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MixedMeasureMapping, name: "member"))
     MultiMeasureAttributeMapping.add_member(:source_column, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, name: "SourceColumn", traits: {"smithy.api#required" => {}}))
     MultiMeasureAttributeMapping.add_member(:target_multi_measure_attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, name: "TargetMultiMeasureAttributeName"))
     MultiMeasureAttributeMapping.add_member(:measure_value_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalarMeasureValueType, name: "MeasureValueType", traits: {"smithy.api#required" => {}}))
     MultiMeasureAttributeMapping.type = Types::MultiMeasureAttributeMapping
-    MultiMeasureAttributeMappingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MultiMeasureAttributeMapping, name: "member")
+    MultiMeasureAttributeMappingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiMeasureAttributeMapping, name: "member"))
     MultiMeasureMappings.add_member(:target_multi_measure_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, name: "TargetMultiMeasureName"))
     MultiMeasureMappings.add_member(:multi_measure_attribute_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiMeasureAttributeMappingList, name: "MultiMeasureAttributeMappings", traits: {"smithy.api#required" => {}}))
     MultiMeasureMappings.type = Types::MultiMeasureMappings
@@ -271,8 +271,8 @@ module Aws::TimestreamQuery
     ParameterMapping.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#required" => {}}))
     ParameterMapping.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, name: "Type", traits: {"smithy.api#required" => {}}))
     ParameterMapping.type = Types::ParameterMapping
-    ParameterMappingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterMapping, name: "member")
-    PartitionKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionKey, name: "member")
+    ParameterMappingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterMapping, name: "member"))
+    PartitionKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionKey, name: "member"))
     PrepareQueryRequest.add_member(:query_string, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryString, name: "QueryString", traits: {"smithy.api#required" => {}}))
     PrepareQueryRequest.add_member(:validate_only, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "ValidateOnly"))
     PrepareQueryRequest.type = Types::PrepareQueryRequest
@@ -343,7 +343,7 @@ module Aws::TimestreamQuery
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     Row.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: DatumList, name: "Data", traits: {"smithy.api#required" => {}}))
     Row.type = Types::Row
-    RowList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Row, name: "member")
+    RowList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Row, name: "member"))
     S3Configuration.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, name: "BucketName", traits: {"smithy.api#required" => {}}))
     S3Configuration.add_member(:object_key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectKeyPrefix, name: "ObjectKeyPrefix"))
     S3Configuration.add_member(:encryption_option, ::Smithy::Schema::Shapes::MemberShape.new(target: S3EncryptionOption, name: "EncryptionOption"))
@@ -407,7 +407,7 @@ module Aws::TimestreamQuery
     ScheduledQueryInsightsResponse.add_member(:output_rows, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "OutputRows", traits: {"smithy.api#default" => nil}))
     ScheduledQueryInsightsResponse.add_member(:output_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "OutputBytes", traits: {"smithy.api#default" => nil}))
     ScheduledQueryInsightsResponse.type = Types::ScheduledQueryInsightsResponse
-    ScheduledQueryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQuery, name: "member")
+    ScheduledQueryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQuery, name: "member"))
     ScheduledQueryRunStatus.add_member(:auto_trigger_success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTO_TRIGGER_SUCCESS", traits: {"smithy.api#enumValue" => "AUTO_TRIGGER_SUCCESS"}))
     ScheduledQueryRunStatus.add_member(:auto_trigger_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTO_TRIGGER_FAILURE", traits: {"smithy.api#enumValue" => "AUTO_TRIGGER_FAILURE"}))
     ScheduledQueryRunStatus.add_member(:manual_trigger_success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANUAL_TRIGGER_SUCCESS", traits: {"smithy.api#enumValue" => "MANUAL_TRIGGER_SUCCESS"}))
@@ -420,7 +420,7 @@ module Aws::TimestreamQuery
     ScheduledQueryRunSummary.add_member(:error_report_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorReportLocation, name: "ErrorReportLocation"))
     ScheduledQueryRunSummary.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "FailureReason"))
     ScheduledQueryRunSummary.type = Types::ScheduledQueryRunSummary
-    ScheduledQueryRunSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryRunSummary, name: "member")
+    ScheduledQueryRunSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledQueryRunSummary, name: "member"))
     ScheduledQueryState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     ScheduledQueryState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     SelectColumn.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
@@ -429,7 +429,7 @@ module Aws::TimestreamQuery
     SelectColumn.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "TableName"))
     SelectColumn.add_member(:aliased, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "Aliased"))
     SelectColumn.type = Types::SelectColumn
-    SelectColumnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SelectColumn, name: "member")
+    SelectColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectColumn, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     SnsConfiguration.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "TopicArn", traits: {"smithy.api#required" => {}}))
@@ -437,8 +437,8 @@ module Aws::TimestreamQuery
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -452,7 +452,7 @@ module Aws::TimestreamQuery
     TimeSeriesDataPoint.add_member(:time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Time", traits: {"smithy.api#required" => {}}))
     TimeSeriesDataPoint.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Datum, name: "Value", traits: {"smithy.api#required" => {}}))
     TimeSeriesDataPoint.type = Types::TimeSeriesDataPoint
-    TimeSeriesDataPointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesDataPoint, name: "member")
+    TimeSeriesDataPointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesDataPoint, name: "member"))
     TimestreamConfiguration.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     TimestreamConfiguration.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "TableName", traits: {"smithy.api#required" => {}}))
     TimestreamConfiguration.add_member(:time_column, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, name: "TimeColumn", traits: {"smithy.api#required" => {}}))

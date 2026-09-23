@@ -55,7 +55,7 @@ module Aws::FreeTier
     AccountPlanStatus.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
     AccountPlanType.add_member(:free, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FREE", traits: {"smithy.api#enumValue" => "FREE"}))
     AccountPlanType.add_member(:paid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PAID", traits: {"smithy.api#enumValue" => "PAID"}))
-    Activities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActivitySummary, name: "member")
+    Activities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivitySummary, name: "member"))
     ActivityReward.add_member(:credit, Types::ActivityReward::Credit, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetaryAmount, name: "credit"))
     ActivityReward.add_member(:unknown, Types::ActivityReward::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ActivityReward.type = Types::ActivityReward
@@ -85,8 +85,8 @@ module Aws::FreeTier
     Expression.add_member(:not, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "Not"))
     Expression.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValues, name: "Dimensions"))
     Expression.type = Types::Expression
-    Expressions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "member")
-    FilterActivityStatuses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActivityStatus, name: "member")
+    Expressions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "member"))
+    FilterActivityStatuses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivityStatus, name: "member"))
     FreeTierUsage.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "service"))
     FreeTierUsage.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "operation"))
     FreeTierUsage.add_member(:usage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "usageType"))
@@ -98,7 +98,7 @@ module Aws::FreeTier
     FreeTierUsage.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "description"))
     FreeTierUsage.add_member(:free_tier_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "freeTierType"))
     FreeTierUsage.type = Types::FreeTierUsage
-    FreeTierUsages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTierUsage, name: "member")
+    FreeTierUsages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTierUsage, name: "member"))
     GetAccountActivityRequest.add_member(:activity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivityId, name: "activityId", traits: {"smithy.api#required" => {}}))
     GetAccountActivityRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "languageCode"))
     GetAccountActivityRequest.type = Types::GetAccountActivityRequest
@@ -155,7 +155,7 @@ module Aws::FreeTier
     MatchOption.add_member(:ends_with, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENDS_WITH", traits: {"smithy.api#enumValue" => "ENDS_WITH"}))
     MatchOption.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINS", traits: {"smithy.api#enumValue" => "CONTAINS"}))
     MatchOption.add_member(:greater_than_or_equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GREATER_THAN_OR_EQUAL", traits: {"smithy.api#enumValue" => "GREATER_THAN_OR_EQUAL"}))
-    MatchOptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOption, name: "member")
+    MatchOptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOption, name: "member"))
     MonetaryAmount.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericDouble, name: "amount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     MonetaryAmount.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, name: "unit", traits: {"smithy.api#required" => {}}))
     MonetaryAmount.type = Types::MonetaryAmount
@@ -171,7 +171,7 @@ module Aws::FreeTier
     UpgradeAccountPlanResponse.type = Types::UpgradeAccountPlanResponse
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
-    Values.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "member")
+    Values.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "member"))
 
     AWSFreeTierService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.freetier#AWSFreeTierService"

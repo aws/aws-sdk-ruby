@@ -106,7 +106,7 @@ module Aws::Identitystore
     Address.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveStringType, name: "Type"))
     Address.add_member(:primary, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBooleanType, name: "Primary", traits: {"smithy.api#default" => false}))
     Address.type = Types::Address
-    Addresses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Address, name: "member")
+    Addresses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Address, name: "member"))
     AlternateIdentifier.add_member(:external_id, Types::AlternateIdentifier::ExternalId, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalId, name: "ExternalId"))
     AlternateIdentifier.add_member(:unique_attribute, Types::AlternateIdentifier::UniqueAttribute, ::Smithy::Schema::Shapes::MemberShape.new(target: UniqueAttribute, name: "UniqueAttribute"))
     AlternateIdentifier.add_member(:unknown, Types::AlternateIdentifier::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -114,7 +114,7 @@ module Aws::Identitystore
     AttributeOperation.add_member(:attribute_path, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributePath, name: "AttributePath", traits: {"smithy.api#required" => {}}))
     AttributeOperation.add_member(:attribute_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "AttributeValue"))
     AttributeOperation.type = Types::AttributeOperation
-    AttributeOperations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeOperation, name: "member")
+    AttributeOperations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeOperation, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     ConflictException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "RequestId"))
     ConflictException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictExceptionReason, name: "Reason"))
@@ -204,15 +204,15 @@ module Aws::Identitystore
     Email.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveStringType, name: "Type"))
     Email.add_member(:primary, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBooleanType, name: "Primary", traits: {"smithy.api#default" => false}))
     Email.type = Types::Email
-    Emails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Email, name: "member")
+    Emails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Email, name: "member"))
     ExternalId.add_member(:issuer, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalIdIssuer, name: "Issuer", traits: {"smithy.api#required" => {}}))
     ExternalId.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalIdIdentifier, name: "Id", traits: {"smithy.api#required" => {}}))
     ExternalId.type = Types::ExternalId
-    ExternalIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalId, name: "member")
+    ExternalIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalId, name: "member"))
     Filter.add_member(:attribute_path, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributePath, name: "AttributePath", traits: {"smithy.api#required" => {}}))
     Filter.add_member(:attribute_value, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveStringType, name: "AttributeValue", traits: {"smithy.api#required" => {}}))
     Filter.type = Types::Filter
-    Filters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
+    Filters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     GetGroupIdInput.add_member(:identity_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityStoreId, name: "IdentityStoreId", traits: {"smithy.api#required" => {}}))
     GetGroupIdInput.add_member(:alternate_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AlternateIdentifier, name: "AlternateIdentifier", traits: {"smithy.api#required" => {}}))
     GetGroupIdInput.type = Types::GetGroupIdInput
@@ -238,7 +238,7 @@ module Aws::Identitystore
     Group.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveStringType, name: "Description"))
     Group.add_member(:identity_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityStoreId, name: "IdentityStoreId", traits: {"smithy.api#required" => {}}))
     Group.type = Types::Group
-    GroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "member")
+    GroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "member"))
     GroupMembership.add_member(:identity_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityStoreId, name: "IdentityStoreId", traits: {"smithy.api#required" => {}}))
     GroupMembership.add_member(:membership_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "MembershipId"))
     GroupMembership.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "GroupId"))
@@ -248,9 +248,9 @@ module Aws::Identitystore
     GroupMembershipExistenceResult.add_member(:member_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberId, name: "MemberId"))
     GroupMembershipExistenceResult.add_member(:membership_exists, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBooleanType, name: "MembershipExists", traits: {"smithy.api#default" => false}))
     GroupMembershipExistenceResult.type = Types::GroupMembershipExistenceResult
-    GroupMembershipExistenceResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupMembershipExistenceResult, name: "member")
-    GroupMemberships.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupMembership, name: "member")
-    Groups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Group, name: "member")
+    GroupMembershipExistenceResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupMembershipExistenceResult, name: "member"))
+    GroupMemberships.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupMembership, name: "member"))
+    Groups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Group, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     InternalServerException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "RequestId"))
     InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryAfterSeconds, name: "RetryAfterSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Retry-After"}))
@@ -307,7 +307,7 @@ module Aws::Identitystore
     PhoneNumber.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveStringType, name: "Type"))
     PhoneNumber.add_member(:primary, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBooleanType, name: "Primary", traits: {"smithy.api#default" => false}))
     PhoneNumber.type = Types::PhoneNumber
-    PhoneNumbers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "member")
+    PhoneNumbers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "member"))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "ResourceId"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
@@ -350,7 +350,7 @@ module Aws::Identitystore
     User.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveStringType, name: "Timezone"))
     User.add_member(:identity_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityStoreId, name: "IdentityStoreId", traits: {"smithy.api#required" => {}}))
     User.type = Types::User
-    Users.member = ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member")
+    Users.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     ValidationException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "RequestId"))
     ValidationException.type = Types::ValidationException

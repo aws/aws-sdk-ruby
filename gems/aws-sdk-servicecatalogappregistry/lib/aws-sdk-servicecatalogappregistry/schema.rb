@@ -125,7 +125,7 @@ module Aws::ServiceCatalogAppRegistry
     Application.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     Application.add_member(:application_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationTagDefinition, name: "applicationTag"))
     Application.type = Types::Application
-    ApplicationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary, name: "member")
+    ApplicationSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary, name: "member"))
     ApplicationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "id"))
     ApplicationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, name: "arn"))
     ApplicationSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
@@ -133,8 +133,8 @@ module Aws::ServiceCatalogAppRegistry
     ApplicationSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime"))
     ApplicationSummary.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdateTime"))
     ApplicationSummary.type = Types::ApplicationSummary
-    ApplicationTagDefinition.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    ApplicationTagDefinition.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    ApplicationTagDefinition.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    ApplicationTagDefinition.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     ApplicationTagResult.add_member(:application_tag_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationTagStatus, name: "applicationTagStatus"))
     ApplicationTagResult.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "errorMessage"))
     ApplicationTagResult.add_member(:resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesList, name: "resources"))
@@ -173,9 +173,9 @@ module Aws::ServiceCatalogAppRegistry
     AttributeGroupDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     AttributeGroupDetails.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy"))
     AttributeGroupDetails.type = Types::AttributeGroupDetails
-    AttributeGroupDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupDetails, name: "member")
-    AttributeGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupId, name: "member")
-    AttributeGroupSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupSummary, name: "member")
+    AttributeGroupDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupDetails, name: "member"))
+    AttributeGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupId, name: "member"))
+    AttributeGroupSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupSummary, name: "member"))
     AttributeGroupSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupId, name: "id"))
     AttributeGroupSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeGroupArn, name: "arn"))
     AttributeGroupSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
@@ -235,7 +235,7 @@ module Aws::ServiceCatalogAppRegistry
     GetApplicationResponse.add_member(:integrations, ::Smithy::Schema::Shapes::MemberShape.new(target: Integrations, name: "integrations"))
     GetApplicationResponse.add_member(:application_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationTagDefinition, name: "applicationTag"))
     GetApplicationResponse.type = Types::GetApplicationResponse
-    GetAssociatedResourceFilter.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceItemStatus, name: "member")
+    GetAssociatedResourceFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceItemStatus, name: "member"))
     GetAssociatedResourceRequest.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSpecifier, name: "application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAssociatedResourceRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAssociatedResourceRequest.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSpecifier, name: "resource", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -303,7 +303,7 @@ module Aws::ServiceCatalogAppRegistry
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    Options.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationOption, name: "member")
+    Options.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationOption, name: "member"))
     PutConfigurationRequest.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AppRegistryConfiguration, name: "configuration", traits: {"smithy.api#required" => {}}))
     PutConfigurationRequest.type = Types::PutConfigurationRequest
     Resource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSpecifier, name: "name"))
@@ -339,8 +339,8 @@ module Aws::ServiceCatalogAppRegistry
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ResourceType.add_member(:cfn_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CFN_STACK", traits: {"smithy.api#enumValue" => "CFN_STACK"}))
     ResourceType.add_member(:resource_tag_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_TAG_VALUE", traits: {"smithy.api#enumValue" => "RESOURCE_TAG_VALUE"}))
-    Resources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceInfo, name: "member")
-    ResourcesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesListItem, name: "member")
+    Resources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceInfo, name: "member"))
+    ResourcesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesListItem, name: "member"))
     ResourcesListItem.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn"))
     ResourcesListItem.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcesListItemErrorMessage, name: "errorMessage"))
     ResourcesListItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "status"))
@@ -357,15 +357,15 @@ module Aws::ServiceCatalogAppRegistry
     SyncResourceResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn"))
     SyncResourceResponse.add_member(:action_taken, ::Smithy::Schema::Shapes::MemberShape.new(target: SyncAction, name: "actionTaken"))
     SyncResourceResponse.type = Types::SyncResourceResponse
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagQueryConfiguration.add_member(:tag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyConfig, name: "tagKey"))
     TagQueryConfiguration.type = Types::TagQueryConfiguration
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceCode"))
     ThrottlingException.type = Types::ThrottlingException

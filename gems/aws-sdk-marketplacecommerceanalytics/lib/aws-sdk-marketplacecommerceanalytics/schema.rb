@@ -25,8 +25,8 @@ module Aws::MarketplaceCommerceAnalytics
     StartSupportDataExportResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecommerceanalytics#StartSupportDataExportResult", name: "StartSupportDataExportResult", traits: {"smithy.api#deprecated" => {"message" => "This target has been deprecated. As of December 2022 Product Support Connection is no longer supported."}})
     SupportDataSetType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.marketplacecommerceanalytics#SupportDataSetType", name: "SupportDataSetType", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
 
-    CustomerDefinedValues.key = ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalKey, name: "key")
-    CustomerDefinedValues.value = ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalValue, name: "value")
+    CustomerDefinedValues.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalKey, name: "key"))
+    CustomerDefinedValues.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalValue, name: "value"))
     DataSetType.add_member(:customer_subscriber_hourly_monthly_subscriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER_SUBSCRIBER_HOURLY_MONTHLY_SUBSCRIPTIONS", traits: {"smithy.api#enumValue" => "customer_subscriber_hourly_monthly_subscriptions"}))
     DataSetType.add_member(:customer_subscriber_annual_subscriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER_SUBSCRIBER_ANNUAL_SUBSCRIPTIONS", traits: {"smithy.api#enumValue" => "customer_subscriber_annual_subscriptions"}))
     DataSetType.add_member(:daily_business_usage_by_instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DAILY_BUSINESS_USAGE_BY_INSTANCE_TYPE", traits: {"smithy.api#enumValue" => "daily_business_usage_by_instance_type"}))

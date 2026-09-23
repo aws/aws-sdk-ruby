@@ -198,7 +198,7 @@ module Aws::TimestreamInfluxDB
     DbClusterSummary.add_member(:db_storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DbStorageType, name: "dbStorageType"))
     DbClusterSummary.add_member(:allocated_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: AllocatedStorage, name: "allocatedStorage"))
     DbClusterSummary.type = Types::DbClusterSummary
-    DbClusterSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DbClusterSummary, name: "member")
+    DbClusterSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DbClusterSummary, name: "member"))
     DbInstanceForClusterSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: DbInstanceId, name: "id", traits: {"smithy.api#required" => {}}))
     DbInstanceForClusterSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DbInstanceName, name: "name", traits: {"smithy.api#required" => {}}))
     DbInstanceForClusterSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -212,7 +212,7 @@ module Aws::TimestreamInfluxDB
     DbInstanceForClusterSummary.add_member(:deployment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentType, name: "deploymentType"))
     DbInstanceForClusterSummary.add_member(:instance_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceMode, name: "instanceMode"))
     DbInstanceForClusterSummary.type = Types::DbInstanceForClusterSummary
-    DbInstanceForClusterSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DbInstanceForClusterSummary, name: "member")
+    DbInstanceForClusterSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DbInstanceForClusterSummary, name: "member"))
     DbInstanceSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: DbInstanceId, name: "id", traits: {"smithy.api#required" => {}}))
     DbInstanceSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DbInstanceName, name: "name", traits: {"smithy.api#required" => {}}))
     DbInstanceSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -225,7 +225,7 @@ module Aws::TimestreamInfluxDB
     DbInstanceSummary.add_member(:allocated_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: AllocatedStorage, name: "allocatedStorage"))
     DbInstanceSummary.add_member(:deployment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentType, name: "deploymentType"))
     DbInstanceSummary.type = Types::DbInstanceSummary
-    DbInstanceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DbInstanceSummary, name: "member")
+    DbInstanceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DbInstanceSummary, name: "member"))
     DbInstanceType.add_member(:db_influx_medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DB_INFLUX_MEDIUM", traits: {"smithy.api#enumValue" => "db.influx.medium"}))
     DbInstanceType.add_member(:db_influx_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DB_INFLUX_LARGE", traits: {"smithy.api#enumValue" => "db.influx.large"}))
     DbInstanceType.add_member(:db_influx_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DB_INFLUX_XLARGE", traits: {"smithy.api#enumValue" => "db.influx.xlarge"}))
@@ -240,7 +240,7 @@ module Aws::TimestreamInfluxDB
     DbParameterGroupSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#required" => {}}))
     DbParameterGroupSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
     DbParameterGroupSummary.type = Types::DbParameterGroupSummary
-    DbParameterGroupSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DbParameterGroupSummary, name: "member")
+    DbParameterGroupSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DbParameterGroupSummary, name: "member"))
     DbStorageType.add_member(:influx_io_included_t1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFLUX_IO_INCLUDED_T1", traits: {"smithy.api#enumValue" => "InfluxIOIncludedT1"}))
     DbStorageType.add_member(:influx_io_included_t2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFLUX_IO_INCLUDED_T2", traits: {"smithy.api#enumValue" => "InfluxIOIncludedT2"}))
     DbStorageType.add_member(:influx_io_included_t3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFLUX_IO_INCLUDED_T3", traits: {"smithy.api#enumValue" => "InfluxIOIncludedT3"}))
@@ -416,14 +416,14 @@ module Aws::TimestreamInfluxDB
     Parameters.add_member(:influx_d_bv2, Types::Parameters::InfluxDBv2, ::Smithy::Schema::Shapes::MemberShape.new(target: InfluxDBv2Parameters, name: "InfluxDBv2"))
     Parameters.add_member(:unknown, Types::Parameters::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Parameters.type = Types::Parameters
-    RequestTagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    RequestTagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    RequestTagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    RequestTagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResponseTagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    ResponseTagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    ResponseTagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    ResponseTagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     S3Configuration.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "bucketName", traits: {"smithy.api#length" => {"min" => 3, "max" => 63}, "smithy.api#pattern" => "^[0-9a-z]+[0-9a-z\\.\\-]*[0-9a-z]+$", "smithy.api#required" => {}}))
     S3Configuration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enabled", traits: {"smithy.api#required" => {}}))
     S3Configuration.type = Types::S3Configuration
@@ -439,7 +439,7 @@ module Aws::TimestreamInfluxDB
     Status.add_member(:updating_deployment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING_DEPLOYMENT_TYPE", traits: {"smithy.api#enumValue" => "UPDATING_DEPLOYMENT_TYPE"}))
     Status.add_member(:updating_instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING_INSTANCE_TYPE", traits: {"smithy.api#enumValue" => "UPDATING_INSTANCE_TYPE"}))
     Status.add_member(:maintenance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAINTENANCE", traits: {"smithy.api#enumValue" => "MAINTENANCE"}))
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestTagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -496,8 +496,8 @@ module Aws::TimestreamInfluxDB
     ValidationException.type = Types::ValidationException
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "FIELD_VALIDATION_FAILED"}))
     ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTHER", traits: {"smithy.api#enumValue" => "OTHER"}))
-    VpcSecurityGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcSecurityGroupId, name: "member")
-    VpcSubnetIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcSubnetId, name: "member")
+    VpcSecurityGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcSecurityGroupId, name: "member"))
+    VpcSubnetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcSubnetId, name: "member"))
 
     AmazonTimestreamInfluxDB = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.timestreaminfluxdb#AmazonTimestreamInfluxDB"

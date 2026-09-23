@@ -467,12 +467,12 @@ module Aws::Route53
     ChangeTagsForResourceRequest.add_member(:remove_tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "RemoveTagKeys"))
     ChangeTagsForResourceRequest.type = Types::ChangeTagsForResourceRequest
     ChangeTagsForResourceResponse.type = Types::ChangeTagsForResourceResponse
-    Changes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Change, name: "member", traits: {"smithy.api#xmlName" => "Change"})
-    CheckerIpRanges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IPAddressCidr, name: "member")
-    ChildHealthCheckList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckId, name: "member", traits: {"smithy.api#xmlName" => "ChildHealthCheck"})
+    Changes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Change, name: "member", traits: {"smithy.api#xmlName" => "Change"}))
+    CheckerIpRanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IPAddressCidr, name: "member"))
+    ChildHealthCheckList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckId, name: "member", traits: {"smithy.api#xmlName" => "ChildHealthCheck"}))
     CidrBlockInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     CidrBlockInUseException.type = Types::CidrBlockInUseException
-    CidrBlockSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CidrBlockSummary, name: "member")
+    CidrBlockSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrBlockSummary, name: "member"))
     CidrBlockSummary.add_member(:cidr_block, ::Smithy::Schema::Shapes::MemberShape.new(target: Cidr, name: "CidrBlock"))
     CidrBlockSummary.add_member(:location_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrLocationNameDefaultNotAllowed, name: "LocationName"))
     CidrBlockSummary.type = Types::CidrBlockSummary
@@ -489,12 +489,12 @@ module Aws::Route53
     CidrCollectionChange.type = Types::CidrCollectionChange
     CidrCollectionChangeAction.add_member(:put, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUT", traits: {"smithy.api#enumValue" => "PUT"}))
     CidrCollectionChangeAction.add_member(:delete_if_exists, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_IF_EXISTS", traits: {"smithy.api#enumValue" => "DELETE_IF_EXISTS"}))
-    CidrCollectionChanges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CidrCollectionChange, name: "member")
+    CidrCollectionChanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrCollectionChange, name: "member"))
     CidrCollectionInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     CidrCollectionInUseException.type = Types::CidrCollectionInUseException
     CidrCollectionVersionMismatchException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     CidrCollectionVersionMismatchException.type = Types::CidrCollectionVersionMismatchException
-    CidrList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Cidr, name: "member", traits: {"smithy.api#xmlName" => "Cidr"})
+    CidrList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Cidr, name: "member", traits: {"smithy.api#xmlName" => "Cidr"}))
     CidrRoutingConfig.add_member(:collection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "CollectionId", traits: {"smithy.api#required" => {}}))
     CidrRoutingConfig.add_member(:location_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrLocationNameDefaultAllowed, name: "LocationName", traits: {"smithy.api#required" => {}}))
     CidrRoutingConfig.type = Types::CidrRoutingConfig
@@ -551,7 +551,7 @@ module Aws::Route53
     CloudWatchRegion.add_member(:ap_east_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_east_2", traits: {"smithy.api#enumValue" => "ap-east-2"}))
     CloudWatchRegion.add_member(:eu_isoe_west_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "eu_isoe_west_1", traits: {"smithy.api#enumValue" => "eu-isoe-west-1"}))
     CloudWatchRegion.add_member(:ap_southeast_6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_southeast_6", traits: {"smithy.api#enumValue" => "ap-southeast-6"}))
-    CollectionSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionSummary, name: "member")
+    CollectionSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionSummary, name: "member"))
     CollectionSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "Arn"))
     CollectionSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "Id"))
     CollectionSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionName, name: "Name"))
@@ -665,12 +665,12 @@ module Aws::Route53
     DelegationSetAlreadyReusable.type = Types::DelegationSetAlreadyReusable
     DelegationSetInUse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     DelegationSetInUse.type = Types::DelegationSetInUse
-    DelegationSetNameServers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DNSName, name: "member", traits: {"smithy.api#xmlName" => "NameServer"})
+    DelegationSetNameServers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSName, name: "member", traits: {"smithy.api#xmlName" => "NameServer"}))
     DelegationSetNotAvailable.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     DelegationSetNotAvailable.type = Types::DelegationSetNotAvailable
     DelegationSetNotReusable.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     DelegationSetNotReusable.type = Types::DelegationSetNotReusable
-    DelegationSets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DelegationSet, name: "member", traits: {"smithy.api#xmlName" => "DelegationSet"})
+    DelegationSets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegationSet, name: "member", traits: {"smithy.api#xmlName" => "DelegationSet"}))
     DeleteCidrCollectionRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteCidrCollectionRequest.type = Types::DeleteCidrCollectionRequest
     DeleteCidrCollectionResponse.type = Types::DeleteCidrCollectionResponse
@@ -706,7 +706,7 @@ module Aws::Route53
     Dimension.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "Name", traits: {"smithy.api#required" => {}}))
     Dimension.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionField, name: "Value", traits: {"smithy.api#required" => {}}))
     Dimension.type = Types::Dimension
-    DimensionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "member", traits: {"smithy.api#xmlName" => "Dimension"})
+    DimensionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "member", traits: {"smithy.api#xmlName" => "Dimension"}))
     DisableHostedZoneDNSSECRequest.add_member(:hosted_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "HostedZoneId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DisableHostedZoneDNSSECRequest.type = Types::DisableHostedZoneDNSSECRequest
     DisableHostedZoneDNSSECResponse.add_member(:change_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeInfo, name: "ChangeInfo", traits: {"smithy.api#required" => {}}))
@@ -721,7 +721,7 @@ module Aws::Route53
     EnableHostedZoneDNSSECRequest.type = Types::EnableHostedZoneDNSSECRequest
     EnableHostedZoneDNSSECResponse.add_member(:change_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeInfo, name: "ChangeInfo", traits: {"smithy.api#required" => {}}))
     EnableHostedZoneDNSSECResponse.type = Types::EnableHostedZoneDNSSECResponse
-    ErrorMessages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "member", traits: {"smithy.api#xmlName" => "Message"})
+    ErrorMessages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "member", traits: {"smithy.api#xmlName" => "Message"}))
     GeoLocation.add_member(:continent_code, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoLocationContinentCode, name: "ContinentCode"))
     GeoLocation.add_member(:country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoLocationCountryCode, name: "CountryCode"))
     GeoLocation.add_member(:subdivision_code, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoLocationSubdivisionCode, name: "SubdivisionCode"))
@@ -733,7 +733,7 @@ module Aws::Route53
     GeoLocationDetails.add_member(:subdivision_code, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoLocationSubdivisionCode, name: "SubdivisionCode"))
     GeoLocationDetails.add_member(:subdivision_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoLocationSubdivisionName, name: "SubdivisionName"))
     GeoLocationDetails.type = Types::GeoLocationDetails
-    GeoLocationDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GeoLocationDetails, name: "member", traits: {"smithy.api#xmlName" => "GeoLocationDetails"})
+    GeoLocationDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoLocationDetails, name: "member", traits: {"smithy.api#xmlName" => "GeoLocationDetails"}))
     GeoProximityLocation.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSRegion, name: "AWSRegion"))
     GeoProximityLocation.add_member(:local_zone_group, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalZoneGroup, name: "LocalZoneGroup"))
     GeoProximityLocation.add_member(:coordinates, ::Smithy::Schema::Shapes::MemberShape.new(target: Coordinates, name: "Coordinates"))
@@ -852,7 +852,7 @@ module Aws::Route53
     HealthCheckObservation.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IPAddress, name: "IPAddress"))
     HealthCheckObservation.add_member(:status_report, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusReport, name: "StatusReport"))
     HealthCheckObservation.type = Types::HealthCheckObservation
-    HealthCheckObservations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckObservation, name: "member", traits: {"smithy.api#xmlName" => "HealthCheckObservation"})
+    HealthCheckObservations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckObservation, name: "member", traits: {"smithy.api#xmlName" => "HealthCheckObservation"}))
     HealthCheckRegion.add_member(:us_east_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "us_east_1", traits: {"smithy.api#enumValue" => "us-east-1"}))
     HealthCheckRegion.add_member(:us_west_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "us_west_1", traits: {"smithy.api#enumValue" => "us-west-1"}))
     HealthCheckRegion.add_member(:us_west_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "us_west_2", traits: {"smithy.api#enumValue" => "us-west-2"}))
@@ -861,7 +861,7 @@ module Aws::Route53
     HealthCheckRegion.add_member(:ap_southeast_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_southeast_2", traits: {"smithy.api#enumValue" => "ap-southeast-2"}))
     HealthCheckRegion.add_member(:ap_northeast_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_northeast_1", traits: {"smithy.api#enumValue" => "ap-northeast-1"}))
     HealthCheckRegion.add_member(:sa_east_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "sa_east_1", traits: {"smithy.api#enumValue" => "sa-east-1"}))
-    HealthCheckRegionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckRegion, name: "member", traits: {"smithy.api#xmlName" => "Region"})
+    HealthCheckRegionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckRegion, name: "member", traits: {"smithy.api#xmlName" => "Region"}))
     HealthCheckType.add_member(:http, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTP", traits: {"smithy.api#enumValue" => "HTTP"}))
     HealthCheckType.add_member(:https, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTPS", traits: {"smithy.api#enumValue" => "HTTPS"}))
     HealthCheckType.add_member(:http_str_match, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTP_STR_MATCH", traits: {"smithy.api#enumValue" => "HTTP_STR_MATCH"}))
@@ -872,7 +872,7 @@ module Aws::Route53
     HealthCheckType.add_member(:recovery_control, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECOVERY_CONTROL", traits: {"smithy.api#enumValue" => "RECOVERY_CONTROL"}))
     HealthCheckVersionMismatch.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     HealthCheckVersionMismatch.type = Types::HealthCheckVersionMismatch
-    HealthChecks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheck, name: "member", traits: {"smithy.api#xmlName" => "HealthCheck"})
+    HealthChecks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheck, name: "member", traits: {"smithy.api#xmlName" => "HealthCheck"}))
     HostedZone.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "Id", traits: {"smithy.api#required" => {}}))
     HostedZone.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSName, name: "Name", traits: {"smithy.api#required" => {}}))
     HostedZone.add_member(:caller_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: Nonce, name: "CallerReference", traits: {"smithy.api#required" => {}}))
@@ -901,13 +901,13 @@ module Aws::Route53
     HostedZoneOwner.type = Types::HostedZoneOwner
     HostedZonePartiallyDelegated.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     HostedZonePartiallyDelegated.type = Types::HostedZonePartiallyDelegated
-    HostedZoneSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HostedZoneSummary, name: "member", traits: {"smithy.api#xmlName" => "HostedZoneSummary"})
+    HostedZoneSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HostedZoneSummary, name: "member", traits: {"smithy.api#xmlName" => "HostedZoneSummary"}))
     HostedZoneSummary.add_member(:hosted_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "HostedZoneId", traits: {"smithy.api#required" => {}}))
     HostedZoneSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSName, name: "Name", traits: {"smithy.api#required" => {}}))
     HostedZoneSummary.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: HostedZoneOwner, name: "Owner", traits: {"smithy.api#required" => {}}))
     HostedZoneSummary.type = Types::HostedZoneSummary
     HostedZoneType.add_member(:private_hosted_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIVATE_HOSTED_ZONE", traits: {"smithy.api#enumValue" => "PrivateHostedZone"}))
-    HostedZones.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HostedZone, name: "member", traits: {"smithy.api#xmlName" => "HostedZone"})
+    HostedZones.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HostedZone, name: "member", traits: {"smithy.api#xmlName" => "HostedZone"}))
     IncompatibleVersion.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     IncompatibleVersion.type = Types::IncompatibleVersion
     InsufficientCloudWatchLogsResourcePolicy.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
@@ -963,7 +963,7 @@ module Aws::Route53
     KeySigningKeyInUse.type = Types::KeySigningKeyInUse
     KeySigningKeyWithActiveStatusNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     KeySigningKeyWithActiveStatusNotFound.type = Types::KeySigningKeyWithActiveStatusNotFound
-    KeySigningKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeySigningKey, name: "member")
+    KeySigningKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeySigningKey, name: "member"))
     LastVPCAssociation.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     LastVPCAssociation.type = Types::LastVPCAssociation
     LimitsExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
@@ -1146,7 +1146,7 @@ module Aws::Route53
     ListVPCAssociationAuthorizationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken"))
     ListVPCAssociationAuthorizationsResponse.add_member(:vp_cs, ::Smithy::Schema::Shapes::MemberShape.new(target: VPCs, name: "VPCs", traits: {"smithy.api#required" => {}}))
     ListVPCAssociationAuthorizationsResponse.type = Types::ListVPCAssociationAuthorizationsResponse
-    LocationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LocationSummary, name: "member")
+    LocationSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationSummary, name: "member"))
     LocationSummary.add_member(:location_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrLocationNameDefaultAllowed, name: "LocationName"))
     LocationSummary.type = Types::LocationSummary
     NoSuchChange.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
@@ -1185,7 +1185,7 @@ module Aws::Route53
     QueryLoggingConfig.type = Types::QueryLoggingConfig
     QueryLoggingConfigAlreadyExists.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     QueryLoggingConfigAlreadyExists.type = Types::QueryLoggingConfigAlreadyExists
-    QueryLoggingConfigs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryLoggingConfig, name: "member", traits: {"smithy.api#xmlName" => "QueryLoggingConfig"})
+    QueryLoggingConfigs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryLoggingConfig, name: "member", traits: {"smithy.api#xmlName" => "QueryLoggingConfig"}))
     RRType.add_member(:soa, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOA", traits: {"smithy.api#enumValue" => "SOA"}))
     RRType.add_member(:a, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "A", traits: {"smithy.api#enumValue" => "A"}))
     RRType.add_member(:txt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TXT", traits: {"smithy.api#enumValue" => "TXT"}))
@@ -1203,12 +1203,12 @@ module Aws::Route53
     RRType.add_member(:sshfp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSHFP", traits: {"smithy.api#enumValue" => "SSHFP"}))
     RRType.add_member(:svcb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SVCB", traits: {"smithy.api#enumValue" => "SVCB"}))
     RRType.add_member(:https, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTPS", traits: {"smithy.api#enumValue" => "HTTPS"}))
-    RecordData.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecordDataEntry, name: "member", traits: {"smithy.api#xmlName" => "RecordDataEntry"})
+    RecordData.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordDataEntry, name: "member", traits: {"smithy.api#xmlName" => "RecordDataEntry"}))
     ResettableElementName.add_member(:fully_qualified_domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FullyQualifiedDomainName", traits: {"smithy.api#enumValue" => "FullyQualifiedDomainName"}))
     ResettableElementName.add_member(:regions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Regions", traits: {"smithy.api#enumValue" => "Regions"}))
     ResettableElementName.add_member(:resource_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ResourcePath", traits: {"smithy.api#enumValue" => "ResourcePath"}))
     ResettableElementName.add_member(:child_health_checks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ChildHealthChecks", traits: {"smithy.api#enumValue" => "ChildHealthChecks"}))
-    ResettableElementNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResettableElementName, name: "member", traits: {"smithy.api#xmlName" => "ResettableElementName"})
+    ResettableElementNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResettableElementName, name: "member", traits: {"smithy.api#xmlName" => "ResettableElementName"}))
     ResourceRecord.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RData, name: "Value", traits: {"smithy.api#required" => {}}))
     ResourceRecord.type = Types::ResourceRecord
     ResourceRecordSet.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSName, name: "Name", traits: {"smithy.api#required" => {}}))
@@ -1267,13 +1267,13 @@ module Aws::Route53
     ResourceRecordSetRegion.add_member(:us_gov_west_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "us_gov_west_1", traits: {"smithy.api#enumValue" => "us-gov-west-1"}))
     ResourceRecordSetRegion.add_member(:ap_east_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_east_2", traits: {"smithy.api#enumValue" => "ap-east-2"}))
     ResourceRecordSetRegion.add_member(:ap_southeast_6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_southeast_6", traits: {"smithy.api#enumValue" => "ap-southeast-6"}))
-    ResourceRecordSets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceRecordSet, name: "member", traits: {"smithy.api#xmlName" => "ResourceRecordSet"})
-    ResourceRecords.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceRecord, name: "member", traits: {"smithy.api#xmlName" => "ResourceRecord"})
+    ResourceRecordSets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceRecordSet, name: "member", traits: {"smithy.api#xmlName" => "ResourceRecordSet"}))
+    ResourceRecords.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceRecord, name: "member", traits: {"smithy.api#xmlName" => "ResourceRecord"}))
     ResourceTagSet.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TagResourceType, name: "ResourceType"))
     ResourceTagSet.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TagResourceId, name: "ResourceId"))
     ResourceTagSet.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     ResourceTagSet.type = Types::ResourceTagSet
-    ResourceTagSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagSet, name: "member", traits: {"smithy.api#xmlName" => "ResourceTagSet"})
+    ResourceTagSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagSet, name: "member", traits: {"smithy.api#xmlName" => "ResourceTagSet"}))
     ReusableDelegationSetLimit.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReusableDelegationSetLimitType, name: "Type", traits: {"smithy.api#required" => {}}))
     ReusableDelegationSetLimit.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitValue, name: "Value", traits: {"smithy.api#required" => {}}))
     ReusableDelegationSetLimit.type = Types::ReusableDelegationSetLimit
@@ -1289,9 +1289,9 @@ module Aws::Route53
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member", traits: {"smithy.api#xmlName" => "Key"})
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member", traits: {"smithy.api#xmlName" => "Tag"})
-    TagResourceIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagResourceId, name: "member", traits: {"smithy.api#xmlName" => "ResourceId"})
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member", traits: {"smithy.api#xmlName" => "Key"}))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member", traits: {"smithy.api#xmlName" => "Tag"}))
+    TagResourceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagResourceId, name: "member", traits: {"smithy.api#xmlName" => "ResourceId"}))
     TagResourceType.add_member(:healthcheck, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "healthcheck", traits: {"smithy.api#enumValue" => "healthcheck"}))
     TagResourceType.add_member(:hostedzone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "hostedzone", traits: {"smithy.api#enumValue" => "hostedzone"}))
     TestDNSAnswerRequest.add_member(:hosted_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "HostedZoneId", traits: {"smithy.api#httpQuery" => "hostedzoneid", "smithy.api#required" => {}}))
@@ -1324,7 +1324,7 @@ module Aws::Route53
     TooManyTrafficPolicyVersionsForCurrentPolicy.type = Types::TooManyTrafficPolicyVersionsForCurrentPolicy
     TooManyVPCAssociationAuthorizations.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     TooManyVPCAssociationAuthorizations.type = Types::TooManyVPCAssociationAuthorizations
-    TrafficPolicies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicy, name: "member", traits: {"smithy.api#xmlName" => "TrafficPolicy"})
+    TrafficPolicies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicy, name: "member", traits: {"smithy.api#xmlName" => "TrafficPolicy"}))
     TrafficPolicy.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicyId, name: "Id", traits: {"smithy.api#required" => {}}))
     TrafficPolicy.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicyVersion, name: "Version", traits: {"smithy.api#required" => {}}))
     TrafficPolicy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicyName, name: "Name", traits: {"smithy.api#required" => {}}))
@@ -1348,8 +1348,8 @@ module Aws::Route53
     TrafficPolicyInstance.type = Types::TrafficPolicyInstance
     TrafficPolicyInstanceAlreadyExists.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     TrafficPolicyInstanceAlreadyExists.type = Types::TrafficPolicyInstanceAlreadyExists
-    TrafficPolicyInstances.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicyInstance, name: "member", traits: {"smithy.api#xmlName" => "TrafficPolicyInstance"})
-    TrafficPolicySummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicySummary, name: "member", traits: {"smithy.api#xmlName" => "TrafficPolicySummary"})
+    TrafficPolicyInstances.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicyInstance, name: "member", traits: {"smithy.api#xmlName" => "TrafficPolicyInstance"}))
+    TrafficPolicySummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicySummary, name: "member", traits: {"smithy.api#xmlName" => "TrafficPolicySummary"}))
     TrafficPolicySummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicyId, name: "Id", traits: {"smithy.api#required" => {}}))
     TrafficPolicySummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicyName, name: "Name", traits: {"smithy.api#required" => {}}))
     TrafficPolicySummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RRType, name: "Type", traits: {"smithy.api#required" => {}}))
@@ -1445,7 +1445,7 @@ module Aws::Route53
     VPCRegion.add_member(:ap_east_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_east_2", traits: {"smithy.api#enumValue" => "ap-east-2"}))
     VPCRegion.add_member(:eu_isoe_west_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "eu_isoe_west_1", traits: {"smithy.api#enumValue" => "eu-isoe-west-1"}))
     VPCRegion.add_member(:ap_southeast_6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_southeast_6", traits: {"smithy.api#enumValue" => "ap-southeast-6"}))
-    VPCs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VPC, name: "member", traits: {"smithy.api#xmlName" => "VPC"})
+    VPCs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VPC, name: "member", traits: {"smithy.api#xmlName" => "VPC"}))
 
     AWSDnsV20130401 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.route53#AWSDnsV20130401"

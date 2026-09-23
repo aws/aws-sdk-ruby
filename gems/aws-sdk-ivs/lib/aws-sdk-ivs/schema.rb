@@ -205,12 +205,12 @@ module Aws::Ivs
     AudioConfiguration.add_member(:channels, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "channels", traits: {"smithy.api#default" => 0}))
     AudioConfiguration.add_member(:track, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "track"))
     AudioConfiguration.type = Types::AudioConfiguration
-    AudioConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AudioConfiguration, name: "member")
+    AudioConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioConfiguration, name: "member"))
     BatchError.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "arn"))
     BatchError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "code"))
     BatchError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     BatchError.type = Types::BatchError
-    BatchErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchError, name: "member")
+    BatchErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchError, name: "member"))
     BatchGetChannelInput.add_member(:arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArnList, name: "arns", traits: {"smithy.api#required" => {}}))
     BatchGetChannelInput.type = Types::BatchGetChannelInput
     BatchGetChannelOutput.add_member(:channels, ::Smithy::Schema::Shapes::MemberShape.new(target: Channels, name: "channels"))
@@ -226,7 +226,7 @@ module Aws::Ivs
     BatchStartViewerSessionRevocationError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "code"))
     BatchStartViewerSessionRevocationError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     BatchStartViewerSessionRevocationError.type = Types::BatchStartViewerSessionRevocationError
-    BatchStartViewerSessionRevocationErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStartViewerSessionRevocationError, name: "member")
+    BatchStartViewerSessionRevocationErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStartViewerSessionRevocationError, name: "member"))
     BatchStartViewerSessionRevocationInput.add_member(:viewer_sessions, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStartViewerSessionRevocationViewerSessionList, name: "viewerSessions", traits: {"smithy.api#required" => {}}))
     BatchStartViewerSessionRevocationInput.type = Types::BatchStartViewerSessionRevocationInput
     BatchStartViewerSessionRevocationOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStartViewerSessionRevocationErrors, name: "errors"))
@@ -235,7 +235,7 @@ module Aws::Ivs
     BatchStartViewerSessionRevocationViewerSession.add_member(:viewer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewerId, name: "viewerId", traits: {"smithy.api#required" => {}}))
     BatchStartViewerSessionRevocationViewerSession.add_member(:viewer_session_versions_less_than_or_equal_to, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewerSessionVersion, name: "viewerSessionVersionsLessThanOrEqualTo", traits: {"smithy.api#default" => 0}))
     BatchStartViewerSessionRevocationViewerSession.type = Types::BatchStartViewerSessionRevocationViewerSession
-    BatchStartViewerSessionRevocationViewerSessionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStartViewerSessionRevocationViewerSession, name: "member")
+    BatchStartViewerSessionRevocationViewerSessionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStartViewerSessionRevocationViewerSession, name: "member"))
     Channel.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, name: "arn"))
     Channel.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, name: "name"))
     Channel.add_member(:latency_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelLatencyMode, name: "latencyMode"))
@@ -252,8 +252,8 @@ module Aws::Ivs
     Channel.add_member(:multitrack_input_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MultitrackInputConfiguration, name: "multitrackInputConfiguration"))
     Channel.add_member(:container_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerFormat, name: "containerFormat"))
     Channel.type = Types::Channel
-    ChannelArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, name: "member")
-    ChannelList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSummary, name: "member")
+    ChannelArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, name: "member"))
+    ChannelList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSummary, name: "member"))
     ChannelNotBroadcasting.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "exceptionMessage"))
     ChannelNotBroadcasting.type = Types::ChannelNotBroadcasting
     ChannelSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, name: "arn"))
@@ -271,7 +271,7 @@ module Aws::Ivs
     ChannelType.add_member(:standard_channel_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "StandardChannelType", traits: {"smithy.api#enumValue" => "STANDARD"}))
     ChannelType.add_member(:advanced_sd_channel_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AdvancedSDChannelType", traits: {"smithy.api#enumValue" => "ADVANCED_SD"}))
     ChannelType.add_member(:advanced_hd_channel_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AdvancedHDChannelType", traits: {"smithy.api#enumValue" => "ADVANCED_HD"}))
-    Channels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "member")
+    Channels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "member"))
     ConflictException.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "exceptionMessage"))
     ConflictException.type = Types::ConflictException
     CreateChannelInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, name: "name"))
@@ -435,7 +435,7 @@ module Aws::Ivs
     PlaybackKeyPair.add_member(:fingerprint, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackKeyPairFingerprint, name: "fingerprint"))
     PlaybackKeyPair.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     PlaybackKeyPair.type = Types::PlaybackKeyPair
-    PlaybackKeyPairList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackKeyPairSummary, name: "member")
+    PlaybackKeyPairList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackKeyPairSummary, name: "member"))
     PlaybackKeyPairSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackKeyPairArn, name: "arn"))
     PlaybackKeyPairSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackKeyPairName, name: "name"))
     PlaybackKeyPairSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
@@ -447,9 +447,9 @@ module Aws::Ivs
     PlaybackRestrictionPolicy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyName, name: "name"))
     PlaybackRestrictionPolicy.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     PlaybackRestrictionPolicy.type = Types::PlaybackRestrictionPolicy
-    PlaybackRestrictionPolicyAllowedCountryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyAllowedCountry, name: "member")
-    PlaybackRestrictionPolicyAllowedOriginList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyAllowedOrigin, name: "member")
-    PlaybackRestrictionPolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicySummary, name: "member")
+    PlaybackRestrictionPolicyAllowedCountryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyAllowedCountry, name: "member"))
+    PlaybackRestrictionPolicyAllowedOriginList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyAllowedOrigin, name: "member"))
+    PlaybackRestrictionPolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicySummary, name: "member"))
     PlaybackRestrictionPolicySummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyArn, name: "arn", traits: {"smithy.api#required" => {}}))
     PlaybackRestrictionPolicySummary.add_member(:allowed_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyAllowedCountryList, name: "allowedCountries", traits: {"smithy.api#required" => {}}))
     PlaybackRestrictionPolicySummary.add_member(:allowed_origins, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackRestrictionPolicyAllowedOriginList, name: "allowedOrigins", traits: {"smithy.api#required" => {}}))
@@ -469,7 +469,7 @@ module Aws::Ivs
     RecordingConfiguration.add_member(:recording_reconnect_window_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingReconnectWindowSeconds, name: "recordingReconnectWindowSeconds", traits: {"smithy.api#default" => 0}))
     RecordingConfiguration.add_member(:rendition_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RenditionConfiguration, name: "renditionConfiguration"))
     RecordingConfiguration.type = Types::RecordingConfiguration
-    RecordingConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingConfigurationSummary, name: "member")
+    RecordingConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingConfigurationSummary, name: "member"))
     RecordingConfigurationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingConfigurationArn, name: "arn", traits: {"smithy.api#required" => {}}))
     RecordingConfigurationSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingConfigurationName, name: "name"))
     RecordingConfigurationSummary.add_member(:destination_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationConfiguration, name: "destinationConfiguration", traits: {"smithy.api#required" => {}}))
@@ -483,7 +483,7 @@ module Aws::Ivs
     RenditionConfigurationRendition.add_member(:hd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HD", traits: {"smithy.api#enumValue" => "HD"}))
     RenditionConfigurationRendition.add_member(:full_hd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL_HD", traits: {"smithy.api#enumValue" => "FULL_HD"}))
     RenditionConfigurationRendition.add_member(:lowest_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOWEST_RESOLUTION", traits: {"smithy.api#enumValue" => "LOWEST_RESOLUTION"}))
-    RenditionConfigurationRenditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RenditionConfigurationRendition, name: "member")
+    RenditionConfigurationRenditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RenditionConfigurationRendition, name: "member"))
     ResourceNotFoundException.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "exceptionMessage"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     S3DestinationConfiguration.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3DestinationBucketName, name: "bucketName", traits: {"smithy.api#required" => {}}))
@@ -514,7 +514,7 @@ module Aws::Ivs
     StreamEvent.add_member(:event_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "eventTime"))
     StreamEvent.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "code"))
     StreamEvent.type = Types::StreamEvent
-    StreamEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamEvent, name: "member")
+    StreamEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamEvent, name: "member"))
     StreamFilters.add_member(:health, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamHealth, name: "health"))
     StreamFilters.type = Types::StreamFilters
     StreamKey.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKeyArn, name: "arn"))
@@ -522,14 +522,14 @@ module Aws::Ivs
     StreamKey.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, name: "channelArn"))
     StreamKey.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     StreamKey.type = Types::StreamKey
-    StreamKeyArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKeyArn, name: "member")
-    StreamKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKeySummary, name: "member")
+    StreamKeyArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKeyArn, name: "member"))
+    StreamKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKeySummary, name: "member"))
     StreamKeySummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKeyArn, name: "arn"))
     StreamKeySummary.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, name: "channelArn"))
     StreamKeySummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     StreamKeySummary.type = Types::StreamKeySummary
-    StreamKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKey, name: "member")
-    StreamList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSummary, name: "member")
+    StreamKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamKey, name: "member"))
+    StreamList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSummary, name: "member"))
     StreamSession.add_member(:stream_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamId, name: "streamId"))
     StreamSession.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "startTime"))
     StreamSession.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "endTime"))
@@ -539,7 +539,7 @@ module Aws::Ivs
     StreamSession.add_member(:recording_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingConfiguration, name: "recordingConfiguration"))
     StreamSession.add_member(:truncated_events, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamEvents, name: "truncatedEvents"))
     StreamSession.type = Types::StreamSession
-    StreamSessionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSessionSummary, name: "member")
+    StreamSessionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSessionSummary, name: "member"))
     StreamSessionSummary.add_member(:stream_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamId, name: "streamId"))
     StreamSessionSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "startTime"))
     StreamSessionSummary.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "endTime"))
@@ -554,13 +554,13 @@ module Aws::Ivs
     StreamSummary.type = Types::StreamSummary
     StreamUnavailable.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "exceptionMessage"))
     StreamUnavailable.type = Types::StreamUnavailable
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     ThrottlingException.add_member(:exception_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "exceptionMessage"))
     ThrottlingException.type = Types::ThrottlingException
     ThumbnailConfiguration.add_member(:recording_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingMode, name: "recordingMode"))
@@ -572,7 +572,7 @@ module Aws::Ivs
     ThumbnailConfigurationResolution.add_member(:hd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HD", traits: {"smithy.api#enumValue" => "HD"}))
     ThumbnailConfigurationResolution.add_member(:full_hd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL_HD", traits: {"smithy.api#enumValue" => "FULL_HD"}))
     ThumbnailConfigurationResolution.add_member(:lowest_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOWEST_RESOLUTION", traits: {"smithy.api#enumValue" => "LOWEST_RESOLUTION"}))
-    ThumbnailConfigurationStorageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThumbnailConfigurationStorage, name: "member")
+    ThumbnailConfigurationStorageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThumbnailConfigurationStorage, name: "member"))
     TranscodePreset.add_member(:higher_bandwidth_transcode_preset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HigherBandwidthTranscodePreset", traits: {"smithy.api#enumValue" => "HIGHER_BANDWIDTH_DELIVERY"}))
     TranscodePreset.add_member(:constrained_bandwidth_transcode_preset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ConstrainedBandwidthTranscodePreset", traits: {"smithy.api#enumValue" => "CONSTRAINED_BANDWIDTH_DELIVERY"}))
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -615,7 +615,7 @@ module Aws::Ivs
     VideoConfiguration.add_member(:track, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "track"))
     VideoConfiguration.add_member(:profile, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "profile"))
     VideoConfiguration.type = Types::VideoConfiguration
-    VideoConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VideoConfiguration, name: "member")
+    VideoConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoConfiguration, name: "member"))
 
     AmazonInteractiveVideoService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.ivs#AmazonInteractiveVideoService"

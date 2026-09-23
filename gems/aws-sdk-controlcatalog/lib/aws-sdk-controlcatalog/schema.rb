@@ -90,7 +90,7 @@ module Aws::ControlCatalog
     AssociatedObjectiveSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectiveArn, name: "Arn"))
     AssociatedObjectiveSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name"))
     AssociatedObjectiveSummary.type = Types::AssociatedObjectiveSummary
-    CommonControlArnFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CommonControlArn, name: "member")
+    CommonControlArnFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CommonControlArn, name: "member"))
     CommonControlFilter.add_member(:objectives, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectiveResourceFilterList, name: "Objectives"))
     CommonControlFilter.type = Types::CommonControlFilter
     CommonControlMappingDetails.add_member(:common_control_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CommonControlArn, name: "CommonControlArn", traits: {"smithy.api#required" => {}}))
@@ -103,9 +103,9 @@ module Aws::ControlCatalog
     CommonControlSummary.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreateTime", traits: {"smithy.api#required" => {}}))
     CommonControlSummary.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "LastUpdateTime", traits: {"smithy.api#required" => {}}))
     CommonControlSummary.type = Types::CommonControlSummary
-    CommonControlSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CommonControlSummary, name: "member")
-    ControlAliases.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ControlAlias, name: "member")
-    ControlArnFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ControlArn, name: "member")
+    CommonControlSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CommonControlSummary, name: "member"))
+    ControlAliases.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlAlias, name: "member"))
+    ControlArnFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlArn, name: "member"))
     ControlBehavior.add_member(:preventive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PREVENTIVE", traits: {"smithy.api#enumValue" => "PREVENTIVE"}))
     ControlBehavior.add_member(:proactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROACTIVE", traits: {"smithy.api#enumValue" => "PROACTIVE"}))
     ControlBehavior.add_member(:detective, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DETECTIVE", traits: {"smithy.api#enumValue" => "DETECTIVE"}))
@@ -119,10 +119,10 @@ module Aws::ControlCatalog
     ControlMappingFilter.add_member(:common_control_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: CommonControlArnFilterList, name: "CommonControlArns"))
     ControlMappingFilter.add_member(:mapping_types, ::Smithy::Schema::Shapes::MemberShape.new(target: MappingTypeFilterList, name: "MappingTypes"))
     ControlMappingFilter.type = Types::ControlMappingFilter
-    ControlMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ControlMapping, name: "member")
+    ControlMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlMapping, name: "member"))
     ControlParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name", traits: {"smithy.api#required" => {}}))
     ControlParameter.type = Types::ControlParameter
-    ControlParameters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ControlParameter, name: "member")
+    ControlParameters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlParameter, name: "member"))
     ControlScope.add_member(:global, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GLOBAL", traits: {"smithy.api#enumValue" => "GLOBAL"}))
     ControlScope.add_member(:regional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGIONAL", traits: {"smithy.api#enumValue" => "REGIONAL"}))
     ControlSeverity.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "LOW"}))
@@ -139,18 +139,18 @@ module Aws::ControlCatalog
     ControlSummary.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreateTime"))
     ControlSummary.add_member(:governed_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: GovernedResources, name: "GovernedResources"))
     ControlSummary.type = Types::ControlSummary
-    Controls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ControlSummary, name: "member")
-    DeployableRegions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegionCode, name: "member")
+    Controls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlSummary, name: "member"))
+    DeployableRegions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionCode, name: "member"))
     DomainResourceFilter.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainArn, name: "Arn"))
     DomainResourceFilter.type = Types::DomainResourceFilter
-    DomainResourceFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainResourceFilter, name: "member")
+    DomainResourceFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainResourceFilter, name: "member"))
     DomainSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainArn, name: "Arn", traits: {"smithy.api#required" => {}}))
     DomainSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name", traits: {"smithy.api#required" => {}}))
     DomainSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Description", traits: {"smithy.api#required" => {}}))
     DomainSummary.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreateTime", traits: {"smithy.api#required" => {}}))
     DomainSummary.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "LastUpdateTime", traits: {"smithy.api#required" => {}}))
     DomainSummary.type = Types::DomainSummary
-    DomainSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainSummary, name: "member")
+    DomainSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainSummary, name: "member"))
     FrameworkMappingDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameworkName, name: "Name", traits: {"smithy.api#required" => {}}))
     FrameworkMappingDetails.add_member(:item, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameworkItem, name: "Item", traits: {"smithy.api#required" => {}}))
     FrameworkMappingDetails.type = Types::FrameworkMappingDetails
@@ -168,18 +168,18 @@ module Aws::ControlCatalog
     GetControlResponse.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreateTime"))
     GetControlResponse.add_member(:governed_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: GovernedResources, name: "GovernedResources"))
     GetControlResponse.type = Types::GetControlResponse
-    GovernedResources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GovernedResource, name: "member")
+    GovernedResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GovernedResource, name: "member"))
     ImplementationDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ImplementationType, name: "Type", traits: {"smithy.api#required" => {}}))
     ImplementationDetails.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ImplementationIdentifier, name: "Identifier"))
     ImplementationDetails.type = Types::ImplementationDetails
     ImplementationFilter.add_member(:types, ::Smithy::Schema::Shapes::MemberShape.new(target: ImplementationTypeFilterList, name: "Types"))
     ImplementationFilter.add_member(:identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: ImplementationIdentifierFilterList, name: "Identifiers"))
     ImplementationFilter.type = Types::ImplementationFilter
-    ImplementationIdentifierFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImplementationIdentifier, name: "member")
+    ImplementationIdentifierFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImplementationIdentifier, name: "member"))
     ImplementationSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ImplementationType, name: "Type", traits: {"smithy.api#required" => {}}))
     ImplementationSummary.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ImplementationIdentifier, name: "Identifier"))
     ImplementationSummary.type = Types::ImplementationSummary
-    ImplementationTypeFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImplementationType, name: "member")
+    ImplementationTypeFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImplementationType, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
     InternalServerException.type = Types::InternalServerException
     ListCommonControlsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxListCommonControlsResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
@@ -222,12 +222,12 @@ module Aws::ControlCatalog
     Mapping.type = Types::Mapping
     MappingType.add_member(:framework, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FRAMEWORK", traits: {"smithy.api#enumValue" => "FRAMEWORK"}))
     MappingType.add_member(:common_control, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMMON_CONTROL", traits: {"smithy.api#enumValue" => "COMMON_CONTROL"}))
-    MappingTypeFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MappingType, name: "member")
+    MappingTypeFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MappingType, name: "member"))
     ObjectiveFilter.add_member(:domains, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainResourceFilterList, name: "Domains"))
     ObjectiveFilter.type = Types::ObjectiveFilter
     ObjectiveResourceFilter.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectiveArn, name: "Arn"))
     ObjectiveResourceFilter.type = Types::ObjectiveResourceFilter
-    ObjectiveResourceFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectiveResourceFilter, name: "member")
+    ObjectiveResourceFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectiveResourceFilter, name: "member"))
     ObjectiveSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectiveArn, name: "Arn", traits: {"smithy.api#required" => {}}))
     ObjectiveSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name", traits: {"smithy.api#required" => {}}))
     ObjectiveSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Description", traits: {"smithy.api#required" => {}}))
@@ -235,7 +235,7 @@ module Aws::ControlCatalog
     ObjectiveSummary.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreateTime", traits: {"smithy.api#required" => {}}))
     ObjectiveSummary.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "LastUpdateTime", traits: {"smithy.api#required" => {}}))
     ObjectiveSummary.type = Types::ObjectiveSummary
-    ObjectiveSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectiveSummary, name: "member")
+    ObjectiveSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectiveSummary, name: "member"))
     RegionConfiguration.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlScope, name: "Scope", traits: {"smithy.api#required" => {}}))
     RegionConfiguration.add_member(:deployable_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: DeployableRegions, name: "DeployableRegions"))
     RegionConfiguration.type = Types::RegionConfiguration

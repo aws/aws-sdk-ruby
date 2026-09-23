@@ -130,7 +130,7 @@ module Aws::CloudControl
     HookProgressEvent.add_member(:hook_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessage, name: "HookStatusMessage"))
     HookProgressEvent.add_member(:failure_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: HookFailureMode, name: "FailureMode"))
     HookProgressEvent.type = Types::HookProgressEvent
-    HooksProgressEvent.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HookProgressEvent, name: "member")
+    HooksProgressEvent.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HookProgressEvent, name: "member"))
     InvalidCredentialsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InvalidCredentialsException.type = Types::InvalidCredentialsException
     InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -159,8 +159,8 @@ module Aws::CloudControl
     NotStabilizedException.type = Types::NotStabilizedException
     NotUpdatableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     NotUpdatableException.type = Types::NotUpdatableException
-    OperationStatuses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OperationStatus, name: "member")
-    Operations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, name: "member")
+    OperationStatuses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationStatus, name: "member"))
+    Operations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, name: "member"))
     PrivateTypeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     PrivateTypeException.type = Types::PrivateTypeException
     ProgressEvent.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, name: "TypeName"))
@@ -182,13 +182,13 @@ module Aws::CloudControl
     ResourceDescription.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "Identifier"))
     ResourceDescription.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: Properties, name: "Properties"))
     ResourceDescription.type = Types::ResourceDescription
-    ResourceDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, name: "member")
+    ResourceDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ResourceRequestStatusFilter.add_member(:operations, ::Smithy::Schema::Shapes::MemberShape.new(target: Operations, name: "Operations"))
     ResourceRequestStatusFilter.add_member(:operation_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationStatuses, name: "OperationStatuses"))
     ResourceRequestStatusFilter.type = Types::ResourceRequestStatusFilter
-    ResourceRequestStatusSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressEvent, name: "member")
+    ResourceRequestStatusSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressEvent, name: "member"))
     ServiceInternalErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ServiceInternalErrorException.type = Types::ServiceInternalErrorException
     ServiceLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))

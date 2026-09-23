@@ -196,8 +196,8 @@ module Aws::AppTest
     Batch.add_member(:batch_job_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchJobParameters, name: "batchJobParameters"))
     Batch.add_member(:export_data_set_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportDataSetNames, name: "exportDataSetNames"))
     Batch.type = Types::Batch
-    BatchJobParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    BatchJobParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    BatchJobParameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    BatchJobParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     BatchStepInput.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: MainframeResourceSummary, name: "resource", traits: {"smithy.api#required" => {}}))
     BatchStepInput.add_member(:batch_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "batchJobName", traits: {"smithy.api#required" => {}}))
     BatchStepInput.add_member(:batch_job_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchJobParameters, name: "batchJobParameters"))
@@ -310,7 +310,7 @@ module Aws::AppTest
     DataSet.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: Format, name: "format", traits: {"smithy.api#required" => {}}))
     DataSet.add_member(:length, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "length", traits: {"smithy.api#required" => {}}))
     DataSet.type = Types::DataSet
-    DataSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSet, name: "member")
+    DataSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSet, name: "member"))
     DataSetType.add_member(:ps, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PS", traits: {"smithy.api#enumValue" => "PS"}))
     DatabaseCDC.add_member(:source_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceDatabaseMetadata, name: "sourceMetadata", traits: {"smithy.api#required" => {}}))
     DatabaseCDC.add_member(:target_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetDatabaseMetadata, name: "targetMetadata", traits: {"smithy.api#required" => {}}))
@@ -333,7 +333,7 @@ module Aws::AppTest
     DeleteTestSuiteRequest.add_member(:test_suite_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "testSuiteId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteTestSuiteRequest.type = Types::DeleteTestSuiteRequest
     DeleteTestSuiteResponse.type = Types::DeleteTestSuiteResponse
-    ExportDataSetNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String100, name: "member")
+    ExportDataSetNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String100, name: "member"))
     File.add_member(:file_type, Types::File::FileType, ::Smithy::Schema::Shapes::MemberShape.new(target: CompareFileType, name: "fileType"))
     File.add_member(:unknown, Types::File::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     File.type = Types::File
@@ -554,8 +554,8 @@ module Aws::AppTest
     Output.type = Types::Output
     OutputFile.add_member(:file_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "fileLocation"))
     OutputFile.type = Types::OutputFile
-    Properties.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    Properties.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    Properties.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    Properties.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     Resource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name", traits: {"smithy.api#required" => {}}))
     Resource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "type", traits: {"smithy.api#required" => {}}))
     Resource.type = Types::Resource
@@ -569,7 +569,7 @@ module Aws::AppTest
     ResourceActionSummary.add_member(:m2_non_managed_application, Types::ResourceActionSummary::M2NonManagedApplication, ::Smithy::Schema::Shapes::MemberShape.new(target: M2NonManagedApplicationStepSummary, name: "m2NonManagedApplication"))
     ResourceActionSummary.add_member(:unknown, Types::ResourceActionSummary::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ResourceActionSummary.type = Types::ResourceActionSummary
-    ResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member")
+    ResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId"))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType"))
@@ -615,7 +615,7 @@ module Aws::AppTest
     StepAction.add_member(:compare_action, Types::StepAction::CompareAction, ::Smithy::Schema::Shapes::MemberShape.new(target: CompareAction, name: "compareAction"))
     StepAction.add_member(:unknown, Types::StepAction::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     StepAction.type = Types::StepAction
-    StepList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Step, name: "member")
+    StepList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Step, name: "member"))
     StepRunStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "Success"}))
     StepRunStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
     StepRunStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "Running"}))
@@ -640,9 +640,9 @@ module Aws::AppTest
     TN3270Summary.add_member(:step_input, ::Smithy::Schema::Shapes::MemberShape.new(target: TN3270StepInput, name: "stepInput", traits: {"smithy.api#required" => {}}))
     TN3270Summary.add_member(:step_output, ::Smithy::Schema::Shapes::MemberShape.new(target: TN3270StepOutput, name: "stepOutput"))
     TN3270Summary.type = Types::TN3270Summary
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -651,14 +651,14 @@ module Aws::AppTest
     TargetDatabaseMetadata.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetDatabase, name: "type", traits: {"smithy.api#required" => {}}))
     TargetDatabaseMetadata.add_member(:capture_tool, ::Smithy::Schema::Shapes::MemberShape.new(target: CaptureTool, name: "captureTool", traits: {"smithy.api#required" => {}}))
     TargetDatabaseMetadata.type = Types::TargetDatabaseMetadata
-    TestCaseIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "member")
+    TestCaseIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "member"))
     TestCaseLatestVersion.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version", traits: {"smithy.api#required" => {}}))
     TestCaseLatestVersion.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TestCaseLifecycle, name: "status", traits: {"smithy.api#required" => {}}))
     TestCaseLatestVersion.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
     TestCaseLatestVersion.type = Types::TestCaseLatestVersion
     TestCaseLifecycle.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "Active"}))
     TestCaseLifecycle.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
-    TestCaseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "member")
+    TestCaseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "member"))
     TestCaseRunStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "Success"}))
     TestCaseRunStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "Running"}))
     TestCaseRunStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
@@ -670,7 +670,7 @@ module Aws::AppTest
     TestCaseRunSummary.add_member(:run_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "runStartTime", traits: {"smithy.api#required" => {}}))
     TestCaseRunSummary.add_member(:run_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "runEndTime"))
     TestCaseRunSummary.type = Types::TestCaseRunSummary
-    TestCaseRunSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TestCaseRunSummary, name: "member")
+    TestCaseRunSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TestCaseRunSummary, name: "member"))
     TestCaseSummary.add_member(:test_case_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "testCaseId", traits: {"smithy.api#required" => {}}))
     TestCaseSummary.add_member(:test_case_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "testCaseArn", traits: {"smithy.api#required" => {}}))
     TestCaseSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -680,18 +680,18 @@ module Aws::AppTest
     TestCaseSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "creationTime", traits: {"smithy.api#required" => {}}))
     TestCaseSummary.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastUpdateTime", traits: {"smithy.api#required" => {}}))
     TestCaseSummary.type = Types::TestCaseSummary
-    TestCaseSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TestCaseSummary, name: "member")
+    TestCaseSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TestCaseSummary, name: "member"))
     TestCases.add_member(:sequential, Types::TestCases::Sequential, ::Smithy::Schema::Shapes::MemberShape.new(target: TestCaseList, name: "sequential"))
     TestCases.add_member(:unknown, Types::TestCases::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     TestCases.type = Types::TestCases
-    TestConfigurationIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "member")
+    TestConfigurationIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "member"))
     TestConfigurationLatestVersion.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version", traits: {"smithy.api#required" => {}}))
     TestConfigurationLatestVersion.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TestConfigurationLifecycle, name: "status", traits: {"smithy.api#required" => {}}))
     TestConfigurationLatestVersion.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
     TestConfigurationLatestVersion.type = Types::TestConfigurationLatestVersion
     TestConfigurationLifecycle.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "Active"}))
     TestConfigurationLifecycle.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
-    TestConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TestConfigurationSummary, name: "member")
+    TestConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TestConfigurationSummary, name: "member"))
     TestConfigurationSummary.add_member(:test_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "testConfigurationId", traits: {"smithy.api#required" => {}}))
     TestConfigurationSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name", traits: {"smithy.api#required" => {}}))
     TestConfigurationSummary.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
@@ -701,7 +701,7 @@ module Aws::AppTest
     TestConfigurationSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "creationTime", traits: {"smithy.api#required" => {}}))
     TestConfigurationSummary.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastUpdateTime", traits: {"smithy.api#required" => {}}))
     TestConfigurationSummary.type = Types::TestConfigurationSummary
-    TestRunIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "member")
+    TestRunIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "member"))
     TestRunStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "Success"}))
     TestRunStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "Running"}))
     TestRunStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
@@ -719,7 +719,7 @@ module Aws::AppTest
     TestRunStepSummary.add_member(:run_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "runStartTime", traits: {"smithy.api#required" => {}}))
     TestRunStepSummary.add_member(:run_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "runEndTime"))
     TestRunStepSummary.type = Types::TestRunStepSummary
-    TestRunStepSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TestRunStepSummary, name: "member")
+    TestRunStepSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TestRunStepSummary, name: "member"))
     TestRunSummary.add_member(:test_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "testRunId", traits: {"smithy.api#required" => {}}))
     TestRunSummary.add_member(:test_run_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "testRunArn", traits: {"smithy.api#required" => {}}))
     TestRunSummary.add_member(:test_suite_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "testSuiteId", traits: {"smithy.api#required" => {}}))
@@ -731,8 +731,8 @@ module Aws::AppTest
     TestRunSummary.add_member(:run_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "runStartTime", traits: {"smithy.api#required" => {}}))
     TestRunSummary.add_member(:run_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "runEndTime"))
     TestRunSummary.type = Types::TestRunSummary
-    TestRunSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TestRunSummary, name: "member")
-    TestSuiteIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "member")
+    TestRunSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TestRunSummary, name: "member"))
+    TestSuiteIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "member"))
     TestSuiteLatestVersion.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version", traits: {"smithy.api#required" => {}}))
     TestSuiteLatestVersion.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TestSuiteLifecycle, name: "status", traits: {"smithy.api#required" => {}}))
     TestSuiteLatestVersion.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
@@ -742,7 +742,7 @@ module Aws::AppTest
     TestSuiteLifecycle.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "Active"}))
     TestSuiteLifecycle.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
     TestSuiteLifecycle.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
-    TestSuiteList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TestSuiteSummary, name: "member")
+    TestSuiteList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TestSuiteSummary, name: "member"))
     TestSuiteSummary.add_member(:test_suite_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "testSuiteId", traits: {"smithy.api#required" => {}}))
     TestSuiteSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name", traits: {"smithy.api#required" => {}}))
     TestSuiteSummary.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
@@ -793,7 +793,7 @@ module Aws::AppTest
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "unknownOperation"}))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "cannotParse"}))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "fieldValidationFailed"}))

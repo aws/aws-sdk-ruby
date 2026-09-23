@@ -323,16 +323,16 @@ module Aws::Route53RecoveryControlConfig
     UpdateSafetyRuleResponse.type = Types::UpdateSafetyRuleResponse
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
-    Listofcluster.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "member")
-    Listofclusterendpoint.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterEndpoint, name: "member")
-    Listofcontrolpanel.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ControlPanel, name: "member")
-    Listofroutingcontrol.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingControl, name: "member")
-    Listofrule.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "member")
-    ListofString.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    ListofStringmax36patterns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmax36patterns, name: "member")
-    ListofStringmin1max256patternazaz09.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max256patternazaz09, name: "member")
-    MapofStringmin0max256patterns.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    MapofStringmin0max256patterns.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max256patterns, name: "value")
+    Listofcluster.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "member"))
+    Listofclusterendpoint.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterEndpoint, name: "member"))
+    Listofcontrolpanel.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlPanel, name: "member"))
+    Listofroutingcontrol.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingControl, name: "member"))
+    Listofrule.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "member"))
+    ListofString.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    ListofStringmax36patterns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmax36patterns, name: "member"))
+    ListofStringmin1max256patternazaz09.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max256patternazaz09, name: "member"))
+    MapofStringmin0max256patterns.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    MapofStringmin0max256patterns.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max256patterns, name: "value"))
 
     Route53RecoveryControlConfig = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.route53recoverycontrolconfig#Route53RecoveryControlConfig"

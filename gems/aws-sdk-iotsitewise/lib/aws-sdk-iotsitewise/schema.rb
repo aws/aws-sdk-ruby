@@ -623,7 +623,7 @@ module Aws::IoTSiteWise
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AccessPolicySummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPolicySummary, name: "member")
+    AccessPolicySummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPolicySummary, name: "member"))
     AccessPolicySummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id", traits: {"smithy.api#required" => {}}))
     AccessPolicySummary.add_member(:identity, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "identity", traits: {"smithy.api#required" => {}}))
     AccessPolicySummary.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "resource", traits: {"smithy.api#required" => {}}))
@@ -635,10 +635,10 @@ module Aws::IoTSiteWise
     ActionDefinition.add_member(:action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "actionName", traits: {"smithy.api#required" => {}}))
     ActionDefinition.add_member(:action_type, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "actionType", traits: {"smithy.api#required" => {}}))
     ActionDefinition.type = Types::ActionDefinition
-    ActionDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionDefinition, name: "member")
+    ActionDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionDefinition, name: "member"))
     ActionPayload.add_member(:string_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionPayloadString, name: "stringValue", traits: {"smithy.api#required" => {}}))
     ActionPayload.type = Types::ActionPayload
-    ActionSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionSummary, name: "member")
+    ActionSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionSummary, name: "member"))
     ActionSummary.add_member(:action_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "actionId"))
     ActionSummary.add_member(:action_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "actionDefinitionId"))
     ActionSummary.add_member(:target_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResource, name: "targetResource"))
@@ -650,12 +650,12 @@ module Aws::IoTSiteWise
     AggregateType.add_member(:minimum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MINIMUM", traits: {"smithy.api#enumValue" => "MINIMUM"}))
     AggregateType.add_member(:sum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUM", traits: {"smithy.api#enumValue" => "SUM"}))
     AggregateType.add_member(:standard_deviation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD_DEVIATION", traits: {"smithy.api#enumValue" => "STANDARD_DEVIATION"}))
-    AggregateTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateType, name: "member")
+    AggregateTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregateType, name: "member"))
     AggregatedValue.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "timestamp", traits: {"smithy.api#required" => {}}))
     AggregatedValue.add_member(:quality, ::Smithy::Schema::Shapes::MemberShape.new(target: Quality, name: "quality"))
     AggregatedValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Aggregates, name: "value", traits: {"smithy.api#required" => {}}))
     AggregatedValue.type = Types::AggregatedValue
-    AggregatedValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedValue, name: "member")
+    AggregatedValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedValue, name: "member"))
     Aggregates.add_member(:average, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedDoubleValue, name: "average"))
     Aggregates.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedDoubleValue, name: "count"))
     Aggregates.add_member(:maximum, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedDoubleValue, name: "maximum"))
@@ -675,11 +675,11 @@ module Aws::IoTSiteWise
     AssetCompositeModel.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id"))
     AssetCompositeModel.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalId, name: "externalId"))
     AssetCompositeModel.type = Types::AssetCompositeModel
-    AssetCompositeModelPath.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetCompositeModelPathSegment, name: "member")
+    AssetCompositeModelPath.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetCompositeModelPathSegment, name: "member"))
     AssetCompositeModelPathSegment.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id"))
     AssetCompositeModelPathSegment.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     AssetCompositeModelPathSegment.type = Types::AssetCompositeModelPathSegment
-    AssetCompositeModelSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetCompositeModelSummary, name: "member")
+    AssetCompositeModelSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetCompositeModelSummary, name: "member"))
     AssetCompositeModelSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id", traits: {"smithy.api#required" => {}}))
     AssetCompositeModelSummary.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalId, name: "externalId"))
     AssetCompositeModelSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
@@ -687,13 +687,13 @@ module Aws::IoTSiteWise
     AssetCompositeModelSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description", traits: {"smithy.api#required" => {}}))
     AssetCompositeModelSummary.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetCompositeModelPath, name: "path", traits: {"smithy.api#required" => {}}))
     AssetCompositeModelSummary.type = Types::AssetCompositeModelSummary
-    AssetCompositeModels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetCompositeModel, name: "member")
+    AssetCompositeModels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetCompositeModel, name: "member"))
     AssetErrorCode.add_member(:internal_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_FAILURE", traits: {"smithy.api#enumValue" => "INTERNAL_FAILURE"}))
     AssetErrorDetails.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetId", traits: {"smithy.api#required" => {}}))
     AssetErrorDetails.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetErrorCode, name: "code", traits: {"smithy.api#required" => {}}))
     AssetErrorDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     AssetErrorDetails.type = Types::AssetErrorDetails
-    AssetHierarchies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetHierarchy, name: "member")
+    AssetHierarchies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetHierarchy, name: "member"))
     AssetHierarchy.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id"))
     AssetHierarchy.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalId, name: "externalId"))
     AssetHierarchy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
@@ -701,7 +701,7 @@ module Aws::IoTSiteWise
     AssetHierarchyInfo.add_member(:parent_asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "parentAssetId"))
     AssetHierarchyInfo.add_member(:child_asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "childAssetId"))
     AssetHierarchyInfo.type = Types::AssetHierarchyInfo
-    AssetIDs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "member")
+    AssetIDs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "member"))
     AssetModelBindingValueFilter.add_member(:asset_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetModelId", traits: {"smithy.api#required" => {}}))
     AssetModelBindingValueFilter.type = Types::AssetModelBindingValueFilter
     AssetModelCompositeModel.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
@@ -718,12 +718,12 @@ module Aws::IoTSiteWise
     AssetModelCompositeModelDefinition.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "type", traits: {"smithy.api#required" => {}}))
     AssetModelCompositeModelDefinition.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelPropertyDefinitions, name: "properties"))
     AssetModelCompositeModelDefinition.type = Types::AssetModelCompositeModelDefinition
-    AssetModelCompositeModelDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelCompositeModelDefinition, name: "member")
-    AssetModelCompositeModelPath.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelCompositeModelPathSegment, name: "member")
+    AssetModelCompositeModelDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelCompositeModelDefinition, name: "member"))
+    AssetModelCompositeModelPath.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelCompositeModelPathSegment, name: "member"))
     AssetModelCompositeModelPathSegment.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id"))
     AssetModelCompositeModelPathSegment.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     AssetModelCompositeModelPathSegment.type = Types::AssetModelCompositeModelPathSegment
-    AssetModelCompositeModelSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelCompositeModelSummary, name: "member")
+    AssetModelCompositeModelSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelCompositeModelSummary, name: "member"))
     AssetModelCompositeModelSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id", traits: {"smithy.api#required" => {}}))
     AssetModelCompositeModelSummary.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalId, name: "externalId"))
     AssetModelCompositeModelSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
@@ -731,8 +731,8 @@ module Aws::IoTSiteWise
     AssetModelCompositeModelSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     AssetModelCompositeModelSummary.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelCompositeModelPath, name: "path"))
     AssetModelCompositeModelSummary.type = Types::AssetModelCompositeModelSummary
-    AssetModelCompositeModels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelCompositeModel, name: "member")
-    AssetModelHierarchies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelHierarchy, name: "member")
+    AssetModelCompositeModels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelCompositeModel, name: "member"))
+    AssetModelHierarchies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelHierarchy, name: "member"))
     AssetModelHierarchy.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "id"))
     AssetModelHierarchy.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalId, name: "externalId"))
     AssetModelHierarchy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
@@ -743,8 +743,8 @@ module Aws::IoTSiteWise
     AssetModelHierarchyDefinition.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
     AssetModelHierarchyDefinition.add_member(:child_asset_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "childAssetModelId", traits: {"smithy.api#required" => {}}))
     AssetModelHierarchyDefinition.type = Types::AssetModelHierarchyDefinition
-    AssetModelHierarchyDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelHierarchyDefinition, name: "member")
-    AssetModelProperties.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelProperty, name: "member")
+    AssetModelHierarchyDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelHierarchyDefinition, name: "member"))
+    AssetModelProperties.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelProperty, name: "member"))
     AssetModelProperty.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "id"))
     AssetModelProperty.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalId, name: "externalId"))
     AssetModelProperty.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
@@ -768,12 +768,12 @@ module Aws::IoTSiteWise
     AssetModelPropertyDefinition.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyUnit, name: "unit"))
     AssetModelPropertyDefinition.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyType, name: "type", traits: {"smithy.api#required" => {}}))
     AssetModelPropertyDefinition.type = Types::AssetModelPropertyDefinition
-    AssetModelPropertyDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelPropertyDefinition, name: "member")
-    AssetModelPropertyPath.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelPropertyPathSegment, name: "member")
+    AssetModelPropertyDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelPropertyDefinition, name: "member"))
+    AssetModelPropertyPath.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelPropertyPathSegment, name: "member"))
     AssetModelPropertyPathSegment.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id"))
     AssetModelPropertyPathSegment.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     AssetModelPropertyPathSegment.type = Types::AssetModelPropertyPathSegment
-    AssetModelPropertySummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelPropertySummary, name: "member")
+    AssetModelPropertySummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelPropertySummary, name: "member"))
     AssetModelPropertySummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id"))
     AssetModelPropertySummary.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalId, name: "externalId"))
     AssetModelPropertySummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
@@ -794,7 +794,7 @@ module Aws::IoTSiteWise
     AssetModelStatus.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelState, name: "state", traits: {"smithy.api#required" => {}}))
     AssetModelStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetails, name: "error"))
     AssetModelStatus.type = Types::AssetModelStatus
-    AssetModelSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelSummary, name: "member")
+    AssetModelSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelSummary, name: "member"))
     AssetModelSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id", traits: {"smithy.api#required" => {}}))
     AssetModelSummary.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalId, name: "externalId"))
     AssetModelSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -811,7 +811,7 @@ module Aws::IoTSiteWise
     AssetModelType.add_member(:interface, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERFACE", traits: {"smithy.api#enumValue" => "INTERFACE"}))
     AssetModelVersionType.add_member(:latest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LATEST", traits: {"smithy.api#enumValue" => "LATEST"}))
     AssetModelVersionType.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    AssetProperties.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetProperty, name: "member")
+    AssetProperties.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetProperty, name: "member"))
     AssetProperty.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id", traits: {"smithy.api#required" => {}}))
     AssetProperty.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalId, name: "externalId"))
     AssetProperty.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
@@ -828,11 +828,11 @@ module Aws::IoTSiteWise
     AssetPropertyBindingValueFilter.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetId", traits: {"smithy.api#required" => {}}))
     AssetPropertyBindingValueFilter.add_member(:property_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "propertyId", traits: {"smithy.api#required" => {}}))
     AssetPropertyBindingValueFilter.type = Types::AssetPropertyBindingValueFilter
-    AssetPropertyPath.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyPathSegment, name: "member")
+    AssetPropertyPath.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyPathSegment, name: "member"))
     AssetPropertyPathSegment.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id"))
     AssetPropertyPathSegment.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     AssetPropertyPathSegment.type = Types::AssetPropertyPathSegment
-    AssetPropertySummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertySummary, name: "member")
+    AssetPropertySummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertySummary, name: "member"))
     AssetPropertySummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id", traits: {"smithy.api#required" => {}}))
     AssetPropertySummary.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalId, name: "externalId"))
     AssetPropertySummary.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyAlias, name: "alias"))
@@ -845,9 +845,9 @@ module Aws::IoTSiteWise
     AssetPropertyValue.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "timestamp", traits: {"smithy.api#required" => {}}))
     AssetPropertyValue.add_member(:quality, ::Smithy::Schema::Shapes::MemberShape.new(target: Quality, name: "quality"))
     AssetPropertyValue.type = Types::AssetPropertyValue
-    AssetPropertyValueHistory.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyValue, name: "member")
-    AssetPropertyValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyValue, name: "member")
-    AssetRelationshipSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetRelationshipSummary, name: "member")
+    AssetPropertyValueHistory.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyValue, name: "member"))
+    AssetPropertyValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyValue, name: "member"))
+    AssetRelationshipSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetRelationshipSummary, name: "member"))
     AssetRelationshipSummary.add_member(:hierarchy_info, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetHierarchyInfo, name: "hierarchyInfo"))
     AssetRelationshipSummary.add_member(:relationship_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetRelationshipType, name: "relationshipType", traits: {"smithy.api#required" => {}}))
     AssetRelationshipSummary.type = Types::AssetRelationshipSummary
@@ -860,7 +860,7 @@ module Aws::IoTSiteWise
     AssetStatus.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetState, name: "state", traits: {"smithy.api#required" => {}}))
     AssetStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetails, name: "error"))
     AssetStatus.type = Types::AssetStatus
-    AssetSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetSummary, name: "member")
+    AssetSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetSummary, name: "member"))
     AssetSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id", traits: {"smithy.api#required" => {}}))
     AssetSummary.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalId, name: "externalId"))
     AssetSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -882,7 +882,7 @@ module Aws::IoTSiteWise
     AssociateTimeSeriesToAssetPropertyRequest.add_member(:property_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "propertyId", traits: {"smithy.api#httpQuery" => "propertyId", "smithy.api#required" => {}}))
     AssociateTimeSeriesToAssetPropertyRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     AssociateTimeSeriesToAssetPropertyRequest.type = Types::AssociateTimeSeriesToAssetPropertyRequest
-    AssociatedAssetsSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedAssetsSummary, name: "member")
+    AssociatedAssetsSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedAssetsSummary, name: "member"))
     AssociatedAssetsSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id", traits: {"smithy.api#required" => {}}))
     AssociatedAssetsSummary.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalId, name: "externalId"))
     AssociatedAssetsSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -898,14 +898,14 @@ module Aws::IoTSiteWise
     Attribute.type = Types::Attribute
     AuthMode.add_member(:iam, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IAM", traits: {"smithy.api#enumValue" => "IAM"}))
     AuthMode.add_member(:sso, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSO", traits: {"smithy.api#enumValue" => "SSO"}))
-    BatchAssociateProjectAssetsErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetErrorDetails, name: "member")
+    BatchAssociateProjectAssetsErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetErrorDetails, name: "member"))
     BatchAssociateProjectAssetsRequest.add_member(:project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "projectId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BatchAssociateProjectAssetsRequest.add_member(:asset_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: IDs, name: "assetIds", traits: {"smithy.api#required" => {}}))
     BatchAssociateProjectAssetsRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     BatchAssociateProjectAssetsRequest.type = Types::BatchAssociateProjectAssetsRequest
     BatchAssociateProjectAssetsResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAssociateProjectAssetsErrors, name: "errors"))
     BatchAssociateProjectAssetsResponse.type = Types::BatchAssociateProjectAssetsResponse
-    BatchDisassociateProjectAssetsErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetErrorDetails, name: "member")
+    BatchDisassociateProjectAssetsErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetErrorDetails, name: "member"))
     BatchDisassociateProjectAssetsRequest.add_member(:project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "projectId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BatchDisassociateProjectAssetsRequest.add_member(:asset_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: IDs, name: "assetIds", traits: {"smithy.api#required" => {}}))
     BatchDisassociateProjectAssetsRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
@@ -914,7 +914,7 @@ module Aws::IoTSiteWise
     BatchDisassociateProjectAssetsResponse.type = Types::BatchDisassociateProjectAssetsResponse
     BatchEntryCompletionStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
     BatchEntryCompletionStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
-    BatchGetAssetPropertyAggregatesEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyAggregatesEntry, name: "member")
+    BatchGetAssetPropertyAggregatesEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyAggregatesEntry, name: "member"))
     BatchGetAssetPropertyAggregatesEntry.add_member(:entry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryId, name: "entryId", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyAggregatesEntry.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetId"))
     BatchGetAssetPropertyAggregatesEntry.add_member(:property_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "propertyId"))
@@ -929,7 +929,7 @@ module Aws::IoTSiteWise
     BatchGetAssetPropertyAggregatesErrorCode.add_member(:resource_not_found_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ResourceNotFoundException", traits: {"smithy.api#enumValue" => "ResourceNotFoundException"}))
     BatchGetAssetPropertyAggregatesErrorCode.add_member(:invalid_request_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InvalidRequestException", traits: {"smithy.api#enumValue" => "InvalidRequestException"}))
     BatchGetAssetPropertyAggregatesErrorCode.add_member(:access_denied_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AccessDeniedException", traits: {"smithy.api#enumValue" => "AccessDeniedException"}))
-    BatchGetAssetPropertyAggregatesErrorEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyAggregatesErrorEntry, name: "member")
+    BatchGetAssetPropertyAggregatesErrorEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyAggregatesErrorEntry, name: "member"))
     BatchGetAssetPropertyAggregatesErrorEntry.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyAggregatesErrorCode, name: "errorCode", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyAggregatesErrorEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyAggregatesErrorEntry.add_member(:entry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryId, name: "entryId", traits: {"smithy.api#required" => {}}))
@@ -946,16 +946,16 @@ module Aws::IoTSiteWise
     BatchGetAssetPropertyAggregatesResponse.add_member(:skipped_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyAggregatesSkippedEntries, name: "skippedEntries", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyAggregatesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     BatchGetAssetPropertyAggregatesResponse.type = Types::BatchGetAssetPropertyAggregatesResponse
-    BatchGetAssetPropertyAggregatesSkippedEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyAggregatesSkippedEntry, name: "member")
+    BatchGetAssetPropertyAggregatesSkippedEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyAggregatesSkippedEntry, name: "member"))
     BatchGetAssetPropertyAggregatesSkippedEntry.add_member(:entry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryId, name: "entryId", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyAggregatesSkippedEntry.add_member(:completion_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchEntryCompletionStatus, name: "completionStatus", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyAggregatesSkippedEntry.add_member(:error_info, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyAggregatesErrorInfo, name: "errorInfo"))
     BatchGetAssetPropertyAggregatesSkippedEntry.type = Types::BatchGetAssetPropertyAggregatesSkippedEntry
-    BatchGetAssetPropertyAggregatesSuccessEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyAggregatesSuccessEntry, name: "member")
+    BatchGetAssetPropertyAggregatesSuccessEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyAggregatesSuccessEntry, name: "member"))
     BatchGetAssetPropertyAggregatesSuccessEntry.add_member(:entry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryId, name: "entryId", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyAggregatesSuccessEntry.add_member(:aggregated_values, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedValues, name: "aggregatedValues", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyAggregatesSuccessEntry.type = Types::BatchGetAssetPropertyAggregatesSuccessEntry
-    BatchGetAssetPropertyValueEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueEntry, name: "member")
+    BatchGetAssetPropertyValueEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueEntry, name: "member"))
     BatchGetAssetPropertyValueEntry.add_member(:entry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryId, name: "entryId", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyValueEntry.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetId"))
     BatchGetAssetPropertyValueEntry.add_member(:property_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "propertyId"))
@@ -964,7 +964,7 @@ module Aws::IoTSiteWise
     BatchGetAssetPropertyValueErrorCode.add_member(:resource_not_found_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ResourceNotFoundException", traits: {"smithy.api#enumValue" => "ResourceNotFoundException"}))
     BatchGetAssetPropertyValueErrorCode.add_member(:invalid_request_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InvalidRequestException", traits: {"smithy.api#enumValue" => "InvalidRequestException"}))
     BatchGetAssetPropertyValueErrorCode.add_member(:access_denied_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AccessDeniedException", traits: {"smithy.api#enumValue" => "AccessDeniedException"}))
-    BatchGetAssetPropertyValueErrorEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueErrorEntry, name: "member")
+    BatchGetAssetPropertyValueErrorEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueErrorEntry, name: "member"))
     BatchGetAssetPropertyValueErrorEntry.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueErrorCode, name: "errorCode", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyValueErrorEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyValueErrorEntry.add_member(:entry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryId, name: "entryId", traits: {"smithy.api#required" => {}}))
@@ -972,7 +972,7 @@ module Aws::IoTSiteWise
     BatchGetAssetPropertyValueErrorInfo.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueErrorCode, name: "errorCode", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyValueErrorInfo.add_member(:error_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "errorTimestamp", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyValueErrorInfo.type = Types::BatchGetAssetPropertyValueErrorInfo
-    BatchGetAssetPropertyValueHistoryEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueHistoryEntry, name: "member")
+    BatchGetAssetPropertyValueHistoryEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueHistoryEntry, name: "member"))
     BatchGetAssetPropertyValueHistoryEntry.add_member(:entry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryId, name: "entryId", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyValueHistoryEntry.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetId"))
     BatchGetAssetPropertyValueHistoryEntry.add_member(:property_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "propertyId"))
@@ -985,7 +985,7 @@ module Aws::IoTSiteWise
     BatchGetAssetPropertyValueHistoryErrorCode.add_member(:resource_not_found_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ResourceNotFoundException", traits: {"smithy.api#enumValue" => "ResourceNotFoundException"}))
     BatchGetAssetPropertyValueHistoryErrorCode.add_member(:invalid_request_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InvalidRequestException", traits: {"smithy.api#enumValue" => "InvalidRequestException"}))
     BatchGetAssetPropertyValueHistoryErrorCode.add_member(:access_denied_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AccessDeniedException", traits: {"smithy.api#enumValue" => "AccessDeniedException"}))
-    BatchGetAssetPropertyValueHistoryErrorEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueHistoryErrorEntry, name: "member")
+    BatchGetAssetPropertyValueHistoryErrorEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueHistoryErrorEntry, name: "member"))
     BatchGetAssetPropertyValueHistoryErrorEntry.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueHistoryErrorCode, name: "errorCode", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyValueHistoryErrorEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyValueHistoryErrorEntry.add_member(:entry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryId, name: "entryId", traits: {"smithy.api#required" => {}}))
@@ -1002,12 +1002,12 @@ module Aws::IoTSiteWise
     BatchGetAssetPropertyValueHistoryResponse.add_member(:skipped_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueHistorySkippedEntries, name: "skippedEntries", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyValueHistoryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     BatchGetAssetPropertyValueHistoryResponse.type = Types::BatchGetAssetPropertyValueHistoryResponse
-    BatchGetAssetPropertyValueHistorySkippedEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueHistorySkippedEntry, name: "member")
+    BatchGetAssetPropertyValueHistorySkippedEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueHistorySkippedEntry, name: "member"))
     BatchGetAssetPropertyValueHistorySkippedEntry.add_member(:entry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryId, name: "entryId", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyValueHistorySkippedEntry.add_member(:completion_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchEntryCompletionStatus, name: "completionStatus", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyValueHistorySkippedEntry.add_member(:error_info, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueHistoryErrorInfo, name: "errorInfo"))
     BatchGetAssetPropertyValueHistorySkippedEntry.type = Types::BatchGetAssetPropertyValueHistorySkippedEntry
-    BatchGetAssetPropertyValueHistorySuccessEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueHistorySuccessEntry, name: "member")
+    BatchGetAssetPropertyValueHistorySuccessEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueHistorySuccessEntry, name: "member"))
     BatchGetAssetPropertyValueHistorySuccessEntry.add_member(:entry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryId, name: "entryId", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyValueHistorySuccessEntry.add_member(:asset_property_value_history, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyValueHistory, name: "assetPropertyValueHistory", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyValueHistorySuccessEntry.type = Types::BatchGetAssetPropertyValueHistorySuccessEntry
@@ -1019,12 +1019,12 @@ module Aws::IoTSiteWise
     BatchGetAssetPropertyValueResponse.add_member(:skipped_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueSkippedEntries, name: "skippedEntries", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyValueResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     BatchGetAssetPropertyValueResponse.type = Types::BatchGetAssetPropertyValueResponse
-    BatchGetAssetPropertyValueSkippedEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueSkippedEntry, name: "member")
+    BatchGetAssetPropertyValueSkippedEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueSkippedEntry, name: "member"))
     BatchGetAssetPropertyValueSkippedEntry.add_member(:entry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryId, name: "entryId", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyValueSkippedEntry.add_member(:completion_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchEntryCompletionStatus, name: "completionStatus", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyValueSkippedEntry.add_member(:error_info, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueErrorInfo, name: "errorInfo"))
     BatchGetAssetPropertyValueSkippedEntry.type = Types::BatchGetAssetPropertyValueSkippedEntry
-    BatchGetAssetPropertyValueSuccessEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueSuccessEntry, name: "member")
+    BatchGetAssetPropertyValueSuccessEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetAssetPropertyValueSuccessEntry, name: "member"))
     BatchGetAssetPropertyValueSuccessEntry.add_member(:entry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryId, name: "entryId", traits: {"smithy.api#required" => {}}))
     BatchGetAssetPropertyValueSuccessEntry.add_member(:asset_property_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyValue, name: "assetPropertyValue"))
     BatchGetAssetPropertyValueSuccessEntry.type = Types::BatchGetAssetPropertyValueSuccessEntry
@@ -1032,11 +1032,11 @@ module Aws::IoTSiteWise
     BatchPutAssetPropertyError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage", traits: {"smithy.api#required" => {}}))
     BatchPutAssetPropertyError.add_member(:timestamps, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamps, name: "timestamps", traits: {"smithy.api#required" => {}}))
     BatchPutAssetPropertyError.type = Types::BatchPutAssetPropertyError
-    BatchPutAssetPropertyErrorEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutAssetPropertyErrorEntry, name: "member")
+    BatchPutAssetPropertyErrorEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutAssetPropertyErrorEntry, name: "member"))
     BatchPutAssetPropertyErrorEntry.add_member(:entry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryId, name: "entryId", traits: {"smithy.api#required" => {}}))
     BatchPutAssetPropertyErrorEntry.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutAssetPropertyErrors, name: "errors", traits: {"smithy.api#required" => {}}))
     BatchPutAssetPropertyErrorEntry.type = Types::BatchPutAssetPropertyErrorEntry
-    BatchPutAssetPropertyErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutAssetPropertyError, name: "member")
+    BatchPutAssetPropertyErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutAssetPropertyError, name: "member"))
     BatchPutAssetPropertyValueErrorCode.add_member(:resource_not_found_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ResourceNotFoundException", traits: {"smithy.api#enumValue" => "ResourceNotFoundException"}))
     BatchPutAssetPropertyValueErrorCode.add_member(:invalid_request_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InvalidRequestException", traits: {"smithy.api#enumValue" => "InvalidRequestException"}))
     BatchPutAssetPropertyValueErrorCode.add_member(:internal_failure_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InternalFailureException", traits: {"smithy.api#enumValue" => "InternalFailureException"}))
@@ -1051,7 +1051,7 @@ module Aws::IoTSiteWise
     BatchPutAssetPropertyValueRequest.type = Types::BatchPutAssetPropertyValueRequest
     BatchPutAssetPropertyValueResponse.add_member(:error_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutAssetPropertyErrorEntries, name: "errorEntries", traits: {"smithy.api#required" => {}}))
     BatchPutAssetPropertyValueResponse.type = Types::BatchPutAssetPropertyValueResponse
-    BindingValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationModelDataBindingValue, name: "member")
+    BindingValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationModelDataBindingValue, name: "member"))
     CapabilitySyncStatus.add_member(:in_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_SYNC", traits: {"smithy.api#enumValue" => "IN_SYNC"}))
     CapabilitySyncStatus.add_member(:out_of_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OUT_OF_SYNC", traits: {"smithy.api#enumValue" => "OUT_OF_SYNC"}))
     CapabilitySyncStatus.add_member(:sync_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYNC_FAILED", traits: {"smithy.api#enumValue" => "SYNC_FAILED"}))
@@ -1060,7 +1060,7 @@ module Aws::IoTSiteWise
     Citation.add_member(:reference, ::Smithy::Schema::Shapes::MemberShape.new(target: Reference, name: "reference"))
     Citation.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: Content, name: "content"))
     Citation.type = Types::Citation
-    Citations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Citation, name: "member")
+    Citations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Citation, name: "member"))
     ColumnInfo.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     ColumnInfo.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnType, name: "type"))
     ColumnInfo.type = Types::ColumnInfo
@@ -1072,10 +1072,10 @@ module Aws::IoTSiteWise
     ColumnName.add_member(:timestamp_nano_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMESTAMP_NANO_OFFSET", traits: {"smithy.api#enumValue" => "TIMESTAMP_NANO_OFFSET"}))
     ColumnName.add_member(:quality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUALITY", traits: {"smithy.api#enumValue" => "QUALITY"}))
     ColumnName.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALUE", traits: {"smithy.api#enumValue" => "VALUE"}))
-    ColumnNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "member")
+    ColumnNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "member"))
     ColumnType.add_member(:scalar_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalarType, name: "scalarType"))
     ColumnType.type = Types::ColumnType
-    ColumnsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnInfo, name: "member")
+    ColumnsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnInfo, name: "member"))
     CompositeModelProperty.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
     CompositeModelProperty.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "type", traits: {"smithy.api#required" => {}}))
     CompositeModelProperty.add_member(:asset_property, ::Smithy::Schema::Shapes::MemberShape.new(target: Property, name: "assetProperty", traits: {"smithy.api#required" => {}}))
@@ -1084,10 +1084,10 @@ module Aws::IoTSiteWise
     CompositeModelProperty.type = Types::CompositeModelProperty
     CompositionDetails.add_member(:composition_relationship, ::Smithy::Schema::Shapes::MemberShape.new(target: CompositionRelationship, name: "compositionRelationship"))
     CompositionDetails.type = Types::CompositionDetails
-    CompositionRelationship.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CompositionRelationshipItem, name: "member")
+    CompositionRelationship.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CompositionRelationshipItem, name: "member"))
     CompositionRelationshipItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id"))
     CompositionRelationshipItem.type = Types::CompositionRelationshipItem
-    CompositionRelationshipSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CompositionRelationshipSummary, name: "member")
+    CompositionRelationshipSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CompositionRelationshipSummary, name: "member"))
     CompositionRelationshipSummary.add_member(:asset_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetModelId", traits: {"smithy.api#required" => {}}))
     CompositionRelationshipSummary.add_member(:asset_model_composite_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetModelCompositeModelId", traits: {"smithy.api#required" => {}}))
     CompositionRelationshipSummary.add_member(:asset_model_composite_model_type, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "assetModelCompositeModelType", traits: {"smithy.api#required" => {}}))
@@ -1097,9 +1097,9 @@ module Aws::IoTSiteWise
     ComputationModelAnomalyDetectionConfiguration.type = Types::ComputationModelAnomalyDetectionConfiguration
     ComputationModelConfiguration.add_member(:anomaly_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationModelAnomalyDetectionConfiguration, name: "anomalyDetection"))
     ComputationModelConfiguration.type = Types::ComputationModelConfiguration
-    ComputationModelDataBinding.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationModelDataBindingVariable, name: "key")
-    ComputationModelDataBinding.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationModelDataBindingValue, name: "value")
-    ComputationModelDataBindingUsageSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationModelDataBindingUsageSummary, name: "member")
+    ComputationModelDataBinding.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationModelDataBindingVariable, name: "key"))
+    ComputationModelDataBinding.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationModelDataBindingValue, name: "value"))
+    ComputationModelDataBindingUsageSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationModelDataBindingUsageSummary, name: "member"))
     ComputationModelDataBindingUsageSummary.add_member(:computation_model_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationModelIdList, name: "computationModelIds", traits: {"smithy.api#required" => {}}))
     ComputationModelDataBindingUsageSummary.add_member(:matched_data_binding, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchedDataBinding, name: "matchedDataBinding", traits: {"smithy.api#required" => {}}))
     ComputationModelDataBindingUsageSummary.type = Types::ComputationModelDataBindingUsageSummary
@@ -1107,10 +1107,10 @@ module Aws::IoTSiteWise
     ComputationModelDataBindingValue.add_member(:asset_property, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyBindingValue, name: "assetProperty"))
     ComputationModelDataBindingValue.add_member(:list, ::Smithy::Schema::Shapes::MemberShape.new(target: BindingValueList, name: "list"))
     ComputationModelDataBindingValue.type = Types::ComputationModelDataBindingValue
-    ComputationModelExecutionSummary.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationModelExecutionSummaryKey, name: "key")
-    ComputationModelExecutionSummary.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationModelExecutionSummaryValue, name: "value")
-    ComputationModelIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "member")
-    ComputationModelResolveToResourceSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationModelResolveToResourceSummary, name: "member")
+    ComputationModelExecutionSummary.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationModelExecutionSummaryKey, name: "key"))
+    ComputationModelExecutionSummary.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationModelExecutionSummaryValue, name: "value"))
+    ComputationModelIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "member"))
+    ComputationModelResolveToResourceSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationModelResolveToResourceSummary, name: "member"))
     ComputationModelResolveToResourceSummary.add_member(:resolve_to, ::Smithy::Schema::Shapes::MemberShape.new(target: ResolveTo, name: "resolveTo"))
     ComputationModelResolveToResourceSummary.type = Types::ComputationModelResolveToResourceSummary
     ComputationModelState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
@@ -1121,7 +1121,7 @@ module Aws::IoTSiteWise
     ComputationModelStatus.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationModelState, name: "state", traits: {"smithy.api#required" => {}}))
     ComputationModelStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetails, name: "error"))
     ComputationModelStatus.type = Types::ComputationModelStatus
-    ComputationModelSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationModelSummary, name: "member")
+    ComputationModelSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationModelSummary, name: "member"))
     ComputationModelSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id", traits: {"smithy.api#required" => {}}))
     ComputationModelSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn", traits: {"smithy.api#required" => {}}))
     ComputationModelSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictedName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -1292,7 +1292,7 @@ module Aws::IoTSiteWise
     CustomerManagedS3Storage.add_member(:s3_resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "s3ResourceArn", traits: {"smithy.api#required" => {}}))
     CustomerManagedS3Storage.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "roleArn", traits: {"smithy.api#required" => {}}))
     CustomerManagedS3Storage.type = Types::CustomerManagedS3Storage
-    DashboardSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardSummary, name: "member")
+    DashboardSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardSummary, name: "member"))
     DashboardSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id", traits: {"smithy.api#required" => {}}))
     DashboardSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
     DashboardSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
@@ -1324,7 +1324,7 @@ module Aws::IoTSiteWise
     DatasetStatus.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetState, name: "state", traits: {"smithy.api#required" => {}}))
     DatasetStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetails, name: "error"))
     DatasetStatus.type = Types::DatasetStatus
-    DatasetSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetSummary, name: "member")
+    DatasetSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetSummary, name: "member"))
     DatasetSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id", traits: {"smithy.api#required" => {}}))
     DatasetSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn", traits: {"smithy.api#required" => {}}))
     DatasetSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictedName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -1338,7 +1338,7 @@ module Aws::IoTSiteWise
     Datum.add_member(:row_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Row, name: "rowValue"))
     Datum.add_member(:null_value, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "nullValue"))
     Datum.type = Types::Datum
-    DatumList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Datum, name: "member")
+    DatumList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Datum, name: "member"))
     DeleteAccessPolicyRequest.add_member(:access_policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "accessPolicyId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAccessPolicyRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
     DeleteAccessPolicyRequest.type = Types::DeleteAccessPolicyRequest
@@ -1670,7 +1670,7 @@ module Aws::IoTSiteWise
     DetailedError.type = Types::DetailedError
     DetailedErrorCode.add_member(:incompatible_compute_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCOMPATIBLE_COMPUTE_LOCATION", traits: {"smithy.api#enumValue" => "INCOMPATIBLE_COMPUTE_LOCATION"}))
     DetailedErrorCode.add_member(:incompatible_forwarding_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCOMPATIBLE_FORWARDING_CONFIGURATION", traits: {"smithy.api#enumValue" => "INCOMPATIBLE_FORWARDING_CONFIGURATION"}))
-    DetailedErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DetailedError, name: "member")
+    DetailedErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DetailedError, name: "member"))
     DisassociateAssetsRequest.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "assetId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DisassociateAssetsRequest.add_member(:hierarchy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "hierarchyId", traits: {"smithy.api#required" => {}}))
     DisassociateAssetsRequest.add_member(:child_asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "childAssetId", traits: {"smithy.api#required" => {}}))
@@ -1711,16 +1711,16 @@ module Aws::IoTSiteWise
     ExecuteQueryResponse.add_member(:rows, ::Smithy::Schema::Shapes::MemberShape.new(target: Rows, name: "rows"))
     ExecuteQueryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecuteQueryNextToken, name: "nextToken"))
     ExecuteQueryResponse.type = Types::ExecuteQueryResponse
-    ExecutionDetails.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionDetailsKey, name: "key")
-    ExecutionDetails.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionDetailsValue, name: "value")
-    ExecutionResult.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionResultKey, name: "key")
-    ExecutionResult.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionResultValue, name: "value")
+    ExecutionDetails.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionDetailsKey, name: "key"))
+    ExecutionDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionDetailsValue, name: "value"))
+    ExecutionResult.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionResultKey, name: "key"))
+    ExecutionResult.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionResultValue, name: "value"))
     ExecutionState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     ExecutionState.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     ExecutionState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     ExecutionStatus.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionState, name: "state", traits: {"smithy.api#required" => {}}))
     ExecutionStatus.type = Types::ExecutionStatus
-    ExecutionSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionSummary, name: "member")
+    ExecutionSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionSummary, name: "member"))
     ExecutionSummary.add_member(:execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "executionId", traits: {"smithy.api#required" => {}}))
     ExecutionSummary.add_member(:action_type, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "actionType"))
     ExecutionSummary.add_member(:target_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResource, name: "targetResource", traits: {"smithy.api#required" => {}}))
@@ -1734,7 +1734,7 @@ module Aws::IoTSiteWise
     ExpressionVariable.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableName, name: "name", traits: {"smithy.api#required" => {}}))
     ExpressionVariable.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableValue, name: "value", traits: {"smithy.api#required" => {}}))
     ExpressionVariable.type = Types::ExpressionVariable
-    ExpressionVariables.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionVariable, name: "member")
+    ExpressionVariables.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionVariable, name: "member"))
     File.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: Bucket, name: "bucket", traits: {"smithy.api#required" => {}}))
     File.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key", traits: {"smithy.api#required" => {}}))
     File.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "versionId"))
@@ -1742,12 +1742,12 @@ module Aws::IoTSiteWise
     FileFormat.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: Csv, name: "csv"))
     FileFormat.add_member(:parquet, ::Smithy::Schema::Shapes::MemberShape.new(target: Parquet, name: "parquet"))
     FileFormat.type = Types::FileFormat
-    Files.member = ::Smithy::Schema::Shapes::MemberShape.new(target: File, name: "member")
+    Files.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: File, name: "member"))
     ForwardingConfig.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ForwardingConfigState, name: "state", traits: {"smithy.api#required" => {}}))
     ForwardingConfig.type = Types::ForwardingConfig
     ForwardingConfigState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     ForwardingConfigState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
-    GatewayCapabilitySummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayCapabilitySummary, name: "member")
+    GatewayCapabilitySummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayCapabilitySummary, name: "member"))
     GatewayCapabilitySummary.add_member(:capability_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityNamespace, name: "capabilityNamespace", traits: {"smithy.api#required" => {}}))
     GatewayCapabilitySummary.add_member(:capability_sync_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilitySyncStatus, name: "capabilitySyncStatus", traits: {"smithy.api#required" => {}}))
     GatewayCapabilitySummary.type = Types::GatewayCapabilitySummary
@@ -1755,7 +1755,7 @@ module Aws::IoTSiteWise
     GatewayPlatform.add_member(:greengrass_v2, ::Smithy::Schema::Shapes::MemberShape.new(target: GreengrassV2, name: "greengrassV2"))
     GatewayPlatform.add_member(:siemens_ie, ::Smithy::Schema::Shapes::MemberShape.new(target: SiemensIE, name: "siemensIE"))
     GatewayPlatform.type = Types::GatewayPlatform
-    GatewaySummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GatewaySummary, name: "member")
+    GatewaySummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewaySummary, name: "member"))
     GatewaySummary.add_member(:gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "gatewayId", traits: {"smithy.api#required" => {}}))
     GatewaySummary.add_member(:gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayName, name: "gatewayName", traits: {"smithy.api#required" => {}}))
     GatewaySummary.add_member(:gateway_platform, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayPlatform, name: "gatewayPlatform"))
@@ -1825,12 +1825,12 @@ module Aws::IoTSiteWise
     HierarchyMapping.add_member(:asset_model_hierarchy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetModelHierarchyId", traits: {"smithy.api#required" => {}}))
     HierarchyMapping.add_member(:interface_asset_model_hierarchy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "interfaceAssetModelHierarchyId", traits: {"smithy.api#required" => {}}))
     HierarchyMapping.type = Types::HierarchyMapping
-    HierarchyMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyMapping, name: "member")
+    HierarchyMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchyMapping, name: "member"))
     IAMRoleIdentity.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamArn, name: "arn", traits: {"smithy.api#required" => {}}))
     IAMRoleIdentity.type = Types::IAMRoleIdentity
     IAMUserIdentity.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamArn, name: "arn", traits: {"smithy.api#required" => {}}))
     IAMUserIdentity.type = Types::IAMUserIdentity
-    IDs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "member")
+    IDs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "member"))
     Identity.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: UserIdentity, name: "user"))
     Identity.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupIdentity, name: "group"))
     Identity.add_member(:iam_user, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMUserIdentity, name: "iamUser"))
@@ -1849,13 +1849,13 @@ module Aws::IoTSiteWise
     ImageLocation.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id", traits: {"smithy.api#required" => {}}))
     ImageLocation.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "url", traits: {"smithy.api#required" => {}}))
     ImageLocation.type = Types::ImageLocation
-    InterfaceDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InterfaceRelationship, name: "member")
+    InterfaceDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InterfaceRelationship, name: "member"))
     InterfaceRelationship.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id", traits: {"smithy.api#required" => {}}))
     InterfaceRelationship.type = Types::InterfaceRelationship
-    InterfaceRelationshipSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InterfaceRelationshipSummary, name: "member")
+    InterfaceRelationshipSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InterfaceRelationshipSummary, name: "member"))
     InterfaceRelationshipSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id", traits: {"smithy.api#required" => {}}))
     InterfaceRelationshipSummary.type = Types::InterfaceRelationshipSummary
-    InterfaceSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InterfaceSummary, name: "member")
+    InterfaceSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InterfaceSummary, name: "member"))
     InterfaceSummary.add_member(:interface_asset_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "interfaceAssetModelId", traits: {"smithy.api#required" => {}}))
     InterfaceSummary.add_member(:interface_asset_model_property_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "interfaceAssetModelPropertyId", traits: {"smithy.api#required" => {}}))
     InterfaceSummary.type = Types::InterfaceSummary
@@ -1864,7 +1864,7 @@ module Aws::IoTSiteWise
     InterpolatedAssetPropertyValue.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "timestamp", traits: {"smithy.api#required" => {}}))
     InterpolatedAssetPropertyValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Variant, name: "value", traits: {"smithy.api#required" => {}}))
     InterpolatedAssetPropertyValue.type = Types::InterpolatedAssetPropertyValue
-    InterpolatedAssetPropertyValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InterpolatedAssetPropertyValue, name: "member")
+    InterpolatedAssetPropertyValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InterpolatedAssetPropertyValue, name: "member"))
     InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     InvalidRequestException.type = Types::InvalidRequestException
     InvocationOutput.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
@@ -1887,7 +1887,7 @@ module Aws::IoTSiteWise
     JobStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     JobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     JobStatus.add_member(:completed_with_failures, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED_WITH_FAILURES", traits: {"smithy.api#enumValue" => "COMPLETED_WITH_FAILURES"}))
-    JobSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobSummary, name: "member")
+    JobSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobSummary, name: "member"))
     JobSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id", traits: {"smithy.api#required" => {}}))
     JobSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
     JobSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "status", traits: {"smithy.api#required" => {}}))
@@ -1945,7 +1945,7 @@ module Aws::IoTSiteWise
     ListAssetModelsResponse.add_member(:asset_model_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelSummaries, name: "assetModelSummaries", traits: {"smithy.api#required" => {}}))
     ListAssetModelsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListAssetModelsResponse.type = Types::ListAssetModelsResponse
-    ListAssetModelsTypeFilter.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelType, name: "member")
+    ListAssetModelsTypeFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelType, name: "member"))
     ListAssetPropertiesFilter.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
     ListAssetPropertiesFilter.add_member(:base, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BASE", traits: {"smithy.api#enumValue" => "BASE"}))
     ListAssetPropertiesRequest.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "assetId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -2142,7 +2142,7 @@ module Aws::IoTSiteWise
     PortalStatus.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalState, name: "state", traits: {"smithy.api#required" => {}}))
     PortalStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorErrorDetails, name: "error"))
     PortalStatus.type = Types::PortalStatus
-    PortalSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PortalSummary, name: "member")
+    PortalSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalSummary, name: "member"))
     PortalSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id", traits: {"smithy.api#required" => {}}))
     PortalSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
     PortalSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
@@ -2153,11 +2153,11 @@ module Aws::IoTSiteWise
     PortalSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalStatus, name: "status", traits: {"smithy.api#required" => {}}))
     PortalSummary.add_member(:portal_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalType, name: "portalType"))
     PortalSummary.type = Types::PortalSummary
-    PortalTools.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "member")
+    PortalTools.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "member"))
     PortalType.add_member(:sitewise_portal_v1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SITEWISE_PORTAL_V1", traits: {"smithy.api#enumValue" => "SITEWISE_PORTAL_V1"}))
     PortalType.add_member(:sitewise_portal_v2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SITEWISE_PORTAL_V2", traits: {"smithy.api#enumValue" => "SITEWISE_PORTAL_V2"}))
-    PortalTypeConfiguration.key = ::Smithy::Schema::Shapes::MemberShape.new(target: PortalTypeKey, name: "key")
-    PortalTypeConfiguration.value = ::Smithy::Schema::Shapes::MemberShape.new(target: PortalTypeEntry, name: "value")
+    PortalTypeConfiguration.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalTypeKey, name: "key"))
+    PortalTypeConfiguration.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalTypeEntry, name: "value"))
     PortalTypeEntry.add_member(:portal_tools, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalTools, name: "portalTools"))
     PortalTypeEntry.type = Types::PortalTypeEntry
     PreconditionFailedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
@@ -2166,7 +2166,7 @@ module Aws::IoTSiteWise
     PreconditionFailedException.type = Types::PreconditionFailedException
     ProjectResource.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id", traits: {"smithy.api#required" => {}}))
     ProjectResource.type = Types::ProjectResource
-    ProjectSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectSummary, name: "member")
+    ProjectSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectSummary, name: "member"))
     ProjectSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id", traits: {"smithy.api#required" => {}}))
     ProjectSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
     ProjectSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
@@ -2195,7 +2195,7 @@ module Aws::IoTSiteWise
     PropertyMappingConfiguration.add_member(:create_missing_property, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateMissingProperty, name: "createMissingProperty", traits: {"smithy.api#default" => false}))
     PropertyMappingConfiguration.add_member(:overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyMappings, name: "overrides"))
     PropertyMappingConfiguration.type = Types::PropertyMappingConfiguration
-    PropertyMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyMapping, name: "member")
+    PropertyMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyMapping, name: "member"))
     PropertyNotification.add_member(:topic, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyNotificationTopic, name: "topic", traits: {"smithy.api#required" => {}}))
     PropertyNotification.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyNotificationState, name: "state", traits: {"smithy.api#required" => {}}))
     PropertyNotification.type = Types::PropertyNotification
@@ -2218,7 +2218,7 @@ module Aws::IoTSiteWise
     PutAssetModelInterfaceRelationshipResponse.add_member(:asset_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "assetModelArn", traits: {"smithy.api#required" => {}}))
     PutAssetModelInterfaceRelationshipResponse.add_member(:asset_model_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelStatus, name: "assetModelStatus", traits: {"smithy.api#required" => {}}))
     PutAssetModelInterfaceRelationshipResponse.type = Types::PutAssetModelInterfaceRelationshipResponse
-    PutAssetPropertyValueEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PutAssetPropertyValueEntry, name: "member")
+    PutAssetPropertyValueEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PutAssetPropertyValueEntry, name: "member"))
     PutAssetPropertyValueEntry.add_member(:entry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryId, name: "entryId", traits: {"smithy.api#required" => {}}))
     PutAssetPropertyValueEntry.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetId"))
     PutAssetPropertyValueEntry.add_member(:property_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "propertyId"))
@@ -2252,7 +2252,7 @@ module Aws::IoTSiteWise
     PutStorageConfigurationResponse.add_member(:warm_tier_retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: WarmTierRetentionPeriod, name: "warmTierRetentionPeriod"))
     PutStorageConfigurationResponse.add_member(:disallow_ingest_null_na_n, ::Smithy::Schema::Shapes::MemberShape.new(target: DisallowIngestNullNaN, name: "disallowIngestNullNaN"))
     PutStorageConfigurationResponse.type = Types::PutStorageConfigurationResponse
-    Qualities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Quality, name: "member")
+    Qualities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Quality, name: "member"))
     Quality.add_member(:good, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GOOD", traits: {"smithy.api#enumValue" => "GOOD"}))
     Quality.add_member(:bad, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BAD", traits: {"smithy.api#enumValue" => "BAD"}))
     Quality.add_member(:uncertain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNCERTAIN", traits: {"smithy.api#enumValue" => "UNCERTAIN"}))
@@ -2295,7 +2295,7 @@ module Aws::IoTSiteWise
     RetentionPeriod.type = Types::RetentionPeriod
     Row.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: DatumList, name: "data", traits: {"smithy.api#required" => {}}))
     Row.type = Types::Row
-    Rows.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Row, name: "member")
+    Rows.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Row, name: "member"))
     ScalarType.add_member(:boolean, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BOOLEAN", traits: {"smithy.api#enumValue" => "BOOLEAN"}))
     ScalarType.add_member(:int, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INT", traits: {"smithy.api#enumValue" => "INT"}))
     ScalarType.add_member(:double, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOUBLE", traits: {"smithy.api#enumValue" => "DOUBLE"}))
@@ -2312,9 +2312,9 @@ module Aws::IoTSiteWise
     SourceDetail.type = Types::SourceDetail
     StorageType.add_member(:sitewise_default_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SITEWISE_DEFAULT_STORAGE", traits: {"smithy.api#enumValue" => "SITEWISE_DEFAULT_STORAGE"}))
     StorageType.add_member(:multi_layer_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTI_LAYER_STORAGE", traits: {"smithy.api#enumValue" => "MULTI_LAYER_STORAGE"}))
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceArn", traits: {"smithy.api#httpQuery" => "resourceArn", "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -2331,7 +2331,7 @@ module Aws::IoTSiteWise
     TimeInNanos.type = Types::TimeInNanos
     TimeOrdering.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASCENDING", traits: {"smithy.api#enumValue" => "ASCENDING"}))
     TimeOrdering.add_member(:descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESCENDING", traits: {"smithy.api#enumValue" => "DESCENDING"}))
-    TimeSeriesSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesSummary, name: "member")
+    TimeSeriesSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesSummary, name: "member"))
     TimeSeriesSummary.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetId"))
     TimeSeriesSummary.add_member(:property_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "propertyId"))
     TimeSeriesSummary.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyAlias, name: "alias"))
@@ -2342,7 +2342,7 @@ module Aws::IoTSiteWise
     TimeSeriesSummary.add_member(:time_series_last_update_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "timeSeriesLastUpdateDate", traits: {"smithy.api#required" => {}}))
     TimeSeriesSummary.add_member(:time_series_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "timeSeriesArn", traits: {"smithy.api#required" => {}}))
     TimeSeriesSummary.type = Types::TimeSeriesSummary
-    Timestamps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "member")
+    Timestamps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "member"))
     TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     TooManyTagsException.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceName"))
     TooManyTagsException.type = Types::TooManyTagsException

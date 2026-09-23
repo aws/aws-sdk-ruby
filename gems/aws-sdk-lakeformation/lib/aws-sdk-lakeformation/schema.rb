@@ -332,8 +332,8 @@ module Aws::LakeFormation
     AddObjectInput.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectSize, name: "Size", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     AddObjectInput.add_member(:partition_values, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionValuesList, name: "PartitionValues"))
     AddObjectInput.type = Types::AddObjectInput
-    AdditionalContextMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ContextKey, name: "key")
-    AdditionalContextMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ContextValue, name: "value")
+    AdditionalContextMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextKey, name: "key"))
+    AdditionalContextMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextValue, name: "value"))
     AllRowsWildcard.type = Types::AllRowsWildcard
     AlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageString, name: "Message"))
     AlreadyExistsException.type = Types::AlreadyExistsException
@@ -351,7 +351,7 @@ module Aws::LakeFormation
     AssumeDecoratedRoleWithSAMLResponse.type = Types::AssumeDecoratedRoleWithSAMLResponse
     AuditContext.add_member(:additional_audit_context, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditContextString, name: "AdditionalAuditContext"))
     AuditContext.type = Types::AuditContext
-    AuthorizedSessionTagValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "member")
+    AuthorizedSessionTagValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "member"))
     BatchGrantPermissionsRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
     BatchGrantPermissionsRequest.add_member(:entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPermissionsRequestEntryList, name: "Entries", traits: {"smithy.api#required" => {}}))
     BatchGrantPermissionsRequest.type = Types::BatchGrantPermissionsRequest
@@ -360,7 +360,7 @@ module Aws::LakeFormation
     BatchPermissionsFailureEntry.add_member(:request_entry, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPermissionsRequestEntry, name: "RequestEntry"))
     BatchPermissionsFailureEntry.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail, name: "Error"))
     BatchPermissionsFailureEntry.type = Types::BatchPermissionsFailureEntry
-    BatchPermissionsFailureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPermissionsFailureEntry, name: "member")
+    BatchPermissionsFailureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPermissionsFailureEntry, name: "member"))
     BatchPermissionsRequestEntry.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "Id", traits: {"smithy.api#required" => {}}))
     BatchPermissionsRequestEntry.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakePrincipal, name: "Principal"))
     BatchPermissionsRequestEntry.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "Resource"))
@@ -368,7 +368,7 @@ module Aws::LakeFormation
     BatchPermissionsRequestEntry.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "Condition"))
     BatchPermissionsRequestEntry.add_member(:permissions_with_grant_option, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionList, name: "PermissionsWithGrantOption"))
     BatchPermissionsRequestEntry.type = Types::BatchPermissionsRequestEntry
-    BatchPermissionsRequestEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPermissionsRequestEntry, name: "member")
+    BatchPermissionsRequestEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPermissionsRequestEntry, name: "member"))
     BatchRevokePermissionsRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
     BatchRevokePermissionsRequest.add_member(:entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPermissionsRequestEntryList, name: "Entries", traits: {"smithy.api#required" => {}}))
     BatchRevokePermissionsRequest.type = Types::BatchRevokePermissionsRequest
@@ -382,8 +382,8 @@ module Aws::LakeFormation
     ColumnLFTag.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name"))
     ColumnLFTag.add_member(:lf_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: LFTagsList, name: "LFTags"))
     ColumnLFTag.type = Types::ColumnLFTag
-    ColumnLFTagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnLFTag, name: "member")
-    ColumnNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "member")
+    ColumnLFTagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnLFTag, name: "member"))
+    ColumnNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "member"))
     ColumnWildcard.add_member(:excluded_column_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnNames, name: "ExcludedColumnNames"))
     ColumnWildcard.type = Types::ColumnWildcard
     CommitTransactionRequest.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionIdString, name: "TransactionId", traits: {"smithy.api#required" => {}}))
@@ -440,7 +440,7 @@ module Aws::LakeFormation
     DataCellsFilter.add_member(:column_wildcard, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnWildcard, name: "ColumnWildcard"))
     DataCellsFilter.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionString, name: "VersionId"))
     DataCellsFilter.type = Types::DataCellsFilter
-    DataCellsFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataCellsFilter, name: "member")
+    DataCellsFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataCellsFilter, name: "member"))
     DataCellsFilterResource.add_member(:table_catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "TableCatalogId"))
     DataCellsFilterResource.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName"))
     DataCellsFilterResource.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TableName"))
@@ -448,7 +448,7 @@ module Aws::LakeFormation
     DataCellsFilterResource.type = Types::DataCellsFilterResource
     DataLakePrincipal.add_member(:data_lake_principal_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakePrincipalString, name: "DataLakePrincipalIdentifier"))
     DataLakePrincipal.type = Types::DataLakePrincipal
-    DataLakePrincipalList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakePrincipal, name: "member")
+    DataLakePrincipalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakePrincipal, name: "member"))
     DataLakeResourceType.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CATALOG", traits: {"smithy.api#enumValue" => "CATALOG"}))
     DataLakeResourceType.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATABASE", traits: {"smithy.api#enumValue" => "DATABASE"}))
     DataLakeResourceType.add_member(:table, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TABLE", traits: {"smithy.api#enumValue" => "TABLE"}))
@@ -472,7 +472,7 @@ module Aws::LakeFormation
     DataLocationResource.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
     DataLocationResource.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArnString, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     DataLocationResource.type = Types::DataLocationResource
-    DatabaseLFTagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaggedDatabase, name: "member")
+    DatabaseLFTagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggedDatabase, name: "member"))
     DatabaseResource.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
     DatabaseResource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
     DatabaseResource.type = Types::DatabaseResource
@@ -544,7 +544,7 @@ module Aws::LakeFormation
     ExecutionStatistics.type = Types::ExecutionStatistics
     ExpiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageString, name: "Message"))
     ExpiredException.type = Types::ExpiredException
-    Expression.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LFTag, name: "member")
+    Expression.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LFTag, name: "member"))
     ExtendTransactionRequest.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionIdString, name: "TransactionId"))
     ExtendTransactionRequest.type = Types::ExtendTransactionRequest
     ExtendTransactionResponse.type = Types::ExtendTransactionResponse
@@ -558,7 +558,7 @@ module Aws::LakeFormation
     FilterCondition.add_member(:comparison_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonOperator, name: "ComparisonOperator"))
     FilterCondition.add_member(:string_value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValueList, name: "StringValueList"))
     FilterCondition.type = Types::FilterCondition
-    FilterConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterCondition, name: "member")
+    FilterConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterCondition, name: "member"))
     GetDataCellsFilterRequest.add_member(:table_catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "TableCatalogId", traits: {"smithy.api#required" => {}}))
     GetDataCellsFilterRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     GetDataCellsFilterRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TableName", traits: {"smithy.api#required" => {}}))
@@ -689,7 +689,7 @@ module Aws::LakeFormation
     LFTagError.add_member(:lf_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: LFTagPair, name: "LFTag"))
     LFTagError.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail, name: "Error"))
     LFTagError.type = Types::LFTagError
-    LFTagErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LFTagError, name: "member")
+    LFTagErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LFTagError, name: "member"))
     LFTagExpression.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name"))
     LFTagExpression.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionString, name: "Description"))
     LFTagExpression.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
@@ -698,7 +698,7 @@ module Aws::LakeFormation
     LFTagExpressionResource.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
     LFTagExpressionResource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
     LFTagExpressionResource.type = Types::LFTagExpressionResource
-    LFTagExpressionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LFTagExpression, name: "member")
+    LFTagExpressionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LFTagExpression, name: "member"))
     LFTagKeyResource.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
     LFTagKeyResource.add_member(:tag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "TagKey", traits: {"smithy.api#required" => {}}))
     LFTagKeyResource.add_member(:tag_values, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValueList, name: "TagValues", traits: {"smithy.api#required" => {}}))
@@ -712,14 +712,14 @@ module Aws::LakeFormation
     LFTagPolicyResource.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "Expression", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => []}))
     LFTagPolicyResource.add_member(:expression_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "ExpressionName"))
     LFTagPolicyResource.type = Types::LFTagPolicyResource
-    LFTagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LFTagPair, name: "member")
+    LFTagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LFTagPair, name: "member"))
     LakeFormationOptInsInfo.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "Resource"))
     LakeFormationOptInsInfo.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakePrincipal, name: "Principal"))
     LakeFormationOptInsInfo.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "Condition"))
     LakeFormationOptInsInfo.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModifiedTimestamp, name: "LastModified"))
     LakeFormationOptInsInfo.add_member(:last_updated_by, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "LastUpdatedBy"))
     LakeFormationOptInsInfo.type = Types::LakeFormationOptInsInfo
-    LakeFormationOptInsInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LakeFormationOptInsInfo, name: "member")
+    LakeFormationOptInsInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LakeFormationOptInsInfo, name: "member"))
     ListDataCellsFilterRequest.add_member(:table, ::Smithy::Schema::Shapes::MemberShape.new(target: TableResource, name: "Table"))
     ListDataCellsFilterRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     ListDataCellsFilterRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, name: "MaxResults"))
@@ -791,16 +791,16 @@ module Aws::LakeFormation
     OptimizerType.add_member(:compaction, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPACTION", traits: {"smithy.api#enumValue" => "COMPACTION"}))
     OptimizerType.add_member(:garbage_collection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GARBAGE_COLLECTION", traits: {"smithy.api#enumValue" => "GARBAGE_COLLECTION"}))
     OptimizerType.add_member(:generic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GENERIC", traits: {"smithy.api#enumValue" => "ALL"}))
-    ParametersMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyString, name: "key")
-    ParametersMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ParametersMapValue, name: "value")
+    ParametersMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyString, name: "key"))
+    ParametersMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParametersMapValue, name: "value"))
     PartitionObjects.add_member(:partition_values, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionValuesList, name: "PartitionValues"))
     PartitionObjects.add_member(:objects, ::Smithy::Schema::Shapes::MemberShape.new(target: TableObjectList, name: "Objects"))
     PartitionObjects.type = Types::PartitionObjects
     PartitionValueList.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueStringList, name: "Values", traits: {"smithy.api#required" => {}}))
     PartitionValueList.type = Types::PartitionValueList
-    PartitionValuesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionValueString, name: "member")
-    PartitionedTableObjectsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionObjects, name: "member")
-    PathStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PathString, name: "member")
+    PartitionValuesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionValueString, name: "member"))
+    PartitionedTableObjectsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionObjects, name: "member"))
+    PathStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PathString, name: "member"))
     Permission.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
     Permission.add_member(:select, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELECT", traits: {"smithy.api#enumValue" => "SELECT"}))
     Permission.add_member(:alter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALTER", traits: {"smithy.api#enumValue" => "ALTER"}))
@@ -817,12 +817,12 @@ module Aws::LakeFormation
     Permission.add_member(:create_lf_tag_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_LF_TAG_EXPRESSION", traits: {"smithy.api#enumValue" => "CREATE_LF_TAG_EXPRESSION"}))
     Permission.add_member(:create_catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_CATALOG", traits: {"smithy.api#enumValue" => "CREATE_CATALOG"}))
     Permission.add_member(:super_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUPER_USER", traits: {"smithy.api#enumValue" => "SUPER_USER"}))
-    PermissionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Permission, name: "member")
+    PermissionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Permission, name: "member"))
     PermissionType.add_member(:column_permission, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COLUMN_PERMISSION", traits: {"smithy.api#enumValue" => "COLUMN_PERMISSION"}))
     PermissionType.add_member(:cell_filter_permission, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CELL_FILTER_PERMISSION", traits: {"smithy.api#enumValue" => "CELL_FILTER_PERMISSION"}))
     PermissionType.add_member(:nested_permission, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NESTED_PERMISSION", traits: {"smithy.api#enumValue" => "NESTED_PERMISSION"}))
     PermissionType.add_member(:nested_cell_permission, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NESTED_CELL_PERMISSION", traits: {"smithy.api#enumValue" => "NESTED_CELL_PERMISSION"}))
-    PermissionTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionType, name: "member")
+    PermissionTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionType, name: "member"))
     PermissionTypeMismatchException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageString, name: "Message"))
     PermissionTypeMismatchException.type = Types::PermissionTypeMismatchException
     PlanningStatistics.add_member(:estimated_data_to_scan_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfBytes, name: "EstimatedDataToScanBytes", traits: {"smithy.api#default" => 0}))
@@ -833,7 +833,7 @@ module Aws::LakeFormation
     PrincipalPermissions.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakePrincipal, name: "Principal"))
     PrincipalPermissions.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionList, name: "Permissions"))
     PrincipalPermissions.type = Types::PrincipalPermissions
-    PrincipalPermissionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalPermissions, name: "member")
+    PrincipalPermissionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalPermissions, name: "member"))
     PrincipalResourcePermissions.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakePrincipal, name: "Principal"))
     PrincipalResourcePermissions.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "Resource"))
     PrincipalResourcePermissions.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "Condition"))
@@ -843,13 +843,13 @@ module Aws::LakeFormation
     PrincipalResourcePermissions.add_member(:last_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModifiedTimestamp, name: "LastUpdated"))
     PrincipalResourcePermissions.add_member(:last_updated_by, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "LastUpdatedBy"))
     PrincipalResourcePermissions.type = Types::PrincipalResourcePermissions
-    PrincipalResourcePermissionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalResourcePermissions, name: "member")
+    PrincipalResourcePermissionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalResourcePermissions, name: "member"))
     PutDataLakeSettingsRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
     PutDataLakeSettingsRequest.add_member(:data_lake_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeSettings, name: "DataLakeSettings", traits: {"smithy.api#required" => {}}))
     PutDataLakeSettingsRequest.type = Types::PutDataLakeSettingsRequest
     PutDataLakeSettingsResponse.type = Types::PutDataLakeSettingsResponse
-    QueryParameterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    QueryParameterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    QueryParameterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    QueryParameterMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     QueryPlanningContext.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
     QueryPlanningContext.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryPlanningContextDatabaseNameString, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     QueryPlanningContext.add_member(:query_as_of_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "QueryAsOfTime"))
@@ -898,12 +898,12 @@ module Aws::LakeFormation
     ResourceInfo.add_member(:hybrid_access_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "HybridAccessEnabled"))
     ResourceInfo.add_member(:with_privileged_access, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "WithPrivilegedAccess"))
     ResourceInfo.type = Types::ResourceInfo
-    ResourceInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceInfo, name: "member")
+    ResourceInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceInfo, name: "member"))
     ResourceNotReadyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageString, name: "Message"))
     ResourceNotReadyException.type = Types::ResourceNotReadyException
     ResourceNumberLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageString, name: "Message"))
     ResourceNumberLimitExceededException.type = Types::ResourceNumberLimitExceededException
-    ResourceShareList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RAMResourceShareArn, name: "member")
+    ResourceShareList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RAMResourceShareArn, name: "member"))
     ResourceShareType.add_member(:foreign, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FOREIGN", traits: {"smithy.api#enumValue" => "FOREIGN"}))
     ResourceShareType.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
     ResourceType.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATABASE", traits: {"smithy.api#enumValue" => "DATABASE"}))
@@ -919,7 +919,7 @@ module Aws::LakeFormation
     RowFilter.add_member(:filter_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: PredicateString, name: "FilterExpression"))
     RowFilter.add_member(:all_rows_wildcard, ::Smithy::Schema::Shapes::MemberShape.new(target: AllRowsWildcard, name: "AllRowsWildcard"))
     RowFilter.type = Types::RowFilter
-    ScopeTargets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeTarget, name: "member")
+    ScopeTargets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeTarget, name: "member"))
     SearchDatabasesByLFTagsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     SearchDatabasesByLFTagsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchPageSize, name: "MaxResults"))
     SearchDatabasesByLFTagsRequest.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
@@ -953,18 +953,18 @@ module Aws::LakeFormation
     StorageOptimizer.add_member(:warnings, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageString, name: "Warnings"))
     StorageOptimizer.add_member(:last_run_details, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageString, name: "LastRunDetails"))
     StorageOptimizer.type = Types::StorageOptimizer
-    StorageOptimizerConfig.key = ::Smithy::Schema::Shapes::MemberShape.new(target: StorageOptimizerConfigKey, name: "key")
-    StorageOptimizerConfig.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StorageOptimizerConfigValue, name: "value")
-    StorageOptimizerConfigMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizerType, name: "key")
-    StorageOptimizerConfigMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StorageOptimizerConfig, name: "value")
-    StorageOptimizerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StorageOptimizer, name: "member")
-    StringValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue, name: "member")
-    TableLFTagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaggedTable, name: "member")
+    StorageOptimizerConfig.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageOptimizerConfigKey, name: "key"))
+    StorageOptimizerConfig.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageOptimizerConfigValue, name: "value"))
+    StorageOptimizerConfigMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizerType, name: "key"))
+    StorageOptimizerConfigMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageOptimizerConfig, name: "value"))
+    StorageOptimizerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageOptimizer, name: "member"))
+    StringValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue, name: "member"))
+    TableLFTagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggedTable, name: "member"))
     TableObject.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: URI, name: "Uri"))
     TableObject.add_member(:e_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ETagString, name: "ETag"))
     TableObject.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectSize, name: "Size", traits: {"smithy.api#default" => 0}))
     TableObject.type = Types::TableObject
-    TableObjectList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TableObject, name: "member")
+    TableObjectList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableObject, name: "member"))
     TableResource.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "CatalogId"))
     TableResource.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     TableResource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name"))
@@ -977,7 +977,7 @@ module Aws::LakeFormation
     TableWithColumnsResource.add_member(:column_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnNames, name: "ColumnNames"))
     TableWithColumnsResource.add_member(:column_wildcard, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnWildcard, name: "ColumnWildcard"))
     TableWithColumnsResource.type = Types::TableWithColumnsResource
-    TagValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LFTagValue, name: "member")
+    TagValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LFTagValue, name: "member"))
     TaggedDatabase.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseResource, name: "Database"))
     TaggedDatabase.add_member(:lf_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: LFTagsList, name: "LFTags"))
     TaggedDatabase.type = Types::TaggedDatabase
@@ -999,7 +999,7 @@ module Aws::LakeFormation
     TransactionDescription.add_member(:transaction_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "TransactionStartTime"))
     TransactionDescription.add_member(:transaction_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "TransactionEndTime"))
     TransactionDescription.type = Types::TransactionDescription
-    TransactionDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionDescription, name: "member")
+    TransactionDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionDescription, name: "member"))
     TransactionStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     TransactionStatus.add_member(:committed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMMITTED", traits: {"smithy.api#enumValue" => "COMMITTED"}))
     TransactionStatus.add_member(:aborted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ABORTED", traits: {"smithy.api#enumValue" => "ABORTED"}))
@@ -1011,7 +1011,7 @@ module Aws::LakeFormation
     TransactionStatusFilter.add_member(:aborted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ABORTED", traits: {"smithy.api#enumValue" => "ABORTED"}))
     TransactionType.add_member(:read_and_write, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READ_AND_WRITE", traits: {"smithy.api#enumValue" => "READ_AND_WRITE"}))
     TransactionType.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READ_ONLY", traits: {"smithy.api#enumValue" => "READ_ONLY"}))
-    TrustedResourceOwners.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "member")
+    TrustedResourceOwners.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdString, name: "member"))
     UpdateDataCellsFilterRequest.add_member(:table_data, ::Smithy::Schema::Shapes::MemberShape.new(target: DataCellsFilter, name: "TableData", traits: {"smithy.api#required" => {}}))
     UpdateDataCellsFilterRequest.type = Types::UpdateDataCellsFilterRequest
     UpdateDataCellsFilterResponse.type = Types::UpdateDataCellsFilterResponse
@@ -1053,22 +1053,22 @@ module Aws::LakeFormation
     UpdateTableStorageOptimizerRequest.type = Types::UpdateTableStorageOptimizerRequest
     UpdateTableStorageOptimizerResponse.add_member(:result, ::Smithy::Schema::Shapes::MemberShape.new(target: Result, name: "Result"))
     UpdateTableStorageOptimizerResponse.type = Types::UpdateTableStorageOptimizerResponse
-    ValueStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValueString, name: "member")
+    ValueStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueString, name: "member"))
     VirtualObject.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: URI, name: "Uri", traits: {"smithy.api#required" => {}}))
     VirtualObject.add_member(:e_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ETagString, name: "ETag"))
     VirtualObject.type = Types::VirtualObject
-    VirtualObjectList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualObject, name: "member")
+    VirtualObjectList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualObject, name: "member"))
     WorkUnitRange.add_member(:work_unit_id_max, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkUnitIdLong, name: "WorkUnitIdMax", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     WorkUnitRange.add_member(:work_unit_id_min, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkUnitIdLong, name: "WorkUnitIdMin", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     WorkUnitRange.add_member(:work_unit_token, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkUnitTokenString, name: "WorkUnitToken", traits: {"smithy.api#required" => {}}))
     WorkUnitRange.type = Types::WorkUnitRange
-    WorkUnitRangeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkUnitRange, name: "member")
+    WorkUnitRangeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkUnitRange, name: "member"))
     WorkUnitsNotReadyYetException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageString, name: "Message"))
     WorkUnitsNotReadyYetException.type = Types::WorkUnitsNotReadyYetException
     WriteOperation.add_member(:add_object, ::Smithy::Schema::Shapes::MemberShape.new(target: AddObjectInput, name: "AddObject"))
     WriteOperation.add_member(:delete_object, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteObjectInput, name: "DeleteObject"))
     WriteOperation.type = Types::WriteOperation
-    WriteOperationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WriteOperation, name: "member")
+    WriteOperationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WriteOperation, name: "member"))
 
     AWSLakeFormation = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.lakeformation#AWSLakeFormation"

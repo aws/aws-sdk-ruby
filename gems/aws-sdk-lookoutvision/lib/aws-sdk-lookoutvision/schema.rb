@@ -153,7 +153,7 @@ module Aws::LookoutVision
     Anomaly.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyName, name: "Name"))
     Anomaly.add_member(:pixel_anomaly, ::Smithy::Schema::Shapes::MemberShape.new(target: PixelAnomaly, name: "PixelAnomaly"))
     Anomaly.type = Types::Anomaly
-    AnomalyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Anomaly, name: "member")
+    AnomalyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Anomaly, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionString, name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionString, name: "ResourceId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -187,7 +187,7 @@ module Aws::LookoutVision
     DatasetDescription.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetStatusMessage, name: "StatusMessage"))
     DatasetDescription.add_member(:image_stats, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetImageStats, name: "ImageStats"))
     DatasetDescription.type = Types::DatasetDescription
-    DatasetEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetEntry, name: "member")
+    DatasetEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetEntry, name: "member"))
     DatasetGroundTruthManifest.add_member(:s3_object, ::Smithy::Schema::Shapes::MemberShape.new(target: InputS3Object, name: "S3Object"))
     DatasetGroundTruthManifest.type = Types::DatasetGroundTruthManifest
     DatasetImageStats.add_member(:total, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Total"))
@@ -200,7 +200,7 @@ module Aws::LookoutVision
     DatasetMetadata.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetStatus, name: "Status"))
     DatasetMetadata.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetStatusMessage, name: "StatusMessage"))
     DatasetMetadata.type = Types::DatasetMetadata
-    DatasetMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetMetadata, name: "member")
+    DatasetMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetMetadata, name: "member"))
     DatasetSource.add_member(:ground_truth_manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetGroundTruthManifest, name: "GroundTruthManifest"))
     DatasetSource.type = Types::DatasetSource
     DatasetStatus.add_member(:create_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
@@ -350,7 +350,7 @@ module Aws::LookoutVision
     ModelMetadata.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelStatusMessage, name: "StatusMessage"))
     ModelMetadata.add_member(:performance, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPerformance, name: "Performance"))
     ModelMetadata.type = Types::ModelMetadata
-    ModelMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ModelMetadata, name: "member")
+    ModelMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelMetadata, name: "member"))
     ModelPackagingConfiguration.add_member(:greengrass, ::Smithy::Schema::Shapes::MemberShape.new(target: GreengrassConfiguration, name: "Greengrass", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ModelPackagingConfiguration.type = Types::ModelPackagingConfiguration
     ModelPackagingDescription.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackagingJobName, name: "JobName"))
@@ -379,7 +379,7 @@ module Aws::LookoutVision
     ModelPackagingJobStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     ModelPackagingJobStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
     ModelPackagingJobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    ModelPackagingJobsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackagingJobMetadata, name: "member")
+    ModelPackagingJobsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackagingJobMetadata, name: "member"))
     ModelPackagingOutputDetails.add_member(:greengrass, ::Smithy::Schema::Shapes::MemberShape.new(target: GreengrassOutputDetails, name: "Greengrass"))
     ModelPackagingOutputDetails.type = Types::ModelPackagingOutputDetails
     ModelPerformance.add_member(:f1_score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "F1Score"))
@@ -412,7 +412,7 @@ module Aws::LookoutVision
     ProjectMetadata.add_member(:project_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectName, name: "ProjectName"))
     ProjectMetadata.add_member(:creation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "CreationTimestamp"))
     ProjectMetadata.type = Types::ProjectMetadata
-    ProjectMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectMetadata, name: "member")
+    ProjectMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectMetadata, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionString, name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionString, name: "ResourceId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -457,8 +457,8 @@ module Aws::LookoutVision
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TagArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest

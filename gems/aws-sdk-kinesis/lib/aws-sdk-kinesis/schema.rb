@@ -161,7 +161,7 @@ module Aws::Kinesis
     ChildShard.add_member(:parent_shards, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardIdList, name: "ParentShards", traits: {"smithy.api#required" => {}}))
     ChildShard.add_member(:hash_key_range, ::Smithy::Schema::Shapes::MemberShape.new(target: HashKeyRange, name: "HashKeyRange", traits: {"smithy.api#required" => {}}))
     ChildShard.type = Types::ChildShard
-    ChildShardList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChildShard, name: "member")
+    ChildShardList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChildShard, name: "member"))
     Consumer.add_member(:consumer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumerName, name: "ConsumerName", traits: {"smithy.api#required" => {}}))
     Consumer.add_member(:consumer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumerARN, name: "ConsumerARN", traits: {"smithy.api#required" => {}}))
     Consumer.add_member(:consumer_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumerStatus, name: "ConsumerStatus", traits: {"smithy.api#required" => {}}))
@@ -173,7 +173,7 @@ module Aws::Kinesis
     ConsumerDescription.add_member(:consumer_creation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ConsumerCreationTimestamp", traits: {"smithy.api#required" => {}}))
     ConsumerDescription.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, name: "StreamARN", traits: {"smithy.api#required" => {}}))
     ConsumerDescription.type = Types::ConsumerDescription
-    ConsumerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Consumer, name: "member")
+    ConsumerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Consumer, name: "member"))
     ConsumerStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     ConsumerStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     ConsumerStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
@@ -242,7 +242,7 @@ module Aws::Kinesis
     EncryptionType.add_member(:kms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KMS", traits: {"smithy.api#enumValue" => "KMS"}))
     EnhancedMetrics.add_member(:shard_level_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsNameList, name: "ShardLevelMetrics"))
     EnhancedMetrics.type = Types::EnhancedMetrics
-    EnhancedMonitoringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnhancedMetrics, name: "member")
+    EnhancedMonitoringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnhancedMetrics, name: "member"))
     ExpiredIteratorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ExpiredIteratorException.type = Types::ExpiredIteratorException
     ExpiredNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
@@ -347,7 +347,7 @@ module Aws::Kinesis
     MetricsName.add_member(:read_provisioned_throughput_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READ_PROVISIONED_THROUGHPUT_EXCEEDED", traits: {"smithy.api#enumValue" => "ReadProvisionedThroughputExceeded"}))
     MetricsName.add_member(:iterator_age_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ITERATOR_AGE_MILLISECONDS", traits: {"smithy.api#enumValue" => "IteratorAgeMilliseconds"}))
     MetricsName.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
-    MetricsNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsName, name: "member")
+    MetricsNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsName, name: "member"))
     ProvisionedThroughputExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ProvisionedThroughputExceededException.type = Types::ProvisionedThroughputExceededException
     PutRecordInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, name: "StreamName"))
@@ -373,13 +373,13 @@ module Aws::Kinesis
     PutRecordsRequestEntry.add_member(:explicit_hash_key, ::Smithy::Schema::Shapes::MemberShape.new(target: HashKey, name: "ExplicitHashKey"))
     PutRecordsRequestEntry.add_member(:partition_key, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionKey, name: "PartitionKey", traits: {"smithy.api#required" => {}}))
     PutRecordsRequestEntry.type = Types::PutRecordsRequestEntry
-    PutRecordsRequestEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PutRecordsRequestEntry, name: "member")
+    PutRecordsRequestEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PutRecordsRequestEntry, name: "member"))
     PutRecordsResultEntry.add_member(:sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumber, name: "SequenceNumber"))
     PutRecordsResultEntry.add_member(:shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, name: "ShardId"))
     PutRecordsResultEntry.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     PutRecordsResultEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage"))
     PutRecordsResultEntry.type = Types::PutRecordsResultEntry
-    PutRecordsResultEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PutRecordsResultEntry, name: "member")
+    PutRecordsResultEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PutRecordsResultEntry, name: "member"))
     PutResourcePolicyInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "ResourceARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "ResourceARN"}}))
     PutResourcePolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, name: "Policy", traits: {"smithy.api#required" => {}}))
     PutResourcePolicyInput.type = Types::PutResourcePolicyInput
@@ -389,7 +389,7 @@ module Aws::Kinesis
     Record.add_member(:partition_key, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionKey, name: "PartitionKey", traits: {"smithy.api#required" => {}}))
     Record.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, name: "EncryptionType"))
     Record.type = Types::Record
-    RecordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Record, name: "member")
+    RecordList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Record, name: "member"))
     RegisterStreamConsumerInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamARN, name: "StreamARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "StreamARN"}}))
     RegisterStreamConsumerInput.add_member(:consumer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumerName, name: "ConsumerName", traits: {"smithy.api#required" => {}}))
     RegisterStreamConsumerInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
@@ -424,13 +424,13 @@ module Aws::Kinesis
     ShardFilterType.add_member(:at_latest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AT_LATEST", traits: {"smithy.api#enumValue" => "AT_LATEST"}))
     ShardFilterType.add_member(:at_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AT_TIMESTAMP", traits: {"smithy.api#enumValue" => "AT_TIMESTAMP"}))
     ShardFilterType.add_member(:from_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FROM_TIMESTAMP", traits: {"smithy.api#enumValue" => "FROM_TIMESTAMP"}))
-    ShardIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, name: "member")
+    ShardIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, name: "member"))
     ShardIteratorType.add_member(:at_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AT_SEQUENCE_NUMBER", traits: {"smithy.api#enumValue" => "AT_SEQUENCE_NUMBER"}))
     ShardIteratorType.add_member(:after_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AFTER_SEQUENCE_NUMBER", traits: {"smithy.api#enumValue" => "AFTER_SEQUENCE_NUMBER"}))
     ShardIteratorType.add_member(:trim_horizon, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRIM_HORIZON", traits: {"smithy.api#enumValue" => "TRIM_HORIZON"}))
     ShardIteratorType.add_member(:latest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LATEST", traits: {"smithy.api#enumValue" => "LATEST"}))
     ShardIteratorType.add_member(:at_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AT_TIMESTAMP", traits: {"smithy.api#enumValue" => "AT_TIMESTAMP"}))
-    ShardList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Shard, name: "member")
+    ShardList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Shard, name: "member"))
     SplitShardInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, name: "StreamName"))
     SplitShardInput.add_member(:shard_to_split, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, name: "ShardToSplit", traits: {"smithy.api#required" => {}}))
     SplitShardInput.add_member(:new_starting_hash_key, ::Smithy::Schema::Shapes::MemberShape.new(target: HashKey, name: "NewStartingHashKey", traits: {"smithy.api#required" => {}}))
@@ -478,7 +478,7 @@ module Aws::Kinesis
     StreamMode.add_member(:on_demand, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON_DEMAND", traits: {"smithy.api#enumValue" => "ON_DEMAND"}))
     StreamModeDetails.add_member(:stream_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamMode, name: "StreamMode", traits: {"smithy.api#required" => {}}))
     StreamModeDetails.type = Types::StreamModeDetails
-    StreamNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, name: "member")
+    StreamNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, name: "member"))
     StreamStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     StreamStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     StreamStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
@@ -489,7 +489,7 @@ module Aws::Kinesis
     StreamSummary.add_member(:stream_mode_details, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamModeDetails, name: "StreamModeDetails"))
     StreamSummary.add_member(:stream_creation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StreamCreationTimestamp"))
     StreamSummary.type = Types::StreamSummary
-    StreamSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSummary, name: "member")
+    StreamSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSummary, name: "member"))
     SubscribeToShardEvent.add_member(:records, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordList, name: "Records", traits: {"smithy.api#required" => {}}))
     SubscribeToShardEvent.add_member(:continuation_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumber, name: "ContinuationSequenceNumber", traits: {"smithy.api#required" => {}}))
     SubscribeToShardEvent.add_member(:millis_behind_latest, ::Smithy::Schema::Shapes::MemberShape.new(target: MillisBehindLatest, name: "MillisBehindLatest", traits: {"smithy.api#required" => {}}))
@@ -516,10 +516,10 @@ module Aws::Kinesis
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "ResourceARN", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "ResourceARN"}}))
     TagResourceInput.type = Types::TagResourceInput

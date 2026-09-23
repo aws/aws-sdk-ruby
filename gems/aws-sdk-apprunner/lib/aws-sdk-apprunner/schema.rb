@@ -241,13 +241,13 @@ module Aws::AppRunner
     AutoScalingConfigurationSummary.add_member(:has_associated_service, ::Smithy::Schema::Shapes::MemberShape.new(target: HasAssociatedService, name: "HasAssociatedService"))
     AutoScalingConfigurationSummary.add_member(:is_default, ::Smithy::Schema::Shapes::MemberShape.new(target: IsDefault, name: "IsDefault"))
     AutoScalingConfigurationSummary.type = Types::AutoScalingConfigurationSummary
-    AutoScalingConfigurationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingConfigurationSummary, name: "member")
+    AutoScalingConfigurationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingConfigurationSummary, name: "member"))
     CertificateValidationRecord.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     CertificateValidationRecord.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
     CertificateValidationRecord.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     CertificateValidationRecord.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateValidationRecordStatus, name: "Status"))
     CertificateValidationRecord.type = Types::CertificateValidationRecord
-    CertificateValidationRecordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateValidationRecord, name: "member")
+    CertificateValidationRecordList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateValidationRecord, name: "member"))
     CertificateValidationRecordStatus.add_member(:pending_validation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_VALIDATION", traits: {"smithy.api#enumValue" => "PENDING_VALIDATION"}))
     CertificateValidationRecordStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
     CertificateValidationRecordStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -284,7 +284,7 @@ module Aws::AppRunner
     ConnectionSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionStatus, name: "Status"))
     ConnectionSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
     ConnectionSummary.type = Types::ConnectionSummary
-    ConnectionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionSummary, name: "member")
+    ConnectionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionSummary, name: "member"))
     CreateAutoScalingConfigurationRequest.add_member(:auto_scaling_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingConfigurationName, name: "AutoScalingConfigurationName", traits: {"smithy.api#required" => {}}))
     CreateAutoScalingConfigurationRequest.add_member(:max_concurrency, ::Smithy::Schema::Shapes::MemberShape.new(target: ASConfigMaxConcurrency, name: "MaxConcurrency"))
     CreateAutoScalingConfigurationRequest.add_member(:min_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ASConfigMinSize, name: "MinSize"))
@@ -344,7 +344,7 @@ module Aws::AppRunner
     CustomDomainAssociationStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
     CustomDomainAssociationStatus.add_member(:pending_certificate_dns_validation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_CERTIFICATE_DNS_VALIDATION", traits: {"smithy.api#enumValue" => "PENDING_CERTIFICATE_DNS_VALIDATION"}))
     CustomDomainAssociationStatus.add_member(:binding_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BINDING_CERTIFICATE", traits: {"smithy.api#enumValue" => "BINDING_CERTIFICATE"}))
-    CustomDomainList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDomain, name: "member")
+    CustomDomainList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDomain, name: "member"))
     DeleteAutoScalingConfigurationRequest.add_member(:auto_scaling_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AppRunnerResourceArn, name: "AutoScalingConfigurationArn", traits: {"smithy.api#required" => {}}))
     DeleteAutoScalingConfigurationRequest.add_member(:delete_all_revisions, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "DeleteAllRevisions", traits: {"smithy.api#default" => false}))
     DeleteAutoScalingConfigurationRequest.type = Types::DeleteAutoScalingConfigurationRequest
@@ -535,7 +535,7 @@ module Aws::AppRunner
     ObservabilityConfigurationSummary.add_member(:observability_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ObservabilityConfigurationName, name: "ObservabilityConfigurationName"))
     ObservabilityConfigurationSummary.add_member(:observability_configuration_revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ObservabilityConfigurationRevision", traits: {"smithy.api#default" => 0}))
     ObservabilityConfigurationSummary.type = Types::ObservabilityConfigurationSummary
-    ObservabilityConfigurationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ObservabilityConfigurationSummary, name: "member")
+    ObservabilityConfigurationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ObservabilityConfigurationSummary, name: "member"))
     OperationStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     OperationStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     OperationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -551,7 +551,7 @@ module Aws::AppRunner
     OperationSummary.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndedAt"))
     OperationSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt"))
     OperationSummary.type = Types::OperationSummary
-    OperationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OperationSummary, name: "member")
+    OperationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationSummary, name: "member"))
     OperationType.add_member(:start_deployment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "START_DEPLOYMENT", traits: {"smithy.api#enumValue" => "START_DEPLOYMENT"}))
     OperationType.add_member(:create_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_SERVICE", traits: {"smithy.api#enumValue" => "CREATE_SERVICE"}))
     OperationType.add_member(:pause_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PAUSE_SERVICE", traits: {"smithy.api#enumValue" => "PAUSE_SERVICE"}))
@@ -585,10 +585,10 @@ module Aws::AppRunner
     Runtime.add_member(:python_311, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PYTHON_311", traits: {"smithy.api#enumValue" => "PYTHON_311"}))
     Runtime.add_member(:nodejs_18, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NODEJS_18", traits: {"smithy.api#enumValue" => "NODEJS_18"}))
     Runtime.add_member(:nodejs_22, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NODEJS_22", traits: {"smithy.api#enumValue" => "NODEJS_22"}))
-    RuntimeEnvironmentSecrets.key = ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeEnvironmentSecretsName, name: "key")
-    RuntimeEnvironmentSecrets.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeEnvironmentSecretsValue, name: "value")
-    RuntimeEnvironmentVariables.key = ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeEnvironmentVariablesKey, name: "key")
-    RuntimeEnvironmentVariables.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeEnvironmentVariablesValue, name: "value")
+    RuntimeEnvironmentSecrets.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeEnvironmentSecretsName, name: "key"))
+    RuntimeEnvironmentSecrets.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeEnvironmentSecretsValue, name: "value"))
+    RuntimeEnvironmentVariables.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeEnvironmentVariablesKey, name: "key"))
+    RuntimeEnvironmentVariables.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeEnvironmentVariablesValue, name: "value"))
     Service.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, name: "ServiceName", traits: {"smithy.api#required" => {}}))
     Service.add_member(:service_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceId, name: "ServiceId", traits: {"smithy.api#required" => {}}))
     Service.add_member(:service_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AppRunnerResourceArn, name: "ServiceArn", traits: {"smithy.api#required" => {}}))
@@ -605,7 +605,7 @@ module Aws::AppRunner
     Service.add_member(:network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkConfiguration, name: "NetworkConfiguration", traits: {"smithy.api#required" => {}}))
     Service.add_member(:observability_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceObservabilityConfiguration, name: "ObservabilityConfiguration"))
     Service.type = Types::Service
-    ServiceArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppRunnerResourceArn, name: "member")
+    ServiceArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppRunnerResourceArn, name: "member"))
     ServiceObservabilityConfiguration.add_member(:observability_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ObservabilityEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     ServiceObservabilityConfiguration.add_member(:observability_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AppRunnerResourceArn, name: "ObservabilityConfigurationArn"))
     ServiceObservabilityConfiguration.type = Types::ServiceObservabilityConfiguration
@@ -625,7 +625,7 @@ module Aws::AppRunner
     ServiceSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt"))
     ServiceSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceStatus, name: "Status"))
     ServiceSummary.type = Types::ServiceSummary
-    ServiceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceSummary, name: "member")
+    ServiceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceSummary, name: "member"))
     SourceCodeVersion.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceCodeVersionType, name: "Type", traits: {"smithy.api#required" => {}}))
     SourceCodeVersion.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value", traits: {"smithy.api#required" => {}}))
     SourceCodeVersion.type = Types::SourceCodeVersion
@@ -639,12 +639,12 @@ module Aws::AppRunner
     StartDeploymentRequest.type = Types::StartDeploymentRequest
     StartDeploymentResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "OperationId", traits: {"smithy.api#required" => {}}))
     StartDeploymentResponse.type = Types::StartDeploymentResponse
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AppRunnerResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -687,12 +687,12 @@ module Aws::AppRunner
     VpcConnector.type = Types::VpcConnector
     VpcConnectorStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     VpcConnectorStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
-    VpcConnectors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConnector, name: "member")
+    VpcConnectors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConnector, name: "member"))
     VpcDNSTarget.add_member(:vpc_ingress_connection_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AppRunnerResourceArn, name: "VpcIngressConnectionArn"))
     VpcDNSTarget.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VpcId"))
     VpcDNSTarget.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName"))
     VpcDNSTarget.type = Types::VpcDNSTarget
-    VpcDNSTargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcDNSTarget, name: "member")
+    VpcDNSTargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcDNSTarget, name: "member"))
     VpcIngressConnection.add_member(:vpc_ingress_connection_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AppRunnerResourceArn, name: "VpcIngressConnectionArn"))
     VpcIngressConnection.add_member(:vpc_ingress_connection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcIngressConnectionName, name: "VpcIngressConnectionName"))
     VpcIngressConnection.add_member(:service_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AppRunnerResourceArn, name: "ServiceArn"))
@@ -714,7 +714,7 @@ module Aws::AppRunner
     VpcIngressConnectionSummary.add_member(:vpc_ingress_connection_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AppRunnerResourceArn, name: "VpcIngressConnectionArn"))
     VpcIngressConnectionSummary.add_member(:service_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AppRunnerResourceArn, name: "ServiceArn"))
     VpcIngressConnectionSummary.type = Types::VpcIngressConnectionSummary
-    VpcIngressConnectionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcIngressConnectionSummary, name: "member")
+    VpcIngressConnectionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcIngressConnectionSummary, name: "member"))
 
     AppRunner = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.apprunner#AppRunner"

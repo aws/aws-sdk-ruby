@@ -159,14 +159,14 @@ module Aws::Support
     AttachmentIdNotFound.type = Types::AttachmentIdNotFound
     AttachmentLimitExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     AttachmentLimitExceeded.type = Types::AttachmentLimitExceeded
-    AttachmentSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentDetails, name: "member")
+    AttachmentSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentDetails, name: "member"))
     AttachmentSetExpired.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     AttachmentSetExpired.type = Types::AttachmentSetExpired
     AttachmentSetIdNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     AttachmentSetIdNotFound.type = Types::AttachmentSetIdNotFound
     AttachmentSetSizeLimitExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     AttachmentSetSizeLimitExceeded.type = Types::AttachmentSetSizeLimitExceeded
-    Attachments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Attachment, name: "member")
+    Attachments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Attachment, name: "member"))
     CaseCreationLimitExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     CaseCreationLimitExceeded.type = Types::CaseCreationLimitExceeded
     CaseDetails.add_member(:case_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseId, name: "caseId"))
@@ -182,27 +182,27 @@ module Aws::Support
     CaseDetails.add_member(:cc_email_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: CcEmailAddressList, name: "ccEmailAddresses"))
     CaseDetails.add_member(:language, ::Smithy::Schema::Shapes::MemberShape.new(target: Language, name: "language"))
     CaseDetails.type = Types::CaseDetails
-    CaseIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CaseId, name: "member")
+    CaseIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseId, name: "member"))
     CaseIdNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     CaseIdNotFound.type = Types::CaseIdNotFound
-    CaseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CaseDetails, name: "member")
+    CaseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseDetails, name: "member"))
     Category.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryCode, name: "code"))
     Category.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryName, name: "name"))
     Category.type = Types::Category
-    CategoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Category, name: "member")
-    CcEmailAddressList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CcEmailAddress, name: "member")
+    CategoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Category, name: "member"))
+    CcEmailAddressList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CcEmailAddress, name: "member"))
     Communication.add_member(:case_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CaseId, name: "caseId"))
     Communication.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidatedCommunicationBody, name: "body"))
     Communication.add_member(:submitted_by, ::Smithy::Schema::Shapes::MemberShape.new(target: SubmittedBy, name: "submittedBy"))
     Communication.add_member(:time_created, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeCreated, name: "timeCreated"))
     Communication.add_member(:attachment_set, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentSet, name: "attachmentSet"))
     Communication.type = Types::Communication
-    CommunicationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Communication, name: "member")
+    CommunicationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Communication, name: "member"))
     CommunicationTypeOptions.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, name: "type"))
     CommunicationTypeOptions.add_member(:supported_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedHoursList, name: "supportedHours"))
     CommunicationTypeOptions.add_member(:dates_without_support, ::Smithy::Schema::Shapes::MemberShape.new(target: DatesWithoutSupportList, name: "datesWithoutSupport"))
     CommunicationTypeOptions.type = Types::CommunicationTypeOptions
-    CommunicationTypeOptionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationTypeOptions, name: "member")
+    CommunicationTypeOptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationTypeOptions, name: "member"))
     CreateCaseRequest.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: Subject, name: "subject", traits: {"smithy.api#required" => {}}))
     CreateCaseRequest.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode2, name: "serviceCode"))
     CreateCaseRequest.add_member(:severity_code, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityCode, name: "severityCode"))
@@ -218,7 +218,7 @@ module Aws::Support
     DateInterval.add_member(:start_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidatedDateTime, name: "startDateTime"))
     DateInterval.add_member(:end_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidatedDateTime, name: "endDateTime"))
     DateInterval.type = Types::DateInterval
-    DatesWithoutSupportList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DateInterval, name: "member")
+    DatesWithoutSupportList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DateInterval, name: "member"))
     DescribeAttachmentLimitExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     DescribeAttachmentLimitExceeded.type = Types::DescribeAttachmentLimitExceeded
     DescribeAttachmentRequest.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentId, name: "attachmentId", traits: {"smithy.api#required" => {}}))
@@ -305,22 +305,22 @@ module Aws::Support
     Service.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, name: "name"))
     Service.add_member(:categories, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryList, name: "categories"))
     Service.type = Types::Service
-    ServiceCodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode2, name: "member")
-    ServiceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "member")
+    ServiceCodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode2, name: "member"))
+    ServiceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "member"))
     SeverityLevel.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityLevelCode, name: "code"))
     SeverityLevel.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityLevelName, name: "name"))
     SeverityLevel.type = Types::SeverityLevel
-    SeverityLevelsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityLevel, name: "member")
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    SeverityLevelsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityLevel, name: "member"))
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     SupportedHour.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTime, name: "startTime"))
     SupportedHour.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: EndTime, name: "endTime"))
     SupportedHour.type = Types::SupportedHour
-    SupportedHoursList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedHour, name: "member")
+    SupportedHoursList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedHour, name: "member"))
     SupportedLanguage.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: Code, name: "code"))
     SupportedLanguage.add_member(:language, ::Smithy::Schema::Shapes::MemberShape.new(target: Language, name: "language"))
     SupportedLanguage.add_member(:display, ::Smithy::Schema::Shapes::MemberShape.new(target: Display, name: "display"))
     SupportedLanguage.type = Types::SupportedLanguage
-    SupportedLanguagesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedLanguage, name: "member")
+    SupportedLanguagesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedLanguage, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityErrorMessage, name: "message"))
     ThrottlingException.type = Types::ThrottlingException
     TrustedAdvisorCategorySpecificSummary.add_member(:cost_optimizing, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedAdvisorCostOptimizingSummary, name: "costOptimizing"))
@@ -331,12 +331,12 @@ module Aws::Support
     TrustedAdvisorCheckDescription.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "category", traits: {"smithy.api#required" => {}}))
     TrustedAdvisorCheckDescription.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "metadata", traits: {"smithy.api#required" => {}}))
     TrustedAdvisorCheckDescription.type = Types::TrustedAdvisorCheckDescription
-    TrustedAdvisorCheckList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedAdvisorCheckDescription, name: "member")
+    TrustedAdvisorCheckList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedAdvisorCheckDescription, name: "member"))
     TrustedAdvisorCheckRefreshStatus.add_member(:check_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "checkId", traits: {"smithy.api#required" => {}}))
     TrustedAdvisorCheckRefreshStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "status", traits: {"smithy.api#required" => {}}))
     TrustedAdvisorCheckRefreshStatus.add_member(:millis_until_next_refreshable, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "millisUntilNextRefreshable", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     TrustedAdvisorCheckRefreshStatus.type = Types::TrustedAdvisorCheckRefreshStatus
-    TrustedAdvisorCheckRefreshStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedAdvisorCheckRefreshStatus, name: "member")
+    TrustedAdvisorCheckRefreshStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedAdvisorCheckRefreshStatus, name: "member"))
     TrustedAdvisorCheckResult.add_member(:check_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "checkId", traits: {"smithy.api#required" => {}}))
     TrustedAdvisorCheckResult.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "timestamp", traits: {"smithy.api#required" => {}}))
     TrustedAdvisorCheckResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "status", traits: {"smithy.api#required" => {}}))
@@ -351,7 +351,7 @@ module Aws::Support
     TrustedAdvisorCheckSummary.add_member(:resources_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedAdvisorResourcesSummary, name: "resourcesSummary", traits: {"smithy.api#required" => {}}))
     TrustedAdvisorCheckSummary.add_member(:category_specific_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedAdvisorCategorySpecificSummary, name: "categorySpecificSummary", traits: {"smithy.api#required" => {}}))
     TrustedAdvisorCheckSummary.type = Types::TrustedAdvisorCheckSummary
-    TrustedAdvisorCheckSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedAdvisorCheckSummary, name: "member")
+    TrustedAdvisorCheckSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedAdvisorCheckSummary, name: "member"))
     TrustedAdvisorCostOptimizingSummary.add_member(:estimated_monthly_savings, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "estimatedMonthlySavings", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     TrustedAdvisorCostOptimizingSummary.add_member(:estimated_percent_monthly_savings, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "estimatedPercentMonthlySavings", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     TrustedAdvisorCostOptimizingSummary.type = Types::TrustedAdvisorCostOptimizingSummary
@@ -361,7 +361,7 @@ module Aws::Support
     TrustedAdvisorResourceDetail.add_member(:is_suppressed, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isSuppressed", traits: {"smithy.api#default" => false}))
     TrustedAdvisorResourceDetail.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "metadata", traits: {"smithy.api#required" => {}}))
     TrustedAdvisorResourceDetail.type = Types::TrustedAdvisorResourceDetail
-    TrustedAdvisorResourceDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedAdvisorResourceDetail, name: "member")
+    TrustedAdvisorResourceDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedAdvisorResourceDetail, name: "member"))
     TrustedAdvisorResourcesSummary.add_member(:resources_processed, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "resourcesProcessed", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     TrustedAdvisorResourcesSummary.add_member(:resources_flagged, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "resourcesFlagged", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     TrustedAdvisorResourcesSummary.add_member(:resources_ignored, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "resourcesIgnored", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))

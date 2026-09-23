@@ -42,7 +42,7 @@ module Aws::Route53RecoveryCluster
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    Arns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    Arns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceType", traits: {"smithy.api#required" => {}}))
@@ -78,7 +78,7 @@ module Aws::Route53RecoveryCluster
     RoutingControl.type = Types::RoutingControl
     RoutingControlState.add_member(:on, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "On", traits: {"smithy.api#enumValue" => "On"}))
     RoutingControlState.add_member(:off, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Off", traits: {"smithy.api#enumValue" => "Off"}))
-    RoutingControls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingControl, name: "member")
+    RoutingControls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingControl, name: "member"))
     ServiceLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceLimitExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceId"))
     ServiceLimitExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceType"))
@@ -88,7 +88,7 @@ module Aws::Route53RecoveryCluster
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryAfterSeconds, name: "retryAfterSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Retry-After"}))
     ThrottlingException.type = Types::ThrottlingException
-    UpdateRoutingControlStateEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateRoutingControlStateEntry, name: "member")
+    UpdateRoutingControlStateEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateRoutingControlStateEntry, name: "member"))
     UpdateRoutingControlStateEntry.add_member(:routing_control_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "RoutingControlArn", traits: {"smithy.api#required" => {}}))
     UpdateRoutingControlStateEntry.add_member(:routing_control_state, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingControlState, name: "RoutingControlState", traits: {"smithy.api#required" => {}}))
     UpdateRoutingControlStateEntry.type = Types::UpdateRoutingControlStateEntry
@@ -108,7 +108,7 @@ module Aws::Route53RecoveryCluster
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "unknownOperation"}))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "cannotParse"}))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "fieldValidationFailed"}))

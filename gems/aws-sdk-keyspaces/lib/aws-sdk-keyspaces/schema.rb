@@ -161,11 +161,11 @@ module Aws::Keyspaces
     ClusteringKey.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "name", traits: {"smithy.api#required" => {}}))
     ClusteringKey.add_member(:order_by, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "orderBy", traits: {"smithy.api#required" => {}}))
     ClusteringKey.type = Types::ClusteringKey
-    ClusteringKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClusteringKey, name: "member")
+    ClusteringKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusteringKey, name: "member"))
     ColumnDefinition.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "name", traits: {"smithy.api#required" => {}}))
     ColumnDefinition.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "type", traits: {"smithy.api#required" => {}}))
     ColumnDefinition.type = Types::ColumnDefinition
-    ColumnDefinitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnDefinition, name: "member")
+    ColumnDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnDefinition, name: "member"))
     Comment.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     Comment.type = Types::Comment
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
@@ -219,7 +219,7 @@ module Aws::Keyspaces
     FieldDefinition.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "name", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#required" => {}}))
     FieldDefinition.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "type", traits: {"smithy.api#required" => {}}))
     FieldDefinition.type = Types::FieldDefinition
-    FieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldDefinition, name: "member")
+    FieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldDefinition, name: "member"))
     GetKeyspaceInput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, name: "keyspaceName", traits: {"smithy.api#required" => {}}))
     GetKeyspaceInput.type = Types::GetKeyspaceInput
     GetKeyspaceOutput.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, name: "keyspaceName", traits: {"smithy.api#required" => {}}))
@@ -277,7 +277,7 @@ module Aws::Keyspaces
     KeyspaceSummary.add_member(:replication_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: Rs, name: "replicationStrategy", traits: {"smithy.api#required" => {}}))
     KeyspaceSummary.add_member(:replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionList, name: "replicationRegions"))
     KeyspaceSummary.type = Types::KeyspaceSummary
-    KeyspaceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceSummary, name: "member")
+    KeyspaceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceSummary, name: "member"))
     ListKeyspacesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListKeyspacesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults"))
     ListKeyspacesInput.type = Types::ListKeyspacesInput
@@ -307,32 +307,32 @@ module Aws::Keyspaces
     ListTypesResponse.type = Types::ListTypesResponse
     PartitionKey.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "name", traits: {"smithy.api#required" => {}}))
     PartitionKey.type = Types::PartitionKey
-    PartitionKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionKey, name: "member")
+    PartitionKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionKey, name: "member"))
     PointInTimeRecovery.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PointInTimeRecoveryStatus, name: "status", traits: {"smithy.api#required" => {}}))
     PointInTimeRecovery.type = Types::PointInTimeRecovery
     PointInTimeRecoverySummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PointInTimeRecoveryStatus, name: "status", traits: {"smithy.api#required" => {}}))
     PointInTimeRecoverySummary.add_member(:earliest_restorable_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "earliestRestorableTimestamp"))
     PointInTimeRecoverySummary.type = Types::PointInTimeRecoverySummary
-    RegionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member")
+    RegionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member"))
     ReplicaAutoScalingSpecification.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "region"))
     ReplicaAutoScalingSpecification.add_member(:auto_scaling_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingSpecification, name: "autoScalingSpecification"))
     ReplicaAutoScalingSpecification.type = Types::ReplicaAutoScalingSpecification
-    ReplicaAutoScalingSpecificationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaAutoScalingSpecification, name: "member")
+    ReplicaAutoScalingSpecificationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaAutoScalingSpecification, name: "member"))
     ReplicaSpecification.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "region", traits: {"smithy.api#required" => {}}))
     ReplicaSpecification.add_member(:read_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityUnits, name: "readCapacityUnits"))
     ReplicaSpecification.add_member(:read_capacity_auto_scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingSettings, name: "readCapacityAutoScaling"))
     ReplicaSpecification.type = Types::ReplicaSpecification
-    ReplicaSpecificationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaSpecification, name: "member")
+    ReplicaSpecificationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaSpecification, name: "member"))
     ReplicaSpecificationSummary.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "region"))
     ReplicaSpecificationSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TableStatus, name: "status"))
     ReplicaSpecificationSummary.add_member(:capacity_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacitySpecificationSummary, name: "capacitySpecification"))
     ReplicaSpecificationSummary.type = Types::ReplicaSpecificationSummary
-    ReplicaSpecificationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaSpecificationSummary, name: "member")
+    ReplicaSpecificationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaSpecificationSummary, name: "member"))
     ReplicationGroupStatus.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "region", traits: {"smithy.api#required" => {}}))
     ReplicationGroupStatus.add_member(:keyspace_status, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceStatus, name: "keyspaceStatus", traits: {"smithy.api#required" => {}}))
     ReplicationGroupStatus.add_member(:tables_replication_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: TablesReplicationProgress, name: "tablesReplicationProgress"))
     ReplicationGroupStatus.type = Types::ReplicationGroupStatus
-    ReplicationGroupStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationGroupStatus, name: "member")
+    ReplicationGroupStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationGroupStatus, name: "member"))
     ReplicationSpecification.add_member(:replication_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: Rs, name: "replicationStrategy", traits: {"smithy.api#required" => {}}))
     ReplicationSpecification.add_member(:region_list, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionList, name: "regionList"))
     ReplicationSpecification.type = Types::ReplicationSpecification
@@ -362,17 +362,17 @@ module Aws::Keyspaces
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     StaticColumn.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "name", traits: {"smithy.api#required" => {}}))
     StaticColumn.type = Types::StaticColumn
-    StaticColumnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StaticColumn, name: "member")
-    TableNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, name: "member")
+    StaticColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StaticColumn, name: "member"))
+    TableNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, name: "member"))
     TableSummary.add_member(:keyspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspaceName, name: "keyspaceName", traits: {"smithy.api#required" => {}}))
     TableSummary.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, name: "tableName", traits: {"smithy.api#required" => {}}))
     TableSummary.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TableSummary.type = Types::TableSummary
-    TableSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TableSummary, name: "member")
+    TableSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableSummary, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -384,7 +384,7 @@ module Aws::Keyspaces
     TargetTrackingScalingPolicyConfiguration.type = Types::TargetTrackingScalingPolicyConfiguration
     TimeToLive.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeToLiveStatus, name: "status", traits: {"smithy.api#required" => {}}))
     TimeToLive.type = Types::TimeToLive
-    TypeNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, name: "member")
+    TypeNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeName, name: "member"))
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     UntagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput

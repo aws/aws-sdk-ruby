@@ -147,7 +147,7 @@ module Aws::TranscribeStreaming
     Alternative.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemList, name: "Items"))
     Alternative.add_member(:entities, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityList, name: "Entities"))
     Alternative.type = Types::Alternative
-    AlternativeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Alternative, name: "member")
+    AlternativeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Alternative, name: "member"))
     AudioEvent.add_member(:audio_chunk, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioChunk, name: "AudioChunk", traits: {"smithy.api#eventPayload" => {}}))
     AudioEvent.type = Types::AudioEvent
     AudioStream.add_member(:audio_event, Types::AudioStream::AudioEvent, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioEvent, name: "AudioEvent"))
@@ -163,7 +163,7 @@ module Aws::TranscribeStreaming
     CallAnalyticsEntity.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Content"))
     CallAnalyticsEntity.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Confidence, name: "Confidence"))
     CallAnalyticsEntity.type = Types::CallAnalyticsEntity
-    CallAnalyticsEntityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CallAnalyticsEntity, name: "member")
+    CallAnalyticsEntityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CallAnalyticsEntity, name: "member"))
     CallAnalyticsItem.add_member(:begin_offset_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "BeginOffsetMillis"))
     CallAnalyticsItem.add_member(:end_offset_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "EndOffsetMillis"))
     CallAnalyticsItem.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemType, name: "Type"))
@@ -172,7 +172,7 @@ module Aws::TranscribeStreaming
     CallAnalyticsItem.add_member(:vocabulary_filter_match, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "VocabularyFilterMatch", traits: {"smithy.api#default" => false}))
     CallAnalyticsItem.add_member(:stable, ::Smithy::Schema::Shapes::MemberShape.new(target: Stable, name: "Stable"))
     CallAnalyticsItem.type = Types::CallAnalyticsItem
-    CallAnalyticsItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CallAnalyticsItem, name: "member")
+    CallAnalyticsItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CallAnalyticsItem, name: "member"))
     CallAnalyticsLanguageCode.add_member(:en_us, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EN_US", traits: {"smithy.api#enumValue" => "en-US"}))
     CallAnalyticsLanguageCode.add_member(:en_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EN_GB", traits: {"smithy.api#enumValue" => "en-GB"}))
     CallAnalyticsLanguageCode.add_member(:es_us, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ES_US", traits: {"smithy.api#enumValue" => "es-US"}))
@@ -182,7 +182,7 @@ module Aws::TranscribeStreaming
     CallAnalyticsLanguageCode.add_member(:it_it, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IT_IT", traits: {"smithy.api#enumValue" => "it-IT"}))
     CallAnalyticsLanguageCode.add_member(:de_de, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DE_DE", traits: {"smithy.api#enumValue" => "de-DE"}))
     CallAnalyticsLanguageCode.add_member(:pt_br, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PT_BR", traits: {"smithy.api#enumValue" => "pt-BR"}))
-    CallAnalyticsLanguageIdentification.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CallAnalyticsLanguageWithScore, name: "member")
+    CallAnalyticsLanguageIdentification.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CallAnalyticsLanguageWithScore, name: "member"))
     CallAnalyticsLanguageWithScore.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CallAnalyticsLanguageCode, name: "LanguageCode"))
     CallAnalyticsLanguageWithScore.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Score", traits: {"smithy.api#default" => 0}))
     CallAnalyticsLanguageWithScore.type = Types::CallAnalyticsLanguageWithScore
@@ -201,7 +201,7 @@ module Aws::TranscribeStreaming
     ChannelDefinition.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, name: "ChannelId", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     ChannelDefinition.add_member(:participant_role, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantRole, name: "ParticipantRole", traits: {"smithy.api#required" => {}}))
     ChannelDefinition.type = Types::ChannelDefinition
-    ChannelDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelDefinition, name: "member")
+    ChannelDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelDefinition, name: "member"))
     CharacterOffsets.add_member(:begin, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Begin"))
     CharacterOffsets.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "End"))
     CharacterOffsets.type = Types::CharacterOffsets
@@ -232,7 +232,7 @@ module Aws::TranscribeStreaming
     Entity.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Content"))
     Entity.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Confidence, name: "Confidence"))
     Entity.type = Types::Entity
-    EntityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Entity, name: "member")
+    EntityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Entity, name: "member"))
     GetMedicalScribeStreamRequest.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "SessionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetMedicalScribeStreamRequest.type = Types::GetMedicalScribeStreamRequest
     GetMedicalScribeStreamResponse.add_member(:medical_scribe_stream_details, ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalScribeStreamDetails, name: "MedicalScribeStreamDetails"))
@@ -241,7 +241,7 @@ module Aws::TranscribeStreaming
     InternalFailureException.type = Types::InternalFailureException
     IssueDetected.add_member(:character_offsets, ::Smithy::Schema::Shapes::MemberShape.new(target: CharacterOffsets, name: "CharacterOffsets"))
     IssueDetected.type = Types::IssueDetected
-    IssuesDetected.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IssueDetected, name: "member")
+    IssuesDetected.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IssueDetected, name: "member"))
     Item.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "StartTime", traits: {"smithy.api#default" => 0}))
     Item.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "EndTime", traits: {"smithy.api#default" => 0}))
     Item.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemType, name: "Type"))
@@ -251,11 +251,11 @@ module Aws::TranscribeStreaming
     Item.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Confidence, name: "Confidence"))
     Item.add_member(:stable, ::Smithy::Schema::Shapes::MemberShape.new(target: Stable, name: "Stable"))
     Item.type = Types::Item
-    ItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Item, name: "member")
+    ItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Item, name: "member"))
     ItemType.add_member(:pronunciation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRONUNCIATION", traits: {"smithy.api#enumValue" => "pronunciation"}))
     ItemType.add_member(:punctuation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUNCTUATION", traits: {"smithy.api#enumValue" => "punctuation"}))
-    KMSEncryptionContextMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key")
-    KMSEncryptionContextMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value")
+    KMSEncryptionContextMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
+    KMSEncryptionContextMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value"))
     LanguageCode.add_member(:en_us, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EN_US", traits: {"smithy.api#enumValue" => "en-US"}))
     LanguageCode.add_member(:en_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EN_GB", traits: {"smithy.api#enumValue" => "en-GB"}))
     LanguageCode.add_member(:es_us, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ES_US", traits: {"smithy.api#enumValue" => "es-US"}))
@@ -310,14 +310,14 @@ module Aws::TranscribeStreaming
     LanguageCode.add_member(:uk_ua, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UK_UA", traits: {"smithy.api#enumValue" => "uk-UA"}))
     LanguageCode.add_member(:vi_vn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VI_VN", traits: {"smithy.api#enumValue" => "vi-VN"}))
     LanguageCode.add_member(:zu_za, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ZU_ZA", traits: {"smithy.api#enumValue" => "zu-ZA"}))
-    LanguageIdentification.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageWithScore, name: "member")
+    LanguageIdentification.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageWithScore, name: "member"))
     LanguageWithScore.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "LanguageCode"))
     LanguageWithScore.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Score", traits: {"smithy.api#default" => 0}))
     LanguageWithScore.type = Types::LanguageWithScore
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
-    MatchedCategoryDetails.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    MatchedCategoryDetails.value = ::Smithy::Schema::Shapes::MemberShape.new(target: PointsOfInterest, name: "value")
+    MatchedCategoryDetails.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    MatchedCategoryDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PointsOfInterest, name: "value"))
     MediaEncoding.add_member(:pcm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PCM", traits: {"smithy.api#enumValue" => "pcm"}))
     MediaEncoding.add_member(:ogg_opus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OGG_OPUS", traits: {"smithy.api#enumValue" => "ogg-opus"}))
     MediaEncoding.add_member(:flac, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLAC", traits: {"smithy.api#enumValue" => "flac"}))
@@ -325,7 +325,7 @@ module Aws::TranscribeStreaming
     MedicalAlternative.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalItemList, name: "Items"))
     MedicalAlternative.add_member(:entities, ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalEntityList, name: "Entities"))
     MedicalAlternative.type = Types::MedicalAlternative
-    MedicalAlternativeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalAlternative, name: "member")
+    MedicalAlternativeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalAlternative, name: "member"))
     MedicalContentIdentificationType.add_member(:phi, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PHI", traits: {"smithy.api#enumValue" => "PHI"}))
     MedicalEntity.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "StartTime", traits: {"smithy.api#default" => 0}))
     MedicalEntity.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "EndTime", traits: {"smithy.api#default" => 0}))
@@ -333,7 +333,7 @@ module Aws::TranscribeStreaming
     MedicalEntity.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Content"))
     MedicalEntity.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Confidence, name: "Confidence"))
     MedicalEntity.type = Types::MedicalEntity
-    MedicalEntityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalEntity, name: "member")
+    MedicalEntityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalEntity, name: "member"))
     MedicalItem.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "StartTime", traits: {"smithy.api#default" => 0}))
     MedicalItem.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "EndTime", traits: {"smithy.api#default" => 0}))
     MedicalItem.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemType, name: "Type"))
@@ -341,7 +341,7 @@ module Aws::TranscribeStreaming
     MedicalItem.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Confidence, name: "Confidence"))
     MedicalItem.add_member(:speaker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Speaker"))
     MedicalItem.type = Types::MedicalItem
-    MedicalItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalItem, name: "member")
+    MedicalItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalItem, name: "member"))
     MedicalResult.add_member(:result_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResultId"))
     MedicalResult.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "StartTime", traits: {"smithy.api#default" => 0}))
     MedicalResult.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "EndTime", traits: {"smithy.api#default" => 0}))
@@ -349,13 +349,13 @@ module Aws::TranscribeStreaming
     MedicalResult.add_member(:alternatives, ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalAlternativeList, name: "Alternatives"))
     MedicalResult.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ChannelId"))
     MedicalResult.type = Types::MedicalResult
-    MedicalResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalResult, name: "member")
+    MedicalResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalResult, name: "member"))
     MedicalScribeAudioEvent.add_member(:audio_chunk, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioChunk, name: "AudioChunk", traits: {"smithy.api#eventPayload" => {}, "smithy.api#required" => {}}))
     MedicalScribeAudioEvent.type = Types::MedicalScribeAudioEvent
     MedicalScribeChannelDefinition.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalScribeChannelId, name: "ChannelId", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     MedicalScribeChannelDefinition.add_member(:participant_role, ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalScribeParticipantRole, name: "ParticipantRole", traits: {"smithy.api#required" => {}}))
     MedicalScribeChannelDefinition.type = Types::MedicalScribeChannelDefinition
-    MedicalScribeChannelDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalScribeChannelDefinition, name: "member")
+    MedicalScribeChannelDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalScribeChannelDefinition, name: "member"))
     MedicalScribeConfigurationEvent.add_member(:vocabulary_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyName, name: "VocabularyName"))
     MedicalScribeConfigurationEvent.add_member(:vocabulary_filter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyFilterName, name: "VocabularyFilterName"))
     MedicalScribeConfigurationEvent.add_member(:vocabulary_filter_method, ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalScribeVocabularyFilterMethod, name: "VocabularyFilterMethod"))
@@ -435,7 +435,7 @@ module Aws::TranscribeStreaming
     MedicalScribeTranscriptItem.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Content"))
     MedicalScribeTranscriptItem.add_member(:vocabulary_filter_match, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "VocabularyFilterMatch"))
     MedicalScribeTranscriptItem.type = Types::MedicalScribeTranscriptItem
-    MedicalScribeTranscriptItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalScribeTranscriptItem, name: "member")
+    MedicalScribeTranscriptItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MedicalScribeTranscriptItem, name: "member"))
     MedicalScribeTranscriptItemType.add_member(:pronunciation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRONUNCIATION", traits: {"smithy.api#enumValue" => "pronunciation"}))
     MedicalScribeTranscriptItemType.add_member(:punctuation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUNCTUATION", traits: {"smithy.api#enumValue" => "punctuation"}))
     MedicalScribeTranscriptSegment.add_member(:segment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SegmentId"))
@@ -487,7 +487,7 @@ module Aws::TranscribeStreaming
     Result.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "LanguageCode"))
     Result.add_member(:language_identification, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageIdentification, name: "LanguageIdentification"))
     Result.type = Types::Result
-    ResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Result, name: "member")
+    ResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Result, name: "member"))
     Sentiment.add_member(:positive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POSITIVE", traits: {"smithy.api#enumValue" => "POSITIVE"}))
     Sentiment.add_member(:negative, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEGATIVE", traits: {"smithy.api#enumValue" => "NEGATIVE"}))
     Sentiment.add_member(:mixed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIXED", traits: {"smithy.api#enumValue" => "MIXED"}))
@@ -646,11 +646,11 @@ module Aws::TranscribeStreaming
     StartStreamTranscriptionResponse[:http_payload] = :transcript_result_stream
     StartStreamTranscriptionResponse[:http_payload_member] = StartStreamTranscriptionResponse.member(:transcript_result_stream)
     StartStreamTranscriptionResponse.type = Types::StartStreamTranscriptionResponse
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     TimestampRange.add_member(:begin_offset_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "BeginOffsetMillis"))
     TimestampRange.add_member(:end_offset_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "EndOffsetMillis"))
     TimestampRange.type = Types::TimestampRange
-    TimestampRanges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampRange, name: "member")
+    TimestampRanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampRange, name: "member"))
     Transcript.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultList, name: "Results"))
     Transcript.type = Types::Transcript
     TranscriptEvent.add_member(:transcript, ::Smithy::Schema::Shapes::MemberShape.new(target: Transcript, name: "Transcript"))

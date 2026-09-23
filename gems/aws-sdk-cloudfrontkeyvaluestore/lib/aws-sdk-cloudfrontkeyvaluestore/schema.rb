@@ -45,7 +45,7 @@ module Aws::CloudFrontKeyValueStore
     DeleteKeyRequest.type = Types::DeleteKeyRequest
     DeleteKeyRequestListItem.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "Key", traits: {"smithy.api#required" => {}}))
     DeleteKeyRequestListItem.type = Types::DeleteKeyRequestListItem
-    DeleteKeyRequestsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteKeyRequestListItem, name: "member")
+    DeleteKeyRequestsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteKeyRequestListItem, name: "member"))
     DeleteKeyResponse.add_member(:item_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "ItemCount", traits: {"smithy.api#required" => {}}))
     DeleteKeyResponse.add_member(:total_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "TotalSizeInBytes", traits: {"smithy.api#required" => {}}))
     DeleteKeyResponse.add_member(:e_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: Etag, name: "ETag", traits: {"smithy.api#httpHeader" => "ETag", "smithy.api#required" => {}}))
@@ -78,7 +78,7 @@ module Aws::CloudFrontKeyValueStore
     ListKeysResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken"))
     ListKeysResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ListKeysResponseList, name: "Items"))
     ListKeysResponse.type = Types::ListKeysResponse
-    ListKeysResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListKeysResponseListItem, name: "member")
+    ListKeysResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListKeysResponseListItem, name: "member"))
     ListKeysResponseListItem.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "Key", traits: {"smithy.api#required" => {}}))
     ListKeysResponseListItem.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "Value", traits: {"smithy.api#required" => {}}))
     ListKeysResponseListItem.type = Types::ListKeysResponseListItem
@@ -90,7 +90,7 @@ module Aws::CloudFrontKeyValueStore
     PutKeyRequestListItem.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "Key", traits: {"smithy.api#required" => {}}))
     PutKeyRequestListItem.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "Value", traits: {"smithy.api#required" => {}}))
     PutKeyRequestListItem.type = Types::PutKeyRequestListItem
-    PutKeyRequestsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PutKeyRequestListItem, name: "member")
+    PutKeyRequestsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PutKeyRequestListItem, name: "member"))
     PutKeyResponse.add_member(:item_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "ItemCount", traits: {"smithy.api#required" => {}}))
     PutKeyResponse.add_member(:total_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "TotalSizeInBytes", traits: {"smithy.api#required" => {}}))
     PutKeyResponse.add_member(:e_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: Etag, name: "ETag", traits: {"smithy.api#httpHeader" => "ETag", "smithy.api#required" => {}}))

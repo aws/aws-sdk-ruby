@@ -347,8 +347,8 @@ module Aws::DevOpsGuru
     AccountHealth.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "AccountId"))
     AccountHealth.add_member(:insight, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountInsightHealth, name: "Insight"))
     AccountHealth.type = Types::AccountHealth
-    AccountHealths.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountHealth, name: "member")
-    AccountIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "member")
+    AccountHealths.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountHealth, name: "member"))
+    AccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "member"))
     AccountInsightHealth.add_member(:open_proactive_insights, ::Smithy::Schema::Shapes::MemberShape.new(target: NumOpenProactiveInsights, name: "OpenProactiveInsights", traits: {"smithy.api#default" => 0}))
     AccountInsightHealth.add_member(:open_reactive_insights, ::Smithy::Schema::Shapes::MemberShape.new(target: NumOpenReactiveInsights, name: "OpenReactiveInsights", traits: {"smithy.api#default" => 0}))
     AccountInsightHealth.type = Types::AccountInsightHealth
@@ -364,14 +364,14 @@ module Aws::DevOpsGuru
     AnomalousLogGroup.add_member(:number_of_log_lines_scanned, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfLogLinesScanned, name: "NumberOfLogLinesScanned", traits: {"smithy.api#default" => 0}))
     AnomalousLogGroup.add_member(:log_anomaly_showcases, ::Smithy::Schema::Shapes::MemberShape.new(target: LogAnomalyShowcases, name: "LogAnomalyShowcases"))
     AnomalousLogGroup.type = Types::AnomalousLogGroup
-    AnomalousLogGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalousLogGroup, name: "member")
+    AnomalousLogGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalousLogGroup, name: "member"))
     AnomalyReportedTimeRange.add_member(:open_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "OpenTime", traits: {"smithy.api#required" => {}}))
     AnomalyReportedTimeRange.add_member(:close_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CloseTime"))
     AnomalyReportedTimeRange.type = Types::AnomalyReportedTimeRange
     AnomalyResource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
     AnomalyResource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "Type"))
     AnomalyResource.type = Types::AnomalyResource
-    AnomalyResources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyResource, name: "member")
+    AnomalyResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyResource, name: "member"))
     AnomalySeverity.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "LOW"}))
     AnomalySeverity.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "MEDIUM"}))
     AnomalySeverity.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "HIGH"}))
@@ -389,8 +389,8 @@ module Aws::DevOpsGuru
     AnomalyTimeRange.type = Types::AnomalyTimeRange
     AnomalyType.add_member(:causal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAUSAL", traits: {"smithy.api#enumValue" => "CAUSAL"}))
     AnomalyType.add_member(:contextual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTEXTUAL", traits: {"smithy.api#enumValue" => "CONTEXTUAL"}))
-    AssociatedResourceArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member")
-    Channels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationChannel, name: "member")
+    AssociatedResourceArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member"))
+    Channels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationChannel, name: "member"))
     CloudFormationCollection.add_member(:stack_names, ::Smithy::Schema::Shapes::MemberShape.new(target: StackNames, name: "StackNames"))
     CloudFormationCollection.type = Types::CloudFormationCollection
     CloudFormationCollectionFilter.add_member(:stack_names, ::Smithy::Schema::Shapes::MemberShape.new(target: StackNames, name: "StackNames"))
@@ -401,7 +401,7 @@ module Aws::DevOpsGuru
     CloudFormationHealth.add_member(:insight, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightHealth, name: "Insight"))
     CloudFormationHealth.add_member(:analyzed_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzedResourceCount, name: "AnalyzedResourceCount"))
     CloudFormationHealth.type = Types::CloudFormationHealth
-    CloudFormationHealths.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CloudFormationHealth, name: "member")
+    CloudFormationHealths.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudFormationHealth, name: "member"))
     CloudWatchMetricDataStatusCode.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETE", traits: {"smithy.api#enumValue" => "Complete"}))
     CloudWatchMetricDataStatusCode.add_member(:internal_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "InternalError"}))
     CloudWatchMetricDataStatusCode.add_member(:partial_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARTIAL_DATA", traits: {"smithy.api#enumValue" => "PartialData"}))
@@ -416,11 +416,11 @@ module Aws::DevOpsGuru
     CloudWatchMetricsDetail.add_member(:period, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchMetricsPeriod, name: "Period", traits: {"smithy.api#default" => 0}))
     CloudWatchMetricsDetail.add_member(:metric_data_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchMetricsDataSummary, name: "MetricDataSummary"))
     CloudWatchMetricsDetail.type = Types::CloudWatchMetricsDetail
-    CloudWatchMetricsDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchMetricsDetail, name: "member")
+    CloudWatchMetricsDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchMetricsDetail, name: "member"))
     CloudWatchMetricsDimension.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchMetricsDimensionName, name: "Name"))
     CloudWatchMetricsDimension.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchMetricsDimensionValue, name: "Value"))
     CloudWatchMetricsDimension.type = Types::CloudWatchMetricsDimension
-    CloudWatchMetricsDimensions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchMetricsDimension, name: "member")
+    CloudWatchMetricsDimensions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchMetricsDimension, name: "member"))
     CloudWatchMetricsStat.add_member(:sum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUM", traits: {"smithy.api#enumValue" => "Sum"}))
     CloudWatchMetricsStat.add_member(:average, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVERAGE", traits: {"smithy.api#enumValue" => "Average"}))
     CloudWatchMetricsStat.add_member(:sample_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAMPLE_COUNT", traits: {"smithy.api#enumValue" => "SampleCount"}))
@@ -438,10 +438,10 @@ module Aws::DevOpsGuru
     CostEstimationResourceCollectionFilter.type = Types::CostEstimationResourceCollectionFilter
     CostEstimationServiceResourceState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     CostEstimationServiceResourceState.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
-    CostEstimationStackNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StackName, name: "member")
+    CostEstimationStackNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StackName, name: "member"))
     CostEstimationStatus.add_member(:ongoing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONGOING", traits: {"smithy.api#enumValue" => "ONGOING"}))
     CostEstimationStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    CostEstimationTagValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "member")
+    CostEstimationTagValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "member"))
     CostEstimationTimeRange.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime"))
     CostEstimationTimeRange.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
     CostEstimationTimeRange.type = Types::CostEstimationTimeRange
@@ -543,7 +543,7 @@ module Aws::DevOpsGuru
     EventResource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventResourceName, name: "Name"))
     EventResource.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EventResourceArn, name: "Arn"))
     EventResource.type = Types::EventResource
-    EventResources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventResource, name: "member")
+    EventResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventResource, name: "member"))
     EventSourceOptInStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     EventSourceOptInStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     EventSourcesConfig.add_member(:amazon_code_guru_profiler, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonCodeGuruProfilerIntegration, name: "AmazonCodeGuruProfiler"))
@@ -551,7 +551,7 @@ module Aws::DevOpsGuru
     EventTimeRange.add_member(:from_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "FromTime", traits: {"smithy.api#required" => {}}))
     EventTimeRange.add_member(:to_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ToTime", traits: {"smithy.api#required" => {}}))
     EventTimeRange.type = Types::EventTimeRange
-    Events.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member")
+    Events.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member"))
     GetCostEstimationRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidNextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
     GetCostEstimationRequest.type = Types::GetCostEstimationRequest
     GetCostEstimationResponse.add_member(:resource_collection, ::Smithy::Schema::Shapes::MemberShape.new(target: CostEstimationResourceCollectionFilter, name: "ResourceCollection"))
@@ -579,13 +579,13 @@ module Aws::DevOpsGuru
     InsightHealth.add_member(:open_reactive_insights, ::Smithy::Schema::Shapes::MemberShape.new(target: NumOpenReactiveInsights, name: "OpenReactiveInsights", traits: {"smithy.api#default" => 0}))
     InsightHealth.add_member(:mean_time_to_recover_in_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: MeanTimeToRecoverInMilliseconds, name: "MeanTimeToRecoverInMilliseconds"))
     InsightHealth.type = Types::InsightHealth
-    InsightSeverities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InsightSeverity, name: "member")
+    InsightSeverities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightSeverity, name: "member"))
     InsightSeverity.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "LOW"}))
     InsightSeverity.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "MEDIUM"}))
     InsightSeverity.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "HIGH"}))
     InsightStatus.add_member(:ongoing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONGOING", traits: {"smithy.api#enumValue" => "ONGOING"}))
     InsightStatus.add_member(:closed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOSED", traits: {"smithy.api#enumValue" => "CLOSED"}))
-    InsightStatuses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InsightStatus, name: "member")
+    InsightStatuses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightStatus, name: "member"))
     InsightTimeRange.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime", traits: {"smithy.api#required" => {}}))
     InsightTimeRange.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
     InsightTimeRange.type = Types::InsightTimeRange
@@ -638,7 +638,7 @@ module Aws::DevOpsGuru
     ListEventsResponse.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: Events, name: "Events", traits: {"smithy.api#required" => {}}))
     ListEventsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidNextToken, name: "NextToken"))
     ListEventsResponse.type = Types::ListEventsResponse
-    ListInsightsAccountIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "member")
+    ListInsightsAccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "member"))
     ListInsightsAnyStatusFilter.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightType, name: "Type", traits: {"smithy.api#required" => {}}))
     ListInsightsAnyStatusFilter.add_member(:start_time_range, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTimeRange, name: "StartTimeRange", traits: {"smithy.api#required" => {}}))
     ListInsightsAnyStatusFilter.type = Types::ListInsightsAnyStatusFilter
@@ -647,7 +647,7 @@ module Aws::DevOpsGuru
     ListInsightsClosedStatusFilter.type = Types::ListInsightsClosedStatusFilter
     ListInsightsOngoingStatusFilter.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightType, name: "Type", traits: {"smithy.api#required" => {}}))
     ListInsightsOngoingStatusFilter.type = Types::ListInsightsOngoingStatusFilter
-    ListInsightsOrganizationalUnitIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitId, name: "member")
+    ListInsightsOrganizationalUnitIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitId, name: "member"))
     ListInsightsRequest.add_member(:status_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ListInsightsStatusFilter, name: "StatusFilter", traits: {"smithy.api#required" => {}}))
     ListInsightsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListInsightsMaxResults, name: "MaxResults"))
     ListInsightsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidNextToken, name: "NextToken"))
@@ -712,10 +712,10 @@ module Aws::DevOpsGuru
     LogAnomalyClass.add_member(:number_of_log_lines_occurrences, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfLogLinesOccurrences, name: "NumberOfLogLinesOccurrences", traits: {"smithy.api#default" => 0}))
     LogAnomalyClass.add_member(:log_event_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LogEventTimestamp"))
     LogAnomalyClass.type = Types::LogAnomalyClass
-    LogAnomalyClasses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogAnomalyClass, name: "member")
+    LogAnomalyClasses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogAnomalyClass, name: "member"))
     LogAnomalyShowcase.add_member(:log_anomaly_classes, ::Smithy::Schema::Shapes::MemberShape.new(target: LogAnomalyClasses, name: "LogAnomalyClasses"))
     LogAnomalyShowcase.type = Types::LogAnomalyShowcase
-    LogAnomalyShowcases.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogAnomalyShowcase, name: "member")
+    LogAnomalyShowcases.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogAnomalyShowcase, name: "member"))
     LogAnomalyType.add_member(:keyword, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KEYWORD", traits: {"smithy.api#enumValue" => "KEYWORD"}))
     LogAnomalyType.add_member(:keyword_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KEYWORD_TOKEN", traits: {"smithy.api#enumValue" => "KEYWORD_TOKEN"}))
     LogAnomalyType.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FORMAT", traits: {"smithy.api#enumValue" => "FORMAT"}))
@@ -734,7 +734,7 @@ module Aws::DevOpsGuru
     MonitoredResourceIdentifier.add_member(:last_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdated"))
     MonitoredResourceIdentifier.add_member(:resource_collection, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCollection, name: "ResourceCollection"))
     MonitoredResourceIdentifier.type = Types::MonitoredResourceIdentifier
-    MonitoredResourceIdentifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoredResourceIdentifier, name: "member")
+    MonitoredResourceIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoredResourceIdentifier, name: "member"))
     NotificationChannel.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationChannelId, name: "Id"))
     NotificationChannel.add_member(:config, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationChannelConfig, name: "Config"))
     NotificationChannel.type = Types::NotificationChannel
@@ -749,7 +749,7 @@ module Aws::DevOpsGuru
     NotificationMessageType.add_member(:new_association, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEW_ASSOCIATION", traits: {"smithy.api#enumValue" => "NEW_ASSOCIATION"}))
     NotificationMessageType.add_member(:severity_upgraded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVERITY_UPGRADED", traits: {"smithy.api#enumValue" => "SEVERITY_UPGRADED"}))
     NotificationMessageType.add_member(:new_recommendation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEW_RECOMMENDATION", traits: {"smithy.api#enumValue" => "NEW_RECOMMENDATION"}))
-    NotificationMessageTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationMessageType, name: "member")
+    NotificationMessageTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationMessageType, name: "member"))
     OpsCenterIntegration.add_member(:opt_in_status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptInStatus, name: "OptInStatus"))
     OpsCenterIntegration.type = Types::OpsCenterIntegration
     OpsCenterIntegrationConfig.add_member(:opt_in_status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptInStatus, name: "OptInStatus"))
@@ -760,14 +760,14 @@ module Aws::DevOpsGuru
     OrganizationResourceCollectionType.add_member(:aws_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SERVICE", traits: {"smithy.api#enumValue" => "AWS_SERVICE"}))
     OrganizationResourceCollectionType.add_member(:aws_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_ACCOUNT", traits: {"smithy.api#enumValue" => "AWS_ACCOUNT"}))
     OrganizationResourceCollectionType.add_member(:aws_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_TAGS", traits: {"smithy.api#enumValue" => "AWS_TAGS"}))
-    OrganizationalUnitIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitId, name: "member")
+    OrganizationalUnitIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitId, name: "member"))
     PerformanceInsightsMetricDimensionGroup.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsMetricGroup, name: "Group"))
     PerformanceInsightsMetricDimensionGroup.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsMetricDimensions, name: "Dimensions"))
     PerformanceInsightsMetricDimensionGroup.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsMetricLimitInteger, name: "Limit"))
     PerformanceInsightsMetricDimensionGroup.type = Types::PerformanceInsightsMetricDimensionGroup
-    PerformanceInsightsMetricDimensions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsMetricDimension, name: "member")
-    PerformanceInsightsMetricFilterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsMetricFilterKey, name: "key")
-    PerformanceInsightsMetricFilterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsMetricFilterValue, name: "value")
+    PerformanceInsightsMetricDimensions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsMetricDimension, name: "member"))
+    PerformanceInsightsMetricFilterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsMetricFilterKey, name: "key"))
+    PerformanceInsightsMetricFilterMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsMetricFilterValue, name: "value"))
     PerformanceInsightsMetricQuery.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsMetricName, name: "Metric"))
     PerformanceInsightsMetricQuery.add_member(:group_by, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsMetricDimensionGroup, name: "GroupBy"))
     PerformanceInsightsMetricQuery.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsMetricFilterMap, name: "Filter"))
@@ -779,14 +779,14 @@ module Aws::DevOpsGuru
     PerformanceInsightsMetricsDetail.add_member(:stats_at_anomaly, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsStats, name: "StatsAtAnomaly"))
     PerformanceInsightsMetricsDetail.add_member(:stats_at_baseline, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsStats, name: "StatsAtBaseline"))
     PerformanceInsightsMetricsDetail.type = Types::PerformanceInsightsMetricsDetail
-    PerformanceInsightsMetricsDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsMetricsDetail, name: "member")
+    PerformanceInsightsMetricsDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsMetricsDetail, name: "member"))
     PerformanceInsightsReferenceComparisonValues.add_member(:reference_scalar, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsReferenceScalar, name: "ReferenceScalar"))
     PerformanceInsightsReferenceComparisonValues.add_member(:reference_metric, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsReferenceMetric, name: "ReferenceMetric"))
     PerformanceInsightsReferenceComparisonValues.type = Types::PerformanceInsightsReferenceComparisonValues
     PerformanceInsightsReferenceData.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsReferenceName, name: "Name"))
     PerformanceInsightsReferenceData.add_member(:comparison_values, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsReferenceComparisonValues, name: "ComparisonValues"))
     PerformanceInsightsReferenceData.type = Types::PerformanceInsightsReferenceData
-    PerformanceInsightsReferenceDataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsReferenceData, name: "member")
+    PerformanceInsightsReferenceDataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsReferenceData, name: "member"))
     PerformanceInsightsReferenceMetric.add_member(:metric_query, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsMetricQuery, name: "MetricQuery"))
     PerformanceInsightsReferenceMetric.type = Types::PerformanceInsightsReferenceMetric
     PerformanceInsightsReferenceScalar.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsValueDouble, name: "Value"))
@@ -794,11 +794,11 @@ module Aws::DevOpsGuru
     PerformanceInsightsStat.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsStatType, name: "Type"))
     PerformanceInsightsStat.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsValueDouble, name: "Value"))
     PerformanceInsightsStat.type = Types::PerformanceInsightsStat
-    PerformanceInsightsStats.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsStat, name: "member")
+    PerformanceInsightsStats.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsStat, name: "member"))
     PredictionTimeRange.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime", traits: {"smithy.api#required" => {}}))
     PredictionTimeRange.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
     PredictionTimeRange.type = Types::PredictionTimeRange
-    ProactiveAnomalies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProactiveAnomalySummary, name: "member")
+    ProactiveAnomalies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProactiveAnomalySummary, name: "member"))
     ProactiveAnomaly.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyId, name: "Id"))
     ProactiveAnomaly.add_member(:severity, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalySeverity, name: "Severity"))
     ProactiveAnomaly.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyStatus, name: "Status"))
@@ -849,7 +849,7 @@ module Aws::DevOpsGuru
     ProactiveInsightSummary.add_member(:service_collection, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCollection, name: "ServiceCollection"))
     ProactiveInsightSummary.add_member(:associated_resource_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedResourceArns, name: "AssociatedResourceArns"))
     ProactiveInsightSummary.type = Types::ProactiveInsightSummary
-    ProactiveInsights.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProactiveInsightSummary, name: "member")
+    ProactiveInsights.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProactiveInsightSummary, name: "member"))
     ProactiveOrganizationInsightSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightId, name: "Id"))
     ProactiveOrganizationInsightSummary.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "AccountId"))
     ProactiveOrganizationInsightSummary.add_member(:organizational_unit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitId, name: "OrganizationalUnitId"))
@@ -861,11 +861,11 @@ module Aws::DevOpsGuru
     ProactiveOrganizationInsightSummary.add_member(:resource_collection, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCollection, name: "ResourceCollection"))
     ProactiveOrganizationInsightSummary.add_member(:service_collection, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCollection, name: "ServiceCollection"))
     ProactiveOrganizationInsightSummary.type = Types::ProactiveOrganizationInsightSummary
-    ProactiveOrganizationInsights.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProactiveOrganizationInsightSummary, name: "member")
+    ProactiveOrganizationInsights.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProactiveOrganizationInsightSummary, name: "member"))
     PutFeedbackRequest.add_member(:insight_feedback, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightFeedback, name: "InsightFeedback"))
     PutFeedbackRequest.type = Types::PutFeedbackRequest
     PutFeedbackResponse.type = Types::PutFeedbackResponse
-    ReactiveAnomalies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReactiveAnomalySummary, name: "member")
+    ReactiveAnomalies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReactiveAnomalySummary, name: "member"))
     ReactiveAnomaly.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyId, name: "Id"))
     ReactiveAnomaly.add_member(:severity, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalySeverity, name: "Severity"))
     ReactiveAnomaly.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyStatus, name: "Status"))
@@ -912,7 +912,7 @@ module Aws::DevOpsGuru
     ReactiveInsightSummary.add_member(:service_collection, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCollection, name: "ServiceCollection"))
     ReactiveInsightSummary.add_member(:associated_resource_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedResourceArns, name: "AssociatedResourceArns"))
     ReactiveInsightSummary.type = Types::ReactiveInsightSummary
-    ReactiveInsights.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReactiveInsightSummary, name: "member")
+    ReactiveInsights.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReactiveInsightSummary, name: "member"))
     ReactiveOrganizationInsightSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightId, name: "Id"))
     ReactiveOrganizationInsightSummary.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "AccountId"))
     ReactiveOrganizationInsightSummary.add_member(:organizational_unit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitId, name: "OrganizationalUnitId"))
@@ -923,7 +923,7 @@ module Aws::DevOpsGuru
     ReactiveOrganizationInsightSummary.add_member(:resource_collection, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCollection, name: "ResourceCollection"))
     ReactiveOrganizationInsightSummary.add_member(:service_collection, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCollection, name: "ServiceCollection"))
     ReactiveOrganizationInsightSummary.type = Types::ReactiveOrganizationInsightSummary
-    ReactiveOrganizationInsights.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReactiveOrganizationInsightSummary, name: "member")
+    ReactiveOrganizationInsights.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReactiveOrganizationInsightSummary, name: "member"))
     Recommendation.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationDescription, name: "Description"))
     Recommendation.add_member(:link, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationLink, name: "Link"))
     Recommendation.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationName, name: "Name"))
@@ -932,7 +932,7 @@ module Aws::DevOpsGuru
     Recommendation.add_member(:related_anomalies, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedAnomalies, name: "RelatedAnomalies"))
     Recommendation.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationCategory, name: "Category"))
     Recommendation.type = Types::Recommendation
-    RecommendationRelatedAnomalies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedAnomaly, name: "member")
+    RecommendationRelatedAnomalies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedAnomaly, name: "member"))
     RecommendationRelatedAnomaly.add_member(:resources, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedAnomalyResources, name: "Resources"))
     RecommendationRelatedAnomaly.add_member(:source_details, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedAnomalySourceDetails, name: "SourceDetails"))
     RecommendationRelatedAnomaly.add_member(:anomaly_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyId, name: "AnomalyId"))
@@ -940,23 +940,23 @@ module Aws::DevOpsGuru
     RecommendationRelatedAnomalyResource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedAnomalyResourceName, name: "Name"))
     RecommendationRelatedAnomalyResource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedAnomalyResourceType, name: "Type"))
     RecommendationRelatedAnomalyResource.type = Types::RecommendationRelatedAnomalyResource
-    RecommendationRelatedAnomalyResources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedAnomalyResource, name: "member")
+    RecommendationRelatedAnomalyResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedAnomalyResource, name: "member"))
     RecommendationRelatedAnomalySourceDetail.add_member(:cloud_watch_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedCloudWatchMetricsSourceDetails, name: "CloudWatchMetrics"))
     RecommendationRelatedAnomalySourceDetail.type = Types::RecommendationRelatedAnomalySourceDetail
     RecommendationRelatedCloudWatchMetricsSourceDetail.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedCloudWatchMetricsSourceMetricName, name: "MetricName"))
     RecommendationRelatedCloudWatchMetricsSourceDetail.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedCloudWatchMetricsSourceNamespace, name: "Namespace"))
     RecommendationRelatedCloudWatchMetricsSourceDetail.type = Types::RecommendationRelatedCloudWatchMetricsSourceDetail
-    RecommendationRelatedCloudWatchMetricsSourceDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedCloudWatchMetricsSourceDetail, name: "member")
+    RecommendationRelatedCloudWatchMetricsSourceDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedCloudWatchMetricsSourceDetail, name: "member"))
     RecommendationRelatedEvent.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedEventName, name: "Name"))
     RecommendationRelatedEvent.add_member(:resources, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedEventResources, name: "Resources"))
     RecommendationRelatedEvent.type = Types::RecommendationRelatedEvent
     RecommendationRelatedEventResource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedEventResourceName, name: "Name"))
     RecommendationRelatedEventResource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedEventResourceType, name: "Type"))
     RecommendationRelatedEventResource.type = Types::RecommendationRelatedEventResource
-    RecommendationRelatedEventResources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedEventResource, name: "member")
-    RecommendationRelatedEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedEvent, name: "member")
-    Recommendations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendation, name: "member")
-    RelatedAnomalySourceDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedAnomalySourceDetail, name: "member")
+    RecommendationRelatedEventResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedEventResource, name: "member"))
+    RecommendationRelatedEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedEvent, name: "member"))
+    Recommendations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendation, name: "member"))
+    RelatedAnomalySourceDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationRelatedAnomalySourceDetail, name: "member"))
     RemoveNotificationChannelRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationChannelId, name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RemoveNotificationChannelRequest.type = Types::RemoveNotificationChannelRequest
     RemoveNotificationChannelResponse.type = Types::RemoveNotificationChannelResponse
@@ -1002,8 +1002,8 @@ module Aws::DevOpsGuru
     ResourceTypeFilter.add_member(:sqs_queue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SQS_QUEUE", traits: {"smithy.api#enumValue" => "SQS_QUEUE"}))
     ResourceTypeFilter.add_member(:step_functions_activity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STEP_FUNCTIONS_ACTIVITY", traits: {"smithy.api#enumValue" => "STEP_FUNCTIONS_ACTIVITY"}))
     ResourceTypeFilter.add_member(:step_functions_state_machine, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STEP_FUNCTIONS_STATE_MACHINE", traits: {"smithy.api#enumValue" => "STEP_FUNCTIONS_STATE_MACHINE"}))
-    ResourceTypeFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeFilter, name: "member")
-    SearchInsightsAccountIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "member")
+    ResourceTypeFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeFilter, name: "member"))
+    SearchInsightsAccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "member"))
     SearchInsightsFilters.add_member(:severities, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightSeverities, name: "Severities"))
     SearchInsightsFilters.add_member(:statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightStatuses, name: "Statuses"))
     SearchInsightsFilters.add_member(:resource_collection, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCollection, name: "ResourceCollection"))
@@ -1043,7 +1043,7 @@ module Aws::DevOpsGuru
     ServiceHealth.add_member(:insight, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceInsightHealth, name: "Insight"))
     ServiceHealth.add_member(:analyzed_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzedResourceCount, name: "AnalyzedResourceCount"))
     ServiceHealth.type = Types::ServiceHealth
-    ServiceHealths.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceHealth, name: "member")
+    ServiceHealths.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceHealth, name: "member"))
     ServiceInsightHealth.add_member(:open_proactive_insights, ::Smithy::Schema::Shapes::MemberShape.new(target: NumOpenProactiveInsights, name: "OpenProactiveInsights", traits: {"smithy.api#default" => 0}))
     ServiceInsightHealth.add_member(:open_reactive_insights, ::Smithy::Schema::Shapes::MemberShape.new(target: NumOpenReactiveInsights, name: "OpenReactiveInsights", traits: {"smithy.api#default" => 0}))
     ServiceInsightHealth.type = Types::ServiceInsightHealth
@@ -1076,7 +1076,7 @@ module Aws::DevOpsGuru
     ServiceName.add_member(:sqs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SQS", traits: {"smithy.api#enumValue" => "SQS"}))
     ServiceName.add_member(:step_functions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STEP_FUNCTIONS", traits: {"smithy.api#enumValue" => "STEP_FUNCTIONS"}))
     ServiceName.add_member(:swf, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SWF", traits: {"smithy.api#enumValue" => "SWF"}))
-    ServiceNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, name: "member")
+    ServiceNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessageString, name: "Message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     ServiceResourceCost.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "Type"))
@@ -1085,10 +1085,10 @@ module Aws::DevOpsGuru
     ServiceResourceCost.add_member(:unit_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: Cost, name: "UnitCost", traits: {"smithy.api#default" => 0}))
     ServiceResourceCost.add_member(:cost, ::Smithy::Schema::Shapes::MemberShape.new(target: Cost, name: "Cost", traits: {"smithy.api#default" => 0}))
     ServiceResourceCost.type = Types::ServiceResourceCost
-    ServiceResourceCosts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceResourceCost, name: "member")
+    ServiceResourceCosts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceResourceCost, name: "member"))
     SnsChannelConfig.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicArn, name: "TopicArn"))
     SnsChannelConfig.type = Types::SnsChannelConfig
-    StackNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StackName, name: "member")
+    StackNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StackName, name: "member"))
     StartCostEstimationRequest.add_member(:resource_collection, ::Smithy::Schema::Shapes::MemberShape.new(target: CostEstimationResourceCollectionFilter, name: "ResourceCollection", traits: {"smithy.api#required" => {}}))
     StartCostEstimationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     StartCostEstimationRequest.type = Types::StartCostEstimationRequest
@@ -1102,19 +1102,19 @@ module Aws::DevOpsGuru
     TagCollectionFilter.add_member(:app_boundary_key, ::Smithy::Schema::Shapes::MemberShape.new(target: AppBoundaryKey, name: "AppBoundaryKey", traits: {"smithy.api#required" => {}}))
     TagCollectionFilter.add_member(:tag_values, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValues, name: "TagValues", traits: {"smithy.api#required" => {}}))
     TagCollectionFilter.type = Types::TagCollectionFilter
-    TagCollectionFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagCollectionFilter, name: "member")
-    TagCollections.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagCollection, name: "member")
+    TagCollectionFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagCollectionFilter, name: "member"))
+    TagCollections.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagCollection, name: "member"))
     TagCostEstimationResourceCollectionFilter.add_member(:app_boundary_key, ::Smithy::Schema::Shapes::MemberShape.new(target: AppBoundaryKey, name: "AppBoundaryKey", traits: {"smithy.api#required" => {}}))
     TagCostEstimationResourceCollectionFilter.add_member(:tag_values, ::Smithy::Schema::Shapes::MemberShape.new(target: CostEstimationTagValues, name: "TagValues", traits: {"smithy.api#required" => {}}))
     TagCostEstimationResourceCollectionFilter.type = Types::TagCostEstimationResourceCollectionFilter
-    TagCostEstimationResourceCollectionFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagCostEstimationResourceCollectionFilter, name: "member")
+    TagCostEstimationResourceCollectionFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagCostEstimationResourceCollectionFilter, name: "member"))
     TagHealth.add_member(:app_boundary_key, ::Smithy::Schema::Shapes::MemberShape.new(target: AppBoundaryKey, name: "AppBoundaryKey"))
     TagHealth.add_member(:tag_value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "TagValue"))
     TagHealth.add_member(:insight, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightHealth, name: "Insight"))
     TagHealth.add_member(:analyzed_resource_count, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzedResourceCount, name: "AnalyzedResourceCount"))
     TagHealth.type = Types::TagHealth
-    TagHealths.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagHealth, name: "member")
-    TagValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "member")
+    TagHealths.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagHealth, name: "member"))
+    TagValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessageString, name: "Message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorQuotaCodeString, name: "QuotaCode"))
     ThrottlingException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorServiceCodeString, name: "ServiceCode"))
@@ -1123,7 +1123,7 @@ module Aws::DevOpsGuru
     TimestampMetricValuePair.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp"))
     TimestampMetricValuePair.add_member(:metric_value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricValue, name: "MetricValue"))
     TimestampMetricValuePair.type = Types::TimestampMetricValuePair
-    TimestampMetricValuePairList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampMetricValuePair, name: "member")
+    TimestampMetricValuePairList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampMetricValuePair, name: "member"))
     UpdateCloudFormationCollectionFilter.add_member(:stack_names, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateStackNames, name: "StackNames"))
     UpdateCloudFormationCollectionFilter.type = Types::UpdateCloudFormationCollectionFilter
     UpdateEventSourcesConfigRequest.add_member(:event_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSourcesConfig, name: "EventSources"))
@@ -1145,12 +1145,12 @@ module Aws::DevOpsGuru
     UpdateServiceIntegrationRequest.add_member(:service_integration, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateServiceIntegrationConfig, name: "ServiceIntegration", traits: {"smithy.api#required" => {}}))
     UpdateServiceIntegrationRequest.type = Types::UpdateServiceIntegrationRequest
     UpdateServiceIntegrationResponse.type = Types::UpdateServiceIntegrationResponse
-    UpdateStackNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StackName, name: "member")
+    UpdateStackNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StackName, name: "member"))
     UpdateTagCollectionFilter.add_member(:app_boundary_key, ::Smithy::Schema::Shapes::MemberShape.new(target: AppBoundaryKey, name: "AppBoundaryKey", traits: {"smithy.api#required" => {}}))
     UpdateTagCollectionFilter.add_member(:tag_values, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTagValues, name: "TagValues", traits: {"smithy.api#required" => {}}))
     UpdateTagCollectionFilter.type = Types::UpdateTagCollectionFilter
-    UpdateTagCollectionFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTagCollectionFilter, name: "member")
-    UpdateTagValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "member")
+    UpdateTagCollectionFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTagCollectionFilter, name: "member"))
+    UpdateTagValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessageString, name: "Message", traits: {"smithy.api#required" => {}}))
     ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, name: "Reason"))
     ValidationException.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFields, name: "Fields"))
@@ -1158,7 +1158,7 @@ module Aws::DevOpsGuru
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorNameString, name: "Name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessageString, name: "Message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "UNKNOWN_OPERATION"}))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "CANNOT_PARSE"}))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "FIELD_VALIDATION_FAILED"}))

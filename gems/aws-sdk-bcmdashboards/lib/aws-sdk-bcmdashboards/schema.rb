@@ -108,7 +108,7 @@ module Aws::BCMDashboards
     DashboardReference.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericTimeStamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
     DashboardReference.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericTimeStamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
     DashboardReference.type = Types::DashboardReference
-    DashboardReferenceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardReference, name: "member")
+    DashboardReferenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardReference, name: "member"))
     DashboardType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
     DateTimeRange.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeValue, name: "startTime", traits: {"smithy.api#required" => {}}))
     DateTimeRange.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeValue, name: "endTime", traits: {"smithy.api#required" => {}}))
@@ -163,7 +163,7 @@ module Aws::BCMDashboards
     Expression.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValues, name: "tags"))
     Expression.add_member(:cost_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryValues, name: "costCategories"))
     Expression.type = Types::Expression
-    Expressions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "member")
+    Expressions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "member"))
     GetDashboardRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "arn", traits: {"smithy.api#required" => {}}))
     GetDashboardRequest.type = Types::GetDashboardRequest
     GetDashboardResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -184,15 +184,15 @@ module Aws::BCMDashboards
     Granularity.add_member(:monthly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MONTHLY", traits: {"smithy.api#enumValue" => "MONTHLY"}))
     GraphDisplayConfig.add_member(:visual_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualType, name: "visualType", traits: {"smithy.api#required" => {}}))
     GraphDisplayConfig.type = Types::GraphDisplayConfig
-    GraphDisplayConfigMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "key")
-    GraphDisplayConfigMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: GraphDisplayConfig, name: "value")
+    GraphDisplayConfigMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "key"))
+    GraphDisplayConfigMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: GraphDisplayConfig, name: "value"))
     GroupDefinition.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[\\S\\s]*$", "smithy.api#required" => {}}))
     GroupDefinition.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupDefinitionType, name: "type", traits: {"smithy.api#default" => "DIMENSION"}))
     GroupDefinition.type = Types::GroupDefinition
     GroupDefinitionType.add_member(:dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIMENSION", traits: {"smithy.api#enumValue" => "DIMENSION"}))
     GroupDefinitionType.add_member(:tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAG", traits: {"smithy.api#enumValue" => "TAG"}))
     GroupDefinitionType.add_member(:cost_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COST_CATEGORY", traits: {"smithy.api#enumValue" => "COST_CATEGORY"}))
-    GroupDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupDefinition, name: "member")
+    GroupDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupDefinition, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
     ListDashboardsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#default" => 20}))
@@ -213,7 +213,7 @@ module Aws::BCMDashboards
     MatchOption.add_member(:greater_than_or_equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GREATER_THAN_OR_EQUAL", traits: {"smithy.api#enumValue" => "GREATER_THAN_OR_EQUAL"}))
     MatchOption.add_member(:case_sensitive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CASE_SENSITIVE", traits: {"smithy.api#enumValue" => "CASE_SENSITIVE"}))
     MatchOption.add_member(:case_insensitive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CASE_INSENSITIVE", traits: {"smithy.api#enumValue" => "CASE_INSENSITIVE"}))
-    MatchOptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOption, name: "member")
+    MatchOptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOption, name: "member"))
     MetricName.add_member(:amortized_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AmortizedCost", traits: {"smithy.api#enumValue" => "AmortizedCost"}))
     MetricName.add_member(:blended_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BlendedCost", traits: {"smithy.api#enumValue" => "BlendedCost"}))
     MetricName.add_member(:net_amortized_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NetAmortizedCost", traits: {"smithy.api#enumValue" => "NetAmortizedCost"}))
@@ -225,7 +225,7 @@ module Aws::BCMDashboards
     MetricName.add_member(:hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Hour", traits: {"smithy.api#enumValue" => "Hour"}))
     MetricName.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Unit", traits: {"smithy.api#enumValue" => "Unit"}))
     MetricName.add_member(:cost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Cost", traits: {"smithy.api#enumValue" => "Cost"}))
-    MetricNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "member")
+    MetricNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "member"))
     QueryParameters.add_member(:cost_and_usage, Types::QueryParameters::CostAndUsage, ::Smithy::Schema::Shapes::MemberShape.new(target: CostAndUsageQuery, name: "costAndUsage"))
     QueryParameters.add_member(:savings_plans_coverage, Types::QueryParameters::SavingsPlansCoverage, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansCoverageQuery, name: "savingsPlansCoverage"))
     QueryParameters.add_member(:savings_plans_utilization, Types::QueryParameters::SavingsPlansUtilization, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansUtilizationQuery, name: "savingsPlansUtilization"))
@@ -249,8 +249,8 @@ module Aws::BCMDashboards
     ResourceTag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "key", traits: {"smithy.api#required" => {}}))
     ResourceTag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagValue, name: "value", traits: {"smithy.api#required" => {}}))
     ResourceTag.type = Types::ResourceTag
-    ResourceTagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "member")
-    ResourceTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member")
+    ResourceTagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "member"))
+    ResourceTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member"))
     SavingsPlansCoverageQuery.add_member(:time_range, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeRange, name: "timeRange", traits: {"smithy.api#required" => {}}))
     SavingsPlansCoverageQuery.add_member(:metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricNames, name: "metrics"))
     SavingsPlansCoverageQuery.add_member(:granularity, ::Smithy::Schema::Shapes::MemberShape.new(target: Granularity, name: "granularity"))
@@ -263,7 +263,7 @@ module Aws::BCMDashboards
     SavingsPlansUtilizationQuery.type = Types::SavingsPlansUtilizationQuery
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     TableDisplayConfigStruct.type = Types::TableDisplayConfigStruct
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagList, name: "resourceTags", traits: {"smithy.api#required" => {}}))
@@ -301,8 +301,8 @@ module Aws::BCMDashboards
     WidgetConfig.add_member(:query_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryParameters, name: "queryParameters", traits: {"smithy.api#required" => {}}))
     WidgetConfig.add_member(:display_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayConfig, name: "displayConfig", traits: {"smithy.api#required" => {}}))
     WidgetConfig.type = Types::WidgetConfig
-    WidgetConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WidgetConfig, name: "member")
-    WidgetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Widget, name: "member")
+    WidgetConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WidgetConfig, name: "member"))
+    WidgetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Widget, name: "member"))
 
     AWSBCMDashboardsService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.bcmdashboards#AWSBCMDashboardsService"

@@ -143,7 +143,7 @@ module Aws::Signer
     CancelSigningProfileRequest.add_member(:profile_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileName, name: "profileName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelSigningProfileRequest.type = Types::CancelSigningProfileRequest
     Category.add_member(:aws_io_t, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWSIoT", traits: {"smithy.api#enumValue" => "AWSIoT"}))
-    CertificateHashes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    CertificateHashes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ConflictException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "code"))
     ConflictException.type = Types::ConflictException
@@ -176,7 +176,7 @@ module Aws::Signer
     EncryptionAlgorithmOptions.add_member(:allowed_values, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionAlgorithms, name: "allowedValues", traits: {"smithy.api#required" => {}}))
     EncryptionAlgorithmOptions.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionAlgorithm, name: "defaultValue", traits: {"smithy.api#required" => {}}))
     EncryptionAlgorithmOptions.type = Types::EncryptionAlgorithmOptions
-    EncryptionAlgorithms.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionAlgorithm, name: "member")
+    EncryptionAlgorithms.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionAlgorithm, name: "member"))
     GetRevocationStatusRequest.add_member(:signature_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "signatureTimestamp", traits: {"smithy.api#httpQuery" => "signatureTimestamp", "smithy.api#required" => {}}))
     GetRevocationStatusRequest.add_member(:platform_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformId, name: "platformId", traits: {"smithy.api#httpQuery" => "platformId", "smithy.api#required" => {}}))
     GetRevocationStatusRequest.add_member(:profile_version_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "profileVersionArn", traits: {"smithy.api#httpQuery" => "profileVersionArn", "smithy.api#required" => {}}))
@@ -220,11 +220,11 @@ module Aws::Signer
     HashAlgorithmOptions.add_member(:allowed_values, ::Smithy::Schema::Shapes::MemberShape.new(target: HashAlgorithms, name: "allowedValues", traits: {"smithy.api#required" => {}}))
     HashAlgorithmOptions.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: HashAlgorithm, name: "defaultValue", traits: {"smithy.api#required" => {}}))
     HashAlgorithmOptions.type = Types::HashAlgorithmOptions
-    HashAlgorithms.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HashAlgorithm, name: "member")
+    HashAlgorithms.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HashAlgorithm, name: "member"))
     ImageFormat.add_member(:json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON", traits: {"smithy.api#enumValue" => "JSON"}))
     ImageFormat.add_member(:json_embedded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSONEmbedded", traits: {"smithy.api#enumValue" => "JSONEmbedded"}))
     ImageFormat.add_member(:json_detached, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSONDetached", traits: {"smithy.api#enumValue" => "JSONDetached"}))
-    ImageFormats.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageFormat, name: "member")
+    ImageFormats.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageFormat, name: "member"))
     InternalServiceErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InternalServiceErrorException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "code"))
     InternalServiceErrorException.type = Types::InternalServiceErrorException
@@ -271,8 +271,8 @@ module Aws::Signer
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    Metadata.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    Metadata.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    Metadata.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    Metadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     NotFoundException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "code"))
     NotFoundException.type = Types::NotFoundException
@@ -281,7 +281,7 @@ module Aws::Signer
     Permission.add_member(:statement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "statementId"))
     Permission.add_member(:profile_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileVersion, name: "profileVersion"))
     Permission.type = Types::Permission
-    Permissions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Permission, name: "member")
+    Permissions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Permission, name: "member"))
     PutSigningProfileRequest.add_member(:profile_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileName, name: "profileName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutSigningProfileRequest.add_member(:signing_material, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningMaterial, name: "signingMaterial"))
     PutSigningProfileRequest.add_member(:signature_validity_period, ::Smithy::Schema::Shapes::MemberShape.new(target: SignatureValidityPeriod, name: "signatureValidityPeriod"))
@@ -312,7 +312,7 @@ module Aws::Signer
     RevokeSigningProfileRequest.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: RevocationReasonString, name: "reason", traits: {"smithy.api#required" => {}}))
     RevokeSigningProfileRequest.add_member(:effective_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "effectiveTime", traits: {"smithy.api#required" => {}}))
     RevokeSigningProfileRequest.type = Types::RevokeSigningProfileRequest
-    RevokedEntities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    RevokedEntities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     S3Destination.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "bucketName"))
     S3Destination.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: Prefix, name: "prefix"))
     S3Destination.type = Types::S3Destination
@@ -369,11 +369,11 @@ module Aws::Signer
     SigningJobRevocationRecord.add_member(:revoked_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "revokedAt"))
     SigningJobRevocationRecord.add_member(:revoked_by, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "revokedBy"))
     SigningJobRevocationRecord.type = Types::SigningJobRevocationRecord
-    SigningJobs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SigningJob, name: "member")
+    SigningJobs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningJob, name: "member"))
     SigningMaterial.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateArn, name: "certificateArn", traits: {"smithy.api#required" => {}}))
     SigningMaterial.type = Types::SigningMaterial
-    SigningParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: SigningParameterKey, name: "key")
-    SigningParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SigningParameterValue, name: "value")
+    SigningParameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningParameterKey, name: "key"))
+    SigningParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningParameterValue, name: "value"))
     SigningPlatform.add_member(:platform_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "platformId"))
     SigningPlatform.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "displayName"))
     SigningPlatform.add_member(:partner, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "partner"))
@@ -387,7 +387,7 @@ module Aws::Signer
     SigningPlatformOverrides.add_member(:signing_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningConfigurationOverrides, name: "signingConfiguration"))
     SigningPlatformOverrides.add_member(:signing_image_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageFormat, name: "signingImageFormat"))
     SigningPlatformOverrides.type = Types::SigningPlatformOverrides
-    SigningPlatforms.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SigningPlatform, name: "member")
+    SigningPlatforms.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningPlatform, name: "member"))
     SigningProfile.add_member(:profile_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileName, name: "profileName"))
     SigningProfile.add_member(:profile_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileVersion, name: "profileVersion"))
     SigningProfile.add_member(:profile_version_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "profileVersionArn"))
@@ -407,7 +407,7 @@ module Aws::Signer
     SigningProfileStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Active", traits: {"smithy.api#enumValue" => "Active"}))
     SigningProfileStatus.add_member(:canceled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Canceled", traits: {"smithy.api#enumValue" => "Canceled"}))
     SigningProfileStatus.add_member(:revoked, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Revoked", traits: {"smithy.api#enumValue" => "Revoked"}))
-    SigningProfiles.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SigningProfile, name: "member")
+    SigningProfiles.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningProfile, name: "member"))
     SigningStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InProgress", traits: {"smithy.api#enumValue" => "InProgress"}))
     SigningStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
     SigningStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Succeeded", traits: {"smithy.api#enumValue" => "Succeeded"}))
@@ -422,10 +422,10 @@ module Aws::Signer
     StartSigningJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "jobId"))
     StartSigningJobResponse.add_member(:job_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "jobOwner"))
     StartSigningJobResponse.type = Types::StartSigningJobResponse
-    Statuses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SigningProfileStatus, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    Statuses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningProfileStatus, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest

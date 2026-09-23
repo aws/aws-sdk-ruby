@@ -243,14 +243,14 @@ module Aws::GlobalAccelerator
     AcceleratorEvent.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Message"))
     AcceleratorEvent.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp"))
     AcceleratorEvent.type = Types::AcceleratorEvent
-    AcceleratorEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AcceleratorEvent, name: "member")
+    AcceleratorEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceleratorEvent, name: "member"))
     AcceleratorNotDisabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     AcceleratorNotDisabledException.type = Types::AcceleratorNotDisabledException
     AcceleratorNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     AcceleratorNotFoundException.type = Types::AcceleratorNotFoundException
     AcceleratorStatus.add_member(:deployed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPLOYED", traits: {"smithy.api#enumValue" => "DEPLOYED"}))
     AcceleratorStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    Accelerators.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Accelerator, name: "member")
+    Accelerators.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Accelerator, name: "member"))
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
     AddCustomRoutingEndpointsRequest.add_member(:endpoint_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingEndpointConfigurations, name: "EndpointConfigurations", traits: {"smithy.api#required" => {}}))
@@ -288,8 +288,8 @@ module Aws::GlobalAccelerator
     Attachment.type = Types::Attachment
     AttachmentNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     AttachmentNotFoundException.type = Types::AttachmentNotFoundException
-    Attachments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Attachment, name: "member")
-    AwsAccountIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "member")
+    Attachments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Attachment, name: "member"))
+    AwsAccountIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "member"))
     ByoipCidr.add_member(:cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Cidr"))
     ByoipCidr.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ByoipCidrState, name: "State"))
     ByoipCidr.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: ByoipCidrEvents, name: "Events"))
@@ -297,7 +297,7 @@ module Aws::GlobalAccelerator
     ByoipCidrEvent.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Message"))
     ByoipCidrEvent.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp"))
     ByoipCidrEvent.type = Types::ByoipCidrEvent
-    ByoipCidrEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ByoipCidrEvent, name: "member")
+    ByoipCidrEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ByoipCidrEvent, name: "member"))
     ByoipCidrNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ByoipCidrNotFoundException.type = Types::ByoipCidrNotFoundException
     ByoipCidrState.add_member(:pending_provisioning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_PROVISIONING", traits: {"smithy.api#enumValue" => "PENDING_PROVISIONING"}))
@@ -311,7 +311,7 @@ module Aws::GlobalAccelerator
     ByoipCidrState.add_member(:failed_advertising, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED_ADVERTISING", traits: {"smithy.api#enumValue" => "FAILED_ADVERTISING"}))
     ByoipCidrState.add_member(:failed_withdraw, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED_WITHDRAW", traits: {"smithy.api#enumValue" => "FAILED_WITHDRAW"}))
     ByoipCidrState.add_member(:failed_deprovision, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED_DEPROVISION", traits: {"smithy.api#enumValue" => "FAILED_DEPROVISION"}))
-    ByoipCidrs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ByoipCidr, name: "member")
+    ByoipCidrs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ByoipCidr, name: "member"))
     CidrAuthorizationContext.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Message", traits: {"smithy.api#required" => {}}))
     CidrAuthorizationContext.add_member(:signature, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Signature", traits: {"smithy.api#required" => {}}))
     CidrAuthorizationContext.type = Types::CidrAuthorizationContext
@@ -384,7 +384,7 @@ module Aws::GlobalAccelerator
     CrossAccountResource.add_member(:cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Cidr"))
     CrossAccountResource.add_member(:attachment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "AttachmentArn"))
     CrossAccountResource.type = Types::CrossAccountResource
-    CrossAccountResources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CrossAccountResource, name: "member")
+    CrossAccountResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossAccountResource, name: "member"))
     CustomRoutingAccelerator.add_member(:accelerator_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "AcceleratorArn"))
     CustomRoutingAccelerator.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Name"))
     CustomRoutingAccelerator.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddressType, name: "IpAddressType"))
@@ -401,39 +401,39 @@ module Aws::GlobalAccelerator
     CustomRoutingAcceleratorAttributes.type = Types::CustomRoutingAcceleratorAttributes
     CustomRoutingAcceleratorStatus.add_member(:deployed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPLOYED", traits: {"smithy.api#enumValue" => "DEPLOYED"}))
     CustomRoutingAcceleratorStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    CustomRoutingAccelerators.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingAccelerator, name: "member")
+    CustomRoutingAccelerators.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingAccelerator, name: "member"))
     CustomRoutingDestinationConfiguration.add_member(:from_port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "FromPort", traits: {"smithy.api#required" => {}}))
     CustomRoutingDestinationConfiguration.add_member(:to_port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "ToPort", traits: {"smithy.api#required" => {}}))
     CustomRoutingDestinationConfiguration.add_member(:protocols, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingProtocols, name: "Protocols", traits: {"smithy.api#required" => {}}))
     CustomRoutingDestinationConfiguration.type = Types::CustomRoutingDestinationConfiguration
-    CustomRoutingDestinationConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingDestinationConfiguration, name: "member")
+    CustomRoutingDestinationConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingDestinationConfiguration, name: "member"))
     CustomRoutingDestinationDescription.add_member(:from_port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "FromPort"))
     CustomRoutingDestinationDescription.add_member(:to_port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "ToPort"))
     CustomRoutingDestinationDescription.add_member(:protocols, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocols, name: "Protocols"))
     CustomRoutingDestinationDescription.type = Types::CustomRoutingDestinationDescription
-    CustomRoutingDestinationDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingDestinationDescription, name: "member")
+    CustomRoutingDestinationDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingDestinationDescription, name: "member"))
     CustomRoutingDestinationTrafficState.add_member(:allow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOW", traits: {"smithy.api#enumValue" => "ALLOW"}))
     CustomRoutingDestinationTrafficState.add_member(:deny, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DENY", traits: {"smithy.api#enumValue" => "DENY"}))
     CustomRoutingEndpointConfiguration.add_member(:endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "EndpointId"))
     CustomRoutingEndpointConfiguration.add_member(:attachment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "AttachmentArn"))
     CustomRoutingEndpointConfiguration.type = Types::CustomRoutingEndpointConfiguration
-    CustomRoutingEndpointConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingEndpointConfiguration, name: "member")
+    CustomRoutingEndpointConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingEndpointConfiguration, name: "member"))
     CustomRoutingEndpointDescription.add_member(:endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "EndpointId"))
     CustomRoutingEndpointDescription.type = Types::CustomRoutingEndpointDescription
-    CustomRoutingEndpointDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingEndpointDescription, name: "member")
+    CustomRoutingEndpointDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingEndpointDescription, name: "member"))
     CustomRoutingEndpointGroup.add_member(:endpoint_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "EndpointGroupArn"))
     CustomRoutingEndpointGroup.add_member(:endpoint_group_region, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "EndpointGroupRegion"))
     CustomRoutingEndpointGroup.add_member(:destination_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingDestinationDescriptions, name: "DestinationDescriptions"))
     CustomRoutingEndpointGroup.add_member(:endpoint_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingEndpointDescriptions, name: "EndpointDescriptions"))
     CustomRoutingEndpointGroup.type = Types::CustomRoutingEndpointGroup
-    CustomRoutingEndpointGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingEndpointGroup, name: "member")
+    CustomRoutingEndpointGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingEndpointGroup, name: "member"))
     CustomRoutingListener.add_member(:listener_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "ListenerArn"))
     CustomRoutingListener.add_member(:port_ranges, ::Smithy::Schema::Shapes::MemberShape.new(target: PortRanges, name: "PortRanges"))
     CustomRoutingListener.type = Types::CustomRoutingListener
-    CustomRoutingListeners.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingListener, name: "member")
+    CustomRoutingListeners.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingListener, name: "member"))
     CustomRoutingProtocol.add_member(:tcp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TCP", traits: {"smithy.api#enumValue" => "TCP"}))
     CustomRoutingProtocol.add_member(:udp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UDP", traits: {"smithy.api#enumValue" => "UDP"}))
-    CustomRoutingProtocols.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingProtocol, name: "member")
+    CustomRoutingProtocols.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingProtocol, name: "member"))
     DeleteAcceleratorRequest.add_member(:accelerator_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "AcceleratorArn", traits: {"smithy.api#required" => {}}))
     DeleteAcceleratorRequest.type = Types::DeleteAcceleratorRequest
     DeleteCrossAccountAttachmentRequest.add_member(:attachment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "AttachmentArn", traits: {"smithy.api#required" => {}}))
@@ -494,7 +494,7 @@ module Aws::GlobalAccelerator
     DescribeListenerRequest.type = Types::DescribeListenerRequest
     DescribeListenerResponse.add_member(:listener, ::Smithy::Schema::Shapes::MemberShape.new(target: Listener, name: "Listener"))
     DescribeListenerResponse.type = Types::DescribeListenerResponse
-    DestinationAddresses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, name: "member")
+    DestinationAddresses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, name: "member"))
     DestinationPortMapping.add_member(:accelerator_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "AcceleratorArn"))
     DestinationPortMapping.add_member(:accelerator_socket_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: SocketAddresses, name: "AcceleratorSocketAddresses"))
     DestinationPortMapping.add_member(:endpoint_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "EndpointGroupArn"))
@@ -504,8 +504,8 @@ module Aws::GlobalAccelerator
     DestinationPortMapping.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddressType, name: "IpAddressType"))
     DestinationPortMapping.add_member(:destination_traffic_state, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingDestinationTrafficState, name: "DestinationTrafficState"))
     DestinationPortMapping.type = Types::DestinationPortMapping
-    DestinationPortMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationPortMapping, name: "member")
-    DestinationPorts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "member")
+    DestinationPortMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationPortMapping, name: "member"))
+    DestinationPorts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "member"))
     EndpointAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     EndpointAlreadyExistsException.type = Types::EndpointAlreadyExistsException
     EndpointConfiguration.add_member(:endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "EndpointId"))
@@ -513,14 +513,14 @@ module Aws::GlobalAccelerator
     EndpointConfiguration.add_member(:client_ip_preservation_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericBoolean, name: "ClientIPPreservationEnabled"))
     EndpointConfiguration.add_member(:attachment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "AttachmentArn"))
     EndpointConfiguration.type = Types::EndpointConfiguration
-    EndpointConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointConfiguration, name: "member")
+    EndpointConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointConfiguration, name: "member"))
     EndpointDescription.add_member(:endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "EndpointId"))
     EndpointDescription.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointWeight, name: "Weight"))
     EndpointDescription.add_member(:health_state, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthState, name: "HealthState"))
     EndpointDescription.add_member(:health_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "HealthReason"))
     EndpointDescription.add_member(:client_ip_preservation_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericBoolean, name: "ClientIPPreservationEnabled"))
     EndpointDescription.type = Types::EndpointDescription
-    EndpointDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointDescription, name: "member")
+    EndpointDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointDescription, name: "member"))
     EndpointGroup.add_member(:endpoint_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "EndpointGroupArn"))
     EndpointGroup.add_member(:endpoint_group_region, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "EndpointGroupRegion"))
     EndpointGroup.add_member(:endpoint_descriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointDescriptions, name: "EndpointDescriptions"))
@@ -536,12 +536,12 @@ module Aws::GlobalAccelerator
     EndpointGroupAlreadyExistsException.type = Types::EndpointGroupAlreadyExistsException
     EndpointGroupNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     EndpointGroupNotFoundException.type = Types::EndpointGroupNotFoundException
-    EndpointGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointGroup, name: "member")
+    EndpointGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointGroup, name: "member"))
     EndpointIdentifier.add_member(:endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "EndpointId", traits: {"smithy.api#required" => {}}))
     EndpointIdentifier.add_member(:client_ip_preservation_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericBoolean, name: "ClientIPPreservationEnabled"))
     EndpointIdentifier.type = Types::EndpointIdentifier
-    EndpointIdentifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointIdentifier, name: "member")
-    EndpointIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "member")
+    EndpointIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointIdentifier, name: "member"))
+    EndpointIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "member"))
     EndpointNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     EndpointNotFoundException.type = Types::EndpointNotFoundException
     HealthCheckProtocol.add_member(:tcp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TCP", traits: {"smithy.api#enumValue" => "TCP"}))
@@ -564,12 +564,12 @@ module Aws::GlobalAccelerator
     IpAddressFamily.add_member(:i_pv6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPv6", traits: {"smithy.api#enumValue" => "IPv6"}))
     IpAddressType.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4", traits: {"smithy.api#enumValue" => "IPV4"}))
     IpAddressType.add_member(:dual_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUAL_STACK", traits: {"smithy.api#enumValue" => "DUAL_STACK"}))
-    IpAddresses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, name: "member")
+    IpAddresses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, name: "member"))
     IpSet.add_member(:ip_family, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "IpFamily", traits: {"smithy.api#deprecated" => {"message" => "IpFamily has been replaced by IpAddressFamily"}}))
     IpSet.add_member(:ip_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddresses, name: "IpAddresses"))
     IpSet.add_member(:ip_address_family, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddressFamily, name: "IpAddressFamily"))
     IpSet.type = Types::IpSet
-    IpSets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpSet, name: "member")
+    IpSets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpSet, name: "member"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
     ListAcceleratorsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
@@ -662,7 +662,7 @@ module Aws::GlobalAccelerator
     Listener.type = Types::Listener
     ListenerNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ListenerNotFoundException.type = Types::ListenerNotFoundException
-    Listeners.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Listener, name: "member")
+    Listeners.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Listener, name: "member"))
     PortMapping.add_member(:accelerator_port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "AcceleratorPort"))
     PortMapping.add_member(:endpoint_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "EndpointGroupArn"))
     PortMapping.add_member(:endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "EndpointId"))
@@ -670,19 +670,19 @@ module Aws::GlobalAccelerator
     PortMapping.add_member(:protocols, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingProtocols, name: "Protocols"))
     PortMapping.add_member(:destination_traffic_state, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRoutingDestinationTrafficState, name: "DestinationTrafficState"))
     PortMapping.type = Types::PortMapping
-    PortMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PortMapping, name: "member")
+    PortMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortMapping, name: "member"))
     PortOverride.add_member(:listener_port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "ListenerPort"))
     PortOverride.add_member(:endpoint_port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "EndpointPort"))
     PortOverride.type = Types::PortOverride
-    PortOverrides.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PortOverride, name: "member")
+    PortOverrides.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortOverride, name: "member"))
     PortRange.add_member(:from_port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "FromPort"))
     PortRange.add_member(:to_port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "ToPort"))
     PortRange.type = Types::PortRange
-    PortRanges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PortRange, name: "member")
-    Principals.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Principal, name: "member")
+    PortRanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortRange, name: "member"))
+    Principals.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Principal, name: "member"))
     Protocol.add_member(:tcp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TCP", traits: {"smithy.api#enumValue" => "TCP"}))
     Protocol.add_member(:udp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UDP", traits: {"smithy.api#enumValue" => "UDP"}))
-    Protocols.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, name: "member")
+    Protocols.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, name: "member"))
     ProvisionByoipCidrRequest.add_member(:cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Cidr", traits: {"smithy.api#required" => {}}))
     ProvisionByoipCidrRequest.add_member(:cidr_authorization_context, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrAuthorizationContext, name: "CidrAuthorizationContext", traits: {"smithy.api#required" => {}}))
     ProvisionByoipCidrRequest.type = Types::ProvisionByoipCidrRequest
@@ -698,20 +698,20 @@ module Aws::GlobalAccelerator
     Resource.add_member(:cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Cidr"))
     Resource.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Region"))
     Resource.type = Types::Resource
-    Resources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member")
+    Resources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
     SocketAddress.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "IpAddress"))
     SocketAddress.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "Port"))
     SocketAddress.type = Types::SocketAddress
-    SocketAddresses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SocketAddress, name: "member")
+    SocketAddresses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SocketAddress, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TransactionInProgressException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     TransactionInProgressException.type = Types::TransactionInProgressException
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))

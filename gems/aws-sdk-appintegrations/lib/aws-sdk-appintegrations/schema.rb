@@ -136,12 +136,12 @@ module Aws::AppIntegrations
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    ApplicationApprovedOrigins.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationTrustedSource, name: "member")
+    ApplicationApprovedOrigins.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationTrustedSource, name: "member"))
     ApplicationAssociationSummary.add_member(:application_association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ApplicationAssociationArn"))
     ApplicationAssociationSummary.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ApplicationArn"))
     ApplicationAssociationSummary.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientId, name: "ClientId"))
     ApplicationAssociationSummary.type = Types::ApplicationAssociationSummary
-    ApplicationAssociationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationAssociationSummary, name: "member")
+    ApplicationAssociationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationAssociationSummary, name: "member"))
     ApplicationConfig.add_member(:contact_handling, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactHandling, name: "ContactHandling"))
     ApplicationConfig.type = Types::ApplicationConfig
     ApplicationSourceConfig.add_member(:external_url_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalUrlConfig, name: "ExternalUrlConfig"))
@@ -154,9 +154,9 @@ module Aws::AppIntegrations
     ApplicationSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     ApplicationSummary.add_member(:is_service, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsService", traits: {"smithy.api#default" => false}))
     ApplicationSummary.type = Types::ApplicationSummary
-    ApplicationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary, name: "member")
-    ClientAssociationMetadata.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "key")
-    ClientAssociationMetadata.value = ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "value")
+    ApplicationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary, name: "member"))
+    ClientAssociationMetadata.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "key"))
+    ClientAssociationMetadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "value"))
     ContactHandling.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactHandlingScope, name: "Scope"))
     ContactHandling.type = Types::ContactHandling
     ContactHandlingScope.add_member(:cross_contacts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CROSS_CONTACTS", traits: {"smithy.api#enumValue" => "CROSS_CONTACTS"}))
@@ -227,12 +227,12 @@ module Aws::AppIntegrations
     DataIntegrationAssociationSummary.add_member(:last_execution_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LastExecutionStatus, name: "LastExecutionStatus"))
     DataIntegrationAssociationSummary.add_member(:execution_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionConfiguration, name: "ExecutionConfiguration"))
     DataIntegrationAssociationSummary.type = Types::DataIntegrationAssociationSummary
-    DataIntegrationAssociationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationAssociationSummary, name: "member")
+    DataIntegrationAssociationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationAssociationSummary, name: "member"))
     DataIntegrationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     DataIntegrationSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
     DataIntegrationSummary.add_member(:source_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceURI, name: "SourceURI"))
     DataIntegrationSummary.type = Types::DataIntegrationSummary
-    DataIntegrationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationSummary, name: "member")
+    DataIntegrationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationSummary, name: "member"))
     DeleteApplicationRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnOrUUID, name: "Arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteApplicationRequest.type = Types::DeleteApplicationRequest
     DeleteApplicationResponse.type = Types::DeleteApplicationResponse
@@ -260,8 +260,8 @@ module Aws::AppIntegrations
     EventIntegrationAssociation.add_member(:event_bridge_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventBridgeRuleName, name: "EventBridgeRuleName"))
     EventIntegrationAssociation.add_member(:client_association_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientAssociationMetadata, name: "ClientAssociationMetadata"))
     EventIntegrationAssociation.type = Types::EventIntegrationAssociation
-    EventIntegrationAssociationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventIntegrationAssociation, name: "member")
-    EventIntegrationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventIntegration, name: "member")
+    EventIntegrationAssociationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventIntegrationAssociation, name: "member"))
+    EventIntegrationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventIntegration, name: "member"))
     ExecutionConfiguration.add_member(:execution_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionMode, name: "ExecutionMode", traits: {"smithy.api#required" => {}}))
     ExecutionConfiguration.add_member(:on_demand_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OnDemandConfiguration, name: "OnDemandConfiguration"))
     ExecutionConfiguration.add_member(:schedule_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleConfiguration, name: "ScheduleConfiguration"))
@@ -274,13 +274,13 @@ module Aws::AppIntegrations
     ExternalUrlConfig.add_member(:access_url, ::Smithy::Schema::Shapes::MemberShape.new(target: URL, name: "AccessUrl", traits: {"smithy.api#required" => {}}))
     ExternalUrlConfig.add_member(:approved_origins, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationApprovedOrigins, name: "ApprovedOrigins"))
     ExternalUrlConfig.type = Types::ExternalUrlConfig
-    FieldsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Fields, name: "member")
-    FieldsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "key")
-    FieldsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldsList, name: "value")
+    FieldsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Fields, name: "member"))
+    FieldsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "key"))
+    FieldsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldsList, name: "value"))
     FileConfiguration.add_member(:folders, ::Smithy::Schema::Shapes::MemberShape.new(target: FolderList, name: "Folders", traits: {"smithy.api#required" => {}}))
     FileConfiguration.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldsMap, name: "Filters"))
     FileConfiguration.type = Types::FileConfiguration
-    FolderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankLongString, name: "member")
+    FolderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankLongString, name: "member"))
     GetApplicationRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnOrUUID, name: "Arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetApplicationRequest.type = Types::GetApplicationRequest
     GetApplicationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
@@ -325,7 +325,7 @@ module Aws::AppIntegrations
     IframeConfig.add_member(:allow, ::Smithy::Schema::Shapes::MemberShape.new(target: IframePermissionList, name: "Allow"))
     IframeConfig.add_member(:sandbox, ::Smithy::Schema::Shapes::MemberShape.new(target: IframePermissionList, name: "Sandbox"))
     IframeConfig.type = Types::IframeConfig
-    IframePermissionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IframePermission, name: "member")
+    IframePermissionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IframePermission, name: "member"))
     InternalServiceError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     InternalServiceError.type = Types::InternalServiceError
     InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
@@ -376,17 +376,17 @@ module Aws::AppIntegrations
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    ObjectConfiguration.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "key")
-    ObjectConfiguration.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldsMap, name: "value")
+    ObjectConfiguration.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "key"))
+    ObjectConfiguration.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldsMap, name: "value"))
     OnDemandConfiguration.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "StartTime", traits: {"smithy.api#required" => {}}))
     OnDemandConfiguration.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "EndTime"))
     OnDemandConfiguration.type = Types::OnDemandConfiguration
-    PermissionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Permission, name: "member")
+    PermissionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Permission, name: "member"))
     Publication.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: EventName, name: "Event", traits: {"smithy.api#required" => {}}))
     Publication.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDefinitionSchema, name: "Schema", traits: {"smithy.api#required" => {}}))
     Publication.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     Publication.type = Types::Publication
-    PublicationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Publication, name: "member")
+    PublicationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Publication, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ResourceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
@@ -398,10 +398,10 @@ module Aws::AppIntegrations
     Subscription.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: EventName, name: "Event", traits: {"smithy.api#required" => {}}))
     Subscription.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     Subscription.type = Types::Subscription
-    SubscriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Subscription, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    SubscriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Subscription, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest

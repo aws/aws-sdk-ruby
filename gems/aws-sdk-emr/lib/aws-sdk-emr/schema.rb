@@ -390,7 +390,7 @@ module Aws::EMR
     Application.add_member(:args, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "Args"))
     Application.add_member(:additional_info, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMap, name: "AdditionalInfo"))
     Application.type = Types::Application
-    ApplicationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Application, name: "member")
+    ApplicationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Application, name: "member"))
     AuthMode.add_member(:sso, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSO", traits: {"smithy.api#enumValue" => "SSO"}))
     AuthMode.add_member(:iam, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IAM", traits: {"smithy.api#enumValue" => "IAM"}))
     AutoScalingPolicy.add_member(:constraints, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingConstraints, name: "Constraints", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -429,15 +429,15 @@ module Aws::EMR
     BootstrapActionConfig.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BootstrapActionConfig.add_member(:script_bootstrap_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ScriptBootstrapActionConfig, name: "ScriptBootstrapAction", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BootstrapActionConfig.type = Types::BootstrapActionConfig
-    BootstrapActionConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BootstrapActionConfig, name: "member")
+    BootstrapActionConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BootstrapActionConfig, name: "member"))
     BootstrapActionDetail.add_member(:bootstrap_action_config, ::Smithy::Schema::Shapes::MemberShape.new(target: BootstrapActionConfig, name: "BootstrapActionConfig"))
     BootstrapActionDetail.type = Types::BootstrapActionDetail
-    BootstrapActionDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BootstrapActionDetail, name: "member")
+    BootstrapActionDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BootstrapActionDetail, name: "member"))
     CancelStepsInfo.add_member(:step_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StepId, name: "StepId"))
     CancelStepsInfo.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CancelStepsRequestStatus, name: "Status"))
     CancelStepsInfo.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Reason"))
     CancelStepsInfo.type = Types::CancelStepsInfo
-    CancelStepsInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CancelStepsInfo, name: "member")
+    CancelStepsInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CancelStepsInfo, name: "member"))
     CancelStepsInput.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "ClusterId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CancelStepsInput.add_member(:step_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StepIdsList, name: "StepIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CancelStepsInput.add_member(:step_cancellation_option, ::Smithy::Schema::Shapes::MemberShape.new(target: StepCancellationOption, name: "StepCancellationOption"))
@@ -510,7 +510,7 @@ module Aws::EMR
     ClusterStateChangeReasonCode.add_member(:user_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER_REQUEST", traits: {"smithy.api#enumValue" => "USER_REQUEST"}))
     ClusterStateChangeReasonCode.add_member(:step_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STEP_FAILURE", traits: {"smithy.api#enumValue" => "STEP_FAILURE"}))
     ClusterStateChangeReasonCode.add_member(:all_steps_completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL_STEPS_COMPLETED", traits: {"smithy.api#enumValue" => "ALL_STEPS_COMPLETED"}))
-    ClusterStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterState, name: "member")
+    ClusterStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterState, name: "member"))
     ClusterStatus.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterState, name: "State"))
     ClusterStatus.add_member(:state_change_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterStateChangeReason, name: "StateChangeReason"))
     ClusterStatus.add_member(:timeline, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterTimeline, name: "Timeline"))
@@ -523,7 +523,7 @@ module Aws::EMR
     ClusterSummary.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "ClusterArn"))
     ClusterSummary.add_member(:outpost_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalArnType, name: "OutpostArn"))
     ClusterSummary.type = Types::ClusterSummary
-    ClusterSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterSummary, name: "member")
+    ClusterSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterSummary, name: "member"))
     ClusterTimeline.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreationDateTime"))
     ClusterTimeline.add_member(:ready_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "ReadyDateTime"))
     ClusterTimeline.add_member(:end_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "EndDateTime"))
@@ -532,7 +532,7 @@ module Aws::EMR
     Command.add_member(:script_path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ScriptPath"))
     Command.add_member(:args, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "Args"))
     Command.type = Types::Command
-    CommandList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Command, name: "member")
+    CommandList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Command, name: "member"))
     ComparisonOperator.add_member(:greater_than_or_equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GREATER_THAN_OR_EQUAL", traits: {"smithy.api#enumValue" => "GREATER_THAN_OR_EQUAL"}))
     ComparisonOperator.add_member(:greater_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GREATER_THAN", traits: {"smithy.api#enumValue" => "GREATER_THAN"}))
     ComparisonOperator.add_member(:less_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LESS_THAN", traits: {"smithy.api#enumValue" => "LESS_THAN"}))
@@ -550,7 +550,7 @@ module Aws::EMR
     Configuration.add_member(:configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, name: "Configurations"))
     Configuration.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMap, name: "Properties"))
     Configuration.type = Types::Configuration
-    ConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, name: "member")
+    ConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, name: "member"))
     CreatePersistentAppUIInput.add_member(:target_resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "TargetResourceArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreatePersistentAppUIInput.add_member(:emr_containers_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EMRContainersConfig, name: "EMRContainersConfig"))
     CreatePersistentAppUIInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
@@ -649,8 +649,8 @@ module Aws::EMR
     DescribeStudioInput.type = Types::DescribeStudioInput
     DescribeStudioOutput.add_member(:studio, ::Smithy::Schema::Shapes::MemberShape.new(target: Studio, name: "Studio"))
     DescribeStudioOutput.type = Types::DescribeStudioOutput
-    EC2InstanceIdsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "member")
-    EC2InstanceIdsToTerminateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "member")
+    EC2InstanceIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "member"))
+    EC2InstanceIdsToTerminateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "member"))
     EMRContainersConfig.add_member(:job_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "JobRunId"))
     EMRContainersConfig.type = Types::EMRContainersConfig
     EbsBlockDevice.add_member(:volume_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeSpecification, name: "VolumeSpecification"))
@@ -659,15 +659,15 @@ module Aws::EMR
     EbsBlockDeviceConfig.add_member(:volume_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeSpecification, name: "VolumeSpecification", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     EbsBlockDeviceConfig.add_member(:volumes_per_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "VolumesPerInstance"))
     EbsBlockDeviceConfig.type = Types::EbsBlockDeviceConfig
-    EbsBlockDeviceConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EbsBlockDeviceConfig, name: "member")
-    EbsBlockDeviceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EbsBlockDevice, name: "member")
+    EbsBlockDeviceConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EbsBlockDeviceConfig, name: "member"))
+    EbsBlockDeviceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EbsBlockDevice, name: "member"))
     EbsConfiguration.add_member(:ebs_block_device_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: EbsBlockDeviceConfigList, name: "EbsBlockDeviceConfigs"))
     EbsConfiguration.add_member(:ebs_optimized, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, name: "EbsOptimized"))
     EbsConfiguration.type = Types::EbsConfiguration
     EbsVolume.add_member(:device, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Device"))
     EbsVolume.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VolumeId"))
     EbsVolume.type = Types::EbsVolume
-    EbsVolumeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EbsVolume, name: "member")
+    EbsVolumeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EbsVolume, name: "member"))
     Ec2InstanceAttributes.add_member(:ec2_key_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Ec2KeyName"))
     Ec2InstanceAttributes.add_member(:ec2_subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Ec2SubnetId"))
     Ec2InstanceAttributes.add_member(:requested_ec2_subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256List, name: "RequestedEc2SubnetIds"))
@@ -680,14 +680,14 @@ module Aws::EMR
     Ec2InstanceAttributes.add_member(:additional_master_security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "AdditionalMasterSecurityGroups"))
     Ec2InstanceAttributes.add_member(:additional_slave_security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "AdditionalSlaveSecurityGroups"))
     Ec2InstanceAttributes.type = Types::Ec2InstanceAttributes
-    EnvironmentVariablesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "key")
-    EnvironmentVariablesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "value")
-    ErrorData.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringMap, name: "member")
+    EnvironmentVariablesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "key"))
+    EnvironmentVariablesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "value"))
+    ErrorData.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMap, name: "member"))
     ErrorDetail.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorCode"))
     ErrorDetail.add_member(:error_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorData, name: "ErrorData"))
     ErrorDetail.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorMessage"))
     ErrorDetail.type = Types::ErrorDetail
-    ErrorDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail, name: "member")
+    ErrorDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail, name: "member"))
     ExecutionEngineConfig.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "Id", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ExecutionEngineConfig.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionEngineType, name: "Type"))
     ExecutionEngineConfig.add_member(:master_instance_security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "MasterInstanceSecurityGroupId"))
@@ -792,8 +792,8 @@ module Aws::EMR
     InstanceFleetConfig.add_member(:resize_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceFleetResizingSpecifications, name: "ResizeSpecifications"))
     InstanceFleetConfig.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "Context"))
     InstanceFleetConfig.type = Types::InstanceFleetConfig
-    InstanceFleetConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceFleetConfig, name: "member")
-    InstanceFleetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceFleet, name: "member")
+    InstanceFleetConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceFleetConfig, name: "member"))
+    InstanceFleetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceFleet, name: "member"))
     InstanceFleetModifyConfig.add_member(:instance_fleet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceFleetId, name: "InstanceFleetId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InstanceFleetModifyConfig.add_member(:target_on_demand_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: WholeNumber, name: "TargetOnDemandCapacity"))
     InstanceFleetModifyConfig.add_member(:target_spot_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: WholeNumber, name: "TargetSpotCapacity"))
@@ -862,7 +862,7 @@ module Aws::EMR
     InstanceGroupConfig.add_member(:auto_scaling_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingPolicy, name: "AutoScalingPolicy"))
     InstanceGroupConfig.add_member(:custom_ami_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "CustomAmiId"))
     InstanceGroupConfig.type = Types::InstanceGroupConfig
-    InstanceGroupConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGroupConfig, name: "member")
+    InstanceGroupConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGroupConfig, name: "member"))
     InstanceGroupDetail.add_member(:instance_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "InstanceGroupId"))
     InstanceGroupDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "Name"))
     InstanceGroupDetail.add_member(:market, ::Smithy::Schema::Shapes::MemberShape.new(target: MarketType, name: "Market", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -879,9 +879,9 @@ module Aws::EMR
     InstanceGroupDetail.add_member(:end_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "EndDateTime"))
     InstanceGroupDetail.add_member(:custom_ami_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "CustomAmiId"))
     InstanceGroupDetail.type = Types::InstanceGroupDetail
-    InstanceGroupDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGroupDetail, name: "member")
-    InstanceGroupIdsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "member")
-    InstanceGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGroup, name: "member")
+    InstanceGroupDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGroupDetail, name: "member"))
+    InstanceGroupIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "member"))
+    InstanceGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGroup, name: "member"))
     InstanceGroupModifyConfig.add_member(:instance_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "InstanceGroupId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InstanceGroupModifyConfig.add_member(:instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "InstanceCount"))
     InstanceGroupModifyConfig.add_member(:ec2_instance_ids_to_terminate, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2InstanceIdsToTerminateList, name: "EC2InstanceIdsToTerminate"))
@@ -889,7 +889,7 @@ module Aws::EMR
     InstanceGroupModifyConfig.add_member(:reconfiguration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReconfigurationType, name: "ReconfigurationType"))
     InstanceGroupModifyConfig.add_member(:configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, name: "Configurations"))
     InstanceGroupModifyConfig.type = Types::InstanceGroupModifyConfig
-    InstanceGroupModifyConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGroupModifyConfig, name: "member")
+    InstanceGroupModifyConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGroupModifyConfig, name: "member"))
     InstanceGroupState.add_member(:provisioning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROVISIONING", traits: {"smithy.api#enumValue" => "PROVISIONING"}))
     InstanceGroupState.add_member(:bootstrapping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BOOTSTRAPPING", traits: {"smithy.api#enumValue" => "BOOTSTRAPPING"}))
     InstanceGroupState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
@@ -919,8 +919,8 @@ module Aws::EMR
     InstanceGroupType.add_member(:master, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MASTER", traits: {"smithy.api#enumValue" => "MASTER"}))
     InstanceGroupType.add_member(:core, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CORE", traits: {"smithy.api#enumValue" => "CORE"}))
     InstanceGroupType.add_member(:task, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TASK", traits: {"smithy.api#enumValue" => "TASK"}))
-    InstanceGroupTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGroupType, name: "member")
-    InstanceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Instance, name: "member")
+    InstanceGroupTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGroupType, name: "member"))
+    InstanceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Instance, name: "member"))
     InstanceResizePolicy.add_member(:instances_to_terminate, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2InstanceIdsList, name: "InstancesToTerminate"))
     InstanceResizePolicy.add_member(:instances_to_protect, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2InstanceIdsList, name: "InstancesToProtect"))
     InstanceResizePolicy.add_member(:instance_termination_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "InstanceTerminationTimeout"))
@@ -941,7 +941,7 @@ module Aws::EMR
     InstanceStateChangeReasonCode.add_member(:instance_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE_FAILURE", traits: {"smithy.api#enumValue" => "INSTANCE_FAILURE"}))
     InstanceStateChangeReasonCode.add_member(:bootstrap_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BOOTSTRAP_FAILURE", traits: {"smithy.api#enumValue" => "BOOTSTRAP_FAILURE"}))
     InstanceStateChangeReasonCode.add_member(:cluster_terminated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLUSTER_TERMINATED", traits: {"smithy.api#enumValue" => "CLUSTER_TERMINATED"}))
-    InstanceStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceState, name: "member")
+    InstanceStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceState, name: "member"))
     InstanceStatus.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceState, name: "State"))
     InstanceStatus.add_member(:state_change_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceStateChangeReason, name: "StateChangeReason"))
     InstanceStatus.add_member(:timeline, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceTimeline, name: "Timeline"))
@@ -959,7 +959,7 @@ module Aws::EMR
     InstanceTypeConfig.add_member(:custom_ami_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "CustomAmiId"))
     InstanceTypeConfig.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeDouble, name: "Priority"))
     InstanceTypeConfig.type = Types::InstanceTypeConfig
-    InstanceTypeConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceTypeConfig, name: "member")
+    InstanceTypeConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceTypeConfig, name: "member"))
     InstanceTypeSpecification.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceType, name: "InstanceType"))
     InstanceTypeSpecification.add_member(:weighted_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: WholeNumber, name: "WeightedCapacity"))
     InstanceTypeSpecification.add_member(:bid_price, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "BidPrice"))
@@ -970,7 +970,7 @@ module Aws::EMR
     InstanceTypeSpecification.add_member(:custom_ami_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "CustomAmiId"))
     InstanceTypeSpecification.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeDouble, name: "Priority"))
     InstanceTypeSpecification.type = Types::InstanceTypeSpecification
-    InstanceTypeSpecificationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceTypeSpecification, name: "member")
+    InstanceTypeSpecificationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceTypeSpecification, name: "member"))
     InternalServerError.type = Types::InternalServerError
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InternalServerException.type = Types::InternalServerException
@@ -993,7 +993,7 @@ module Aws::EMR
     JobFlowDetail.add_member(:auto_scaling_role, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "AutoScalingRole"))
     JobFlowDetail.add_member(:scale_down_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: ScaleDownBehavior, name: "ScaleDownBehavior"))
     JobFlowDetail.type = Types::JobFlowDetail
-    JobFlowDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobFlowDetail, name: "member")
+    JobFlowDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobFlowDetail, name: "member"))
     JobFlowExecutionState.add_member(:starting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTING", traits: {"smithy.api#enumValue" => "STARTING"}))
     JobFlowExecutionState.add_member(:bootstrapping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BOOTSTRAPPING", traits: {"smithy.api#enumValue" => "BOOTSTRAPPING"}))
     JobFlowExecutionState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
@@ -1002,7 +1002,7 @@ module Aws::EMR
     JobFlowExecutionState.add_member(:terminated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERMINATED", traits: {"smithy.api#enumValue" => "TERMINATED"}))
     JobFlowExecutionState.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     JobFlowExecutionState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    JobFlowExecutionStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobFlowExecutionState, name: "member")
+    JobFlowExecutionStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobFlowExecutionState, name: "member"))
     JobFlowExecutionStatusDetail.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: JobFlowExecutionState, name: "State", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     JobFlowExecutionStatusDetail.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreationDateTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     JobFlowExecutionStatusDetail.add_member(:start_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "StartDateTime"))
@@ -1053,7 +1053,7 @@ module Aws::EMR
     KeyValue.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "Key"))
     KeyValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "Value"))
     KeyValue.type = Types::KeyValue
-    KeyValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, name: "member")
+    KeyValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, name: "member"))
     ListBootstrapActionsInput.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterId, name: "ClusterId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ListBootstrapActionsInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, name: "Marker"))
     ListBootstrapActionsInput.type = Types::ListBootstrapActionsInput
@@ -1148,7 +1148,7 @@ module Aws::EMR
     MetricDimension.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Key"))
     MetricDimension.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     MetricDimension.type = Types::MetricDimension
-    MetricDimensionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimension, name: "member")
+    MetricDimensionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimension, name: "member"))
     ModifyClusterInput.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ModifyClusterInput.add_member(:step_concurrency_level, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "StepConcurrencyLevel"))
     ModifyClusterInput.add_member(:extended_support, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, name: "ExtendedSupport"))
@@ -1162,7 +1162,7 @@ module Aws::EMR
     ModifyInstanceGroupsInput.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterId, name: "ClusterId"))
     ModifyInstanceGroupsInput.add_member(:instance_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGroupModifyConfigList, name: "InstanceGroups"))
     ModifyInstanceGroupsInput.type = Types::ModifyInstanceGroupsInput
-    NewSupportedProductsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedProductConfig, name: "member")
+    NewSupportedProductsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedProductConfig, name: "member"))
     NotebookExecution.add_member(:notebook_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "NotebookExecutionId"))
     NotebookExecution.add_member(:editor_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "EditorId"))
     NotebookExecution.add_member(:execution_engine, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionEngineConfig, name: "ExecutionEngine"))
@@ -1200,7 +1200,7 @@ module Aws::EMR
     NotebookExecutionSummary.add_member(:notebook_s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookS3LocationForOutput, name: "NotebookS3Location"))
     NotebookExecutionSummary.add_member(:execution_engine_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "ExecutionEngineId"))
     NotebookExecutionSummary.type = Types::NotebookExecutionSummary
-    NotebookExecutionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookExecutionSummary, name: "member")
+    NotebookExecutionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookExecutionSummary, name: "member"))
     NotebookS3LocationForOutput.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "Bucket"))
     NotebookS3LocationForOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: UriString, name: "Key"))
     NotebookS3LocationForOutput.type = Types::NotebookS3LocationForOutput
@@ -1209,7 +1209,7 @@ module Aws::EMR
     NotebookS3LocationFromInput.type = Types::NotebookS3LocationFromInput
     OSRelease.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Label"))
     OSRelease.type = Types::OSRelease
-    OSReleaseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OSRelease, name: "member")
+    OSReleaseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OSRelease, name: "member"))
     OnClusterAppUIType.add_member(:spark_history_server, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SparkHistoryServer", traits: {"smithy.api#enumValue" => "SparkHistoryServer"}))
     OnClusterAppUIType.add_member(:yarn_timeline_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "YarnTimelineService", traits: {"smithy.api#enumValue" => "YarnTimelineService"}))
     OnClusterAppUIType.add_member(:tez_ui, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TezUI", traits: {"smithy.api#enumValue" => "TezUI"}))
@@ -1251,11 +1251,11 @@ module Aws::EMR
     PersistentAppUIType.add_member(:shs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHS", traits: {"smithy.api#enumValue" => "SHS"}))
     PersistentAppUIType.add_member(:tez, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEZ", traits: {"smithy.api#enumValue" => "TEZ"}))
     PersistentAppUIType.add_member(:yts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "YTS", traits: {"smithy.api#enumValue" => "YTS"}))
-    PersistentAppUITypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PersistentAppUIType, name: "member")
+    PersistentAppUITypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PersistentAppUIType, name: "member"))
     PlacementGroupConfig.add_member(:instance_role, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceRoleType, name: "InstanceRole", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     PlacementGroupConfig.add_member(:placement_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementGroupStrategy, name: "PlacementStrategy"))
     PlacementGroupConfig.type = Types::PlacementGroupConfig
-    PlacementGroupConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementGroupConfig, name: "member")
+    PlacementGroupConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementGroupConfig, name: "member"))
     PlacementGroupStrategy.add_member(:spread, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPREAD", traits: {"smithy.api#enumValue" => "SPREAD"}))
     PlacementGroupStrategy.add_member(:partition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARTITION", traits: {"smithy.api#enumValue" => "PARTITION"}))
     PlacementGroupStrategy.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLUSTER", traits: {"smithy.api#enumValue" => "CLUSTER"}))
@@ -1266,7 +1266,7 @@ module Aws::EMR
     PortRange.add_member(:min_range, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "MinRange", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     PortRange.add_member(:max_range, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "MaxRange"))
     PortRange.type = Types::PortRange
-    PortRanges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PortRange, name: "member")
+    PortRanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortRange, name: "member"))
     ProfilerType.add_member(:shs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHS", traits: {"smithy.api#enumValue" => "SHS"}))
     ProfilerType.add_member(:tezui, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEZUI", traits: {"smithy.api#enumValue" => "TEZUI"}))
     ProfilerType.add_member(:yts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "YTS", traits: {"smithy.api#enumValue" => "YTS"}))
@@ -1360,7 +1360,7 @@ module Aws::EMR
     ScalingRule.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingAction, name: "Action", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ScalingRule.add_member(:trigger, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingTrigger, name: "Trigger", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ScalingRule.type = Types::ScalingRule
-    ScalingRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingRule, name: "member")
+    ScalingRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalingRule, name: "member"))
     ScalingStrategy.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "DEFAULT"}))
     ScalingStrategy.add_member(:advanced, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADVANCED", traits: {"smithy.api#enumValue" => "ADVANCED"}))
     ScalingTrigger.add_member(:cloud_watch_alarm_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchAlarmDefinition, name: "CloudWatchAlarmDefinition", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1368,11 +1368,11 @@ module Aws::EMR
     ScriptBootstrapActionConfig.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "Path", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ScriptBootstrapActionConfig.add_member(:args, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringList, name: "Args"))
     ScriptBootstrapActionConfig.type = Types::ScriptBootstrapActionConfig
-    SecurityConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityConfigurationSummary, name: "member")
+    SecurityConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityConfigurationSummary, name: "member"))
     SecurityConfigurationSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "Name"))
     SecurityConfigurationSummary.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreationDateTime"))
     SecurityConfigurationSummary.type = Types::SecurityConfigurationSummary
-    SecurityGroupsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "member")
+    SecurityGroupsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "member"))
     SessionMappingDetail.add_member(:studio_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "StudioId"))
     SessionMappingDetail.add_member(:identity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "IdentityId"))
     SessionMappingDetail.add_member(:identity_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "IdentityName"))
@@ -1388,7 +1388,7 @@ module Aws::EMR
     SessionMappingSummary.add_member(:session_policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "SessionPolicyArn"))
     SessionMappingSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreationTime"))
     SessionMappingSummary.type = Types::SessionMappingSummary
-    SessionMappingSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SessionMappingSummary, name: "member")
+    SessionMappingSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionMappingSummary, name: "member"))
     SetKeepJobFlowAliveWhenNoStepsInput.add_member(:job_flow_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringList, name: "JobFlowIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SetKeepJobFlowAliveWhenNoStepsInput.add_member(:keep_job_flow_alive_when_no_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "KeepJobFlowAliveWhenNoSteps", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SetKeepJobFlowAliveWhenNoStepsInput.type = Types::SetKeepJobFlowAliveWhenNoStepsInput
@@ -1411,7 +1411,7 @@ module Aws::EMR
     SimplifiedApplication.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     SimplifiedApplication.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Version"))
     SimplifiedApplication.type = Types::SimplifiedApplication
-    SimplifiedApplicationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SimplifiedApplication, name: "member")
+    SimplifiedApplicationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SimplifiedApplication, name: "member"))
     SpotProvisioningAllocationStrategy.add_member(:capacity_optimized, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAPACITY_OPTIMIZED", traits: {"smithy.api#enumValue" => "capacity-optimized"}))
     SpotProvisioningAllocationStrategy.add_member(:price_capacity_optimized, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRICE_CAPACITY_OPTIMIZED", traits: {"smithy.api#enumValue" => "price-capacity-optimized"}))
     SpotProvisioningAllocationStrategy.add_member(:lowest_price, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOWEST_PRICE", traits: {"smithy.api#enumValue" => "lowest-price"}))
@@ -1460,11 +1460,11 @@ module Aws::EMR
     StepConfig.add_member(:action_on_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionOnFailure, name: "ActionOnFailure"))
     StepConfig.add_member(:hadoop_jar_step, ::Smithy::Schema::Shapes::MemberShape.new(target: HadoopJarStepConfig, name: "HadoopJarStep", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StepConfig.type = Types::StepConfig
-    StepConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StepConfig, name: "member")
+    StepConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StepConfig, name: "member"))
     StepDetail.add_member(:step_config, ::Smithy::Schema::Shapes::MemberShape.new(target: StepConfig, name: "StepConfig", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StepDetail.add_member(:execution_status_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: StepExecutionStatusDetail, name: "ExecutionStatusDetail", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StepDetail.type = Types::StepDetail
-    StepDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StepDetail, name: "member")
+    StepDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StepDetail, name: "member"))
     StepExecutionState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     StepExecutionState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     StepExecutionState.add_member(:continue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTINUE", traits: {"smithy.api#enumValue" => "CONTINUE"}))
@@ -1478,7 +1478,7 @@ module Aws::EMR
     StepExecutionStatusDetail.add_member(:end_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "EndDateTime"))
     StepExecutionStatusDetail.add_member(:last_state_change_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "LastStateChangeReason"))
     StepExecutionStatusDetail.type = Types::StepExecutionStatusDetail
-    StepIdsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "member")
+    StepIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "member"))
     StepState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     StepState.add_member(:cancel_pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCEL_PENDING", traits: {"smithy.api#enumValue" => "CANCEL_PENDING"}))
     StepState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
@@ -1490,7 +1490,7 @@ module Aws::EMR
     StepStateChangeReason.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     StepStateChangeReason.type = Types::StepStateChangeReason
     StepStateChangeReasonCode.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    StepStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StepState, name: "member")
+    StepStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StepState, name: "member"))
     StepStatus.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: StepState, name: "State"))
     StepStatus.add_member(:state_change_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StepStateChangeReason, name: "StateChangeReason"))
     StepStatus.add_member(:failure_details, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureDetails, name: "FailureDetails"))
@@ -1502,16 +1502,16 @@ module Aws::EMR
     StepSummary.add_member(:action_on_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionOnFailure, name: "ActionOnFailure"))
     StepSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StepStatus, name: "Status"))
     StepSummary.type = Types::StepSummary
-    StepSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StepSummary, name: "member")
+    StepSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StepSummary, name: "member"))
     StepTimeline.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreationDateTime"))
     StepTimeline.add_member(:start_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "StartDateTime"))
     StepTimeline.add_member(:end_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "EndDateTime"))
     StepTimeline.type = Types::StepTimeline
     StopNotebookExecutionInput.add_member(:notebook_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "NotebookExecutionId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StopNotebookExecutionInput.type = Types::StopNotebookExecutionInput
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    StringMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    StringMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    StringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    StringMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     Studio.add_member(:studio_id, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "StudioId"))
     Studio.add_member(:studio_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "StudioArn"))
     Studio.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "Name"))
@@ -1542,8 +1542,8 @@ module Aws::EMR
     StudioSummary.add_member(:auth_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthMode, name: "AuthMode"))
     StudioSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreationTime"))
     StudioSummary.type = Types::StudioSummary
-    StudioSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StudioSummary, name: "member")
-    SubnetIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    StudioSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StudioSummary, name: "member"))
+    SubnetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     SupportedInstanceType.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
     SupportedInstanceType.add_member(:memory_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "MemoryGB"))
     SupportedInstanceType.add_member(:storage_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "StorageGB"))
@@ -1556,15 +1556,15 @@ module Aws::EMR
     SupportedInstanceType.add_member(:ebs_storage_only, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EbsStorageOnly"))
     SupportedInstanceType.add_member(:architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Architecture"))
     SupportedInstanceType.type = Types::SupportedInstanceType
-    SupportedInstanceTypesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedInstanceType, name: "member")
+    SupportedInstanceTypesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedInstanceType, name: "member"))
     SupportedProductConfig.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "Name"))
     SupportedProductConfig.add_member(:args, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringList, name: "Args"))
     SupportedProductConfig.type = Types::SupportedProductConfig
-    SupportedProductsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "member")
+    SupportedProductsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     Tag.type = Types::Tag
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TerminateJobFlowsInput.add_member(:job_flow_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringList, name: "JobFlowIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TerminateJobFlowsInput.type = Types::TerminateJobFlowsInput
     Unit.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
@@ -1615,8 +1615,8 @@ module Aws::EMR
     VolumeSpecification.add_member(:size_in_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "SizeInGB", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     VolumeSpecification.add_member(:throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: ThroughputVal, name: "Throughput"))
     VolumeSpecification.type = Types::VolumeSpecification
-    XmlStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "member")
-    XmlStringMaxLen256List.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "member")
+    XmlStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlString, name: "member"))
+    XmlStringMaxLen256List.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XmlStringMaxLen256, name: "member"))
 
     ElasticMapReduce = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.emr#ElasticMapReduce"

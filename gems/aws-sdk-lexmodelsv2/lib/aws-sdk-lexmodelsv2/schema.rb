@@ -832,7 +832,7 @@ module Aws::LexModelsV2
 
     ActiveContext.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveContextName, name: "name", traits: {"smithy.api#required" => {}}))
     ActiveContext.type = Types::ActiveContext
-    ActiveContextList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveContext, name: "member")
+    ActiveContextList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveContext, name: "member"))
     AdvancedRecognitionSetting.add_member(:audio_recognition_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioRecognitionStrategy, name: "audioRecognitionStrategy"))
     AdvancedRecognitionSetting.type = Types::AdvancedRecognitionSetting
     AgentTurnResult.add_member(:expected_agent_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: TestSetAgentPrompt, name: "expectedAgentPrompt", traits: {"smithy.api#required" => {}}))
@@ -850,7 +850,7 @@ module Aws::LexModelsV2
     AggregatedUtterancesFilterName.add_member(:utterance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Utterance", traits: {"smithy.api#enumValue" => "Utterance"}))
     AggregatedUtterancesFilterOperator.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Contains", traits: {"smithy.api#enumValue" => "CO"}))
     AggregatedUtterancesFilterOperator.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Equals", traits: {"smithy.api#enumValue" => "EQ"}))
-    AggregatedUtterancesFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedUtterancesFilter, name: "member")
+    AggregatedUtterancesFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedUtterancesFilter, name: "member"))
     AggregatedUtterancesSortAttribute.add_member(:hit_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HitCount", traits: {"smithy.api#enumValue" => "HitCount"}))
     AggregatedUtterancesSortAttribute.add_member(:missed_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MissedCount", traits: {"smithy.api#enumValue" => "MissedCount"}))
     AggregatedUtterancesSortBy.add_member(:attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedUtterancesSortAttribute, name: "attribute", traits: {"smithy.api#required" => {}}))
@@ -863,11 +863,11 @@ module Aws::LexModelsV2
     AggregatedUtterancesSummary.add_member(:utterance_last_recorded_in_aggregation_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "utteranceLastRecordedInAggregationDuration"))
     AggregatedUtterancesSummary.add_member(:contains_data_from_deleted_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "containsDataFromDeletedResources"))
     AggregatedUtterancesSummary.type = Types::AggregatedUtterancesSummary
-    AggregatedUtterancesSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedUtterancesSummary, name: "member")
+    AggregatedUtterancesSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedUtterancesSummary, name: "member"))
     AllowedInputTypes.add_member(:allow_audio_input, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "allowAudioInput", traits: {"smithy.api#required" => {}}))
     AllowedInputTypes.add_member(:allow_dtmf_input, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "allowDTMFInput", traits: {"smithy.api#required" => {}}))
     AllowedInputTypes.type = Types::AllowedInputTypes
-    AnalyticsBinByList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsBinBySpecification, name: "member")
+    AnalyticsBinByList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsBinBySpecification, name: "member"))
     AnalyticsBinByName.add_member(:conversation_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ConversationStartTime", traits: {"smithy.api#enumValue" => "ConversationStartTime"}))
     AnalyticsBinByName.add_member(:utterance_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UtteranceTimestamp", traits: {"smithy.api#enumValue" => "UtteranceTimestamp"}))
     AnalyticsBinBySpecification.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsBinByName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -877,7 +877,7 @@ module Aws::LexModelsV2
     AnalyticsBinKey.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsBinByName, name: "name"))
     AnalyticsBinKey.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsBinValue, name: "value"))
     AnalyticsBinKey.type = Types::AnalyticsBinKey
-    AnalyticsBinKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsBinKey, name: "member")
+    AnalyticsBinKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsBinKey, name: "member"))
     AnalyticsCommonFilterName.add_member(:bot_alias_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BotAliasId", traits: {"smithy.api#enumValue" => "BotAliasId"}))
     AnalyticsCommonFilterName.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BotVersion", traits: {"smithy.api#enumValue" => "BotVersion"}))
     AnalyticsCommonFilterName.add_member(:locale_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LocaleId", traits: {"smithy.api#enumValue" => "LocaleId"}))
@@ -886,7 +886,7 @@ module Aws::LexModelsV2
     AnalyticsFilterOperator.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Equals", traits: {"smithy.api#enumValue" => "EQ"}))
     AnalyticsFilterOperator.add_member(:greater_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GreaterThan", traits: {"smithy.api#enumValue" => "GT"}))
     AnalyticsFilterOperator.add_member(:less_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LessThan", traits: {"smithy.api#enumValue" => "LT"}))
-    AnalyticsFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsFilterValue, name: "member")
+    AnalyticsFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsFilterValue, name: "member"))
     AnalyticsIntentField.add_member(:intent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IntentName", traits: {"smithy.api#enumValue" => "IntentName"}))
     AnalyticsIntentField.add_member(:intent_end_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IntentEndState", traits: {"smithy.api#enumValue" => "IntentEndState"}))
     AnalyticsIntentField.add_member(:intent_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IntentLevel", traits: {"smithy.api#enumValue" => "IntentLevel"}))
@@ -903,12 +903,12 @@ module Aws::LexModelsV2
     AnalyticsIntentFilterName.add_member(:originating_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OriginatingRequestId", traits: {"smithy.api#enumValue" => "OriginatingRequestId"}))
     AnalyticsIntentFilterName.add_member(:intent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IntentName", traits: {"smithy.api#enumValue" => "IntentName"}))
     AnalyticsIntentFilterName.add_member(:intent_end_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IntentEndState", traits: {"smithy.api#enumValue" => "IntentEndState"}))
-    AnalyticsIntentFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentFilter, name: "member")
+    AnalyticsIntentFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentFilter, name: "member"))
     AnalyticsIntentGroupByKey.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentField, name: "name"))
     AnalyticsIntentGroupByKey.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsGroupByValue, name: "value"))
     AnalyticsIntentGroupByKey.type = Types::AnalyticsIntentGroupByKey
-    AnalyticsIntentGroupByKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentGroupByKey, name: "member")
-    AnalyticsIntentGroupByList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentGroupBySpecification, name: "member")
+    AnalyticsIntentGroupByKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentGroupByKey, name: "member"))
+    AnalyticsIntentGroupByList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentGroupBySpecification, name: "member"))
     AnalyticsIntentGroupBySpecification.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentField, name: "name", traits: {"smithy.api#required" => {}}))
     AnalyticsIntentGroupBySpecification.type = Types::AnalyticsIntentGroupBySpecification
     AnalyticsIntentMetric.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentMetricName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -924,9 +924,9 @@ module Aws::LexModelsV2
     AnalyticsIntentMetricResult.add_member(:statistic, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsMetricStatistic, name: "statistic"))
     AnalyticsIntentMetricResult.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsMetricValue, name: "value"))
     AnalyticsIntentMetricResult.type = Types::AnalyticsIntentMetricResult
-    AnalyticsIntentMetricResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentMetricResult, name: "member")
-    AnalyticsIntentMetrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentMetric, name: "member")
-    AnalyticsIntentNodeSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentNodeSummary, name: "member")
+    AnalyticsIntentMetricResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentMetricResult, name: "member"))
+    AnalyticsIntentMetrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentMetric, name: "member"))
+    AnalyticsIntentNodeSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentNodeSummary, name: "member"))
     AnalyticsIntentNodeSummary.add_member(:intent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "intentName"))
     AnalyticsIntentNodeSummary.add_member(:intent_path, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsPath, name: "intentPath"))
     AnalyticsIntentNodeSummary.add_member(:intent_count, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsNodeCount, name: "intentCount"))
@@ -937,7 +937,7 @@ module Aws::LexModelsV2
     AnalyticsIntentResult.add_member(:group_by_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentGroupByKeys, name: "groupByKeys"))
     AnalyticsIntentResult.add_member(:metrics_results, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentMetricResults, name: "metricsResults"))
     AnalyticsIntentResult.type = Types::AnalyticsIntentResult
-    AnalyticsIntentResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentResult, name: "member")
+    AnalyticsIntentResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentResult, name: "member"))
     AnalyticsIntentStageField.add_member(:intent_stage_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IntentStageName", traits: {"smithy.api#enumValue" => "IntentStageName"}))
     AnalyticsIntentStageField.add_member(:switched_to_intent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SwitchedToIntent", traits: {"smithy.api#enumValue" => "SwitchedToIntent"}))
     AnalyticsIntentStageFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentStageFilterName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -953,12 +953,12 @@ module Aws::LexModelsV2
     AnalyticsIntentStageFilterName.add_member(:originating_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OriginatingRequestId", traits: {"smithy.api#enumValue" => "OriginatingRequestId"}))
     AnalyticsIntentStageFilterName.add_member(:intent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IntentName", traits: {"smithy.api#enumValue" => "IntentName"}))
     AnalyticsIntentStageFilterName.add_member(:intent_stage_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IntentStageName", traits: {"smithy.api#enumValue" => "IntentStageName"}))
-    AnalyticsIntentStageFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentStageFilter, name: "member")
+    AnalyticsIntentStageFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentStageFilter, name: "member"))
     AnalyticsIntentStageGroupByKey.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentStageField, name: "name"))
     AnalyticsIntentStageGroupByKey.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsGroupByValue, name: "value"))
     AnalyticsIntentStageGroupByKey.type = Types::AnalyticsIntentStageGroupByKey
-    AnalyticsIntentStageGroupByKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentStageGroupByKey, name: "member")
-    AnalyticsIntentStageGroupByList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentStageGroupBySpecification, name: "member")
+    AnalyticsIntentStageGroupByKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentStageGroupByKey, name: "member"))
+    AnalyticsIntentStageGroupByList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentStageGroupBySpecification, name: "member"))
     AnalyticsIntentStageGroupBySpecification.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentStageField, name: "name", traits: {"smithy.api#required" => {}}))
     AnalyticsIntentStageGroupBySpecification.type = Types::AnalyticsIntentStageGroupBySpecification
     AnalyticsIntentStageMetric.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentStageMetricName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -974,13 +974,13 @@ module Aws::LexModelsV2
     AnalyticsIntentStageMetricResult.add_member(:statistic, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsMetricStatistic, name: "statistic"))
     AnalyticsIntentStageMetricResult.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsMetricValue, name: "value"))
     AnalyticsIntentStageMetricResult.type = Types::AnalyticsIntentStageMetricResult
-    AnalyticsIntentStageMetricResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentStageMetricResult, name: "member")
-    AnalyticsIntentStageMetrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentStageMetric, name: "member")
+    AnalyticsIntentStageMetricResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentStageMetricResult, name: "member"))
+    AnalyticsIntentStageMetrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentStageMetric, name: "member"))
     AnalyticsIntentStageResult.add_member(:bin_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsBinKeys, name: "binKeys"))
     AnalyticsIntentStageResult.add_member(:group_by_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentStageGroupByKeys, name: "groupByKeys"))
     AnalyticsIntentStageResult.add_member(:metrics_results, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentStageMetricResults, name: "metricsResults"))
     AnalyticsIntentStageResult.type = Types::AnalyticsIntentStageResult
-    AnalyticsIntentStageResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentStageResult, name: "member")
+    AnalyticsIntentStageResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsIntentStageResult, name: "member"))
     AnalyticsInterval.add_member(:one_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OneHour", traits: {"smithy.api#enumValue" => "OneHour"}))
     AnalyticsInterval.add_member(:one_day, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OneDay", traits: {"smithy.api#enumValue" => "OneDay"}))
     AnalyticsMetricStatistic.add_member(:sum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Sum", traits: {"smithy.api#enumValue" => "Sum"}))
@@ -996,7 +996,7 @@ module Aws::LexModelsV2
     AnalyticsPathFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsFilterOperator, name: "operator", traits: {"smithy.api#required" => {}}))
     AnalyticsPathFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsFilterValues, name: "values", traits: {"smithy.api#required" => {}}))
     AnalyticsPathFilter.type = Types::AnalyticsPathFilter
-    AnalyticsPathFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsPathFilter, name: "member")
+    AnalyticsPathFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsPathFilter, name: "member"))
     AnalyticsSessionField.add_member(:conversation_end_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ConversationEndState", traits: {"smithy.api#enumValue" => "ConversationEndState"}))
     AnalyticsSessionField.add_member(:locale_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LocaleId", traits: {"smithy.api#enumValue" => "LocaleId"}))
     AnalyticsSessionFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsSessionFilterName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -1013,12 +1013,12 @@ module Aws::LexModelsV2
     AnalyticsSessionFilterName.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SessionId", traits: {"smithy.api#enumValue" => "SessionId"}))
     AnalyticsSessionFilterName.add_member(:originating_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OriginatingRequestId", traits: {"smithy.api#enumValue" => "OriginatingRequestId"}))
     AnalyticsSessionFilterName.add_member(:intent_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IntentPath", traits: {"smithy.api#enumValue" => "IntentPath"}))
-    AnalyticsSessionFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsSessionFilter, name: "member")
+    AnalyticsSessionFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsSessionFilter, name: "member"))
     AnalyticsSessionGroupByKey.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsSessionField, name: "name"))
     AnalyticsSessionGroupByKey.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsGroupByValue, name: "value"))
     AnalyticsSessionGroupByKey.type = Types::AnalyticsSessionGroupByKey
-    AnalyticsSessionGroupByKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsSessionGroupByKey, name: "member")
-    AnalyticsSessionGroupByList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsSessionGroupBySpecification, name: "member")
+    AnalyticsSessionGroupByKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsSessionGroupByKey, name: "member"))
+    AnalyticsSessionGroupByList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsSessionGroupBySpecification, name: "member"))
     AnalyticsSessionGroupBySpecification.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsSessionField, name: "name", traits: {"smithy.api#required" => {}}))
     AnalyticsSessionGroupBySpecification.type = Types::AnalyticsSessionGroupBySpecification
     AnalyticsSessionMetric.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsSessionMetricName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -1036,13 +1036,13 @@ module Aws::LexModelsV2
     AnalyticsSessionMetricResult.add_member(:statistic, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsMetricStatistic, name: "statistic"))
     AnalyticsSessionMetricResult.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsMetricValue, name: "value"))
     AnalyticsSessionMetricResult.type = Types::AnalyticsSessionMetricResult
-    AnalyticsSessionMetricResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsSessionMetricResult, name: "member")
-    AnalyticsSessionMetrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsSessionMetric, name: "member")
+    AnalyticsSessionMetricResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsSessionMetricResult, name: "member"))
+    AnalyticsSessionMetrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsSessionMetric, name: "member"))
     AnalyticsSessionResult.add_member(:bin_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsBinKeys, name: "binKeys"))
     AnalyticsSessionResult.add_member(:group_by_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsSessionGroupByKeys, name: "groupByKeys"))
     AnalyticsSessionResult.add_member(:metrics_results, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsSessionMetricResults, name: "metricsResults"))
     AnalyticsSessionResult.type = Types::AnalyticsSessionResult
-    AnalyticsSessionResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsSessionResult, name: "member")
+    AnalyticsSessionResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsSessionResult, name: "member"))
     AnalyticsSessionSortByName.add_member(:conversation_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ConversationStartTime", traits: {"smithy.api#enumValue" => "ConversationStartTime"}))
     AnalyticsSessionSortByName.add_member(:number_of_turns, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NumberOfTurns", traits: {"smithy.api#enumValue" => "NumberOfTurns"}))
     AnalyticsSessionSortByName.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Duration", traits: {"smithy.api#enumValue" => "Duration"}))
@@ -1053,8 +1053,8 @@ module Aws::LexModelsV2
     AnalyticsUtteranceAttributeName.add_member(:last_used_intent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LastUsedIntent", traits: {"smithy.api#enumValue" => "LastUsedIntent"}))
     AnalyticsUtteranceAttributeResult.add_member(:last_used_intent, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "lastUsedIntent"))
     AnalyticsUtteranceAttributeResult.type = Types::AnalyticsUtteranceAttributeResult
-    AnalyticsUtteranceAttributeResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceAttributeResult, name: "member")
-    AnalyticsUtteranceAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceAttribute, name: "member")
+    AnalyticsUtteranceAttributeResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceAttributeResult, name: "member"))
+    AnalyticsUtteranceAttributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceAttribute, name: "member"))
     AnalyticsUtteranceField.add_member(:utterance_text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UtteranceText", traits: {"smithy.api#enumValue" => "UtteranceText"}))
     AnalyticsUtteranceField.add_member(:utterance_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UtteranceState", traits: {"smithy.api#enumValue" => "UtteranceState"}))
     AnalyticsUtteranceFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceFilterName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -1070,12 +1070,12 @@ module Aws::LexModelsV2
     AnalyticsUtteranceFilterName.add_member(:originating_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OriginatingRequestId", traits: {"smithy.api#enumValue" => "OriginatingRequestId"}))
     AnalyticsUtteranceFilterName.add_member(:utterance_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UtteranceState", traits: {"smithy.api#enumValue" => "UtteranceState"}))
     AnalyticsUtteranceFilterName.add_member(:utterance_text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UtteranceText", traits: {"smithy.api#enumValue" => "UtteranceText"}))
-    AnalyticsUtteranceFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceFilter, name: "member")
+    AnalyticsUtteranceFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceFilter, name: "member"))
     AnalyticsUtteranceGroupByKey.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceField, name: "name"))
     AnalyticsUtteranceGroupByKey.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsGroupByValue, name: "value"))
     AnalyticsUtteranceGroupByKey.type = Types::AnalyticsUtteranceGroupByKey
-    AnalyticsUtteranceGroupByKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceGroupByKey, name: "member")
-    AnalyticsUtteranceGroupByList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceGroupBySpecification, name: "member")
+    AnalyticsUtteranceGroupByKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceGroupByKey, name: "member"))
+    AnalyticsUtteranceGroupByList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceGroupBySpecification, name: "member"))
     AnalyticsUtteranceGroupBySpecification.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceField, name: "name", traits: {"smithy.api#required" => {}}))
     AnalyticsUtteranceGroupBySpecification.type = Types::AnalyticsUtteranceGroupBySpecification
     AnalyticsUtteranceMetric.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceMetricName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -1090,14 +1090,14 @@ module Aws::LexModelsV2
     AnalyticsUtteranceMetricResult.add_member(:statistic, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsMetricStatistic, name: "statistic"))
     AnalyticsUtteranceMetricResult.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsMetricValue, name: "value"))
     AnalyticsUtteranceMetricResult.type = Types::AnalyticsUtteranceMetricResult
-    AnalyticsUtteranceMetricResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceMetricResult, name: "member")
-    AnalyticsUtteranceMetrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceMetric, name: "member")
+    AnalyticsUtteranceMetricResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceMetricResult, name: "member"))
+    AnalyticsUtteranceMetrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceMetric, name: "member"))
     AnalyticsUtteranceResult.add_member(:bin_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsBinKeys, name: "binKeys"))
     AnalyticsUtteranceResult.add_member(:group_by_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceGroupByKeys, name: "groupByKeys"))
     AnalyticsUtteranceResult.add_member(:metrics_results, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceMetricResults, name: "metricsResults"))
     AnalyticsUtteranceResult.add_member(:attribute_results, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceAttributeResults, name: "attributeResults"))
     AnalyticsUtteranceResult.type = Types::AnalyticsUtteranceResult
-    AnalyticsUtteranceResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceResult, name: "member")
+    AnalyticsUtteranceResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceResult, name: "member"))
     AnalyticsUtteranceSortByName.add_member(:utterance_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UtteranceTimestamp", traits: {"smithy.api#enumValue" => "UtteranceTimestamp"}))
     AssociatedTranscript.add_member(:transcript, ::Smithy::Schema::Shapes::MemberShape.new(target: Transcript, name: "transcript"))
     AssociatedTranscript.type = Types::AssociatedTranscript
@@ -1106,8 +1106,8 @@ module Aws::LexModelsV2
     AssociatedTranscriptFilter.type = Types::AssociatedTranscriptFilter
     AssociatedTranscriptFilterName.add_member(:intent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IntentId", traits: {"smithy.api#enumValue" => "IntentId"}))
     AssociatedTranscriptFilterName.add_member(:slot_type_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SlotTypeId", traits: {"smithy.api#enumValue" => "SlotTypeId"}))
-    AssociatedTranscriptFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedTranscriptFilter, name: "member")
-    AssociatedTranscriptList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedTranscript, name: "member")
+    AssociatedTranscriptFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedTranscriptFilter, name: "member"))
+    AssociatedTranscriptList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedTranscript, name: "member"))
     AudioAndDTMFInputSpecification.add_member(:start_timeout_ms, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInMilliSeconds, name: "startTimeoutMs", traits: {"smithy.api#required" => {}}))
     AudioAndDTMFInputSpecification.add_member(:audio_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioSpecification, name: "audioSpecification"))
     AudioAndDTMFInputSpecification.add_member(:dtmf_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: DTMFSpecification, name: "dtmfSpecification"))
@@ -1118,7 +1118,7 @@ module Aws::LexModelsV2
     AudioLogSetting.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioLogDestination, name: "destination", traits: {"smithy.api#required" => {}}))
     AudioLogSetting.add_member(:selective_logging_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "selectiveLoggingEnabled"))
     AudioLogSetting.type = Types::AudioLogSetting
-    AudioLogSettingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AudioLogSetting, name: "member")
+    AudioLogSettingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioLogSetting, name: "member"))
     AudioRecognitionStrategy.add_member(:use_slot_values_as_custom_vocabulary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UseSlotValuesAsCustomVocabulary", traits: {"smithy.api#enumValue" => "UseSlotValuesAsCustomVocabulary"}))
     AudioSpecification.add_member(:max_length_ms, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInMilliSeconds, name: "maxLengthMs", traits: {"smithy.api#required" => {}}))
     AudioSpecification.add_member(:end_timeout_ms, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInMilliSeconds, name: "endTimeoutMs", traits: {"smithy.api#required" => {}}))
@@ -1176,12 +1176,12 @@ module Aws::LexModelsV2
     BotAliasHistoryEvent.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startDate"))
     BotAliasHistoryEvent.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "endDate"))
     BotAliasHistoryEvent.type = Types::BotAliasHistoryEvent
-    BotAliasHistoryEventsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasHistoryEvent, name: "member")
+    BotAliasHistoryEventsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasHistoryEvent, name: "member"))
     BotAliasLocaleSettings.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     BotAliasLocaleSettings.add_member(:code_hook_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeHookSpecification, name: "codeHookSpecification"))
     BotAliasLocaleSettings.type = Types::BotAliasLocaleSettings
-    BotAliasLocaleSettingsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "key")
-    BotAliasLocaleSettingsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasLocaleSettings, name: "value")
+    BotAliasLocaleSettingsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "key"))
+    BotAliasLocaleSettingsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasLocaleSettings, name: "value"))
     BotAliasReplicaSummary.add_member(:bot_alias_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasId, name: "botAliasId"))
     BotAliasReplicaSummary.add_member(:bot_alias_replication_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasReplicationStatus, name: "botAliasReplicationStatus"))
     BotAliasReplicaSummary.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: BotVersion, name: "botVersion"))
@@ -1189,7 +1189,7 @@ module Aws::LexModelsV2
     BotAliasReplicaSummary.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedDateTime"))
     BotAliasReplicaSummary.add_member(:failure_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReasons, name: "failureReasons"))
     BotAliasReplicaSummary.type = Types::BotAliasReplicaSummary
-    BotAliasReplicaSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasReplicaSummary, name: "member")
+    BotAliasReplicaSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasReplicaSummary, name: "member"))
     BotAliasReplicationStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Creating", traits: {"smithy.api#enumValue" => "Creating"}))
     BotAliasReplicationStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Updating", traits: {"smithy.api#enumValue" => "Updating"}))
     BotAliasReplicationStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Available", traits: {"smithy.api#enumValue" => "Available"}))
@@ -1207,7 +1207,7 @@ module Aws::LexModelsV2
     BotAliasSummary.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDateTime"))
     BotAliasSummary.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedDateTime"))
     BotAliasSummary.type = Types::BotAliasSummary
-    BotAliasSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasSummary, name: "member")
+    BotAliasSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasSummary, name: "member"))
     BotAliasTestExecutionTarget.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId", traits: {"smithy.api#required" => {}}))
     BotAliasTestExecutionTarget.add_member(:bot_alias_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasId, name: "botAliasId", traits: {"smithy.api#required" => {}}))
     BotAliasTestExecutionTarget.add_member(:locale_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "localeId", traits: {"smithy.api#required" => {}}))
@@ -1224,7 +1224,7 @@ module Aws::LexModelsV2
     BotFilterOperator.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Contains", traits: {"smithy.api#enumValue" => "CO"}))
     BotFilterOperator.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Equals", traits: {"smithy.api#enumValue" => "EQ"}))
     BotFilterOperator.add_member(:not_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NotEquals", traits: {"smithy.api#enumValue" => "NE"}))
-    BotFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BotFilter, name: "member")
+    BotFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BotFilter, name: "member"))
     BotImportSpecification.add_member(:bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "botName", traits: {"smithy.api#required" => {}}))
     BotImportSpecification.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
     BotImportSpecification.add_member(:data_privacy, ::Smithy::Schema::Shapes::MemberShape.new(target: DataPrivacy, name: "dataPrivacy", traits: {"smithy.api#required" => {}}))
@@ -1244,11 +1244,11 @@ module Aws::LexModelsV2
     BotLocaleFilterName.add_member(:bot_locale_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BotLocaleName", traits: {"smithy.api#enumValue" => "BotLocaleName"}))
     BotLocaleFilterOperator.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Contains", traits: {"smithy.api#enumValue" => "CO"}))
     BotLocaleFilterOperator.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Equals", traits: {"smithy.api#enumValue" => "EQ"}))
-    BotLocaleFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BotLocaleFilter, name: "member")
+    BotLocaleFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BotLocaleFilter, name: "member"))
     BotLocaleHistoryEvent.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: BotLocaleHistoryEventDescription, name: "event", traits: {"smithy.api#required" => {}}))
     BotLocaleHistoryEvent.add_member(:event_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "eventDate", traits: {"smithy.api#required" => {}}))
     BotLocaleHistoryEvent.type = Types::BotLocaleHistoryEvent
-    BotLocaleHistoryEventsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BotLocaleHistoryEvent, name: "member")
+    BotLocaleHistoryEventsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BotLocaleHistoryEvent, name: "member"))
     BotLocaleImportSpecification.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId", traits: {"smithy.api#required" => {}}))
     BotLocaleImportSpecification.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DraftBotVersion, name: "botVersion", traits: {"smithy.api#required" => {}}))
     BotLocaleImportSpecification.add_member(:locale_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "localeId", traits: {"smithy.api#required" => {}}))
@@ -1275,14 +1275,14 @@ module Aws::LexModelsV2
     BotLocaleSummary.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedDateTime"))
     BotLocaleSummary.add_member(:last_build_submitted_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastBuildSubmittedDateTime"))
     BotLocaleSummary.type = Types::BotLocaleSummary
-    BotLocaleSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BotLocaleSummary, name: "member")
+    BotLocaleSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BotLocaleSummary, name: "member"))
     BotMember.add_member(:bot_member_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botMemberId", traits: {"smithy.api#required" => {}}))
     BotMember.add_member(:bot_member_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "botMemberName", traits: {"smithy.api#required" => {}}))
     BotMember.add_member(:bot_member_alias_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasId, name: "botMemberAliasId", traits: {"smithy.api#required" => {}}))
     BotMember.add_member(:bot_member_alias_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasName, name: "botMemberAliasName", traits: {"smithy.api#required" => {}}))
     BotMember.add_member(:bot_member_version, ::Smithy::Schema::Shapes::MemberShape.new(target: BotVersion, name: "botMemberVersion", traits: {"smithy.api#required" => {}}))
     BotMember.type = Types::BotMember
-    BotMembers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BotMember, name: "member")
+    BotMembers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BotMember, name: "member"))
     BotRecommendationResultStatistics.add_member(:intents, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentStatistics, name: "intents"))
     BotRecommendationResultStatistics.add_member(:slot_types, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeStatistics, name: "slotTypes"))
     BotRecommendationResultStatistics.type = Types::BotRecommendationResultStatistics
@@ -1304,7 +1304,7 @@ module Aws::LexModelsV2
     BotRecommendationSummary.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDateTime"))
     BotRecommendationSummary.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedDateTime"))
     BotRecommendationSummary.type = Types::BotRecommendationSummary
-    BotRecommendationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BotRecommendationSummary, name: "member")
+    BotRecommendationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BotRecommendationSummary, name: "member"))
     BotReplicaStatus.add_member(:enabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Enabling", traits: {"smithy.api#enumValue" => "Enabling"}))
     BotReplicaStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
     BotReplicaStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Deleting", traits: {"smithy.api#enumValue" => "Deleting"}))
@@ -1314,7 +1314,7 @@ module Aws::LexModelsV2
     BotReplicaSummary.add_member(:bot_replica_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BotReplicaStatus, name: "botReplicaStatus"))
     BotReplicaSummary.add_member(:failure_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReasons, name: "failureReasons"))
     BotReplicaSummary.type = Types::BotReplicaSummary
-    BotReplicaSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BotReplicaSummary, name: "member")
+    BotReplicaSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BotReplicaSummary, name: "member"))
     BotSortAttribute.add_member(:bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BotName", traits: {"smithy.api#enumValue" => "BotName"}))
     BotSortBy.add_member(:attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: BotSortAttribute, name: "attribute", traits: {"smithy.api#required" => {}}))
     BotSortBy.add_member(:order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "order", traits: {"smithy.api#required" => {}}))
@@ -1335,13 +1335,13 @@ module Aws::LexModelsV2
     BotSummary.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedDateTime"))
     BotSummary.add_member(:bot_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BotType, name: "botType"))
     BotSummary.type = Types::BotSummary
-    BotSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BotSummary, name: "member")
+    BotSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BotSummary, name: "member"))
     BotType.add_member(:bot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Bot", traits: {"smithy.api#enumValue" => "Bot"}))
     BotType.add_member(:bot_network, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BotNetwork", traits: {"smithy.api#enumValue" => "BotNetwork"}))
     BotVersionLocaleDetails.add_member(:source_bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: BotVersion, name: "sourceBotVersion", traits: {"smithy.api#required" => {}}))
     BotVersionLocaleDetails.type = Types::BotVersionLocaleDetails
-    BotVersionLocaleSpecification.key = ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "key")
-    BotVersionLocaleSpecification.value = ::Smithy::Schema::Shapes::MemberShape.new(target: BotVersionLocaleDetails, name: "value")
+    BotVersionLocaleSpecification.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "key"))
+    BotVersionLocaleSpecification.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: BotVersionLocaleDetails, name: "value"))
     BotVersionReplicaSortAttribute.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BotVersion", traits: {"smithy.api#enumValue" => "BotVersion"}))
     BotVersionReplicaSortBy.add_member(:attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: BotVersionReplicaSortAttribute, name: "attribute", traits: {"smithy.api#required" => {}}))
     BotVersionReplicaSortBy.add_member(:order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "order", traits: {"smithy.api#required" => {}}))
@@ -1351,7 +1351,7 @@ module Aws::LexModelsV2
     BotVersionReplicaSummary.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDateTime"))
     BotVersionReplicaSummary.add_member(:failure_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReasons, name: "failureReasons"))
     BotVersionReplicaSummary.type = Types::BotVersionReplicaSummary
-    BotVersionReplicaSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BotVersionReplicaSummary, name: "member")
+    BotVersionReplicaSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BotVersionReplicaSummary, name: "member"))
     BotVersionReplicationStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Creating", traits: {"smithy.api#enumValue" => "Creating"}))
     BotVersionReplicationStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Available", traits: {"smithy.api#enumValue" => "Available"}))
     BotVersionReplicationStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Deleting", traits: {"smithy.api#enumValue" => "Deleting"}))
@@ -1366,7 +1366,7 @@ module Aws::LexModelsV2
     BotVersionSummary.add_member(:bot_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BotStatus, name: "botStatus"))
     BotVersionSummary.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDateTime"))
     BotVersionSummary.type = Types::BotVersionSummary
-    BotVersionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BotVersionSummary, name: "member")
+    BotVersionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BotVersionSummary, name: "member"))
     BuildBotLocaleRequest.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BuildBotLocaleRequest.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DraftBotVersion, name: "botVersion", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BuildBotLocaleRequest.add_member(:locale_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "localeId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1387,7 +1387,7 @@ module Aws::LexModelsV2
     BuiltInIntentSummary.add_member(:intent_signature, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentSignature, name: "intentSignature"))
     BuiltInIntentSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     BuiltInIntentSummary.type = Types::BuiltInIntentSummary
-    BuiltInIntentSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltInIntentSummary, name: "member")
+    BuiltInIntentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltInIntentSummary, name: "member"))
     BuiltInSlotTypeSortAttribute.add_member(:slot_type_signature, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SlotTypeSignature", traits: {"smithy.api#enumValue" => "SlotTypeSignature"}))
     BuiltInSlotTypeSortBy.add_member(:attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltInSlotTypeSortAttribute, name: "attribute", traits: {"smithy.api#required" => {}}))
     BuiltInSlotTypeSortBy.add_member(:order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "order", traits: {"smithy.api#required" => {}}))
@@ -1395,11 +1395,11 @@ module Aws::LexModelsV2
     BuiltInSlotTypeSummary.add_member(:slot_type_signature, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeSignature, name: "slotTypeSignature"))
     BuiltInSlotTypeSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     BuiltInSlotTypeSummary.type = Types::BuiltInSlotTypeSummary
-    BuiltInSlotTypeSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltInSlotTypeSummary, name: "member")
+    BuiltInSlotTypeSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltInSlotTypeSummary, name: "member"))
     Button.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ButtonText, name: "text", traits: {"smithy.api#required" => {}}))
     Button.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ButtonValue, name: "value", traits: {"smithy.api#required" => {}}))
     Button.type = Types::Button
-    ButtonsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Button, name: "member")
+    ButtonsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Button, name: "member"))
     CloudWatchLogGroupLogDestination.add_member(:cloud_watch_log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogGroupArn, name: "cloudWatchLogGroupArn", traits: {"smithy.api#required" => {}}))
     CloudWatchLogGroupLogDestination.add_member(:log_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: LogPrefix, name: "logPrefix", traits: {"smithy.api#required" => {}}))
     CloudWatchLogGroupLogDestination.type = Types::CloudWatchLogGroupLogDestination
@@ -1409,16 +1409,16 @@ module Aws::LexModelsV2
     CompositeSlotTypeSetting.type = Types::CompositeSlotTypeSetting
     Condition.add_member(:expression_string, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionExpression, name: "expressionString", traits: {"smithy.api#required" => {}}))
     Condition.type = Types::Condition
-    ConditionKeyValueMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionKey, name: "key")
-    ConditionKeyValueMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionValue, name: "value")
-    ConditionMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionOperator, name: "key")
-    ConditionMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionKeyValueMap, name: "value")
+    ConditionKeyValueMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionKey, name: "key"))
+    ConditionKeyValueMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionValue, name: "value"))
+    ConditionMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionOperator, name: "key"))
+    ConditionMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionKeyValueMap, name: "value"))
     ConditionalBranch.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
     ConditionalBranch.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "condition", traits: {"smithy.api#required" => {}}))
     ConditionalBranch.add_member(:next_step, ::Smithy::Schema::Shapes::MemberShape.new(target: DialogState, name: "nextStep", traits: {"smithy.api#required" => {}}))
     ConditionalBranch.add_member(:response, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseSpecification, name: "response"))
     ConditionalBranch.type = Types::ConditionalBranch
-    ConditionalBranches.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionalBranch, name: "member")
+    ConditionalBranches.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionalBranch, name: "member"))
     ConditionalSpecification.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "active", traits: {"smithy.api#required" => {}}))
     ConditionalSpecification.add_member(:conditional_branches, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionalBranches, name: "conditionalBranches", traits: {"smithy.api#required" => {}}))
     ConditionalSpecification.add_member(:default_branch, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultConditionalBranch, name: "defaultBranch", traits: {"smithy.api#required" => {}}))
@@ -1431,7 +1431,7 @@ module Aws::LexModelsV2
     ConversationLevelIntentClassificationResultItem.add_member(:intent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "intentName", traits: {"smithy.api#required" => {}}))
     ConversationLevelIntentClassificationResultItem.add_member(:match_result, ::Smithy::Schema::Shapes::MemberShape.new(target: TestResultMatchStatus, name: "matchResult", traits: {"smithy.api#required" => {}}))
     ConversationLevelIntentClassificationResultItem.type = Types::ConversationLevelIntentClassificationResultItem
-    ConversationLevelIntentClassificationResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationLevelIntentClassificationResultItem, name: "member")
+    ConversationLevelIntentClassificationResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationLevelIntentClassificationResultItem, name: "member"))
     ConversationLevelResultDetail.add_member(:end_to_end_result, ::Smithy::Schema::Shapes::MemberShape.new(target: TestResultMatchStatus, name: "endToEndResult", traits: {"smithy.api#required" => {}}))
     ConversationLevelResultDetail.add_member(:speech_transcription_result, ::Smithy::Schema::Shapes::MemberShape.new(target: TestResultMatchStatus, name: "speechTranscriptionResult"))
     ConversationLevelResultDetail.type = Types::ConversationLevelResultDetail
@@ -1439,14 +1439,14 @@ module Aws::LexModelsV2
     ConversationLevelSlotResolutionResultItem.add_member(:slot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TestResultSlotName, name: "slotName", traits: {"smithy.api#required" => {}}))
     ConversationLevelSlotResolutionResultItem.add_member(:match_result, ::Smithy::Schema::Shapes::MemberShape.new(target: TestResultMatchStatus, name: "matchResult", traits: {"smithy.api#required" => {}}))
     ConversationLevelSlotResolutionResultItem.type = Types::ConversationLevelSlotResolutionResultItem
-    ConversationLevelSlotResolutionResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationLevelSlotResolutionResultItem, name: "member")
+    ConversationLevelSlotResolutionResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationLevelSlotResolutionResultItem, name: "member"))
     ConversationLevelTestResultItem.add_member(:conversation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TestSetConversationId, name: "conversationId", traits: {"smithy.api#required" => {}}))
     ConversationLevelTestResultItem.add_member(:end_to_end_result, ::Smithy::Schema::Shapes::MemberShape.new(target: TestResultMatchStatus, name: "endToEndResult", traits: {"smithy.api#required" => {}}))
     ConversationLevelTestResultItem.add_member(:speech_transcription_result, ::Smithy::Schema::Shapes::MemberShape.new(target: TestResultMatchStatus, name: "speechTranscriptionResult"))
     ConversationLevelTestResultItem.add_member(:intent_classification_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationLevelIntentClassificationResults, name: "intentClassificationResults", traits: {"smithy.api#required" => {}}))
     ConversationLevelTestResultItem.add_member(:slot_resolution_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationLevelSlotResolutionResults, name: "slotResolutionResults", traits: {"smithy.api#required" => {}}))
     ConversationLevelTestResultItem.type = Types::ConversationLevelTestResultItem
-    ConversationLevelTestResultItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationLevelTestResultItem, name: "member")
+    ConversationLevelTestResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationLevelTestResultItem, name: "member"))
     ConversationLevelTestResults.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationLevelTestResultItemList, name: "items", traits: {"smithy.api#required" => {}}))
     ConversationLevelTestResults.type = Types::ConversationLevelTestResults
     ConversationLevelTestResultsFilterBy.add_member(:end_to_end_result, ::Smithy::Schema::Shapes::MemberShape.new(target: TestResultMatchStatus, name: "endToEndResult"))
@@ -1550,7 +1550,7 @@ module Aws::LexModelsV2
     CreateBotVersionResponse.add_member(:bot_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BotStatus, name: "botStatus"))
     CreateBotVersionResponse.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDateTime"))
     CreateBotVersionResponse.type = Types::CreateBotVersionResponse
-    CreateCustomVocabularyItemsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NewCustomVocabularyItem, name: "member")
+    CreateCustomVocabularyItemsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NewCustomVocabularyItem, name: "member"))
     CreateExportRequest.add_member(:resource_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportResourceSpecification, name: "resourceSpecification", traits: {"smithy.api#required" => {}}))
     CreateExportRequest.add_member(:file_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportExportFileFormat, name: "fileFormat", traits: {"smithy.api#required" => {}}))
     CreateExportRequest.add_member(:file_password, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportExportFilePassword, name: "filePassword"))
@@ -1695,7 +1695,7 @@ module Aws::LexModelsV2
     CustomVocabularyItem.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: Weight, name: "weight"))
     CustomVocabularyItem.add_member(:display_as, ::Smithy::Schema::Shapes::MemberShape.new(target: Phrase, name: "displayAs"))
     CustomVocabularyItem.type = Types::CustomVocabularyItem
-    CustomVocabularyItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomVocabularyItem, name: "member")
+    CustomVocabularyItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomVocabularyItem, name: "member"))
     CustomVocabularyStatus.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Ready", traits: {"smithy.api#enumValue" => "Ready"}))
     CustomVocabularyStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Deleting", traits: {"smithy.api#enumValue" => "Deleting"}))
     CustomVocabularyStatus.add_member(:exporting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Exporting", traits: {"smithy.api#enumValue" => "Exporting"}))
@@ -1756,7 +1756,7 @@ module Aws::LexModelsV2
     DeleteBotVersionResponse.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NumericalBotVersion, name: "botVersion"))
     DeleteBotVersionResponse.add_member(:bot_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BotStatus, name: "botStatus"))
     DeleteBotVersionResponse.type = Types::DeleteBotVersionResponse
-    DeleteCustomVocabularyItemsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomVocabularyEntryId, name: "member")
+    DeleteCustomVocabularyItemsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomVocabularyEntryId, name: "member"))
     DeleteCustomVocabularyRequest.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteCustomVocabularyRequest.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DraftBotVersion, name: "botVersion", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteCustomVocabularyRequest.add_member(:locale_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "localeId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -2143,7 +2143,7 @@ module Aws::LexModelsV2
     ExportFilterName.add_member(:export_resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ExportResourceType", traits: {"smithy.api#enumValue" => "ExportResourceType"}))
     ExportFilterOperator.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Contains", traits: {"smithy.api#enumValue" => "CO"}))
     ExportFilterOperator.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Equals", traits: {"smithy.api#enumValue" => "EQ"}))
-    ExportFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilter, name: "member")
+    ExportFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilter, name: "member"))
     ExportResourceSpecification.add_member(:bot_export_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: BotExportSpecification, name: "botExportSpecification"))
     ExportResourceSpecification.add_member(:bot_locale_export_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: BotLocaleExportSpecification, name: "botLocaleExportSpecification"))
     ExportResourceSpecification.add_member(:custom_vocabulary_export_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomVocabularyExportSpecification, name: "customVocabularyExportSpecification"))
@@ -2164,16 +2164,16 @@ module Aws::LexModelsV2
     ExportSummary.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDateTime"))
     ExportSummary.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedDateTime"))
     ExportSummary.type = Types::ExportSummary
-    ExportSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportSummary, name: "member")
+    ExportSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportSummary, name: "member"))
     ExternalSourceSetting.add_member(:grammar_slot_type_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: GrammarSlotTypeSetting, name: "grammarSlotTypeSetting"))
     ExternalSourceSetting.type = Types::ExternalSourceSetting
     FailedCustomVocabularyItem.add_member(:item_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemId, name: "itemId"))
     FailedCustomVocabularyItem.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
     FailedCustomVocabularyItem.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "errorCode"))
     FailedCustomVocabularyItem.type = Types::FailedCustomVocabularyItem
-    FailedCustomVocabularyItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedCustomVocabularyItem, name: "member")
-    FailureReasons.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "member")
-    FilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member")
+    FailedCustomVocabularyItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedCustomVocabularyItem, name: "member"))
+    FailureReasons.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "member"))
+    FilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member"))
     FulfillmentCodeHookSettings.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     FulfillmentCodeHookSettings.add_member(:post_fulfillment_status_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: PostFulfillmentStatusSpecification, name: "postFulfillmentStatusSpecification"))
     FulfillmentCodeHookSettings.add_member(:fulfillment_updates_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: FulfillmentUpdatesSpecification, name: "fulfillmentUpdatesSpecification"))
@@ -2216,7 +2216,7 @@ module Aws::LexModelsV2
     GenerationSummary.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDateTime"))
     GenerationSummary.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedDateTime"))
     GenerationSummary.type = Types::GenerationSummary
-    GenerationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GenerationSummary, name: "member")
+    GenerationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GenerationSummary, name: "member"))
     GenerativeAISettings.add_member(:runtime_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeSettings, name: "runtimeSettings"))
     GenerativeAISettings.add_member(:buildtime_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: BuildtimeSettings, name: "buildtimeSettings"))
     GenerativeAISettings.type = Types::GenerativeAISettings
@@ -2246,7 +2246,7 @@ module Aws::LexModelsV2
     ImportFilterName.add_member(:import_resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ImportResourceType", traits: {"smithy.api#enumValue" => "ImportResourceType"}))
     ImportFilterOperator.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Contains", traits: {"smithy.api#enumValue" => "CO"}))
     ImportFilterOperator.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Equals", traits: {"smithy.api#enumValue" => "EQ"}))
-    ImportFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportFilter, name: "member")
+    ImportFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportFilter, name: "member"))
     ImportResourceSpecification.add_member(:bot_import_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: BotImportSpecification, name: "botImportSpecification"))
     ImportResourceSpecification.add_member(:bot_locale_import_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: BotLocaleImportSpecification, name: "botLocaleImportSpecification"))
     ImportResourceSpecification.add_member(:custom_vocabulary_import_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomVocabularyImportSpecification, name: "customVocabularyImportSpecification"))
@@ -2273,7 +2273,7 @@ module Aws::LexModelsV2
     ImportSummary.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedDateTime"))
     ImportSummary.add_member(:imported_resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportResourceType, name: "importedResourceType"))
     ImportSummary.type = Types::ImportSummary
-    ImportSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportSummary, name: "member")
+    ImportSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportSummary, name: "member"))
     InitialResponseSetting.add_member(:initial_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseSpecification, name: "initialResponse"))
     InitialResponseSetting.add_member(:next_step, ::Smithy::Schema::Shapes::MemberShape.new(target: DialogState, name: "nextStep"))
     InitialResponseSetting.add_member(:conditional, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionalSpecification, name: "conditional"))
@@ -2281,7 +2281,7 @@ module Aws::LexModelsV2
     InitialResponseSetting.type = Types::InitialResponseSetting
     InputContext.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
     InputContext.type = Types::InputContext
-    InputContextsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InputContext, name: "member")
+    InputContextsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InputContext, name: "member"))
     InputSessionStateSpecification.add_member(:session_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMap, name: "sessionAttributes"))
     InputSessionStateSpecification.add_member(:active_contexts, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveContextList, name: "activeContexts"))
     InputSessionStateSpecification.add_member(:runtime_hints, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeHints, name: "runtimeHints"))
@@ -2294,7 +2294,7 @@ module Aws::LexModelsV2
     IntentClassificationTestResultItemCounts.add_member(:speech_transcription_result_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: TestResultMatchStatusCountMap, name: "speechTranscriptionResultCounts"))
     IntentClassificationTestResultItemCounts.add_member(:intent_match_result_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: TestResultMatchStatusCountMap, name: "intentMatchResultCounts", traits: {"smithy.api#required" => {}}))
     IntentClassificationTestResultItemCounts.type = Types::IntentClassificationTestResultItemCounts
-    IntentClassificationTestResultItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IntentClassificationTestResultItem, name: "member")
+    IntentClassificationTestResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentClassificationTestResultItem, name: "member"))
     IntentClassificationTestResults.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentClassificationTestResultItemList, name: "items", traits: {"smithy.api#required" => {}}))
     IntentClassificationTestResults.type = Types::IntentClassificationTestResults
     IntentClosingSetting.add_member(:closing_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseSpecification, name: "closingResponse"))
@@ -2323,12 +2323,12 @@ module Aws::LexModelsV2
     IntentFilterName.add_member(:intent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IntentName", traits: {"smithy.api#enumValue" => "IntentName"}))
     IntentFilterOperator.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Contains", traits: {"smithy.api#enumValue" => "CO"}))
     IntentFilterOperator.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Equals", traits: {"smithy.api#enumValue" => "EQ"}))
-    IntentFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IntentFilter, name: "member")
+    IntentFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentFilter, name: "member"))
     IntentLevelSlotResolutionTestResultItem.add_member(:intent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "intentName", traits: {"smithy.api#required" => {}}))
     IntentLevelSlotResolutionTestResultItem.add_member(:multi_turn_conversation, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "multiTurnConversation", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     IntentLevelSlotResolutionTestResultItem.add_member(:slot_resolution_results, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotResolutionTestResultItems, name: "slotResolutionResults", traits: {"smithy.api#required" => {}}))
     IntentLevelSlotResolutionTestResultItem.type = Types::IntentLevelSlotResolutionTestResultItem
-    IntentLevelSlotResolutionTestResultItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IntentLevelSlotResolutionTestResultItem, name: "member")
+    IntentLevelSlotResolutionTestResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentLevelSlotResolutionTestResultItem, name: "member"))
     IntentLevelSlotResolutionTestResults.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentLevelSlotResolutionTestResultItemList, name: "items", traits: {"smithy.api#required" => {}}))
     IntentLevelSlotResolutionTestResults.type = Types::IntentLevelSlotResolutionTestResults
     IntentOverride.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
@@ -2355,12 +2355,12 @@ module Aws::LexModelsV2
     IntentSummary.add_member(:output_contexts, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputContextsList, name: "outputContexts"))
     IntentSummary.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedDateTime"))
     IntentSummary.type = Types::IntentSummary
-    IntentSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IntentSummary, name: "member")
+    IntentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentSummary, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     InternalServerException.type = Types::InternalServerException
     InvokedIntentSample.add_member(:intent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "intentName"))
     InvokedIntentSample.type = Types::InvokedIntentSample
-    InvokedIntentSamples.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InvokedIntentSample, name: "member")
+    InvokedIntentSamples.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InvokedIntentSample, name: "member"))
     KendraConfiguration.add_member(:kendra_index, ::Smithy::Schema::Shapes::MemberShape.new(target: KendraIndexArn, name: "kendraIndex", traits: {"smithy.api#required" => {}}))
     KendraConfiguration.add_member(:query_filter_string_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "queryFilterStringEnabled", traits: {"smithy.api#default" => false}))
     KendraConfiguration.add_member(:query_filter_string, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryFilterString, name: "queryFilterString"))
@@ -2731,10 +2731,10 @@ module Aws::LexModelsV2
     MessageGroup.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message", traits: {"smithy.api#required" => {}}))
     MessageGroup.add_member(:variations, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageVariationsList, name: "variations"))
     MessageGroup.type = Types::MessageGroup
-    MessageGroupsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageGroup, name: "member")
+    MessageGroupsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageGroup, name: "member"))
     MessageSelectionStrategy.add_member(:random, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Random", traits: {"smithy.api#enumValue" => "Random"}))
     MessageSelectionStrategy.add_member(:ordered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Ordered", traits: {"smithy.api#enumValue" => "Ordered"}))
-    MessageVariationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "member")
+    MessageVariationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "member"))
     MultipleValuesSetting.add_member(:allow_multiple_values, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "allowMultipleValues", traits: {"smithy.api#default" => false}))
     MultipleValuesSetting.type = Types::MultipleValuesSetting
     NewCustomVocabularyItem.add_member(:phrase, ::Smithy::Schema::Shapes::MemberShape.new(target: Phrase, name: "phrase", traits: {"smithy.api#required" => {}}))
@@ -2743,36 +2743,36 @@ module Aws::LexModelsV2
     NewCustomVocabularyItem.type = Types::NewCustomVocabularyItem
     NluImprovementSpecification.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, name: "enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     NluImprovementSpecification.type = Types::NluImprovementSpecification
-    OSIncludeFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IncludeField, name: "member")
+    OSIncludeFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludeField, name: "member"))
     ObfuscationSetting.add_member(:obfuscation_setting_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ObfuscationSettingType, name: "obfuscationSettingType", traits: {"smithy.api#required" => {}}))
     ObfuscationSetting.type = Types::ObfuscationSetting
     ObfuscationSettingType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "None", traits: {"smithy.api#enumValue" => "None"}))
     ObfuscationSettingType.add_member(:default_obfuscation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DefaultObfuscation", traits: {"smithy.api#enumValue" => "DefaultObfuscation"}))
-    ObjectPrefixes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectPrefix, name: "member")
+    ObjectPrefixes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectPrefix, name: "member"))
     OpensearchConfiguration.add_member(:domain_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainEndpoint, name: "domainEndpoint", traits: {"smithy.api#required" => {}}))
     OpensearchConfiguration.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OSIndexName, name: "indexName", traits: {"smithy.api#required" => {}}))
     OpensearchConfiguration.add_member(:exact_response, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "exactResponse", traits: {"smithy.api#default" => false}))
     OpensearchConfiguration.add_member(:exact_response_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: ExactResponseFields, name: "exactResponseFields"))
     OpensearchConfiguration.add_member(:include_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: OSIncludeFields, name: "includeFields"))
     OpensearchConfiguration.type = Types::OpensearchConfiguration
-    OperationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, name: "member")
+    OperationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, name: "member"))
     OutputContext.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
     OutputContext.add_member(:time_to_live_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextTimeToLiveInSeconds, name: "timeToLiveInSeconds", traits: {"smithy.api#required" => {}}))
     OutputContext.add_member(:turns_to_live, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextTurnsToLive, name: "turnsToLive", traits: {"smithy.api#required" => {}}))
     OutputContext.type = Types::OutputContext
-    OutputContextsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OutputContext, name: "member")
+    OutputContextsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputContext, name: "member"))
     OverallTestResultItem.add_member(:multi_turn_conversation, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "multiTurnConversation", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     OverallTestResultItem.add_member(:total_result_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "totalResultCount", traits: {"smithy.api#required" => {}}))
     OverallTestResultItem.add_member(:speech_transcription_result_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: TestResultMatchStatusCountMap, name: "speechTranscriptionResultCounts"))
     OverallTestResultItem.add_member(:end_to_end_result_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: TestResultMatchStatusCountMap, name: "endToEndResultCounts", traits: {"smithy.api#required" => {}}))
     OverallTestResultItem.type = Types::OverallTestResultItem
-    OverallTestResultItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OverallTestResultItem, name: "member")
+    OverallTestResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OverallTestResultItem, name: "member"))
     OverallTestResults.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: OverallTestResultItemList, name: "items", traits: {"smithy.api#required" => {}}))
     OverallTestResults.type = Types::OverallTestResults
     ParentBotNetwork.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId", traits: {"smithy.api#required" => {}}))
     ParentBotNetwork.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: BotVersion, name: "botVersion", traits: {"smithy.api#required" => {}}))
     ParentBotNetwork.type = Types::ParentBotNetwork
-    ParentBotNetworks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParentBotNetwork, name: "member")
+    ParentBotNetworks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParentBotNetwork, name: "member"))
     PathFormat.add_member(:object_prefixes, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectPrefixes, name: "objectPrefixes"))
     PathFormat.type = Types::PathFormat
     PlainTextMessage.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PlainTextMessageValue, name: "value", traits: {"smithy.api#required" => {}}))
@@ -2802,7 +2802,7 @@ module Aws::LexModelsV2
     Principal.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipal, name: "service"))
     Principal.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalArn, name: "arn"))
     Principal.type = Types::Principal
-    PrincipalList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Principal, name: "member")
+    PrincipalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Principal, name: "member"))
     PromptAttempt.add_member(:initial, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Initial", traits: {"smithy.api#enumValue" => "Initial"}))
     PromptAttempt.add_member(:retry1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Retry1", traits: {"smithy.api#enumValue" => "Retry1"}))
     PromptAttempt.add_member(:retry2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Retry2", traits: {"smithy.api#enumValue" => "Retry2"}))
@@ -2814,8 +2814,8 @@ module Aws::LexModelsV2
     PromptAttemptSpecification.add_member(:audio_and_dtmf_input_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioAndDTMFInputSpecification, name: "audioAndDTMFInputSpecification"))
     PromptAttemptSpecification.add_member(:text_input_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: TextInputSpecification, name: "textInputSpecification"))
     PromptAttemptSpecification.type = Types::PromptAttemptSpecification
-    PromptAttemptsSpecificationMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: PromptAttempt, name: "key")
-    PromptAttemptsSpecificationMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: PromptAttemptSpecification, name: "value")
+    PromptAttemptsSpecificationMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptAttempt, name: "key"))
+    PromptAttemptsSpecificationMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptAttemptSpecification, name: "value"))
     PromptSpecification.add_member(:message_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageGroupsList, name: "messageGroups", traits: {"smithy.api#required" => {}}))
     PromptSpecification.add_member(:max_retries, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptMaxRetries, name: "maxRetries", traits: {"smithy.api#required" => {}}))
     PromptSpecification.add_member(:allow_interrupt, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "allowInterrupt"))
@@ -2834,12 +2834,12 @@ module Aws::LexModelsV2
     QnAKendraConfiguration.add_member(:query_filter_string, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryFilterString, name: "queryFilterString"))
     QnAKendraConfiguration.add_member(:exact_response, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "exactResponse", traits: {"smithy.api#default" => false}))
     QnAKendraConfiguration.type = Types::QnAKendraConfiguration
-    RecommendedActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendedAction, name: "member")
+    RecommendedActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendedAction, name: "member"))
     RecommendedIntentSummary.add_member(:intent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "intentId"))
     RecommendedIntentSummary.add_member(:intent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "intentName"))
     RecommendedIntentSummary.add_member(:sample_utterances_count, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleUtterancesCount, name: "sampleUtterancesCount"))
     RecommendedIntentSummary.type = Types::RecommendedIntentSummary
-    RecommendedIntentSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendedIntentSummary, name: "member")
+    RecommendedIntentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendedIntentSummary, name: "member"))
     RelativeAggregationDuration.add_member(:time_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeDimension, name: "timeDimension", traits: {"smithy.api#required" => {}}))
     RelativeAggregationDuration.add_member(:time_value, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeValue, name: "timeValue", traits: {"smithy.api#required" => {}}))
     RelativeAggregationDuration.type = Types::RelativeAggregationDuration
@@ -2853,7 +2853,7 @@ module Aws::LexModelsV2
     RuntimeHintDetails.type = Types::RuntimeHintDetails
     RuntimeHintValue.add_member(:phrase, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeHintPhrase, name: "phrase", traits: {"smithy.api#required" => {}}))
     RuntimeHintValue.type = Types::RuntimeHintValue
-    RuntimeHintValuesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeHintValue, name: "member")
+    RuntimeHintValuesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeHintValue, name: "member"))
     RuntimeHints.add_member(:slot_hints, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotHintsIntentMap, name: "slotHints"))
     RuntimeHints.type = Types::RuntimeHints
     RuntimeSettings.add_member(:slot_resolution_improvement, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotResolutionImprovementSpecification, name: "slotResolutionImprovement"))
@@ -2876,7 +2876,7 @@ module Aws::LexModelsV2
     SampleUtteranceGenerationSpecification.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     SampleUtteranceGenerationSpecification.add_member(:bedrock_model_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: BedrockModelSpecification, name: "bedrockModelSpecification"))
     SampleUtteranceGenerationSpecification.type = Types::SampleUtteranceGenerationSpecification
-    SampleUtterancesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SampleUtterance, name: "member")
+    SampleUtterancesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleUtterance, name: "member"))
     SampleValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "value", traits: {"smithy.api#required" => {}}))
     SampleValue.type = Types::SampleValue
     SearchAssociatedTranscriptsRequest.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -2919,7 +2919,7 @@ module Aws::LexModelsV2
     SessionSpecification.add_member(:invoked_intent_samples, ::Smithy::Schema::Shapes::MemberShape.new(target: InvokedIntentSamples, name: "invokedIntentSamples"))
     SessionSpecification.add_member(:originating_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsOriginatingRequestId, name: "originatingRequestId"))
     SessionSpecification.type = Types::SessionSpecification
-    SessionSpecifications.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SessionSpecification, name: "member")
+    SessionSpecifications.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionSpecification, name: "member"))
     SlotCaptureSetting.add_member(:capture_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseSpecification, name: "captureResponse"))
     SlotCaptureSetting.add_member(:capture_next_step, ::Smithy::Schema::Shapes::MemberShape.new(target: DialogState, name: "captureNextStep"))
     SlotCaptureSetting.add_member(:capture_conditional, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionalSpecification, name: "captureConditional"))
@@ -2933,7 +2933,7 @@ module Aws::LexModelsV2
     SlotConstraint.add_member(:optional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Optional", traits: {"smithy.api#enumValue" => "Optional"}))
     SlotDefaultValue.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotDefaultValueString, name: "defaultValue", traits: {"smithy.api#required" => {}}))
     SlotDefaultValue.type = Types::SlotDefaultValue
-    SlotDefaultValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlotDefaultValue, name: "member")
+    SlotDefaultValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotDefaultValue, name: "member"))
     SlotDefaultValueSpecification.add_member(:default_value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotDefaultValueList, name: "defaultValueList", traits: {"smithy.api#required" => {}}))
     SlotDefaultValueSpecification.type = Types::SlotDefaultValueSpecification
     SlotFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotFilterName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -2943,12 +2943,12 @@ module Aws::LexModelsV2
     SlotFilterName.add_member(:slot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SlotName", traits: {"smithy.api#enumValue" => "SlotName"}))
     SlotFilterOperator.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Contains", traits: {"smithy.api#enumValue" => "CO"}))
     SlotFilterOperator.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Equals", traits: {"smithy.api#enumValue" => "EQ"}))
-    SlotFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlotFilter, name: "member")
-    SlotHintsIntentMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "key")
-    SlotHintsIntentMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SlotHintsSlotMap, name: "value")
-    SlotHintsSlotMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "key")
-    SlotHintsSlotMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeHintDetails, name: "value")
-    SlotPrioritiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlotPriority, name: "member")
+    SlotFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotFilter, name: "member"))
+    SlotHintsIntentMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "key"))
+    SlotHintsIntentMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotHintsSlotMap, name: "value"))
+    SlotHintsSlotMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "key"))
+    SlotHintsSlotMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeHintDetails, name: "value"))
+    SlotPrioritiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotPriority, name: "member"))
     SlotPriority.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: PriorityValue, name: "priority", traits: {"smithy.api#required" => {}}))
     SlotPriority.add_member(:slot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "slotId", traits: {"smithy.api#required" => {}}))
     SlotPriority.type = Types::SlotPriority
@@ -2966,7 +2966,7 @@ module Aws::LexModelsV2
     SlotResolutionTestResultItemCounts.add_member(:speech_transcription_result_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: TestResultMatchStatusCountMap, name: "speechTranscriptionResultCounts"))
     SlotResolutionTestResultItemCounts.add_member(:slot_match_result_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: TestResultMatchStatusCountMap, name: "slotMatchResultCounts", traits: {"smithy.api#required" => {}}))
     SlotResolutionTestResultItemCounts.type = Types::SlotResolutionTestResultItemCounts
-    SlotResolutionTestResultItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlotResolutionTestResultItem, name: "member")
+    SlotResolutionTestResultItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotResolutionTestResultItem, name: "member"))
     SlotShape.add_member(:scalar, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Scalar", traits: {"smithy.api#enumValue" => "Scalar"}))
     SlotShape.add_member(:list, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "List", traits: {"smithy.api#enumValue" => "List"}))
     SlotSortAttribute.add_member(:slot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SlotName", traits: {"smithy.api#enumValue" => "SlotName"}))
@@ -2982,7 +2982,7 @@ module Aws::LexModelsV2
     SlotSummary.add_member(:value_elicitation_prompt_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptSpecification, name: "valueElicitationPromptSpecification"))
     SlotSummary.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedDateTime"))
     SlotSummary.type = Types::SlotSummary
-    SlotSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlotSummary, name: "member")
+    SlotSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotSummary, name: "member"))
     SlotTypeCategory.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Custom", traits: {"smithy.api#enumValue" => "Custom"}))
     SlotTypeCategory.add_member(:extended, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Extended", traits: {"smithy.api#enumValue" => "Extended"}))
     SlotTypeCategory.add_member(:external_grammar, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ExternalGrammar", traits: {"smithy.api#enumValue" => "ExternalGrammar"}))
@@ -2995,7 +2995,7 @@ module Aws::LexModelsV2
     SlotTypeFilterName.add_member(:external_source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ExternalSourceType", traits: {"smithy.api#enumValue" => "ExternalSourceType"}))
     SlotTypeFilterOperator.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Contains", traits: {"smithy.api#enumValue" => "CO"}))
     SlotTypeFilterOperator.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Equals", traits: {"smithy.api#enumValue" => "EQ"}))
-    SlotTypeFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeFilter, name: "member")
+    SlotTypeFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeFilter, name: "member"))
     SlotTypeSortAttribute.add_member(:slot_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SlotTypeName", traits: {"smithy.api#enumValue" => "SlotTypeName"}))
     SlotTypeSortAttribute.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LastUpdatedDateTime", traits: {"smithy.api#enumValue" => "LastUpdatedDateTime"}))
     SlotTypeSortBy.add_member(:attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeSortAttribute, name: "attribute", traits: {"smithy.api#required" => {}}))
@@ -3010,11 +3010,11 @@ module Aws::LexModelsV2
     SlotTypeSummary.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedDateTime"))
     SlotTypeSummary.add_member(:slot_type_category, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeCategory, name: "slotTypeCategory"))
     SlotTypeSummary.type = Types::SlotTypeSummary
-    SlotTypeSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeSummary, name: "member")
+    SlotTypeSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeSummary, name: "member"))
     SlotTypeValue.add_member(:sample_value, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleValue, name: "sampleValue"))
     SlotTypeValue.add_member(:synonyms, ::Smithy::Schema::Shapes::MemberShape.new(target: SynonymList, name: "synonyms"))
     SlotTypeValue.type = Types::SlotTypeValue
-    SlotTypeValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeValue, name: "member")
+    SlotTypeValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeValue, name: "member"))
     SlotValue.add_member(:interpreted_value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "interpretedValue"))
     SlotValue.type = Types::SlotValue
     SlotValueElicitationSetting.add_member(:default_value_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotDefaultValueSpecification, name: "defaultValueSpecification"))
@@ -3029,8 +3029,8 @@ module Aws::LexModelsV2
     SlotValueOverride.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotValue, name: "value"))
     SlotValueOverride.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotValues, name: "values"))
     SlotValueOverride.type = Types::SlotValueOverride
-    SlotValueOverrideMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "key")
-    SlotValueOverrideMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SlotValueOverride, name: "value")
+    SlotValueOverrideMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "key"))
+    SlotValueOverrideMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotValueOverride, name: "value"))
     SlotValueRegexFilter.add_member(:pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: RegexPattern, name: "pattern", traits: {"smithy.api#required" => {}}))
     SlotValueRegexFilter.type = Types::SlotValueRegexFilter
     SlotValueResolutionStrategy.add_member(:original_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OriginalValue", traits: {"smithy.api#enumValue" => "OriginalValue"}))
@@ -3040,7 +3040,7 @@ module Aws::LexModelsV2
     SlotValueSelectionSetting.add_member(:regex_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotValueRegexFilter, name: "regexFilter"))
     SlotValueSelectionSetting.add_member(:advanced_recognition_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedRecognitionSetting, name: "advancedRecognitionSetting"))
     SlotValueSelectionSetting.type = Types::SlotValueSelectionSetting
-    SlotValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlotValueOverride, name: "member")
+    SlotValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotValueOverride, name: "member"))
     SortOrder.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Ascending", traits: {"smithy.api#enumValue" => "Ascending"}))
     SortOrder.add_member(:descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Descending", traits: {"smithy.api#enumValue" => "Descending"}))
     Specifications.add_member(:slot_type_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltInOrCustomSlotTypeId, name: "slotTypeId", traits: {"smithy.api#required" => {}}))
@@ -3130,26 +3130,26 @@ module Aws::LexModelsV2
     StopBotRecommendationResponse.add_member(:bot_recommendation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BotRecommendationStatus, name: "botRecommendationStatus"))
     StopBotRecommendationResponse.add_member(:bot_recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botRecommendationId"))
     StopBotRecommendationResponse.type = Types::StopBotRecommendationResponse
-    StringMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key")
-    StringMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    StringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
+    StringMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     SubSlotSetting.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: SubSlotExpression, name: "expression"))
     SubSlotSetting.add_member(:slot_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: SubSlotSpecificationMap, name: "slotSpecifications"))
     SubSlotSetting.type = Types::SubSlotSetting
-    SubSlotSpecificationMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "key")
-    SubSlotSpecificationMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Specifications, name: "value")
+    SubSlotSpecificationMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "key"))
+    SubSlotSpecificationMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Specifications, name: "value"))
     SubSlotTypeComposition.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
     SubSlotTypeComposition.add_member(:slot_type_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltInOrCustomSlotTypeId, name: "slotTypeId", traits: {"smithy.api#required" => {}}))
     SubSlotTypeComposition.type = Types::SubSlotTypeComposition
-    SubSlotTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubSlotTypeComposition, name: "member")
+    SubSlotTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubSlotTypeComposition, name: "member"))
     SubSlotValueElicitationSetting.add_member(:default_value_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotDefaultValueSpecification, name: "defaultValueSpecification"))
     SubSlotValueElicitationSetting.add_member(:prompt_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptSpecification, name: "promptSpecification", traits: {"smithy.api#required" => {}}))
     SubSlotValueElicitationSetting.add_member(:sample_utterances, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleUtterancesList, name: "sampleUtterances"))
     SubSlotValueElicitationSetting.add_member(:wait_and_continue_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: WaitAndContinueSpecification, name: "waitAndContinueSpecification"))
     SubSlotValueElicitationSetting.type = Types::SubSlotValueElicitationSetting
-    SynonymList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SampleValue, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    SynonymList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleValue, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceARN", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -3189,14 +3189,14 @@ module Aws::LexModelsV2
     TestExecutionSummary.add_member(:api_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: TestExecutionApiMode, name: "apiMode"))
     TestExecutionSummary.add_member(:test_execution_modality, ::Smithy::Schema::Shapes::MemberShape.new(target: TestExecutionModality, name: "testExecutionModality"))
     TestExecutionSummary.type = Types::TestExecutionSummary
-    TestExecutionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TestExecutionSummary, name: "member")
+    TestExecutionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TestExecutionSummary, name: "member"))
     TestExecutionTarget.add_member(:bot_alias_target, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasTestExecutionTarget, name: "botAliasTarget"))
     TestExecutionTarget.type = Types::TestExecutionTarget
     TestResultMatchStatus.add_member(:matched, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Matched", traits: {"smithy.api#enumValue" => "Matched"}))
     TestResultMatchStatus.add_member(:mismatched, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Mismatched", traits: {"smithy.api#enumValue" => "Mismatched"}))
     TestResultMatchStatus.add_member(:execution_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ExecutionError", traits: {"smithy.api#enumValue" => "ExecutionError"}))
-    TestResultMatchStatusCountMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TestResultMatchStatus, name: "key")
-    TestResultMatchStatusCountMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "value")
+    TestResultMatchStatusCountMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TestResultMatchStatus, name: "key"))
+    TestResultMatchStatusCountMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "value"))
     TestResultTypeFilter.add_member(:overall_test_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OverallTestResults", traits: {"smithy.api#enumValue" => "OverallTestResults"}))
     TestResultTypeFilter.add_member(:conversation_level_test_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ConversationLevelTestResults", traits: {"smithy.api#enumValue" => "ConversationLevelTestResults"}))
     TestResultTypeFilter.add_member(:intent_classification_test_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IntentClassificationTestResults", traits: {"smithy.api#enumValue" => "IntentClassificationTestResults"}))
@@ -3236,14 +3236,14 @@ module Aws::LexModelsV2
     TestSetIntentDiscrepancyItem.add_member(:intent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "intentName", traits: {"smithy.api#required" => {}}))
     TestSetIntentDiscrepancyItem.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "errorMessage", traits: {"smithy.api#required" => {}}))
     TestSetIntentDiscrepancyItem.type = Types::TestSetIntentDiscrepancyItem
-    TestSetIntentDiscrepancyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TestSetIntentDiscrepancyItem, name: "member")
+    TestSetIntentDiscrepancyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TestSetIntentDiscrepancyItem, name: "member"))
     TestSetModality.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Text", traits: {"smithy.api#enumValue" => "Text"}))
     TestSetModality.add_member(:audio, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Audio", traits: {"smithy.api#enumValue" => "Audio"}))
     TestSetSlotDiscrepancyItem.add_member(:intent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "intentName", traits: {"smithy.api#required" => {}}))
     TestSetSlotDiscrepancyItem.add_member(:slot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "slotName", traits: {"smithy.api#required" => {}}))
     TestSetSlotDiscrepancyItem.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "errorMessage", traits: {"smithy.api#required" => {}}))
     TestSetSlotDiscrepancyItem.type = Types::TestSetSlotDiscrepancyItem
-    TestSetSlotDiscrepancyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TestSetSlotDiscrepancyItem, name: "member")
+    TestSetSlotDiscrepancyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TestSetSlotDiscrepancyItem, name: "member"))
     TestSetSortAttribute.add_member(:test_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TestSetName", traits: {"smithy.api#enumValue" => "TestSetName"}))
     TestSetSortAttribute.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LastUpdatedDateTime", traits: {"smithy.api#enumValue" => "LastUpdatedDateTime"}))
     TestSetSortBy.add_member(:attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: TestSetSortAttribute, name: "attribute", traits: {"smithy.api#required" => {}}))
@@ -3269,13 +3269,13 @@ module Aws::LexModelsV2
     TestSetSummary.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDateTime"))
     TestSetSummary.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedDateTime"))
     TestSetSummary.type = Types::TestSetSummary
-    TestSetSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TestSetSummary, name: "member")
+    TestSetSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TestSetSummary, name: "member"))
     TestSetTurnRecord.add_member(:record_number, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordNumber, name: "recordNumber", traits: {"smithy.api#required" => {}}))
     TestSetTurnRecord.add_member(:conversation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TestSetConversationId, name: "conversationId"))
     TestSetTurnRecord.add_member(:turn_number, ::Smithy::Schema::Shapes::MemberShape.new(target: TurnNumber, name: "turnNumber"))
     TestSetTurnRecord.add_member(:turn_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: TurnSpecification, name: "turnSpecification", traits: {"smithy.api#required" => {}}))
     TestSetTurnRecord.type = Types::TestSetTurnRecord
-    TestSetTurnRecordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TestSetTurnRecord, name: "member")
+    TestSetTurnRecordList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TestSetTurnRecord, name: "member"))
     TestSetTurnResult.add_member(:agent, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentTurnResult, name: "agent"))
     TestSetTurnResult.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: UserTurnResult, name: "user"))
     TestSetTurnResult.type = Types::TestSetTurnResult
@@ -3287,7 +3287,7 @@ module Aws::LexModelsV2
     TextLogSetting.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: TextLogDestination, name: "destination", traits: {"smithy.api#required" => {}}))
     TextLogSetting.add_member(:selective_logging_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "selectiveLoggingEnabled"))
     TextLogSetting.type = Types::TextLogSetting
-    TextLogSettingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TextLogSetting, name: "member")
+    TextLogSettingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TextLogSetting, name: "member"))
     ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryAfterSeconds, name: "retryAfterSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Retry-After"}))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ThrottlingException.type = Types::ThrottlingException
@@ -3388,7 +3388,7 @@ module Aws::LexModelsV2
     UpdateBotResponse.add_member(:bot_members, ::Smithy::Schema::Shapes::MemberShape.new(target: BotMembers, name: "botMembers"))
     UpdateBotResponse.add_member(:error_log_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorLogSettings, name: "errorLogSettings"))
     UpdateBotResponse.type = Types::UpdateBotResponse
-    UpdateCustomVocabularyItemsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomVocabularyItem, name: "member")
+    UpdateCustomVocabularyItemsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomVocabularyItem, name: "member"))
     UpdateExportRequest.add_member(:export_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "exportId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateExportRequest.add_member(:file_password, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportExportFilePassword, name: "filePassword"))
     UpdateExportRequest.type = Types::UpdateExportRequest
@@ -3542,9 +3542,9 @@ module Aws::LexModelsV2
     UserTurnSlotOutput.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: UserTurnSlotOutputList, name: "values"))
     UserTurnSlotOutput.add_member(:sub_slots, ::Smithy::Schema::Shapes::MemberShape.new(target: UserTurnSlotOutputMap, name: "subSlots"))
     UserTurnSlotOutput.type = Types::UserTurnSlotOutput
-    UserTurnSlotOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserTurnSlotOutput, name: "member")
-    UserTurnSlotOutputMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "key")
-    UserTurnSlotOutputMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: UserTurnSlotOutput, name: "value")
+    UserTurnSlotOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserTurnSlotOutput, name: "member"))
+    UserTurnSlotOutputMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "key"))
+    UserTurnSlotOutputMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: UserTurnSlotOutput, name: "value"))
     UserTurnSpecification.add_member(:input, ::Smithy::Schema::Shapes::MemberShape.new(target: UserTurnInputSpecification, name: "input", traits: {"smithy.api#required" => {}}))
     UserTurnSpecification.add_member(:expected, ::Smithy::Schema::Shapes::MemberShape.new(target: UserTurnOutputSpecification, name: "expected", traits: {"smithy.api#required" => {}}))
     UserTurnSpecification.type = Types::UserTurnSpecification
@@ -3556,7 +3556,7 @@ module Aws::LexModelsV2
     UtteranceBotResponse.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UtteranceContentType, name: "contentType"))
     UtteranceBotResponse.add_member(:image_response_card, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageResponseCard, name: "imageResponseCard"))
     UtteranceBotResponse.type = Types::UtteranceBotResponse
-    UtteranceBotResponses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UtteranceBotResponse, name: "member")
+    UtteranceBotResponses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UtteranceBotResponse, name: "member"))
     UtteranceContentType.add_member(:plain_text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PlainText", traits: {"smithy.api#enumValue" => "PlainText"}))
     UtteranceContentType.add_member(:custom_payload, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CustomPayload", traits: {"smithy.api#enumValue" => "CustomPayload"}))
     UtteranceContentType.add_member(:ssml, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSML", traits: {"smithy.api#enumValue" => "SSML"}))
@@ -3571,7 +3571,7 @@ module Aws::LexModelsV2
     UtteranceLevelTestResultItem.add_member(:conversation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TestSetConversationId, name: "conversationId"))
     UtteranceLevelTestResultItem.add_member(:turn_result, ::Smithy::Schema::Shapes::MemberShape.new(target: TestSetTurnResult, name: "turnResult", traits: {"smithy.api#required" => {}}))
     UtteranceLevelTestResultItem.type = Types::UtteranceLevelTestResultItem
-    UtteranceLevelTestResultItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UtteranceLevelTestResultItem, name: "member")
+    UtteranceLevelTestResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UtteranceLevelTestResultItem, name: "member"))
     UtteranceLevelTestResults.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: UtteranceLevelTestResultItemList, name: "items", traits: {"smithy.api#required" => {}}))
     UtteranceLevelTestResults.type = Types::UtteranceLevelTestResults
     UtteranceSpecification.add_member(:bot_alias_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasId, name: "botAliasId"))
@@ -3597,7 +3597,7 @@ module Aws::LexModelsV2
     UtteranceSpecification.add_member(:utterance_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "utteranceRequestId"))
     UtteranceSpecification.add_member(:bot_responses, ::Smithy::Schema::Shapes::MemberShape.new(target: UtteranceBotResponses, name: "botResponses"))
     UtteranceSpecification.type = Types::UtteranceSpecification
-    UtteranceSpecifications.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UtteranceSpecification, name: "member")
+    UtteranceSpecifications.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UtteranceSpecification, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ValidationException.type = Types::ValidationException
     VoiceEngine.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Standard", traits: {"smithy.api#enumValue" => "standard"}))

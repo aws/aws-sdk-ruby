@@ -135,7 +135,7 @@ module Aws::OSIS
     ChangeProgressStage.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
     ChangeProgressStage.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedAt"))
     ChangeProgressStage.type = Types::ChangeProgressStage
-    ChangeProgressStageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeProgressStage, name: "member")
+    ChangeProgressStageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeProgressStage, name: "member"))
     ChangeProgressStageStatuses.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     ChangeProgressStageStatuses.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     ChangeProgressStageStatuses.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
@@ -145,7 +145,7 @@ module Aws::OSIS
     ChangeProgressStatus.add_member(:total_number_of_stages, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "TotalNumberOfStages", traits: {"smithy.api#default" => 0}))
     ChangeProgressStatus.add_member(:change_progress_stages, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeProgressStageList, name: "ChangeProgressStages"))
     ChangeProgressStatus.type = Types::ChangeProgressStatus
-    ChangeProgressStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeProgressStatus, name: "member")
+    ChangeProgressStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeProgressStatus, name: "member"))
     ChangeProgressStatuses.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     ChangeProgressStatuses.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     ChangeProgressStatuses.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
@@ -207,7 +207,7 @@ module Aws::OSIS
     GetResourcePolicyResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineArn, name: "ResourceArn"))
     GetResourcePolicyResponse.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicy, name: "Policy"))
     GetResourcePolicyResponse.type = Types::GetResourcePolicyResponse
-    IngestEndpointUrlsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    IngestEndpointUrlsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     InternalException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InternalException.type = Types::InternalException
     InvalidPaginationTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
@@ -275,11 +275,11 @@ module Aws::OSIS
     PipelineBlueprintSummary.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Service"))
     PipelineBlueprintSummary.add_member(:use_case, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "UseCase"))
     PipelineBlueprintSummary.type = Types::PipelineBlueprintSummary
-    PipelineBlueprintsSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineBlueprintSummary, name: "member")
+    PipelineBlueprintsSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineBlueprintSummary, name: "member"))
     PipelineDestination.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServiceName"))
     PipelineDestination.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Endpoint"))
     PipelineDestination.type = Types::PipelineDestination
-    PipelineDestinationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineDestination, name: "member")
+    PipelineDestinationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineDestination, name: "member"))
     PipelineEndpoint.add_member(:pipeline_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineArn, name: "PipelineArn"))
     PipelineEndpoint.add_member(:endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineEndpointId, name: "EndpointId"))
     PipelineEndpoint.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineEndpointStatus, name: "Status"))
@@ -292,8 +292,8 @@ module Aws::OSIS
     PipelineEndpointConnection.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineEndpointStatus, name: "Status"))
     PipelineEndpointConnection.add_member(:vpc_endpoint_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "VpcEndpointOwner"))
     PipelineEndpointConnection.type = Types::PipelineEndpointConnection
-    PipelineEndpointConnectionsSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineEndpointConnection, name: "member")
-    PipelineEndpointIdsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineEndpointId, name: "member")
+    PipelineEndpointConnectionsSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineEndpointConnection, name: "member"))
+    PipelineEndpointIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineEndpointId, name: "member"))
     PipelineEndpointStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     PipelineEndpointStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     PipelineEndpointStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
@@ -303,7 +303,7 @@ module Aws::OSIS
     PipelineEndpointVpcOptions.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, name: "SubnetIds"))
     PipelineEndpointVpcOptions.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, name: "SecurityGroupIds"))
     PipelineEndpointVpcOptions.type = Types::PipelineEndpointVpcOptions
-    PipelineEndpointsSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineEndpoint, name: "member")
+    PipelineEndpointsSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineEndpoint, name: "member"))
     PipelineStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     PipelineStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     PipelineStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
@@ -327,7 +327,7 @@ module Aws::OSIS
     PipelineSummary.add_member(:destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineDestinationList, name: "Destinations"))
     PipelineSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     PipelineSummary.type = Types::PipelineSummary
-    PipelineSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineSummary, name: "member")
+    PipelineSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineSummary, name: "member"))
     PutResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutResourcePolicyRequest.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicy, name: "Policy", traits: {"smithy.api#required" => {}}))
     PutResourcePolicyRequest.type = Types::PutResourcePolicyRequest
@@ -343,11 +343,11 @@ module Aws::OSIS
     RevokePipelineEndpointConnectionsRequest.type = Types::RevokePipelineEndpointConnectionsRequest
     RevokePipelineEndpointConnectionsResponse.add_member(:pipeline_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineArn, name: "PipelineArn"))
     RevokePipelineEndpointConnectionsResponse.type = Types::RevokePipelineEndpointConnectionsResponse
-    SecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
+    SecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     ServiceVpcEndpoint.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointServiceName, name: "ServiceName"))
     ServiceVpcEndpoint.add_member(:vpc_endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VpcEndpointId"))
     ServiceVpcEndpoint.type = Types::ServiceVpcEndpoint
-    ServiceVpcEndpointsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceVpcEndpoint, name: "member")
+    ServiceVpcEndpointsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceVpcEndpoint, name: "member"))
     StartPipelineRequest.add_member(:pipeline_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineName, name: "PipelineName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartPipelineRequest.type = Types::StartPipelineRequest
     StartPipelineResponse.add_member(:pipeline, ::Smithy::Schema::Shapes::MemberShape.new(target: Pipeline, name: "Pipeline"))
@@ -356,12 +356,12 @@ module Aws::OSIS
     StopPipelineRequest.type = Types::StopPipelineRequest
     StopPipelineResponse.add_member(:pipeline, ::Smithy::Schema::Shapes::MemberShape.new(target: Pipeline, name: "Pipeline"))
     StopPipelineResponse.type = Types::StopPipelineResponse
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    SubnetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineArn, name: "Arn", traits: {"smithy.api#httpQuery" => "arn", "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -390,7 +390,7 @@ module Aws::OSIS
     ValidationException.type = Types::ValidationException
     ValidationMessage.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ValidationMessage.type = Types::ValidationMessage
-    ValidationMessageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationMessage, name: "member")
+    ValidationMessageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationMessage, name: "member"))
     VpcAttachmentOptions.add_member(:attach_to_vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AttachToVpc", traits: {"smithy.api#required" => {}}))
     VpcAttachmentOptions.add_member(:cidr_block, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrBlock, name: "CidrBlock"))
     VpcAttachmentOptions.type = Types::VpcAttachmentOptions
@@ -401,7 +401,7 @@ module Aws::OSIS
     VpcEndpointManagement.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER", traits: {"smithy.api#enumValue" => "CUSTOMER"}))
     VpcEndpointManagement.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE", traits: {"smithy.api#enumValue" => "SERVICE"}))
     VpcEndpointServiceName.add_member(:opensearch_serverless, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPENSEARCH_SERVERLESS", traits: {"smithy.api#enumValue" => "OPENSEARCH_SERVERLESS"}))
-    VpcEndpointsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpoint, name: "member")
+    VpcEndpointsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpoint, name: "member"))
     VpcOptions.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, name: "SubnetIds", traits: {"smithy.api#required" => {}}))
     VpcOptions.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, name: "SecurityGroupIds"))
     VpcOptions.add_member(:vpc_attachment_options, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcAttachmentOptions, name: "VpcAttachmentOptions"))

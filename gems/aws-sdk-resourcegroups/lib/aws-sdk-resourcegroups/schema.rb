@@ -150,8 +150,8 @@ module Aws::ResourceGroups
     AccountSettings.add_member(:group_lifecycle_events_status, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupLifecycleEventsStatus, name: "GroupLifecycleEventsStatus"))
     AccountSettings.add_member(:group_lifecycle_events_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupLifecycleEventsStatusMessage, name: "GroupLifecycleEventsStatusMessage"))
     AccountSettings.type = Types::AccountSettings
-    ApplicationTag.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationTagKey, name: "key")
-    ApplicationTag.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, name: "value")
+    ApplicationTag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationTagKey, name: "key"))
+    ApplicationTag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, name: "value"))
     BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     BadRequestException.type = Types::BadRequestException
     CancelTagSyncTaskInput.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TagSyncTaskArn, name: "TaskArn", traits: {"smithy.api#required" => {}}))
@@ -179,7 +179,7 @@ module Aws::ResourceGroups
     FailedResource.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage"))
     FailedResource.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     FailedResource.type = Types::FailedResource
-    FailedResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedResource, name: "member")
+    FailedResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedResource, name: "member"))
     ForbiddenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ForbiddenException.type = Types::ForbiddenException
     GetAccountSettingsOutput.add_member(:account_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountSettings, name: "AccountSettings"))
@@ -232,24 +232,24 @@ module Aws::ResourceGroups
     GroupConfigurationItem.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupConfigurationType, name: "Type", traits: {"smithy.api#required" => {}}))
     GroupConfigurationItem.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupParameterList, name: "Parameters"))
     GroupConfigurationItem.type = Types::GroupConfigurationItem
-    GroupConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupConfigurationItem, name: "member")
+    GroupConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupConfigurationItem, name: "member"))
     GroupConfigurationParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupConfigurationParameterName, name: "Name", traits: {"smithy.api#required" => {}}))
     GroupConfigurationParameter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupConfigurationParameterValueList, name: "Values"))
     GroupConfigurationParameter.type = Types::GroupConfigurationParameter
-    GroupConfigurationParameterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupConfigurationParameterValue, name: "member")
+    GroupConfigurationParameterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupConfigurationParameterValue, name: "member"))
     GroupConfigurationStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
     GroupConfigurationStatus.add_member(:update_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_COMPLETE", traits: {"smithy.api#enumValue" => "UPDATE_COMPLETE"}))
     GroupConfigurationStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
     GroupFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupFilterName, name: "Name", traits: {"smithy.api#required" => {}}))
     GroupFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupFilterValues, name: "Values", traits: {"smithy.api#required" => {}}))
     GroupFilter.type = Types::GroupFilter
-    GroupFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupFilter, name: "member")
+    GroupFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupFilter, name: "member"))
     GroupFilterName.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ResourceType", traits: {"smithy.api#enumValue" => "resource-type"}))
     GroupFilterName.add_member(:configuration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ConfigurationType", traits: {"smithy.api#enumValue" => "configuration-type"}))
     GroupFilterName.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Owner", traits: {"smithy.api#enumValue" => "owner"}))
     GroupFilterName.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DisplayName", traits: {"smithy.api#enumValue" => "display-name"}))
     GroupFilterName.add_member(:criticality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Criticality", traits: {"smithy.api#enumValue" => "criticality"}))
-    GroupFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupFilterValue, name: "member")
+    GroupFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupFilterValue, name: "member"))
     GroupIdentifier.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, name: "GroupName"))
     GroupIdentifier.add_member(:group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupArn, name: "GroupArn"))
     GroupIdentifier.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
@@ -257,15 +257,15 @@ module Aws::ResourceGroups
     GroupIdentifier.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: Owner, name: "Owner"))
     GroupIdentifier.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "DisplayName"))
     GroupIdentifier.type = Types::GroupIdentifier
-    GroupIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupIdentifier, name: "member")
+    GroupIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupIdentifier, name: "member"))
     GroupLifecycleEventsDesiredStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     GroupLifecycleEventsDesiredStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     GroupLifecycleEventsStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     GroupLifecycleEventsStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     GroupLifecycleEventsStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     GroupLifecycleEventsStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
-    GroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Group, name: "member")
-    GroupParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupConfigurationParameter, name: "member")
+    GroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Group, name: "member"))
+    GroupParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupConfigurationParameter, name: "member"))
     GroupQuery.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, name: "GroupName", traits: {"smithy.api#required" => {}}))
     GroupQuery.add_member(:resource_query, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceQuery, name: "ResourceQuery", traits: {"smithy.api#required" => {}}))
     GroupQuery.type = Types::GroupQuery
@@ -287,7 +287,7 @@ module Aws::ResourceGroups
     GroupingStatusesItem.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     GroupingStatusesItem.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdatedAt"))
     GroupingStatusesItem.type = Types::GroupingStatusesItem
-    GroupingStatusesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingStatusesItem, name: "member")
+    GroupingStatusesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingStatusesItem, name: "member"))
     GroupingType.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GROUP", traits: {"smithy.api#enumValue" => "GROUP"}))
     GroupingType.add_member(:ungroup, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNGROUP", traits: {"smithy.api#enumValue" => "UNGROUP"}))
     InternalServerErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -301,7 +301,7 @@ module Aws::ResourceGroups
     ListGroupResourcesItem.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, name: "Identifier"))
     ListGroupResourcesItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatus, name: "Status"))
     ListGroupResourcesItem.type = Types::ListGroupResourcesItem
-    ListGroupResourcesItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListGroupResourcesItem, name: "member")
+    ListGroupResourcesItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListGroupResourcesItem, name: "member"))
     ListGroupResourcesOutput.add_member(:resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ListGroupResourcesItemList, name: "Resources"))
     ListGroupResourcesOutput.add_member(:resource_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifierList, name: "ResourceIdentifiers", traits: {"smithy.api#deprecated" => {"message" => "This field is deprecated, use Resources instead."}}))
     ListGroupResourcesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
@@ -310,10 +310,10 @@ module Aws::ResourceGroups
     ListGroupingStatusesFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ListGroupingStatusesFilterName, name: "Name", traits: {"smithy.api#required" => {}}))
     ListGroupingStatusesFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ListGroupingStatusesFilterValues, name: "Values", traits: {"smithy.api#required" => {}}))
     ListGroupingStatusesFilter.type = Types::ListGroupingStatusesFilter
-    ListGroupingStatusesFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListGroupingStatusesFilter, name: "member")
+    ListGroupingStatusesFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListGroupingStatusesFilter, name: "member"))
     ListGroupingStatusesFilterName.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Status", traits: {"smithy.api#enumValue" => "status"}))
     ListGroupingStatusesFilterName.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ResourceArn", traits: {"smithy.api#enumValue" => "resource-arn"}))
-    ListGroupingStatusesFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListGroupingStatusesFilterValue, name: "member")
+    ListGroupingStatusesFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListGroupingStatusesFilterValue, name: "member"))
     ListGroupingStatusesInput.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupStringV2, name: "Group", traits: {"smithy.api#required" => {}}))
     ListGroupingStatusesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
     ListGroupingStatusesInput.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListGroupingStatusesFilterList, name: "Filters"))
@@ -334,7 +334,7 @@ module Aws::ResourceGroups
     ListTagSyncTasksFilter.add_member(:group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupArnV2, name: "GroupArn"))
     ListTagSyncTasksFilter.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, name: "GroupName"))
     ListTagSyncTasksFilter.type = Types::ListTagSyncTasksFilter
-    ListTagSyncTasksFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListTagSyncTasksFilter, name: "member")
+    ListTagSyncTasksFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListTagSyncTasksFilter, name: "member"))
     ListTagSyncTasksInput.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListTagSyncTasksFilterList, name: "Filters"))
     ListTagSyncTasksInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
     ListTagSyncTasksInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
@@ -348,7 +348,7 @@ module Aws::ResourceGroups
     NotFoundException.type = Types::NotFoundException
     PendingResource.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn"))
     PendingResource.type = Types::PendingResource
-    PendingResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PendingResource, name: "member")
+    PendingResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PendingResource, name: "member"))
     PutGroupConfigurationInput.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupString, name: "Group"))
     PutGroupConfigurationInput.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupConfigurationList, name: "Configuration"))
     PutGroupConfigurationInput.type = Types::PutGroupConfigurationInput
@@ -360,20 +360,20 @@ module Aws::ResourceGroups
     QueryErrorCode.add_member(:cloudformation_stack_not_existing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUDFORMATION_STACK_NOT_EXISTING", traits: {"smithy.api#enumValue" => "CLOUDFORMATION_STACK_NOT_EXISTING"}))
     QueryErrorCode.add_member(:cloudformation_stack_unassumable_role, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUDFORMATION_STACK_UNASSUMABLE_ROLE", traits: {"smithy.api#enumValue" => "CLOUDFORMATION_STACK_UNASSUMABLE_ROLE"}))
     QueryErrorCode.add_member(:resource_type_not_supported, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_TYPE_NOT_SUPPORTED", traits: {"smithy.api#enumValue" => "RESOURCE_TYPE_NOT_SUPPORTED"}))
-    QueryErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryError, name: "member")
+    QueryErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryError, name: "member"))
     QueryType.add_member(:tag_filters_1_0, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAG_FILTERS_1_0", traits: {"smithy.api#enumValue" => "TAG_FILTERS_1_0"}))
     QueryType.add_member(:cloudformation_stack_1_0, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUDFORMATION_STACK_1_0", traits: {"smithy.api#enumValue" => "CLOUDFORMATION_STACK_1_0"}))
-    ResourceArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member")
+    ResourceArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member"))
     ResourceFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceFilterName, name: "Name", traits: {"smithy.api#required" => {}}))
     ResourceFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceFilterValues, name: "Values", traits: {"smithy.api#required" => {}}))
     ResourceFilter.type = Types::ResourceFilter
-    ResourceFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceFilter, name: "member")
+    ResourceFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceFilter, name: "member"))
     ResourceFilterName.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ResourceType", traits: {"smithy.api#enumValue" => "resource-type"}))
-    ResourceFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceFilterValue, name: "member")
+    ResourceFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceFilterValue, name: "member"))
     ResourceIdentifier.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn"))
     ResourceIdentifier.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
     ResourceIdentifier.type = Types::ResourceIdentifier
-    ResourceIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, name: "member")
+    ResourceIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, name: "member"))
     ResourceQuery.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryType, name: "Type", traits: {"smithy.api#required" => {}}))
     ResourceQuery.add_member(:query, ::Smithy::Schema::Shapes::MemberShape.new(target: Query, name: "Query", traits: {"smithy.api#required" => {}}))
     ResourceQuery.type = Types::ResourceQuery
@@ -405,7 +405,7 @@ module Aws::ResourceGroups
     TagInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupArnV2, name: "Arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagInput.type = Types::TagInput
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupArnV2, name: "Arn"))
     TagOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags"))
     TagOutput.type = Types::TagOutput
@@ -420,11 +420,11 @@ module Aws::ResourceGroups
     TagSyncTaskItem.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage"))
     TagSyncTaskItem.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
     TagSyncTaskItem.type = Types::TagSyncTaskItem
-    TagSyncTaskList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagSyncTaskItem, name: "member")
+    TagSyncTaskList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagSyncTaskItem, name: "member"))
     TagSyncTaskStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     TagSyncTaskStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     TooManyRequestsException.type = Types::TooManyRequestsException
     UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))

@@ -256,7 +256,7 @@ module Aws::Wisdom
     AssistantAssociationSummary.add_member(:association_data, ::Smithy::Schema::Shapes::MemberShape.new(target: AssistantAssociationOutputData, name: "associationData", traits: {"smithy.api#required" => {}}))
     AssistantAssociationSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     AssistantAssociationSummary.type = Types::AssistantAssociationSummary
-    AssistantAssociationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssistantAssociationSummary, name: "member")
+    AssistantAssociationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssistantAssociationSummary, name: "member"))
     AssistantData.add_member(:assistant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "assistantId", traits: {"smithy.api#required" => {}}))
     AssistantData.add_member(:assistant_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "assistantArn", traits: {"smithy.api#required" => {}}))
     AssistantData.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
@@ -269,7 +269,7 @@ module Aws::Wisdom
     AssistantData.type = Types::AssistantData
     AssistantIntegrationConfiguration.add_member(:topic_integration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericArn, name: "topicIntegrationArn"))
     AssistantIntegrationConfiguration.type = Types::AssistantIntegrationConfiguration
-    AssistantList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssistantSummary, name: "member")
+    AssistantList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssistantSummary, name: "member"))
     AssistantSummary.add_member(:assistant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "assistantId", traits: {"smithy.api#required" => {}}))
     AssistantSummary.add_member(:assistant_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "assistantArn", traits: {"smithy.api#required" => {}}))
     AssistantSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
@@ -280,7 +280,7 @@ module Aws::Wisdom
     AssistantSummary.add_member(:server_side_encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideEncryptionConfiguration, name: "serverSideEncryptionConfiguration"))
     AssistantSummary.add_member(:integration_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AssistantIntegrationConfiguration, name: "integrationConfiguration"))
     AssistantSummary.type = Types::AssistantSummary
-    Channels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "member")
+    Channels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "member"))
     Configuration.add_member(:connect_configuration, Types::Configuration::ConnectConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectConfiguration, name: "connectConfiguration"))
     Configuration.add_member(:unknown, Types::Configuration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Configuration.type = Types::Configuration
@@ -288,9 +288,9 @@ module Aws::Wisdom
     ConflictException.type = Types::ConflictException
     ConnectConfiguration.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "instanceId"))
     ConnectConfiguration.type = Types::ConnectConfiguration
-    ContactAttributeKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactAttributeKey, name: "member")
-    ContactAttributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactAttributeKey, name: "key")
-    ContactAttributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactAttributeValue, name: "value")
+    ContactAttributeKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactAttributeKey, name: "member"))
+    ContactAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactAttributeKey, name: "key"))
+    ContactAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactAttributeValue, name: "value"))
     ContentData.add_member(:content_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "contentArn", traits: {"smithy.api#required" => {}}))
     ContentData.add_member(:content_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "contentId", traits: {"smithy.api#required" => {}}))
     ContentData.add_member(:knowledge_base_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "knowledgeBaseArn", traits: {"smithy.api#required" => {}}))
@@ -306,8 +306,8 @@ module Aws::Wisdom
     ContentData.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "url", traits: {"smithy.api#required" => {}}))
     ContentData.add_member(:url_expiry, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "urlExpiry", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "epoch-seconds"}))
     ContentData.type = Types::ContentData
-    ContentMetadata.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key")
-    ContentMetadata.value = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value")
+    ContentMetadata.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
+    ContentMetadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value"))
     ContentReference.add_member(:knowledge_base_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "knowledgeBaseArn"))
     ContentReference.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "knowledgeBaseId"))
     ContentReference.add_member(:content_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "contentArn"))
@@ -325,7 +325,7 @@ module Aws::Wisdom
     ContentSummary.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentMetadata, name: "metadata", traits: {"smithy.api#required" => {}}))
     ContentSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     ContentSummary.type = Types::ContentSummary
-    ContentSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContentSummary, name: "member")
+    ContentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentSummary, name: "member"))
     CreateAssistantAssociationInput.add_member(:assistant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidOrArn, name: "assistantId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateAssistantAssociationInput.add_member(:association_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationType, name: "associationType", traits: {"smithy.api#required" => {}}))
     CreateAssistantAssociationInput.add_member(:association, ::Smithy::Schema::Shapes::MemberShape.new(target: AssistantAssociationInputData, name: "association", traits: {"smithy.api#required" => {}}))
@@ -424,7 +424,7 @@ module Aws::Wisdom
     Filter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterOperator, name: "operator", traits: {"smithy.api#required" => {}}))
     Filter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value", traits: {"smithy.api#required" => {}}))
     Filter.type = Types::Filter
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     GetAssistantAssociationInput.add_member(:assistant_association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidOrArn, name: "assistantAssociationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAssistantAssociationInput.add_member(:assistant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidOrArn, name: "assistantId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAssistantAssociationInput.type = Types::GetAssistantAssociationInput
@@ -474,13 +474,13 @@ module Aws::Wisdom
     GroupingConfiguration.add_member(:criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingCriteria, name: "criteria"))
     GroupingConfiguration.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingValues, name: "values"))
     GroupingConfiguration.type = Types::GroupingConfiguration
-    GroupingValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingValue, name: "member")
-    Headers.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key")
-    Headers.value = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value")
+    GroupingValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingValue, name: "member"))
+    Headers.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
+    Headers.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value"))
     Highlight.add_member(:begin_offset_inclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightOffset, name: "beginOffsetInclusive", traits: {"smithy.api#default" => 0}))
     Highlight.add_member(:end_offset_exclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightOffset, name: "endOffsetExclusive", traits: {"smithy.api#default" => 0}))
     Highlight.type = Types::Highlight
-    Highlights.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Highlight, name: "member")
+    Highlights.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Highlight, name: "member"))
     ImportJobData.add_member(:import_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "importJobId", traits: {"smithy.api#required" => {}}))
     ImportJobData.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "knowledgeBaseId", traits: {"smithy.api#required" => {}}))
     ImportJobData.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadId, name: "uploadId", traits: {"smithy.api#required" => {}}))
@@ -495,7 +495,7 @@ module Aws::Wisdom
     ImportJobData.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentMetadata, name: "metadata"))
     ImportJobData.add_member(:external_source_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalSourceConfiguration, name: "externalSourceConfiguration"))
     ImportJobData.type = Types::ImportJobData
-    ImportJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportJobSummary, name: "member")
+    ImportJobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportJobSummary, name: "member"))
     ImportJobSummary.add_member(:import_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "importJobId", traits: {"smithy.api#required" => {}}))
     ImportJobSummary.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "knowledgeBaseId", traits: {"smithy.api#required" => {}}))
     ImportJobSummary.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadId, name: "uploadId", traits: {"smithy.api#required" => {}}))
@@ -522,7 +522,7 @@ module Aws::Wisdom
     KnowledgeBaseData.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     KnowledgeBaseData.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     KnowledgeBaseData.type = Types::KnowledgeBaseData
-    KnowledgeBaseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseSummary, name: "member")
+    KnowledgeBaseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseSummary, name: "member"))
     KnowledgeBaseSummary.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "knowledgeBaseId", traits: {"smithy.api#required" => {}}))
     KnowledgeBaseSummary.add_member(:knowledge_base_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "knowledgeBaseArn", traits: {"smithy.api#required" => {}}))
     KnowledgeBaseSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
@@ -581,7 +581,7 @@ module Aws::Wisdom
     NotifyRecommendationsReceivedError.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "recommendationId"))
     NotifyRecommendationsReceivedError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyRecommendationsReceivedErrorMessage, name: "message"))
     NotifyRecommendationsReceivedError.type = Types::NotifyRecommendationsReceivedError
-    NotifyRecommendationsReceivedErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyRecommendationsReceivedError, name: "member")
+    NotifyRecommendationsReceivedErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyRecommendationsReceivedError, name: "member"))
     NotifyRecommendationsReceivedInput.add_member(:assistant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidOrArn, name: "assistantId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     NotifyRecommendationsReceivedInput.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidOrArn, name: "sessionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     NotifyRecommendationsReceivedInput.add_member(:recommendation_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationIdList, name: "recommendationIds", traits: {"smithy.api#required" => {}}))
@@ -589,7 +589,7 @@ module Aws::Wisdom
     NotifyRecommendationsReceivedOutput.add_member(:recommendation_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationIdList, name: "recommendationIds"))
     NotifyRecommendationsReceivedOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyRecommendationsReceivedErrorList, name: "errors"))
     NotifyRecommendationsReceivedOutput.type = Types::NotifyRecommendationsReceivedOutput
-    ObjectFieldsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    ObjectFieldsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     PreconditionFailedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     PreconditionFailedException.type = Types::PreconditionFailedException
     QueryAssistantInput.add_member(:assistant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidOrArn, name: "assistantId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -602,7 +602,7 @@ module Aws::Wisdom
     QueryAssistantOutput.type = Types::QueryAssistantOutput
     QueryRecommendationTriggerData.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryText, name: "text"))
     QueryRecommendationTriggerData.type = Types::QueryRecommendationTriggerData
-    QueryResultsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResultData, name: "member")
+    QueryResultsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultData, name: "member"))
     QuickResponseContentProvider.add_member(:content, Types::QuickResponseContentProvider::Content, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseContent, name: "content"))
     QuickResponseContentProvider.add_member(:unknown, Types::QuickResponseContentProvider::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     QuickResponseContentProvider.type = Types::QuickResponseContentProvider
@@ -636,8 +636,8 @@ module Aws::Wisdom
     QuickResponseFilterField.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseFilterOperator, name: "operator", traits: {"smithy.api#required" => {}}))
     QuickResponseFilterField.add_member(:include_no_existence, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "includeNoExistence"))
     QuickResponseFilterField.type = Types::QuickResponseFilterField
-    QuickResponseFilterFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseFilterField, name: "member")
-    QuickResponseFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseFilterValue, name: "member")
+    QuickResponseFilterFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseFilterField, name: "member"))
+    QuickResponseFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseFilterValue, name: "member"))
     QuickResponseOrderField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "name", traits: {"smithy.api#required" => {}}))
     QuickResponseOrderField.add_member(:order, ::Smithy::Schema::Shapes::MemberShape.new(target: Order, name: "order"))
     QuickResponseOrderField.type = Types::QuickResponseOrderField
@@ -647,8 +647,8 @@ module Aws::Wisdom
     QuickResponseQueryField.add_member(:allow_fuzziness, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "allowFuzziness"))
     QuickResponseQueryField.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: Priority, name: "priority"))
     QuickResponseQueryField.type = Types::QuickResponseQueryField
-    QuickResponseQueryFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseQueryField, name: "member")
-    QuickResponseQueryValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseQueryValue, name: "member")
+    QuickResponseQueryFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseQueryField, name: "member"))
+    QuickResponseQueryValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseQueryValue, name: "member"))
     QuickResponseSearchExpression.add_member(:queries, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseQueryFieldList, name: "queries"))
     QuickResponseSearchExpression.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseFilterFieldList, name: "filters"))
     QuickResponseSearchExpression.add_member(:order_on_field, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseOrderField, name: "orderOnField"))
@@ -674,7 +674,7 @@ module Aws::Wisdom
     QuickResponseSearchResultData.add_member(:attributes_interpolated, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactAttributeKeys, name: "attributesInterpolated"))
     QuickResponseSearchResultData.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     QuickResponseSearchResultData.type = Types::QuickResponseSearchResultData
-    QuickResponseSearchResultsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseSearchResultData, name: "member")
+    QuickResponseSearchResultsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseSearchResultData, name: "member"))
     QuickResponseSummary.add_member(:quick_response_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "quickResponseArn", traits: {"smithy.api#required" => {}}))
     QuickResponseSummary.add_member(:quick_response_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "quickResponseId", traits: {"smithy.api#required" => {}}))
     QuickResponseSummary.add_member(:knowledge_base_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "knowledgeBaseArn", traits: {"smithy.api#required" => {}}))
@@ -690,15 +690,15 @@ module Aws::Wisdom
     QuickResponseSummary.add_member(:channels, ::Smithy::Schema::Shapes::MemberShape.new(target: Channels, name: "channels"))
     QuickResponseSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     QuickResponseSummary.type = Types::QuickResponseSummary
-    QuickResponseSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseSummary, name: "member")
+    QuickResponseSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseSummary, name: "member"))
     RecommendationData.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "recommendationId", traits: {"smithy.api#required" => {}}))
     RecommendationData.add_member(:document, ::Smithy::Schema::Shapes::MemberShape.new(target: Document, name: "document", traits: {"smithy.api#required" => {}}))
     RecommendationData.add_member(:relevance_score, ::Smithy::Schema::Shapes::MemberShape.new(target: RelevanceScore, name: "relevanceScore", traits: {"smithy.api#default" => 0}))
     RecommendationData.add_member(:relevance_level, ::Smithy::Schema::Shapes::MemberShape.new(target: RelevanceLevel, name: "relevanceLevel"))
     RecommendationData.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationType, name: "type"))
     RecommendationData.type = Types::RecommendationData
-    RecommendationIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    RecommendationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationData, name: "member")
+    RecommendationIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    RecommendationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationData, name: "member"))
     RecommendationTrigger.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "id", traits: {"smithy.api#required" => {}}))
     RecommendationTrigger.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationTriggerType, name: "type", traits: {"smithy.api#required" => {}}))
     RecommendationTrigger.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationSourceType, name: "source", traits: {"smithy.api#required" => {}}))
@@ -708,7 +708,7 @@ module Aws::Wisdom
     RecommendationTriggerData.add_member(:query, Types::RecommendationTriggerData::Query, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryRecommendationTriggerData, name: "query"))
     RecommendationTriggerData.add_member(:unknown, Types::RecommendationTriggerData::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RecommendationTriggerData.type = Types::RecommendationTriggerData
-    RecommendationTriggerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationTrigger, name: "member")
+    RecommendationTriggerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationTrigger, name: "member"))
     RemoveKnowledgeBaseTemplateUriInput.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidOrArn, name: "knowledgeBaseId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RemoveKnowledgeBaseTemplateUriInput.type = Types::RemoveKnowledgeBaseTemplateUriInput
     RemoveKnowledgeBaseTemplateUriOutput.type = Types::RemoveKnowledgeBaseTemplateUriOutput
@@ -763,7 +763,7 @@ module Aws::Wisdom
     SessionData.type = Types::SessionData
     SessionIntegrationConfiguration.add_member(:topic_integration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericArn, name: "topicIntegrationArn"))
     SessionIntegrationConfiguration.type = Types::SessionIntegrationConfiguration
-    SessionSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SessionSummary, name: "member")
+    SessionSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionSummary, name: "member"))
     SessionSummary.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "sessionId", traits: {"smithy.api#required" => {}}))
     SessionSummary.add_member(:session_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "sessionArn", traits: {"smithy.api#required" => {}}))
     SessionSummary.add_member(:assistant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "assistantId", traits: {"smithy.api#required" => {}}))
@@ -790,13 +790,13 @@ module Aws::Wisdom
     StartImportJobRequest.type = Types::StartImportJobRequest
     StartImportJobResponse.add_member(:import_job, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportJobData, name: "importJob"))
     StartImportJobResponse.type = Types::StartImportJobResponse
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     TooManyTagsException.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceName"))
     TooManyTagsException.type = Types::TooManyTagsException

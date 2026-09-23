@@ -132,7 +132,7 @@ module Aws::WorkSpacesThinClient
     DayOfWeek.add_member(:friday, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FRIDAY", traits: {"smithy.api#enumValue" => "FRIDAY"}))
     DayOfWeek.add_member(:saturday, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SATURDAY", traits: {"smithy.api#enumValue" => "SATURDAY"}))
     DayOfWeek.add_member(:sunday, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUNDAY", traits: {"smithy.api#enumValue" => "SUNDAY"}))
-    DayOfWeekList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfWeek, name: "member")
+    DayOfWeekList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfWeek, name: "member"))
     DeleteDeviceRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceId, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteDeviceRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
     DeleteDeviceRequest.type = Types::DeleteDeviceRequest
@@ -171,9 +171,9 @@ module Aws::WorkSpacesThinClient
     Device.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "kmsKeyArn"))
     Device.add_member(:last_user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "lastUserId"))
     Device.type = Types::Device
-    DeviceCreationTagsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceCreationTagKey, name: "key")
-    DeviceCreationTagsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceCreationTagValue, name: "value")
-    DeviceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceSummary, name: "member")
+    DeviceCreationTagsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceCreationTagKey, name: "key"))
+    DeviceCreationTagsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceCreationTagValue, name: "value"))
+    DeviceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceSummary, name: "member"))
     DeviceSoftwareSetComplianceStatus.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     DeviceSoftwareSetComplianceStatus.add_member(:compliant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLIANT", traits: {"smithy.api#enumValue" => "COMPLIANT"}))
     DeviceSoftwareSetComplianceStatus.add_member(:not_compliant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_COMPLIANT", traits: {"smithy.api#enumValue" => "NOT_COMPLIANT"}))
@@ -218,7 +218,7 @@ module Aws::WorkSpacesThinClient
     Environment.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "kmsKeyArn"))
     Environment.add_member(:device_creation_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceCreationTagsMap, name: "deviceCreationTags"))
     Environment.type = Types::Environment
-    EnvironmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentSummary, name: "member")
+    EnvironmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentSummary, name: "member"))
     EnvironmentSoftwareSetComplianceStatus.add_member(:no_registered_devices, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_REGISTERED_DEVICES", traits: {"smithy.api#enumValue" => "NO_REGISTERED_DEVICES"}))
     EnvironmentSoftwareSetComplianceStatus.add_member(:compliant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLIANT", traits: {"smithy.api#enumValue" => "COMPLIANT"}))
     EnvironmentSoftwareSetComplianceStatus.add_member(:not_compliant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_COMPLIANT", traits: {"smithy.api#enumValue" => "NOT_COMPLIANT"}))
@@ -297,7 +297,7 @@ module Aws::WorkSpacesThinClient
     Software.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name"))
     Software.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "version"))
     Software.type = Types::Software
-    SoftwareList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Software, name: "member")
+    SoftwareList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Software, name: "member"))
     SoftwareSet.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareSetId, name: "id"))
     SoftwareSet.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "version"))
     SoftwareSet.add_member(:released_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "releasedAt"))
@@ -306,7 +306,7 @@ module Aws::WorkSpacesThinClient
     SoftwareSet.add_member(:software, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareList, name: "software"))
     SoftwareSet.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
     SoftwareSet.type = Types::SoftwareSet
-    SoftwareSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareSetSummary, name: "member")
+    SoftwareSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareSetSummary, name: "member"))
     SoftwareSetSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareSetId, name: "id"))
     SoftwareSetSummary.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "version"))
     SoftwareSetSummary.add_member(:released_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "releasedAt"))
@@ -323,13 +323,13 @@ module Aws::WorkSpacesThinClient
     SoftwareSetUpdateStatus.add_member(:up_to_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UP_TO_DATE", traits: {"smithy.api#enumValue" => "UP_TO_DATE"}))
     SoftwareSetValidationStatus.add_member(:validated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALIDATED", traits: {"smithy.api#enumValue" => "VALIDATED"}))
     SoftwareSetValidationStatus.add_member(:not_validated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_VALIDATED", traits: {"smithy.api#enumValue" => "NOT_VALIDATED"}))
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TagsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    TagsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    TagsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    TagsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     TargetDeviceStatus.add_member(:deregistered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEREGISTERED", traits: {"smithy.api#enumValue" => "DEREGISTERED"}))
     TargetDeviceStatus.add_member(:archived, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARCHIVED", traits: {"smithy.api#enumValue" => "ARCHIVED"}))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -371,7 +371,7 @@ module Aws::WorkSpacesThinClient
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldName, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "unknownOperation"}))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "cannotParse"}))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "fieldValidationFailed"}))

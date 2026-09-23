@@ -63,8 +63,8 @@ module Aws::DynamoDBStreams
     TableName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.dynamodbstreams#TableName", name: "TableName", traits: {"smithy.api#length" => {"min" => 3, "max" => 255}, "smithy.api#pattern" => "^[a-zA-Z0-9_.-]+$"})
     TrimmedDataAccessException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dynamodbstreams#TrimmedDataAccessException", name: "TrimmedDataAccessException", traits: {"smithy.api#error" => "client"})
 
-    AttributeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
-    AttributeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
+    AttributeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
+    AttributeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     AttributeValue.add_member(:s, Types::AttributeValue::S, ::Smithy::Schema::Shapes::MemberShape.new(target: StringAttributeValue, name: "S"))
     AttributeValue.add_member(:n, Types::AttributeValue::N, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberAttributeValue, name: "N"))
     AttributeValue.add_member(:b, Types::AttributeValue::B, ::Smithy::Schema::Shapes::MemberShape.new(target: BinaryAttributeValue, name: "B"))
@@ -77,7 +77,7 @@ module Aws::DynamoDBStreams
     AttributeValue.add_member(:bool, Types::AttributeValue::BOOL, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanAttributeValue, name: "BOOL"))
     AttributeValue.add_member(:unknown, Types::AttributeValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AttributeValue.type = Types::AttributeValue
-    BinarySetAttributeValue.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BinaryAttributeValue, name: "member")
+    BinarySetAttributeValue.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BinaryAttributeValue, name: "member"))
     DescribeStreamInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamArn, name: "StreamArn", traits: {"smithy.api#required" => {}}))
     DescribeStreamInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveIntegerObject, name: "Limit"))
     DescribeStreamInput.add_member(:exclusive_start_shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, name: "ExclusiveStartShardId"))
@@ -105,7 +105,7 @@ module Aws::DynamoDBStreams
     Identity.type = Types::Identity
     InternalServerError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InternalServerError.type = Types::InternalServerError
-    KeySchema.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeySchemaElement, name: "member")
+    KeySchema.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeySchemaElement, name: "member"))
     KeySchemaElement.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeySchemaAttributeName, name: "AttributeName", traits: {"smithy.api#required" => {}}))
     KeySchemaElement.add_member(:key_type, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyType, name: "KeyType", traits: {"smithy.api#required" => {}}))
     KeySchemaElement.type = Types::KeySchemaElement
@@ -113,7 +113,7 @@ module Aws::DynamoDBStreams
     KeyType.add_member(:range, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RANGE", traits: {"smithy.api#enumValue" => "RANGE"}))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     LimitExceededException.type = Types::LimitExceededException
-    ListAttributeValue.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "member")
+    ListAttributeValue.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "member"))
     ListStreamsInput.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, name: "TableName"))
     ListStreamsInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveIntegerObject, name: "Limit"))
     ListStreamsInput.add_member(:exclusive_start_stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamArn, name: "ExclusiveStartStreamArn"))
@@ -121,9 +121,9 @@ module Aws::DynamoDBStreams
     ListStreamsOutput.add_member(:streams, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamList, name: "Streams"))
     ListStreamsOutput.add_member(:last_evaluated_stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamArn, name: "LastEvaluatedStreamArn"))
     ListStreamsOutput.type = Types::ListStreamsOutput
-    MapAttributeValue.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
-    MapAttributeValue.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
-    NumberSetAttributeValue.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NumberAttributeValue, name: "member")
+    MapAttributeValue.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
+    MapAttributeValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
+    NumberSetAttributeValue.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberAttributeValue, name: "member"))
     OperationType.add_member(:insert, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSERT", traits: {"smithy.api#enumValue" => "INSERT"}))
     OperationType.add_member(:modify, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MODIFY", traits: {"smithy.api#enumValue" => "MODIFY"}))
     OperationType.add_member(:remove, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMOVE", traits: {"smithy.api#enumValue" => "REMOVE"}))
@@ -135,7 +135,7 @@ module Aws::DynamoDBStreams
     Record.add_member(:dynamodb, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamRecord, name: "dynamodb"))
     Record.add_member(:user_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "userIdentity"))
     Record.type = Types::Record
-    RecordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Record, name: "member")
+    RecordList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Record, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     SequenceNumberRange.add_member(:starting_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumber, name: "StartingSequenceNumber"))
@@ -145,7 +145,7 @@ module Aws::DynamoDBStreams
     Shard.add_member(:sequence_number_range, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceNumberRange, name: "SequenceNumberRange"))
     Shard.add_member(:parent_shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, name: "ParentShardId"))
     Shard.type = Types::Shard
-    ShardDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Shard, name: "member")
+    ShardDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Shard, name: "member"))
     ShardFilter.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardFilterType, name: "Type"))
     ShardFilter.add_member(:shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, name: "ShardId"))
     ShardFilter.type = Types::ShardFilter
@@ -168,7 +168,7 @@ module Aws::DynamoDBStreams
     StreamDescription.add_member(:shards, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardDescriptionList, name: "Shards"))
     StreamDescription.add_member(:last_evaluated_shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, name: "LastEvaluatedShardId"))
     StreamDescription.type = Types::StreamDescription
-    StreamList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Stream, name: "member")
+    StreamList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Stream, name: "member"))
     StreamRecord.add_member(:approximate_creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "ApproximateCreationDateTime"))
     StreamRecord.add_member(:keys, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMap, name: "Keys"))
     StreamRecord.add_member(:new_image, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMap, name: "NewImage"))
@@ -185,7 +185,7 @@ module Aws::DynamoDBStreams
     StreamViewType.add_member(:old_image, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OLD_IMAGE", traits: {"smithy.api#enumValue" => "OLD_IMAGE"}))
     StreamViewType.add_member(:new_and_old_images, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEW_AND_OLD_IMAGES", traits: {"smithy.api#enumValue" => "NEW_AND_OLD_IMAGES"}))
     StreamViewType.add_member(:keys_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KEYS_ONLY", traits: {"smithy.api#enumValue" => "KEYS_ONLY"}))
-    StringSetAttributeValue.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringAttributeValue, name: "member")
+    StringSetAttributeValue.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringAttributeValue, name: "member"))
     TrimmedDataAccessException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     TrimmedDataAccessException.type = Types::TrimmedDataAccessException
 

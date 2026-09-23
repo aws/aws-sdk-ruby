@@ -44,7 +44,7 @@ module Aws::KinesisVideoSignaling
     IceServer.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: Password, name: "Password"))
     IceServer.add_member(:ttl, ::Smithy::Schema::Shapes::MemberShape.new(target: Ttl, name: "Ttl"))
     IceServer.type = Types::IceServer
-    IceServerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IceServer, name: "member")
+    IceServerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IceServer, name: "member"))
     InvalidArgumentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InvalidArgumentException.type = Types::InvalidArgumentException
     InvalidClientException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
@@ -62,7 +62,7 @@ module Aws::KinesisVideoSignaling
     Service.add_member(:turn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TURN", traits: {"smithy.api#enumValue" => "TURN"}))
     SessionExpiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     SessionExpiredException.type = Types::SessionExpiredException
-    Uris.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "member")
+    Uris.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "member"))
 
     AWSAcuitySignalingService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.kinesisvideosignaling#AWSAcuitySignalingService"

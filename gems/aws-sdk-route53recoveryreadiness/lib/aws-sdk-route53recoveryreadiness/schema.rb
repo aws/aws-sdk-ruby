@@ -353,8 +353,8 @@ module Aws::Route53RecoveryReadiness
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "tags", "smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     TargetResource.add_member(:nlb_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: NLBResource, name: "NLBResource", traits: {"smithy.api#jsonName" => "nLBResource"}))
     TargetResource.add_member(:r53_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: R53ResourceRecord, name: "R53Resource", traits: {"smithy.api#jsonName" => "r53Resource"}))
     TargetResource.type = Types::TargetResource
@@ -400,19 +400,19 @@ module Aws::Route53RecoveryReadiness
     UpdateResourceSetResponse.type = Types::UpdateResourceSetResponse
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
     ValidationException.type = Types::ValidationException
-    Listofcelloutput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CellOutput, name: "member")
-    Listofcrossaccountauthorization.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CrossAccountAuthorization, name: "member")
-    Listoflistrulesoutput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListRulesOutput, name: "member")
-    Listofmessage.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "member")
-    Listofreadinesscheckoutput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReadinessCheckOutput, name: "member")
-    Listofreadinesschecksummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReadinessCheckSummary, name: "member")
-    Listofrecommendation.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendation, name: "member")
-    Listofrecoverygroupoutput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryGroupOutput, name: "member")
-    Listofresource.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member")
-    Listofresourceresult.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceResult, name: "member")
-    Listofresourcesetoutput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSetOutput, name: "member")
-    Listofruleresult.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleResult, name: "member")
-    ListofString.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    Listofcelloutput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CellOutput, name: "member"))
+    Listofcrossaccountauthorization.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossAccountAuthorization, name: "member"))
+    Listoflistrulesoutput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListRulesOutput, name: "member"))
+    Listofmessage.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "member"))
+    Listofreadinesscheckoutput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadinessCheckOutput, name: "member"))
+    Listofreadinesschecksummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadinessCheckSummary, name: "member"))
+    Listofrecommendation.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendation, name: "member"))
+    Listofrecoverygroupoutput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryGroupOutput, name: "member"))
+    Listofresource.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
+    Listofresourceresult.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceResult, name: "member"))
+    Listofresourcesetoutput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSetOutput, name: "member"))
+    Listofruleresult.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleResult, name: "member"))
+    ListofString.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
 
     Route53RecoveryReadiness = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.route53recoveryreadiness#Route53RecoveryReadiness"

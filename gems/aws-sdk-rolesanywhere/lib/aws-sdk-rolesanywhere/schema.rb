@@ -120,7 +120,7 @@ module Aws::RolesAnywhere
     AttributeMapping.add_member(:certificate_field, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateField, name: "certificateField"))
     AttributeMapping.add_member(:mapping_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: MappingRules, name: "mappingRules"))
     AttributeMapping.type = Types::AttributeMapping
-    AttributeMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMapping, name: "member")
+    AttributeMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMapping, name: "member"))
     CreateProfileInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name", traits: {"smithy.api#required" => {}}))
     CreateProfileInput.add_member(:require_instance_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "requireInstanceProperties"))
     CreateProfileInput.add_member(:session_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "sessionPolicy"))
@@ -141,7 +141,7 @@ module Aws::RolesAnywhere
     CreateTrustAnchorInput.type = Types::CreateTrustAnchorInput
     CreateTrustAnchorOutput.add_member(:trust_anchor, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustAnchorDetail, name: "trustAnchor", traits: {"smithy.api#required" => {}}))
     CreateTrustAnchorOutput.type = Types::CreateTrustAnchorOutput
-    CredentialSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialSummary, name: "member")
+    CredentialSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialSummary, name: "member"))
     CredentialSummary.add_member(:seen_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "seenAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     CredentialSummary.add_member(:serial_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "serialNumber"))
     CredentialSummary.add_member(:issuer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "issuer"))
@@ -158,7 +158,7 @@ module Aws::RolesAnywhere
     CrlDetail.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     CrlDetail.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     CrlDetail.type = Types::CrlDetail
-    CrlDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CrlDetail, name: "member")
+    CrlDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CrlDetail, name: "member"))
     DeleteAttributeMappingRequest.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "profileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAttributeMappingRequest.add_member(:certificate_field, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateField, name: "certificateField", traits: {"smithy.api#httpQuery" => "certificateField", "smithy.api#required" => {}}))
     DeleteAttributeMappingRequest.add_member(:specifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: SpecifierList, name: "specifiers", traits: {"smithy.api#httpQuery" => "specifiers"}))
@@ -225,13 +225,13 @@ module Aws::RolesAnywhere
     ImportCrlInput.type = Types::ImportCrlInput
     ImportCrlOutput.add_member(:crl, ::Smithy::Schema::Shapes::MemberShape.new(target: CrlDetail, name: "crl", traits: {"smithy.api#required" => {}}))
     ImportCrlOutput.type = Types::ImportCrlOutput
-    InstanceProperties.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceProperty, name: "member")
+    InstanceProperties.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceProperty, name: "member"))
     InstanceProperty.add_member(:seen_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "seenAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     InstanceProperty.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePropertyMap, name: "properties"))
     InstanceProperty.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "failed"))
     InstanceProperty.type = Types::InstanceProperty
-    InstancePropertyMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
-    InstancePropertyMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
+    InstancePropertyMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}}))
+    InstancePropertyMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}}))
     ListCrlsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken", "smithy.api#length" => {"min" => 1, "max" => 10000}}))
     ListCrlsInput.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "pageSize", traits: {"smithy.api#httpQuery" => "pageSize"}))
     ListCrlsInput.type = Types::ListCrlsInput
@@ -260,10 +260,10 @@ module Aws::RolesAnywhere
     ListTrustAnchorsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
     ListTrustAnchorsOutput.add_member(:trust_anchors, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustAnchorDetails, name: "trustAnchors"))
     ListTrustAnchorsOutput.type = Types::ListTrustAnchorsOutput
-    ManagedPolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
+    ManagedPolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}}))
     MappingRule.add_member(:specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "specifier", traits: {"smithy.api#length" => {"max" => 60}, "smithy.api#required" => {}}))
     MappingRule.type = Types::MappingRule
-    MappingRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MappingRule, name: "member")
+    MappingRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MappingRule, name: "member"))
     NotificationSetting.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enabled", traits: {"smithy.api#required" => {}}))
     NotificationSetting.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationEvent, name: "event", traits: {"smithy.api#required" => {}}))
     NotificationSetting.add_member(:threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "threshold", traits: {"smithy.api#range" => {"min" => 1, "max" => 360}}))
@@ -275,12 +275,12 @@ module Aws::RolesAnywhere
     NotificationSettingDetail.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationChannel, name: "channel"))
     NotificationSettingDetail.add_member(:configured_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "configuredBy", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}}))
     NotificationSettingDetail.type = Types::NotificationSettingDetail
-    NotificationSettingDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSettingDetail, name: "member")
+    NotificationSettingDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSettingDetail, name: "member"))
     NotificationSettingKey.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationEvent, name: "event", traits: {"smithy.api#required" => {}}))
     NotificationSettingKey.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationChannel, name: "channel"))
     NotificationSettingKey.type = Types::NotificationSettingKey
-    NotificationSettingKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSettingKey, name: "member")
-    NotificationSettings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSetting, name: "member")
+    NotificationSettingKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSettingKey, name: "member"))
+    NotificationSettings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSetting, name: "member"))
     ProfileDetail.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "profileId"))
     ProfileDetail.add_member(:profile_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileArn, name: "profileArn"))
     ProfileDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name"))
@@ -296,7 +296,7 @@ module Aws::RolesAnywhere
     ProfileDetail.add_member(:accept_role_session_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "acceptRoleSessionName"))
     ProfileDetail.add_member(:attribute_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMappings, name: "attributeMappings"))
     ProfileDetail.type = Types::ProfileDetail
-    ProfileDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileDetail, name: "member")
+    ProfileDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileDetail, name: "member"))
     PutAttributeMappingRequest.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "profileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutAttributeMappingRequest.add_member(:certificate_field, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateField, name: "certificateField", traits: {"smithy.api#required" => {}}))
     PutAttributeMappingRequest.add_member(:mapping_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: MappingRules, name: "mappingRules", traits: {"smithy.api#required" => {}}))
@@ -315,7 +315,7 @@ module Aws::RolesAnywhere
     ResetNotificationSettingsResponse.type = Types::ResetNotificationSettingsResponse
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RoleArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "member")
+    RoleArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "member"))
     Source.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustAnchorType, name: "sourceType"))
     Source.add_member(:source_data, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceData, name: "sourceData"))
     Source.type = Types::Source
@@ -323,7 +323,7 @@ module Aws::RolesAnywhere
     SourceData.add_member(:acm_pca_arn, Types::SourceData::AcmPcaArn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "acmPcaArn"))
     SourceData.add_member(:unknown, Types::SourceData::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     SourceData.type = Types::SourceData
-    SpecifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    SpecifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     SubjectDetail.add_member(:subject_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "subjectArn"))
     SubjectDetail.add_member(:subject_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "subjectId"))
     SubjectDetail.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enabled"))
@@ -334,7 +334,7 @@ module Aws::RolesAnywhere
     SubjectDetail.add_member(:credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialSummaries, name: "credentials"))
     SubjectDetail.add_member(:instance_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceProperties, name: "instanceProperties"))
     SubjectDetail.type = Types::SubjectDetail
-    SubjectSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectSummary, name: "member")
+    SubjectSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectSummary, name: "member"))
     SubjectSummary.add_member(:subject_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "subjectArn"))
     SubjectSummary.add_member(:subject_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "subjectId"))
     SubjectSummary.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enabled"))
@@ -346,8 +346,8 @@ module Aws::RolesAnywhere
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -363,7 +363,7 @@ module Aws::RolesAnywhere
     TrustAnchorDetail.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     TrustAnchorDetail.add_member(:notification_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSettingDetails, name: "notificationSettings"))
     TrustAnchorDetail.type = Types::TrustAnchorDetail
-    TrustAnchorDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrustAnchorDetail, name: "member")
+    TrustAnchorDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustAnchorDetail, name: "member"))
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "tagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput

@@ -149,7 +149,7 @@ module Aws::OAM
     ListAttachedLinksItem.add_member(:link_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "LinkArn"))
     ListAttachedLinksItem.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypesOutput, name: "ResourceTypes"))
     ListAttachedLinksItem.type = Types::ListAttachedLinksItem
-    ListAttachedLinksItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListAttachedLinksItem, name: "member")
+    ListAttachedLinksItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListAttachedLinksItem, name: "member"))
     ListAttachedLinksOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ListAttachedLinksItems, name: "Items", traits: {"smithy.api#required" => {}}))
     ListAttachedLinksOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken"))
     ListAttachedLinksOutput.type = Types::ListAttachedLinksOutput
@@ -162,7 +162,7 @@ module Aws::OAM
     ListLinksItem.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypesOutput, name: "ResourceTypes"))
     ListLinksItem.add_member(:sink_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "SinkArn"))
     ListLinksItem.type = Types::ListLinksItem
-    ListLinksItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListLinksItem, name: "member")
+    ListLinksItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListLinksItem, name: "member"))
     ListLinksOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ListLinksItems, name: "Items", traits: {"smithy.api#required" => {}}))
     ListLinksOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken"))
     ListLinksOutput.type = Types::ListLinksOutput
@@ -173,7 +173,7 @@ module Aws::OAM
     ListSinksItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Id"))
     ListSinksItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name"))
     ListSinksItem.type = Types::ListSinksItem
-    ListSinksItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListSinksItem, name: "member")
+    ListSinksItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListSinksItem, name: "member"))
     ListSinksOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ListSinksItems, name: "Items", traits: {"smithy.api#required" => {}}))
     ListSinksOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken"))
     ListSinksOutput.type = Types::ListSinksOutput
@@ -205,16 +205,16 @@ module Aws::OAM
     ResourceType.add_member(:aws_internetmonitor_monitor, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_INTERNETMONITOR_MONITOR", traits: {"smithy.api#enumValue" => "AWS::InternetMonitor::Monitor"}))
     ResourceType.add_member(:aws_application_signals_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_APPLICATION_SIGNALS_SERVICE", traits: {"smithy.api#enumValue" => "AWS::ApplicationSignals::Service"}))
     ResourceType.add_member(:aws_application_signals_slo, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_APPLICATION_SIGNALS_SLO", traits: {"smithy.api#enumValue" => "AWS::ApplicationSignals::ServiceLevelObjective"}))
-    ResourceTypesInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "member")
-    ResourceTypesOutput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    ResourceTypesInput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "member"))
+    ResourceTypesOutput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
     ServiceQuotaExceededException.add_member(:amzn_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "amznErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMapInput.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMapInput.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
-    TagMapOutput.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    TagMapOutput.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMapInput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMapInput.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
+    TagMapOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    TagMapOutput.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMapInput, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput

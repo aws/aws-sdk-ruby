@@ -54,7 +54,7 @@ module Aws::SagemakerEdge
     Definition.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: Checksum, name: "Checksum"))
     Definition.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelState, name: "State"))
     Definition.type = Types::Definition
-    Definitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Definition, name: "member")
+    Definitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Definition, name: "member"))
     DeploymentModel.add_member(:model_handle, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "ModelHandle"))
     DeploymentModel.add_member(:model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelName, name: "ModelName"))
     DeploymentModel.add_member(:model_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "ModelVersion"))
@@ -64,7 +64,7 @@ module Aws::SagemakerEdge
     DeploymentModel.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StatusReason"))
     DeploymentModel.add_member(:rollback_failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RollbackFailureReason"))
     DeploymentModel.type = Types::DeploymentModel
-    DeploymentModels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentModel, name: "member")
+    DeploymentModels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentModel, name: "member"))
     DeploymentResult.add_member(:deployment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "DeploymentName"))
     DeploymentResult.add_member(:deployment_status, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "DeploymentStatus"))
     DeploymentResult.add_member(:deployment_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DeploymentStatusMessage"))
@@ -80,13 +80,13 @@ module Aws::SagemakerEdge
     EdgeDeployment.add_member(:failure_handling_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureHandlingPolicy, name: "FailureHandlingPolicy"))
     EdgeDeployment.add_member(:definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: Definitions, name: "Definitions"))
     EdgeDeployment.type = Types::EdgeDeployment
-    EdgeDeployments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EdgeDeployment, name: "member")
+    EdgeDeployments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EdgeDeployment, name: "member"))
     EdgeMetric.add_member(:dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "Dimension"))
     EdgeMetric.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Metric, name: "MetricName"))
     EdgeMetric.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "Value"))
     EdgeMetric.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp"))
     EdgeMetric.type = Types::EdgeMetric
-    EdgeMetrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EdgeMetric, name: "member")
+    EdgeMetrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EdgeMetric, name: "member"))
     FailureHandlingPolicy.add_member(:rollback_on_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RollbackOnFailure", traits: {"smithy.api#enumValue" => "ROLLBACK_ON_FAILURE"}))
     FailureHandlingPolicy.add_member(:do_nothing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DoNothing", traits: {"smithy.api#enumValue" => "DO_NOTHING"}))
     GetDeploymentsRequest.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceName, name: "DeviceName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -110,7 +110,7 @@ module Aws::SagemakerEdge
     Model.type = Types::Model
     ModelState.add_member(:deploy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Deploy", traits: {"smithy.api#enumValue" => "DEPLOY"}))
     ModelState.add_member(:undeploy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Undeploy", traits: {"smithy.api#enumValue" => "UNDEPLOY"}))
-    Models.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Model, name: "member")
+    Models.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Model, name: "member"))
     SendHeartbeatRequest.add_member(:agent_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: EdgeMetrics, name: "AgentMetrics"))
     SendHeartbeatRequest.add_member(:models, ::Smithy::Schema::Shapes::MemberShape.new(target: Models, name: "Models"))
     SendHeartbeatRequest.add_member(:agent_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "AgentVersion", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))

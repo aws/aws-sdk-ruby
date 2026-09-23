@@ -190,7 +190,7 @@ module Aws::SSMIncidents
     Action.add_member(:ssm_automation, Types::Action::SsmAutomation, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmAutomation, name: "ssmAutomation"))
     Action.add_member(:unknown, Types::Action::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Action.type = Types::Action
-    ActionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "member")
+    ActionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "member"))
     AddRegionAction.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "regionName", traits: {"smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
     AddRegionAction.add_member(:sse_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SseKmsKey, name: "sseKmsKeyId"))
     AddRegionAction.type = Types::AddRegionAction
@@ -201,12 +201,12 @@ module Aws::SSMIncidents
     AutomationExecution.add_member(:ssm_execution_arn, Types::AutomationExecution::SsmExecutionArn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ssmExecutionArn", traits: {"smithy.api#tags" => ["logs_investigations"]}))
     AutomationExecution.add_member(:unknown, Types::AutomationExecution::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AutomationExecution.type = Types::AutomationExecution
-    AutomationExecutionSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationExecution, name: "member")
+    AutomationExecutionSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationExecution, name: "member"))
     BatchGetIncidentFindingsError.add_member(:finding_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingId, name: "findingId", traits: {"smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
     BatchGetIncidentFindingsError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "code", traits: {"smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
     BatchGetIncidentFindingsError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
     BatchGetIncidentFindingsError.type = Types::BatchGetIncidentFindingsError
-    BatchGetIncidentFindingsErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetIncidentFindingsError, name: "member")
+    BatchGetIncidentFindingsErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetIncidentFindingsError, name: "member"))
     BatchGetIncidentFindingsInput.add_member(:incident_record_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "incidentRecordArn", traits: {"smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
     BatchGetIncidentFindingsInput.add_member(:finding_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingIdList, name: "findingIds", traits: {"smithy.api#required" => {}}))
     BatchGetIncidentFindingsInput.type = Types::BatchGetIncidentFindingsInput
@@ -217,7 +217,7 @@ module Aws::SSMIncidents
     ChatChannel.add_member(:chatbot_sns, Types::ChatChannel::ChatbotSns, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatbotSnsConfigurationSet, name: "chatbotSns"))
     ChatChannel.add_member(:unknown, Types::ChatChannel::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ChatChannel.type = Types::ChatChannel
-    ChatbotSnsConfigurationSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnsArn, name: "member", traits: {"smithy.api#tags" => ["logs_investigations"]})
+    ChatbotSnsConfigurationSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsArn, name: "member", traits: {"smithy.api#tags" => ["logs_investigations"]}))
     CloudFormationStackUpdate.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "startTime", traits: {"smithy.api#required" => {}}))
     CloudFormationStackUpdate.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "endTime"))
     CloudFormationStackUpdate.add_member(:stack_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "stackArn", traits: {"smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
@@ -287,15 +287,15 @@ module Aws::SSMIncidents
     DynamicSsmParameterValue.add_member(:variable, Types::DynamicSsmParameterValue::Variable, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableType, name: "variable", traits: {"smithy.api#tags" => ["logs_investigations"]}))
     DynamicSsmParameterValue.add_member(:unknown, Types::DynamicSsmParameterValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     DynamicSsmParameterValue.type = Types::DynamicSsmParameterValue
-    DynamicSsmParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
-    DynamicSsmParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: DynamicSsmParameterValue, name: "value")
+    DynamicSsmParameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}}))
+    DynamicSsmParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamicSsmParameterValue, name: "value"))
     EmptyChatChannel.type = Types::EmptyChatChannel
-    EngagementSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, name: "member", traits: {"smithy.api#tags" => ["logs_investigations"]})
+    EngagementSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, name: "member", traits: {"smithy.api#tags" => ["logs_investigations"]}))
     EventReference.add_member(:resource, Types::EventReference::Resource, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resource", traits: {"smithy.api#tags" => ["logs_investigations"]}))
     EventReference.add_member(:related_item_id, Types::EventReference::RelatedItemId, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedId, name: "relatedItemId", traits: {"smithy.api#tags" => ["logs_investigations"]}))
     EventReference.add_member(:unknown, Types::EventReference::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     EventReference.type = Types::EventReference
-    EventReferenceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventReference, name: "member")
+    EventReferenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventReference, name: "member"))
     EventSummary.add_member(:incident_record_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "incidentRecordArn", traits: {"smithy.api#required" => {}}))
     EventSummary.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "eventId", traits: {"smithy.api#required" => {}}))
     EventSummary.add_member(:event_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "eventTime", traits: {"smithy.api#required" => {}}))
@@ -303,11 +303,11 @@ module Aws::SSMIncidents
     EventSummary.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TimelineEventType, name: "eventType", traits: {"smithy.api#required" => {}}))
     EventSummary.add_member(:event_references, ::Smithy::Schema::Shapes::MemberShape.new(target: EventReferenceList, name: "eventReferences"))
     EventSummary.type = Types::EventSummary
-    EventSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventSummary, name: "member")
+    EventSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSummary, name: "member"))
     Filter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"max" => 50}, "smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
     Filter.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "condition", traits: {"smithy.api#required" => {}}))
     Filter.type = Types::Filter
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     Finding.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingId, name: "id", traits: {"smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
     Finding.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "creationTime", traits: {"smithy.api#required" => {}}))
     Finding.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastModifiedTime", traits: {"smithy.api#required" => {}}))
@@ -317,12 +317,12 @@ module Aws::SSMIncidents
     FindingDetails.add_member(:cloud_formation_stack_update, Types::FindingDetails::CloudFormationStackUpdate, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudFormationStackUpdate, name: "cloudFormationStackUpdate"))
     FindingDetails.add_member(:unknown, Types::FindingDetails::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     FindingDetails.type = Types::FindingDetails
-    FindingIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingId, name: "member")
-    FindingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Finding, name: "member")
+    FindingIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingId, name: "member"))
+    FindingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Finding, name: "member"))
     FindingSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingId, name: "id", traits: {"smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
     FindingSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastModifiedTime", traits: {"smithy.api#required" => {}}))
     FindingSummary.type = Types::FindingSummary
-    FindingSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingSummary, name: "member")
+    FindingSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingSummary, name: "member"))
     GetIncidentRecordOperationInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#httpQuery" => "arn", "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
     GetIncidentRecordOperationInput.type = Types::GetIncidentRecordOperationInput
     GetIncidentRecordOperationOutput.add_member(:incident_record, ::Smithy::Schema::Shapes::MemberShape.new(target: IncidentRecord, name: "incidentRecord", traits: {"smithy.api#required" => {}}))
@@ -382,7 +382,7 @@ module Aws::SSMIncidents
     IncidentRecordSummary.add_member(:resolved_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "resolvedTime"))
     IncidentRecordSummary.add_member(:incident_record_source, ::Smithy::Schema::Shapes::MemberShape.new(target: IncidentRecordSource, name: "incidentRecordSource", traits: {"smithy.api#required" => {}}))
     IncidentRecordSummary.type = Types::IncidentRecordSummary
-    IncidentRecordSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IncidentRecordSummary, name: "member")
+    IncidentRecordSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IncidentRecordSummary, name: "member"))
     IncidentTemplate.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: IncidentTitle, name: "title", traits: {"smithy.api#required" => {}}))
     IncidentTemplate.add_member(:impact, ::Smithy::Schema::Shapes::MemberShape.new(target: Impact, name: "impact", traits: {"smithy.api#required" => {}}))
     IncidentTemplate.add_member(:summary, ::Smithy::Schema::Shapes::MemberShape.new(target: IncidentSummary, name: "summary"))
@@ -390,11 +390,11 @@ module Aws::SSMIncidents
     IncidentTemplate.add_member(:notification_targets, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationTargetSet, name: "notificationTargets"))
     IncidentTemplate.add_member(:incident_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "incidentTags"))
     IncidentTemplate.type = Types::IncidentTemplate
-    IntegerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "member", traits: {"smithy.api#tags" => ["logs_investigations"]})
+    IntegerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "member", traits: {"smithy.api#tags" => ["logs_investigations"]}))
     Integration.add_member(:pager_duty_configuration, Types::Integration::PagerDutyConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: PagerDutyConfiguration, name: "pagerDutyConfiguration"))
     Integration.add_member(:unknown, Types::Integration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Integration.type = Types::Integration
-    Integrations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Integration, name: "member")
+    Integrations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Integration, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
     ItemIdentifier.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemValue, name: "value", traits: {"smithy.api#required" => {}}))
@@ -456,7 +456,7 @@ module Aws::SSMIncidents
     NotificationTargetItem.add_member(:sns_topic_arn, Types::NotificationTargetItem::SnsTopicArn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "snsTopicArn", traits: {"smithy.api#tags" => ["logs_investigations"]}))
     NotificationTargetItem.add_member(:unknown, Types::NotificationTargetItem::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     NotificationTargetItem.type = Types::NotificationTargetItem
-    NotificationTargetSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationTargetItem, name: "member")
+    NotificationTargetSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationTargetItem, name: "member"))
     PagerDutyConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#required" => {}}))
     PagerDutyConfiguration.add_member(:secret_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "secretId", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#required" => {}}))
     PagerDutyConfiguration.add_member(:pager_duty_incident_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PagerDutyIncidentConfiguration, name: "pagerDutyIncidentConfiguration", traits: {"smithy.api#required" => {}}))
@@ -477,17 +477,17 @@ module Aws::SSMIncidents
     RegionInfo.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusMessage"))
     RegionInfo.add_member(:status_update_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "statusUpdateDateTime", traits: {"smithy.api#required" => {}}))
     RegionInfo.type = Types::RegionInfo
-    RegionInfoMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "key")
-    RegionInfoMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RegionInfo, name: "value")
-    RegionMapInput.key = ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "key", traits: {"smithy.api#tags" => ["logs_investigations"]})
-    RegionMapInput.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RegionMapInputValue, name: "value")
+    RegionInfoMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "key"))
+    RegionInfoMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionInfo, name: "value"))
+    RegionMapInput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "key", traits: {"smithy.api#tags" => ["logs_investigations"]}))
+    RegionMapInput.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionMapInputValue, name: "value"))
     RegionMapInputValue.add_member(:sse_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SseKmsKey, name: "sseKmsKeyId"))
     RegionMapInputValue.type = Types::RegionMapInputValue
     RelatedItem.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemIdentifier, name: "identifier", traits: {"smithy.api#required" => {}}))
     RelatedItem.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "title", traits: {"smithy.api#length" => {"max" => 200}}))
     RelatedItem.add_member(:generated_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedId, name: "generatedId"))
     RelatedItem.type = Types::RelatedItem
-    RelatedItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedItem, name: "member")
+    RelatedItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedItem, name: "member"))
     RelatedItemsUpdate.add_member(:item_to_add, Types::RelatedItemsUpdate::ItemToAdd, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedItem, name: "itemToAdd"))
     RelatedItemsUpdate.add_member(:item_to_remove, Types::RelatedItemsUpdate::ItemToRemove, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemIdentifier, name: "itemToRemove"))
     RelatedItemsUpdate.add_member(:unknown, Types::RelatedItemsUpdate::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -501,7 +501,7 @@ module Aws::SSMIncidents
     ReplicationSet.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastModifiedTime", traits: {"smithy.api#required" => {}}))
     ReplicationSet.add_member(:last_modified_by, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "lastModifiedBy", traits: {"smithy.api#required" => {}}))
     ReplicationSet.type = Types::ReplicationSet
-    ReplicationSetArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    ReplicationSetArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceIdentifier"))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType"))
@@ -510,12 +510,12 @@ module Aws::SSMIncidents
     ResourcePolicy.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, name: "policyId", traits: {"smithy.api#required" => {}}))
     ResourcePolicy.add_member(:ram_resource_share_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ramResourceShareRegion", traits: {"smithy.api#required" => {}}))
     ResourcePolicy.type = Types::ResourcePolicy
-    ResourcePolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicy, name: "member")
+    ResourcePolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicy, name: "member"))
     ResponsePlanSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#required" => {}}))
     ResponsePlanSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsePlanName, name: "name", traits: {"smithy.api#required" => {}}))
     ResponsePlanSummary.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsePlanDisplayName, name: "displayName"))
     ResponsePlanSummary.type = Types::ResponsePlanSummary
-    ResponsePlanSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsePlanSummary, name: "member")
+    ResponsePlanSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsePlanSummary, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceIdentifier"))
     ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType"))
@@ -529,9 +529,9 @@ module Aws::SSMIncidents
     SsmAutomation.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmParameters, name: "parameters"))
     SsmAutomation.add_member(:dynamic_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamicSsmParameters, name: "dynamicParameters"))
     SsmAutomation.type = Types::SsmAutomation
-    SsmParameterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}})
-    SsmParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
-    SsmParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SsmParameterValues, name: "value")
+    SsmParameterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}}))
+    SsmParameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}}))
+    SsmParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmParameterValues, name: "value"))
     StartIncidentOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#tags" => ["logs_investigations"]}))
     StartIncidentOperationInput.add_member(:response_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "responsePlanArn", traits: {"smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
     StartIncidentOperationInput.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: IncidentTitle, name: "title"))
@@ -541,12 +541,12 @@ module Aws::SSMIncidents
     StartIncidentOperationInput.type = Types::StartIncidentOperationInput
     StartIncidentOperationOutput.add_member(:incident_record_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "incidentRecordArn", traits: {"smithy.api#required" => {}}))
     StartIncidentOperationOutput.type = Types::StartIncidentOperationOutput
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"max" => 1000}, "smithy.api#tags" => ["logs_investigations"]})
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#tags" => ["logs_investigations"]})
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#tags" => ["logs_investigations"]})
-    TagMapUpdate.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#tags" => ["logs_investigations"]})
-    TagMapUpdate.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#tags" => ["logs_investigations"]})
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"max" => 1000}, "smithy.api#tags" => ["logs_investigations"]}))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#tags" => ["logs_investigations"]}))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#tags" => ["logs_investigations"]}))
+    TagMapUpdate.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#tags" => ["logs_investigations"]}))
+    TagMapUpdate.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#tags" => ["logs_investigations"]}))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -572,7 +572,7 @@ module Aws::SSMIncidents
     UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
     UntagResourceOutput.type = Types::UntagResourceOutput
-    UpdateActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateReplicationSetAction, name: "member")
+    UpdateActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateReplicationSetAction, name: "member"))
     UpdateDeletionProtectionOperationInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#required" => {}, "smithy.api#tags" => ["logs_required"]}))
     UpdateDeletionProtectionOperationInput.add_member(:deletion_protected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "deletionProtected", traits: {"smithy.api#required" => {}, "smithy.api#tags" => ["logs_investigations"]}))
     UpdateDeletionProtectionOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#tags" => ["logs_investigations"]}))

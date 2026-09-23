@@ -174,11 +174,11 @@ module Aws::GeoPlaces
     AccessDeniedException.type = Types::AccessDeniedException
     AccessPoint.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "Position"))
     AccessPoint.type = Types::AccessPoint
-    AccessPointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPoint, name: "member")
+    AccessPointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPoint, name: "member"))
     AccessRestriction.add_member(:restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "Restricted"))
     AccessRestriction.add_member(:categories, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryList, name: "Categories"))
     AccessRestriction.type = Types::AccessRestriction
-    AccessRestrictionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessRestriction, name: "member")
+    AccessRestrictionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessRestriction, name: "member"))
     Address.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Label", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}}))
     Address.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: Country, name: "Country"))
     Address.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "Region"))
@@ -220,7 +220,7 @@ module Aws::GeoPlaces
     AddressComponentPhonemes.add_member(:sub_block, ::Smithy::Schema::Shapes::MemberShape.new(target: PhonemeTranscriptionList, name: "SubBlock"))
     AddressComponentPhonemes.add_member(:street, ::Smithy::Schema::Shapes::MemberShape.new(target: PhonemeTranscriptionList, name: "Street"))
     AddressComponentPhonemes.type = Types::AddressComponentPhonemes
-    AutocompleteAdditionalFeatureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutocompleteAdditionalFeature, name: "member")
+    AutocompleteAdditionalFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutocompleteAdditionalFeature, name: "member"))
     AutocompleteAddressHighlights.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightList, name: "Label"))
     AutocompleteAddressHighlights.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryHighlights, name: "Country"))
     AutocompleteAddressHighlights.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionHighlights, name: "Region"))
@@ -241,7 +241,7 @@ module Aws::GeoPlaces
     AutocompleteFilter.add_member(:include_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCodeList, name: "IncludeCountries"))
     AutocompleteFilter.add_member(:include_place_types, ::Smithy::Schema::Shapes::MemberShape.new(target: AutocompleteFilterPlaceTypeList, name: "IncludePlaceTypes"))
     AutocompleteFilter.type = Types::AutocompleteFilter
-    AutocompleteFilterPlaceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutocompleteFilterPlaceType, name: "member")
+    AutocompleteFilterPlaceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutocompleteFilterPlaceType, name: "member"))
     AutocompleteHighlights.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightList, name: "Title"))
     AutocompleteHighlights.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: AutocompleteAddressHighlights, name: "Address"))
     AutocompleteHighlights.type = Types::AutocompleteHighlights
@@ -268,18 +268,18 @@ module Aws::GeoPlaces
     AutocompleteResultItem.add_member(:political_view, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode3, name: "PoliticalView"))
     AutocompleteResultItem.add_member(:highlights, ::Smithy::Schema::Shapes::MemberShape.new(target: AutocompleteHighlights, name: "Highlights"))
     AutocompleteResultItem.type = Types::AutocompleteResultItem
-    AutocompleteResultItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutocompleteResultItem, name: "member")
-    BoundingBox.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member")
+    AutocompleteResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutocompleteResultItem, name: "member"))
+    BoundingBox.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member"))
     BusinessChain.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Name", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}}))
     BusinessChain.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Id", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}}))
     BusinessChain.type = Types::BusinessChain
-    BusinessChainList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BusinessChain, name: "member")
+    BusinessChainList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BusinessChain, name: "member"))
     Category.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Id", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#required" => {}}))
     Category.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Name", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#required" => {}}))
     Category.add_member(:localized_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "LocalizedName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}}))
     Category.add_member(:primary, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "Primary"))
     Category.type = Types::Category
-    CategoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Category, name: "member")
+    CategoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Category, name: "member"))
     ComponentMatchScores.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchScore, name: "Title", traits: {"smithy.api#default" => 0}))
     ComponentMatchScores.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressComponentMatchScores, name: "Address"))
     ComponentMatchScores.type = Types::ComponentMatchScores
@@ -287,7 +287,7 @@ module Aws::GeoPlaces
     ContactDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Value", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}}))
     ContactDetails.add_member(:categories, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryList, name: "Categories"))
     ContactDetails.type = Types::ContactDetails
-    ContactDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactDetails, name: "member")
+    ContactDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactDetails, name: "member"))
     Contacts.add_member(:phones, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactDetailsList, name: "Phones"))
     Contacts.add_member(:faxes, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactDetailsList, name: "Faxes"))
     Contacts.add_member(:websites, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactDetailsList, name: "Websites"))
@@ -297,26 +297,26 @@ module Aws::GeoPlaces
     Country.add_member(:code3, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode3, name: "Code3"))
     Country.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Name", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}}))
     Country.type = Types::Country
-    CountryCodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode, name: "member")
+    CountryCodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode, name: "member"))
     CountryHighlights.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightList, name: "Code"))
     CountryHighlights.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightList, name: "Name"))
     CountryHighlights.type = Types::CountryHighlights
-    FilterBusinessChainList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
-    FilterCategoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    FilterBusinessChainList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}}))
+    FilterCategoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}}))
     FilterCircle.add_member(:center, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "Center", traits: {"smithy.api#required" => {}}))
     FilterCircle.add_member(:radius, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "Radius", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1, "max" => 21000000}, "smithy.api#required" => {}}))
     FilterCircle.type = Types::FilterCircle
-    FilterFoodTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    FilterFoodTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}}))
     FoodType.add_member(:localized_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "LocalizedName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#required" => {}}))
     FoodType.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Id", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}}))
     FoodType.add_member(:primary, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "Primary"))
     FoodType.type = Types::FoodType
-    FoodTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FoodType, name: "member")
-    GeocodeAdditionalFeatureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GeocodeAdditionalFeature, name: "member")
+    FoodTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FoodType, name: "member"))
+    GeocodeAdditionalFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GeocodeAdditionalFeature, name: "member"))
     GeocodeFilter.add_member(:include_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCodeList, name: "IncludeCountries"))
     GeocodeFilter.add_member(:include_place_types, ::Smithy::Schema::Shapes::MemberShape.new(target: GeocodeFilterPlaceTypeList, name: "IncludePlaceTypes"))
     GeocodeFilter.type = Types::GeocodeFilter
-    GeocodeFilterPlaceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GeocodeFilterPlaceType, name: "member")
+    GeocodeFilterPlaceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GeocodeFilterPlaceType, name: "member"))
     GeocodeParsedQuery.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: ParsedQueryComponentList, name: "Title"))
     GeocodeParsedQuery.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: GeocodeParsedQueryAddressComponents, name: "Address"))
     GeocodeParsedQuery.type = Types::GeocodeParsedQuery
@@ -377,8 +377,8 @@ module Aws::GeoPlaces
     GeocodeResultItem.add_member(:main_address, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedPlace, name: "MainAddress"))
     GeocodeResultItem.add_member(:secondary_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedPlaceList, name: "SecondaryAddresses"))
     GeocodeResultItem.type = Types::GeocodeResultItem
-    GeocodeResultItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GeocodeResultItem, name: "member")
-    GetPlaceAdditionalFeatureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GetPlaceAdditionalFeature, name: "member")
+    GeocodeResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GeocodeResultItem, name: "member"))
+    GetPlaceAdditionalFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GetPlaceAdditionalFeature, name: "member"))
     GetPlaceRequest.add_member(:place_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "PlaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#length" => {"max" => 500}, "smithy.api#required" => {}}))
     GetPlaceRequest.add_member(:additional_features, ::Smithy::Schema::Shapes::MemberShape.new(target: GetPlaceAdditionalFeatureList, name: "AdditionalFeatures", traits: {"smithy.api#httpQuery" => "additional-features"}))
     GetPlaceRequest.add_member(:language, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageTag, name: "Language", traits: {"smithy.api#httpQuery" => "language"}))
@@ -412,7 +412,7 @@ module Aws::GeoPlaces
     Highlight.add_member(:end_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "EndIndex", traits: {"smithy.api#range" => {"min" => 0}}))
     Highlight.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Value", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}}))
     Highlight.type = Types::Highlight
-    HighlightList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Highlight, name: "member")
+    HighlightList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Highlight, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
     Intersection.add_member(:place_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "PlaceId", traits: {"smithy.api#length" => {"min" => 0, "max" => 500}, "smithy.api#required" => {}}))
@@ -424,13 +424,13 @@ module Aws::GeoPlaces
     Intersection.add_member(:map_view, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundingBox, name: "MapView"))
     Intersection.add_member(:access_points, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointList, name: "AccessPoints"))
     Intersection.type = Types::Intersection
-    IntersectionHighlightsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightList, name: "member")
-    IntersectionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Intersection, name: "member")
-    IntersectionStreetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IntersectionStreet, name: "member")
+    IntersectionHighlightsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightList, name: "member"))
+    IntersectionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Intersection, name: "member"))
+    IntersectionStreetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntersectionStreet, name: "member"))
     MatchScoreDetails.add_member(:overall, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchScore, name: "Overall", traits: {"smithy.api#default" => 0}))
     MatchScoreDetails.add_member(:components, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentMatchScores, name: "Components"))
     MatchScoreDetails.type = Types::MatchScoreDetails
-    MatchScoreList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MatchScore, name: "member")
+    MatchScoreList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchScore, name: "member"))
     OpeningHours.add_member(:display, ::Smithy::Schema::Shapes::MemberShape.new(target: OpeningHoursDisplayList, name: "Display"))
     OpeningHours.add_member(:open_now, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "OpenNow"))
     OpeningHours.add_member(:components, ::Smithy::Schema::Shapes::MemberShape.new(target: OpeningHoursComponentsList, name: "Components"))
@@ -440,22 +440,22 @@ module Aws::GeoPlaces
     OpeningHoursComponents.add_member(:open_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "OpenDuration", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}}))
     OpeningHoursComponents.add_member(:recurrence, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Recurrence", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}}))
     OpeningHoursComponents.type = Types::OpeningHoursComponents
-    OpeningHoursComponentsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OpeningHoursComponents, name: "member")
-    OpeningHoursDisplayList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OpeningHoursDisplay, name: "member")
-    OpeningHoursList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OpeningHours, name: "member")
+    OpeningHoursComponentsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OpeningHoursComponents, name: "member"))
+    OpeningHoursDisplayList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OpeningHoursDisplay, name: "member"))
+    OpeningHoursList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OpeningHours, name: "member"))
     ParsedQueryComponent.add_member(:start_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "StartIndex", traits: {"smithy.api#range" => {"min" => 0}}))
     ParsedQueryComponent.add_member(:end_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "EndIndex", traits: {"smithy.api#range" => {"min" => 0}}))
     ParsedQueryComponent.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Value", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}}))
     ParsedQueryComponent.add_member(:query_component, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "QueryComponent", traits: {"smithy.api#length" => {"min" => 0, "max" => 11}}))
     ParsedQueryComponent.type = Types::ParsedQueryComponent
-    ParsedQueryComponentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParsedQueryComponent, name: "member")
+    ParsedQueryComponentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParsedQueryComponent, name: "member"))
     ParsedQuerySecondaryAddressComponent.add_member(:start_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "StartIndex", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
     ParsedQuerySecondaryAddressComponent.add_member(:end_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "EndIndex", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
     ParsedQuerySecondaryAddressComponent.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Value", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}, "smithy.api#required" => {}}))
     ParsedQuerySecondaryAddressComponent.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Number", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}, "smithy.api#required" => {}}))
     ParsedQuerySecondaryAddressComponent.add_member(:designator, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Designator", traits: {"smithy.api#length" => {"min" => 0, "max" => 4}, "smithy.api#required" => {}}))
     ParsedQuerySecondaryAddressComponent.type = Types::ParsedQuerySecondaryAddressComponent
-    ParsedQuerySecondaryAddressComponentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParsedQuerySecondaryAddressComponent, name: "member")
+    ParsedQuerySecondaryAddressComponentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParsedQuerySecondaryAddressComponent, name: "member"))
     PhonemeDetails.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: PhonemeTranscriptionList, name: "Title"))
     PhonemeDetails.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressComponentPhonemes, name: "Address"))
     PhonemeDetails.type = Types::PhonemeDetails
@@ -463,21 +463,21 @@ module Aws::GeoPlaces
     PhonemeTranscription.add_member(:language, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageTag, name: "Language"))
     PhonemeTranscription.add_member(:preferred, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "Preferred"))
     PhonemeTranscription.type = Types::PhonemeTranscription
-    PhonemeTranscriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhonemeTranscription, name: "member")
-    Position.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member")
+    PhonemeTranscriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhonemeTranscription, name: "member"))
+    Position.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member"))
     PostalCodeDetails.add_member(:postal_code, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "PostalCode", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}}))
     PostalCodeDetails.add_member(:postal_authority, ::Smithy::Schema::Shapes::MemberShape.new(target: PostalAuthority, name: "PostalAuthority"))
     PostalCodeDetails.add_member(:postal_code_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PostalCodeType, name: "PostalCodeType"))
     PostalCodeDetails.add_member(:usps_zip, ::Smithy::Schema::Shapes::MemberShape.new(target: UspsZip, name: "UspsZip"))
     PostalCodeDetails.add_member(:usps_zip_plus4, ::Smithy::Schema::Shapes::MemberShape.new(target: UspsZipPlus4, name: "UspsZipPlus4"))
     PostalCodeDetails.type = Types::PostalCodeDetails
-    PostalCodeDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PostalCodeDetails, name: "member")
+    PostalCodeDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PostalCodeDetails, name: "member"))
     QueryRefinement.add_member(:refined_term, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "RefinedTerm", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}, "smithy.api#required" => {}}))
     QueryRefinement.add_member(:original_term, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "OriginalTerm", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}, "smithy.api#required" => {}}))
     QueryRefinement.add_member(:start_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "StartIndex", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
     QueryRefinement.add_member(:end_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "EndIndex", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
     QueryRefinement.type = Types::QueryRefinement
-    QueryRefinementList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryRefinement, name: "member")
+    QueryRefinementList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryRefinement, name: "member"))
     Region.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Code", traits: {"smithy.api#length" => {"min" => 0, "max" => 3}}))
     Region.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Name", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}}))
     Region.type = Types::Region
@@ -491,11 +491,11 @@ module Aws::GeoPlaces
     RelatedPlace.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "Position"))
     RelatedPlace.add_member(:access_points, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointList, name: "AccessPoints"))
     RelatedPlace.type = Types::RelatedPlace
-    RelatedPlaceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedPlace, name: "member")
-    ReverseGeocodeAdditionalFeatureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReverseGeocodeAdditionalFeature, name: "member")
+    RelatedPlaceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedPlace, name: "member"))
+    ReverseGeocodeAdditionalFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReverseGeocodeAdditionalFeature, name: "member"))
     ReverseGeocodeFilter.add_member(:include_place_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ReverseGeocodeFilterPlaceTypeList, name: "IncludePlaceTypes"))
     ReverseGeocodeFilter.type = Types::ReverseGeocodeFilter
-    ReverseGeocodeFilterPlaceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReverseGeocodeFilterPlaceType, name: "member")
+    ReverseGeocodeFilterPlaceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReverseGeocodeFilterPlaceType, name: "member"))
     ReverseGeocodeRequest.add_member(:query_position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "QueryPosition", traits: {"smithy.api#required" => {}}))
     ReverseGeocodeRequest.add_member(:query_radius, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "QueryRadius", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1, "max" => 21000000}}))
     ReverseGeocodeRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MaxResults", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1, "max" => 100}}))
@@ -525,8 +525,8 @@ module Aws::GeoPlaces
     ReverseGeocodeResultItem.add_member(:political_view, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode3, name: "PoliticalView"))
     ReverseGeocodeResultItem.add_member(:intersections, ::Smithy::Schema::Shapes::MemberShape.new(target: IntersectionList, name: "Intersections"))
     ReverseGeocodeResultItem.type = Types::ReverseGeocodeResultItem
-    ReverseGeocodeResultItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReverseGeocodeResultItem, name: "member")
-    SearchNearbyAdditionalFeatureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchNearbyAdditionalFeature, name: "member")
+    ReverseGeocodeResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReverseGeocodeResultItem, name: "member"))
+    SearchNearbyAdditionalFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchNearbyAdditionalFeature, name: "member"))
     SearchNearbyFilter.add_member(:bounding_box, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundingBox, name: "BoundingBox"))
     SearchNearbyFilter.add_member(:include_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCodeList, name: "IncludeCountries"))
     SearchNearbyFilter.add_member(:include_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterCategoryList, name: "IncludeCategories"))
@@ -570,8 +570,8 @@ module Aws::GeoPlaces
     SearchNearbyResultItem.add_member(:political_view, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode3, name: "PoliticalView"))
     SearchNearbyResultItem.add_member(:phonemes, ::Smithy::Schema::Shapes::MemberShape.new(target: PhonemeDetails, name: "Phonemes"))
     SearchNearbyResultItem.type = Types::SearchNearbyResultItem
-    SearchNearbyResultItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchNearbyResultItem, name: "member")
-    SearchTextAdditionalFeatureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchTextAdditionalFeature, name: "member")
+    SearchNearbyResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchNearbyResultItem, name: "member"))
+    SearchTextAdditionalFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchTextAdditionalFeature, name: "member"))
     SearchTextFilter.add_member(:bounding_box, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundingBox, name: "BoundingBox"))
     SearchTextFilter.add_member(:circle, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterCircle, name: "Circle"))
     SearchTextFilter.add_member(:include_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCodeList, name: "IncludeCountries"))
@@ -611,13 +611,13 @@ module Aws::GeoPlaces
     SearchTextResultItem.add_member(:political_view, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode3, name: "PoliticalView"))
     SearchTextResultItem.add_member(:phonemes, ::Smithy::Schema::Shapes::MemberShape.new(target: PhonemeDetails, name: "Phonemes"))
     SearchTextResultItem.type = Types::SearchTextResultItem
-    SearchTextResultItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchTextResultItem, name: "member")
+    SearchTextResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchTextResultItem, name: "member"))
     SecondaryAddressComponent.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Number", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}, "smithy.api#required" => {}}))
     SecondaryAddressComponent.type = Types::SecondaryAddressComponent
-    SecondaryAddressComponentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecondaryAddressComponent, name: "member")
+    SecondaryAddressComponentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecondaryAddressComponent, name: "member"))
     SecondaryAddressComponentMatchScore.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchScore, name: "Number", traits: {"smithy.api#default" => 0}))
     SecondaryAddressComponentMatchScore.type = Types::SecondaryAddressComponentMatchScore
-    SecondaryAddressComponentMatchScoreList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecondaryAddressComponentMatchScore, name: "member")
+    SecondaryAddressComponentMatchScoreList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecondaryAddressComponentMatchScore, name: "member"))
     StreetComponents.add_member(:base_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "BaseName", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}}))
     StreetComponents.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Type", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}}))
     StreetComponents.add_member(:type_placement, ::Smithy::Schema::Shapes::MemberShape.new(target: TypePlacement, name: "TypePlacement"))
@@ -627,14 +627,14 @@ module Aws::GeoPlaces
     StreetComponents.add_member(:direction, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Direction", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}}))
     StreetComponents.add_member(:language, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageTag, name: "Language"))
     StreetComponents.type = Types::StreetComponents
-    StreetComponentsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreetComponents, name: "member")
+    StreetComponentsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StreetComponents, name: "member"))
     SubRegion.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Code", traits: {"smithy.api#length" => {"min" => 0, "max" => 3}}))
     SubRegion.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Name", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}}))
     SubRegion.type = Types::SubRegion
     SubRegionHighlights.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightList, name: "Code"))
     SubRegionHighlights.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightList, name: "Name"))
     SubRegionHighlights.type = Types::SubRegionHighlights
-    SuggestAdditionalFeatureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestAdditionalFeature, name: "member")
+    SuggestAdditionalFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestAdditionalFeature, name: "member"))
     SuggestAddressHighlights.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightList, name: "Label"))
     SuggestAddressHighlights.type = Types::SuggestAddressHighlights
     SuggestFilter.add_member(:bounding_box, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundingBox, name: "BoundingBox"))
@@ -683,7 +683,7 @@ module Aws::GeoPlaces
     SuggestResultItem.add_member(:query, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestQueryResult, name: "Query"))
     SuggestResultItem.add_member(:highlights, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestHighlights, name: "Highlights"))
     SuggestResultItem.type = Types::SuggestResultItem
-    SuggestResultItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestResultItem, name: "member")
+    SuggestResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestResultItem, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
     TimeZone.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Name", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}, "smithy.api#required" => {}}))
@@ -701,7 +701,7 @@ module Aws::GeoPlaces
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name", traits: {"smithy.api#jsonName" => "name", "smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
 
     PlacesService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.geoplaces#PlacesService"

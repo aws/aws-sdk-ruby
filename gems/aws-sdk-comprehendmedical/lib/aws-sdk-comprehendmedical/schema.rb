@@ -154,7 +154,7 @@ module Aws::ComprehendMedical
     Attribute.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, name: "Category"))
     Attribute.add_member(:traits, ::Smithy::Schema::Shapes::MemberShape.new(target: TraitList, name: "Traits"))
     Attribute.type = Types::Attribute
-    AttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member")
+    AttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member"))
     AttributeName.add_member(:sign, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SIGN", traits: {"smithy.api#enumValue" => "SIGN"}))
     AttributeName.add_member(:symptom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYMPTOM", traits: {"smithy.api#enumValue" => "SYMPTOM"}))
     AttributeName.add_member(:diagnosis, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIAGNOSIS", traits: {"smithy.api#enumValue" => "DIAGNOSIS"}))
@@ -186,7 +186,7 @@ module Aws::ComprehendMedical
     ComprehendMedicalAsyncJobProperties.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKey, name: "KMSKey"))
     ComprehendMedicalAsyncJobProperties.add_member(:model_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelVersion, name: "ModelVersion"))
     ComprehendMedicalAsyncJobProperties.type = Types::ComprehendMedicalAsyncJobProperties
-    ComprehendMedicalAsyncJobPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendMedicalAsyncJobProperties, name: "member")
+    ComprehendMedicalAsyncJobPropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendMedicalAsyncJobProperties, name: "member"))
     DescribeEntitiesDetectionV2JobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "JobId", traits: {"smithy.api#required" => {}}))
     DescribeEntitiesDetectionV2JobRequest.type = Types::DescribeEntitiesDetectionV2JobRequest
     DescribeEntitiesDetectionV2JobResponse.add_member(:comprehend_medical_async_job_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ComprehendMedicalAsyncJobProperties, name: "ComprehendMedicalAsyncJobProperties"))
@@ -237,7 +237,7 @@ module Aws::ComprehendMedical
     Entity.add_member(:traits, ::Smithy::Schema::Shapes::MemberShape.new(target: TraitList, name: "Traits"))
     Entity.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeList, name: "Attributes"))
     Entity.type = Types::Entity
-    EntityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Entity, name: "member")
+    EntityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Entity, name: "member"))
     EntitySubType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
     EntitySubType.add_member(:dx_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DX_NAME", traits: {"smithy.api#enumValue" => "DX_NAME"}))
     EntitySubType.add_member(:dosage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOSAGE", traits: {"smithy.api#enumValue" => "DOSAGE"}))
@@ -301,7 +301,7 @@ module Aws::ComprehendMedical
     ICD10CMAttribute.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: ICD10CMEntityType, name: "Category"))
     ICD10CMAttribute.add_member(:relationship_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ICD10CMRelationshipType, name: "RelationshipType"))
     ICD10CMAttribute.type = Types::ICD10CMAttribute
-    ICD10CMAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ICD10CMAttribute, name: "member")
+    ICD10CMAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ICD10CMAttribute, name: "member"))
     ICD10CMAttributeType.add_member(:acuity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACUITY", traits: {"smithy.api#enumValue" => "ACUITY"}))
     ICD10CMAttributeType.add_member(:direction, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECTION", traits: {"smithy.api#enumValue" => "DIRECTION"}))
     ICD10CMAttributeType.add_member(:system_organ_site, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYSTEM_ORGAN_SITE", traits: {"smithy.api#enumValue" => "SYSTEM_ORGAN_SITE"}))
@@ -313,7 +313,7 @@ module Aws::ComprehendMedical
     ICD10CMConcept.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     ICD10CMConcept.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "Score"))
     ICD10CMConcept.type = Types::ICD10CMConcept
-    ICD10CMConceptList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ICD10CMConcept, name: "member")
+    ICD10CMConceptList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ICD10CMConcept, name: "member"))
     ICD10CMEntity.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Id"))
     ICD10CMEntity.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: OntologyLinkingBoundedLengthString, name: "Text"))
     ICD10CMEntity.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: ICD10CMEntityCategory, name: "Category"))
@@ -326,7 +326,7 @@ module Aws::ComprehendMedical
     ICD10CMEntity.add_member(:icd10_cm_concepts, ::Smithy::Schema::Shapes::MemberShape.new(target: ICD10CMConceptList, name: "ICD10CMConcepts"))
     ICD10CMEntity.type = Types::ICD10CMEntity
     ICD10CMEntityCategory.add_member(:medical_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDICAL_CONDITION", traits: {"smithy.api#enumValue" => "MEDICAL_CONDITION"}))
-    ICD10CMEntityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ICD10CMEntity, name: "member")
+    ICD10CMEntityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ICD10CMEntity, name: "member"))
     ICD10CMEntityType.add_member(:dx_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DX_NAME", traits: {"smithy.api#enumValue" => "DX_NAME"}))
     ICD10CMEntityType.add_member(:time_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIME_EXPRESSION", traits: {"smithy.api#enumValue" => "TIME_EXPRESSION"}))
     ICD10CMRelationshipType.add_member(:overlap, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OVERLAP", traits: {"smithy.api#enumValue" => "OVERLAP"}))
@@ -335,7 +335,7 @@ module Aws::ComprehendMedical
     ICD10CMTrait.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ICD10CMTraitName, name: "Name"))
     ICD10CMTrait.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "Score"))
     ICD10CMTrait.type = Types::ICD10CMTrait
-    ICD10CMTraitList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ICD10CMTrait, name: "member")
+    ICD10CMTraitList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ICD10CMTrait, name: "member"))
     ICD10CMTraitName.add_member(:negation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEGATION", traits: {"smithy.api#enumValue" => "NEGATION"}))
     ICD10CMTraitName.add_member(:diagnosis, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIAGNOSIS", traits: {"smithy.api#enumValue" => "DIAGNOSIS"}))
     ICD10CMTraitName.add_member(:sign, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SIGN", traits: {"smithy.api#enumValue" => "SIGN"}))
@@ -451,7 +451,7 @@ module Aws::ComprehendMedical
     RxNormAttribute.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Text"))
     RxNormAttribute.add_member(:traits, ::Smithy::Schema::Shapes::MemberShape.new(target: RxNormTraitList, name: "Traits"))
     RxNormAttribute.type = Types::RxNormAttribute
-    RxNormAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RxNormAttribute, name: "member")
+    RxNormAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RxNormAttribute, name: "member"))
     RxNormAttributeType.add_member(:dosage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOSAGE", traits: {"smithy.api#enumValue" => "DOSAGE"}))
     RxNormAttributeType.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DURATION", traits: {"smithy.api#enumValue" => "DURATION"}))
     RxNormAttributeType.add_member(:form, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FORM", traits: {"smithy.api#enumValue" => "FORM"}))
@@ -463,7 +463,7 @@ module Aws::ComprehendMedical
     RxNormConcept.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     RxNormConcept.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "Score"))
     RxNormConcept.type = Types::RxNormConcept
-    RxNormConceptList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RxNormConcept, name: "member")
+    RxNormConceptList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RxNormConcept, name: "member"))
     RxNormEntity.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Id"))
     RxNormEntity.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: OntologyLinkingBoundedLengthString, name: "Text"))
     RxNormEntity.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: RxNormEntityCategory, name: "Category"))
@@ -476,13 +476,13 @@ module Aws::ComprehendMedical
     RxNormEntity.add_member(:rx_norm_concepts, ::Smithy::Schema::Shapes::MemberShape.new(target: RxNormConceptList, name: "RxNormConcepts"))
     RxNormEntity.type = Types::RxNormEntity
     RxNormEntityCategory.add_member(:medication, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDICATION", traits: {"smithy.api#enumValue" => "MEDICATION"}))
-    RxNormEntityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RxNormEntity, name: "member")
+    RxNormEntityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RxNormEntity, name: "member"))
     RxNormEntityType.add_member(:brand_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BRAND_NAME", traits: {"smithy.api#enumValue" => "BRAND_NAME"}))
     RxNormEntityType.add_member(:generic_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GENERIC_NAME", traits: {"smithy.api#enumValue" => "GENERIC_NAME"}))
     RxNormTrait.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RxNormTraitName, name: "Name"))
     RxNormTrait.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "Score"))
     RxNormTrait.type = Types::RxNormTrait
-    RxNormTraitList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RxNormTrait, name: "member")
+    RxNormTraitList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RxNormTrait, name: "member"))
     RxNormTraitName.add_member(:negation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEGATION", traits: {"smithy.api#enumValue" => "NEGATION"}))
     RxNormTraitName.add_member(:past_history, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PAST_HISTORY", traits: {"smithy.api#enumValue" => "PAST_HISTORY"}))
     SNOMEDCTAttribute.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: SNOMEDCTEntityCategory, name: "Category"))
@@ -497,7 +497,7 @@ module Aws::ComprehendMedical
     SNOMEDCTAttribute.add_member(:traits, ::Smithy::Schema::Shapes::MemberShape.new(target: SNOMEDCTTraitList, name: "Traits"))
     SNOMEDCTAttribute.add_member(:snomedct_concepts, ::Smithy::Schema::Shapes::MemberShape.new(target: SNOMEDCTConceptList, name: "SNOMEDCTConcepts"))
     SNOMEDCTAttribute.type = Types::SNOMEDCTAttribute
-    SNOMEDCTAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SNOMEDCTAttribute, name: "member")
+    SNOMEDCTAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SNOMEDCTAttribute, name: "member"))
     SNOMEDCTAttributeType.add_member(:acuity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACUITY", traits: {"smithy.api#enumValue" => "ACUITY"}))
     SNOMEDCTAttributeType.add_member(:quality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUALITY", traits: {"smithy.api#enumValue" => "QUALITY"}))
     SNOMEDCTAttributeType.add_member(:direction, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECTION", traits: {"smithy.api#enumValue" => "DIRECTION"}))
@@ -508,7 +508,7 @@ module Aws::ComprehendMedical
     SNOMEDCTConcept.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     SNOMEDCTConcept.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "Score"))
     SNOMEDCTConcept.type = Types::SNOMEDCTConcept
-    SNOMEDCTConceptList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SNOMEDCTConcept, name: "member")
+    SNOMEDCTConceptList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SNOMEDCTConcept, name: "member"))
     SNOMEDCTDetails.add_member(:edition, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Edition"))
     SNOMEDCTDetails.add_member(:language, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Language"))
     SNOMEDCTDetails.add_member(:version_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VersionDate"))
@@ -527,7 +527,7 @@ module Aws::ComprehendMedical
     SNOMEDCTEntityCategory.add_member(:medical_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDICAL_CONDITION", traits: {"smithy.api#enumValue" => "MEDICAL_CONDITION"}))
     SNOMEDCTEntityCategory.add_member(:anatomy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANATOMY", traits: {"smithy.api#enumValue" => "ANATOMY"}))
     SNOMEDCTEntityCategory.add_member(:test_treatment_procedure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEST_TREATMENT_PROCEDURE", traits: {"smithy.api#enumValue" => "TEST_TREATMENT_PROCEDURE"}))
-    SNOMEDCTEntityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SNOMEDCTEntity, name: "member")
+    SNOMEDCTEntityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SNOMEDCTEntity, name: "member"))
     SNOMEDCTEntityType.add_member(:dx_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DX_NAME", traits: {"smithy.api#enumValue" => "DX_NAME"}))
     SNOMEDCTEntityType.add_member(:test_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEST_NAME", traits: {"smithy.api#enumValue" => "TEST_NAME"}))
     SNOMEDCTEntityType.add_member(:procedure_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROCEDURE_NAME", traits: {"smithy.api#enumValue" => "PROCEDURE_NAME"}))
@@ -542,7 +542,7 @@ module Aws::ComprehendMedical
     SNOMEDCTTrait.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SNOMEDCTTraitName, name: "Name"))
     SNOMEDCTTrait.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "Score"))
     SNOMEDCTTrait.type = Types::SNOMEDCTTrait
-    SNOMEDCTTraitList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SNOMEDCTTrait, name: "member")
+    SNOMEDCTTraitList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SNOMEDCTTrait, name: "member"))
     SNOMEDCTTraitName.add_member(:negation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEGATION", traits: {"smithy.api#enumValue" => "NEGATION"}))
     SNOMEDCTTraitName.add_member(:diagnosis, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIAGNOSIS", traits: {"smithy.api#enumValue" => "DIAGNOSIS"}))
     SNOMEDCTTraitName.add_member(:sign, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SIGN", traits: {"smithy.api#enumValue" => "SIGN"}))
@@ -631,11 +631,11 @@ module Aws::ComprehendMedical
     Trait.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "Name"))
     Trait.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "Score"))
     Trait.type = Types::Trait
-    TraitList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Trait, name: "member")
+    TraitList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Trait, name: "member"))
     UnmappedAttribute.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, name: "Type"))
     UnmappedAttribute.add_member(:attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "Attribute"))
     UnmappedAttribute.type = Types::UnmappedAttribute
-    UnmappedAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnmappedAttribute, name: "member")
+    UnmappedAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnmappedAttribute, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ValidationException.type = Types::ValidationException
 

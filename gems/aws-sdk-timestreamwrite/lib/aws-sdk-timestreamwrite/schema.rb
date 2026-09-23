@@ -171,7 +171,7 @@ module Aws::TimestreamWrite
     BatchLoadTaskDescription.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "LastUpdatedTime"))
     BatchLoadTaskDescription.add_member(:resumable_until, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "ResumableUntil"))
     BatchLoadTaskDescription.type = Types::BatchLoadTaskDescription
-    BatchLoadTaskList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchLoadTask, name: "member")
+    BatchLoadTaskList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchLoadTask, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
     CreateBatchLoadTaskRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
@@ -232,7 +232,7 @@ module Aws::TimestreamWrite
     Database.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreationTime"))
     Database.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "LastUpdatedTime"))
     Database.type = Types::Database
-    DatabaseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Database, name: "member")
+    DatabaseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Database, name: "member"))
     DeleteDatabaseRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
     DeleteDatabaseRequest.type = Types::DeleteDatabaseRequest
     DeleteTableRequest.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "DatabaseName", traits: {"smithy.api#required" => {}}))
@@ -261,13 +261,13 @@ module Aws::TimestreamWrite
     DimensionMapping.add_member(:source_column, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, name: "SourceColumn"))
     DimensionMapping.add_member(:destination_column, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, name: "DestinationColumn"))
     DimensionMapping.type = Types::DimensionMapping
-    DimensionMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionMapping, name: "member")
+    DimensionMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionMapping, name: "member"))
     DimensionValueType.add_member(:varchar, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VARCHAR", traits: {"smithy.api#enumValue" => "VARCHAR"}))
-    Dimensions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "member")
+    Dimensions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "member"))
     Endpoint.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Address", traits: {"smithy.api#required" => {}}))
     Endpoint.add_member(:cache_period_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "CachePeriodInMinutes", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     Endpoint.type = Types::Endpoint
-    Endpoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "member")
+    Endpoints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
     InvalidEndpointException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -311,19 +311,19 @@ module Aws::TimestreamWrite
     MeasureValueType.add_member(:boolean, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BOOLEAN", traits: {"smithy.api#enumValue" => "BOOLEAN"}))
     MeasureValueType.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMESTAMP", traits: {"smithy.api#enumValue" => "TIMESTAMP"}))
     MeasureValueType.add_member(:multi, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTI", traits: {"smithy.api#enumValue" => "MULTI"}))
-    MeasureValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureValue, name: "member")
+    MeasureValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureValue, name: "member"))
     MixedMeasureMapping.add_member(:measure_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, name: "MeasureName"))
     MixedMeasureMapping.add_member(:source_column, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, name: "SourceColumn"))
     MixedMeasureMapping.add_member(:target_measure_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, name: "TargetMeasureName"))
     MixedMeasureMapping.add_member(:measure_value_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureValueType, name: "MeasureValueType", traits: {"smithy.api#required" => {}}))
     MixedMeasureMapping.add_member(:multi_measure_attribute_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiMeasureAttributeMappingList, name: "MultiMeasureAttributeMappings"))
     MixedMeasureMapping.type = Types::MixedMeasureMapping
-    MixedMeasureMappingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MixedMeasureMapping, name: "member")
+    MixedMeasureMappingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MixedMeasureMapping, name: "member"))
     MultiMeasureAttributeMapping.add_member(:source_column, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, name: "SourceColumn", traits: {"smithy.api#required" => {}}))
     MultiMeasureAttributeMapping.add_member(:target_multi_measure_attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, name: "TargetMultiMeasureAttributeName"))
     MultiMeasureAttributeMapping.add_member(:measure_value_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalarMeasureValueType, name: "MeasureValueType"))
     MultiMeasureAttributeMapping.type = Types::MultiMeasureAttributeMapping
-    MultiMeasureAttributeMappingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MultiMeasureAttributeMapping, name: "member")
+    MultiMeasureAttributeMappingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiMeasureAttributeMapping, name: "member"))
     MultiMeasureMappings.add_member(:target_multi_measure_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaName, name: "TargetMultiMeasureName"))
     MultiMeasureMappings.add_member(:multi_measure_attribute_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiMeasureAttributeMappingList, name: "MultiMeasureAttributeMappings", traits: {"smithy.api#required" => {}}))
     MultiMeasureMappings.type = Types::MultiMeasureMappings
@@ -333,7 +333,7 @@ module Aws::TimestreamWrite
     PartitionKey.type = Types::PartitionKey
     PartitionKeyEnforcementLevel.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUIRED", traits: {"smithy.api#enumValue" => "REQUIRED"}))
     PartitionKeyEnforcementLevel.add_member(:optional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPTIONAL", traits: {"smithy.api#enumValue" => "OPTIONAL"}))
-    PartitionKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionKey, name: "member")
+    PartitionKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionKey, name: "member"))
     PartitionKeyType.add_member(:dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIMENSION", traits: {"smithy.api#enumValue" => "DIMENSION"}))
     PartitionKeyType.add_member(:measure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEASURE", traits: {"smithy.api#enumValue" => "MEASURE"}))
     Record.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimensions, name: "Dimensions"))
@@ -345,7 +345,7 @@ module Aws::TimestreamWrite
     Record.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordVersion, name: "Version", traits: {"smithy.api#default" => nil}))
     Record.add_member(:measure_values, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureValues, name: "MeasureValues"))
     Record.type = Types::Record
-    Records.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Record, name: "member")
+    Records.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Record, name: "member"))
     RecordsIngested.add_member(:total, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Total", traits: {"smithy.api#default" => 0}))
     RecordsIngested.add_member(:memory_store, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "MemoryStore", traits: {"smithy.api#default" => 0}))
     RecordsIngested.add_member(:magnetic_store, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "MagneticStore", traits: {"smithy.api#default" => 0}))
@@ -354,7 +354,7 @@ module Aws::TimestreamWrite
     RejectedRecord.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Reason"))
     RejectedRecord.add_member(:existing_version, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordVersion, name: "ExistingVersion", traits: {"smithy.api#default" => nil}))
     RejectedRecord.type = Types::RejectedRecord
-    RejectedRecords.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RejectedRecord, name: "member")
+    RejectedRecords.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RejectedRecord, name: "member"))
     RejectedRecordsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     RejectedRecordsException.add_member(:rejected_records, ::Smithy::Schema::Shapes::MemberShape.new(target: RejectedRecords, name: "RejectedRecords"))
     RejectedRecordsException.type = Types::RejectedRecordsException
@@ -399,15 +399,15 @@ module Aws::TimestreamWrite
     Table.add_member(:magnetic_store_write_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: MagneticStoreWriteProperties, name: "MagneticStoreWriteProperties"))
     Table.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: Schema, name: "Schema"))
     Table.type = Types::Table
-    TableList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Table, name: "member")
+    TableList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Table, name: "member"))
     TableStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     TableStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     TableStatus.add_member(:restoring, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESTORING", traits: {"smithy.api#enumValue" => "RESTORING"}))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest

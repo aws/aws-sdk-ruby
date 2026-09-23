@@ -798,10 +798,10 @@ module Aws::RDS
     AccountQuota.add_member(:used, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "Used"))
     AccountQuota.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "Max"))
     AccountQuota.type = Types::AccountQuota
-    AccountQuotaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountQuota, name: "member", traits: {"smithy.api#xmlName" => "AccountQuota"})
+    AccountQuotaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountQuota, name: "member", traits: {"smithy.api#xmlName" => "AccountQuota"}))
     ActivityStreamMode.add_member(:sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "sync", traits: {"smithy.api#enumValue" => "sync"}))
     ActivityStreamMode.add_member(:async, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "async", traits: {"smithy.api#enumValue" => "async"}))
-    ActivityStreamModeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ActivityStreamModeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ActivityStreamPolicyStatus.add_member(:locked, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "locked", traits: {"smithy.api#enumValue" => "locked"}))
     ActivityStreamPolicyStatus.add_member(:unlocked, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "unlocked", traits: {"smithy.api#enumValue" => "unlocked"}))
     ActivityStreamPolicyStatus.add_member(:locking_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "locking_policy", traits: {"smithy.api#enumValue" => "locking-policy"}))
@@ -834,7 +834,7 @@ module Aws::RDS
     ApplyPendingMaintenanceActionMessage.type = Types::ApplyPendingMaintenanceActionMessage
     ApplyPendingMaintenanceActionResult.add_member(:resource_pending_maintenance_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePendingMaintenanceActions, name: "ResourcePendingMaintenanceActions"))
     ApplyPendingMaintenanceActionResult.type = Types::ApplyPendingMaintenanceActionResult
-    AttributeValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "AttributeValue"})
+    AttributeValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "AttributeValue"}))
     AuditPolicyState.add_member(:locked_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOCKED_POLICY", traits: {"smithy.api#enumValue" => "locked"}))
     AuditPolicyState.add_member(:unlocked_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNLOCKED_POLICY", traits: {"smithy.api#enumValue" => "unlocked"}))
     AuthScheme.add_member(:secrets, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECRETS", traits: {"smithy.api#enumValue" => "SECRETS"}))
@@ -856,13 +856,13 @@ module Aws::RDS
     AutomationMode.add_member(:all_paused, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL_PAUSED", traits: {"smithy.api#enumValue" => "all-paused"}))
     AvailabilityZone.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     AvailabilityZone.type = Types::AvailabilityZone
-    AvailabilityZoneList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "member", traits: {"smithy.api#xmlName" => "AvailabilityZone"})
-    AvailabilityZones.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "AvailabilityZone"})
+    AvailabilityZoneList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "member", traits: {"smithy.api#xmlName" => "AvailabilityZone"}))
+    AvailabilityZones.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "AvailabilityZone"}))
     AvailableProcessorFeature.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     AvailableProcessorFeature.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DefaultValue"))
     AvailableProcessorFeature.add_member(:allowed_values, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AllowedValues"))
     AvailableProcessorFeature.type = Types::AvailableProcessorFeature
-    AvailableProcessorFeatureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailableProcessorFeature, name: "member", traits: {"smithy.api#xmlName" => "AvailableProcessorFeature"})
+    AvailableProcessorFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailableProcessorFeature, name: "member", traits: {"smithy.api#xmlName" => "AvailableProcessorFeature"}))
     BacktrackDBClusterMessage.add_member(:db_cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BacktrackDBClusterMessage.add_member(:backtrack_to, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "BacktrackTo", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BacktrackDBClusterMessage.add_member(:force, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "Force"))
@@ -891,14 +891,14 @@ module Aws::RDS
     BlueGreenDeployment.type = Types::BlueGreenDeployment
     BlueGreenDeploymentAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     BlueGreenDeploymentAlreadyExistsFault.type = Types::BlueGreenDeploymentAlreadyExistsFault
-    BlueGreenDeploymentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BlueGreenDeployment, name: "member")
+    BlueGreenDeploymentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueGreenDeployment, name: "member"))
     BlueGreenDeploymentNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     BlueGreenDeploymentNotFoundFault.type = Types::BlueGreenDeploymentNotFoundFault
     BlueGreenDeploymentTask.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueGreenDeploymentTaskName, name: "Name"))
     BlueGreenDeploymentTask.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueGreenDeploymentTaskStatus, name: "Status"))
     BlueGreenDeploymentTask.type = Types::BlueGreenDeploymentTask
-    BlueGreenDeploymentTaskList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BlueGreenDeploymentTask, name: "member")
-    CACertificateIdentifiersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    BlueGreenDeploymentTaskList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueGreenDeploymentTask, name: "member"))
+    CACertificateIdentifiersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     CancelExportTaskMessage.add_member(:export_task_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ExportTaskIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CancelExportTaskMessage.type = Types::CancelExportTaskMessage
     CancelExportTaskOutput.add_member(:export_task_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ExportTaskIdentifier"))
@@ -930,7 +930,7 @@ module Aws::RDS
     CertificateDetails.add_member(:ca_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CAIdentifier"))
     CertificateDetails.add_member(:valid_till, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "ValidTill"))
     CertificateDetails.type = Types::CertificateDetails
-    CertificateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Certificate, name: "member", traits: {"smithy.api#xmlName" => "Certificate"})
+    CertificateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Certificate, name: "member", traits: {"smithy.api#xmlName" => "Certificate"}))
     CertificateMessage.add_member(:default_certificate_for_new_launches, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DefaultCertificateForNewLaunches"))
     CertificateMessage.add_member(:certificates, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateList, name: "Certificates"))
     CertificateMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
@@ -978,7 +978,7 @@ module Aws::RDS
     ContextAttribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Key"))
     ContextAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     ContextAttribute.type = Types::ContextAttribute
-    ContextAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContextAttribute, name: "member")
+    ContextAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextAttribute, name: "member"))
     CopyDBClusterParameterGroupMessage.add_member(:source_db_cluster_parameter_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceDBClusterParameterGroupIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CopyDBClusterParameterGroupMessage.add_member(:target_db_cluster_parameter_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TargetDBClusterParameterGroupIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CopyDBClusterParameterGroupMessage.add_member(:target_db_cluster_parameter_group_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TargetDBClusterParameterGroupDescription", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1564,7 +1564,7 @@ module Aws::RDS
     DBClusterAutomatedBackup.add_member(:storage_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "StorageThroughput"))
     DBClusterAutomatedBackup.add_member(:aws_backup_recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AwsBackupRecoveryPointArn"))
     DBClusterAutomatedBackup.type = Types::DBClusterAutomatedBackup
-    DBClusterAutomatedBackupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterAutomatedBackup, name: "member", traits: {"smithy.api#xmlName" => "DBClusterAutomatedBackup"})
+    DBClusterAutomatedBackupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterAutomatedBackup, name: "member", traits: {"smithy.api#xmlName" => "DBClusterAutomatedBackup"}))
     DBClusterAutomatedBackupMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     DBClusterAutomatedBackupMessage.add_member(:db_cluster_automated_backups, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterAutomatedBackupList, name: "DBClusterAutomatedBackups"))
     DBClusterAutomatedBackupMessage.type = Types::DBClusterAutomatedBackupMessage
@@ -1579,7 +1579,7 @@ module Aws::RDS
     DBClusterBacktrack.add_member(:backtrack_request_creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "BacktrackRequestCreationTime"))
     DBClusterBacktrack.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     DBClusterBacktrack.type = Types::DBClusterBacktrack
-    DBClusterBacktrackList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterBacktrack, name: "member", traits: {"smithy.api#xmlName" => "DBClusterBacktrack"})
+    DBClusterBacktrackList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterBacktrack, name: "member", traits: {"smithy.api#xmlName" => "DBClusterBacktrack"}))
     DBClusterBacktrackMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     DBClusterBacktrackMessage.add_member(:db_cluster_backtracks, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterBacktrackList, name: "DBClusterBacktracks"))
     DBClusterBacktrackMessage.type = Types::DBClusterBacktrackMessage
@@ -1598,7 +1598,7 @@ module Aws::RDS
     DBClusterEndpoint.type = Types::DBClusterEndpoint
     DBClusterEndpointAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBClusterEndpointAlreadyExistsFault.type = Types::DBClusterEndpointAlreadyExistsFault
-    DBClusterEndpointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterEndpoint, name: "member", traits: {"smithy.api#xmlName" => "DBClusterEndpointList"})
+    DBClusterEndpointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterEndpoint, name: "member", traits: {"smithy.api#xmlName" => "DBClusterEndpointList"}))
     DBClusterEndpointMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     DBClusterEndpointMessage.add_member(:db_cluster_endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterEndpointList, name: "DBClusterEndpoints"))
     DBClusterEndpointMessage.type = Types::DBClusterEndpointMessage
@@ -1606,19 +1606,19 @@ module Aws::RDS
     DBClusterEndpointNotFoundFault.type = Types::DBClusterEndpointNotFoundFault
     DBClusterEndpointQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBClusterEndpointQuotaExceededFault.type = Types::DBClusterEndpointQuotaExceededFault
-    DBClusterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBCluster, name: "member", traits: {"smithy.api#xmlName" => "DBCluster"})
+    DBClusterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBCluster, name: "member", traits: {"smithy.api#xmlName" => "DBCluster"}))
     DBClusterMember.add_member(:db_instance_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBInstanceIdentifier"))
     DBClusterMember.add_member(:is_cluster_writer, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsClusterWriter"))
     DBClusterMember.add_member(:db_cluster_parameter_group_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterParameterGroupStatus"))
     DBClusterMember.add_member(:promotion_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "PromotionTier"))
     DBClusterMember.type = Types::DBClusterMember
-    DBClusterMemberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterMember, name: "member", traits: {"smithy.api#xmlName" => "DBClusterMember"})
+    DBClusterMemberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterMember, name: "member", traits: {"smithy.api#xmlName" => "DBClusterMember"}))
     DBClusterMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     DBClusterMessage.add_member(:db_clusters, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterList, name: "DBClusters"))
     DBClusterMessage.type = Types::DBClusterMessage
     DBClusterNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBClusterNotFoundFault.type = Types::DBClusterNotFoundFault
-    DBClusterOptionGroupMemberships.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterOptionGroupStatus, name: "member", traits: {"smithy.api#xmlName" => "DBClusterOptionGroup"})
+    DBClusterOptionGroupMemberships.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterOptionGroupStatus, name: "member", traits: {"smithy.api#xmlName" => "DBClusterOptionGroup"}))
     DBClusterOptionGroupStatus.add_member(:db_cluster_option_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterOptionGroupName"))
     DBClusterOptionGroupStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     DBClusterOptionGroupStatus.type = Types::DBClusterOptionGroupStatus
@@ -1627,7 +1627,7 @@ module Aws::RDS
     DBClusterParameterGroup.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
     DBClusterParameterGroup.add_member(:db_cluster_parameter_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterParameterGroupArn"))
     DBClusterParameterGroup.type = Types::DBClusterParameterGroup
-    DBClusterParameterGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterParameterGroup, name: "member", traits: {"smithy.api#xmlName" => "DBClusterParameterGroup"})
+    DBClusterParameterGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterParameterGroup, name: "member", traits: {"smithy.api#xmlName" => "DBClusterParameterGroup"}))
     DBClusterParameterGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBClusterParameterGroupNotFoundFault.type = Types::DBClusterParameterGroupNotFoundFault
     DBClusterParameterGroupsMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
@@ -1645,7 +1645,7 @@ module Aws::RDS
     DBClusterRoleNotFoundFault.type = Types::DBClusterRoleNotFoundFault
     DBClusterRoleQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBClusterRoleQuotaExceededFault.type = Types::DBClusterRoleQuotaExceededFault
-    DBClusterRoles.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterRole, name: "member", traits: {"smithy.api#xmlName" => "DBClusterRole"})
+    DBClusterRoles.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterRole, name: "member", traits: {"smithy.api#xmlName" => "DBClusterRole"}))
     DBClusterSnapshot.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZones, name: "AvailabilityZones"))
     DBClusterSnapshot.add_member(:db_cluster_snapshot_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterSnapshotIdentifier"))
     DBClusterSnapshot.add_member(:db_cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterIdentifier"))
@@ -1678,11 +1678,11 @@ module Aws::RDS
     DBClusterSnapshotAttribute.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AttributeName"))
     DBClusterSnapshotAttribute.add_member(:attribute_values, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValueList, name: "AttributeValues"))
     DBClusterSnapshotAttribute.type = Types::DBClusterSnapshotAttribute
-    DBClusterSnapshotAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterSnapshotAttribute, name: "member", traits: {"smithy.api#xmlName" => "DBClusterSnapshotAttribute"})
+    DBClusterSnapshotAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterSnapshotAttribute, name: "member", traits: {"smithy.api#xmlName" => "DBClusterSnapshotAttribute"}))
     DBClusterSnapshotAttributesResult.add_member(:db_cluster_snapshot_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterSnapshotIdentifier"))
     DBClusterSnapshotAttributesResult.add_member(:db_cluster_snapshot_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterSnapshotAttributeList, name: "DBClusterSnapshotAttributes"))
     DBClusterSnapshotAttributesResult.type = Types::DBClusterSnapshotAttributesResult
-    DBClusterSnapshotList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterSnapshot, name: "member", traits: {"smithy.api#xmlName" => "DBClusterSnapshot"})
+    DBClusterSnapshotList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterSnapshot, name: "member", traits: {"smithy.api#xmlName" => "DBClusterSnapshot"}))
     DBClusterSnapshotMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     DBClusterSnapshotMessage.add_member(:db_cluster_snapshots, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterSnapshotList, name: "DBClusterSnapshots"))
     DBClusterSnapshotMessage.type = Types::DBClusterSnapshotMessage
@@ -1693,7 +1693,7 @@ module Aws::RDS
     DBClusterStatusInfo.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     DBClusterStatusInfo.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     DBClusterStatusInfo.type = Types::DBClusterStatusInfo
-    DBClusterStatusInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterStatusInfo, name: "member", traits: {"smithy.api#xmlName" => "DBClusterStatusInfo"})
+    DBClusterStatusInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterStatusInfo, name: "member", traits: {"smithy.api#xmlName" => "DBClusterStatusInfo"}))
     DBEngineVersion.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Engine"))
     DBEngineVersion.add_member(:major_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MajorEngineVersion"))
     DBEngineVersion.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineVersion"))
@@ -1730,7 +1730,7 @@ module Aws::RDS
     DBEngineVersion.add_member(:supports_integrations, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SupportsIntegrations"))
     DBEngineVersion.add_member(:serverless_v2_features_support, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessV2FeaturesSupport, name: "ServerlessV2FeaturesSupport"))
     DBEngineVersion.type = Types::DBEngineVersion
-    DBEngineVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBEngineVersion, name: "member", traits: {"smithy.api#xmlName" => "DBEngineVersion"})
+    DBEngineVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBEngineVersion, name: "member", traits: {"smithy.api#xmlName" => "DBEngineVersion"}))
     DBEngineVersionMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     DBEngineVersionMessage.add_member(:db_engine_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: DBEngineVersionList, name: "DBEngineVersions"))
     DBEngineVersionMessage.type = Types::DBEngineVersionMessage
@@ -1856,7 +1856,7 @@ module Aws::RDS
     DBInstanceAutomatedBackup.add_member(:aws_backup_recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AwsBackupRecoveryPointArn"))
     DBInstanceAutomatedBackup.add_member(:dedicated_log_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "DedicatedLogVolume"))
     DBInstanceAutomatedBackup.type = Types::DBInstanceAutomatedBackup
-    DBInstanceAutomatedBackupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBInstanceAutomatedBackup, name: "member", traits: {"smithy.api#xmlName" => "DBInstanceAutomatedBackup"})
+    DBInstanceAutomatedBackupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBInstanceAutomatedBackup, name: "member", traits: {"smithy.api#xmlName" => "DBInstanceAutomatedBackup"}))
     DBInstanceAutomatedBackupMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     DBInstanceAutomatedBackupMessage.add_member(:db_instance_automated_backups, ::Smithy::Schema::Shapes::MemberShape.new(target: DBInstanceAutomatedBackupList, name: "DBInstanceAutomatedBackups"))
     DBInstanceAutomatedBackupMessage.type = Types::DBInstanceAutomatedBackupMessage
@@ -1866,8 +1866,8 @@ module Aws::RDS
     DBInstanceAutomatedBackupQuotaExceededFault.type = Types::DBInstanceAutomatedBackupQuotaExceededFault
     DBInstanceAutomatedBackupsReplication.add_member(:db_instance_automated_backups_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBInstanceAutomatedBackupsArn"))
     DBInstanceAutomatedBackupsReplication.type = Types::DBInstanceAutomatedBackupsReplication
-    DBInstanceAutomatedBackupsReplicationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBInstanceAutomatedBackupsReplication, name: "member", traits: {"smithy.api#xmlName" => "DBInstanceAutomatedBackupsReplication"})
-    DBInstanceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBInstance, name: "member", traits: {"smithy.api#xmlName" => "DBInstance"})
+    DBInstanceAutomatedBackupsReplicationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBInstanceAutomatedBackupsReplication, name: "member", traits: {"smithy.api#xmlName" => "DBInstanceAutomatedBackupsReplication"}))
+    DBInstanceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBInstance, name: "member", traits: {"smithy.api#xmlName" => "DBInstance"}))
     DBInstanceMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     DBInstanceMessage.add_member(:db_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: DBInstanceList, name: "DBInstances"))
     DBInstanceMessage.type = Types::DBInstanceMessage
@@ -1885,20 +1885,20 @@ module Aws::RDS
     DBInstanceRoleNotFoundFault.type = Types::DBInstanceRoleNotFoundFault
     DBInstanceRoleQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBInstanceRoleQuotaExceededFault.type = Types::DBInstanceRoleQuotaExceededFault
-    DBInstanceRoles.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBInstanceRole, name: "member", traits: {"smithy.api#xmlName" => "DBInstanceRole"})
+    DBInstanceRoles.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBInstanceRole, name: "member", traits: {"smithy.api#xmlName" => "DBInstanceRole"}))
     DBInstanceStatusInfo.add_member(:status_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StatusType"))
     DBInstanceStatusInfo.add_member(:normal, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Normal"))
     DBInstanceStatusInfo.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     DBInstanceStatusInfo.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     DBInstanceStatusInfo.type = Types::DBInstanceStatusInfo
-    DBInstanceStatusInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBInstanceStatusInfo, name: "member", traits: {"smithy.api#xmlName" => "DBInstanceStatusInfo"})
+    DBInstanceStatusInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBInstanceStatusInfo, name: "member", traits: {"smithy.api#xmlName" => "DBInstanceStatusInfo"}))
     DBLogFileNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBLogFileNotFoundFault.type = Types::DBLogFileNotFoundFault
     DBMajorEngineVersion.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Engine"))
     DBMajorEngineVersion.add_member(:major_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MajorEngineVersion"))
     DBMajorEngineVersion.add_member(:supported_engine_lifecycles, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedEngineLifecycleList, name: "SupportedEngineLifecycles"))
     DBMajorEngineVersion.type = Types::DBMajorEngineVersion
-    DBMajorEngineVersionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBMajorEngineVersion, name: "member", traits: {"smithy.api#xmlName" => "DBMajorEngineVersion"})
+    DBMajorEngineVersionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBMajorEngineVersion, name: "member", traits: {"smithy.api#xmlName" => "DBMajorEngineVersion"}))
     DBParameterGroup.add_member(:db_parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBParameterGroupName"))
     DBParameterGroup.add_member(:db_parameter_group_family, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBParameterGroupFamily"))
     DBParameterGroup.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
@@ -1906,7 +1906,7 @@ module Aws::RDS
     DBParameterGroup.type = Types::DBParameterGroup
     DBParameterGroupAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBParameterGroupAlreadyExistsFault.type = Types::DBParameterGroupAlreadyExistsFault
-    DBParameterGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBParameterGroup, name: "member", traits: {"smithy.api#xmlName" => "DBParameterGroup"})
+    DBParameterGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBParameterGroup, name: "member", traits: {"smithy.api#xmlName" => "DBParameterGroup"}))
     DBParameterGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBParameterGroupNotFoundFault.type = Types::DBParameterGroupNotFoundFault
     DBParameterGroupQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -1914,7 +1914,7 @@ module Aws::RDS
     DBParameterGroupStatus.add_member(:db_parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBParameterGroupName"))
     DBParameterGroupStatus.add_member(:parameter_apply_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ParameterApplyStatus"))
     DBParameterGroupStatus.type = Types::DBParameterGroupStatus
-    DBParameterGroupStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBParameterGroupStatus, name: "member", traits: {"smithy.api#xmlName" => "DBParameterGroup"})
+    DBParameterGroupStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBParameterGroupStatus, name: "member", traits: {"smithy.api#xmlName" => "DBParameterGroup"}))
     DBParameterGroupsMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     DBParameterGroupsMessage.add_member(:db_parameter_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: DBParameterGroupList, name: "DBParameterGroups"))
     DBParameterGroupsMessage.type = Types::DBParameterGroupsMessage
@@ -1954,7 +1954,7 @@ module Aws::RDS
     DBProxyEndpoint.type = Types::DBProxyEndpoint
     DBProxyEndpointAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBProxyEndpointAlreadyExistsFault.type = Types::DBProxyEndpointAlreadyExistsFault
-    DBProxyEndpointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBProxyEndpoint, name: "member")
+    DBProxyEndpointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBProxyEndpoint, name: "member"))
     DBProxyEndpointNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBProxyEndpointNotFoundFault.type = Types::DBProxyEndpointNotFoundFault
     DBProxyEndpointQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -1967,7 +1967,7 @@ module Aws::RDS
     DBProxyEndpointStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "deleting"}))
     DBProxyEndpointTargetRole.add_member(:read_write, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READ_WRITE", traits: {"smithy.api#enumValue" => "READ_WRITE"}))
     DBProxyEndpointTargetRole.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READ_ONLY", traits: {"smithy.api#enumValue" => "READ_ONLY"}))
-    DBProxyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBProxy, name: "member")
+    DBProxyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBProxy, name: "member"))
     DBProxyNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBProxyNotFoundFault.type = Types::DBProxyNotFoundFault
     DBProxyQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -2026,7 +2026,7 @@ module Aws::RDS
     DBRecommendation.add_member(:links, ::Smithy::Schema::Shapes::MemberShape.new(target: DocLinkList, name: "Links"))
     DBRecommendation.add_member(:issue_details, ::Smithy::Schema::Shapes::MemberShape.new(target: IssueDetails, name: "IssueDetails"))
     DBRecommendation.type = Types::DBRecommendation
-    DBRecommendationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBRecommendation, name: "member")
+    DBRecommendationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBRecommendation, name: "member"))
     DBRecommendationMessage.add_member(:db_recommendation, ::Smithy::Schema::Shapes::MemberShape.new(target: DBRecommendation, name: "DBRecommendation"))
     DBRecommendationMessage.type = Types::DBRecommendationMessage
     DBRecommendationsMessage.add_member(:db_recommendations, ::Smithy::Schema::Shapes::MemberShape.new(target: DBRecommendationList, name: "DBRecommendations"))
@@ -2045,18 +2045,18 @@ module Aws::RDS
     DBSecurityGroupMembership.add_member(:db_security_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBSecurityGroupName"))
     DBSecurityGroupMembership.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     DBSecurityGroupMembership.type = Types::DBSecurityGroupMembership
-    DBSecurityGroupMembershipList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBSecurityGroupMembership, name: "member", traits: {"smithy.api#xmlName" => "DBSecurityGroup"})
+    DBSecurityGroupMembershipList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBSecurityGroupMembership, name: "member", traits: {"smithy.api#xmlName" => "DBSecurityGroup"}))
     DBSecurityGroupMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     DBSecurityGroupMessage.add_member(:db_security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: DBSecurityGroups, name: "DBSecurityGroups"))
     DBSecurityGroupMessage.type = Types::DBSecurityGroupMessage
-    DBSecurityGroupNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "DBSecurityGroupName"})
+    DBSecurityGroupNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "DBSecurityGroupName"}))
     DBSecurityGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBSecurityGroupNotFoundFault.type = Types::DBSecurityGroupNotFoundFault
     DBSecurityGroupNotSupportedFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBSecurityGroupNotSupportedFault.type = Types::DBSecurityGroupNotSupportedFault
     DBSecurityGroupQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBSecurityGroupQuotaExceededFault.type = Types::DBSecurityGroupQuotaExceededFault
-    DBSecurityGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBSecurityGroup, name: "member", traits: {"smithy.api#xmlName" => "DBSecurityGroup"})
+    DBSecurityGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBSecurityGroup, name: "member", traits: {"smithy.api#xmlName" => "DBSecurityGroup"}))
     DBShardGroup.add_member(:db_shard_group_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBShardGroupResourceId"))
     DBShardGroup.add_member(:db_shard_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DBShardGroupIdentifier, name: "DBShardGroupIdentifier"))
     DBShardGroup.add_member(:db_cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterIdentifier"))
@@ -2073,7 +2073,7 @@ module Aws::RDS
     DBShardGroupAlreadyExistsFault.type = Types::DBShardGroupAlreadyExistsFault
     DBShardGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBShardGroupNotFoundFault.type = Types::DBShardGroupNotFoundFault
-    DBShardGroupsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBShardGroup, name: "member", traits: {"smithy.api#xmlName" => "DBShardGroup"})
+    DBShardGroupsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBShardGroup, name: "member", traits: {"smithy.api#xmlName" => "DBShardGroup"}))
     DBSnapshot.add_member(:db_snapshot_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBSnapshotIdentifier"))
     DBSnapshot.add_member(:db_instance_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBInstanceIdentifier"))
     DBSnapshot.add_member(:snapshot_create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "SnapshotCreateTime"))
@@ -2117,11 +2117,11 @@ module Aws::RDS
     DBSnapshotAttribute.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AttributeName"))
     DBSnapshotAttribute.add_member(:attribute_values, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValueList, name: "AttributeValues"))
     DBSnapshotAttribute.type = Types::DBSnapshotAttribute
-    DBSnapshotAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBSnapshotAttribute, name: "member", traits: {"smithy.api#xmlName" => "DBSnapshotAttribute"})
+    DBSnapshotAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBSnapshotAttribute, name: "member", traits: {"smithy.api#xmlName" => "DBSnapshotAttribute"}))
     DBSnapshotAttributesResult.add_member(:db_snapshot_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBSnapshotIdentifier"))
     DBSnapshotAttributesResult.add_member(:db_snapshot_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: DBSnapshotAttributeList, name: "DBSnapshotAttributes"))
     DBSnapshotAttributesResult.type = Types::DBSnapshotAttributesResult
-    DBSnapshotList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBSnapshot, name: "member", traits: {"smithy.api#xmlName" => "DBSnapshot"})
+    DBSnapshotList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBSnapshot, name: "member", traits: {"smithy.api#xmlName" => "DBSnapshot"}))
     DBSnapshotMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     DBSnapshotMessage.add_member(:db_snapshots, ::Smithy::Schema::Shapes::MemberShape.new(target: DBSnapshotList, name: "DBSnapshots"))
     DBSnapshotMessage.type = Types::DBSnapshotMessage
@@ -2143,7 +2143,7 @@ module Aws::RDS
     DBSnapshotTenantDatabase.type = Types::DBSnapshotTenantDatabase
     DBSnapshotTenantDatabaseNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBSnapshotTenantDatabaseNotFoundFault.type = Types::DBSnapshotTenantDatabaseNotFoundFault
-    DBSnapshotTenantDatabasesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBSnapshotTenantDatabase, name: "member", traits: {"smithy.api#xmlName" => "DBSnapshotTenantDatabase"})
+    DBSnapshotTenantDatabasesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBSnapshotTenantDatabase, name: "member", traits: {"smithy.api#xmlName" => "DBSnapshotTenantDatabase"}))
     DBSnapshotTenantDatabasesMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     DBSnapshotTenantDatabasesMessage.add_member(:db_snapshot_tenant_databases, ::Smithy::Schema::Shapes::MemberShape.new(target: DBSnapshotTenantDatabasesList, name: "DBSnapshotTenantDatabases"))
     DBSnapshotTenantDatabasesMessage.type = Types::DBSnapshotTenantDatabasesMessage
@@ -2168,7 +2168,7 @@ module Aws::RDS
     DBSubnetGroupNotFoundFault.type = Types::DBSubnetGroupNotFoundFault
     DBSubnetGroupQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBSubnetGroupQuotaExceededFault.type = Types::DBSubnetGroupQuotaExceededFault
-    DBSubnetGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBSubnetGroup, name: "member", traits: {"smithy.api#xmlName" => "DBSubnetGroup"})
+    DBSubnetGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBSubnetGroup, name: "member", traits: {"smithy.api#xmlName" => "DBSubnetGroup"}))
     DBSubnetQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DBSubnetQuotaExceededFault.type = Types::DBSubnetQuotaExceededFault
     DBUpgradeDependencyFailureFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -2426,7 +2426,7 @@ module Aws::RDS
     DescribeDBLogFilesDetails.add_member(:last_written, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "LastWritten"))
     DescribeDBLogFilesDetails.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "Size"))
     DescribeDBLogFilesDetails.type = Types::DescribeDBLogFilesDetails
-    DescribeDBLogFilesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeDBLogFilesDetails, name: "member", traits: {"smithy.api#xmlName" => "DescribeDBLogFilesDetails"})
+    DescribeDBLogFilesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeDBLogFilesDetails, name: "member", traits: {"smithy.api#xmlName" => "DescribeDBLogFilesDetails"}))
     DescribeDBLogFilesMessage.add_member(:db_instance_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBInstanceIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeDBLogFilesMessage.add_member(:filename_contains, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FilenameContains"))
     DescribeDBLogFilesMessage.add_member(:file_last_written, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "FileLastWritten"))
@@ -2670,7 +2670,7 @@ module Aws::RDS
     DocLink.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Text"))
     DocLink.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Url"))
     DocLink.type = Types::DocLink
-    DocLinkList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocLink, name: "member")
+    DocLinkList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocLink, name: "member"))
     DomainMembership.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Domain"))
     DomainMembership.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     DomainMembership.add_member(:fqdn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FQDN"))
@@ -2679,13 +2679,13 @@ module Aws::RDS
     DomainMembership.add_member(:auth_secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AuthSecretArn"))
     DomainMembership.add_member(:dns_ips, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "DnsIps"))
     DomainMembership.type = Types::DomainMembership
-    DomainMembershipList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainMembership, name: "member", traits: {"smithy.api#xmlName" => "DomainMembership"})
+    DomainMembershipList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainMembership, name: "member", traits: {"smithy.api#xmlName" => "DomainMembership"}))
     DomainNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DomainNotFoundFault.type = Types::DomainNotFoundFault
     DoubleRange.add_member(:from, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "From"))
     DoubleRange.add_member(:to, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "To"))
     DoubleRange.type = Types::DoubleRange
-    DoubleRangeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleRange, name: "member", traits: {"smithy.api#xmlName" => "DoubleRange"})
+    DoubleRangeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleRange, name: "member", traits: {"smithy.api#xmlName" => "DoubleRange"}))
     DownloadDBLogFilePortionMessage.add_member(:db_instance_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBInstanceIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DownloadDBLogFilePortionMessage.add_member(:log_file_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LogFileName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DownloadDBLogFilePortionMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
@@ -2700,7 +2700,7 @@ module Aws::RDS
     EC2SecurityGroup.add_member(:ec2_security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EC2SecurityGroupId"))
     EC2SecurityGroup.add_member(:ec2_security_group_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EC2SecurityGroupOwnerId"))
     EC2SecurityGroup.type = Types::EC2SecurityGroup
-    EC2SecurityGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EC2SecurityGroup, name: "member", traits: {"smithy.api#xmlName" => "EC2SecurityGroup"})
+    EC2SecurityGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2SecurityGroup, name: "member", traits: {"smithy.api#xmlName" => "EC2SecurityGroup"}))
     Ec2ImagePropertiesNotSupportedFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     Ec2ImagePropertiesNotSupportedFault.type = Types::Ec2ImagePropertiesNotSupportedFault
     EnableHttpEndpointRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -2708,8 +2708,8 @@ module Aws::RDS
     EnableHttpEndpointResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn"))
     EnableHttpEndpointResponse.add_member(:http_endpoint_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "HttpEndpointEnabled"))
     EnableHttpEndpointResponse.type = Types::EnableHttpEndpointResponse
-    EncryptionContextMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    EncryptionContextMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    EncryptionContextMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    EncryptionContextMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     Endpoint.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Address"))
     Endpoint.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Port"))
     Endpoint.add_member(:hosted_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "HostedZoneId"))
@@ -2724,7 +2724,7 @@ module Aws::RDS
     EngineFamily.add_member(:mysql, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MYSQL", traits: {"smithy.api#enumValue" => "MYSQL"}))
     EngineFamily.add_member(:postgresql, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POSTGRESQL", traits: {"smithy.api#enumValue" => "POSTGRESQL"}))
     EngineFamily.add_member(:sqlserver, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SQLSERVER", traits: {"smithy.api#enumValue" => "SQLSERVER"}))
-    EngineModeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    EngineModeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Event.add_member(:source_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceIdentifier"))
     Event.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceType, name: "SourceType"))
     Event.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
@@ -2732,14 +2732,14 @@ module Aws::RDS
     Event.add_member(:date, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "Date"))
     Event.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceArn"))
     Event.type = Types::Event
-    EventCategoriesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "EventCategory"})
+    EventCategoriesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "EventCategory"}))
     EventCategoriesMap.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceType"))
     EventCategoriesMap.add_member(:event_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: EventCategoriesList, name: "EventCategories"))
     EventCategoriesMap.type = Types::EventCategoriesMap
-    EventCategoriesMapList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventCategoriesMap, name: "member", traits: {"smithy.api#xmlName" => "EventCategoriesMap"})
+    EventCategoriesMapList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventCategoriesMap, name: "member", traits: {"smithy.api#xmlName" => "EventCategoriesMap"}))
     EventCategoriesMessage.add_member(:event_categories_map_list, ::Smithy::Schema::Shapes::MemberShape.new(target: EventCategoriesMapList, name: "EventCategoriesMapList"))
     EventCategoriesMessage.type = Types::EventCategoriesMessage
-    EventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member", traits: {"smithy.api#xmlName" => "Event"})
+    EventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member", traits: {"smithy.api#xmlName" => "Event"}))
     EventSubscription.add_member(:customer_aws_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CustomerAwsId"))
     EventSubscription.add_member(:cust_subscription_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CustSubscriptionId"))
     EventSubscription.add_member(:sns_topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SnsTopicArn"))
@@ -2753,7 +2753,7 @@ module Aws::RDS
     EventSubscription.type = Types::EventSubscription
     EventSubscriptionQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     EventSubscriptionQuotaExceededFault.type = Types::EventSubscriptionQuotaExceededFault
-    EventSubscriptionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventSubscription, name: "member", traits: {"smithy.api#xmlName" => "EventSubscription"})
+    EventSubscriptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSubscription, name: "member", traits: {"smithy.api#xmlName" => "EventSubscription"}))
     EventSubscriptionsMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     EventSubscriptionsMessage.add_member(:event_subscriptions_list, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSubscriptionsList, name: "EventSubscriptionsList"))
     EventSubscriptionsMessage.type = Types::EventSubscriptionsMessage
@@ -2783,7 +2783,7 @@ module Aws::RDS
     ExportTaskAlreadyExistsFault.type = Types::ExportTaskAlreadyExistsFault
     ExportTaskNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ExportTaskNotFoundFault.type = Types::ExportTaskNotFoundFault
-    ExportTasksList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportTask, name: "member", traits: {"smithy.api#xmlName" => "ExportTask"})
+    ExportTasksList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportTask, name: "member", traits: {"smithy.api#xmlName" => "ExportTask"}))
     ExportTasksMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     ExportTasksMessage.add_member(:export_tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportTasksList, name: "ExportTasks"))
     ExportTasksMessage.type = Types::ExportTasksMessage
@@ -2807,12 +2807,12 @@ module Aws::RDS
     FailoverStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "pending"}))
     FailoverStatus.add_member(:failing_over, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILING_OVER", traits: {"smithy.api#enumValue" => "failing-over"}))
     FailoverStatus.add_member(:cancelling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLING", traits: {"smithy.api#enumValue" => "cancelling"}))
-    FeatureNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    FeatureNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Filter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, name: "Values", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Filter.type = Types::Filter
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member", traits: {"smithy.api#xmlName" => "Filter"})
-    FilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Value"})
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member", traits: {"smithy.api#xmlName" => "Filter"}))
+    FilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "Value"}))
     GlobalCluster.add_member(:global_cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalClusterIdentifier, name: "GlobalClusterIdentifier"))
     GlobalCluster.add_member(:global_cluster_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "GlobalClusterResourceId"))
     GlobalCluster.add_member(:global_cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "GlobalClusterArn"))
@@ -2830,14 +2830,14 @@ module Aws::RDS
     GlobalCluster.type = Types::GlobalCluster
     GlobalClusterAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     GlobalClusterAlreadyExistsFault.type = Types::GlobalClusterAlreadyExistsFault
-    GlobalClusterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalCluster, name: "member", traits: {"smithy.api#xmlName" => "GlobalClusterMember"})
+    GlobalClusterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalCluster, name: "member", traits: {"smithy.api#xmlName" => "GlobalClusterMember"}))
     GlobalClusterMember.add_member(:db_cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterArn"))
     GlobalClusterMember.add_member(:readers, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadersArnList, name: "Readers"))
     GlobalClusterMember.add_member(:is_writer, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsWriter"))
     GlobalClusterMember.add_member(:global_write_forwarding_status, ::Smithy::Schema::Shapes::MemberShape.new(target: WriteForwardingStatus, name: "GlobalWriteForwardingStatus"))
     GlobalClusterMember.add_member(:synchronization_status, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalClusterMemberSynchronizationStatus, name: "SynchronizationStatus"))
     GlobalClusterMember.type = Types::GlobalClusterMember
-    GlobalClusterMemberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalClusterMember, name: "member", traits: {"smithy.api#xmlName" => "GlobalClusterMember"})
+    GlobalClusterMemberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalClusterMember, name: "member", traits: {"smithy.api#xmlName" => "GlobalClusterMember"}))
     GlobalClusterMemberSynchronizationStatus.add_member(:connected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECTED", traits: {"smithy.api#enumValue" => "connected"}))
     GlobalClusterMemberSynchronizationStatus.add_member(:pending_resync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_RESYNC", traits: {"smithy.api#enumValue" => "pending-resync"}))
     GlobalClusterNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -2853,7 +2853,7 @@ module Aws::RDS
     IPRange.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     IPRange.add_member(:cidrip, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CIDRIP"))
     IPRange.type = Types::IPRange
-    IPRangeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IPRange, name: "member", traits: {"smithy.api#xmlName" => "IPRange"})
+    IPRangeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IPRange, name: "member", traits: {"smithy.api#xmlName" => "IPRange"}))
     IamRoleMissingPermissionsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     IamRoleMissingPermissionsFault.type = Types::IamRoleMissingPermissionsFault
     IamRoleNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -2888,8 +2888,8 @@ module Aws::RDS
     IntegrationError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorCode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     IntegrationError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorMessage"))
     IntegrationError.type = Types::IntegrationError
-    IntegrationErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationError, name: "member", traits: {"smithy.api#xmlName" => "IntegrationError"})
-    IntegrationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Integration, name: "member", traits: {"smithy.api#xmlName" => "Integration"})
+    IntegrationErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationError, name: "member", traits: {"smithy.api#xmlName" => "IntegrationError"}))
+    IntegrationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Integration, name: "member", traits: {"smithy.api#xmlName" => "Integration"}))
     IntegrationNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     IntegrationNotFoundFault.type = Types::IntegrationNotFoundFault
     IntegrationQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -2965,7 +2965,7 @@ module Aws::RDS
     IssueDetails.type = Types::IssueDetails
     KMSKeyNotAccessibleFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     KMSKeyNotAccessibleFault.type = Types::KMSKeyNotAccessibleFault
-    KeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    KeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     LifecycleSupportName.add_member(:open_source_rds_standard_support, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPEN_SOURCE_RDS_STANDARD_SUPPORT", traits: {"smithy.api#enumValue" => "open-source-rds-standard-support"}))
     LifecycleSupportName.add_member(:open_source_rds_extended_support, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPEN_SOURCE_RDS_EXTENDED_SUPPORT", traits: {"smithy.api#enumValue" => "open-source-rds-extended-support"}))
     LimitlessDatabase.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitlessDatabaseStatus, name: "Status"))
@@ -2987,7 +2987,7 @@ module Aws::RDS
     LocalWriteForwardingStatus.add_member(:enabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLING", traits: {"smithy.api#enumValue" => "enabling"}))
     LocalWriteForwardingStatus.add_member(:disabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLING", traits: {"smithy.api#enumValue" => "disabling"}))
     LocalWriteForwardingStatus.add_member(:requested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUESTED", traits: {"smithy.api#enumValue" => "requested"}))
-    LogTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    LogTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     MasterUserAuthenticationType.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASSWORD", traits: {"smithy.api#enumValue" => "password"}))
     MasterUserAuthenticationType.add_member(:iam_db_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IAM_DB_AUTH", traits: {"smithy.api#enumValue" => "iam-db-auth"}))
     MasterUserSecret.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SecretArn"))
@@ -3001,17 +3001,17 @@ module Aws::RDS
     Metric.add_member(:statistics_details, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StatisticsDetails"))
     Metric.add_member(:metric_query, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricQuery, name: "MetricQuery"))
     Metric.type = Types::Metric
-    MetricList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Metric, name: "member")
+    MetricList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Metric, name: "member"))
     MetricQuery.add_member(:performance_insights_metric_query, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceInsightsMetricQuery, name: "PerformanceInsightsMetricQuery"))
     MetricQuery.type = Types::MetricQuery
     MetricReference.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     MetricReference.add_member(:reference_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceDetails, name: "ReferenceDetails"))
     MetricReference.type = Types::MetricReference
-    MetricReferenceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricReference, name: "member")
+    MetricReferenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricReference, name: "member"))
     MinimumEngineVersionPerAllowedValue.add_member(:allowed_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AllowedValue"))
     MinimumEngineVersionPerAllowedValue.add_member(:minimum_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MinimumEngineVersion"))
     MinimumEngineVersionPerAllowedValue.type = Types::MinimumEngineVersionPerAllowedValue
-    MinimumEngineVersionPerAllowedValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MinimumEngineVersionPerAllowedValue, name: "member", traits: {"smithy.api#xmlName" => "MinimumEngineVersionPerAllowedValue"})
+    MinimumEngineVersionPerAllowedValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MinimumEngineVersionPerAllowedValue, name: "member", traits: {"smithy.api#xmlName" => "MinimumEngineVersionPerAllowedValue"}))
     ModifyActivityStreamRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn"))
     ModifyActivityStreamRequest.add_member(:audit_policy_state, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditPolicyState, name: "AuditPolicyState"))
     ModifyActivityStreamRequest.type = Types::ModifyActivityStreamRequest
@@ -3363,7 +3363,7 @@ module Aws::RDS
     OptionConfiguration.add_member(:vpc_security_group_memberships, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcSecurityGroupIdList, name: "VpcSecurityGroupMemberships"))
     OptionConfiguration.add_member(:option_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionSettingsList, name: "OptionSettings"))
     OptionConfiguration.type = Types::OptionConfiguration
-    OptionConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OptionConfiguration, name: "member", traits: {"smithy.api#xmlName" => "OptionConfiguration"})
+    OptionConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionConfiguration, name: "member", traits: {"smithy.api#xmlName" => "OptionConfiguration"}))
     OptionGroup.add_member(:option_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "OptionGroupName"))
     OptionGroup.add_member(:option_group_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "OptionGroupDescription"))
     OptionGroup.add_member(:engine_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineName"))
@@ -3381,7 +3381,7 @@ module Aws::RDS
     OptionGroupMembership.add_member(:option_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "OptionGroupName"))
     OptionGroupMembership.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     OptionGroupMembership.type = Types::OptionGroupMembership
-    OptionGroupMembershipList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OptionGroupMembership, name: "member", traits: {"smithy.api#xmlName" => "OptionGroupMembership"})
+    OptionGroupMembershipList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionGroupMembership, name: "member", traits: {"smithy.api#xmlName" => "OptionGroupMembership"}))
     OptionGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     OptionGroupNotFoundFault.type = Types::OptionGroupNotFoundFault
     OptionGroupOption.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
@@ -3411,16 +3411,16 @@ module Aws::RDS
     OptionGroupOptionSetting.add_member(:is_required, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsRequired"))
     OptionGroupOptionSetting.add_member(:minimum_engine_version_per_allowed_value, ::Smithy::Schema::Shapes::MemberShape.new(target: MinimumEngineVersionPerAllowedValueList, name: "MinimumEngineVersionPerAllowedValue"))
     OptionGroupOptionSetting.type = Types::OptionGroupOptionSetting
-    OptionGroupOptionSettingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OptionGroupOptionSetting, name: "member", traits: {"smithy.api#xmlName" => "OptionGroupOptionSetting"})
-    OptionGroupOptionVersionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OptionVersion, name: "member", traits: {"smithy.api#xmlName" => "OptionVersion"})
-    OptionGroupOptionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OptionGroupOption, name: "member", traits: {"smithy.api#xmlName" => "OptionGroupOption"})
+    OptionGroupOptionSettingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionGroupOptionSetting, name: "member", traits: {"smithy.api#xmlName" => "OptionGroupOptionSetting"}))
+    OptionGroupOptionVersionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionVersion, name: "member", traits: {"smithy.api#xmlName" => "OptionVersion"}))
+    OptionGroupOptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionGroupOption, name: "member", traits: {"smithy.api#xmlName" => "OptionGroupOption"}))
     OptionGroupOptionsMessage.add_member(:option_group_options, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionGroupOptionsList, name: "OptionGroupOptions"))
     OptionGroupOptionsMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     OptionGroupOptionsMessage.type = Types::OptionGroupOptionsMessage
     OptionGroupQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     OptionGroupQuotaExceededFault.type = Types::OptionGroupQuotaExceededFault
-    OptionGroupsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OptionGroup, name: "member", traits: {"smithy.api#xmlName" => "OptionGroup"})
-    OptionNamesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    OptionGroupsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionGroup, name: "member", traits: {"smithy.api#xmlName" => "OptionGroup"}))
+    OptionNamesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     OptionSetting.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     OptionSetting.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PotentiallySensitiveOptionSettingValue, name: "Value"))
     OptionSetting.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DefaultValue"))
@@ -3431,14 +3431,14 @@ module Aws::RDS
     OptionSetting.add_member(:is_modifiable, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsModifiable"))
     OptionSetting.add_member(:is_collection, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsCollection"))
     OptionSetting.type = Types::OptionSetting
-    OptionSettingConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OptionSetting, name: "member", traits: {"smithy.api#xmlName" => "OptionSetting"})
-    OptionSettingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OptionSetting, name: "member", traits: {"smithy.api#xmlName" => "OptionSetting"})
+    OptionSettingConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionSetting, name: "member", traits: {"smithy.api#xmlName" => "OptionSetting"}))
+    OptionSettingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionSetting, name: "member", traits: {"smithy.api#xmlName" => "OptionSetting"}))
     OptionVersion.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Version"))
     OptionVersion.add_member(:is_default, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsDefault"))
     OptionVersion.type = Types::OptionVersion
-    OptionsConflictsWith.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "OptionConflictName"})
-    OptionsDependedOn.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "OptionName"})
-    OptionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Option, name: "member", traits: {"smithy.api#xmlName" => "Option"})
+    OptionsConflictsWith.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "OptionConflictName"}))
+    OptionsDependedOn.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "OptionName"}))
+    OptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Option, name: "member", traits: {"smithy.api#xmlName" => "Option"}))
     OrderableDBInstanceOption.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Engine"))
     OrderableDBInstanceOption.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineVersion"))
     OrderableDBInstanceOption.add_member(:db_instance_class, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBInstanceClass"))
@@ -3477,7 +3477,7 @@ module Aws::RDS
     OrderableDBInstanceOption.add_member(:supports_dedicated_log_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SupportsDedicatedLogVolume"))
     OrderableDBInstanceOption.add_member(:supports_http_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SupportsHttpEndpoint"))
     OrderableDBInstanceOption.type = Types::OrderableDBInstanceOption
-    OrderableDBInstanceOptionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrderableDBInstanceOption, name: "member", traits: {"smithy.api#xmlName" => "OrderableDBInstanceOption"})
+    OrderableDBInstanceOptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderableDBInstanceOption, name: "member", traits: {"smithy.api#xmlName" => "OrderableDBInstanceOption"}))
     OrderableDBInstanceOptionsMessage.add_member(:orderable_db_instance_options, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderableDBInstanceOptionsList, name: "OrderableDBInstanceOptions"))
     OrderableDBInstanceOptionsMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     OrderableDBInstanceOptionsMessage.type = Types::OrderableDBInstanceOptionsMessage
@@ -3495,7 +3495,7 @@ module Aws::RDS
     Parameter.add_member(:apply_method, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplyMethod, name: "ApplyMethod"))
     Parameter.add_member(:supported_engine_modes, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineModeList, name: "SupportedEngineModes"))
     Parameter.type = Types::Parameter
-    ParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Parameter, name: "member", traits: {"smithy.api#xmlName" => "Parameter"})
+    ParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameter, name: "member", traits: {"smithy.api#xmlName" => "Parameter"}))
     PendingCloudwatchLogsExports.add_member(:log_types_to_enable, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypeList, name: "LogTypesToEnable"))
     PendingCloudwatchLogsExports.add_member(:log_types_to_disable, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypeList, name: "LogTypesToDisable"))
     PendingCloudwatchLogsExports.type = Types::PendingCloudwatchLogsExports
@@ -3506,8 +3506,8 @@ module Aws::RDS
     PendingMaintenanceAction.add_member(:current_apply_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "CurrentApplyDate"))
     PendingMaintenanceAction.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
     PendingMaintenanceAction.type = Types::PendingMaintenanceAction
-    PendingMaintenanceActionDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PendingMaintenanceAction, name: "member", traits: {"smithy.api#xmlName" => "PendingMaintenanceAction"})
-    PendingMaintenanceActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePendingMaintenanceActions, name: "member", traits: {"smithy.api#xmlName" => "ResourcePendingMaintenanceActions"})
+    PendingMaintenanceActionDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PendingMaintenanceAction, name: "member", traits: {"smithy.api#xmlName" => "PendingMaintenanceAction"}))
+    PendingMaintenanceActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePendingMaintenanceActions, name: "member", traits: {"smithy.api#xmlName" => "ResourcePendingMaintenanceActions"}))
     PendingMaintenanceActionsMessage.add_member(:pending_maintenance_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: PendingMaintenanceActions, name: "PendingMaintenanceActions"))
     PendingMaintenanceActionsMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     PendingMaintenanceActionsMessage.type = Types::PendingMaintenanceActionsMessage
@@ -3551,7 +3551,7 @@ module Aws::RDS
     ProcessorFeature.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     ProcessorFeature.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     ProcessorFeature.type = Types::ProcessorFeature
-    ProcessorFeatureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessorFeature, name: "member", traits: {"smithy.api#xmlName" => "ProcessorFeature"})
+    ProcessorFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessorFeature, name: "member", traits: {"smithy.api#xmlName" => "ProcessorFeature"}))
     PromoteReadReplicaDBClusterMessage.add_member(:db_cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     PromoteReadReplicaDBClusterMessage.type = Types::PromoteReadReplicaDBClusterMessage
     PromoteReadReplicaDBClusterResult.add_member(:db_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: DBCluster, name: "DBCluster"))
@@ -3575,15 +3575,15 @@ module Aws::RDS
     Range.add_member(:to, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "To"))
     Range.add_member(:step, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "Step"))
     Range.type = Types::Range
-    RangeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Range, name: "member", traits: {"smithy.api#xmlName" => "Range"})
+    RangeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Range, name: "member", traits: {"smithy.api#xmlName" => "Range"}))
     RdsCustomClusterConfiguration.add_member(:interconnect_subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "InterconnectSubnetId"))
     RdsCustomClusterConfiguration.add_member(:transit_gateway_multicast_domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TransitGatewayMulticastDomainId"))
     RdsCustomClusterConfiguration.add_member(:replica_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaMode, name: "ReplicaMode"))
     RdsCustomClusterConfiguration.type = Types::RdsCustomClusterConfiguration
-    ReadReplicaDBClusterIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "ReadReplicaDBClusterIdentifier"})
-    ReadReplicaDBInstanceIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "ReadReplicaDBInstanceIdentifier"})
-    ReadReplicaIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "ReadReplicaIdentifier"})
-    ReadersArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ReadReplicaDBClusterIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "ReadReplicaDBClusterIdentifier"}))
+    ReadReplicaDBInstanceIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "ReadReplicaDBInstanceIdentifier"}))
+    ReadReplicaIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "ReadReplicaIdentifier"}))
+    ReadersArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     RebootDBClusterMessage.add_member(:db_cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DBClusterIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RebootDBClusterMessage.type = Types::RebootDBClusterMessage
     RebootDBClusterResult.add_member(:db_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: DBCluster, name: "DBCluster"))
@@ -3617,19 +3617,19 @@ module Aws::RDS
     RecommendedAction.add_member(:issue_details, ::Smithy::Schema::Shapes::MemberShape.new(target: IssueDetails, name: "IssueDetails"))
     RecommendedAction.add_member(:context_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextAttributeList, name: "ContextAttributes"))
     RecommendedAction.type = Types::RecommendedAction
-    RecommendedActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendedAction, name: "member")
+    RecommendedActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendedAction, name: "member"))
     RecommendedActionParameter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Key"))
     RecommendedActionParameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     RecommendedActionParameter.type = Types::RecommendedActionParameter
-    RecommendedActionParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendedActionParameter, name: "member")
+    RecommendedActionParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendedActionParameter, name: "member"))
     RecommendedActionUpdate.add_member(:action_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ActionId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RecommendedActionUpdate.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RecommendedActionUpdate.type = Types::RecommendedActionUpdate
-    RecommendedActionUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendedActionUpdate, name: "member")
+    RecommendedActionUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendedActionUpdate, name: "member"))
     RecurringCharge.add_member(:recurring_charge_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "RecurringChargeAmount"))
     RecurringCharge.add_member(:recurring_charge_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RecurringChargeFrequency"))
     RecurringCharge.type = Types::RecurringCharge
-    RecurringChargeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringCharge, name: "member", traits: {"smithy.api#xmlName" => "RecurringCharge"})
+    RecurringChargeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringCharge, name: "member", traits: {"smithy.api#xmlName" => "RecurringCharge"}))
     ReferenceDetails.add_member(:scalar_reference_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalarReferenceDetails, name: "ScalarReferenceDetails"))
     ReferenceDetails.type = Types::ReferenceDetails
     RegisterDBProxyTargetsRequest.add_member(:db_proxy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DBProxyName, name: "DBProxyName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -3681,7 +3681,7 @@ module Aws::RDS
     ReservedDBInstance.type = Types::ReservedDBInstance
     ReservedDBInstanceAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ReservedDBInstanceAlreadyExistsFault.type = Types::ReservedDBInstanceAlreadyExistsFault
-    ReservedDBInstanceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedDBInstance, name: "member", traits: {"smithy.api#xmlName" => "ReservedDBInstance"})
+    ReservedDBInstanceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedDBInstance, name: "member", traits: {"smithy.api#xmlName" => "ReservedDBInstance"}))
     ReservedDBInstanceMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     ReservedDBInstanceMessage.add_member(:reserved_db_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedDBInstanceList, name: "ReservedDBInstances"))
     ReservedDBInstanceMessage.type = Types::ReservedDBInstanceMessage
@@ -3700,7 +3700,7 @@ module Aws::RDS
     ReservedDBInstancesOffering.add_member(:multi_az, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "MultiAZ"))
     ReservedDBInstancesOffering.add_member(:recurring_charges, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringChargeList, name: "RecurringCharges"))
     ReservedDBInstancesOffering.type = Types::ReservedDBInstancesOffering
-    ReservedDBInstancesOfferingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedDBInstancesOffering, name: "member", traits: {"smithy.api#xmlName" => "ReservedDBInstancesOffering"})
+    ReservedDBInstancesOfferingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedDBInstancesOffering, name: "member", traits: {"smithy.api#xmlName" => "ReservedDBInstancesOffering"}))
     ReservedDBInstancesOfferingMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     ReservedDBInstancesOfferingMessage.add_member(:reserved_db_instances_offerings, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedDBInstancesOfferingList, name: "ReservedDBInstancesOfferings"))
     ReservedDBInstancesOfferingMessage.type = Types::ReservedDBInstancesOfferingMessage
@@ -4044,7 +4044,7 @@ module Aws::RDS
     SourceClusterNotSupportedFault.type = Types::SourceClusterNotSupportedFault
     SourceDatabaseNotSupportedFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SourceDatabaseNotSupportedFault.type = Types::SourceDatabaseNotSupportedFault
-    SourceIdsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SourceId"})
+    SourceIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SourceId"}))
     SourceNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SourceNotFoundFault.type = Types::SourceNotFoundFault
     SourceRegion.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RegionName"))
@@ -4052,7 +4052,7 @@ module Aws::RDS
     SourceRegion.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     SourceRegion.add_member(:supports_db_instance_automated_backups_replication, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SupportsDBInstanceAutomatedBackupsReplication"))
     SourceRegion.type = Types::SourceRegion
-    SourceRegionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SourceRegion, name: "member", traits: {"smithy.api#xmlName" => "SourceRegion"})
+    SourceRegionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceRegion, name: "member", traits: {"smithy.api#xmlName" => "SourceRegion"}))
     SourceRegionMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     SourceRegionMessage.add_member(:source_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceRegionList, name: "SourceRegions"))
     SourceRegionMessage.type = Types::SourceRegionMessage
@@ -4147,7 +4147,7 @@ module Aws::RDS
     StorageTypeNotAvailableFault.type = Types::StorageTypeNotAvailableFault
     StorageTypeNotSupportedFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     StorageTypeNotSupportedFault.type = Types::StorageTypeNotSupportedFault
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Subnet.add_member(:subnet_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SubnetIdentifier"))
     Subnet.add_member(:subnet_availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "SubnetAvailabilityZone"))
     Subnet.add_member(:subnet_outpost, ::Smithy::Schema::Shapes::MemberShape.new(target: Outpost, name: "SubnetOutpost"))
@@ -4155,21 +4155,21 @@ module Aws::RDS
     Subnet.type = Types::Subnet
     SubnetAlreadyInUse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SubnetAlreadyInUse.type = Types::SubnetAlreadyInUse
-    SubnetIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SubnetIdentifier"})
-    SubnetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Subnet, name: "member", traits: {"smithy.api#xmlName" => "Subnet"})
+    SubnetIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SubnetIdentifier"}))
+    SubnetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnet, name: "member", traits: {"smithy.api#xmlName" => "Subnet"}))
     SubscriptionAlreadyExistFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SubscriptionAlreadyExistFault.type = Types::SubscriptionAlreadyExistFault
     SubscriptionCategoryNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SubscriptionCategoryNotFoundFault.type = Types::SubscriptionCategoryNotFoundFault
     SubscriptionNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SubscriptionNotFoundFault.type = Types::SubscriptionNotFoundFault
-    SupportedCharacterSetsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CharacterSet, name: "member", traits: {"smithy.api#xmlName" => "CharacterSet"})
+    SupportedCharacterSetsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CharacterSet, name: "member", traits: {"smithy.api#xmlName" => "CharacterSet"}))
     SupportedEngineLifecycle.add_member(:lifecycle_support_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleSupportName, name: "LifecycleSupportName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SupportedEngineLifecycle.add_member(:lifecycle_support_start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "LifecycleSupportStartDate", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SupportedEngineLifecycle.add_member(:lifecycle_support_end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "LifecycleSupportEndDate", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SupportedEngineLifecycle.type = Types::SupportedEngineLifecycle
-    SupportedEngineLifecycleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedEngineLifecycle, name: "member", traits: {"smithy.api#xmlName" => "SupportedEngineLifecycle"})
-    SupportedTimezonesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Timezone, name: "member", traits: {"smithy.api#xmlName" => "Timezone"})
+    SupportedEngineLifecycleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedEngineLifecycle, name: "member", traits: {"smithy.api#xmlName" => "SupportedEngineLifecycle"}))
+    SupportedTimezonesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Timezone, name: "member", traits: {"smithy.api#xmlName" => "Timezone"}))
     SwitchoverBlueGreenDeploymentRequest.add_member(:blue_green_deployment_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueGreenDeploymentIdentifier, name: "BlueGreenDeploymentIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SwitchoverBlueGreenDeploymentRequest.add_member(:switchover_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: SwitchoverTimeout, name: "SwitchoverTimeout"))
     SwitchoverBlueGreenDeploymentRequest.type = Types::SwitchoverBlueGreenDeploymentRequest
@@ -4179,7 +4179,7 @@ module Aws::RDS
     SwitchoverDetail.add_member(:target_member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseArn, name: "TargetMember"))
     SwitchoverDetail.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SwitchoverDetailStatus, name: "Status"))
     SwitchoverDetail.type = Types::SwitchoverDetail
-    SwitchoverDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SwitchoverDetail, name: "member")
+    SwitchoverDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SwitchoverDetail, name: "member"))
     SwitchoverGlobalClusterMessage.add_member(:global_cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalClusterIdentifier, name: "GlobalClusterIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SwitchoverGlobalClusterMessage.add_member(:target_db_cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DBClusterIdentifier, name: "TargetDbClusterIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SwitchoverGlobalClusterMessage.type = Types::SwitchoverGlobalClusterMessage
@@ -4192,12 +4192,12 @@ module Aws::RDS
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     Tag.type = Types::Tag
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member", traits: {"smithy.api#xmlName" => "Tag"})
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member", traits: {"smithy.api#xmlName" => "Tag"}))
     TagListMessage.add_member(:tag_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "TagList"))
     TagListMessage.type = Types::TagListMessage
     TargetConnectionNetworkType.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4", traits: {"smithy.api#enumValue" => "IPV4"}))
     TargetConnectionNetworkType.add_member(:ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV6", traits: {"smithy.api#enumValue" => "IPV6"}))
-    TargetGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBProxyTargetGroup, name: "member")
+    TargetGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBProxyTargetGroup, name: "member"))
     TargetHealth.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetState, name: "State"))
     TargetHealth.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetHealthReason, name: "Reason"))
     TargetHealth.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
@@ -4208,7 +4208,7 @@ module Aws::RDS
     TargetHealthReason.add_member(:pending_proxy_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_PROXY_CAPACITY", traits: {"smithy.api#enumValue" => "PENDING_PROXY_CAPACITY"}))
     TargetHealthReason.add_member(:invalid_replication_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_REPLICATION_STATE", traits: {"smithy.api#enumValue" => "INVALID_REPLICATION_STATE"}))
     TargetHealthReason.add_member(:promoted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROMOTED", traits: {"smithy.api#enumValue" => "PROMOTED"}))
-    TargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DBProxyTarget, name: "member")
+    TargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DBProxyTarget, name: "member"))
     TargetRole.add_member(:read_write, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READ_WRITE", traits: {"smithy.api#enumValue" => "READ_WRITE"}))
     TargetRole.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READ_ONLY", traits: {"smithy.api#enumValue" => "READ_ONLY"}))
     TargetRole.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
@@ -4243,7 +4243,7 @@ module Aws::RDS
     TenantDatabasePendingModifiedValues.type = Types::TenantDatabasePendingModifiedValues
     TenantDatabaseQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     TenantDatabaseQuotaExceededFault.type = Types::TenantDatabaseQuotaExceededFault
-    TenantDatabasesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TenantDatabase, name: "member", traits: {"smithy.api#xmlName" => "TenantDatabase"})
+    TenantDatabasesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantDatabase, name: "member", traits: {"smithy.api#xmlName" => "TenantDatabase"}))
     TenantDatabasesMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     TenantDatabasesMessage.add_member(:tenant_databases, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantDatabasesList, name: "TenantDatabases"))
     TenantDatabasesMessage.type = Types::TenantDatabasesMessage
@@ -4278,8 +4278,8 @@ module Aws::RDS
     UserAuthConfigInfo.add_member(:iam_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMAuthMode, name: "IAMAuth"))
     UserAuthConfigInfo.add_member(:client_password_auth_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientPasswordAuthType, name: "ClientPasswordAuthType"))
     UserAuthConfigInfo.type = Types::UserAuthConfigInfo
-    UserAuthConfigInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserAuthConfigInfo, name: "member")
-    UserAuthConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserAuthConfig, name: "member")
+    UserAuthConfigInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAuthConfigInfo, name: "member"))
+    UserAuthConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAuthConfig, name: "member"))
     ValidDBInstanceModificationsMessage.add_member(:storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidStorageOptionsList, name: "Storage"))
     ValidDBInstanceModificationsMessage.add_member(:valid_processor_features, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailableProcessorFeatureList, name: "ValidProcessorFeatures"))
     ValidDBInstanceModificationsMessage.add_member(:supports_dedicated_log_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SupportsDedicatedLogVolume"))
@@ -4292,13 +4292,13 @@ module Aws::RDS
     ValidStorageOptions.add_member(:storage_throughput_to_iops_ratio, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleRangeList, name: "StorageThroughputToIopsRatio"))
     ValidStorageOptions.add_member(:supports_storage_autoscaling, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SupportsStorageAutoscaling"))
     ValidStorageOptions.type = Types::ValidStorageOptions
-    ValidStorageOptionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidStorageOptions, name: "member", traits: {"smithy.api#xmlName" => "ValidStorageOptions"})
-    ValidUpgradeTargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpgradeTarget, name: "member", traits: {"smithy.api#xmlName" => "UpgradeTarget"})
-    VpcSecurityGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "VpcSecurityGroupId"})
+    ValidStorageOptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidStorageOptions, name: "member", traits: {"smithy.api#xmlName" => "ValidStorageOptions"}))
+    ValidUpgradeTargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpgradeTarget, name: "member", traits: {"smithy.api#xmlName" => "UpgradeTarget"}))
+    VpcSecurityGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "VpcSecurityGroupId"}))
     VpcSecurityGroupMembership.add_member(:vpc_security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VpcSecurityGroupId"))
     VpcSecurityGroupMembership.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     VpcSecurityGroupMembership.type = Types::VpcSecurityGroupMembership
-    VpcSecurityGroupMembershipList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcSecurityGroupMembership, name: "member", traits: {"smithy.api#xmlName" => "VpcSecurityGroupMembership"})
+    VpcSecurityGroupMembershipList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcSecurityGroupMembership, name: "member", traits: {"smithy.api#xmlName" => "VpcSecurityGroupMembership"}))
     WriteForwardingStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "enabled"}))
     WriteForwardingStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "disabled"}))
     WriteForwardingStatus.add_member(:enabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLING", traits: {"smithy.api#enumValue" => "enabling"}))

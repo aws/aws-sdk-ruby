@@ -159,8 +159,8 @@ module Aws::Account
     Region.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "RegionName"))
     Region.add_member(:region_opt_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionOptStatus, name: "RegionOptStatus"))
     Region.type = Types::Region
-    RegionOptList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member")
-    RegionOptStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegionOptStatus, name: "member")
+    RegionOptList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member"))
+    RegionOptStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionOptStatus, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
@@ -179,7 +179,7 @@ module Aws::Account
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
 
     Account = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.account#Account"

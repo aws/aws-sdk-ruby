@@ -123,13 +123,13 @@ module Aws::QLDBSession
     StartTransactionResult.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionId, name: "TransactionId"))
     StartTransactionResult.add_member(:timing_information, ::Smithy::Schema::Shapes::MemberShape.new(target: TimingInformation, name: "TimingInformation"))
     StartTransactionResult.type = Types::StartTransactionResult
-    StatementParameters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValueHolder, name: "member")
+    StatementParameters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueHolder, name: "member"))
     TimingInformation.add_member(:processing_time_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingTimeMilliseconds, name: "ProcessingTimeMilliseconds", traits: {"smithy.api#default" => 0}))
     TimingInformation.type = Types::TimingInformation
     ValueHolder.add_member(:ion_binary, ::Smithy::Schema::Shapes::MemberShape.new(target: IonBinary, name: "IonBinary"))
     ValueHolder.add_member(:ion_text, ::Smithy::Schema::Shapes::MemberShape.new(target: IonText, name: "IonText"))
     ValueHolder.type = Types::ValueHolder
-    ValueHolders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValueHolder, name: "member")
+    ValueHolders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueHolder, name: "member"))
 
     QLDBSession = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.qldbsession#QLDBSession"

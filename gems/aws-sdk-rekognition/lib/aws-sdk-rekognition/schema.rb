@@ -559,7 +559,7 @@ module Aws::Rekognition
     AgeRange.type = Types::AgeRange
     Asset.add_member(:ground_truth_manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: GroundTruthManifest, name: "GroundTruthManifest"))
     Asset.type = Types::Asset
-    Assets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Asset, name: "member")
+    Assets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Asset, name: "member"))
     AssociateFacesRequest.add_member(:collection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionId, name: "CollectionId", traits: {"smithy.api#required" => {}}))
     AssociateFacesRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "UserId", traits: {"smithy.api#required" => {}}))
     AssociateFacesRequest.add_member(:face_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: UserFaceIdList, name: "FaceIds", traits: {"smithy.api#required" => {}}))
@@ -572,7 +572,7 @@ module Aws::Rekognition
     AssociateFacesResponse.type = Types::AssociateFacesResponse
     AssociatedFace.add_member(:face_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FaceId, name: "FaceId"))
     AssociatedFace.type = Types::AssociatedFace
-    AssociatedFacesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedFace, name: "member")
+    AssociatedFacesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedFace, name: "member"))
     Attribute.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "DEFAULT"}))
     Attribute.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
     Attribute.add_member(:age_range, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGE_RANGE", traits: {"smithy.api#enumValue" => "AGE_RANGE"}))
@@ -587,18 +587,18 @@ module Aws::Rekognition
     Attribute.add_member(:face_occluded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FACE_OCCLUDED", traits: {"smithy.api#enumValue" => "FACE_OCCLUDED"}))
     Attribute.add_member(:smile, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMILE", traits: {"smithy.api#enumValue" => "SMILE"}))
     Attribute.add_member(:sunglasses, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUNGLASSES", traits: {"smithy.api#enumValue" => "SUNGLASSES"}))
-    Attributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member")
+    Attributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member"))
     AudioMetadata.add_member(:codec, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Codec"))
     AudioMetadata.add_member(:duration_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: ULong, name: "DurationMillis"))
     AudioMetadata.add_member(:sample_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: ULong, name: "SampleRate"))
     AudioMetadata.add_member(:number_of_channels, ::Smithy::Schema::Shapes::MemberShape.new(target: ULong, name: "NumberOfChannels"))
     AudioMetadata.type = Types::AudioMetadata
-    AudioMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AudioMetadata, name: "member")
+    AudioMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioMetadata, name: "member"))
     AuditImage.add_member(:bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: LivenessImageBlob, name: "Bytes"))
     AuditImage.add_member(:s3_object, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Object, name: "S3Object"))
     AuditImage.add_member(:bounding_box, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundingBox, name: "BoundingBox"))
     AuditImage.type = Types::AuditImage
-    AuditImages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuditImage, name: "member")
+    AuditImages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditImage, name: "member"))
     Beard.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Value", traits: {"smithy.api#default" => false}))
     Beard.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Confidence"))
     Beard.type = Types::Beard
@@ -609,7 +609,7 @@ module Aws::Rekognition
     BodyPart.add_member(:head, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HEAD", traits: {"smithy.api#enumValue" => "HEAD"}))
     BodyPart.add_member(:left_hand, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LEFT_HAND", traits: {"smithy.api#enumValue" => "LEFT_HAND"}))
     BodyPart.add_member(:right_hand, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RIGHT_HAND", traits: {"smithy.api#enumValue" => "RIGHT_HAND"}))
-    BodyParts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectiveEquipmentBodyPart, name: "member")
+    BodyParts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectiveEquipmentBodyPart, name: "member"))
     BoundingBox.add_member(:width, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "Width"))
     BoundingBox.add_member(:height, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "Height"))
     BoundingBox.add_member(:left, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "Left"))
@@ -630,27 +630,27 @@ module Aws::Rekognition
     CelebrityDetail.add_member(:face, ::Smithy::Schema::Shapes::MemberShape.new(target: FaceDetail, name: "Face"))
     CelebrityDetail.add_member(:known_gender, ::Smithy::Schema::Shapes::MemberShape.new(target: KnownGender, name: "KnownGender"))
     CelebrityDetail.type = Types::CelebrityDetail
-    CelebrityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Celebrity, name: "member")
+    CelebrityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Celebrity, name: "member"))
     CelebrityRecognition.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp", traits: {"smithy.api#default" => 0}))
     CelebrityRecognition.add_member(:celebrity, ::Smithy::Schema::Shapes::MemberShape.new(target: CelebrityDetail, name: "Celebrity"))
     CelebrityRecognition.type = Types::CelebrityRecognition
     CelebrityRecognitionSortBy.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ID", traits: {"smithy.api#enumValue" => "ID"}))
     CelebrityRecognitionSortBy.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMESTAMP", traits: {"smithy.api#enumValue" => "TIMESTAMP"}))
-    CelebrityRecognitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CelebrityRecognition, name: "member")
+    CelebrityRecognitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CelebrityRecognition, name: "member"))
     Challenge.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeType, name: "Type", traits: {"smithy.api#required" => {}}))
     Challenge.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "Version", traits: {"smithy.api#required" => {}}))
     Challenge.type = Types::Challenge
     ChallengePreference.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeType, name: "Type", traits: {"smithy.api#required" => {}}))
     ChallengePreference.add_member(:versions, ::Smithy::Schema::Shapes::MemberShape.new(target: Versions, name: "Versions"))
     ChallengePreference.type = Types::ChallengePreference
-    ChallengePreferences.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengePreference, name: "member")
+    ChallengePreferences.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengePreference, name: "member"))
     ChallengeType.add_member(:face_movement_and_light_challenge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FACE_MOVEMENT_AND_LIGHT_CHALLENGE", traits: {"smithy.api#enumValue" => "FaceMovementAndLightChallenge"}))
     ChallengeType.add_member(:face_movement_challenge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FACE_MOVEMENT_CHALLENGE", traits: {"smithy.api#enumValue" => "FaceMovementChallenge"}))
-    CollectionIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionId, name: "member")
+    CollectionIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionId, name: "member"))
     CompareFacesMatch.add_member(:similarity, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Similarity"))
     CompareFacesMatch.add_member(:face, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparedFace, name: "Face"))
     CompareFacesMatch.type = Types::CompareFacesMatch
-    CompareFacesMatchList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CompareFacesMatch, name: "member")
+    CompareFacesMatchList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CompareFacesMatch, name: "member"))
     CompareFacesRequest.add_member(:source_image, ::Smithy::Schema::Shapes::MemberShape.new(target: Image, name: "SourceImage", traits: {"smithy.api#required" => {}}))
     CompareFacesRequest.add_member(:target_image, ::Smithy::Schema::Shapes::MemberShape.new(target: Image, name: "TargetImage", traits: {"smithy.api#required" => {}}))
     CompareFacesRequest.add_member(:similarity_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "SimilarityThreshold"))
@@ -662,7 +662,7 @@ module Aws::Rekognition
     CompareFacesResponse.add_member(:source_image_orientation_correction, ::Smithy::Schema::Shapes::MemberShape.new(target: OrientationCorrection, name: "SourceImageOrientationCorrection"))
     CompareFacesResponse.add_member(:target_image_orientation_correction, ::Smithy::Schema::Shapes::MemberShape.new(target: OrientationCorrection, name: "TargetImageOrientationCorrection"))
     CompareFacesResponse.type = Types::CompareFacesResponse
-    CompareFacesUnmatchList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComparedFace, name: "member")
+    CompareFacesUnmatchList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparedFace, name: "member"))
     ComparedFace.add_member(:bounding_box, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundingBox, name: "BoundingBox"))
     ComparedFace.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Confidence"))
     ComparedFace.add_member(:landmarks, ::Smithy::Schema::Shapes::MemberShape.new(target: Landmarks, name: "Landmarks"))
@@ -671,7 +671,7 @@ module Aws::Rekognition
     ComparedFace.add_member(:emotions, ::Smithy::Schema::Shapes::MemberShape.new(target: Emotions, name: "Emotions"))
     ComparedFace.add_member(:smile, ::Smithy::Schema::Shapes::MemberShape.new(target: Smile, name: "Smile"))
     ComparedFace.type = Types::ComparedFace
-    ComparedFaceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComparedFace, name: "member")
+    ComparedFaceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparedFace, name: "member"))
     ComparedSourceImageFace.add_member(:bounding_box, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundingBox, name: "BoundingBox"))
     ComparedSourceImageFace.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Confidence"))
     ComparedSourceImageFace.type = Types::ComparedSourceImageFace
@@ -679,7 +679,7 @@ module Aws::Rekognition
     ConflictException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     ConflictException.add_member(:logref, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Logref"))
     ConflictException.type = Types::ConflictException
-    ConnectedHomeLabels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectedHomeLabel, name: "member")
+    ConnectedHomeLabels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectedHomeLabel, name: "member"))
     ConnectedHomeSettings.add_member(:labels, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectedHomeLabels, name: "Labels", traits: {"smithy.api#required" => {}}))
     ConnectedHomeSettings.add_member(:min_confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "MinConfidence"))
     ConnectedHomeSettings.type = Types::ConnectedHomeSettings
@@ -688,7 +688,7 @@ module Aws::Rekognition
     ConnectedHomeSettingsForUpdate.type = Types::ConnectedHomeSettingsForUpdate
     ContentClassifier.add_member(:free_of_personally_identifiable_information, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION", traits: {"smithy.api#enumValue" => "FreeOfPersonallyIdentifiableInformation"}))
     ContentClassifier.add_member(:free_of_adult_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FREE_OF_ADULT_CONTENT", traits: {"smithy.api#enumValue" => "FreeOfAdultContent"}))
-    ContentClassifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContentClassifier, name: "member")
+    ContentClassifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentClassifier, name: "member"))
     ContentModerationAggregateBy.add_member(:timestamps, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMESTAMPS", traits: {"smithy.api#enumValue" => "TIMESTAMPS"}))
     ContentModerationAggregateBy.add_member(:segments, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEGMENTS", traits: {"smithy.api#enumValue" => "SEGMENTS"}))
     ContentModerationDetection.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp", traits: {"smithy.api#default" => 0}))
@@ -698,13 +698,13 @@ module Aws::Rekognition
     ContentModerationDetection.add_member(:duration_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: ULong, name: "DurationMillis"))
     ContentModerationDetection.add_member(:content_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentTypes, name: "ContentTypes"))
     ContentModerationDetection.type = Types::ContentModerationDetection
-    ContentModerationDetections.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContentModerationDetection, name: "member")
+    ContentModerationDetections.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentModerationDetection, name: "member"))
     ContentModerationSortBy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
     ContentModerationSortBy.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMESTAMP", traits: {"smithy.api#enumValue" => "TIMESTAMP"}))
     ContentType.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Confidence"))
     ContentType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     ContentType.type = Types::ContentType
-    ContentTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContentType, name: "member")
+    ContentTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentType, name: "member"))
     CopyProjectVersionRequest.add_member(:source_project_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectArn, name: "SourceProjectArn", traits: {"smithy.api#required" => {}}))
     CopyProjectVersionRequest.add_member(:source_project_version_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectVersionArn, name: "SourceProjectVersionArn", traits: {"smithy.api#required" => {}}))
     CopyProjectVersionRequest.add_member(:destination_project_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectArn, name: "DestinationProjectArn", traits: {"smithy.api#required" => {}}))
@@ -783,14 +783,14 @@ module Aws::Rekognition
     CustomLabel.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Confidence"))
     CustomLabel.add_member(:geometry, ::Smithy::Schema::Shapes::MemberShape.new(target: Geometry, name: "Geometry"))
     CustomLabel.type = Types::CustomLabel
-    CustomLabels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLabel, name: "member")
+    CustomLabels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLabel, name: "member"))
     CustomizationFeature.add_member(:content_moderation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTENT_MODERATION", traits: {"smithy.api#enumValue" => "CONTENT_MODERATION"}))
     CustomizationFeature.add_member(:custom_labels, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM_LABELS", traits: {"smithy.api#enumValue" => "CUSTOM_LABELS"}))
     CustomizationFeatureConfig.add_member(:content_moderation, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomizationFeatureContentModerationConfig, name: "ContentModeration"))
     CustomizationFeatureConfig.type = Types::CustomizationFeatureConfig
     CustomizationFeatureContentModerationConfig.add_member(:confidence_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "ConfidenceThreshold"))
     CustomizationFeatureContentModerationConfig.type = Types::CustomizationFeatureContentModerationConfig
-    CustomizationFeatures.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomizationFeature, name: "member")
+    CustomizationFeatures.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomizationFeature, name: "member"))
     DatasetChanges.add_member(:ground_truth, ::Smithy::Schema::Shapes::MemberShape.new(target: GroundTruthBlob, name: "GroundTruth", traits: {"smithy.api#required" => {}}))
     DatasetChanges.type = Types::DatasetChanges
     DatasetDescription.add_member(:creation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "CreationTimestamp"))
@@ -800,15 +800,15 @@ module Aws::Rekognition
     DatasetDescription.add_member(:status_message_code, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetStatusMessageCode, name: "StatusMessageCode"))
     DatasetDescription.add_member(:dataset_stats, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetStats, name: "DatasetStats"))
     DatasetDescription.type = Types::DatasetDescription
-    DatasetEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetEntry, name: "member")
+    DatasetEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetEntry, name: "member"))
     DatasetLabelDescription.add_member(:label_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetLabel, name: "LabelName"))
     DatasetLabelDescription.add_member(:label_stats, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetLabelStats, name: "LabelStats"))
     DatasetLabelDescription.type = Types::DatasetLabelDescription
-    DatasetLabelDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetLabelDescription, name: "member")
+    DatasetLabelDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetLabelDescription, name: "member"))
     DatasetLabelStats.add_member(:entry_count, ::Smithy::Schema::Shapes::MemberShape.new(target: UInteger, name: "EntryCount"))
     DatasetLabelStats.add_member(:bounding_box_count, ::Smithy::Schema::Shapes::MemberShape.new(target: UInteger, name: "BoundingBoxCount"))
     DatasetLabelStats.type = Types::DatasetLabelStats
-    DatasetLabels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetLabel, name: "member")
+    DatasetLabels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetLabel, name: "member"))
     DatasetMetadata.add_member(:creation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "CreationTimestamp"))
     DatasetMetadata.add_member(:dataset_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetType, name: "DatasetType"))
     DatasetMetadata.add_member(:dataset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetArn, name: "DatasetArn"))
@@ -816,7 +816,7 @@ module Aws::Rekognition
     DatasetMetadata.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessage, name: "StatusMessage"))
     DatasetMetadata.add_member(:status_message_code, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetStatusMessageCode, name: "StatusMessageCode"))
     DatasetMetadata.type = Types::DatasetMetadata
-    DatasetMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetMetadata, name: "member")
+    DatasetMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetMetadata, name: "member"))
     DatasetSource.add_member(:ground_truth_manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: GroundTruthManifest, name: "GroundTruthManifest"))
     DatasetSource.add_member(:dataset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetArn, name: "DatasetArn"))
     DatasetSource.type = Types::DatasetSource
@@ -929,7 +929,7 @@ module Aws::Rekognition
     DetectFacesResponse.add_member(:face_details, ::Smithy::Schema::Shapes::MemberShape.new(target: FaceDetailList, name: "FaceDetails"))
     DetectFacesResponse.add_member(:orientation_correction, ::Smithy::Schema::Shapes::MemberShape.new(target: OrientationCorrection, name: "OrientationCorrection"))
     DetectFacesResponse.type = Types::DetectFacesResponse
-    DetectLabelsFeatureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DetectLabelsFeatureName, name: "member")
+    DetectLabelsFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectLabelsFeatureName, name: "member"))
     DetectLabelsFeatureName.add_member(:general_labels, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GENERAL_LABELS", traits: {"smithy.api#enumValue" => "GENERAL_LABELS"}))
     DetectLabelsFeatureName.add_member(:image_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMAGE_PROPERTIES", traits: {"smithy.api#enumValue" => "IMAGE_PROPERTIES"}))
     DetectLabelsImageBackground.add_member(:quality, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectLabelsImageQuality, name: "Quality"))
@@ -1005,13 +1005,13 @@ module Aws::Rekognition
     DisassociateFacesResponse.type = Types::DisassociateFacesResponse
     DisassociatedFace.add_member(:face_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FaceId, name: "FaceId"))
     DisassociatedFace.type = Types::DisassociatedFace
-    DisassociatedFacesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DisassociatedFace, name: "member")
+    DisassociatedFacesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DisassociatedFace, name: "member"))
     DistributeDataset.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetArn, name: "Arn", traits: {"smithy.api#required" => {}}))
     DistributeDataset.type = Types::DistributeDataset
     DistributeDatasetEntriesRequest.add_member(:datasets, ::Smithy::Schema::Shapes::MemberShape.new(target: DistributeDatasetMetadataList, name: "Datasets", traits: {"smithy.api#required" => {}}))
     DistributeDatasetEntriesRequest.type = Types::DistributeDatasetEntriesRequest
     DistributeDatasetEntriesResponse.type = Types::DistributeDatasetEntriesResponse
-    DistributeDatasetMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DistributeDataset, name: "member")
+    DistributeDatasetMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DistributeDataset, name: "member"))
     DominantColor.add_member(:red, ::Smithy::Schema::Shapes::MemberShape.new(target: UInteger, name: "Red"))
     DominantColor.add_member(:blue, ::Smithy::Schema::Shapes::MemberShape.new(target: UInteger, name: "Blue"))
     DominantColor.add_member(:green, ::Smithy::Schema::Shapes::MemberShape.new(target: UInteger, name: "Green"))
@@ -1020,7 +1020,7 @@ module Aws::Rekognition
     DominantColor.add_member(:simplified_color, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SimplifiedColor"))
     DominantColor.add_member(:pixel_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "PixelPercent"))
     DominantColor.type = Types::DominantColor
-    DominantColors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DominantColor, name: "member")
+    DominantColors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DominantColor, name: "member"))
     Emotion.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EmotionName, name: "Type"))
     Emotion.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Confidence"))
     Emotion.type = Types::Emotion
@@ -1033,13 +1033,13 @@ module Aws::Rekognition
     EmotionName.add_member(:calm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CALM", traits: {"smithy.api#enumValue" => "CALM"}))
     EmotionName.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
     EmotionName.add_member(:fear, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FEAR", traits: {"smithy.api#enumValue" => "FEAR"}))
-    Emotions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Emotion, name: "member")
+    Emotions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Emotion, name: "member"))
     EquipmentDetection.add_member(:bounding_box, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundingBox, name: "BoundingBox"))
     EquipmentDetection.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Confidence"))
     EquipmentDetection.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectiveEquipmentType, name: "Type"))
     EquipmentDetection.add_member(:covers_body_part, ::Smithy::Schema::Shapes::MemberShape.new(target: CoversBodyPart, name: "CoversBodyPart"))
     EquipmentDetection.type = Types::EquipmentDetection
-    EquipmentDetections.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EquipmentDetection, name: "member")
+    EquipmentDetections.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EquipmentDetection, name: "member"))
     EvaluationResult.add_member(:f1_score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "F1Score"))
     EvaluationResult.add_member(:summary, ::Smithy::Schema::Shapes::MemberShape.new(target: Summary, name: "Summary"))
     EvaluationResult.type = Types::EvaluationResult
@@ -1081,25 +1081,25 @@ module Aws::Rekognition
     FaceDetail.add_member(:face_occluded, ::Smithy::Schema::Shapes::MemberShape.new(target: FaceOccluded, name: "FaceOccluded"))
     FaceDetail.add_member(:eye_direction, ::Smithy::Schema::Shapes::MemberShape.new(target: EyeDirection, name: "EyeDirection"))
     FaceDetail.type = Types::FaceDetail
-    FaceDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FaceDetail, name: "member")
+    FaceDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FaceDetail, name: "member"))
     FaceDetection.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp", traits: {"smithy.api#default" => 0}))
     FaceDetection.add_member(:face, ::Smithy::Schema::Shapes::MemberShape.new(target: FaceDetail, name: "Face"))
     FaceDetection.type = Types::FaceDetection
-    FaceDetections.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FaceDetection, name: "member")
-    FaceIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FaceId, name: "member")
-    FaceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Face, name: "member")
+    FaceDetections.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FaceDetection, name: "member"))
+    FaceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FaceId, name: "member"))
+    FaceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Face, name: "member"))
     FaceMatch.add_member(:similarity, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Similarity"))
     FaceMatch.add_member(:face, ::Smithy::Schema::Shapes::MemberShape.new(target: Face, name: "Face"))
     FaceMatch.type = Types::FaceMatch
-    FaceMatchList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FaceMatch, name: "member")
-    FaceModelVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    FaceMatchList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FaceMatch, name: "member"))
+    FaceModelVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     FaceOccluded.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Value", traits: {"smithy.api#default" => false}))
     FaceOccluded.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Confidence"))
     FaceOccluded.type = Types::FaceOccluded
     FaceRecord.add_member(:face, ::Smithy::Schema::Shapes::MemberShape.new(target: Face, name: "Face"))
     FaceRecord.add_member(:face_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: FaceDetail, name: "FaceDetail"))
     FaceRecord.type = Types::FaceRecord
-    FaceRecordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FaceRecord, name: "member")
+    FaceRecordList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FaceRecord, name: "member"))
     FaceSearchSettings.add_member(:collection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionId, name: "CollectionId"))
     FaceSearchSettings.add_member(:face_match_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "FaceMatchThreshold"))
     FaceSearchSettings.type = Types::FaceSearchSettings
@@ -1110,7 +1110,7 @@ module Aws::Rekognition
     Gender.type = Types::Gender
     GenderType.add_member(:male, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Male", traits: {"smithy.api#enumValue" => "Male"}))
     GenderType.add_member(:female, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Female", traits: {"smithy.api#enumValue" => "Female"}))
-    GeneralLabelsFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GeneralLabelsFilterValue, name: "member")
+    GeneralLabelsFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneralLabelsFilterValue, name: "member"))
     GeneralLabelsSettings.add_member(:label_inclusion_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneralLabelsFilterList, name: "LabelInclusionFilters"))
     GeneralLabelsSettings.add_member(:label_exclusion_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneralLabelsFilterList, name: "LabelExclusionFilters"))
     GeneralLabelsSettings.add_member(:label_category_inclusion_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneralLabelsFilterList, name: "LabelCategoryInclusionFilters"))
@@ -1279,7 +1279,7 @@ module Aws::Rekognition
     HumanLoopActivationOutput.add_member(:human_loop_activation_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopActivationReasons, name: "HumanLoopActivationReasons"))
     HumanLoopActivationOutput.add_member(:human_loop_activation_conditions_evaluation_results, ::Smithy::Schema::Shapes::MemberShape.new(target: SynthesizedJsonHumanLoopActivationConditionsEvaluationResults, name: "HumanLoopActivationConditionsEvaluationResults"))
     HumanLoopActivationOutput.type = Types::HumanLoopActivationOutput
-    HumanLoopActivationReasons.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopActivationReason, name: "member")
+    HumanLoopActivationReasons.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopActivationReason, name: "member"))
     HumanLoopConfig.add_member(:human_loop_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopName, name: "HumanLoopName", traits: {"smithy.api#required" => {}}))
     HumanLoopConfig.add_member(:flow_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowDefinitionArn, name: "FlowDefinitionArn", traits: {"smithy.api#required" => {}}))
     HumanLoopConfig.add_member(:data_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopDataAttributes, name: "DataAttributes"))
@@ -1323,7 +1323,7 @@ module Aws::Rekognition
     Instance.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Confidence"))
     Instance.add_member(:dominant_colors, ::Smithy::Schema::Shapes::MemberShape.new(target: DominantColors, name: "DominantColors"))
     Instance.type = Types::Instance
-    Instances.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Instance, name: "member")
+    Instances.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Instance, name: "member"))
     InternalServerError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     InternalServerError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     InternalServerError.add_member(:logref, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Logref"))
@@ -1374,8 +1374,8 @@ module Aws::Rekognition
     Label.type = Types::Label
     LabelAlias.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     LabelAlias.type = Types::LabelAlias
-    LabelAliases.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LabelAlias, name: "member")
-    LabelCategories.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LabelCategory, name: "member")
+    LabelAliases.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelAlias, name: "member"))
+    LabelCategories.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelCategory, name: "member"))
     LabelCategory.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     LabelCategory.type = Types::LabelCategory
     LabelDetection.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp", traits: {"smithy.api#default" => 0}))
@@ -1386,14 +1386,14 @@ module Aws::Rekognition
     LabelDetection.type = Types::LabelDetection
     LabelDetectionAggregateBy.add_member(:timestamps, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMESTAMPS", traits: {"smithy.api#enumValue" => "TIMESTAMPS"}))
     LabelDetectionAggregateBy.add_member(:segments, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEGMENTS", traits: {"smithy.api#enumValue" => "SEGMENTS"}))
-    LabelDetectionFeatureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LabelDetectionFeatureName, name: "member")
+    LabelDetectionFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelDetectionFeatureName, name: "member"))
     LabelDetectionFeatureName.add_member(:general_labels, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GENERAL_LABELS", traits: {"smithy.api#enumValue" => "GENERAL_LABELS"}))
     LabelDetectionSettings.add_member(:general_labels, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneralLabelsSettings, name: "GeneralLabels"))
     LabelDetectionSettings.type = Types::LabelDetectionSettings
     LabelDetectionSortBy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
     LabelDetectionSortBy.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMESTAMP", traits: {"smithy.api#enumValue" => "TIMESTAMP"}))
-    LabelDetections.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LabelDetection, name: "member")
-    Labels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Label, name: "member")
+    LabelDetections.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelDetection, name: "member"))
+    Labels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Label, name: "member"))
     Landmark.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: LandmarkType, name: "Type"))
     Landmark.add_member(:x, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "X"))
     Landmark.add_member(:y, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "Y"))
@@ -1428,7 +1428,7 @@ module Aws::Rekognition
     LandmarkType.add_member(:chin_bottom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "chinBottom", traits: {"smithy.api#enumValue" => "chinBottom"}))
     LandmarkType.add_member(:mid_jawline_right, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "midJawlineRight", traits: {"smithy.api#enumValue" => "midJawlineRight"}))
     LandmarkType.add_member(:upper_jawline_right, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "upperJawlineRight", traits: {"smithy.api#enumValue" => "upperJawlineRight"}))
-    Landmarks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Landmark, name: "member")
+    Landmarks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Landmark, name: "member"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     LimitExceededException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     LimitExceededException.add_member(:logref, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Logref"))
@@ -1531,7 +1531,7 @@ module Aws::Rekognition
     MediaAnalysisJobDescription.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaAnalysisResults, name: "Results"))
     MediaAnalysisJobDescription.add_member(:manifest_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaAnalysisManifestSummary, name: "ManifestSummary"))
     MediaAnalysisJobDescription.type = Types::MediaAnalysisJobDescription
-    MediaAnalysisJobDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MediaAnalysisJobDescription, name: "member")
+    MediaAnalysisJobDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaAnalysisJobDescription, name: "member"))
     MediaAnalysisJobFailureCode.add_member(:internal_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_ERROR"}))
     MediaAnalysisJobFailureCode.add_member(:invalid_s3_object, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_S3_OBJECT", traits: {"smithy.api#enumValue" => "INVALID_S3_OBJECT"}))
     MediaAnalysisJobFailureCode.add_member(:invalid_manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_MANIFEST", traits: {"smithy.api#enumValue" => "INVALID_MANIFEST"}))
@@ -1566,7 +1566,7 @@ module Aws::Rekognition
     ModerationLabel.add_member(:parent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ParentName"))
     ModerationLabel.add_member(:taxonomy_level, ::Smithy::Schema::Shapes::MemberShape.new(target: UInteger, name: "TaxonomyLevel"))
     ModerationLabel.type = Types::ModerationLabel
-    ModerationLabels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ModerationLabel, name: "member")
+    ModerationLabels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ModerationLabel, name: "member"))
     MouthOpen.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Value", traits: {"smithy.api#default" => false}))
     MouthOpen.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Confidence"))
     MouthOpen.type = Types::MouthOpen
@@ -1585,7 +1585,7 @@ module Aws::Rekognition
     OutputConfig.type = Types::OutputConfig
     Parent.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     Parent.type = Types::Parent
-    Parents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Parent, name: "member")
+    Parents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Parent, name: "member"))
     PersonDetail.add_member(:index, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonIndex, name: "Index", traits: {"smithy.api#default" => 0}))
     PersonDetail.add_member(:bounding_box, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundingBox, name: "BoundingBox"))
     PersonDetail.add_member(:face, ::Smithy::Schema::Shapes::MemberShape.new(target: FaceDetail, name: "Face"))
@@ -1593,18 +1593,18 @@ module Aws::Rekognition
     PersonDetection.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp", traits: {"smithy.api#default" => 0}))
     PersonDetection.add_member(:person, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonDetail, name: "Person"))
     PersonDetection.type = Types::PersonDetection
-    PersonDetections.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PersonDetection, name: "member")
+    PersonDetections.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonDetection, name: "member"))
     PersonMatch.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp", traits: {"smithy.api#default" => 0}))
     PersonMatch.add_member(:person, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonDetail, name: "Person"))
     PersonMatch.add_member(:face_matches, ::Smithy::Schema::Shapes::MemberShape.new(target: FaceMatchList, name: "FaceMatches"))
     PersonMatch.type = Types::PersonMatch
-    PersonMatches.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PersonMatch, name: "member")
+    PersonMatches.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonMatch, name: "member"))
     PersonTrackingSortBy.add_member(:index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INDEX", traits: {"smithy.api#enumValue" => "INDEX"}))
     PersonTrackingSortBy.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMESTAMP", traits: {"smithy.api#enumValue" => "TIMESTAMP"}))
     Point.add_member(:x, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "X"))
     Point.add_member(:y, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "Y"))
     Point.type = Types::Point
-    Polygon.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Point, name: "member")
+    Polygon.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Point, name: "member"))
     Pose.add_member(:roll, ::Smithy::Schema::Shapes::MemberShape.new(target: Degree, name: "Roll"))
     Pose.add_member(:yaw, ::Smithy::Schema::Shapes::MemberShape.new(target: Degree, name: "Yaw"))
     Pose.add_member(:pitch, ::Smithy::Schema::Shapes::MemberShape.new(target: Degree, name: "Pitch"))
@@ -1618,9 +1618,9 @@ module Aws::Rekognition
     ProjectDescription.add_member(:feature, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomizationFeature, name: "Feature"))
     ProjectDescription.add_member(:auto_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectAutoUpdate, name: "AutoUpdate"))
     ProjectDescription.type = Types::ProjectDescription
-    ProjectDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectDescription, name: "member")
-    ProjectNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectName, name: "member")
-    ProjectPolicies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectPolicy, name: "member")
+    ProjectDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectDescription, name: "member"))
+    ProjectNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectName, name: "member"))
+    ProjectPolicies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectPolicy, name: "member"))
     ProjectPolicy.add_member(:project_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectArn, name: "ProjectArn"))
     ProjectPolicy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectPolicyName, name: "PolicyName"))
     ProjectPolicy.add_member(:policy_revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectPolicyRevisionId, name: "PolicyRevisionId"))
@@ -1651,7 +1651,7 @@ module Aws::Rekognition
     ProjectVersionDescription.add_member(:base_model_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BaseModelVersion"))
     ProjectVersionDescription.add_member(:feature_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomizationFeatureConfig, name: "FeatureConfig"))
     ProjectVersionDescription.type = Types::ProjectVersionDescription
-    ProjectVersionDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectVersionDescription, name: "member")
+    ProjectVersionDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectVersionDescription, name: "member"))
     ProjectVersionStatus.add_member(:training_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRAINING_IN_PROGRESS", traits: {"smithy.api#enumValue" => "TRAINING_IN_PROGRESS"}))
     ProjectVersionStatus.add_member(:training_completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRAINING_COMPLETED", traits: {"smithy.api#enumValue" => "TRAINING_COMPLETED"}))
     ProjectVersionStatus.add_member(:training_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRAINING_FAILED", traits: {"smithy.api#enumValue" => "TRAINING_FAILED"}))
@@ -1675,8 +1675,8 @@ module Aws::Rekognition
     ProtectiveEquipmentPerson.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Confidence"))
     ProtectiveEquipmentPerson.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UInteger, name: "Id"))
     ProtectiveEquipmentPerson.type = Types::ProtectiveEquipmentPerson
-    ProtectiveEquipmentPersonIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UInteger, name: "member")
-    ProtectiveEquipmentPersons.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectiveEquipmentPerson, name: "member")
+    ProtectiveEquipmentPersonIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UInteger, name: "member"))
+    ProtectiveEquipmentPersons.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectiveEquipmentPerson, name: "member"))
     ProtectiveEquipmentSummarizationAttributes.add_member(:min_confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "MinConfidence", traits: {"smithy.api#required" => {}}))
     ProtectiveEquipmentSummarizationAttributes.add_member(:required_equipment_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectiveEquipmentTypes, name: "RequiredEquipmentTypes", traits: {"smithy.api#required" => {}}))
     ProtectiveEquipmentSummarizationAttributes.type = Types::ProtectiveEquipmentSummarizationAttributes
@@ -1687,7 +1687,7 @@ module Aws::Rekognition
     ProtectiveEquipmentType.add_member(:face_cover, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FACE_COVER", traits: {"smithy.api#enumValue" => "FACE_COVER"}))
     ProtectiveEquipmentType.add_member(:hand_cover, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HAND_COVER", traits: {"smithy.api#enumValue" => "HAND_COVER"}))
     ProtectiveEquipmentType.add_member(:head_cover, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HEAD_COVER", traits: {"smithy.api#enumValue" => "HEAD_COVER"}))
-    ProtectiveEquipmentTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectiveEquipmentType, name: "member")
+    ProtectiveEquipmentTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectiveEquipmentType, name: "member"))
     ProvisionedThroughputExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ProvisionedThroughputExceededException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     ProvisionedThroughputExceededException.add_member(:logref, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Logref"))
@@ -1711,7 +1711,7 @@ module Aws::Rekognition
     Reason.add_member(:low_confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW_CONFIDENCE", traits: {"smithy.api#enumValue" => "LOW_CONFIDENCE"}))
     Reason.add_member(:small_bounding_box, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMALL_BOUNDING_BOX", traits: {"smithy.api#enumValue" => "SMALL_BOUNDING_BOX"}))
     Reason.add_member(:low_face_quality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW_FACE_QUALITY", traits: {"smithy.api#enumValue" => "LOW_FACE_QUALITY"}))
-    Reasons.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Reason, name: "member")
+    Reasons.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Reason, name: "member"))
     RecognizeCelebritiesRequest.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: Image, name: "Image", traits: {"smithy.api#required" => {}}))
     RecognizeCelebritiesRequest.type = Types::RecognizeCelebritiesRequest
     RecognizeCelebritiesResponse.add_member(:celebrity_faces, ::Smithy::Schema::Shapes::MemberShape.new(target: CelebrityList, name: "CelebrityFaces"))
@@ -1721,7 +1721,7 @@ module Aws::Rekognition
     RegionOfInterest.add_member(:bounding_box, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundingBox, name: "BoundingBox"))
     RegionOfInterest.add_member(:polygon, ::Smithy::Schema::Shapes::MemberShape.new(target: Polygon, name: "Polygon"))
     RegionOfInterest.type = Types::RegionOfInterest
-    RegionsOfInterest.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegionOfInterest, name: "member")
+    RegionsOfInterest.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionOfInterest, name: "member"))
     ResourceAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ResourceAlreadyExistsException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     ResourceAlreadyExistsException.add_member(:logref, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Logref"))
@@ -1806,14 +1806,14 @@ module Aws::Rekognition
     SegmentDetection.add_member(:end_frame_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ULong, name: "EndFrameNumber"))
     SegmentDetection.add_member(:duration_frames, ::Smithy::Schema::Shapes::MemberShape.new(target: ULong, name: "DurationFrames"))
     SegmentDetection.type = Types::SegmentDetection
-    SegmentDetections.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentDetection, name: "member")
+    SegmentDetections.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentDetection, name: "member"))
     SegmentType.add_member(:technical_cue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TECHNICAL_CUE", traits: {"smithy.api#enumValue" => "TECHNICAL_CUE"}))
     SegmentType.add_member(:shot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHOT", traits: {"smithy.api#enumValue" => "SHOT"}))
     SegmentTypeInfo.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentType, name: "Type"))
     SegmentTypeInfo.add_member(:model_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ModelVersion"))
     SegmentTypeInfo.type = Types::SegmentTypeInfo
-    SegmentTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentType, name: "member")
-    SegmentTypesInfo.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentTypeInfo, name: "member")
+    SegmentTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentType, name: "member"))
+    SegmentTypesInfo.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentTypeInfo, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ServiceQuotaExceededException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     ServiceQuotaExceededException.add_member(:logref, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Logref"))
@@ -1944,7 +1944,7 @@ module Aws::Rekognition
     StreamProcessorDataSharingPreference.type = Types::StreamProcessorDataSharingPreference
     StreamProcessorInput.add_member(:kinesis_video_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisVideoStream, name: "KinesisVideoStream"))
     StreamProcessorInput.type = Types::StreamProcessorInput
-    StreamProcessorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamProcessor, name: "member")
+    StreamProcessorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamProcessor, name: "member"))
     StreamProcessorNotificationChannel.add_member(:sns_topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SNSTopicArn, name: "SNSTopicArn", traits: {"smithy.api#required" => {}}))
     StreamProcessorNotificationChannel.type = Types::StreamProcessorNotificationChannel
     StreamProcessorOutput.add_member(:kinesis_data_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisDataStream, name: "KinesisDataStream"))
@@ -1952,7 +1952,7 @@ module Aws::Rekognition
     StreamProcessorOutput.type = Types::StreamProcessorOutput
     StreamProcessorParameterToDelete.add_member(:connected_home_min_confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ConnectedHomeMinConfidence", traits: {"smithy.api#enumValue" => "ConnectedHomeMinConfidence"}))
     StreamProcessorParameterToDelete.add_member(:regions_of_interest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RegionsOfInterest", traits: {"smithy.api#enumValue" => "RegionsOfInterest"}))
-    StreamProcessorParametersToDelete.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamProcessorParameterToDelete, name: "member")
+    StreamProcessorParametersToDelete.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamProcessorParameterToDelete, name: "member"))
     StreamProcessorSettings.add_member(:face_search, ::Smithy::Schema::Shapes::MemberShape.new(target: FaceSearchSettings, name: "FaceSearch"))
     StreamProcessorSettings.add_member(:connected_home, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectedHomeSettings, name: "ConnectedHome"))
     StreamProcessorSettings.type = Types::StreamProcessorSettings
@@ -1969,9 +1969,9 @@ module Aws::Rekognition
     Sunglasses.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Value", traits: {"smithy.api#default" => false}))
     Sunglasses.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Confidence"))
     Sunglasses.type = Types::Sunglasses
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -2000,11 +2000,11 @@ module Aws::Rekognition
     TextDetection.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Confidence"))
     TextDetection.add_member(:geometry, ::Smithy::Schema::Shapes::MemberShape.new(target: Geometry, name: "Geometry"))
     TextDetection.type = Types::TextDetection
-    TextDetectionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TextDetection, name: "member")
+    TextDetectionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TextDetection, name: "member"))
     TextDetectionResult.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp", traits: {"smithy.api#default" => 0}))
     TextDetectionResult.add_member(:text_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: TextDetection, name: "TextDetection"))
     TextDetectionResult.type = Types::TextDetectionResult
-    TextDetectionResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TextDetectionResult, name: "member")
+    TextDetectionResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TextDetectionResult, name: "member"))
     TextTypes.add_member(:line, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINE", traits: {"smithy.api#enumValue" => "LINE"}))
     TextTypes.add_member(:word, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WORD", traits: {"smithy.api#enumValue" => "WORD"}))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
@@ -2020,7 +2020,7 @@ module Aws::Rekognition
     UnindexedFace.add_member(:reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: Reasons, name: "Reasons"))
     UnindexedFace.add_member(:face_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: FaceDetail, name: "FaceDetail"))
     UnindexedFace.type = Types::UnindexedFace
-    UnindexedFaces.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnindexedFace, name: "member")
+    UnindexedFaces.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnindexedFace, name: "member"))
     UnsearchedFace.add_member(:face_details, ::Smithy::Schema::Shapes::MemberShape.new(target: FaceDetail, name: "FaceDetails"))
     UnsearchedFace.add_member(:reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: UnsearchedFaceReasons, name: "Reasons"))
     UnsearchedFace.type = Types::UnsearchedFace
@@ -2032,34 +2032,34 @@ module Aws::Rekognition
     UnsearchedFaceReason.add_member(:low_confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW_CONFIDENCE", traits: {"smithy.api#enumValue" => "LOW_CONFIDENCE"}))
     UnsearchedFaceReason.add_member(:small_bounding_box, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMALL_BOUNDING_BOX", traits: {"smithy.api#enumValue" => "SMALL_BOUNDING_BOX"}))
     UnsearchedFaceReason.add_member(:low_face_quality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW_FACE_QUALITY", traits: {"smithy.api#enumValue" => "LOW_FACE_QUALITY"}))
-    UnsearchedFaceReasons.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnsearchedFaceReason, name: "member")
-    UnsearchedFacesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnsearchedFace, name: "member")
+    UnsearchedFaceReasons.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnsearchedFaceReason, name: "member"))
+    UnsearchedFacesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnsearchedFace, name: "member"))
     UnsuccessfulFaceAssociation.add_member(:face_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FaceId, name: "FaceId"))
     UnsuccessfulFaceAssociation.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "UserId"))
     UnsuccessfulFaceAssociation.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Confidence"))
     UnsuccessfulFaceAssociation.add_member(:reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: UnsuccessfulFaceAssociationReasons, name: "Reasons"))
     UnsuccessfulFaceAssociation.type = Types::UnsuccessfulFaceAssociation
-    UnsuccessfulFaceAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnsuccessfulFaceAssociation, name: "member")
+    UnsuccessfulFaceAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnsuccessfulFaceAssociation, name: "member"))
     UnsuccessfulFaceAssociationReason.add_member(:face_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FACE_NOT_FOUND", traits: {"smithy.api#enumValue" => "FACE_NOT_FOUND"}))
     UnsuccessfulFaceAssociationReason.add_member(:associated_to_a_different_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSOCIATED_TO_A_DIFFERENT_USER", traits: {"smithy.api#enumValue" => "ASSOCIATED_TO_A_DIFFERENT_USER"}))
     UnsuccessfulFaceAssociationReason.add_member(:low_match_confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW_MATCH_CONFIDENCE", traits: {"smithy.api#enumValue" => "LOW_MATCH_CONFIDENCE"}))
-    UnsuccessfulFaceAssociationReasons.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnsuccessfulFaceAssociationReason, name: "member")
+    UnsuccessfulFaceAssociationReasons.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnsuccessfulFaceAssociationReason, name: "member"))
     UnsuccessfulFaceDeletion.add_member(:face_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FaceId, name: "FaceId"))
     UnsuccessfulFaceDeletion.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "UserId"))
     UnsuccessfulFaceDeletion.add_member(:reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: UnsuccessfulFaceDeletionReasons, name: "Reasons"))
     UnsuccessfulFaceDeletion.type = Types::UnsuccessfulFaceDeletion
     UnsuccessfulFaceDeletionReason.add_member(:associated_to_an_existing_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSOCIATED_TO_AN_EXISTING_USER", traits: {"smithy.api#enumValue" => "ASSOCIATED_TO_AN_EXISTING_USER"}))
     UnsuccessfulFaceDeletionReason.add_member(:face_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FACE_NOT_FOUND", traits: {"smithy.api#enumValue" => "FACE_NOT_FOUND"}))
-    UnsuccessfulFaceDeletionReasons.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnsuccessfulFaceDeletionReason, name: "member")
-    UnsuccessfulFaceDeletionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnsuccessfulFaceDeletion, name: "member")
+    UnsuccessfulFaceDeletionReasons.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnsuccessfulFaceDeletionReason, name: "member"))
+    UnsuccessfulFaceDeletionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnsuccessfulFaceDeletion, name: "member"))
     UnsuccessfulFaceDisassociation.add_member(:face_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FaceId, name: "FaceId"))
     UnsuccessfulFaceDisassociation.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "UserId"))
     UnsuccessfulFaceDisassociation.add_member(:reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: UnsuccessfulFaceDisassociationReasons, name: "Reasons"))
     UnsuccessfulFaceDisassociation.type = Types::UnsuccessfulFaceDisassociation
-    UnsuccessfulFaceDisassociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnsuccessfulFaceDisassociation, name: "member")
+    UnsuccessfulFaceDisassociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnsuccessfulFaceDisassociation, name: "member"))
     UnsuccessfulFaceDisassociationReason.add_member(:face_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FACE_NOT_FOUND", traits: {"smithy.api#enumValue" => "FACE_NOT_FOUND"}))
     UnsuccessfulFaceDisassociationReason.add_member(:associated_to_a_different_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSOCIATED_TO_A_DIFFERENT_USER", traits: {"smithy.api#enumValue" => "ASSOCIATED_TO_A_DIFFERENT_USER"}))
-    UnsuccessfulFaceDisassociationReasons.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnsuccessfulFaceDisassociationReason, name: "member")
+    UnsuccessfulFaceDisassociationReasons.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnsuccessfulFaceDisassociationReason, name: "member"))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -2075,23 +2075,23 @@ module Aws::Rekognition
     UpdateStreamProcessorRequest.add_member(:parameters_to_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamProcessorParametersToDelete, name: "ParametersToDelete"))
     UpdateStreamProcessorRequest.type = Types::UpdateStreamProcessorRequest
     UpdateStreamProcessorResponse.type = Types::UpdateStreamProcessorResponse
-    Urls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "member")
+    Urls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "member"))
     User.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "UserId"))
     User.add_member(:user_status, ::Smithy::Schema::Shapes::MemberShape.new(target: UserStatus, name: "UserStatus"))
     User.type = Types::User
-    UserFaceIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FaceId, name: "member")
-    UserList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member")
+    UserFaceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FaceId, name: "member"))
+    UserList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member"))
     UserMatch.add_member(:similarity, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Similarity"))
     UserMatch.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchedUser, name: "User"))
     UserMatch.type = Types::UserMatch
-    UserMatchList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserMatch, name: "member")
+    UserMatchList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserMatch, name: "member"))
     UserStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     UserStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
     UserStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     UserStatus.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
     ValidationData.add_member(:assets, ::Smithy::Schema::Shapes::MemberShape.new(target: Assets, name: "Assets"))
     ValidationData.type = Types::ValidationData
-    VersionNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, name: "member")
+    VersionNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, name: "member"))
     Versions.add_member(:minimum, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "Minimum"))
     Versions.add_member(:maximum, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "Maximum"))
     Versions.type = Types::Versions
@@ -2110,7 +2110,7 @@ module Aws::Rekognition
     VideoMetadata.add_member(:frame_width, ::Smithy::Schema::Shapes::MemberShape.new(target: ULong, name: "FrameWidth"))
     VideoMetadata.add_member(:color_range, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoColorRange, name: "ColorRange"))
     VideoMetadata.type = Types::VideoMetadata
-    VideoMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VideoMetadata, name: "member")
+    VideoMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoMetadata, name: "member"))
     VideoTooLargeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     VideoTooLargeException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     VideoTooLargeException.add_member(:logref, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Logref"))

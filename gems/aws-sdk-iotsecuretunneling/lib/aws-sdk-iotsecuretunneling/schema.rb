@@ -105,12 +105,12 @@ module Aws::IoTSecureTunneling
     RotateTunnelAccessTokenResponse.add_member(:source_access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientAccessToken, name: "sourceAccessToken"))
     RotateTunnelAccessTokenResponse.add_member(:destination_access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientAccessToken, name: "destinationAccessToken"))
     RotateTunnelAccessTokenResponse.type = Types::RotateTunnelAccessTokenResponse
-    ServiceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "member")
+    ServiceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -138,7 +138,7 @@ module Aws::IoTSecureTunneling
     TunnelSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "createdAt"))
     TunnelSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "lastUpdatedAt"))
     TunnelSummary.type = Types::TunnelSummary
-    TunnelSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TunnelSummary, name: "member")
+    TunnelSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TunnelSummary, name: "member"))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "tagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest

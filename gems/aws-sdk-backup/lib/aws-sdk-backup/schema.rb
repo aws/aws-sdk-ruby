@@ -371,7 +371,7 @@ module Aws::Backup
     AdvancedBackupSetting.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
     AdvancedBackupSetting.add_member(:backup_options, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupOptions, name: "BackupOptions"))
     AdvancedBackupSetting.type = Types::AdvancedBackupSetting
-    AdvancedBackupSettings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedBackupSetting, name: "member")
+    AdvancedBackupSettings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedBackupSetting, name: "member"))
     AggregationPeriod.add_member(:one_day, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONE_DAY", traits: {"smithy.api#enumValue" => "ONE_DAY"}))
     AggregationPeriod.add_member(:seven_days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVEN_DAYS", traits: {"smithy.api#enumValue" => "SEVEN_DAYS"}))
     AggregationPeriod.add_member(:fourteen_days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FOURTEEN_DAYS", traits: {"smithy.api#enumValue" => "FOURTEEN_DAYS"}))
@@ -412,8 +412,8 @@ module Aws::Backup
     BackupJob.add_member(:initiation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "InitiationDate"))
     BackupJob.add_member(:message_category, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MessageCategory"))
     BackupJob.type = Types::BackupJob
-    BackupJobChildJobsInState.key = ::Smithy::Schema::Shapes::MemberShape.new(target: BackupJobState, name: "key")
-    BackupJobChildJobsInState.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "value")
+    BackupJobChildJobsInState.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupJobState, name: "key"))
+    BackupJobChildJobsInState.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "value"))
     BackupJobState.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
     BackupJobState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     BackupJobState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
@@ -443,10 +443,10 @@ module Aws::Backup
     BackupJobSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime"))
     BackupJobSummary.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
     BackupJobSummary.type = Types::BackupJobSummary
-    BackupJobSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BackupJobSummary, name: "member")
-    BackupJobsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BackupJob, name: "member")
-    BackupOptions.key = ::Smithy::Schema::Shapes::MemberShape.new(target: BackupOptionKey, name: "key")
-    BackupOptions.value = ::Smithy::Schema::Shapes::MemberShape.new(target: BackupOptionValue, name: "value")
+    BackupJobSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupJobSummary, name: "member"))
+    BackupJobsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupJob, name: "member"))
+    BackupOptions.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupOptionKey, name: "key"))
+    BackupOptions.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupOptionValue, name: "value"))
     BackupPlan.add_member(:backup_plan_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupPlanName, name: "BackupPlanName", traits: {"smithy.api#required" => {}}))
     BackupPlan.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupRules, name: "Rules", traits: {"smithy.api#required" => {}}))
     BackupPlan.add_member(:advanced_backup_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedBackupSettings, name: "AdvancedBackupSettings"))
@@ -455,12 +455,12 @@ module Aws::Backup
     BackupPlanInput.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupRulesInput, name: "Rules", traits: {"smithy.api#required" => {}}))
     BackupPlanInput.add_member(:advanced_backup_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedBackupSettings, name: "AdvancedBackupSettings"))
     BackupPlanInput.type = Types::BackupPlanInput
-    BackupPlanTemplatesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BackupPlanTemplatesListMember, name: "member")
+    BackupPlanTemplatesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupPlanTemplatesListMember, name: "member"))
     BackupPlanTemplatesListMember.add_member(:backup_plan_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupPlanTemplateId"))
     BackupPlanTemplatesListMember.add_member(:backup_plan_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupPlanTemplateName"))
     BackupPlanTemplatesListMember.type = Types::BackupPlanTemplatesListMember
-    BackupPlanVersionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BackupPlansListMember, name: "member")
-    BackupPlansList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BackupPlansListMember, name: "member")
+    BackupPlanVersionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupPlansListMember, name: "member"))
+    BackupPlansList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupPlansListMember, name: "member"))
     BackupPlansListMember.add_member(:backup_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "BackupPlanArn"))
     BackupPlansListMember.add_member(:backup_plan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupPlanId"))
     BackupPlansListMember.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationDate"))
@@ -496,8 +496,8 @@ module Aws::Backup
     BackupRuleInput.add_member(:schedule_expression_timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: Timezone, name: "ScheduleExpressionTimezone"))
     BackupRuleInput.add_member(:index_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexActions, name: "IndexActions"))
     BackupRuleInput.type = Types::BackupRuleInput
-    BackupRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BackupRule, name: "member")
-    BackupRulesInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BackupRuleInput, name: "member")
+    BackupRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupRule, name: "member"))
+    BackupRulesInput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupRuleInput, name: "member"))
     BackupSelection.add_member(:selection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupSelectionName, name: "SelectionName", traits: {"smithy.api#required" => {}}))
     BackupSelection.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
     BackupSelection.add_member(:resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArns, name: "Resources"))
@@ -505,7 +505,7 @@ module Aws::Backup
     BackupSelection.add_member(:not_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArns, name: "NotResources"))
     BackupSelection.add_member(:conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: Conditions, name: "Conditions"))
     BackupSelection.type = Types::BackupSelection
-    BackupSelectionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BackupSelectionsListMember, name: "member")
+    BackupSelectionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupSelectionsListMember, name: "member"))
     BackupSelectionsListMember.add_member(:selection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SelectionId"))
     BackupSelectionsListMember.add_member(:selection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupSelectionName, name: "SelectionName"))
     BackupSelectionsListMember.add_member(:backup_plan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupPlanId"))
@@ -534,8 +534,8 @@ module Aws::Backup
     BackupVaultEvent.add_member(:recovery_point_index_completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECOVERY_POINT_INDEX_COMPLETED", traits: {"smithy.api#enumValue" => "RECOVERY_POINT_INDEX_COMPLETED"}))
     BackupVaultEvent.add_member(:recovery_point_index_deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECOVERY_POINT_INDEX_DELETED", traits: {"smithy.api#enumValue" => "RECOVERY_POINT_INDEX_DELETED"}))
     BackupVaultEvent.add_member(:recovery_point_indexing_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECOVERY_POINT_INDEXING_FAILED", traits: {"smithy.api#enumValue" => "RECOVERY_POINT_INDEXING_FAILED"}))
-    BackupVaultEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultEvent, name: "member")
-    BackupVaultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultListMember, name: "member")
+    BackupVaultEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultEvent, name: "member"))
+    BackupVaultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultListMember, name: "member"))
     BackupVaultListMember.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultName, name: "BackupVaultName"))
     BackupVaultListMember.add_member(:backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "BackupVaultArn"))
     BackupVaultListMember.add_member(:vault_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VaultType, name: "VaultType"))
@@ -557,7 +557,7 @@ module Aws::Backup
     CancelLegalHoldInput.add_member(:retain_record_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "RetainRecordInDays", traits: {"smithy.api#httpQuery" => "retainRecordInDays"}))
     CancelLegalHoldInput.type = Types::CancelLegalHoldInput
     CancelLegalHoldOutput.type = Types::CancelLegalHoldOutput
-    ComplianceResourceIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ComplianceResourceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Condition.add_member(:condition_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionType, name: "ConditionType", traits: {"smithy.api#required" => {}}))
     Condition.add_member(:condition_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionKey, name: "ConditionKey", traits: {"smithy.api#required" => {}}))
     Condition.add_member(:condition_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionValue, name: "ConditionValue", traits: {"smithy.api#required" => {}}))
@@ -565,7 +565,7 @@ module Aws::Backup
     ConditionParameter.add_member(:condition_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionKey, name: "ConditionKey"))
     ConditionParameter.add_member(:condition_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionValue, name: "ConditionValue"))
     ConditionParameter.type = Types::ConditionParameter
-    ConditionParameters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionParameter, name: "member")
+    ConditionParameters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionParameter, name: "member"))
     ConditionType.add_member(:stringequals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRINGEQUALS", traits: {"smithy.api#enumValue" => "STRINGEQUALS"}))
     Conditions.add_member(:string_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionParameters, name: "StringEquals"))
     Conditions.add_member(:string_not_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionParameters, name: "StringNotEquals"))
@@ -580,7 +580,7 @@ module Aws::Backup
     ControlInputParameter.add_member(:parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "ParameterName"))
     ControlInputParameter.add_member(:parameter_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "ParameterValue"))
     ControlInputParameter.type = Types::ControlInputParameter
-    ControlInputParameters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ControlInputParameter, name: "member")
+    ControlInputParameters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlInputParameter, name: "member"))
     ControlScope.add_member(:compliance_resource_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceResourceIdList, name: "ComplianceResourceIds"))
     ControlScope.add_member(:compliance_resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeList, name: "ComplianceResourceTypes"))
     ControlScope.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMap, name: "Tags"))
@@ -588,7 +588,7 @@ module Aws::Backup
     CopyAction.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: Lifecycle, name: "Lifecycle"))
     CopyAction.add_member(:destination_backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "DestinationBackupVaultArn", traits: {"smithy.api#required" => {}}))
     CopyAction.type = Types::CopyAction
-    CopyActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CopyAction, name: "member")
+    CopyActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CopyAction, name: "member"))
     CopyJob.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     CopyJob.add_member(:copy_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CopyJobId"))
     CopyJob.add_member(:source_backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "SourceBackupVaultArn"))
@@ -612,8 +612,8 @@ module Aws::Backup
     CopyJob.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceName"))
     CopyJob.add_member(:message_category, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MessageCategory"))
     CopyJob.type = Types::CopyJob
-    CopyJobChildJobsInState.key = ::Smithy::Schema::Shapes::MemberShape.new(target: CopyJobState, name: "key")
-    CopyJobChildJobsInState.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "value")
+    CopyJobChildJobsInState.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: CopyJobState, name: "key"))
+    CopyJobChildJobsInState.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "value"))
     CopyJobState.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
     CopyJobState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     CopyJobState.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
@@ -639,8 +639,8 @@ module Aws::Backup
     CopyJobSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime"))
     CopyJobSummary.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
     CopyJobSummary.type = Types::CopyJobSummary
-    CopyJobSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CopyJobSummary, name: "member")
-    CopyJobsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CopyJob, name: "member")
+    CopyJobSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CopyJobSummary, name: "member"))
+    CopyJobsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CopyJob, name: "member"))
     CreateBackupPlanInput.add_member(:backup_plan, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupPlanInput, name: "BackupPlan", traits: {"smithy.api#required" => {}}))
     CreateBackupPlanInput.add_member(:backup_plan_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "BackupPlanTags"))
     CreateBackupPlanInput.add_member(:creator_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CreatorRequestId", traits: {"smithy.api#idempotencyToken" => {}}))
@@ -939,7 +939,7 @@ module Aws::Backup
     ExportBackupPlanTemplateInput.type = Types::ExportBackupPlanTemplateInput
     ExportBackupPlanTemplateOutput.add_member(:backup_plan_template_json, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupPlanTemplateJson"))
     ExportBackupPlanTemplateOutput.type = Types::ExportBackupPlanTemplateOutput
-    FormatList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    FormatList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Framework.add_member(:framework_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameworkName, name: "FrameworkName"))
     Framework.add_member(:framework_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "FrameworkArn"))
     Framework.add_member(:framework_description, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameworkDescription, name: "FrameworkDescription"))
@@ -951,8 +951,8 @@ module Aws::Backup
     FrameworkControl.add_member(:control_input_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlInputParameters, name: "ControlInputParameters"))
     FrameworkControl.add_member(:control_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlScope, name: "ControlScope"))
     FrameworkControl.type = Types::FrameworkControl
-    FrameworkControls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FrameworkControl, name: "member")
-    FrameworkList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Framework, name: "member")
+    FrameworkControls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameworkControl, name: "member"))
+    FrameworkList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Framework, name: "member"))
     GetBackupPlanFromJSONInput.add_member(:backup_plan_template_json, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupPlanTemplateJson", traits: {"smithy.api#required" => {}}))
     GetBackupPlanFromJSONInput.type = Types::GetBackupPlanFromJSONInput
     GetBackupPlanFromJSONOutput.add_member(:backup_plan, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupPlan, name: "BackupPlan"))
@@ -1053,13 +1053,13 @@ module Aws::Backup
     GetRestoreTestingSelectionOutput.type = Types::GetRestoreTestingSelectionOutput
     GetSupportedResourceTypesOutput.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypes, name: "ResourceTypes"))
     GetSupportedResourceTypesOutput.type = Types::GetSupportedResourceTypesOutput
-    GlobalSettings.key = ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalSettingsName, name: "key")
-    GlobalSettings.value = ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalSettingsValue, name: "value")
+    GlobalSettings.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalSettingsName, name: "key"))
+    GlobalSettings.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalSettingsValue, name: "value"))
     Index.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     Index.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     IndexAction.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypes, name: "ResourceTypes"))
     IndexAction.type = Types::IndexAction
-    IndexActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IndexAction, name: "member")
+    IndexActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexAction, name: "member"))
     IndexStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     IndexStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     IndexStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -1074,7 +1074,7 @@ module Aws::Backup
     IndexedRecoveryPoint.add_member(:index_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IndexStatusMessage"))
     IndexedRecoveryPoint.add_member(:backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "BackupVaultArn"))
     IndexedRecoveryPoint.type = Types::IndexedRecoveryPoint
-    IndexedRecoveryPointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IndexedRecoveryPoint, name: "member")
+    IndexedRecoveryPointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexedRecoveryPoint, name: "member"))
     InvalidParameterValueException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     InvalidParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     InvalidParameterValueException.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
@@ -1093,7 +1093,7 @@ module Aws::Backup
     KeyValue.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Key", traits: {"smithy.api#required" => {}}))
     KeyValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Value", traits: {"smithy.api#required" => {}}))
     KeyValue.type = Types::KeyValue
-    KeyValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, name: "member")
+    KeyValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, name: "member"))
     LatestMpaApprovalTeamUpdate.add_member(:mpa_session_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "MpaSessionArn"))
     LatestMpaApprovalTeamUpdate.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MpaSessionStatus, name: "Status"))
     LatestMpaApprovalTeamUpdate.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StatusMessage"))
@@ -1118,7 +1118,7 @@ module Aws::Backup
     LegalHoldStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     LegalHoldStatus.add_member(:canceling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELING", traits: {"smithy.api#enumValue" => "CANCELING"}))
     LegalHoldStatus.add_member(:canceled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELED", traits: {"smithy.api#enumValue" => "CANCELED"}))
-    LegalHoldsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LegalHold, name: "member")
+    LegalHoldsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LegalHold, name: "member"))
     Lifecycle.add_member(:move_to_cold_storage_after_days, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "MoveToColdStorageAfterDays"))
     Lifecycle.add_member(:delete_after_days, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "DeleteAfterDays"))
     Lifecycle.add_member(:opt_in_to_archive_for_supported_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "OptInToArchiveForSupportedResources"))
@@ -1244,7 +1244,7 @@ module Aws::Backup
     ListLegalHoldsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     ListLegalHoldsOutput.add_member(:legal_holds, ::Smithy::Schema::Shapes::MemberShape.new(target: LegalHoldsList, name: "LegalHolds"))
     ListLegalHoldsOutput.type = Types::ListLegalHoldsOutput
-    ListOfTags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "member")
+    ListOfTags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "member"))
     ListProtectedResourcesByBackupVaultInput.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultName, name: "BackupVaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListProtectedResourcesByBackupVaultInput.add_member(:backup_vault_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "BackupVaultAccountId", traits: {"smithy.api#httpQuery" => "backupVaultAccountId"}))
     ListProtectedResourcesByBackupVaultInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -1366,8 +1366,8 @@ module Aws::Backup
     ListTagsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     ListTagsOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags"))
     ListTagsOutput.type = Types::ListTagsOutput
-    Metadata.key = ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataKey, name: "key")
-    Metadata.value = ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataValue, name: "value")
+    Metadata.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataKey, name: "key"))
+    Metadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataValue, name: "value"))
     MissingParameterValueException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     MissingParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     MissingParameterValueException.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
@@ -1388,7 +1388,7 @@ module Aws::Backup
     ProtectedResourceConditions.add_member(:string_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValueList, name: "StringEquals"))
     ProtectedResourceConditions.add_member(:string_not_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValueList, name: "StringNotEquals"))
     ProtectedResourceConditions.type = Types::ProtectedResourceConditions
-    ProtectedResourcesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedResource, name: "member")
+    ProtectedResourcesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedResource, name: "member"))
     PutBackupVaultAccessPolicyInput.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultName, name: "BackupVaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutBackupVaultAccessPolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMPolicy, name: "Policy"))
     PutBackupVaultAccessPolicyInput.type = Types::PutBackupVaultAccessPolicyInput
@@ -1432,7 +1432,7 @@ module Aws::Backup
     RecoveryPointByBackupVault.add_member(:index_status, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexStatus, name: "IndexStatus"))
     RecoveryPointByBackupVault.add_member(:index_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IndexStatusMessage"))
     RecoveryPointByBackupVault.type = Types::RecoveryPointByBackupVault
-    RecoveryPointByBackupVaultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPointByBackupVault, name: "member")
+    RecoveryPointByBackupVaultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPointByBackupVault, name: "member"))
     RecoveryPointByResource.add_member(:recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "RecoveryPointArn"))
     RecoveryPointByResource.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationDate"))
     RecoveryPointByResource.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPointStatus, name: "Status"))
@@ -1447,7 +1447,7 @@ module Aws::Backup
     RecoveryPointByResource.add_member(:index_status, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexStatus, name: "IndexStatus"))
     RecoveryPointByResource.add_member(:index_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IndexStatusMessage"))
     RecoveryPointByResource.type = Types::RecoveryPointByResource
-    RecoveryPointByResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPointByResource, name: "member")
+    RecoveryPointByResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPointByResource, name: "member"))
     RecoveryPointCreator.add_member(:backup_plan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupPlanId"))
     RecoveryPointCreator.add_member(:backup_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "BackupPlanArn"))
     RecoveryPointCreator.add_member(:backup_plan_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupPlanVersion"))
@@ -1469,7 +1469,7 @@ module Aws::Backup
     RecoveryPointStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     RecoveryPointStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
     RecoveryPointStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    RecoveryPointsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPointMember, name: "member")
+    RecoveryPointsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPointMember, name: "member"))
     ReportDeliveryChannel.add_member(:s3_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "S3BucketName", traits: {"smithy.api#required" => {}}))
     ReportDeliveryChannel.add_member(:s3_key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "S3KeyPrefix"))
     ReportDeliveryChannel.add_member(:formats, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatList, name: "Formats"))
@@ -1486,7 +1486,7 @@ module Aws::Backup
     ReportJob.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StatusMessage"))
     ReportJob.add_member(:report_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportDestination, name: "ReportDestination"))
     ReportJob.type = Types::ReportJob
-    ReportJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReportJob, name: "member")
+    ReportJobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportJob, name: "member"))
     ReportPlan.add_member(:report_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "ReportPlanArn"))
     ReportPlan.add_member(:report_plan_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportPlanName, name: "ReportPlanName"))
     ReportPlan.add_member(:report_plan_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportPlanDescription, name: "ReportPlanDescription"))
@@ -1497,7 +1497,7 @@ module Aws::Backup
     ReportPlan.add_member(:last_attempted_execution_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastAttemptedExecutionTime"))
     ReportPlan.add_member(:last_successful_execution_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastSuccessfulExecutionTime"))
     ReportPlan.type = Types::ReportPlan
-    ReportPlanList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReportPlan, name: "member")
+    ReportPlanList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportPlan, name: "member"))
     ReportSetting.add_member(:report_template, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReportTemplate", traits: {"smithy.api#required" => {}}))
     ReportSetting.add_member(:framework_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "FrameworkArns"))
     ReportSetting.add_member(:number_of_frameworks, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "NumberOfFrameworks", traits: {"smithy.api#default" => 0}))
@@ -1505,20 +1505,20 @@ module Aws::Backup
     ReportSetting.add_member(:organization_units, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "OrganizationUnits"))
     ReportSetting.add_member(:regions, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "Regions"))
     ReportSetting.type = Types::ReportSetting
-    ResourceArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "member")
-    ResourceIdentifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ResourceArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "member"))
+    ResourceIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ResourceNotFoundException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ResourceNotFoundException.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
     ResourceNotFoundException.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Context"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "member")
-    ResourceTypeManagementPreference.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "key")
-    ResourceTypeManagementPreference.value = ::Smithy::Schema::Shapes::MemberShape.new(target: IsEnabled, name: "value")
-    ResourceTypeOptInPreference.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "key")
-    ResourceTypeOptInPreference.value = ::Smithy::Schema::Shapes::MemberShape.new(target: IsEnabled, name: "value")
-    ResourceTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "member")
-    RestoreAccessBackupVaultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreAccessBackupVaultListMember, name: "member")
+    ResourceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "member"))
+    ResourceTypeManagementPreference.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "key"))
+    ResourceTypeManagementPreference.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: IsEnabled, name: "value"))
+    ResourceTypeOptInPreference.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "key"))
+    ResourceTypeOptInPreference.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: IsEnabled, name: "value"))
+    ResourceTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "member"))
+    RestoreAccessBackupVaultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreAccessBackupVaultListMember, name: "member"))
     RestoreAccessBackupVaultListMember.add_member(:restore_access_backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "RestoreAccessBackupVaultArn"))
     RestoreAccessBackupVaultListMember.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationDate"))
     RestoreAccessBackupVaultListMember.add_member(:approval_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ApprovalDate"))
@@ -1551,8 +1551,8 @@ module Aws::Backup
     RestoreJobSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime"))
     RestoreJobSummary.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
     RestoreJobSummary.type = Types::RestoreJobSummary
-    RestoreJobSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreJobSummary, name: "member")
-    RestoreJobsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreJobsListMember, name: "member")
+    RestoreJobSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreJobSummary, name: "member"))
+    RestoreJobsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreJobsListMember, name: "member"))
     RestoreJobsListMember.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     RestoreJobsListMember.add_member(:restore_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RestoreJobId"))
     RestoreJobsListMember.add_member(:recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "RecoveryPointArn"))
@@ -1604,7 +1604,7 @@ module Aws::Backup
     RestoreTestingPlanForUpdate.add_member(:schedule_expression_timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ScheduleExpressionTimezone"))
     RestoreTestingPlanForUpdate.add_member(:start_window_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "StartWindowHours", traits: {"smithy.api#default" => 0}))
     RestoreTestingPlanForUpdate.type = Types::RestoreTestingPlanForUpdate
-    RestoreTestingPlans.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreTestingPlanForList, name: "member")
+    RestoreTestingPlans.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreTestingPlanForList, name: "member"))
     RestoreTestingRecoveryPointSelection.add_member(:algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreTestingRecoveryPointSelectionAlgorithm, name: "Algorithm"))
     RestoreTestingRecoveryPointSelection.add_member(:exclude_vaults, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "ExcludeVaults"))
     RestoreTestingRecoveryPointSelection.add_member(:include_vaults, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "IncludeVaults"))
@@ -1615,7 +1615,7 @@ module Aws::Backup
     RestoreTestingRecoveryPointSelectionAlgorithm.add_member(:random_within_window, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RANDOM_WITHIN_WINDOW", traits: {"smithy.api#enumValue" => "RANDOM_WITHIN_WINDOW"}))
     RestoreTestingRecoveryPointType.add_member(:continuous, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTINUOUS", traits: {"smithy.api#enumValue" => "CONTINUOUS"}))
     RestoreTestingRecoveryPointType.add_member(:snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SNAPSHOT", traits: {"smithy.api#enumValue" => "SNAPSHOT"}))
-    RestoreTestingRecoveryPointTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreTestingRecoveryPointType, name: "member")
+    RestoreTestingRecoveryPointTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreTestingRecoveryPointType, name: "member"))
     RestoreTestingSelectionForCreate.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
     RestoreTestingSelectionForCreate.add_member(:protected_resource_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "ProtectedResourceArns"))
     RestoreTestingSelectionForCreate.add_member(:protected_resource_conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedResourceConditions, name: "ProtectedResourceConditions"))
@@ -1648,7 +1648,7 @@ module Aws::Backup
     RestoreTestingSelectionForUpdate.add_member(:restore_metadata_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveStringMap, name: "RestoreMetadataOverrides"))
     RestoreTestingSelectionForUpdate.add_member(:validation_window_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ValidationWindowHours", traits: {"smithy.api#default" => 0}))
     RestoreTestingSelectionForUpdate.type = Types::RestoreTestingSelectionForUpdate
-    RestoreTestingSelections.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreTestingSelectionForList, name: "member")
+    RestoreTestingSelections.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreTestingSelectionForList, name: "member"))
     RestoreValidationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     RestoreValidationStatus.add_member(:successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESSFUL", traits: {"smithy.api#enumValue" => "SUCCESSFUL"}))
     RestoreValidationStatus.add_member(:timed_out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMED_OUT", traits: {"smithy.api#enumValue" => "TIMED_OUT"}))
@@ -1657,8 +1657,8 @@ module Aws::Backup
     RevokeRestoreAccessBackupVaultInput.add_member(:restore_access_backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "RestoreAccessBackupVaultArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RevokeRestoreAccessBackupVaultInput.add_member(:requester_comment, ::Smithy::Schema::Shapes::MemberShape.new(target: RequesterComment, name: "RequesterComment", traits: {"smithy.api#httpQuery" => "requesterComment"}))
     RevokeRestoreAccessBackupVaultInput.type = Types::RevokeRestoreAccessBackupVaultInput
-    SensitiveStringMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    SensitiveStringMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    SensitiveStringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    SensitiveStringMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     ServiceUnavailableException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ServiceUnavailableException.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
@@ -1710,12 +1710,12 @@ module Aws::Backup
     StorageClass.add_member(:warm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WARM", traits: {"smithy.api#enumValue" => "WARM"}))
     StorageClass.add_member(:cold, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COLD", traits: {"smithy.api#enumValue" => "COLD"}))
     StorageClass.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceInput.add_member(:tag_key_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeyList", traits: {"smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
@@ -1789,16 +1789,16 @@ module Aws::Backup
     UpdateRestoreTestingSelectionOutput.add_member(:restore_testing_selection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RestoreTestingSelectionName", traits: {"smithy.api#required" => {}}))
     UpdateRestoreTestingSelectionOutput.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "UpdateTime", traits: {"smithy.api#required" => {}}))
     UpdateRestoreTestingSelectionOutput.type = Types::UpdateRestoreTestingSelectionOutput
-    VaultNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    VaultNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     VaultState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     VaultState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     VaultState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     VaultType.add_member(:backup_vault, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BACKUP_VAULT", traits: {"smithy.api#enumValue" => "BACKUP_VAULT"}))
     VaultType.add_member(:logically_air_gapped_backup_vault, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOGICALLY_AIR_GAPPED_BACKUP_VAULT", traits: {"smithy.api#enumValue" => "LOGICALLY_AIR_GAPPED_BACKUP_VAULT"}))
     VaultType.add_member(:restore_access_backup_vault, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESTORE_ACCESS_BACKUP_VAULT", traits: {"smithy.api#enumValue" => "RESTORE_ACCESS_BACKUP_VAULT"}))
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    StringMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    StringMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    StringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    StringMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
 
     CryoControllerUserManager = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.backup#CryoControllerUserManager"

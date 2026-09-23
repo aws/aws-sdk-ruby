@@ -130,7 +130,7 @@ module Aws::Glacier
     AbortVaultLockInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AbortVaultLockInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AbortVaultLockInput.type = Types::AbortVaultLockInput
-    AccessControlPolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Grant, name: "member")
+    AccessControlPolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Grant, name: "member"))
     ActionCode.add_member(:archive_retrieval, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ArchiveRetrieval", traits: {"smithy.api#enumValue" => "ArchiveRetrieval"}))
     ActionCode.add_member(:inventory_retrieval, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InventoryRetrieval", traits: {"smithy.api#enumValue" => "InventoryRetrieval"}))
     ActionCode.add_member(:select, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Select", traits: {"smithy.api#enumValue" => "Select"}))
@@ -182,7 +182,7 @@ module Aws::Glacier
     DataRetrievalRule.add_member(:strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Strategy"))
     DataRetrievalRule.add_member(:bytes_per_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableLong, name: "BytesPerHour"))
     DataRetrievalRule.type = Types::DataRetrievalRule
-    DataRetrievalRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataRetrievalRule, name: "member")
+    DataRetrievalRulesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRetrievalRule, name: "member"))
     DeleteArchiveInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteArchiveInput.add_member(:vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "vaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteArchiveInput.add_member(:archive_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "archiveId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -368,7 +368,7 @@ module Aws::Glacier
     InventoryRetrievalJobInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Limit"))
     InventoryRetrievalJobInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     InventoryRetrievalJobInput.type = Types::InventoryRetrievalJobInput
-    JobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GlacierJobDescription, name: "member")
+    JobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlacierJobDescription, name: "member"))
     JobParameters.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Format"))
     JobParameters.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
     JobParameters.add_member(:archive_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ArchiveId"))
@@ -436,12 +436,12 @@ module Aws::Glacier
     MissingParameterValueException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "code"))
     MissingParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     MissingParameterValueException.type = Types::MissingParameterValueException
-    NotificationEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    NotificationEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     OutputLocation.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "S3"))
     OutputLocation.type = Types::OutputLocation
     OutputSerialization.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: CSVOutput, name: "csv"))
     OutputSerialization.type = Types::OutputSerialization
-    PartList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PartListElement, name: "member")
+    PartList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PartListElement, name: "member"))
     PartListElement.add_member(:range_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RangeInBytes"))
     PartListElement.add_member(:sha256_tree_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SHA256TreeHash"))
     PartListElement.type = Types::PartListElement
@@ -458,7 +458,7 @@ module Aws::Glacier
     ProvisionedCapacityDescription.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StartDate"))
     ProvisionedCapacityDescription.add_member(:expiration_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ExpirationDate"))
     ProvisionedCapacityDescription.type = Types::ProvisionedCapacityDescription
-    ProvisionedCapacityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedCapacityDescription, name: "member")
+    ProvisionedCapacityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedCapacityDescription, name: "member"))
     PurchaseProvisionedCapacityInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PurchaseProvisionedCapacityInput.type = Types::PurchaseProvisionedCapacityInput
     PurchaseProvisionedCapacityOutput.add_member(:capacity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "capacityId", traits: {"smithy.api#httpHeader" => "x-amz-capacity-id"}))
@@ -516,9 +516,9 @@ module Aws::Glacier
     StorageClass.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Standard", traits: {"smithy.api#enumValue" => "STANDARD"}))
     StorageClass.add_member(:reduced_redundancy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ReducedRedundancy", traits: {"smithy.api#enumValue" => "REDUCED_REDUNDANCY"}))
     StorageClass.add_member(:standard_infrequent_access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "StandardInfrequentAccess", traits: {"smithy.api#enumValue" => "STANDARD_IA"}))
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     Type.add_member(:amazon_customer_by_email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AmazonCustomerByEmail", traits: {"smithy.api#enumValue" => "AmazonCustomerByEmail"}))
     Type.add_member(:canonical_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CanonicalUser", traits: {"smithy.api#enumValue" => "CanonicalUser"}))
     Type.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Group", traits: {"smithy.api#enumValue" => "Group"}))
@@ -551,17 +551,17 @@ module Aws::Glacier
     UploadMultipartPartInput.type = Types::UploadMultipartPartInput
     UploadMultipartPartOutput.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "checksum", traits: {"smithy.api#httpHeader" => "x-amz-sha256-tree-hash"}))
     UploadMultipartPartOutput.type = Types::UploadMultipartPartOutput
-    UploadsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UploadListElement, name: "member")
+    UploadsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadListElement, name: "member"))
     VaultAccessPolicy.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Policy"))
     VaultAccessPolicy.type = Types::VaultAccessPolicy
-    VaultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeVaultOutput, name: "member")
+    VaultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeVaultOutput, name: "member"))
     VaultLockPolicy.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Policy"))
     VaultLockPolicy.type = Types::VaultLockPolicy
     VaultNotificationConfig.add_member(:sns_topic, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SNSTopic"))
     VaultNotificationConfig.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationEventList, name: "Events"))
     VaultNotificationConfig.type = Types::VaultNotificationConfig
-    Hashmap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    Hashmap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    Hashmap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    Hashmap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
 
     Glacier = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.glacier#Glacier"

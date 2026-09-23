@@ -135,14 +135,14 @@ module Aws::S3Vectors
     DeleteVectorsInput.add_member(:index_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexArn, name: "indexArn"))
     DeleteVectorsInput.add_member(:keys, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteVectorsInputList, name: "keys", traits: {"smithy.api#required" => {}}))
     DeleteVectorsInput.type = Types::DeleteVectorsInput
-    DeleteVectorsInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VectorKey, name: "member")
+    DeleteVectorsInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorKey, name: "member"))
     DeleteVectorsOutput.type = Types::DeleteVectorsOutput
     DistanceMetric.add_member(:euclidean, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EUCLIDEAN", traits: {"smithy.api#enumValue" => "euclidean"}))
     DistanceMetric.add_member(:cosine, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COSINE", traits: {"smithy.api#enumValue" => "cosine"}))
     EncryptionConfiguration.add_member(:sse_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SseType, name: "sseType", traits: {"smithy.api#default" => "AES256"}))
     EncryptionConfiguration.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "kmsKeyArn"))
     EncryptionConfiguration.type = Types::EncryptionConfiguration
-    Float32VectorData.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "member")
+    Float32VectorData.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "member"))
     GetIndexInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, name: "vectorBucketName"))
     GetIndexInput.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "indexName"))
     GetIndexInput.add_member(:index_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexArn, name: "indexArn"))
@@ -170,10 +170,10 @@ module Aws::S3Vectors
     GetVectorsInput.add_member(:return_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "returnData", traits: {"smithy.api#default" => false}))
     GetVectorsInput.add_member(:return_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "returnMetadata", traits: {"smithy.api#default" => false}))
     GetVectorsInput.type = Types::GetVectorsInput
-    GetVectorsInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VectorKey, name: "member")
+    GetVectorsInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorKey, name: "member"))
     GetVectorsOutput.add_member(:vectors, ::Smithy::Schema::Shapes::MemberShape.new(target: GetVectorsOutputList, name: "vectors", traits: {"smithy.api#required" => {}}))
     GetVectorsOutput.type = Types::GetVectorsOutput
-    GetVectorsOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GetOutputVector, name: "member")
+    GetVectorsOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GetOutputVector, name: "member"))
     Index.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, name: "vectorBucketName", traits: {"smithy.api#required" => {}}))
     Index.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "indexName", traits: {"smithy.api#required" => {}}))
     Index.add_member(:index_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexArn, name: "indexArn", traits: {"smithy.api#required" => {}}))
@@ -207,7 +207,7 @@ module Aws::S3Vectors
     ListIndexesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ListIndexesNextToken, name: "nextToken"))
     ListIndexesOutput.add_member(:indexes, ::Smithy::Schema::Shapes::MemberShape.new(target: ListIndexesOutputList, name: "indexes", traits: {"smithy.api#required" => {}}))
     ListIndexesOutput.type = Types::ListIndexesOutput
-    ListIndexesOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IndexSummary, name: "member")
+    ListIndexesOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexSummary, name: "member"))
     ListOutputVector.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorKey, name: "key", traits: {"smithy.api#required" => {}}))
     ListOutputVector.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorData, name: "data"))
     ListOutputVector.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorMetadata, name: "metadata"))
@@ -219,7 +219,7 @@ module Aws::S3Vectors
     ListVectorBucketsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVectorBucketsNextToken, name: "nextToken"))
     ListVectorBucketsOutput.add_member(:vector_buckets, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVectorBucketsOutputList, name: "vectorBuckets", traits: {"smithy.api#required" => {}}))
     ListVectorBucketsOutput.type = Types::ListVectorBucketsOutput
-    ListVectorBucketsOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketSummary, name: "member")
+    ListVectorBucketsOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketSummary, name: "member"))
     ListVectorsInput.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, name: "vectorBucketName"))
     ListVectorsInput.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "indexName"))
     ListVectorsInput.add_member(:index_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexArn, name: "indexArn"))
@@ -233,10 +233,10 @@ module Aws::S3Vectors
     ListVectorsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVectorsNextToken, name: "nextToken"))
     ListVectorsOutput.add_member(:vectors, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVectorsOutputList, name: "vectors", traits: {"smithy.api#required" => {}}))
     ListVectorsOutput.type = Types::ListVectorsOutput
-    ListVectorsOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListOutputVector, name: "member")
+    ListVectorsOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOutputVector, name: "member"))
     MetadataConfiguration.add_member(:non_filterable_metadata_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: NonFilterableMetadataKeys, name: "nonFilterableMetadataKeys", traits: {"smithy.api#required" => {}}))
     MetadataConfiguration.type = Types::MetadataConfiguration
-    NonFilterableMetadataKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataKey, name: "member")
+    NonFilterableMetadataKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataKey, name: "member"))
     NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message", traits: {"smithy.api#required" => {}}))
     NotFoundException.type = Types::NotFoundException
     PutInputVector.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorKey, name: "key", traits: {"smithy.api#required" => {}}))
@@ -253,7 +253,7 @@ module Aws::S3Vectors
     PutVectorsInput.add_member(:index_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexArn, name: "indexArn"))
     PutVectorsInput.add_member(:vectors, ::Smithy::Schema::Shapes::MemberShape.new(target: PutVectorsInputList, name: "vectors", traits: {"smithy.api#required" => {}}))
     PutVectorsInput.type = Types::PutVectorsInput
-    PutVectorsInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PutInputVector, name: "member")
+    PutVectorsInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PutInputVector, name: "member"))
     PutVectorsOutput.type = Types::PutVectorsOutput
     QueryOutputVector.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorKey, name: "key", traits: {"smithy.api#required" => {}}))
     QueryOutputVector.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorData, name: "data"))
@@ -271,7 +271,7 @@ module Aws::S3Vectors
     QueryVectorsInput.type = Types::QueryVectorsInput
     QueryVectorsOutput.add_member(:vectors, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryVectorsOutputList, name: "vectors", traits: {"smithy.api#required" => {}}))
     QueryVectorsOutput.type = Types::QueryVectorsOutput
-    QueryVectorsOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryOutputVector, name: "member")
+    QueryVectorsOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryOutputVector, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message", traits: {"smithy.api#required" => {}}))
@@ -286,7 +286,7 @@ module Aws::S3Vectors
     ValidationExceptionField.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "path", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     VectorBucket.add_member(:vector_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketName, name: "vectorBucketName", traits: {"smithy.api#required" => {}}))
     VectorBucket.add_member(:vector_bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorBucketArn, name: "vectorBucketArn", traits: {"smithy.api#required" => {}}))
     VectorBucket.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "creationTime", traits: {"smithy.api#required" => {}}))

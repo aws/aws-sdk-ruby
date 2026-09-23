@@ -123,7 +123,7 @@ module Aws::Evs
     CheckType.add_member(:key_coverage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KEY_COVERAGE", traits: {"smithy.api#enumValue" => "KEY_COVERAGE"}))
     CheckType.add_member(:reachability, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REACHABILITY", traits: {"smithy.api#enumValue" => "REACHABILITY"}))
     CheckType.add_member(:host_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOST_COUNT", traits: {"smithy.api#enumValue" => "HOST_COUNT"}))
-    ChecksList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Check, name: "member")
+    ChecksList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Check, name: "member"))
     ConnectivityInfo.add_member(:private_route_server_peerings, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteServerPeeringList, name: "privateRouteServerPeerings", traits: {"smithy.api#required" => {}}))
     ConnectivityInfo.type = Types::ConnectivityInfo
     CreateEnvironmentHostRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
@@ -174,7 +174,7 @@ module Aws::Evs
     EipAssociation.add_member(:allocation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AllocationId, name: "allocationId"))
     EipAssociation.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, name: "ipAddress"))
     EipAssociation.type = Types::EipAssociation
-    EipAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EipAssociation, name: "member")
+    EipAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EipAssociation, name: "member"))
     Environment.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId"))
     Environment.add_member(:environment_state, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentState, name: "environmentState"))
     Environment.add_member(:state_details, ::Smithy::Schema::Shapes::MemberShape.new(target: StateDetails, name: "stateDetails"))
@@ -201,7 +201,7 @@ module Aws::Evs
     EnvironmentState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     EnvironmentState.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
     EnvironmentState.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
-    EnvironmentStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentState, name: "member")
+    EnvironmentStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentState, name: "member"))
     EnvironmentSummary.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId"))
     EnvironmentSummary.add_member(:environment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, name: "environmentName"))
     EnvironmentSummary.add_member(:vcf_version, ::Smithy::Schema::Shapes::MemberShape.new(target: VcfVersion, name: "vcfVersion"))
@@ -211,7 +211,7 @@ module Aws::Evs
     EnvironmentSummary.add_member(:modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "modifiedAt"))
     EnvironmentSummary.add_member(:environment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "environmentArn"))
     EnvironmentSummary.type = Types::EnvironmentSummary
-    EnvironmentSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentSummary, name: "member")
+    EnvironmentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentSummary, name: "member"))
     GetEnvironmentRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetEnvironmentRequest.type = Types::GetEnvironmentRequest
     GetEnvironmentResponse.add_member(:environment, ::Smithy::Schema::Shapes::MemberShape.new(target: Environment, name: "environment"))
@@ -235,8 +235,8 @@ module Aws::Evs
     HostInfoForCreate.add_member(:placement_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementGroupId, name: "placementGroupId"))
     HostInfoForCreate.add_member(:dedicated_host_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DedicatedHostId, name: "dedicatedHostId"))
     HostInfoForCreate.type = Types::HostInfoForCreate
-    HostInfoForCreateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HostInfoForCreate, name: "member")
-    HostList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Host, name: "member")
+    HostInfoForCreateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HostInfoForCreate, name: "member"))
+    HostList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Host, name: "member"))
     HostState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     HostState.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
     HostState.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
@@ -263,7 +263,7 @@ module Aws::Evs
     LicenseInfo.add_member(:solution_key, ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionKey, name: "solutionKey", traits: {"smithy.api#required" => {}}))
     LicenseInfo.add_member(:vsan_key, ::Smithy::Schema::Shapes::MemberShape.new(target: VSanLicenseKey, name: "vsanKey", traits: {"smithy.api#required" => {}}))
     LicenseInfo.type = Types::LicenseInfo
-    LicenseInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseInfo, name: "member")
+    LicenseInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseInfo, name: "member"))
     ListEnvironmentHostsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListEnvironmentHostsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListEnvironmentHostsRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -291,25 +291,25 @@ module Aws::Evs
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
     NetworkInterface.add_member(:network_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceId, name: "networkInterfaceId"))
     NetworkInterface.type = Types::NetworkInterface
-    NetworkInterfaceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface, name: "member")
-    RequestTagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    RequestTagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    NetworkInterfaceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface, name: "member"))
+    RequestTagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    RequestTagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResponseTagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    ResponseTagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
-    RouteServerPeeringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteServerPeering, name: "member")
+    ResponseTagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    ResponseTagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
+    RouteServerPeeringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteServerPeering, name: "member"))
     Secret.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "secretArn"))
     Secret.type = Types::Secret
-    SecretList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Secret, name: "member")
-    SecurityGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
+    SecretList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Secret, name: "member"))
+    SecurityGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     ServiceAccessSecurityGroups.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroups, name: "securityGroups"))
     ServiceAccessSecurityGroups.type = Types::ServiceAccessSecurityGroups
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagPolicyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     TagPolicyException.type = Types::TagPolicyException
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
@@ -332,7 +332,7 @@ module Aws::Evs
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "unknownOperation"}))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "cannotParse"}))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "fieldValidationFailed"}))
@@ -361,7 +361,7 @@ module Aws::Evs
     Vlan.add_member(:is_public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isPublic"))
     Vlan.add_member(:network_acl_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkAclId, name: "networkAclId"))
     Vlan.type = Types::Vlan
-    VlanList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Vlan, name: "member")
+    VlanList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Vlan, name: "member"))
     VlanState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     VlanState.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
     VlanState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))

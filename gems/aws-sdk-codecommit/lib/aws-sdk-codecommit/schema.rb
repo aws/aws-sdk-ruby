@@ -550,7 +550,7 @@ module Aws::CodeCommit
     Approval.add_member(:user_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "userArn"))
     Approval.add_member(:approval_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalState, name: "approvalState"))
     Approval.type = Types::Approval
-    ApprovalList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Approval, name: "member")
+    ApprovalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Approval, name: "member"))
     ApprovalRule.add_member(:approval_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleId, name: "approvalRuleId"))
     ApprovalRule.add_member(:approval_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleName, name: "approvalRuleName"))
     ApprovalRule.add_member(:approval_rule_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleContent, name: "approvalRuleContent"))
@@ -592,12 +592,12 @@ module Aws::CodeCommit
     ApprovalRuleTemplateInUseException.type = Types::ApprovalRuleTemplateInUseException
     ApprovalRuleTemplateNameAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ApprovalRuleTemplateNameAlreadyExistsException.type = Types::ApprovalRuleTemplateNameAlreadyExistsException
-    ApprovalRuleTemplateNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName, name: "member")
+    ApprovalRuleTemplateNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName, name: "member"))
     ApprovalRuleTemplateNameRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ApprovalRuleTemplateNameRequiredException.type = Types::ApprovalRuleTemplateNameRequiredException
-    ApprovalRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRule, name: "member")
-    ApprovalRulesNotSatisfiedList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleName, name: "member")
-    ApprovalRulesSatisfiedList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleName, name: "member")
+    ApprovalRulesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRule, name: "member"))
+    ApprovalRulesNotSatisfiedList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleName, name: "member"))
+    ApprovalRulesSatisfiedList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleName, name: "member"))
     ApprovalState.add_member(:approve, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPROVE", traits: {"smithy.api#enumValue" => "APPROVE"}))
     ApprovalState.add_member(:revoke, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REVOKE", traits: {"smithy.api#enumValue" => "REVOKE"}))
     ApprovalStateChangedEventMetadata.add_member(:revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionId, name: "revisionId"))
@@ -614,7 +614,7 @@ module Aws::CodeCommit
     BatchAssociateApprovalRuleTemplateWithRepositoriesError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "errorCode"))
     BatchAssociateApprovalRuleTemplateWithRepositoriesError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
     BatchAssociateApprovalRuleTemplateWithRepositoriesError.type = Types::BatchAssociateApprovalRuleTemplateWithRepositoriesError
-    BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAssociateApprovalRuleTemplateWithRepositoriesError, name: "member")
+    BatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAssociateApprovalRuleTemplateWithRepositoriesError, name: "member"))
     BatchAssociateApprovalRuleTemplateWithRepositoriesInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName, name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
     BatchAssociateApprovalRuleTemplateWithRepositoriesInput.add_member(:repository_names, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryNameList, name: "repositoryNames", traits: {"smithy.api#required" => {}}))
     BatchAssociateApprovalRuleTemplateWithRepositoriesInput.type = Types::BatchAssociateApprovalRuleTemplateWithRepositoriesInput
@@ -625,7 +625,7 @@ module Aws::CodeCommit
     BatchDescribeMergeConflictsError.add_member(:exception_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionName, name: "exceptionName", traits: {"smithy.api#required" => {}}))
     BatchDescribeMergeConflictsError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message", traits: {"smithy.api#required" => {}}))
     BatchDescribeMergeConflictsError.type = Types::BatchDescribeMergeConflictsError
-    BatchDescribeMergeConflictsErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDescribeMergeConflictsError, name: "member")
+    BatchDescribeMergeConflictsErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDescribeMergeConflictsError, name: "member"))
     BatchDescribeMergeConflictsInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
     BatchDescribeMergeConflictsInput.add_member(:destination_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, name: "destinationCommitSpecifier", traits: {"smithy.api#required" => {}}))
     BatchDescribeMergeConflictsInput.add_member(:source_commit_specifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitName, name: "sourceCommitSpecifier", traits: {"smithy.api#required" => {}}))
@@ -648,7 +648,7 @@ module Aws::CodeCommit
     BatchDisassociateApprovalRuleTemplateFromRepositoriesError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "errorCode"))
     BatchDisassociateApprovalRuleTemplateFromRepositoriesError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
     BatchDisassociateApprovalRuleTemplateFromRepositoriesError.type = Types::BatchDisassociateApprovalRuleTemplateFromRepositoriesError
-    BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDisassociateApprovalRuleTemplateFromRepositoriesError, name: "member")
+    BatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDisassociateApprovalRuleTemplateFromRepositoriesError, name: "member"))
     BatchDisassociateApprovalRuleTemplateFromRepositoriesInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName, name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
     BatchDisassociateApprovalRuleTemplateFromRepositoriesInput.add_member(:repository_names, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryNameList, name: "repositoryNames", traits: {"smithy.api#required" => {}}))
     BatchDisassociateApprovalRuleTemplateFromRepositoriesInput.type = Types::BatchDisassociateApprovalRuleTemplateFromRepositoriesInput
@@ -659,7 +659,7 @@ module Aws::CodeCommit
     BatchGetCommitsError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "errorCode"))
     BatchGetCommitsError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
     BatchGetCommitsError.type = Types::BatchGetCommitsError
-    BatchGetCommitsErrorsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetCommitsError, name: "member")
+    BatchGetCommitsErrorsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetCommitsError, name: "member"))
     BatchGetCommitsInput.add_member(:commit_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitIdsInputList, name: "commitIds", traits: {"smithy.api#required" => {}}))
     BatchGetCommitsInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
     BatchGetCommitsInput.type = Types::BatchGetCommitsInput
@@ -677,7 +677,7 @@ module Aws::CodeCommit
     BatchGetRepositoriesErrorCodeEnum.add_member(:encryption_key_not_found_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENCRYPTION_KEY_NOT_FOUND_EXCEPTION", traits: {"smithy.api#enumValue" => "EncryptionKeyNotFoundException"}))
     BatchGetRepositoriesErrorCodeEnum.add_member(:encryption_key_unavailable_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENCRYPTION_KEY_UNAVAILABLE_EXCEPTION", traits: {"smithy.api#enumValue" => "EncryptionKeyUnavailableException"}))
     BatchGetRepositoriesErrorCodeEnum.add_member(:repository_does_not_exist_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REPOSITORY_DOES_NOT_EXIST_EXCEPTION", traits: {"smithy.api#enumValue" => "RepositoryDoesNotExistException"}))
-    BatchGetRepositoriesErrorsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetRepositoriesError, name: "member")
+    BatchGetRepositoriesErrorsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetRepositoriesError, name: "member"))
     BatchGetRepositoriesInput.add_member(:repository_names, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryNameList, name: "repositoryNames", traits: {"smithy.api#required" => {}}))
     BatchGetRepositoriesInput.type = Types::BatchGetRepositoriesInput
     BatchGetRepositoriesOutput.add_member(:repositories, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryMetadataList, name: "repositories"))
@@ -703,10 +703,10 @@ module Aws::CodeCommit
     BranchNameExistsException.type = Types::BranchNameExistsException
     BranchNameIsTagNameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     BranchNameIsTagNameException.type = Types::BranchNameIsTagNameException
-    BranchNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, name: "member")
+    BranchNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, name: "member"))
     BranchNameRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     BranchNameRequiredException.type = Types::BranchNameRequiredException
-    CallerReactions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionValue, name: "member")
+    CallerReactions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionValue, name: "member"))
     CannotDeleteApprovalRuleFromTemplateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     CannotDeleteApprovalRuleFromTemplateException.type = Types::CannotDeleteApprovalRuleFromTemplateException
     CannotModifyApprovalRuleFromTemplateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -739,7 +739,7 @@ module Aws::CodeCommit
     CommentIdRequiredException.type = Types::CommentIdRequiredException
     CommentNotCreatedByCallerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     CommentNotCreatedByCallerException.type = Types::CommentNotCreatedByCallerException
-    Comments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Comment, name: "member")
+    Comments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Comment, name: "member"))
     CommentsForComparedCommit.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName"))
     CommentsForComparedCommit.add_member(:before_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, name: "beforeCommitId"))
     CommentsForComparedCommit.add_member(:after_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, name: "afterCommitId"))
@@ -748,7 +748,7 @@ module Aws::CodeCommit
     CommentsForComparedCommit.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: Location, name: "location"))
     CommentsForComparedCommit.add_member(:comments, ::Smithy::Schema::Shapes::MemberShape.new(target: Comments, name: "comments"))
     CommentsForComparedCommit.type = Types::CommentsForComparedCommit
-    CommentsForComparedCommitData.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CommentsForComparedCommit, name: "member")
+    CommentsForComparedCommitData.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentsForComparedCommit, name: "member"))
     CommentsForPullRequest.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, name: "pullRequestId"))
     CommentsForPullRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName"))
     CommentsForPullRequest.add_member(:before_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, name: "beforeCommitId"))
@@ -758,7 +758,7 @@ module Aws::CodeCommit
     CommentsForPullRequest.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: Location, name: "location"))
     CommentsForPullRequest.add_member(:comments, ::Smithy::Schema::Shapes::MemberShape.new(target: Comments, name: "comments"))
     CommentsForPullRequest.type = Types::CommentsForPullRequest
-    CommentsForPullRequestData.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CommentsForPullRequest, name: "member")
+    CommentsForPullRequestData.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentsForPullRequest, name: "member"))
     Commit.add_member(:commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, name: "commitId"))
     Commit.add_member(:tree_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, name: "treeId"))
     Commit.add_member(:parents, ::Smithy::Schema::Shapes::MemberShape.new(target: ParentList, name: "parents"))
@@ -773,14 +773,14 @@ module Aws::CodeCommit
     CommitIdDoesNotExistException.type = Types::CommitIdDoesNotExistException
     CommitIdRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     CommitIdRequiredException.type = Types::CommitIdRequiredException
-    CommitIdsInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, name: "member")
+    CommitIdsInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, name: "member"))
     CommitIdsLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     CommitIdsLimitExceededException.type = Types::CommitIdsLimitExceededException
     CommitIdsListRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     CommitIdsListRequiredException.type = Types::CommitIdsListRequiredException
     CommitMessageLengthExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     CommitMessageLengthExceededException.type = Types::CommitMessageLengthExceededException
-    CommitObjectsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Commit, name: "member")
+    CommitObjectsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Commit, name: "member"))
     CommitRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     CommitRequiredException.type = Types::CommitRequiredException
     ConcurrentReferenceUpdateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -801,7 +801,7 @@ module Aws::CodeCommit
     ConflictMetadata.add_member(:object_type_conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: IsObjectTypeConflict, name: "objectTypeConflict", traits: {"smithy.api#default" => false}))
     ConflictMetadata.add_member(:merge_operations, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeOperations, name: "mergeOperations"))
     ConflictMetadata.type = Types::ConflictMetadata
-    ConflictMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictMetadata, name: "member")
+    ConflictMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictMetadata, name: "member"))
     ConflictResolution.add_member(:replace_contents, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplaceContentEntries, name: "replaceContents"))
     ConflictResolution.add_member(:delete_files, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteFileEntries, name: "deleteFiles"))
     ConflictResolution.add_member(:set_file_modes, ::Smithy::Schema::Shapes::MemberShape.new(target: SetFileModeEntries, name: "setFileModes"))
@@ -810,7 +810,7 @@ module Aws::CodeCommit
     ConflictResolutionStrategyTypeEnum.add_member(:accept_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCEPT_SOURCE", traits: {"smithy.api#enumValue" => "ACCEPT_SOURCE"}))
     ConflictResolutionStrategyTypeEnum.add_member(:accept_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCEPT_DESTINATION", traits: {"smithy.api#enumValue" => "ACCEPT_DESTINATION"}))
     ConflictResolutionStrategyTypeEnum.add_member(:automerge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTOMERGE", traits: {"smithy.api#enumValue" => "AUTOMERGE"}))
-    Conflicts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Conflict, name: "member")
+    Conflicts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Conflict, name: "member"))
     CreateApprovalRuleTemplateInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName, name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
     CreateApprovalRuleTemplateInput.add_member(:approval_rule_template_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateContent, name: "approvalRuleTemplateContent", traits: {"smithy.api#required" => {}}))
     CreateApprovalRuleTemplateInput.add_member(:approval_rule_template_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateDescription, name: "approvalRuleTemplateDescription"))
@@ -888,7 +888,7 @@ module Aws::CodeCommit
     DeleteCommentContentInput.type = Types::DeleteCommentContentInput
     DeleteCommentContentOutput.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: Comment, name: "comment"))
     DeleteCommentContentOutput.type = Types::DeleteCommentContentOutput
-    DeleteFileEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteFileEntry, name: "member")
+    DeleteFileEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteFileEntry, name: "member"))
     DeleteFileEntry.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "filePath", traits: {"smithy.api#required" => {}}))
     DeleteFileEntry.type = Types::DeleteFileEntry
     DeleteFileInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
@@ -944,7 +944,7 @@ module Aws::CodeCommit
     Difference.add_member(:after_blob, ::Smithy::Schema::Shapes::MemberShape.new(target: BlobMetadata, name: "afterBlob"))
     Difference.add_member(:change_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeTypeEnum, name: "changeType"))
     Difference.type = Types::Difference
-    DifferenceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Difference, name: "member")
+    DifferenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Difference, name: "member"))
     DirectoryNameConflictsWithFileNameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     DirectoryNameConflictsWithFileNameException.type = Types::DirectoryNameConflictsWithFileNameException
     DisassociateApprovalRuleTemplateFromRepositoryInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName, name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
@@ -991,7 +991,7 @@ module Aws::CodeCommit
     FileDoesNotExistException.type = Types::FileDoesNotExistException
     FileEntryRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     FileEntryRequiredException.type = Types::FileEntryRequiredException
-    FileList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: File, name: "member")
+    FileList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: File, name: "member"))
     FileMetadata.add_member(:absolute_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "absolutePath"))
     FileMetadata.add_member(:blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, name: "blobId"))
     FileMetadata.add_member(:file_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: FileModeTypeEnum, name: "fileMode"))
@@ -1009,7 +1009,7 @@ module Aws::CodeCommit
     FileNameConflictsWithDirectoryNameException.type = Types::FileNameConflictsWithDirectoryNameException
     FilePathConflictsWithSubmodulePathException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     FilePathConflictsWithSubmodulePathException.type = Types::FilePathConflictsWithSubmodulePathException
-    FilePaths.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "member")
+    FilePaths.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "member"))
     FileSizes.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSize, name: "source", traits: {"smithy.api#default" => 0}))
     FileSizes.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSize, name: "destination", traits: {"smithy.api#default" => 0}))
     FileSizes.add_member(:base, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSize, name: "base", traits: {"smithy.api#default" => 0}))
@@ -1021,7 +1021,7 @@ module Aws::CodeCommit
     FileVersion.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "path"))
     FileVersion.add_member(:revision_children, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionChildren, name: "revisionChildren"))
     FileVersion.type = Types::FileVersion
-    FilesMetadata.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileMetadata, name: "member")
+    FilesMetadata.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FileMetadata, name: "member"))
     Folder.add_member(:tree_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, name: "treeId"))
     Folder.add_member(:absolute_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "absolutePath"))
     Folder.add_member(:relative_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "relativePath"))
@@ -1030,7 +1030,7 @@ module Aws::CodeCommit
     FolderContentSizeLimitExceededException.type = Types::FolderContentSizeLimitExceededException
     FolderDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     FolderDoesNotExistException.type = Types::FolderDoesNotExistException
-    FolderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Folder, name: "member")
+    FolderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Folder, name: "member"))
     GetApprovalRuleTemplateInput.add_member(:approval_rule_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplateName, name: "approvalRuleTemplateName", traits: {"smithy.api#required" => {}}))
     GetApprovalRuleTemplateInput.type = Types::GetApprovalRuleTemplateInput
     GetApprovalRuleTemplateOutput.add_member(:approval_rule_template, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleTemplate, name: "approvalRuleTemplate", traits: {"smithy.api#required" => {}}))
@@ -1439,7 +1439,7 @@ module Aws::CodeCommit
     MergeHunkDetail.add_member(:end_line, ::Smithy::Schema::Shapes::MemberShape.new(target: LineNumber, name: "endLine"))
     MergeHunkDetail.add_member(:hunk_content, ::Smithy::Schema::Shapes::MemberShape.new(target: HunkContent, name: "hunkContent"))
     MergeHunkDetail.type = Types::MergeHunkDetail
-    MergeHunks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MergeHunk, name: "member")
+    MergeHunks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeHunk, name: "member"))
     MergeMetadata.add_member(:is_merged, ::Smithy::Schema::Shapes::MemberShape.new(target: IsMerged, name: "isMerged", traits: {"smithy.api#default" => false}))
     MergeMetadata.add_member(:merged_by, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "mergedBy"))
     MergeMetadata.add_member(:merge_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, name: "mergeCommitId"))
@@ -1453,7 +1453,7 @@ module Aws::CodeCommit
     MergeOptionTypeEnum.add_member(:fast_forward_merge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAST_FORWARD_MERGE", traits: {"smithy.api#enumValue" => "FAST_FORWARD_MERGE"}))
     MergeOptionTypeEnum.add_member(:squash_merge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SQUASH_MERGE", traits: {"smithy.api#enumValue" => "SQUASH_MERGE"}))
     MergeOptionTypeEnum.add_member(:three_way_merge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THREE_WAY_MERGE", traits: {"smithy.api#enumValue" => "THREE_WAY_MERGE"}))
-    MergeOptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MergeOptionTypeEnum, name: "member")
+    MergeOptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeOptionTypeEnum, name: "member"))
     MergePullRequestByFastForwardInput.add_member(:pull_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, name: "pullRequestId", traits: {"smithy.api#required" => {}}))
     MergePullRequestByFastForwardInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
     MergePullRequestByFastForwardInput.add_member(:source_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, name: "sourceCommitId"))
@@ -1529,7 +1529,7 @@ module Aws::CodeCommit
     ParentCommitIdOutdatedException.type = Types::ParentCommitIdOutdatedException
     ParentCommitIdRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ParentCommitIdRequiredException.type = Types::ParentCommitIdRequiredException
-    ParentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, name: "member")
+    ParentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, name: "member"))
     PathDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     PathDoesNotExistException.type = Types::PathDoesNotExistException
     PathRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -1609,7 +1609,7 @@ module Aws::CodeCommit
     PullRequestEvent.add_member(:approval_state_changed_event_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalStateChangedEventMetadata, name: "approvalStateChangedEventMetadata"))
     PullRequestEvent.add_member(:approval_rule_overridden_event_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalRuleOverriddenEventMetadata, name: "approvalRuleOverriddenEventMetadata"))
     PullRequestEvent.type = Types::PullRequestEvent
-    PullRequestEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestEvent, name: "member")
+    PullRequestEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestEvent, name: "member"))
     PullRequestEventType.add_member(:pull_request_created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PULL_REQUEST_CREATED", traits: {"smithy.api#enumValue" => "PULL_REQUEST_CREATED"}))
     PullRequestEventType.add_member(:pull_request_status_changed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PULL_REQUEST_STATUS_CHANGED", traits: {"smithy.api#enumValue" => "PULL_REQUEST_STATUS_CHANGED"}))
     PullRequestEventType.add_member(:pull_request_source_reference_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PULL_REQUEST_SOURCE_REFERENCE_UPDATED", traits: {"smithy.api#enumValue" => "PULL_REQUEST_SOURCE_REFERENCE_UPDATED"}))
@@ -1619,7 +1619,7 @@ module Aws::CodeCommit
     PullRequestEventType.add_member(:pull_request_approval_rule_deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PULL_REQUEST_APPROVAL_RULE_DELETED", traits: {"smithy.api#enumValue" => "PULL_REQUEST_APPROVAL_RULE_DELETED"}))
     PullRequestEventType.add_member(:pull_request_approval_rule_overridden, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN", traits: {"smithy.api#enumValue" => "PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN"}))
     PullRequestEventType.add_member(:pull_request_approval_state_changed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PULL_REQUEST_APPROVAL_STATE_CHANGED", traits: {"smithy.api#enumValue" => "PULL_REQUEST_APPROVAL_STATE_CHANGED"}))
-    PullRequestIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, name: "member")
+    PullRequestIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestId, name: "member"))
     PullRequestIdRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     PullRequestIdRequiredException.type = Types::PullRequestIdRequiredException
     PullRequestMergedStateChangedEventMetadata.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName"))
@@ -1645,11 +1645,11 @@ module Aws::CodeCommit
     PullRequestTarget.add_member(:merge_base, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, name: "mergeBase"))
     PullRequestTarget.add_member(:merge_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: MergeMetadata, name: "mergeMetadata"))
     PullRequestTarget.type = Types::PullRequestTarget
-    PullRequestTargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestTarget, name: "member")
+    PullRequestTargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestTarget, name: "member"))
     PutCommentReactionInput.add_member(:comment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentId, name: "commentId", traits: {"smithy.api#required" => {}}))
     PutCommentReactionInput.add_member(:reaction_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionValue, name: "reactionValue", traits: {"smithy.api#required" => {}}))
     PutCommentReactionInput.type = Types::PutCommentReactionInput
-    PutFileEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PutFileEntry, name: "member")
+    PutFileEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PutFileEntry, name: "member"))
     PutFileEntry.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "filePath", traits: {"smithy.api#required" => {}}))
     PutFileEntry.add_member(:file_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: FileModeTypeEnum, name: "fileMode"))
     PutFileEntry.add_member(:file_content, ::Smithy::Schema::Shapes::MemberShape.new(target: FileContent, name: "fileContent"))
@@ -1676,22 +1676,22 @@ module Aws::CodeCommit
     PutRepositoryTriggersInput.type = Types::PutRepositoryTriggersInput
     PutRepositoryTriggersOutput.add_member(:configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggersConfigurationId, name: "configurationId"))
     PutRepositoryTriggersOutput.type = Types::PutRepositoryTriggersOutput
-    ReactionCountsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionValue, name: "key")
-    ReactionCountsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "value")
+    ReactionCountsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionValue, name: "key"))
+    ReactionCountsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "value"))
     ReactionForComment.add_member(:reaction, ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionValueFormats, name: "reaction"))
     ReactionForComment.add_member(:reaction_users, ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionUsersList, name: "reactionUsers"))
     ReactionForComment.add_member(:reactions_from_deleted_users_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "reactionsFromDeletedUsersCount"))
     ReactionForComment.type = Types::ReactionForComment
     ReactionLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ReactionLimitExceededException.type = Types::ReactionLimitExceededException
-    ReactionUsersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    ReactionUsersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     ReactionValueFormats.add_member(:emoji, ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionEmoji, name: "emoji"))
     ReactionValueFormats.add_member(:short_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionShortCode, name: "shortCode"))
     ReactionValueFormats.add_member(:unicode, ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionUnicode, name: "unicode"))
     ReactionValueFormats.type = Types::ReactionValueFormats
     ReactionValueRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ReactionValueRequiredException.type = Types::ReactionValueRequiredException
-    ReactionsForCommentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionForComment, name: "member")
+    ReactionsForCommentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReactionForComment, name: "member"))
     ReferenceDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ReferenceDoesNotExistException.type = Types::ReferenceDoesNotExistException
     ReferenceNameRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -1700,7 +1700,7 @@ module Aws::CodeCommit
     ReferenceTypeNotSupportedException.type = Types::ReferenceTypeNotSupportedException
     RelativeFileVersionEnum.add_member(:before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BEFORE", traits: {"smithy.api#enumValue" => "BEFORE"}))
     RelativeFileVersionEnum.add_member(:after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AFTER", traits: {"smithy.api#enumValue" => "AFTER"}))
-    ReplaceContentEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplaceContentEntry, name: "member")
+    ReplaceContentEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplaceContentEntry, name: "member"))
     ReplaceContentEntry.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "filePath", traits: {"smithy.api#required" => {}}))
     ReplaceContentEntry.add_member(:replacement_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplacementTypeEnum, name: "replacementType", traits: {"smithy.api#required" => {}}))
     ReplaceContentEntry.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: FileContent, name: "content"))
@@ -1730,21 +1730,21 @@ module Aws::CodeCommit
     RepositoryMetadata.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     RepositoryMetadata.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "kmsKeyId"))
     RepositoryMetadata.type = Types::RepositoryMetadata
-    RepositoryMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryMetadata, name: "member")
+    RepositoryMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryMetadata, name: "member"))
     RepositoryNameExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     RepositoryNameExistsException.type = Types::RepositoryNameExistsException
     RepositoryNameIdPair.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName"))
     RepositoryNameIdPair.add_member(:repository_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryId, name: "repositoryId"))
     RepositoryNameIdPair.type = Types::RepositoryNameIdPair
-    RepositoryNameIdPairList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryNameIdPair, name: "member")
-    RepositoryNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "member")
+    RepositoryNameIdPairList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryNameIdPair, name: "member"))
+    RepositoryNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "member"))
     RepositoryNameRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     RepositoryNameRequiredException.type = Types::RepositoryNameRequiredException
     RepositoryNamesRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     RepositoryNamesRequiredException.type = Types::RepositoryNamesRequiredException
     RepositoryNotAssociatedWithPullRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     RepositoryNotAssociatedWithPullRequestException.type = Types::RepositoryNotAssociatedWithPullRequestException
-    RepositoryNotFoundList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "member")
+    RepositoryNotFoundList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "member"))
     RepositoryTrigger.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggerName, name: "name", traits: {"smithy.api#required" => {}}))
     RepositoryTrigger.add_member(:destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "destinationArn", traits: {"smithy.api#required" => {}}))
     RepositoryTrigger.add_member(:custom_data, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggerCustomData, name: "customData"))
@@ -1759,25 +1759,25 @@ module Aws::CodeCommit
     RepositoryTriggerEventEnum.add_member(:update_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_REFERENCE", traits: {"smithy.api#enumValue" => "updateReference"}))
     RepositoryTriggerEventEnum.add_member(:create_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_REFERENCE", traits: {"smithy.api#enumValue" => "createReference"}))
     RepositoryTriggerEventEnum.add_member(:delete_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_REFERENCE", traits: {"smithy.api#enumValue" => "deleteReference"}))
-    RepositoryTriggerEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggerEventEnum, name: "member")
+    RepositoryTriggerEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggerEventEnum, name: "member"))
     RepositoryTriggerEventsListRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     RepositoryTriggerEventsListRequiredException.type = Types::RepositoryTriggerEventsListRequiredException
     RepositoryTriggerExecutionFailure.add_member(:trigger, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggerName, name: "trigger"))
     RepositoryTriggerExecutionFailure.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggerExecutionFailureMessage, name: "failureMessage"))
     RepositoryTriggerExecutionFailure.type = Types::RepositoryTriggerExecutionFailure
-    RepositoryTriggerExecutionFailureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggerExecutionFailure, name: "member")
-    RepositoryTriggerNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggerName, name: "member")
+    RepositoryTriggerExecutionFailureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggerExecutionFailure, name: "member"))
+    RepositoryTriggerNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTriggerName, name: "member"))
     RepositoryTriggerNameRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     RepositoryTriggerNameRequiredException.type = Types::RepositoryTriggerNameRequiredException
-    RepositoryTriggersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTrigger, name: "member")
+    RepositoryTriggersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryTrigger, name: "member"))
     RepositoryTriggersListRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     RepositoryTriggersListRequiredException.type = Types::RepositoryTriggersListRequiredException
     ResourceArnRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ResourceArnRequiredException.type = Types::ResourceArnRequiredException
     RestrictedSourceFileException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     RestrictedSourceFileException.type = Types::RestrictedSourceFileException
-    RevisionChildren.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionId, name: "member")
-    RevisionDag.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileVersion, name: "member")
+    RevisionChildren.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionId, name: "member"))
+    RevisionDag.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FileVersion, name: "member"))
     RevisionIdRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     RevisionIdRequiredException.type = Types::RevisionIdRequiredException
     RevisionNotCurrentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -1786,7 +1786,7 @@ module Aws::CodeCommit
     SameFileContentException.type = Types::SameFileContentException
     SamePathRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     SamePathRequestException.type = Types::SamePathRequestException
-    SetFileModeEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SetFileModeEntry, name: "member")
+    SetFileModeEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SetFileModeEntry, name: "member"))
     SetFileModeEntry.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "filePath", traits: {"smithy.api#required" => {}}))
     SetFileModeEntry.add_member(:file_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: FileModeTypeEnum, name: "fileMode", traits: {"smithy.api#required" => {}}))
     SetFileModeEntry.type = Types::SetFileModeEntry
@@ -1803,14 +1803,14 @@ module Aws::CodeCommit
     SubModule.add_member(:absolute_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "absolutePath"))
     SubModule.add_member(:relative_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "relativePath"))
     SubModule.type = Types::SubModule
-    SubModuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubModule, name: "member")
+    SubModuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubModule, name: "member"))
     SymbolicLink.add_member(:blob_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectId, name: "blobId"))
     SymbolicLink.add_member(:absolute_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "absolutePath"))
     SymbolicLink.add_member(:relative_path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "relativePath"))
     SymbolicLink.add_member(:file_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: FileModeTypeEnum, name: "fileMode"))
     SymbolicLink.type = Types::SymbolicLink
-    SymbolicLinkList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SymbolicLink, name: "member")
-    TagKeysList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    SymbolicLinkList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SymbolicLink, name: "member"))
+    TagKeysList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagKeysListRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     TagKeysListRequiredException.type = Types::TagKeysListRequiredException
     TagPolicyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -1818,15 +1818,15 @@ module Aws::CodeCommit
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
-    TagsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagsMapRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     TagsMapRequiredException.type = Types::TagsMapRequiredException
     Target.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
     Target.add_member(:source_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceName, name: "sourceReference", traits: {"smithy.api#required" => {}}))
     Target.add_member(:destination_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceName, name: "destinationReference"))
     Target.type = Types::Target
-    TargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "member")
+    TargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "member"))
     TargetRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     TargetRequiredException.type = Types::TargetRequiredException
     TargetsRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))

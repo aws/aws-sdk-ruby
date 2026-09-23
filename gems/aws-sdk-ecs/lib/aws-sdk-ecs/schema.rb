@@ -504,7 +504,7 @@ module Aws::ECS
     AcceleratorManufacturer.add_member(:nvidia, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NVIDIA", traits: {"smithy.api#enumValue" => "nvidia"}))
     AcceleratorManufacturer.add_member(:xilinx, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "XILINX", traits: {"smithy.api#enumValue" => "xilinx"}))
     AcceleratorManufacturer.add_member(:habana, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HABANA", traits: {"smithy.api#enumValue" => "habana"}))
-    AcceleratorManufacturerSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AcceleratorManufacturer, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    AcceleratorManufacturerSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceleratorManufacturer, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     AcceleratorName.add_member(:a100, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "A100", traits: {"smithy.api#enumValue" => "a100"}))
     AcceleratorName.add_member(:inferentia, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFERENTIA", traits: {"smithy.api#enumValue" => "inferentia"}))
     AcceleratorName.add_member(:k520, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "K520", traits: {"smithy.api#enumValue" => "k520"}))
@@ -517,14 +517,14 @@ module Aws::ECS
     AcceleratorName.add_member(:a10_g, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "A10G", traits: {"smithy.api#enumValue" => "a10g"}))
     AcceleratorName.add_member(:h100, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "H100", traits: {"smithy.api#enumValue" => "h100"}))
     AcceleratorName.add_member(:t4_g, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "T4G", traits: {"smithy.api#enumValue" => "t4g"}))
-    AcceleratorNameSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AcceleratorName, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    AcceleratorNameSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceleratorName, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     AcceleratorTotalMemoryMiBRequest.add_member(:min, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "min"))
     AcceleratorTotalMemoryMiBRequest.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "max"))
     AcceleratorTotalMemoryMiBRequest.type = Types::AcceleratorTotalMemoryMiBRequest
     AcceleratorType.add_member(:gpu, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GPU", traits: {"smithy.api#enumValue" => "gpu"}))
     AcceleratorType.add_member(:fpga, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FPGA", traits: {"smithy.api#enumValue" => "fpga"}))
     AcceleratorType.add_member(:inference, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFERENCE", traits: {"smithy.api#enumValue" => "inference"}))
-    AcceleratorTypeSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AcceleratorType, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    AcceleratorTypeSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceleratorType, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
     AdvancedConfiguration.add_member(:alternate_target_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "alternateTargetGroupArn"))
@@ -538,7 +538,7 @@ module Aws::ECS
     AgentUpdateStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
     AgentUpdateStatus.add_member(:updated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATED", traits: {"smithy.api#enumValue" => "UPDATED"}))
     AgentUpdateStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    AllowedInstanceTypeSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedInstanceType, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    AllowedInstanceTypeSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedInstanceType, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     ApplicationProtocol.add_member(:http, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTP", traits: {"smithy.api#enumValue" => "http"}))
     ApplicationProtocol.add_member(:http2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTP2", traits: {"smithy.api#enumValue" => "http2"}))
     ApplicationProtocol.add_member(:grpc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GRPC", traits: {"smithy.api#enumValue" => "grpc"}))
@@ -549,12 +549,12 @@ module Aws::ECS
     Attachment.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "status"))
     Attachment.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentDetails, name: "details"))
     Attachment.type = Types::Attachment
-    AttachmentDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValuePair, name: "member")
+    AttachmentDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValuePair, name: "member"))
     AttachmentStateChange.add_member(:attachment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "attachmentArn", traits: {"smithy.api#required" => {}}))
     AttachmentStateChange.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "status", traits: {"smithy.api#required" => {}}))
     AttachmentStateChange.type = Types::AttachmentStateChange
-    AttachmentStateChanges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentStateChange, name: "member")
-    Attachments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Attachment, name: "member")
+    AttachmentStateChanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentStateChange, name: "member"))
+    Attachments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Attachment, name: "member"))
     Attribute.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#required" => {}}))
     Attribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     Attribute.add_member(:target_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetType, name: "targetType"))
@@ -562,7 +562,7 @@ module Aws::ECS
     Attribute.type = Types::Attribute
     AttributeLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     AttributeLimitExceededException.type = Types::AttributeLimitExceededException
-    Attributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member")
+    Attributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member"))
     AutoScalingGroupProvider.add_member(:auto_scaling_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "autoScalingGroupArn", traits: {"smithy.api#required" => {}}))
     AutoScalingGroupProvider.add_member(:managed_scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedScaling, name: "managedScaling"))
     AutoScalingGroupProvider.add_member(:managed_termination_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedTerminationProtection, name: "managedTerminationProtection"))
@@ -603,12 +603,12 @@ module Aws::ECS
     CapacityProvider.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderType, name: "type"))
     CapacityProvider.type = Types::CapacityProvider
     CapacityProviderField.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAGS", traits: {"smithy.api#enumValue" => "TAGS"}))
-    CapacityProviderFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderField, name: "member")
+    CapacityProviderFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderField, name: "member"))
     CapacityProviderStatus.add_member(:provisioning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROVISIONING", traits: {"smithy.api#enumValue" => "PROVISIONING"}))
     CapacityProviderStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     CapacityProviderStatus.add_member(:deprovisioning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPROVISIONING", traits: {"smithy.api#enumValue" => "DEPROVISIONING"}))
     CapacityProviderStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
-    CapacityProviderStrategy.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategyItem, name: "member")
+    CapacityProviderStrategy.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategyItem, name: "member"))
     CapacityProviderStrategyItem.add_member(:capacity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "capacityProvider", traits: {"smithy.api#required" => {}}))
     CapacityProviderStrategyItem.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategyItemWeight, name: "weight", traits: {"smithy.api#default" => 0}))
     CapacityProviderStrategyItem.add_member(:base, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategyItemBase, name: "base", traits: {"smithy.api#default" => 0}))
@@ -626,7 +626,7 @@ module Aws::ECS
     CapacityProviderUpdateStatus.add_member(:update_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "UPDATE_IN_PROGRESS"}))
     CapacityProviderUpdateStatus.add_member(:update_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_COMPLETE", traits: {"smithy.api#enumValue" => "UPDATE_COMPLETE"}))
     CapacityProviderUpdateStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
-    CapacityProviders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProvider, name: "member")
+    CapacityProviders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProvider, name: "member"))
     ClientException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ClientException.type = Types::ClientException
     Cluster.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clusterArn"))
@@ -662,7 +662,7 @@ module Aws::ECS
     ClusterField.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SETTINGS", traits: {"smithy.api#enumValue" => "SETTINGS"}))
     ClusterField.add_member(:statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATISTICS", traits: {"smithy.api#enumValue" => "STATISTICS"}))
     ClusterField.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAGS", traits: {"smithy.api#enumValue" => "TAGS"}))
-    ClusterFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterField, name: "member")
+    ClusterFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterField, name: "member"))
     ClusterNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ClusterNotFoundException.type = Types::ClusterNotFoundException
     ClusterServiceConnectDefaults.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "namespace"))
@@ -673,13 +673,13 @@ module Aws::ECS
     ClusterSetting.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     ClusterSetting.type = Types::ClusterSetting
     ClusterSettingName.add_member(:container_insights, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINER_INSIGHTS", traits: {"smithy.api#enumValue" => "containerInsights"}))
-    ClusterSettings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterSetting, name: "member")
-    Clusters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "member")
+    ClusterSettings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterSetting, name: "member"))
+    Clusters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "member"))
     Compatibility.add_member(:ec2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EC2", traits: {"smithy.api#enumValue" => "EC2"}))
     Compatibility.add_member(:fargate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FARGATE", traits: {"smithy.api#enumValue" => "FARGATE"}))
     Compatibility.add_member(:external, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXTERNAL", traits: {"smithy.api#enumValue" => "EXTERNAL"}))
     Compatibility.add_member(:managed_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANAGED_INSTANCES", traits: {"smithy.api#enumValue" => "MANAGED_INSTANCES"}))
-    CompatibilityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Compatibility, name: "member")
+    CompatibilityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Compatibility, name: "member"))
     ConflictException.add_member(:resource_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIds, name: "resourceIds"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ConflictException.type = Types::ConflictException
@@ -750,8 +750,8 @@ module Aws::ECS
     ContainerDefinition.add_member(:firelens_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FirelensConfiguration, name: "firelensConfiguration"))
     ContainerDefinition.add_member(:credential_specs, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "credentialSpecs"))
     ContainerDefinition.type = Types::ContainerDefinition
-    ContainerDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerDefinition, name: "member")
-    ContainerDependencies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerDependency, name: "member")
+    ContainerDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerDefinition, name: "member"))
+    ContainerDependencies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerDependency, name: "member"))
     ContainerDependency.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "containerName", traits: {"smithy.api#required" => {}}))
     ContainerDependency.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerCondition, name: "condition", traits: {"smithy.api#required" => {}}))
     ContainerDependency.type = Types::ContainerDependency
@@ -759,7 +759,7 @@ module Aws::ECS
     ContainerImage.add_member(:image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "imageDigest"))
     ContainerImage.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "image"))
     ContainerImage.type = Types::ContainerImage
-    ContainerImages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerImage, name: "member")
+    ContainerImages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerImage, name: "member"))
     ContainerInstance.add_member(:container_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "containerInstanceArn"))
     ContainerInstance.add_member(:ec2_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ec2InstanceId"))
     ContainerInstance.add_member(:capacity_provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "capacityProviderName"))
@@ -781,7 +781,7 @@ module Aws::ECS
     ContainerInstance.type = Types::ContainerInstance
     ContainerInstanceField.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAGS", traits: {"smithy.api#enumValue" => "TAGS"}))
     ContainerInstanceField.add_member(:container_instance_health, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINER_INSTANCE_HEALTH", traits: {"smithy.api#enumValue" => "CONTAINER_INSTANCE_HEALTH"}))
-    ContainerInstanceFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerInstanceField, name: "member")
+    ContainerInstanceFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerInstanceField, name: "member"))
     ContainerInstanceHealthStatus.add_member(:overall_status, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceHealthCheckState, name: "overallStatus"))
     ContainerInstanceHealthStatus.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceHealthCheckResultList, name: "details"))
     ContainerInstanceHealthStatus.type = Types::ContainerInstanceHealthStatus
@@ -790,7 +790,7 @@ module Aws::ECS
     ContainerInstanceStatus.add_member(:registering, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGISTERING", traits: {"smithy.api#enumValue" => "REGISTERING"}))
     ContainerInstanceStatus.add_member(:deregistering, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEREGISTERING", traits: {"smithy.api#enumValue" => "DEREGISTERING"}))
     ContainerInstanceStatus.add_member(:registration_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGISTRATION_FAILED", traits: {"smithy.api#enumValue" => "REGISTRATION_FAILED"}))
-    ContainerInstances.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerInstance, name: "member")
+    ContainerInstances.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerInstance, name: "member"))
     ContainerOverride.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     ContainerOverride.add_member(:command, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "command"))
     ContainerOverride.add_member(:environment, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariables, name: "environment"))
@@ -800,7 +800,7 @@ module Aws::ECS
     ContainerOverride.add_member(:memory_reservation, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "memoryReservation"))
     ContainerOverride.add_member(:resource_requirements, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceRequirements, name: "resourceRequirements"))
     ContainerOverride.type = Types::ContainerOverride
-    ContainerOverrides.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerOverride, name: "member")
+    ContainerOverrides.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerOverride, name: "member"))
     ContainerRestartPolicy.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "enabled", traits: {"smithy.api#required" => {}}))
     ContainerRestartPolicy.add_member(:ignored_exit_codes, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerList, name: "ignoredExitCodes"))
     ContainerRestartPolicy.add_member(:restart_attempt_period, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "restartAttemptPeriod"))
@@ -813,12 +813,12 @@ module Aws::ECS
     ContainerStateChange.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "reason"))
     ContainerStateChange.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "status"))
     ContainerStateChange.type = Types::ContainerStateChange
-    ContainerStateChanges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerStateChange, name: "member")
-    Containers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Container, name: "member")
+    ContainerStateChanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerStateChange, name: "member"))
+    Containers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Container, name: "member"))
     CpuManufacturer.add_member(:intel, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTEL", traits: {"smithy.api#enumValue" => "intel"}))
     CpuManufacturer.add_member(:amd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMD", traits: {"smithy.api#enumValue" => "amd"}))
     CpuManufacturer.add_member(:amazon_web_services, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMAZON_WEB_SERVICES", traits: {"smithy.api#enumValue" => "amazon-web-services"}))
-    CpuManufacturerSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CpuManufacturer, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    CpuManufacturerSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CpuManufacturer, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     CreateCapacityProviderRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#required" => {}}))
     CreateCapacityProviderRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     CreateCapacityProviderRequest.add_member(:auto_scaling_group_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroupProvider, name: "autoScalingGroupProvider"))
@@ -975,7 +975,7 @@ module Aws::ECS
     DeploymentLifecycleHook.add_member(:lifecycle_stages, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentLifecycleHookStageList, name: "lifecycleStages"))
     DeploymentLifecycleHook.add_member(:hook_details, ::Smithy::Schema::Shapes::MemberShape.new(target: HookDetails, name: "hookDetails"))
     DeploymentLifecycleHook.type = Types::DeploymentLifecycleHook
-    DeploymentLifecycleHookList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentLifecycleHook, name: "member")
+    DeploymentLifecycleHookList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentLifecycleHook, name: "member"))
     DeploymentLifecycleHookStage.add_member(:reconcile_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECONCILE_SERVICE", traits: {"smithy.api#enumValue" => "RECONCILE_SERVICE"}))
     DeploymentLifecycleHookStage.add_member(:pre_scale_up, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_SCALE_UP", traits: {"smithy.api#enumValue" => "PRE_SCALE_UP"}))
     DeploymentLifecycleHookStage.add_member(:post_scale_up, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POST_SCALE_UP", traits: {"smithy.api#enumValue" => "POST_SCALE_UP"}))
@@ -983,13 +983,13 @@ module Aws::ECS
     DeploymentLifecycleHookStage.add_member(:post_test_traffic_shift, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POST_TEST_TRAFFIC_SHIFT", traits: {"smithy.api#enumValue" => "POST_TEST_TRAFFIC_SHIFT"}))
     DeploymentLifecycleHookStage.add_member(:production_traffic_shift, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRODUCTION_TRAFFIC_SHIFT", traits: {"smithy.api#enumValue" => "PRODUCTION_TRAFFIC_SHIFT"}))
     DeploymentLifecycleHookStage.add_member(:post_production_traffic_shift, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POST_PRODUCTION_TRAFFIC_SHIFT", traits: {"smithy.api#enumValue" => "POST_PRODUCTION_TRAFFIC_SHIFT"}))
-    DeploymentLifecycleHookStageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentLifecycleHookStage, name: "member")
+    DeploymentLifecycleHookStageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentLifecycleHookStage, name: "member"))
     DeploymentRolloutState.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     DeploymentRolloutState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     DeploymentRolloutState.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     DeploymentStrategy.add_member(:rolling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLING", traits: {"smithy.api#enumValue" => "ROLLING"}))
     DeploymentStrategy.add_member(:blue_green, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BLUE_GREEN", traits: {"smithy.api#enumValue" => "BLUE_GREEN"}))
-    Deployments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Deployment, name: "member")
+    Deployments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Deployment, name: "member"))
     DeregisterContainerInstanceRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     DeregisterContainerInstanceRequest.add_member(:container_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "containerInstance", traits: {"smithy.api#required" => {}}))
     DeregisterContainerInstanceRequest.add_member(:force, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "force"))
@@ -1071,8 +1071,8 @@ module Aws::ECS
     DeviceCgroupPermission.add_member(:read, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READ", traits: {"smithy.api#enumValue" => "read"}))
     DeviceCgroupPermission.add_member(:write, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WRITE", traits: {"smithy.api#enumValue" => "write"}))
     DeviceCgroupPermission.add_member(:mknod, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MKNOD", traits: {"smithy.api#enumValue" => "mknod"}))
-    DeviceCgroupPermissions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceCgroupPermission, name: "member")
-    DevicesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Device, name: "member")
+    DeviceCgroupPermissions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceCgroupPermission, name: "member"))
+    DevicesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Device, name: "member"))
     DiscoverPollEndpointRequest.add_member(:container_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "containerInstance"))
     DiscoverPollEndpointRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     DiscoverPollEndpointRequest.type = Types::DiscoverPollEndpointRequest
@@ -1080,8 +1080,8 @@ module Aws::ECS
     DiscoverPollEndpointResponse.add_member(:telemetry_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "telemetryEndpoint"))
     DiscoverPollEndpointResponse.add_member(:service_connect_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceConnectEndpoint"))
     DiscoverPollEndpointResponse.type = Types::DiscoverPollEndpointResponse
-    DockerLabelsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    DockerLabelsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    DockerLabelsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    DockerLabelsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     DockerVolumeConfiguration.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: Scope, name: "scope"))
     DockerVolumeConfiguration.add_member(:autoprovision, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "autoprovision"))
     DockerVolumeConfiguration.add_member(:driver, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "driver"))
@@ -1093,7 +1093,7 @@ module Aws::ECS
     EBSTagSpecification.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     EBSTagSpecification.add_member(:propagate_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: PropagateTags, name: "propagateTags"))
     EBSTagSpecification.type = Types::EBSTagSpecification
-    EBSTagSpecifications.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EBSTagSpecification, name: "member")
+    EBSTagSpecifications.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EBSTagSpecification, name: "member"))
     EFSAuthorizationConfig.add_member(:access_point_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessPointId"))
     EFSAuthorizationConfig.add_member(:iam, ::Smithy::Schema::Shapes::MemberShape.new(target: EFSAuthorizationConfigIAM, name: "iam"))
     EFSAuthorizationConfig.type = Types::EFSAuthorizationConfig
@@ -1111,11 +1111,11 @@ module Aws::ECS
     EnvironmentFile.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentFileType, name: "type", traits: {"smithy.api#required" => {}}))
     EnvironmentFile.type = Types::EnvironmentFile
     EnvironmentFileType.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3", traits: {"smithy.api#enumValue" => "s3"}))
-    EnvironmentFiles.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentFile, name: "member")
-    EnvironmentVariables.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValuePair, name: "member")
+    EnvironmentFiles.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentFile, name: "member"))
+    EnvironmentVariables.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValuePair, name: "member"))
     EphemeralStorage.add_member(:size_in_gi_b, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "sizeInGiB", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     EphemeralStorage.type = Types::EphemeralStorage
-    ExcludedInstanceTypeSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludedInstanceType, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    ExcludedInstanceTypeSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludedInstanceType, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     ExecuteCommandConfiguration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "kmsKeyId"))
     ExecuteCommandConfiguration.add_member(:logging, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecuteCommandLogging, name: "logging"))
     ExecuteCommandConfiguration.add_member(:log_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecuteCommandLogConfiguration, name: "logConfiguration"))
@@ -1153,12 +1153,12 @@ module Aws::ECS
     Failure.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "reason"))
     Failure.add_member(:detail, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "detail"))
     Failure.type = Types::Failure
-    Failures.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Failure, name: "member")
+    Failures.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Failure, name: "member"))
     FirelensConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: FirelensConfigurationType, name: "type", traits: {"smithy.api#required" => {}}))
     FirelensConfiguration.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: FirelensConfigurationOptionsMap, name: "options"))
     FirelensConfiguration.type = Types::FirelensConfiguration
-    FirelensConfigurationOptionsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    FirelensConfigurationOptionsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    FirelensConfigurationOptionsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    FirelensConfigurationOptionsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     FirelensConfigurationType.add_member(:fluentd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLUENTD", traits: {"smithy.api#enumValue" => "fluentd"}))
     FirelensConfigurationType.add_member(:fluentbit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLUENTBIT", traits: {"smithy.api#enumValue" => "fluentbit"}))
     GetTaskProtectionRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster", traits: {"smithy.api#required" => {}}))
@@ -1167,7 +1167,7 @@ module Aws::ECS
     GetTaskProtectionResponse.add_member(:protected_tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedTasks, name: "protectedTasks"))
     GetTaskProtectionResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures"))
     GetTaskProtectionResponse.type = Types::GetTaskProtectionResponse
-    GpuIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    GpuIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     HealthCheck.add_member(:command, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "command", traits: {"smithy.api#required" => {}}))
     HealthCheck.add_member(:interval, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "interval"))
     HealthCheck.add_member(:timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "timeout"))
@@ -1180,7 +1180,7 @@ module Aws::ECS
     HostEntry.add_member(:hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "hostname", traits: {"smithy.api#required" => {}}))
     HostEntry.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ipAddress", traits: {"smithy.api#required" => {}}))
     HostEntry.type = Types::HostEntry
-    HostEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HostEntry, name: "member")
+    HostEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HostEntry, name: "member"))
     HostVolumeProperties.add_member(:source_path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "sourcePath"))
     HostVolumeProperties.type = Types::HostVolumeProperties
     InferenceAccelerator.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "deviceName", traits: {"smithy.api#required" => {}}))
@@ -1189,17 +1189,17 @@ module Aws::ECS
     InferenceAcceleratorOverride.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "deviceName"))
     InferenceAcceleratorOverride.add_member(:device_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "deviceType"))
     InferenceAcceleratorOverride.type = Types::InferenceAcceleratorOverride
-    InferenceAcceleratorOverrides.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceAcceleratorOverride, name: "member")
-    InferenceAccelerators.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceAccelerator, name: "member")
+    InferenceAcceleratorOverrides.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceAcceleratorOverride, name: "member"))
+    InferenceAccelerators.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceAccelerator, name: "member"))
     InstanceGeneration.add_member(:current, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CURRENT", traits: {"smithy.api#enumValue" => "current"}))
     InstanceGeneration.add_member(:previous, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PREVIOUS", traits: {"smithy.api#enumValue" => "previous"}))
-    InstanceGenerationSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGeneration, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    InstanceGenerationSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGeneration, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     InstanceHealthCheckResult.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceHealthCheckType, name: "type"))
     InstanceHealthCheckResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceHealthCheckState, name: "status"))
     InstanceHealthCheckResult.add_member(:last_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdated"))
     InstanceHealthCheckResult.add_member(:last_status_change, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastStatusChange"))
     InstanceHealthCheckResult.type = Types::InstanceHealthCheckResult
-    InstanceHealthCheckResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceHealthCheckResult, name: "member")
+    InstanceHealthCheckResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceHealthCheckResult, name: "member"))
     InstanceHealthCheckState.add_member(:ok, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OK", traits: {"smithy.api#enumValue" => "OK"}))
     InstanceHealthCheckState.add_member(:impaired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMPAIRED", traits: {"smithy.api#enumValue" => "IMPAIRED"}))
     InstanceHealthCheckState.add_member(:insufficient_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSUFFICIENT_DATA", traits: {"smithy.api#enumValue" => "INSUFFICIENT_DATA"}))
@@ -1242,7 +1242,7 @@ module Aws::ECS
     InstanceRequirementsRequest.add_member(:allowed_instance_types, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedInstanceTypeSet, name: "allowedInstanceTypes", traits: {"smithy.api#xmlName" => "AllowedInstanceType"}))
     InstanceRequirementsRequest.add_member(:max_spot_price_as_percentage_of_optimal_on_demand_price, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "maxSpotPriceAsPercentageOfOptimalOnDemandPrice"))
     InstanceRequirementsRequest.type = Types::InstanceRequirementsRequest
-    IntegerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "member")
+    IntegerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "member"))
     InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     InvalidParameterException.type = Types::InvalidParameterException
     IpcMode.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOST", traits: {"smithy.api#enumValue" => "host"}))
@@ -1369,19 +1369,19 @@ module Aws::ECS
     LoadBalancer.add_member(:container_port, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "containerPort"))
     LoadBalancer.add_member(:advanced_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedConfiguration, name: "advancedConfiguration"))
     LoadBalancer.type = Types::LoadBalancer
-    LoadBalancers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancer, name: "member")
+    LoadBalancers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancer, name: "member"))
     LocalStorage.add_member(:included, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCLUDED", traits: {"smithy.api#enumValue" => "included"}))
     LocalStorage.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUIRED", traits: {"smithy.api#enumValue" => "required"}))
     LocalStorage.add_member(:excluded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXCLUDED", traits: {"smithy.api#enumValue" => "excluded"}))
     LocalStorageType.add_member(:hdd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HDD", traits: {"smithy.api#enumValue" => "hdd"}))
     LocalStorageType.add_member(:ssd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSD", traits: {"smithy.api#enumValue" => "ssd"}))
-    LocalStorageTypeSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LocalStorageType, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    LocalStorageTypeSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalStorageType, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     LogConfiguration.add_member(:log_driver, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDriver, name: "logDriver", traits: {"smithy.api#required" => {}}))
     LogConfiguration.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: LogConfigurationOptionsMap, name: "options"))
     LogConfiguration.add_member(:secret_options, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretList, name: "secretOptions"))
     LogConfiguration.type = Types::LogConfiguration
-    LogConfigurationOptionsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    LogConfigurationOptionsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    LogConfigurationOptionsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    LogConfigurationOptionsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     LogDriver.add_member(:json_file, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON_FILE", traits: {"smithy.api#enumValue" => "json-file"}))
     LogDriver.add_member(:syslog, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYSLOG", traits: {"smithy.api#enumValue" => "syslog"}))
     LogDriver.add_member(:journald, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JOURNALD", traits: {"smithy.api#enumValue" => "journald"}))
@@ -1401,8 +1401,8 @@ module Aws::ECS
     ManagedAgentStateChange.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "status", traits: {"smithy.api#required" => {}}))
     ManagedAgentStateChange.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "reason"))
     ManagedAgentStateChange.type = Types::ManagedAgentStateChange
-    ManagedAgentStateChanges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedAgentStateChange, name: "member")
-    ManagedAgents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedAgent, name: "member")
+    ManagedAgentStateChanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedAgentStateChange, name: "member"))
+    ManagedAgents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedAgent, name: "member"))
     ManagedDraining.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     ManagedDraining.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     ManagedInstancesMonitoringOptions.add_member(:basic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BASIC", traits: {"smithy.api#enumValue" => "BASIC"}))
@@ -1441,7 +1441,7 @@ module Aws::ECS
     MountPoint.add_member(:container_path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "containerPath"))
     MountPoint.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "readOnly"))
     MountPoint.type = Types::MountPoint
-    MountPointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MountPoint, name: "member")
+    MountPointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MountPoint, name: "member"))
     NamespaceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     NamespaceNotFoundException.type = Types::NamespaceNotFoundException
     NetworkBandwidthGbpsRequest.add_member(:min, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedDouble, name: "min"))
@@ -1454,7 +1454,7 @@ module Aws::ECS
     NetworkBinding.add_member(:container_port_range, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "containerPortRange"))
     NetworkBinding.add_member(:host_port_range, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "hostPortRange"))
     NetworkBinding.type = Types::NetworkBinding
-    NetworkBindings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkBinding, name: "member")
+    NetworkBindings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkBinding, name: "member"))
     NetworkConfiguration.add_member(:awsvpc_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsVpcConfiguration, name: "awsvpcConfiguration"))
     NetworkConfiguration.type = Types::NetworkConfiguration
     NetworkInterface.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "attachmentId"))
@@ -1464,7 +1464,7 @@ module Aws::ECS
     NetworkInterfaceCountRequest.add_member(:min, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "min"))
     NetworkInterfaceCountRequest.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "max"))
     NetworkInterfaceCountRequest.type = Types::NetworkInterfaceCountRequest
-    NetworkInterfaces.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface, name: "member")
+    NetworkInterfaces.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface, name: "member"))
     NetworkMode.add_member(:bridge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BRIDGE", traits: {"smithy.api#enumValue" => "bridge"}))
     NetworkMode.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOST", traits: {"smithy.api#enumValue" => "host"}))
     NetworkMode.add_member(:awsvpc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWSVPC", traits: {"smithy.api#enumValue" => "awsvpc"}))
@@ -1488,8 +1488,8 @@ module Aws::ECS
     PlacementConstraint.type = Types::PlacementConstraint
     PlacementConstraintType.add_member(:distinct_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISTINCT_INSTANCE", traits: {"smithy.api#enumValue" => "distinctInstance"}))
     PlacementConstraintType.add_member(:member_of, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEMBER_OF", traits: {"smithy.api#enumValue" => "memberOf"}))
-    PlacementConstraints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementConstraint, name: "member")
-    PlacementStrategies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStrategy, name: "member")
+    PlacementConstraints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementConstraint, name: "member"))
+    PlacementStrategies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStrategy, name: "member"))
     PlacementStrategy.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStrategyType, name: "type"))
     PlacementStrategy.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "field"))
     PlacementStrategy.type = Types::PlacementStrategy
@@ -1500,7 +1500,7 @@ module Aws::ECS
     PlatformDevice.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformDeviceType, name: "type", traits: {"smithy.api#required" => {}}))
     PlatformDevice.type = Types::PlatformDevice
     PlatformDeviceType.add_member(:gpu, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GPU", traits: {"smithy.api#enumValue" => "GPU"}))
-    PlatformDevices.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformDevice, name: "member")
+    PlatformDevices.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformDevice, name: "member"))
     PlatformTaskDefinitionIncompatibilityException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     PlatformTaskDefinitionIncompatibilityException.type = Types::PlatformTaskDefinitionIncompatibilityException
     PlatformUnknownException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
@@ -1512,7 +1512,7 @@ module Aws::ECS
     PortMapping.add_member(:app_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationProtocol, name: "appProtocol"))
     PortMapping.add_member(:container_port_range, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "containerPortRange"))
     PortMapping.type = Types::PortMapping
-    PortMappingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PortMapping, name: "member")
+    PortMappingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortMapping, name: "member"))
     PropagateMITags.add_member(:capacity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAPACITY_PROVIDER", traits: {"smithy.api#enumValue" => "CAPACITY_PROVIDER"}))
     PropagateMITags.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     PropagateTags.add_member(:task_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TASK_DEFINITION", traits: {"smithy.api#enumValue" => "TASK_DEFINITION"}))
@@ -1522,12 +1522,12 @@ module Aws::ECS
     ProtectedTask.add_member(:protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "protectionEnabled", traits: {"smithy.api#default" => false}))
     ProtectedTask.add_member(:expiration_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "expirationDate"))
     ProtectedTask.type = Types::ProtectedTask
-    ProtectedTasks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedTask, name: "member")
+    ProtectedTasks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedTask, name: "member"))
     ProxyConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProxyConfigurationType, name: "type"))
     ProxyConfiguration.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "containerName", traits: {"smithy.api#required" => {}}))
     ProxyConfiguration.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ProxyConfigurationProperties, name: "properties"))
     ProxyConfiguration.type = Types::ProxyConfiguration
-    ProxyConfigurationProperties.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValuePair, name: "member")
+    ProxyConfigurationProperties.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValuePair, name: "member"))
     ProxyConfigurationType.add_member(:appmesh, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPMESH", traits: {"smithy.api#enumValue" => "APPMESH"}))
     PutAccountSettingDefaultRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SettingName, name: "name", traits: {"smithy.api#required" => {}}))
     PutAccountSettingDefaultRequest.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value", traits: {"smithy.api#required" => {}}))
@@ -1587,7 +1587,7 @@ module Aws::ECS
     RegisterTaskDefinitionResponse.type = Types::RegisterTaskDefinitionResponse
     RepositoryCredentials.add_member(:credentials_parameter, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "credentialsParameter", traits: {"smithy.api#required" => {}}))
     RepositoryCredentials.type = Types::RepositoryCredentials
-    RequiresAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member")
+    RequiresAttributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member"))
     ResolvedConfiguration.add_member(:load_balancers, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRevisionLoadBalancers, name: "loadBalancers"))
     ResolvedConfiguration.type = Types::ResolvedConfiguration
     Resource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
@@ -1597,7 +1597,7 @@ module Aws::ECS
     Resource.add_member(:integer_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "integerValue", traits: {"smithy.api#default" => 0}))
     Resource.add_member(:string_set_value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "stringSetValue"))
     Resource.type = Types::Resource
-    ResourceIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ResourceIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ResourceInUseException.type = Types::ResourceInUseException
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
@@ -1605,10 +1605,10 @@ module Aws::ECS
     ResourceRequirement.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value", traits: {"smithy.api#required" => {}}))
     ResourceRequirement.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "type", traits: {"smithy.api#required" => {}}))
     ResourceRequirement.type = Types::ResourceRequirement
-    ResourceRequirements.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceRequirement, name: "member")
+    ResourceRequirements.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceRequirement, name: "member"))
     ResourceType.add_member(:gpu, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GPU", traits: {"smithy.api#enumValue" => "GPU"}))
     ResourceType.add_member(:inference_accelerator, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFERENCE_ACCELERATOR", traits: {"smithy.api#enumValue" => "InferenceAccelerator"}))
-    Resources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member")
+    Resources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
     Rollback.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "reason"))
     Rollback.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startedAt"))
     Rollback.add_member(:service_revision_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceRevisionArn"))
@@ -1650,7 +1650,7 @@ module Aws::ECS
     Secret.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#required" => {}}))
     Secret.add_member(:value_from, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "valueFrom", traits: {"smithy.api#required" => {}}))
     Secret.type = Types::Secret
-    SecretList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Secret, name: "member")
+    SecretList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Secret, name: "member"))
     ServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ServerException.type = Types::ServerException
     Service.add_member(:service_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceArn"))
@@ -1690,7 +1690,7 @@ module Aws::ECS
     ServiceConnectClientAlias.add_member(:dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "dnsName"))
     ServiceConnectClientAlias.add_member(:test_traffic_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceConnectTestTrafficRules, name: "testTrafficRules"))
     ServiceConnectClientAlias.type = Types::ServiceConnectClientAlias
-    ServiceConnectClientAliasList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceConnectClientAlias, name: "member")
+    ServiceConnectClientAliasList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceConnectClientAlias, name: "member"))
     ServiceConnectConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     ServiceConnectConfiguration.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "namespace"))
     ServiceConnectConfiguration.add_member(:services, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceConnectServiceList, name: "services"))
@@ -1703,11 +1703,11 @@ module Aws::ECS
     ServiceConnectService.add_member(:timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeoutConfiguration, name: "timeout"))
     ServiceConnectService.add_member(:tls, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceConnectTlsConfiguration, name: "tls"))
     ServiceConnectService.type = Types::ServiceConnectService
-    ServiceConnectServiceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceConnectService, name: "member")
+    ServiceConnectServiceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceConnectService, name: "member"))
     ServiceConnectServiceResource.add_member(:discovery_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "discoveryName"))
     ServiceConnectServiceResource.add_member(:discovery_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "discoveryArn"))
     ServiceConnectServiceResource.type = Types::ServiceConnectServiceResource
-    ServiceConnectServiceResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceConnectServiceResource, name: "member")
+    ServiceConnectServiceResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceConnectServiceResource, name: "member"))
     ServiceConnectTestTrafficHeaderMatchRules.add_member(:exact, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "exact", traits: {"smithy.api#required" => {}}))
     ServiceConnectTestTrafficHeaderMatchRules.type = Types::ServiceConnectTestTrafficHeaderMatchRules
     ServiceConnectTestTrafficHeaderRules.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#required" => {}}))
@@ -1782,16 +1782,16 @@ module Aws::ECS
     ServiceDeploymentStatus.add_member(:rollback_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLBACK_IN_PROGRESS", traits: {"smithy.api#enumValue" => "ROLLBACK_IN_PROGRESS"}))
     ServiceDeploymentStatus.add_member(:rollback_successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLBACK_SUCCESSFUL", traits: {"smithy.api#enumValue" => "ROLLBACK_SUCCESSFUL"}))
     ServiceDeploymentStatus.add_member(:rollback_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLBACK_FAILED", traits: {"smithy.api#enumValue" => "ROLLBACK_FAILED"}))
-    ServiceDeploymentStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceDeploymentStatus, name: "member")
-    ServiceDeployments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceDeployment, name: "member")
-    ServiceDeploymentsBrief.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceDeploymentBrief, name: "member")
+    ServiceDeploymentStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceDeploymentStatus, name: "member"))
+    ServiceDeployments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceDeployment, name: "member"))
+    ServiceDeploymentsBrief.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceDeploymentBrief, name: "member"))
     ServiceEvent.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "id"))
     ServiceEvent.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
     ServiceEvent.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ServiceEvent.type = Types::ServiceEvent
-    ServiceEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceEvent, name: "member")
+    ServiceEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceEvent, name: "member"))
     ServiceField.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAGS", traits: {"smithy.api#enumValue" => "TAGS"}))
-    ServiceFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceField, name: "member")
+    ServiceFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceField, name: "member"))
     ServiceManagedEBSVolumeConfiguration.add_member(:encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "encrypted"))
     ServiceManagedEBSVolumeConfiguration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EBSKMSKeyId, name: "kmsKeyId"))
     ServiceManagedEBSVolumeConfiguration.add_member(:volume_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EBSVolumeType, name: "volumeType"))
@@ -1808,7 +1808,7 @@ module Aws::ECS
     ServiceNotActiveException.type = Types::ServiceNotActiveException
     ServiceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ServiceNotFoundException.type = Types::ServiceNotFoundException
-    ServiceRegistries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRegistry, name: "member")
+    ServiceRegistries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRegistry, name: "member"))
     ServiceRegistry.add_member(:registry_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "registryArn"))
     ServiceRegistry.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInteger, name: "port"))
     ServiceRegistry.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "containerName"))
@@ -1837,19 +1837,19 @@ module Aws::ECS
     ServiceRevisionLoadBalancer.add_member(:target_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "targetGroupArn"))
     ServiceRevisionLoadBalancer.add_member(:production_listener_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "productionListenerRule"))
     ServiceRevisionLoadBalancer.type = Types::ServiceRevisionLoadBalancer
-    ServiceRevisionLoadBalancers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRevisionLoadBalancer, name: "member")
+    ServiceRevisionLoadBalancers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRevisionLoadBalancer, name: "member"))
     ServiceRevisionSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
     ServiceRevisionSummary.add_member(:requested_task_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "requestedTaskCount", traits: {"smithy.api#default" => 0}))
     ServiceRevisionSummary.add_member(:running_task_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "runningTaskCount", traits: {"smithy.api#default" => 0}))
     ServiceRevisionSummary.add_member(:pending_task_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "pendingTaskCount", traits: {"smithy.api#default" => 0}))
     ServiceRevisionSummary.type = Types::ServiceRevisionSummary
-    ServiceRevisions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRevision, name: "member")
-    ServiceRevisionsSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRevisionSummary, name: "member")
+    ServiceRevisions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRevision, name: "member"))
+    ServiceRevisionsSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceRevisionSummary, name: "member"))
     ServiceVolumeConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ECSVolumeName, name: "name", traits: {"smithy.api#required" => {}}))
     ServiceVolumeConfiguration.add_member(:managed_ebs_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceManagedEBSVolumeConfiguration, name: "managedEBSVolume"))
     ServiceVolumeConfiguration.type = Types::ServiceVolumeConfiguration
-    ServiceVolumeConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceVolumeConfiguration, name: "member")
-    Services.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "member")
+    ServiceVolumeConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceVolumeConfiguration, name: "member"))
+    Services.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "member"))
     Session.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "sessionId"))
     Session.add_member(:stream_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "streamUrl"))
     Session.add_member(:token_value, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "tokenValue"))
@@ -1871,7 +1871,7 @@ module Aws::ECS
     SettingName.add_member(:default_log_driver_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT_LOG_DRIVER_MODE", traits: {"smithy.api#enumValue" => "defaultLogDriverMode"}))
     SettingType.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER", traits: {"smithy.api#enumValue" => "user"}))
     SettingType.add_member(:aws_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_MANAGED", traits: {"smithy.api#enumValue" => "aws_managed"}))
-    Settings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Setting, name: "member")
+    Settings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Setting, name: "member"))
     SortOrder.add_member(:asc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASC", traits: {"smithy.api#enumValue" => "ASC"}))
     SortOrder.add_member(:desc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESC", traits: {"smithy.api#enumValue" => "DESC"}))
     StabilityStatus.add_member(:steady_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STEADY_STATE", traits: {"smithy.api#enumValue" => "STEADY_STATE"}))
@@ -1893,7 +1893,7 @@ module Aws::ECS
     StartTaskResponse.add_member(:tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: Tasks, name: "tasks"))
     StartTaskResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: Failures, name: "failures"))
     StartTaskResponse.type = Types::StartTaskResponse
-    Statistics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValuePair, name: "member")
+    Statistics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValuePair, name: "member"))
     StopServiceDeploymentRequest.add_member(:service_deployment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceDeploymentArn", traits: {"smithy.api#required" => {}}))
     StopServiceDeploymentRequest.add_member(:stop_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StopServiceDeploymentStopType, name: "stopType"))
     StopServiceDeploymentRequest.type = Types::StopServiceDeploymentRequest
@@ -1907,9 +1907,9 @@ module Aws::ECS
     StopTaskRequest.type = Types::StopTaskRequest
     StopTaskResponse.add_member(:task, ::Smithy::Schema::Shapes::MemberShape.new(target: Task, name: "task"))
     StopTaskResponse.type = Types::StopTaskResponse
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    StringMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    StringMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    StringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    StringMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     SubmitAttachmentStateChangesRequest.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cluster"))
     SubmitAttachmentStateChangesRequest.add_member(:attachments, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentStateChanges, name: "attachments", traits: {"smithy.api#required" => {}}))
     SubmitAttachmentStateChangesRequest.type = Types::SubmitAttachmentStateChangesRequest
@@ -1942,16 +1942,16 @@ module Aws::ECS
     SystemControl.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "namespace"))
     SystemControl.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     SystemControl.type = Types::SystemControl
-    SystemControls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SystemControl, name: "member")
+    SystemControls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemControl, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     Tag.type = Types::Tag
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TargetNotConnectedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     TargetNotConnectedException.type = Types::TargetNotConnectedException
     TargetNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
@@ -2025,13 +2025,13 @@ module Aws::ECS
     TaskDefinitionFamilyStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     TaskDefinitionFamilyStatus.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
     TaskDefinitionField.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAGS", traits: {"smithy.api#enumValue" => "TAGS"}))
-    TaskDefinitionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskDefinitionField, name: "member")
-    TaskDefinitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskDefinition, name: "member")
+    TaskDefinitionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskDefinitionField, name: "member"))
+    TaskDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskDefinition, name: "member"))
     TaskDefinitionPlacementConstraint.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskDefinitionPlacementConstraintType, name: "type"))
     TaskDefinitionPlacementConstraint.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "expression"))
     TaskDefinitionPlacementConstraint.type = Types::TaskDefinitionPlacementConstraint
     TaskDefinitionPlacementConstraintType.add_member(:member_of, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEMBER_OF", traits: {"smithy.api#enumValue" => "memberOf"}))
-    TaskDefinitionPlacementConstraints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskDefinitionPlacementConstraint, name: "member")
+    TaskDefinitionPlacementConstraints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskDefinitionPlacementConstraint, name: "member"))
     TaskDefinitionStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     TaskDefinitionStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     TaskDefinitionStatus.add_member(:delete_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DELETE_IN_PROGRESS"}))
@@ -2039,7 +2039,7 @@ module Aws::ECS
     TaskEphemeralStorage.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "kmsKeyId"))
     TaskEphemeralStorage.type = Types::TaskEphemeralStorage
     TaskField.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAGS", traits: {"smithy.api#enumValue" => "TAGS"}))
-    TaskFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskField, name: "member")
+    TaskFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskField, name: "member"))
     TaskFilesystemType.add_member(:ext3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXT3", traits: {"smithy.api#enumValue" => "ext3"}))
     TaskFilesystemType.add_member(:ext4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXT4", traits: {"smithy.api#enumValue" => "ext4"}))
     TaskFilesystemType.add_member(:xfs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "XFS", traits: {"smithy.api#enumValue" => "xfs"}))
@@ -2094,10 +2094,10 @@ module Aws::ECS
     TaskSet.add_member(:fargate_ephemeral_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentEphemeralStorage, name: "fargateEphemeralStorage"))
     TaskSet.type = Types::TaskSet
     TaskSetField.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAGS", traits: {"smithy.api#enumValue" => "TAGS"}))
-    TaskSetFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSetField, name: "member")
+    TaskSetFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSetField, name: "member"))
     TaskSetNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     TaskSetNotFoundException.type = Types::TaskSetNotFoundException
-    TaskSets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSet, name: "member")
+    TaskSets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSet, name: "member"))
     TaskStopCode.add_member(:task_failed_to_start, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TASK_FAILED_TO_START", traits: {"smithy.api#enumValue" => "TaskFailedToStart"}))
     TaskStopCode.add_member(:essential_container_exited, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ESSENTIAL_CONTAINER_EXITED", traits: {"smithy.api#enumValue" => "EssentialContainerExited"}))
     TaskStopCode.add_member(:user_initiated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER_INITIATED", traits: {"smithy.api#enumValue" => "UserInitiated"}))
@@ -2107,8 +2107,8 @@ module Aws::ECS
     TaskVolumeConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ECSVolumeName, name: "name", traits: {"smithy.api#required" => {}}))
     TaskVolumeConfiguration.add_member(:managed_ebs_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskManagedEBSVolumeConfiguration, name: "managedEBSVolume"))
     TaskVolumeConfiguration.type = Types::TaskVolumeConfiguration
-    TaskVolumeConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskVolumeConfiguration, name: "member")
-    Tasks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Task, name: "member")
+    TaskVolumeConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskVolumeConfiguration, name: "member"))
+    Tasks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Task, name: "member"))
     TimeoutConfiguration.add_member(:idle_timeout_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, name: "idleTimeoutSeconds"))
     TimeoutConfiguration.add_member(:per_request_timeout_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, name: "perRequestTimeoutSeconds"))
     TimeoutConfiguration.type = Types::TimeoutConfiguration
@@ -2116,7 +2116,7 @@ module Aws::ECS
     Tmpfs.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "size", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     Tmpfs.add_member(:mount_options, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "mountOptions"))
     Tmpfs.type = Types::Tmpfs
-    TmpfsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tmpfs, name: "member")
+    TmpfsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tmpfs, name: "member"))
     TotalLocalStorageGBRequest.add_member(:min, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedDouble, name: "min"))
     TotalLocalStorageGBRequest.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedDouble, name: "max"))
     TotalLocalStorageGBRequest.type = Types::TotalLocalStorageGBRequest
@@ -2126,7 +2126,7 @@ module Aws::ECS
     Ulimit.add_member(:soft_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "softLimit", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     Ulimit.add_member(:hard_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "hardLimit", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     Ulimit.type = Types::Ulimit
-    UlimitList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ulimit, name: "member")
+    UlimitList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ulimit, name: "member"))
     UlimitName.add_member(:core, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CORE", traits: {"smithy.api#enumValue" => "core"}))
     UlimitName.add_member(:cpu, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CPU", traits: {"smithy.api#enumValue" => "cpu"}))
     UlimitName.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATA", traits: {"smithy.api#enumValue" => "data"}))
@@ -2250,13 +2250,13 @@ module Aws::ECS
     VolumeFrom.add_member(:source_container, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "sourceContainer"))
     VolumeFrom.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "readOnly"))
     VolumeFrom.type = Types::VolumeFrom
-    VolumeFromList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeFrom, name: "member")
-    VolumeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, name: "member")
+    VolumeFromList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeFrom, name: "member"))
+    VolumeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, name: "member"))
     VpcLatticeConfiguration.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
     VpcLatticeConfiguration.add_member(:target_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "targetGroupArn", traits: {"smithy.api#required" => {}}))
     VpcLatticeConfiguration.add_member(:port_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "portName", traits: {"smithy.api#required" => {}}))
     VpcLatticeConfiguration.type = Types::VpcLatticeConfiguration
-    VpcLatticeConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcLatticeConfiguration, name: "member")
+    VpcLatticeConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcLatticeConfiguration, name: "member"))
 
     AmazonEC2ContainerServiceV20141113 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.ecs#AmazonEC2ContainerServiceV20141113"

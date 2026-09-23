@@ -78,7 +78,7 @@ module Aws::MediaStoreData
     Item.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentType, name: "ContentType"))
     Item.add_member(:content_length, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeLong, name: "ContentLength"))
     Item.type = Types::Item
-    ItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Item, name: "member")
+    ItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Item, name: "member"))
     ItemType.add_member(:object, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OBJECT", traits: {"smithy.api#enumValue" => "OBJECT"}))
     ItemType.add_member(:folder, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FOLDER", traits: {"smithy.api#enumValue" => "FOLDER"}))
     ListItemsRequest.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: ListPathNaming, name: "Path", traits: {"smithy.api#httpQuery" => "Path"}))

@@ -121,14 +121,14 @@ module Aws::SQS
     UnsupportedOperation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sqs#UnsupportedOperation", name: "UnsupportedOperation", traits: {"aws.protocols#awsQueryError" => {"code" => "AWS.SimpleQueueService.UnsupportedOperation", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     UntagQueueRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sqs#UntagQueueRequest", name: "UntagQueueRequest")
 
-    AWSAccountIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    ActionNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    AWSAccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    ActionNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     AddPermissionRequest.add_member(:queue_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "QueueUrl", traits: {"smithy.api#required" => {}}))
     AddPermissionRequest.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Label", traits: {"smithy.api#required" => {}}))
     AddPermissionRequest.add_member(:aws_account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountIdList, name: "AWSAccountIds", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "AWSAccountId"}))
     AddPermissionRequest.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionNameList, name: "Actions", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "ActionName"}))
     AddPermissionRequest.type = Types::AddPermissionRequest
-    AttributeNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueueAttributeName, name: "member")
+    AttributeNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueAttributeName, name: "member"))
     BatchEntryIdsNotDistinct.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     BatchEntryIdsNotDistinct.type = Types::BatchEntryIdsNotDistinct
     BatchRequestTooLong.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -138,8 +138,8 @@ module Aws::SQS
     BatchResultErrorEntry.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code", traits: {"smithy.api#required" => {}}))
     BatchResultErrorEntry.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     BatchResultErrorEntry.type = Types::BatchResultErrorEntry
-    BatchResultErrorEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchResultErrorEntry, name: "member")
-    BinaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Binary, name: "member", traits: {"smithy.api#xmlName" => "BinaryListValue"})
+    BatchResultErrorEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchResultErrorEntry, name: "member"))
+    BinaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Binary, name: "member", traits: {"smithy.api#xmlName" => "BinaryListValue"}))
     CancelMessageMoveTaskRequest.add_member(:task_handle, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TaskHandle", traits: {"smithy.api#required" => {}}))
     CancelMessageMoveTaskRequest.type = Types::CancelMessageMoveTaskRequest
     CancelMessageMoveTaskResult.add_member(:approximate_number_of_messages_moved, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "ApproximateNumberOfMessagesMoved", traits: {"smithy.api#default" => 0}))
@@ -151,13 +151,13 @@ module Aws::SQS
     ChangeMessageVisibilityBatchRequestEntry.add_member(:receipt_handle, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReceiptHandle", traits: {"smithy.api#required" => {}}))
     ChangeMessageVisibilityBatchRequestEntry.add_member(:visibility_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "VisibilityTimeout"))
     ChangeMessageVisibilityBatchRequestEntry.type = Types::ChangeMessageVisibilityBatchRequestEntry
-    ChangeMessageVisibilityBatchRequestEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeMessageVisibilityBatchRequestEntry, name: "member")
+    ChangeMessageVisibilityBatchRequestEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeMessageVisibilityBatchRequestEntry, name: "member"))
     ChangeMessageVisibilityBatchResult.add_member(:successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeMessageVisibilityBatchResultEntryList, name: "Successful", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "ChangeMessageVisibilityBatchResultEntry"}))
     ChangeMessageVisibilityBatchResult.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchResultErrorEntryList, name: "Failed", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "BatchResultErrorEntry"}))
     ChangeMessageVisibilityBatchResult.type = Types::ChangeMessageVisibilityBatchResult
     ChangeMessageVisibilityBatchResultEntry.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Id", traits: {"smithy.api#required" => {}}))
     ChangeMessageVisibilityBatchResultEntry.type = Types::ChangeMessageVisibilityBatchResultEntry
-    ChangeMessageVisibilityBatchResultEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeMessageVisibilityBatchResultEntry, name: "member")
+    ChangeMessageVisibilityBatchResultEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeMessageVisibilityBatchResultEntry, name: "member"))
     ChangeMessageVisibilityRequest.add_member(:queue_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "QueueUrl", traits: {"smithy.api#required" => {}}))
     ChangeMessageVisibilityRequest.add_member(:receipt_handle, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReceiptHandle", traits: {"smithy.api#required" => {}}))
     ChangeMessageVisibilityRequest.add_member(:visibility_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "VisibilityTimeout", traits: {"smithy.api#required" => {}}))
@@ -174,13 +174,13 @@ module Aws::SQS
     DeleteMessageBatchRequestEntry.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Id", traits: {"smithy.api#required" => {}}))
     DeleteMessageBatchRequestEntry.add_member(:receipt_handle, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReceiptHandle", traits: {"smithy.api#required" => {}}))
     DeleteMessageBatchRequestEntry.type = Types::DeleteMessageBatchRequestEntry
-    DeleteMessageBatchRequestEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteMessageBatchRequestEntry, name: "member")
+    DeleteMessageBatchRequestEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteMessageBatchRequestEntry, name: "member"))
     DeleteMessageBatchResult.add_member(:successful, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteMessageBatchResultEntryList, name: "Successful", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "DeleteMessageBatchResultEntry"}))
     DeleteMessageBatchResult.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchResultErrorEntryList, name: "Failed", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "BatchResultErrorEntry"}))
     DeleteMessageBatchResult.type = Types::DeleteMessageBatchResult
     DeleteMessageBatchResultEntry.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Id", traits: {"smithy.api#required" => {}}))
     DeleteMessageBatchResultEntry.type = Types::DeleteMessageBatchResultEntry
-    DeleteMessageBatchResultEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteMessageBatchResultEntry, name: "member")
+    DeleteMessageBatchResultEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteMessageBatchResultEntry, name: "member"))
     DeleteMessageRequest.add_member(:queue_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "QueueUrl", traits: {"smithy.api#required" => {}}))
     DeleteMessageRequest.add_member(:receipt_handle, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReceiptHandle", traits: {"smithy.api#required" => {}}))
     DeleteMessageRequest.type = Types::DeleteMessageRequest
@@ -247,7 +247,7 @@ module Aws::SQS
     ListMessageMoveTasksResultEntry.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FailureReason"))
     ListMessageMoveTasksResultEntry.add_member(:started_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "StartedTimestamp", traits: {"smithy.api#default" => 0}))
     ListMessageMoveTasksResultEntry.type = Types::ListMessageMoveTasksResultEntry
-    ListMessageMoveTasksResultEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListMessageMoveTasksResultEntry, name: "member")
+    ListMessageMoveTasksResultEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListMessageMoveTasksResultEntry, name: "member"))
     ListQueueTagsRequest.add_member(:queue_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "QueueUrl", traits: {"smithy.api#required" => {}}))
     ListQueueTagsRequest.type = Types::ListQueueTagsRequest
     ListQueueTagsResult.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Tag"}))
@@ -267,22 +267,22 @@ module Aws::SQS
     Message.add_member(:md5_of_message_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MD5OfMessageAttributes"))
     Message.add_member(:message_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageBodyAttributeMap, name: "MessageAttributes", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "MessageAttribute"}))
     Message.type = Types::Message
-    MessageAttributeNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageAttributeName, name: "member")
+    MessageAttributeNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageAttributeName, name: "member"))
     MessageAttributeValue.add_member(:string_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StringValue"))
     MessageAttributeValue.add_member(:binary_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Binary, name: "BinaryValue"))
     MessageAttributeValue.add_member(:string_list_values, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "StringListValues", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "StringListValue"}))
     MessageAttributeValue.add_member(:binary_list_values, ::Smithy::Schema::Shapes::MemberShape.new(target: BinaryList, name: "BinaryListValues", traits: {"smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "BinaryListValue"}))
     MessageAttributeValue.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DataType", traits: {"smithy.api#required" => {}}))
     MessageAttributeValue.type = Types::MessageAttributeValue
-    MessageBodyAttributeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key", traits: {"smithy.api#xmlName" => "Name"})
-    MessageBodyAttributeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageAttributeValue, name: "value", traits: {"smithy.api#xmlName" => "Value"})
-    MessageBodySystemAttributeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageSystemAttributeNameForSends, name: "key", traits: {"smithy.api#xmlName" => "Name"})
-    MessageBodySystemAttributeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageSystemAttributeValue, name: "value", traits: {"smithy.api#xmlName" => "Value"})
-    MessageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "member")
+    MessageBodyAttributeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key", traits: {"smithy.api#xmlName" => "Name"}))
+    MessageBodyAttributeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageAttributeValue, name: "value", traits: {"smithy.api#xmlName" => "Value"}))
+    MessageBodySystemAttributeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageSystemAttributeNameForSends, name: "key", traits: {"smithy.api#xmlName" => "Name"}))
+    MessageBodySystemAttributeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageSystemAttributeValue, name: "value", traits: {"smithy.api#xmlName" => "Value"}))
+    MessageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "member"))
     MessageNotInflight.type = Types::MessageNotInflight
-    MessageSystemAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageSystemAttributeName, name: "member")
-    MessageSystemAttributeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageSystemAttributeName, name: "key", traits: {"smithy.api#xmlName" => "Name"})
-    MessageSystemAttributeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value", traits: {"smithy.api#xmlName" => "Value"})
+    MessageSystemAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageSystemAttributeName, name: "member"))
+    MessageSystemAttributeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageSystemAttributeName, name: "key", traits: {"smithy.api#xmlName" => "Name"}))
+    MessageSystemAttributeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value", traits: {"smithy.api#xmlName" => "Value"}))
     MessageSystemAttributeName.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "All", traits: {"smithy.api#enumValue" => "All"}))
     MessageSystemAttributeName.add_member(:sender_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SenderId", traits: {"smithy.api#enumValue" => "SenderId"}))
     MessageSystemAttributeName.add_member(:sent_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SentTimestamp", traits: {"smithy.api#enumValue" => "SentTimestamp"}))
@@ -306,8 +306,8 @@ module Aws::SQS
     PurgeQueueInProgress.type = Types::PurgeQueueInProgress
     PurgeQueueRequest.add_member(:queue_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "QueueUrl", traits: {"smithy.api#required" => {}}))
     PurgeQueueRequest.type = Types::PurgeQueueRequest
-    QueueAttributeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: QueueAttributeName, name: "key", traits: {"smithy.api#xmlName" => "Name"})
-    QueueAttributeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value", traits: {"smithy.api#xmlName" => "Value"})
+    QueueAttributeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueAttributeName, name: "key", traits: {"smithy.api#xmlName" => "Name"}))
+    QueueAttributeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value", traits: {"smithy.api#xmlName" => "Value"}))
     QueueAttributeName.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "All", traits: {"smithy.api#enumValue" => "All"}))
     QueueAttributeName.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Policy", traits: {"smithy.api#enumValue" => "Policy"}))
     QueueAttributeName.add_member(:visibility_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VisibilityTimeout", traits: {"smithy.api#enumValue" => "VisibilityTimeout"}))
@@ -336,7 +336,7 @@ module Aws::SQS
     QueueDoesNotExist.type = Types::QueueDoesNotExist
     QueueNameExists.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     QueueNameExists.type = Types::QueueNameExists
-    QueueUrlList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    QueueUrlList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ReceiptHandleIsInvalid.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ReceiptHandleIsInvalid.type = Types::ReceiptHandleIsInvalid
     ReceiveMessageRequest.add_member(:queue_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "QueueUrl", traits: {"smithy.api#required" => {}}))
@@ -368,7 +368,7 @@ module Aws::SQS
     SendMessageBatchRequestEntry.add_member(:message_deduplication_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MessageDeduplicationId"))
     SendMessageBatchRequestEntry.add_member(:message_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MessageGroupId"))
     SendMessageBatchRequestEntry.type = Types::SendMessageBatchRequestEntry
-    SendMessageBatchRequestEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SendMessageBatchRequestEntry, name: "member")
+    SendMessageBatchRequestEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SendMessageBatchRequestEntry, name: "member"))
     SendMessageBatchResult.add_member(:successful, ::Smithy::Schema::Shapes::MemberShape.new(target: SendMessageBatchResultEntryList, name: "Successful", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "SendMessageBatchResultEntry"}))
     SendMessageBatchResult.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchResultErrorEntryList, name: "Failed", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "BatchResultErrorEntry"}))
     SendMessageBatchResult.type = Types::SendMessageBatchResult
@@ -379,7 +379,7 @@ module Aws::SQS
     SendMessageBatchResultEntry.add_member(:md5_of_message_system_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MD5OfMessageSystemAttributes"))
     SendMessageBatchResultEntry.add_member(:sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SequenceNumber"))
     SendMessageBatchResultEntry.type = Types::SendMessageBatchResultEntry
-    SendMessageBatchResultEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SendMessageBatchResultEntry, name: "member")
+    SendMessageBatchResultEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SendMessageBatchResultEntry, name: "member"))
     SendMessageRequest.add_member(:queue_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "QueueUrl", traits: {"smithy.api#required" => {}}))
     SendMessageRequest.add_member(:message_body, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MessageBody", traits: {"smithy.api#required" => {}}))
     SendMessageRequest.add_member(:delay_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "DelaySeconds"))
@@ -403,10 +403,10 @@ module Aws::SQS
     StartMessageMoveTaskRequest.type = Types::StartMessageMoveTaskRequest
     StartMessageMoveTaskResult.add_member(:task_handle, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TaskHandle"))
     StartMessageMoveTaskResult.type = Types::StartMessageMoveTaskResult
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "StringListValue"})
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#xmlName" => "Key"})
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#xmlName" => "Value"})
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "StringListValue"}))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#xmlName" => "Key"}))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#xmlName" => "Value"}))
     TagQueueRequest.add_member(:queue_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "QueueUrl", traits: {"smithy.api#required" => {}}))
     TagQueueRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#required" => {}, "smithy.api#xmlFlattened" => {}, "smithy.api#xmlName" => "Tag"}))
     TagQueueRequest.type = Types::TagQueueRequest

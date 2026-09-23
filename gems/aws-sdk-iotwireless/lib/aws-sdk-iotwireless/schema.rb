@@ -730,8 +730,8 @@ module Aws::IoTWireless
     ApplicationConfig.add_member(:destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationName, name: "DestinationName"))
     ApplicationConfig.type = Types::ApplicationConfig
     ApplicationConfigType.add_member(:semtech_geo_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SemtechGeoLocation", traits: {"smithy.api#enumValue" => "SemtechGeolocation"}))
-    Applications.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationConfig, name: "member")
-    AssistPosition.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Coordinate, name: "member")
+    Applications.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationConfig, name: "member"))
+    AssistPosition.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Coordinate, name: "member"))
     AssociateAwsAccountWithPartnerAccountRequest.add_member(:sidewalk, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkAccountInfo, name: "Sidewalk", traits: {"smithy.api#required" => {}}))
     AssociateAwsAccountWithPartnerAccountRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
     AssociateAwsAccountWithPartnerAccountRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
@@ -770,15 +770,15 @@ module Aws::IoTWireless
     Beaconing.add_member(:data_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: BeaconingDataRate, name: "DataRate"))
     Beaconing.add_member(:frequencies, ::Smithy::Schema::Shapes::MemberShape.new(target: BeaconingFrequencies, name: "Frequencies"))
     Beaconing.type = Types::Beaconing
-    BeaconingFrequencies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BeaconingFrequency, name: "member")
+    BeaconingFrequencies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BeaconingFrequency, name: "member"))
     CancelMulticastGroupSessionRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: MulticastGroupId, name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelMulticastGroupSessionRequest.type = Types::CancelMulticastGroupSessionRequest
     CancelMulticastGroupSessionResponse.type = Types::CancelMulticastGroupSessionResponse
-    CdmaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CdmaObj, name: "member")
+    CdmaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CdmaObj, name: "member"))
     CdmaLocalId.add_member(:pn_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: PnOffset, name: "PnOffset", traits: {"smithy.api#required" => {}}))
     CdmaLocalId.add_member(:cdma_channel, ::Smithy::Schema::Shapes::MemberShape.new(target: CdmaChannel, name: "CdmaChannel", traits: {"smithy.api#required" => {}}))
     CdmaLocalId.type = Types::CdmaLocalId
-    CdmaNmrList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CdmaNmrObj, name: "member")
+    CdmaNmrList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CdmaNmrObj, name: "member"))
     CdmaNmrObj.add_member(:pn_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: PnOffset, name: "PnOffset", traits: {"smithy.api#required" => {}}))
     CdmaNmrObj.add_member(:cdma_channel, ::Smithy::Schema::Shapes::MemberShape.new(target: CdmaChannel, name: "CdmaChannel", traits: {"smithy.api#required" => {}}))
     CdmaNmrObj.add_member(:pilot_power, ::Smithy::Schema::Shapes::MemberShape.new(target: PilotPower, name: "PilotPower"))
@@ -921,7 +921,7 @@ module Aws::IoTWireless
     DakCertificateMetadata.add_member(:ap_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApId, name: "ApId"))
     DakCertificateMetadata.add_member(:device_type_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceTypeId, name: "DeviceTypeId"))
     DakCertificateMetadata.type = Types::DakCertificateMetadata
-    DakCertificateMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DakCertificateMetadata, name: "member")
+    DakCertificateMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DakCertificateMetadata, name: "member"))
     DeleteDestinationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationName, name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteDestinationRequest.type = Types::DeleteDestinationRequest
     DeleteDestinationResponse.type = Types::DeleteDestinationResponse
@@ -964,7 +964,7 @@ module Aws::IoTWireless
     DeregisterWirelessDeviceRequest.add_member(:wireless_device_type, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessDeviceType, name: "WirelessDeviceType", traits: {"smithy.api#httpQuery" => "WirelessDeviceType"}))
     DeregisterWirelessDeviceRequest.type = Types::DeregisterWirelessDeviceRequest
     DeregisterWirelessDeviceResponse.type = Types::DeregisterWirelessDeviceResponse
-    DestinationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Destinations, name: "member")
+    DestinationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Destinations, name: "member"))
     Destinations.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationArn, name: "Arn"))
     Destinations.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationName, name: "Name"))
     Destinations.add_member(:expression_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionType, name: "ExpressionType"))
@@ -972,13 +972,13 @@ module Aws::IoTWireless
     Destinations.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     Destinations.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn"))
     Destinations.type = Types::Destinations
-    DeviceCertificateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateList, name: "member")
-    DeviceCreationFileList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceCreationFile, name: "member")
+    DeviceCertificateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateList, name: "member"))
+    DeviceCreationFileList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceCreationFile, name: "member"))
     DeviceProfile.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceProfileArn, name: "Arn"))
     DeviceProfile.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceProfileName, name: "Name"))
     DeviceProfile.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceProfileId, name: "Id"))
     DeviceProfile.type = Types::DeviceProfile
-    DeviceProfileList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceProfile, name: "member")
+    DeviceProfileList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceProfile, name: "member"))
     DeviceProfileType.add_member(:sidewalk, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Sidewalk", traits: {"smithy.api#enumValue" => "Sidewalk"}))
     DeviceProfileType.add_member(:lo_ra_wan, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LoRaWAN", traits: {"smithy.api#enumValue" => "LoRaWAN"}))
     DeviceRegistrationStateEventConfiguration.add_member(:sidewalk, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkEventNotificationConfigurations, name: "Sidewalk"))
@@ -995,7 +995,7 @@ module Aws::IoTWireless
     Dimension.type = Types::Dimension
     DimensionName.add_member(:device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DeviceId", traits: {"smithy.api#enumValue" => "DeviceId"}))
     DimensionName.add_member(:gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GatewayId", traits: {"smithy.api#enumValue" => "GatewayId"}))
-    Dimensions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "member")
+    Dimensions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "member"))
     DisassociateAwsAccountFromPartnerAccountRequest.add_member(:partner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerAccountId, name: "PartnerAccountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DisassociateAwsAccountFromPartnerAccountRequest.add_member(:partner_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerType, name: "PartnerType", traits: {"smithy.api#httpQuery" => "partnerType", "smithy.api#required" => {}}))
     DisassociateAwsAccountFromPartnerAccountRequest.type = Types::DisassociateAwsAccountFromPartnerAccountRequest
@@ -1031,7 +1031,7 @@ module Aws::IoTWireless
     DownlinkQueueMessage.add_member(:received_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ISODateTimeString, name: "ReceivedAt"))
     DownlinkQueueMessage.add_member(:lo_ra_wan, ::Smithy::Schema::Shapes::MemberShape.new(target: LoRaWANSendDataToDevice, name: "LoRaWAN"))
     DownlinkQueueMessage.type = Types::DownlinkQueueMessage
-    DownlinkQueueMessagesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DownlinkQueueMessage, name: "member")
+    DownlinkQueueMessagesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DownlinkQueueMessage, name: "member"))
     Event.add_member(:discovered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISCOVERED", traits: {"smithy.api#enumValue" => "discovered"}))
     Event.add_member(:lost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOST", traits: {"smithy.api#enumValue" => "lost"}))
     Event.add_member(:ack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACK", traits: {"smithy.api#enumValue" => "ack"}))
@@ -1042,7 +1042,7 @@ module Aws::IoTWireless
     EventConfigurationItem.add_member(:partner_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EventNotificationPartnerType, name: "PartnerType"))
     EventConfigurationItem.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: EventNotificationItemConfigurations, name: "Events"))
     EventConfigurationItem.type = Types::EventConfigurationItem
-    EventConfigurationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventConfigurationItem, name: "member")
+    EventConfigurationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventConfigurationItem, name: "member"))
     EventNotificationItemConfigurations.add_member(:device_registration_state, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceRegistrationStateEventConfiguration, name: "DeviceRegistrationState"))
     EventNotificationItemConfigurations.add_member(:proximity, ::Smithy::Schema::Shapes::MemberShape.new(target: ProximityEventConfiguration, name: "Proximity"))
     EventNotificationItemConfigurations.add_member(:join, ::Smithy::Schema::Shapes::MemberShape.new(target: JoinEventConfiguration, name: "Join"))
@@ -1063,7 +1063,7 @@ module Aws::IoTWireless
     FPorts.add_member(:positioning, ::Smithy::Schema::Shapes::MemberShape.new(target: Positioning, name: "Positioning"))
     FPorts.add_member(:applications, ::Smithy::Schema::Shapes::MemberShape.new(target: Applications, name: "Applications"))
     FPorts.type = Types::FPorts
-    FactoryPresetFreqsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PresetFreq, name: "member")
+    FactoryPresetFreqsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PresetFreq, name: "member"))
     FuotaDeviceStatus.add_member(:initial, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Initial", traits: {"smithy.api#enumValue" => "Initial"}))
     FuotaDeviceStatus.add_member(:package_not_supported, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Package_Not_Supported", traits: {"smithy.api#enumValue" => "Package_Not_Supported"}))
     FuotaDeviceStatus.add_member(:frag_algo_unsupported, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FragAlgo_unsupported", traits: {"smithy.api#enumValue" => "FragAlgo_unsupported"}))
@@ -1084,24 +1084,24 @@ module Aws::IoTWireless
     FuotaTaskEventLogOption.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: FuotaTaskEvent, name: "Event", traits: {"smithy.api#required" => {}}))
     FuotaTaskEventLogOption.add_member(:log_level, ::Smithy::Schema::Shapes::MemberShape.new(target: LogLevel, name: "LogLevel", traits: {"smithy.api#required" => {}}))
     FuotaTaskEventLogOption.type = Types::FuotaTaskEventLogOption
-    FuotaTaskEventLogOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FuotaTaskEventLogOption, name: "member")
-    FuotaTaskList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FuotaTask, name: "member")
+    FuotaTaskEventLogOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FuotaTaskEventLogOption, name: "member"))
+    FuotaTaskList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FuotaTask, name: "member"))
     FuotaTaskLogOption.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: FuotaTaskType, name: "Type", traits: {"smithy.api#required" => {}}))
     FuotaTaskLogOption.add_member(:log_level, ::Smithy::Schema::Shapes::MemberShape.new(target: LogLevel, name: "LogLevel", traits: {"smithy.api#required" => {}}))
     FuotaTaskLogOption.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: FuotaTaskEventLogOptionList, name: "Events"))
     FuotaTaskLogOption.type = Types::FuotaTaskLogOption
-    FuotaTaskLogOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FuotaTaskLogOption, name: "member")
+    FuotaTaskLogOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FuotaTaskLogOption, name: "member"))
     FuotaTaskStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Pending", traits: {"smithy.api#enumValue" => "Pending"}))
     FuotaTaskStatus.add_member(:fuota_session_waiting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FuotaSession_Waiting", traits: {"smithy.api#enumValue" => "FuotaSession_Waiting"}))
     FuotaTaskStatus.add_member(:in_fuota_session, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "In_FuotaSession", traits: {"smithy.api#enumValue" => "In_FuotaSession"}))
     FuotaTaskStatus.add_member(:fuota_done, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FuotaDone", traits: {"smithy.api#enumValue" => "FuotaDone"}))
     FuotaTaskStatus.add_member(:delete_waiting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Delete_Waiting", traits: {"smithy.api#enumValue" => "Delete_Waiting"}))
     FuotaTaskType.add_member(:lo_ra_wan, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LoRaWAN", traits: {"smithy.api#enumValue" => "LoRaWAN"}))
-    GatewayList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayListItem, name: "member")
+    GatewayList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayListItem, name: "member"))
     GatewayListItem.add_member(:gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessGatewayId, name: "GatewayId", traits: {"smithy.api#required" => {}}))
     GatewayListItem.add_member(:downlink_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: DownlinkFrequency, name: "DownlinkFrequency", traits: {"smithy.api#required" => {}}))
     GatewayListItem.type = Types::GatewayListItem
-    GatewayListMulticast.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessGatewayId, name: "member")
+    GatewayListMulticast.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessGatewayId, name: "member"))
     GetDestinationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationName, name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetDestinationRequest.type = Types::GetDestinationRequest
     GetDestinationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationArn, name: "Arn"))
@@ -1333,11 +1333,11 @@ module Aws::IoTWireless
     Gnss.add_member(:assist_altitude, ::Smithy::Schema::Shapes::MemberShape.new(target: Coordinate, name: "AssistAltitude"))
     Gnss.add_member(:use2_d_solver, ::Smithy::Schema::Shapes::MemberShape.new(target: Use2DSolver, name: "Use2DSolver", traits: {"smithy.api#default" => false}))
     Gnss.type = Types::Gnss
-    GsmList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GsmObj, name: "member")
+    GsmList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GsmObj, name: "member"))
     GsmLocalId.add_member(:bsic, ::Smithy::Schema::Shapes::MemberShape.new(target: BSIC, name: "Bsic", traits: {"smithy.api#required" => {}}))
     GsmLocalId.add_member(:bcch, ::Smithy::Schema::Shapes::MemberShape.new(target: BCCH, name: "Bcch", traits: {"smithy.api#required" => {}}))
     GsmLocalId.type = Types::GsmLocalId
-    GsmNmrList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GsmNmrObj, name: "member")
+    GsmNmrList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GsmNmrObj, name: "member"))
     GsmNmrObj.add_member(:bsic, ::Smithy::Schema::Shapes::MemberShape.new(target: BSIC, name: "Bsic", traits: {"smithy.api#required" => {}}))
     GsmNmrObj.add_member(:bcch, ::Smithy::Schema::Shapes::MemberShape.new(target: BCCH, name: "Bcch", traits: {"smithy.api#required" => {}}))
     GsmNmrObj.add_member(:rx_level, ::Smithy::Schema::Shapes::MemberShape.new(target: RxLevel, name: "RxLevel"))
@@ -1370,13 +1370,13 @@ module Aws::IoTWireless
     ImportedSidewalkDevice.type = Types::ImportedSidewalkDevice
     ImportedWirelessDevice.add_member(:sidewalk, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportedSidewalkDevice, name: "Sidewalk"))
     ImportedWirelessDevice.type = Types::ImportedWirelessDevice
-    ImportedWirelessDeviceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportedWirelessDevice, name: "member")
+    ImportedWirelessDeviceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportedWirelessDevice, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     InternalServerException.type = Types::InternalServerException
     Ip.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IPAddress, name: "IpAddress", traits: {"smithy.api#required" => {}}))
     Ip.type = Types::Ip
-    JoinEuiFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JoinEuiRange, name: "member")
-    JoinEuiRange.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JoinEui, name: "member")
+    JoinEuiFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JoinEuiRange, name: "member"))
+    JoinEuiRange.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JoinEui, name: "member"))
     JoinEventConfiguration.add_member(:lo_ra_wan, ::Smithy::Schema::Shapes::MemberShape.new(target: LoRaWANJoinEventNotificationConfigurations, name: "LoRaWAN"))
     JoinEventConfiguration.add_member(:wireless_device_id_event_topic, ::Smithy::Schema::Shapes::MemberShape.new(target: EventNotificationTopicStatus, name: "WirelessDeviceIdEventTopic"))
     JoinEventConfiguration.type = Types::JoinEventConfiguration
@@ -1558,7 +1558,7 @@ module Aws::IoTWireless
     LoRaWANGatewayMetadata.add_member(:snr, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Snr"))
     LoRaWANGatewayMetadata.add_member(:rssi, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Rssi"))
     LoRaWANGatewayMetadata.type = Types::LoRaWANGatewayMetadata
-    LoRaWANGatewayMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoRaWANGatewayMetadata, name: "member")
+    LoRaWANGatewayMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoRaWANGatewayMetadata, name: "member"))
     LoRaWANGatewayVersion.add_member(:package_version, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageVersion, name: "PackageVersion"))
     LoRaWANGatewayVersion.add_member(:model, ::Smithy::Schema::Shapes::MemberShape.new(target: Model, name: "Model"))
     LoRaWANGatewayVersion.add_member(:station, ::Smithy::Schema::Shapes::MemberShape.new(target: Station, name: "Station"))
@@ -1618,7 +1618,7 @@ module Aws::IoTWireless
     LoRaWANPublicGatewayMetadata.add_member(:rf_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RfRegion, name: "RfRegion"))
     LoRaWANPublicGatewayMetadata.add_member(:dl_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: DlAllowed, name: "DlAllowed"))
     LoRaWANPublicGatewayMetadata.type = Types::LoRaWANPublicGatewayMetadata
-    LoRaWANPublicGatewayMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoRaWANPublicGatewayMetadata, name: "member")
+    LoRaWANPublicGatewayMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoRaWANPublicGatewayMetadata, name: "member"))
     LoRaWANSendDataToDevice.add_member(:f_port, ::Smithy::Schema::Shapes::MemberShape.new(target: FPort, name: "FPort"))
     LoRaWANSendDataToDevice.add_member(:participating_gateways, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipatingGateways, name: "ParticipatingGateways"))
     LoRaWANSendDataToDevice.type = Types::LoRaWANSendDataToDevice
@@ -1651,11 +1651,11 @@ module Aws::IoTWireless
     LogLevel.add_member(:info, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFO", traits: {"smithy.api#enumValue" => "INFO"}))
     LogLevel.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
     LogLevel.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    LteList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LteObj, name: "member")
+    LteList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LteObj, name: "member"))
     LteLocalId.add_member(:pci, ::Smithy::Schema::Shapes::MemberShape.new(target: PCI, name: "Pci", traits: {"smithy.api#required" => {}}))
     LteLocalId.add_member(:earfcn, ::Smithy::Schema::Shapes::MemberShape.new(target: EARFCN, name: "Earfcn", traits: {"smithy.api#required" => {}}))
     LteLocalId.type = Types::LteLocalId
-    LteNmrList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LteNmrObj, name: "member")
+    LteNmrList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LteNmrObj, name: "member"))
     LteNmrObj.add_member(:pci, ::Smithy::Schema::Shapes::MemberShape.new(target: PCI, name: "Pci", traits: {"smithy.api#required" => {}}))
     LteNmrObj.add_member(:earfcn, ::Smithy::Schema::Shapes::MemberShape.new(target: EARFCN, name: "Earfcn", traits: {"smithy.api#required" => {}}))
     LteNmrObj.add_member(:eutran_cid, ::Smithy::Schema::Shapes::MemberShape.new(target: EutranCid, name: "EutranCid", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => 0}))
@@ -1716,7 +1716,7 @@ module Aws::IoTWireless
     MetricName.add_member(:aws_account_active_gateway_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AwsAccountActiveGatewayCount", traits: {"smithy.api#enumValue" => "AwsAccountActiveGatewayCount"}))
     MetricQueryStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Succeeded", traits: {"smithy.api#enumValue" => "Succeeded"}))
     MetricQueryStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
-    MetricQueryTimestamps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricQueryTimestamp, name: "member")
+    MetricQueryTimestamps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricQueryTimestamp, name: "member"))
     MetricQueryValue.add_member(:min, ::Smithy::Schema::Shapes::MemberShape.new(target: Min, name: "Min"))
     MetricQueryValue.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: Max, name: "Max"))
     MetricQueryValue.add_member(:sum, ::Smithy::Schema::Shapes::MemberShape.new(target: Sum, name: "Sum"))
@@ -1724,7 +1724,7 @@ module Aws::IoTWireless
     MetricQueryValue.add_member(:std, ::Smithy::Schema::Shapes::MemberShape.new(target: Std, name: "Std"))
     MetricQueryValue.add_member(:p90, ::Smithy::Schema::Shapes::MemberShape.new(target: P90, name: "P90"))
     MetricQueryValue.type = Types::MetricQueryValue
-    MetricQueryValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricQueryValue, name: "member")
+    MetricQueryValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricQueryValue, name: "member"))
     MulticastFrameInfo.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     MulticastFrameInfo.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     MulticastGroup.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: MulticastGroupId, name: "Id"))
@@ -1733,16 +1733,16 @@ module Aws::IoTWireless
     MulticastGroup.type = Types::MulticastGroup
     MulticastGroupByFuotaTask.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: MulticastGroupId, name: "Id"))
     MulticastGroupByFuotaTask.type = Types::MulticastGroupByFuotaTask
-    MulticastGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MulticastGroup, name: "member")
-    MulticastGroupListByFuotaTask.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MulticastGroupByFuotaTask, name: "member")
+    MulticastGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MulticastGroup, name: "member"))
+    MulticastGroupListByFuotaTask.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MulticastGroupByFuotaTask, name: "member"))
     MulticastWirelessMetadata.add_member(:lo_ra_wan, ::Smithy::Schema::Shapes::MemberShape.new(target: LoRaWANMulticastMetadata, name: "LoRaWAN"))
     MulticastWirelessMetadata.type = Types::MulticastWirelessMetadata
-    NetIdFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetId, name: "member")
-    NetworkAnalyzerConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkAnalyzerConfigurations, name: "member")
+    NetIdFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetId, name: "member"))
+    NetworkAnalyzerConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkAnalyzerConfigurations, name: "member"))
     NetworkAnalyzerConfigurations.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkAnalyzerConfigurationArn, name: "Arn"))
     NetworkAnalyzerConfigurations.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkAnalyzerConfigurationName, name: "Name"))
     NetworkAnalyzerConfigurations.type = Types::NetworkAnalyzerConfigurations
-    NetworkAnalyzerMulticastGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MulticastGroupId, name: "member")
+    NetworkAnalyzerMulticastGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MulticastGroupId, name: "member"))
     OnboardStatus.add_member(:initialized, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INITIALIZED", traits: {"smithy.api#enumValue" => "INITIALIZED"}))
     OnboardStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     OnboardStatus.add_member(:onboarded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONBOARDED", traits: {"smithy.api#enumValue" => "ONBOARDED"}))
@@ -1771,10 +1771,10 @@ module Aws::IoTWireless
     PositionConfigurationItem.add_member(:solvers, ::Smithy::Schema::Shapes::MemberShape.new(target: PositionSolverDetails, name: "Solvers"))
     PositionConfigurationItem.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationName, name: "Destination"))
     PositionConfigurationItem.type = Types::PositionConfigurationItem
-    PositionConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PositionConfigurationItem, name: "member")
+    PositionConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PositionConfigurationItem, name: "member"))
     PositionConfigurationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
     PositionConfigurationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
-    PositionCoordinate.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PositionCoordinateValue, name: "member")
+    PositionCoordinate.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PositionCoordinateValue, name: "member"))
     PositionResourceType.add_member(:wireless_device, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WirelessDevice", traits: {"smithy.api#enumValue" => "WirelessDevice"}))
     PositionResourceType.add_member(:wireless_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WirelessGateway", traits: {"smithy.api#enumValue" => "WirelessGateway"}))
     PositionSolverConfigurations.add_member(:semtech_gnss, ::Smithy::Schema::Shapes::MemberShape.new(target: SemtechGnssConfiguration, name: "SemtechGnss"))
@@ -1789,7 +1789,7 @@ module Aws::IoTWireless
     Positioning.type = Types::Positioning
     PositioningConfigStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
     PositioningConfigStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
-    PrivateKeysList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateList, name: "member")
+    PrivateKeysList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateList, name: "member"))
     ProximityEventConfiguration.add_member(:sidewalk, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkEventNotificationConfigurations, name: "Sidewalk"))
     ProximityEventConfiguration.add_member(:wireless_device_id_event_topic, ::Smithy::Schema::Shapes::MemberShape.new(target: EventNotificationTopicStatus, name: "WirelessDeviceIdEventTopic"))
     ProximityEventConfiguration.type = Types::ProximityEventConfiguration
@@ -1841,7 +1841,7 @@ module Aws::IoTWireless
     ServiceProfile.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceProfileName, name: "Name"))
     ServiceProfile.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceProfileId, name: "Id"))
     ServiceProfile.type = Types::ServiceProfile
-    ServiceProfileList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceProfile, name: "member")
+    ServiceProfileList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceProfile, name: "member"))
     SessionKeysAbpV10X.add_member(:nwk_s_key, ::Smithy::Schema::Shapes::MemberShape.new(target: NwkSKey, name: "NwkSKey"))
     SessionKeysAbpV10X.add_member(:app_s_key, ::Smithy::Schema::Shapes::MemberShape.new(target: AppSKey, name: "AppSKey"))
     SessionKeysAbpV10X.type = Types::SessionKeysAbpV10X
@@ -1857,7 +1857,7 @@ module Aws::IoTWireless
     SidewalkAccountInfoWithFingerprint.add_member(:fingerprint, ::Smithy::Schema::Shapes::MemberShape.new(target: Fingerprint, name: "Fingerprint"))
     SidewalkAccountInfoWithFingerprint.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerAccountArn, name: "Arn"))
     SidewalkAccountInfoWithFingerprint.type = Types::SidewalkAccountInfoWithFingerprint
-    SidewalkAccountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkAccountInfoWithFingerprint, name: "member")
+    SidewalkAccountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SidewalkAccountInfoWithFingerprint, name: "member"))
     SidewalkCreateDeviceProfile.type = Types::SidewalkCreateDeviceProfile
     SidewalkCreateWirelessDevice.add_member(:device_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceProfileId, name: "DeviceProfileId"))
     SidewalkCreateWirelessDevice.type = Types::SidewalkCreateWirelessDevice
@@ -1943,12 +1943,12 @@ module Aws::IoTWireless
     StartWirelessDeviceImportTaskResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTaskId, name: "Id"))
     StartWirelessDeviceImportTaskResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTaskArn, name: "Arn"))
     StartWirelessDeviceImportTaskResponse.type = Types::StartWirelessDeviceImportTaskResponse
-    SubBands.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubBand, name: "member")
+    SubBands.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubBand, name: "member"))
     SummaryMetricConfiguration.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SummaryMetricConfigurationStatus, name: "Status"))
     SummaryMetricConfiguration.type = Types::SummaryMetricConfiguration
     SummaryMetricConfigurationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
     SummaryMetricConfigurationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
-    SummaryMetricQueries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SummaryMetricQuery, name: "member")
+    SummaryMetricQueries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SummaryMetricQuery, name: "member"))
     SummaryMetricQuery.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricQueryId, name: "QueryId"))
     SummaryMetricQuery.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "MetricName"))
     SummaryMetricQuery.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimensions, name: "Dimensions"))
@@ -1968,7 +1968,7 @@ module Aws::IoTWireless
     SummaryMetricQueryResult.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricQueryValues, name: "Values"))
     SummaryMetricQueryResult.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricUnit, name: "Unit"))
     SummaryMetricQueryResult.type = Types::SummaryMetricQueryResult
-    SummaryMetricQueryResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SummaryMetricQueryResult, name: "member")
+    SummaryMetricQueryResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SummaryMetricQueryResult, name: "member"))
     SupportedRfRegion.add_member(:eu868, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EU868", traits: {"smithy.api#enumValue" => "EU868"}))
     SupportedRfRegion.add_member(:us915, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "US915", traits: {"smithy.api#enumValue" => "US915"}))
     SupportedRfRegion.add_member(:au915, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AU915", traits: {"smithy.api#enumValue" => "AU915"}))
@@ -1985,17 +1985,17 @@ module Aws::IoTWireless
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceArn", traits: {"smithy.api#httpQuery" => "resourceArn", "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TdscdmaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TdscdmaObj, name: "member")
+    TdscdmaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TdscdmaObj, name: "member"))
     TdscdmaLocalId.add_member(:uarfcn, ::Smithy::Schema::Shapes::MemberShape.new(target: UARFCN, name: "Uarfcn", traits: {"smithy.api#required" => {}}))
     TdscdmaLocalId.add_member(:cell_params, ::Smithy::Schema::Shapes::MemberShape.new(target: CellParams, name: "CellParams", traits: {"smithy.api#required" => {}}))
     TdscdmaLocalId.type = Types::TdscdmaLocalId
-    TdscdmaNmrList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TdscdmaNmrObj, name: "member")
+    TdscdmaNmrList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TdscdmaNmrObj, name: "member"))
     TdscdmaNmrObj.add_member(:uarfcn, ::Smithy::Schema::Shapes::MemberShape.new(target: UARFCN, name: "Uarfcn", traits: {"smithy.api#required" => {}}))
     TdscdmaNmrObj.add_member(:cell_params, ::Smithy::Schema::Shapes::MemberShape.new(target: CellParams, name: "CellParams", traits: {"smithy.api#required" => {}}))
     TdscdmaNmrObj.add_member(:utran_cid, ::Smithy::Schema::Shapes::MemberShape.new(target: UtranCid, name: "UtranCid"))
@@ -2145,11 +2145,11 @@ module Aws::IoTWireless
     UpdateWirelessGatewayTaskEntry.type = Types::UpdateWirelessGatewayTaskEntry
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     ValidationException.type = Types::ValidationException
-    WcdmaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WcdmaObj, name: "member")
+    WcdmaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WcdmaObj, name: "member"))
     WcdmaLocalId.add_member(:uarfcndl, ::Smithy::Schema::Shapes::MemberShape.new(target: UARFCNDL, name: "Uarfcndl", traits: {"smithy.api#required" => {}}))
     WcdmaLocalId.add_member(:psc, ::Smithy::Schema::Shapes::MemberShape.new(target: PSC, name: "Psc", traits: {"smithy.api#required" => {}}))
     WcdmaLocalId.type = Types::WcdmaLocalId
-    WcdmaNmrList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WcdmaNmrObj, name: "member")
+    WcdmaNmrList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WcdmaNmrObj, name: "member"))
     WcdmaNmrObj.add_member(:uarfcndl, ::Smithy::Schema::Shapes::MemberShape.new(target: UARFCNDL, name: "Uarfcndl", traits: {"smithy.api#required" => {}}))
     WcdmaNmrObj.add_member(:psc, ::Smithy::Schema::Shapes::MemberShape.new(target: PSC, name: "Psc", traits: {"smithy.api#required" => {}}))
     WcdmaNmrObj.add_member(:utran_cid, ::Smithy::Schema::Shapes::MemberShape.new(target: UtranCid, name: "UtranCid", traits: {"smithy.api#required" => {}}))
@@ -2168,7 +2168,7 @@ module Aws::IoTWireless
     WiFiAccessPoint.add_member(:mac_address, ::Smithy::Schema::Shapes::MemberShape.new(target: MacAddress, name: "MacAddress", traits: {"smithy.api#required" => {}}))
     WiFiAccessPoint.add_member(:rss, ::Smithy::Schema::Shapes::MemberShape.new(target: RSS, name: "Rss", traits: {"smithy.api#required" => {}}))
     WiFiAccessPoint.type = Types::WiFiAccessPoint
-    WiFiAccessPoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WiFiAccessPoint, name: "member")
+    WiFiAccessPoints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WiFiAccessPoint, name: "member"))
     WirelessDeviceEvent.add_member(:join, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Join", traits: {"smithy.api#enumValue" => "Join"}))
     WirelessDeviceEvent.add_member(:rejoin, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Rejoin", traits: {"smithy.api#enumValue" => "Rejoin"}))
     WirelessDeviceEvent.add_member(:uplink_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Uplink_Data", traits: {"smithy.api#enumValue" => "Uplink_Data"}))
@@ -2177,7 +2177,7 @@ module Aws::IoTWireless
     WirelessDeviceEventLogOption.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessDeviceEvent, name: "Event", traits: {"smithy.api#required" => {}}))
     WirelessDeviceEventLogOption.add_member(:log_level, ::Smithy::Schema::Shapes::MemberShape.new(target: LogLevel, name: "LogLevel", traits: {"smithy.api#required" => {}}))
     WirelessDeviceEventLogOption.type = Types::WirelessDeviceEventLogOption
-    WirelessDeviceEventLogOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessDeviceEventLogOption, name: "member")
+    WirelessDeviceEventLogOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessDeviceEventLogOption, name: "member"))
     WirelessDeviceFrameInfo.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     WirelessDeviceFrameInfo.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     WirelessDeviceIdType.add_member(:wireless_device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WirelessDeviceId", traits: {"smithy.api#enumValue" => "WirelessDeviceId"}))
@@ -2196,13 +2196,13 @@ module Aws::IoTWireless
     WirelessDeviceImportTask.add_member(:onboarded_imported_device_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportedWirelessDeviceCount, name: "OnboardedImportedDeviceCount"))
     WirelessDeviceImportTask.add_member(:failed_imported_device_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportedWirelessDeviceCount, name: "FailedImportedDeviceCount"))
     WirelessDeviceImportTask.type = Types::WirelessDeviceImportTask
-    WirelessDeviceImportTaskList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessDeviceImportTask, name: "member")
-    WirelessDeviceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessDeviceId, name: "member")
+    WirelessDeviceImportTaskList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessDeviceImportTask, name: "member"))
+    WirelessDeviceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessDeviceId, name: "member"))
     WirelessDeviceLogOption.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessDeviceType, name: "Type", traits: {"smithy.api#required" => {}}))
     WirelessDeviceLogOption.add_member(:log_level, ::Smithy::Schema::Shapes::MemberShape.new(target: LogLevel, name: "LogLevel", traits: {"smithy.api#required" => {}}))
     WirelessDeviceLogOption.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessDeviceEventLogOptionList, name: "Events"))
     WirelessDeviceLogOption.type = Types::WirelessDeviceLogOption
-    WirelessDeviceLogOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessDeviceLogOption, name: "member")
+    WirelessDeviceLogOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessDeviceLogOption, name: "member"))
     WirelessDeviceSidewalkStatus.add_member(:provisioned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROVISIONED", traits: {"smithy.api#enumValue" => "PROVISIONED"}))
     WirelessDeviceSidewalkStatus.add_member(:registered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGISTERED", traits: {"smithy.api#enumValue" => "REGISTERED"}))
     WirelessDeviceSidewalkStatus.add_member(:activated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVATED", traits: {"smithy.api#enumValue" => "ACTIVATED"}))
@@ -2219,7 +2219,7 @@ module Aws::IoTWireless
     WirelessDeviceStatistics.add_member(:multicast_device_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MulticastDeviceStatus, name: "MulticastDeviceStatus"))
     WirelessDeviceStatistics.add_member(:mc_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: McGroupId, name: "McGroupId"))
     WirelessDeviceStatistics.type = Types::WirelessDeviceStatistics
-    WirelessDeviceStatisticsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessDeviceStatistics, name: "member")
+    WirelessDeviceStatisticsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessDeviceStatistics, name: "member"))
     WirelessDeviceType.add_member(:sidewalk, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Sidewalk", traits: {"smithy.api#enumValue" => "Sidewalk"}))
     WirelessDeviceType.add_member(:lo_ra_wan, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LoRaWAN", traits: {"smithy.api#enumValue" => "LoRaWAN"}))
     WirelessGatewayEvent.add_member(:cups_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUPS_Request", traits: {"smithy.api#enumValue" => "CUPS_Request"}))
@@ -2227,16 +2227,16 @@ module Aws::IoTWireless
     WirelessGatewayEventLogOption.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessGatewayEvent, name: "Event", traits: {"smithy.api#required" => {}}))
     WirelessGatewayEventLogOption.add_member(:log_level, ::Smithy::Schema::Shapes::MemberShape.new(target: LogLevel, name: "LogLevel", traits: {"smithy.api#required" => {}}))
     WirelessGatewayEventLogOption.type = Types::WirelessGatewayEventLogOption
-    WirelessGatewayEventLogOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessGatewayEventLogOption, name: "member")
+    WirelessGatewayEventLogOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessGatewayEventLogOption, name: "member"))
     WirelessGatewayIdType.add_member(:gateway_eui, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GatewayEui", traits: {"smithy.api#enumValue" => "GatewayEui"}))
     WirelessGatewayIdType.add_member(:wireless_gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WirelessGatewayId", traits: {"smithy.api#enumValue" => "WirelessGatewayId"}))
     WirelessGatewayIdType.add_member(:thing_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ThingName", traits: {"smithy.api#enumValue" => "ThingName"}))
-    WirelessGatewayList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessGatewayId, name: "member")
+    WirelessGatewayList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessGatewayId, name: "member"))
     WirelessGatewayLogOption.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessGatewayType, name: "Type", traits: {"smithy.api#required" => {}}))
     WirelessGatewayLogOption.add_member(:log_level, ::Smithy::Schema::Shapes::MemberShape.new(target: LogLevel, name: "LogLevel", traits: {"smithy.api#required" => {}}))
     WirelessGatewayLogOption.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessGatewayEventLogOptionList, name: "Events"))
     WirelessGatewayLogOption.type = Types::WirelessGatewayLogOption
-    WirelessGatewayLogOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessGatewayLogOption, name: "member")
+    WirelessGatewayLogOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessGatewayLogOption, name: "member"))
     WirelessGatewayServiceType.add_member(:cups, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUPS", traits: {"smithy.api#enumValue" => "CUPS"}))
     WirelessGatewayServiceType.add_member(:lns, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LNS", traits: {"smithy.api#enumValue" => "LNS"}))
     WirelessGatewayStatistics.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessGatewayArn, name: "Arn"))
@@ -2246,8 +2246,8 @@ module Aws::IoTWireless
     WirelessGatewayStatistics.add_member(:lo_ra_wan, ::Smithy::Schema::Shapes::MemberShape.new(target: LoRaWANGateway, name: "LoRaWAN"))
     WirelessGatewayStatistics.add_member(:last_uplink_received_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ISODateTimeString, name: "LastUplinkReceivedAt"))
     WirelessGatewayStatistics.type = Types::WirelessGatewayStatistics
-    WirelessGatewayStatisticsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessGatewayStatistics, name: "member")
-    WirelessGatewayTaskDefinitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateWirelessGatewayTaskEntry, name: "member")
+    WirelessGatewayStatisticsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WirelessGatewayStatistics, name: "member"))
+    WirelessGatewayTaskDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateWirelessGatewayTaskEntry, name: "member"))
     WirelessGatewayTaskDefinitionType.add_member(:update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE", traits: {"smithy.api#enumValue" => "UPDATE"}))
     WirelessGatewayTaskStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     WirelessGatewayTaskStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))

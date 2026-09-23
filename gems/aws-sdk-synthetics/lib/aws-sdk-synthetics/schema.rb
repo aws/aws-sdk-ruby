@@ -179,16 +179,16 @@ module Aws::Synthetics
     BaseScreenshot.add_member(:screenshot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ScreenshotName", traits: {"smithy.api#required" => {}}))
     BaseScreenshot.add_member(:ignore_coordinates, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseScreenshotIgnoreCoordinates, name: "IgnoreCoordinates"))
     BaseScreenshot.type = Types::BaseScreenshot
-    BaseScreenshotIgnoreCoordinates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BaseScreenshotConfigIgnoreCoordinate, name: "member")
-    BaseScreenshots.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BaseScreenshot, name: "member")
-    BlueprintTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintType, name: "member")
+    BaseScreenshotIgnoreCoordinates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseScreenshotConfigIgnoreCoordinate, name: "member"))
+    BaseScreenshots.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseScreenshot, name: "member"))
+    BlueprintTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintType, name: "member"))
     BrowserConfig.add_member(:browser_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserType, name: "BrowserType"))
     BrowserConfig.type = Types::BrowserConfig
-    BrowserConfigs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserConfig, name: "member")
+    BrowserConfigs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserConfig, name: "member"))
     BrowserType.add_member(:chrome, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CHROME", traits: {"smithy.api#enumValue" => "CHROME"}))
     BrowserType.add_member(:firefox, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIREFOX", traits: {"smithy.api#enumValue" => "FIREFOX"}))
-    Canaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Canary, name: "member")
-    CanariesLastRun.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryLastRun, name: "member")
+    Canaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Canary, name: "member"))
+    CanariesLastRun.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryLastRun, name: "member"))
     Canary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "Id"))
     Canary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryName, name: "Name"))
     Canary.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryCodeOutput, name: "Code"))
@@ -268,7 +268,7 @@ module Aws::Synthetics
     CanaryRunTimeline.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Completed"))
     CanaryRunTimeline.add_member(:metric_timestamp_for_run_and_retries, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "MetricTimestampForRunAndRetries"))
     CanaryRunTimeline.type = Types::CanaryRunTimeline
-    CanaryRuns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryRun, name: "member")
+    CanaryRuns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryRun, name: "member"))
     CanaryScheduleInput.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Expression", traits: {"smithy.api#required" => {}}))
     CanaryScheduleInput.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxOneYearInSeconds, name: "DurationInSeconds"))
     CanaryScheduleInput.add_member(:retry_config, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryConfigInput, name: "RetryConfig"))
@@ -339,12 +339,12 @@ module Aws::Synthetics
     DeleteGroupRequest.add_member(:group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupIdentifier, name: "GroupIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteGroupRequest.type = Types::DeleteGroupRequest
     DeleteGroupResponse.type = Types::DeleteGroupResponse
-    Dependencies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Dependency, name: "member")
+    Dependencies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Dependency, name: "member"))
     Dependency.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DependencyType, name: "Type"))
     Dependency.add_member(:reference, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Reference", traits: {"smithy.api#required" => {}}))
     Dependency.type = Types::Dependency
     DependencyType.add_member(:lambda_layer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LambdaLayer", traits: {"smithy.api#enumValue" => "LambdaLayer"}))
-    DescribeCanariesLastRunNameFilter.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryName, name: "member")
+    DescribeCanariesLastRunNameFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryName, name: "member"))
     DescribeCanariesLastRunRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     DescribeCanariesLastRunRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize100, name: "MaxResults"))
     DescribeCanariesLastRunRequest.add_member(:names, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeCanariesLastRunNameFilter, name: "Names"))
@@ -353,7 +353,7 @@ module Aws::Synthetics
     DescribeCanariesLastRunResponse.add_member(:canaries_last_run, ::Smithy::Schema::Shapes::MemberShape.new(target: CanariesLastRun, name: "CanariesLastRun"))
     DescribeCanariesLastRunResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     DescribeCanariesLastRunResponse.type = Types::DescribeCanariesLastRunResponse
-    DescribeCanariesNameFilter.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryName, name: "member")
+    DescribeCanariesNameFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryName, name: "member"))
     DescribeCanariesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     DescribeCanariesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxCanaryResults, name: "MaxResults"))
     DescribeCanariesRequest.add_member(:names, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeCanariesNameFilter, name: "Names"))
@@ -379,9 +379,9 @@ module Aws::Synthetics
     EngineConfig.add_member(:engine_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionArn, name: "EngineArn"))
     EngineConfig.add_member(:browser_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserType, name: "BrowserType"))
     EngineConfig.type = Types::EngineConfig
-    EngineConfigs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EngineConfig, name: "member")
-    EnvironmentVariablesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableName, name: "key")
-    EnvironmentVariablesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableValue, name: "value")
+    EngineConfigs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineConfig, name: "member"))
+    EnvironmentVariablesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableName, name: "key"))
+    EnvironmentVariablesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableValue, name: "value"))
     GetCanaryRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryName, name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetCanaryRequest.add_member(:dry_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "DryRunId", traits: {"smithy.api#httpQuery" => "dryRunId"}))
     GetCanaryRequest.type = Types::GetCanaryRequest
@@ -411,7 +411,7 @@ module Aws::Synthetics
     GroupSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, name: "Name"))
     GroupSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupArn, name: "Arn"))
     GroupSummary.type = Types::GroupSummary
-    GroupSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSummary, name: "member")
+    GroupSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSummary, name: "member"))
     InternalFailureException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InternalFailureException.type = Types::InternalFailureException
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -446,7 +446,7 @@ module Aws::Synthetics
     ProvisionedResourceCleanupSetting.add_member(:off, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OFF", traits: {"smithy.api#enumValue" => "OFF"}))
     RequestEntityTooLargeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     RequestEntityTooLargeException.type = Types::RequestEntityTooLargeException
-    ResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceToTag, name: "member")
+    ResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceToTag, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ResourceToTag.add_member(:lambda_function, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAMBDA_FUNCTION", traits: {"smithy.api#enumValue" => "lambda-function"}))
@@ -461,11 +461,11 @@ module Aws::Synthetics
     RuntimeVersion.add_member(:release_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ReleaseDate"))
     RuntimeVersion.add_member(:deprecation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "DeprecationDate"))
     RuntimeVersion.type = Types::RuntimeVersion
-    RuntimeVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeVersion, name: "member")
+    RuntimeVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeVersion, name: "member"))
     S3EncryptionConfig.add_member(:encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, name: "EncryptionMode"))
     S3EncryptionConfig.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "KmsKeyArn"))
     S3EncryptionConfig.type = Types::S3EncryptionConfig
-    SecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
+    SecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     StartCanaryDryRunRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryName, name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -491,11 +491,11 @@ module Aws::Synthetics
     StopCanaryRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryName, name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopCanaryRequest.type = Types::StopCanaryRequest
     StopCanaryResponse.type = Types::StopCanaryResponse
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    SubnetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -534,8 +534,8 @@ module Aws::Synthetics
     VisualReferenceOutput.add_member(:base_canary_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BaseCanaryRunId"))
     VisualReferenceOutput.add_member(:browser_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserType, name: "BrowserType"))
     VisualReferenceOutput.type = Types::VisualReferenceOutput
-    VisualReferences.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VisualReferenceInput, name: "member")
-    VisualReferencesOutput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VisualReferenceOutput, name: "member")
+    VisualReferences.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualReferenceInput, name: "member"))
+    VisualReferencesOutput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualReferenceOutput, name: "member"))
     VpcConfigInput.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, name: "SubnetIds"))
     VpcConfigInput.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, name: "SecurityGroupIds"))
     VpcConfigInput.add_member(:ipv6_allowed_for_dual_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "Ipv6AllowedForDualStack"))

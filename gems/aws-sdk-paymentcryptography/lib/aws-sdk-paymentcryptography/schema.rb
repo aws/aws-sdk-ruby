@@ -152,7 +152,7 @@ module Aws::PaymentCryptography
     Alias.add_member(:alias_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, name: "AliasName", traits: {"smithy.api#required" => {}}))
     Alias.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, name: "KeyArn"))
     Alias.type = Types::Alias
-    Aliases.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Alias, name: "member")
+    Aliases.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Alias, name: "member"))
     CertificateSubjectType.add_member(:common_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "CommonName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z]+$", "smithy.api#required" => {}}))
     CertificateSubjectType.add_member(:organization_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "OrganizationUnit", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z]+$"}))
     CertificateSubjectType.add_member(:organization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Organization", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z]+$"}))
@@ -377,7 +377,7 @@ module Aws::PaymentCryptography
     KeySummary.add_member(:multi_region_key_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiRegionKeyType, name: "MultiRegionKeyType"))
     KeySummary.add_member(:primary_region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "PrimaryRegion"))
     KeySummary.type = Types::KeySummary
-    KeySummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeySummary, name: "member")
+    KeySummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeySummary, name: "member"))
     ListAliasesInput.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, name: "KeyArn"))
     ListAliasesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListAliasesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
@@ -399,16 +399,16 @@ module Aws::PaymentCryptography
     ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    OptionalBlocks.key = ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalBlockId, name: "key")
-    OptionalBlocks.value = ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalBlockValue, name: "value")
-    Regions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member")
+    OptionalBlocks.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalBlockId, name: "key"))
+    OptionalBlocks.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalBlockValue, name: "value"))
+    Regions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member"))
     RemoveKeyReplicationRegionsInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
     RemoveKeyReplicationRegionsInput.add_member(:replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: Regions, name: "ReplicationRegions", traits: {"smithy.api#required" => {}}))
     RemoveKeyReplicationRegionsInput.type = Types::RemoveKeyReplicationRegionsInput
     RemoveKeyReplicationRegionsOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "Key", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
     RemoveKeyReplicationRegionsOutput.type = Types::RemoveKeyReplicationRegionsOutput
-    ReplicationStatus.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "key")
-    ReplicationStatus.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatusType, name: "value")
+    ReplicationStatus.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "key"))
+    ReplicationStatus.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatusType, name: "value"))
     ReplicationStatusType.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyReplicationState, name: "Status", traits: {"smithy.api#required" => {}}))
     ReplicationStatusType.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "StatusMessage"))
     ReplicationStatusType.type = Types::ReplicationStatusType
@@ -445,12 +445,12 @@ module Aws::PaymentCryptography
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
     TrustedCertificatePublicKey.add_member(:key_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAttributes, name: "KeyAttributes", traits: {"smithy.api#required" => {}}))

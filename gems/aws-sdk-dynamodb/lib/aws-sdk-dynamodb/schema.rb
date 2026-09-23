@@ -510,12 +510,12 @@ module Aws::DynamoDB
     AttributeDefinition.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeySchemaAttributeName, name: "AttributeName", traits: {"smithy.api#required" => {}}))
     AttributeDefinition.add_member(:attribute_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalarAttributeType, name: "AttributeType", traits: {"smithy.api#required" => {}}))
     AttributeDefinition.type = Types::AttributeDefinition
-    AttributeDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeDefinition, name: "member")
-    AttributeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
-    AttributeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
-    AttributeNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "member")
-    AttributeUpdates.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
-    AttributeUpdates.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValueUpdate, name: "value")
+    AttributeDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeDefinition, name: "member"))
+    AttributeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
+    AttributeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
+    AttributeNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "member"))
+    AttributeUpdates.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
+    AttributeUpdates.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValueUpdate, name: "value"))
     AttributeValue.add_member(:s, Types::AttributeValue::S, ::Smithy::Schema::Shapes::MemberShape.new(target: StringAttributeValue, name: "S"))
     AttributeValue.add_member(:n, Types::AttributeValue::N, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberAttributeValue, name: "N"))
     AttributeValue.add_member(:b, Types::AttributeValue::B, ::Smithy::Schema::Shapes::MemberShape.new(target: BinaryAttributeValue, name: "B"))
@@ -528,14 +528,14 @@ module Aws::DynamoDB
     AttributeValue.add_member(:bool, Types::AttributeValue::BOOL, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanAttributeValue, name: "BOOL"))
     AttributeValue.add_member(:unknown, Types::AttributeValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AttributeValue.type = Types::AttributeValue
-    AttributeValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "member")
+    AttributeValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "member"))
     AttributeValueUpdate.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "Value"))
     AttributeValueUpdate.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeAction, name: "Action"))
     AttributeValueUpdate.type = Types::AttributeValueUpdate
     AutoScalingPolicyDescription.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingPolicyName, name: "PolicyName"))
     AutoScalingPolicyDescription.add_member(:target_tracking_scaling_policy_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingTargetTrackingScalingPolicyConfigurationDescription, name: "TargetTrackingScalingPolicyConfiguration"))
     AutoScalingPolicyDescription.type = Types::AutoScalingPolicyDescription
-    AutoScalingPolicyDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingPolicyDescription, name: "member")
+    AutoScalingPolicyDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingPolicyDescription, name: "member"))
     AutoScalingPolicyUpdate.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingPolicyName, name: "PolicyName"))
     AutoScalingPolicyUpdate.add_member(:target_tracking_scaling_policy_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingTargetTrackingScalingPolicyConfigurationUpdate, name: "TargetTrackingScalingPolicyConfiguration", traits: {"smithy.api#required" => {}}))
     AutoScalingPolicyUpdate.type = Types::AutoScalingPolicyUpdate
@@ -580,7 +580,7 @@ module Aws::DynamoDB
     BackupStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     BackupStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
     BackupStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
-    BackupSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BackupSummary, name: "member")
+    BackupSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupSummary, name: "member"))
     BackupSummary.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, name: "TableName"))
     BackupSummary.add_member(:table_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TableId, name: "TableId"))
     BackupSummary.add_member(:table_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TableArn, name: "TableArn"))
@@ -612,10 +612,10 @@ module Aws::DynamoDB
     BatchGetItemOutput.add_member(:unprocessed_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetRequestMap, name: "UnprocessedKeys"))
     BatchGetItemOutput.add_member(:consumed_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumedCapacityMultiple, name: "ConsumedCapacity"))
     BatchGetItemOutput.type = Types::BatchGetItemOutput
-    BatchGetRequestMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TableArn, name: "key")
-    BatchGetRequestMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: KeysAndAttributes, name: "value")
-    BatchGetResponseMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TableArn, name: "key")
-    BatchGetResponseMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ItemList, name: "value")
+    BatchGetRequestMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TableArn, name: "key"))
+    BatchGetRequestMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeysAndAttributes, name: "value"))
+    BatchGetResponseMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TableArn, name: "key"))
+    BatchGetResponseMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemList, name: "value"))
     BatchStatementError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStatementErrorCodeEnum, name: "Code"))
     BatchStatementError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     BatchStatementError.add_member(:item, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMap, name: "Item"))
@@ -648,19 +648,19 @@ module Aws::DynamoDB
     BatchWriteItemOutput.add_member(:item_collection_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemCollectionMetricsPerTable, name: "ItemCollectionMetrics"))
     BatchWriteItemOutput.add_member(:consumed_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumedCapacityMultiple, name: "ConsumedCapacity"))
     BatchWriteItemOutput.type = Types::BatchWriteItemOutput
-    BatchWriteItemRequestMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TableArn, name: "key")
-    BatchWriteItemRequestMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: WriteRequests, name: "value")
+    BatchWriteItemRequestMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TableArn, name: "key"))
+    BatchWriteItemRequestMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: WriteRequests, name: "value"))
     BillingMode.add_member(:provisioned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROVISIONED", traits: {"smithy.api#enumValue" => "PROVISIONED"}))
     BillingMode.add_member(:pay_per_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PAY_PER_REQUEST", traits: {"smithy.api#enumValue" => "PAY_PER_REQUEST"}))
     BillingModeSummary.add_member(:billing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingMode, name: "BillingMode"))
     BillingModeSummary.add_member(:last_update_to_pay_per_request_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "LastUpdateToPayPerRequestDateTime"))
     BillingModeSummary.type = Types::BillingModeSummary
-    BinarySetAttributeValue.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BinaryAttributeValue, name: "member")
+    BinarySetAttributeValue.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BinaryAttributeValue, name: "member"))
     CancellationReason.add_member(:item, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMap, name: "Item"))
     CancellationReason.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: Code, name: "Code"))
     CancellationReason.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     CancellationReason.type = Types::CancellationReason
-    CancellationReasonList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CancellationReason, name: "member")
+    CancellationReasonList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CancellationReason, name: "member"))
     Capacity.add_member(:read_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumedCapacityUnits, name: "ReadCapacityUnits"))
     Capacity.add_member(:write_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumedCapacityUnits, name: "WriteCapacityUnits"))
     Capacity.add_member(:capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumedCapacityUnits, name: "CapacityUnits"))
@@ -701,7 +701,7 @@ module Aws::DynamoDB
     ConsumedCapacity.add_member(:local_secondary_indexes, ::Smithy::Schema::Shapes::MemberShape.new(target: SecondaryIndexesCapacityMap, name: "LocalSecondaryIndexes"))
     ConsumedCapacity.add_member(:global_secondary_indexes, ::Smithy::Schema::Shapes::MemberShape.new(target: SecondaryIndexesCapacityMap, name: "GlobalSecondaryIndexes"))
     ConsumedCapacity.type = Types::ConsumedCapacity
-    ConsumedCapacityMultiple.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumedCapacity, name: "member")
+    ConsumedCapacityMultiple.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumedCapacity, name: "member"))
     ContinuousBackupsDescription.add_member(:continuous_backups_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousBackupsStatus, name: "ContinuousBackupsStatus", traits: {"smithy.api#required" => {}}))
     ContinuousBackupsDescription.add_member(:point_in_time_recovery_description, ::Smithy::Schema::Shapes::MemberShape.new(target: PointInTimeRecoveryDescription, name: "PointInTimeRecoveryDescription"))
     ContinuousBackupsDescription.type = Types::ContinuousBackupsDescription
@@ -713,13 +713,13 @@ module Aws::DynamoDB
     ContributorInsightsAction.add_member(:disable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLE", traits: {"smithy.api#enumValue" => "DISABLE"}))
     ContributorInsightsMode.add_member(:accessed_and_throttled_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESSED_AND_THROTTLED_KEYS", traits: {"smithy.api#enumValue" => "ACCESSED_AND_THROTTLED_KEYS"}))
     ContributorInsightsMode.add_member(:throttled_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THROTTLED_KEYS", traits: {"smithy.api#enumValue" => "THROTTLED_KEYS"}))
-    ContributorInsightsRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContributorInsightsRule, name: "member")
+    ContributorInsightsRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContributorInsightsRule, name: "member"))
     ContributorInsightsStatus.add_member(:enabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLING", traits: {"smithy.api#enumValue" => "ENABLING"}))
     ContributorInsightsStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     ContributorInsightsStatus.add_member(:disabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLING", traits: {"smithy.api#enumValue" => "DISABLING"}))
     ContributorInsightsStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     ContributorInsightsStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    ContributorInsightsSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContributorInsightsSummary, name: "member")
+    ContributorInsightsSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContributorInsightsSummary, name: "member"))
     ContributorInsightsSummary.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, name: "TableName"))
     ContributorInsightsSummary.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "IndexName"))
     ContributorInsightsSummary.add_member(:contributor_insights_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ContributorInsightsStatus, name: "ContributorInsightsStatus"))
@@ -771,7 +771,7 @@ module Aws::DynamoDB
     CreateTableInput.type = Types::CreateTableInput
     CreateTableOutput.add_member(:table_description, ::Smithy::Schema::Shapes::MemberShape.new(target: TableDescription, name: "TableDescription"))
     CreateTableOutput.type = Types::CreateTableOutput
-    CsvHeaderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CsvHeader, name: "member")
+    CsvHeaderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CsvHeader, name: "member"))
     CsvOptions.add_member(:delimiter, ::Smithy::Schema::Shapes::MemberShape.new(target: CsvDelimiter, name: "Delimiter"))
     CsvOptions.add_member(:header_list, ::Smithy::Schema::Shapes::MemberShape.new(target: CsvHeaderList, name: "HeaderList"))
     CsvOptions.type = Types::CsvOptions
@@ -914,7 +914,7 @@ module Aws::DynamoDB
     Endpoint.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Address", traits: {"smithy.api#required" => {}}))
     Endpoint.add_member(:cache_period_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "CachePeriodInMinutes", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     Endpoint.type = Types::Endpoint
-    Endpoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "member")
+    Endpoints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "member"))
     ExecuteStatementInput.add_member(:statement, ::Smithy::Schema::Shapes::MemberShape.new(target: PartiQLStatement, name: "Statement", traits: {"smithy.api#required" => {}}))
     ExecuteStatementInput.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: PreparedStatementParameters, name: "Parameters"))
     ExecuteStatementInput.add_member(:consistent_read, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsistentRead, name: "ConsistentRead"))
@@ -935,8 +935,8 @@ module Aws::DynamoDB
     ExecuteTransactionOutput.add_member(:responses, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemResponseList, name: "Responses"))
     ExecuteTransactionOutput.add_member(:consumed_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumedCapacityMultiple, name: "ConsumedCapacity"))
     ExecuteTransactionOutput.type = Types::ExecuteTransactionOutput
-    ExpectedAttributeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
-    ExpectedAttributeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ExpectedAttributeValue, name: "value")
+    ExpectedAttributeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
+    ExpectedAttributeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpectedAttributeValue, name: "value"))
     ExpectedAttributeValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "Value"))
     ExpectedAttributeValue.add_member(:exists, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, name: "Exists"))
     ExpectedAttributeValue.add_member(:comparison_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonOperator, name: "ComparisonOperator"))
@@ -973,7 +973,7 @@ module Aws::DynamoDB
     ExportStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     ExportStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     ExportStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    ExportSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportSummary, name: "member")
+    ExportSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportSummary, name: "member"))
     ExportSummary.add_member(:export_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportArn, name: "ExportArn"))
     ExportSummary.add_member(:export_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportStatus, name: "ExportStatus"))
     ExportSummary.add_member(:export_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportType, name: "ExportType"))
@@ -996,15 +996,15 @@ module Aws::DynamoDB
     ExportType.add_member(:incremental_export, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCREMENTAL_EXPORT", traits: {"smithy.api#enumValue" => "INCREMENTAL_EXPORT"}))
     ExportViewType.add_member(:new_image, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEW_IMAGE", traits: {"smithy.api#enumValue" => "NEW_IMAGE"}))
     ExportViewType.add_member(:new_and_old_images, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEW_AND_OLD_IMAGES", traits: {"smithy.api#enumValue" => "NEW_AND_OLD_IMAGES"}))
-    ExpressionAttributeNameMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionAttributeNameVariable, name: "key")
-    ExpressionAttributeNameMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "value")
-    ExpressionAttributeValueMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionAttributeValueVariable, name: "key")
-    ExpressionAttributeValueMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
+    ExpressionAttributeNameMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionAttributeNameVariable, name: "key"))
+    ExpressionAttributeNameMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "value"))
+    ExpressionAttributeValueMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionAttributeValueVariable, name: "key"))
+    ExpressionAttributeValueMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     FailureException.add_member(:exception_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionName, name: "ExceptionName"))
     FailureException.add_member(:exception_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionDescription, name: "ExceptionDescription"))
     FailureException.type = Types::FailureException
-    FilterConditionMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
-    FilterConditionMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "value")
+    FilterConditionMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
+    FilterConditionMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "value"))
     Get.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "Key", traits: {"smithy.api#required" => {}}))
     Get.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableArn, name: "TableName", traits: {"smithy.api#required" => {}}))
     Get.add_member(:projection_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectionExpression, name: "ProjectionExpression"))
@@ -1036,7 +1036,7 @@ module Aws::DynamoDB
     GlobalSecondaryIndexAutoScalingUpdate.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "IndexName"))
     GlobalSecondaryIndexAutoScalingUpdate.add_member(:provisioned_write_capacity_auto_scaling_update, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingSettingsUpdate, name: "ProvisionedWriteCapacityAutoScalingUpdate"))
     GlobalSecondaryIndexAutoScalingUpdate.type = Types::GlobalSecondaryIndexAutoScalingUpdate
-    GlobalSecondaryIndexAutoScalingUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalSecondaryIndexAutoScalingUpdate, name: "member")
+    GlobalSecondaryIndexAutoScalingUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalSecondaryIndexAutoScalingUpdate, name: "member"))
     GlobalSecondaryIndexDescription.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "IndexName"))
     GlobalSecondaryIndexDescription.add_member(:key_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: KeySchema, name: "KeySchema"))
     GlobalSecondaryIndexDescription.add_member(:projection, ::Smithy::Schema::Shapes::MemberShape.new(target: Projection, name: "Projection"))
@@ -1049,24 +1049,24 @@ module Aws::DynamoDB
     GlobalSecondaryIndexDescription.add_member(:on_demand_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: OnDemandThroughput, name: "OnDemandThroughput"))
     GlobalSecondaryIndexDescription.add_member(:warm_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalSecondaryIndexWarmThroughputDescription, name: "WarmThroughput"))
     GlobalSecondaryIndexDescription.type = Types::GlobalSecondaryIndexDescription
-    GlobalSecondaryIndexDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalSecondaryIndexDescription, name: "member")
+    GlobalSecondaryIndexDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalSecondaryIndexDescription, name: "member"))
     GlobalSecondaryIndexInfo.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "IndexName"))
     GlobalSecondaryIndexInfo.add_member(:key_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: KeySchema, name: "KeySchema"))
     GlobalSecondaryIndexInfo.add_member(:projection, ::Smithy::Schema::Shapes::MemberShape.new(target: Projection, name: "Projection"))
     GlobalSecondaryIndexInfo.add_member(:provisioned_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedThroughput, name: "ProvisionedThroughput"))
     GlobalSecondaryIndexInfo.add_member(:on_demand_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: OnDemandThroughput, name: "OnDemandThroughput"))
     GlobalSecondaryIndexInfo.type = Types::GlobalSecondaryIndexInfo
-    GlobalSecondaryIndexList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalSecondaryIndex, name: "member")
+    GlobalSecondaryIndexList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalSecondaryIndex, name: "member"))
     GlobalSecondaryIndexUpdate.add_member(:update, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateGlobalSecondaryIndexAction, name: "Update"))
     GlobalSecondaryIndexUpdate.add_member(:create, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateGlobalSecondaryIndexAction, name: "Create"))
     GlobalSecondaryIndexUpdate.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteGlobalSecondaryIndexAction, name: "Delete"))
     GlobalSecondaryIndexUpdate.type = Types::GlobalSecondaryIndexUpdate
-    GlobalSecondaryIndexUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalSecondaryIndexUpdate, name: "member")
+    GlobalSecondaryIndexUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalSecondaryIndexUpdate, name: "member"))
     GlobalSecondaryIndexWarmThroughputDescription.add_member(:read_units_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveLongObject, name: "ReadUnitsPerSecond"))
     GlobalSecondaryIndexWarmThroughputDescription.add_member(:write_units_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveLongObject, name: "WriteUnitsPerSecond"))
     GlobalSecondaryIndexWarmThroughputDescription.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexStatus, name: "Status"))
     GlobalSecondaryIndexWarmThroughputDescription.type = Types::GlobalSecondaryIndexWarmThroughputDescription
-    GlobalSecondaryIndexes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalSecondaryIndexInfo, name: "member")
+    GlobalSecondaryIndexes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalSecondaryIndexInfo, name: "member"))
     GlobalTable.add_member(:global_table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, name: "GlobalTableName"))
     GlobalTable.add_member(:replication_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaList, name: "ReplicationGroup"))
     GlobalTable.type = Types::GlobalTable
@@ -1082,8 +1082,8 @@ module Aws::DynamoDB
     GlobalTableGlobalSecondaryIndexSettingsUpdate.add_member(:provisioned_write_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveLongObject, name: "ProvisionedWriteCapacityUnits"))
     GlobalTableGlobalSecondaryIndexSettingsUpdate.add_member(:provisioned_write_capacity_auto_scaling_settings_update, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingSettingsUpdate, name: "ProvisionedWriteCapacityAutoScalingSettingsUpdate"))
     GlobalTableGlobalSecondaryIndexSettingsUpdate.type = Types::GlobalTableGlobalSecondaryIndexSettingsUpdate
-    GlobalTableGlobalSecondaryIndexSettingsUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalTableGlobalSecondaryIndexSettingsUpdate, name: "member")
-    GlobalTableList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalTable, name: "member")
+    GlobalTableGlobalSecondaryIndexSettingsUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalTableGlobalSecondaryIndexSettingsUpdate, name: "member"))
+    GlobalTableList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalTable, name: "member"))
     GlobalTableNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     GlobalTableNotFoundException.type = Types::GlobalTableNotFoundException
     GlobalTableStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
@@ -1093,11 +1093,11 @@ module Aws::DynamoDB
     GlobalTableWitnessDescription.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "RegionName"))
     GlobalTableWitnessDescription.add_member(:witness_status, ::Smithy::Schema::Shapes::MemberShape.new(target: WitnessStatus, name: "WitnessStatus"))
     GlobalTableWitnessDescription.type = Types::GlobalTableWitnessDescription
-    GlobalTableWitnessDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalTableWitnessDescription, name: "member")
+    GlobalTableWitnessDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalTableWitnessDescription, name: "member"))
     GlobalTableWitnessGroupUpdate.add_member(:create, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateGlobalTableWitnessGroupMemberAction, name: "Create"))
     GlobalTableWitnessGroupUpdate.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteGlobalTableWitnessGroupMemberAction, name: "Delete"))
     GlobalTableWitnessGroupUpdate.type = Types::GlobalTableWitnessGroupUpdate
-    GlobalTableWitnessGroupUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalTableWitnessGroupUpdate, name: "member")
+    GlobalTableWitnessGroupUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalTableWitnessGroupUpdate, name: "member"))
     IdempotentParameterMismatchException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     IdempotentParameterMismatchException.type = Types::IdempotentParameterMismatchException
     ImportConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
@@ -1118,7 +1118,7 @@ module Aws::DynamoDB
     ImportSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportStartTime, name: "StartTime"))
     ImportSummary.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportEndTime, name: "EndTime"))
     ImportSummary.type = Types::ImportSummary
-    ImportSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportSummary, name: "member")
+    ImportSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportSummary, name: "member"))
     ImportTableDescription.add_member(:import_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportArn, name: "ImportArn"))
     ImportTableDescription.add_member(:import_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportStatus, name: "ImportStatus"))
     ImportTableDescription.add_member(:table_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TableArn, name: "TableArn"))
@@ -1174,27 +1174,27 @@ module Aws::DynamoDB
     InvalidExportTimeException.type = Types::InvalidExportTimeException
     InvalidRestoreTimeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InvalidRestoreTimeException.type = Types::InvalidRestoreTimeException
-    ItemCollectionKeyAttributeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
-    ItemCollectionKeyAttributeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
+    ItemCollectionKeyAttributeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
+    ItemCollectionKeyAttributeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     ItemCollectionMetrics.add_member(:item_collection_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemCollectionKeyAttributeMap, name: "ItemCollectionKey"))
     ItemCollectionMetrics.add_member(:size_estimate_range_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemCollectionSizeEstimateRange, name: "SizeEstimateRangeGB"))
     ItemCollectionMetrics.type = Types::ItemCollectionMetrics
-    ItemCollectionMetricsMultiple.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ItemCollectionMetrics, name: "member")
-    ItemCollectionMetricsPerTable.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TableArn, name: "key")
-    ItemCollectionMetricsPerTable.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ItemCollectionMetricsMultiple, name: "value")
-    ItemCollectionSizeEstimateRange.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ItemCollectionSizeEstimateBound, name: "member")
+    ItemCollectionMetricsMultiple.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemCollectionMetrics, name: "member"))
+    ItemCollectionMetricsPerTable.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TableArn, name: "key"))
+    ItemCollectionMetricsPerTable.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemCollectionMetricsMultiple, name: "value"))
+    ItemCollectionSizeEstimateRange.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemCollectionSizeEstimateBound, name: "member"))
     ItemCollectionSizeLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ItemCollectionSizeLimitExceededException.type = Types::ItemCollectionSizeLimitExceededException
-    ItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMap, name: "member")
+    ItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMap, name: "member"))
     ItemResponse.add_member(:item, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMap, name: "Item"))
     ItemResponse.type = Types::ItemResponse
-    ItemResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ItemResponse, name: "member")
-    Key.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
-    Key.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
-    KeyConditions.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
-    KeyConditions.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "value")
-    KeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "member")
-    KeySchema.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeySchemaElement, name: "member")
+    ItemResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemResponse, name: "member"))
+    Key.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
+    Key.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
+    KeyConditions.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
+    KeyConditions.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "value"))
+    KeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "member"))
+    KeySchema.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeySchemaElement, name: "member"))
     KeySchemaElement.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeySchemaAttributeName, name: "AttributeName", traits: {"smithy.api#required" => {}}))
     KeySchemaElement.add_member(:key_type, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyType, name: "KeyType", traits: {"smithy.api#required" => {}}))
     KeySchemaElement.type = Types::KeySchemaElement
@@ -1211,10 +1211,10 @@ module Aws::DynamoDB
     KinesisDataStreamDestination.add_member(:destination_status_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DestinationStatusDescription"))
     KinesisDataStreamDestination.add_member(:approximate_creation_date_time_precision, ::Smithy::Schema::Shapes::MemberShape.new(target: ApproximateCreationDateTimePrecision, name: "ApproximateCreationDateTimePrecision"))
     KinesisDataStreamDestination.type = Types::KinesisDataStreamDestination
-    KinesisDataStreamDestinations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisDataStreamDestination, name: "member")
+    KinesisDataStreamDestinations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisDataStreamDestination, name: "member"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     LimitExceededException.type = Types::LimitExceededException
-    ListAttributeValue.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "member")
+    ListAttributeValue.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "member"))
     ListBackupsInput.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableArn, name: "TableName", traits: {"smithy.rules#contextParam" => {"name" => "ResourceArn"}}))
     ListBackupsInput.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupsInputLimit, name: "Limit"))
     ListBackupsInput.add_member(:time_range_lower_bound, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeRangeLowerBound, name: "TimeRangeLowerBound"))
@@ -1276,19 +1276,19 @@ module Aws::DynamoDB
     LocalSecondaryIndexDescription.add_member(:item_count, ::Smithy::Schema::Shapes::MemberShape.new(target: LongObject, name: "ItemCount"))
     LocalSecondaryIndexDescription.add_member(:index_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IndexArn"))
     LocalSecondaryIndexDescription.type = Types::LocalSecondaryIndexDescription
-    LocalSecondaryIndexDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LocalSecondaryIndexDescription, name: "member")
+    LocalSecondaryIndexDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalSecondaryIndexDescription, name: "member"))
     LocalSecondaryIndexInfo.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "IndexName"))
     LocalSecondaryIndexInfo.add_member(:key_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: KeySchema, name: "KeySchema"))
     LocalSecondaryIndexInfo.add_member(:projection, ::Smithy::Schema::Shapes::MemberShape.new(target: Projection, name: "Projection"))
     LocalSecondaryIndexInfo.type = Types::LocalSecondaryIndexInfo
-    LocalSecondaryIndexList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LocalSecondaryIndex, name: "member")
-    LocalSecondaryIndexes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LocalSecondaryIndexInfo, name: "member")
-    MapAttributeValue.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
-    MapAttributeValue.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
+    LocalSecondaryIndexList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalSecondaryIndex, name: "member"))
+    LocalSecondaryIndexes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalSecondaryIndexInfo, name: "member"))
+    MapAttributeValue.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
+    MapAttributeValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     MultiRegionConsistency.add_member(:eventual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVENTUAL", traits: {"smithy.api#enumValue" => "EVENTUAL"}))
     MultiRegionConsistency.add_member(:strong, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRONG", traits: {"smithy.api#enumValue" => "STRONG"}))
-    NonKeyAttributeNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonKeyAttributeName, name: "member")
-    NumberSetAttributeValue.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NumberAttributeValue, name: "member")
+    NonKeyAttributeNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonKeyAttributeName, name: "member"))
+    NumberSetAttributeValue.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberAttributeValue, name: "member"))
     OnDemandThroughput.add_member(:max_read_request_units, ::Smithy::Schema::Shapes::MemberShape.new(target: LongObject, name: "MaxReadRequestUnits"))
     OnDemandThroughput.add_member(:max_write_request_units, ::Smithy::Schema::Shapes::MemberShape.new(target: LongObject, name: "MaxWriteRequestUnits"))
     OnDemandThroughput.type = Types::OnDemandThroughput
@@ -1298,9 +1298,9 @@ module Aws::DynamoDB
     ParameterizedStatement.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: PreparedStatementParameters, name: "Parameters"))
     ParameterizedStatement.add_member(:return_values_on_condition_check_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ReturnValuesOnConditionCheckFailure, name: "ReturnValuesOnConditionCheckFailure"))
     ParameterizedStatement.type = Types::ParameterizedStatement
-    ParameterizedStatements.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterizedStatement, name: "member")
-    PartiQLBatchRequest.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStatementRequest, name: "member")
-    PartiQLBatchResponse.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStatementResponse, name: "member")
+    ParameterizedStatements.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterizedStatement, name: "member"))
+    PartiQLBatchRequest.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStatementRequest, name: "member"))
+    PartiQLBatchResponse.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStatementResponse, name: "member"))
     PointInTimeRecoveryDescription.add_member(:point_in_time_recovery_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PointInTimeRecoveryStatus, name: "PointInTimeRecoveryStatus"))
     PointInTimeRecoveryDescription.add_member(:recovery_period_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPeriodInDays, name: "RecoveryPeriodInDays"))
     PointInTimeRecoveryDescription.add_member(:earliest_restorable_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "EarliestRestorableDateTime"))
@@ -1315,7 +1315,7 @@ module Aws::DynamoDB
     PointInTimeRecoveryUnavailableException.type = Types::PointInTimeRecoveryUnavailableException
     PolicyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     PolicyNotFoundException.type = Types::PolicyNotFoundException
-    PreparedStatementParameters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "member")
+    PreparedStatementParameters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "member"))
     Projection.add_member(:projection_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectionType, name: "ProjectionType"))
     Projection.add_member(:non_key_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: NonKeyAttributeNameList, name: "NonKeyAttributes"))
     Projection.type = Types::Projection
@@ -1355,8 +1355,8 @@ module Aws::DynamoDB
     PutItemInput.add_member(:expression_attribute_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionAttributeValueMap, name: "ExpressionAttributeValues"))
     PutItemInput.add_member(:return_values_on_condition_check_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ReturnValuesOnConditionCheckFailure, name: "ReturnValuesOnConditionCheckFailure"))
     PutItemInput.type = Types::PutItemInput
-    PutItemInputAttributeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
-    PutItemInputAttributeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
+    PutItemInputAttributeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
+    PutItemInputAttributeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     PutItemOutput.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMap, name: "Attributes"))
     PutItemOutput.add_member(:consumed_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumedCapacity, name: "ConsumedCapacity"))
     PutItemOutput.add_member(:item_collection_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemCollectionMetrics, name: "ItemCollectionMetrics"))
@@ -1404,12 +1404,12 @@ module Aws::DynamoDB
     ReplicaAutoScalingDescription.add_member(:replica_provisioned_write_capacity_auto_scaling_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingSettingsDescription, name: "ReplicaProvisionedWriteCapacityAutoScalingSettings"))
     ReplicaAutoScalingDescription.add_member(:replica_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaStatus, name: "ReplicaStatus"))
     ReplicaAutoScalingDescription.type = Types::ReplicaAutoScalingDescription
-    ReplicaAutoScalingDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaAutoScalingDescription, name: "member")
+    ReplicaAutoScalingDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaAutoScalingDescription, name: "member"))
     ReplicaAutoScalingUpdate.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "RegionName", traits: {"smithy.api#required" => {}}))
     ReplicaAutoScalingUpdate.add_member(:replica_global_secondary_index_updates, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaGlobalSecondaryIndexAutoScalingUpdateList, name: "ReplicaGlobalSecondaryIndexUpdates"))
     ReplicaAutoScalingUpdate.add_member(:replica_provisioned_read_capacity_auto_scaling_update, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingSettingsUpdate, name: "ReplicaProvisionedReadCapacityAutoScalingUpdate"))
     ReplicaAutoScalingUpdate.type = Types::ReplicaAutoScalingUpdate
-    ReplicaAutoScalingUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaAutoScalingUpdate, name: "member")
+    ReplicaAutoScalingUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaAutoScalingUpdate, name: "member"))
     ReplicaDescription.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "RegionName"))
     ReplicaDescription.add_member(:replica_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaStatus, name: "ReplicaStatus"))
     ReplicaDescription.add_member(:replica_status_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaStatusDescription, name: "ReplicaStatusDescription"))
@@ -1422,7 +1422,7 @@ module Aws::DynamoDB
     ReplicaDescription.add_member(:replica_inaccessible_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "ReplicaInaccessibleDateTime"))
     ReplicaDescription.add_member(:replica_table_class_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: TableClassSummary, name: "ReplicaTableClassSummary"))
     ReplicaDescription.type = Types::ReplicaDescription
-    ReplicaDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaDescription, name: "member")
+    ReplicaDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaDescription, name: "member"))
     ReplicaGlobalSecondaryIndex.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "IndexName", traits: {"smithy.api#required" => {}}))
     ReplicaGlobalSecondaryIndex.add_member(:provisioned_throughput_override, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedThroughputOverride, name: "ProvisionedThroughputOverride"))
     ReplicaGlobalSecondaryIndex.add_member(:on_demand_throughput_override, ::Smithy::Schema::Shapes::MemberShape.new(target: OnDemandThroughputOverride, name: "OnDemandThroughputOverride"))
@@ -1432,18 +1432,18 @@ module Aws::DynamoDB
     ReplicaGlobalSecondaryIndexAutoScalingDescription.add_member(:provisioned_read_capacity_auto_scaling_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingSettingsDescription, name: "ProvisionedReadCapacityAutoScalingSettings"))
     ReplicaGlobalSecondaryIndexAutoScalingDescription.add_member(:provisioned_write_capacity_auto_scaling_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingSettingsDescription, name: "ProvisionedWriteCapacityAutoScalingSettings"))
     ReplicaGlobalSecondaryIndexAutoScalingDescription.type = Types::ReplicaGlobalSecondaryIndexAutoScalingDescription
-    ReplicaGlobalSecondaryIndexAutoScalingDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaGlobalSecondaryIndexAutoScalingDescription, name: "member")
+    ReplicaGlobalSecondaryIndexAutoScalingDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaGlobalSecondaryIndexAutoScalingDescription, name: "member"))
     ReplicaGlobalSecondaryIndexAutoScalingUpdate.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "IndexName"))
     ReplicaGlobalSecondaryIndexAutoScalingUpdate.add_member(:provisioned_read_capacity_auto_scaling_update, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingSettingsUpdate, name: "ProvisionedReadCapacityAutoScalingUpdate"))
     ReplicaGlobalSecondaryIndexAutoScalingUpdate.type = Types::ReplicaGlobalSecondaryIndexAutoScalingUpdate
-    ReplicaGlobalSecondaryIndexAutoScalingUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaGlobalSecondaryIndexAutoScalingUpdate, name: "member")
+    ReplicaGlobalSecondaryIndexAutoScalingUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaGlobalSecondaryIndexAutoScalingUpdate, name: "member"))
     ReplicaGlobalSecondaryIndexDescription.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "IndexName"))
     ReplicaGlobalSecondaryIndexDescription.add_member(:provisioned_throughput_override, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedThroughputOverride, name: "ProvisionedThroughputOverride"))
     ReplicaGlobalSecondaryIndexDescription.add_member(:on_demand_throughput_override, ::Smithy::Schema::Shapes::MemberShape.new(target: OnDemandThroughputOverride, name: "OnDemandThroughputOverride"))
     ReplicaGlobalSecondaryIndexDescription.add_member(:warm_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalSecondaryIndexWarmThroughputDescription, name: "WarmThroughput"))
     ReplicaGlobalSecondaryIndexDescription.type = Types::ReplicaGlobalSecondaryIndexDescription
-    ReplicaGlobalSecondaryIndexDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaGlobalSecondaryIndexDescription, name: "member")
-    ReplicaGlobalSecondaryIndexList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaGlobalSecondaryIndex, name: "member")
+    ReplicaGlobalSecondaryIndexDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaGlobalSecondaryIndexDescription, name: "member"))
+    ReplicaGlobalSecondaryIndexList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaGlobalSecondaryIndex, name: "member"))
     ReplicaGlobalSecondaryIndexSettingsDescription.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "IndexName", traits: {"smithy.api#required" => {}}))
     ReplicaGlobalSecondaryIndexSettingsDescription.add_member(:index_status, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexStatus, name: "IndexStatus"))
     ReplicaGlobalSecondaryIndexSettingsDescription.add_member(:provisioned_read_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveLongObject, name: "ProvisionedReadCapacityUnits"))
@@ -1451,13 +1451,13 @@ module Aws::DynamoDB
     ReplicaGlobalSecondaryIndexSettingsDescription.add_member(:provisioned_write_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveLongObject, name: "ProvisionedWriteCapacityUnits"))
     ReplicaGlobalSecondaryIndexSettingsDescription.add_member(:provisioned_write_capacity_auto_scaling_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingSettingsDescription, name: "ProvisionedWriteCapacityAutoScalingSettings"))
     ReplicaGlobalSecondaryIndexSettingsDescription.type = Types::ReplicaGlobalSecondaryIndexSettingsDescription
-    ReplicaGlobalSecondaryIndexSettingsDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaGlobalSecondaryIndexSettingsDescription, name: "member")
+    ReplicaGlobalSecondaryIndexSettingsDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaGlobalSecondaryIndexSettingsDescription, name: "member"))
     ReplicaGlobalSecondaryIndexSettingsUpdate.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "IndexName", traits: {"smithy.api#required" => {}}))
     ReplicaGlobalSecondaryIndexSettingsUpdate.add_member(:provisioned_read_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveLongObject, name: "ProvisionedReadCapacityUnits"))
     ReplicaGlobalSecondaryIndexSettingsUpdate.add_member(:provisioned_read_capacity_auto_scaling_settings_update, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingSettingsUpdate, name: "ProvisionedReadCapacityAutoScalingSettingsUpdate"))
     ReplicaGlobalSecondaryIndexSettingsUpdate.type = Types::ReplicaGlobalSecondaryIndexSettingsUpdate
-    ReplicaGlobalSecondaryIndexSettingsUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaGlobalSecondaryIndexSettingsUpdate, name: "member")
-    ReplicaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Replica, name: "member")
+    ReplicaGlobalSecondaryIndexSettingsUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaGlobalSecondaryIndexSettingsUpdate, name: "member"))
+    ReplicaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Replica, name: "member"))
     ReplicaNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ReplicaNotFoundException.type = Types::ReplicaNotFoundException
     ReplicaSettingsDescription.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "RegionName", traits: {"smithy.api#required" => {}}))
@@ -1470,14 +1470,14 @@ module Aws::DynamoDB
     ReplicaSettingsDescription.add_member(:replica_global_secondary_index_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaGlobalSecondaryIndexSettingsDescriptionList, name: "ReplicaGlobalSecondaryIndexSettings"))
     ReplicaSettingsDescription.add_member(:replica_table_class_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: TableClassSummary, name: "ReplicaTableClassSummary"))
     ReplicaSettingsDescription.type = Types::ReplicaSettingsDescription
-    ReplicaSettingsDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaSettingsDescription, name: "member")
+    ReplicaSettingsDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaSettingsDescription, name: "member"))
     ReplicaSettingsUpdate.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "RegionName", traits: {"smithy.api#required" => {}}))
     ReplicaSettingsUpdate.add_member(:replica_provisioned_read_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveLongObject, name: "ReplicaProvisionedReadCapacityUnits"))
     ReplicaSettingsUpdate.add_member(:replica_provisioned_read_capacity_auto_scaling_settings_update, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingSettingsUpdate, name: "ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate"))
     ReplicaSettingsUpdate.add_member(:replica_global_secondary_index_settings_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaGlobalSecondaryIndexSettingsUpdateList, name: "ReplicaGlobalSecondaryIndexSettingsUpdate"))
     ReplicaSettingsUpdate.add_member(:replica_table_class, ::Smithy::Schema::Shapes::MemberShape.new(target: TableClass, name: "ReplicaTableClass"))
     ReplicaSettingsUpdate.type = Types::ReplicaSettingsUpdate
-    ReplicaSettingsUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaSettingsUpdate, name: "member")
+    ReplicaSettingsUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaSettingsUpdate, name: "member"))
     ReplicaStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     ReplicaStatus.add_member(:creation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATION_FAILED", traits: {"smithy.api#enumValue" => "CREATION_FAILED"}))
     ReplicaStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
@@ -1491,14 +1491,14 @@ module Aws::DynamoDB
     ReplicaUpdate.add_member(:create, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateReplicaAction, name: "Create"))
     ReplicaUpdate.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteReplicaAction, name: "Delete"))
     ReplicaUpdate.type = Types::ReplicaUpdate
-    ReplicaUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaUpdate, name: "member")
+    ReplicaUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaUpdate, name: "member"))
     ReplicatedWriteConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ReplicatedWriteConflictException.type = Types::ReplicatedWriteConflictException
     ReplicationGroupUpdate.add_member(:create, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateReplicationGroupMemberAction, name: "Create"))
     ReplicationGroupUpdate.add_member(:update, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateReplicationGroupMemberAction, name: "Update"))
     ReplicationGroupUpdate.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteReplicationGroupMemberAction, name: "Delete"))
     ReplicationGroupUpdate.type = Types::ReplicationGroupUpdate
-    ReplicationGroupUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationGroupUpdate, name: "member")
+    ReplicationGroupUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationGroupUpdate, name: "member"))
     RequestLimitExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     RequestLimitExceeded.add_member(:throttling_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: ThrottlingReasonList, name: "ThrottlingReasons"))
     RequestLimitExceeded.type = Types::RequestLimitExceeded
@@ -1596,8 +1596,8 @@ module Aws::DynamoDB
     ScanOutput.add_member(:last_evaluated_key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "LastEvaluatedKey"))
     ScanOutput.add_member(:consumed_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumedCapacity, name: "ConsumedCapacity"))
     ScanOutput.type = Types::ScanOutput
-    SecondaryIndexesCapacityMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "key")
-    SecondaryIndexesCapacityMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Capacity, name: "value")
+    SecondaryIndexesCapacityMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "key"))
+    SecondaryIndexesCapacityMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Capacity, name: "value"))
     Select.add_member(:all_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL_ATTRIBUTES", traits: {"smithy.api#enumValue" => "ALL_ATTRIBUTES"}))
     Select.add_member(:all_projected_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL_PROJECTED_ATTRIBUTES", traits: {"smithy.api#enumValue" => "ALL_PROJECTED_ATTRIBUTES"}))
     Select.add_member(:specific_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPECIFIC_ATTRIBUTES", traits: {"smithy.api#enumValue" => "SPECIFIC_ATTRIBUTES"}))
@@ -1626,7 +1626,7 @@ module Aws::DynamoDB
     StreamViewType.add_member(:old_image, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OLD_IMAGE", traits: {"smithy.api#enumValue" => "OLD_IMAGE"}))
     StreamViewType.add_member(:new_and_old_images, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEW_AND_OLD_IMAGES", traits: {"smithy.api#enumValue" => "NEW_AND_OLD_IMAGES"}))
     StreamViewType.add_member(:keys_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KEYS_ONLY", traits: {"smithy.api#enumValue" => "KEYS_ONLY"}))
-    StringSetAttributeValue.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringAttributeValue, name: "member")
+    StringSetAttributeValue.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringAttributeValue, name: "member"))
     TableAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     TableAlreadyExistsException.type = Types::TableAlreadyExistsException
     TableAutoScalingDescription.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, name: "TableName"))
@@ -1677,7 +1677,7 @@ module Aws::DynamoDB
     TableDescription.type = Types::TableDescription
     TableInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     TableInUseException.type = Types::TableInUseException
-    TableNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, name: "member")
+    TableNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, name: "member"))
     TableNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     TableNotFoundException.type = Types::TableNotFoundException
     TableStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
@@ -1695,8 +1695,8 @@ module Aws::DynamoDB
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyString, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValueString, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyString, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyString, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArnString, name: "ResourceArn", traits: {"smithy.api#required" => {}, "smithy.rules#contextParam" => {"name" => "ResourceArn"}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -1706,7 +1706,7 @@ module Aws::DynamoDB
     ThrottlingReason.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: Reason, name: "reason"))
     ThrottlingReason.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "resource"))
     ThrottlingReason.type = Types::ThrottlingReason
-    ThrottlingReasonList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThrottlingReason, name: "member")
+    ThrottlingReasonList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThrottlingReason, name: "member"))
     TimeToLiveDescription.add_member(:time_to_live_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeToLiveStatus, name: "TimeToLiveStatus"))
     TimeToLiveDescription.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeToLiveAttributeName, name: "AttributeName"))
     TimeToLiveDescription.type = Types::TimeToLiveDescription
@@ -1719,7 +1719,7 @@ module Aws::DynamoDB
     TimeToLiveStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     TransactGetItem.add_member(:get, ::Smithy::Schema::Shapes::MemberShape.new(target: Get, name: "Get", traits: {"smithy.api#required" => {}}))
     TransactGetItem.type = Types::TransactGetItem
-    TransactGetItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TransactGetItem, name: "member")
+    TransactGetItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactGetItem, name: "member"))
     TransactGetItemsInput.add_member(:transact_items, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactGetItemList, name: "TransactItems", traits: {"smithy.api#required" => {}}))
     TransactGetItemsInput.add_member(:return_consumed_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ReturnConsumedCapacity, name: "ReturnConsumedCapacity"))
     TransactGetItemsInput.type = Types::TransactGetItemsInput
@@ -1731,7 +1731,7 @@ module Aws::DynamoDB
     TransactWriteItem.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: Delete, name: "Delete"))
     TransactWriteItem.add_member(:update, ::Smithy::Schema::Shapes::MemberShape.new(target: Update, name: "Update"))
     TransactWriteItem.type = Types::TransactWriteItem
-    TransactWriteItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TransactWriteItem, name: "member")
+    TransactWriteItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactWriteItem, name: "member"))
     TransactWriteItemsInput.add_member(:transact_items, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactWriteItemList, name: "TransactItems", traits: {"smithy.api#required" => {}}))
     TransactWriteItemsInput.add_member(:return_consumed_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ReturnConsumedCapacity, name: "ReturnConsumedCapacity"))
     TransactWriteItemsInput.add_member(:return_item_collection_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: ReturnItemCollectionMetrics, name: "ReturnItemCollectionMetrics"))
@@ -1867,7 +1867,7 @@ module Aws::DynamoDB
     WriteRequest.add_member(:put_request, ::Smithy::Schema::Shapes::MemberShape.new(target: PutRequest, name: "PutRequest"))
     WriteRequest.add_member(:delete_request, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteRequest, name: "DeleteRequest"))
     WriteRequest.type = Types::WriteRequest
-    WriteRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WriteRequest, name: "member")
+    WriteRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WriteRequest, name: "member"))
 
     DynamoDB20120810 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.dynamodb#DynamoDB_20120810"

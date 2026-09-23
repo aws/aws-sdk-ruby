@@ -431,7 +431,7 @@ module Aws::NetworkManager
     AccountStatus.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     AccountStatus.add_member(:slr_deployment_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SLRDeploymentStatus, name: "SLRDeploymentStatus"))
     AccountStatus.type = Types::AccountStatus
-    AccountStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountStatus, name: "member")
+    AccountStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountStatus, name: "member"))
     AssociateConnectPeerRequest.add_member(:global_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalNetworkId, name: "GlobalNetworkId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AssociateConnectPeerRequest.add_member(:connect_peer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectPeerId, name: "ConnectPeerId", traits: {"smithy.api#required" => {}}))
     AssociateConnectPeerRequest.add_member(:device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceId, name: "DeviceId", traits: {"smithy.api#required" => {}}))
@@ -494,8 +494,8 @@ module Aws::NetworkManager
     AttachmentErrorCode.add_member(:direct_connect_gateway_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECT_CONNECT_GATEWAY_NOT_FOUND", traits: {"smithy.api#enumValue" => "DIRECT_CONNECT_GATEWAY_NOT_FOUND"}))
     AttachmentErrorCode.add_member(:direct_connect_gateway_existing_attachments, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", traits: {"smithy.api#enumValue" => "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS"}))
     AttachmentErrorCode.add_member(:direct_connect_gateway_no_private_vif, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", traits: {"smithy.api#enumValue" => "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"}))
-    AttachmentErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentError, name: "member")
-    AttachmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Attachment, name: "member")
+    AttachmentErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentError, name: "member"))
+    AttachmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Attachment, name: "member"))
     AttachmentState.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
     AttachmentState.add_member(:pending_attachment_acceptance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_ATTACHMENT_ACCEPTANCE", traits: {"smithy.api#enumValue" => "PENDING_ATTACHMENT_ACCEPTANCE"}))
     AttachmentState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
@@ -565,7 +565,7 @@ module Aws::NetworkManager
     ConnectPeerAssociation.add_member(:link_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkId, name: "LinkId"))
     ConnectPeerAssociation.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectPeerAssociationState, name: "State"))
     ConnectPeerAssociation.type = Types::ConnectPeerAssociation
-    ConnectPeerAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectPeerAssociation, name: "member")
+    ConnectPeerAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectPeerAssociation, name: "member"))
     ConnectPeerAssociationState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "pending", traits: {"smithy.api#enumValue" => "PENDING"}))
     ConnectPeerAssociationState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "available", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     ConnectPeerAssociationState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "deleting", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -575,7 +575,7 @@ module Aws::NetworkManager
     ConnectPeerBgpConfiguration.add_member(:core_network_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IPAddress, name: "CoreNetworkAddress"))
     ConnectPeerBgpConfiguration.add_member(:peer_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IPAddress, name: "PeerAddress"))
     ConnectPeerBgpConfiguration.type = Types::ConnectPeerBgpConfiguration
-    ConnectPeerBgpConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectPeerBgpConfiguration, name: "member")
+    ConnectPeerBgpConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectPeerBgpConfiguration, name: "member"))
     ConnectPeerConfiguration.add_member(:core_network_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IPAddress, name: "CoreNetworkAddress"))
     ConnectPeerConfiguration.add_member(:peer_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IPAddress, name: "PeerAddress"))
     ConnectPeerConfiguration.add_member(:inside_cidr_blocks, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedStringList, name: "InsideCidrBlocks"))
@@ -593,8 +593,8 @@ module Aws::NetworkManager
     ConnectPeerErrorCode.add_member(:ip_outside_subnet_cidr_range, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IP_OUTSIDE_SUBNET_CIDR_RANGE", traits: {"smithy.api#enumValue" => "IP_OUTSIDE_SUBNET_CIDR_RANGE"}))
     ConnectPeerErrorCode.add_member(:invalid_inside_cidr_block, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_INSIDE_CIDR_BLOCK", traits: {"smithy.api#enumValue" => "INVALID_INSIDE_CIDR_BLOCK"}))
     ConnectPeerErrorCode.add_member(:no_associated_cidr_block, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_ASSOCIATED_CIDR_BLOCK", traits: {"smithy.api#enumValue" => "NO_ASSOCIATED_CIDR_BLOCK"}))
-    ConnectPeerErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectPeerError, name: "member")
-    ConnectPeerIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectPeerId, name: "member")
+    ConnectPeerErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectPeerError, name: "member"))
+    ConnectPeerIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectPeerId, name: "member"))
     ConnectPeerState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     ConnectPeerState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     ConnectPeerState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
@@ -608,7 +608,7 @@ module Aws::NetworkManager
     ConnectPeerSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     ConnectPeerSummary.add_member(:subnet_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetArn, name: "SubnetArn"))
     ConnectPeerSummary.type = Types::ConnectPeerSummary
-    ConnectPeerSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectPeerSummary, name: "member")
+    ConnectPeerSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectPeerSummary, name: "member"))
     Connection.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "ConnectionId"))
     Connection.add_member(:connection_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionArn, name: "ConnectionArn"))
     Connection.add_member(:global_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalNetworkId, name: "GlobalNetworkId"))
@@ -625,8 +625,8 @@ module Aws::NetworkManager
     ConnectionHealth.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionStatus, name: "Status"))
     ConnectionHealth.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "Timestamp"))
     ConnectionHealth.type = Types::ConnectionHealth
-    ConnectionIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "member")
-    ConnectionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Connection, name: "member")
+    ConnectionIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "member"))
+    ConnectionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Connection, name: "member"))
     ConnectionState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "pending", traits: {"smithy.api#enumValue" => "PENDING"}))
     ConnectionState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "available", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     ConnectionState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "deleting", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -635,7 +635,7 @@ module Aws::NetworkManager
     ConnectionStatus.add_member(:down, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOWN", traits: {"smithy.api#enumValue" => "DOWN"}))
     ConnectionType.add_member(:bgp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BGP", traits: {"smithy.api#enumValue" => "BGP"}))
     ConnectionType.add_member(:ipsec, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPSEC", traits: {"smithy.api#enumValue" => "IPSEC"}))
-    ConstrainedStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "member")
+    ConstrainedStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "member"))
     CoreNetwork.add_member(:global_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalNetworkId, name: "GlobalNetworkId"))
     CoreNetwork.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId"))
     CoreNetwork.add_member(:core_network_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkArn, name: "CoreNetworkArn"))
@@ -661,14 +661,14 @@ module Aws::NetworkManager
     CoreNetworkChangeEvent.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeStatus, name: "Status"))
     CoreNetworkChangeEvent.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkChangeEventValues, name: "Values"))
     CoreNetworkChangeEvent.type = Types::CoreNetworkChangeEvent
-    CoreNetworkChangeEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkChangeEvent, name: "member")
+    CoreNetworkChangeEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkChangeEvent, name: "member"))
     CoreNetworkChangeEventValues.add_member(:edge_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalRegionCode, name: "EdgeLocation"))
     CoreNetworkChangeEventValues.add_member(:segment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "SegmentName"))
     CoreNetworkChangeEventValues.add_member(:network_function_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "NetworkFunctionGroupName"))
     CoreNetworkChangeEventValues.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentId, name: "AttachmentId"))
     CoreNetworkChangeEventValues.add_member(:cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "Cidr"))
     CoreNetworkChangeEventValues.type = Types::CoreNetworkChangeEventValues
-    CoreNetworkChangeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkChange, name: "member")
+    CoreNetworkChangeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkChange, name: "member"))
     CoreNetworkChangeValues.add_member(:segment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "SegmentName"))
     CoreNetworkChangeValues.add_member(:network_function_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "NetworkFunctionGroupName"))
     CoreNetworkChangeValues.add_member(:edge_locations, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalRegionCodeList, name: "EdgeLocations"))
@@ -686,7 +686,7 @@ module Aws::NetworkManager
     CoreNetworkEdge.add_member(:asn, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "Asn"))
     CoreNetworkEdge.add_member(:inside_cidr_blocks, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedStringList, name: "InsideCidrBlocks"))
     CoreNetworkEdge.type = Types::CoreNetworkEdge
-    CoreNetworkEdgeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkEdge, name: "member")
+    CoreNetworkEdgeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkEdge, name: "member"))
     CoreNetworkNetworkFunctionGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "Name"))
     CoreNetworkNetworkFunctionGroup.add_member(:edge_locations, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalRegionCodeList, name: "EdgeLocations"))
     CoreNetworkNetworkFunctionGroup.add_member(:segments, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceInsertionSegments, name: "Segments"))
@@ -695,7 +695,7 @@ module Aws::NetworkManager
     CoreNetworkNetworkFunctionGroupIdentifier.add_member(:network_function_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "NetworkFunctionGroupName"))
     CoreNetworkNetworkFunctionGroupIdentifier.add_member(:edge_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalRegionCode, name: "EdgeLocation"))
     CoreNetworkNetworkFunctionGroupIdentifier.type = Types::CoreNetworkNetworkFunctionGroupIdentifier
-    CoreNetworkNetworkFunctionGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkNetworkFunctionGroup, name: "member")
+    CoreNetworkNetworkFunctionGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkNetworkFunctionGroup, name: "member"))
     CoreNetworkPolicy.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId"))
     CoreNetworkPolicy.add_member(:policy_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "PolicyVersionId"))
     CoreNetworkPolicy.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkPolicyAlias, name: "Alias"))
@@ -711,7 +711,7 @@ module Aws::NetworkManager
     CoreNetworkPolicyError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideString, name: "Message", traits: {"smithy.api#required" => {}}))
     CoreNetworkPolicyError.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideString, name: "Path"))
     CoreNetworkPolicyError.type = Types::CoreNetworkPolicyError
-    CoreNetworkPolicyErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkPolicyError, name: "member")
+    CoreNetworkPolicyErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkPolicyError, name: "member"))
     CoreNetworkPolicyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideString, name: "Message", traits: {"smithy.api#required" => {}}))
     CoreNetworkPolicyException.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkPolicyErrorList, name: "Errors"))
     CoreNetworkPolicyException.type = Types::CoreNetworkPolicyException
@@ -722,7 +722,7 @@ module Aws::NetworkManager
     CoreNetworkPolicyVersion.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "CreatedAt"))
     CoreNetworkPolicyVersion.add_member(:change_set_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeSetState, name: "ChangeSetState"))
     CoreNetworkPolicyVersion.type = Types::CoreNetworkPolicyVersion
-    CoreNetworkPolicyVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkPolicyVersion, name: "member")
+    CoreNetworkPolicyVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkPolicyVersion, name: "member"))
     CoreNetworkSegment.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "Name"))
     CoreNetworkSegment.add_member(:edge_locations, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalRegionCodeList, name: "EdgeLocations"))
     CoreNetworkSegment.add_member(:shared_segments, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedStringList, name: "SharedSegments"))
@@ -731,7 +731,7 @@ module Aws::NetworkManager
     CoreNetworkSegmentEdgeIdentifier.add_member(:segment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "SegmentName"))
     CoreNetworkSegmentEdgeIdentifier.add_member(:edge_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalRegionCode, name: "EdgeLocation"))
     CoreNetworkSegmentEdgeIdentifier.type = Types::CoreNetworkSegmentEdgeIdentifier
-    CoreNetworkSegmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkSegment, name: "member")
+    CoreNetworkSegmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkSegment, name: "member"))
     CoreNetworkState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     CoreNetworkState.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
     CoreNetworkState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
@@ -744,7 +744,7 @@ module Aws::NetworkManager
     CoreNetworkSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "Description"))
     CoreNetworkSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CoreNetworkSummary.type = Types::CoreNetworkSummary
-    CoreNetworkSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkSummary, name: "member")
+    CoreNetworkSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkSummary, name: "member"))
     CreateConnectAttachmentRequest.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId", traits: {"smithy.api#required" => {}}))
     CreateConnectAttachmentRequest.add_member(:edge_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalRegionCode, name: "EdgeLocation", traits: {"smithy.api#required" => {}}))
     CreateConnectAttachmentRequest.add_member(:transport_attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentId, name: "TransportAttachmentId", traits: {"smithy.api#required" => {}}))
@@ -856,14 +856,14 @@ module Aws::NetworkManager
     CreateVpcAttachmentRequest.type = Types::CreateVpcAttachmentRequest
     CreateVpcAttachmentResponse.add_member(:vpc_attachment, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcAttachment, name: "VpcAttachment"))
     CreateVpcAttachmentResponse.type = Types::CreateVpcAttachmentResponse
-    CustomerGatewayArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerGatewayArn, name: "member")
+    CustomerGatewayArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerGatewayArn, name: "member"))
     CustomerGatewayAssociation.add_member(:customer_gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerGatewayArn, name: "CustomerGatewayArn"))
     CustomerGatewayAssociation.add_member(:global_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalNetworkId, name: "GlobalNetworkId"))
     CustomerGatewayAssociation.add_member(:device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceId, name: "DeviceId"))
     CustomerGatewayAssociation.add_member(:link_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkId, name: "LinkId"))
     CustomerGatewayAssociation.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerGatewayAssociationState, name: "State"))
     CustomerGatewayAssociation.type = Types::CustomerGatewayAssociation
-    CustomerGatewayAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerGatewayAssociation, name: "member")
+    CustomerGatewayAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerGatewayAssociation, name: "member"))
     CustomerGatewayAssociationState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "pending", traits: {"smithy.api#enumValue" => "PENDING"}))
     CustomerGatewayAssociationState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "available", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     CustomerGatewayAssociationState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "deleting", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -943,8 +943,8 @@ module Aws::NetworkManager
     Device.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceState, name: "State"))
     Device.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     Device.type = Types::Device
-    DeviceIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceId, name: "member")
-    DeviceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Device, name: "member")
+    DeviceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceId, name: "member"))
+    DeviceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Device, name: "member"))
     DeviceState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "pending", traits: {"smithy.api#enumValue" => "PENDING"}))
     DeviceState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "available", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     DeviceState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "deleting", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -976,18 +976,18 @@ module Aws::NetworkManager
     EdgeOverride.add_member(:edge_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: EdgeSetList, name: "EdgeSets"))
     EdgeOverride.add_member(:use_edge, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "UseEdge"))
     EdgeOverride.type = Types::EdgeOverride
-    EdgeSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "member")
-    EdgeSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EdgeSet, name: "member")
-    ExceptionContextMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionContextKey, name: "key")
-    ExceptionContextMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionContextValue, name: "value")
+    EdgeSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "member"))
+    EdgeSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EdgeSet, name: "member"))
+    ExceptionContextMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionContextKey, name: "key"))
+    ExceptionContextMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionContextValue, name: "value"))
     ExecuteCoreNetworkChangeSetRequest.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ExecuteCoreNetworkChangeSetRequest.add_member(:policy_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "PolicyVersionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ExecuteCoreNetworkChangeSetRequest.type = Types::ExecuteCoreNetworkChangeSetRequest
     ExecuteCoreNetworkChangeSetResponse.type = Types::ExecuteCoreNetworkChangeSetResponse
-    ExternalRegionCodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalRegionCode, name: "member")
-    FilterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, name: "key")
-    FilterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, name: "value")
-    FilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member")
+    ExternalRegionCodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalRegionCode, name: "member"))
+    FilterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, name: "key"))
+    FilterMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, name: "value"))
+    FilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member"))
     GetConnectAttachmentRequest.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentId, name: "AttachmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetConnectAttachmentRequest.type = Types::GetConnectAttachmentRequest
     GetConnectAttachmentResponse.add_member(:connect_attachment, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectAttachment, name: "ConnectAttachment"))
@@ -1200,8 +1200,8 @@ module Aws::NetworkManager
     GlobalNetwork.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalNetworkState, name: "State"))
     GlobalNetwork.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     GlobalNetwork.type = Types::GlobalNetwork
-    GlobalNetworkIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalNetworkId, name: "member")
-    GlobalNetworkList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalNetwork, name: "member")
+    GlobalNetworkIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalNetworkId, name: "member"))
+    GlobalNetworkList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalNetwork, name: "member"))
     GlobalNetworkState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "pending", traits: {"smithy.api#enumValue" => "PENDING"}))
     GlobalNetworkState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "available", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     GlobalNetworkState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "deleting", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -1226,13 +1226,13 @@ module Aws::NetworkManager
     LinkAssociation.add_member(:link_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkId, name: "LinkId"))
     LinkAssociation.add_member(:link_association_state, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkAssociationState, name: "LinkAssociationState"))
     LinkAssociation.type = Types::LinkAssociation
-    LinkAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LinkAssociation, name: "member")
+    LinkAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkAssociation, name: "member"))
     LinkAssociationState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "pending", traits: {"smithy.api#enumValue" => "PENDING"}))
     LinkAssociationState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "available", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     LinkAssociationState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "deleting", traits: {"smithy.api#enumValue" => "DELETING"}))
     LinkAssociationState.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "deleted", traits: {"smithy.api#enumValue" => "DELETED"}))
-    LinkIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LinkId, name: "member")
-    LinkList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Link, name: "member")
+    LinkIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkId, name: "member"))
+    LinkList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Link, name: "member"))
     LinkState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "pending", traits: {"smithy.api#enumValue" => "PENDING"}))
     LinkState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "available", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     LinkState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "deleting", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -1294,7 +1294,7 @@ module Aws::NetworkManager
     Location.type = Types::Location
     NetworkFunctionGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "Name"))
     NetworkFunctionGroup.type = Types::NetworkFunctionGroup
-    NetworkFunctionGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkFunctionGroup, name: "member")
+    NetworkFunctionGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkFunctionGroup, name: "member"))
     NetworkResource.add_member(:registered_gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "RegisteredGatewayArn"))
     NetworkResource.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId"))
     NetworkResource.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalRegionCode, name: "AwsRegion"))
@@ -1310,10 +1310,10 @@ module Aws::NetworkManager
     NetworkResourceCount.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "ResourceType"))
     NetworkResourceCount.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Count"))
     NetworkResourceCount.type = Types::NetworkResourceCount
-    NetworkResourceCountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkResourceCount, name: "member")
-    NetworkResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkResource, name: "member")
-    NetworkResourceMetadataMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "key")
-    NetworkResourceMetadataMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "value")
+    NetworkResourceCountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkResourceCount, name: "member"))
+    NetworkResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkResource, name: "member"))
+    NetworkResourceMetadataMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "key"))
+    NetworkResourceMetadataMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "value"))
     NetworkResourceSummary.add_member(:registered_gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "RegisteredGatewayArn"))
     NetworkResourceSummary.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn"))
     NetworkResourceSummary.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "ResourceType"))
@@ -1335,8 +1335,8 @@ module Aws::NetworkManager
     NetworkRouteDestination.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "ResourceType"))
     NetworkRouteDestination.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "ResourceId"))
     NetworkRouteDestination.type = Types::NetworkRouteDestination
-    NetworkRouteDestinationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkRouteDestination, name: "member")
-    NetworkRouteList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkRoute, name: "member")
+    NetworkRouteDestinationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkRouteDestination, name: "member"))
+    NetworkRouteList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkRoute, name: "member"))
     NetworkTelemetry.add_member(:registered_gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "RegisteredGatewayArn"))
     NetworkTelemetry.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId"))
     NetworkTelemetry.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalRegionCode, name: "AwsRegion"))
@@ -1347,7 +1347,7 @@ module Aws::NetworkManager
     NetworkTelemetry.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "Address"))
     NetworkTelemetry.add_member(:health, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionHealth, name: "Health"))
     NetworkTelemetry.type = Types::NetworkTelemetry
-    NetworkTelemetryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkTelemetry, name: "member")
+    NetworkTelemetryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkTelemetry, name: "member"))
     OrganizationStatus.add_member(:organization_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationId, name: "OrganizationId"))
     OrganizationStatus.add_member(:organization_aws_service_access_status, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationAwsServiceAccessStatus, name: "OrganizationAwsServiceAccessStatus"))
     OrganizationStatus.add_member(:slr_deployment_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SLRDeploymentStatus, name: "SLRDeploymentStatus"))
@@ -1357,7 +1357,7 @@ module Aws::NetworkManager
     PathComponent.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkResourceSummary, name: "Resource"))
     PathComponent.add_member(:destination_cidr_block, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "DestinationCidrBlock"))
     PathComponent.type = Types::PathComponent
-    PathComponentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PathComponent, name: "member")
+    PathComponentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PathComponent, name: "member"))
     Peering.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId"))
     Peering.add_member(:core_network_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkArn, name: "CoreNetworkArn"))
     Peering.add_member(:peering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PeeringId, name: "PeeringId"))
@@ -1382,8 +1382,8 @@ module Aws::NetworkManager
     PeeringErrorCode.add_member(:internal_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_ERROR"}))
     PeeringErrorCode.add_member(:edge_location_peer_duplicate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EDGE_LOCATION_PEER_DUPLICATE", traits: {"smithy.api#enumValue" => "EDGE_LOCATION_PEER_DUPLICATE"}))
     PeeringErrorCode.add_member(:invalid_transit_gateway_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_TRANSIT_GATEWAY_STATE", traits: {"smithy.api#enumValue" => "INVALID_TRANSIT_GATEWAY_STATE"}))
-    PeeringErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PeeringError, name: "member")
-    PeeringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Peering, name: "member")
+    PeeringErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PeeringError, name: "member"))
+    PeeringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Peering, name: "member"))
     PeeringState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     PeeringState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     PeeringState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
@@ -1411,8 +1411,8 @@ module Aws::NetworkManager
     PutResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutResourcePolicyRequest.type = Types::PutResourcePolicyRequest
     PutResourcePolicyResponse.type = Types::PutResourcePolicyResponse
-    ReasonContextMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ReasonContextKey, name: "key")
-    ReasonContextMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ReasonContextValue, name: "value")
+    ReasonContextMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ReasonContextKey, name: "key"))
+    ReasonContextMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ReasonContextValue, name: "value"))
     RegisterTransitGatewayRequest.add_member(:global_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalNetworkId, name: "GlobalNetworkId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RegisterTransitGatewayRequest.add_member(:transit_gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitGatewayArn, name: "TransitGatewayArn", traits: {"smithy.api#required" => {}}))
     RegisterTransitGatewayRequest.type = Types::RegisterTransitGatewayRequest
@@ -1425,7 +1425,7 @@ module Aws::NetworkManager
     Relationship.add_member(:from, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "From"))
     Relationship.add_member(:to, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "To"))
     Relationship.type = Types::Relationship
-    RelationshipList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Relationship, name: "member")
+    RelationshipList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Relationship, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideString, name: "Message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideString, name: "ResourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideString, name: "ResourceType", traits: {"smithy.api#required" => {}}))
@@ -1480,7 +1480,7 @@ module Aws::NetworkManager
     RouteAnalysisStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "failed", traits: {"smithy.api#enumValue" => "FAILED"}))
     RouteState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     RouteState.add_member(:blackhole, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BLACKHOLE", traits: {"smithy.api#enumValue" => "BLACKHOLE"}))
-    RouteStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteState, name: "member")
+    RouteStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteState, name: "member"))
     RouteTableIdentifier.add_member(:transit_gateway_route_table_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitGatewayRouteTableArn, name: "TransitGatewayRouteTableArn"))
     RouteTableIdentifier.add_member(:core_network_segment_edge, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkSegmentEdgeIdentifier, name: "CoreNetworkSegmentEdge"))
     RouteTableIdentifier.add_member(:core_network_network_function_group, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkNetworkFunctionGroupIdentifier, name: "CoreNetworkNetworkFunctionGroup"))
@@ -1490,7 +1490,7 @@ module Aws::NetworkManager
     RouteTableType.add_member(:network_function_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NETWORK_FUNCTION_GROUP", traits: {"smithy.api#enumValue" => "NETWORK_FUNCTION_GROUP"}))
     RouteType.add_member(:propagated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROPAGATED", traits: {"smithy.api#enumValue" => "PROPAGATED"}))
     RouteType.add_member(:static, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATIC", traits: {"smithy.api#enumValue" => "STATIC"}))
-    RouteTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteType, name: "member")
+    RouteTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteType, name: "member"))
     SegmentActionServiceInsertion.add_member(:send_via, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEND_VIA", traits: {"smithy.api#enumValue" => "send-via"}))
     SegmentActionServiceInsertion.add_member(:send_to, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEND_TO", traits: {"smithy.api#enumValue" => "send-to"}))
     SendViaMode.add_member(:dual_hop, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUAL_HOP", traits: {"smithy.api#enumValue" => "dual-hop"}))
@@ -1500,7 +1500,7 @@ module Aws::NetworkManager
     ServiceInsertionAction.add_member(:when_sent_to, ::Smithy::Schema::Shapes::MemberShape.new(target: WhenSentTo, name: "WhenSentTo"))
     ServiceInsertionAction.add_member(:via, ::Smithy::Schema::Shapes::MemberShape.new(target: Via, name: "Via"))
     ServiceInsertionAction.type = Types::ServiceInsertionAction
-    ServiceInsertionActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceInsertionAction, name: "member")
+    ServiceInsertionActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceInsertionAction, name: "member"))
     ServiceInsertionSegments.add_member(:send_via, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedStringList, name: "SendVia"))
     ServiceInsertionSegments.add_member(:send_to, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedStringList, name: "SendTo"))
     ServiceInsertionSegments.type = Types::ServiceInsertionSegments
@@ -1519,8 +1519,8 @@ module Aws::NetworkManager
     Site.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: SiteState, name: "State"))
     Site.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     Site.type = Types::Site
-    SiteIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SiteId, name: "member")
-    SiteList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Site, name: "member")
+    SiteIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SiteId, name: "member"))
+    SiteList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Site, name: "member"))
     SiteState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "pending", traits: {"smithy.api#enumValue" => "PENDING"}))
     SiteState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "available", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     SiteState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "deleting", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -1540,12 +1540,12 @@ module Aws::NetworkManager
     StartRouteAnalysisRequest.type = Types::StartRouteAnalysisRequest
     StartRouteAnalysisResponse.add_member(:route_analysis, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteAnalysis, name: "RouteAnalysis"))
     StartRouteAnalysisResponse.type = Types::StartRouteAnalysisResponse
-    SubnetArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetArn, name: "member")
+    SubnetArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetArn, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -1553,15 +1553,15 @@ module Aws::NetworkManager
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideString, name: "Message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryAfterSeconds, name: "RetryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     ThrottlingException.type = Types::ThrottlingException
-    TransitGatewayArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TransitGatewayArn, name: "member")
-    TransitGatewayConnectPeerArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TransitGatewayConnectPeerArn, name: "member")
+    TransitGatewayArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitGatewayArn, name: "member"))
+    TransitGatewayConnectPeerArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitGatewayConnectPeerArn, name: "member"))
     TransitGatewayConnectPeerAssociation.add_member(:transit_gateway_connect_peer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitGatewayConnectPeerArn, name: "TransitGatewayConnectPeerArn"))
     TransitGatewayConnectPeerAssociation.add_member(:global_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalNetworkId, name: "GlobalNetworkId"))
     TransitGatewayConnectPeerAssociation.add_member(:device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceId, name: "DeviceId"))
     TransitGatewayConnectPeerAssociation.add_member(:link_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkId, name: "LinkId"))
     TransitGatewayConnectPeerAssociation.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitGatewayConnectPeerAssociationState, name: "State"))
     TransitGatewayConnectPeerAssociation.type = Types::TransitGatewayConnectPeerAssociation
-    TransitGatewayConnectPeerAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TransitGatewayConnectPeerAssociation, name: "member")
+    TransitGatewayConnectPeerAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitGatewayConnectPeerAssociation, name: "member"))
     TransitGatewayConnectPeerAssociationState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "pending", traits: {"smithy.api#enumValue" => "PENDING"}))
     TransitGatewayConnectPeerAssociationState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "available", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     TransitGatewayConnectPeerAssociationState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "deleting", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -1574,7 +1574,7 @@ module Aws::NetworkManager
     TransitGatewayRegistration.add_member(:transit_gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitGatewayArn, name: "TransitGatewayArn"))
     TransitGatewayRegistration.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitGatewayRegistrationStateReason, name: "State"))
     TransitGatewayRegistration.type = Types::TransitGatewayRegistration
-    TransitGatewayRegistrationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TransitGatewayRegistration, name: "member")
+    TransitGatewayRegistrationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitGatewayRegistration, name: "member"))
     TransitGatewayRegistrationState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "pending", traits: {"smithy.api#enumValue" => "PENDING"}))
     TransitGatewayRegistrationState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "available", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     TransitGatewayRegistrationState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "deleting", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -1666,7 +1666,7 @@ module Aws::NetworkManager
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideString, name: "Name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideString, name: "Message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "UnknownOperation"}))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "CannotParse"}))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "FieldValidationFailed"}))
@@ -1685,8 +1685,8 @@ module Aws::NetworkManager
     VpcOptions.type = Types::VpcOptions
     WhenSentTo.add_member(:when_sent_to_segments_list, ::Smithy::Schema::Shapes::MemberShape.new(target: WhenSentToSegmentsList, name: "WhenSentToSegmentsList"))
     WhenSentTo.type = Types::WhenSentTo
-    WhenSentToSegmentsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "member")
-    WithEdgeOverridesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EdgeOverride, name: "member")
+    WhenSentToSegmentsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "member"))
+    WithEdgeOverridesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EdgeOverride, name: "member"))
 
     NetworkManager = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.networkmanager#NetworkManager"

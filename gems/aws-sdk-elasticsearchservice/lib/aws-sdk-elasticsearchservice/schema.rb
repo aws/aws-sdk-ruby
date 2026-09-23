@@ -364,9 +364,9 @@ module Aws::ElasticsearchService
     AdditionalLimit.add_member(:limit_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitName, name: "LimitName"))
     AdditionalLimit.add_member(:limit_values, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitValueList, name: "LimitValues"))
     AdditionalLimit.type = Types::AdditionalLimit
-    AdditionalLimitList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalLimit, name: "member")
-    AdvancedOptions.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    AdvancedOptions.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    AdditionalLimitList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalLimit, name: "member"))
+    AdvancedOptions.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    AdvancedOptions.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     AdvancedOptionsStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedOptions, name: "Options", traits: {"smithy.api#required" => {}}))
     AdvancedOptionsStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     AdvancedOptionsStatus.type = Types::AdvancedOptionsStatus
@@ -398,7 +398,7 @@ module Aws::ElasticsearchService
     AuthorizedPrincipal.add_member(:principal_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalType, name: "PrincipalType"))
     AuthorizedPrincipal.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Principal"))
     AuthorizedPrincipal.type = Types::AuthorizedPrincipal
-    AuthorizedPrincipalList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizedPrincipal, name: "member")
+    AuthorizedPrincipalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizedPrincipal, name: "member"))
     AutoTune.add_member(:auto_tune_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoTuneType, name: "AutoTuneType"))
     AutoTune.add_member(:auto_tune_details, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoTuneDetails, name: "AutoTuneDetails"))
     AutoTune.type = Types::AutoTune
@@ -406,12 +406,12 @@ module Aws::ElasticsearchService
     AutoTuneDesiredState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     AutoTuneDetails.add_member(:scheduled_auto_tune_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledAutoTuneDetails, name: "ScheduledAutoTuneDetails"))
     AutoTuneDetails.type = Types::AutoTuneDetails
-    AutoTuneList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutoTune, name: "member")
+    AutoTuneList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoTune, name: "member"))
     AutoTuneMaintenanceSchedule.add_member(:start_at, ::Smithy::Schema::Shapes::MemberShape.new(target: StartAt, name: "StartAt"))
     AutoTuneMaintenanceSchedule.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, name: "Duration"))
     AutoTuneMaintenanceSchedule.add_member(:cron_expression_for_recurrence, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CronExpressionForRecurrence"))
     AutoTuneMaintenanceSchedule.type = Types::AutoTuneMaintenanceSchedule
-    AutoTuneMaintenanceScheduleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutoTuneMaintenanceSchedule, name: "member")
+    AutoTuneMaintenanceScheduleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoTuneMaintenanceSchedule, name: "member"))
     AutoTuneOptions.add_member(:desired_state, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoTuneDesiredState, name: "DesiredState"))
     AutoTuneOptions.add_member(:rollback_on_disable, ::Smithy::Schema::Shapes::MemberShape.new(target: RollbackOnDisable, name: "RollbackOnDisable"))
     AutoTuneOptions.add_member(:maintenance_schedules, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoTuneMaintenanceScheduleList, name: "MaintenanceSchedules"))
@@ -459,7 +459,7 @@ module Aws::ElasticsearchService
     CancelledChangeProperty.add_member(:cancelled_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CancelledValue"))
     CancelledChangeProperty.add_member(:active_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ActiveValue"))
     CancelledChangeProperty.type = Types::CancelledChangeProperty
-    CancelledChangePropertyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CancelledChangeProperty, name: "member")
+    CancelledChangePropertyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CancelledChangeProperty, name: "member"))
     ChangeProgressDetails.add_member(:change_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GUID, name: "ChangeId"))
     ChangeProgressDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     ChangeProgressDetails.add_member(:config_change_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigChangeStatus, name: "ConfigChangeStatus"))
@@ -472,7 +472,7 @@ module Aws::ElasticsearchService
     ChangeProgressStage.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     ChangeProgressStage.add_member(:last_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdated, name: "LastUpdated"))
     ChangeProgressStage.type = Types::ChangeProgressStage
-    ChangeProgressStageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeProgressStage, name: "member")
+    ChangeProgressStageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeProgressStage, name: "member"))
     ChangeProgressStatusDetails.add_member(:change_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GUID, name: "ChangeId"))
     ChangeProgressStatusDetails.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTimestamp, name: "StartTime"))
     ChangeProgressStatusDetails.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OverallChangeStatus, name: "Status"))
@@ -494,7 +494,7 @@ module Aws::ElasticsearchService
     CognitoOptionsStatus.type = Types::CognitoOptionsStatus
     ColdStorageOptions.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled", traits: {"smithy.api#required" => {}}))
     ColdStorageOptions.type = Types::ColdStorageOptions
-    CompatibleElasticsearchVersionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CompatibleVersionsMap, name: "member")
+    CompatibleElasticsearchVersionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CompatibleVersionsMap, name: "member"))
     CompatibleVersionsMap.add_member(:source_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ElasticsearchVersionString, name: "SourceVersion"))
     CompatibleVersionsMap.add_member(:target_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: ElasticsearchVersionList, name: "TargetVersions"))
     CompatibleVersionsMap.type = Types::CompatibleVersionsMap
@@ -622,11 +622,11 @@ module Aws::ElasticsearchService
     DescribePackagesFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribePackagesFilterName, name: "Name"))
     DescribePackagesFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribePackagesFilterValues, name: "Value"))
     DescribePackagesFilter.type = Types::DescribePackagesFilter
-    DescribePackagesFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DescribePackagesFilter, name: "member")
+    DescribePackagesFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribePackagesFilter, name: "member"))
     DescribePackagesFilterName.add_member(:package_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PackageID", traits: {"smithy.api#enumValue" => "PackageID"}))
     DescribePackagesFilterName.add_member(:package_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PackageName", traits: {"smithy.api#enumValue" => "PackageName"}))
     DescribePackagesFilterName.add_member(:package_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PackageStatus", traits: {"smithy.api#enumValue" => "PackageStatus"}))
-    DescribePackagesFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DescribePackagesFilterValue, name: "member")
+    DescribePackagesFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribePackagesFilterValue, name: "member"))
     DescribePackagesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribePackagesFilterList, name: "Filters"))
     DescribePackagesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#default" => 0}))
     DescribePackagesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
@@ -672,12 +672,12 @@ module Aws::ElasticsearchService
     DomainInfo.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName"))
     DomainInfo.add_member(:engine_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineType, name: "EngineType"))
     DomainInfo.type = Types::DomainInfo
-    DomainInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainInfo, name: "member")
+    DomainInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainInfo, name: "member"))
     DomainInformation.add_member(:owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerId, name: "OwnerId"))
     DomainInformation.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#required" => {}}))
     DomainInformation.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "Region"))
     DomainInformation.type = Types::DomainInformation
-    DomainNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "member")
+    DomainNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "member"))
     DomainPackageDetails.add_member(:package_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageID, name: "PackageID"))
     DomainPackageDetails.add_member(:package_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageName, name: "PackageName"))
     DomainPackageDetails.add_member(:package_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageType, name: "PackageType"))
@@ -688,7 +688,7 @@ module Aws::ElasticsearchService
     DomainPackageDetails.add_member(:reference_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferencePath, name: "ReferencePath"))
     DomainPackageDetails.add_member(:error_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetails, name: "ErrorDetails"))
     DomainPackageDetails.type = Types::DomainPackageDetails
-    DomainPackageDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainPackageDetails, name: "member")
+    DomainPackageDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainPackageDetails, name: "member"))
     DomainPackageStatus.add_member(:associating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSOCIATING", traits: {"smithy.api#enumValue" => "ASSOCIATING"}))
     DomainPackageStatus.add_member(:association_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSOCIATION_FAILED", traits: {"smithy.api#enumValue" => "ASSOCIATION_FAILED"}))
     DomainPackageStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
@@ -836,9 +836,9 @@ module Aws::ElasticsearchService
     ElasticsearchDomainStatus.add_member(:domain_processing_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainProcessingStatusType, name: "DomainProcessingStatus"))
     ElasticsearchDomainStatus.add_member(:modifying_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ModifyingPropertiesList, name: "ModifyingProperties"))
     ElasticsearchDomainStatus.type = Types::ElasticsearchDomainStatus
-    ElasticsearchDomainStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ElasticsearchDomainStatus, name: "member")
-    ElasticsearchInstanceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ESPartitionInstanceType, name: "member")
-    ElasticsearchVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ElasticsearchVersionString, name: "member")
+    ElasticsearchDomainStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ElasticsearchDomainStatus, name: "member"))
+    ElasticsearchInstanceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ESPartitionInstanceType, name: "member"))
+    ElasticsearchVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ElasticsearchVersionString, name: "member"))
     ElasticsearchVersionStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: ElasticsearchVersionString, name: "Options", traits: {"smithy.api#required" => {}}))
     ElasticsearchVersionStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     ElasticsearchVersionStatus.type = Types::ElasticsearchVersionStatus
@@ -848,8 +848,8 @@ module Aws::ElasticsearchService
     EncryptionAtRestOptionsStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionAtRestOptions, name: "Options", traits: {"smithy.api#required" => {}}))
     EncryptionAtRestOptionsStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     EncryptionAtRestOptionsStatus.type = Types::EncryptionAtRestOptionsStatus
-    EndpointsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    EndpointsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUrl, name: "value")
+    EndpointsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    EndpointsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUrl, name: "value"))
     EngineType.add_member(:open_search, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OpenSearch", traits: {"smithy.api#enumValue" => "OpenSearch"}))
     EngineType.add_member(:elasticsearch, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Elasticsearch", traits: {"smithy.api#enumValue" => "Elasticsearch"}))
     ErrorDetails.add_member(:error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorType, name: "ErrorType"))
@@ -858,8 +858,8 @@ module Aws::ElasticsearchService
     Filter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueStringList, name: "Values"))
     Filter.type = Types::Filter
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
-    GUIDList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GUID, name: "member")
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
+    GUIDList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GUID, name: "member"))
     GetCompatibleElasticsearchVersionsRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#httpQuery" => "domainName"}))
     GetCompatibleElasticsearchVersionsRequest.type = Types::GetCompatibleElasticsearchVersionsRequest
     GetCompatibleElasticsearchVersionsResponse.add_member(:compatible_elasticsearch_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: CompatibleElasticsearchVersionsList, name: "CompatibleElasticsearchVersions"))
@@ -899,7 +899,7 @@ module Aws::ElasticsearchService
     InboundCrossClusterSearchConnectionStatusCode.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
     InboundCrossClusterSearchConnectionStatusCode.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     InboundCrossClusterSearchConnectionStatusCode.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
-    InboundCrossClusterSearchConnections.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InboundCrossClusterSearchConnection, name: "member")
+    InboundCrossClusterSearchConnections.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InboundCrossClusterSearchConnection, name: "member"))
     InitiatedBy.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER", traits: {"smithy.api#enumValue" => "CUSTOMER"}))
     InitiatedBy.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE", traits: {"smithy.api#enumValue" => "SERVICE"}))
     InstanceCountLimits.add_member(:minimum_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: MinimumInstanceCount, name: "MinimumInstanceCount", traits: {"smithy.api#default" => 0}))
@@ -913,16 +913,16 @@ module Aws::ElasticsearchService
     InvalidPaginationTokenException.type = Types::InvalidPaginationTokenException
     InvalidTypeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InvalidTypeException.type = Types::InvalidTypeException
-    Issues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Issue, name: "member")
+    Issues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Issue, name: "member"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     LimitExceededException.type = Types::LimitExceededException
-    LimitValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LimitValue, name: "member")
+    LimitValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitValue, name: "member"))
     Limits.add_member(:storage_types, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageTypeList, name: "StorageTypes"))
     Limits.add_member(:instance_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceLimits, name: "InstanceLimits"))
     Limits.add_member(:additional_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalLimitList, name: "AdditionalLimits"))
     Limits.type = Types::Limits
-    LimitsByRole.key = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceRole, name: "key")
-    LimitsByRole.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Limits, name: "value")
+    LimitsByRole.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceRole, name: "key"))
+    LimitsByRole.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Limits, name: "value"))
     ListDomainNamesRequest.add_member(:engine_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineType, name: "EngineType", traits: {"smithy.api#httpQuery" => "engineType"}))
     ListDomainNamesRequest.type = Types::ListDomainNamesRequest
     ListDomainNamesResponse.add_member(:domain_names, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainInfoList, name: "DomainNames"))
@@ -979,8 +979,8 @@ module Aws::ElasticsearchService
     LogPublishingOption.add_member(:cloud_watch_logs_log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogsLogGroupArn, name: "CloudWatchLogsLogGroupArn"))
     LogPublishingOption.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled"))
     LogPublishingOption.type = Types::LogPublishingOption
-    LogPublishingOptions.key = ::Smithy::Schema::Shapes::MemberShape.new(target: LogType, name: "key")
-    LogPublishingOptions.value = ::Smithy::Schema::Shapes::MemberShape.new(target: LogPublishingOption, name: "value")
+    LogPublishingOptions.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LogType, name: "key"))
+    LogPublishingOptions.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LogPublishingOption, name: "value"))
     LogPublishingOptionsStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: LogPublishingOptions, name: "Options"))
     LogPublishingOptionsStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status"))
     LogPublishingOptionsStatus.type = Types::LogPublishingOptionsStatus
@@ -997,7 +997,7 @@ module Aws::ElasticsearchService
     ModifyingProperties.add_member(:pending_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PendingValue"))
     ModifyingProperties.add_member(:value_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyValueType, name: "ValueType"))
     ModifyingProperties.type = Types::ModifyingProperties
-    ModifyingPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ModifyingProperties, name: "member")
+    ModifyingPropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ModifyingProperties, name: "member"))
     NodeToNodeEncryptionOptions.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled"))
     NodeToNodeEncryptionOptions.type = Types::NodeToNodeEncryptionOptions
     NodeToNodeEncryptionOptionsStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeToNodeEncryptionOptions, name: "Options", traits: {"smithy.api#required" => {}}))
@@ -1029,7 +1029,7 @@ module Aws::ElasticsearchService
     OutboundCrossClusterSearchConnectionStatusCode.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
     OutboundCrossClusterSearchConnectionStatusCode.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     OutboundCrossClusterSearchConnectionStatusCode.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
-    OutboundCrossClusterSearchConnections.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OutboundCrossClusterSearchConnection, name: "member")
+    OutboundCrossClusterSearchConnections.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutboundCrossClusterSearchConnection, name: "member"))
     OverallChangeStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     OverallChangeStatus.add_member(:processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROCESSING", traits: {"smithy.api#enumValue" => "PROCESSING"}))
     OverallChangeStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
@@ -1044,7 +1044,7 @@ module Aws::ElasticsearchService
     PackageDetails.add_member(:available_package_version, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageVersion, name: "AvailablePackageVersion"))
     PackageDetails.add_member(:error_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetails, name: "ErrorDetails"))
     PackageDetails.type = Types::PackageDetails
-    PackageDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PackageDetails, name: "member")
+    PackageDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageDetails, name: "member"))
     PackageSource.add_member(:s3_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, name: "S3BucketName"))
     PackageSource.add_member(:s3_key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Key, name: "S3Key"))
     PackageSource.type = Types::PackageSource
@@ -1061,7 +1061,7 @@ module Aws::ElasticsearchService
     PackageVersionHistory.add_member(:commit_message, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitMessage, name: "CommitMessage"))
     PackageVersionHistory.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAt, name: "CreatedAt"))
     PackageVersionHistory.type = Types::PackageVersionHistory
-    PackageVersionHistoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PackageVersionHistory, name: "member")
+    PackageVersionHistoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageVersionHistory, name: "member"))
     PrincipalType.add_member(:aws_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_ACCOUNT", traits: {"smithy.api#enumValue" => "AWS_ACCOUNT"}))
     PrincipalType.add_member(:aws_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SERVICE", traits: {"smithy.api#enumValue" => "AWS_SERVICE"}))
     PropertyValueType.add_member(:plain_text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PLAIN_TEXT", traits: {"smithy.api#enumValue" => "PLAIN_TEXT"}))
@@ -1076,7 +1076,7 @@ module Aws::ElasticsearchService
     RecurringCharge.add_member(:recurring_charge_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "RecurringChargeAmount"))
     RecurringCharge.add_member(:recurring_charge_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RecurringChargeFrequency"))
     RecurringCharge.type = Types::RecurringCharge
-    RecurringChargeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringCharge, name: "member", traits: {"smithy.api#xmlName" => "RecurringCharge"})
+    RecurringChargeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringCharge, name: "member", traits: {"smithy.api#xmlName" => "RecurringCharge"}))
     RejectInboundCrossClusterSearchConnectionRequest.add_member(:cross_cluster_search_connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossClusterSearchConnectionId, name: "CrossClusterSearchConnectionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RejectInboundCrossClusterSearchConnectionRequest.type = Types::RejectInboundCrossClusterSearchConnectionRequest
     RejectInboundCrossClusterSearchConnectionResponse.add_member(:cross_cluster_search_connection, ::Smithy::Schema::Shapes::MemberShape.new(target: InboundCrossClusterSearchConnection, name: "CrossClusterSearchConnection"))
@@ -1098,7 +1098,7 @@ module Aws::ElasticsearchService
     ReservedElasticsearchInstance.add_member(:payment_option, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedElasticsearchInstancePaymentOption, name: "PaymentOption"))
     ReservedElasticsearchInstance.add_member(:recurring_charges, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringChargeList, name: "RecurringCharges"))
     ReservedElasticsearchInstance.type = Types::ReservedElasticsearchInstance
-    ReservedElasticsearchInstanceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedElasticsearchInstance, name: "member")
+    ReservedElasticsearchInstanceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedElasticsearchInstance, name: "member"))
     ReservedElasticsearchInstanceOffering.add_member(:reserved_elasticsearch_instance_offering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GUID, name: "ReservedElasticsearchInstanceOfferingId"))
     ReservedElasticsearchInstanceOffering.add_member(:elasticsearch_instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ESPartitionInstanceType, name: "ElasticsearchInstanceType"))
     ReservedElasticsearchInstanceOffering.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Duration", traits: {"smithy.api#default" => 0}))
@@ -1108,7 +1108,7 @@ module Aws::ElasticsearchService
     ReservedElasticsearchInstanceOffering.add_member(:payment_option, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedElasticsearchInstancePaymentOption, name: "PaymentOption"))
     ReservedElasticsearchInstanceOffering.add_member(:recurring_charges, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringChargeList, name: "RecurringCharges"))
     ReservedElasticsearchInstanceOffering.type = Types::ReservedElasticsearchInstanceOffering
-    ReservedElasticsearchInstanceOfferingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedElasticsearchInstanceOffering, name: "member", traits: {"smithy.api#xmlName" => "ReservedElasticsearchInstanceOffering"})
+    ReservedElasticsearchInstanceOfferingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedElasticsearchInstanceOffering, name: "member", traits: {"smithy.api#xmlName" => "ReservedElasticsearchInstanceOffering"}))
     ReservedElasticsearchInstancePaymentOption.add_member(:all_upfront, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL_UPFRONT", traits: {"smithy.api#enumValue" => "ALL_UPFRONT"}))
     ReservedElasticsearchInstancePaymentOption.add_member(:partial_upfront, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARTIAL_UPFRONT", traits: {"smithy.api#enumValue" => "PARTIAL_UPFRONT"}))
     ReservedElasticsearchInstancePaymentOption.add_member(:no_upfront, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_UPFRONT", traits: {"smithy.api#enumValue" => "NO_UPFRONT"}))
@@ -1174,16 +1174,16 @@ module Aws::ElasticsearchService
     StorageTypeLimit.add_member(:limit_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitName, name: "LimitName"))
     StorageTypeLimit.add_member(:limit_values, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitValueList, name: "LimitValues"))
     StorageTypeLimit.type = Types::StorageTypeLimit
-    StorageTypeLimitList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StorageTypeLimit, name: "member")
-    StorageTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, name: "member")
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    StorageTypeLimitList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageTypeLimit, name: "member"))
+    StorageTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, name: "member"))
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     TLSSecurityPolicy.add_member(:policy_min_tls_1_0_2019_07, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_MIN_TLS_1_0_2019_07", traits: {"smithy.api#enumValue" => "Policy-Min-TLS-1-0-2019-07"}))
     TLSSecurityPolicy.add_member(:policy_min_tls_1_2_2019_07, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_MIN_TLS_1_2_2019_07", traits: {"smithy.api#enumValue" => "Policy-Min-TLS-1-2-2019-07"}))
     TLSSecurityPolicy.add_member(:policy_min_tls_1_2_pfs_2023_10, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_MIN_TLS_1_2_PFS_2023_10", traits: {"smithy.api#enumValue" => "Policy-Min-TLS-1-2-PFS-2023-10"}))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TimeUnit.add_member(:hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOURS", traits: {"smithy.api#enumValue" => "HOURS"}))
     UpdateElasticsearchDomainConfigRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateElasticsearchDomainConfigRequest.add_member(:elasticsearch_cluster_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ElasticsearchClusterConfig, name: "ElasticsearchClusterConfig"))
@@ -1230,7 +1230,7 @@ module Aws::ElasticsearchService
     UpgradeHistory.add_member(:upgrade_status, ::Smithy::Schema::Shapes::MemberShape.new(target: UpgradeStatus, name: "UpgradeStatus"))
     UpgradeHistory.add_member(:steps_list, ::Smithy::Schema::Shapes::MemberShape.new(target: UpgradeStepsList, name: "StepsList"))
     UpgradeHistory.type = Types::UpgradeHistory
-    UpgradeHistoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpgradeHistory, name: "member")
+    UpgradeHistoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpgradeHistory, name: "member"))
     UpgradeStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     UpgradeStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
     UpgradeStatus.add_member(:succeeded_with_issues, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED_WITH_ISSUES", traits: {"smithy.api#enumValue" => "SUCCEEDED_WITH_ISSUES"}))
@@ -1243,7 +1243,7 @@ module Aws::ElasticsearchService
     UpgradeStepItem.add_member(:issues, ::Smithy::Schema::Shapes::MemberShape.new(target: Issues, name: "Issues"))
     UpgradeStepItem.add_member(:progress_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "ProgressPercent"))
     UpgradeStepItem.type = Types::UpgradeStepItem
-    UpgradeStepsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpgradeStepItem, name: "member")
+    UpgradeStepsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpgradeStepItem, name: "member"))
     VPCDerivedInfo.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VPCId"))
     VPCDerivedInfo.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "SubnetIds"))
     VPCDerivedInfo.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "AvailabilityZones"))
@@ -1257,7 +1257,7 @@ module Aws::ElasticsearchService
     VPCOptions.type = Types::VPCOptions
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ValidationException.type = Types::ValidationException
-    ValueStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    ValueStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     VolumeType.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "standard", traits: {"smithy.api#enumValue" => "standard"}))
     VolumeType.add_member(:gp2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "gp2", traits: {"smithy.api#enumValue" => "gp2"}))
     VolumeType.add_member(:io1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "io1", traits: {"smithy.api#enumValue" => "io1"}))
@@ -1275,8 +1275,8 @@ module Aws::ElasticsearchService
     VpcEndpointError.type = Types::VpcEndpointError
     VpcEndpointErrorCode.add_member(:endpoint_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENDPOINT_NOT_FOUND", traits: {"smithy.api#enumValue" => "ENDPOINT_NOT_FOUND"}))
     VpcEndpointErrorCode.add_member(:server_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVER_ERROR", traits: {"smithy.api#enumValue" => "SERVER_ERROR"}))
-    VpcEndpointErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointError, name: "member")
-    VpcEndpointIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointId, name: "member")
+    VpcEndpointErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointError, name: "member"))
+    VpcEndpointIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointId, name: "member"))
     VpcEndpointStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     VpcEndpointStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
     VpcEndpointStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
@@ -1289,8 +1289,8 @@ module Aws::ElasticsearchService
     VpcEndpointSummary.add_member(:domain_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainArn, name: "DomainArn"))
     VpcEndpointSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointStatus, name: "Status"))
     VpcEndpointSummary.type = Types::VpcEndpointSummary
-    VpcEndpointSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointSummary, name: "member")
-    VpcEndpoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpoint, name: "member")
+    VpcEndpointSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointSummary, name: "member"))
+    VpcEndpoints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpoint, name: "member"))
     ZoneAwarenessConfig.add_member(:availability_zone_count, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerClass, name: "AvailabilityZoneCount"))
     ZoneAwarenessConfig.type = Types::ZoneAwarenessConfig
 

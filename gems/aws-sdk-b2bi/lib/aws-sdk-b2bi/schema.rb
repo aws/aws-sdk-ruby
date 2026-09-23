@@ -203,7 +203,7 @@ module Aws::B2bi
     CapabilityConfiguration.type = Types::CapabilityConfiguration
     CapabilityDirection.add_member(:inbound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INBOUND", traits: {"smithy.api#enumValue" => "INBOUND"}))
     CapabilityDirection.add_member(:outbound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OUTBOUND", traits: {"smithy.api#enumValue" => "OUTBOUND"}))
-    CapabilityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilitySummary, name: "member")
+    CapabilityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilitySummary, name: "member"))
     CapabilityOptions.add_member(:outbound_edi, ::Smithy::Schema::Shapes::MemberShape.new(target: OutboundEdiOptions, name: "outboundEdi"))
     CapabilityOptions.add_member(:inbound_edi, ::Smithy::Schema::Shapes::MemberShape.new(target: InboundEdiOptions, name: "inboundEdi"))
     CapabilityOptions.type = Types::CapabilityOptions
@@ -214,7 +214,7 @@ module Aws::B2bi
     CapabilitySummary.add_member(:modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ModifiedDate, name: "modifiedAt"))
     CapabilitySummary.type = Types::CapabilitySummary
     CapabilityType.add_member(:edi, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EDI", traits: {"smithy.api#enumValue" => "edi"}))
-    CodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    CodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
     ConversionSource.add_member(:file_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversionSourceFormat, name: "fileFormat", traits: {"smithy.api#required" => {}}))
@@ -420,11 +420,11 @@ module Aws::B2bi
     InputFileSource.add_member(:file_content, Types::InputFileSource::FileContent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "fileContent", traits: {"smithy.api#length" => {"min" => 1, "max" => 5000000}}))
     InputFileSource.add_member(:unknown, Types::InputFileSource::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     InputFileSource.type = Types::InputFileSource
-    InstructionsDocuments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "member")
+    InstructionsDocuments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     InternalServerException.type = Types::InternalServerException
-    KeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SampleDocumentKeys, name: "member")
+    KeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleDocumentKeys, name: "member"))
     LineTerminator.add_member(:crlf, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CRLF", traits: {"smithy.api#enumValue" => "CRLF"}))
     LineTerminator.add_member(:lf, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LF", traits: {"smithy.api#enumValue" => "LF"}))
     LineTerminator.add_member(:cr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CR", traits: {"smithy.api#enumValue" => "CR"}))
@@ -476,9 +476,9 @@ module Aws::B2bi
     OutputSampleFileSource.add_member(:file_location, Types::OutputSampleFileSource::FileLocation, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "fileLocation"))
     OutputSampleFileSource.add_member(:unknown, Types::OutputSampleFileSource::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     OutputSampleFileSource.type = Types::OutputSampleFileSource
-    ParsedSplitFileContentsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    PartnershipCapabilities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityId, name: "member")
-    PartnershipList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PartnershipSummary, name: "member")
+    ParsedSplitFileContentsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    PartnershipCapabilities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityId, name: "member"))
+    PartnershipList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnershipSummary, name: "member"))
     PartnershipSummary.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileId, name: "profileId", traits: {"smithy.api#required" => {}}))
     PartnershipSummary.add_member(:partnership_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnershipId, name: "partnershipId", traits: {"smithy.api#required" => {}}))
     PartnershipSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerName, name: "name"))
@@ -488,7 +488,7 @@ module Aws::B2bi
     PartnershipSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedDate, name: "createdAt", traits: {"smithy.api#required" => {}}))
     PartnershipSummary.add_member(:modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ModifiedDate, name: "modifiedAt"))
     PartnershipSummary.type = Types::PartnershipSummary
-    ProfileList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileSummary, name: "member")
+    ProfileList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileSummary, name: "member"))
     ProfileSummary.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileId, name: "profileId", traits: {"smithy.api#required" => {}}))
     ProfileSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileName, name: "name", traits: {"smithy.api#required" => {}}))
     ProfileSummary.add_member(:business_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BusinessName, name: "businessName", traits: {"smithy.api#required" => {}}))
@@ -502,7 +502,7 @@ module Aws::B2bi
     S3Location.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "bucketName"))
     S3Location.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Key, name: "key"))
     S3Location.type = Types::S3Location
-    S3LocationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "member")
+    S3LocationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "member"))
     SampleDocumentKeys.add_member(:input, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Key, name: "input"))
     SampleDocumentKeys.add_member(:output, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Key, name: "output"))
     SampleDocumentKeys.type = Types::SampleDocumentKeys
@@ -525,8 +525,8 @@ module Aws::B2bi
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -561,7 +561,7 @@ module Aws::B2bi
     TransformerJobStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "running"}))
     TransformerJobStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "succeeded"}))
     TransformerJobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "failed"}))
-    TransformerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TransformerSummary, name: "member")
+    TransformerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TransformerSummary, name: "member"))
     TransformerStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "active"}))
     TransformerStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "inactive"}))
     TransformerSummary.add_member(:transformer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TransformerId, name: "transformerId", traits: {"smithy.api#required" => {}}))
@@ -658,7 +658,7 @@ module Aws::B2bi
     UpdateTransformerResponse.type = Types::UpdateTransformerResponse
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message", traits: {"smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
-    ValidationMessages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    ValidationMessages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     WrapFormat.add_member(:segment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEGMENT", traits: {"smithy.api#enumValue" => "SEGMENT"}))
     WrapFormat.add_member(:one_line, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONE_LINE", traits: {"smithy.api#enumValue" => "ONE_LINE"}))
     WrapFormat.add_member(:line_length, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINE_LENGTH", traits: {"smithy.api#enumValue" => "LINE_LENGTH"}))
@@ -1079,7 +1079,7 @@ module Aws::B2bi
     X12ValidationRule.add_member(:element_requirement_validation_rule, Types::X12ValidationRule::ElementRequirementValidationRule, ::Smithy::Schema::Shapes::MemberShape.new(target: X12ElementRequirementValidationRule, name: "elementRequirementValidationRule"))
     X12ValidationRule.add_member(:unknown, Types::X12ValidationRule::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     X12ValidationRule.type = Types::X12ValidationRule
-    X12ValidationRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: X12ValidationRule, name: "member")
+    X12ValidationRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: X12ValidationRule, name: "member"))
     X12Version.add_member(:version_4010, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERSION_4010", traits: {"smithy.api#enumValue" => "VERSION_4010"}))
     X12Version.add_member(:version_4030, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERSION_4030", traits: {"smithy.api#enumValue" => "VERSION_4030"}))
     X12Version.add_member(:version_4050, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERSION_4050", traits: {"smithy.api#enumValue" => "VERSION_4050"}))

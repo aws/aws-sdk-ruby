@@ -128,7 +128,7 @@ module Aws::BackupGateway
     BandwidthRateLimitInterval.add_member(:end_minute_of_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: MinuteOfHour, name: "EndMinuteOfHour", traits: {"smithy.api#required" => {}}))
     BandwidthRateLimitInterval.add_member(:days_of_week, ::Smithy::Schema::Shapes::MemberShape.new(target: DaysOfWeek, name: "DaysOfWeek", traits: {"smithy.api#required" => {}}))
     BandwidthRateLimitInterval.type = Types::BandwidthRateLimitInterval
-    BandwidthRateLimitIntervals.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BandwidthRateLimitInterval, name: "member")
+    BandwidthRateLimitIntervals.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BandwidthRateLimitInterval, name: "member"))
     ConflictException.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorCode", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ConflictException.type = Types::ConflictException
@@ -139,7 +139,7 @@ module Aws::BackupGateway
     CreateGatewayOperationInput.type = Types::CreateGatewayOperationInput
     CreateGatewayOperationOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayArn, name: "GatewayArn"))
     CreateGatewayOperationOutput.type = Types::CreateGatewayOperationOutput
-    DaysOfWeek.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfWeek, name: "member")
+    DaysOfWeek.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfWeek, name: "member"))
     DeleteGatewayOperationInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayArn, name: "GatewayArn", traits: {"smithy.api#required" => {}}))
     DeleteGatewayOperationInput.type = Types::DeleteGatewayOperationInput
     DeleteGatewayOperationOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayArn, name: "GatewayArn"))
@@ -167,7 +167,7 @@ module Aws::BackupGateway
     GatewayDetails.add_member(:next_update_availability_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "NextUpdateAvailabilityTime"))
     GatewayDetails.add_member(:vpc_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpoint, name: "VpcEndpoint"))
     GatewayDetails.type = Types::GatewayDetails
-    Gateways.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Gateway, name: "member")
+    Gateways.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Gateway, name: "member"))
     GetBandwidthRateLimitScheduleOperationInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayArn, name: "GatewayArn", traits: {"smithy.api#required" => {}}))
     GetBandwidthRateLimitScheduleOperationInput.type = Types::GetBandwidthRateLimitScheduleOperationInput
     GetBandwidthRateLimitScheduleOperationOutput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayArn, name: "GatewayArn"))
@@ -207,7 +207,7 @@ module Aws::BackupGateway
     HypervisorDetails.add_member(:latest_metadata_sync_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LatestMetadataSyncStatusMessage"))
     HypervisorDetails.add_member(:latest_metadata_sync_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SyncMetadataStatus, name: "LatestMetadataSyncStatus"))
     HypervisorDetails.type = Types::HypervisorDetails
-    Hypervisors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Hypervisor, name: "member")
+    Hypervisors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Hypervisor, name: "member"))
     ImportHypervisorConfigurationOperationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name", traits: {"smithy.api#required" => {}}))
     ImportHypervisorConfigurationOperationInput.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: Host, name: "Host", traits: {"smithy.api#required" => {}}))
     ImportHypervisorConfigurationOperationInput.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: Username, name: "Username"))
@@ -278,13 +278,13 @@ module Aws::BackupGateway
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceOperationInput.type = Types::TagResourceOperationInput
     TagResourceOperationOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceARN"))
     TagResourceOperationOutput.type = Types::TagResourceOperationOutput
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TestHypervisorConfigurationOperationInput.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayArn, name: "GatewayArn", traits: {"smithy.api#required" => {}}))
     TestHypervisorConfigurationOperationInput.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: Host, name: "Host", traits: {"smithy.api#required" => {}}))
     TestHypervisorConfigurationOperationInput.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: Username, name: "Username"))
@@ -335,18 +335,18 @@ module Aws::BackupGateway
     VirtualMachineDetails.add_member(:last_backup_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "LastBackupDate"))
     VirtualMachineDetails.add_member(:vmware_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: VmwareTags, name: "VmwareTags"))
     VirtualMachineDetails.type = Types::VirtualMachineDetails
-    VirtualMachines.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualMachine, name: "member")
+    VirtualMachines.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualMachine, name: "member"))
     VmwareTag.add_member(:vmware_category, ::Smithy::Schema::Shapes::MemberShape.new(target: VmwareCategory, name: "VmwareCategory"))
     VmwareTag.add_member(:vmware_tag_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VmwareTagName, name: "VmwareTagName"))
     VmwareTag.add_member(:vmware_tag_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VmwareTagDescription"))
     VmwareTag.type = Types::VmwareTag
-    VmwareTags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VmwareTag, name: "member")
+    VmwareTags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VmwareTag, name: "member"))
     VmwareToAwsTagMapping.add_member(:vmware_category, ::Smithy::Schema::Shapes::MemberShape.new(target: VmwareCategory, name: "VmwareCategory", traits: {"smithy.api#required" => {}}))
     VmwareToAwsTagMapping.add_member(:vmware_tag_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VmwareTagName, name: "VmwareTagName", traits: {"smithy.api#required" => {}}))
     VmwareToAwsTagMapping.add_member(:aws_tag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "AwsTagKey", traits: {"smithy.api#required" => {}}))
     VmwareToAwsTagMapping.add_member(:aws_tag_value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "AwsTagValue", traits: {"smithy.api#required" => {}}))
     VmwareToAwsTagMapping.type = Types::VmwareToAwsTagMapping
-    VmwareToAwsTagMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VmwareToAwsTagMapping, name: "member")
+    VmwareToAwsTagMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VmwareToAwsTagMapping, name: "member"))
 
     BackupOnPremisesV20210101 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.backupgateway#BackupOnPremises_v20210101"

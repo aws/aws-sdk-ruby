@@ -220,13 +220,13 @@ module Aws::ApplicationSignals
     AttributeFilter.add_member(:attribute_filter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeFilterName, name: "AttributeFilterName", traits: {"smithy.api#required" => {}}))
     AttributeFilter.add_member(:attribute_filter_values, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeFilterValues, name: "AttributeFilterValues", traits: {"smithy.api#required" => {}}))
     AttributeFilter.type = Types::AttributeFilter
-    AttributeFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeFilterValue, name: "member")
-    AttributeFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeFilter, name: "member")
-    AttributeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    AttributeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
-    AttributeMaps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMap, name: "member")
-    Attributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAttributeName, name: "key")
-    Attributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAttributeValue, name: "value")
+    AttributeFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeFilterValue, name: "member"))
+    AttributeFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeFilter, name: "member"))
+    AttributeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    AttributeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
+    AttributeMaps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMap, name: "member"))
+    Attributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAttributeName, name: "key"))
+    Attributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAttributeValue, name: "value"))
     AuditFinding.add_member(:key_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "KeyAttributes", traits: {"smithy.api#required" => {}}))
     AuditFinding.add_member(:auditor_results, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditorResults, name: "AuditorResults"))
     AuditFinding.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Operation"))
@@ -234,7 +234,7 @@ module Aws::ApplicationSignals
     AuditFinding.add_member(:dependency_graph, ::Smithy::Schema::Shapes::MemberShape.new(target: DependencyGraph, name: "DependencyGraph"))
     AuditFinding.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Type"))
     AuditFinding.type = Types::AuditFinding
-    AuditFindings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuditFinding, name: "member")
+    AuditFindings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditFinding, name: "member"))
     AuditTarget.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Type", traits: {"smithy.api#required" => {}}))
     AuditTarget.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditTargetEntity, name: "Data", traits: {"smithy.api#required" => {}}))
     AuditTarget.type = Types::AuditTarget
@@ -243,13 +243,13 @@ module Aws::ApplicationSignals
     AuditTargetEntity.add_member(:service_operation, Types::AuditTargetEntity::ServiceOperation, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceOperationEntity, name: "ServiceOperation"))
     AuditTargetEntity.add_member(:unknown, Types::AuditTargetEntity::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AuditTargetEntity.type = Types::AuditTargetEntity
-    AuditTargets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuditTarget, name: "member")
+    AuditTargets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditTarget, name: "member"))
     AuditorResult.add_member(:auditor, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Auditor"))
     AuditorResult.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Description", traits: {"smithy.api#length" => {"max" => 10240}}))
     AuditorResult.add_member(:severity, ::Smithy::Schema::Shapes::MemberShape.new(target: Severity, name: "Severity"))
     AuditorResult.type = Types::AuditorResult
-    AuditorResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuditorResult, name: "member")
-    Auditors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    AuditorResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditorResult, name: "member"))
+    Auditors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     BatchGetServiceLevelObjectiveBudgetReportInput.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "Timestamp", traits: {"smithy.api#required" => {}}))
     BatchGetServiceLevelObjectiveBudgetReportInput.add_member(:slo_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceLevelObjectiveIds, name: "SloIds", traits: {"smithy.api#required" => {}}))
     BatchGetServiceLevelObjectiveBudgetReportInput.type = Types::BatchGetServiceLevelObjectiveBudgetReportInput
@@ -261,7 +261,7 @@ module Aws::ApplicationSignals
     BatchUpdateExclusionWindowsError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ExclusionWindowErrorCode, name: "ErrorCode", traits: {"smithy.api#required" => {}}))
     BatchUpdateExclusionWindowsError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExclusionWindowErrorMessage, name: "ErrorMessage", traits: {"smithy.api#required" => {}}))
     BatchUpdateExclusionWindowsError.type = Types::BatchUpdateExclusionWindowsError
-    BatchUpdateExclusionWindowsErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateExclusionWindowsError, name: "member")
+    BatchUpdateExclusionWindowsErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateExclusionWindowsError, name: "member"))
     BatchUpdateExclusionWindowsInput.add_member(:slo_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceLevelObjectiveIds, name: "SloIds", traits: {"smithy.api#required" => {}}))
     BatchUpdateExclusionWindowsInput.add_member(:add_exclusion_windows, ::Smithy::Schema::Shapes::MemberShape.new(target: ExclusionWindows, name: "AddExclusionWindows"))
     BatchUpdateExclusionWindowsInput.add_member(:remove_exclusion_windows, ::Smithy::Schema::Shapes::MemberShape.new(target: ExclusionWindows, name: "RemoveExclusionWindows"))
@@ -271,7 +271,7 @@ module Aws::ApplicationSignals
     BatchUpdateExclusionWindowsOutput.type = Types::BatchUpdateExclusionWindowsOutput
     BurnRateConfiguration.add_member(:look_back_window_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: BurnRateLookBackWindowMinutes, name: "LookBackWindowMinutes", traits: {"smithy.api#required" => {}}))
     BurnRateConfiguration.type = Types::BurnRateConfiguration
-    BurnRateConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BurnRateConfiguration, name: "member")
+    BurnRateConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BurnRateConfiguration, name: "member"))
     CalendarInterval.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "StartTime", traits: {"smithy.api#required" => {}}))
     CalendarInterval.add_member(:duration_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationUnit, name: "DurationUnit", traits: {"smithy.api#required" => {}}))
     CalendarInterval.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: CalendarIntervalDuration, name: "Duration", traits: {"smithy.api#required" => {}}))
@@ -313,7 +313,7 @@ module Aws::ApplicationSignals
     Dimension.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionName, name: "Name", traits: {"smithy.api#required" => {}}))
     Dimension.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Dimension.type = Types::Dimension
-    Dimensions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "member")
+    Dimensions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "member"))
     DurationUnit.add_member(:minute, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MINUTE", traits: {"smithy.api#enumValue" => "MINUTE"}))
     DurationUnit.add_member(:hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOUR", traits: {"smithy.api#enumValue" => "HOUR"}))
     DurationUnit.add_member(:day, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DAY", traits: {"smithy.api#enumValue" => "DAY"}))
@@ -323,7 +323,7 @@ module Aws::ApplicationSignals
     Edge.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Duration"))
     Edge.add_member(:connection_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionType, name: "ConnectionType"))
     Edge.type = Types::Edge
-    Edges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Edge, name: "member")
+    Edges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Edge, name: "member"))
     EvaluationType.add_member(:period_based, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PERIOD_BASED", traits: {"smithy.api#enumValue" => "PeriodBased"}))
     EvaluationType.add_member(:request_based, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUEST_BASED", traits: {"smithy.api#enumValue" => "RequestBased"}))
     ExclusionWindow.add_member(:window, ::Smithy::Schema::Shapes::MemberShape.new(target: Window, name: "Window", traits: {"smithy.api#required" => {}}))
@@ -331,7 +331,7 @@ module Aws::ApplicationSignals
     ExclusionWindow.add_member(:recurrence_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurrenceRule, name: "RecurrenceRule"))
     ExclusionWindow.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ExclusionReason, name: "Reason"))
     ExclusionWindow.type = Types::ExclusionWindow
-    ExclusionWindows.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExclusionWindow, name: "member")
+    ExclusionWindows.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExclusionWindow, name: "member"))
     GetServiceInput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "StartTime", traits: {"smithy.api#httpQuery" => "StartTime", "smithy.api#required" => {}}))
     GetServiceInput.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "EndTime", traits: {"smithy.api#httpQuery" => "EndTime", "smithy.api#required" => {}}))
     GetServiceInput.add_member(:key_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "KeyAttributes", traits: {"smithy.api#required" => {}}))
@@ -353,16 +353,16 @@ module Aws::ApplicationSignals
     GroupingAttributeDefinition.add_member(:grouping_source_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingSourceKeyStringList, name: "GroupingSourceKeys"))
     GroupingAttributeDefinition.add_member(:default_grouping_value, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingString, name: "DefaultGroupingValue"))
     GroupingAttributeDefinition.type = Types::GroupingAttributeDefinition
-    GroupingAttributeDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingAttributeDefinition, name: "member")
+    GroupingAttributeDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingAttributeDefinition, name: "member"))
     GroupingConfiguration.add_member(:grouping_attribute_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingAttributeDefinitions, name: "GroupingAttributeDefinitions", traits: {"smithy.api#required" => {}}))
     GroupingConfiguration.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "UpdatedAt", traits: {"smithy.api#required" => {}}))
     GroupingConfiguration.type = Types::GroupingConfiguration
-    GroupingSourceKeyStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingString, name: "member")
+    GroupingSourceKeyStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingString, name: "member"))
     Interval.add_member(:rolling_interval, Types::Interval::RollingInterval, ::Smithy::Schema::Shapes::MemberShape.new(target: RollingInterval, name: "RollingInterval"))
     Interval.add_member(:calendar_interval, Types::Interval::CalendarInterval, ::Smithy::Schema::Shapes::MemberShape.new(target: CalendarInterval, name: "CalendarInterval"))
     Interval.add_member(:unknown, Types::Interval::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Interval.type = Types::Interval
-    LatestChangeEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeEvent, name: "member")
+    LatestChangeEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeEvent, name: "member"))
     ListAuditFindingsInput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "StartTime", traits: {"smithy.api#httpQuery" => "StartTime", "smithy.api#required" => {}}))
     ListAuditFindingsInput.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "EndTime", traits: {"smithy.api#httpQuery" => "EndTime", "smithy.api#required" => {}}))
     ListAuditFindingsInput.add_member(:auditors, ::Smithy::Schema::Shapes::MemberShape.new(target: Auditors, name: "Auditors"))
@@ -460,12 +460,12 @@ module Aws::ApplicationSignals
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    LogGroupReferences.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "member")
+    LogGroupReferences.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "member"))
     Metric.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "Namespace"))
     Metric.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "MetricName"))
     Metric.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimensions, name: "Dimensions"))
     Metric.type = Types::Metric
-    MetricDataQueries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDataQuery, name: "member")
+    MetricDataQueries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDataQuery, name: "member"))
     MetricDataQuery.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricId, name: "Id", traits: {"smithy.api#required" => {}}))
     MetricDataQuery.add_member(:metric_stat, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStat, name: "MetricStat"))
     MetricDataQuery.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricExpression, name: "Expression"))
@@ -484,11 +484,11 @@ module Aws::ApplicationSignals
     MetricReference.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "MetricName", traits: {"smithy.api#required" => {}}))
     MetricReference.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "AccountId"))
     MetricReference.type = Types::MetricReference
-    MetricReferences.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricReference, name: "member")
+    MetricReferences.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricReference, name: "member"))
     MetricSourceType.add_member(:service_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE_OPERATION", traits: {"smithy.api#enumValue" => "ServiceOperation"}))
     MetricSourceType.add_member(:cloudwatch_metric, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUDWATCH_METRIC", traits: {"smithy.api#enumValue" => "CloudWatchMetric"}))
     MetricSourceType.add_member(:service_dependency, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE_DEPENDENCY", traits: {"smithy.api#enumValue" => "ServiceDependency"}))
-    MetricSourceTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricSourceType, name: "member")
+    MetricSourceTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricSourceType, name: "member"))
     MetricStat.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: Metric, name: "Metric", traits: {"smithy.api#required" => {}}))
     MetricStat.add_member(:period, ::Smithy::Schema::Shapes::MemberShape.new(target: Period, name: "Period", traits: {"smithy.api#required" => {}}))
     MetricStat.add_member(:stat, ::Smithy::Schema::Shapes::MemberShape.new(target: Stat, name: "Stat", traits: {"smithy.api#required" => {}}))
@@ -506,7 +506,7 @@ module Aws::ApplicationSignals
     Node.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Duration"))
     Node.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Status"))
     Node.type = Types::Node
-    Nodes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Node, name: "member")
+    Nodes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Node, name: "member"))
     PutGroupingConfigurationInput.add_member(:grouping_attribute_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingAttributeDefinitions, name: "GroupingAttributeDefinitions", traits: {"smithy.api#required" => {}}))
     PutGroupingConfigurationInput.type = Types::PutGroupingConfigurationInput
     PutGroupingConfigurationOutput.add_member(:grouping_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingConfiguration, name: "GroupingConfiguration", traits: {"smithy.api#required" => {}}))
@@ -548,7 +548,7 @@ module Aws::ApplicationSignals
     Service.add_member(:metric_references, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricReferences, name: "MetricReferences", traits: {"smithy.api#required" => {}}))
     Service.add_member(:log_group_references, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupReferences, name: "LogGroupReferences"))
     Service.type = Types::Service
-    ServiceDependencies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceDependency, name: "member")
+    ServiceDependencies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceDependency, name: "member"))
     ServiceDependency.add_member(:operation_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationName, name: "OperationName", traits: {"smithy.api#required" => {}}))
     ServiceDependency.add_member(:dependency_key_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "DependencyKeyAttributes", traits: {"smithy.api#required" => {}}))
     ServiceDependency.add_member(:dependency_operation_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationName, name: "DependencyOperationName", traits: {"smithy.api#required" => {}}))
@@ -559,7 +559,7 @@ module Aws::ApplicationSignals
     ServiceDependent.add_member(:dependent_operation_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationName, name: "DependentOperationName"))
     ServiceDependent.add_member(:metric_references, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricReferences, name: "MetricReferences", traits: {"smithy.api#required" => {}}))
     ServiceDependent.type = Types::ServiceDependent
-    ServiceDependents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceDependent, name: "member")
+    ServiceDependents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceDependent, name: "member"))
     ServiceEntity.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Type"))
     ServiceEntity.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name"))
     ServiceEntity.add_member(:environment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Environment"))
@@ -570,7 +570,7 @@ module Aws::ApplicationSignals
     ServiceGroup.add_member(:group_source, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSource, name: "GroupSource", traits: {"smithy.api#required" => {}}))
     ServiceGroup.add_member(:group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupIdentifier, name: "GroupIdentifier", traits: {"smithy.api#required" => {}}))
     ServiceGroup.type = Types::ServiceGroup
-    ServiceGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceGroup, name: "member")
+    ServiceGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceGroup, name: "member"))
     ServiceLevelIndicator.add_member(:sli_metric, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceLevelIndicatorMetric, name: "SliMetric", traits: {"smithy.api#required" => {}}))
     ServiceLevelIndicator.add_member(:metric_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceLevelIndicatorMetricThreshold, name: "MetricThreshold", traits: {"smithy.api#required" => {}}))
     ServiceLevelIndicator.add_member(:comparison_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceLevelIndicatorComparisonOperator, name: "ComparisonOperator", traits: {"smithy.api#required" => {}}))
@@ -630,8 +630,8 @@ module Aws::ApplicationSignals
     ServiceLevelObjectiveBudgetReportError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceLevelObjectiveBudgetReportErrorCode, name: "ErrorCode", traits: {"smithy.api#required" => {}}))
     ServiceLevelObjectiveBudgetReportError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceLevelObjectiveBudgetReportErrorMessage, name: "ErrorMessage", traits: {"smithy.api#required" => {}}))
     ServiceLevelObjectiveBudgetReportError.type = Types::ServiceLevelObjectiveBudgetReportError
-    ServiceLevelObjectiveBudgetReportErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceLevelObjectiveBudgetReportError, name: "member")
-    ServiceLevelObjectiveBudgetReports.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceLevelObjectiveBudgetReport, name: "member")
+    ServiceLevelObjectiveBudgetReportErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceLevelObjectiveBudgetReportError, name: "member"))
+    ServiceLevelObjectiveBudgetReports.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceLevelObjectiveBudgetReport, name: "member"))
     ServiceLevelObjectiveBudgetStatus.add_member(:ok, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OK", traits: {"smithy.api#enumValue" => "OK"}))
     ServiceLevelObjectiveBudgetStatus.add_member(:warning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WARNING", traits: {"smithy.api#enumValue" => "WARNING"}))
     ServiceLevelObjectiveBudgetStatus.add_member(:breached, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BREACHED", traits: {"smithy.api#enumValue" => "BREACHED"}))
@@ -639,8 +639,8 @@ module Aws::ApplicationSignals
     ServiceLevelObjectiveEntity.add_member(:slo_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "SloName"))
     ServiceLevelObjectiveEntity.add_member(:slo_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "SloArn"))
     ServiceLevelObjectiveEntity.type = Types::ServiceLevelObjectiveEntity
-    ServiceLevelObjectiveIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    ServiceLevelObjectiveSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceLevelObjectiveSummary, name: "member")
+    ServiceLevelObjectiveIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    ServiceLevelObjectiveSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceLevelObjectiveSummary, name: "member"))
     ServiceLevelObjectiveSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceLevelObjectiveArn, name: "Arn", traits: {"smithy.api#required" => {}}))
     ServiceLevelObjectiveSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceLevelObjectiveName, name: "Name", traits: {"smithy.api#required" => {}}))
     ServiceLevelObjectiveSummary.add_member(:key_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "KeyAttributes"))
@@ -657,15 +657,15 @@ module Aws::ApplicationSignals
     ServiceOperationEntity.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Operation"))
     ServiceOperationEntity.add_member(:metric_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "MetricType"))
     ServiceOperationEntity.type = Types::ServiceOperationEntity
-    ServiceOperations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceOperation, name: "member")
+    ServiceOperations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceOperation, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     ServiceState.add_member(:attribute_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeFilters, name: "AttributeFilters"))
     ServiceState.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "Service", traits: {"smithy.api#required" => {}}))
     ServiceState.add_member(:latest_change_events, ::Smithy::Schema::Shapes::MemberShape.new(target: LatestChangeEvents, name: "LatestChangeEvents", traits: {"smithy.api#required" => {}}))
     ServiceState.type = Types::ServiceState
-    ServiceStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceState, name: "member")
-    ServiceSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceSummary, name: "member")
+    ServiceStates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceState, name: "member"))
+    ServiceSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceSummary, name: "member"))
     ServiceSummary.add_member(:key_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "KeyAttributes", traits: {"smithy.api#required" => {}}))
     ServiceSummary.add_member(:attribute_maps, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMaps, name: "AttributeMaps"))
     ServiceSummary.add_member(:metric_references, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricReferences, name: "MetricReferences", traits: {"smithy.api#required" => {}}))
@@ -708,8 +708,8 @@ module Aws::ApplicationSignals
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest

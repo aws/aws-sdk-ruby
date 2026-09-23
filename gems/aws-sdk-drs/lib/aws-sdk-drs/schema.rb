@@ -308,8 +308,8 @@ module Aws::Drs
     AccessDeniedException.type = Types::AccessDeniedException
     Account.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "accountID"))
     Account.type = Types::Account
-    AccountIDs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "member")
-    Accounts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Account, name: "member")
+    AccountIDs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "member"))
+    Accounts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Account, name: "member"))
     AssociateSourceNetworkStackRequest.add_member(:source_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceNetworkID, name: "sourceNetworkID", traits: {"smithy.api#required" => {}}))
     AssociateSourceNetworkStackRequest.add_member(:cfn_stack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CfnStackName, name: "cfnStackName", traits: {"smithy.api#required" => {}}))
     AssociateSourceNetworkStackRequest.type = Types::AssociateSourceNetworkStackRequest
@@ -323,8 +323,8 @@ module Aws::Drs
     ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "resourceId"))
     ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "resourceType"))
     ConflictException.type = Types::ConflictException
-    ConversionMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EbsSnapshot, name: "key")
-    ConversionMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EbsSnapshot, name: "value")
+    ConversionMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EbsSnapshot, name: "key"))
+    ConversionMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EbsSnapshot, name: "value"))
     ConversionProperties.add_member(:volume_to_conversion_map, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeToConversionMap, name: "volumeToConversionMap"))
     ConversionProperties.add_member(:root_volume_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "rootVolumeName"))
     ConversionProperties.add_member(:force_uefi, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "forceUefi"))
@@ -332,7 +332,7 @@ module Aws::Drs
     ConversionProperties.add_member(:volume_to_volume_size, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeToSizeMap, name: "volumeToVolumeSize"))
     ConversionProperties.add_member(:volume_to_product_codes, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeToProductCodes, name: "volumeToProductCodes"))
     ConversionProperties.type = Types::ConversionProperties
-    Cpus.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CPU, name: "member")
+    Cpus.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CPU, name: "member"))
     CreateExtendedSourceServerInput.add_member(:source_server_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerARN, name: "sourceServerArn", traits: {"smithy.api#required" => {}}))
     CreateExtendedSourceServerInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
     CreateExtendedSourceServerInput.type = Types::CreateExtendedSourceServerInput
@@ -410,7 +410,7 @@ module Aws::Drs
     DataReplicationInfoReplicatedDisk.add_member(:backlogged_storage_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "backloggedStorageBytes", traits: {"smithy.api#default" => 0}))
     DataReplicationInfoReplicatedDisk.add_member(:volume_status, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeStatus, name: "volumeStatus"))
     DataReplicationInfoReplicatedDisk.type = Types::DataReplicationInfoReplicatedDisk
-    DataReplicationInfoReplicatedDisks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataReplicationInfoReplicatedDisk, name: "member")
+    DataReplicationInfoReplicatedDisks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataReplicationInfoReplicatedDisk, name: "member"))
     DataReplicationInitiation.add_member(:start_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "startDateTime"))
     DataReplicationInitiation.add_member(:next_attempt_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "nextAttemptDateTime"))
     DataReplicationInitiation.add_member(:steps, ::Smithy::Schema::Shapes::MemberShape.new(target: DataReplicationInitiationSteps, name: "steps"))
@@ -418,7 +418,7 @@ module Aws::Drs
     DataReplicationInitiationStep.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataReplicationInitiationStepName, name: "name"))
     DataReplicationInitiationStep.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DataReplicationInitiationStepStatus, name: "status"))
     DataReplicationInitiationStep.type = Types::DataReplicationInitiationStep
-    DataReplicationInitiationSteps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataReplicationInitiationStep, name: "member")
+    DataReplicationInitiationSteps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataReplicationInitiationStep, name: "member"))
     DeleteJobInput.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobID, name: "jobID", traits: {"smithy.api#required" => {}}))
     DeleteJobInput.type = Types::DeleteJobInput
     DeleteJobOutput.type = Types::DeleteJobOutput
@@ -458,7 +458,7 @@ module Aws::Drs
     DescribeJobsRequestFilters.add_member(:from_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "fromDate"))
     DescribeJobsRequestFilters.add_member(:to_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "toDate"))
     DescribeJobsRequestFilters.type = Types::DescribeJobsRequestFilters
-    DescribeJobsRequestFiltersJobIDs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobID, name: "member")
+    DescribeJobsRequestFiltersJobIDs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobID, name: "member"))
     DescribeLaunchConfigurationTemplatesInput.add_member(:launch_configuration_template_i_ds, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchConfigurationTemplateIDs, name: "launchConfigurationTemplateIDs"))
     DescribeLaunchConfigurationTemplatesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsType, name: "maxResults"))
     DescribeLaunchConfigurationTemplatesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
@@ -470,7 +470,7 @@ module Aws::Drs
     DescribeRecoveryInstancesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictlyPositiveInteger, name: "maxResults"))
     DescribeRecoveryInstancesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
     DescribeRecoveryInstancesInput.type = Types::DescribeRecoveryInstancesInput
-    DescribeRecoveryInstancesItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstance, name: "member")
+    DescribeRecoveryInstancesItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstance, name: "member"))
     DescribeRecoveryInstancesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
     DescribeRecoveryInstancesOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeRecoveryInstancesItems, name: "items"))
     DescribeRecoveryInstancesOutput.type = Types::DescribeRecoveryInstancesOutput
@@ -504,7 +504,7 @@ module Aws::Drs
     DescribeSourceNetworksRequestFilters.add_member(:origin_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "originAccountID"))
     DescribeSourceNetworksRequestFilters.add_member(:origin_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, name: "originRegion"))
     DescribeSourceNetworksRequestFilters.type = Types::DescribeSourceNetworksRequestFilters
-    DescribeSourceNetworksRequestFiltersIDs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SourceNetworkID, name: "member")
+    DescribeSourceNetworksRequestFiltersIDs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceNetworkID, name: "member"))
     DescribeSourceNetworksResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceNetworksList, name: "items"))
     DescribeSourceNetworksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
     DescribeSourceNetworksResponse.type = Types::DescribeSourceNetworksResponse
@@ -519,7 +519,7 @@ module Aws::Drs
     DescribeSourceServersRequestFilters.add_member(:hardware_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "hardwareId"))
     DescribeSourceServersRequestFilters.add_member(:staging_account_i_ds, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIDs, name: "stagingAccountIDs"))
     DescribeSourceServersRequestFilters.type = Types::DescribeSourceServersRequestFilters
-    DescribeSourceServersRequestFiltersIDs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "member")
+    DescribeSourceServersRequestFiltersIDs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "member"))
     DisconnectRecoveryInstanceInput.add_member(:recovery_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstanceID, name: "recoveryInstanceID", traits: {"smithy.api#required" => {}}))
     DisconnectRecoveryInstanceInput.type = Types::DisconnectRecoveryInstanceInput
     DisconnectSourceServerInput.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID", traits: {"smithy.api#required" => {}}))
@@ -542,8 +542,8 @@ module Aws::Drs
     Disk.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "deviceName"))
     Disk.add_member(:bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "bytes", traits: {"smithy.api#default" => 0}))
     Disk.type = Types::Disk
-    Disks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Disk, name: "member")
-    EbsSnapshotsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EbsSnapshot, name: "member")
+    Disks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Disk, name: "member"))
+    EbsSnapshotsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EbsSnapshot, name: "member"))
     EventResourceData.add_member(:source_network_data, Types::EventResourceData::SourceNetworkData, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceNetworkData, name: "sourceNetworkData"))
     EventResourceData.add_member(:unknown, Types::EventResourceData::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     EventResourceData.type = Types::EventResourceData
@@ -591,7 +591,7 @@ module Aws::Drs
     GetReplicationConfigurationOutput.add_member(:pit_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PITPolicy, name: "pitPolicy"))
     GetReplicationConfigurationOutput.add_member(:auto_replicate_new_disks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "autoReplicateNewDisks"))
     GetReplicationConfigurationOutput.type = Types::GetReplicationConfigurationOutput
-    IPsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "member")
+    IPsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "member"))
     IdentificationHints.add_member(:fqdn, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "fqdn"))
     IdentificationHints.add_member(:hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "hostname"))
     IdentificationHints.add_member(:vm_ware_uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "vmWareUuid"))
@@ -624,8 +624,8 @@ module Aws::Drs
     JobLogEventData.add_member(:conversion_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversionProperties, name: "conversionProperties"))
     JobLogEventData.add_member(:event_resource_data, ::Smithy::Schema::Shapes::MemberShape.new(target: EventResourceData, name: "eventResourceData"))
     JobLogEventData.type = Types::JobLogEventData
-    JobLogs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobLog, name: "member")
-    JobsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Job, name: "member")
+    JobLogs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobLog, name: "member"))
+    JobsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Job, name: "member"))
     LaunchAction.add_member(:action_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchActionId, name: "actionId"))
     LaunchAction.add_member(:action_code, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmDocumentName, name: "actionCode"))
     LaunchAction.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchActionType, name: "type"))
@@ -638,19 +638,19 @@ module Aws::Drs
     LaunchAction.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchActionDescription, name: "description"))
     LaunchAction.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchActionCategory, name: "category"))
     LaunchAction.type = Types::LaunchAction
-    LaunchActionIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchActionId, name: "member")
+    LaunchActionIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchActionId, name: "member"))
     LaunchActionParameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchActionParameterValue, name: "value"))
     LaunchActionParameter.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchActionParameterType, name: "type"))
     LaunchActionParameter.type = Types::LaunchActionParameter
-    LaunchActionParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchActionParameterName, name: "key")
-    LaunchActionParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchActionParameter, name: "value")
+    LaunchActionParameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchActionParameterName, name: "key"))
+    LaunchActionParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchActionParameter, name: "value"))
     LaunchActionRun.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchAction, name: "action"))
     LaunchActionRun.add_member(:run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchActionRunId, name: "runId"))
     LaunchActionRun.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchActionRunStatus, name: "status"))
     LaunchActionRun.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "failureReason"))
     LaunchActionRun.type = Types::LaunchActionRun
-    LaunchActionRuns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchActionRun, name: "member")
-    LaunchActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchAction, name: "member")
+    LaunchActionRuns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchActionRun, name: "member"))
+    LaunchActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchAction, name: "member"))
     LaunchActionsRequestFilters.add_member(:action_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchActionIds, name: "actionIds"))
     LaunchActionsRequestFilters.type = Types::LaunchActionsRequestFilters
     LaunchActionsStatus.add_member(:ssm_agent_discovery_datetime, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "ssmAgentDiscoveryDatetime"))
@@ -668,8 +668,8 @@ module Aws::Drs
     LaunchConfigurationTemplate.add_member(:post_launch_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "postLaunchEnabled"))
     LaunchConfigurationTemplate.add_member(:launch_into_source_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "launchIntoSourceInstance"))
     LaunchConfigurationTemplate.type = Types::LaunchConfigurationTemplate
-    LaunchConfigurationTemplateIDs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchConfigurationTemplateID, name: "member")
-    LaunchConfigurationTemplates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchConfigurationTemplate, name: "member")
+    LaunchConfigurationTemplateIDs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchConfigurationTemplateID, name: "member"))
+    LaunchConfigurationTemplates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchConfigurationTemplate, name: "member"))
     LaunchIntoInstanceProperties.add_member(:launch_into_ec2_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2InstanceID, name: "launchIntoEC2InstanceID"))
     LaunchIntoInstanceProperties.type = Types::LaunchIntoInstanceProperties
     Licensing.add_member(:os_byol, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "osByol"))
@@ -716,10 +716,10 @@ module Aws::Drs
     NetworkInterface.add_member(:ips, ::Smithy::Schema::Shapes::MemberShape.new(target: IPsList, name: "ips"))
     NetworkInterface.add_member(:is_primary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isPrimary"))
     NetworkInterface.type = Types::NetworkInterface
-    NetworkInterfaces.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface, name: "member")
+    NetworkInterfaces.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface, name: "member"))
     OS.add_member(:full_string, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "fullString"))
     OS.type = Types::OS
-    PITPolicy.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PITPolicyRule, name: "member")
+    PITPolicy.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PITPolicyRule, name: "member"))
     PITPolicyRule.add_member(:rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "ruleID", traits: {"smithy.api#default" => 0}))
     PITPolicyRule.add_member(:units, ::Smithy::Schema::Shapes::MemberShape.new(target: PITPolicyRuleUnits, name: "units", traits: {"smithy.api#required" => {}}))
     PITPolicyRule.add_member(:interval, ::Smithy::Schema::Shapes::MemberShape.new(target: StrictlyPositiveInteger, name: "interval", traits: {"smithy.api#required" => {}}))
@@ -732,17 +732,17 @@ module Aws::Drs
     ParticipatingResourceID.add_member(:source_network_id, Types::ParticipatingResourceID::SourceNetworkID, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceNetworkID, name: "sourceNetworkID"))
     ParticipatingResourceID.add_member(:unknown, Types::ParticipatingResourceID::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ParticipatingResourceID.type = Types::ParticipatingResourceID
-    ParticipatingResources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipatingResource, name: "member")
+    ParticipatingResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipatingResource, name: "member"))
     ParticipatingServer.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID"))
     ParticipatingServer.add_member(:recovery_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstanceID, name: "recoveryInstanceID"))
     ParticipatingServer.add_member(:launch_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchStatus, name: "launchStatus"))
     ParticipatingServer.add_member(:launch_actions_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchActionsStatus, name: "launchActionsStatus"))
     ParticipatingServer.type = Types::ParticipatingServer
-    ParticipatingServers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipatingServer, name: "member")
+    ParticipatingServers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipatingServer, name: "member"))
     ProductCode.add_member(:product_code_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCodeId, name: "productCodeId"))
     ProductCode.add_member(:product_code_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCodeMode, name: "productCodeMode"))
     ProductCode.type = Types::ProductCode
-    ProductCodes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCode, name: "member")
+    ProductCodes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCode, name: "member"))
     PutLaunchActionRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchActionResourceId, name: "resourceId", traits: {"smithy.api#required" => {}}))
     PutLaunchActionRequest.add_member(:action_code, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmDocumentName, name: "actionCode", traits: {"smithy.api#required" => {}}))
     PutLaunchActionRequest.add_member(:order, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchActionOrder, name: "order", traits: {"smithy.api#required" => {}}))
@@ -803,19 +803,19 @@ module Aws::Drs
     RecoveryInstanceDataReplicationInfoReplicatedDisk.add_member(:rescanned_storage_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "rescannedStorageBytes", traits: {"smithy.api#default" => 0}))
     RecoveryInstanceDataReplicationInfoReplicatedDisk.add_member(:backlogged_storage_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "backloggedStorageBytes", traits: {"smithy.api#default" => 0}))
     RecoveryInstanceDataReplicationInfoReplicatedDisk.type = Types::RecoveryInstanceDataReplicationInfoReplicatedDisk
-    RecoveryInstanceDataReplicationInfoReplicatedDisks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstanceDataReplicationInfoReplicatedDisk, name: "member")
+    RecoveryInstanceDataReplicationInfoReplicatedDisks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstanceDataReplicationInfoReplicatedDisk, name: "member"))
     RecoveryInstanceDataReplicationInitiation.add_member(:start_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "startDateTime"))
     RecoveryInstanceDataReplicationInitiation.add_member(:steps, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstanceDataReplicationInitiationSteps, name: "steps"))
     RecoveryInstanceDataReplicationInitiation.type = Types::RecoveryInstanceDataReplicationInitiation
     RecoveryInstanceDataReplicationInitiationStep.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstanceDataReplicationInitiationStepName, name: "name"))
     RecoveryInstanceDataReplicationInitiationStep.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstanceDataReplicationInitiationStepStatus, name: "status"))
     RecoveryInstanceDataReplicationInitiationStep.type = Types::RecoveryInstanceDataReplicationInitiationStep
-    RecoveryInstanceDataReplicationInitiationSteps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstanceDataReplicationInitiationStep, name: "member")
+    RecoveryInstanceDataReplicationInitiationSteps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstanceDataReplicationInitiationStep, name: "member"))
     RecoveryInstanceDisk.add_member(:internal_device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "internalDeviceName"))
     RecoveryInstanceDisk.add_member(:bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "bytes", traits: {"smithy.api#default" => 0}))
     RecoveryInstanceDisk.add_member(:ebs_volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EbsVolumeID, name: "ebsVolumeID"))
     RecoveryInstanceDisk.type = Types::RecoveryInstanceDisk
-    RecoveryInstanceDisks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstanceDisk, name: "member")
+    RecoveryInstanceDisks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstanceDisk, name: "member"))
     RecoveryInstanceFailback.add_member(:failback_client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "failbackClientID"))
     RecoveryInstanceFailback.add_member(:failback_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobID, name: "failbackJobID"))
     RecoveryInstanceFailback.add_member(:failback_initiation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "failbackInitiationTime"))
@@ -827,7 +827,7 @@ module Aws::Drs
     RecoveryInstanceFailback.add_member(:elapsed_replication_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "elapsedReplicationDuration"))
     RecoveryInstanceFailback.add_member(:failback_launch_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FailbackLaunchType, name: "failbackLaunchType"))
     RecoveryInstanceFailback.type = Types::RecoveryInstanceFailback
-    RecoveryInstanceIDs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstanceID, name: "member")
+    RecoveryInstanceIDs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstanceID, name: "member"))
     RecoveryInstanceProperties.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "lastUpdatedDateTime"))
     RecoveryInstanceProperties.add_member(:identification_hints, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentificationHints, name: "identificationHints"))
     RecoveryInstanceProperties.add_member(:network_interfaces, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaces, name: "networkInterfaces"))
@@ -836,7 +836,7 @@ module Aws::Drs
     RecoveryInstanceProperties.add_member(:ram_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "ramBytes", traits: {"smithy.api#default" => 0}))
     RecoveryInstanceProperties.add_member(:os, ::Smithy::Schema::Shapes::MemberShape.new(target: OS, name: "os"))
     RecoveryInstanceProperties.type = Types::RecoveryInstanceProperties
-    RecoveryInstancesForTerminationRequest.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstanceID, name: "member")
+    RecoveryInstancesForTerminationRequest.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstanceID, name: "member"))
     RecoveryLifeCycle.add_member(:api_call_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "apiCallDateTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
     RecoveryLifeCycle.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobID, name: "jobID"))
     RecoveryLifeCycle.add_member(:last_recovery_result, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryResult, name: "lastRecoveryResult"))
@@ -847,7 +847,7 @@ module Aws::Drs
     RecoverySnapshot.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "timestamp"))
     RecoverySnapshot.add_member(:ebs_snapshots, ::Smithy::Schema::Shapes::MemberShape.new(target: EbsSnapshotsList, name: "ebsSnapshots"))
     RecoverySnapshot.type = Types::RecoverySnapshot
-    RecoverySnapshotsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecoverySnapshot, name: "member")
+    RecoverySnapshotsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoverySnapshot, name: "member"))
     ReplicationConfigurationReplicatedDisk.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "deviceName"))
     ReplicationConfigurationReplicatedDisk.add_member(:is_boot_disk, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isBootDisk"))
     ReplicationConfigurationReplicatedDisk.add_member(:staging_disk_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationReplicatedDiskStagingDiskType, name: "stagingDiskType"))
@@ -855,7 +855,7 @@ module Aws::Drs
     ReplicationConfigurationReplicatedDisk.add_member(:throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "throughput", traits: {"smithy.api#default" => 0}))
     ReplicationConfigurationReplicatedDisk.add_member(:optimized_staging_disk_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationReplicatedDiskStagingDiskType, name: "optimizedStagingDiskType"))
     ReplicationConfigurationReplicatedDisk.type = Types::ReplicationConfigurationReplicatedDisk
-    ReplicationConfigurationReplicatedDisks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationReplicatedDisk, name: "member")
+    ReplicationConfigurationReplicatedDisks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationReplicatedDisk, name: "member"))
     ReplicationConfigurationTemplate.add_member(:replication_configuration_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationTemplateID, name: "replicationConfigurationTemplateID", traits: {"smithy.api#required" => {}}))
     ReplicationConfigurationTemplate.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
     ReplicationConfigurationTemplate.add_member(:staging_area_subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetID, name: "stagingAreaSubnetId"))
@@ -874,9 +874,9 @@ module Aws::Drs
     ReplicationConfigurationTemplate.add_member(:pit_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PITPolicy, name: "pitPolicy"))
     ReplicationConfigurationTemplate.add_member(:auto_replicate_new_disks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "autoReplicateNewDisks"))
     ReplicationConfigurationTemplate.type = Types::ReplicationConfigurationTemplate
-    ReplicationConfigurationTemplateIDs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationTemplateID, name: "member")
-    ReplicationConfigurationTemplates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationTemplate, name: "member")
-    ReplicationServersSecurityGroupsIDs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupID, name: "member")
+    ReplicationConfigurationTemplateIDs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationTemplateID, name: "member"))
+    ReplicationConfigurationTemplates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationTemplate, name: "member"))
+    ReplicationServersSecurityGroupsIDs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupID, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "message"))
     ResourceNotFoundException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "code"))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "resourceId"))
@@ -932,7 +932,7 @@ module Aws::Drs
     SourceNetworkData.add_member(:target_vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcID, name: "targetVpc"))
     SourceNetworkData.add_member(:stack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "stackName"))
     SourceNetworkData.type = Types::SourceNetworkData
-    SourceNetworksList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SourceNetwork, name: "member")
+    SourceNetworksList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceNetwork, name: "member"))
     SourceProperties.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DatetimeString, name: "lastUpdatedDateTime"))
     SourceProperties.add_member(:recommended_instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2InstanceType, name: "recommendedInstanceType"))
     SourceProperties.add_member(:identification_hints, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentificationHints, name: "identificationHints"))
@@ -958,8 +958,8 @@ module Aws::Drs
     SourceServer.add_member(:source_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceNetworkID, name: "sourceNetworkID"))
     SourceServer.add_member(:agent_version, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentVersion, name: "agentVersion"))
     SourceServer.type = Types::SourceServer
-    SourceServerIDs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "member")
-    SourceServersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServer, name: "member")
+    SourceServerIDs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "member"))
+    SourceServersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServer, name: "member"))
     StagingArea.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtensionStatus, name: "status"))
     StagingArea.add_member(:staging_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountID, name: "stagingAccountID"))
     StagingArea.add_member(:staging_source_server_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "stagingSourceServerArn"))
@@ -969,13 +969,13 @@ module Aws::Drs
     StagingSourceServer.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerARN, name: "arn"))
     StagingSourceServer.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
     StagingSourceServer.type = Types::StagingSourceServer
-    StagingSourceServersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StagingSourceServer, name: "member")
+    StagingSourceServersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StagingSourceServer, name: "member"))
     StartFailbackLaunchInput.add_member(:recovery_instance_i_ds, ::Smithy::Schema::Shapes::MemberShape.new(target: StartFailbackRequestRecoveryInstanceIDs, name: "recoveryInstanceIDs", traits: {"smithy.api#required" => {}}))
     StartFailbackLaunchInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
     StartFailbackLaunchInput.type = Types::StartFailbackLaunchInput
     StartFailbackLaunchOutput.add_member(:job, ::Smithy::Schema::Shapes::MemberShape.new(target: Job, name: "job"))
     StartFailbackLaunchOutput.type = Types::StartFailbackLaunchOutput
-    StartFailbackRequestRecoveryInstanceIDs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstanceID, name: "member")
+    StartFailbackRequestRecoveryInstanceIDs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstanceID, name: "member"))
     StartRecoveryInput.add_member(:source_servers, ::Smithy::Schema::Shapes::MemberShape.new(target: StartRecoveryRequestSourceServers, name: "sourceServers", traits: {"smithy.api#required" => {}}))
     StartRecoveryInput.add_member(:is_drill, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isDrill"))
     StartRecoveryInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
@@ -985,7 +985,7 @@ module Aws::Drs
     StartRecoveryRequestSourceServer.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID", traits: {"smithy.api#required" => {}}))
     StartRecoveryRequestSourceServer.add_member(:recovery_snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoverySnapshotID, name: "recoverySnapshotID"))
     StartRecoveryRequestSourceServer.type = Types::StartRecoveryRequestSourceServer
-    StartRecoveryRequestSourceServers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StartRecoveryRequestSourceServer, name: "member")
+    StartRecoveryRequestSourceServers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StartRecoveryRequestSourceServer, name: "member"))
     StartReplicationInput.add_member(:source_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServerID, name: "sourceServerID", traits: {"smithy.api#required" => {}}))
     StartReplicationInput.type = Types::StartReplicationInput
     StartReplicationOutput.add_member(:source_server, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceServer, name: "sourceServer"))
@@ -994,7 +994,7 @@ module Aws::Drs
     StartSourceNetworkRecoveryRequest.add_member(:deploy_as_new, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "deployAsNew"))
     StartSourceNetworkRecoveryRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
     StartSourceNetworkRecoveryRequest.type = Types::StartSourceNetworkRecoveryRequest
-    StartSourceNetworkRecoveryRequestNetworkEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StartSourceNetworkRecoveryRequestNetworkEntry, name: "member")
+    StartSourceNetworkRecoveryRequestNetworkEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StartSourceNetworkRecoveryRequestNetworkEntry, name: "member"))
     StartSourceNetworkRecoveryRequestNetworkEntry.add_member(:source_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceNetworkID, name: "sourceNetworkID", traits: {"smithy.api#required" => {}}))
     StartSourceNetworkRecoveryRequestNetworkEntry.add_member(:cfn_stack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CfnStackName, name: "cfnStackName"))
     StartSourceNetworkRecoveryRequestNetworkEntry.type = Types::StartSourceNetworkRecoveryRequestNetworkEntry
@@ -1014,12 +1014,12 @@ module Aws::Drs
     StopSourceNetworkReplicationRequest.type = Types::StopSourceNetworkReplicationRequest
     StopSourceNetworkReplicationResponse.add_member(:source_network, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceNetwork, name: "sourceNetwork"))
     StopSourceNetworkReplicationResponse.type = Types::StopSourceNetworkReplicationResponse
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
-    TagsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TerminateRecoveryInstancesInput.add_member(:recovery_instance_i_ds, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryInstancesForTerminationRequest, name: "recoveryInstanceIDs", traits: {"smithy.api#required" => {}}))
     TerminateRecoveryInstancesInput.type = Types::TerminateRecoveryInstancesInput
     TerminateRecoveryInstancesOutput.add_member(:job, ::Smithy::Schema::Shapes::MemberShape.new(target: Job, name: "job"))
@@ -1152,13 +1152,13 @@ module Aws::Drs
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "name"))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "message"))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
-    VolumeToConversionMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "key")
-    VolumeToConversionMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ConversionMap, name: "value")
-    VolumeToProductCodes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "key")
-    VolumeToProductCodes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCodes, name: "value")
-    VolumeToSizeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "key")
-    VolumeToSizeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "value")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
+    VolumeToConversionMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "key"))
+    VolumeToConversionMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversionMap, name: "value"))
+    VolumeToProductCodes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "key"))
+    VolumeToProductCodes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCodes, name: "value"))
+    VolumeToSizeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeBoundedString, name: "key"))
+    VolumeToSizeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "value"))
 
     ElasticDisasterRecoveryService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.drs#ElasticDisasterRecoveryService"

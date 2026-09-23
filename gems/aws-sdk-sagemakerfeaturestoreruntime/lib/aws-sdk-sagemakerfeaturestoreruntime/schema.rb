@@ -49,12 +49,12 @@ module Aws::SageMakerFeatureStoreRuntime
     BatchGetRecordError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueAsString, name: "ErrorCode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BatchGetRecordError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "ErrorMessage", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BatchGetRecordError.type = Types::BatchGetRecordError
-    BatchGetRecordErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetRecordError, name: "member")
+    BatchGetRecordErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetRecordError, name: "member"))
     BatchGetRecordIdentifier.add_member(:feature_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureGroupNameOrArn, name: "FeatureGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BatchGetRecordIdentifier.add_member(:record_identifiers_value_as_string, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordIdentifiers, name: "RecordIdentifiersValueAsString", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BatchGetRecordIdentifier.add_member(:feature_names, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureNames, name: "FeatureNames"))
     BatchGetRecordIdentifier.type = Types::BatchGetRecordIdentifier
-    BatchGetRecordIdentifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetRecordIdentifier, name: "member")
+    BatchGetRecordIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetRecordIdentifier, name: "member"))
     BatchGetRecordRequest.add_member(:identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetRecordIdentifiers, name: "Identifiers", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BatchGetRecordRequest.add_member(:expiration_time_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpirationTimeResponse, name: "ExpirationTimeResponse"))
     BatchGetRecordRequest.type = Types::BatchGetRecordRequest
@@ -67,7 +67,7 @@ module Aws::SageMakerFeatureStoreRuntime
     BatchGetRecordResultDetail.add_member(:record, ::Smithy::Schema::Shapes::MemberShape.new(target: Record, name: "Record", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BatchGetRecordResultDetail.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpiresAt, name: "ExpiresAt"))
     BatchGetRecordResultDetail.type = Types::BatchGetRecordResultDetail
-    BatchGetRecordResultDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetRecordResultDetail, name: "member")
+    BatchGetRecordResultDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetRecordResultDetail, name: "member"))
     DeleteRecordRequest.add_member(:feature_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureGroupNameOrArn, name: "FeatureGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteRecordRequest.add_member(:record_identifier_value_as_string, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueAsString, name: "RecordIdentifierValueAsString", traits: {"smithy.api#clientOptional" => {}, "smithy.api#httpQuery" => "RecordIdentifierValueAsString", "smithy.api#required" => {}}))
     DeleteRecordRequest.add_member(:event_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueAsString, name: "EventTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#httpQuery" => "EventTime", "smithy.api#required" => {}}))
@@ -78,7 +78,7 @@ module Aws::SageMakerFeatureStoreRuntime
     DeletionMode.add_member(:hard_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HARD_DELETE", traits: {"smithy.api#enumValue" => "HardDelete"}))
     ExpirationTimeResponse.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "Enabled"}))
     ExpirationTimeResponse.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "Disabled"}))
-    FeatureNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureName, name: "member")
+    FeatureNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureName, name: "member"))
     FeatureValue.add_member(:feature_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureName, name: "FeatureName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     FeatureValue.add_member(:value_as_string, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueAsString, name: "ValueAsString"))
     FeatureValue.add_member(:value_as_string_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueAsStringList, name: "ValueAsStringList"))
@@ -98,15 +98,15 @@ module Aws::SageMakerFeatureStoreRuntime
     PutRecordRequest.add_member(:target_stores, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetStores, name: "TargetStores"))
     PutRecordRequest.add_member(:ttl_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: TtlDuration, name: "TtlDuration"))
     PutRecordRequest.type = Types::PutRecordRequest
-    Record.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureValue, name: "member")
-    RecordIdentifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValueAsString, name: "member")
+    Record.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureValue, name: "member"))
+    RecordIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueAsString, name: "member"))
     ResourceNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     ResourceNotFound.type = Types::ResourceNotFound
     ServiceUnavailable.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     ServiceUnavailable.type = Types::ServiceUnavailable
     TargetStore.add_member(:online_store, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONLINE_STORE", traits: {"smithy.api#enumValue" => "OnlineStore"}))
     TargetStore.add_member(:offline_store, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OFFLINE_STORE", traits: {"smithy.api#enumValue" => "OfflineStore"}))
-    TargetStores.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetStore, name: "member")
+    TargetStores.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetStore, name: "member"))
     TtlDuration.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: TtlDurationUnit, name: "Unit", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TtlDuration.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TtlDurationValue, name: "Value", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TtlDuration.type = Types::TtlDuration
@@ -115,10 +115,10 @@ module Aws::SageMakerFeatureStoreRuntime
     TtlDurationUnit.add_member(:hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOURS", traits: {"smithy.api#enumValue" => "Hours"}))
     TtlDurationUnit.add_member(:days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DAYS", traits: {"smithy.api#enumValue" => "Days"}))
     TtlDurationUnit.add_member(:weeks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEEKS", traits: {"smithy.api#enumValue" => "Weeks"}))
-    UnprocessedIdentifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetRecordIdentifier, name: "member")
+    UnprocessedIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetRecordIdentifier, name: "member"))
     ValidationError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     ValidationError.type = Types::ValidationError
-    ValueAsStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValueAsString, name: "member")
+    ValueAsStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueAsString, name: "member"))
 
     AmazonSageMakerFeatureStoreRuntime = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.sagemakerfeaturestoreruntime#AmazonSageMakerFeatureStoreRuntime"

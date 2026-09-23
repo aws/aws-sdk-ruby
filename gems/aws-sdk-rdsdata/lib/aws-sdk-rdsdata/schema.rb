@@ -88,7 +88,7 @@ module Aws::RDSData
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    ArrayOfArray.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ArrayValue, name: "member")
+    ArrayOfArray.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ArrayValue, name: "member"))
     ArrayValue.add_member(:boolean_values, Types::ArrayValue::BooleanValues, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanArray, name: "booleanValues"))
     ArrayValue.add_member(:long_values, Types::ArrayValue::LongValues, ::Smithy::Schema::Shapes::MemberShape.new(target: LongArray, name: "longValues"))
     ArrayValue.add_member(:double_values, Types::ArrayValue::DoubleValues, ::Smithy::Schema::Shapes::MemberShape.new(target: DoubleArray, name: "doubleValues"))
@@ -96,7 +96,7 @@ module Aws::RDSData
     ArrayValue.add_member(:array_values, Types::ArrayValue::ArrayValues, ::Smithy::Schema::Shapes::MemberShape.new(target: ArrayOfArray, name: "arrayValues"))
     ArrayValue.add_member(:unknown, Types::ArrayValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ArrayValue.type = Types::ArrayValue
-    ArrayValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "member")
+    ArrayValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "member"))
     BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     BadRequestException.type = Types::BadRequestException
     BatchExecuteStatementInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
@@ -116,7 +116,7 @@ module Aws::RDSData
     BeginTransactionInput.type = Types::BeginTransactionInput
     BeginTransactionOutput.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "transactionId"))
     BeginTransactionOutput.type = Types::BeginTransactionOutput
-    BooleanArray.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "member")
+    BooleanArray.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "member"))
     ColumnMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     ColumnMetadata.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "type", traits: {"smithy.api#default" => 0}))
     ColumnMetadata.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "typeName"))
@@ -145,7 +145,7 @@ module Aws::RDSData
     DatabaseResumingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     DatabaseResumingException.type = Types::DatabaseResumingException
     DatabaseUnavailableException.type = Types::DatabaseUnavailableException
-    DoubleArray.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedDouble, name: "member")
+    DoubleArray.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedDouble, name: "member"))
     ExecuteSqlInput.add_member(:db_cluster_or_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "dbClusterOrInstanceArn", traits: {"smithy.api#required" => {}}))
     ExecuteSqlInput.add_member(:aws_secret_store_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "awsSecretStoreArn", traits: {"smithy.api#required" => {}}))
     ExecuteSqlInput.add_member(:sql_statements, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlStatement, name: "sqlStatements", traits: {"smithy.api#required" => {}}))
@@ -181,7 +181,7 @@ module Aws::RDSData
     Field.add_member(:array_value, Types::Field::ArrayValue, ::Smithy::Schema::Shapes::MemberShape.new(target: ArrayValue, name: "arrayValue"))
     Field.add_member(:unknown, Types::Field::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Field.type = Types::Field
-    FieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Field, name: "member")
+    FieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Field, name: "member"))
     ForbiddenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ForbiddenException.type = Types::ForbiddenException
     HttpEndpointNotEnabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
@@ -191,13 +191,13 @@ module Aws::RDSData
     InvalidResourceStateException.type = Types::InvalidResourceStateException
     InvalidSecretException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InvalidSecretException.type = Types::InvalidSecretException
-    LongArray.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedLong, name: "member")
-    Metadata.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnMetadata, name: "member")
+    LongArray.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedLong, name: "member"))
+    Metadata.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnMetadata, name: "member"))
     NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     NotFoundException.type = Types::NotFoundException
     Record.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: Row, name: "values"))
     Record.type = Types::Record
-    Records.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Record, name: "member")
+    Records.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Record, name: "member"))
     ResultFrame.add_member(:result_set_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultSetMetadata, name: "resultSetMetadata"))
     ResultFrame.add_member(:records, ::Smithy::Schema::Shapes::MemberShape.new(target: Records, name: "records"))
     ResultFrame.type = Types::ResultFrame
@@ -213,7 +213,7 @@ module Aws::RDSData
     RollbackTransactionInput.type = Types::RollbackTransactionInput
     RollbackTransactionOutput.add_member(:transaction_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionStatus, name: "transactionStatus"))
     RollbackTransactionOutput.type = Types::RollbackTransactionOutput
-    Row.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "member")
+    Row.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "member"))
     SecretsErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     SecretsErrorException.type = Types::SecretsErrorException
     ServiceUnavailableError.type = Types::ServiceUnavailableError
@@ -221,17 +221,17 @@ module Aws::RDSData
     SqlParameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Field, name: "value"))
     SqlParameter.add_member(:type_hint, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeHint, name: "typeHint"))
     SqlParameter.type = Types::SqlParameter
-    SqlParameterSets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SqlParametersList, name: "member")
-    SqlParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SqlParameter, name: "member")
-    SqlRecords.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldList, name: "member")
+    SqlParameterSets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlParametersList, name: "member"))
+    SqlParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlParameter, name: "member"))
+    SqlRecords.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldList, name: "member"))
     SqlStatementResult.add_member(:result_frame, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultFrame, name: "resultFrame"))
     SqlStatementResult.add_member(:number_of_records_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordsUpdated, name: "numberOfRecordsUpdated", traits: {"smithy.api#default" => 0}))
     SqlStatementResult.type = Types::SqlStatementResult
-    SqlStatementResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SqlStatementResult, name: "member")
+    SqlStatementResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlStatementResult, name: "member"))
     StatementTimeoutException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     StatementTimeoutException.add_member(:db_connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "dbConnectionId", traits: {"smithy.api#default" => 0}))
     StatementTimeoutException.type = Types::StatementTimeoutException
-    StringArray.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    StringArray.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     StructValue.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ArrayValueList, name: "attributes"))
     StructValue.type = Types::StructValue
     TransactionNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
@@ -240,7 +240,7 @@ module Aws::RDSData
     UnsupportedResultException.type = Types::UnsupportedResultException
     UpdateResult.add_member(:generated_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldList, name: "generatedFields"))
     UpdateResult.type = Types::UpdateResult
-    UpdateResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateResult, name: "member")
+    UpdateResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateResult, name: "member"))
     Value.add_member(:is_null, Types::Value::IsNull, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "isNull"))
     Value.add_member(:bit_value, Types::Value::BitValue, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "bitValue"))
     Value.add_member(:big_int_value, Types::Value::BigIntValue, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedLong, name: "bigIntValue"))

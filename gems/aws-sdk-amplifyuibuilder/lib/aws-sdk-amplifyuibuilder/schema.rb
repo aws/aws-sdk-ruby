@@ -218,8 +218,8 @@ module Aws::AmplifyUIBuilder
     ApiConfiguration.add_member(:no_api_config, Types::ApiConfiguration::NoApiConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: NoApiRenderConfig, name: "noApiConfig"))
     ApiConfiguration.add_member(:unknown, Types::ApiConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ApiConfiguration.type = Types::ApiConfiguration
-    AssociatedFieldsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    CodegenDependencies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CodegenDependency, name: "member")
+    AssociatedFieldsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    CodegenDependencies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CodegenDependency, name: "member"))
     CodegenDependency.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name"))
     CodegenDependency.add_member(:supported_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "supportedVersion"))
     CodegenDependency.add_member(:is_sem_ver, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isSemVer"))
@@ -230,9 +230,9 @@ module Aws::AmplifyUIBuilder
     CodegenFeatureFlags.type = Types::CodegenFeatureFlags
     CodegenGenericDataEnum.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: CodegenGenericDataEnumValuesList, name: "values", traits: {"smithy.api#required" => {}}))
     CodegenGenericDataEnum.type = Types::CodegenGenericDataEnum
-    CodegenGenericDataEnumValuesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    CodegenGenericDataEnums.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    CodegenGenericDataEnums.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CodegenGenericDataEnum, name: "value")
+    CodegenGenericDataEnumValuesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    CodegenGenericDataEnums.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    CodegenGenericDataEnums.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CodegenGenericDataEnum, name: "value"))
     CodegenGenericDataField.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CodegenGenericDataFieldDataType, name: "dataType", traits: {"smithy.api#required" => {}}))
     CodegenGenericDataField.add_member(:data_type_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "dataTypeValue", traits: {"smithy.api#required" => {}}))
     CodegenGenericDataField.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "required", traits: {"smithy.api#required" => {}}))
@@ -257,20 +257,20 @@ module Aws::AmplifyUIBuilder
     CodegenGenericDataFieldDataType.add_member(:enum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENUM", traits: {"smithy.api#enumValue" => "Enum"}))
     CodegenGenericDataFieldDataType.add_member(:model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MODEL", traits: {"smithy.api#enumValue" => "Model"}))
     CodegenGenericDataFieldDataType.add_member(:non_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NON_MODEL", traits: {"smithy.api#enumValue" => "NonModel"}))
-    CodegenGenericDataFields.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    CodegenGenericDataFields.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CodegenGenericDataField, name: "value")
+    CodegenGenericDataFields.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    CodegenGenericDataFields.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CodegenGenericDataField, name: "value"))
     CodegenGenericDataModel.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: CodegenGenericDataFields, name: "fields", traits: {"smithy.api#required" => {}}))
     CodegenGenericDataModel.add_member(:is_join_table, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isJoinTable"))
     CodegenGenericDataModel.add_member(:primary_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: CodegenPrimaryKeysList, name: "primaryKeys", traits: {"smithy.api#required" => {}}))
     CodegenGenericDataModel.type = Types::CodegenGenericDataModel
-    CodegenGenericDataModels.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    CodegenGenericDataModels.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CodegenGenericDataModel, name: "value")
+    CodegenGenericDataModels.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    CodegenGenericDataModels.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CodegenGenericDataModel, name: "value"))
     CodegenGenericDataNonModel.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: CodegenGenericDataNonModelFields, name: "fields", traits: {"smithy.api#required" => {}}))
     CodegenGenericDataNonModel.type = Types::CodegenGenericDataNonModel
-    CodegenGenericDataNonModelFields.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    CodegenGenericDataNonModelFields.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CodegenGenericDataField, name: "value")
-    CodegenGenericDataNonModels.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    CodegenGenericDataNonModels.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CodegenGenericDataNonModel, name: "value")
+    CodegenGenericDataNonModelFields.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    CodegenGenericDataNonModelFields.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CodegenGenericDataField, name: "value"))
+    CodegenGenericDataNonModels.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    CodegenGenericDataNonModels.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CodegenGenericDataNonModel, name: "value"))
     CodegenGenericDataRelationshipType.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericDataRelationshipType, name: "type", traits: {"smithy.api#required" => {}}))
     CodegenGenericDataRelationshipType.add_member(:related_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "relatedModelName", traits: {"smithy.api#required" => {}}))
     CodegenGenericDataRelationshipType.add_member(:related_model_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedModelFieldsList, name: "relatedModelFields"))
@@ -316,8 +316,8 @@ module Aws::AmplifyUIBuilder
     CodegenJobSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#timestampFormat" => "date-time"}))
     CodegenJobSummary.add_member(:modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "modifiedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#timestampFormat" => "date-time"}))
     CodegenJobSummary.type = Types::CodegenJobSummary
-    CodegenJobSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CodegenJobSummary, name: "member")
-    CodegenPrimaryKeysList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    CodegenJobSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CodegenJobSummary, name: "member"))
+    CodegenPrimaryKeysList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     Component.add_member(:app_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "appId", traits: {"smithy.api#required" => {}}))
     Component.add_member(:environment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "environmentName", traits: {"smithy.api#required" => {}}))
     Component.add_member(:source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "sourceId"))
@@ -336,8 +336,8 @@ module Aws::AmplifyUIBuilder
     Component.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentEvents, name: "events"))
     Component.add_member(:schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "schemaVersion"))
     Component.type = Types::Component
-    ComponentBindingProperties.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    ComponentBindingProperties.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentBindingPropertiesValue, name: "value")
+    ComponentBindingProperties.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    ComponentBindingProperties.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentBindingPropertiesValue, name: "value"))
     ComponentBindingPropertiesValue.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "type"))
     ComponentBindingPropertiesValue.add_member(:binding_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentBindingPropertiesValueProperties, name: "bindingProperties"))
     ComponentBindingPropertiesValue.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "defaultValue"))
@@ -358,9 +358,9 @@ module Aws::AmplifyUIBuilder
     ComponentChild.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentEvents, name: "events"))
     ComponentChild.add_member(:source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "sourceId"))
     ComponentChild.type = Types::ComponentChild
-    ComponentChildList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentChild, name: "member")
-    ComponentCollectionProperties.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    ComponentCollectionProperties.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentDataConfiguration, name: "value")
+    ComponentChildList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentChild, name: "member"))
+    ComponentCollectionProperties.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    ComponentCollectionProperties.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentDataConfiguration, name: "value"))
     ComponentConditionProperty.add_member(:property, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "property"))
     ComponentConditionProperty.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "field"))
     ComponentConditionProperty.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "operator"))
@@ -378,15 +378,15 @@ module Aws::AmplifyUIBuilder
     ComponentEvent.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionParameters, name: "parameters"))
     ComponentEvent.add_member(:binding_event, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "bindingEvent"))
     ComponentEvent.type = Types::ComponentEvent
-    ComponentEvents.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    ComponentEvents.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentEvent, name: "value")
-    ComponentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Component, name: "member")
-    ComponentOverrides.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    ComponentOverrides.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentOverridesValue, name: "value")
-    ComponentOverridesValue.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    ComponentOverridesValue.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
-    ComponentProperties.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    ComponentProperties.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentProperty, name: "value")
+    ComponentEvents.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    ComponentEvents.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentEvent, name: "value"))
+    ComponentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Component, name: "member"))
+    ComponentOverrides.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    ComponentOverrides.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentOverridesValue, name: "value"))
+    ComponentOverridesValue.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    ComponentOverridesValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
+    ComponentProperties.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    ComponentProperties.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentProperty, name: "value"))
     ComponentProperty.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     ComponentProperty.add_member(:binding_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentPropertyBindingProperties, name: "bindingProperties"))
     ComponentProperty.add_member(:collection_binding_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentPropertyBindingProperties, name: "collectionBindingProperties"))
@@ -406,20 +406,20 @@ module Aws::AmplifyUIBuilder
     ComponentPropertyBindingProperties.add_member(:property, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "property", traits: {"smithy.api#required" => {}}))
     ComponentPropertyBindingProperties.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "field"))
     ComponentPropertyBindingProperties.type = Types::ComponentPropertyBindingProperties
-    ComponentPropertyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentProperty, name: "member")
+    ComponentPropertyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentProperty, name: "member"))
     ComponentSummary.add_member(:app_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "appId", traits: {"smithy.api#required" => {}}))
     ComponentSummary.add_member(:environment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "environmentName", traits: {"smithy.api#required" => {}}))
     ComponentSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "id", traits: {"smithy.api#required" => {}}))
     ComponentSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentName, name: "name", traits: {"smithy.api#required" => {}}))
     ComponentSummary.add_member(:component_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentType, name: "componentType", traits: {"smithy.api#required" => {}}))
     ComponentSummary.type = Types::ComponentSummary
-    ComponentSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentSummary, name: "member")
+    ComponentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentSummary, name: "member"))
     ComponentVariant.add_member(:variant_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentVariantValues, name: "variantValues"))
     ComponentVariant.add_member(:overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentOverrides, name: "overrides"))
     ComponentVariant.type = Types::ComponentVariant
-    ComponentVariantValues.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    ComponentVariantValues.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
-    ComponentVariants.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentVariant, name: "member")
+    ComponentVariantValues.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    ComponentVariantValues.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
+    ComponentVariants.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentVariant, name: "member"))
     CreateComponentData.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentName, name: "name", traits: {"smithy.api#required" => {}}))
     CreateComponentData.add_member(:source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "sourceId"))
     CreateComponentData.add_member(:component_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentType, name: "componentType", traits: {"smithy.api#required" => {}}))
@@ -529,8 +529,8 @@ module Aws::AmplifyUIBuilder
     ExportThemesOutput.add_member(:entities, ::Smithy::Schema::Shapes::MemberShape.new(target: ThemeList, name: "entities", traits: {"smithy.api#required" => {}}))
     ExportThemesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
     ExportThemesOutput.type = Types::ExportThemesOutput
-    FeaturesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    FeaturesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    FeaturesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    FeaturesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     FieldConfig.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "label"))
     FieldConfig.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldPosition, name: "position"))
     FieldConfig.add_member(:excluded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "excluded"))
@@ -564,8 +564,8 @@ module Aws::AmplifyUIBuilder
     FieldValidationConfiguration.add_member(:num_values, ::Smithy::Schema::Shapes::MemberShape.new(target: NumValues, name: "numValues"))
     FieldValidationConfiguration.add_member(:validation_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "validationMessage"))
     FieldValidationConfiguration.type = Types::FieldValidationConfiguration
-    FieldsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    FieldsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldConfig, name: "value")
+    FieldsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    FieldsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldConfig, name: "value"))
     FileUploaderFieldConfig.add_member(:access_level, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageAccessLevel, name: "accessLevel", traits: {"smithy.api#required" => {}}))
     FileUploaderFieldConfig.add_member(:accepted_file_types, ::Smithy::Schema::Shapes::MemberShape.new(target: StrValues, name: "acceptedFileTypes", traits: {"smithy.api#required" => {}}))
     FileUploaderFieldConfig.add_member(:show_thumbnails, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "showThumbnails"))
@@ -593,8 +593,8 @@ module Aws::AmplifyUIBuilder
     FormBindingElement.add_member(:element, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "element", traits: {"smithy.api#required" => {}}))
     FormBindingElement.add_member(:property, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "property", traits: {"smithy.api#required" => {}}))
     FormBindingElement.type = Types::FormBindingElement
-    FormBindings.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    FormBindings.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FormBindingElement, name: "value")
+    FormBindings.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    FormBindings.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FormBindingElement, name: "value"))
     FormButton.add_member(:excluded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "excluded"))
     FormButton.add_member(:children, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "children"))
     FormButton.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldPosition, name: "position"))
@@ -610,8 +610,8 @@ module Aws::AmplifyUIBuilder
     FormDataTypeConfig.add_member(:data_source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FormDataSourceType, name: "dataSourceType", traits: {"smithy.api#required" => {}}))
     FormDataTypeConfig.add_member(:data_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "dataTypeName", traits: {"smithy.api#required" => {}}))
     FormDataTypeConfig.type = Types::FormDataTypeConfig
-    FormInputBindingProperties.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    FormInputBindingProperties.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FormInputBindingPropertiesValue, name: "value")
+    FormInputBindingProperties.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    FormInputBindingProperties.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FormInputBindingPropertiesValue, name: "value"))
     FormInputBindingPropertiesValue.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "type"))
     FormInputBindingPropertiesValue.add_member(:binding_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: FormInputBindingPropertiesValueProperties, name: "bindingProperties"))
     FormInputBindingPropertiesValue.type = Types::FormInputBindingPropertiesValue
@@ -624,8 +624,8 @@ module Aws::AmplifyUIBuilder
     FormInputValuePropertyBindingProperties.add_member(:property, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "property", traits: {"smithy.api#required" => {}}))
     FormInputValuePropertyBindingProperties.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "field"))
     FormInputValuePropertyBindingProperties.type = Types::FormInputValuePropertyBindingProperties
-    FormInputValuePropertyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FormInputValueProperty, name: "member")
-    FormList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Form, name: "member")
+    FormInputValuePropertyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FormInputValueProperty, name: "member"))
+    FormList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Form, name: "member"))
     FormStyle.add_member(:horizontal_gap, ::Smithy::Schema::Shapes::MemberShape.new(target: FormStyleConfig, name: "horizontalGap"))
     FormStyle.add_member(:vertical_gap, ::Smithy::Schema::Shapes::MemberShape.new(target: FormStyleConfig, name: "verticalGap"))
     FormStyle.add_member(:outer_padding, ::Smithy::Schema::Shapes::MemberShape.new(target: FormStyleConfig, name: "outerPadding"))
@@ -641,7 +641,7 @@ module Aws::AmplifyUIBuilder
     FormSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "id", traits: {"smithy.api#required" => {}}))
     FormSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FormName, name: "name", traits: {"smithy.api#required" => {}}))
     FormSummary.type = Types::FormSummary
-    FormSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FormSummary, name: "member")
+    FormSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FormSummary, name: "member"))
     GenericDataRelationshipType.add_member(:has_many, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HAS_MANY", traits: {"smithy.api#enumValue" => "HAS_MANY"}))
     GenericDataRelationshipType.add_member(:has_one, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HAS_ONE", traits: {"smithy.api#enumValue" => "HAS_ONE"}))
     GenericDataRelationshipType.add_member(:belongs_to, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BELONGS_TO", traits: {"smithy.api#enumValue" => "BELONGS_TO"}))
@@ -688,7 +688,7 @@ module Aws::AmplifyUIBuilder
     GraphQLRenderConfig.add_member(:subscriptions_file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "subscriptionsFilePath", traits: {"smithy.api#required" => {}}))
     GraphQLRenderConfig.add_member(:fragments_file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "fragmentsFilePath", traits: {"smithy.api#required" => {}}))
     GraphQLRenderConfig.type = Types::GraphQLRenderConfig
-    IdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    IdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     InternalServerException.type = Types::InternalServerException
     InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
@@ -741,7 +741,7 @@ module Aws::AmplifyUIBuilder
     MutationActionSetStateParameter.add_member(:set, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentProperty, name: "set", traits: {"smithy.api#required" => {}}))
     MutationActionSetStateParameter.type = Types::MutationActionSetStateParameter
     NoApiRenderConfig.type = Types::NoApiRenderConfig
-    NumValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "member")
+    NumValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "member"))
     Predicate.add_member(:or, ::Smithy::Schema::Shapes::MemberShape.new(target: PredicateList, name: "or"))
     Predicate.add_member(:and, ::Smithy::Schema::Shapes::MemberShape.new(target: PredicateList, name: "and"))
     Predicate.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "field"))
@@ -749,7 +749,7 @@ module Aws::AmplifyUIBuilder
     Predicate.add_member(:operand, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "operand"))
     Predicate.add_member(:operand_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OperandType, name: "operandType"))
     Predicate.type = Types::Predicate
-    PredicateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Predicate, name: "member")
+    PredicateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Predicate, name: "member"))
     PutMetadataFlagBody.add_member(:new_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "newValue", traits: {"smithy.api#required" => {}}))
     PutMetadataFlagBody.type = Types::PutMetadataFlagBody
     PutMetadataFlagInput.add_member(:app_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "appId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -759,8 +759,8 @@ module Aws::AmplifyUIBuilder
     PutMetadataFlagInput[:http_payload] = :body
     PutMetadataFlagInput[:http_payload_member] = PutMetadataFlagInput.member(:body)
     PutMetadataFlagInput.type = Types::PutMetadataFlagInput
-    ReactCodegenDependencies.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    ReactCodegenDependencies.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    ReactCodegenDependencies.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    ReactCodegenDependencies.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     ReactStartCodegenJobData.add_member(:module, ::Smithy::Schema::Shapes::MemberShape.new(target: JSModule, name: "module"))
     ReactStartCodegenJobData.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: JSTarget, name: "target"))
     ReactStartCodegenJobData.add_member(:script, ::Smithy::Schema::Shapes::MemberShape.new(target: JSScript, name: "script"))
@@ -780,7 +780,7 @@ module Aws::AmplifyUIBuilder
     RefreshTokenRequestBody.add_member(:token, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "token", traits: {"smithy.api#required" => {}}))
     RefreshTokenRequestBody.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "clientId"))
     RefreshTokenRequestBody.type = Types::RefreshTokenRequestBody
-    RelatedModelFieldsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    RelatedModelFieldsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     ResourceConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ResourceConflictException.type = Types::ResourceConflictException
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
@@ -792,8 +792,8 @@ module Aws::AmplifyUIBuilder
     SectionalElement.add_member(:orientation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "orientation"))
     SectionalElement.add_member(:excluded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "excluded"))
     SectionalElement.type = Types::SectionalElement
-    SectionalElementMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    SectionalElementMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SectionalElement, name: "value")
+    SectionalElementMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    SectionalElementMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SectionalElement, name: "value"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     SortDirection.add_member(:asc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASC", traits: {"smithy.api#enumValue" => "ASC"}))
@@ -801,7 +801,7 @@ module Aws::AmplifyUIBuilder
     SortProperty.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "field", traits: {"smithy.api#required" => {}}))
     SortProperty.add_member(:direction, ::Smithy::Schema::Shapes::MemberShape.new(target: SortDirection, name: "direction", traits: {"smithy.api#required" => {}}))
     SortProperty.type = Types::SortProperty
-    SortPropertyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SortProperty, name: "member")
+    SortPropertyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SortProperty, name: "member"))
     StartCodegenJobData.add_member(:render_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CodegenJobRenderConfig, name: "renderConfig", traits: {"smithy.api#required" => {}}))
     StartCodegenJobData.add_member(:generic_data_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: CodegenJobGenericDataSchema, name: "genericDataSchema"))
     StartCodegenJobData.add_member(:auto_generate_forms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "autoGenerateForms"))
@@ -822,14 +822,14 @@ module Aws::AmplifyUIBuilder
     StorageAccessLevel.add_member(:public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLIC", traits: {"smithy.api#enumValue" => "public"}))
     StorageAccessLevel.add_member(:protected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROTECTED", traits: {"smithy.api#enumValue" => "protected"}))
     StorageAccessLevel.add_member(:private, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIVATE", traits: {"smithy.api#enumValue" => "private"}))
-    StrValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    StrValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     Theme.add_member(:app_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "appId", traits: {"smithy.api#required" => {}}))
     Theme.add_member(:environment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "environmentName", traits: {"smithy.api#required" => {}}))
     Theme.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "id", traits: {"smithy.api#required" => {}}))
@@ -840,20 +840,20 @@ module Aws::AmplifyUIBuilder
     Theme.add_member(:overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: ThemeValuesList, name: "overrides"))
     Theme.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     Theme.type = Types::Theme
-    ThemeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Theme, name: "member")
+    ThemeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Theme, name: "member"))
     ThemeSummary.add_member(:app_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "appId", traits: {"smithy.api#required" => {}}))
     ThemeSummary.add_member(:environment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "environmentName", traits: {"smithy.api#required" => {}}))
     ThemeSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "id", traits: {"smithy.api#required" => {}}))
     ThemeSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ThemeName, name: "name", traits: {"smithy.api#required" => {}}))
     ThemeSummary.type = Types::ThemeSummary
-    ThemeSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThemeSummary, name: "member")
+    ThemeSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThemeSummary, name: "member"))
     ThemeValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     ThemeValue.add_member(:children, ::Smithy::Schema::Shapes::MemberShape.new(target: ThemeValuesList, name: "children"))
     ThemeValue.type = Types::ThemeValue
     ThemeValues.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
     ThemeValues.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ThemeValue, name: "value"))
     ThemeValues.type = Types::ThemeValues
-    ThemeValuesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThemeValues, name: "member")
+    ThemeValuesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThemeValues, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ThrottlingException.type = Types::ThrottlingException
     UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
@@ -926,11 +926,11 @@ module Aws::AmplifyUIBuilder
     UpdateThemeOutput[:http_payload] = :entity
     UpdateThemeOutput[:http_payload_member] = UpdateThemeOutput.member(:entity)
     UpdateThemeOutput.type = Types::UpdateThemeOutput
-    ValidationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValidationConfiguration, name: "member")
+    ValidationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValidationConfiguration, name: "member"))
     ValueMapping.add_member(:display_value, ::Smithy::Schema::Shapes::MemberShape.new(target: FormInputValueProperty, name: "displayValue"))
     ValueMapping.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FormInputValueProperty, name: "value", traits: {"smithy.api#required" => {}}))
     ValueMapping.type = Types::ValueMapping
-    ValueMappingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValueMapping, name: "member")
+    ValueMappingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueMapping, name: "member"))
     ValueMappings.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueMappingList, name: "values", traits: {"smithy.api#required" => {}}))
     ValueMappings.add_member(:binding_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: FormInputBindingProperties, name: "bindingProperties"))
     ValueMappings.type = Types::ValueMappings

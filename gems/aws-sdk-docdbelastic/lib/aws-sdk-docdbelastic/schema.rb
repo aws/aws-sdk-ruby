@@ -111,7 +111,7 @@ module Aws::DocDBElastic
     ClusterInList.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clusterArn", traits: {"smithy.api#required" => {}}))
     ClusterInList.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "status", traits: {"smithy.api#required" => {}}))
     ClusterInList.type = Types::ClusterInList
-    ClusterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInList, name: "member")
+    ClusterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInList, name: "member"))
     ClusterSnapshot.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "subnetIds", traits: {"smithy.api#required" => {}}))
     ClusterSnapshot.add_member(:snapshot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "snapshotName", traits: {"smithy.api#required" => {}}))
     ClusterSnapshot.add_member(:snapshot_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "snapshotArn", traits: {"smithy.api#required" => {}}))
@@ -130,7 +130,7 @@ module Aws::DocDBElastic
     ClusterSnapshotInList.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "status", traits: {"smithy.api#required" => {}}))
     ClusterSnapshotInList.add_member(:snapshot_creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "snapshotCreationTime", traits: {"smithy.api#required" => {}}))
     ClusterSnapshotInList.type = Types::ClusterSnapshotInList
-    ClusterSnapshotList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterSnapshotInList, name: "member")
+    ClusterSnapshotList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterSnapshotInList, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType", traits: {"smithy.api#required" => {}}))
@@ -220,7 +220,7 @@ module Aws::DocDBElastic
     PendingMaintenanceActionDetails.add_member(:current_apply_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "currentApplyDate"))
     PendingMaintenanceActionDetails.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
     PendingMaintenanceActionDetails.type = Types::PendingMaintenanceActionDetails
-    PendingMaintenanceActionDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PendingMaintenanceActionDetails, name: "member")
+    PendingMaintenanceActionDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PendingMaintenanceActionDetails, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType", traits: {"smithy.api#required" => {}}))
@@ -228,7 +228,7 @@ module Aws::DocDBElastic
     ResourcePendingMaintenanceAction.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn"))
     ResourcePendingMaintenanceAction.add_member(:pending_maintenance_action_details, ::Smithy::Schema::Shapes::MemberShape.new(target: PendingMaintenanceActionDetailsList, name: "pendingMaintenanceActionDetails"))
     ResourcePendingMaintenanceAction.type = Types::ResourcePendingMaintenanceAction
-    ResourcePendingMaintenanceActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePendingMaintenanceAction, name: "member")
+    ResourcePendingMaintenanceActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePendingMaintenanceAction, name: "member"))
     RestoreClusterFromSnapshotOperationInput.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clusterName", traits: {"smithy.api#required" => {}}))
     RestoreClusterFromSnapshotOperationInput.add_member(:snapshot_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "snapshotArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "snapshotArn"}))
     RestoreClusterFromSnapshotOperationInput.add_member(:vpc_security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "vpcSecurityGroupIds"))
@@ -246,7 +246,7 @@ module Aws::DocDBElastic
     Shard.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "createTime", traits: {"smithy.api#required" => {}}))
     Shard.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "status", traits: {"smithy.api#required" => {}}))
     Shard.type = Types::Shard
-    ShardList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Shard, name: "member")
+    ShardList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Shard, name: "member"))
     StartClusterInput.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clusterArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "clusterArn"}))
     StartClusterInput.type = Types::StartClusterInput
     StartClusterOutput.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "cluster", traits: {"smithy.api#required" => {}}))
@@ -255,10 +255,10 @@ module Aws::DocDBElastic
     StopClusterInput.type = Types::StopClusterInput
     StopClusterOutput.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "cluster", traits: {"smithy.api#required" => {}}))
     StopClusterOutput.type = Types::StopClusterOutput
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -292,7 +292,7 @@ module Aws::DocDBElastic
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
 
     ChimeraDbLionfishServiceLambda = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.docdbelastic#ChimeraDbLionfishServiceLambda"

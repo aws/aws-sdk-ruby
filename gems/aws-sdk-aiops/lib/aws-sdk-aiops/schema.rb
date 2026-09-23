@@ -62,9 +62,9 @@ module Aws::AIOps
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    ChatConfigurationArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, name: "member")
-    ChatbotNotificationChannel.key = ::Smithy::Schema::Shapes::MemberShape.new(target: SNSTopicArn, name: "key")
-    ChatbotNotificationChannel.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArns, name: "value")
+    ChatConfigurationArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, name: "member"))
+    ChatbotNotificationChannel.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SNSTopicArn, name: "key"))
+    ChatbotNotificationChannel.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArns, name: "value"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ConflictException.type = Types::ConflictException
     CreateInvestigationGroupInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithPatternAndLengthLimits, name: "name", traits: {"smithy.api#required" => {}}))
@@ -81,7 +81,7 @@ module Aws::AIOps
     CreateInvestigationGroupOutput.type = Types::CreateInvestigationGroupOutput
     CrossAccountConfiguration.add_member(:source_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "sourceRoleArn"))
     CrossAccountConfiguration.type = Types::CrossAccountConfiguration
-    CrossAccountConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CrossAccountConfiguration, name: "member")
+    CrossAccountConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossAccountConfiguration, name: "member"))
     DeleteInvestigationGroupPolicyOutput.type = Types::DeleteInvestigationGroupPolicyOutput
     DeleteInvestigationGroupPolicyRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: InvestigationGroupIdentifier, name: "identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteInvestigationGroupPolicyRequest.type = Types::DeleteInvestigationGroupPolicyRequest
@@ -117,7 +117,7 @@ module Aws::AIOps
     GetInvestigationGroupResponse.type = Types::GetInvestigationGroupResponse
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     InternalServerException.type = Types::InternalServerException
-    InvestigationGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListInvestigationGroupsModel, name: "member")
+    InvestigationGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListInvestigationGroupsModel, name: "member"))
     ListInvestigationGroupsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveStringWithLengthLimits, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListInvestigationGroupsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 50}}))
     ListInvestigationGroupsInput.type = Types::ListInvestigationGroupsInput
@@ -144,14 +144,14 @@ module Aws::AIOps
     ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "serviceCode"))
     ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "quotaCode"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    TagKeyBoundaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeyBoundaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ThrottlingException.type = Types::ThrottlingException
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))

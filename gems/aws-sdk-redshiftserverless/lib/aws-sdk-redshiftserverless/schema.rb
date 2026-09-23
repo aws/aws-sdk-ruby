@@ -248,17 +248,17 @@ module Aws::RedshiftServerless
     AccessDeniedException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "code"))
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AccountIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    AccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     Association.add_member(:custom_domain_certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDomainCertificateArnString, name: "customDomainCertificateArn"))
     Association.add_member(:custom_domain_certificate_expiry_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "customDomainCertificateExpiryTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
     Association.add_member(:custom_domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDomainName, name: "customDomainName"))
     Association.add_member(:workgroup_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkgroupName, name: "workgroupName"))
     Association.type = Types::Association
-    AssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Association, name: "member")
+    AssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Association, name: "member"))
     ConfigParameter.add_member(:parameter_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterKey, name: "parameterKey"))
     ConfigParameter.add_member(:parameter_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "parameterValue"))
     ConfigParameter.type = Types::ConfigParameter
-    ConfigParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigParameter, name: "member")
+    ConfigParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigParameter, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
     ConvertRecoveryPointToSnapshotRequest.add_member(:recovery_point_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "recoveryPointId", traits: {"smithy.api#required" => {}}))
@@ -414,7 +414,7 @@ module Aws::RedshiftServerless
     EndpointAccess.add_member(:vpc_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpoint, name: "vpcEndpoint"))
     EndpointAccess.add_member(:endpoint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "endpointArn"))
     EndpointAccess.type = Types::EndpointAccess
-    EndpointAccessList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointAccess, name: "member")
+    EndpointAccessList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointAccess, name: "member"))
     GetCredentialsRequest.add_member(:db_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DbName, name: "dbName"))
     GetCredentialsRequest.add_member(:duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "durationSeconds"))
     GetCredentialsRequest.add_member(:workgroup_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkgroupName, name: "workgroupName"))
@@ -483,7 +483,7 @@ module Aws::RedshiftServerless
     GetWorkgroupRequest.type = Types::GetWorkgroupRequest
     GetWorkgroupResponse.add_member(:workgroup, ::Smithy::Schema::Shapes::MemberShape.new(target: Workgroup, name: "workgroup", traits: {"smithy.api#required" => {}}))
     GetWorkgroupResponse.type = Types::GetWorkgroupResponse
-    IamRoleArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "member")
+    IamRoleArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "member"))
     InsufficientCapacityException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InsufficientCapacityException.type = Types::InsufficientCapacityException
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
@@ -602,7 +602,7 @@ module Aws::RedshiftServerless
     ListWorkgroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
     ListWorkgroupsResponse.add_member(:workgroups, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkgroupList, name: "workgroups", traits: {"smithy.api#required" => {}}))
     ListWorkgroupsResponse.type = Types::ListWorkgroupsResponse
-    LogExportList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogExport, name: "member")
+    LogExportList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogExport, name: "member"))
     ManagedWorkgroupListItem.add_member(:managed_workgroup_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedWorkgroupName, name: "managedWorkgroupName"))
     ManagedWorkgroupListItem.add_member(:managed_workgroup_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "managedWorkgroupId"))
     ManagedWorkgroupListItem.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceArn, name: "sourceArn"))
@@ -614,7 +614,7 @@ module Aws::RedshiftServerless
     ManagedWorkgroupStatus.add_member(:modifying, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MODIFYING", traits: {"smithy.api#enumValue" => "MODIFYING"}))
     ManagedWorkgroupStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     ManagedWorkgroupStatus.add_member(:not_available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_AVAILABLE", traits: {"smithy.api#enumValue" => "NOT_AVAILABLE"}))
-    ManagedWorkgroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedWorkgroupListItem, name: "member")
+    ManagedWorkgroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedWorkgroupListItem, name: "member"))
     Namespace.add_member(:namespace_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "namespaceArn"))
     Namespace.add_member(:namespace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "namespaceId"))
     Namespace.add_member(:namespace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceName, name: "namespaceName"))
@@ -629,15 +629,15 @@ module Aws::RedshiftServerless
     Namespace.add_member(:admin_password_secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "adminPasswordSecretArn"))
     Namespace.add_member(:admin_password_secret_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "adminPasswordSecretKmsKeyId"))
     Namespace.type = Types::Namespace
-    NamespaceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "member")
+    NamespaceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "member"))
     NetworkInterface.add_member(:network_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "networkInterfaceId"))
     NetworkInterface.add_member(:subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "subnetId"))
     NetworkInterface.add_member(:private_ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "privateIpAddress"))
     NetworkInterface.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "availabilityZone"))
     NetworkInterface.add_member(:ipv6_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ipv6Address"))
     NetworkInterface.type = Types::NetworkInterface
-    NetworkInterfaceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface, name: "member")
-    NextInvocationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "member")
+    NetworkInterfaceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface, name: "member"))
+    NextInvocationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "member"))
     PerformanceTarget.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceTargetStatus, name: "status"))
     PerformanceTarget.add_member(:level, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "level", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
     PerformanceTarget.type = Types::PerformanceTarget
@@ -653,7 +653,7 @@ module Aws::RedshiftServerless
     RecoveryPoint.add_member(:workgroup_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkgroupName, name: "workgroupName"))
     RecoveryPoint.add_member(:namespace_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "namespaceArn"))
     RecoveryPoint.type = Types::RecoveryPoint
-    RecoveryPointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPoint, name: "member")
+    RecoveryPointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPoint, name: "member"))
     Reservation.add_member(:reservation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservationId, name: "reservationId"))
     Reservation.add_member(:reservation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservationArn, name: "reservationArn"))
     Reservation.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "startDate", traits: {"smithy.api#timestampFormat" => "date-time"}))
@@ -669,8 +669,8 @@ module Aws::RedshiftServerless
     ReservationOffering.add_member(:currency_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, name: "currencyCode"))
     ReservationOffering.add_member(:offering_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferingType, name: "offeringType"))
     ReservationOffering.type = Types::ReservationOffering
-    ReservationOfferingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReservationOffering, name: "member")
-    ReservationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Reservation, name: "member")
+    ReservationOfferingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservationOffering, name: "member"))
+    ReservationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Reservation, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceName"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
@@ -741,8 +741,8 @@ module Aws::RedshiftServerless
     ScheduledActionResponse.add_member(:namespace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceName, name: "namespaceName"))
     ScheduledActionResponse.add_member(:scheduled_action_uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "scheduledActionUuid"))
     ScheduledActionResponse.type = Types::ScheduledActionResponse
-    ScheduledActionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledActionAssociation, name: "member")
-    SecurityGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
+    ScheduledActionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledActionAssociation, name: "member"))
+    SecurityGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     ServerlessTrack.add_member(:track_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackName, name: "trackName"))
     ServerlessTrack.add_member(:workgroup_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "workgroupVersion"))
     ServerlessTrack.add_member(:update_targets, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTargetsList, name: "updateTargets"))
@@ -779,9 +779,9 @@ module Aws::RedshiftServerless
     SnapshotCopyConfiguration.add_member(:snapshot_retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "snapshotRetentionPeriod"))
     SnapshotCopyConfiguration.add_member(:destination_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "destinationKmsKeyId"))
     SnapshotCopyConfiguration.type = Types::SnapshotCopyConfiguration
-    SnapshotCopyConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotCopyConfiguration, name: "member")
-    SnapshotList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Snapshot, name: "member")
-    SubnetIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
+    SnapshotCopyConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotCopyConfiguration, name: "member"))
+    SnapshotList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Snapshot, name: "member"))
+    SubnetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
     TableRestoreStatus.add_member(:table_restore_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "tableRestoreRequestId"))
     TableRestoreStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "status"))
     TableRestoreStatus.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
@@ -799,12 +799,12 @@ module Aws::RedshiftServerless
     TableRestoreStatus.add_member(:new_table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "newTableName"))
     TableRestoreStatus.add_member(:recovery_point_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "recoveryPointId"))
     TableRestoreStatus.type = Types::TableRestoreStatus
-    TableRestoreStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TableRestoreStatus, name: "member")
+    TableRestoreStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableRestoreStatus, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -818,7 +818,7 @@ module Aws::RedshiftServerless
     TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     TooManyTagsException.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceName"))
     TooManyTagsException.type = Types::TooManyTagsException
-    TrackList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessTrack, name: "member")
+    TrackList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessTrack, name: "member"))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "tagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -873,7 +873,7 @@ module Aws::RedshiftServerless
     UpdateTarget.add_member(:track_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackName, name: "trackName"))
     UpdateTarget.add_member(:workgroup_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "workgroupVersion"))
     UpdateTarget.type = Types::UpdateTarget
-    UpdateTargetsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTarget, name: "member")
+    UpdateTargetsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTarget, name: "member"))
     UpdateUsageLimitRequest.add_member(:usage_limit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "usageLimitId", traits: {"smithy.api#required" => {}}))
     UpdateUsageLimitRequest.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "amount"))
     UpdateUsageLimitRequest.add_member(:breach_action, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageLimitBreachAction, name: "breachAction"))
@@ -903,20 +903,20 @@ module Aws::RedshiftServerless
     UsageLimit.add_member(:period, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageLimitPeriod, name: "period"))
     UsageLimit.add_member(:breach_action, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageLimitBreachAction, name: "breachAction"))
     UsageLimit.type = Types::UsageLimit
-    UsageLimits.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageLimit, name: "member")
+    UsageLimits.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageLimit, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
     VpcEndpoint.add_member(:vpc_endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "vpcEndpointId"))
     VpcEndpoint.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "vpcId"))
     VpcEndpoint.add_member(:network_interfaces, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceList, name: "networkInterfaces"))
     VpcEndpoint.type = Types::VpcEndpoint
-    VpcEndpointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpoint, name: "member")
-    VpcIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    VpcSecurityGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcSecurityGroupId, name: "member")
+    VpcEndpointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpoint, name: "member"))
+    VpcIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    VpcSecurityGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcSecurityGroupId, name: "member"))
     VpcSecurityGroupMembership.add_member(:vpc_security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcSecurityGroupId, name: "vpcSecurityGroupId"))
     VpcSecurityGroupMembership.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "status"))
     VpcSecurityGroupMembership.type = Types::VpcSecurityGroupMembership
-    VpcSecurityGroupMembershipList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcSecurityGroupMembership, name: "member")
+    VpcSecurityGroupMembershipList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcSecurityGroupMembership, name: "member"))
     Workgroup.add_member(:workgroup_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "workgroupId"))
     Workgroup.add_member(:workgroup_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "workgroupArn"))
     Workgroup.add_member(:workgroup_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkgroupName, name: "workgroupName"))
@@ -943,7 +943,7 @@ module Aws::RedshiftServerless
     Workgroup.add_member(:track_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackName, name: "trackName"))
     Workgroup.add_member(:pending_track_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackName, name: "pendingTrackName"))
     Workgroup.type = Types::Workgroup
-    WorkgroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Workgroup, name: "member")
+    WorkgroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Workgroup, name: "member"))
 
     RedshiftServerless = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.redshiftserverless#RedshiftServerless"

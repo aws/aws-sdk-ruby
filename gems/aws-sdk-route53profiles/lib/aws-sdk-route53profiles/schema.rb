@@ -182,7 +182,7 @@ module Aws::Route53Profiles
     ProfileAssociation.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Rfc3339Timestamp, name: "CreationTime"))
     ProfileAssociation.add_member(:modification_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Rfc3339Timestamp, name: "ModificationTime"))
     ProfileAssociation.type = Types::ProfileAssociation
-    ProfileAssociations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileAssociation, name: "member")
+    ProfileAssociations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileAssociation, name: "member"))
     ProfileResourceAssociation.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "Id"))
     ProfileResourceAssociation.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
     ProfileResourceAssociation.add_member(:owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "OwnerId"))
@@ -195,7 +195,7 @@ module Aws::Route53Profiles
     ProfileResourceAssociation.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Rfc3339Timestamp, name: "CreationTime"))
     ProfileResourceAssociation.add_member(:modification_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Rfc3339Timestamp, name: "ModificationTime"))
     ProfileResourceAssociation.type = Types::ProfileResourceAssociation
-    ProfileResourceAssociations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileResourceAssociation, name: "member")
+    ProfileResourceAssociations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileResourceAssociation, name: "member"))
     ProfileStatus.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
     ProfileStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     ProfileStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
@@ -207,7 +207,7 @@ module Aws::Route53Profiles
     ProfileSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
     ProfileSummary.add_member(:share_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareStatus, name: "ShareStatus"))
     ProfileSummary.type = Types::ProfileSummary
-    ProfileSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileSummary, name: "member")
+    ProfileSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileSummary, name: "member"))
     ResourceExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ResourceExistsException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceType"))
     ResourceExistsException.type = Types::ResourceExistsException
@@ -220,10 +220,10 @@ module Aws::Route53Profiles
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest

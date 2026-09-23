@@ -409,7 +409,7 @@ module Aws::CodeDeploy
     AlarmConfiguration.add_member(:ignore_poll_alarm_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ignorePollAlarmFailure", traits: {"smithy.api#default" => false}))
     AlarmConfiguration.add_member(:alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmList, name: "alarms"))
     AlarmConfiguration.type = Types::AlarmConfiguration
-    AlarmList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Alarm, name: "member")
+    AlarmList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Alarm, name: "member"))
     AlarmsLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     AlarmsLimitExceededException.type = Types::AlarmsLimitExceededException
     AppSpecContent.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: RawStringContent, name: "content"))
@@ -433,8 +433,8 @@ module Aws::CodeDeploy
     ApplicationRevisionSortBy.add_member(:register_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RegisterTime", traits: {"smithy.api#enumValue" => "registerTime"}))
     ApplicationRevisionSortBy.add_member(:first_used_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FirstUsedTime", traits: {"smithy.api#enumValue" => "firstUsedTime"}))
     ApplicationRevisionSortBy.add_member(:last_used_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LastUsedTime", traits: {"smithy.api#enumValue" => "lastUsedTime"}))
-    ApplicationsInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationInfo, name: "member")
-    ApplicationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "member")
+    ApplicationsInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationInfo, name: "member"))
+    ApplicationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "member"))
     ArnNotSupportedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ArnNotSupportedException.type = Types::ArnNotSupportedException
     AutoRollbackConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enabled", traits: {"smithy.api#default" => false}))
@@ -443,13 +443,13 @@ module Aws::CodeDeploy
     AutoRollbackEvent.add_member(:deployment_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPLOYMENT_FAILURE", traits: {"smithy.api#enumValue" => "DEPLOYMENT_FAILURE"}))
     AutoRollbackEvent.add_member(:deployment_stop_on_alarm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPLOYMENT_STOP_ON_ALARM", traits: {"smithy.api#enumValue" => "DEPLOYMENT_STOP_ON_ALARM"}))
     AutoRollbackEvent.add_member(:deployment_stop_on_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPLOYMENT_STOP_ON_REQUEST", traits: {"smithy.api#enumValue" => "DEPLOYMENT_STOP_ON_REQUEST"}))
-    AutoRollbackEventsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutoRollbackEvent, name: "member")
+    AutoRollbackEventsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoRollbackEvent, name: "member"))
     AutoScalingGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroupName, name: "name"))
     AutoScalingGroup.add_member(:hook, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroupHook, name: "hook"))
     AutoScalingGroup.add_member(:termination_hook, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroupHook, name: "terminationHook"))
     AutoScalingGroup.type = Types::AutoScalingGroup
-    AutoScalingGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroup, name: "member")
-    AutoScalingGroupNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroupName, name: "member")
+    AutoScalingGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroup, name: "member"))
+    AutoScalingGroupNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroupName, name: "member"))
     BatchGetApplicationRevisionsInput.add_member(:application_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "applicationName", traits: {"smithy.api#required" => {}}))
     BatchGetApplicationRevisionsInput.add_member(:revisions, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionLocationList, name: "revisions", traits: {"smithy.api#required" => {}}))
     BatchGetApplicationRevisionsInput.type = Types::BatchGetApplicationRevisionsInput
@@ -602,7 +602,7 @@ module Aws::CodeDeploy
     DeploymentConfigLimitExceededException.type = Types::DeploymentConfigLimitExceededException
     DeploymentConfigNameRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     DeploymentConfigNameRequiredException.type = Types::DeploymentConfigNameRequiredException
-    DeploymentConfigsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentConfigName, name: "member")
+    DeploymentConfigsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentConfigName, name: "member"))
     DeploymentCreator.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "User", traits: {"smithy.api#enumValue" => "user"}))
     DeploymentCreator.add_member(:autoscaling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Autoscaling", traits: {"smithy.api#enumValue" => "autoscaling"}))
     DeploymentCreator.add_member(:code_deploy_rollback, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CodeDeployRollback", traits: {"smithy.api#enumValue" => "codeDeployRollback"}))
@@ -641,12 +641,12 @@ module Aws::CodeDeploy
     DeploymentGroupInfo.add_member(:ecs_services, ::Smithy::Schema::Shapes::MemberShape.new(target: ECSServiceList, name: "ecsServices"))
     DeploymentGroupInfo.add_member(:termination_hook_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "terminationHookEnabled", traits: {"smithy.api#default" => false}))
     DeploymentGroupInfo.type = Types::DeploymentGroupInfo
-    DeploymentGroupInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentGroupInfo, name: "member")
+    DeploymentGroupInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentGroupInfo, name: "member"))
     DeploymentGroupLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     DeploymentGroupLimitExceededException.type = Types::DeploymentGroupLimitExceededException
     DeploymentGroupNameRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     DeploymentGroupNameRequiredException.type = Types::DeploymentGroupNameRequiredException
-    DeploymentGroupsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentGroupName, name: "member")
+    DeploymentGroupsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentGroupName, name: "member"))
     DeploymentIdRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     DeploymentIdRequiredException.type = Types::DeploymentIdRequiredException
     DeploymentInfo.add_member(:application_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "applicationName"))
@@ -708,8 +708,8 @@ module Aws::CodeDeploy
     DeploymentStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
     DeploymentStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "Stopped"}))
     DeploymentStatus.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READY", traits: {"smithy.api#enumValue" => "Ready"}))
-    DeploymentStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStatus, name: "member")
-    DeploymentStatusMessageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "member")
+    DeploymentStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStatus, name: "member"))
+    DeploymentStatusMessageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "member"))
     DeploymentStyle.add_member(:deployment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentType, name: "deploymentType"))
     DeploymentStyle.add_member(:deployment_option, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentOption, name: "deploymentOption"))
     DeploymentStyle.type = Types::DeploymentStyle
@@ -723,7 +723,7 @@ module Aws::CodeDeploy
     DeploymentTargetDoesNotExistException.type = Types::DeploymentTargetDoesNotExistException
     DeploymentTargetIdRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     DeploymentTargetIdRequiredException.type = Types::DeploymentTargetIdRequiredException
-    DeploymentTargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentTarget, name: "member")
+    DeploymentTargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentTarget, name: "member"))
     DeploymentTargetListSizeExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     DeploymentTargetListSizeExceededException.type = Types::DeploymentTargetListSizeExceededException
     DeploymentTargetType.add_member(:instance_target, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE_TARGET", traits: {"smithy.api#enumValue" => "InstanceTarget"}))
@@ -734,8 +734,8 @@ module Aws::CodeDeploy
     DeploymentType.add_member(:blue_green, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BLUE_GREEN", traits: {"smithy.api#enumValue" => "BLUE_GREEN"}))
     DeploymentWaitType.add_member(:ready_wait, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READY_WAIT", traits: {"smithy.api#enumValue" => "READY_WAIT"}))
     DeploymentWaitType.add_member(:termination_wait, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERMINATION_WAIT", traits: {"smithy.api#enumValue" => "TERMINATION_WAIT"}))
-    DeploymentsInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentInfo, name: "member")
-    DeploymentsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentId, name: "member")
+    DeploymentsInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentInfo, name: "member"))
+    DeploymentsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentId, name: "member"))
     DeregisterOnPremisesInstanceInput.add_member(:instance_name, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceName, name: "instanceName", traits: {"smithy.api#required" => {}}))
     DeregisterOnPremisesInstanceInput.type = Types::DeregisterOnPremisesInstanceInput
     DescriptionTooLongException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -749,17 +749,17 @@ module Aws::CodeDeploy
     EC2TagFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "Value"))
     EC2TagFilter.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2TagFilterType, name: "Type"))
     EC2TagFilter.type = Types::EC2TagFilter
-    EC2TagFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EC2TagFilter, name: "member")
+    EC2TagFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2TagFilter, name: "member"))
     EC2TagFilterType.add_member(:key_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KEY_ONLY", traits: {"smithy.api#enumValue" => "KEY_ONLY"}))
     EC2TagFilterType.add_member(:value_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALUE_ONLY", traits: {"smithy.api#enumValue" => "VALUE_ONLY"}))
     EC2TagFilterType.add_member(:key_and_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KEY_AND_VALUE", traits: {"smithy.api#enumValue" => "KEY_AND_VALUE"}))
     EC2TagSet.add_member(:ec2_tag_set_list, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2TagSetList, name: "ec2TagSetList"))
     EC2TagSet.type = Types::EC2TagSet
-    EC2TagSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EC2TagFilterList, name: "member")
+    EC2TagSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2TagFilterList, name: "member"))
     ECSService.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ECSServiceName, name: "serviceName"))
     ECSService.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ECSClusterName, name: "clusterName"))
     ECSService.type = Types::ECSService
-    ECSServiceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ECSService, name: "member")
+    ECSServiceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ECSService, name: "member"))
     ECSServiceMappingLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ECSServiceMappingLimitExceededException.type = Types::ECSServiceMappingLimitExceededException
     ECSTarget.add_member(:deployment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentId, name: "deploymentId"))
@@ -779,10 +779,10 @@ module Aws::CodeDeploy
     ECSTaskSet.add_member(:target_group, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupInfo, name: "targetGroup"))
     ECSTaskSet.add_member(:task_set_label, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetLabel, name: "taskSetLabel"))
     ECSTaskSet.type = Types::ECSTaskSet
-    ECSTaskSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ECSTaskSet, name: "member")
+    ECSTaskSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ECSTaskSet, name: "member"))
     ELBInfo.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ELBName, name: "name"))
     ELBInfo.type = Types::ELBInfo
-    ELBInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ELBInfo, name: "member")
+    ELBInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ELBInfo, name: "member"))
     ErrorCode.add_member(:agent_issue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGENT_ISSUE", traits: {"smithy.api#enumValue" => "AGENT_ISSUE"}))
     ErrorCode.add_member(:alarm_active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALARM_ACTIVE", traits: {"smithy.api#enumValue" => "ALARM_ACTIVE"}))
     ErrorCode.add_member(:application_missing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPLICATION_MISSING", traits: {"smithy.api#enumValue" => "APPLICATION_MISSING"}))
@@ -823,7 +823,7 @@ module Aws::CodeDeploy
     FileExistsBehavior.add_member(:disallow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISALLOW", traits: {"smithy.api#enumValue" => "DISALLOW"}))
     FileExistsBehavior.add_member(:overwrite, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OVERWRITE", traits: {"smithy.api#enumValue" => "OVERWRITE"}))
     FileExistsBehavior.add_member(:retain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RETAIN", traits: {"smithy.api#enumValue" => "RETAIN"}))
-    FilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member")
+    FilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member"))
     GenericRevisionInfo.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     GenericRevisionInfo.add_member(:deployment_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentGroupsList, name: "deploymentGroups"))
     GenericRevisionInfo.add_member(:first_used_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "firstUsedTime"))
@@ -870,7 +870,7 @@ module Aws::CodeDeploy
     GetOnPremisesInstanceOutput.type = Types::GetOnPremisesInstanceOutput
     GitHubAccountTokenDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     GitHubAccountTokenDoesNotExistException.type = Types::GitHubAccountTokenDoesNotExistException
-    GitHubAccountTokenNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GitHubAccountTokenName, name: "member")
+    GitHubAccountTokenNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GitHubAccountTokenName, name: "member"))
     GitHubAccountTokenNameRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     GitHubAccountTokenNameRequiredException.type = Types::GitHubAccountTokenNameRequiredException
     GitHubLocation.add_member(:repository, ::Smithy::Schema::Shapes::MemberShape.new(target: Repository, name: "repository"))
@@ -902,12 +902,12 @@ module Aws::CodeDeploy
     InstanceInfo.add_member(:deregister_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "deregisterTime"))
     InstanceInfo.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     InstanceInfo.type = Types::InstanceInfo
-    InstanceInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceInfo, name: "member")
+    InstanceInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceInfo, name: "member"))
     InstanceLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     InstanceLimitExceededException.type = Types::InstanceLimitExceededException
     InstanceNameAlreadyRegisteredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     InstanceNameAlreadyRegisteredException.type = Types::InstanceNameAlreadyRegisteredException
-    InstanceNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceName, name: "member")
+    InstanceNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceName, name: "member"))
     InstanceNameRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     InstanceNameRequiredException.type = Types::InstanceNameRequiredException
     InstanceNotRegisteredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -919,7 +919,7 @@ module Aws::CodeDeploy
     InstanceStatus.add_member(:skipped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SKIPPED", traits: {"smithy.api#enumValue" => "Skipped"}))
     InstanceStatus.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN", traits: {"smithy.api#enumValue" => "Unknown"}))
     InstanceStatus.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READY", traits: {"smithy.api#enumValue" => "Ready"}))
-    InstanceStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceStatus, name: "member")
+    InstanceStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceStatus, name: "member"))
     InstanceSummary.add_member(:deployment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentId, name: "deploymentId"))
     InstanceSummary.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "instanceId"))
     InstanceSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceStatus, name: "status"))
@@ -927,7 +927,7 @@ module Aws::CodeDeploy
     InstanceSummary.add_member(:lifecycle_events, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleEventList, name: "lifecycleEvents"))
     InstanceSummary.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceType, name: "instanceType"))
     InstanceSummary.type = Types::InstanceSummary
-    InstanceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceSummary, name: "member")
+    InstanceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceSummary, name: "member"))
     InstanceTarget.add_member(:deployment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentId, name: "deploymentId"))
     InstanceTarget.add_member(:target_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetId, name: "targetId"))
     InstanceTarget.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetArn, name: "targetArn"))
@@ -938,8 +938,8 @@ module Aws::CodeDeploy
     InstanceTarget.type = Types::InstanceTarget
     InstanceType.add_member(:blue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BLUE", traits: {"smithy.api#enumValue" => "Blue"}))
     InstanceType.add_member(:green, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GREEN", traits: {"smithy.api#enumValue" => "Green"}))
-    InstanceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceType, name: "member")
-    InstancesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "member")
+    InstanceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceType, name: "member"))
+    InstancesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "member"))
     InvalidAlarmConfigException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     InvalidAlarmConfigException.type = Types::InvalidAlarmConfigException
     InvalidApplicationNameException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -1083,7 +1083,7 @@ module Aws::CodeDeploy
     LifecycleEvent.type = Types::LifecycleEvent
     LifecycleEventAlreadyCompletedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     LifecycleEventAlreadyCompletedException.type = Types::LifecycleEventAlreadyCompletedException
-    LifecycleEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleEvent, name: "member")
+    LifecycleEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleEvent, name: "member"))
     LifecycleEventStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "Pending"}))
     LifecycleEventStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "InProgress"}))
     LifecycleEventStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "Succeeded"}))
@@ -1166,7 +1166,7 @@ module Aws::CodeDeploy
     ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     ListTagsForResourceOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    ListenerArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerArn, name: "member")
+    ListenerArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerArn, name: "member"))
     LoadBalancerInfo.add_member(:elb_info_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ELBInfoList, name: "elbInfoList"))
     LoadBalancerInfo.add_member(:target_group_info_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupInfoList, name: "targetGroupInfoList"))
     LoadBalancerInfo.add_member(:target_group_pair_info_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupPairInfoList, name: "targetGroupPairInfoList"))
@@ -1185,7 +1185,7 @@ module Aws::CodeDeploy
     MultipleIamArnsProvidedException.type = Types::MultipleIamArnsProvidedException
     OnPremisesTagSet.add_member(:on_premises_tag_set_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OnPremisesTagSetList, name: "onPremisesTagSetList"))
     OnPremisesTagSet.type = Types::OnPremisesTagSet
-    OnPremisesTagSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilterList, name: "member")
+    OnPremisesTagSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilterList, name: "member"))
     OperationNotSupportedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     OperationNotSupportedException.type = Types::OperationNotSupportedException
     OutdatedInstancesStrategy.add_member(:update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Update", traits: {"smithy.api#enumValue" => "UPDATE"}))
@@ -1224,14 +1224,14 @@ module Aws::CodeDeploy
     RevisionInfo.add_member(:revision_location, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionLocation, name: "revisionLocation"))
     RevisionInfo.add_member(:generic_revision_info, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericRevisionInfo, name: "genericRevisionInfo"))
     RevisionInfo.type = Types::RevisionInfo
-    RevisionInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionInfo, name: "member")
+    RevisionInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionInfo, name: "member"))
     RevisionLocation.add_member(:revision_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionLocationType, name: "revisionType"))
     RevisionLocation.add_member(:s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "s3Location"))
     RevisionLocation.add_member(:git_hub_location, ::Smithy::Schema::Shapes::MemberShape.new(target: GitHubLocation, name: "gitHubLocation"))
     RevisionLocation.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: RawString, name: "string"))
     RevisionLocation.add_member(:app_spec_content, ::Smithy::Schema::Shapes::MemberShape.new(target: AppSpecContent, name: "appSpecContent"))
     RevisionLocation.type = Types::RevisionLocation
-    RevisionLocationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionLocation, name: "member")
+    RevisionLocationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionLocation, name: "member"))
     RevisionLocationType.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3", traits: {"smithy.api#enumValue" => "S3"}))
     RevisionLocationType.add_member(:git_hub, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GitHub", traits: {"smithy.api#enumValue" => "GitHub"}))
     RevisionLocationType.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "String", traits: {"smithy.api#enumValue" => "String"}))
@@ -1269,14 +1269,14 @@ module Aws::CodeDeploy
     TagFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "Value"))
     TagFilter.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilterType, name: "Type"))
     TagFilter.type = Types::TagFilter
-    TagFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilter, name: "member")
+    TagFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilter, name: "member"))
     TagFilterType.add_member(:key_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KEY_ONLY", traits: {"smithy.api#enumValue" => "KEY_ONLY"}))
     TagFilterType.add_member(:value_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALUE_ONLY", traits: {"smithy.api#enumValue" => "VALUE_ONLY"}))
     TagFilterType.add_member(:key_and_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KEY_AND_VALUE", traits: {"smithy.api#enumValue" => "KEY_AND_VALUE"}))
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "member"))
     TagLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     TagLimitExceededException.type = Types::TagLimitExceededException
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagRequiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     TagRequiredException.type = Types::TagRequiredException
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
@@ -1287,17 +1287,17 @@ module Aws::CodeDeploy
     TagSetListLimitExceededException.type = Types::TagSetListLimitExceededException
     TargetFilterName.add_member(:target_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TARGET_STATUS", traits: {"smithy.api#enumValue" => "TargetStatus"}))
     TargetFilterName.add_member(:server_instance_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVER_INSTANCE_LABEL", traits: {"smithy.api#enumValue" => "ServerInstanceLabel"}))
-    TargetFilters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetFilterName, name: "key")
-    TargetFilters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, name: "value")
+    TargetFilters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetFilterName, name: "key"))
+    TargetFilters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, name: "value"))
     TargetGroupInfo.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupName, name: "name"))
     TargetGroupInfo.type = Types::TargetGroupInfo
-    TargetGroupInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupInfo, name: "member")
+    TargetGroupInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupInfo, name: "member"))
     TargetGroupPairInfo.add_member(:target_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupInfoList, name: "targetGroups"))
     TargetGroupPairInfo.add_member(:prod_traffic_route, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficRoute, name: "prodTrafficRoute"))
     TargetGroupPairInfo.add_member(:test_traffic_route, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficRoute, name: "testTrafficRoute"))
     TargetGroupPairInfo.type = Types::TargetGroupPairInfo
-    TargetGroupPairInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupPairInfo, name: "member")
-    TargetIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetId, name: "member")
+    TargetGroupPairInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupPairInfo, name: "member"))
+    TargetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetId, name: "member"))
     TargetInstances.add_member(:tag_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2TagFilterList, name: "tagFilters"))
     TargetInstances.add_member(:auto_scaling_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroupNameList, name: "autoScalingGroups"))
     TargetInstances.add_member(:ec2_tag_set, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2TagSet, name: "ec2TagSet"))
@@ -1335,7 +1335,7 @@ module Aws::CodeDeploy
     TriggerConfig.add_member(:trigger_target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerTargetArn, name: "triggerTargetArn"))
     TriggerConfig.add_member(:trigger_events, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerEventTypeList, name: "triggerEvents"))
     TriggerConfig.type = Types::TriggerConfig
-    TriggerConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerConfig, name: "member")
+    TriggerConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerConfig, name: "member"))
     TriggerEventType.add_member(:deployment_start, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPLOYMENT_START", traits: {"smithy.api#enumValue" => "DeploymentStart"}))
     TriggerEventType.add_member(:deployment_success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPLOYMENT_SUCCESS", traits: {"smithy.api#enumValue" => "DeploymentSuccess"}))
     TriggerEventType.add_member(:deployment_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPLOYMENT_FAILURE", traits: {"smithy.api#enumValue" => "DeploymentFailure"}))
@@ -1346,7 +1346,7 @@ module Aws::CodeDeploy
     TriggerEventType.add_member(:instance_success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE_SUCCESS", traits: {"smithy.api#enumValue" => "InstanceSuccess"}))
     TriggerEventType.add_member(:instance_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE_FAILURE", traits: {"smithy.api#enumValue" => "InstanceFailure"}))
     TriggerEventType.add_member(:instance_ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE_READY", traits: {"smithy.api#enumValue" => "InstanceReady"}))
-    TriggerEventTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerEventType, name: "member")
+    TriggerEventTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerEventType, name: "member"))
     TriggerTargetsLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     TriggerTargetsLimitExceededException.type = Types::TriggerTargetsLimitExceededException
     UnsupportedActionForDeploymentTypeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))

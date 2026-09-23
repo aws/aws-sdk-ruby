@@ -570,7 +570,7 @@ module Aws::WorkSpaces
     AccessEndpointConfig.add_member(:access_endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessEndpointList, name: "AccessEndpoints", traits: {"smithy.api#required" => {}}))
     AccessEndpointConfig.add_member(:internet_fallback_protocols, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetFallbackProtocolList, name: "InternetFallbackProtocols"))
     AccessEndpointConfig.type = Types::AccessEndpointConfig
-    AccessEndpointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessEndpoint, name: "member")
+    AccessEndpointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessEndpoint, name: "member"))
     AccessEndpointType.add_member(:streaming_wsp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STREAMING_WSP", traits: {"smithy.api#enumValue" => "STREAMING_WSP"}))
     AccessPropertyValue.add_member(:allow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOW", traits: {"smithy.api#enumValue" => "ALLOW"}))
     AccessPropertyValue.add_member(:deny, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DENY", traits: {"smithy.api#enumValue" => "DENY"}))
@@ -579,7 +579,7 @@ module Aws::WorkSpaces
     AccountLink.add_member(:source_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccount, name: "SourceAccountId"))
     AccountLink.add_member(:target_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccount, name: "TargetAccountId"))
     AccountLink.type = Types::AccountLink
-    AccountLinkList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountLink, name: "member")
+    AccountLinkList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountLink, name: "member"))
     AccountLinkStatusEnum.add_member(:linked, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINKED", traits: {"smithy.api#enumValue" => "LINKED"}))
     AccountLinkStatusEnum.add_member(:linking_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINKING_FAILED", traits: {"smithy.api#enumValue" => "LINKING_FAILED"}))
     AccountLinkStatusEnum.add_member(:link_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINK_NOT_FOUND", traits: {"smithy.api#enumValue" => "LINK_NOT_FOUND"}))
@@ -592,7 +592,7 @@ module Aws::WorkSpaces
     AccountModification.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceErrorCode, name: "ErrorCode"))
     AccountModification.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "ErrorMessage"))
     AccountModification.type = Types::AccountModification
-    AccountModificationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountModification, name: "member")
+    AccountModificationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountModification, name: "member"))
     ActiveDirectoryConfig.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#required" => {}}))
     ActiveDirectoryConfig.add_member(:service_account_secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretsManagerArn, name: "ServiceAccountSecretArn", traits: {"smithy.api#required" => {}}))
     ActiveDirectoryConfig.type = Types::ActiveDirectoryConfig
@@ -601,8 +601,8 @@ module Aws::WorkSpaces
     ApplicationAssociatedResourceType.add_member(:workspace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WORKSPACE", traits: {"smithy.api#enumValue" => "WORKSPACE"}))
     ApplicationAssociatedResourceType.add_member(:bundle, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUNDLE", traits: {"smithy.api#enumValue" => "BUNDLE"}))
     ApplicationAssociatedResourceType.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMAGE", traits: {"smithy.api#enumValue" => "IMAGE"}))
-    ApplicationAssociatedResourceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationAssociatedResourceType, name: "member")
-    ApplicationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Application, name: "member")
+    ApplicationAssociatedResourceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationAssociatedResourceType, name: "member"))
+    ApplicationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Application, name: "member"))
     ApplicationNotSupportedException.type = Types::ApplicationNotSupportedException
     ApplicationResourceAssociation.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkSpaceApplicationId, name: "ApplicationId"))
     ApplicationResourceAssociation.add_member(:associated_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AssociatedResourceId"))
@@ -612,7 +612,7 @@ module Aws::WorkSpaces
     ApplicationResourceAssociation.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationState, name: "State"))
     ApplicationResourceAssociation.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationStateReason, name: "StateReason"))
     ApplicationResourceAssociation.type = Types::ApplicationResourceAssociation
-    ApplicationResourceAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationResourceAssociation, name: "member")
+    ApplicationResourceAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationResourceAssociation, name: "member"))
     ApplicationSettingsRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSettingsStatusEnum, name: "Status", traits: {"smithy.api#required" => {}}))
     ApplicationSettingsRequest.add_member(:settings_group, ::Smithy::Schema::Shapes::MemberShape.new(target: SettingsGroup, name: "SettingsGroup"))
     ApplicationSettingsRequest.type = Types::ApplicationSettingsRequest
@@ -664,9 +664,9 @@ module Aws::WorkSpaces
     AuthorizeIpRulesRequest.type = Types::AuthorizeIpRulesRequest
     AuthorizeIpRulesResult.type = Types::AuthorizeIpRulesResult
     BundleAssociatedResourceType.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPLICATION", traits: {"smithy.api#enumValue" => "APPLICATION"}))
-    BundleAssociatedResourceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BundleAssociatedResourceType, name: "member")
-    BundleIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BundleId, name: "member")
-    BundleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceBundle, name: "member")
+    BundleAssociatedResourceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BundleAssociatedResourceType, name: "member"))
+    BundleIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BundleId, name: "member"))
+    BundleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceBundle, name: "member"))
     BundleResourceAssociation.add_member(:associated_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AssociatedResourceId"))
     BundleResourceAssociation.add_member(:associated_resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BundleAssociatedResourceType, name: "AssociatedResourceType"))
     BundleResourceAssociation.add_member(:bundle_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BundleId, name: "BundleId"))
@@ -675,7 +675,7 @@ module Aws::WorkSpaces
     BundleResourceAssociation.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationState, name: "State"))
     BundleResourceAssociation.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationStateReason, name: "StateReason"))
     BundleResourceAssociation.type = Types::BundleResourceAssociation
-    BundleResourceAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BundleResourceAssociation, name: "member")
+    BundleResourceAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BundleResourceAssociation, name: "member"))
     BundleType.add_member(:regular, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGULAR", traits: {"smithy.api#enumValue" => "REGULAR"}))
     BundleType.add_member(:standby, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDBY", traits: {"smithy.api#enumValue" => "STANDBY"}))
     Capacity.add_member(:desired_user_sessions, ::Smithy::Schema::Shapes::MemberShape.new(target: DesiredUserSessions, name: "DesiredUserSessions", traits: {"smithy.api#required" => {}}))
@@ -696,11 +696,11 @@ module Aws::WorkSpaces
     ClientDeviceType.add_member(:device_type_ios, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEVICE_TYPE_IOS", traits: {"smithy.api#enumValue" => "DeviceTypeIos"}))
     ClientDeviceType.add_member(:device_type_linux, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEVICE_TYPE_LINUX", traits: {"smithy.api#enumValue" => "DeviceTypeLinux"}))
     ClientDeviceType.add_member(:device_type_web, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEVICE_TYPE_WEB", traits: {"smithy.api#enumValue" => "DeviceTypeWeb"}))
-    ClientDeviceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClientDeviceType, name: "member")
+    ClientDeviceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientDeviceType, name: "member"))
     ClientProperties.add_member(:reconnect_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ReconnectEnum, name: "ReconnectEnabled"))
     ClientProperties.add_member(:log_upload_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: LogUploadEnum, name: "LogUploadEnabled"))
     ClientProperties.type = Types::ClientProperties
-    ClientPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClientPropertiesResult, name: "member")
+    ClientPropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientPropertiesResult, name: "member"))
     ClientPropertiesResult.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceId"))
     ClientPropertiesResult.add_member(:client_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientProperties, name: "ClientProperties"))
     ClientPropertiesResult.type = Types::ClientPropertiesResult
@@ -715,7 +715,7 @@ module Aws::WorkSpaces
     Compute.add_member(:graphicspro, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GRAPHICSPRO", traits: {"smithy.api#enumValue" => "GRAPHICSPRO"}))
     Compute.add_member(:graphics_g4_dn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GRAPHICS_G4DN", traits: {"smithy.api#enumValue" => "GRAPHICS_G4DN"}))
     Compute.add_member(:graphicspro_g4_dn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GRAPHICSPRO_G4DN", traits: {"smithy.api#enumValue" => "GRAPHICSPRO_G4DN"}))
-    ComputeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Compute, name: "member")
+    ComputeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Compute, name: "member"))
     ComputeNotCompatibleException.type = Types::ComputeNotCompatibleException
     ComputeType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Compute, name: "Name"))
     ComputeType.type = Types::ComputeType
@@ -726,7 +726,7 @@ module Aws::WorkSpaces
     ConnectClientAddIn.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AddInName, name: "Name"))
     ConnectClientAddIn.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: AddInUrl, name: "URL"))
     ConnectClientAddIn.type = Types::ConnectClientAddIn
-    ConnectClientAddInList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectClientAddIn, name: "member")
+    ConnectClientAddInList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectClientAddIn, name: "member"))
     ConnectionAlias.add_member(:connection_string, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionString, name: "ConnectionString"))
     ConnectionAlias.add_member(:alias_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionAliasId, name: "AliasId"))
     ConnectionAlias.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionAliasState, name: "State"))
@@ -738,13 +738,13 @@ module Aws::WorkSpaces
     ConnectionAliasAssociation.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceId"))
     ConnectionAliasAssociation.add_member(:connection_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionIdentifier, name: "ConnectionIdentifier"))
     ConnectionAliasAssociation.type = Types::ConnectionAliasAssociation
-    ConnectionAliasAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionAliasAssociation, name: "member")
-    ConnectionAliasIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionAliasId, name: "member")
-    ConnectionAliasList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionAlias, name: "member")
+    ConnectionAliasAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionAliasAssociation, name: "member"))
+    ConnectionAliasIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionAliasId, name: "member"))
+    ConnectionAliasList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionAlias, name: "member"))
     ConnectionAliasPermission.add_member(:shared_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccount, name: "SharedAccountId", traits: {"smithy.api#required" => {}}))
     ConnectionAliasPermission.add_member(:allow_association, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, name: "AllowAssociation", traits: {"smithy.api#required" => {}}))
     ConnectionAliasPermission.type = Types::ConnectionAliasPermission
-    ConnectionAliasPermissions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionAliasPermission, name: "member")
+    ConnectionAliasPermissions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionAliasPermission, name: "member"))
     ConnectionAliasState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     ConnectionAliasState.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
     ConnectionAliasState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -846,7 +846,7 @@ module Aws::WorkSpaces
     CustomWorkspaceImageImportErrorDetails.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     CustomWorkspaceImageImportErrorDetails.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageErrorMessage, name: "ErrorMessage"))
     CustomWorkspaceImageImportErrorDetails.type = Types::CustomWorkspaceImageImportErrorDetails
-    CustomWorkspaceImageImportErrorDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomWorkspaceImageImportErrorDetails, name: "member")
+    CustomWorkspaceImageImportErrorDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomWorkspaceImageImportErrorDetails, name: "member"))
     CustomWorkspaceImageImportState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     CustomWorkspaceImageImportState.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     CustomWorkspaceImageImportState.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
@@ -858,7 +858,7 @@ module Aws::WorkSpaces
     DataReplicationSettings.type = Types::DataReplicationSettings
     DedicatedTenancyAccountType.add_member(:source_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOURCE_ACCOUNT", traits: {"smithy.api#enumValue" => "SOURCE_ACCOUNT"}))
     DedicatedTenancyAccountType.add_member(:target_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TARGET_ACCOUNT", traits: {"smithy.api#enumValue" => "TARGET_ACCOUNT"}))
-    DedicatedTenancyCidrRangeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DedicatedTenancyManagementCidrRange, name: "member")
+    DedicatedTenancyCidrRangeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DedicatedTenancyManagementCidrRange, name: "member"))
     DedicatedTenancyModificationStateEnum.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     DedicatedTenancyModificationStateEnum.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     DedicatedTenancyModificationStateEnum.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -884,9 +884,9 @@ module Aws::WorkSpaces
     DefaultWorkspaceCreationProperties.add_member(:enable_maintenance_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, name: "EnableMaintenanceMode"))
     DefaultWorkspaceCreationProperties.add_member(:instance_iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "InstanceIamRoleArn"))
     DefaultWorkspaceCreationProperties.type = Types::DefaultWorkspaceCreationProperties
-    DeletableCertificateBasedAuthPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeletableCertificateBasedAuthProperty, name: "member")
+    DeletableCertificateBasedAuthPropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletableCertificateBasedAuthProperty, name: "member"))
     DeletableCertificateBasedAuthProperty.add_member(:certificate_based_auth_properties_certificate_authority_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN", traits: {"smithy.api#enumValue" => "CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN"}))
-    DeletableSamlPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeletableSamlProperty, name: "member")
+    DeletableSamlPropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletableSamlProperty, name: "member"))
     DeletableSamlProperty.add_member(:saml_properties_user_access_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAML_PROPERTIES_USER_ACCESS_URL", traits: {"smithy.api#enumValue" => "SAML_PROPERTIES_USER_ACCESS_URL"}))
     DeletableSamlProperty.add_member(:saml_properties_relay_state_parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME", traits: {"smithy.api#enumValue" => "SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME"}))
     DeleteAccountLinkInvitationRequest.add_member(:link_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkId, name: "LinkId", traits: {"smithy.api#required" => {}}))
@@ -1039,10 +1039,10 @@ module Aws::WorkSpaces
     DescribeWorkspaceDirectoriesFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeWorkspaceDirectoriesFilterName, name: "Name", traits: {"smithy.api#required" => {}}))
     DescribeWorkspaceDirectoriesFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeWorkspaceDirectoriesFilterValues, name: "Values", traits: {"smithy.api#required" => {}}))
     DescribeWorkspaceDirectoriesFilter.type = Types::DescribeWorkspaceDirectoriesFilter
-    DescribeWorkspaceDirectoriesFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeWorkspaceDirectoriesFilter, name: "member")
+    DescribeWorkspaceDirectoriesFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeWorkspaceDirectoriesFilter, name: "member"))
     DescribeWorkspaceDirectoriesFilterName.add_member(:user_identity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER_IDENTITY_TYPE", traits: {"smithy.api#enumValue" => "USER_IDENTITY_TYPE"}))
     DescribeWorkspaceDirectoriesFilterName.add_member(:workspace_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WORKSPACE_TYPE", traits: {"smithy.api#enumValue" => "WORKSPACE_TYPE"}))
-    DescribeWorkspaceDirectoriesFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeWorkspaceDirectoriesFilterValue, name: "member")
+    DescribeWorkspaceDirectoriesFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeWorkspaceDirectoriesFilterValue, name: "member"))
     DescribeWorkspaceDirectoriesRequest.add_member(:directory_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryIdList, name: "DirectoryIds"))
     DescribeWorkspaceDirectoriesRequest.add_member(:workspace_directory_names, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceDirectoryNameList, name: "WorkspaceDirectoryNames"))
     DescribeWorkspaceDirectoriesRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, name: "Limit"))
@@ -1096,8 +1096,8 @@ module Aws::WorkSpaces
     DescribeWorkspacesPoolsFilterOperator.add_member(:notequals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOTEQUALS", traits: {"smithy.api#enumValue" => "NOTEQUALS"}))
     DescribeWorkspacesPoolsFilterOperator.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINS", traits: {"smithy.api#enumValue" => "CONTAINS"}))
     DescribeWorkspacesPoolsFilterOperator.add_member(:notcontains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOTCONTAINS", traits: {"smithy.api#enumValue" => "NOTCONTAINS"}))
-    DescribeWorkspacesPoolsFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeWorkspacesPoolsFilterValue, name: "member")
-    DescribeWorkspacesPoolsFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeWorkspacesPoolsFilter, name: "member")
+    DescribeWorkspacesPoolsFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeWorkspacesPoolsFilterValue, name: "member"))
+    DescribeWorkspacesPoolsFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeWorkspacesPoolsFilter, name: "member"))
     DescribeWorkspacesPoolsRequest.add_member(:pool_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspacesPoolIds, name: "PoolIds"))
     DescribeWorkspacesPoolsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeWorkspacesPoolsFilters, name: "Filters"))
     DescribeWorkspacesPoolsRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, name: "Limit"))
@@ -1117,8 +1117,8 @@ module Aws::WorkSpaces
     DescribeWorkspacesResult.add_member(:workspaces, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceList, name: "Workspaces"))
     DescribeWorkspacesResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken"))
     DescribeWorkspacesResult.type = Types::DescribeWorkspacesResult
-    DirectoryIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, name: "member")
-    DirectoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceDirectory, name: "member")
+    DirectoryIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, name: "member"))
+    DirectoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceDirectory, name: "member"))
     DisassociateConnectionAliasRequest.add_member(:alias_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionAliasId, name: "AliasId", traits: {"smithy.api#required" => {}}))
     DisassociateConnectionAliasRequest.type = Types::DisassociateConnectionAliasRequest
     DisassociateConnectionAliasResult.type = Types::DisassociateConnectionAliasResult
@@ -1131,28 +1131,28 @@ module Aws::WorkSpaces
     DisassociateWorkspaceApplicationRequest.type = Types::DisassociateWorkspaceApplicationRequest
     DisassociateWorkspaceApplicationResult.add_member(:association, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceResourceAssociation, name: "Association"))
     DisassociateWorkspaceApplicationResult.type = Types::DisassociateWorkspaceApplicationResult
-    DnsIpAddresses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, name: "member")
+    DnsIpAddresses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, name: "member"))
     EndpointEncryptionMode.add_member(:standard_tls, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD_TLS", traits: {"smithy.api#enumValue" => "STANDARD_TLS"}))
     EndpointEncryptionMode.add_member(:fips_validated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIPS_VALIDATED", traits: {"smithy.api#enumValue" => "FIPS_VALIDATED"}))
     ErrorDetails.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceImageErrorDetailCode, name: "ErrorCode"))
     ErrorDetails.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "ErrorMessage"))
     ErrorDetails.type = Types::ErrorDetails
-    ErrorDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetails, name: "member")
+    ErrorDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetails, name: "member"))
     FailedCreateStandbyWorkspacesRequest.add_member(:standby_workspace_request, ::Smithy::Schema::Shapes::MemberShape.new(target: StandbyWorkspace, name: "StandbyWorkspaceRequest"))
     FailedCreateStandbyWorkspacesRequest.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceErrorCode, name: "ErrorCode"))
     FailedCreateStandbyWorkspacesRequest.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "ErrorMessage"))
     FailedCreateStandbyWorkspacesRequest.type = Types::FailedCreateStandbyWorkspacesRequest
-    FailedCreateStandbyWorkspacesRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedCreateStandbyWorkspacesRequest, name: "member")
+    FailedCreateStandbyWorkspacesRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedCreateStandbyWorkspacesRequest, name: "member"))
     FailedCreateWorkspaceRequest.add_member(:workspace_request, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceRequest, name: "WorkspaceRequest"))
     FailedCreateWorkspaceRequest.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorType, name: "ErrorCode"))
     FailedCreateWorkspaceRequest.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "ErrorMessage"))
     FailedCreateWorkspaceRequest.type = Types::FailedCreateWorkspaceRequest
-    FailedCreateWorkspaceRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedCreateWorkspaceRequest, name: "member")
-    FailedRebootWorkspaceRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedWorkspaceChangeRequest, name: "member")
-    FailedRebuildWorkspaceRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedWorkspaceChangeRequest, name: "member")
-    FailedStartWorkspaceRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedWorkspaceChangeRequest, name: "member")
-    FailedStopWorkspaceRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedWorkspaceChangeRequest, name: "member")
-    FailedTerminateWorkspaceRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedWorkspaceChangeRequest, name: "member")
+    FailedCreateWorkspaceRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedCreateWorkspaceRequest, name: "member"))
+    FailedRebootWorkspaceRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedWorkspaceChangeRequest, name: "member"))
+    FailedRebuildWorkspaceRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedWorkspaceChangeRequest, name: "member"))
+    FailedStartWorkspaceRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedWorkspaceChangeRequest, name: "member"))
+    FailedStopWorkspaceRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedWorkspaceChangeRequest, name: "member"))
+    FailedTerminateWorkspaceRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedWorkspaceChangeRequest, name: "member"))
     FailedWorkspaceChangeRequest.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "WorkspaceId"))
     FailedWorkspaceChangeRequest.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorType, name: "ErrorCode"))
     FailedWorkspaceChangeRequest.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "ErrorMessage"))
@@ -1172,12 +1172,12 @@ module Aws::WorkSpaces
     IDCConfig.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "ApplicationArn"))
     IDCConfig.type = Types::IDCConfig
     ImageAssociatedResourceType.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPLICATION", traits: {"smithy.api#enumValue" => "APPLICATION"}))
-    ImageAssociatedResourceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageAssociatedResourceType, name: "member")
+    ImageAssociatedResourceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageAssociatedResourceType, name: "member"))
     ImageComputeType.add_member(:base, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BASE", traits: {"smithy.api#enumValue" => "BASE"}))
     ImageComputeType.add_member(:graphics_g4_dn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GRAPHICS_G4DN", traits: {"smithy.api#enumValue" => "GRAPHICS_G4DN"}))
     ImagePermission.add_member(:shared_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccount, name: "SharedAccountId"))
     ImagePermission.type = Types::ImagePermission
-    ImagePermissions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImagePermission, name: "member")
+    ImagePermissions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImagePermission, name: "member"))
     ImageResourceAssociation.add_member(:associated_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AssociatedResourceId"))
     ImageResourceAssociation.add_member(:associated_resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageAssociatedResourceType, name: "AssociatedResourceType"))
     ImageResourceAssociation.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Created"))
@@ -1186,7 +1186,7 @@ module Aws::WorkSpaces
     ImageResourceAssociation.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationState, name: "State"))
     ImageResourceAssociation.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationStateReason, name: "StateReason"))
     ImageResourceAssociation.type = Types::ImageResourceAssociation
-    ImageResourceAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageResourceAssociation, name: "member")
+    ImageResourceAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageResourceAssociation, name: "member"))
     ImageSourceIdentifier.add_member(:ec2_import_task_id, Types::ImageSourceIdentifier::Ec2ImportTaskId, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2ImportTaskId, name: "Ec2ImportTaskId"))
     ImageSourceIdentifier.add_member(:image_build_version_arn, Types::ImageSourceIdentifier::ImageBuildVersionArn, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageBuildVersionArn, name: "ImageBuildVersionArn"))
     ImageSourceIdentifier.add_member(:ec2_image_id, Types::ImageSourceIdentifier::Ec2ImageId, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2ImageId, name: "Ec2ImageId"))
@@ -1235,7 +1235,7 @@ module Aws::WorkSpaces
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     InternalServerException.type = Types::InternalServerException
     InternetFallbackProtocol.add_member(:pcoip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PCOIP", traits: {"smithy.api#enumValue" => "PCOIP"}))
-    InternetFallbackProtocolList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InternetFallbackProtocol, name: "member")
+    InternetFallbackProtocolList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetFallbackProtocol, name: "member"))
     InvalidParameterCombinationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     InvalidParameterCombinationException.type = Types::InvalidParameterCombinationException
     InvalidParameterValuesException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -1258,13 +1258,13 @@ module Aws::WorkSpaces
     IosImportClientBrandingAttributes.add_member(:forgot_password_link, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientUrl, name: "ForgotPasswordLink"))
     IosImportClientBrandingAttributes.add_member(:login_message, ::Smithy::Schema::Shapes::MemberShape.new(target: LoginMessage, name: "LoginMessage"))
     IosImportClientBrandingAttributes.type = Types::IosImportClientBrandingAttributes
-    IpGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpGroupId, name: "member")
-    IpRevokedRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpRule, name: "member")
+    IpGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpGroupId, name: "member"))
+    IpRevokedRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpRule, name: "member"))
     IpRuleItem.add_member(:ip_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: IpRule, name: "ipRule"))
     IpRuleItem.add_member(:rule_desc, ::Smithy::Schema::Shapes::MemberShape.new(target: IpRuleDesc, name: "ruleDesc"))
     IpRuleItem.type = Types::IpRuleItem
-    IpRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpRuleItem, name: "member")
-    LinkStatusFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountLinkStatusEnum, name: "member")
+    IpRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpRuleItem, name: "member"))
+    LinkStatusFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountLinkStatusEnum, name: "member"))
     ListAccountLinksRequest.add_member(:link_status_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkStatusFilterList, name: "LinkStatusFilter"))
     ListAccountLinksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken"))
     ListAccountLinksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, name: "MaxResults"))
@@ -1281,8 +1281,8 @@ module Aws::WorkSpaces
     ListAvailableManagementCidrRangesResult.type = Types::ListAvailableManagementCidrRangesResult
     LogUploadEnum.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     LogUploadEnum.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    LoginMessage.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ClientLocale, name: "key")
-    LoginMessage.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ClientLoginMessage, name: "value")
+    LoginMessage.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientLocale, name: "key"))
+    LoginMessage.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientLoginMessage, name: "value"))
     MicrosoftEntraConfig.add_member(:tenant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MicrosoftEntraConfigTenantId, name: "TenantId"))
     MicrosoftEntraConfig.add_member(:application_config_secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretsManagerArn, name: "ApplicationConfigSecretArn"))
     MicrosoftEntraConfig.type = Types::MicrosoftEntraConfig
@@ -1300,7 +1300,7 @@ module Aws::WorkSpaces
     ModificationState.type = Types::ModificationState
     ModificationStateEnum.add_member(:update_initiated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_INITIATED", traits: {"smithy.api#enumValue" => "UPDATE_INITIATED"}))
     ModificationStateEnum.add_member(:update_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "UPDATE_IN_PROGRESS"}))
-    ModificationStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ModificationState, name: "member")
+    ModificationStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ModificationState, name: "member"))
     ModifyAccountRequest.add_member(:dedicated_tenancy_support, ::Smithy::Schema::Shapes::MemberShape.new(target: DedicatedTenancySupportEnum, name: "DedicatedTenancySupport"))
     ModifyAccountRequest.add_member(:dedicated_tenancy_management_cidr_range, ::Smithy::Schema::Shapes::MemberShape.new(target: DedicatedTenancyManagementCidrRange, name: "DedicatedTenancyManagementCidrRange"))
     ModifyAccountRequest.type = Types::ModifyAccountRequest
@@ -1369,7 +1369,7 @@ module Aws::WorkSpaces
     OperatingSystemName.add_member(:windows_server_2022, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WINDOWS_SERVER_2022", traits: {"smithy.api#enumValue" => "WINDOWS_SERVER_2022"}))
     OperatingSystemName.add_member(:rhel_8, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RHEL_8", traits: {"smithy.api#enumValue" => "RHEL_8"}))
     OperatingSystemName.add_member(:rocky_8, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROCKY_8", traits: {"smithy.api#enumValue" => "ROCKY_8"}))
-    OperatingSystemNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OperatingSystemName, name: "member")
+    OperatingSystemNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OperatingSystemName, name: "member"))
     OperatingSystemNotCompatibleException.type = Types::OperatingSystemNotCompatibleException
     OperatingSystemType.add_member(:windows, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WINDOWS", traits: {"smithy.api#enumValue" => "WINDOWS"}))
     OperatingSystemType.add_member(:linux, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINUX", traits: {"smithy.api#enumValue" => "LINUX"}))
@@ -1383,23 +1383,23 @@ module Aws::WorkSpaces
     PendingCreateStandbyWorkspacesRequest.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceState, name: "State"))
     PendingCreateStandbyWorkspacesRequest.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "WorkspaceId"))
     PendingCreateStandbyWorkspacesRequest.type = Types::PendingCreateStandbyWorkspacesRequest
-    PendingCreateStandbyWorkspacesRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PendingCreateStandbyWorkspacesRequest, name: "member")
+    PendingCreateStandbyWorkspacesRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PendingCreateStandbyWorkspacesRequest, name: "member"))
     Platform.add_member(:windows, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WINDOWS", traits: {"smithy.api#enumValue" => "WINDOWS"}))
     PoolsRunningMode.add_member(:auto_stop, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTO_STOP", traits: {"smithy.api#enumValue" => "AUTO_STOP"}))
     PoolsRunningMode.add_member(:always_on, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALWAYS_ON", traits: {"smithy.api#enumValue" => "ALWAYS_ON"}))
     Protocol.add_member(:pcoip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PCOIP", traits: {"smithy.api#enumValue" => "PCOIP"}))
     Protocol.add_member(:wsp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WSP", traits: {"smithy.api#enumValue" => "WSP"}))
-    ProtocolList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, name: "member")
+    ProtocolList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, name: "member"))
     RebootRequest.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "WorkspaceId", traits: {"smithy.api#required" => {}}))
     RebootRequest.type = Types::RebootRequest
-    RebootWorkspaceRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RebootRequest, name: "member")
+    RebootWorkspaceRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RebootRequest, name: "member"))
     RebootWorkspacesRequest.add_member(:reboot_workspace_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: RebootWorkspaceRequests, name: "RebootWorkspaceRequests", traits: {"smithy.api#required" => {}}))
     RebootWorkspacesRequest.type = Types::RebootWorkspacesRequest
     RebootWorkspacesResult.add_member(:failed_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedRebootWorkspaceRequests, name: "FailedRequests"))
     RebootWorkspacesResult.type = Types::RebootWorkspacesResult
     RebuildRequest.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "WorkspaceId", traits: {"smithy.api#required" => {}}))
     RebuildRequest.type = Types::RebuildRequest
-    RebuildWorkspaceRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RebuildRequest, name: "member")
+    RebuildWorkspaceRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RebuildRequest, name: "member"))
     RebuildWorkspacesRequest.add_member(:rebuild_workspace_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: RebuildWorkspaceRequests, name: "RebuildWorkspaceRequests", traits: {"smithy.api#required" => {}}))
     RebuildWorkspacesRequest.type = Types::RebuildWorkspacesRequest
     RebuildWorkspacesResult.add_member(:failed_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedRebuildWorkspaceRequests, name: "FailedRequests"))
@@ -1432,14 +1432,14 @@ module Aws::WorkSpaces
     RelatedWorkspaceProperties.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceState, name: "State"))
     RelatedWorkspaceProperties.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: StandbyWorkspaceRelationshipType, name: "Type"))
     RelatedWorkspaceProperties.type = Types::RelatedWorkspaceProperties
-    RelatedWorkspaces.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedWorkspaceProperties, name: "member")
+    RelatedWorkspaces.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedWorkspaceProperties, name: "member"))
     ResourceAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ResourceAlreadyExistsException.type = Types::ResourceAlreadyExistsException
     ResourceAssociatedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ResourceAssociatedException.type = Types::ResourceAssociatedException
     ResourceCreationFailedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ResourceCreationFailedException.type = Types::ResourceCreationFailedException
-    ResourceIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    ResourceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ResourceInUseException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "ResourceId"))
     ResourceInUseException.type = Types::ResourceInUseException
@@ -1480,7 +1480,7 @@ module Aws::WorkSpaces
     SessionConnectionState.add_member(:not_connected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_CONNECTED", traits: {"smithy.api#enumValue" => "NOT_CONNECTED"}))
     Snapshot.add_member(:snapshot_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "SnapshotTime"))
     Snapshot.type = Types::Snapshot
-    SnapshotList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Snapshot, name: "member")
+    SnapshotList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Snapshot, name: "member"))
     StandbyWorkspace.add_member(:primary_workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "PrimaryWorkspaceId", traits: {"smithy.api#required" => {}}))
     StandbyWorkspace.add_member(:volume_encryption_key, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeEncryptionKey, name: "VolumeEncryptionKey"))
     StandbyWorkspace.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, name: "DirectoryId", traits: {"smithy.api#required" => {}}))
@@ -1489,15 +1489,15 @@ module Aws::WorkSpaces
     StandbyWorkspace.type = Types::StandbyWorkspace
     StandbyWorkspaceRelationshipType.add_member(:primary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIMARY", traits: {"smithy.api#enumValue" => "PRIMARY"}))
     StandbyWorkspaceRelationshipType.add_member(:standby, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDBY", traits: {"smithy.api#enumValue" => "STANDBY"}))
-    StandbyWorkspacesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StandbyWorkspace, name: "member")
+    StandbyWorkspacesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StandbyWorkspace, name: "member"))
     StandbyWorkspacesProperties.add_member(:standby_workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "StandbyWorkspaceId"))
     StandbyWorkspacesProperties.add_member(:data_replication, ::Smithy::Schema::Shapes::MemberShape.new(target: DataReplication, name: "DataReplication"))
     StandbyWorkspacesProperties.add_member(:recovery_snapshot_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "RecoverySnapshotTime"))
     StandbyWorkspacesProperties.type = Types::StandbyWorkspacesProperties
-    StandbyWorkspacesPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StandbyWorkspacesProperties, name: "member")
+    StandbyWorkspacesPropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StandbyWorkspacesProperties, name: "member"))
     StartRequest.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "WorkspaceId"))
     StartRequest.type = Types::StartRequest
-    StartWorkspaceRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StartRequest, name: "member")
+    StartWorkspaceRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StartRequest, name: "member"))
     StartWorkspacesPoolRequest.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspacesPoolId, name: "PoolId", traits: {"smithy.api#required" => {}}))
     StartWorkspacesPoolRequest.type = Types::StartWorkspacesPoolRequest
     StartWorkspacesPoolResult.type = Types::StartWorkspacesPoolResult
@@ -1507,7 +1507,7 @@ module Aws::WorkSpaces
     StartWorkspacesResult.type = Types::StartWorkspacesResult
     StopRequest.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "WorkspaceId"))
     StopRequest.type = Types::StopRequest
-    StopWorkspaceRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StopRequest, name: "member")
+    StopWorkspaceRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StopRequest, name: "member"))
     StopWorkspacesPoolRequest.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspacesPoolId, name: "PoolId", traits: {"smithy.api#required" => {}}))
     StopWorkspacesPoolRequest.type = Types::StopWorkspacesPoolRequest
     StopWorkspacesPoolResult.type = Types::StopWorkspacesPoolResult
@@ -1521,7 +1521,7 @@ module Aws::WorkSpaces
     StorageConnectorStatusEnum.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     StorageConnectorStatusEnum.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     StorageConnectorTypeEnum.add_member(:home_folder, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOME_FOLDER", traits: {"smithy.api#enumValue" => "HOME_FOLDER"}))
-    StorageConnectors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StorageConnector, name: "member")
+    StorageConnectors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageConnector, name: "member"))
     StreamingExperiencePreferredProtocolEnum.add_member(:tcp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TCP", traits: {"smithy.api#enumValue" => "TCP"}))
     StreamingExperiencePreferredProtocolEnum.add_member(:udp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UDP", traits: {"smithy.api#enumValue" => "UDP"}))
     StreamingProperties.add_member(:streaming_experience_preferred_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamingExperiencePreferredProtocolEnum, name: "StreamingExperiencePreferredProtocol"))
@@ -1529,19 +1529,19 @@ module Aws::WorkSpaces
     StreamingProperties.add_member(:storage_connectors, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageConnectors, name: "StorageConnectors"))
     StreamingProperties.add_member(:global_accelerator, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalAcceleratorForDirectory, name: "GlobalAccelerator"))
     StreamingProperties.type = Types::StreamingProperties
-    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
+    SubnetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TargetWorkspaceState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     TargetWorkspaceState.add_member(:admin_maintenance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADMIN_MAINTENANCE", traits: {"smithy.api#enumValue" => "ADMIN_MAINTENANCE"}))
     Tenancy.add_member(:dedicated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEDICATED", traits: {"smithy.api#enumValue" => "DEDICATED"}))
     Tenancy.add_member(:shared, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHARED", traits: {"smithy.api#enumValue" => "SHARED"}))
     TerminateRequest.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "WorkspaceId", traits: {"smithy.api#required" => {}}))
     TerminateRequest.type = Types::TerminateRequest
-    TerminateWorkspaceRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TerminateRequest, name: "member")
+    TerminateWorkspaceRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminateRequest, name: "member"))
     TerminateWorkspacesPoolRequest.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspacesPoolId, name: "PoolId", traits: {"smithy.api#required" => {}}))
     TerminateWorkspacesPoolRequest.type = Types::TerminateWorkspacesPoolRequest
     TerminateWorkspacesPoolResult.type = Types::TerminateWorkspacesPoolResult
@@ -1610,7 +1610,7 @@ module Aws::WorkSpaces
     UserSettingActionEnum.add_member(:smart_card, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMART_CARD", traits: {"smithy.api#enumValue" => "SMART_CARD"}))
     UserSettingPermissionEnum.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     UserSettingPermissionEnum.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    UserSettings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserSetting, name: "member")
+    UserSettings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserSetting, name: "member"))
     UserStorage.add_member(:capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Capacity", traits: {"smithy.api#required" => {}}))
     UserStorage.type = Types::UserStorage
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -1627,16 +1627,16 @@ module Aws::WorkSpaces
     WorkSpaceApplication.type = Types::WorkSpaceApplication
     WorkSpaceApplicationDeployment.add_member(:associations, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceResourceAssociationList, name: "Associations"))
     WorkSpaceApplicationDeployment.type = Types::WorkSpaceApplicationDeployment
-    WorkSpaceApplicationIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkSpaceApplicationId, name: "member")
+    WorkSpaceApplicationIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkSpaceApplicationId, name: "member"))
     WorkSpaceApplicationLicenseType.add_member(:licensed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LICENSED", traits: {"smithy.api#enumValue" => "LICENSED"}))
     WorkSpaceApplicationLicenseType.add_member(:unlicensed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNLICENSED", traits: {"smithy.api#enumValue" => "UNLICENSED"}))
-    WorkSpaceApplicationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkSpaceApplication, name: "member")
+    WorkSpaceApplicationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkSpaceApplication, name: "member"))
     WorkSpaceApplicationState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     WorkSpaceApplicationState.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
     WorkSpaceApplicationState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     WorkSpaceApplicationState.add_member(:uninstall_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNINSTALL_ONLY", traits: {"smithy.api#enumValue" => "UNINSTALL_ONLY"}))
     WorkSpaceAssociatedResourceType.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPLICATION", traits: {"smithy.api#enumValue" => "APPLICATION"}))
-    WorkSpaceAssociatedResourceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkSpaceAssociatedResourceType, name: "member")
+    WorkSpaceAssociatedResourceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkSpaceAssociatedResourceType, name: "member"))
     Workspace.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "WorkspaceId"))
     Workspace.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, name: "DirectoryId"))
     Workspace.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, name: "UserName"))
@@ -1689,7 +1689,7 @@ module Aws::WorkSpaces
     WorkspaceConnectionStatus.add_member(:connection_state_check_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ConnectionStateCheckTimestamp"))
     WorkspaceConnectionStatus.add_member(:last_known_user_connection_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastKnownUserConnectionTimestamp"))
     WorkspaceConnectionStatus.type = Types::WorkspaceConnectionStatus
-    WorkspaceConnectionStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceConnectionStatus, name: "member")
+    WorkspaceConnectionStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceConnectionStatus, name: "member"))
     WorkspaceCreationProperties.add_member(:enable_internet_access, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, name: "EnableInternetAccess"))
     WorkspaceCreationProperties.add_member(:default_ou, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultOu, name: "DefaultOu"))
     WorkspaceCreationProperties.add_member(:custom_security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "CustomSecurityGroupId"))
@@ -1726,7 +1726,7 @@ module Aws::WorkSpaces
     WorkspaceDirectory.add_member(:streaming_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamingProperties, name: "StreamingProperties"))
     WorkspaceDirectory.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "ErrorMessage"))
     WorkspaceDirectory.type = Types::WorkspaceDirectory
-    WorkspaceDirectoryNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceDirectoryName, name: "member")
+    WorkspaceDirectoryNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceDirectoryName, name: "member"))
     WorkspaceDirectoryState.add_member(:registering, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGISTERING", traits: {"smithy.api#enumValue" => "REGISTERING"}))
     WorkspaceDirectoryState.add_member(:registered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGISTERED", traits: {"smithy.api#enumValue" => "REGISTERED"}))
     WorkspaceDirectoryState.add_member(:deregistering, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEREGISTERING", traits: {"smithy.api#enumValue" => "DEREGISTERING"}))
@@ -1736,7 +1736,7 @@ module Aws::WorkSpaces
     WorkspaceDirectoryType.add_member(:ad_connector, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AD_CONNECTOR", traits: {"smithy.api#enumValue" => "AD_CONNECTOR"}))
     WorkspaceDirectoryType.add_member(:customer_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER_MANAGED", traits: {"smithy.api#enumValue" => "CUSTOMER_MANAGED"}))
     WorkspaceDirectoryType.add_member(:aws_iam_identity_center, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_IAM_IDENTITY_CENTER", traits: {"smithy.api#enumValue" => "AWS_IAM_IDENTITY_CENTER"}))
-    WorkspaceIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "member")
+    WorkspaceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "member"))
     WorkspaceImage.add_member(:image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceImageId, name: "ImageId"))
     WorkspaceImage.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceImageName, name: "Name"))
     WorkspaceImage.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceImageDescription, name: "Description"))
@@ -1798,7 +1798,7 @@ module Aws::WorkSpaces
     WorkspaceImageErrorDetailCode.add_member(:incompatible_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCOMPATIBLE_PROTOCOL", traits: {"smithy.api#enumValue" => "ProtocolOSIncompatibility"}))
     WorkspaceImageErrorDetailCode.add_member(:incompatible_memory_integrity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCOMPATIBLE_MEMORY_INTEGRITY", traits: {"smithy.api#enumValue" => "MemoryIntegrityIncompatibility"}))
     WorkspaceImageErrorDetailCode.add_member(:restricted_drive_letter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESTRICTED_DRIVE_LETTER", traits: {"smithy.api#enumValue" => "RestrictedDriveLetterInUse"}))
-    WorkspaceImageIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceImageId, name: "member")
+    WorkspaceImageIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceImageId, name: "member"))
     WorkspaceImageIngestionProcess.add_member(:byol_regular, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BYOL_REGULAR", traits: {"smithy.api#enumValue" => "BYOL_REGULAR"}))
     WorkspaceImageIngestionProcess.add_member(:byol_graphics, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BYOL_GRAPHICS", traits: {"smithy.api#enumValue" => "BYOL_GRAPHICS"}))
     WorkspaceImageIngestionProcess.add_member(:byol_graphicspro, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BYOL_GRAPHICSPRO", traits: {"smithy.api#enumValue" => "BYOL_GRAPHICSPRO"}))
@@ -1807,13 +1807,13 @@ module Aws::WorkSpaces
     WorkspaceImageIngestionProcess.add_member(:byol_graphics_g4_dn_wsp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BYOL_GRAPHICS_G4DN_WSP", traits: {"smithy.api#enumValue" => "BYOL_GRAPHICS_G4DN_WSP"}))
     WorkspaceImageIngestionProcess.add_member(:byol_regular_byop, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BYOL_REGULAR_BYOP", traits: {"smithy.api#enumValue" => "BYOL_REGULAR_BYOP"}))
     WorkspaceImageIngestionProcess.add_member(:byol_graphics_g4_dn_byop, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BYOL_GRAPHICS_G4DN_BYOP", traits: {"smithy.api#enumValue" => "BYOL_GRAPHICS_G4DN_BYOP"}))
-    WorkspaceImageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceImage, name: "member")
+    WorkspaceImageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceImage, name: "member"))
     WorkspaceImageRequiredTenancy.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "DEFAULT"}))
     WorkspaceImageRequiredTenancy.add_member(:dedicated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEDICATED", traits: {"smithy.api#enumValue" => "DEDICATED"}))
     WorkspaceImageState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     WorkspaceImageState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     WorkspaceImageState.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
-    WorkspaceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Workspace, name: "member")
+    WorkspaceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Workspace, name: "member"))
     WorkspaceProperties.add_member(:running_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RunningMode, name: "RunningMode"))
     WorkspaceProperties.add_member(:running_mode_auto_stop_timeout_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: RunningModeAutoStopTimeoutInMinutes, name: "RunningModeAutoStopTimeoutInMinutes"))
     WorkspaceProperties.add_member(:root_volume_size_gib, ::Smithy::Schema::Shapes::MemberShape.new(target: RootVolumeSizeGib, name: "RootVolumeSizeGib"))
@@ -1833,7 +1833,7 @@ module Aws::WorkSpaces
     WorkspaceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     WorkspaceRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "WorkspaceName"))
     WorkspaceRequest.type = Types::WorkspaceRequest
-    WorkspaceRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceRequest, name: "member")
+    WorkspaceRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceRequest, name: "member"))
     WorkspaceResourceAssociation.add_member(:associated_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AssociatedResourceId"))
     WorkspaceResourceAssociation.add_member(:associated_resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkSpaceAssociatedResourceType, name: "AssociatedResourceType"))
     WorkspaceResourceAssociation.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Created"))
@@ -1842,7 +1842,7 @@ module Aws::WorkSpaces
     WorkspaceResourceAssociation.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationStateReason, name: "StateReason"))
     WorkspaceResourceAssociation.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "WorkspaceId"))
     WorkspaceResourceAssociation.type = Types::WorkspaceResourceAssociation
-    WorkspaceResourceAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceResourceAssociation, name: "member")
+    WorkspaceResourceAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceResourceAssociation, name: "member"))
     WorkspaceState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     WorkspaceState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     WorkspaceState.add_member(:impaired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMPAIRED", traits: {"smithy.api#enumValue" => "IMPAIRED"}))
@@ -1869,7 +1869,7 @@ module Aws::WorkSpaces
     WorkspacesIpGroup.add_member(:group_desc, ::Smithy::Schema::Shapes::MemberShape.new(target: IpGroupDesc, name: "groupDesc"))
     WorkspacesIpGroup.add_member(:user_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: IpRuleList, name: "userRules"))
     WorkspacesIpGroup.type = Types::WorkspacesIpGroup
-    WorkspacesIpGroupsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspacesIpGroup, name: "member")
+    WorkspacesIpGroupsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspacesIpGroup, name: "member"))
     WorkspacesPool.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspacesPoolId, name: "PoolId", traits: {"smithy.api#required" => {}}))
     WorkspacesPool.add_member(:pool_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "PoolArn", traits: {"smithy.api#required" => {}}))
     WorkspacesPool.add_member(:capacity_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityStatus, name: "CapacityStatus", traits: {"smithy.api#required" => {}}))
@@ -1927,8 +1927,8 @@ module Aws::WorkSpaces
     WorkspacesPoolErrorCode.add_member(:directory_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECTORY_NOT_FOUND", traits: {"smithy.api#enumValue" => "DIRECTORY_NOT_FOUND"}))
     WorkspacesPoolErrorCode.add_member(:insufficient_permissions_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSUFFICIENT_PERMISSIONS_ERROR", traits: {"smithy.api#enumValue" => "INSUFFICIENT_PERMISSIONS_ERROR"}))
     WorkspacesPoolErrorCode.add_member(:default_ou_is_missing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT_OU_IS_MISSING", traits: {"smithy.api#enumValue" => "DEFAULT_OU_IS_MISSING"}))
-    WorkspacesPoolErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspacesPoolError, name: "member")
-    WorkspacesPoolIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspacesPoolId, name: "member")
+    WorkspacesPoolErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspacesPoolError, name: "member"))
+    WorkspacesPoolIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspacesPoolId, name: "member"))
     WorkspacesPoolSession.add_member(:authentication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationType, name: "AuthenticationType"))
     WorkspacesPoolSession.add_member(:connection_state, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionConnectionState, name: "ConnectionState"))
     WorkspacesPoolSession.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonUuid, name: "SessionId", traits: {"smithy.api#required" => {}}))
@@ -1939,7 +1939,7 @@ module Aws::WorkSpaces
     WorkspacesPoolSession.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime"))
     WorkspacesPoolSession.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspacesPoolUserId, name: "UserId", traits: {"smithy.api#required" => {}}))
     WorkspacesPoolSession.type = Types::WorkspacesPoolSession
-    WorkspacesPoolSessions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspacesPoolSession, name: "member")
+    WorkspacesPoolSessions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspacesPoolSession, name: "member"))
     WorkspacesPoolState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     WorkspacesPoolState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     WorkspacesPoolState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
@@ -1947,7 +1947,7 @@ module Aws::WorkSpaces
     WorkspacesPoolState.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
     WorkspacesPoolState.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPING", traits: {"smithy.api#enumValue" => "STOPPING"}))
     WorkspacesPoolState.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
-    WorkspacesPools.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspacesPool, name: "member")
+    WorkspacesPools.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspacesPool, name: "member"))
 
     WorkspacesService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.workspaces#WorkspacesService"

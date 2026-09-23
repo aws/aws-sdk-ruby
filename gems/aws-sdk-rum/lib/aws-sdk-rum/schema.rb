@@ -159,19 +159,19 @@ module Aws::RUM
     AppMonitorDetails.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id"))
     AppMonitorDetails.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "version"))
     AppMonitorDetails.type = Types::AppMonitorDetails
-    AppMonitorDomainList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppMonitorDomain, name: "member")
+    AppMonitorDomainList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppMonitorDomain, name: "member"))
     AppMonitorSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AppMonitorName, name: "Name"))
     AppMonitorSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AppMonitorId, name: "Id"))
     AppMonitorSummary.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestampString, name: "Created"))
     AppMonitorSummary.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: ISOTimestampString, name: "LastModified"))
     AppMonitorSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: StateEnum, name: "State"))
     AppMonitorSummary.type = Types::AppMonitorSummary
-    AppMonitorSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppMonitorSummary, name: "member")
+    AppMonitorSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppMonitorSummary, name: "member"))
     BatchCreateRumMetricDefinitionsError.add_member(:metric_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDefinitionRequest, name: "MetricDefinition", traits: {"smithy.api#required" => {}}))
     BatchCreateRumMetricDefinitionsError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ErrorCode", traits: {"smithy.api#required" => {}}))
     BatchCreateRumMetricDefinitionsError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ErrorMessage", traits: {"smithy.api#required" => {}}))
     BatchCreateRumMetricDefinitionsError.type = Types::BatchCreateRumMetricDefinitionsError
-    BatchCreateRumMetricDefinitionsErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateRumMetricDefinitionsError, name: "member")
+    BatchCreateRumMetricDefinitionsErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateRumMetricDefinitionsError, name: "member"))
     BatchCreateRumMetricDefinitionsInput.add_member(:app_monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AppMonitorName, name: "AppMonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Name"}))
     BatchCreateRumMetricDefinitionsInput.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDestination, name: "Destination", traits: {"smithy.api#required" => {}}))
     BatchCreateRumMetricDefinitionsInput.add_member(:destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationArn, name: "DestinationArn"))
@@ -184,7 +184,7 @@ module Aws::RUM
     BatchDeleteRumMetricDefinitionsError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ErrorCode", traits: {"smithy.api#required" => {}}))
     BatchDeleteRumMetricDefinitionsError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ErrorMessage", traits: {"smithy.api#required" => {}}))
     BatchDeleteRumMetricDefinitionsError.type = Types::BatchDeleteRumMetricDefinitionsError
-    BatchDeleteRumMetricDefinitionsErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteRumMetricDefinitionsError, name: "member")
+    BatchDeleteRumMetricDefinitionsErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteRumMetricDefinitionsError, name: "member"))
     BatchDeleteRumMetricDefinitionsInput.add_member(:app_monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AppMonitorName, name: "AppMonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Name"}))
     BatchDeleteRumMetricDefinitionsInput.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDestination, name: "Destination", traits: {"smithy.api#httpQuery" => "destination", "smithy.api#required" => {}}))
     BatchDeleteRumMetricDefinitionsInput.add_member(:destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationArn, name: "DestinationArn", traits: {"smithy.api#httpQuery" => "destinationArn"}))
@@ -239,10 +239,10 @@ module Aws::RUM
     DeleteRumMetricsDestinationOutput.type = Types::DeleteRumMetricsDestinationOutput
     DeobfuscationConfiguration.add_member(:java_script_source_maps, ::Smithy::Schema::Shapes::MemberShape.new(target: JavaScriptSourceMaps, name: "JavaScriptSourceMaps"))
     DeobfuscationConfiguration.type = Types::DeobfuscationConfiguration
-    DimensionKeysMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionKey, name: "key")
-    DimensionKeysMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionName, name: "value")
-    EventDataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventData, name: "member")
-    FavoritePages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    DimensionKeysMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionKey, name: "key"))
+    DimensionKeysMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionName, name: "value"))
+    EventDataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventData, name: "member"))
+    FavoritePages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     GetAppMonitorDataInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AppMonitorName, name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAppMonitorDataInput.add_member(:time_range, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeRange, name: "TimeRange", traits: {"smithy.api#required" => {}}))
     GetAppMonitorDataInput.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryFilters, name: "Filters"))
@@ -297,7 +297,7 @@ module Aws::RUM
     MetricDefinition.add_member(:event_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: EventPattern, name: "EventPattern"))
     MetricDefinition.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "Namespace"))
     MetricDefinition.type = Types::MetricDefinition
-    MetricDefinitionIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDefinitionId, name: "member")
+    MetricDefinitionIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDefinitionId, name: "member"))
     MetricDefinitionRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "Name", traits: {"smithy.api#required" => {}}))
     MetricDefinitionRequest.add_member(:value_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueKey, name: "ValueKey"))
     MetricDefinitionRequest.add_member(:unit_label, ::Smithy::Schema::Shapes::MemberShape.new(target: UnitLabel, name: "UnitLabel"))
@@ -305,14 +305,14 @@ module Aws::RUM
     MetricDefinitionRequest.add_member(:event_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: EventPattern, name: "EventPattern"))
     MetricDefinitionRequest.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "Namespace"))
     MetricDefinitionRequest.type = Types::MetricDefinitionRequest
-    MetricDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDefinition, name: "member")
-    MetricDefinitionsRequest.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDefinitionRequest, name: "member")
+    MetricDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDefinition, name: "member"))
+    MetricDefinitionsRequest.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDefinitionRequest, name: "member"))
     MetricDestinationSummary.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDestination, name: "Destination"))
     MetricDestinationSummary.add_member(:destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationArn, name: "DestinationArn"))
     MetricDestinationSummary.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "IamRoleArn"))
     MetricDestinationSummary.type = Types::MetricDestinationSummary
-    MetricDestinationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDestinationSummary, name: "member")
-    Pages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "member")
+    MetricDestinationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDestinationSummary, name: "member"))
+    Pages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "member"))
     PolicyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     PolicyNotFoundException.type = Types::PolicyNotFoundException
     PolicySizeLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
@@ -341,8 +341,8 @@ module Aws::RUM
     QueryFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryFilterKey, name: "Name"))
     QueryFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryFilterValueList, name: "Values"))
     QueryFilter.type = Types::QueryFilter
-    QueryFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryFilterValue, name: "member")
-    QueryFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryFilter, name: "member")
+    QueryFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryFilterValue, name: "member"))
+    QueryFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryFilter, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceName", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType"))
@@ -353,17 +353,17 @@ module Aws::RUM
     RumEvent.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonValue, name: "metadata"))
     RumEvent.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonValue, name: "details", traits: {"smithy.api#required" => {}}))
     RumEvent.type = Types::RumEvent
-    RumEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RumEvent, name: "member")
+    RumEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RumEvent, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    Telemetries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Telemetry, name: "member")
+    Telemetries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Telemetry, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "serviceCode"))
     ThrottlingException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "quotaCode"))

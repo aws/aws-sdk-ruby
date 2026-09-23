@@ -166,7 +166,7 @@ module Aws::WorkspacesInstances
     BlockDeviceMappingRequest.add_member(:no_device, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceName, name: "NoDevice"))
     BlockDeviceMappingRequest.add_member(:virtual_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualName, name: "VirtualName"))
     BlockDeviceMappingRequest.type = Types::BlockDeviceMappingRequest
-    BlockDeviceMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BlockDeviceMappingRequest, name: "member")
+    BlockDeviceMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockDeviceMappingRequest, name: "member"))
     CapacityReservationPreferenceEnum.add_member(:capacity_reservations_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAPACITY_RESERVATIONS_ONLY", traits: {"smithy.api#enumValue" => "capacity-reservations-only"}))
     CapacityReservationPreferenceEnum.add_member(:open, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPEN", traits: {"smithy.api#enumValue" => "open"}))
     CapacityReservationPreferenceEnum.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "none"}))
@@ -229,7 +229,7 @@ module Aws::WorkspacesInstances
     EC2InstanceError.add_member(:ec2_exception_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "EC2ExceptionType"))
     EC2InstanceError.add_member(:ec2_error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "EC2ErrorMessage"))
     EC2InstanceError.type = Types::EC2InstanceError
-    EC2InstanceErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EC2InstanceError, name: "member")
+    EC2InstanceErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2InstanceError, name: "member"))
     EC2ManagedInstance.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "InstanceId"))
     EC2ManagedInstance.type = Types::EC2ManagedInstance
     EbsBlockDevice.add_member(:volume_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeTypeEnum, name: "VolumeType"))
@@ -311,7 +311,7 @@ module Aws::WorkspacesInstances
     InstanceNetworkPerformanceOptionsRequest.type = Types::InstanceNetworkPerformanceOptionsRequest
     InstanceTypeInfo.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceType, name: "InstanceType"))
     InstanceTypeInfo.type = Types::InstanceTypeInfo
-    InstanceTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceTypeInfo, name: "member")
+    InstanceTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceTypeInfo, name: "member"))
     InterfaceTypeEnum.add_member(:interface, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERFACE", traits: {"smithy.api#enumValue" => "interface"}))
     InterfaceTypeEnum.add_member(:efa, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EFA", traits: {"smithy.api#enumValue" => "efa"}))
     InterfaceTypeEnum.add_member(:efa_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EFA_ONLY", traits: {"smithy.api#enumValue" => "efa-only"}))
@@ -320,14 +320,14 @@ module Aws::WorkspacesInstances
     InternalServerException.type = Types::InternalServerException
     Ipv4PrefixSpecificationRequest.add_member(:ipv4_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv4Prefix, name: "Ipv4Prefix"))
     Ipv4PrefixSpecificationRequest.type = Types::Ipv4PrefixSpecificationRequest
-    Ipv4Prefixes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv4PrefixSpecificationRequest, name: "member")
-    Ipv6Addresses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceIpv6Address, name: "member")
+    Ipv4Prefixes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv4PrefixSpecificationRequest, name: "member"))
+    Ipv6Addresses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceIpv6Address, name: "member"))
     Ipv6PrefixSpecificationRequest.add_member(:ipv6_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6Prefix, name: "Ipv6Prefix"))
     Ipv6PrefixSpecificationRequest.type = Types::Ipv6PrefixSpecificationRequest
-    Ipv6Prefixes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6PrefixSpecificationRequest, name: "member")
+    Ipv6Prefixes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6PrefixSpecificationRequest, name: "member"))
     LicenseConfigurationRequest.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "LicenseConfigurationArn"))
     LicenseConfigurationRequest.type = Types::LicenseConfigurationRequest
-    LicenseSpecifications.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfigurationRequest, name: "member")
+    LicenseSpecifications.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfigurationRequest, name: "member"))
     ListInstanceTypesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
     ListInstanceTypesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListInstanceTypesRequest.type = Types::ListInstanceTypesRequest
@@ -386,7 +386,7 @@ module Aws::WorkspacesInstances
     ManagedInstanceRequest.type = Types::ManagedInstanceRequest
     MarketTypeEnum.add_member(:spot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPOT", traits: {"smithy.api#enumValue" => "spot"}))
     MarketTypeEnum.add_member(:capacity_block, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAPACITY_BLOCK", traits: {"smithy.api#enumValue" => "capacity-block"}))
-    NetworkInterfaces.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceNetworkInterfaceSpecification, name: "member")
+    NetworkInterfaces.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceNetworkInterfaceSpecification, name: "member"))
     Placement.add_member(:affinity, ::Smithy::Schema::Shapes::MemberShape.new(target: String64, name: "Affinity"))
     Placement.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "AvailabilityZone"))
     Placement.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementGroupId, name: "GroupId"))
@@ -403,17 +403,17 @@ module Aws::WorkspacesInstances
     PrivateIpAddressSpecification.add_member(:primary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "Primary"))
     PrivateIpAddressSpecification.add_member(:private_ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv4Address, name: "PrivateIpAddress"))
     PrivateIpAddressSpecification.type = Types::PrivateIpAddressSpecification
-    PrivateIpAddresses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateIpAddressSpecification, name: "member")
+    PrivateIpAddresses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateIpAddressSpecification, name: "member"))
     ProvisionStateEnum.add_member(:allocating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOCATING", traits: {"smithy.api#enumValue" => "ALLOCATING"}))
     ProvisionStateEnum.add_member(:allocated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOCATED", traits: {"smithy.api#enumValue" => "ALLOCATED"}))
     ProvisionStateEnum.add_member(:deallocating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEALLOCATING", traits: {"smithy.api#enumValue" => "DEALLOCATING"}))
     ProvisionStateEnum.add_member(:deallocated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEALLOCATED", traits: {"smithy.api#enumValue" => "DEALLOCATED"}))
     ProvisionStateEnum.add_member(:error_allocating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR_ALLOCATING", traits: {"smithy.api#enumValue" => "ERROR_ALLOCATING"}))
     ProvisionStateEnum.add_member(:error_deallocating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR_DEALLOCATING", traits: {"smithy.api#enumValue" => "ERROR_DEALLOCATING"}))
-    ProvisionStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionStateEnum, name: "member")
+    ProvisionStates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionStateEnum, name: "member"))
     Region.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "RegionName"))
     Region.type = Types::Region
-    RegionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member")
+    RegionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResourceType", traits: {"smithy.api#required" => {}}))
@@ -424,8 +424,8 @@ module Aws::WorkspacesInstances
     ResourceTypeEnum.add_member(:network_interface, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NETWORK_INTERFACE", traits: {"smithy.api#enumValue" => "network-interface"}))
     RunInstancesMonitoringEnabled.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "Enabled"))
     RunInstancesMonitoringEnabled.type = Types::RunInstancesMonitoringEnabled
-    SecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
-    SecurityGroupNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupName, name: "member")
+    SecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
+    SecurityGroupNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupName, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResourceId", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResourceType", traits: {"smithy.api#required" => {}}))
@@ -443,8 +443,8 @@ module Aws::WorkspacesInstances
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:workspace_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceInstanceId, name: "WorkspaceInstanceId", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -452,7 +452,7 @@ module Aws::WorkspacesInstances
     TagSpecification.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeEnum, name: "ResourceType"))
     TagSpecification.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     TagSpecification.type = Types::TagSpecification
-    TagSpecifications.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagSpecification, name: "member")
+    TagSpecifications.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagSpecification, name: "member"))
     TenancyEnum.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "default"}))
     TenancyEnum.add_member(:dedicated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEDICATED", traits: {"smithy.api#enumValue" => "dedicated"}))
     TenancyEnum.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOST", traits: {"smithy.api#enumValue" => "host"}))
@@ -473,7 +473,7 @@ module Aws::WorkspacesInstances
     ValidationExceptionField.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Reason", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "UNKNOWN_OPERATION"}))
     ValidationExceptionReason.add_member(:unsupported_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNSUPPORTED_OPERATION", traits: {"smithy.api#enumValue" => "UNSUPPORTED_OPERATION"}))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "CANNOT_PARSE"}))
@@ -494,8 +494,8 @@ module Aws::WorkspacesInstances
     WorkspaceInstanceError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ErrorCode"))
     WorkspaceInstanceError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ErrorMessage"))
     WorkspaceInstanceError.type = Types::WorkspaceInstanceError
-    WorkspaceInstanceErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceInstanceError, name: "member")
-    WorkspaceInstances.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceInstance, name: "member")
+    WorkspaceInstanceErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceInstanceError, name: "member"))
+    WorkspaceInstances.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceInstance, name: "member"))
 
     EUCMIFrontendAPIService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.workspacesinstances#EUCMIFrontendAPIService"

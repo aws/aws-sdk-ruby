@@ -692,8 +692,8 @@ module Aws::Lightsail
     AccessKeyLastUsed.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "region"))
     AccessKeyLastUsed.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceName"))
     AccessKeyLastUsed.type = Types::AccessKeyLastUsed
-    AccessKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessKey, name: "member")
-    AccessReceiverList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceReceivingAccess, name: "member")
+    AccessKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessKey, name: "member"))
+    AccessReceiverList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceReceivingAccess, name: "member"))
     AccessRules.add_member(:get_object, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessType, name: "getObject"))
     AccessRules.add_member(:allow_public_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "allowPublicOverrides"))
     AccessRules.type = Types::AccessRules
@@ -720,12 +720,12 @@ module Aws::Lightsail
     AddOn.add_member(:threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "threshold"))
     AddOn.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "duration"))
     AddOn.type = Types::AddOn
-    AddOnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AddOn, name: "member")
+    AddOnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AddOn, name: "member"))
     AddOnRequest.add_member(:add_on_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AddOnType, name: "addOnType", traits: {"smithy.api#required" => {}}))
     AddOnRequest.add_member(:auto_snapshot_add_on_request, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoSnapshotAddOnRequest, name: "autoSnapshotAddOnRequest"))
     AddOnRequest.add_member(:stop_instance_on_idle_request, ::Smithy::Schema::Shapes::MemberShape.new(target: StopInstanceOnIdleRequest, name: "stopInstanceOnIdleRequest"))
     AddOnRequest.type = Types::AddOnRequest
-    AddOnRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AddOnRequest, name: "member")
+    AddOnRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AddOnRequest, name: "member"))
     AddOnType.add_member(:auto_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AutoSnapshot", traits: {"smithy.api#enumValue" => "AutoSnapshot"}))
     AddOnType.add_member(:stop_instance_on_idle, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "StopInstanceOnIdle", traits: {"smithy.api#enumValue" => "StopInstanceOnIdle"}))
     Alarm.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name"))
@@ -752,13 +752,13 @@ module Aws::Lightsail
     AlarmState.add_member(:ok, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OK", traits: {"smithy.api#enumValue" => "OK"}))
     AlarmState.add_member(:alarm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALARM", traits: {"smithy.api#enumValue" => "ALARM"}))
     AlarmState.add_member(:insufficient_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSUFFICIENT_DATA", traits: {"smithy.api#enumValue" => "INSUFFICIENT_DATA"}))
-    AlarmsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Alarm, name: "member")
+    AlarmsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Alarm, name: "member"))
     AllocateStaticIpRequest.add_member(:static_ip_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "staticIpName", traits: {"smithy.api#required" => {}}))
     AllocateStaticIpRequest.type = Types::AllocateStaticIpRequest
     AllocateStaticIpResult.add_member(:operations, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationList, name: "operations"))
     AllocateStaticIpResult.type = Types::AllocateStaticIpResult
     AppCategory.add_member(:lf_r, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LfR", traits: {"smithy.api#enumValue" => "LfR"}))
-    AppCategoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppCategory, name: "member")
+    AppCategoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppCategory, name: "member"))
     AttachCertificateToDistributionRequest.add_member(:distribution_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "distributionName", traits: {"smithy.api#required" => {}}))
     AttachCertificateToDistributionRequest.add_member(:certificate_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "certificateName", traits: {"smithy.api#required" => {}}))
     AttachCertificateToDistributionRequest.type = Types::AttachCertificateToDistributionRequest
@@ -789,9 +789,9 @@ module Aws::Lightsail
     AttachedDisk.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "path"))
     AttachedDisk.add_member(:size_in_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "sizeInGb"))
     AttachedDisk.type = Types::AttachedDisk
-    AttachedDiskList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttachedDisk, name: "member")
-    AttachedDiskMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "key")
-    AttachedDiskMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: DiskMapList, name: "value")
+    AttachedDiskList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachedDisk, name: "member"))
+    AttachedDiskMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "key"))
+    AttachedDiskMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskMapList, name: "value"))
     AutoMountStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
     AutoMountStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Pending", traits: {"smithy.api#enumValue" => "Pending"}))
     AutoMountStatus.add_member(:mounted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Mounted", traits: {"smithy.api#enumValue" => "Mounted"}))
@@ -803,7 +803,7 @@ module Aws::Lightsail
     AutoSnapshotDetails.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoSnapshotStatus, name: "status"))
     AutoSnapshotDetails.add_member(:from_attached_disks, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachedDiskList, name: "fromAttachedDisks"))
     AutoSnapshotDetails.type = Types::AutoSnapshotDetails
-    AutoSnapshotDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutoSnapshotDetails, name: "member")
+    AutoSnapshotDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoSnapshotDetails, name: "member"))
     AutoSnapshotStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "Success"}))
     AutoSnapshotStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
     AutoSnapshotStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "InProgress"}))
@@ -811,7 +811,7 @@ module Aws::Lightsail
     AvailabilityZone.add_member(:zone_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "zoneName"))
     AvailabilityZone.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "state"))
     AvailabilityZone.type = Types::AvailabilityZone
-    AvailabilityZoneList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "member")
+    AvailabilityZoneList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "member"))
     BPAStatusMessage.add_member(:defaulted_for_slr_missing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULTED_FOR_SLR_MISSING", traits: {"smithy.api#enumValue" => "DEFAULTED_FOR_SLR_MISSING"}))
     BPAStatusMessage.add_member(:sync_on_hold, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYNC_ON_HOLD", traits: {"smithy.api#enumValue" => "SYNC_ON_HOLD"}))
     BPAStatusMessage.add_member(:defaulted_for_slr_missing_on_hold, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULTED_FOR_SLR_MISSING_ON_HOLD", traits: {"smithy.api#enumValue" => "DEFAULTED_FOR_SLR_MISSING_ON_HOLD"}))
@@ -832,7 +832,7 @@ module Aws::Lightsail
     Blueprint.add_member(:platform, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePlatform, name: "platform"))
     Blueprint.add_member(:app_category, ::Smithy::Schema::Shapes::MemberShape.new(target: AppCategory, name: "appCategory"))
     Blueprint.type = Types::Blueprint
-    BlueprintList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Blueprint, name: "member")
+    BlueprintList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Blueprint, name: "member"))
     BlueprintType.add_member(:os, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "os", traits: {"smithy.api#enumValue" => "os"}))
     BlueprintType.add_member(:app, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "app", traits: {"smithy.api#enumValue" => "app"}))
     Bucket.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "resourceType"))
@@ -863,8 +863,8 @@ module Aws::Lightsail
     BucketBundle.add_member(:transfer_per_month_in_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "transferPerMonthInGb"))
     BucketBundle.add_member(:is_active, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isActive"))
     BucketBundle.type = Types::BucketBundle
-    BucketBundleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BucketBundle, name: "member")
-    BucketList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Bucket, name: "member")
+    BucketBundleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketBundle, name: "member"))
+    BucketList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Bucket, name: "member"))
     BucketMetricName.add_member(:bucket_size_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BucketSizeBytes", traits: {"smithy.api#enumValue" => "BucketSizeBytes"}))
     BucketMetricName.add_member(:number_of_objects, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NumberOfObjects", traits: {"smithy.api#enumValue" => "NumberOfObjects"}))
     BucketState.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "code"))
@@ -884,10 +884,10 @@ module Aws::Lightsail
     Bundle.add_member(:supported_app_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: AppCategoryList, name: "supportedAppCategories"))
     Bundle.add_member(:public_ipv4_address_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "publicIpv4AddressCount"))
     Bundle.type = Types::Bundle
-    BundleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Bundle, name: "member")
+    BundleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Bundle, name: "member"))
     CacheBehavior.add_member(:behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: BehaviorEnum, name: "behavior"))
     CacheBehavior.type = Types::CacheBehavior
-    CacheBehaviorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CacheBehaviorPerPath, name: "member")
+    CacheBehaviorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheBehaviorPerPath, name: "member"))
     CacheBehaviorPerPath.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "path"))
     CacheBehaviorPerPath.add_member(:behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: BehaviorEnum, name: "behavior"))
     CacheBehaviorPerPath.type = Types::CacheBehaviorPerPath
@@ -933,14 +933,14 @@ module Aws::Lightsail
     CertificateStatus.add_member(:validation_timed_out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ValidationTimedOut", traits: {"smithy.api#enumValue" => "VALIDATION_TIMED_OUT"}))
     CertificateStatus.add_member(:revoked, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Revoked", traits: {"smithy.api#enumValue" => "REVOKED"}))
     CertificateStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "FAILED"}))
-    CertificateStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateStatus, name: "member")
+    CertificateStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateStatus, name: "member"))
     CertificateSummary.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "certificateArn"))
     CertificateSummary.add_member(:certificate_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateName, name: "certificateName"))
     CertificateSummary.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "domainName"))
     CertificateSummary.add_member(:certificate_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: Certificate, name: "certificateDetail"))
     CertificateSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     CertificateSummary.type = Types::CertificateSummary
-    CertificateSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateSummary, name: "member")
+    CertificateSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateSummary, name: "member"))
     CloseInstancePublicPortsRequest.add_member(:port_info, ::Smithy::Schema::Shapes::MemberShape.new(target: PortInfo, name: "portInfo", traits: {"smithy.api#required" => {}}))
     CloseInstancePublicPortsRequest.add_member(:instance_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "instanceName", traits: {"smithy.api#required" => {}}))
     CloseInstancePublicPortsRequest.type = Types::CloseInstancePublicPortsRequest
@@ -955,12 +955,12 @@ module Aws::Lightsail
     CloudFormationStackRecord.add_member(:source_info, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudFormationStackRecordSourceInfoList, name: "sourceInfo"))
     CloudFormationStackRecord.add_member(:destination_info, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationInfo, name: "destinationInfo"))
     CloudFormationStackRecord.type = Types::CloudFormationStackRecord
-    CloudFormationStackRecordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CloudFormationStackRecord, name: "member")
+    CloudFormationStackRecordList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudFormationStackRecord, name: "member"))
     CloudFormationStackRecordSourceInfo.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudFormationStackRecordSourceType, name: "resourceType"))
     CloudFormationStackRecordSourceInfo.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "name"))
     CloudFormationStackRecordSourceInfo.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "arn"))
     CloudFormationStackRecordSourceInfo.type = Types::CloudFormationStackRecordSourceInfo
-    CloudFormationStackRecordSourceInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CloudFormationStackRecordSourceInfo, name: "member")
+    CloudFormationStackRecordSourceInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudFormationStackRecordSourceInfo, name: "member"))
     CloudFormationStackRecordSourceType.add_member(:export_snapshot_record, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ExportSnapshotRecord", traits: {"smithy.api#enumValue" => "ExportSnapshotRecord"}))
     ComparisonOperator.add_member(:greater_than_or_equal_to_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GreaterThanOrEqualToThreshold", traits: {"smithy.api#enumValue" => "GreaterThanOrEqualToThreshold"}))
     ComparisonOperator.add_member(:greater_than_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GreaterThanThreshold", traits: {"smithy.api#enumValue" => "GreaterThanThreshold"}))
@@ -980,10 +980,10 @@ module Aws::Lightsail
     ContactMethodStatus.add_member(:valid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Valid", traits: {"smithy.api#enumValue" => "Valid"}))
     ContactMethodStatus.add_member(:invalid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Invalid", traits: {"smithy.api#enumValue" => "Invalid"}))
     ContactMethodVerificationProtocol.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Email", traits: {"smithy.api#enumValue" => "Email"}))
-    ContactMethodsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactMethod, name: "member")
+    ContactMethodsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactMethod, name: "member"))
     ContactProtocol.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Email", traits: {"smithy.api#enumValue" => "Email"}))
     ContactProtocol.add_member(:sms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMS", traits: {"smithy.api#enumValue" => "SMS"}))
-    ContactProtocolsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactProtocol, name: "member")
+    ContactProtocolsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactProtocol, name: "member"))
     Container.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "image"))
     Container.add_member(:command, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "command"))
     Container.add_member(:environment, ::Smithy::Schema::Shapes::MemberShape.new(target: Environment, name: "environment"))
@@ -993,9 +993,9 @@ module Aws::Lightsail
     ContainerImage.add_member(:digest, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "digest"))
     ContainerImage.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoDate, name: "createdAt"))
     ContainerImage.type = Types::ContainerImage
-    ContainerImageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerImage, name: "member")
-    ContainerMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "key")
-    ContainerMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Container, name: "value")
+    ContainerImageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerImage, name: "member"))
+    ContainerMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerName, name: "key"))
+    ContainerMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Container, name: "value"))
     ContainerService.add_member(:container_service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerServiceName, name: "containerServiceName"))
     ContainerService.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "arn"))
     ContainerService.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoDate, name: "createdAt"))
@@ -1022,7 +1022,7 @@ module Aws::Lightsail
     ContainerServiceDeployment.add_member(:public_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerServiceEndpoint, name: "publicEndpoint"))
     ContainerServiceDeployment.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoDate, name: "createdAt"))
     ContainerServiceDeployment.type = Types::ContainerServiceDeployment
-    ContainerServiceDeploymentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerServiceDeployment, name: "member")
+    ContainerServiceDeploymentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerServiceDeployment, name: "member"))
     ContainerServiceDeploymentRequest.add_member(:containers, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerMap, name: "containers"))
     ContainerServiceDeploymentRequest.add_member(:public_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointRequest, name: "publicEndpoint"))
     ContainerServiceDeploymentRequest.type = Types::ContainerServiceDeploymentRequest
@@ -1046,14 +1046,14 @@ module Aws::Lightsail
     ContainerServiceHealthCheckConfig.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "path"))
     ContainerServiceHealthCheckConfig.add_member(:success_codes, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "successCodes"))
     ContainerServiceHealthCheckConfig.type = Types::ContainerServiceHealthCheckConfig
-    ContainerServiceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerService, name: "member")
+    ContainerServiceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerService, name: "member"))
     ContainerServiceLogEvent.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoDate, name: "createdAt"))
     ContainerServiceLogEvent.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ContainerServiceLogEvent.type = Types::ContainerServiceLogEvent
-    ContainerServiceLogEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerServiceLogEvent, name: "member")
-    ContainerServiceMetadataEntry.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    ContainerServiceMetadataEntry.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
-    ContainerServiceMetadataEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerServiceMetadataEntry, name: "member")
+    ContainerServiceLogEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerServiceLogEvent, name: "member"))
+    ContainerServiceMetadataEntry.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    ContainerServiceMetadataEntry.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
+    ContainerServiceMetadataEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerServiceMetadataEntry, name: "member"))
     ContainerServiceMetricName.add_member(:cpu_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CPUUtilization", traits: {"smithy.api#enumValue" => "CPUUtilization"}))
     ContainerServiceMetricName.add_member(:memory_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MemoryUtilization", traits: {"smithy.api#enumValue" => "MemoryUtilization"}))
     ContainerServicePower.add_member(:power_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "powerId"))
@@ -1063,7 +1063,7 @@ module Aws::Lightsail
     ContainerServicePower.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     ContainerServicePower.add_member(:is_active, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isActive"))
     ContainerServicePower.type = Types::ContainerServicePower
-    ContainerServicePowerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerServicePower, name: "member")
+    ContainerServicePowerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerServicePower, name: "member"))
     ContainerServicePowerName.add_member(:nano, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "nano", traits: {"smithy.api#enumValue" => "nano"}))
     ContainerServicePowerName.add_member(:micro, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "micro", traits: {"smithy.api#enumValue" => "micro"}))
     ContainerServicePowerName.add_member(:small, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "small", traits: {"smithy.api#enumValue" => "small"}))
@@ -1074,9 +1074,9 @@ module Aws::Lightsail
     ContainerServiceProtocol.add_member(:https, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTPS", traits: {"smithy.api#enumValue" => "HTTPS"}))
     ContainerServiceProtocol.add_member(:tcp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TCP", traits: {"smithy.api#enumValue" => "TCP"}))
     ContainerServiceProtocol.add_member(:udp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UDP", traits: {"smithy.api#enumValue" => "UDP"}))
-    ContainerServicePublicDomains.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    ContainerServicePublicDomains.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerServicePublicDomainsList, name: "value")
-    ContainerServicePublicDomainsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ContainerServicePublicDomains.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    ContainerServicePublicDomains.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerServicePublicDomainsList, name: "value"))
+    ContainerServicePublicDomainsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ContainerServiceRegistryLogin.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "username"))
     ContainerServiceRegistryLogin.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "password"))
     ContainerServiceRegistryLogin.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoDate, name: "expiresAt"))
@@ -1118,7 +1118,7 @@ module Aws::Lightsail
     CostEstimate.add_member(:usage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "usageType"))
     CostEstimate.add_member(:results_by_time, ::Smithy::Schema::Shapes::MemberShape.new(target: EstimatesByTime, name: "resultsByTime"))
     CostEstimate.type = Types::CostEstimate
-    CostEstimates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CostEstimate, name: "member")
+    CostEstimates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CostEstimate, name: "member"))
     CreateBucketAccessKeyRequest.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "bucketName", traits: {"smithy.api#required" => {}}))
     CreateBucketAccessKeyRequest.type = Types::CreateBucketAccessKeyRequest
     CreateBucketAccessKeyResult.add_member(:access_key, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessKey, name: "accessKey"))
@@ -1466,12 +1466,12 @@ module Aws::Lightsail
     DiskInfo.add_member(:size_in_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "sizeInGb"))
     DiskInfo.add_member(:is_system_disk, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isSystemDisk"))
     DiskInfo.type = Types::DiskInfo
-    DiskInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DiskInfo, name: "member")
-    DiskList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Disk, name: "member")
+    DiskInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskInfo, name: "member"))
+    DiskList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Disk, name: "member"))
     DiskMap.add_member(:original_disk_path, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "originalDiskPath"))
     DiskMap.add_member(:new_disk_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "newDiskName"))
     DiskMap.type = Types::DiskMap
-    DiskMapList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DiskMap, name: "member")
+    DiskMapList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskMap, name: "member"))
     DiskSnapshot.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name"))
     DiskSnapshot.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "arn"))
     DiskSnapshot.add_member(:support_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "supportCode"))
@@ -1490,7 +1490,7 @@ module Aws::Lightsail
     DiskSnapshot.type = Types::DiskSnapshot
     DiskSnapshotInfo.add_member(:size_in_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "sizeInGb"))
     DiskSnapshotInfo.type = Types::DiskSnapshotInfo
-    DiskSnapshotList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DiskSnapshot, name: "member")
+    DiskSnapshotList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskSnapshot, name: "member"))
     DiskSnapshotState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Pending", traits: {"smithy.api#enumValue" => "pending"}))
     DiskSnapshotState.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Completed", traits: {"smithy.api#enumValue" => "completed"}))
     DiskSnapshotState.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Error", traits: {"smithy.api#enumValue" => "error"}))
@@ -1506,8 +1506,8 @@ module Aws::Lightsail
     DistributionBundle.add_member(:transfer_per_month_in_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "transferPerMonthInGb"))
     DistributionBundle.add_member(:is_active, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isActive"))
     DistributionBundle.type = Types::DistributionBundle
-    DistributionBundleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DistributionBundle, name: "member")
-    DistributionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LightsailDistribution, name: "member")
+    DistributionBundleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DistributionBundle, name: "member"))
+    DistributionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LightsailDistribution, name: "member"))
     DistributionMetricName.add_member(:requests, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Requests", traits: {"smithy.api#enumValue" => "Requests"}))
     DistributionMetricName.add_member(:bytes_downloaded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BytesDownloaded", traits: {"smithy.api#enumValue" => "BytesDownloaded"}))
     DistributionMetricName.add_member(:bytes_uploaded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BytesUploaded", traits: {"smithy.api#enumValue" => "BytesUploaded"}))
@@ -1537,17 +1537,17 @@ module Aws::Lightsail
     DomainEntry.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainEntryType, name: "type"))
     DomainEntry.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainEntryOptions, name: "options", traits: {"smithy.api#deprecated" => {}}))
     DomainEntry.type = Types::DomainEntry
-    DomainEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainEntry, name: "member")
-    DomainEntryOptions.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainEntryOptionsKeys, name: "key")
-    DomainEntryOptions.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
-    DomainList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Domain, name: "member")
-    DomainNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "member")
+    DomainEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainEntry, name: "member"))
+    DomainEntryOptions.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainEntryOptionsKeys, name: "key"))
+    DomainEntryOptions.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
+    DomainList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Domain, name: "member"))
+    DomainNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "member"))
     DomainValidationRecord.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "domainName"))
     DomainValidationRecord.add_member(:resource_record, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceRecord, name: "resourceRecord"))
     DomainValidationRecord.add_member(:dns_record_creation_state, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsRecordCreationState, name: "dnsRecordCreationState"))
     DomainValidationRecord.add_member(:validation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateDomainValidationStatus, name: "validationStatus"))
     DomainValidationRecord.type = Types::DomainValidationRecord
-    DomainValidationRecordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainValidationRecord, name: "member")
+    DomainValidationRecordList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainValidationRecord, name: "member"))
     DownloadDefaultKeyPairRequest.type = Types::DownloadDefaultKeyPairRequest
     DownloadDefaultKeyPairResult.add_member(:public_key_base64, ::Smithy::Schema::Shapes::MemberShape.new(target: Base64, name: "publicKeyBase64"))
     DownloadDefaultKeyPairResult.add_member(:private_key_base64, ::Smithy::Schema::Shapes::MemberShape.new(target: Base64, name: "privateKeyBase64"))
@@ -1562,15 +1562,15 @@ module Aws::Lightsail
     EndpointRequest.add_member(:container_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "containerPort", traits: {"smithy.api#required" => {}}))
     EndpointRequest.add_member(:health_check, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerServiceHealthCheckConfig, name: "healthCheck"))
     EndpointRequest.type = Types::EndpointRequest
-    Environment.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    Environment.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    Environment.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    Environment.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     EstimateByTime.add_member(:usage_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "usageCost"))
     EstimateByTime.add_member(:pricing_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingUnit, name: "pricingUnit"))
     EstimateByTime.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "unit"))
     EstimateByTime.add_member(:currency, ::Smithy::Schema::Shapes::MemberShape.new(target: Currency, name: "currency"))
     EstimateByTime.add_member(:time_period, ::Smithy::Schema::Shapes::MemberShape.new(target: TimePeriod, name: "timePeriod"))
     EstimateByTime.type = Types::EstimateByTime
-    EstimatesByTime.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EstimateByTime, name: "member")
+    EstimatesByTime.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EstimateByTime, name: "member"))
     ExportSnapshotRecord.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name"))
     ExportSnapshotRecord.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "arn"))
     ExportSnapshotRecord.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoDate, name: "createdAt"))
@@ -1580,7 +1580,7 @@ module Aws::Lightsail
     ExportSnapshotRecord.add_member(:source_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportSnapshotRecordSourceInfo, name: "sourceInfo"))
     ExportSnapshotRecord.add_member(:destination_info, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationInfo, name: "destinationInfo"))
     ExportSnapshotRecord.type = Types::ExportSnapshotRecord
-    ExportSnapshotRecordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportSnapshotRecord, name: "member")
+    ExportSnapshotRecordList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportSnapshotRecord, name: "member"))
     ExportSnapshotRecordSourceInfo.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportSnapshotRecordSourceType, name: "resourceType"))
     ExportSnapshotRecordSourceInfo.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoDate, name: "createdAt"))
     ExportSnapshotRecordSourceInfo.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "name"))
@@ -1980,7 +1980,7 @@ module Aws::Lightsail
     HeaderEnum.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "host", traits: {"smithy.api#enumValue" => "Host"}))
     HeaderEnum.add_member(:origin, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "origin", traits: {"smithy.api#enumValue" => "Origin"}))
     HeaderEnum.add_member(:referer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "referer", traits: {"smithy.api#enumValue" => "Referer"}))
-    HeaderForwardList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderEnum, name: "member")
+    HeaderForwardList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderEnum, name: "member"))
     HeaderObject.add_member(:option, ::Smithy::Schema::Shapes::MemberShape.new(target: ForwardValues, name: "option"))
     HeaderObject.add_member(:headers_allow_list, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderForwardList, name: "headersAllowList"))
     HeaderObject.type = Types::HeaderObject
@@ -1992,7 +1992,7 @@ module Aws::Lightsail
     HostKeyAttributes.add_member(:not_valid_before, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoDate, name: "notValidBefore"))
     HostKeyAttributes.add_member(:not_valid_after, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoDate, name: "notValidAfter"))
     HostKeyAttributes.type = Types::HostKeyAttributes
-    HostKeysList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HostKeyAttributes, name: "member")
+    HostKeysList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HostKeyAttributes, name: "member"))
     HttpEndpoint.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "disabled", traits: {"smithy.api#enumValue" => "disabled"}))
     HttpEndpoint.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "enabled", traits: {"smithy.api#enumValue" => "enabled"}))
     HttpProtocolIpv6.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "disabled", traits: {"smithy.api#enumValue" => "disabled"}))
@@ -2052,7 +2052,7 @@ module Aws::Lightsail
     InstanceEntry.add_member(:user_data, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "userData"))
     InstanceEntry.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "availabilityZone", traits: {"smithy.api#required" => {}}))
     InstanceEntry.type = Types::InstanceEntry
-    InstanceEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceEntry, name: "member")
+    InstanceEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceEntry, name: "member"))
     InstanceHardware.add_member(:cpu_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "cpuCount"))
     InstanceHardware.add_member(:disks, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskList, name: "disks"))
     InstanceHardware.add_member(:ram_size_in_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "ramSizeInGb"))
@@ -2078,8 +2078,8 @@ module Aws::Lightsail
     InstanceHealthSummary.add_member(:instance_health, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceHealthState, name: "instanceHealth"))
     InstanceHealthSummary.add_member(:instance_health_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceHealthReason, name: "instanceHealthReason"))
     InstanceHealthSummary.type = Types::InstanceHealthSummary
-    InstanceHealthSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceHealthSummary, name: "member")
-    InstanceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Instance, name: "member")
+    InstanceHealthSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceHealthSummary, name: "member"))
+    InstanceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Instance, name: "member"))
     InstanceMetadataOptions.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceMetadataState, name: "state"))
     InstanceMetadataOptions.add_member(:http_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpTokens, name: "httpTokens"))
     InstanceMetadataOptions.add_member(:http_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpEndpoint, name: "httpEndpoint"))
@@ -2102,7 +2102,7 @@ module Aws::Lightsail
     InstanceNetworking.type = Types::InstanceNetworking
     InstancePlatform.add_member(:linux_unix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LinuxUnix", traits: {"smithy.api#enumValue" => "LINUX_UNIX"}))
     InstancePlatform.add_member(:windows, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Windows", traits: {"smithy.api#enumValue" => "WINDOWS"}))
-    InstancePlatformList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePlatform, name: "member")
+    InstancePlatformList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePlatform, name: "member"))
     InstancePortInfo.add_member(:from_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "fromPort", traits: {"smithy.api#default" => 0}))
     InstancePortInfo.add_member(:to_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "toPort", traits: {"smithy.api#default" => 0}))
     InstancePortInfo.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkProtocol, name: "protocol"))
@@ -2114,7 +2114,7 @@ module Aws::Lightsail
     InstancePortInfo.add_member(:ipv6_cidrs, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "ipv6Cidrs"))
     InstancePortInfo.add_member(:cidr_list_aliases, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "cidrListAliases"))
     InstancePortInfo.type = Types::InstancePortInfo
-    InstancePortInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePortInfo, name: "member")
+    InstancePortInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePortInfo, name: "member"))
     InstancePortState.add_member(:from_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "fromPort", traits: {"smithy.api#default" => 0}))
     InstancePortState.add_member(:to_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "toPort", traits: {"smithy.api#default" => 0}))
     InstancePortState.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkProtocol, name: "protocol"))
@@ -2123,7 +2123,7 @@ module Aws::Lightsail
     InstancePortState.add_member(:ipv6_cidrs, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "ipv6Cidrs"))
     InstancePortState.add_member(:cidr_list_aliases, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "cidrListAliases"))
     InstancePortState.type = Types::InstancePortState
-    InstancePortStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePortState, name: "member")
+    InstancePortStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePortState, name: "member"))
     InstanceSnapshot.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name"))
     InstanceSnapshot.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "arn"))
     InstanceSnapshot.add_member(:support_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "supportCode"))
@@ -2145,7 +2145,7 @@ module Aws::Lightsail
     InstanceSnapshotInfo.add_member(:from_blueprint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "fromBlueprintId"))
     InstanceSnapshotInfo.add_member(:from_disk_info, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskInfoList, name: "fromDiskInfo"))
     InstanceSnapshotInfo.type = Types::InstanceSnapshotInfo
-    InstanceSnapshotList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceSnapshot, name: "member")
+    InstanceSnapshotList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceSnapshot, name: "member"))
     InstanceSnapshotState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Pending", traits: {"smithy.api#enumValue" => "pending"}))
     InstanceSnapshotState.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Error", traits: {"smithy.api#enumValue" => "error"}))
     InstanceSnapshotState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Available", traits: {"smithy.api#enumValue" => "available"}))
@@ -2160,7 +2160,7 @@ module Aws::Lightsail
     IpAddressType.add_member(:dualstack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUALSTACK", traits: {"smithy.api#enumValue" => "dualstack"}))
     IpAddressType.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4", traits: {"smithy.api#enumValue" => "ipv4"}))
     IpAddressType.add_member(:ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV6", traits: {"smithy.api#enumValue" => "ipv6"}))
-    Ipv6AddressList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6Address, name: "member")
+    Ipv6AddressList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6Address, name: "member"))
     IsVpcPeeredRequest.type = Types::IsVpcPeeredRequest
     IsVpcPeeredResult.add_member(:is_peered, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isPeered"))
     IsVpcPeeredResult.type = Types::IsVpcPeeredResult
@@ -2173,7 +2173,7 @@ module Aws::Lightsail
     KeyPair.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     KeyPair.add_member(:fingerprint, ::Smithy::Schema::Shapes::MemberShape.new(target: Base64, name: "fingerprint"))
     KeyPair.type = Types::KeyPair
-    KeyPairList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyPair, name: "member")
+    KeyPairList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyPair, name: "member"))
     LightsailDistribution.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name"))
     LightsailDistribution.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "arn"))
     LightsailDistribution.add_member(:support_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "supportCode"))
@@ -2221,9 +2221,9 @@ module Aws::Lightsail
     LoadBalancerAttributeName.add_member(:session_stickiness_lb_cookie_duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SessionStickiness_LB_CookieDurationSeconds", traits: {"smithy.api#enumValue" => "SessionStickiness_LB_CookieDurationSeconds"}))
     LoadBalancerAttributeName.add_member(:https_redirection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HttpsRedirectionEnabled", traits: {"smithy.api#enumValue" => "HttpsRedirectionEnabled"}))
     LoadBalancerAttributeName.add_member(:tls_policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TlsPolicyName", traits: {"smithy.api#enumValue" => "TlsPolicyName"}))
-    LoadBalancerConfigurationOptions.key = ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerAttributeName, name: "key")
-    LoadBalancerConfigurationOptions.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
-    LoadBalancerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancer, name: "member")
+    LoadBalancerConfigurationOptions.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerAttributeName, name: "key"))
+    LoadBalancerConfigurationOptions.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
+    LoadBalancerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancer, name: "member"))
     LoadBalancerMetricName.add_member(:client_tls_negotiation_error_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ClientTLSNegotiationErrorCount", traits: {"smithy.api#enumValue" => "ClientTLSNegotiationErrorCount"}))
     LoadBalancerMetricName.add_member(:healthy_host_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HealthyHostCount", traits: {"smithy.api#enumValue" => "HealthyHostCount"}))
     LoadBalancerMetricName.add_member(:unhealthy_host_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UnhealthyHostCount", traits: {"smithy.api#enumValue" => "UnhealthyHostCount"}))
@@ -2281,7 +2281,7 @@ module Aws::Lightsail
     LoadBalancerTlsCertificateDomainValidationOption.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "domainName"))
     LoadBalancerTlsCertificateDomainValidationOption.add_member(:validation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerTlsCertificateDomainStatus, name: "validationStatus"))
     LoadBalancerTlsCertificateDomainValidationOption.type = Types::LoadBalancerTlsCertificateDomainValidationOption
-    LoadBalancerTlsCertificateDomainValidationOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerTlsCertificateDomainValidationOption, name: "member")
+    LoadBalancerTlsCertificateDomainValidationOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerTlsCertificateDomainValidationOption, name: "member"))
     LoadBalancerTlsCertificateDomainValidationRecord.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "name"))
     LoadBalancerTlsCertificateDomainValidationRecord.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "type"))
     LoadBalancerTlsCertificateDomainValidationRecord.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value"))
@@ -2289,13 +2289,13 @@ module Aws::Lightsail
     LoadBalancerTlsCertificateDomainValidationRecord.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "domainName"))
     LoadBalancerTlsCertificateDomainValidationRecord.add_member(:dns_record_creation_state, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerTlsCertificateDnsRecordCreationState, name: "dnsRecordCreationState"))
     LoadBalancerTlsCertificateDomainValidationRecord.type = Types::LoadBalancerTlsCertificateDomainValidationRecord
-    LoadBalancerTlsCertificateDomainValidationRecordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerTlsCertificateDomainValidationRecord, name: "member")
+    LoadBalancerTlsCertificateDomainValidationRecordList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerTlsCertificateDomainValidationRecord, name: "member"))
     LoadBalancerTlsCertificateFailureReason.add_member(:no_available_contacts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NoAvailableContacts", traits: {"smithy.api#enumValue" => "NO_AVAILABLE_CONTACTS"}))
     LoadBalancerTlsCertificateFailureReason.add_member(:additional_verification_required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AdditionalVerificationRequired", traits: {"smithy.api#enumValue" => "ADDITIONAL_VERIFICATION_REQUIRED"}))
     LoadBalancerTlsCertificateFailureReason.add_member(:domain_not_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DomainNotAllowed", traits: {"smithy.api#enumValue" => "DOMAIN_NOT_ALLOWED"}))
     LoadBalancerTlsCertificateFailureReason.add_member(:invalid_public_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InvalidPublicDomain", traits: {"smithy.api#enumValue" => "INVALID_PUBLIC_DOMAIN"}))
     LoadBalancerTlsCertificateFailureReason.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Other", traits: {"smithy.api#enumValue" => "OTHER"}))
-    LoadBalancerTlsCertificateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerTlsCertificate, name: "member")
+    LoadBalancerTlsCertificateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerTlsCertificate, name: "member"))
     LoadBalancerTlsCertificateRenewalStatus.add_member(:pending_auto_renewal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PendingAutoRenewal", traits: {"smithy.api#enumValue" => "PENDING_AUTO_RENEWAL"}))
     LoadBalancerTlsCertificateRenewalStatus.add_member(:pending_validation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PendingValidation", traits: {"smithy.api#enumValue" => "PENDING_VALIDATION"}))
     LoadBalancerTlsCertificateRenewalStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Success", traits: {"smithy.api#enumValue" => "SUCCESS"}))
@@ -2324,18 +2324,18 @@ module Aws::Lightsail
     LoadBalancerTlsCertificateSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name"))
     LoadBalancerTlsCertificateSummary.add_member(:is_attached, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isAttached"))
     LoadBalancerTlsCertificateSummary.type = Types::LoadBalancerTlsCertificateSummary
-    LoadBalancerTlsCertificateSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerTlsCertificateSummary, name: "member")
+    LoadBalancerTlsCertificateSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerTlsCertificateSummary, name: "member"))
     LoadBalancerTlsPolicy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name"))
     LoadBalancerTlsPolicy.add_member(:is_default, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isDefault"))
     LoadBalancerTlsPolicy.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "description"))
     LoadBalancerTlsPolicy.add_member(:protocols, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "protocols"))
     LoadBalancerTlsPolicy.add_member(:ciphers, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "ciphers"))
     LoadBalancerTlsPolicy.type = Types::LoadBalancerTlsPolicy
-    LoadBalancerTlsPolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerTlsPolicy, name: "member")
+    LoadBalancerTlsPolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerTlsPolicy, name: "member"))
     LogEvent.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoDate, name: "createdAt"))
     LogEvent.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     LogEvent.type = Types::LogEvent
-    LogEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogEvent, name: "member")
+    LogEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogEvent, name: "member"))
     MetricDatapoint.add_member(:average, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "average"))
     MetricDatapoint.add_member(:maximum, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "maximum"))
     MetricDatapoint.add_member(:minimum, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "minimum"))
@@ -2344,7 +2344,7 @@ module Aws::Lightsail
     MetricDatapoint.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "timestamp"))
     MetricDatapoint.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricUnit, name: "unit"))
     MetricDatapoint.type = Types::MetricDatapoint
-    MetricDatapointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDatapoint, name: "member")
+    MetricDatapointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDatapoint, name: "member"))
     MetricName.add_member(:cpu_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CPUUtilization", traits: {"smithy.api#enumValue" => "CPUUtilization"}))
     MetricName.add_member(:network_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NetworkIn", traits: {"smithy.api#enumValue" => "NetworkIn"}))
     MetricName.add_member(:network_out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NetworkOut", traits: {"smithy.api#enumValue" => "NetworkOut"}))
@@ -2375,7 +2375,7 @@ module Aws::Lightsail
     MetricStatistic.add_member(:sum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Sum", traits: {"smithy.api#enumValue" => "Sum"}))
     MetricStatistic.add_member(:average, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Average", traits: {"smithy.api#enumValue" => "Average"}))
     MetricStatistic.add_member(:sample_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SampleCount", traits: {"smithy.api#enumValue" => "SampleCount"}))
-    MetricStatisticList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStatistic, name: "member")
+    MetricStatisticList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStatistic, name: "member"))
     MetricUnit.add_member(:seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Seconds", traits: {"smithy.api#enumValue" => "Seconds"}))
     MetricUnit.add_member(:microseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Microseconds", traits: {"smithy.api#enumValue" => "Microseconds"}))
     MetricUnit.add_member(:milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Milliseconds", traits: {"smithy.api#enumValue" => "Milliseconds"}))
@@ -2426,7 +2426,7 @@ module Aws::Lightsail
     NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     NotFoundException.add_member(:tip, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "tip"))
     NotFoundException.type = Types::NotFoundException
-    NotificationTriggerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmState, name: "member")
+    NotificationTriggerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmState, name: "member"))
     OpenInstancePublicPortsRequest.add_member(:port_info, ::Smithy::Schema::Shapes::MemberShape.new(target: PortInfo, name: "portInfo", traits: {"smithy.api#required" => {}}))
     OpenInstancePublicPortsRequest.add_member(:instance_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "instanceName", traits: {"smithy.api#required" => {}}))
     OpenInstancePublicPortsRequest.type = Types::OpenInstancePublicPortsRequest
@@ -2450,7 +2450,7 @@ module Aws::Lightsail
     OperationFailureException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     OperationFailureException.add_member(:tip, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "tip"))
     OperationFailureException.type = Types::OperationFailureException
-    OperationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, name: "member")
+    OperationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, name: "member"))
     OperationStatus.add_member(:not_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NotStarted", traits: {"smithy.api#enumValue" => "NotStarted"}))
     OperationStatus.add_member(:started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Started", traits: {"smithy.api#enumValue" => "Started"}))
     OperationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
@@ -2547,7 +2547,7 @@ module Aws::Lightsail
     Origin.type = Types::Origin
     OriginProtocolPolicyEnum.add_member(:http_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTPOnly", traits: {"smithy.api#enumValue" => "http-only"}))
     OriginProtocolPolicyEnum.add_member(:https_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTPSOnly", traits: {"smithy.api#enumValue" => "https-only"}))
-    PartnerIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    PartnerIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     PasswordData.add_member(:ciphertext, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ciphertext"))
     PasswordData.add_member(:key_pair_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "keyPairName"))
     PasswordData.type = Types::PasswordData
@@ -2558,7 +2558,7 @@ module Aws::Lightsail
     PendingMaintenanceAction.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "description"))
     PendingMaintenanceAction.add_member(:current_apply_date, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoDate, name: "currentApplyDate"))
     PendingMaintenanceAction.type = Types::PendingMaintenanceAction
-    PendingMaintenanceActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PendingMaintenanceAction, name: "member")
+    PendingMaintenanceActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PendingMaintenanceAction, name: "member"))
     PendingModifiedRelationalDatabaseValues.add_member(:master_user_password, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "masterUserPassword"))
     PendingModifiedRelationalDatabaseValues.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "engineVersion"))
     PendingModifiedRelationalDatabaseValues.add_member(:backup_retention_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "backupRetentionEnabled"))
@@ -2572,14 +2572,14 @@ module Aws::Lightsail
     PortInfo.add_member(:ipv6_cidrs, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "ipv6Cidrs"))
     PortInfo.add_member(:cidr_list_aliases, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "cidrListAliases"))
     PortInfo.type = Types::PortInfo
-    PortInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PortInfo, name: "member")
+    PortInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortInfo, name: "member"))
     PortInfoSourceType.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Default", traits: {"smithy.api#enumValue" => "DEFAULT"}))
     PortInfoSourceType.add_member(:instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Instance", traits: {"smithy.api#enumValue" => "INSTANCE"}))
     PortInfoSourceType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "None", traits: {"smithy.api#enumValue" => "NONE"}))
     PortInfoSourceType.add_member(:closed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Closed", traits: {"smithy.api#enumValue" => "CLOSED"}))
-    PortList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "member")
-    PortMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    PortMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerServiceProtocol, name: "value")
+    PortList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "member"))
+    PortMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    PortMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerServiceProtocol, name: "value"))
     PortState.add_member(:open, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Open", traits: {"smithy.api#enumValue" => "open"}))
     PortState.add_member(:closed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Closed", traits: {"smithy.api#enumValue" => "closed"}))
     PricingUnit.add_member(:gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GB", traits: {"smithy.api#enumValue" => "GB"}))
@@ -2638,7 +2638,7 @@ module Aws::Lightsail
     Region.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneList, name: "availabilityZones"))
     Region.add_member(:relational_database_availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneList, name: "relationalDatabaseAvailabilityZones"))
     Region.type = Types::Region
-    RegionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member")
+    RegionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member"))
     RegionName.add_member(:us_east_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "US_EAST_1", traits: {"smithy.api#enumValue" => "us-east-1"}))
     RegionName.add_member(:us_east_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "US_EAST_2", traits: {"smithy.api#enumValue" => "us-east-2"}))
     RegionName.add_member(:us_west_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "US_WEST_1", traits: {"smithy.api#enumValue" => "us-west-1"}))
@@ -2703,7 +2703,7 @@ module Aws::Lightsail
     RelationalDatabaseBlueprint.add_member(:engine_version_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "engineVersionDescription"))
     RelationalDatabaseBlueprint.add_member(:is_engine_default, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isEngineDefault"))
     RelationalDatabaseBlueprint.type = Types::RelationalDatabaseBlueprint
-    RelationalDatabaseBlueprintList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RelationalDatabaseBlueprint, name: "member")
+    RelationalDatabaseBlueprintList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RelationalDatabaseBlueprint, name: "member"))
     RelationalDatabaseBundle.add_member(:bundle_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "bundleId"))
     RelationalDatabaseBundle.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     RelationalDatabaseBundle.add_member(:price, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "price"))
@@ -2714,7 +2714,7 @@ module Aws::Lightsail
     RelationalDatabaseBundle.add_member(:is_encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isEncrypted"))
     RelationalDatabaseBundle.add_member(:is_active, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isActive"))
     RelationalDatabaseBundle.type = Types::RelationalDatabaseBundle
-    RelationalDatabaseBundleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RelationalDatabaseBundle, name: "member")
+    RelationalDatabaseBundleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RelationalDatabaseBundle, name: "member"))
     RelationalDatabaseEndpoint.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "port"))
     RelationalDatabaseEndpoint.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "address"))
     RelationalDatabaseEndpoint.type = Types::RelationalDatabaseEndpoint
@@ -2724,12 +2724,12 @@ module Aws::Lightsail
     RelationalDatabaseEvent.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     RelationalDatabaseEvent.add_member(:event_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "eventCategories"))
     RelationalDatabaseEvent.type = Types::RelationalDatabaseEvent
-    RelationalDatabaseEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RelationalDatabaseEvent, name: "member")
+    RelationalDatabaseEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RelationalDatabaseEvent, name: "member"))
     RelationalDatabaseHardware.add_member(:cpu_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "cpuCount"))
     RelationalDatabaseHardware.add_member(:disk_size_in_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "diskSizeInGb"))
     RelationalDatabaseHardware.add_member(:ram_size_in_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "ramSizeInGb"))
     RelationalDatabaseHardware.type = Types::RelationalDatabaseHardware
-    RelationalDatabaseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RelationalDatabase, name: "member")
+    RelationalDatabaseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RelationalDatabase, name: "member"))
     RelationalDatabaseMetricName.add_member(:cpu_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CPUUtilization", traits: {"smithy.api#enumValue" => "CPUUtilization"}))
     RelationalDatabaseMetricName.add_member(:database_connections, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DatabaseConnections", traits: {"smithy.api#enumValue" => "DatabaseConnections"}))
     RelationalDatabaseMetricName.add_member(:disk_queue_depth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DiskQueueDepth", traits: {"smithy.api#enumValue" => "DiskQueueDepth"}))
@@ -2745,7 +2745,7 @@ module Aws::Lightsail
     RelationalDatabaseParameter.add_member(:parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "parameterName"))
     RelationalDatabaseParameter.add_member(:parameter_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "parameterValue"))
     RelationalDatabaseParameter.type = Types::RelationalDatabaseParameter
-    RelationalDatabaseParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RelationalDatabaseParameter, name: "member")
+    RelationalDatabaseParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RelationalDatabaseParameter, name: "member"))
     RelationalDatabasePasswordVersion.add_member(:current, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CURRENT", traits: {"smithy.api#enumValue" => "CURRENT"}))
     RelationalDatabasePasswordVersion.add_member(:previous, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PREVIOUS", traits: {"smithy.api#enumValue" => "PREVIOUS"}))
     RelationalDatabasePasswordVersion.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
@@ -2765,7 +2765,7 @@ module Aws::Lightsail
     RelationalDatabaseSnapshot.add_member(:from_relational_database_bundle_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "fromRelationalDatabaseBundleId"))
     RelationalDatabaseSnapshot.add_member(:from_relational_database_blueprint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "fromRelationalDatabaseBlueprintId"))
     RelationalDatabaseSnapshot.type = Types::RelationalDatabaseSnapshot
-    RelationalDatabaseSnapshotList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RelationalDatabaseSnapshot, name: "member")
+    RelationalDatabaseSnapshotList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RelationalDatabaseSnapshot, name: "member"))
     ReleaseStaticIpRequest.add_member(:static_ip_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "staticIpName", traits: {"smithy.api#required" => {}}))
     ReleaseStaticIpRequest.type = Types::ReleaseStaticIpRequest
     ReleaseStaticIpResult.add_member(:operations, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationList, name: "operations"))
@@ -2796,7 +2796,7 @@ module Aws::Lightsail
     ResourceLocation.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "availabilityZone"))
     ResourceLocation.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "regionName"))
     ResourceLocation.type = Types::ResourceLocation
-    ResourceNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "member")
+    ResourceNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "member"))
     ResourceReceivingAccess.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "name"))
     ResourceReceivingAccess.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "resourceType"))
     ResourceReceivingAccess.type = Types::ResourceReceivingAccess
@@ -2824,7 +2824,7 @@ module Aws::Lightsail
     ResourceType.add_member(:distribution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Distribution", traits: {"smithy.api#enumValue" => "Distribution"}))
     ResourceType.add_member(:certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Certificate", traits: {"smithy.api#enumValue" => "Certificate"}))
     ResourceType.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Bucket", traits: {"smithy.api#enumValue" => "Bucket"}))
-    ResourcesBudgetEstimate.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceBudgetEstimate, name: "member")
+    ResourcesBudgetEstimate.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceBudgetEstimate, name: "member"))
     SendContactMethodVerificationRequest.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactMethodVerificationProtocol, name: "protocol", traits: {"smithy.api#required" => {}}))
     SendContactMethodVerificationRequest.type = Types::SendContactMethodVerificationRequest
     SendContactMethodVerificationResult.add_member(:operations, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationList, name: "operations"))
@@ -2838,7 +2838,7 @@ module Aws::Lightsail
     Session.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveNonEmptyString, name: "url"))
     Session.add_member(:is_primary, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isPrimary"))
     Session.type = Types::Session
-    Sessions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Session, name: "member")
+    Sessions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Session, name: "member"))
     SetIpAddressTypeRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType", traits: {"smithy.api#required" => {}}))
     SetIpAddressTypeRequest.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "resourceName", traits: {"smithy.api#required" => {}}))
     SetIpAddressTypeRequest.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddressType, name: "ipAddressType", traits: {"smithy.api#required" => {}}))
@@ -2852,7 +2852,7 @@ module Aws::Lightsail
     SetResourceAccessForBucketRequest.type = Types::SetResourceAccessForBucketRequest
     SetResourceAccessForBucketResult.add_member(:operations, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationList, name: "operations"))
     SetResourceAccessForBucketResult.type = Types::SetResourceAccessForBucketResult
-    SetupDomainNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SetupDomainName, name: "member")
+    SetupDomainNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SetupDomainName, name: "member"))
     SetupExecutionDetails.add_member(:command, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "command"))
     SetupExecutionDetails.add_member(:date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoDate, name: "dateTime"))
     SetupExecutionDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "name"))
@@ -2861,7 +2861,7 @@ module Aws::Lightsail
     SetupExecutionDetails.add_member(:standard_output, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "standardOutput"))
     SetupExecutionDetails.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "version"))
     SetupExecutionDetails.type = Types::SetupExecutionDetails
-    SetupExecutionDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SetupExecutionDetails, name: "member")
+    SetupExecutionDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SetupExecutionDetails, name: "member"))
     SetupHistory.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "operationId"))
     SetupHistory.add_member(:request, ::Smithy::Schema::Shapes::MemberShape.new(target: SetupRequest, name: "request"))
     SetupHistory.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: SetupHistoryResource, name: "resource"))
@@ -2910,7 +2910,7 @@ module Aws::Lightsail
     StaticIp.add_member(:attached_to, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "attachedTo"))
     StaticIp.add_member(:is_attached, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isAttached"))
     StaticIp.type = Types::StaticIp
-    StaticIpList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StaticIp, name: "member")
+    StaticIpList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StaticIp, name: "member"))
     Status.add_member(:start_expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "StartExpired", traits: {"smithy.api#enumValue" => "startExpired"}))
     Status.add_member(:not_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NotStarted", traits: {"smithy.api#enumValue" => "notStarted"}))
     Status.add_member(:started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Started", traits: {"smithy.api#enumValue" => "started"}))
@@ -2940,13 +2940,13 @@ module Aws::Lightsail
     StopRelationalDatabaseRequest.type = Types::StopRelationalDatabaseRequest
     StopRelationalDatabaseResult.add_member(:operations, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationList, name: "operations"))
     StopRelationalDatabaseResult.type = Types::StopRelationalDatabaseResult
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    SubjectAlternativeNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    SubjectAlternativeNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "resourceName", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn"))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
@@ -3061,7 +3061,7 @@ module Aws::Lightsail
     ViewerMinimumTlsProtocolVersionEnum.add_member(:tl_sv12_2018, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLSv12_2018", traits: {"smithy.api#enumValue" => "TLSv1.2_2018"}))
     ViewerMinimumTlsProtocolVersionEnum.add_member(:tl_sv12_2019, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLSv12_2019", traits: {"smithy.api#enumValue" => "TLSv1.2_2019"}))
     ViewerMinimumTlsProtocolVersionEnum.add_member(:tl_sv12_2021, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLSv12_2021", traits: {"smithy.api#enumValue" => "TLSv1.2_2021"}))
-    SetupHistoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SetupHistory, name: "member")
+    SetupHistoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SetupHistory, name: "member"))
 
     Lightsail20161128 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.lightsail#Lightsail_20161128"

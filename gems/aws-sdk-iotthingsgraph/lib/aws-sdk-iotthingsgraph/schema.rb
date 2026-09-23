@@ -213,7 +213,7 @@ module Aws::IoTThingsGraph
     DependencyRevision.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Urn, name: "id"))
     DependencyRevision.add_member(:revision_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "revisionNumber"))
     DependencyRevision.type = Types::DependencyRevision
-    DependencyRevisions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DependencyRevision, name: "member")
+    DependencyRevisions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DependencyRevision, name: "member"))
     DeploySystemInstanceRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Urn, name: "id"))
     DeploySystemInstanceRequest.type = Types::DeploySystemInstanceRequest
     DeploySystemInstanceResponse.add_member(:summary, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemInstanceSummary, name: "summary", traits: {"smithy.api#required" => {}}))
@@ -245,7 +245,7 @@ module Aws::IoTThingsGraph
     EntityDescription.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
     EntityDescription.add_member(:definition, ::Smithy::Schema::Shapes::MemberShape.new(target: DefinitionDocument, name: "definition"))
     EntityDescription.type = Types::EntityDescription
-    EntityDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDescription, name: "member")
+    EntityDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDescription, name: "member"))
     EntityFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityFilterName, name: "name"))
     EntityFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityFilterValues, name: "value"))
     EntityFilter.type = Types::EntityFilter
@@ -253,8 +253,8 @@ module Aws::IoTThingsGraph
     EntityFilterName.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAMESPACE", traits: {"smithy.api#enumValue" => "NAMESPACE"}))
     EntityFilterName.add_member(:semantic_type_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEMANTIC_TYPE_PATH", traits: {"smithy.api#enumValue" => "SEMANTIC_TYPE_PATH"}))
     EntityFilterName.add_member(:referenced_entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REFERENCED_ENTITY_ID", traits: {"smithy.api#enumValue" => "REFERENCED_ENTITY_ID"}))
-    EntityFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityFilterValue, name: "member")
-    EntityFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityFilter, name: "member")
+    EntityFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityFilterValue, name: "member"))
+    EntityFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityFilter, name: "member"))
     EntityType.add_member(:device, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEVICE", traits: {"smithy.api#enumValue" => "DEVICE"}))
     EntityType.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE", traits: {"smithy.api#enumValue" => "SERVICE"}))
     EntityType.add_member(:device_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEVICE_MODEL", traits: {"smithy.api#enumValue" => "DEVICE_MODEL"}))
@@ -265,7 +265,7 @@ module Aws::IoTThingsGraph
     EntityType.add_member(:property, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROPERTY", traits: {"smithy.api#enumValue" => "PROPERTY"}))
     EntityType.add_member(:mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAPPING", traits: {"smithy.api#enumValue" => "MAPPING"}))
     EntityType.add_member(:enum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENUM", traits: {"smithy.api#enumValue" => "ENUM"}))
-    EntityTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, name: "member")
+    EntityTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, name: "member"))
     FlowExecutionEventType.add_member(:execution_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXECUTION_STARTED", traits: {"smithy.api#enumValue" => "EXECUTION_STARTED"}))
     FlowExecutionEventType.add_member(:execution_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXECUTION_FAILED", traits: {"smithy.api#enumValue" => "EXECUTION_FAILED"}))
     FlowExecutionEventType.add_member(:execution_aborted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXECUTION_ABORTED", traits: {"smithy.api#enumValue" => "EXECUTION_ABORTED"}))
@@ -288,12 +288,12 @@ module Aws::IoTThingsGraph
     FlowExecutionMessage.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "timestamp"))
     FlowExecutionMessage.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowExecutionMessagePayload, name: "payload"))
     FlowExecutionMessage.type = Types::FlowExecutionMessage
-    FlowExecutionMessages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FlowExecutionMessage, name: "member")
+    FlowExecutionMessages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowExecutionMessage, name: "member"))
     FlowExecutionStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     FlowExecutionStatus.add_member(:aborted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ABORTED", traits: {"smithy.api#enumValue" => "ABORTED"}))
     FlowExecutionStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
     FlowExecutionStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    FlowExecutionSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FlowExecutionSummary, name: "member")
+    FlowExecutionSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowExecutionSummary, name: "member"))
     FlowExecutionSummary.add_member(:flow_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowExecutionId, name: "flowExecutionId"))
     FlowExecutionSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowExecutionStatus, name: "status"))
     FlowExecutionSummary.add_member(:system_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Urn, name: "systemInstanceId"))
@@ -309,9 +309,9 @@ module Aws::IoTThingsGraph
     FlowTemplateFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowTemplateFilterValues, name: "value", traits: {"smithy.api#required" => {}}))
     FlowTemplateFilter.type = Types::FlowTemplateFilter
     FlowTemplateFilterName.add_member(:device_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEVICE_MODEL_ID", traits: {"smithy.api#enumValue" => "DEVICE_MODEL_ID"}))
-    FlowTemplateFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FlowTemplateFilterValue, name: "member")
-    FlowTemplateFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FlowTemplateFilter, name: "member")
-    FlowTemplateSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FlowTemplateSummary, name: "member")
+    FlowTemplateFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowTemplateFilterValue, name: "member"))
+    FlowTemplateFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowTemplateFilter, name: "member"))
+    FlowTemplateSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowTemplateSummary, name: "member"))
     FlowTemplateSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Urn, name: "id"))
     FlowTemplateSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
     FlowTemplateSummary.add_member(:revision_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "revisionNumber"))
@@ -448,7 +448,7 @@ module Aws::IoTThingsGraph
     SearchThingsResponse.add_member(:things, ::Smithy::Schema::Shapes::MemberShape.new(target: Things, name: "things"))
     SearchThingsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     SearchThingsResponse.type = Types::SearchThingsResponse
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     SystemInstanceDeploymentStatus.add_member(:not_deployed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_DEPLOYED", traits: {"smithy.api#enumValue" => "NOT_DEPLOYED"}))
     SystemInstanceDeploymentStatus.add_member(:bootstrap, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BOOTSTRAP", traits: {"smithy.api#enumValue" => "BOOTSTRAP"}))
     SystemInstanceDeploymentStatus.add_member(:deploy_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPLOY_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DEPLOY_IN_PROGRESS"}))
@@ -471,9 +471,9 @@ module Aws::IoTThingsGraph
     SystemInstanceFilterName.add_member(:system_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYSTEM_TEMPLATE_ID", traits: {"smithy.api#enumValue" => "SYSTEM_TEMPLATE_ID"}))
     SystemInstanceFilterName.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATUS", traits: {"smithy.api#enumValue" => "STATUS"}))
     SystemInstanceFilterName.add_member(:greengrass_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GREENGRASS_GROUP_NAME", traits: {"smithy.api#enumValue" => "GREENGRASS_GROUP_NAME"}))
-    SystemInstanceFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SystemInstanceFilterValue, name: "member")
-    SystemInstanceFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SystemInstanceFilter, name: "member")
-    SystemInstanceSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SystemInstanceSummary, name: "member")
+    SystemInstanceFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemInstanceFilterValue, name: "member"))
+    SystemInstanceFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemInstanceFilter, name: "member"))
+    SystemInstanceSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemInstanceSummary, name: "member"))
     SystemInstanceSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Urn, name: "id"))
     SystemInstanceSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
     SystemInstanceSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemInstanceDeploymentStatus, name: "status"))
@@ -492,9 +492,9 @@ module Aws::IoTThingsGraph
     SystemTemplateFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemTemplateFilterValues, name: "value", traits: {"smithy.api#required" => {}}))
     SystemTemplateFilter.type = Types::SystemTemplateFilter
     SystemTemplateFilterName.add_member(:flow_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLOW_TEMPLATE_ID", traits: {"smithy.api#enumValue" => "FLOW_TEMPLATE_ID"}))
-    SystemTemplateFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SystemTemplateFilterValue, name: "member")
-    SystemTemplateFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SystemTemplateFilter, name: "member")
-    SystemTemplateSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SystemTemplateSummary, name: "member")
+    SystemTemplateFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemTemplateFilterValue, name: "member"))
+    SystemTemplateFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemTemplateFilter, name: "member"))
+    SystemTemplateSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemTemplateSummary, name: "member"))
     SystemTemplateSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Urn, name: "id"))
     SystemTemplateSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
     SystemTemplateSummary.add_member(:revision_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "revisionNumber"))
@@ -503,8 +503,8 @@ module Aws::IoTThingsGraph
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -512,7 +512,7 @@ module Aws::IoTThingsGraph
     Thing.add_member(:thing_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingArn, name: "thingArn"))
     Thing.add_member(:thing_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingName, name: "thingName"))
     Thing.type = Types::Thing
-    Things.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Thing, name: "member")
+    Things.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Thing, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ThrottlingException.type = Types::ThrottlingException
     UndeploySystemInstanceRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Urn, name: "id"))
@@ -544,7 +544,7 @@ module Aws::IoTThingsGraph
     UploadStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     UploadStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
     UploadStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    Urns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Urn, name: "member")
+    Urns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Urn, name: "member"))
 
     IotThingsGraphFrontEndService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.iotthingsgraph#IotThingsGraphFrontEndService"

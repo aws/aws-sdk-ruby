@@ -75,23 +75,23 @@ module Aws::SSMQuickSetup
     ConfigurationDefinitionInput.add_member(:local_deployment_execution_role_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "LocalDeploymentExecutionRoleName", traits: {"smithy.api#pattern" => "^[\\w+=,.@-]{1,64}$"}))
     ConfigurationDefinitionInput.add_member(:local_deployment_administration_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, name: "LocalDeploymentAdministrationRoleArn"))
     ConfigurationDefinitionInput.type = Types::ConfigurationDefinitionInput
-    ConfigurationDefinitionSummariesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationDefinitionSummary, name: "member")
+    ConfigurationDefinitionSummariesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationDefinitionSummary, name: "member"))
     ConfigurationDefinitionSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Id"))
     ConfigurationDefinitionSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Type"))
     ConfigurationDefinitionSummary.add_member(:type_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "TypeVersion"))
     ConfigurationDefinitionSummary.add_member(:first_class_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationParametersMap, name: "FirstClassParameters"))
     ConfigurationDefinitionSummary.type = Types::ConfigurationDefinitionSummary
-    ConfigurationDefinitionsInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationDefinitionInput, name: "member")
-    ConfigurationDefinitionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationDefinition, name: "member")
-    ConfigurationManagerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationManagerSummary, name: "member")
+    ConfigurationDefinitionsInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationDefinitionInput, name: "member"))
+    ConfigurationDefinitionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationDefinition, name: "member"))
+    ConfigurationManagerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationManagerSummary, name: "member"))
     ConfigurationManagerSummary.add_member(:manager_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ManagerArn", traits: {"smithy.api#required" => {}}))
     ConfigurationManagerSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Description"))
     ConfigurationManagerSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name"))
     ConfigurationManagerSummary.add_member(:status_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusSummariesList, name: "StatusSummaries"))
     ConfigurationManagerSummary.add_member(:configuration_definition_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationDefinitionSummariesList, name: "ConfigurationDefinitionSummaries"))
     ConfigurationManagerSummary.type = Types::ConfigurationManagerSummary
-    ConfigurationParametersMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9+=@_\\/\\s-]+$"})
-    ConfigurationParametersMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"max" => 40960}})
+    ConfigurationParametersMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9+=@_\\/\\s-]+$"}))
+    ConfigurationParametersMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"max" => 40960}}))
     ConfigurationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Id"))
     ConfigurationSummary.add_member(:manager_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ManagerArn"))
     ConfigurationSummary.add_member(:configuration_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ConfigurationDefinitionId"))
@@ -103,7 +103,7 @@ module Aws::SSMQuickSetup
     ConfigurationSummary.add_member(:first_class_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationParametersMap, name: "FirstClassParameters"))
     ConfigurationSummary.add_member(:status_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusSummariesList, name: "StatusSummaries"))
     ConfigurationSummary.type = Types::ConfigurationSummary
-    ConfigurationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSummary, name: "member")
+    ConfigurationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSummary, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
     ConflictException.type = Types::ConflictException
     CreateConfigurationManagerInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name", traits: {"smithy.api#pattern" => "^[ A-Za-z0-9._-]{0,120}$"}))
@@ -118,8 +118,8 @@ module Aws::SSMQuickSetup
     Filter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Key", traits: {"smithy.api#length" => {"max" => 128}, "smithy.api#pattern" => "^[A-Za-z0-9+=@_\\/\\s-]*$", "smithy.api#required" => {}}))
     Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, name: "Values", traits: {"smithy.api#required" => {}}))
     Filter.type = Types::Filter
-    FilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9+=@_\\/\\s-]*$"})
-    FiltersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
+    FilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9+=@_\\/\\s-]*$"}))
+    FiltersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     GetConfigurationInput.add_member(:configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ConfigurationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#pattern" => "^[a-zA-Z0-9-_/:]{1,100}$", "smithy.api#required" => {}}))
     GetConfigurationInput.type = Types::GetConfigurationInput
     GetConfigurationManagerInput.add_member(:manager_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ManagerArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#length" => {"min" => 1}, "smithy.api#pattern" => "^arn:aws:ssm-quicksetup:([^:]+):(\\d{12}):configuration-manager/[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$", "smithy.api#required" => {}}))
@@ -171,7 +171,7 @@ module Aws::SSMQuickSetup
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    QuickSetupTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuickSetupTypeOutput, name: "member")
+    QuickSetupTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickSetupTypeOutput, name: "member"))
     QuickSetupTypeOutput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Type"))
     QuickSetupTypeOutput.add_member(:latest_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "LatestVersion"))
     QuickSetupTypeOutput.type = Types::QuickSetupTypeOutput
@@ -189,9 +189,9 @@ module Aws::SSMQuickSetup
     Status.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
     Status.add_member(:stop_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOP_FAILED", traits: {"smithy.api#enumValue" => "STOP_FAILED"}))
     Status.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    StatusDetails.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    StatusDetails.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
-    StatusSummariesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StatusSummary, name: "member")
+    StatusDetails.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    StatusDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
+    StatusSummariesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusSummary, name: "member"))
     StatusSummary.add_member(:status_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusType, name: "StatusType", traits: {"smithy.api#required" => {}}))
     StatusSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "Status"))
     StatusSummary.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "StatusMessage"))
@@ -203,13 +203,13 @@ module Aws::SSMQuickSetup
     TagEntry.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Key", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[A-Za-z0-9 _=@:.+-/]+$"}))
     TagEntry.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Value", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9 _=@:.+-/]+$"}))
     TagEntry.type = Types::TagEntry
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagEntry, name: "member")
-    TagsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[A-Za-z0-9 _=@:.+-/]+$"})
-    TagsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9 _=@:.+-/]+$"})
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagEntry, name: "member"))
+    TagsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[A-Za-z0-9 _=@:.+-/]+$"}))
+    TagsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9 _=@:.+-/]+$"}))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))

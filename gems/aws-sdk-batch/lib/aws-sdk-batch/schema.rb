@@ -313,8 +313,8 @@ module Aws::Batch
 
     ArrayJobDependency.add_member(:n_to_n, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "N_TO_N", traits: {"smithy.api#enumValue" => "N_TO_N"}))
     ArrayJobDependency.add_member(:sequential, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEQUENTIAL", traits: {"smithy.api#enumValue" => "SEQUENTIAL"}))
-    ArrayJobStatusSummary.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    ArrayJobStatusSummary.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "value")
+    ArrayJobStatusSummary.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    ArrayJobStatusSummary.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "value"))
     ArrayProperties.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "size"))
     ArrayProperties.type = Types::ArrayProperties
     ArrayPropertiesDetail.add_member(:status_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ArrayJobStatusSummary, name: "statusSummary"))
@@ -339,7 +339,7 @@ module Aws::Batch
     AttemptDetail.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "statusReason"))
     AttemptDetail.add_member(:task_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ListAttemptEcsTaskDetails, name: "taskProperties"))
     AttemptDetail.type = Types::AttemptDetail
-    AttemptDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttemptDetail, name: "member")
+    AttemptDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttemptDetail, name: "member"))
     AttemptEcsTaskDetails.add_member(:container_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "containerInstanceArn"))
     AttemptEcsTaskDetails.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "taskArn"))
     AttemptEcsTaskDetails.add_member(:containers, ::Smithy::Schema::Shapes::MemberShape.new(target: ListAttemptTaskContainerDetails, name: "containers"))
@@ -378,7 +378,7 @@ module Aws::Batch
     CapacityLimit.add_member(:max_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "maxCapacity"))
     CapacityLimit.add_member(:capacity_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "capacityUnit"))
     CapacityLimit.type = Types::CapacityLimit
-    CapacityLimits.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityLimit, name: "member")
+    CapacityLimits.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityLimit, name: "member"))
     ClientException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ClientException.type = Types::ClientException
     ComputeEnvironmentDetail.add_member(:compute_environment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "computeEnvironmentName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -398,11 +398,11 @@ module Aws::Batch
     ComputeEnvironmentDetail.add_member(:uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "uuid"))
     ComputeEnvironmentDetail.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "context"))
     ComputeEnvironmentDetail.type = Types::ComputeEnvironmentDetail
-    ComputeEnvironmentDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeEnvironmentDetail, name: "member")
+    ComputeEnvironmentDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeEnvironmentDetail, name: "member"))
     ComputeEnvironmentOrder.add_member(:order, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "order", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ComputeEnvironmentOrder.add_member(:compute_environment, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "computeEnvironment", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ComputeEnvironmentOrder.type = Types::ComputeEnvironmentOrder
-    ComputeEnvironmentOrders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeEnvironmentOrder, name: "member")
+    ComputeEnvironmentOrders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeEnvironmentOrder, name: "member"))
     ComputeResource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: CRType, name: "type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ComputeResource.add_member(:allocation_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: CRAllocationStrategy, name: "allocationStrategy"))
     ComputeResource.add_member(:minv_cpus, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "minvCpus"))
@@ -439,7 +439,7 @@ module Aws::Batch
     ComputeResourceUpdate.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: CRType, name: "type"))
     ComputeResourceUpdate.add_member(:image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "imageId"))
     ComputeResourceUpdate.type = Types::ComputeResourceUpdate
-    ConsumableResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumableResourceRequirement, name: "member")
+    ConsumableResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumableResourceRequirement, name: "member"))
     ConsumableResourceProperties.add_member(:consumable_resource_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumableResourceList, name: "consumableResourceList"))
     ConsumableResourceProperties.type = Types::ConsumableResourceProperties
     ConsumableResourceRequirement.add_member(:consumable_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "consumableResource"))
@@ -451,7 +451,7 @@ module Aws::Batch
     ConsumableResourceSummary.add_member(:in_use_quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "inUseQuantity"))
     ConsumableResourceSummary.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceType"))
     ConsumableResourceSummary.type = Types::ConsumableResourceSummary
-    ConsumableResourceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumableResourceSummary, name: "member")
+    ConsumableResourceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumableResourceSummary, name: "member"))
     ContainerDetail.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "image"))
     ContainerDetail.add_member(:vcpus, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "vcpus"))
     ContainerDetail.add_member(:memory, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "memory"))
@@ -664,8 +664,8 @@ module Aws::Batch
     DeviceCgroupPermission.add_member(:read, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READ", traits: {"smithy.api#enumValue" => "READ"}))
     DeviceCgroupPermission.add_member(:write, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WRITE", traits: {"smithy.api#enumValue" => "WRITE"}))
     DeviceCgroupPermission.add_member(:mknod, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MKNOD", traits: {"smithy.api#enumValue" => "MKNOD"}))
-    DeviceCgroupPermissions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceCgroupPermission, name: "member")
-    DevicesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Device, name: "member")
+    DeviceCgroupPermissions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceCgroupPermission, name: "member"))
+    DevicesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Device, name: "member"))
     EFSAuthorizationConfig.add_member(:access_point_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "accessPointId"))
     EFSAuthorizationConfig.add_member(:iam, ::Smithy::Schema::Shapes::MemberShape.new(target: EFSAuthorizationConfigIAM, name: "iam"))
     EFSAuthorizationConfig.type = Types::EFSAuthorizationConfig
@@ -683,7 +683,7 @@ module Aws::Batch
     Ec2Configuration.add_member(:image_id_override, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdOverride, name: "imageIdOverride"))
     Ec2Configuration.add_member(:image_kubernetes_version, ::Smithy::Schema::Shapes::MemberShape.new(target: KubernetesVersion, name: "imageKubernetesVersion"))
     Ec2Configuration.type = Types::Ec2Configuration
-    Ec2ConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2Configuration, name: "member")
+    Ec2ConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2Configuration, name: "member"))
     EcsProperties.add_member(:task_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ListEcsTaskProperties, name: "taskProperties", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     EcsProperties.type = Types::EcsProperties
     EcsPropertiesDetail.add_member(:task_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ListEcsTaskDetails, name: "taskProperties"))
@@ -716,14 +716,14 @@ module Aws::Batch
     EcsTaskProperties.add_member(:volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: Volumes, name: "volumes"))
     EcsTaskProperties.add_member(:enable_execute_command, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enableExecuteCommand"))
     EcsTaskProperties.type = Types::EcsTaskProperties
-    EksAnnotationsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    EksAnnotationsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    EksAnnotationsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    EksAnnotationsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     EksAttemptContainerDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     EksAttemptContainerDetail.add_member(:container_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "containerID"))
     EksAttemptContainerDetail.add_member(:exit_code, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "exitCode"))
     EksAttemptContainerDetail.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "reason"))
     EksAttemptContainerDetail.type = Types::EksAttemptContainerDetail
-    EksAttemptContainerDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EksAttemptContainerDetail, name: "member")
+    EksAttemptContainerDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EksAttemptContainerDetail, name: "member"))
     EksAttemptDetail.add_member(:containers, ::Smithy::Schema::Shapes::MemberShape.new(target: EksAttemptContainerDetails, name: "containers"))
     EksAttemptDetail.add_member(:init_containers, ::Smithy::Schema::Shapes::MemberShape.new(target: EksAttemptContainerDetails, name: "initContainers"))
     EksAttemptDetail.add_member(:eks_cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "eksClusterArn"))
@@ -734,7 +734,7 @@ module Aws::Batch
     EksAttemptDetail.add_member(:stopped_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "stoppedAt"))
     EksAttemptDetail.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "statusReason"))
     EksAttemptDetail.type = Types::EksAttemptDetail
-    EksAttemptDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EksAttemptDetail, name: "member")
+    EksAttemptDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EksAttemptDetail, name: "member"))
     EksConfiguration.add_member(:eks_cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "eksClusterArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     EksConfiguration.add_member(:kubernetes_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "kubernetesNamespace", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     EksConfiguration.type = Types::EksConfiguration
@@ -760,11 +760,11 @@ module Aws::Batch
     EksContainerDetail.add_member(:volume_mounts, ::Smithy::Schema::Shapes::MemberShape.new(target: EksContainerVolumeMounts, name: "volumeMounts"))
     EksContainerDetail.add_member(:security_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EksContainerSecurityContext, name: "securityContext"))
     EksContainerDetail.type = Types::EksContainerDetail
-    EksContainerDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EksContainerDetail, name: "member")
+    EksContainerDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EksContainerDetail, name: "member"))
     EksContainerEnvironmentVariable.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     EksContainerEnvironmentVariable.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     EksContainerEnvironmentVariable.type = Types::EksContainerEnvironmentVariable
-    EksContainerEnvironmentVariables.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EksContainerEnvironmentVariable, name: "member")
+    EksContainerEnvironmentVariables.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EksContainerEnvironmentVariable, name: "member"))
     EksContainerOverride.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     EksContainerOverride.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "image"))
     EksContainerOverride.add_member(:command, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "command"))
@@ -772,7 +772,7 @@ module Aws::Batch
     EksContainerOverride.add_member(:env, ::Smithy::Schema::Shapes::MemberShape.new(target: EksContainerEnvironmentVariables, name: "env"))
     EksContainerOverride.add_member(:resources, ::Smithy::Schema::Shapes::MemberShape.new(target: EksContainerResourceRequirements, name: "resources"))
     EksContainerOverride.type = Types::EksContainerOverride
-    EksContainerOverrideList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EksContainerOverride, name: "member")
+    EksContainerOverrideList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EksContainerOverride, name: "member"))
     EksContainerResourceRequirements.add_member(:limits, ::Smithy::Schema::Shapes::MemberShape.new(target: EksLimits, name: "limits"))
     EksContainerResourceRequirements.add_member(:requests, ::Smithy::Schema::Shapes::MemberShape.new(target: EksRequests, name: "requests"))
     EksContainerResourceRequirements.type = Types::EksContainerResourceRequirements
@@ -788,17 +788,17 @@ module Aws::Batch
     EksContainerVolumeMount.add_member(:sub_path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "subPath"))
     EksContainerVolumeMount.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "readOnly"))
     EksContainerVolumeMount.type = Types::EksContainerVolumeMount
-    EksContainerVolumeMounts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EksContainerVolumeMount, name: "member")
-    EksContainers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EksContainer, name: "member")
+    EksContainerVolumeMounts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EksContainerVolumeMount, name: "member"))
+    EksContainers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EksContainer, name: "member"))
     EksEmptyDir.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "medium"))
     EksEmptyDir.add_member(:size_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Quantity, name: "sizeLimit"))
     EksEmptyDir.type = Types::EksEmptyDir
     EksHostPath.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "path"))
     EksHostPath.type = Types::EksHostPath
-    EksLabelsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    EksLabelsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
-    EksLimits.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    EksLimits.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Quantity, name: "value")
+    EksLabelsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    EksLabelsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
+    EksLimits.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    EksLimits.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Quantity, name: "value"))
     EksMetadata.add_member(:labels, ::Smithy::Schema::Shapes::MemberShape.new(target: EksLabelsMap, name: "labels"))
     EksMetadata.add_member(:annotations, ::Smithy::Schema::Shapes::MemberShape.new(target: EksAnnotationsMap, name: "annotations"))
     EksMetadata.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "namespace"))
@@ -838,8 +838,8 @@ module Aws::Batch
     EksPropertiesDetail.type = Types::EksPropertiesDetail
     EksPropertiesOverride.add_member(:pod_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: EksPodPropertiesOverride, name: "podProperties"))
     EksPropertiesOverride.type = Types::EksPropertiesOverride
-    EksRequests.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    EksRequests.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Quantity, name: "value")
+    EksRequests.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    EksRequests.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Quantity, name: "value"))
     EksSecret.add_member(:secret_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "secretName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     EksSecret.add_member(:optional, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "optional"))
     EksSecret.type = Types::EksSecret
@@ -849,8 +849,8 @@ module Aws::Batch
     EksVolume.add_member(:secret, ::Smithy::Schema::Shapes::MemberShape.new(target: EksSecret, name: "secret"))
     EksVolume.add_member(:persistent_volume_claim, ::Smithy::Schema::Shapes::MemberShape.new(target: EksPersistentVolumeClaim, name: "persistentVolumeClaim"))
     EksVolume.type = Types::EksVolume
-    EksVolumes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EksVolume, name: "member")
-    EnvironmentVariables.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValuePair, name: "member")
+    EksVolumes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EksVolume, name: "member"))
+    EnvironmentVariables.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValuePair, name: "member"))
     EphemeralStorage.add_member(:size_in_gi_b, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "sizeInGiB", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     EphemeralStorage.type = Types::EphemeralStorage
     EvaluateOnExit.add_member(:on_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "onStatusReason"))
@@ -858,7 +858,7 @@ module Aws::Batch
     EvaluateOnExit.add_member(:on_exit_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "onExitCode"))
     EvaluateOnExit.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryAction, name: "action", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     EvaluateOnExit.type = Types::EvaluateOnExit
-    EvaluateOnExitList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluateOnExit, name: "member")
+    EvaluateOnExitList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluateOnExit, name: "member"))
     FairsharePolicy.add_member(:share_decay_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "shareDecaySeconds"))
     FairsharePolicy.add_member(:compute_reservation, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "computeReservation"))
     FairsharePolicy.add_member(:share_distribution, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareAttributesList, name: "shareDistribution"))
@@ -868,8 +868,8 @@ module Aws::Batch
     FirelensConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: FirelensConfigurationType, name: "type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     FirelensConfiguration.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: FirelensConfigurationOptionsMap, name: "options"))
     FirelensConfiguration.type = Types::FirelensConfiguration
-    FirelensConfigurationOptionsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    FirelensConfigurationOptionsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    FirelensConfigurationOptionsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    FirelensConfigurationOptionsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     FirelensConfigurationType.add_member(:fluentd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLUENTD", traits: {"smithy.api#enumValue" => "fluentd"}))
     FirelensConfigurationType.add_member(:fluentbit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLUENTBIT", traits: {"smithy.api#enumValue" => "fluentbit"}))
     FrontOfQueueDetail.add_member(:jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: FrontOfQueueJobSummaryList, name: "jobs"))
@@ -878,7 +878,7 @@ module Aws::Batch
     FrontOfQueueJobSummary.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "jobArn"))
     FrontOfQueueJobSummary.add_member(:earliest_time_at_position, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "earliestTimeAtPosition"))
     FrontOfQueueJobSummary.type = Types::FrontOfQueueJobSummary
-    FrontOfQueueJobSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FrontOfQueueJobSummary, name: "member")
+    FrontOfQueueJobSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FrontOfQueueJobSummary, name: "member"))
     GetJobQueueSnapshotRequest.add_member(:job_queue, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "jobQueue", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GetJobQueueSnapshotRequest.type = Types::GetJobQueueSnapshotRequest
     GetJobQueueSnapshotResponse.add_member(:front_of_queue, ::Smithy::Schema::Shapes::MemberShape.new(target: FrontOfQueueDetail, name: "frontOfQueue"))
@@ -887,7 +887,7 @@ module Aws::Batch
     Host.type = Types::Host
     ImagePullSecret.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ImagePullSecret.type = Types::ImagePullSecret
-    ImagePullSecrets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImagePullSecret, name: "member")
+    ImagePullSecrets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImagePullSecret, name: "member"))
     JQState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     JQState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     JQStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
@@ -915,13 +915,13 @@ module Aws::Batch
     JobDefinition.add_member(:container_orchestration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OrchestrationType, name: "containerOrchestrationType"))
     JobDefinition.add_member(:consumable_resource_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumableResourceProperties, name: "consumableResourceProperties"))
     JobDefinition.type = Types::JobDefinition
-    JobDefinitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobDefinition, name: "member")
+    JobDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobDefinition, name: "member"))
     JobDefinitionType.add_member(:container, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Container", traits: {"smithy.api#enumValue" => "container"}))
     JobDefinitionType.add_member(:multinode, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Multinode", traits: {"smithy.api#enumValue" => "multinode"}))
     JobDependency.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "jobId"))
     JobDependency.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ArrayJobDependency, name: "type"))
     JobDependency.type = Types::JobDependency
-    JobDependencyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobDependency, name: "member")
+    JobDependencyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobDependency, name: "member"))
     JobDetail.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "jobArn"))
     JobDetail.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "jobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     JobDetail.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "jobId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -953,7 +953,7 @@ module Aws::Batch
     JobDetail.add_member(:is_terminated, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isTerminated"))
     JobDetail.add_member(:consumable_resource_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumableResourceProperties, name: "consumableResourceProperties"))
     JobDetail.type = Types::JobDetail
-    JobDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobDetail, name: "member")
+    JobDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobDetail, name: "member"))
     JobQueueDetail.add_member(:job_queue_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "jobQueueName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     JobQueueDetail.add_member(:job_queue_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "jobQueueArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     JobQueueDetail.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: JQState, name: "state", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -967,7 +967,7 @@ module Aws::Batch
     JobQueueDetail.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagrisTagsMap, name: "tags"))
     JobQueueDetail.add_member(:job_state_time_limit_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStateTimeLimitActions, name: "jobStateTimeLimitActions"))
     JobQueueDetail.type = Types::JobQueueDetail
-    JobQueueDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobQueueDetail, name: "member")
+    JobQueueDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobQueueDetail, name: "member"))
     JobQueueType.add_member(:eks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EKS", traits: {"smithy.api#enumValue" => "EKS"}))
     JobQueueType.add_member(:ecs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ECS", traits: {"smithy.api#enumValue" => "ECS"}))
     JobQueueType.add_member(:ecs_fargate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ECS_FARGATE", traits: {"smithy.api#enumValue" => "ECS_FARGATE"}))
@@ -977,7 +977,7 @@ module Aws::Batch
     JobStateTimeLimitAction.add_member(:max_time_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "maxTimeSeconds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     JobStateTimeLimitAction.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStateTimeLimitActionsAction, name: "action", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     JobStateTimeLimitAction.type = Types::JobStateTimeLimitAction
-    JobStateTimeLimitActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobStateTimeLimitAction, name: "member")
+    JobStateTimeLimitActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStateTimeLimitAction, name: "member"))
     JobStateTimeLimitActionsAction.add_member(:cancel, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCEL", traits: {"smithy.api#enumValue" => "CANCEL"}))
     JobStateTimeLimitActionsAction.add_member(:terminate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERMINATE", traits: {"smithy.api#enumValue" => "TERMINATE"}))
     JobStateTimeLimitActionsState.add_member(:runnable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNABLE", traits: {"smithy.api#enumValue" => "RUNNABLE"}))
@@ -1001,7 +1001,7 @@ module Aws::Batch
     JobSummary.add_member(:node_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: NodePropertiesSummary, name: "nodeProperties"))
     JobSummary.add_member(:job_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "jobDefinition"))
     JobSummary.type = Types::JobSummary
-    JobSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobSummary, name: "member")
+    JobSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobSummary, name: "member"))
     JobTimeout.add_member(:attempt_duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "attemptDurationSeconds"))
     JobTimeout.type = Types::JobTimeout
     KeyValuePair.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
@@ -1024,7 +1024,7 @@ module Aws::Batch
     LaunchTemplateSpecificationOverride.add_member(:target_instance_types, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "targetInstanceTypes"))
     LaunchTemplateSpecificationOverride.add_member(:userdata_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UserdataType, name: "userdataType"))
     LaunchTemplateSpecificationOverride.type = Types::LaunchTemplateSpecificationOverride
-    LaunchTemplateSpecificationOverrideList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplateSpecificationOverride, name: "member")
+    LaunchTemplateSpecificationOverrideList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplateSpecificationOverride, name: "member"))
     LinuxParameters.add_member(:devices, ::Smithy::Schema::Shapes::MemberShape.new(target: DevicesList, name: "devices"))
     LinuxParameters.add_member(:init_process_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "initProcessEnabled"))
     LinuxParameters.add_member(:shared_memory_size, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "sharedMemorySize"))
@@ -1032,9 +1032,9 @@ module Aws::Batch
     LinuxParameters.add_member(:max_swap, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "maxSwap"))
     LinuxParameters.add_member(:swappiness, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "swappiness"))
     LinuxParameters.type = Types::LinuxParameters
-    ListAttemptEcsTaskDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttemptEcsTaskDetails, name: "member")
-    ListAttemptTaskContainerDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttemptTaskContainerDetails, name: "member")
-    ListConsumableResourcesFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValuesPair, name: "member")
+    ListAttemptEcsTaskDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttemptEcsTaskDetails, name: "member"))
+    ListAttemptTaskContainerDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttemptTaskContainerDetails, name: "member"))
+    ListConsumableResourcesFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValuesPair, name: "member"))
     ListConsumableResourcesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListConsumableResourcesFilterList, name: "filters"))
     ListConsumableResourcesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "maxResults"))
     ListConsumableResourcesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
@@ -1042,9 +1042,9 @@ module Aws::Batch
     ListConsumableResourcesResponse.add_member(:consumable_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumableResourceSummaryList, name: "consumableResources", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ListConsumableResourcesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
     ListConsumableResourcesResponse.type = Types::ListConsumableResourcesResponse
-    ListEcsTaskDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EcsTaskDetails, name: "member")
-    ListEcsTaskProperties.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EcsTaskProperties, name: "member")
-    ListJobsByConsumableResourceFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValuesPair, name: "member")
+    ListEcsTaskDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EcsTaskDetails, name: "member"))
+    ListEcsTaskProperties.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EcsTaskProperties, name: "member"))
+    ListJobsByConsumableResourceFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValuesPair, name: "member"))
     ListJobsByConsumableResourceRequest.add_member(:consumable_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "consumableResource", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ListJobsByConsumableResourceRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListJobsByConsumableResourceFilterList, name: "filters"))
     ListJobsByConsumableResourceRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "maxResults"))
@@ -1065,8 +1065,8 @@ module Aws::Batch
     ListJobsByConsumableResourceSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "createdAt", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ListJobsByConsumableResourceSummary.add_member(:consumable_resource_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumableResourceProperties, name: "consumableResourceProperties", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ListJobsByConsumableResourceSummary.type = Types::ListJobsByConsumableResourceSummary
-    ListJobsByConsumableResourceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListJobsByConsumableResourceSummary, name: "member")
-    ListJobsFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValuesPair, name: "member")
+    ListJobsByConsumableResourceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListJobsByConsumableResourceSummary, name: "member"))
+    ListJobsFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValuesPair, name: "member"))
     ListJobsRequest.add_member(:job_queue, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "jobQueue"))
     ListJobsRequest.add_member(:array_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arrayJobId"))
     ListJobsRequest.add_member(:multi_node_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "multiNodeJobId"))
@@ -1097,16 +1097,16 @@ module Aws::Batch
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagrisTagsMap, name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    ListTaskContainerDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskContainerDetails, name: "member")
-    ListTaskContainerOverrides.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskContainerOverrides, name: "member")
-    ListTaskContainerProperties.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskContainerProperties, name: "member")
-    ListTaskPropertiesOverride.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskPropertiesOverride, name: "member")
+    ListTaskContainerDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskContainerDetails, name: "member"))
+    ListTaskContainerOverrides.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskContainerOverrides, name: "member"))
+    ListTaskContainerProperties.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskContainerProperties, name: "member"))
+    ListTaskPropertiesOverride.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskPropertiesOverride, name: "member"))
     LogConfiguration.add_member(:log_driver, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDriver, name: "logDriver", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     LogConfiguration.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: LogConfigurationOptionsMap, name: "options"))
     LogConfiguration.add_member(:secret_options, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretList, name: "secretOptions"))
     LogConfiguration.type = Types::LogConfiguration
-    LogConfigurationOptionsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    LogConfigurationOptionsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    LogConfigurationOptionsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    LogConfigurationOptionsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     LogDriver.add_member(:json_file, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON_FILE", traits: {"smithy.api#enumValue" => "json-file"}))
     LogDriver.add_member(:syslog, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYSLOG", traits: {"smithy.api#enumValue" => "syslog"}))
     LogDriver.add_member(:journald, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JOURNALD", traits: {"smithy.api#enumValue" => "journald"}))
@@ -1119,14 +1119,14 @@ module Aws::Batch
     MountPoint.add_member(:read_only, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "readOnly"))
     MountPoint.add_member(:source_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "sourceVolume"))
     MountPoint.type = Types::MountPoint
-    MountPoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MountPoint, name: "member")
+    MountPoints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MountPoint, name: "member"))
     NetworkConfiguration.add_member(:assign_public_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: AssignPublicIp, name: "assignPublicIp"))
     NetworkConfiguration.type = Types::NetworkConfiguration
     NetworkInterface.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "attachmentId"))
     NetworkInterface.add_member(:ipv6_address, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ipv6Address"))
     NetworkInterface.add_member(:private_ipv4_address, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "privateIpv4Address"))
     NetworkInterface.type = Types::NetworkInterface
-    NetworkInterfaceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface, name: "member")
+    NetworkInterfaceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface, name: "member"))
     NodeDetails.add_member(:node_index, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "nodeIndex"))
     NodeDetails.add_member(:is_main_node, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isMainNode"))
     NodeDetails.type = Types::NodeDetails
@@ -1148,8 +1148,8 @@ module Aws::Batch
     NodePropertyOverride.add_member(:eks_properties_override, ::Smithy::Schema::Shapes::MemberShape.new(target: EksPropertiesOverride, name: "eksPropertiesOverride"))
     NodePropertyOverride.add_member(:consumable_resource_properties_override, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumableResourceProperties, name: "consumableResourcePropertiesOverride"))
     NodePropertyOverride.type = Types::NodePropertyOverride
-    NodePropertyOverrides.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NodePropertyOverride, name: "member")
-    NodeRangeProperties.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NodeRangeProperty, name: "member")
+    NodePropertyOverrides.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NodePropertyOverride, name: "member"))
+    NodeRangeProperties.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeRangeProperty, name: "member"))
     NodeRangeProperty.add_member(:target_nodes, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "targetNodes", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     NodeRangeProperty.add_member(:container, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProperties, name: "container"))
     NodeRangeProperty.add_member(:instance_types, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "instanceTypes"))
@@ -1159,11 +1159,11 @@ module Aws::Batch
     NodeRangeProperty.type = Types::NodeRangeProperty
     OrchestrationType.add_member(:ecs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ECS", traits: {"smithy.api#enumValue" => "ECS"}))
     OrchestrationType.add_member(:eks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EKS", traits: {"smithy.api#enumValue" => "EKS"}))
-    ParametersMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    ParametersMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    ParametersMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    ParametersMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     PlatformCapability.add_member(:ec2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EC2", traits: {"smithy.api#enumValue" => "EC2"}))
     PlatformCapability.add_member(:fargate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FARGATE", traits: {"smithy.api#enumValue" => "FARGATE"}))
-    PlatformCapabilityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformCapability, name: "member")
+    PlatformCapabilityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformCapability, name: "member"))
     RegisterJobDefinitionRequest.add_member(:job_definition_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "jobDefinitionName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RegisterJobDefinitionRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: JobDefinitionType, name: "type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RegisterJobDefinitionRequest.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ParametersMap, name: "parameters"))
@@ -1188,7 +1188,7 @@ module Aws::Batch
     ResourceRequirement.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ResourceRequirement.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ResourceRequirement.type = Types::ResourceRequirement
-    ResourceRequirements.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceRequirement, name: "member")
+    ResourceRequirements.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceRequirement, name: "member"))
     ResourceType.add_member(:gpu, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GPU", traits: {"smithy.api#enumValue" => "GPU"}))
     ResourceType.add_member(:vcpu, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VCPU", traits: {"smithy.api#enumValue" => "VCPU"}))
     ResourceType.add_member(:memory, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEMORY", traits: {"smithy.api#enumValue" => "MEMORY"}))
@@ -1205,14 +1205,14 @@ module Aws::Batch
     SchedulingPolicyDetail.add_member(:fairshare_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: FairsharePolicy, name: "fairsharePolicy"))
     SchedulingPolicyDetail.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagrisTagsMap, name: "tags"))
     SchedulingPolicyDetail.type = Types::SchedulingPolicyDetail
-    SchedulingPolicyDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SchedulingPolicyDetail, name: "member")
+    SchedulingPolicyDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SchedulingPolicyDetail, name: "member"))
     SchedulingPolicyListingDetail.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SchedulingPolicyListingDetail.type = Types::SchedulingPolicyListingDetail
-    SchedulingPolicyListingDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SchedulingPolicyListingDetail, name: "member")
+    SchedulingPolicyListingDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SchedulingPolicyListingDetail, name: "member"))
     Secret.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Secret.add_member(:value_from, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "valueFrom", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Secret.type = Types::Secret
-    SecretList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Secret, name: "member")
+    SecretList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Secret, name: "member"))
     ServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ServerException.type = Types::ServerException
     ServiceEnvironmentDetail.add_member(:service_environment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceEnvironmentName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1223,11 +1223,11 @@ module Aws::Batch
     ServiceEnvironmentDetail.add_member(:capacity_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityLimits, name: "capacityLimits", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ServiceEnvironmentDetail.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagrisTagsMap, name: "tags"))
     ServiceEnvironmentDetail.type = Types::ServiceEnvironmentDetail
-    ServiceEnvironmentDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceEnvironmentDetail, name: "member")
+    ServiceEnvironmentDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceEnvironmentDetail, name: "member"))
     ServiceEnvironmentOrder.add_member(:order, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "order", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ServiceEnvironmentOrder.add_member(:service_environment, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceEnvironment", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ServiceEnvironmentOrder.type = Types::ServiceEnvironmentOrder
-    ServiceEnvironmentOrders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceEnvironmentOrder, name: "member")
+    ServiceEnvironmentOrders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceEnvironmentOrder, name: "member"))
     ServiceEnvironmentState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     ServiceEnvironmentState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     ServiceEnvironmentStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
@@ -1242,11 +1242,11 @@ module Aws::Batch
     ServiceJobAttemptDetail.add_member(:stopped_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "stoppedAt"))
     ServiceJobAttemptDetail.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "statusReason"))
     ServiceJobAttemptDetail.type = Types::ServiceJobAttemptDetail
-    ServiceJobAttemptDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceJobAttemptDetail, name: "member")
+    ServiceJobAttemptDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceJobAttemptDetail, name: "member"))
     ServiceJobEvaluateOnExit.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceJobRetryAction, name: "action"))
     ServiceJobEvaluateOnExit.add_member(:on_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "onStatusReason"))
     ServiceJobEvaluateOnExit.type = Types::ServiceJobEvaluateOnExit
-    ServiceJobEvaluateOnExitList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceJobEvaluateOnExit, name: "member")
+    ServiceJobEvaluateOnExitList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceJobEvaluateOnExit, name: "member"))
     ServiceJobRetryAction.add_member(:retry, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RETRY", traits: {"smithy.api#enumValue" => "RETRY"}))
     ServiceJobRetryAction.add_member(:exit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXIT", traits: {"smithy.api#enumValue" => "EXIT"}))
     ServiceJobRetryStrategy.add_member(:attempts, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "attempts", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1272,7 +1272,7 @@ module Aws::Batch
     ServiceJobSummary.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "startedAt"))
     ServiceJobSummary.add_member(:stopped_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "stoppedAt"))
     ServiceJobSummary.type = Types::ServiceJobSummary
-    ServiceJobSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceJobSummary, name: "member")
+    ServiceJobSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceJobSummary, name: "member"))
     ServiceJobTimeout.add_member(:attempt_duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "attemptDurationSeconds"))
     ServiceJobTimeout.type = Types::ServiceJobTimeout
     ServiceJobType.add_member(:sagemaker_training, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAGEMAKER_TRAINING", traits: {"smithy.api#enumValue" => "SAGEMAKER_TRAINING"}))
@@ -1283,8 +1283,8 @@ module Aws::Batch
     ShareAttributes.add_member(:share_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "shareIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ShareAttributes.add_member(:weight_factor, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "weightFactor"))
     ShareAttributes.type = Types::ShareAttributes
-    ShareAttributesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShareAttributes, name: "member")
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ShareAttributesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareAttributes, name: "member"))
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     SubmitJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "jobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SubmitJobRequest.add_member(:job_queue, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "jobQueue", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SubmitJobRequest.add_member(:share_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "shareIdentifier"))
@@ -1322,19 +1322,19 @@ module Aws::Batch
     SubmitServiceJobResponse.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "jobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SubmitServiceJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "jobId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SubmitServiceJobResponse.type = Types::SubmitServiceJobResponse
-    TagKeysList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeysList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagrisTagsMap, name: "tags", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TagrisTagsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagrisTagsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
-    TagsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    TagsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    TagrisTagsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagrisTagsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
+    TagsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    TagsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     TaskContainerDependency.add_member(:container_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "containerName"))
     TaskContainerDependency.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "condition"))
     TaskContainerDependency.type = Types::TaskContainerDependency
-    TaskContainerDependencyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskContainerDependency, name: "member")
+    TaskContainerDependencyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskContainerDependency, name: "member"))
     TaskContainerDetails.add_member(:command, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "command"))
     TaskContainerDetails.add_member(:depends_on, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskContainerDependencyList, name: "dependsOn"))
     TaskContainerDetails.add_member(:environment, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariables, name: "environment"))
@@ -1394,12 +1394,12 @@ module Aws::Batch
     Tmpfs.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "size", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Tmpfs.add_member(:mount_options, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "mountOptions"))
     Tmpfs.type = Types::Tmpfs
-    TmpfsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tmpfs, name: "member")
+    TmpfsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tmpfs, name: "member"))
     Ulimit.add_member(:hard_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "hardLimit", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Ulimit.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Ulimit.add_member(:soft_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "softLimit", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Ulimit.type = Types::Ulimit
-    Ulimits.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ulimit, name: "member")
+    Ulimits.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ulimit, name: "member"))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeysList, name: "tagKeys", traits: {"smithy.api#clientOptional" => {}, "smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -1455,7 +1455,7 @@ module Aws::Batch
     Volume.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     Volume.add_member(:efs_volume_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EFSVolumeConfiguration, name: "efsVolumeConfiguration"))
     Volume.type = Types::Volume
-    Volumes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, name: "member")
+    Volumes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, name: "member"))
 
     AWSBatchV20160810 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.batch#AWSBatchV20160810"

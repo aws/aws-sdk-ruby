@@ -265,12 +265,12 @@ module Aws::Amplify
     App.add_member(:waf_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WafConfiguration, name: "wafConfiguration"))
     App.add_member(:job_config, ::Smithy::Schema::Shapes::MemberShape.new(target: JobConfig, name: "jobConfig"))
     App.type = Types::App
-    Apps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: App, name: "member")
+    Apps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: App, name: "member"))
     Artifact.add_member(:artifact_file_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactFileName, name: "artifactFileName", traits: {"smithy.api#required" => {}}))
     Artifact.add_member(:artifact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactId, name: "artifactId", traits: {"smithy.api#required" => {}}))
     Artifact.type = Types::Artifact
-    Artifacts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Artifact, name: "member")
-    AssociatedResources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedResource, name: "member")
+    Artifacts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Artifact, name: "member"))
+    AssociatedResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedResource, name: "member"))
     AutoBranchCreationConfig.add_member(:stage, ::Smithy::Schema::Shapes::MemberShape.new(target: Stage, name: "stage"))
     AutoBranchCreationConfig.add_member(:framework, ::Smithy::Schema::Shapes::MemberShape.new(target: Framework, name: "framework"))
     AutoBranchCreationConfig.add_member(:enable_auto_build, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableAutoBuild, name: "enableAutoBuild"))
@@ -282,8 +282,8 @@ module Aws::Amplify
     AutoBranchCreationConfig.add_member(:enable_pull_request_preview, ::Smithy::Schema::Shapes::MemberShape.new(target: EnablePullRequestPreview, name: "enablePullRequestPreview"))
     AutoBranchCreationConfig.add_member(:pull_request_environment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestEnvironmentName, name: "pullRequestEnvironmentName"))
     AutoBranchCreationConfig.type = Types::AutoBranchCreationConfig
-    AutoBranchCreationPatterns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutoBranchCreationPattern, name: "member")
-    AutoSubDomainCreationPatterns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutoSubDomainCreationPattern, name: "member")
+    AutoBranchCreationPatterns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoBranchCreationPattern, name: "member"))
+    AutoSubDomainCreationPatterns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoSubDomainCreationPattern, name: "member"))
     Backend.add_member(:stack_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StackArn, name: "stackArn"))
     Backend.type = Types::Backend
     BackendEnvironment.add_member(:backend_environment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BackendEnvironmentArn, name: "backendEnvironmentArn", traits: {"smithy.api#required" => {}}))
@@ -293,7 +293,7 @@ module Aws::Amplify
     BackendEnvironment.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateTime, name: "createTime", traits: {"smithy.api#required" => {}}))
     BackendEnvironment.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTime, name: "updateTime", traits: {"smithy.api#required" => {}}))
     BackendEnvironment.type = Types::BackendEnvironment
-    BackendEnvironments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BackendEnvironment, name: "member")
+    BackendEnvironments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BackendEnvironment, name: "member"))
     BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     BadRequestException.type = Types::BadRequestException
     Branch.add_member(:branch_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchArn, name: "branchArn", traits: {"smithy.api#required" => {}}))
@@ -327,7 +327,7 @@ module Aws::Amplify
     Branch.add_member(:backend, ::Smithy::Schema::Shapes::MemberShape.new(target: Backend, name: "backend"))
     Branch.add_member(:compute_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeRoleArn, name: "computeRoleArn"))
     Branch.type = Types::Branch
-    Branches.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Branch, name: "member")
+    Branches.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Branch, name: "member"))
     BuildComputeType.add_member(:standard_8_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD_8GB", traits: {"smithy.api#enumValue" => "STANDARD_8GB"}))
     BuildComputeType.add_member(:large_16_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LARGE_16GB", traits: {"smithy.api#enumValue" => "LARGE_16GB"}))
     BuildComputeType.add_member(:xlarge_72_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "XLARGE_72GB", traits: {"smithy.api#enumValue" => "XLARGE_72GB"}))
@@ -424,13 +424,13 @@ module Aws::Amplify
     CreateWebhookRequest.type = Types::CreateWebhookRequest
     CreateWebhookResult.add_member(:webhook, ::Smithy::Schema::Shapes::MemberShape.new(target: Webhook, name: "webhook", traits: {"smithy.api#required" => {}}))
     CreateWebhookResult.type = Types::CreateWebhookResult
-    CustomDomains.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDomain, name: "member")
+    CustomDomains.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDomain, name: "member"))
     CustomRule.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "source", traits: {"smithy.api#required" => {}}))
     CustomRule.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "target", traits: {"smithy.api#required" => {}}))
     CustomRule.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "status"))
     CustomRule.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "condition"))
     CustomRule.type = Types::CustomRule
-    CustomRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRule, name: "member")
+    CustomRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRule, name: "member"))
     DeleteAppRequest.add_member(:app_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AppId, name: "appId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAppRequest.type = Types::DeleteAppRequest
     DeleteAppResult.add_member(:app, ::Smithy::Schema::Shapes::MemberShape.new(target: App, name: "app", traits: {"smithy.api#required" => {}}))
@@ -474,7 +474,7 @@ module Aws::Amplify
     DomainAssociation.add_member(:sub_domains, ::Smithy::Schema::Shapes::MemberShape.new(target: SubDomains, name: "subDomains", traits: {"smithy.api#required" => {}}))
     DomainAssociation.add_member(:certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: Certificate, name: "certificate"))
     DomainAssociation.type = Types::DomainAssociation
-    DomainAssociations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainAssociation, name: "member")
+    DomainAssociations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainAssociation, name: "member"))
     DomainStatus.add_member(:pending_verification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_VERIFICATION", traits: {"smithy.api#enumValue" => "PENDING_VERIFICATION"}))
     DomainStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     DomainStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
@@ -485,12 +485,12 @@ module Aws::Amplify
     DomainStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     DomainStatus.add_member(:requesting_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUESTING_CERTIFICATE", traits: {"smithy.api#enumValue" => "REQUESTING_CERTIFICATE"}))
     DomainStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
-    EnvironmentVariables.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvKey, name: "key")
-    EnvironmentVariables.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvValue, name: "value")
-    FileMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: FileName, name: "key")
-    FileMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: MD5Hash, name: "value")
-    FileUploadUrls.key = ::Smithy::Schema::Shapes::MemberShape.new(target: FileName, name: "key")
-    FileUploadUrls.value = ::Smithy::Schema::Shapes::MemberShape.new(target: UploadUrl, name: "value")
+    EnvironmentVariables.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvKey, name: "key"))
+    EnvironmentVariables.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvValue, name: "value"))
+    FileMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: FileName, name: "key"))
+    FileMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MD5Hash, name: "value"))
+    FileUploadUrls.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: FileName, name: "key"))
+    FileUploadUrls.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadUrl, name: "value"))
     GenerateAccessLogsRequest.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTime, name: "startTime"))
     GenerateAccessLogsRequest.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: EndTime, name: "endTime"))
     GenerateAccessLogsRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "domainName", traits: {"smithy.api#required" => {}}))
@@ -547,7 +547,7 @@ module Aws::Amplify
     JobStatus.add_member(:succeed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEED", traits: {"smithy.api#enumValue" => "SUCCEED"}))
     JobStatus.add_member(:cancelling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLING", traits: {"smithy.api#enumValue" => "CANCELLING"}))
     JobStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
-    JobSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobSummary, name: "member")
+    JobSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobSummary, name: "member"))
     JobSummary.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: JobArn, name: "jobArn", traits: {"smithy.api#required" => {}}))
     JobSummary.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "jobId", traits: {"smithy.api#required" => {}}))
     JobSummary.add_member(:commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitId, name: "commitId", traits: {"smithy.api#required" => {}}))
@@ -638,8 +638,8 @@ module Aws::Amplify
     ResourceNotFoundException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: Code, name: "code", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    Screenshots.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ThumbnailName, name: "key")
-    Screenshots.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ThumbnailUrl, name: "value")
+    Screenshots.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ThumbnailName, name: "key"))
+    Screenshots.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ThumbnailUrl, name: "value"))
     SourceUrlType.add_member(:zip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ZIP", traits: {"smithy.api#enumValue" => "ZIP"}))
     SourceUrlType.add_member(:bucket_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUCKET_PREFIX", traits: {"smithy.api#enumValue" => "BUCKET_PREFIX"}))
     Stage.add_member(:production, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRODUCTION", traits: {"smithy.api#enumValue" => "PRODUCTION"}))
@@ -678,7 +678,7 @@ module Aws::Amplify
     Step.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusReason, name: "statusReason"))
     Step.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: Context, name: "context"))
     Step.type = Types::Step
-    Steps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Step, name: "member")
+    Steps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Step, name: "member"))
     StopJobRequest.add_member(:app_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AppId, name: "appId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopJobRequest.add_member(:branch_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, name: "branchName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -692,11 +692,11 @@ module Aws::Amplify
     SubDomainSetting.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainPrefix, name: "prefix", traits: {"smithy.api#required" => {}}))
     SubDomainSetting.add_member(:branch_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, name: "branchName", traits: {"smithy.api#required" => {}}))
     SubDomainSetting.type = Types::SubDomainSetting
-    SubDomainSettings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubDomainSetting, name: "member")
-    SubDomains.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubDomain, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    SubDomainSettings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubDomainSetting, name: "member"))
+    SubDomains.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubDomain, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -796,7 +796,7 @@ module Aws::Amplify
     Webhook.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateTime, name: "createTime", traits: {"smithy.api#required" => {}}))
     Webhook.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTime, name: "updateTime", traits: {"smithy.api#required" => {}}))
     Webhook.type = Types::Webhook
-    Webhooks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Webhook, name: "member")
+    Webhooks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Webhook, name: "member"))
 
     Amplify = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.amplify#Amplify"

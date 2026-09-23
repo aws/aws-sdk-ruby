@@ -85,7 +85,7 @@ module Aws::CostandUsageReportService
     AdditionalArtifact.add_member(:redshift, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REDSHIFT", traits: {"smithy.api#enumValue" => "REDSHIFT"}))
     AdditionalArtifact.add_member(:quicksight, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUICKSIGHT", traits: {"smithy.api#enumValue" => "QUICKSIGHT"}))
     AdditionalArtifact.add_member(:athena, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ATHENA", traits: {"smithy.api#enumValue" => "ATHENA"}))
-    AdditionalArtifactList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalArtifact, name: "member")
+    AdditionalArtifactList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalArtifact, name: "member"))
     CompressionFormat.add_member(:zip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ZIP", traits: {"smithy.api#enumValue" => "ZIP"}))
     CompressionFormat.add_member(:gzip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GZIP", traits: {"smithy.api#enumValue" => "GZIP"}))
     CompressionFormat.add_member(:parquet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Parquet", traits: {"smithy.api#enumValue" => "Parquet"}))
@@ -132,7 +132,7 @@ module Aws::CostandUsageReportService
     ReportDefinition.add_member(:billing_view_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingViewArn, name: "BillingViewArn"))
     ReportDefinition.add_member(:report_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportStatus, name: "ReportStatus"))
     ReportDefinition.type = Types::ReportDefinition
-    ReportDefinitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReportDefinition, name: "member")
+    ReportDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportDefinition, name: "member"))
     ReportFormat.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CSV", traits: {"smithy.api#enumValue" => "textORcsv"}))
     ReportFormat.add_member(:parquet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Parquet", traits: {"smithy.api#enumValue" => "Parquet"}))
     ReportLimitReachedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -147,12 +147,12 @@ module Aws::CostandUsageReportService
     SchemaElement.add_member(:resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCES", traits: {"smithy.api#enumValue" => "RESOURCES"}))
     SchemaElement.add_member(:split_cost_allocation_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPLIT_COST_ALLOCATION_DATA", traits: {"smithy.api#enumValue" => "SPLIT_COST_ALLOCATION_DATA"}))
     SchemaElement.add_member(:manual_discount_compatibility, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANUAL_DISCOUNT_COMPATIBILITY", traits: {"smithy.api#enumValue" => "MANUAL_DISCOUNT_COMPATIBILITY"}))
-    SchemaElementList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaElement, name: "member")
+    SchemaElementList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaElement, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:report_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportName, name: "ReportName", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest

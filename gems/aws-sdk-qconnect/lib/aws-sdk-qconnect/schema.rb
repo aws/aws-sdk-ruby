@@ -564,8 +564,8 @@ module Aws::QConnect
     AIAgentConfiguration.type = Types::AIAgentConfiguration
     AIAgentConfigurationData.add_member(:ai_agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidWithQualifier, name: "aiAgentId", traits: {"smithy.api#required" => {}}))
     AIAgentConfigurationData.type = Types::AIAgentConfigurationData
-    AIAgentConfigurationMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AIAgentType, name: "key")
-    AIAgentConfigurationMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AIAgentConfigurationData, name: "value")
+    AIAgentConfigurationMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AIAgentType, name: "key"))
+    AIAgentConfigurationMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AIAgentConfigurationData, name: "value"))
     AIAgentData.add_member(:assistant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "assistantId", traits: {"smithy.api#required" => {}}))
     AIAgentData.add_member(:assistant_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "assistantArn", traits: {"smithy.api#required" => {}}))
     AIAgentData.add_member(:ai_agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "aiAgentId", traits: {"smithy.api#required" => {}}))
@@ -594,8 +594,8 @@ module Aws::QConnect
     AIAgentSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "status"))
     AIAgentSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     AIAgentSummary.type = Types::AIAgentSummary
-    AIAgentSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AIAgentSummary, name: "member")
-    AIAgentVersionSummariesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AIAgentVersionSummary, name: "member")
+    AIAgentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AIAgentSummary, name: "member"))
+    AIAgentVersionSummariesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AIAgentVersionSummary, name: "member"))
     AIAgentVersionSummary.add_member(:ai_agent_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: AIAgentSummary, name: "aiAgentSummary"))
     AIAgentVersionSummary.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "versionNumber"))
     AIAgentVersionSummary.type = Types::AIAgentVersionSummary
@@ -624,7 +624,7 @@ module Aws::QConnect
     AIGuardrailSensitiveInformationPolicyConfig.add_member(:pii_entities_config, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailPiiEntitiesConfig, name: "piiEntitiesConfig"))
     AIGuardrailSensitiveInformationPolicyConfig.add_member(:regexes_config, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailRegexesConfig, name: "regexesConfig"))
     AIGuardrailSensitiveInformationPolicyConfig.type = Types::AIGuardrailSensitiveInformationPolicyConfig
-    AIGuardrailSummariesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AIGuardrailSummary, name: "member")
+    AIGuardrailSummariesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AIGuardrailSummary, name: "member"))
     AIGuardrailSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
     AIGuardrailSummary.add_member(:assistant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "assistantId", traits: {"smithy.api#required" => {}}))
     AIGuardrailSummary.add_member(:assistant_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "assistantArn", traits: {"smithy.api#required" => {}}))
@@ -638,7 +638,7 @@ module Aws::QConnect
     AIGuardrailSummary.type = Types::AIGuardrailSummary
     AIGuardrailTopicPolicyConfig.add_member(:topics_config, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailTopicsConfig, name: "topicsConfig", traits: {"smithy.api#required" => {}}))
     AIGuardrailTopicPolicyConfig.type = Types::AIGuardrailTopicPolicyConfig
-    AIGuardrailVersionSummariesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AIGuardrailVersionSummary, name: "member")
+    AIGuardrailVersionSummariesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AIGuardrailVersionSummary, name: "member"))
     AIGuardrailVersionSummary.add_member(:ai_guardrail_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: AIGuardrailSummary, name: "aiGuardrailSummary"))
     AIGuardrailVersionSummary.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "versionNumber"))
     AIGuardrailVersionSummary.type = Types::AIGuardrailVersionSummary
@@ -678,11 +678,11 @@ module Aws::QConnect
     AIPromptSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "status"))
     AIPromptSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     AIPromptSummary.type = Types::AIPromptSummary
-    AIPromptSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AIPromptSummary, name: "member")
+    AIPromptSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AIPromptSummary, name: "member"))
     AIPromptTemplateConfiguration.add_member(:text_full_ai_prompt_edit_template_configuration, Types::AIPromptTemplateConfiguration::TextFullAIPromptEditTemplateConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: TextFullAIPromptEditTemplateConfiguration, name: "textFullAIPromptEditTemplateConfiguration"))
     AIPromptTemplateConfiguration.add_member(:unknown, Types::AIPromptTemplateConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AIPromptTemplateConfiguration.type = Types::AIPromptTemplateConfiguration
-    AIPromptVersionSummariesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AIPromptVersionSummary, name: "member")
+    AIPromptVersionSummariesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AIPromptVersionSummary, name: "member"))
     AIPromptVersionSummary.add_member(:ai_prompt_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: AIPromptSummary, name: "aiPromptSummary"))
     AIPromptVersionSummary.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "versionNumber"))
     AIPromptVersionSummary.type = Types::AIPromptVersionSummary
@@ -701,7 +701,7 @@ module Aws::QConnect
     AgentAttributes.type = Types::AgentAttributes
     AmazonConnectGuideAssociationData.add_member(:flow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericArn, name: "flowId"))
     AmazonConnectGuideAssociationData.type = Types::AmazonConnectGuideAssociationData
-    AndConditions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagCondition, name: "member")
+    AndConditions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagCondition, name: "member"))
     AnswerRecommendationAIAgentConfiguration.add_member(:intent_labeling_generation_ai_prompt_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidWithQualifier, name: "intentLabelingGenerationAIPromptId"))
     AnswerRecommendationAIAgentConfiguration.add_member(:query_reformulation_ai_prompt_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidWithQualifier, name: "queryReformulationAIPromptId"))
     AnswerRecommendationAIAgentConfiguration.add_member(:answer_generation_ai_prompt_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidWithQualifier, name: "answerGenerationAIPromptId"))
@@ -734,7 +734,7 @@ module Aws::QConnect
     AssistantAssociationSummary.add_member(:association_data, ::Smithy::Schema::Shapes::MemberShape.new(target: AssistantAssociationOutputData, name: "associationData", traits: {"smithy.api#required" => {}}))
     AssistantAssociationSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     AssistantAssociationSummary.type = Types::AssistantAssociationSummary
-    AssistantAssociationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssistantAssociationSummary, name: "member")
+    AssistantAssociationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssistantAssociationSummary, name: "member"))
     AssistantCapabilityConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AssistantCapabilityType, name: "type"))
     AssistantCapabilityConfiguration.type = Types::AssistantCapabilityConfiguration
     AssistantData.add_member(:assistant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "assistantId", traits: {"smithy.api#required" => {}}))
@@ -751,7 +751,7 @@ module Aws::QConnect
     AssistantData.type = Types::AssistantData
     AssistantIntegrationConfiguration.add_member(:topic_integration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericArn, name: "topicIntegrationArn"))
     AssistantIntegrationConfiguration.type = Types::AssistantIntegrationConfiguration
-    AssistantList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssistantSummary, name: "member")
+    AssistantList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssistantSummary, name: "member"))
     AssistantSummary.add_member(:assistant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "assistantId", traits: {"smithy.api#required" => {}}))
     AssistantSummary.add_member(:assistant_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "assistantArn", traits: {"smithy.api#required" => {}}))
     AssistantSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
@@ -771,11 +771,11 @@ module Aws::QConnect
     AssociationConfigurationData.add_member(:knowledge_base_association_configuration_data, Types::AssociationConfigurationData::KnowledgeBaseAssociationConfigurationData, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseAssociationConfigurationData, name: "knowledgeBaseAssociationConfigurationData"))
     AssociationConfigurationData.add_member(:unknown, Types::AssociationConfigurationData::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AssociationConfigurationData.type = Types::AssociationConfigurationData
-    AssociationConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationConfiguration, name: "member")
+    AssociationConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationConfiguration, name: "member"))
     BedrockFoundationModelConfigurationForParsing.add_member(:model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BedrockModelArnForParsing, name: "modelArn", traits: {"smithy.api#required" => {}}))
     BedrockFoundationModelConfigurationForParsing.add_member(:parsing_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: ParsingPrompt, name: "parsingPrompt"))
     BedrockFoundationModelConfigurationForParsing.type = Types::BedrockFoundationModelConfigurationForParsing
-    Channels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "member")
+    Channels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "member"))
     ChunkingConfiguration.add_member(:chunking_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ChunkingStrategy, name: "chunkingStrategy", traits: {"smithy.api#required" => {}}))
     ChunkingConfiguration.add_member(:fixed_size_chunking_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: FixedSizeChunkingConfiguration, name: "fixedSizeChunkingConfiguration"))
     ChunkingConfiguration.add_member(:hierarchical_chunking_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchicalChunkingConfiguration, name: "hierarchicalChunkingConfiguration"))
@@ -791,9 +791,9 @@ module Aws::QConnect
     ConflictException.type = Types::ConflictException
     ConnectConfiguration.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "instanceId"))
     ConnectConfiguration.type = Types::ConnectConfiguration
-    ContactAttributeKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactAttributeKey, name: "member")
-    ContactAttributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactAttributeKey, name: "key")
-    ContactAttributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactAttributeValue, name: "value")
+    ContactAttributeKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactAttributeKey, name: "member"))
+    ContactAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactAttributeKey, name: "key"))
+    ContactAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactAttributeValue, name: "value"))
     ContentAssociationContents.add_member(:amazon_connect_guide_association, Types::ContentAssociationContents::AmazonConnectGuideAssociation, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonConnectGuideAssociationData, name: "amazonConnectGuideAssociation"))
     ContentAssociationContents.add_member(:unknown, Types::ContentAssociationContents::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ContentAssociationContents.type = Types::ContentAssociationContents
@@ -817,7 +817,7 @@ module Aws::QConnect
     ContentAssociationSummary.add_member(:association_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentAssociationContents, name: "associationData", traits: {"smithy.api#required" => {}}))
     ContentAssociationSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     ContentAssociationSummary.type = Types::ContentAssociationSummary
-    ContentAssociationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContentAssociationSummary, name: "member")
+    ContentAssociationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentAssociationSummary, name: "member"))
     ContentData.add_member(:content_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "contentArn", traits: {"smithy.api#required" => {}}))
     ContentData.add_member(:content_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "contentId", traits: {"smithy.api#required" => {}}))
     ContentData.add_member(:knowledge_base_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "knowledgeBaseArn", traits: {"smithy.api#required" => {}}))
@@ -839,8 +839,8 @@ module Aws::QConnect
     ContentFeedbackData.add_member(:generative_content_feedback_data, Types::ContentFeedbackData::GenerativeContentFeedbackData, ::Smithy::Schema::Shapes::MemberShape.new(target: GenerativeContentFeedbackData, name: "generativeContentFeedbackData"))
     ContentFeedbackData.add_member(:unknown, Types::ContentFeedbackData::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ContentFeedbackData.type = Types::ContentFeedbackData
-    ContentMetadata.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key")
-    ContentMetadata.value = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value")
+    ContentMetadata.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
+    ContentMetadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value"))
     ContentReference.add_member(:knowledge_base_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "knowledgeBaseArn"))
     ContentReference.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "knowledgeBaseId"))
     ContentReference.add_member(:content_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "contentArn"))
@@ -860,7 +860,7 @@ module Aws::QConnect
     ContentSummary.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentMetadata, name: "metadata", traits: {"smithy.api#required" => {}}))
     ContentSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     ContentSummary.type = Types::ContentSummary
-    ContentSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContentSummary, name: "member")
+    ContentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentSummary, name: "member"))
     ConversationContext.add_member(:self_service_conversation_history, ::Smithy::Schema::Shapes::MemberShape.new(target: SelfServiceConversationHistoryList, name: "selfServiceConversationHistory", traits: {"smithy.api#required" => {}}))
     ConversationContext.type = Types::ConversationContext
     ConversationState.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationStatus, name: "status", traits: {"smithy.api#required" => {}}))
@@ -1034,8 +1034,8 @@ module Aws::QConnect
     CreateSessionInput.type = Types::CreateSessionInput
     CreateSessionOutput.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionData, name: "session"))
     CreateSessionOutput.type = Types::CreateSessionOutput
-    CustomAttributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateAttributeKey, name: "key")
-    CustomAttributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateAttributeValue, name: "value")
+    CustomAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateAttributeKey, name: "key"))
+    CustomAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateAttributeValue, name: "value"))
     CustomerProfileAttributes.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateAttributeValue, name: "profileId"))
     CustomerProfileAttributes.add_member(:profile_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateAttributeValue, name: "profileARN"))
     CustomerProfileAttributes.add_member(:first_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateAttributeValue, name: "firstName"))
@@ -1112,7 +1112,7 @@ module Aws::QConnect
     DataSummary.add_member(:reference, ::Smithy::Schema::Shapes::MemberShape.new(target: DataReference, name: "reference", traits: {"smithy.api#required" => {}}))
     DataSummary.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: DataDetails, name: "details", traits: {"smithy.api#required" => {}}))
     DataSummary.type = Types::DataSummary
-    DataSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSummary, name: "member")
+    DataSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSummary, name: "member"))
     DeactivateMessageTemplateRequest.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidOrArn, name: "knowledgeBaseId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeactivateMessageTemplateRequest.add_member(:message_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidOrArnOrEitherWithQualifier, name: "messageTemplateId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeactivateMessageTemplateRequest.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "versionNumber", traits: {"smithy.api#required" => {}}))
@@ -1205,7 +1205,7 @@ module Aws::QConnect
     EmailHeader.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailHeaderKey, name: "name"))
     EmailHeader.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailHeaderValue, name: "value"))
     EmailHeader.type = Types::EmailHeader
-    EmailHeaders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EmailHeader, name: "member")
+    EmailHeaders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailHeader, name: "member"))
     EmailMessageTemplateContent.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyUnlimitedString, name: "subject"))
     EmailMessageTemplateContent.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailMessageTemplateContentBody, name: "body"))
     EmailMessageTemplateContent.add_member(:headers, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailHeaders, name: "headers"))
@@ -1251,12 +1251,12 @@ module Aws::QConnect
     ExternalSourceConfiguration.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalSource, name: "source", traits: {"smithy.api#required" => {}}))
     ExternalSourceConfiguration.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, name: "configuration", traits: {"smithy.api#required" => {}}))
     ExternalSourceConfiguration.type = Types::ExternalSourceConfiguration
-    FailureReason.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    FailureReason.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     Filter.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterField, name: "field", traits: {"smithy.api#required" => {}}))
     Filter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterOperator, name: "operator", traits: {"smithy.api#required" => {}}))
     Filter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value", traits: {"smithy.api#required" => {}}))
     Filter.type = Types::Filter
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     FixedSizeChunkingConfiguration.add_member(:max_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxTokens", traits: {"smithy.api#range" => {"min" => 1}, "smithy.api#required" => {}}))
     FixedSizeChunkingConfiguration.add_member(:overlap_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "overlapPercentage", traits: {"smithy.api#range" => {"min" => 1, "max" => 99}, "smithy.api#required" => {}}))
     FixedSizeChunkingConfiguration.type = Types::FixedSizeChunkingConfiguration
@@ -1363,20 +1363,20 @@ module Aws::QConnect
     GroupingConfiguration.add_member(:criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingCriteria, name: "criteria"))
     GroupingConfiguration.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingValues, name: "values"))
     GroupingConfiguration.type = Types::GroupingConfiguration
-    GroupingValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingValue, name: "member")
+    GroupingValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingValue, name: "member"))
     GuardrailContentFilterConfig.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailContentFilterType, name: "type", traits: {"smithy.api#required" => {}}))
     GuardrailContentFilterConfig.add_member(:input_strength, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailFilterStrength, name: "inputStrength", traits: {"smithy.api#required" => {}}))
     GuardrailContentFilterConfig.add_member(:output_strength, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailFilterStrength, name: "outputStrength", traits: {"smithy.api#required" => {}}))
     GuardrailContentFilterConfig.type = Types::GuardrailContentFilterConfig
-    GuardrailContentFiltersConfig.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailContentFilterConfig, name: "member")
+    GuardrailContentFiltersConfig.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailContentFilterConfig, name: "member"))
     GuardrailContextualGroundingFilterConfig.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailContextualGroundingFilterType, name: "type", traits: {"smithy.api#required" => {}}))
     GuardrailContextualGroundingFilterConfig.add_member(:threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailContextualGroundingFilterThreshold, name: "threshold", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     GuardrailContextualGroundingFilterConfig.type = Types::GuardrailContextualGroundingFilterConfig
-    GuardrailContextualGroundingFiltersConfig.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailContextualGroundingFilterConfig, name: "member")
-    GuardrailManagedWordListsConfig.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailManagedWordsConfig, name: "member")
+    GuardrailContextualGroundingFiltersConfig.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailContextualGroundingFilterConfig, name: "member"))
+    GuardrailManagedWordListsConfig.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailManagedWordsConfig, name: "member"))
     GuardrailManagedWordsConfig.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailManagedWordsType, name: "type", traits: {"smithy.api#required" => {}}))
     GuardrailManagedWordsConfig.type = Types::GuardrailManagedWordsConfig
-    GuardrailPiiEntitiesConfig.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailPiiEntityConfig, name: "member")
+    GuardrailPiiEntitiesConfig.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailPiiEntityConfig, name: "member"))
     GuardrailPiiEntityConfig.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailPiiEntityType, name: "type", traits: {"smithy.api#required" => {}}))
     GuardrailPiiEntityConfig.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailSensitiveInformationAction, name: "action", traits: {"smithy.api#required" => {}}))
     GuardrailPiiEntityConfig.type = Types::GuardrailPiiEntityConfig
@@ -1385,29 +1385,29 @@ module Aws::QConnect
     GuardrailRegexConfig.add_member(:pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailRegexPattern, name: "pattern", traits: {"smithy.api#required" => {}}))
     GuardrailRegexConfig.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailSensitiveInformationAction, name: "action", traits: {"smithy.api#required" => {}}))
     GuardrailRegexConfig.type = Types::GuardrailRegexConfig
-    GuardrailRegexesConfig.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailRegexConfig, name: "member")
+    GuardrailRegexesConfig.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailRegexConfig, name: "member"))
     GuardrailTopicConfig.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailTopicName, name: "name", traits: {"smithy.api#required" => {}}))
     GuardrailTopicConfig.add_member(:definition, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailTopicDefinition, name: "definition", traits: {"smithy.api#required" => {}}))
     GuardrailTopicConfig.add_member(:examples, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailTopicExamples, name: "examples"))
     GuardrailTopicConfig.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailTopicType, name: "type", traits: {"smithy.api#required" => {}}))
     GuardrailTopicConfig.type = Types::GuardrailTopicConfig
-    GuardrailTopicExamples.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailTopicExample, name: "member")
-    GuardrailTopicsConfig.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailTopicConfig, name: "member")
+    GuardrailTopicExamples.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailTopicExample, name: "member"))
+    GuardrailTopicsConfig.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailTopicConfig, name: "member"))
     GuardrailWordConfig.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailWordText, name: "text", traits: {"smithy.api#required" => {}}))
     GuardrailWordConfig.type = Types::GuardrailWordConfig
-    GuardrailWordsConfig.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailWordConfig, name: "member")
-    Headers.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key")
-    Headers.value = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value")
+    GuardrailWordsConfig.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailWordConfig, name: "member"))
+    Headers.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
+    Headers.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value"))
     HierarchicalChunkingConfiguration.add_member(:level_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchicalChunkingLevelConfigurations, name: "levelConfigurations", traits: {"smithy.api#required" => {}}))
     HierarchicalChunkingConfiguration.add_member(:overlap_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "overlapTokens", traits: {"smithy.api#range" => {"min" => 1}, "smithy.api#required" => {}}))
     HierarchicalChunkingConfiguration.type = Types::HierarchicalChunkingConfiguration
     HierarchicalChunkingLevelConfiguration.add_member(:max_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxTokens", traits: {"smithy.api#range" => {"min" => 1, "max" => 8192}, "smithy.api#required" => {}}))
     HierarchicalChunkingLevelConfiguration.type = Types::HierarchicalChunkingLevelConfiguration
-    HierarchicalChunkingLevelConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchicalChunkingLevelConfiguration, name: "member")
+    HierarchicalChunkingLevelConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HierarchicalChunkingLevelConfiguration, name: "member"))
     Highlight.add_member(:begin_offset_inclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightOffset, name: "beginOffsetInclusive", traits: {"smithy.api#default" => 0}))
     Highlight.add_member(:end_offset_exclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightOffset, name: "endOffsetExclusive", traits: {"smithy.api#default" => 0}))
     Highlight.type = Types::Highlight
-    Highlights.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Highlight, name: "member")
+    Highlights.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Highlight, name: "member"))
     ImportJobData.add_member(:import_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "importJobId", traits: {"smithy.api#required" => {}}))
     ImportJobData.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "knowledgeBaseId", traits: {"smithy.api#required" => {}}))
     ImportJobData.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadId, name: "uploadId", traits: {"smithy.api#required" => {}}))
@@ -1422,7 +1422,7 @@ module Aws::QConnect
     ImportJobData.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentMetadata, name: "metadata"))
     ImportJobData.add_member(:external_source_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalSourceConfiguration, name: "externalSourceConfiguration"))
     ImportJobData.type = Types::ImportJobData
-    ImportJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportJobSummary, name: "member")
+    ImportJobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportJobSummary, name: "member"))
     ImportJobSummary.add_member(:import_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "importJobId", traits: {"smithy.api#required" => {}}))
     ImportJobSummary.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "knowledgeBaseId", traits: {"smithy.api#required" => {}}))
     ImportJobSummary.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadId, name: "uploadId", traits: {"smithy.api#required" => {}}))
@@ -1461,7 +1461,7 @@ module Aws::QConnect
     KnowledgeBaseData.add_member(:ingestion_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SyncStatus, name: "ingestionStatus"))
     KnowledgeBaseData.add_member(:ingestion_failure_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "ingestionFailureReasons"))
     KnowledgeBaseData.type = Types::KnowledgeBaseData
-    KnowledgeBaseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseSummary, name: "member")
+    KnowledgeBaseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KnowledgeBaseSummary, name: "member"))
     KnowledgeBaseSummary.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "knowledgeBaseId", traits: {"smithy.api#required" => {}}))
     KnowledgeBaseSummary.add_member(:knowledge_base_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "knowledgeBaseArn", traits: {"smithy.api#required" => {}}))
     KnowledgeBaseSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
@@ -1613,7 +1613,7 @@ module Aws::QConnect
     MessageData.type = Types::MessageData
     MessageInput.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageData, name: "value", traits: {"smithy.api#required" => {}}))
     MessageInput.type = Types::MessageInput
-    MessageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageOutput, name: "member")
+    MessageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageOutput, name: "member"))
     MessageOutput.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageData, name: "value", traits: {"smithy.api#required" => {}}))
     MessageOutput.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "messageId", traits: {"smithy.api#required" => {}}))
     MessageOutput.add_member(:participant, ::Smithy::Schema::Shapes::MemberShape.new(target: Participant, name: "participant", traits: {"smithy.api#required" => {}}))
@@ -1626,9 +1626,9 @@ module Aws::QConnect
     MessageTemplateAttachment.add_member(:url_expiry, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "urlExpiry", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     MessageTemplateAttachment.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "attachmentId", traits: {"smithy.api#required" => {}}))
     MessageTemplateAttachment.type = Types::MessageTemplateAttachment
-    MessageTemplateAttachmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateAttachment, name: "member")
-    MessageTemplateAttributeKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateAttributeKey, name: "member")
-    MessageTemplateAttributeTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateAttributeType, name: "member")
+    MessageTemplateAttachmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateAttachment, name: "member"))
+    MessageTemplateAttributeKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateAttributeKey, name: "member"))
+    MessageTemplateAttributeTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateAttributeType, name: "member"))
     MessageTemplateAttributes.add_member(:system_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemAttributes, name: "systemAttributes"))
     MessageTemplateAttributes.add_member(:agent_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentAttributes, name: "agentAttributes"))
     MessageTemplateAttributes.add_member(:customer_profile_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerProfileAttributes, name: "customerProfileAttributes"))
@@ -1664,8 +1664,8 @@ module Aws::QConnect
     MessageTemplateFilterField.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateFilterOperator, name: "operator", traits: {"smithy.api#required" => {}}))
     MessageTemplateFilterField.add_member(:include_no_existence, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "includeNoExistence"))
     MessageTemplateFilterField.type = Types::MessageTemplateFilterField
-    MessageTemplateFilterFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateFilterField, name: "member")
-    MessageTemplateFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateFilterValue, name: "member")
+    MessageTemplateFilterFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateFilterField, name: "member"))
+    MessageTemplateFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateFilterValue, name: "member"))
     MessageTemplateOrderField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "name", traits: {"smithy.api#required" => {}}))
     MessageTemplateOrderField.add_member(:order, ::Smithy::Schema::Shapes::MemberShape.new(target: Order, name: "order"))
     MessageTemplateOrderField.type = Types::MessageTemplateOrderField
@@ -1675,8 +1675,8 @@ module Aws::QConnect
     MessageTemplateQueryField.add_member(:allow_fuzziness, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "allowFuzziness"))
     MessageTemplateQueryField.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: Priority, name: "priority"))
     MessageTemplateQueryField.type = Types::MessageTemplateQueryField
-    MessageTemplateQueryFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateQueryField, name: "member")
-    MessageTemplateQueryValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateQueryValue, name: "member")
+    MessageTemplateQueryFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateQueryField, name: "member"))
+    MessageTemplateQueryValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateQueryValue, name: "member"))
     MessageTemplateSearchExpression.add_member(:queries, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateQueryFieldList, name: "queries"))
     MessageTemplateSearchExpression.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateFilterFieldList, name: "filters"))
     MessageTemplateSearchExpression.add_member(:order_on_field, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateOrderField, name: "orderOnField"))
@@ -1697,7 +1697,7 @@ module Aws::QConnect
     MessageTemplateSearchResultData.add_member(:language, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "language"))
     MessageTemplateSearchResultData.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     MessageTemplateSearchResultData.type = Types::MessageTemplateSearchResultData
-    MessageTemplateSearchResultsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateSearchResultData, name: "member")
+    MessageTemplateSearchResultsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateSearchResultData, name: "member"))
     MessageTemplateSummary.add_member(:message_template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnWithQualifier, name: "messageTemplateArn", traits: {"smithy.api#required" => {}}))
     MessageTemplateSummary.add_member(:message_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "messageTemplateId", traits: {"smithy.api#required" => {}}))
     MessageTemplateSummary.add_member(:knowledge_base_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "knowledgeBaseArn", traits: {"smithy.api#required" => {}}))
@@ -1711,7 +1711,7 @@ module Aws::QConnect
     MessageTemplateSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     MessageTemplateSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     MessageTemplateSummary.type = Types::MessageTemplateSummary
-    MessageTemplateSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateSummary, name: "member")
+    MessageTemplateSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateSummary, name: "member"))
     MessageTemplateVersionSummary.add_member(:message_template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnWithQualifier, name: "messageTemplateArn", traits: {"smithy.api#required" => {}}))
     MessageTemplateVersionSummary.add_member(:message_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "messageTemplateId", traits: {"smithy.api#required" => {}}))
     MessageTemplateVersionSummary.add_member(:knowledge_base_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "knowledgeBaseArn", traits: {"smithy.api#required" => {}}))
@@ -1721,11 +1721,11 @@ module Aws::QConnect
     MessageTemplateVersionSummary.add_member(:is_active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isActive", traits: {"smithy.api#required" => {}}))
     MessageTemplateVersionSummary.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "versionNumber", traits: {"smithy.api#required" => {}}))
     MessageTemplateVersionSummary.type = Types::MessageTemplateVersionSummary
-    MessageTemplateVersionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateVersionSummary, name: "member")
+    MessageTemplateVersionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTemplateVersionSummary, name: "member"))
     NotifyRecommendationsReceivedError.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationId, name: "recommendationId"))
     NotifyRecommendationsReceivedError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyRecommendationsReceivedErrorMessage, name: "message"))
     NotifyRecommendationsReceivedError.type = Types::NotifyRecommendationsReceivedError
-    NotifyRecommendationsReceivedErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyRecommendationsReceivedError, name: "member")
+    NotifyRecommendationsReceivedErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyRecommendationsReceivedError, name: "member"))
     NotifyRecommendationsReceivedInput.add_member(:assistant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidOrArn, name: "assistantId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     NotifyRecommendationsReceivedInput.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidOrArn, name: "sessionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     NotifyRecommendationsReceivedInput.add_member(:recommendation_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationIdList, name: "recommendationIds", traits: {"smithy.api#required" => {}}))
@@ -1733,12 +1733,12 @@ module Aws::QConnect
     NotifyRecommendationsReceivedOutput.add_member(:recommendation_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationIdList, name: "recommendationIds"))
     NotifyRecommendationsReceivedOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyRecommendationsReceivedErrorList, name: "errors"))
     NotifyRecommendationsReceivedOutput.type = Types::NotifyRecommendationsReceivedOutput
-    ObjectFieldsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    ObjectFieldsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     OrCondition.add_member(:and_conditions, Types::OrCondition::AndConditions, ::Smithy::Schema::Shapes::MemberShape.new(target: AndConditions, name: "andConditions"))
     OrCondition.add_member(:tag_condition, Types::OrCondition::TagCondition, ::Smithy::Schema::Shapes::MemberShape.new(target: TagCondition, name: "tagCondition"))
     OrCondition.add_member(:unknown, Types::OrCondition::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     OrCondition.type = Types::OrCondition
-    OrConditions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrCondition, name: "member")
+    OrConditions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrCondition, name: "member"))
     ParsingConfiguration.add_member(:parsing_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ParsingStrategy, name: "parsingStrategy", traits: {"smithy.api#required" => {}}))
     ParsingConfiguration.add_member(:bedrock_foundation_model_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BedrockFoundationModelConfigurationForParsing, name: "bedrockFoundationModelConfiguration"))
     ParsingConfiguration.type = Types::ParsingConfiguration
@@ -1772,7 +1772,7 @@ module Aws::QConnect
     QueryCondition.add_member(:single, Types::QueryCondition::Single, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryConditionItem, name: "single"))
     QueryCondition.add_member(:unknown, Types::QueryCondition::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     QueryCondition.type = Types::QueryCondition
-    QueryConditionExpression.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryCondition, name: "member")
+    QueryConditionExpression.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryCondition, name: "member"))
     QueryConditionItem.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryConditionFieldName, name: "field", traits: {"smithy.api#required" => {}}))
     QueryConditionItem.add_member(:comparator, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryConditionComparisonOperator, name: "comparator", traits: {"smithy.api#required" => {}}))
     QueryConditionItem.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value", traits: {"smithy.api#required" => {}}))
@@ -1783,7 +1783,7 @@ module Aws::QConnect
     QueryInputData.type = Types::QueryInputData
     QueryRecommendationTriggerData.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryText, name: "text"))
     QueryRecommendationTriggerData.type = Types::QueryRecommendationTriggerData
-    QueryResultsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResultData, name: "member")
+    QueryResultsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultData, name: "member"))
     QueryTextInputData.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryText, name: "text", traits: {"smithy.api#required" => {}}))
     QueryTextInputData.type = Types::QueryTextInputData
     QuickResponseContentProvider.add_member(:content, Types::QuickResponseContentProvider::Content, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseContent, name: "content"))
@@ -1819,8 +1819,8 @@ module Aws::QConnect
     QuickResponseFilterField.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseFilterOperator, name: "operator", traits: {"smithy.api#required" => {}}))
     QuickResponseFilterField.add_member(:include_no_existence, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "includeNoExistence"))
     QuickResponseFilterField.type = Types::QuickResponseFilterField
-    QuickResponseFilterFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseFilterField, name: "member")
-    QuickResponseFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseFilterValue, name: "member")
+    QuickResponseFilterFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseFilterField, name: "member"))
+    QuickResponseFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseFilterValue, name: "member"))
     QuickResponseOrderField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "name", traits: {"smithy.api#required" => {}}))
     QuickResponseOrderField.add_member(:order, ::Smithy::Schema::Shapes::MemberShape.new(target: Order, name: "order"))
     QuickResponseOrderField.type = Types::QuickResponseOrderField
@@ -1830,8 +1830,8 @@ module Aws::QConnect
     QuickResponseQueryField.add_member(:allow_fuzziness, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "allowFuzziness"))
     QuickResponseQueryField.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: Priority, name: "priority"))
     QuickResponseQueryField.type = Types::QuickResponseQueryField
-    QuickResponseQueryFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseQueryField, name: "member")
-    QuickResponseQueryValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseQueryValue, name: "member")
+    QuickResponseQueryFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseQueryField, name: "member"))
+    QuickResponseQueryValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseQueryValue, name: "member"))
     QuickResponseSearchExpression.add_member(:queries, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseQueryFieldList, name: "queries"))
     QuickResponseSearchExpression.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseFilterFieldList, name: "filters"))
     QuickResponseSearchExpression.add_member(:order_on_field, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseOrderField, name: "orderOnField"))
@@ -1857,7 +1857,7 @@ module Aws::QConnect
     QuickResponseSearchResultData.add_member(:attributes_interpolated, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactAttributeKeys, name: "attributesInterpolated"))
     QuickResponseSearchResultData.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     QuickResponseSearchResultData.type = Types::QuickResponseSearchResultData
-    QuickResponseSearchResultsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseSearchResultData, name: "member")
+    QuickResponseSearchResultsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseSearchResultData, name: "member"))
     QuickResponseSummary.add_member(:quick_response_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "quickResponseArn", traits: {"smithy.api#required" => {}}))
     QuickResponseSummary.add_member(:quick_response_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "quickResponseId", traits: {"smithy.api#required" => {}}))
     QuickResponseSummary.add_member(:knowledge_base_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "knowledgeBaseArn", traits: {"smithy.api#required" => {}}))
@@ -1873,7 +1873,7 @@ module Aws::QConnect
     QuickResponseSummary.add_member(:channels, ::Smithy::Schema::Shapes::MemberShape.new(target: Channels, name: "channels"))
     QuickResponseSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     QuickResponseSummary.type = Types::QuickResponseSummary
-    QuickResponseSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseSummary, name: "member")
+    QuickResponseSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuickResponseSummary, name: "member"))
     RankingData.add_member(:relevance_score, ::Smithy::Schema::Shapes::MemberShape.new(target: RelevanceScore, name: "relevanceScore", traits: {"smithy.api#default" => 0}))
     RankingData.add_member(:relevance_level, ::Smithy::Schema::Shapes::MemberShape.new(target: RelevanceLevel, name: "relevanceLevel"))
     RankingData.type = Types::RankingData
@@ -1884,8 +1884,8 @@ module Aws::QConnect
     RecommendationData.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationType, name: "type"))
     RecommendationData.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSummary, name: "data"))
     RecommendationData.type = Types::RecommendationData
-    RecommendationIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationId, name: "member")
-    RecommendationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationData, name: "member")
+    RecommendationIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationId, name: "member"))
+    RecommendationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationData, name: "member"))
     RecommendationTrigger.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "id", traits: {"smithy.api#required" => {}}))
     RecommendationTrigger.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationTriggerType, name: "type", traits: {"smithy.api#required" => {}}))
     RecommendationTrigger.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationSourceType, name: "source", traits: {"smithy.api#required" => {}}))
@@ -1895,7 +1895,7 @@ module Aws::QConnect
     RecommendationTriggerData.add_member(:query, Types::RecommendationTriggerData::Query, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryRecommendationTriggerData, name: "query"))
     RecommendationTriggerData.add_member(:unknown, Types::RecommendationTriggerData::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RecommendationTriggerData.type = Types::RecommendationTriggerData
-    RecommendationTriggerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationTrigger, name: "member")
+    RecommendationTriggerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationTrigger, name: "member"))
     RemoveAssistantAIAgentRequest.add_member(:assistant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidOrArn, name: "assistantId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RemoveAssistantAIAgentRequest.add_member(:ai_agent_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AIAgentType, name: "aiAgentType", traits: {"smithy.api#httpQuery" => "aiAgentType", "smithy.api#required" => {}}))
     RemoveAssistantAIAgentRequest.type = Types::RemoveAssistantAIAgentRequest
@@ -1927,7 +1927,7 @@ module Aws::QConnect
     RuntimeSessionData.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptySensitiveString, name: "key", traits: {"smithy.api#required" => {}}))
     RuntimeSessionData.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeSessionDataValue, name: "value", traits: {"smithy.api#required" => {}}))
     RuntimeSessionData.type = Types::RuntimeSessionData
-    RuntimeSessionDataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeSessionData, name: "member")
+    RuntimeSessionDataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeSessionData, name: "member"))
     RuntimeSessionDataValue.add_member(:string_value, Types::RuntimeSessionDataValue::StringValue, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptySensitiveString, name: "stringValue"))
     RuntimeSessionDataValue.add_member(:unknown, Types::RuntimeSessionDataValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RuntimeSessionDataValue.type = Types::RuntimeSessionDataValue
@@ -1972,7 +1972,7 @@ module Aws::QConnect
     SearchSessionsOutput.type = Types::SearchSessionsOutput
     SeedUrl.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: WebUrl, name: "url"))
     SeedUrl.type = Types::SeedUrl
-    SeedUrls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SeedUrl, name: "member")
+    SeedUrls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SeedUrl, name: "member"))
     SelfServiceAIAgentConfiguration.add_member(:self_service_pre_processing_ai_prompt_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidWithQualifier, name: "selfServicePreProcessingAIPromptId"))
     SelfServiceAIAgentConfiguration.add_member(:self_service_answer_generation_ai_prompt_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidWithQualifier, name: "selfServiceAnswerGenerationAIPromptId"))
     SelfServiceAIAgentConfiguration.add_member(:self_service_ai_guardrail_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UuidWithQualifier, name: "selfServiceAIGuardrailId"))
@@ -1982,7 +1982,7 @@ module Aws::QConnect
     SelfServiceConversationHistory.add_member(:input_transcript, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "inputTranscript"))
     SelfServiceConversationHistory.add_member(:bot_response, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "botResponse"))
     SelfServiceConversationHistory.type = Types::SelfServiceConversationHistory
-    SelfServiceConversationHistoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SelfServiceConversationHistory, name: "member")
+    SelfServiceConversationHistoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SelfServiceConversationHistory, name: "member"))
     SemanticChunkingConfiguration.add_member(:max_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxTokens", traits: {"smithy.api#range" => {"min" => 1}, "smithy.api#required" => {}}))
     SemanticChunkingConfiguration.add_member(:buffer_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "bufferSize", traits: {"smithy.api#range" => {"min" => 0, "max" => 1}, "smithy.api#required" => {}}))
     SemanticChunkingConfiguration.add_member(:breakpoint_percentile_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "breakpointPercentileThreshold", traits: {"smithy.api#range" => {"min" => 50, "max" => 99}, "smithy.api#required" => {}}))
@@ -2015,7 +2015,7 @@ module Aws::QConnect
     SessionData.type = Types::SessionData
     SessionIntegrationConfiguration.add_member(:topic_integration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericArn, name: "topicIntegrationArn"))
     SessionIntegrationConfiguration.type = Types::SessionIntegrationConfiguration
-    SessionSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SessionSummary, name: "member")
+    SessionSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionSummary, name: "member"))
     SessionSummary.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "sessionId", traits: {"smithy.api#required" => {}}))
     SessionSummary.add_member(:session_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "sessionArn", traits: {"smithy.api#required" => {}}))
     SessionSummary.add_member(:assistant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "assistantId", traits: {"smithy.api#required" => {}}))
@@ -2063,13 +2063,13 @@ module Aws::QConnect
     TagFilter.add_member(:or_conditions, Types::TagFilter::OrConditions, ::Smithy::Schema::Shapes::MemberShape.new(target: OrConditions, name: "orConditions"))
     TagFilter.add_member(:unknown, Types::TagFilter::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     TagFilter.type = Types::TagFilter
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TextData.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentText, name: "title"))
     TextData.add_member(:excerpt, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentText, name: "excerpt"))
     TextData.type = Types::TextData
@@ -2197,7 +2197,7 @@ module Aws::QConnect
     UpdateSessionResponse.type = Types::UpdateSessionResponse
     UrlConfiguration.add_member(:seed_urls, ::Smithy::Schema::Shapes::MemberShape.new(target: SeedUrls, name: "seedUrls"))
     UrlConfiguration.type = Types::UrlConfiguration
-    UrlFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UrlFilterPattern, name: "member")
+    UrlFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UrlFilterPattern, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ValidationException.type = Types::ValidationException
     VectorIngestionConfiguration.add_member(:chunking_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ChunkingConfiguration, name: "chunkingConfiguration"))

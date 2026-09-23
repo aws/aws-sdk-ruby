@@ -126,7 +126,7 @@ module Aws::Braket
     Association.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BraketResourceArn, name: "arn", traits: {"smithy.api#required" => {}}))
     Association.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationType, name: "type", traits: {"smithy.api#required" => {}}))
     Association.type = Types::Association
-    Associations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Association, name: "member")
+    Associations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Association, name: "member"))
     CancelJobInput.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: JobArn, name: "jobArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelJobInput.type = Types::CancelJobInput
     CancelJobOutput.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: JobArn, name: "jobArn", traits: {"smithy.api#required" => {}}))
@@ -181,7 +181,7 @@ module Aws::Braket
     DeviceQueueInfo.add_member(:queue_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "queueSize", traits: {"smithy.api#required" => {}}))
     DeviceQueueInfo.add_member(:queue_priority, ::Smithy::Schema::Shapes::MemberShape.new(target: QueuePriority, name: "queuePriority"))
     DeviceQueueInfo.type = Types::DeviceQueueInfo
-    DeviceQueueInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceQueueInfo, name: "member")
+    DeviceQueueInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceQueueInfo, name: "member"))
     DeviceRetiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     DeviceRetiredException.type = Types::DeviceRetiredException
     DeviceSummary.add_member(:device_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceArn, name: "deviceArn", traits: {"smithy.api#required" => {}}))
@@ -190,7 +190,7 @@ module Aws::Braket
     DeviceSummary.add_member(:device_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceType, name: "deviceType", traits: {"smithy.api#required" => {}}))
     DeviceSummary.add_member(:device_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceStatus, name: "deviceStatus", traits: {"smithy.api#required" => {}}))
     DeviceSummary.type = Types::DeviceSummary
-    DeviceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceSummary, name: "member")
+    DeviceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceSummary, name: "member"))
     GetDeviceInput.add_member(:device_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceArn, name: "deviceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetDeviceInput.type = Types::GetDeviceInput
     GetDeviceOutput.add_member(:device_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceArn, name: "deviceArn", traits: {"smithy.api#required" => {}}))
@@ -246,14 +246,14 @@ module Aws::Braket
     GetQuantumTaskOutput.add_member(:num_successful_shots, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "numSuccessfulShots"))
     GetQuantumTaskOutput.add_member(:action_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionMetadata, name: "actionMetadata"))
     GetQuantumTaskOutput.type = Types::GetQuantumTaskOutput
-    HybridJobAdditionalAttributeNamesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HybridJobAdditionalAttributeName, name: "member")
+    HybridJobAdditionalAttributeNamesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HybridJobAdditionalAttributeName, name: "member"))
     HybridJobQueueInfo.add_member(:queue, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueName, name: "queue", traits: {"smithy.api#required" => {}}))
     HybridJobQueueInfo.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "position", traits: {"smithy.api#required" => {}}))
     HybridJobQueueInfo.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     HybridJobQueueInfo.type = Types::HybridJobQueueInfo
-    HyperParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "key")
-    HyperParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 2500}, "smithy.api#pattern" => "^.*$"})
-    InputConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InputFileConfig, name: "member")
+    HyperParameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "key"))
+    HyperParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 2500}, "smithy.api#pattern" => "^.*$"}))
+    InputConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InputFileConfig, name: "member"))
     InputFileConfig.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String64, name: "channelName", traits: {"smithy.api#pattern" => "^[A-Za-z0-9\\.\\-_]+$", "smithy.api#required" => {}}))
     InputFileConfig.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "contentType"))
     InputFileConfig.add_member(:data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "dataSource", traits: {"smithy.api#required" => {}}))
@@ -271,7 +271,7 @@ module Aws::Braket
     JobEventDetails.add_member(:time_of_event, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "timeOfEvent", traits: {"smithy.api#timestampFormat" => "date-time"}))
     JobEventDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#length" => {"min" => 0, "max" => 2500}}))
     JobEventDetails.type = Types::JobEventDetails
-    JobEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobEventDetails, name: "member")
+    JobEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobEventDetails, name: "member"))
     JobOutputDataConfig.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String2048, name: "kmsKeyId"))
     JobOutputDataConfig.add_member(:s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Path, name: "s3Path", traits: {"smithy.api#required" => {}}))
     JobOutputDataConfig.type = Types::JobOutputDataConfig
@@ -286,7 +286,7 @@ module Aws::Braket
     JobSummary.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "endedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     JobSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
     JobSummary.type = Types::JobSummary
-    JobSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobSummary, name: "member")
+    JobSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobSummary, name: "member"))
     ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
     ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
@@ -295,9 +295,9 @@ module Aws::Braket
     ProgramSetValidationFailure.add_member(:inputs_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "inputsIndex"))
     ProgramSetValidationFailure.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgramValidationFailuresList, name: "errors"))
     ProgramSetValidationFailure.type = Types::ProgramSetValidationFailure
-    ProgramSetValidationFailuresList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProgramSetValidationFailure, name: "member")
-    ProgramValidationFailuresList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    QuantumTaskAdditionalAttributeNamesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuantumTaskAdditionalAttributeName, name: "member")
+    ProgramSetValidationFailuresList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgramSetValidationFailure, name: "member"))
+    ProgramValidationFailuresList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    QuantumTaskAdditionalAttributeNamesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuantumTaskAdditionalAttributeName, name: "member"))
     QuantumTaskQueueInfo.add_member(:queue, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueName, name: "queue", traits: {"smithy.api#required" => {}}))
     QuantumTaskQueueInfo.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "position", traits: {"smithy.api#required" => {}}))
     QuantumTaskQueueInfo.add_member(:queue_priority, ::Smithy::Schema::Shapes::MemberShape.new(target: QueuePriority, name: "queuePriority"))
@@ -313,7 +313,7 @@ module Aws::Braket
     QuantumTaskSummary.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "endedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     QuantumTaskSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
     QuantumTaskSummary.type = Types::QuantumTaskSummary
-    QuantumTaskSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuantumTaskSummary, name: "member")
+    QuantumTaskSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuantumTaskSummary, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     S3DataSource.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Path, name: "s3Uri", traits: {"smithy.api#required" => {}}))
@@ -325,7 +325,7 @@ module Aws::Braket
     SearchDevicesFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#required" => {}}))
     SearchDevicesFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: String256List, name: "values", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#required" => {}}))
     SearchDevicesFilter.type = Types::SearchDevicesFilter
-    SearchDevicesFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchDevicesFilter, name: "member")
+    SearchDevicesFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchDevicesFilter, name: "member"))
     SearchDevicesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
     SearchDevicesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
     SearchDevicesInput.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchDevicesFilterList, name: "filters", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}, "smithy.api#required" => {}}))
@@ -337,7 +337,7 @@ module Aws::Braket
     SearchJobsFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: String256List, name: "values", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#required" => {}}))
     SearchJobsFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchJobsFilterOperator, name: "operator", traits: {"smithy.api#required" => {}}))
     SearchJobsFilter.type = Types::SearchJobsFilter
-    SearchJobsFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchJobsFilter, name: "member")
+    SearchJobsFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchJobsFilter, name: "member"))
     SearchJobsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
     SearchJobsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
     SearchJobsInput.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchJobsFilterList, name: "filters", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}, "smithy.api#required" => {}}))
@@ -349,7 +349,7 @@ module Aws::Braket
     SearchQuantumTasksFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: String256List, name: "values", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#required" => {}}))
     SearchQuantumTasksFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchQuantumTasksFilterOperator, name: "operator", traits: {"smithy.api#required" => {}}))
     SearchQuantumTasksFilter.type = Types::SearchQuantumTasksFilter
-    SearchQuantumTasksFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchQuantumTasksFilter, name: "member")
+    SearchQuantumTasksFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchQuantumTasksFilter, name: "member"))
     SearchQuantumTasksInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
     SearchQuantumTasksInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
     SearchQuantumTasksInput.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchQuantumTasksFilterList, name: "filters", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}, "smithy.api#required" => {}}))
@@ -359,14 +359,14 @@ module Aws::Braket
     SearchQuantumTasksOutput.type = Types::SearchQuantumTasksOutput
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    String256List.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "member")
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    String256List.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "member"))
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    TagsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    TagsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    TagsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    TagsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ThrottlingException.type = Types::ThrottlingException
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))

@@ -385,7 +385,7 @@ module Aws::Transfer
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceErrorMessage, name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AddressAllocationIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AddressAllocationId, name: "member")
+    AddressAllocationIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressAllocationId, name: "member"))
     AgreementStatusType.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     AgreementStatusType.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     As2ConnectorConfig.add_member(:local_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileId, name: "LocalProfileId"))
@@ -400,8 +400,8 @@ module Aws::Transfer
     As2ConnectorConfig.add_member(:preserve_content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PreserveContentType, name: "PreserveContentType"))
     As2ConnectorConfig.type = Types::As2ConnectorConfig
     As2Transport.add_member(:http, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTP", traits: {"smithy.api#enumValue" => "HTTP"}))
-    As2Transports.member = ::Smithy::Schema::Shapes::MemberShape.new(target: As2Transport, name: "member")
-    CertificateIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateId, name: "member")
+    As2Transports.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: As2Transport, name: "member"))
+    CertificateIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateId, name: "member"))
     CertificateStatusType.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     CertificateStatusType.add_member(:pending_rotation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_ROTATION", traits: {"smithy.api#enumValue" => "PENDING_ROTATION"}))
     CertificateStatusType.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
@@ -419,7 +419,7 @@ module Aws::Transfer
     ConnectorFileTransferResult.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureCode, name: "FailureCode"))
     ConnectorFileTransferResult.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "FailureMessage"))
     ConnectorFileTransferResult.type = Types::ConnectorFileTransferResult
-    ConnectorFileTransferResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorFileTransferResult, name: "member")
+    ConnectorFileTransferResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorFileTransferResult, name: "member"))
     CopyStepDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStepName, name: "Name"))
     CopyStepDetails.add_member(:destination_file_location, ::Smithy::Schema::Shapes::MemberShape.new(target: InputFileLocation, name: "DestinationFileLocation"))
     CopyStepDetails.add_member(:overwrite_existing, ::Smithy::Schema::Shapes::MemberShape.new(target: OverwriteExisting, name: "OverwriteExisting"))
@@ -822,16 +822,16 @@ module Aws::Transfer
     ExecutionStepResult.add_member(:outputs, ::Smithy::Schema::Shapes::MemberShape.new(target: StepResultOutputsJson, name: "Outputs"))
     ExecutionStepResult.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionError, name: "Error"))
     ExecutionStepResult.type = Types::ExecutionStepResult
-    ExecutionStepResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStepResult, name: "member")
+    ExecutionStepResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStepResult, name: "member"))
     FileLocation.add_member(:s3_file_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3FileLocation, name: "S3FileLocation"))
     FileLocation.add_member(:efs_file_location, ::Smithy::Schema::Shapes::MemberShape.new(target: EfsFileLocation, name: "EfsFileLocation"))
     FileLocation.type = Types::FileLocation
-    FilePaths.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilePath, name: "member")
+    FilePaths.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePath, name: "member"))
     HomeDirectoryMapEntry.add_member(:entry, ::Smithy::Schema::Shapes::MemberShape.new(target: MapEntry, name: "Entry", traits: {"smithy.api#required" => {}}))
     HomeDirectoryMapEntry.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: MapTarget, name: "Target", traits: {"smithy.api#required" => {}}))
     HomeDirectoryMapEntry.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MapType, name: "Type"))
     HomeDirectoryMapEntry.type = Types::HomeDirectoryMapEntry
-    HomeDirectoryMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HomeDirectoryMapEntry, name: "member")
+    HomeDirectoryMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HomeDirectoryMapEntry, name: "member"))
     HomeDirectoryType.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PATH", traits: {"smithy.api#enumValue" => "PATH"}))
     HomeDirectoryType.add_member(:logical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOGICAL", traits: {"smithy.api#enumValue" => "LOGICAL"}))
     IdentityCenterConfig.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterInstanceArn, name: "InstanceArn"))
@@ -988,7 +988,7 @@ module Aws::Transfer
     ListedAccess.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "Role"))
     ListedAccess.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalId, name: "ExternalId"))
     ListedAccess.type = Types::ListedAccess
-    ListedAccesses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListedAccess, name: "member")
+    ListedAccesses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListedAccess, name: "member"))
     ListedAgreement.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     ListedAgreement.add_member(:agreement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AgreementId, name: "AgreementId"))
     ListedAgreement.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
@@ -997,7 +997,7 @@ module Aws::Transfer
     ListedAgreement.add_member(:local_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileId, name: "LocalProfileId"))
     ListedAgreement.add_member(:partner_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileId, name: "PartnerProfileId"))
     ListedAgreement.type = Types::ListedAgreement
-    ListedAgreements.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListedAgreement, name: "member")
+    ListedAgreements.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListedAgreement, name: "member"))
     ListedCertificate.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     ListedCertificate.add_member(:certificate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateId, name: "CertificateId"))
     ListedCertificate.add_member(:usage, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateUsageType, name: "Usage"))
@@ -1007,18 +1007,18 @@ module Aws::Transfer
     ListedCertificate.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, name: "Type"))
     ListedCertificate.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     ListedCertificate.type = Types::ListedCertificate
-    ListedCertificates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListedCertificate, name: "member")
+    ListedCertificates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListedCertificate, name: "member"))
     ListedConnector.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     ListedConnector.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorId, name: "ConnectorId"))
     ListedConnector.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "Url"))
     ListedConnector.type = Types::ListedConnector
-    ListedConnectors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListedConnector, name: "member")
+    ListedConnectors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListedConnector, name: "member"))
     ListedExecution.add_member(:execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionId, name: "ExecutionId"))
     ListedExecution.add_member(:initial_file_location, ::Smithy::Schema::Shapes::MemberShape.new(target: FileLocation, name: "InitialFileLocation"))
     ListedExecution.add_member(:service_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceMetadata, name: "ServiceMetadata"))
     ListedExecution.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStatus, name: "Status"))
     ListedExecution.type = Types::ListedExecution
-    ListedExecutions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListedExecution, name: "member")
+    ListedExecutions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListedExecution, name: "member"))
     ListedHostKey.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn", traits: {"smithy.api#required" => {}}))
     ListedHostKey.add_member(:host_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HostKeyId, name: "HostKeyId"))
     ListedHostKey.add_member(:fingerprint, ::Smithy::Schema::Shapes::MemberShape.new(target: HostKeyFingerprint, name: "Fingerprint"))
@@ -1026,13 +1026,13 @@ module Aws::Transfer
     ListedHostKey.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: HostKeyType, name: "Type"))
     ListedHostKey.add_member(:date_imported, ::Smithy::Schema::Shapes::MemberShape.new(target: DateImported, name: "DateImported"))
     ListedHostKey.type = Types::ListedHostKey
-    ListedHostKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListedHostKey, name: "member")
+    ListedHostKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListedHostKey, name: "member"))
     ListedProfile.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     ListedProfile.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileId, name: "ProfileId"))
     ListedProfile.add_member(:as2_id, ::Smithy::Schema::Shapes::MemberShape.new(target: As2Id, name: "As2Id"))
     ListedProfile.add_member(:profile_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileType, name: "ProfileType"))
     ListedProfile.type = Types::ListedProfile
-    ListedProfiles.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListedProfile, name: "member")
+    ListedProfiles.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListedProfile, name: "member"))
     ListedServer.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn", traits: {"smithy.api#required" => {}}))
     ListedServer.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: Domain, name: "Domain"))
     ListedServer.add_member(:identity_provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderType, name: "IdentityProviderType"))
@@ -1042,7 +1042,7 @@ module Aws::Transfer
     ListedServer.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: State, name: "State"))
     ListedServer.add_member(:user_count, ::Smithy::Schema::Shapes::MemberShape.new(target: UserCount, name: "UserCount"))
     ListedServer.type = Types::ListedServer
-    ListedServers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListedServer, name: "member")
+    ListedServers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListedServer, name: "member"))
     ListedUser.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn", traits: {"smithy.api#required" => {}}))
     ListedUser.add_member(:home_directory, ::Smithy::Schema::Shapes::MemberShape.new(target: HomeDirectory, name: "HomeDirectory"))
     ListedUser.add_member(:home_directory_type, ::Smithy::Schema::Shapes::MemberShape.new(target: HomeDirectoryType, name: "HomeDirectoryType"))
@@ -1050,18 +1050,18 @@ module Aws::Transfer
     ListedUser.add_member(:ssh_public_key_count, ::Smithy::Schema::Shapes::MemberShape.new(target: SshPublicKeyCount, name: "SshPublicKeyCount"))
     ListedUser.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, name: "UserName"))
     ListedUser.type = Types::ListedUser
-    ListedUsers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListedUser, name: "member")
+    ListedUsers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListedUser, name: "member"))
     ListedWebApp.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn", traits: {"smithy.api#required" => {}}))
     ListedWebApp.add_member(:web_app_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppId, name: "WebAppId", traits: {"smithy.api#required" => {}}))
     ListedWebApp.add_member(:access_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppAccessEndpoint, name: "AccessEndpoint"))
     ListedWebApp.add_member(:web_app_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAppEndpoint, name: "WebAppEndpoint"))
     ListedWebApp.type = Types::ListedWebApp
-    ListedWebApps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListedWebApp, name: "member")
+    ListedWebApps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListedWebApp, name: "member"))
     ListedWorkflow.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, name: "WorkflowId"))
     ListedWorkflow.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowDescription, name: "Description"))
     ListedWorkflow.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     ListedWorkflow.type = Types::ListedWorkflow
-    ListedWorkflows.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListedWorkflow, name: "member")
+    ListedWorkflows.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListedWorkflow, name: "member"))
     LoggingConfiguration.add_member(:logging_role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "LoggingRole"))
     LoggingConfiguration.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "LogGroupName"))
     LoggingConfiguration.type = Types::LoggingConfiguration
@@ -1075,8 +1075,8 @@ module Aws::Transfer
     MdnSigningAlg.add_member(:sha1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHA1", traits: {"smithy.api#enumValue" => "SHA1"}))
     MdnSigningAlg.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     MdnSigningAlg.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "DEFAULT"}))
-    OnPartialUploadWorkflowDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowDetail, name: "member")
-    OnUploadWorkflowDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowDetail, name: "member")
+    OnPartialUploadWorkflowDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowDetail, name: "member"))
+    OnUploadWorkflowDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowDetail, name: "member"))
     OverwriteExisting.add_member(:true, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRUE", traits: {"smithy.api#enumValue" => "TRUE"}))
     OverwriteExisting.add_member(:false, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FALSE", traits: {"smithy.api#enumValue" => "FALSE"}))
     PosixProfile.add_member(:uid, ::Smithy::Schema::Shapes::MemberShape.new(target: PosixId, name: "Uid", traits: {"smithy.api#required" => {}}))
@@ -1098,7 +1098,7 @@ module Aws::Transfer
     ProtocolDetails.add_member(:set_stat_option, ::Smithy::Schema::Shapes::MemberShape.new(target: SetStatOption, name: "SetStatOption"))
     ProtocolDetails.add_member(:as2_transports, ::Smithy::Schema::Shapes::MemberShape.new(target: As2Transports, name: "As2Transports"))
     ProtocolDetails.type = Types::ProtocolDetails
-    Protocols.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, name: "member")
+    Protocols.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, name: "member"))
     ResourceExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message", traits: {"smithy.api#required" => {}}))
     ResourceExistsException.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "Resource", traits: {"smithy.api#required" => {}}))
     ResourceExistsException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType", traits: {"smithy.api#required" => {}}))
@@ -1120,14 +1120,14 @@ module Aws::Transfer
     S3Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     S3Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     S3Tag.type = Types::S3Tag
-    S3Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: S3Tag, name: "member")
-    SecondaryGids.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PosixId, name: "member")
-    SecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
-    SecurityPolicyNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicyName, name: "member")
-    SecurityPolicyOptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicyOption, name: "member")
+    S3Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Tag, name: "member"))
+    SecondaryGids.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PosixId, name: "member"))
+    SecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
+    SecurityPolicyNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicyName, name: "member"))
+    SecurityPolicyOptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicyOption, name: "member"))
     SecurityPolicyProtocol.add_member(:sftp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SFTP", traits: {"smithy.api#enumValue" => "SFTP"}))
     SecurityPolicyProtocol.add_member(:ftps, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FTPS", traits: {"smithy.api#enumValue" => "FTPS"}))
-    SecurityPolicyProtocols.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicyProtocol, name: "member")
+    SecurityPolicyProtocols.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityPolicyProtocol, name: "member"))
     SecurityPolicyResourceType.add_member(:server, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVER", traits: {"smithy.api#enumValue" => "SERVER"}))
     SecurityPolicyResourceType.add_member(:connector, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECTOR", traits: {"smithy.api#enumValue" => "CONNECTOR"}))
     SendWorkflowStepStateRequest.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, name: "WorkflowId", traits: {"smithy.api#required" => {}}))
@@ -1136,7 +1136,7 @@ module Aws::Transfer
     SendWorkflowStepStateRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomStepStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     SendWorkflowStepStateRequest.type = Types::SendWorkflowStepStateRequest
     SendWorkflowStepStateResponse.type = Types::SendWorkflowStepStateResponse
-    ServiceManagedEgressIpAddresses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceManagedEgressIpAddress, name: "member")
+    ServiceManagedEgressIpAddresses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceManagedEgressIpAddress, name: "member"))
     ServiceMetadata.add_member(:user_details, ::Smithy::Schema::Shapes::MemberShape.new(target: UserDetails, name: "UserDetails", traits: {"smithy.api#required" => {}}))
     ServiceMetadata.type = Types::ServiceMetadata
     ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceErrorMessage, name: "Message"))
@@ -1153,7 +1153,7 @@ module Aws::Transfer
     SftpConnectorConfig.type = Types::SftpConnectorConfig
     SftpConnectorConnectionDetails.add_member(:host_key, ::Smithy::Schema::Shapes::MemberShape.new(target: SftpConnectorHostKey, name: "HostKey"))
     SftpConnectorConnectionDetails.type = Types::SftpConnectorConnectionDetails
-    SftpConnectorTrustedHostKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SftpConnectorTrustedHostKey, name: "member")
+    SftpConnectorTrustedHostKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SftpConnectorTrustedHostKey, name: "member"))
     SigningAlg.add_member(:sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHA256", traits: {"smithy.api#enumValue" => "SHA256"}))
     SigningAlg.add_member(:sha384, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHA384", traits: {"smithy.api#enumValue" => "SHA384"}))
     SigningAlg.add_member(:sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHA512", traits: {"smithy.api#enumValue" => "SHA512"}))
@@ -1163,7 +1163,7 @@ module Aws::Transfer
     SshPublicKey.add_member(:ssh_public_key_body, ::Smithy::Schema::Shapes::MemberShape.new(target: SshPublicKeyBody, name: "SshPublicKeyBody", traits: {"smithy.api#required" => {}}))
     SshPublicKey.add_member(:ssh_public_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SshPublicKeyId, name: "SshPublicKeyId", traits: {"smithy.api#required" => {}}))
     SshPublicKey.type = Types::SshPublicKey
-    SshPublicKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SshPublicKey, name: "member")
+    SshPublicKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SshPublicKey, name: "member"))
     StartDirectoryListingRequest.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorId, name: "ConnectorId", traits: {"smithy.api#required" => {}}))
     StartDirectoryListingRequest.add_member(:remote_directory_path, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePath, name: "RemoteDirectoryPath", traits: {"smithy.api#required" => {}}))
     StartDirectoryListingRequest.add_member(:max_items, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxItems, name: "MaxItems"))
@@ -1201,12 +1201,12 @@ module Aws::Transfer
     State.add_member(:stop_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOP_FAILED", traits: {"smithy.api#enumValue" => "STOP_FAILED"}))
     StopServerRequest.add_member(:server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerId, name: "ServerId", traits: {"smithy.api#required" => {}}))
     StopServerRequest.type = Types::StopServerRequest
-    StructuredLogDestinations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
-    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
+    StructuredLogDestinations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
+    SubnetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -1214,7 +1214,7 @@ module Aws::Transfer
     TagStepDetails.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Tags, name: "Tags"))
     TagStepDetails.add_member(:source_file_location, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceFileLocation, name: "SourceFileLocation"))
     TagStepDetails.type = Types::TagStepDetails
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TestConnectionRequest.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorId, name: "ConnectorId", traits: {"smithy.api#required" => {}}))
     TestConnectionRequest.type = Types::TestConnectionRequest
     TestConnectionResponse.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorId, name: "ConnectorId"))
@@ -1381,7 +1381,7 @@ module Aws::Transfer
     WorkflowStepType.add_member(:tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAG", traits: {"smithy.api#enumValue" => "TAG"}))
     WorkflowStepType.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE", traits: {"smithy.api#enumValue" => "DELETE"}))
     WorkflowStepType.add_member(:decrypt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DECRYPT", traits: {"smithy.api#enumValue" => "DECRYPT"}))
-    WorkflowSteps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStep, name: "member")
+    WorkflowSteps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStep, name: "member"))
 
     TransferService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.transfer#TransferService"

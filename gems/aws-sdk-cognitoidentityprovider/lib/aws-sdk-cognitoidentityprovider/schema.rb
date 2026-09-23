@@ -787,10 +787,10 @@ module Aws::CognitoIdentityProvider
     AliasAttributeType.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PHONE_NUMBER", traits: {"smithy.api#enumValue" => "phone_number"}))
     AliasAttributeType.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMAIL", traits: {"smithy.api#enumValue" => "email"}))
     AliasAttributeType.add_member(:preferred_username, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PREFERRED_USERNAME", traits: {"smithy.api#enumValue" => "preferred_username"}))
-    AliasAttributesListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AliasAttributeType, name: "member")
+    AliasAttributesListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasAttributeType, name: "member"))
     AliasExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     AliasExistsException.type = Types::AliasExistsException
-    AllowedFirstAuthFactorsListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthFactorType, name: "member")
+    AllowedFirstAuthFactorsListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthFactorType, name: "member"))
     AnalyticsConfigurationType.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HexStringType, name: "ApplicationId"))
     AnalyticsConfigurationType.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "ApplicationArn"))
     AnalyticsConfigurationType.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "RoleArn"))
@@ -819,7 +819,7 @@ module Aws::CognitoIdentityProvider
     AssetExtensionType.add_member(:png, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PNG", traits: {"smithy.api#enumValue" => "PNG"}))
     AssetExtensionType.add_member(:svg, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SVG", traits: {"smithy.api#enumValue" => "SVG"}))
     AssetExtensionType.add_member(:webp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEBP", traits: {"smithy.api#enumValue" => "WEBP"}))
-    AssetListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetType, name: "member")
+    AssetListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetType, name: "member"))
     AssetType.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetCategoryType, name: "Category", traits: {"smithy.api#required" => {}}))
     AssetType.add_member(:color_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ColorSchemeModeType, name: "ColorMode", traits: {"smithy.api#required" => {}}))
     AssetType.add_member(:extension, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetExtensionType, name: "Extension", traits: {"smithy.api#required" => {}}))
@@ -836,14 +836,14 @@ module Aws::CognitoIdentityProvider
     AttributeDataType.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NUMBER", traits: {"smithy.api#enumValue" => "Number"}))
     AttributeDataType.add_member(:datetime, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATETIME", traits: {"smithy.api#enumValue" => "DateTime"}))
     AttributeDataType.add_member(:boolean, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BOOLEAN", traits: {"smithy.api#enumValue" => "Boolean"}))
-    AttributeListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeType, name: "member")
-    AttributeMappingType.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMappingKeyType, name: "key")
-    AttributeMappingType.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "value")
-    AttributeNameListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameType, name: "member")
+    AttributeListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeType, name: "member"))
+    AttributeMappingType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeMappingKeyType, name: "key"))
+    AttributeMappingType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "value"))
+    AttributeNameListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameType, name: "member"))
     AttributeType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameType, name: "Name", traits: {"smithy.api#required" => {}}))
     AttributeType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValueType, name: "Value"))
     AttributeType.type = Types::AttributeType
-    AttributesRequireVerificationBeforeUpdateType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedAttributeType, name: "member")
+    AttributesRequireVerificationBeforeUpdateType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedAttributeType, name: "member"))
     AuthEventType.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "EventId"))
     AuthEventType.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "EventType"))
     AuthEventType.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "CreationDate"))
@@ -853,7 +853,7 @@ module Aws::CognitoIdentityProvider
     AuthEventType.add_member(:event_context_data, ::Smithy::Schema::Shapes::MemberShape.new(target: EventContextDataType, name: "EventContextData"))
     AuthEventType.add_member(:event_feedback, ::Smithy::Schema::Shapes::MemberShape.new(target: EventFeedbackType, name: "EventFeedback"))
     AuthEventType.type = Types::AuthEventType
-    AuthEventsType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthEventType, name: "member")
+    AuthEventsType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthEventType, name: "member"))
     AuthFactorType.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASSWORD", traits: {"smithy.api#enumValue" => "PASSWORD"}))
     AuthFactorType.add_member(:email_otp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMAIL_OTP", traits: {"smithy.api#enumValue" => "EMAIL_OTP"}))
     AuthFactorType.add_member(:sms_otp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMS_OTP", traits: {"smithy.api#enumValue" => "SMS_OTP"}))
@@ -866,8 +866,8 @@ module Aws::CognitoIdentityProvider
     AuthFlowType.add_member(:user_password_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER_PASSWORD_AUTH", traits: {"smithy.api#enumValue" => "USER_PASSWORD_AUTH"}))
     AuthFlowType.add_member(:admin_user_password_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADMIN_USER_PASSWORD_AUTH", traits: {"smithy.api#enumValue" => "ADMIN_USER_PASSWORD_AUTH"}))
     AuthFlowType.add_member(:user_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER_AUTH", traits: {"smithy.api#enumValue" => "USER_AUTH"}))
-    AuthParametersType.key = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "key")
-    AuthParametersType.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "value")
+    AuthParametersType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "key"))
+    AuthParametersType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "value"))
     AuthenticationResultType.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, name: "AccessToken"))
     AuthenticationResultType.add_member(:expires_in, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerType, name: "ExpiresIn", traits: {"smithy.api#default" => 0}))
     AuthenticationResultType.add_member(:token_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "TokenType"))
@@ -875,9 +875,9 @@ module Aws::CognitoIdentityProvider
     AuthenticationResultType.add_member(:id_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, name: "IdToken"))
     AuthenticationResultType.add_member(:new_device_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: NewDeviceMetadataType, name: "NewDeviceMetadata"))
     AuthenticationResultType.type = Types::AuthenticationResultType
-    AvailableChallengeListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeNameType, name: "member")
-    BlockedIPRangeListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "member")
-    CallbackURLsListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RedirectUrlType, name: "member")
+    AvailableChallengeListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeNameType, name: "member"))
+    BlockedIPRangeListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "member"))
+    CallbackURLsListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RedirectUrlType, name: "member"))
     ChallengeName.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Password", traits: {"smithy.api#enumValue" => "Password"}))
     ChallengeName.add_member(:mfa, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Mfa", traits: {"smithy.api#enumValue" => "Mfa"}))
     ChallengeNameType.add_member(:sms_mfa, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMS_MFA", traits: {"smithy.api#enumValue" => "SMS_MFA"}))
@@ -896,27 +896,27 @@ module Aws::CognitoIdentityProvider
     ChallengeNameType.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASSWORD", traits: {"smithy.api#enumValue" => "PASSWORD"}))
     ChallengeNameType.add_member(:web_authn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEB_AUTHN", traits: {"smithy.api#enumValue" => "WEB_AUTHN"}))
     ChallengeNameType.add_member(:password_srp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASSWORD_SRP", traits: {"smithy.api#enumValue" => "PASSWORD_SRP"}))
-    ChallengeParametersType.key = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "key")
-    ChallengeParametersType.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "value")
+    ChallengeParametersType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "key"))
+    ChallengeParametersType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "value"))
     ChallengeResponse.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Success", traits: {"smithy.api#enumValue" => "Success"}))
     ChallengeResponse.add_member(:failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failure", traits: {"smithy.api#enumValue" => "Failure"}))
-    ChallengeResponseListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeResponseType, name: "member")
+    ChallengeResponseListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeResponseType, name: "member"))
     ChallengeResponseType.add_member(:challenge_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeName, name: "ChallengeName"))
     ChallengeResponseType.add_member(:challenge_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeResponse, name: "ChallengeResponse"))
     ChallengeResponseType.type = Types::ChallengeResponseType
-    ChallengeResponsesType.key = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "key")
-    ChallengeResponsesType.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "value")
+    ChallengeResponsesType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "key"))
+    ChallengeResponsesType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "value"))
     ChangePasswordRequest.add_member(:previous_password, ::Smithy::Schema::Shapes::MemberShape.new(target: PasswordType, name: "PreviousPassword"))
     ChangePasswordRequest.add_member(:proposed_password, ::Smithy::Schema::Shapes::MemberShape.new(target: PasswordType, name: "ProposedPassword", traits: {"smithy.api#required" => {}}))
     ChangePasswordRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, name: "AccessToken", traits: {"smithy.api#required" => {}}))
     ChangePasswordRequest.type = Types::ChangePasswordRequest
     ChangePasswordResponse.type = Types::ChangePasswordResponse
-    ClientMetadataType.key = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "key")
-    ClientMetadataType.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "value")
-    ClientPermissionListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClientPermissionType, name: "member")
+    ClientMetadataType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "key"))
+    ClientMetadataType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "value"))
+    ClientPermissionListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientPermissionType, name: "member"))
     CloudWatchLogsConfigurationType.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "LogGroupArn"))
     CloudWatchLogsConfigurationType.type = Types::CloudWatchLogsConfigurationType
-    CodeDeliveryDetailsListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CodeDeliveryDetailsType, name: "member")
+    CodeDeliveryDetailsListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeDeliveryDetailsType, name: "member"))
     CodeDeliveryDetailsType.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "Destination"))
     CodeDeliveryDetailsType.add_member(:delivery_medium, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryMediumType, name: "DeliveryMedium"))
     CodeDeliveryDetailsType.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameType, name: "AttributeName"))
@@ -941,7 +941,7 @@ module Aws::CognitoIdentityProvider
     CompromisedCredentialsRiskConfigurationType.type = Types::CompromisedCredentialsRiskConfigurationType
     ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     ConcurrentModificationException.type = Types::ConcurrentModificationException
-    ConfiguredUserAuthFactorsListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthFactorType, name: "member")
+    ConfiguredUserAuthFactorsListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthFactorType, name: "member"))
     ConfirmDeviceRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, name: "AccessToken", traits: {"smithy.api#required" => {}}))
     ConfirmDeviceRequest.add_member(:device_key, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceKeyType, name: "DeviceKey", traits: {"smithy.api#required" => {}}))
     ConfirmDeviceRequest.add_member(:device_secret_verifier_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceSecretVerifierConfigType, name: "DeviceSecretVerifierConfig"))
@@ -1085,7 +1085,7 @@ module Aws::CognitoIdentityProvider
     CreateUserPoolRequest.type = Types::CreateUserPoolRequest
     CreateUserPoolResponse.add_member(:user_pool, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolType, name: "UserPool"))
     CreateUserPoolResponse.type = Types::CreateUserPoolResponse
-    CustomAttributesListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaAttributeType, name: "member")
+    CustomAttributesListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaAttributeType, name: "member"))
     CustomDomainConfigType.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "CertificateArn", traits: {"smithy.api#required" => {}}))
     CustomDomainConfigType.type = Types::CustomDomainConfigType
     CustomEmailLambdaVersionConfigType.add_member(:lambda_version, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomEmailSenderLambdaVersionType, name: "LambdaVersion", traits: {"smithy.api#required" => {}}))
@@ -1134,7 +1134,7 @@ module Aws::CognitoIdentityProvider
     DeleteWebAuthnCredentialResponse.type = Types::DeleteWebAuthnCredentialResponse
     DeletionProtectionType.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     DeletionProtectionType.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
-    DeliveryMediumListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryMediumType, name: "member")
+    DeliveryMediumListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryMediumType, name: "member"))
     DeliveryMediumType.add_member(:sms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMS", traits: {"smithy.api#enumValue" => "SMS"}))
     DeliveryMediumType.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMAIL", traits: {"smithy.api#enumValue" => "EMAIL"}))
     DescribeIdentityProviderRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
@@ -1192,7 +1192,7 @@ module Aws::CognitoIdentityProvider
     DeviceConfigurationType.type = Types::DeviceConfigurationType
     DeviceKeyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     DeviceKeyExistsException.type = Types::DeviceKeyExistsException
-    DeviceListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceType, name: "member")
+    DeviceListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceType, name: "member"))
     DeviceRememberedStatusType.add_member(:remembered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMEMBERED", traits: {"smithy.api#enumValue" => "remembered"}))
     DeviceRememberedStatusType.add_member(:not_remembered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_REMEMBERED", traits: {"smithy.api#enumValue" => "not_remembered"}))
     DeviceSecretVerifierConfigType.add_member(:password_verifier, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "PasswordVerifier"))
@@ -1250,7 +1250,7 @@ module Aws::CognitoIdentityProvider
     EventFilterType.add_member(:sign_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SIGN_IN", traits: {"smithy.api#enumValue" => "SIGN_IN"}))
     EventFilterType.add_member(:password_change, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASSWORD_CHANGE", traits: {"smithy.api#enumValue" => "PASSWORD_CHANGE"}))
     EventFilterType.add_member(:sign_up, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SIGN_UP", traits: {"smithy.api#enumValue" => "SIGN_UP"}))
-    EventFiltersType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventFilterType, name: "member")
+    EventFiltersType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventFilterType, name: "member"))
     EventResponseType.add_member(:pass, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Pass", traits: {"smithy.api#enumValue" => "Pass"}))
     EventResponseType.add_member(:fail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Fail", traits: {"smithy.api#enumValue" => "Fail"}))
     EventResponseType.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InProgress", traits: {"smithy.api#enumValue" => "InProgress"}))
@@ -1267,7 +1267,7 @@ module Aws::CognitoIdentityProvider
     EventType.add_member(:resend_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ResendCode", traits: {"smithy.api#enumValue" => "ResendCode"}))
     ExpiredCodeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     ExpiredCodeException.type = Types::ExpiredCodeException
-    ExplicitAuthFlowsListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExplicitAuthFlowsType, name: "member")
+    ExplicitAuthFlowsListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExplicitAuthFlowsType, name: "member"))
     ExplicitAuthFlowsType.add_member(:admin_no_srp_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADMIN_NO_SRP_AUTH", traits: {"smithy.api#enumValue" => "ADMIN_NO_SRP_AUTH"}))
     ExplicitAuthFlowsType.add_member(:custom_auth_flow_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM_AUTH_FLOW_ONLY", traits: {"smithy.api#enumValue" => "CUSTOM_AUTH_FLOW_ONLY"}))
     ExplicitAuthFlowsType.add_member(:user_password_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER_PASSWORD_AUTH", traits: {"smithy.api#enumValue" => "USER_PASSWORD_AUTH"}))
@@ -1374,7 +1374,7 @@ module Aws::CognitoIdentityProvider
     GlobalSignOutResponse.type = Types::GlobalSignOutResponse
     GroupExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     GroupExistsException.type = Types::GroupExistsException
-    GroupListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupType, name: "member")
+    GroupListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupType, name: "member"))
     GroupType.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameType, name: "GroupName"))
     GroupType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId"))
     GroupType.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionType, name: "Description"))
@@ -1386,7 +1386,7 @@ module Aws::CognitoIdentityProvider
     HttpHeader.add_member(:header_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "headerName"))
     HttpHeader.add_member(:header_value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "headerValue"))
     HttpHeader.type = Types::HttpHeader
-    HttpHeaderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HttpHeader, name: "member")
+    HttpHeaderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpHeader, name: "member"))
     IdentityProviderType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId"))
     IdentityProviderType.add_member(:provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderNameType, name: "ProviderName"))
     IdentityProviderType.add_member(:provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderTypeType, name: "ProviderType"))
@@ -1402,7 +1402,7 @@ module Aws::CognitoIdentityProvider
     IdentityProviderTypeType.add_member(:login_with_amazon, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LoginWithAmazon", traits: {"smithy.api#enumValue" => "LoginWithAmazon"}))
     IdentityProviderTypeType.add_member(:sign_in_with_apple, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SignInWithApple", traits: {"smithy.api#enumValue" => "SignInWithApple"}))
     IdentityProviderTypeType.add_member(:oidc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OIDC", traits: {"smithy.api#enumValue" => "OIDC"}))
-    IdpIdentifiersListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IdpIdentifierType, name: "member")
+    IdpIdentifiersListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdpIdentifierType, name: "member"))
     InitiateAuthRequest.add_member(:auth_flow, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthFlowType, name: "AuthFlow", traits: {"smithy.api#required" => {}}))
     InitiateAuthRequest.add_member(:auth_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthParametersType, name: "AuthParameters"))
     InitiateAuthRequest.add_member(:client_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientMetadataType, name: "ClientMetadata"))
@@ -1453,8 +1453,8 @@ module Aws::CognitoIdentityProvider
     LambdaConfigType.type = Types::LambdaConfigType
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     LimitExceededException.type = Types::LimitExceededException
-    LinksType.key = ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageIdType, name: "key")
-    LinksType.value = ::Smithy::Schema::Shapes::MemberShape.new(target: LinkUrlType, name: "value")
+    LinksType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageIdType, name: "key"))
+    LinksType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkUrlType, name: "value"))
     ListDevicesRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, name: "AccessToken", traits: {"smithy.api#required" => {}}))
     ListDevicesRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryLimitType, name: "Limit"))
     ListDevicesRequest.add_member(:pagination_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchPaginationTokenType, name: "PaginationToken"))
@@ -1476,7 +1476,7 @@ module Aws::CognitoIdentityProvider
     ListIdentityProvidersResponse.add_member(:providers, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvidersListType, name: "Providers", traits: {"smithy.api#required" => {}}))
     ListIdentityProvidersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKeyType, name: "NextToken"))
     ListIdentityProvidersResponse.type = Types::ListIdentityProvidersResponse
-    ListOfStringTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "member")
+    ListOfStringTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "member"))
     ListResourceServersRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     ListResourceServersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListResourceServersLimitType, name: "MaxResults"))
     ListResourceServersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKeyType, name: "NextToken"))
@@ -1539,7 +1539,7 @@ module Aws::CognitoIdentityProvider
     ListWebAuthnCredentialsResponse.add_member(:credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAuthnCredentialDescriptionListType, name: "Credentials", traits: {"smithy.api#required" => {}}))
     ListWebAuthnCredentialsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationKey, name: "NextToken"))
     ListWebAuthnCredentialsResponse.type = Types::ListWebAuthnCredentialsResponse
-    LogConfigurationListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogConfigurationType, name: "member")
+    LogConfigurationListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogConfigurationType, name: "member"))
     LogConfigurationType.add_member(:log_level, ::Smithy::Schema::Shapes::MemberShape.new(target: LogLevel, name: "LogLevel", traits: {"smithy.api#required" => {}}))
     LogConfigurationType.add_member(:event_source, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSourceName, name: "EventSource", traits: {"smithy.api#required" => {}}))
     LogConfigurationType.add_member(:cloud_watch_logs_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogsConfigurationType, name: "CloudWatchLogsConfiguration"))
@@ -1551,10 +1551,10 @@ module Aws::CognitoIdentityProvider
     LogDeliveryConfigurationType.type = Types::LogDeliveryConfigurationType
     LogLevel.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
     LogLevel.add_member(:info, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFO", traits: {"smithy.api#enumValue" => "INFO"}))
-    LogoutURLsListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RedirectUrlType, name: "member")
+    LogoutURLsListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RedirectUrlType, name: "member"))
     MFAMethodNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     MFAMethodNotFoundException.type = Types::MFAMethodNotFoundException
-    MFAOptionListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MFAOptionType, name: "member")
+    MFAOptionListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MFAOptionType, name: "member"))
     MFAOptionType.add_member(:delivery_medium, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryMediumType, name: "DeliveryMedium"))
     MFAOptionType.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameType, name: "AttributeName"))
     MFAOptionType.type = Types::MFAOptionType
@@ -1596,7 +1596,7 @@ module Aws::CognitoIdentityProvider
     OAuthFlowType.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "code", traits: {"smithy.api#enumValue" => "code"}))
     OAuthFlowType.add_member(:implicit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "implicit", traits: {"smithy.api#enumValue" => "implicit"}))
     OAuthFlowType.add_member(:client_credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "client_credentials", traits: {"smithy.api#enumValue" => "client_credentials"}))
-    OAuthFlowsType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthFlowType, name: "member")
+    OAuthFlowsType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthFlowType, name: "member"))
     PasswordHistoryPolicyViolationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     PasswordHistoryPolicyViolationException.type = Types::PasswordHistoryPolicyViolationException
     PasswordPolicyType.add_member(:minimum_length, ::Smithy::Schema::Shapes::MemberShape.new(target: PasswordPolicyMinLengthType, name: "MinimumLength"))
@@ -1624,14 +1624,14 @@ module Aws::CognitoIdentityProvider
     ProviderDescription.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "LastModifiedDate"))
     ProviderDescription.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "CreationDate"))
     ProviderDescription.type = Types::ProviderDescription
-    ProviderDetailsType.key = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "key")
-    ProviderDetailsType.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "value")
+    ProviderDetailsType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "key"))
+    ProviderDetailsType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "value"))
     ProviderUserIdentifierType.add_member(:provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderNameType, name: "ProviderName"))
     ProviderUserIdentifierType.add_member(:provider_attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "ProviderAttributeName"))
     ProviderUserIdentifierType.add_member(:provider_attribute_value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "ProviderAttributeValue"))
     ProviderUserIdentifierType.type = Types::ProviderUserIdentifierType
-    ProvidersListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderDescription, name: "member")
-    RecoveryMechanismsType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryOptionType, name: "member")
+    ProvidersListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderDescription, name: "member"))
+    RecoveryMechanismsType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryOptionType, name: "member"))
     RecoveryOptionNameType.add_member(:verified_email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERIFIED_EMAIL", traits: {"smithy.api#enumValue" => "verified_email"}))
     RecoveryOptionNameType.add_member(:verified_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERIFIED_PHONE_NUMBER", traits: {"smithy.api#enumValue" => "verified_phone_number"}))
     RecoveryOptionNameType.add_member(:admin_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADMIN_ONLY", traits: {"smithy.api#enumValue" => "admin_only"}))
@@ -1654,7 +1654,7 @@ module Aws::CognitoIdentityProvider
     ResendConfirmationCodeResponse.type = Types::ResendConfirmationCodeResponse
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourceServerScopeListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerScopeType, name: "member")
+    ResourceServerScopeListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerScopeType, name: "member"))
     ResourceServerScopeType.add_member(:scope_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerScopeNameType, name: "ScopeName", traits: {"smithy.api#required" => {}}))
     ResourceServerScopeType.add_member(:scope_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerScopeDescriptionType, name: "ScopeDescription", traits: {"smithy.api#required" => {}}))
     ResourceServerScopeType.type = Types::ResourceServerScopeType
@@ -1663,7 +1663,7 @@ module Aws::CognitoIdentityProvider
     ResourceServerType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerNameType, name: "Name"))
     ResourceServerType.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerScopeListType, name: "Scopes"))
     ResourceServerType.type = Types::ResourceServerType
-    ResourceServersListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerType, name: "member")
+    ResourceServersListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerType, name: "member"))
     RespondToAuthChallengeRequest.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, name: "ClientId", traits: {"smithy.api#required" => {}}))
     RespondToAuthChallengeRequest.add_member(:challenge_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeNameType, name: "ChallengeName", traits: {"smithy.api#required" => {}}))
     RespondToAuthChallengeRequest.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, name: "Session"))
@@ -1711,11 +1711,11 @@ module Aws::CognitoIdentityProvider
     SchemaAttributeType.add_member(:number_attribute_constraints, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberAttributeConstraintsType, name: "NumberAttributeConstraints"))
     SchemaAttributeType.add_member(:string_attribute_constraints, ::Smithy::Schema::Shapes::MemberShape.new(target: StringAttributeConstraintsType, name: "StringAttributeConstraints"))
     SchemaAttributeType.type = Types::SchemaAttributeType
-    SchemaAttributesListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaAttributeType, name: "member")
+    SchemaAttributesListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaAttributeType, name: "member"))
     ScopeDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     ScopeDoesNotExistException.type = Types::ScopeDoesNotExistException
-    ScopeListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeType, name: "member")
-    SearchedAttributeNamesListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameType, name: "member")
+    ScopeListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeType, name: "member"))
+    SearchedAttributeNamesListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameType, name: "member"))
     SetLogDeliveryConfigurationRequest.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId", traits: {"smithy.api#required" => {}}))
     SetLogDeliveryConfigurationRequest.add_member(:log_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: LogConfigurationListType, name: "LogConfigurations", traits: {"smithy.api#required" => {}}))
     SetLogDeliveryConfigurationRequest.type = Types::SetLogDeliveryConfigurationRequest
@@ -1776,7 +1776,7 @@ module Aws::CognitoIdentityProvider
     SignUpResponse.add_member(:user_sub, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "UserSub", traits: {"smithy.api#required" => {}}))
     SignUpResponse.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, name: "Session"))
     SignUpResponse.type = Types::SignUpResponse
-    SkippedIPRangeListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "member")
+    SkippedIPRangeListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "member"))
     SmsConfigurationType.add_member(:sns_caller_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "SnsCallerArn", traits: {"smithy.api#required" => {}}))
     SmsConfigurationType.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "ExternalId"))
     SmsConfigurationType.add_member(:sns_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionCodeType, name: "SnsRegion"))
@@ -1810,12 +1810,12 @@ module Aws::CognitoIdentityProvider
     StringAttributeConstraintsType.add_member(:min_length, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "MinLength"))
     StringAttributeConstraintsType.add_member(:max_length, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "MaxLength"))
     StringAttributeConstraintsType.type = Types::StringAttributeConstraintsType
-    SupportedIdentityProvidersListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderNameType, name: "member")
+    SupportedIdentityProvidersListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderNameType, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolTagsType, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TermsDescriptionListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TermsDescriptionType, name: "member")
+    TermsDescriptionListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsDescriptionType, name: "member"))
     TermsDescriptionType.add_member(:terms_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsIdType, name: "TermsId", traits: {"smithy.api#required" => {}}))
     TermsDescriptionType.add_member(:terms_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsNameType, name: "TermsName", traits: {"smithy.api#required" => {}}))
     TermsDescriptionType.add_member(:enforcement, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsEnforcementType, name: "Enforcement", traits: {"smithy.api#required" => {}}))
@@ -2018,10 +2018,10 @@ module Aws::CognitoIdentityProvider
     UserImportJobType.add_member(:failed_users, ::Smithy::Schema::Shapes::MemberShape.new(target: LongType, name: "FailedUsers", traits: {"smithy.api#default" => 0}))
     UserImportJobType.add_member(:completion_message, ::Smithy::Schema::Shapes::MemberShape.new(target: CompletionMessageType, name: "CompletionMessage"))
     UserImportJobType.type = Types::UserImportJobType
-    UserImportJobsListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserImportJobType, name: "member")
+    UserImportJobsListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserImportJobType, name: "member"))
     UserLambdaValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     UserLambdaValidationException.type = Types::UserLambdaValidationException
-    UserMFASettingListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "member")
+    UserMFASettingListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "member"))
     UserNotConfirmedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     UserNotConfirmedException.type = Types::UserNotConfirmedException
     UserNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
@@ -2035,7 +2035,7 @@ module Aws::CognitoIdentityProvider
     UserPoolClientDescription.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId"))
     UserPoolClientDescription.add_member(:client_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientNameType, name: "ClientName"))
     UserPoolClientDescription.type = Types::UserPoolClientDescription
-    UserPoolClientListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolClientDescription, name: "member")
+    UserPoolClientListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolClientDescription, name: "member"))
     UserPoolClientType.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolIdType, name: "UserPoolId"))
     UserPoolClientType.add_member(:client_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientNameType, name: "ClientName"))
     UserPoolClientType.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, name: "ClientId"))
@@ -2070,7 +2070,7 @@ module Aws::CognitoIdentityProvider
     UserPoolDescriptionType.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "LastModifiedDate"))
     UserPoolDescriptionType.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "CreationDate"))
     UserPoolDescriptionType.type = Types::UserPoolDescriptionType
-    UserPoolListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolDescriptionType, name: "member")
+    UserPoolListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPoolDescriptionType, name: "member"))
     UserPoolMfaType.add_member(:off, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OFF", traits: {"smithy.api#enumValue" => "OFF"}))
     UserPoolMfaType.add_member(:on, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON", traits: {"smithy.api#enumValue" => "ON"}))
     UserPoolMfaType.add_member(:optional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPTIONAL", traits: {"smithy.api#enumValue" => "OPTIONAL"}))
@@ -2079,9 +2079,9 @@ module Aws::CognitoIdentityProvider
     UserPoolPolicyType.type = Types::UserPoolPolicyType
     UserPoolTaggingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     UserPoolTaggingException.type = Types::UserPoolTaggingException
-    UserPoolTagsListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeysType, name: "member")
-    UserPoolTagsType.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeysType, name: "key")
-    UserPoolTagsType.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValueType, name: "value")
+    UserPoolTagsListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeysType, name: "member"))
+    UserPoolTagsType.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeysType, name: "key"))
+    UserPoolTagsType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValueType, name: "value"))
     UserPoolTierType.add_member(:lite, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LITE", traits: {"smithy.api#enumValue" => "LITE"}))
     UserPoolTierType.add_member(:essentials, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ESSENTIALS", traits: {"smithy.api#enumValue" => "ESSENTIALS"}))
     UserPoolTierType.add_member(:plus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PLUS", traits: {"smithy.api#enumValue" => "PLUS"}))
@@ -2140,12 +2140,12 @@ module Aws::CognitoIdentityProvider
     UserVerificationType.add_member(:preferred, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PREFERRED", traits: {"smithy.api#enumValue" => "preferred"}))
     UsernameAttributeType.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PHONE_NUMBER", traits: {"smithy.api#enumValue" => "phone_number"}))
     UsernameAttributeType.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMAIL", traits: {"smithy.api#enumValue" => "email"}))
-    UsernameAttributesListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameAttributeType, name: "member")
+    UsernameAttributesListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameAttributeType, name: "member"))
     UsernameConfigurationType.add_member(:case_sensitive, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedBooleanType, name: "CaseSensitive", traits: {"smithy.api#required" => {}}))
     UsernameConfigurationType.type = Types::UsernameConfigurationType
     UsernameExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     UsernameExistsException.type = Types::UsernameExistsException
-    UsersListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserType, name: "member")
+    UsersListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserType, name: "member"))
     VerificationMessageTemplateType.add_member(:sms_message, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsVerificationMessageType, name: "SmsMessage"))
     VerificationMessageTemplateType.add_member(:email_message, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailVerificationMessageType, name: "EmailMessage"))
     VerificationMessageTemplateType.add_member(:email_subject, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailVerificationSubjectType, name: "EmailSubject"))
@@ -2155,7 +2155,7 @@ module Aws::CognitoIdentityProvider
     VerificationMessageTemplateType.type = Types::VerificationMessageTemplateType
     VerifiedAttributeType.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PHONE_NUMBER", traits: {"smithy.api#enumValue" => "phone_number"}))
     VerifiedAttributeType.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMAIL", traits: {"smithy.api#enumValue" => "email"}))
-    VerifiedAttributesListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedAttributeType, name: "member")
+    VerifiedAttributesListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedAttributeType, name: "member"))
     VerifySoftwareTokenRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenModelType, name: "AccessToken"))
     VerifySoftwareTokenRequest.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionType, name: "Session"))
     VerifySoftwareTokenRequest.add_member(:user_code, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareTokenMFAUserCodeType, name: "UserCode", traits: {"smithy.api#required" => {}}))
@@ -2171,7 +2171,7 @@ module Aws::CognitoIdentityProvider
     VerifyUserAttributeRequest.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfirmationCodeType, name: "Code", traits: {"smithy.api#required" => {}}))
     VerifyUserAttributeRequest.type = Types::VerifyUserAttributeRequest
     VerifyUserAttributeResponse.type = Types::VerifyUserAttributeResponse
-    WebAuthnAuthenticatorTransportsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WebAuthnAuthenticatorTransportType, name: "member")
+    WebAuthnAuthenticatorTransportsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAuthnAuthenticatorTransportType, name: "member"))
     WebAuthnChallengeNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     WebAuthnChallengeNotFoundException.type = Types::WebAuthnChallengeNotFoundException
     WebAuthnClientMismatchException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
@@ -2188,7 +2188,7 @@ module Aws::CognitoIdentityProvider
     WebAuthnCredentialDescription.add_member(:authenticator_transports, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAuthnAuthenticatorTransportsList, name: "AuthenticatorTransports", traits: {"smithy.api#required" => {}}))
     WebAuthnCredentialDescription.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "CreatedAt", traits: {"smithy.api#required" => {}}))
     WebAuthnCredentialDescription.type = Types::WebAuthnCredentialDescription
-    WebAuthnCredentialDescriptionListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WebAuthnCredentialDescription, name: "member")
+    WebAuthnCredentialDescriptionListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WebAuthnCredentialDescription, name: "member"))
     WebAuthnCredentialNotSupportedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))
     WebAuthnCredentialNotSupportedException.type = Types::WebAuthnCredentialNotSupportedException
     WebAuthnNotEnabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "message"))

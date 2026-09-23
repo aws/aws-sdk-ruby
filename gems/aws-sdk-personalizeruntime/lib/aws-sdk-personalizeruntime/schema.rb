@@ -46,12 +46,12 @@ module Aws::PersonalizeRuntime
     Score = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.personalizeruntime#Score", name: "Score")
     UserID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.personalizeruntime#UserID", name: "UserID", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
 
-    ActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PredictedAction, name: "member")
-    ColumnNamesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "member")
-    Context.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
-    Context.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
-    FilterValues.key = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterAttributeName, name: "key")
-    FilterValues.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterAttributeValue, name: "value")
+    ActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictedAction, name: "member"))
+    ColumnNamesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "member"))
+    Context.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
+    Context.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
+    FilterValues.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterAttributeName, name: "key"))
+    FilterValues.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterAttributeValue, name: "value"))
     GetActionRecommendationsRequest.add_member(:campaign_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "campaignArn"))
     GetActionRecommendationsRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserID, name: "userId"))
     GetActionRecommendationsRequest.add_member(:num_results, ::Smithy::Schema::Shapes::MemberShape.new(target: NumResults, name: "numResults", traits: {"smithy.api#default" => 0}))
@@ -86,14 +86,14 @@ module Aws::PersonalizeRuntime
     GetRecommendationsResponse.add_member(:item_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemList, name: "itemList"))
     GetRecommendationsResponse.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationID, name: "recommendationId"))
     GetRecommendationsResponse.type = Types::GetRecommendationsResponse
-    InputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ItemID, name: "member")
+    InputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemID, name: "member"))
     InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InvalidInputException.type = Types::InvalidInputException
-    ItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PredictedItem, name: "member")
-    Metadata.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "key")
-    Metadata.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnValue, name: "value")
-    MetadataColumns.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetType, name: "key")
-    MetadataColumns.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnNamesList, name: "value")
+    ItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictedItem, name: "member"))
+    Metadata.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "key"))
+    Metadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnValue, name: "value"))
+    MetadataColumns.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetType, name: "key"))
+    MetadataColumns.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnNamesList, name: "value"))
     PredictedAction.add_member(:action_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionID, name: "actionId"))
     PredictedAction.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Score, name: "score"))
     PredictedAction.type = Types::PredictedAction
@@ -108,8 +108,8 @@ module Aws::PersonalizeRuntime
     Promotion.add_member(:filter_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "filterArn"))
     Promotion.add_member(:filter_values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, name: "filterValues"))
     Promotion.type = Types::Promotion
-    PromotionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Promotion, name: "member")
-    ReasonList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Reason, name: "member")
+    PromotionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Promotion, name: "member"))
+    ReasonList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Reason, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
 

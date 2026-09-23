@@ -106,9 +106,9 @@ module Aws::Ivschat
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    ChatTokenAttributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    ChatTokenAttributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
-    ChatTokenCapabilities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChatTokenCapability, name: "member")
+    ChatTokenAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    ChatTokenAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
+    ChatTokenCapabilities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatTokenCapability, name: "member"))
     CloudWatchLogsDestinationConfiguration.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "logGroupName", traits: {"smithy.api#required" => {}}))
     CloudWatchLogsDestinationConfiguration.type = Types::CloudWatchLogsDestinationConfiguration
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
@@ -176,8 +176,8 @@ module Aws::Ivschat
     DisconnectUserInput.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: Reason, name: "reason"))
     DisconnectUserInput.type = Types::DisconnectUserInput
     DisconnectUserOutput.type = Types::DisconnectUserOutput
-    EventAttributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    EventAttributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    EventAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    EventAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     FirehoseDestinationConfiguration.add_member(:delivery_stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryStreamName, name: "deliveryStreamName", traits: {"smithy.api#required" => {}}))
     FirehoseDestinationConfiguration.type = Types::FirehoseDestinationConfiguration
     GetLoggingConfigurationInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfigurationIdentifier, name: "identifier", traits: {"smithy.api#required" => {}}))
@@ -225,8 +225,8 @@ module Aws::Ivschat
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
     ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    LoggingConfigurationIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfigurationIdentifier, name: "member")
-    LoggingConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfigurationSummary, name: "member")
+    LoggingConfigurationIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfigurationIdentifier, name: "member"))
+    LoggingConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfigurationSummary, name: "member"))
     LoggingConfigurationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfigurationArn, name: "arn"))
     LoggingConfigurationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfigurationID, name: "id"))
     LoggingConfigurationSummary.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "createTime"))
@@ -245,7 +245,7 @@ module Aws::Ivschat
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RoomList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoomSummary, name: "member")
+    RoomList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoomSummary, name: "member"))
     RoomSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoomArn, name: "arn"))
     RoomSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RoomID, name: "id"))
     RoomSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RoomName, name: "name"))
@@ -268,13 +268,13 @@ module Aws::Ivschat
     ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, name: "limit", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ThrottlingException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType", traits: {"smithy.api#required" => {}}))
@@ -322,7 +322,7 @@ module Aws::Ivschat
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldName, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
 
     AmazonInteractiveVideoServiceChat = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.ivschat#AmazonInteractiveVideoServiceChat"

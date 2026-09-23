@@ -351,7 +351,7 @@ module Aws::Athena
     ApplicationDPUSizes.add_member(:application_runtime_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "ApplicationRuntimeId"))
     ApplicationDPUSizes.add_member(:supported_dpu_sizes, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedDPUSizeList, name: "SupportedDPUSizes"))
     ApplicationDPUSizes.type = Types::ApplicationDPUSizes
-    ApplicationDPUSizesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationDPUSizes, name: "member")
+    ApplicationDPUSizesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationDPUSizes, name: "member"))
     AthenaError.add_member(:error_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCategory, name: "ErrorCategory"))
     AthenaError.add_member(:error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorType, name: "ErrorType"))
     AthenaError.add_member(:retryable, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Retryable", traits: {"smithy.api#default" => false}))
@@ -401,7 +401,7 @@ module Aws::Athena
     CalculationSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionString, name: "Description"))
     CalculationSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CalculationStatus, name: "Status"))
     CalculationSummary.type = Types::CalculationSummary
-    CalculationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CalculationSummary, name: "member")
+    CalculationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CalculationSummary, name: "member"))
     CancelCapacityReservationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityReservationName, name: "Name", traits: {"smithy.api#required" => {}}))
     CancelCapacityReservationInput.type = Types::CancelCapacityReservationInput
     CancelCapacityReservationOutput.type = Types::CancelCapacityReservationOutput
@@ -418,7 +418,7 @@ module Aws::Athena
     CapacityAssignmentConfiguration.add_member(:capacity_reservation_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityReservationName, name: "CapacityReservationName"))
     CapacityAssignmentConfiguration.add_member(:capacity_assignments, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityAssignmentsList, name: "CapacityAssignments"))
     CapacityAssignmentConfiguration.type = Types::CapacityAssignmentConfiguration
-    CapacityAssignmentsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityAssignment, name: "member")
+    CapacityAssignmentsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityAssignment, name: "member"))
     CapacityReservation.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityReservationName, name: "Name", traits: {"smithy.api#required" => {}}))
     CapacityReservation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityReservationStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     CapacityReservation.add_member(:target_dpus, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetDpusInteger, name: "TargetDpus", traits: {"smithy.api#required" => {}}))
@@ -433,7 +433,7 @@ module Aws::Athena
     CapacityReservationStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
     CapacityReservationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     CapacityReservationStatus.add_member(:update_pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_PENDING", traits: {"smithy.api#enumValue" => "UPDATE_PENDING"}))
-    CapacityReservationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityReservation, name: "member")
+    CapacityReservationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityReservation, name: "member"))
     Column.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
     Column.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TypeString, name: "Type"))
     Column.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentString, name: "Comment"))
@@ -449,8 +449,8 @@ module Aws::Athena
     ColumnInfo.add_member(:nullable, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnNullable, name: "Nullable"))
     ColumnInfo.add_member(:case_sensitive, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "CaseSensitive", traits: {"smithy.api#default" => false}))
     ColumnInfo.type = Types::ColumnInfo
-    ColumnInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnInfo, name: "member")
-    ColumnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Column, name: "member")
+    ColumnInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnInfo, name: "member"))
+    ColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Column, name: "member"))
     ColumnNullable.add_member(:not_null, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_NULL", traits: {"smithy.api#enumValue" => "NOT_NULL"}))
     ColumnNullable.add_member(:nullable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NULLABLE", traits: {"smithy.api#enumValue" => "NULLABLE"}))
     ColumnNullable.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
@@ -545,7 +545,7 @@ module Aws::Athena
     DataCatalogSummary.add_member(:connection_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionType, name: "ConnectionType"))
     DataCatalogSummary.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Error"))
     DataCatalogSummary.type = Types::DataCatalogSummary
-    DataCatalogSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataCatalogSummary, name: "member")
+    DataCatalogSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataCatalogSummary, name: "member"))
     DataCatalogType.add_member(:lambda, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAMBDA", traits: {"smithy.api#enumValue" => "LAMBDA"}))
     DataCatalogType.add_member(:glue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GLUE", traits: {"smithy.api#enumValue" => "GLUE"}))
     DataCatalogType.add_member(:hive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIVE", traits: {"smithy.api#enumValue" => "HIVE"}))
@@ -554,7 +554,7 @@ module Aws::Athena
     Database.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionString, name: "Description"))
     Database.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ParametersMap, name: "Parameters"))
     Database.type = Types::Database
-    DatabaseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Database, name: "member")
+    DatabaseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Database, name: "member"))
     Datum.add_member(:var_char_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DatumString, name: "VarCharValue"))
     Datum.type = Types::Datum
     DeleteCapacityReservationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityReservationName, name: "Name", traits: {"smithy.api#required" => {}}))
@@ -594,8 +594,8 @@ module Aws::Athena
     EngineVersion.add_member(:selected_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "SelectedEngineVersion"))
     EngineVersion.add_member(:effective_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "EffectiveEngineVersion"))
     EngineVersion.type = Types::EngineVersion
-    EngineVersionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EngineVersion, name: "member")
-    ExecutionParameters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionParameter, name: "member")
+    EngineVersionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineVersion, name: "member"))
+    ExecutionParameters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionParameter, name: "member"))
     ExecutorState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     ExecutorState.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
     ExecutorState.add_member(:registered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGISTERED", traits: {"smithy.api#enumValue" => "REGISTERED"}))
@@ -612,7 +612,7 @@ module Aws::Athena
     ExecutorsSummary.add_member(:executor_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutorState, name: "ExecutorState"))
     ExecutorsSummary.add_member(:executor_size, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "ExecutorSize"))
     ExecutorsSummary.type = Types::ExecutorsSummary
-    ExecutorsSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutorsSummary, name: "member")
+    ExecutorsSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutorsSummary, name: "member"))
     ExportNotebookInput.add_member(:notebook_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookId, name: "NotebookId", traits: {"smithy.api#required" => {}}))
     ExportNotebookInput.type = Types::ExportNotebookInput
     ExportNotebookOutput.add_member(:notebook_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookMetadata, name: "NotebookMetadata"))
@@ -868,8 +868,8 @@ module Aws::Athena
     NamedQuery.add_member(:named_query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NamedQueryId, name: "NamedQueryId"))
     NamedQuery.add_member(:work_group, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkGroupName, name: "WorkGroup"))
     NamedQuery.type = Types::NamedQuery
-    NamedQueryIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NamedQueryId, name: "member")
-    NamedQueryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NamedQuery, name: "member")
+    NamedQueryIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NamedQueryId, name: "member"))
+    NamedQueryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NamedQuery, name: "member"))
     NotebookMetadata.add_member(:notebook_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookId, name: "NotebookId"))
     NotebookMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookName, name: "Name"))
     NotebookMetadata.add_member(:work_group, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkGroupName, name: "WorkGroup"))
@@ -877,26 +877,26 @@ module Aws::Athena
     NotebookMetadata.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookType, name: "Type"))
     NotebookMetadata.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "LastModifiedTime"))
     NotebookMetadata.type = Types::NotebookMetadata
-    NotebookMetadataArray.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookMetadata, name: "member")
+    NotebookMetadataArray.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookMetadata, name: "member"))
     NotebookSessionSummary.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "SessionId"))
     NotebookSessionSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreationTime"))
     NotebookSessionSummary.type = Types::NotebookSessionSummary
-    NotebookSessionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookSessionSummary, name: "member")
+    NotebookSessionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookSessionSummary, name: "member"))
     NotebookType.add_member(:ipynb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPYNB", traits: {"smithy.api#enumValue" => "IPYNB"}))
-    ParametersMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyString, name: "key")
-    ParametersMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ParametersMapValue, name: "value")
+    ParametersMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyString, name: "key"))
+    ParametersMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParametersMapValue, name: "value"))
     PreparedStatement.add_member(:statement_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StatementName, name: "StatementName"))
     PreparedStatement.add_member(:query_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryString, name: "QueryStatement"))
     PreparedStatement.add_member(:work_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkGroupName, name: "WorkGroupName"))
     PreparedStatement.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionString, name: "Description"))
     PreparedStatement.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "LastModifiedTime"))
     PreparedStatement.type = Types::PreparedStatement
-    PreparedStatementDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PreparedStatement, name: "member")
-    PreparedStatementNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StatementName, name: "member")
+    PreparedStatementDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PreparedStatement, name: "member"))
+    PreparedStatementNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StatementName, name: "member"))
     PreparedStatementSummary.add_member(:statement_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StatementName, name: "StatementName"))
     PreparedStatementSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "LastModifiedTime"))
     PreparedStatementSummary.type = Types::PreparedStatementSummary
-    PreparedStatementsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PreparedStatementSummary, name: "member")
+    PreparedStatementsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PreparedStatementSummary, name: "member"))
     PutCapacityAssignmentConfigurationInput.add_member(:capacity_reservation_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityReservationName, name: "CapacityReservationName", traits: {"smithy.api#required" => {}}))
     PutCapacityAssignmentConfigurationInput.add_member(:capacity_assignments, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityAssignmentsList, name: "CapacityAssignments", traits: {"smithy.api#required" => {}}))
     PutCapacityAssignmentConfigurationInput.type = Types::PutCapacityAssignmentConfigurationInput
@@ -919,8 +919,8 @@ module Aws::Athena
     QueryExecutionContext.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseString, name: "Database"))
     QueryExecutionContext.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogNameString, name: "Catalog"))
     QueryExecutionContext.type = Types::QueryExecutionContext
-    QueryExecutionIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryExecutionId, name: "member")
-    QueryExecutionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryExecution, name: "member")
+    QueryExecutionIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryExecutionId, name: "member"))
+    QueryExecutionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryExecution, name: "member"))
     QueryExecutionState.add_member(:queued, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUEUED", traits: {"smithy.api#enumValue" => "QUEUED"}))
     QueryExecutionState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     QueryExecutionState.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
@@ -979,8 +979,8 @@ module Aws::Athena
     QueryStagePlanNode.add_member(:children, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStagePlanNodes, name: "Children"))
     QueryStagePlanNode.add_member(:remote_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "RemoteSources"))
     QueryStagePlanNode.type = Types::QueryStagePlanNode
-    QueryStagePlanNodes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStagePlanNode, name: "member")
-    QueryStages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStage, name: "member")
+    QueryStagePlanNodes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStagePlanNode, name: "member"))
+    QueryStages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStage, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ResourceNotFoundException.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceName"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
@@ -1012,7 +1012,7 @@ module Aws::Athena
     ResultSetMetadata.type = Types::ResultSetMetadata
     Row.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: DatumList, name: "Data"))
     Row.type = Types::Row
-    RowList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Row, name: "member")
+    RowList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Row, name: "member"))
     S3AclOption.add_member(:bucket_owner_full_control, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUCKET_OWNER_FULL_CONTROL", traits: {"smithy.api#enumValue" => "BUCKET_OWNER_FULL_CONTROL"}))
     SessionAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     SessionAlreadyExistsException.type = Types::SessionAlreadyExistsException
@@ -1044,7 +1044,7 @@ module Aws::Athena
     SessionSummary.add_member(:notebook_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "NotebookVersion"))
     SessionSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionStatus, name: "Status"))
     SessionSummary.type = Types::SessionSummary
-    SessionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SessionSummary, name: "member")
+    SessionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionSummary, name: "member"))
     StartCalculationExecutionRequest.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "SessionId", traits: {"smithy.api#required" => {}}))
     StartCalculationExecutionRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DescriptionString, name: "Description"))
     StartCalculationExecutionRequest.add_member(:calculation_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CalculationConfiguration, name: "CalculationConfiguration", traits: {"smithy.api#deprecated" => {"message" => "Structure is deprecated."}}))
@@ -1084,8 +1084,8 @@ module Aws::Athena
     StopQueryExecutionInput.add_member(:query_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryExecutionId, name: "QueryExecutionId", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
     StopQueryExecutionInput.type = Types::StopQueryExecutionInput
     StopQueryExecutionOutput.type = Types::StopQueryExecutionOutput
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    SupportedDPUSizeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    SupportedDPUSizeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "member"))
     TableMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "Name", traits: {"smithy.api#required" => {}}))
     TableMetadata.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreateTime"))
     TableMetadata.add_member(:last_access_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastAccessTime"))
@@ -1094,12 +1094,12 @@ module Aws::Athena
     TableMetadata.add_member(:partition_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnList, name: "PartitionKeys"))
     TableMetadata.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ParametersMap, name: "Parameters"))
     TableMetadata.type = Types::TableMetadata
-    TableMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TableMetadata, name: "member")
+    TableMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableMetadata, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -1116,17 +1116,17 @@ module Aws::Athena
     UnprocessedNamedQueryId.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     UnprocessedNamedQueryId.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage"))
     UnprocessedNamedQueryId.type = Types::UnprocessedNamedQueryId
-    UnprocessedNamedQueryIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedNamedQueryId, name: "member")
+    UnprocessedNamedQueryIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedNamedQueryId, name: "member"))
     UnprocessedPreparedStatementName.add_member(:statement_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StatementName, name: "StatementName"))
     UnprocessedPreparedStatementName.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     UnprocessedPreparedStatementName.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage"))
     UnprocessedPreparedStatementName.type = Types::UnprocessedPreparedStatementName
-    UnprocessedPreparedStatementNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedPreparedStatementName, name: "member")
+    UnprocessedPreparedStatementNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedPreparedStatementName, name: "member"))
     UnprocessedQueryExecutionId.add_member(:query_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryExecutionId, name: "QueryExecutionId"))
     UnprocessedQueryExecutionId.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     UnprocessedQueryExecutionId.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage"))
     UnprocessedQueryExecutionId.type = Types::UnprocessedQueryExecutionId
-    UnprocessedQueryExecutionIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedQueryExecutionId, name: "member")
+    UnprocessedQueryExecutionIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedQueryExecutionId, name: "member"))
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
@@ -1207,7 +1207,7 @@ module Aws::Athena
     WorkGroupConfigurationUpdates.add_member(:enable_minimum_encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "EnableMinimumEncryptionConfiguration"))
     WorkGroupConfigurationUpdates.add_member(:query_results_s3_access_grants_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryResultsS3AccessGrantsConfiguration, name: "QueryResultsS3AccessGrantsConfiguration"))
     WorkGroupConfigurationUpdates.type = Types::WorkGroupConfigurationUpdates
-    WorkGroupNamesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkGroupName, name: "member")
+    WorkGroupNamesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkGroupName, name: "member"))
     WorkGroupState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     WorkGroupState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     WorkGroupSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkGroupName, name: "Name"))
@@ -1217,8 +1217,8 @@ module Aws::Athena
     WorkGroupSummary.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineVersion, name: "EngineVersion"))
     WorkGroupSummary.add_member(:identity_center_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterApplicationArn, name: "IdentityCenterApplicationArn"))
     WorkGroupSummary.type = Types::WorkGroupSummary
-    WorkGroupsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkGroupSummary, name: "member")
-    DatumList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Datum, name: "member")
+    WorkGroupsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkGroupSummary, name: "member"))
+    DatumList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Datum, name: "member"))
 
     AmazonAthena = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.athena#AmazonAthena"

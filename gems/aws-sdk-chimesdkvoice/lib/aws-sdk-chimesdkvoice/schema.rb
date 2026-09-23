@@ -360,7 +360,7 @@ module Aws::ChimeSDKVoice
     Address.add_member(:postal_code_plus4, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveNonEmptyString, name: "postalCodePlus4"))
     Address.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveNonEmptyString, name: "country"))
     Address.type = Types::Address
-    AlexaSkillIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AlexaSkillId, name: "member")
+    AlexaSkillIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AlexaSkillId, name: "member"))
     AlexaSkillStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     AlexaSkillStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     AssociatePhoneNumbersWithVoiceConnectorGroupRequest.add_member(:voice_connector_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorGroupId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -396,7 +396,7 @@ module Aws::ChimeSDKVoice
     CallingNameStatus.add_member(:update_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UpdateInProgress", traits: {"smithy.api#enumValue" => "UpdateInProgress"}))
     CallingNameStatus.add_member(:update_succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UpdateSucceeded", traits: {"smithy.api#enumValue" => "UpdateSucceeded"}))
     CallingNameStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UpdateFailed", traits: {"smithy.api#enumValue" => "UpdateFailed"}))
-    CallingRegionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CallingRegion, name: "member")
+    CallingRegionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CallingRegion, name: "member"))
     CandidateAddress.add_member(:street_info, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveNonEmptyString, name: "streetInfo"))
     CandidateAddress.add_member(:street_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveNonEmptyString, name: "streetNumber"))
     CandidateAddress.add_member(:city, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveNonEmptyString, name: "city"))
@@ -405,10 +405,10 @@ module Aws::ChimeSDKVoice
     CandidateAddress.add_member(:postal_code_plus4, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveNonEmptyString, name: "postalCodePlus4"))
     CandidateAddress.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveNonEmptyString, name: "country"))
     CandidateAddress.type = Types::CandidateAddress
-    CandidateAddressList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CandidateAddress, name: "member", traits: {"smithy.api#xmlName" => "CandidateAddress"})
+    CandidateAddressList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CandidateAddress, name: "member", traits: {"smithy.api#xmlName" => "CandidateAddress"}))
     Capability.add_member(:voice, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Voice", traits: {"smithy.api#enumValue" => "Voice"}))
     Capability.add_member(:sms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMS", traits: {"smithy.api#enumValue" => "SMS"}))
-    CapabilityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Capability, name: "member")
+    CapabilityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Capability, name: "member"))
     ConflictException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "Code"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ConflictException.type = Types::ConflictException
@@ -416,8 +416,8 @@ module Aws::ChimeSDKVoice
     ContactCenterSystemType.add_member(:avaya_aura_call_center_elite, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAYA_AURA_CALL_CENTER_ELITE", traits: {"smithy.api#enumValue" => "AVAYA_AURA_CALL_CENTER_ELITE"}))
     ContactCenterSystemType.add_member(:avaya_aura_contact_center, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAYA_AURA_CONTACT_CENTER", traits: {"smithy.api#enumValue" => "AVAYA_AURA_CONTACT_CENTER"}))
     ContactCenterSystemType.add_member(:cisco_unified_contact_center_enterprise, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CISCO_UNIFIED_CONTACT_CENTER_ENTERPRISE", traits: {"smithy.api#enumValue" => "CISCO_UNIFIED_CONTACT_CENTER_ENTERPRISE"}))
-    ContactCenterSystemTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactCenterSystemType, name: "member")
-    CountryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Country, name: "member")
+    ContactCenterSystemTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactCenterSystemType, name: "member"))
+    CountryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Country, name: "member"))
     CreatePhoneNumberOrderRequest.add_member(:product_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberProductType, name: "ProductType", traits: {"smithy.api#required" => {}}))
     CreatePhoneNumberOrderRequest.add_member(:e164_phone_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumberList, name: "E164PhoneNumbers", traits: {"smithy.api#required" => {}}))
     CreatePhoneNumberOrderRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberName, name: "Name"))
@@ -487,12 +487,12 @@ module Aws::ChimeSDKVoice
     Credential.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Username"))
     Credential.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Password"))
     Credential.type = Types::Credential
-    CredentialList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Credential, name: "member")
+    CredentialList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Credential, name: "member"))
     DNISEmergencyCallingConfiguration.add_member(:emergency_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumber, name: "EmergencyPhoneNumber", traits: {"smithy.api#required" => {}}))
     DNISEmergencyCallingConfiguration.add_member(:test_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumber, name: "TestPhoneNumber"))
     DNISEmergencyCallingConfiguration.add_member(:calling_country, ::Smithy::Schema::Shapes::MemberShape.new(target: Alpha2CountryCode, name: "CallingCountry", traits: {"smithy.api#required" => {}}))
     DNISEmergencyCallingConfiguration.type = Types::DNISEmergencyCallingConfiguration
-    DNISEmergencyCallingConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DNISEmergencyCallingConfiguration, name: "member")
+    DNISEmergencyCallingConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DNISEmergencyCallingConfiguration, name: "member"))
     DeletePhoneNumberRequest.add_member(:phone_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveNonEmptyString, name: "PhoneNumberId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeletePhoneNumberRequest.type = Types::DeletePhoneNumberRequest
     DeleteProxySessionRequest.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString128, name: "VoiceConnectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -535,7 +535,7 @@ module Aws::ChimeSDKVoice
     DisassociatePhoneNumbersFromVoiceConnectorRequest.type = Types::DisassociatePhoneNumbersFromVoiceConnectorRequest
     DisassociatePhoneNumbersFromVoiceConnectorResponse.add_member(:phone_number_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberErrorList, name: "PhoneNumberErrors"))
     DisassociatePhoneNumbersFromVoiceConnectorResponse.type = Types::DisassociatePhoneNumbersFromVoiceConnectorResponse
-    E164PhoneNumberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumber, name: "member")
+    E164PhoneNumberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumber, name: "member"))
     EmergencyCallingConfiguration.add_member(:dnis, ::Smithy::Schema::Shapes::MemberShape.new(target: DNISEmergencyCallingConfigurationList, name: "DNIS"))
     EmergencyCallingConfiguration.type = Types::EmergencyCallingConfiguration
     ErrorCode.add_member(:bad_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BadRequest", traits: {"smithy.api#enumValue" => "BadRequest"}))
@@ -746,7 +746,7 @@ module Aws::ChimeSDKVoice
     MediaInsightsConfiguration.type = Types::MediaInsightsConfiguration
     NetworkType.add_member(:ipv4_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4_ONLY", traits: {"smithy.api#enumValue" => "IPV4_ONLY"}))
     NetworkType.add_member(:dual_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUAL_STACK", traits: {"smithy.api#enumValue" => "DUAL_STACK"}))
-    NonEmptyStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    NonEmptyStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     NotFoundException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "Code"))
     NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     NotFoundException.type = Types::NotFoundException
@@ -758,7 +758,7 @@ module Aws::ChimeSDKVoice
     OrderedPhoneNumber.add_member(:e164_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumber, name: "E164PhoneNumber"))
     OrderedPhoneNumber.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderedPhoneNumberStatus, name: "Status"))
     OrderedPhoneNumber.type = Types::OrderedPhoneNumber
-    OrderedPhoneNumberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrderedPhoneNumber, name: "member")
+    OrderedPhoneNumberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderedPhoneNumber, name: "member"))
     OrderedPhoneNumberStatus.add_member(:processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Processing", traits: {"smithy.api#enumValue" => "Processing"}))
     OrderedPhoneNumberStatus.add_member(:acquired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Acquired", traits: {"smithy.api#enumValue" => "Acquired"}))
     OrderedPhoneNumberStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
@@ -771,14 +771,14 @@ module Aws::ChimeSDKVoice
     OriginationRoute.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginationRoutePriority, name: "Priority"))
     OriginationRoute.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginationRouteWeight, name: "Weight"))
     OriginationRoute.type = Types::OriginationRoute
-    OriginationRouteList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OriginationRoute, name: "member")
+    OriginationRouteList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginationRoute, name: "member"))
     OriginationRouteProtocol.add_member(:tcp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TCP", traits: {"smithy.api#enumValue" => "TCP"}))
     OriginationRouteProtocol.add_member(:udp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UDP", traits: {"smithy.api#enumValue" => "UDP"}))
     Participant.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumber, name: "PhoneNumber"))
     Participant.add_member(:proxy_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumber, name: "ProxyPhoneNumber"))
     Participant.type = Types::Participant
-    ParticipantPhoneNumberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumber, name: "member")
-    Participants.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Participant, name: "member")
+    ParticipantPhoneNumberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumber, name: "member"))
+    Participants.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Participant, name: "member"))
     PhoneNumber.add_member(:phone_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveNonEmptyString, name: "PhoneNumberId"))
     PhoneNumber.add_member(:e164_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumber, name: "E164PhoneNumber"))
     PhoneNumber.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: Alpha2CountryCode, name: "Country"))
@@ -799,7 +799,7 @@ module Aws::ChimeSDKVoice
     PhoneNumberAssociation.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberAssociationName, name: "Name"))
     PhoneNumberAssociation.add_member(:associated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "AssociatedTimestamp"))
     PhoneNumberAssociation.type = Types::PhoneNumberAssociation
-    PhoneNumberAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberAssociation, name: "member")
+    PhoneNumberAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberAssociation, name: "member"))
     PhoneNumberAssociationName.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VoiceConnectorId", traits: {"smithy.api#enumValue" => "VoiceConnectorId"}))
     PhoneNumberAssociationName.add_member(:voice_connector_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VoiceConnectorGroupId", traits: {"smithy.api#enumValue" => "VoiceConnectorGroupId"}))
     PhoneNumberAssociationName.add_member(:sip_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SipRuleId", traits: {"smithy.api#enumValue" => "SipRuleId"}))
@@ -810,7 +810,7 @@ module Aws::ChimeSDKVoice
     PhoneNumberCapabilities.add_member(:inbound_mms, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "InboundMMS"))
     PhoneNumberCapabilities.add_member(:outbound_mms, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "OutboundMMS"))
     PhoneNumberCapabilities.type = Types::PhoneNumberCapabilities
-    PhoneNumberCountriesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberCountry, name: "member")
+    PhoneNumberCountriesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberCountry, name: "member"))
     PhoneNumberCountry.add_member(:country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: Alpha2CountryCode, name: "CountryCode"))
     PhoneNumberCountry.add_member(:supported_phone_number_types, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberTypeList, name: "SupportedPhoneNumberTypes"))
     PhoneNumberCountry.type = Types::PhoneNumberCountry
@@ -818,8 +818,8 @@ module Aws::ChimeSDKVoice
     PhoneNumberError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     PhoneNumberError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorMessage"))
     PhoneNumberError.type = Types::PhoneNumberError
-    PhoneNumberErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberError, name: "member")
-    PhoneNumberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "member")
+    PhoneNumberErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberError, name: "member"))
+    PhoneNumberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "member"))
     PhoneNumberOrder.add_member(:phone_number_order_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GuidString, name: "PhoneNumberOrderId"))
     PhoneNumberOrder.add_member(:product_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberProductType, name: "ProductType"))
     PhoneNumberOrder.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberOrderStatus, name: "Status"))
@@ -829,7 +829,7 @@ module Aws::ChimeSDKVoice
     PhoneNumberOrder.add_member(:updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "UpdatedTimestamp"))
     PhoneNumberOrder.add_member(:foc_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "FocDate"))
     PhoneNumberOrder.type = Types::PhoneNumberOrder
-    PhoneNumberOrderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberOrder, name: "member")
+    PhoneNumberOrderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberOrder, name: "member"))
     PhoneNumberOrderStatus.add_member(:processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Processing", traits: {"smithy.api#enumValue" => "Processing"}))
     PhoneNumberOrderStatus.add_member(:successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Successful", traits: {"smithy.api#enumValue" => "Successful"}))
     PhoneNumberOrderStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
@@ -858,7 +858,7 @@ module Aws::ChimeSDKVoice
     PhoneNumberStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DeleteFailed", traits: {"smithy.api#enumValue" => "DeleteFailed"}))
     PhoneNumberType.add_member(:local, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Local", traits: {"smithy.api#enumValue" => "Local"}))
     PhoneNumberType.add_member(:toll_free, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TollFree", traits: {"smithy.api#enumValue" => "TollFree"}))
-    PhoneNumberTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberType, name: "member")
+    PhoneNumberTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberType, name: "member"))
     Proxy.add_member(:default_session_expiry_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "DefaultSessionExpiryMinutes"))
     Proxy.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Disabled"))
     Proxy.add_member(:fall_back_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumber, name: "FallBackPhoneNumber"))
@@ -881,7 +881,7 @@ module Aws::ChimeSDKVoice
     ProxySessionStatus.add_member(:open, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Open", traits: {"smithy.api#enumValue" => "Open"}))
     ProxySessionStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InProgress", traits: {"smithy.api#enumValue" => "InProgress"}))
     ProxySessionStatus.add_member(:closed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Closed", traits: {"smithy.api#enumValue" => "Closed"}))
-    ProxySessions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProxySession, name: "member")
+    ProxySessions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProxySession, name: "member"))
     PutSipMediaApplicationAlexaSkillConfigurationRequest.add_member(:sip_media_application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SipMediaApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutSipMediaApplicationAlexaSkillConfigurationRequest.add_member(:sip_media_application_alexa_skill_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SipMediaApplicationAlexaSkillConfiguration, name: "SipMediaApplicationAlexaSkillConfiguration"))
     PutSipMediaApplicationAlexaSkillConfigurationRequest.type = Types::PutSipMediaApplicationAlexaSkillConfigurationRequest
@@ -941,10 +941,10 @@ module Aws::ChimeSDKVoice
     RestorePhoneNumberRequest.type = Types::RestorePhoneNumberRequest
     RestorePhoneNumberResponse.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "PhoneNumber"))
     RestorePhoneNumberResponse.type = Types::RestorePhoneNumberResponse
-    SMACreateCallArgumentsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "key")
-    SMACreateCallArgumentsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "value")
-    SMAUpdateCallArgumentsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "key")
-    SMAUpdateCallArgumentsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "value")
+    SMACreateCallArgumentsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "key"))
+    SMACreateCallArgumentsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "value"))
+    SMAUpdateCallArgumentsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "key"))
+    SMAUpdateCallArgumentsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "value"))
     SearchAvailablePhoneNumbersRequest.add_member(:area_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AreaCode", traits: {"smithy.api#httpQuery" => "area-code"}))
     SearchAvailablePhoneNumbersRequest.add_member(:city, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "City", traits: {"smithy.api#httpQuery" => "city"}))
     SearchAvailablePhoneNumbersRequest.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: Alpha2CountryCode, name: "Country", traits: {"smithy.api#httpQuery" => "country"}))
@@ -957,7 +957,7 @@ module Aws::ChimeSDKVoice
     SearchAvailablePhoneNumbersResponse.add_member(:e164_phone_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumberList, name: "E164PhoneNumbers"))
     SearchAvailablePhoneNumbersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     SearchAvailablePhoneNumbersResponse.type = Types::SearchAvailablePhoneNumbersResponse
-    SensitiveStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "member")
+    SensitiveStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "member"))
     ServerSideEncryptionConfiguration.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "KmsKeyArn", traits: {"smithy.api#required" => {}}))
     ServerSideEncryptionConfiguration.type = Types::ServerSideEncryptionConfiguration
     ServiceFailureException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "Code"))
@@ -971,9 +971,9 @@ module Aws::ChimeSDKVoice
     SessionBorderControllerType.add_member(:avaya_sbce, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAYA_SBCE", traits: {"smithy.api#enumValue" => "AVAYA_SBCE"}))
     SessionBorderControllerType.add_member(:cisco_unified_border_element, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CISCO_UNIFIED_BORDER_ELEMENT", traits: {"smithy.api#enumValue" => "CISCO_UNIFIED_BORDER_ELEMENT"}))
     SessionBorderControllerType.add_member(:audiocodes_mediant_sbc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUDIOCODES_MEDIANT_SBC", traits: {"smithy.api#enumValue" => "AUDIOCODES_MEDIANT_SBC"}))
-    SessionBorderControllerTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SessionBorderControllerType, name: "member")
-    SipHeadersMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "key")
-    SipHeadersMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "value")
+    SessionBorderControllerTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionBorderControllerType, name: "member"))
+    SipHeadersMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "key"))
+    SipHeadersMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "value"))
     SipMediaApplication.add_member(:sip_media_application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SipMediaApplicationId"))
     SipMediaApplication.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AwsRegion"))
     SipMediaApplication.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SipMediaApplicationName, name: "Name"))
@@ -989,8 +989,8 @@ module Aws::ChimeSDKVoice
     SipMediaApplicationCall.type = Types::SipMediaApplicationCall
     SipMediaApplicationEndpoint.add_member(:lambda_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionArn, name: "LambdaArn"))
     SipMediaApplicationEndpoint.type = Types::SipMediaApplicationEndpoint
-    SipMediaApplicationEndpointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SipMediaApplicationEndpoint, name: "member")
-    SipMediaApplicationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SipMediaApplication, name: "member")
+    SipMediaApplicationEndpointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SipMediaApplicationEndpoint, name: "member"))
+    SipMediaApplicationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SipMediaApplication, name: "member"))
     SipMediaApplicationLoggingConfiguration.add_member(:enable_sip_media_application_message_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableSipMediaApplicationMessageLogs"))
     SipMediaApplicationLoggingConfiguration.type = Types::SipMediaApplicationLoggingConfiguration
     SipRule.add_member(:sip_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SipRuleId"))
@@ -1002,12 +1002,12 @@ module Aws::ChimeSDKVoice
     SipRule.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "CreatedTimestamp"))
     SipRule.add_member(:updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "UpdatedTimestamp"))
     SipRule.type = Types::SipRule
-    SipRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SipRule, name: "member")
+    SipRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SipRule, name: "member"))
     SipRuleTargetApplication.add_member(:sip_media_application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SipMediaApplicationId"))
     SipRuleTargetApplication.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: SipApplicationPriority, name: "Priority"))
     SipRuleTargetApplication.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AwsRegion"))
     SipRuleTargetApplication.type = Types::SipRuleTargetApplication
-    SipRuleTargetApplicationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SipRuleTargetApplication, name: "member")
+    SipRuleTargetApplicationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SipRuleTargetApplication, name: "member"))
     SipRuleTriggerType.add_member(:to_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ToPhoneNumber", traits: {"smithy.api#enumValue" => "ToPhoneNumber"}))
     SipRuleTriggerType.add_member(:request_uri_hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RequestUriHostname", traits: {"smithy.api#enumValue" => "RequestUriHostname"}))
     SpeakerSearchDetails.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerSearchResultList, name: "Results"))
@@ -1016,7 +1016,7 @@ module Aws::ChimeSDKVoice
     SpeakerSearchResult.add_member(:confidence_score, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfidenceScore, name: "ConfidenceScore", traits: {"smithy.api#default" => 0}))
     SpeakerSearchResult.add_member(:voice_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString256, name: "VoiceProfileId"))
     SpeakerSearchResult.type = Types::SpeakerSearchResult
-    SpeakerSearchResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerSearchResult, name: "member")
+    SpeakerSearchResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerSearchResult, name: "member"))
     SpeakerSearchTask.add_member(:speaker_search_task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString256, name: "SpeakerSearchTaskId"))
     SpeakerSearchTask.add_member(:speaker_search_task_status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "SpeakerSearchTaskStatus"))
     SpeakerSearchTask.add_member(:call_details, ::Smithy::Schema::Shapes::MemberShape.new(target: CallDetails, name: "CallDetails"))
@@ -1054,13 +1054,13 @@ module Aws::ChimeSDKVoice
     StreamingConfiguration.type = Types::StreamingConfiguration
     StreamingNotificationTarget.add_member(:notification_target, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationTarget, name: "NotificationTarget"))
     StreamingNotificationTarget.type = Types::StreamingNotificationTarget
-    StreamingNotificationTargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamingNotificationTarget, name: "member")
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    StreamingNotificationTargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamingNotificationTarget, name: "member"))
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -1097,7 +1097,7 @@ module Aws::ChimeSDKVoice
     UpdatePhoneNumberRequestItem.add_member(:calling_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CallingName, name: "CallingName"))
     UpdatePhoneNumberRequestItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberName, name: "Name"))
     UpdatePhoneNumberRequestItem.type = Types::UpdatePhoneNumberRequestItem
-    UpdatePhoneNumberRequestItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatePhoneNumberRequestItem, name: "member")
+    UpdatePhoneNumberRequestItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatePhoneNumberRequestItem, name: "member"))
     UpdatePhoneNumberResponse.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "PhoneNumber"))
     UpdatePhoneNumberResponse.type = Types::UpdatePhoneNumberResponse
     UpdatePhoneNumberSettingsRequest.add_member(:calling_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CallingName, name: "CallingName", traits: {"smithy.api#required" => {}}))
@@ -1185,7 +1185,7 @@ module Aws::ChimeSDKVoice
     VoiceConnectorAwsRegion.add_member(:ap_northeast_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AP_NORTHEAST_1", traits: {"smithy.api#enumValue" => "ap-northeast-1"}))
     VoiceConnectorAwsRegion.add_member(:ap_southeast_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AP_SOUTHEAST_1", traits: {"smithy.api#enumValue" => "ap-southeast-1"}))
     VoiceConnectorAwsRegion.add_member(:ap_southeast_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AP_SOUTHEAST_2", traits: {"smithy.api#enumValue" => "ap-southeast-2"}))
-    VoiceConnectorAwsRegionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorAwsRegion, name: "member")
+    VoiceConnectorAwsRegionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorAwsRegion, name: "member"))
     VoiceConnectorGroup.add_member(:voice_connector_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorGroupId"))
     VoiceConnectorGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorGroupName, name: "Name"))
     VoiceConnectorGroup.add_member(:voice_connector_items, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorItemList, name: "VoiceConnectorItems"))
@@ -1193,14 +1193,14 @@ module Aws::ChimeSDKVoice
     VoiceConnectorGroup.add_member(:updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "UpdatedTimestamp"))
     VoiceConnectorGroup.add_member(:voice_connector_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorGroupArn"))
     VoiceConnectorGroup.type = Types::VoiceConnectorGroup
-    VoiceConnectorGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorGroup, name: "member")
+    VoiceConnectorGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorGroup, name: "member"))
     VoiceConnectorIntegrationType.add_member(:connect_call_transfer_connector, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECT_CALL_TRANSFER_CONNECTOR", traits: {"smithy.api#enumValue" => "CONNECT_CALL_TRANSFER_CONNECTOR"}))
     VoiceConnectorIntegrationType.add_member(:connect_analytics_connector, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECT_ANALYTICS_CONNECTOR", traits: {"smithy.api#enumValue" => "CONNECT_ANALYTICS_CONNECTOR"}))
     VoiceConnectorItem.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceConnectorId", traits: {"smithy.api#required" => {}}))
     VoiceConnectorItem.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorItemPriority, name: "Priority", traits: {"smithy.api#required" => {}}))
     VoiceConnectorItem.type = Types::VoiceConnectorItem
-    VoiceConnectorItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorItem, name: "member")
-    VoiceConnectorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnector, name: "member")
+    VoiceConnectorItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnectorItem, name: "member"))
+    VoiceConnectorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceConnector, name: "member"))
     VoiceConnectorSettings.add_member(:cdr_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CdrBucket"))
     VoiceConnectorSettings.type = Types::VoiceConnectorSettings
     VoiceProfile.add_member(:voice_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString256, name: "VoiceProfileId"))
@@ -1225,7 +1225,7 @@ module Aws::ChimeSDKVoice
     VoiceProfileDomainSummary.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "CreatedTimestamp"))
     VoiceProfileDomainSummary.add_member(:updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "UpdatedTimestamp"))
     VoiceProfileDomainSummary.type = Types::VoiceProfileDomainSummary
-    VoiceProfileDomainSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceProfileDomainSummary, name: "member")
+    VoiceProfileDomainSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceProfileDomainSummary, name: "member"))
     VoiceProfileSummary.add_member(:voice_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString256, name: "VoiceProfileId"))
     VoiceProfileSummary.add_member(:voice_profile_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "VoiceProfileArn"))
     VoiceProfileSummary.add_member(:voice_profile_domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString256, name: "VoiceProfileDomainId"))
@@ -1233,7 +1233,7 @@ module Aws::ChimeSDKVoice
     VoiceProfileSummary.add_member(:updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "UpdatedTimestamp"))
     VoiceProfileSummary.add_member(:expiration_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "ExpirationTimestamp"))
     VoiceProfileSummary.type = Types::VoiceProfileSummary
-    VoiceProfileSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceProfileSummary, name: "member")
+    VoiceProfileSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceProfileSummary, name: "member"))
     VoiceToneAnalysisTask.add_member(:voice_tone_analysis_task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString256, name: "VoiceToneAnalysisTaskId"))
     VoiceToneAnalysisTask.add_member(:voice_tone_analysis_task_status, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "VoiceToneAnalysisTaskStatus"))
     VoiceToneAnalysisTask.add_member(:call_details, ::Smithy::Schema::Shapes::MemberShape.new(target: CallDetails, name: "CallDetails"))

@@ -358,8 +358,8 @@ module Aws::Schemas
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "tags", "smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     TooManyRequestsException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TooManyRequestsException.type = Types::TooManyRequestsException
@@ -407,14 +407,14 @@ module Aws::Schemas
     UpdateSchemaResponse.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
     UpdateSchemaResponse.add_member(:version_created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "VersionCreatedDate"))
     UpdateSchemaResponse.type = Types::UpdateSchemaResponse
-    Listofdiscoverersummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DiscovererSummary, name: "member")
-    Listofgetdiscoveredschemaversioniteminput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GetDiscoveredSchemaVersionItemInput, name: "member")
-    Listofregistrysummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrySummary, name: "member")
-    Listofschemasummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaSummary, name: "member")
-    Listofschemaversionsummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaVersionSummary, name: "member")
-    Listofsearchschemasummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSchemaSummary, name: "member")
-    Listofsearchschemaversionsummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSchemaVersionSummary, name: "member")
-    ListofString.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    Listofdiscoverersummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscovererSummary, name: "member"))
+    Listofgetdiscoveredschemaversioniteminput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GetDiscoveredSchemaVersionItemInput, name: "member"))
+    Listofregistrysummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrySummary, name: "member"))
+    Listofschemasummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaSummary, name: "member"))
+    Listofschemaversionsummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaVersionSummary, name: "member"))
+    Listofsearchschemasummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSchemaSummary, name: "member"))
+    Listofsearchschemaversionsummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSchemaVersionSummary, name: "member"))
+    ListofString.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
 
     Schemas = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.schemas#schemas"

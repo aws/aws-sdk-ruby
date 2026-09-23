@@ -235,7 +235,7 @@ module Aws::MigrationHubStrategy
     AnalyzableServerSummary.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "source"))
     AnalyzableServerSummary.add_member(:vm_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "vmId"))
     AnalyzableServerSummary.type = Types::AnalyzableServerSummary
-    AnalyzableServerSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzableServerSummary, name: "member")
+    AnalyzableServerSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzableServerSummary, name: "member"))
     AnalyzerNameUnion.add_member(:binary_analyzer_name, Types::AnalyzerNameUnion::BinaryAnalyzerName, ::Smithy::Schema::Shapes::MemberShape.new(target: BinaryAnalyzerName, name: "binaryAnalyzerName"))
     AnalyzerNameUnion.add_member(:run_time_analyzer_name, Types::AnalyzerNameUnion::RunTimeAnalyzerName, ::Smithy::Schema::Shapes::MemberShape.new(target: RunTimeAnalyzerName, name: "runTimeAnalyzerName"))
     AnalyzerNameUnion.add_member(:source_code_analyzer_name, Types::AnalyzerNameUnion::SourceCodeAnalyzerName, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceCodeAnalyzerName, name: "sourceCodeAnalyzerName"))
@@ -246,7 +246,7 @@ module Aws::MigrationHubStrategy
     AntipatternReportResult.add_member(:antipattern_report_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AntipatternReportStatus, name: "antipatternReportStatus"))
     AntipatternReportResult.add_member(:antipattern_report_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessage, name: "antipatternReportStatusMessage"))
     AntipatternReportResult.type = Types::AntipatternReportResult
-    AntipatternReportResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AntipatternReportResult, name: "member")
+    AntipatternReportResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AntipatternReportResult, name: "member"))
     AntipatternSeveritySummary.add_member(:severity, ::Smithy::Schema::Shapes::MemberShape.new(target: Severity, name: "severity"))
     AntipatternSeveritySummary.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "count"))
     AntipatternSeveritySummary.type = Types::AntipatternSeveritySummary
@@ -276,11 +276,11 @@ module Aws::MigrationHubStrategy
     ApplicationComponentDetail.add_member(:app_unit_error, ::Smithy::Schema::Shapes::MemberShape.new(target: AppUnitError, name: "appUnitError"))
     ApplicationComponentDetail.add_member(:result_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultList, name: "resultList"))
     ApplicationComponentDetail.type = Types::ApplicationComponentDetail
-    ApplicationComponentDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationComponentDetail, name: "member")
+    ApplicationComponentDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationComponentDetail, name: "member"))
     ApplicationComponentStatusSummary.add_member(:src_code_or_db_analysis_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SrcCodeOrDbAnalysisStatus, name: "srcCodeOrDbAnalysisStatus"))
     ApplicationComponentStatusSummary.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "count"))
     ApplicationComponentStatusSummary.type = Types::ApplicationComponentStatusSummary
-    ApplicationComponentStrategies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationComponentStrategy, name: "member")
+    ApplicationComponentStrategies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationComponentStrategy, name: "member"))
     ApplicationComponentStrategy.add_member(:recommendation, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationSet, name: "recommendation"))
     ApplicationComponentStrategy.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StrategyRecommendation, name: "status"))
     ApplicationComponentStrategy.add_member(:is_preferred, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isPreferred"))
@@ -306,16 +306,16 @@ module Aws::MigrationHubStrategy
     AssessmentTarget.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#required" => {}}))
     AssessmentTarget.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentTargetValues, name: "values", traits: {"smithy.api#required" => {}}))
     AssessmentTarget.type = Types::AssessmentTarget
-    AssessmentTargetValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    AssessmentTargets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentTarget, name: "member")
+    AssessmentTargetValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    AssessmentTargets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentTarget, name: "member"))
     AssociatedApplication.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     AssociatedApplication.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "id"))
     AssociatedApplication.type = Types::AssociatedApplication
-    AssociatedApplications.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedApplication, name: "member")
-    AssociatedServerIDs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    AssociatedApplications.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedApplication, name: "member"))
+    AssociatedServerIDs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     AwsManagedResources.add_member(:target_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsManagedTargetDestinations, name: "targetDestination", traits: {"smithy.api#required" => {}}))
     AwsManagedResources.type = Types::AwsManagedResources
-    AwsManagedTargetDestinations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsManagedTargetDestination, name: "member")
+    AwsManagedTargetDestinations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsManagedTargetDestination, name: "member"))
     BusinessGoals.add_member(:speed_of_migration, ::Smithy::Schema::Shapes::MemberShape.new(target: BusinessGoalsInteger, name: "speedOfMigration"))
     BusinessGoals.add_member(:reduce_operational_overhead_with_managed_services, ::Smithy::Schema::Shapes::MemberShape.new(target: BusinessGoalsInteger, name: "reduceOperationalOverheadWithManagedServices"))
     BusinessGoals.add_member(:modernize_infrastructure_with_cloud_native_technologies, ::Smithy::Schema::Shapes::MemberShape.new(target: BusinessGoalsInteger, name: "modernizeInfrastructureWithCloudNativeTechnologies"))
@@ -330,7 +330,7 @@ module Aws::MigrationHubStrategy
     Collector.add_member(:last_activity_time_stamp, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "lastActivityTimeStamp"))
     Collector.add_member(:configuration_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSummary, name: "configurationSummary"))
     Collector.type = Types::Collector
-    Collectors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Collector, name: "member")
+    Collectors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Collector, name: "member"))
     ConfigurationSummary.add_member(:vcenter_based_remote_info_list, ::Smithy::Schema::Shapes::MemberShape.new(target: VcenterBasedRemoteInfoList, name: "vcenterBasedRemoteInfoList"))
     ConfigurationSummary.add_member(:ip_address_based_remote_info_list, ::Smithy::Schema::Shapes::MemberShape.new(target: IPAddressBasedRemoteInfoList, name: "ipAddressBasedRemoteInfoList"))
     ConfigurationSummary.add_member(:version_control_info_list, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionControlInfoList, name: "versionControlInfoList"))
@@ -423,18 +423,18 @@ module Aws::MigrationHubStrategy
     Group.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, name: "name"))
     Group.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     Group.type = Types::Group
-    GroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Group, name: "member")
+    GroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Group, name: "member"))
     Heterogeneous.add_member(:target_database_engine, ::Smithy::Schema::Shapes::MemberShape.new(target: HeterogeneousTargetDatabaseEngines, name: "targetDatabaseEngine", traits: {"smithy.api#required" => {}}))
     Heterogeneous.type = Types::Heterogeneous
-    HeterogeneousTargetDatabaseEngines.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HeterogeneousTargetDatabaseEngine, name: "member")
+    HeterogeneousTargetDatabaseEngines.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HeterogeneousTargetDatabaseEngine, name: "member"))
     Homogeneous.add_member(:target_database_engine, ::Smithy::Schema::Shapes::MemberShape.new(target: HomogeneousTargetDatabaseEngines, name: "targetDatabaseEngine"))
     Homogeneous.type = Types::Homogeneous
-    HomogeneousTargetDatabaseEngines.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HomogeneousTargetDatabaseEngine, name: "member")
+    HomogeneousTargetDatabaseEngines.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HomogeneousTargetDatabaseEngine, name: "member"))
     IPAddressBasedRemoteInfo.add_member(:ip_address_configuration_time_stamp, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ipAddressConfigurationTimeStamp"))
     IPAddressBasedRemoteInfo.add_member(:auth_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthType, name: "authType"))
     IPAddressBasedRemoteInfo.add_member(:os_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OSType, name: "osType"))
     IPAddressBasedRemoteInfo.type = Types::IPAddressBasedRemoteInfo
-    IPAddressBasedRemoteInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IPAddressBasedRemoteInfo, name: "member")
+    IPAddressBasedRemoteInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IPAddressBasedRemoteInfo, name: "member"))
     ImportFileTaskInformation.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "id"))
     ImportFileTaskInformation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportFileTaskStatus, name: "status"))
     ImportFileTaskInformation.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, name: "startTime"))
@@ -456,9 +456,9 @@ module Aws::MigrationHubStrategy
     ListAnalyzableServersResponse.add_member(:analyzable_servers, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzableServerSummaryList, name: "analyzableServers"))
     ListAnalyzableServersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListAnalyzableServersResponse.type = Types::ListAnalyzableServersResponse
-    ListAntipatternSeveritySummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AntipatternSeveritySummary, name: "member")
-    ListApplicationComponentStatusSummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationComponentStatusSummary, name: "member")
-    ListApplicationComponentSummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationComponentSummary, name: "member")
+    ListAntipatternSeveritySummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AntipatternSeveritySummary, name: "member"))
+    ListApplicationComponentStatusSummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationComponentStatusSummary, name: "member"))
+    ListApplicationComponentSummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationComponentSummary, name: "member"))
     ListApplicationComponentsInput.add_member(:application_component_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationComponentCriteria, name: "applicationComponentCriteria"))
     ListApplicationComponentsInput.add_member(:filter_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "filterValue", traits: {"smithy.api#length" => {"max" => 256}}))
     ListApplicationComponentsInput.add_member(:sort, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "sort"))
@@ -475,15 +475,15 @@ module Aws::MigrationHubStrategy
     ListCollectorsOutput.add_member(:collectors, ::Smithy::Schema::Shapes::MemberShape.new(target: Collectors, name: "Collectors"))
     ListCollectorsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListCollectorsOutput.type = Types::ListCollectorsOutput
-    ListImportFileTaskInformation.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportFileTaskInformation, name: "member")
+    ListImportFileTaskInformation.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportFileTaskInformation, name: "member"))
     ListImportFileTaskInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListImportFileTaskInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListImportFileTaskInput.type = Types::ListImportFileTaskInput
     ListImportFileTaskOutput.add_member(:task_infos, ::Smithy::Schema::Shapes::MemberShape.new(target: ListImportFileTaskInformation, name: "taskInfos"))
     ListImportFileTaskOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
     ListImportFileTaskOutput.type = Types::ListImportFileTaskOutput
-    ListServerStatusSummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServerStatusSummary, name: "member")
-    ListServerSummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSummary, name: "member")
+    ListServerStatusSummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerStatusSummary, name: "member"))
+    ListServerSummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSummary, name: "member"))
     ListServersInput.add_member(:server_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerCriteria, name: "serverCriteria"))
     ListServersInput.add_member(:filter_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "filterValue"))
     ListServersInput.add_member(:sort, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "sort"))
@@ -494,7 +494,7 @@ module Aws::MigrationHubStrategy
     ListServersOutput.add_member(:server_infos, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerDetails, name: "serverInfos"))
     ListServersOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListServersOutput.type = Types::ListServersOutput
-    ListStrategySummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StrategySummary, name: "member")
+    ListStrategySummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StrategySummary, name: "member"))
     ManagementPreference.add_member(:aws_managed_resources, Types::ManagementPreference::AwsManagedResources, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsManagedResources, name: "awsManagedResources"))
     ManagementPreference.add_member(:self_manage_resources, Types::ManagementPreference::SelfManageResources, ::Smithy::Schema::Shapes::MemberShape.new(target: SelfManageResources, name: "selfManageResources"))
     ManagementPreference.add_member(:no_preference, Types::ManagementPreference::NoPreference, ::Smithy::Schema::Shapes::MemberShape.new(target: NoManagementPreference, name: "noPreference"))
@@ -505,19 +505,19 @@ module Aws::MigrationHubStrategy
     NetworkInfo.add_member(:mac_address, ::Smithy::Schema::Shapes::MemberShape.new(target: MacAddress, name: "macAddress", traits: {"smithy.api#required" => {}}))
     NetworkInfo.add_member(:net_mask, ::Smithy::Schema::Shapes::MemberShape.new(target: NetMask, name: "netMask", traits: {"smithy.api#required" => {}}))
     NetworkInfo.type = Types::NetworkInfo
-    NetworkInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInfo, name: "member")
+    NetworkInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInfo, name: "member"))
     NoDatabaseMigrationPreference.add_member(:target_database_engine, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetDatabaseEngines, name: "targetDatabaseEngine", traits: {"smithy.api#required" => {}}))
     NoDatabaseMigrationPreference.type = Types::NoDatabaseMigrationPreference
     NoManagementPreference.add_member(:target_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: NoPreferenceTargetDestinations, name: "targetDestination", traits: {"smithy.api#required" => {}}))
     NoManagementPreference.type = Types::NoManagementPreference
-    NoPreferenceTargetDestinations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NoPreferenceTargetDestination, name: "member")
+    NoPreferenceTargetDestinations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NoPreferenceTargetDestination, name: "member"))
     OSInfo.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: OSType, name: "type"))
     OSInfo.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: OSVersion, name: "version"))
     OSInfo.type = Types::OSInfo
     PipelineInfo.add_member(:pipeline_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineType, name: "pipelineType"))
     PipelineInfo.add_member(:pipeline_configuration_time_stamp, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "pipelineConfigurationTimeStamp"))
     PipelineInfo.type = Types::PipelineInfo
-    PipelineInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineInfo, name: "member")
+    PipelineInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineInfo, name: "member"))
     PrioritizeBusinessGoals.add_member(:business_goals, ::Smithy::Schema::Shapes::MemberShape.new(target: BusinessGoals, name: "businessGoals"))
     PrioritizeBusinessGoals.type = Types::PrioritizeBusinessGoals
     PutPortfolioPreferencesInput.add_member(:prioritize_business_goals, ::Smithy::Schema::Shapes::MemberShape.new(target: PrioritizeBusinessGoals, name: "prioritizeBusinessGoals"))
@@ -546,14 +546,14 @@ module Aws::MigrationHubStrategy
     Result.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessage, name: "statusMessage"))
     Result.add_member(:antipattern_report_result_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AntipatternReportResultList, name: "antipatternReportResultList"))
     Result.type = Types::Result
-    ResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Result, name: "member")
-    S3Keys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Result, name: "member"))
+    S3Keys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     S3Object.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Bucket, name: "s3Bucket"))
     S3Object.add_member(:s3key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Key, name: "s3key"))
     S3Object.type = Types::S3Object
     SelfManageResources.add_member(:target_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: SelfManageTargetDestinations, name: "targetDestination", traits: {"smithy.api#required" => {}}))
     SelfManageResources.type = Types::SelfManageResources
-    SelfManageTargetDestinations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SelfManageTargetDestination, name: "member")
+    SelfManageTargetDestinations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SelfManageTargetDestination, name: "member"))
     ServerDetail.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "id"))
     ServerDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name"))
     ServerDetail.add_member(:recommendation_set, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationSet, name: "recommendationSet"))
@@ -569,13 +569,13 @@ module Aws::MigrationHubStrategy
     ServerDetail.add_member(:last_analyzed_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, name: "lastAnalyzedTimestamp"))
     ServerDetail.add_member(:server_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerError, name: "serverError"))
     ServerDetail.type = Types::ServerDetail
-    ServerDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServerDetail, name: "member")
+    ServerDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerDetail, name: "member"))
     ServerError.add_member(:server_error_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerErrorCategory, name: "serverErrorCategory"))
     ServerError.type = Types::ServerError
     ServerStatusSummary.add_member(:run_time_assessment_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RunTimeAssessmentStatus, name: "runTimeAssessmentStatus"))
     ServerStatusSummary.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "count"))
     ServerStatusSummary.type = Types::ServerStatusSummary
-    ServerStrategies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServerStrategy, name: "member")
+    ServerStrategies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerStrategy, name: "member"))
     ServerStrategy.add_member(:recommendation, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationSet, name: "recommendation"))
     ServerStrategy.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StrategyRecommendation, name: "status"))
     ServerStrategy.add_member(:number_of_application_components, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "numberOfApplicationComponents"))
@@ -593,8 +593,8 @@ module Aws::MigrationHubStrategy
     SourceCode.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: Location, name: "location"))
     SourceCode.add_member(:project_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectName, name: "projectName"))
     SourceCode.type = Types::SourceCode
-    SourceCodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SourceCode, name: "member")
-    SourceCodeRepositories.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SourceCodeRepository, name: "member")
+    SourceCodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceCode, name: "member"))
+    SourceCodeRepositories.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceCodeRepository, name: "member"))
     SourceCodeRepository.add_member(:repository, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "repository"))
     SourceCodeRepository.add_member(:branch, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "branch"))
     SourceCodeRepository.add_member(:version_control_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "versionControlType"))
@@ -637,7 +637,7 @@ module Aws::MigrationHubStrategy
     SystemInfo.add_member(:network_info_list, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInfoList, name: "networkInfoList"))
     SystemInfo.add_member(:cpu_architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cpuArchitecture"))
     SystemInfo.type = Types::SystemInfo
-    TargetDatabaseEngines.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetDatabaseEngine, name: "member")
+    TargetDatabaseEngines.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetDatabaseEngine, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ThrottlingException.type = Types::ThrottlingException
     TransformationTool.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TransformationToolName, name: "name"))
@@ -662,11 +662,11 @@ module Aws::MigrationHubStrategy
     VcenterBasedRemoteInfo.add_member(:vcenter_configuration_time_stamp, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "vcenterConfigurationTimeStamp"))
     VcenterBasedRemoteInfo.add_member(:os_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OSType, name: "osType"))
     VcenterBasedRemoteInfo.type = Types::VcenterBasedRemoteInfo
-    VcenterBasedRemoteInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VcenterBasedRemoteInfo, name: "member")
+    VcenterBasedRemoteInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VcenterBasedRemoteInfo, name: "member"))
     VersionControlInfo.add_member(:version_control_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionControlType, name: "versionControlType"))
     VersionControlInfo.add_member(:version_control_configuration_time_stamp, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "versionControlConfigurationTimeStamp"))
     VersionControlInfo.type = Types::VersionControlInfo
-    VersionControlInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VersionControlInfo, name: "member")
+    VersionControlInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionControlInfo, name: "member"))
 
     AWSMigrationHubStrategyRecommendation = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.migrationhubstrategy#AWSMigrationHubStrategyRecommendation"

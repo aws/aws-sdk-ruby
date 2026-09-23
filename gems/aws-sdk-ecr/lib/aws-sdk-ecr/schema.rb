@@ -354,12 +354,12 @@ module Aws::ECR
     Attribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKey, name: "key", traits: {"smithy.api#required" => {}}))
     Attribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     Attribute.type = Types::Attribute
-    AttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member")
+    AttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member"))
     AuthorizationData.add_member(:authorization_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Base64, name: "authorizationToken"))
     AuthorizationData.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpirationTimestamp, name: "expiresAt"))
     AuthorizationData.add_member(:proxy_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ProxyEndpoint, name: "proxyEndpoint"))
     AuthorizationData.type = Types::AuthorizationData
-    AuthorizationDataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizationData, name: "member")
+    AuthorizationDataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizationData, name: "member"))
     AwsEcrContainerImageDetails.add_member(:architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: Arch, name: "architecture"))
     AwsEcrContainerImageDetails.add_member(:author, ::Smithy::Schema::Shapes::MemberShape.new(target: Author, name: "author"))
     AwsEcrContainerImageDetails.add_member(:image_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDigest, name: "imageHash"))
@@ -398,7 +398,7 @@ module Aws::ECR
     BatchGetRepositoryScanningConfigurationResponse.add_member(:scanning_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryScanningConfigurationList, name: "scanningConfigurations"))
     BatchGetRepositoryScanningConfigurationResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryScanningConfigurationFailureList, name: "failures"))
     BatchGetRepositoryScanningConfigurationResponse.type = Types::BatchGetRepositoryScanningConfigurationResponse
-    BatchedOperationLayerDigestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchedOperationLayerDigest, name: "member")
+    BatchedOperationLayerDigestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchedOperationLayerDigest, name: "member"))
     CompleteLayerUploadRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "registryId"))
     CompleteLayerUploadRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
     CompleteLayerUploadRequest.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadId, name: "uploadId", traits: {"smithy.api#required" => {}}))
@@ -458,14 +458,14 @@ module Aws::ECR
     CvssScoreAdjustment.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: Metric, name: "metric"))
     CvssScoreAdjustment.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: Reason, name: "reason"))
     CvssScoreAdjustment.type = Types::CvssScoreAdjustment
-    CvssScoreAdjustmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CvssScoreAdjustment, name: "member")
+    CvssScoreAdjustmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CvssScoreAdjustment, name: "member"))
     CvssScoreDetails.add_member(:adjustments, ::Smithy::Schema::Shapes::MemberShape.new(target: CvssScoreAdjustmentList, name: "adjustments"))
     CvssScoreDetails.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Score, name: "score", traits: {"smithy.api#default" => 0}))
     CvssScoreDetails.add_member(:score_source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "scoreSource"))
     CvssScoreDetails.add_member(:scoring_vector, ::Smithy::Schema::Shapes::MemberShape.new(target: ScoringVector, name: "scoringVector"))
     CvssScoreDetails.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version"))
     CvssScoreDetails.type = Types::CvssScoreDetails
-    CvssScoreList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CvssScore, name: "member")
+    CvssScoreList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CvssScore, name: "member"))
     DeleteLifecyclePolicyRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "registryId"))
     DeleteLifecyclePolicyRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
     DeleteLifecyclePolicyRequest.type = Types::DeleteLifecyclePolicyRequest
@@ -597,21 +597,21 @@ module Aws::ECR
     EnhancedImageScanFinding.add_member(:fix_available, ::Smithy::Schema::Shapes::MemberShape.new(target: FixAvailable, name: "fixAvailable"))
     EnhancedImageScanFinding.add_member(:exploit_available, ::Smithy::Schema::Shapes::MemberShape.new(target: ExploitAvailable, name: "exploitAvailable"))
     EnhancedImageScanFinding.type = Types::EnhancedImageScanFinding
-    EnhancedImageScanFindingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnhancedImageScanFinding, name: "member")
+    EnhancedImageScanFindingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnhancedImageScanFinding, name: "member"))
     FindingSeverity.add_member(:informational, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFORMATIONAL", traits: {"smithy.api#enumValue" => "INFORMATIONAL"}))
     FindingSeverity.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "LOW"}))
     FindingSeverity.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "MEDIUM"}))
     FindingSeverity.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "HIGH"}))
     FindingSeverity.add_member(:critical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CRITICAL", traits: {"smithy.api#enumValue" => "CRITICAL"}))
     FindingSeverity.add_member(:undefined, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNDEFINED", traits: {"smithy.api#enumValue" => "UNDEFINED"}))
-    FindingSeverityCounts.key = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingSeverity, name: "key")
-    FindingSeverityCounts.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityCount, name: "value")
+    FindingSeverityCounts.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingSeverity, name: "key"))
+    FindingSeverityCounts.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityCount, name: "value"))
     GetAccountSettingRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountSettingName, name: "name", traits: {"smithy.api#required" => {}}))
     GetAccountSettingRequest.type = Types::GetAccountSettingRequest
     GetAccountSettingResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountSettingName, name: "name"))
     GetAccountSettingResponse.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountSettingName, name: "value"))
     GetAccountSettingResponse.type = Types::GetAccountSettingResponse
-    GetAuthorizationTokenRegistryIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "member")
+    GetAuthorizationTokenRegistryIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "member"))
     GetAuthorizationTokenRequest.add_member(:registry_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: GetAuthorizationTokenRegistryIdList, name: "registryIds", traits: {"smithy.api#deprecated" => {"message" => "This field is deprecated. The returned authorization token can be used to access any Amazon ECR registry that the IAM principal has access to, specifying a registry ID doesn't change the permissions scope of the authorization token."}}))
     GetAuthorizationTokenRequest.type = Types::GetAuthorizationTokenRequest
     GetAuthorizationTokenResponse.add_member(:authorization_data, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizationDataList, name: "authorizationData"))
@@ -682,7 +682,7 @@ module Aws::ECR
     ImageDetail.add_member(:artifact_media_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaType, name: "artifactMediaType"))
     ImageDetail.add_member(:last_recorded_pull_time, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordedPullTimestamp, name: "lastRecordedPullTime"))
     ImageDetail.type = Types::ImageDetail
-    ImageDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDetail, name: "member")
+    ImageDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDetail, name: "member"))
     ImageDigestDoesNotMatchException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ImageDigestDoesNotMatchException.type = Types::ImageDigestDoesNotMatchException
     ImageFailure.add_member(:image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdentifier, name: "imageId"))
@@ -699,12 +699,12 @@ module Aws::ECR
     ImageFailureCode.add_member(:upstream_access_denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UpstreamAccessDenied", traits: {"smithy.api#enumValue" => "UpstreamAccessDenied"}))
     ImageFailureCode.add_member(:upstream_too_many_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UpstreamTooManyRequests", traits: {"smithy.api#enumValue" => "UpstreamTooManyRequests"}))
     ImageFailureCode.add_member(:upstream_unavailable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UpstreamUnavailable", traits: {"smithy.api#enumValue" => "UpstreamUnavailable"}))
-    ImageFailureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageFailure, name: "member")
+    ImageFailureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageFailure, name: "member"))
     ImageIdentifier.add_member(:image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDigest, name: "imageDigest"))
     ImageIdentifier.add_member(:image_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTag, name: "imageTag"))
     ImageIdentifier.type = Types::ImageIdentifier
-    ImageIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdentifier, name: "member")
-    ImageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Image, name: "member")
+    ImageIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdentifier, name: "member"))
+    ImageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Image, name: "member"))
     ImageNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ImageNotFoundException.type = Types::ImageNotFoundException
     ImageReplicationStatus.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "region"))
@@ -712,14 +712,14 @@ module Aws::ECR
     ImageReplicationStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatus, name: "status"))
     ImageReplicationStatus.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationError, name: "failureCode"))
     ImageReplicationStatus.type = Types::ImageReplicationStatus
-    ImageReplicationStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageReplicationStatus, name: "member")
+    ImageReplicationStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageReplicationStatus, name: "member"))
     ImageScanFinding.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingName, name: "name"))
     ImageScanFinding.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingDescription, name: "description"))
     ImageScanFinding.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "uri"))
     ImageScanFinding.add_member(:severity, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingSeverity, name: "severity"))
     ImageScanFinding.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeList, name: "attributes"))
     ImageScanFinding.type = Types::ImageScanFinding
-    ImageScanFindingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageScanFinding, name: "member")
+    ImageScanFindingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageScanFinding, name: "member"))
     ImageScanFindings.add_member(:image_scan_completed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanTimestamp, name: "imageScanCompletedAt"))
     ImageScanFindings.add_member(:vulnerability_source_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: VulnerabilitySourceUpdateTimestamp, name: "vulnerabilitySourceUpdatedAt"))
     ImageScanFindings.add_member(:finding_severity_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingSeverityCounts, name: "findingSeverityCounts"))
@@ -737,7 +737,7 @@ module Aws::ECR
     ImageScanningConfiguration.type = Types::ImageScanningConfiguration
     ImageTagAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ImageTagAlreadyExistsException.type = Types::ImageTagAlreadyExistsException
-    ImageTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTag, name: "member")
+    ImageTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTag, name: "member"))
     ImageTagMutability.add_member(:mutable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MUTABLE", traits: {"smithy.api#enumValue" => "MUTABLE"}))
     ImageTagMutability.add_member(:immutable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMMUTABLE", traits: {"smithy.api#enumValue" => "IMMUTABLE"}))
     ImageTagMutability.add_member(:immutable_with_exclusion, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMMUTABLE_WITH_EXCLUSION", traits: {"smithy.api#enumValue" => "IMMUTABLE_WITH_EXCLUSION"}))
@@ -746,8 +746,8 @@ module Aws::ECR
     ImageTagMutabilityExclusionFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTagMutabilityExclusionFilterValue, name: "filter", traits: {"smithy.api#required" => {}}))
     ImageTagMutabilityExclusionFilter.type = Types::ImageTagMutabilityExclusionFilter
     ImageTagMutabilityExclusionFilterType.add_member(:wildcard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WILDCARD", traits: {"smithy.api#enumValue" => "WILDCARD"}))
-    ImageTagMutabilityExclusionFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTagMutabilityExclusionFilter, name: "member")
-    ImageTagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTag, name: "member")
+    ImageTagMutabilityExclusionFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTagMutabilityExclusionFilter, name: "member"))
+    ImageTagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTag, name: "member"))
     InitiateLayerUploadRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "registryId"))
     InitiateLayerUploadRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
     InitiateLayerUploadRequest.type = Types::InitiateLayerUploadRequest
@@ -778,17 +778,17 @@ module Aws::ECR
     LayerAlreadyExistsException.type = Types::LayerAlreadyExistsException
     LayerAvailability.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     LayerAvailability.add_member(:unavailable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNAVAILABLE", traits: {"smithy.api#enumValue" => "UNAVAILABLE"}))
-    LayerDigestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LayerDigest, name: "member")
+    LayerDigestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerDigest, name: "member"))
     LayerFailure.add_member(:layer_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchedOperationLayerDigest, name: "layerDigest"))
     LayerFailure.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerFailureCode, name: "failureCode"))
     LayerFailure.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerFailureReason, name: "failureReason"))
     LayerFailure.type = Types::LayerFailure
     LayerFailureCode.add_member(:invalid_layer_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InvalidLayerDigest", traits: {"smithy.api#enumValue" => "InvalidLayerDigest"}))
     LayerFailureCode.add_member(:missing_layer_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MissingLayerDigest", traits: {"smithy.api#enumValue" => "MissingLayerDigest"}))
-    LayerFailureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LayerFailure, name: "member")
+    LayerFailureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerFailure, name: "member"))
     LayerInaccessibleException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     LayerInaccessibleException.type = Types::LayerInaccessibleException
-    LayerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Layer, name: "member")
+    LayerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Layer, name: "member"))
     LayerPartTooSmallException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     LayerPartTooSmallException.type = Types::LayerPartTooSmallException
     LayersNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -807,7 +807,7 @@ module Aws::ECR
     LifecyclePolicyPreviewResult.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyRuleAction, name: "action"))
     LifecyclePolicyPreviewResult.add_member(:applied_rule_priority, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyRulePriority, name: "appliedRulePriority"))
     LifecyclePolicyPreviewResult.type = Types::LifecyclePolicyPreviewResult
-    LifecyclePolicyPreviewResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyPreviewResult, name: "member")
+    LifecyclePolicyPreviewResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyPreviewResult, name: "member"))
     LifecyclePolicyPreviewStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     LifecyclePolicyPreviewStatus.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
     LifecyclePolicyPreviewStatus.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
@@ -833,7 +833,7 @@ module Aws::ECR
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    MediaTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MediaType, name: "member")
+    MediaTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaType, name: "member"))
     PackageVulnerabilityDetails.add_member(:cvss, ::Smithy::Schema::Shapes::MemberShape.new(target: CvssScoreList, name: "cvss"))
     PackageVulnerabilityDetails.add_member(:reference_urls, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceUrlsList, name: "referenceUrls"))
     PackageVulnerabilityDetails.add_member(:related_vulnerabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedVulnerabilitiesList, name: "relatedVulnerabilities"))
@@ -845,7 +845,7 @@ module Aws::ECR
     PackageVulnerabilityDetails.add_member(:vulnerability_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VulnerabilityId, name: "vulnerabilityId"))
     PackageVulnerabilityDetails.add_member(:vulnerable_packages, ::Smithy::Schema::Shapes::MemberShape.new(target: VulnerablePackagesList, name: "vulnerablePackages"))
     PackageVulnerabilityDetails.type = Types::PackageVulnerabilityDetails
-    PrefixList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Prefix, name: "member")
+    PrefixList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Prefix, name: "member"))
     PullThroughCacheRule.add_member(:ecr_repository_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: PullThroughCacheRuleRepositoryPrefix, name: "ecrRepositoryPrefix"))
     PullThroughCacheRule.add_member(:upstream_registry_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "upstreamRegistryUrl"))
     PullThroughCacheRule.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTimestamp, name: "createdAt"))
@@ -858,10 +858,10 @@ module Aws::ECR
     PullThroughCacheRule.type = Types::PullThroughCacheRule
     PullThroughCacheRuleAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     PullThroughCacheRuleAlreadyExistsException.type = Types::PullThroughCacheRuleAlreadyExistsException
-    PullThroughCacheRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PullThroughCacheRule, name: "member")
+    PullThroughCacheRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PullThroughCacheRule, name: "member"))
     PullThroughCacheRuleNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     PullThroughCacheRuleNotFoundException.type = Types::PullThroughCacheRuleNotFoundException
-    PullThroughCacheRuleRepositoryPrefixList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PullThroughCacheRuleRepositoryPrefix, name: "member")
+    PullThroughCacheRuleRepositoryPrefixList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PullThroughCacheRuleRepositoryPrefix, name: "member"))
     PutAccountSettingRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountSettingName, name: "name", traits: {"smithy.api#required" => {}}))
     PutAccountSettingRequest.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountSettingValue, name: "value", traits: {"smithy.api#required" => {}}))
     PutAccountSettingRequest.type = Types::PutAccountSettingRequest
@@ -919,11 +919,11 @@ module Aws::ECR
     PutReplicationConfigurationResponse.type = Types::PutReplicationConfigurationResponse
     RCTAppliedFor.add_member(:replication, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REPLICATION", traits: {"smithy.api#enumValue" => "REPLICATION"}))
     RCTAppliedFor.add_member(:pull_through_cache, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PULL_THROUGH_CACHE", traits: {"smithy.api#enumValue" => "PULL_THROUGH_CACHE"}))
-    RCTAppliedForList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RCTAppliedFor, name: "member")
+    RCTAppliedForList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RCTAppliedFor, name: "member"))
     Recommendation.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "url"))
     Recommendation.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationText, name: "text"))
     Recommendation.type = Types::Recommendation
-    ReferenceUrlsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "member")
+    ReferenceUrlsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "member"))
     ReferencedImagesNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ReferencedImagesNotFoundException.type = Types::ReferencedImagesNotFoundException
     RegistryPolicyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -934,8 +934,8 @@ module Aws::ECR
     RegistryScanningRule.add_member(:scan_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanFrequency, name: "scanFrequency", traits: {"smithy.api#required" => {}}))
     RegistryScanningRule.add_member(:repository_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanningRepositoryFilterList, name: "repositoryFilters", traits: {"smithy.api#required" => {}}))
     RegistryScanningRule.type = Types::RegistryScanningRule
-    RegistryScanningRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryScanningRule, name: "member")
-    RelatedVulnerabilitiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedVulnerability, name: "member")
+    RegistryScanningRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryScanningRule, name: "member"))
+    RelatedVulnerabilitiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedVulnerability, name: "member"))
     Remediation.add_member(:recommendation, ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendation, name: "recommendation"))
     Remediation.type = Types::Remediation
     ReplicationConfiguration.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationRuleList, name: "rules", traits: {"smithy.api#required" => {}}))
@@ -943,11 +943,11 @@ module Aws::ECR
     ReplicationDestination.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "region", traits: {"smithy.api#required" => {}}))
     ReplicationDestination.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "registryId", traits: {"smithy.api#required" => {}}))
     ReplicationDestination.type = Types::ReplicationDestination
-    ReplicationDestinationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationDestination, name: "member")
+    ReplicationDestinationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationDestination, name: "member"))
     ReplicationRule.add_member(:destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationDestinationList, name: "destinations", traits: {"smithy.api#required" => {}}))
     ReplicationRule.add_member(:repository_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryFilterList, name: "repositoryFilters"))
     ReplicationRule.type = Types::ReplicationRule
-    ReplicationRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationRule, name: "member")
+    ReplicationRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationRule, name: "member"))
     ReplicationStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     ReplicationStatus.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
     ReplicationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -976,14 +976,14 @@ module Aws::ECR
     RepositoryCreationTemplate.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "createdAt"))
     RepositoryCreationTemplate.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "updatedAt"))
     RepositoryCreationTemplate.type = Types::RepositoryCreationTemplate
-    RepositoryCreationTemplateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryCreationTemplate, name: "member")
+    RepositoryCreationTemplateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryCreationTemplate, name: "member"))
     RepositoryFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryFilterValue, name: "filter", traits: {"smithy.api#required" => {}}))
     RepositoryFilter.add_member(:filter_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryFilterType, name: "filterType", traits: {"smithy.api#required" => {}}))
     RepositoryFilter.type = Types::RepositoryFilter
-    RepositoryFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryFilter, name: "member")
+    RepositoryFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryFilter, name: "member"))
     RepositoryFilterType.add_member(:prefix_match, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PREFIX_MATCH", traits: {"smithy.api#enumValue" => "PREFIX_MATCH"}))
-    RepositoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Repository, name: "member")
-    RepositoryNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "member")
+    RepositoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Repository, name: "member"))
+    RepositoryNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "member"))
     RepositoryNotEmptyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     RepositoryNotEmptyException.type = Types::RepositoryNotEmptyException
     RepositoryNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -1000,8 +1000,8 @@ module Aws::ECR
     RepositoryScanningConfigurationFailure.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanningConfigurationFailureCode, name: "failureCode"))
     RepositoryScanningConfigurationFailure.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanningConfigurationFailureReason, name: "failureReason"))
     RepositoryScanningConfigurationFailure.type = Types::RepositoryScanningConfigurationFailure
-    RepositoryScanningConfigurationFailureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryScanningConfigurationFailure, name: "member")
-    RepositoryScanningConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryScanningConfiguration, name: "member")
+    RepositoryScanningConfigurationFailureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryScanningConfigurationFailure, name: "member"))
+    RepositoryScanningConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryScanningConfiguration, name: "member"))
     Resource.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDetails, name: "details"))
     Resource.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "id"))
     Resource.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
@@ -1009,7 +1009,7 @@ module Aws::ECR
     Resource.type = Types::Resource
     ResourceDetails.add_member(:aws_ecr_container_image, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcrContainerImageDetails, name: "awsEcrContainerImage"))
     ResourceDetails.type = Types::ResourceDetails
-    ResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member")
+    ResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
     ScanFrequency.add_member(:scan_on_push, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCAN_ON_PUSH", traits: {"smithy.api#enumValue" => "SCAN_ON_PUSH"}))
     ScanFrequency.add_member(:continuous_scan, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTINUOUS_SCAN", traits: {"smithy.api#enumValue" => "CONTINUOUS_SCAN"}))
     ScanFrequency.add_member(:manual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANUAL", traits: {"smithy.api#enumValue" => "MANUAL"}))
@@ -1027,11 +1027,11 @@ module Aws::ECR
     ScanType.add_member(:basic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BASIC", traits: {"smithy.api#enumValue" => "BASIC"}))
     ScanType.add_member(:enhanced, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENHANCED", traits: {"smithy.api#enumValue" => "ENHANCED"}))
     ScanningConfigurationFailureCode.add_member(:repository_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REPOSITORY_NOT_FOUND", traits: {"smithy.api#enumValue" => "REPOSITORY_NOT_FOUND"}))
-    ScanningConfigurationRepositoryNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "member")
+    ScanningConfigurationRepositoryNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "member"))
     ScanningRepositoryFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanningRepositoryFilterValue, name: "filter", traits: {"smithy.api#required" => {}}))
     ScanningRepositoryFilter.add_member(:filter_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanningRepositoryFilterType, name: "filterType", traits: {"smithy.api#required" => {}}))
     ScanningRepositoryFilter.type = Types::ScanningRepositoryFilter
-    ScanningRepositoryFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScanningRepositoryFilter, name: "member")
+    ScanningRepositoryFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanningRepositoryFilter, name: "member"))
     ScanningRepositoryFilterType.add_member(:wildcard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WILDCARD", traits: {"smithy.api#enumValue" => "WILDCARD"}))
     ScoreDetails.add_member(:cvss, ::Smithy::Schema::Shapes::MemberShape.new(target: CvssScoreDetails, name: "cvss"))
     ScoreDetails.type = Types::ScoreDetails
@@ -1069,8 +1069,8 @@ module Aws::ECR
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -1078,8 +1078,8 @@ module Aws::ECR
     TagStatus.add_member(:tagged, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAGGED", traits: {"smithy.api#enumValue" => "TAGGED"}))
     TagStatus.add_member(:untagged, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNTAGGED", traits: {"smithy.api#enumValue" => "UNTAGGED"}))
     TagStatus.add_member(:any, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANY", traits: {"smithy.api#enumValue" => "ANY"}))
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TemplateAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     TemplateAlreadyExistsException.type = Types::TemplateAlreadyExistsException
     TemplateNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -1174,7 +1174,7 @@ module Aws::ECR
     VulnerablePackage.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version"))
     VulnerablePackage.add_member(:fixed_in_version, ::Smithy::Schema::Shapes::MemberShape.new(target: FixedInVersion, name: "fixedInVersion"))
     VulnerablePackage.type = Types::VulnerablePackage
-    VulnerablePackagesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VulnerablePackage, name: "member")
+    VulnerablePackagesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VulnerablePackage, name: "member"))
 
     AmazonEC2ContainerRegistryV20150921 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.ecr#AmazonEC2ContainerRegistry_V20150921"

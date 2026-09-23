@@ -46,7 +46,7 @@ module Aws::PersonalizeEvents
     Action.add_member(:action_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "actionId", traits: {"smithy.api#required" => {}}))
     Action.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: SynthesizedJsonActionProperties, name: "properties"))
     Action.type = Types::Action
-    ActionImpression.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionId, name: "member")
+    ActionImpression.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionId, name: "member"))
     ActionInteraction.add_member(:action_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionId, name: "actionId", traits: {"smithy.api#required" => {}}))
     ActionInteraction.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "userId"))
     ActionInteraction.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "sessionId", traits: {"smithy.api#required" => {}}))
@@ -57,8 +57,8 @@ module Aws::PersonalizeEvents
     ActionInteraction.add_member(:impression, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionImpression, name: "impression"))
     ActionInteraction.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: SynthesizedJsonActionInteractionProperties, name: "properties"))
     ActionInteraction.type = Types::ActionInteraction
-    ActionInteractionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionInteraction, name: "member")
-    ActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "member")
+    ActionInteractionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionInteraction, name: "member"))
+    ActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "member"))
     Event.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "eventId"))
     Event.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "eventType", traits: {"smithy.api#required" => {}}))
     Event.add_member(:event_value, ::Smithy::Schema::Shapes::MemberShape.new(target: FloatType, name: "eventValue"))
@@ -69,14 +69,14 @@ module Aws::PersonalizeEvents
     Event.add_member(:impression, ::Smithy::Schema::Shapes::MemberShape.new(target: Impression, name: "impression"))
     Event.add_member(:metric_attribution, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricAttribution, name: "metricAttribution"))
     Event.type = Types::Event
-    EventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member")
-    Impression.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ItemId, name: "member")
+    EventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member"))
+    Impression.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemId, name: "member"))
     InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InvalidInputException.type = Types::InvalidInputException
     Item.add_member(:item_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "itemId", traits: {"smithy.api#required" => {}}))
     Item.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: SynthesizedJsonItemProperties, name: "properties"))
     Item.type = Types::Item
-    ItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Item, name: "member")
+    ItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Item, name: "member"))
     MetricAttribution.add_member(:event_attribution_source, ::Smithy::Schema::Shapes::MemberShape.new(target: EventAttributionSource, name: "eventAttributionSource", traits: {"smithy.api#required" => {}}))
     MetricAttribution.type = Types::MetricAttribution
     PutActionInteractionsRequest.add_member(:tracking_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "trackingId", traits: {"smithy.api#required" => {}}))
@@ -103,7 +103,7 @@ module Aws::PersonalizeEvents
     User.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "userId", traits: {"smithy.api#required" => {}}))
     User.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: SynthesizedJsonUserProperties, name: "properties"))
     User.type = Types::User
-    UserList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member")
+    UserList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member"))
 
     AmazonPersonalizeEvents = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.personalizeevents#AmazonPersonalizeEvents"

@@ -175,14 +175,14 @@ module Aws::ACMPCA
     AccessDescription.add_member(:access_method, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessMethod, name: "AccessMethod", traits: {"smithy.api#required" => {}}))
     AccessDescription.add_member(:access_location, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneralName, name: "AccessLocation", traits: {"smithy.api#required" => {}}))
     AccessDescription.type = Types::AccessDescription
-    AccessDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessDescription, name: "member")
+    AccessDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessDescription, name: "member"))
     AccessMethod.add_member(:custom_object_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomObjectIdentifier, name: "CustomObjectIdentifier"))
     AccessMethod.add_member(:access_method_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessMethodType, name: "AccessMethodType"))
     AccessMethod.type = Types::AccessMethod
     AccessMethodType.add_member(:ca_repository, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CA_REPOSITORY", traits: {"smithy.api#enumValue" => "CA_REPOSITORY"}))
     AccessMethodType.add_member(:resource_pki_manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_PKI_MANIFEST", traits: {"smithy.api#enumValue" => "RESOURCE_PKI_MANIFEST"}))
     AccessMethodType.add_member(:resource_pki_notify, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_PKI_NOTIFY", traits: {"smithy.api#enumValue" => "RESOURCE_PKI_NOTIFY"}))
-    ActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionType, name: "member")
+    ActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionType, name: "member"))
     ActionType.add_member(:issue_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IssueCertificate", traits: {"smithy.api#enumValue" => "IssueCertificate"}))
     ActionType.add_member(:get_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GetCertificate", traits: {"smithy.api#enumValue" => "GetCertificate"}))
     ActionType.add_member(:list_permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ListPermissions", traits: {"smithy.api#enumValue" => "ListPermissions"}))
@@ -194,7 +194,7 @@ module Aws::ACMPCA
     AuditReportStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     AuditReportStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
     AuditReportStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    CertificateAuthorities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateAuthority, name: "member")
+    CertificateAuthorities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateAuthority, name: "member"))
     CertificateAuthority.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     CertificateAuthority.add_member(:owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "OwnerAccount"))
     CertificateAuthority.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "CreatedAt"))
@@ -229,7 +229,7 @@ module Aws::ACMPCA
     CertificateAuthorityUsageMode.add_member(:short_lived_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHORT_LIVED_CERTIFICATE", traits: {"smithy.api#enumValue" => "SHORT_LIVED_CERTIFICATE"}))
     CertificateMismatchException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     CertificateMismatchException.type = Types::CertificateMismatchException
-    CertificatePolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyInformation, name: "member")
+    CertificatePolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyInformation, name: "member"))
     ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ConcurrentModificationException.type = Types::ConcurrentModificationException
     CreateCertificateAuthorityAuditReportRequest.add_member(:certificate_authority_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "CertificateAuthorityArn", traits: {"smithy.api#required" => {}}))
@@ -273,12 +273,12 @@ module Aws::ACMPCA
     CustomAttribute.add_member(:object_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomObjectIdentifier, name: "ObjectIdentifier", traits: {"smithy.api#required" => {}}))
     CustomAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String1To256, name: "Value", traits: {"smithy.api#required" => {}}))
     CustomAttribute.type = Types::CustomAttribute
-    CustomAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomAttribute, name: "member")
+    CustomAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomAttribute, name: "member"))
     CustomExtension.add_member(:object_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomObjectIdentifier, name: "ObjectIdentifier", traits: {"smithy.api#required" => {}}))
     CustomExtension.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Base64String1To4096, name: "Value", traits: {"smithy.api#required" => {}}))
     CustomExtension.add_member(:critical, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Critical", traits: {"smithy.api#default" => nil}))
     CustomExtension.type = Types::CustomExtension
-    CustomExtensionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomExtension, name: "member")
+    CustomExtensionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomExtension, name: "member"))
     DeleteCertificateAuthorityRequest.add_member(:certificate_authority_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "CertificateAuthorityArn", traits: {"smithy.api#required" => {}}))
     DeleteCertificateAuthorityRequest.add_member(:permanent_deletion_time_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: PermanentDeletionTimeInDays, name: "PermanentDeletionTimeInDays"))
     DeleteCertificateAuthorityRequest.type = Types::DeleteCertificateAuthorityRequest
@@ -306,7 +306,7 @@ module Aws::ACMPCA
     ExtendedKeyUsage.add_member(:extended_key_usage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtendedKeyUsageType, name: "ExtendedKeyUsageType"))
     ExtendedKeyUsage.add_member(:extended_key_usage_object_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomObjectIdentifier, name: "ExtendedKeyUsageObjectIdentifier"))
     ExtendedKeyUsage.type = Types::ExtendedKeyUsage
-    ExtendedKeyUsageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExtendedKeyUsage, name: "member")
+    ExtendedKeyUsageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtendedKeyUsage, name: "member"))
     ExtendedKeyUsageType.add_member(:server_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVER_AUTH", traits: {"smithy.api#enumValue" => "SERVER_AUTH"}))
     ExtendedKeyUsageType.add_member(:client_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLIENT_AUTH", traits: {"smithy.api#enumValue" => "CLIENT_AUTH"}))
     ExtendedKeyUsageType.add_member(:code_signing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CODE_SIGNING", traits: {"smithy.api#enumValue" => "CODE_SIGNING"}))
@@ -334,7 +334,7 @@ module Aws::ACMPCA
     GeneralName.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: String39, name: "IpAddress"))
     GeneralName.add_member(:registered_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomObjectIdentifier, name: "RegisteredId"))
     GeneralName.type = Types::GeneralName
-    GeneralNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GeneralName, name: "member")
+    GeneralNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneralName, name: "member"))
     GetCertificateAuthorityCertificateRequest.add_member(:certificate_authority_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "CertificateAuthorityArn", traits: {"smithy.api#required" => {}}))
     GetCertificateAuthorityCertificateRequest.type = Types::GetCertificateAuthorityCertificateRequest
     GetCertificateAuthorityCertificateResponse.add_member(:certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateBody, name: "Certificate"))
@@ -447,7 +447,7 @@ module Aws::ACMPCA
     Permission.type = Types::Permission
     PermissionAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     PermissionAlreadyExistsException.type = Types::PermissionAlreadyExistsException
-    PermissionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Permission, name: "member")
+    PermissionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Permission, name: "member"))
     PolicyInformation.add_member(:cert_policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomObjectIdentifier, name: "CertPolicyId", traits: {"smithy.api#required" => {}}))
     PolicyInformation.add_member(:policy_qualifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyQualifierInfoList, name: "PolicyQualifiers"))
     PolicyInformation.type = Types::PolicyInformation
@@ -455,7 +455,7 @@ module Aws::ACMPCA
     PolicyQualifierInfo.add_member(:policy_qualifier_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyQualifierId, name: "PolicyQualifierId", traits: {"smithy.api#required" => {}}))
     PolicyQualifierInfo.add_member(:qualifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Qualifier, name: "Qualifier", traits: {"smithy.api#required" => {}}))
     PolicyQualifierInfo.type = Types::PolicyQualifierInfo
-    PolicyQualifierInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyQualifierInfo, name: "member")
+    PolicyQualifierInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyQualifierInfo, name: "member"))
     PutPolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     PutPolicyRequest.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSPolicy, name: "Policy", traits: {"smithy.api#required" => {}}))
     PutPolicyRequest.type = Types::PutPolicyRequest
@@ -503,7 +503,7 @@ module Aws::ACMPCA
     TagCertificateAuthorityRequest.add_member(:certificate_authority_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "CertificateAuthorityArn", traits: {"smithy.api#required" => {}}))
     TagCertificateAuthorityRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagCertificateAuthorityRequest.type = Types::TagCertificateAuthorityRequest
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     TooManyTagsException.type = Types::TooManyTagsException
     UntagCertificateAuthorityRequest.add_member(:certificate_authority_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "CertificateAuthorityArn", traits: {"smithy.api#required" => {}}))

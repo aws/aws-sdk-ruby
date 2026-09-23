@@ -186,7 +186,7 @@ module Aws::QLDB
     JournalKinesisStreamDescription.add_member(:error_cause, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCause, name: "ErrorCause"))
     JournalKinesisStreamDescription.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, name: "StreamName", traits: {"smithy.api#required" => {}}))
     JournalKinesisStreamDescription.type = Types::JournalKinesisStreamDescription
-    JournalKinesisStreamDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JournalKinesisStreamDescription, name: "member")
+    JournalKinesisStreamDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JournalKinesisStreamDescription, name: "member"))
     JournalS3ExportDescription.add_member(:ledger_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LedgerName, name: "LedgerName", traits: {"smithy.api#required" => {}}))
     JournalS3ExportDescription.add_member(:export_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UniqueId, name: "ExportId", traits: {"smithy.api#required" => {}}))
     JournalS3ExportDescription.add_member(:export_creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ExportCreationTime", traits: {"smithy.api#required" => {}}))
@@ -197,7 +197,7 @@ module Aws::QLDB
     JournalS3ExportDescription.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "RoleArn", traits: {"smithy.api#required" => {}}))
     JournalS3ExportDescription.add_member(:output_format, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputFormat, name: "OutputFormat"))
     JournalS3ExportDescription.type = Types::JournalS3ExportDescription
-    JournalS3ExportList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JournalS3ExportDescription, name: "member")
+    JournalS3ExportList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JournalS3ExportDescription, name: "member"))
     KinesisConfiguration.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "StreamArn", traits: {"smithy.api#required" => {}}))
     KinesisConfiguration.add_member(:aggregation_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AggregationEnabled"))
     KinesisConfiguration.type = Types::KinesisConfiguration
@@ -205,7 +205,7 @@ module Aws::QLDB
     LedgerEncryptionDescription.add_member(:encryption_status, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionStatus, name: "EncryptionStatus", traits: {"smithy.api#required" => {}}))
     LedgerEncryptionDescription.add_member(:inaccessible_kms_key_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "InaccessibleKmsKeyDateTime"))
     LedgerEncryptionDescription.type = Types::LedgerEncryptionDescription
-    LedgerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LedgerSummary, name: "member")
+    LedgerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LedgerSummary, name: "member"))
     LedgerState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     LedgerState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     LedgerState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -293,13 +293,13 @@ module Aws::QLDB
     StreamStatus.add_member(:canceled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELED", traits: {"smithy.api#enumValue" => "CANCELED"}))
     StreamStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     StreamStatus.add_member(:impaired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMPAIRED", traits: {"smithy.api#enumValue" => "IMPAIRED"}))
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest

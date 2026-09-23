@@ -309,14 +309,14 @@ module Aws::NeptuneGraph
     DeletePrivateGraphEndpointOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateGraphEndpointStatus, name: "status", traits: {"smithy.api#required" => {}}))
     DeletePrivateGraphEndpointOutput.add_member(:vpc_endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointId, name: "vpcEndpointId"))
     DeletePrivateGraphEndpointOutput.type = Types::DeletePrivateGraphEndpointOutput
-    DocumentValuedMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    DocumentValuedMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Document, name: "value")
-    EdgeLabels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    EdgeProperties.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    DocumentValuedMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    DocumentValuedMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Document, name: "value"))
+    EdgeLabels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    EdgeProperties.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     EdgeStructure.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "count"))
     EdgeStructure.add_member(:edge_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: EdgeProperties, name: "edgeProperties"))
     EdgeStructure.type = Types::EdgeStructure
-    EdgeStructures.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EdgeStructure, name: "member")
+    EdgeStructures.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EdgeStructure, name: "member"))
     ExecuteQueryInput.add_member(:graph_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GraphIdentifier, name: "graphIdentifier", traits: {"smithy.api#hostLabel" => {}, "smithy.api#httpHeader" => "graphIdentifier", "smithy.api#required" => {}}))
     ExecuteQueryInput.add_member(:query_string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "queryString", traits: {"smithy.api#jsonName" => "query", "smithy.api#required" => {}}))
     ExecuteQueryInput.add_member(:language, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryLanguage, name: "language", traits: {"smithy.api#required" => {}}))
@@ -336,14 +336,14 @@ module Aws::NeptuneGraph
     ExportFilter.type = Types::ExportFilter
     ExportFilterElement.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilterPropertyMap, name: "properties"))
     ExportFilterElement.type = Types::ExportFilterElement
-    ExportFilterPerLabelMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilterLabel, name: "key")
-    ExportFilterPerLabelMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilterElement, name: "value")
+    ExportFilterPerLabelMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilterLabel, name: "key"))
+    ExportFilterPerLabelMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilterElement, name: "value"))
     ExportFilterPropertyAttributes.add_member(:output_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilterOutputDataType, name: "outputType"))
     ExportFilterPropertyAttributes.add_member(:source_property_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilterSourcePropertyName, name: "sourcePropertyName"))
     ExportFilterPropertyAttributes.add_member(:multi_value_handling, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiValueHandlingType, name: "multiValueHandling", traits: {"smithy.api#default" => "PICK_FIRST"}))
     ExportFilterPropertyAttributes.type = Types::ExportFilterPropertyAttributes
-    ExportFilterPropertyMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilterOutputPropertyName, name: "key")
-    ExportFilterPropertyMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilterPropertyAttributes, name: "value")
+    ExportFilterPropertyMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilterOutputPropertyName, name: "key"))
+    ExportFilterPropertyMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilterPropertyAttributes, name: "value"))
     ExportFormat.add_member(:parquet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARQUET", traits: {"smithy.api#enumValue" => "PARQUET"}))
     ExportFormat.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
     ExportTaskDetails.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "startTime", traits: {"smithy.api#required" => {}}))
@@ -369,7 +369,7 @@ module Aws::NeptuneGraph
     ExportTaskSummary.add_member(:parquet_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ParquetType, name: "parquetType"))
     ExportTaskSummary.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
     ExportTaskSummary.type = Types::ExportTaskSummary
-    ExportTaskSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportTaskSummary, name: "member")
+    ExportTaskSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportTaskSummary, name: "member"))
     Format.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
     Format.add_member(:open_cypher, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPEN_CYPHER", traits: {"smithy.api#enumValue" => "OPEN_CYPHER"}))
     Format.add_member(:parquet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARQUET", traits: {"smithy.api#enumValue" => "PARQUET"}))
@@ -477,7 +477,7 @@ module Aws::NeptuneGraph
     GraphSnapshotSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotStatus, name: "status"))
     GraphSnapshotSummary.add_member(:kms_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "kmsKeyIdentifier"))
     GraphSnapshotSummary.type = Types::GraphSnapshotSummary
-    GraphSnapshotSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GraphSnapshotSummary, name: "member")
+    GraphSnapshotSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GraphSnapshotSummary, name: "member"))
     GraphStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     GraphStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     GraphStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -500,7 +500,7 @@ module Aws::NeptuneGraph
     GraphSummary.add_member(:kms_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "kmsKeyIdentifier"))
     GraphSummary.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "deletionProtection"))
     GraphSummary.type = Types::GraphSummary
-    GraphSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GraphSummary, name: "member")
+    GraphSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GraphSummary, name: "member"))
     GraphSummaryMode.add_member(:basic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BASIC", traits: {"smithy.api#enumValue" => "BASIC"}))
     GraphSummaryMode.add_member(:detailed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DETAILED", traits: {"smithy.api#enumValue" => "DETAILED"}))
     ImportOptions.add_member(:neptune, Types::ImportOptions::Neptune, ::Smithy::Schema::Shapes::MemberShape.new(target: NeptuneImportOptions, name: "neptune"))
@@ -534,7 +534,7 @@ module Aws::NeptuneGraph
     ImportTaskSummary.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
     ImportTaskSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTaskStatus, name: "status", traits: {"smithy.api#required" => {}}))
     ImportTaskSummary.type = Types::ImportTaskSummary
-    ImportTaskSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTaskSummary, name: "member")
+    ImportTaskSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTaskSummary, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
     ListExportTasksInput.add_member(:graph_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GraphIdentifier, name: "graphIdentifier", traits: {"smithy.api#httpQuery" => "graphIdentifier"}))
@@ -580,9 +580,9 @@ module Aws::NeptuneGraph
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
     ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    LongValuedMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    LongValuedMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "value")
-    LongValuedMapList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LongValuedMap, name: "member")
+    LongValuedMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    LongValuedMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "value"))
+    LongValuedMapList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LongValuedMap, name: "member"))
     MultiValueHandlingType.add_member(:to_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TO_LIST", traits: {"smithy.api#enumValue" => "TO_LIST"}))
     MultiValueHandlingType.add_member(:pick_first, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PICK_FIRST", traits: {"smithy.api#enumValue" => "PICK_FIRST"}))
     NeptuneImportOptions.add_member(:s3_export_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "s3ExportPath", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#required" => {}}))
@@ -590,14 +590,14 @@ module Aws::NeptuneGraph
     NeptuneImportOptions.add_member(:preserve_default_vertex_labels, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "preserveDefaultVertexLabels"))
     NeptuneImportOptions.add_member(:preserve_edge_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "preserveEdgeIds"))
     NeptuneImportOptions.type = Types::NeptuneImportOptions
-    NodeLabels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    NodeProperties.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    NodeLabels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    NodeProperties.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     NodeStructure.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "count"))
     NodeStructure.add_member(:node_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeProperties, name: "nodeProperties"))
     NodeStructure.add_member(:distinct_outgoing_edge_labels, ::Smithy::Schema::Shapes::MemberShape.new(target: OutgoingEdgeLabels, name: "distinctOutgoingEdgeLabels"))
     NodeStructure.type = Types::NodeStructure
-    NodeStructures.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NodeStructure, name: "member")
-    OutgoingEdgeLabels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    NodeStructures.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeStructure, name: "member"))
+    OutgoingEdgeLabels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     ParquetType.add_member(:columnar, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COLUMNAR", traits: {"smithy.api#enumValue" => "COLUMNAR"}))
     PlanCacheType.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     PlanCacheType.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
@@ -611,7 +611,7 @@ module Aws::NeptuneGraph
     PrivateGraphEndpointSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateGraphEndpointStatus, name: "status", traits: {"smithy.api#required" => {}}))
     PrivateGraphEndpointSummary.add_member(:vpc_endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointId, name: "vpcEndpointId"))
     PrivateGraphEndpointSummary.type = Types::PrivateGraphEndpointSummary
-    PrivateGraphEndpointSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateGraphEndpointSummary, name: "member")
+    PrivateGraphEndpointSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateGraphEndpointSummary, name: "member"))
     QueryLanguage.add_member(:open_cypher, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPEN_CYPHER", traits: {"smithy.api#enumValue" => "OPEN_CYPHER"}))
     QueryState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     QueryState.add_member(:waiting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WAITING", traits: {"smithy.api#enumValue" => "WAITING"}))
@@ -626,7 +626,7 @@ module Aws::NeptuneGraph
     QuerySummary.add_member(:elapsed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "elapsed"))
     QuerySummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryState, name: "state"))
     QuerySummary.type = Types::QuerySummary
-    QuerySummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QuerySummary, name: "member")
+    QuerySummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuerySummary, name: "member"))
     ResetGraphInput.add_member(:graph_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GraphIdentifier, name: "graphIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ResetGraphInput.add_member(:skip_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "skipSnapshot", traits: {"smithy.api#required" => {}}))
     ResetGraphInput.type = Types::ResetGraphInput
@@ -672,7 +672,7 @@ module Aws::NeptuneGraph
     RestoreGraphFromSnapshotOutput.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "deletionProtection"))
     RestoreGraphFromSnapshotOutput.add_member(:build_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "buildNumber"))
     RestoreGraphFromSnapshotOutput.type = Types::RestoreGraphFromSnapshotOutput
-    SecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
+    SecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId"))
     ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType"))
@@ -757,10 +757,10 @@ module Aws::NeptuneGraph
     StopGraphOutput.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "deletionProtection"))
     StopGraphOutput.add_member(:build_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "buildNumber"))
     StopGraphOutput.type = Types::StopGraphOutput
-    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    SubnetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput

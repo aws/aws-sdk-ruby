@@ -445,13 +445,13 @@ module Aws::WAFV2
     WebACLSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#WebACLSummary", name: "WebACLSummary")
     XssMatchStatement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.wafv2#XssMatchStatement", name: "XssMatchStatement")
 
-    APIKeySummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: APIKeySummary, name: "member")
+    APIKeySummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: APIKeySummary, name: "member"))
     APIKeySummary.add_member(:token_domains, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenDomains, name: "TokenDomains"))
     APIKeySummary.add_member(:api_key, ::Smithy::Schema::Shapes::MemberShape.new(target: APIKey, name: "APIKey"))
     APIKeySummary.add_member(:creation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTimestamp"))
     APIKeySummary.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: APIKeyVersion, name: "Version", traits: {"smithy.api#default" => 0}))
     APIKeySummary.type = Types::APIKeySummary
-    APIKeyTokenDomains.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TokenDomain, name: "member")
+    APIKeyTokenDomains.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenDomain, name: "member"))
     AWSManagedRulesACFPRuleSet.add_member(:creation_path, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationPathString, name: "CreationPath", traits: {"smithy.api#required" => {}}))
     AWSManagedRulesACFPRuleSet.add_member(:registration_page_path, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationPagePathString, name: "RegistrationPagePath", traits: {"smithy.api#required" => {}}))
     AWSManagedRulesACFPRuleSet.add_member(:request_inspection, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestInspectionACFP, name: "RequestInspection", traits: {"smithy.api#required" => {}}))
@@ -479,7 +479,7 @@ module Aws::WAFV2
     ActionValue.add_member(:excluded_as_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXCLUDED_AS_COUNT", traits: {"smithy.api#enumValue" => "EXCLUDED_AS_COUNT"}))
     AddressField.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldIdentifier, name: "Identifier", traits: {"smithy.api#required" => {}}))
     AddressField.type = Types::AddressField
-    AddressFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AddressField, name: "member")
+    AddressFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressField, name: "member"))
     All.type = Types::All
     AllQueryArguments.type = Types::AllQueryArguments
     AllowAction.add_member(:custom_request_handling, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomRequestHandling, name: "CustomRequestHandling"))
@@ -489,10 +489,10 @@ module Aws::WAFV2
     ApplicationAttribute.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "Name"))
     ApplicationAttribute.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValues, name: "Values"))
     ApplicationAttribute.type = Types::ApplicationAttribute
-    ApplicationAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationAttribute, name: "member")
+    ApplicationAttributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationAttribute, name: "member"))
     ApplicationConfig.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationAttributes, name: "Attributes"))
     ApplicationConfig.type = Types::ApplicationConfig
-    AsnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ASN, name: "member")
+    AsnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ASN, name: "member"))
     AsnMatchStatement.add_member(:asn_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AsnList, name: "AsnList", traits: {"smithy.api#required" => {}}))
     AsnMatchStatement.add_member(:forwarded_ip_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ForwardedIPConfig, name: "ForwardedIPConfig"))
     AsnMatchStatement.type = Types::AsnMatchStatement
@@ -507,7 +507,7 @@ module Aws::WAFV2
     AssociatedResourceType.add_member(:verified_access_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERIFIED_ACCESS_INSTANCE", traits: {"smithy.api#enumValue" => "VERIFIED_ACCESS_INSTANCE"}))
     AssociationConfig.add_member(:request_body, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestBody, name: "RequestBody"))
     AssociationConfig.type = Types::AssociationConfig
-    AttributeValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "member")
+    AttributeValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "member"))
     BlockAction.add_member(:custom_response, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomResponse, name: "CustomResponse"))
     BlockAction.type = Types::BlockAction
     Body.add_member(:oversize_handling, ::Smithy::Schema::Shapes::MemberShape.new(target: OversizeHandling, name: "OversizeHandling"))
@@ -556,12 +556,12 @@ module Aws::WAFV2
     Condition.add_member(:action_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionCondition, name: "ActionCondition"))
     Condition.add_member(:label_name_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelNameCondition, name: "LabelNameCondition"))
     Condition.type = Types::Condition
-    Conditions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "member")
+    Conditions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "member"))
     CookieMatchPattern.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: All, name: "All"))
     CookieMatchPattern.add_member(:included_cookies, ::Smithy::Schema::Shapes::MemberShape.new(target: CookieNames, name: "IncludedCookies"))
     CookieMatchPattern.add_member(:excluded_cookies, ::Smithy::Schema::Shapes::MemberShape.new(target: CookieNames, name: "ExcludedCookies"))
     CookieMatchPattern.type = Types::CookieMatchPattern
-    CookieNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SingleCookieName, name: "member")
+    CookieNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SingleCookieName, name: "member"))
     Cookies.add_member(:match_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: CookieMatchPattern, name: "MatchPattern", traits: {"smithy.api#required" => {}}))
     Cookies.add_member(:match_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: MapMatchScope, name: "MatchScope", traits: {"smithy.api#required" => {}}))
     Cookies.add_member(:oversize_handling, ::Smithy::Schema::Shapes::MemberShape.new(target: OversizeHandling, name: "OversizeHandling", traits: {"smithy.api#required" => {}}))
@@ -818,7 +818,7 @@ module Aws::WAFV2
     CountryCode.add_member(:zm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ZM", traits: {"smithy.api#enumValue" => "ZM"}))
     CountryCode.add_member(:zw, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ZW", traits: {"smithy.api#enumValue" => "ZW"}))
     CountryCode.add_member(:xk, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "XK", traits: {"smithy.api#enumValue" => "XK"}))
-    CountryCodes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode, name: "member")
+    CountryCodes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode, name: "member"))
     CreateAPIKeyRequest.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: Scope, name: "Scope", traits: {"smithy.api#required" => {}}))
     CreateAPIKeyRequest.add_member(:token_domains, ::Smithy::Schema::Shapes::MemberShape.new(target: APIKeyTokenDomains, name: "TokenDomains", traits: {"smithy.api#required" => {}}))
     CreateAPIKeyRequest.type = Types::CreateAPIKeyRequest
@@ -873,15 +873,15 @@ module Aws::WAFV2
     CustomHTTPHeader.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomHTTPHeaderName, name: "Name", traits: {"smithy.api#required" => {}}))
     CustomHTTPHeader.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomHTTPHeaderValue, name: "Value", traits: {"smithy.api#required" => {}}))
     CustomHTTPHeader.type = Types::CustomHTTPHeader
-    CustomHTTPHeaders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomHTTPHeader, name: "member")
+    CustomHTTPHeaders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomHTTPHeader, name: "member"))
     CustomRequestHandling.add_member(:insert_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomHTTPHeaders, name: "InsertHeaders", traits: {"smithy.api#required" => {}}))
     CustomRequestHandling.type = Types::CustomRequestHandling
     CustomResponse.add_member(:response_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseStatusCode, name: "ResponseCode", traits: {"smithy.api#required" => {}}))
     CustomResponse.add_member(:custom_response_body_key, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "CustomResponseBodyKey"))
     CustomResponse.add_member(:response_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomHTTPHeaders, name: "ResponseHeaders"))
     CustomResponse.type = Types::CustomResponse
-    CustomResponseBodies.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "key")
-    CustomResponseBodies.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomResponseBody, name: "value")
+    CustomResponseBodies.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "key"))
+    CustomResponseBodies.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomResponseBody, name: "value"))
     CustomResponseBody.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseContentType, name: "ContentType", traits: {"smithy.api#required" => {}}))
     CustomResponseBody.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseContent, name: "Content", traits: {"smithy.api#required" => {}}))
     CustomResponseBody.type = Types::CustomResponseBody
@@ -894,7 +894,7 @@ module Aws::WAFV2
     DataProtectionAction.add_member(:hash, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HASH", traits: {"smithy.api#enumValue" => "HASH"}))
     DataProtectionConfig.add_member(:data_protections, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProtections, name: "DataProtections", traits: {"smithy.api#required" => {}}))
     DataProtectionConfig.type = Types::DataProtectionConfig
-    DataProtections.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataProtection, name: "member")
+    DataProtections.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProtection, name: "member"))
     DefaultAction.add_member(:block, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockAction, name: "Block"))
     DefaultAction.add_member(:allow, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowAction, name: "Allow"))
     DefaultAction.type = Types::DefaultAction
@@ -968,7 +968,7 @@ module Aws::WAFV2
     EmailField.type = Types::EmailField
     ExcludedRule.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name", traits: {"smithy.api#required" => {}}))
     ExcludedRule.type = Types::ExcludedRule
-    ExcludedRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludedRule, name: "member")
+    ExcludedRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludedRule, name: "member"))
     FailureReason.add_member(:token_missing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOKEN_MISSING", traits: {"smithy.api#enumValue" => "TOKEN_MISSING"}))
     FailureReason.add_member(:token_expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOKEN_EXPIRED", traits: {"smithy.api#enumValue" => "TOKEN_EXPIRED"}))
     FailureReason.add_member(:token_invalid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOKEN_INVALID", traits: {"smithy.api#enumValue" => "TOKEN_INVALID"}))
@@ -993,7 +993,7 @@ module Aws::WAFV2
     FieldToProtect.add_member(:field_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToProtectType, name: "FieldType", traits: {"smithy.api#required" => {}}))
     FieldToProtect.add_member(:field_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToProtectKeys, name: "FieldKeys"))
     FieldToProtect.type = Types::FieldToProtect
-    FieldToProtectKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToProtectKeyName, name: "member")
+    FieldToProtectKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToProtectKeyName, name: "member"))
     FieldToProtectType.add_member(:single_header, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE_HEADER", traits: {"smithy.api#enumValue" => "SINGLE_HEADER"}))
     FieldToProtectType.add_member(:single_cookie, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE_COOKIE", traits: {"smithy.api#enumValue" => "SINGLE_COOKIE"}))
     FieldToProtectType.add_member(:single_query_argument, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE_QUERY_ARGUMENT", traits: {"smithy.api#enumValue" => "SINGLE_QUERY_ARGUMENT"}))
@@ -1007,14 +1007,14 @@ module Aws::WAFV2
     FilterBehavior.add_member(:drop, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DROP", traits: {"smithy.api#enumValue" => "DROP"}))
     FilterRequirement.add_member(:meets_all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEETS_ALL", traits: {"smithy.api#enumValue" => "MEETS_ALL"}))
     FilterRequirement.add_member(:meets_any, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEETS_ANY", traits: {"smithy.api#enumValue" => "MEETS_ANY"}))
-    Filters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
+    Filters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     FirewallManagerRuleGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name", traits: {"smithy.api#required" => {}}))
     FirewallManagerRuleGroup.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: RulePriority, name: "Priority", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     FirewallManagerRuleGroup.add_member(:firewall_manager_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallManagerStatement, name: "FirewallManagerStatement", traits: {"smithy.api#required" => {}}))
     FirewallManagerRuleGroup.add_member(:override_action, ::Smithy::Schema::Shapes::MemberShape.new(target: OverrideAction, name: "OverrideAction", traits: {"smithy.api#required" => {}}))
     FirewallManagerRuleGroup.add_member(:visibility_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VisibilityConfig, name: "VisibilityConfig", traits: {"smithy.api#required" => {}}))
     FirewallManagerRuleGroup.type = Types::FirewallManagerRuleGroup
-    FirewallManagerRuleGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallManagerRuleGroup, name: "member")
+    FirewallManagerRuleGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallManagerRuleGroup, name: "member"))
     FirewallManagerStatement.add_member(:managed_rule_group_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRuleGroupStatement, name: "ManagedRuleGroupStatement"))
     FirewallManagerStatement.add_member(:rule_group_reference_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupReferenceStatement, name: "RuleGroupReferenceStatement"))
     FirewallManagerStatement.type = Types::FirewallManagerStatement
@@ -1117,7 +1117,7 @@ module Aws::WAFV2
     HTTPHeader.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderName, name: "Name"))
     HTTPHeader.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderValue, name: "Value"))
     HTTPHeader.type = Types::HTTPHeader
-    HTTPHeaders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HTTPHeader, name: "member")
+    HTTPHeaders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HTTPHeader, name: "member"))
     HTTPRequest.add_member(:client_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: IPString, name: "ClientIP"))
     HTTPRequest.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: Country, name: "Country"))
     HTTPRequest.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: URIString, name: "URI"))
@@ -1129,7 +1129,7 @@ module Aws::WAFV2
     HeaderMatchPattern.add_member(:included_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderNames, name: "IncludedHeaders"))
     HeaderMatchPattern.add_member(:excluded_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderNames, name: "ExcludedHeaders"))
     HeaderMatchPattern.type = Types::HeaderMatchPattern
-    HeaderNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToMatchData, name: "member")
+    HeaderNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToMatchData, name: "member"))
     HeaderOrder.add_member(:oversize_handling, ::Smithy::Schema::Shapes::MemberShape.new(target: OversizeHandling, name: "OversizeHandling", traits: {"smithy.api#required" => {}}))
     HeaderOrder.type = Types::HeaderOrder
     Headers.add_member(:match_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatchPattern, name: "MatchPattern", traits: {"smithy.api#required" => {}}))
@@ -1138,7 +1138,7 @@ module Aws::WAFV2
     Headers.type = Types::Headers
     IPAddressVersion.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4", traits: {"smithy.api#enumValue" => "IPV4"}))
     IPAddressVersion.add_member(:ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV6", traits: {"smithy.api#enumValue" => "IPV6"}))
-    IPAddresses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IPAddress, name: "member")
+    IPAddresses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IPAddress, name: "member"))
     IPSet.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name", traits: {"smithy.api#required" => {}}))
     IPSet.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "Id", traits: {"smithy.api#required" => {}}))
     IPSet.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ARN", traits: {"smithy.api#required" => {}}))
@@ -1153,7 +1153,7 @@ module Aws::WAFV2
     IPSetReferenceStatement.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ARN", traits: {"smithy.api#required" => {}}))
     IPSetReferenceStatement.add_member(:ip_set_forwarded_ip_config, ::Smithy::Schema::Shapes::MemberShape.new(target: IPSetForwardedIPConfig, name: "IPSetForwardedIPConfig"))
     IPSetReferenceStatement.type = Types::IPSetReferenceStatement
-    IPSetSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IPSetSummary, name: "member")
+    IPSetSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IPSetSummary, name: "member"))
     IPSetSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name"))
     IPSetSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "Id"))
     IPSetSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDescription, name: "Description"))
@@ -1179,7 +1179,7 @@ module Aws::WAFV2
     JsonMatchScope.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
     JsonMatchScope.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KEY", traits: {"smithy.api#enumValue" => "KEY"}))
     JsonMatchScope.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALUE", traits: {"smithy.api#enumValue" => "VALUE"}))
-    JsonPointerPaths.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JsonPointerPath, name: "member")
+    JsonPointerPaths.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonPointerPath, name: "member"))
     Label.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelName, name: "Name", traits: {"smithy.api#required" => {}}))
     Label.type = Types::Label
     LabelMatchScope.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LABEL", traits: {"smithy.api#enumValue" => "LABEL"}))
@@ -1189,10 +1189,10 @@ module Aws::WAFV2
     LabelMatchStatement.type = Types::LabelMatchStatement
     LabelNameCondition.add_member(:label_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelName, name: "LabelName", traits: {"smithy.api#required" => {}}))
     LabelNameCondition.type = Types::LabelNameCondition
-    LabelSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LabelSummary, name: "member")
+    LabelSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelSummary, name: "member"))
     LabelSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelName, name: "Name"))
     LabelSummary.type = Types::LabelSummary
-    Labels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Label, name: "member")
+    Labels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Label, name: "member"))
     ListAPIKeysRequest.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: Scope, name: "Scope", traits: {"smithy.api#required" => {}}))
     ListAPIKeysRequest.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: NextMarker, name: "NextMarker"))
     ListAPIKeysRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationLimit, name: "Limit"))
@@ -1280,7 +1280,7 @@ module Aws::WAFV2
     ListWebACLsResponse.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: NextMarker, name: "NextMarker"))
     ListWebACLsResponse.add_member(:web_ac_ls, ::Smithy::Schema::Shapes::MemberShape.new(target: WebACLSummaries, name: "WebACLs"))
     ListWebACLsResponse.type = Types::ListWebACLsResponse
-    LogDestinationConfigs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member")
+    LogDestinationConfigs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member"))
     LogScope.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER", traits: {"smithy.api#enumValue" => "CUSTOMER"}))
     LogScope.add_member(:security_lake, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECURITY_LAKE", traits: {"smithy.api#enumValue" => "SECURITY_LAKE"}))
     LogType.add_member(:waf_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WAF_LOGS", traits: {"smithy.api#enumValue" => "WAF_LOGS"}))
@@ -1292,7 +1292,7 @@ module Aws::WAFV2
     LoggingConfiguration.add_member(:log_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogType, name: "LogType"))
     LoggingConfiguration.add_member(:log_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: LogScope, name: "LogScope"))
     LoggingConfiguration.type = Types::LoggingConfiguration
-    LoggingConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfiguration, name: "member")
+    LoggingConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfiguration, name: "member"))
     LoggingFilter.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: Filters, name: "Filters", traits: {"smithy.api#required" => {}}))
     LoggingFilter.add_member(:default_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterBehavior, name: "DefaultBehavior", traits: {"smithy.api#required" => {}}))
     LoggingFilter.type = Types::LoggingFilter
@@ -1308,7 +1308,7 @@ module Aws::WAFV2
     ManagedProductDescriptor.add_member(:is_versioning_supported, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsVersioningSupported", traits: {"smithy.api#default" => false}))
     ManagedProductDescriptor.add_member(:is_advanced_managed_rule_set, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsAdvancedManagedRuleSet", traits: {"smithy.api#default" => false}))
     ManagedProductDescriptor.type = Types::ManagedProductDescriptor
-    ManagedProductDescriptors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedProductDescriptor, name: "member")
+    ManagedProductDescriptors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedProductDescriptor, name: "member"))
     ManagedRuleGroupConfig.add_member(:login_path, ::Smithy::Schema::Shapes::MemberShape.new(target: LoginPathString, name: "LoginPath", traits: {"smithy.api#deprecated" => {"message" => "Deprecated. Use AWSManagedRulesATPRuleSet LoginPath"}}))
     ManagedRuleGroupConfig.add_member(:payload_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PayloadType, name: "PayloadType", traits: {"smithy.api#deprecated" => {"message" => "Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection PayloadType"}}))
     ManagedRuleGroupConfig.add_member(:username_field, ::Smithy::Schema::Shapes::MemberShape.new(target: UsernameField, name: "UsernameField", traits: {"smithy.api#deprecated" => {"message" => "Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection UsernameField"}}))
@@ -1318,7 +1318,7 @@ module Aws::WAFV2
     ManagedRuleGroupConfig.add_member(:aws_managed_rules_acfp_rule_set, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSManagedRulesACFPRuleSet, name: "AWSManagedRulesACFPRuleSet"))
     ManagedRuleGroupConfig.add_member(:aws_managed_rules_anti_d_do_s_rule_set, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSManagedRulesAntiDDoSRuleSet, name: "AWSManagedRulesAntiDDoSRuleSet"))
     ManagedRuleGroupConfig.type = Types::ManagedRuleGroupConfig
-    ManagedRuleGroupConfigs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRuleGroupConfig, name: "member")
+    ManagedRuleGroupConfigs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRuleGroupConfig, name: "member"))
     ManagedRuleGroupStatement.add_member(:vendor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VendorName, name: "VendorName", traits: {"smithy.api#required" => {}}))
     ManagedRuleGroupStatement.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name", traits: {"smithy.api#required" => {}}))
     ManagedRuleGroupStatement.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionKeyString, name: "Version"))
@@ -1327,7 +1327,7 @@ module Aws::WAFV2
     ManagedRuleGroupStatement.add_member(:managed_rule_group_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRuleGroupConfigs, name: "ManagedRuleGroupConfigs"))
     ManagedRuleGroupStatement.add_member(:rule_action_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleActionOverrides, name: "RuleActionOverrides"))
     ManagedRuleGroupStatement.type = Types::ManagedRuleGroupStatement
-    ManagedRuleGroupSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRuleGroupSummary, name: "member")
+    ManagedRuleGroupSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRuleGroupSummary, name: "member"))
     ManagedRuleGroupSummary.add_member(:vendor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VendorName, name: "VendorName"))
     ManagedRuleGroupSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name"))
     ManagedRuleGroupSummary.add_member(:versioning_supported, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "VersioningSupported", traits: {"smithy.api#default" => false}))
@@ -1336,7 +1336,7 @@ module Aws::WAFV2
     ManagedRuleGroupVersion.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionKeyString, name: "Name"))
     ManagedRuleGroupVersion.add_member(:last_update_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdateTimestamp"))
     ManagedRuleGroupVersion.type = Types::ManagedRuleGroupVersion
-    ManagedRuleGroupVersions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRuleGroupVersion, name: "member")
+    ManagedRuleGroupVersions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRuleGroupVersion, name: "member"))
     ManagedRuleSet.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name", traits: {"smithy.api#required" => {}}))
     ManagedRuleSet.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "Id", traits: {"smithy.api#required" => {}}))
     ManagedRuleSet.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ARN", traits: {"smithy.api#required" => {}}))
@@ -1345,7 +1345,7 @@ module Aws::WAFV2
     ManagedRuleSet.add_member(:recommended_version, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionKeyString, name: "RecommendedVersion"))
     ManagedRuleSet.add_member(:label_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelName, name: "LabelNamespace"))
     ManagedRuleSet.type = Types::ManagedRuleSet
-    ManagedRuleSetSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRuleSetSummary, name: "member")
+    ManagedRuleSetSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRuleSetSummary, name: "member"))
     ManagedRuleSetSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name"))
     ManagedRuleSetSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "Id"))
     ManagedRuleSetSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDescription, name: "Description"))
@@ -1460,7 +1460,7 @@ module Aws::WAFV2
     PayloadType.add_member(:form_encoded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FORM_ENCODED", traits: {"smithy.api#enumValue" => "FORM_ENCODED"}))
     PhoneNumberField.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldIdentifier, name: "Identifier", traits: {"smithy.api#required" => {}}))
     PhoneNumberField.type = Types::PhoneNumberField
-    PhoneNumberFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberField, name: "member")
+    PhoneNumberFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberField, name: "member"))
     Platform.add_member(:ios, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IOS", traits: {"smithy.api#enumValue" => "IOS"}))
     Platform.add_member(:android, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANDROID", traits: {"smithy.api#enumValue" => "ANDROID"}))
     PositionalConstraint.add_member(:exactly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXACTLY", traits: {"smithy.api#enumValue" => "EXACTLY"}))
@@ -1468,8 +1468,8 @@ module Aws::WAFV2
     PositionalConstraint.add_member(:ends_with, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENDS_WITH", traits: {"smithy.api#enumValue" => "ENDS_WITH"}))
     PositionalConstraint.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINS", traits: {"smithy.api#enumValue" => "CONTAINS"}))
     PositionalConstraint.add_member(:contains_word, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINS_WORD", traits: {"smithy.api#enumValue" => "CONTAINS_WORD"}))
-    PublishedVersions.key = ::Smithy::Schema::Shapes::MemberShape.new(target: VersionKeyString, name: "key")
-    PublishedVersions.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRuleSetVersion, name: "value")
+    PublishedVersions.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionKeyString, name: "key"))
+    PublishedVersions.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRuleSetVersion, name: "value"))
     PutLoggingConfigurationRequest.add_member(:logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfiguration, name: "LoggingConfiguration", traits: {"smithy.api#required" => {}}))
     PutLoggingConfigurationRequest.type = Types::PutLoggingConfigurationRequest
     PutLoggingConfigurationResponse.add_member(:logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfiguration, name: "LoggingConfiguration"))
@@ -1512,7 +1512,7 @@ module Aws::WAFV2
     RateBasedStatementCustomKey.add_member(:ja4_fingerprint, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimitJA4Fingerprint, name: "JA4Fingerprint"))
     RateBasedStatementCustomKey.add_member(:asn, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimitAsn, name: "ASN"))
     RateBasedStatementCustomKey.type = Types::RateBasedStatementCustomKey
-    RateBasedStatementCustomKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RateBasedStatementCustomKey, name: "member")
+    RateBasedStatementCustomKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RateBasedStatementCustomKey, name: "member"))
     RateBasedStatementManagedKeysIPSet.add_member(:ip_address_version, ::Smithy::Schema::Shapes::MemberShape.new(target: IPAddressVersion, name: "IPAddressVersion"))
     RateBasedStatementManagedKeysIPSet.add_member(:addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: IPAddresses, name: "Addresses"))
     RateBasedStatementManagedKeysIPSet.type = Types::RateBasedStatementManagedKeysIPSet
@@ -1539,7 +1539,7 @@ module Aws::WAFV2
     RateLimitQueryString.type = Types::RateLimitQueryString
     RateLimitUriPath.add_member(:text_transformations, ::Smithy::Schema::Shapes::MemberShape.new(target: TextTransformations, name: "TextTransformations", traits: {"smithy.api#required" => {}}))
     RateLimitUriPath.type = Types::RateLimitUriPath
-    RedactedFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToMatch, name: "member")
+    RedactedFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToMatch, name: "member"))
     Regex.add_member(:regex_string, ::Smithy::Schema::Shapes::MemberShape.new(target: RegexPatternString, name: "RegexString"))
     Regex.type = Types::Regex
     RegexMatchStatement.add_member(:regex_string, ::Smithy::Schema::Shapes::MemberShape.new(target: RegexPatternString, name: "RegexString", traits: {"smithy.api#required" => {}}))
@@ -1556,20 +1556,20 @@ module Aws::WAFV2
     RegexPatternSetReferenceStatement.add_member(:field_to_match, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToMatch, name: "FieldToMatch", traits: {"smithy.api#required" => {}}))
     RegexPatternSetReferenceStatement.add_member(:text_transformations, ::Smithy::Schema::Shapes::MemberShape.new(target: TextTransformations, name: "TextTransformations", traits: {"smithy.api#required" => {}}))
     RegexPatternSetReferenceStatement.type = Types::RegexPatternSetReferenceStatement
-    RegexPatternSetSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegexPatternSetSummary, name: "member")
+    RegexPatternSetSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegexPatternSetSummary, name: "member"))
     RegexPatternSetSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name"))
     RegexPatternSetSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "Id"))
     RegexPatternSetSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDescription, name: "Description"))
     RegexPatternSetSummary.add_member(:lock_token, ::Smithy::Schema::Shapes::MemberShape.new(target: LockToken, name: "LockToken"))
     RegexPatternSetSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ARN"))
     RegexPatternSetSummary.type = Types::RegexPatternSetSummary
-    RegularExpressionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Regex, name: "member")
-    ReleaseSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseSummary, name: "member")
+    RegularExpressionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Regex, name: "member"))
+    ReleaseSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseSummary, name: "member"))
     ReleaseSummary.add_member(:release_version, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionKeyString, name: "ReleaseVersion"))
     ReleaseSummary.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp"))
     ReleaseSummary.type = Types::ReleaseSummary
-    RequestBody.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedResourceType, name: "key")
-    RequestBody.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RequestBodyAssociatedResourceTypeConfig, name: "value")
+    RequestBody.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedResourceType, name: "key"))
+    RequestBody.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestBodyAssociatedResourceTypeConfig, name: "value"))
     RequestBodyAssociatedResourceTypeConfig.add_member(:default_size_inspection_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: SizeInspectionLimit, name: "DefaultSizeInspectionLimit", traits: {"smithy.api#required" => {}}))
     RequestBodyAssociatedResourceTypeConfig.type = Types::RequestBodyAssociatedResourceTypeConfig
     RequestInspection.add_member(:payload_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PayloadType, name: "PayloadType", traits: {"smithy.api#required" => {}}))
@@ -1583,7 +1583,7 @@ module Aws::WAFV2
     RequestInspectionACFP.add_member(:phone_number_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberFields, name: "PhoneNumberFields"))
     RequestInspectionACFP.add_member(:address_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressFields, name: "AddressFields"))
     RequestInspectionACFP.type = Types::RequestInspectionACFP
-    ResourceArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member")
+    ResourceArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member"))
     ResourceType.add_member(:application_load_balancer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPLICATION_LOAD_BALANCER", traits: {"smithy.api#enumValue" => "APPLICATION_LOAD_BALANCER"}))
     ResourceType.add_member(:api_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "API_GATEWAY", traits: {"smithy.api#enumValue" => "API_GATEWAY"}))
     ResourceType.add_member(:appsync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPSYNC", traits: {"smithy.api#enumValue" => "APPSYNC"}))
@@ -1602,25 +1602,25 @@ module Aws::WAFV2
     ResponseInspectionBodyContains.add_member(:success_strings, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseInspectionBodyContainsSuccessStrings, name: "SuccessStrings", traits: {"smithy.api#required" => {}}))
     ResponseInspectionBodyContains.add_member(:failure_strings, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseInspectionBodyContainsFailureStrings, name: "FailureStrings", traits: {"smithy.api#required" => {}}))
     ResponseInspectionBodyContains.type = Types::ResponseInspectionBodyContains
-    ResponseInspectionBodyContainsFailureStrings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailureValue, name: "member")
-    ResponseInspectionBodyContainsSuccessStrings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessValue, name: "member")
+    ResponseInspectionBodyContainsFailureStrings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureValue, name: "member"))
+    ResponseInspectionBodyContainsSuccessStrings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessValue, name: "member"))
     ResponseInspectionHeader.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseInspectionHeaderName, name: "Name", traits: {"smithy.api#required" => {}}))
     ResponseInspectionHeader.add_member(:success_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseInspectionHeaderSuccessValues, name: "SuccessValues", traits: {"smithy.api#required" => {}}))
     ResponseInspectionHeader.add_member(:failure_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseInspectionHeaderFailureValues, name: "FailureValues", traits: {"smithy.api#required" => {}}))
     ResponseInspectionHeader.type = Types::ResponseInspectionHeader
-    ResponseInspectionHeaderFailureValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailureValue, name: "member")
-    ResponseInspectionHeaderSuccessValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessValue, name: "member")
+    ResponseInspectionHeaderFailureValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureValue, name: "member"))
+    ResponseInspectionHeaderSuccessValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessValue, name: "member"))
     ResponseInspectionJson.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldIdentifier, name: "Identifier", traits: {"smithy.api#required" => {}}))
     ResponseInspectionJson.add_member(:success_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseInspectionJsonSuccessValues, name: "SuccessValues", traits: {"smithy.api#required" => {}}))
     ResponseInspectionJson.add_member(:failure_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseInspectionJsonFailureValues, name: "FailureValues", traits: {"smithy.api#required" => {}}))
     ResponseInspectionJson.type = Types::ResponseInspectionJson
-    ResponseInspectionJsonFailureValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailureValue, name: "member")
-    ResponseInspectionJsonSuccessValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessValue, name: "member")
+    ResponseInspectionJsonFailureValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureValue, name: "member"))
+    ResponseInspectionJsonSuccessValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessValue, name: "member"))
     ResponseInspectionStatusCode.add_member(:success_codes, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseInspectionStatusCodeSuccessCodes, name: "SuccessCodes", traits: {"smithy.api#required" => {}}))
     ResponseInspectionStatusCode.add_member(:failure_codes, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseInspectionStatusCodeFailureCodes, name: "FailureCodes", traits: {"smithy.api#required" => {}}))
     ResponseInspectionStatusCode.type = Types::ResponseInspectionStatusCode
-    ResponseInspectionStatusCodeFailureCodes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailureCode, name: "member")
-    ResponseInspectionStatusCodeSuccessCodes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessCode, name: "member")
+    ResponseInspectionStatusCodeFailureCodes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureCode, name: "member"))
+    ResponseInspectionStatusCodeSuccessCodes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessCode, name: "member"))
     Rule.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name", traits: {"smithy.api#required" => {}}))
     Rule.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: RulePriority, name: "Priority", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     Rule.add_member(:statement, ::Smithy::Schema::Shapes::MemberShape.new(target: Statement, name: "Statement", traits: {"smithy.api#required" => {}}))
@@ -1640,7 +1640,7 @@ module Aws::WAFV2
     RuleActionOverride.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name", traits: {"smithy.api#required" => {}}))
     RuleActionOverride.add_member(:action_to_use, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleAction, name: "ActionToUse", traits: {"smithy.api#required" => {}}))
     RuleActionOverride.type = Types::RuleActionOverride
-    RuleActionOverrides.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleActionOverride, name: "member")
+    RuleActionOverrides.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleActionOverride, name: "member"))
     RuleGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name", traits: {"smithy.api#required" => {}}))
     RuleGroup.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "Id", traits: {"smithy.api#required" => {}}))
     RuleGroup.add_member(:capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityUnit, name: "Capacity", traits: {"smithy.api#required" => {}}))
@@ -1657,18 +1657,18 @@ module Aws::WAFV2
     RuleGroupReferenceStatement.add_member(:excluded_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludedRules, name: "ExcludedRules"))
     RuleGroupReferenceStatement.add_member(:rule_action_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleActionOverrides, name: "RuleActionOverrides"))
     RuleGroupReferenceStatement.type = Types::RuleGroupReferenceStatement
-    RuleGroupSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSummary, name: "member")
+    RuleGroupSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSummary, name: "member"))
     RuleGroupSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name"))
     RuleGroupSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "Id"))
     RuleGroupSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDescription, name: "Description"))
     RuleGroupSummary.add_member(:lock_token, ::Smithy::Schema::Shapes::MemberShape.new(target: LockToken, name: "LockToken"))
     RuleGroupSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ARN"))
     RuleGroupSummary.type = Types::RuleGroupSummary
-    RuleSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSummary, name: "member")
+    RuleSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSummary, name: "member"))
     RuleSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name"))
     RuleSummary.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleAction, name: "Action"))
     RuleSummary.type = Types::RuleSummary
-    Rules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "member")
+    Rules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "member"))
     SampledHTTPRequest.add_member(:request, ::Smithy::Schema::Shapes::MemberShape.new(target: HTTPRequest, name: "Request", traits: {"smithy.api#required" => {}}))
     SampledHTTPRequest.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleWeight, name: "Weight", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     SampledHTTPRequest.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp"))
@@ -1681,7 +1681,7 @@ module Aws::WAFV2
     SampledHTTPRequest.add_member(:challenge_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ChallengeResponse, name: "ChallengeResponse"))
     SampledHTTPRequest.add_member(:overridden_action, ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "OverriddenAction"))
     SampledHTTPRequest.type = Types::SampledHTTPRequest
-    SampledHTTPRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SampledHTTPRequest, name: "member")
+    SampledHTTPRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SampledHTTPRequest, name: "member"))
     Scope.add_member(:cloudfront, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUDFRONT", traits: {"smithy.api#enumValue" => "CLOUDFRONT"}))
     Scope.add_member(:regional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGIONAL", traits: {"smithy.api#enumValue" => "REGIONAL"}))
     SensitivityLevel.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "LOW"}))
@@ -1723,15 +1723,15 @@ module Aws::WAFV2
     Statement.add_member(:regex_match_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: RegexMatchStatement, name: "RegexMatchStatement"))
     Statement.add_member(:asn_match_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: AsnMatchStatement, name: "AsnMatchStatement"))
     Statement.type = Types::Statement
-    Statements.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Statement, name: "member")
+    Statements.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Statement, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
     TagInfoForResource.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceARN"))
     TagInfoForResource.add_member(:tag_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "TagList"))
     TagInfoForResource.type = Types::TagInfoForResource
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -1760,11 +1760,11 @@ module Aws::WAFV2
     TextTransformationType.add_member(:base64_decode_ext, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BASE64_DECODE_EXT", traits: {"smithy.api#enumValue" => "BASE64_DECODE_EXT"}))
     TextTransformationType.add_member(:url_decode_uni, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "URL_DECODE_UNI", traits: {"smithy.api#enumValue" => "URL_DECODE_UNI"}))
     TextTransformationType.add_member(:utf8_to_unicode, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UTF8_TO_UNICODE", traits: {"smithy.api#enumValue" => "UTF8_TO_UNICODE"}))
-    TextTransformations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TextTransformation, name: "member")
+    TextTransformations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TextTransformation, name: "member"))
     TimeWindow.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime", traits: {"smithy.api#required" => {}}))
     TimeWindow.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime", traits: {"smithy.api#required" => {}}))
     TimeWindow.type = Types::TimeWindow
-    TokenDomains.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TokenDomain, name: "member")
+    TokenDomains.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenDomain, name: "member"))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -1838,8 +1838,8 @@ module Aws::WAFV2
     VersionToPublish.add_member(:associated_rule_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "AssociatedRuleGroupArn"))
     VersionToPublish.add_member(:forecasted_lifetime, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeWindowDay, name: "ForecastedLifetime"))
     VersionToPublish.type = Types::VersionToPublish
-    VersionsToPublish.key = ::Smithy::Schema::Shapes::MemberShape.new(target: VersionKeyString, name: "key")
-    VersionsToPublish.value = ::Smithy::Schema::Shapes::MemberShape.new(target: VersionToPublish, name: "value")
+    VersionsToPublish.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionKeyString, name: "key"))
+    VersionsToPublish.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionToPublish, name: "value"))
     VisibilityConfig.add_member(:sampled_requests_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SampledRequestsEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     VisibilityConfig.add_member(:cloud_watch_metrics_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "CloudWatchMetricsEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     VisibilityConfig.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "MetricName", traits: {"smithy.api#required" => {}}))
@@ -1908,7 +1908,7 @@ module Aws::WAFV2
     WebACL.add_member(:on_source_d_do_s_protection_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OnSourceDDoSProtectionConfig, name: "OnSourceDDoSProtectionConfig"))
     WebACL.add_member(:application_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationConfig, name: "ApplicationConfig"))
     WebACL.type = Types::WebACL
-    WebACLSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WebACLSummary, name: "member")
+    WebACLSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WebACLSummary, name: "member"))
     WebACLSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "Name"))
     WebACLSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "Id"))
     WebACLSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDescription, name: "Description"))

@@ -83,12 +83,12 @@ module Aws::LexRuntimeService
     ActiveContext.add_member(:time_to_live, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveContextTimeToLive, name: "timeToLive", traits: {"smithy.api#required" => {}}))
     ActiveContext.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveContextParametersMap, name: "parameters", traits: {"smithy.api#required" => {}}))
     ActiveContext.type = Types::ActiveContext
-    ActiveContextParametersMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "key")
-    ActiveContextParametersMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "value")
+    ActiveContextParametersMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "key"))
+    ActiveContextParametersMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "value"))
     ActiveContextTimeToLive.add_member(:time_to_live_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveContextTimeToLiveInSeconds, name: "timeToLiveInSeconds"))
     ActiveContextTimeToLive.add_member(:turns_to_live, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveContextTurnsToLive, name: "turnsToLive"))
     ActiveContextTimeToLive.type = Types::ActiveContextTimeToLive
-    ActiveContextsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveContext, name: "member")
+    ActiveContextsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveContext, name: "member"))
     BadGatewayException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     BadGatewayException.type = Types::BadGatewayException
     BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
@@ -154,7 +154,7 @@ module Aws::LexRuntimeService
     GetSessionResponse.type = Types::GetSessionResponse
     IntentConfidence.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "score", traits: {"smithy.api#default" => 0}))
     IntentConfidence.type = Types::IntentConfidence
-    IntentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PredictedIntent, name: "member")
+    IntentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictedIntent, name: "member"))
     IntentSummary.add_member(:intent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentName, name: "intentName"))
     IntentSummary.add_member(:checkpoint_label, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentSummaryCheckpointLabel, name: "checkpointLabel"))
     IntentSummary.add_member(:slots, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMap, name: "slots"))
@@ -163,7 +163,7 @@ module Aws::LexRuntimeService
     IntentSummary.add_member(:fulfillment_state, ::Smithy::Schema::Shapes::MemberShape.new(target: FulfillmentState, name: "fulfillmentState"))
     IntentSummary.add_member(:slot_to_elicit, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "slotToElicit"))
     IntentSummary.type = Types::IntentSummary
-    IntentSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IntentSummary, name: "member")
+    IntentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentSummary, name: "member"))
     InternalFailureException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     InternalFailureException.type = Types::InternalFailureException
     LimitExceededException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
@@ -272,12 +272,12 @@ module Aws::LexRuntimeService
     SentimentResponse.add_member(:sentiment_label, ::Smithy::Schema::Shapes::MemberShape.new(target: SentimentLabel, name: "sentimentLabel"))
     SentimentResponse.add_member(:sentiment_score, ::Smithy::Schema::Shapes::MemberShape.new(target: SentimentScore, name: "sentimentScore"))
     SentimentResponse.type = Types::SentimentResponse
-    StringMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    StringMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    StringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    StringMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     UnsupportedMediaTypeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     UnsupportedMediaTypeException.type = Types::UnsupportedMediaTypeException
-    GenericAttachmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GenericAttachment, name: "member")
-    ListOfButtons.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Button, name: "member")
+    GenericAttachmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericAttachment, name: "member"))
+    ListOfButtons.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Button, name: "member"))
 
     AWSDeepSenseRunTimeService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.lexruntimeservice#AWSDeepSenseRunTimeService"

@@ -106,8 +106,8 @@ module Aws::MWAA
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AirflowConfigurationOptions.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigKey, name: "key")
-    AirflowConfigurationOptions.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigValue, name: "value")
+    AirflowConfigurationOptions.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigKey, name: "key"))
+    AirflowConfigurationOptions.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigValue, name: "value"))
     CreateCliTokenInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateCliTokenInput.type = Types::CreateCliTokenInput
     CreateCliTokenOutput.add_member(:cli_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "CliToken"))
@@ -154,7 +154,7 @@ module Aws::MWAA
     Dimension.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name", traits: {"smithy.api#required" => {}}))
     Dimension.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Value", traits: {"smithy.api#required" => {}}))
     Dimension.type = Types::Dimension
-    Dimensions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "member")
+    Dimensions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "member"))
     Environment.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, name: "Name"))
     Environment.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentStatus, name: "Status"))
     Environment.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentArn, name: "Arn"))
@@ -190,7 +190,7 @@ module Aws::MWAA
     Environment.add_member(:min_webservers, ::Smithy::Schema::Shapes::MemberShape.new(target: MinWebservers, name: "MinWebservers"))
     Environment.add_member(:max_webservers, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxWebservers, name: "MaxWebservers"))
     Environment.type = Types::Environment
-    EnvironmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, name: "member")
+    EnvironmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, name: "member"))
     GetEnvironmentOperationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetEnvironmentOperationInput.type = Types::GetEnvironmentOperationInput
     GetEnvironmentOperationOutput.add_member(:environment, ::Smithy::Schema::Shapes::MemberShape.new(target: Environment, name: "Environment"))
@@ -234,7 +234,7 @@ module Aws::MWAA
     LoggingConfigurationInput.add_member(:worker_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ModuleLoggingConfigurationInput, name: "WorkerLogs"))
     LoggingConfigurationInput.add_member(:task_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ModuleLoggingConfigurationInput, name: "TaskLogs"))
     LoggingConfigurationInput.type = Types::LoggingConfigurationInput
-    MetricData.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDatum, name: "member")
+    MetricData.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDatum, name: "member"))
     MetricDatum.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "MetricName", traits: {"smithy.api#required" => {}}))
     MetricDatum.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "Timestamp", traits: {"smithy.api#required" => {}}))
     MetricDatum.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimensions, name: "Dimensions"))
@@ -264,16 +264,16 @@ module Aws::MWAA
     RestApiServerException.add_member(:rest_api_status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "RestApiStatusCode"))
     RestApiServerException.add_member(:rest_api_response, ::Smithy::Schema::Shapes::MemberShape.new(target: RestApiResponse, name: "RestApiResponse"))
     RestApiServerException.type = Types::RestApiServerException
-    SecurityGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
+    SecurityGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     StatisticSet.add_member(:sample_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "SampleCount"))
     StatisticSet.add_member(:sum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Sum"))
     StatisticSet.add_member(:minimum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Minimum"))
     StatisticSet.add_member(:maximum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Maximum"))
     StatisticSet.type = Types::StatisticSet
-    SubnetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    SubnetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceOperationInput.type = Types::TagResourceOperationInput

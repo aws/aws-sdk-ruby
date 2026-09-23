@@ -53,10 +53,10 @@ module Aws::Pricing
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AttributeNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    AttributeNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     AttributeValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     AttributeValue.type = Types::AttributeValue
-    AttributeValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "member")
+    AttributeValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "member"))
     DescribeServicesRequest.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServiceCode"))
     DescribeServicesRequest.add_member(:format_version, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatVersion, name: "FormatVersion"))
     DescribeServicesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
@@ -68,7 +68,7 @@ module Aws::Pricing
     DescribeServicesResponse.type = Types::DescribeServicesResponse
     ExpiredNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ExpiredNextTokenException.type = Types::ExpiredNextTokenException
-    FileFormats.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileFormat, name: "member")
+    FileFormats.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FileFormat, name: "member"))
     Filter.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterType, name: "Type", traits: {"smithy.api#required" => {}}))
     Filter.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: Field, name: "Field", traits: {"smithy.api#required" => {}}))
     Filter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "Value", traits: {"smithy.api#required" => {}}))
@@ -78,7 +78,7 @@ module Aws::Pricing
     FilterType.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINS", traits: {"smithy.api#enumValue" => "CONTAINS"}))
     FilterType.add_member(:any_of, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANY_OF", traits: {"smithy.api#enumValue" => "ANY_OF"}))
     FilterType.add_member(:none_of, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE_OF", traits: {"smithy.api#enumValue" => "NONE_OF"}))
-    Filters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
+    Filters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     GetAttributeValuesRequest.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServiceCode", traits: {"smithy.api#required" => {}}))
     GetAttributeValuesRequest.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AttributeName", traits: {"smithy.api#required" => {}}))
     GetAttributeValuesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
@@ -125,14 +125,14 @@ module Aws::Pricing
     PriceList.add_member(:currency_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, name: "CurrencyCode"))
     PriceList.add_member(:file_formats, ::Smithy::Schema::Shapes::MemberShape.new(target: FileFormats, name: "FileFormats"))
     PriceList.type = Types::PriceList
-    PriceListJsonItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SynthesizedJsonPriceListJsonItem, name: "member")
-    PriceLists.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PriceList, name: "member")
+    PriceListJsonItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SynthesizedJsonPriceListJsonItem, name: "member"))
+    PriceLists.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PriceList, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     Service.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServiceCode", traits: {"smithy.api#required" => {}}))
     Service.add_member(:attribute_names, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameList, name: "AttributeNames"))
     Service.type = Types::Service
-    ServiceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "member")
+    ServiceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
 

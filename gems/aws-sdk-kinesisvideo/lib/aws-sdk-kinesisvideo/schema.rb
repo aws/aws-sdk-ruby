@@ -193,7 +193,7 @@ module Aws::KinesisVideo
     ChannelInfo.add_member(:single_master_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SingleMasterConfiguration, name: "SingleMasterConfiguration"))
     ChannelInfo.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "Version"))
     ChannelInfo.type = Types::ChannelInfo
-    ChannelInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelInfo, name: "member")
+    ChannelInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelInfo, name: "member"))
     ChannelNameCondition.add_member(:comparison_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonOperator, name: "ComparisonOperator"))
     ChannelNameCondition.add_member(:comparison_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, name: "ComparisonValue"))
     ChannelNameCondition.type = Types::ChannelNameCondition
@@ -298,8 +298,8 @@ module Aws::KinesisVideo
     EdgeConfig.type = Types::EdgeConfig
     Format.add_member(:jpeg, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JPEG", traits: {"smithy.api#enumValue" => "JPEG"}))
     Format.add_member(:png, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PNG", traits: {"smithy.api#enumValue" => "PNG"}))
-    FormatConfig.key = ::Smithy::Schema::Shapes::MemberShape.new(target: FormatConfigKey, name: "key")
-    FormatConfig.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FormatConfigValue, name: "value")
+    FormatConfig.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatConfigKey, name: "key"))
+    FormatConfig.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatConfigValue, name: "value"))
     FormatConfigKey.add_member(:jpeg_quality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JPEGQuality", traits: {"smithy.api#enumValue" => "JPEGQuality"}))
     GetDataEndpointInput.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, name: "StreamName"))
     GetDataEndpointInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "StreamARN"))
@@ -350,7 +350,7 @@ module Aws::KinesisVideo
     ListEdgeAgentConfigurationsEdgeConfig.add_member(:failed_status_details, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedStatusDetails, name: "FailedStatusDetails"))
     ListEdgeAgentConfigurationsEdgeConfig.add_member(:edge_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EdgeConfig, name: "EdgeConfig"))
     ListEdgeAgentConfigurationsEdgeConfig.type = Types::ListEdgeAgentConfigurationsEdgeConfig
-    ListEdgeAgentConfigurationsEdgeConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListEdgeAgentConfigurationsEdgeConfig, name: "member")
+    ListEdgeAgentConfigurationsEdgeConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListEdgeAgentConfigurationsEdgeConfig, name: "member"))
     ListEdgeAgentConfigurationsInput.add_member(:hub_device_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: HubDeviceArn, name: "HubDeviceArn", traits: {"smithy.api#required" => {}}))
     ListEdgeAgentConfigurationsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListEdgeAgentConfigurationsInputLimit, name: "MaxResults"))
     ListEdgeAgentConfigurationsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
@@ -358,7 +358,7 @@ module Aws::KinesisVideo
     ListEdgeAgentConfigurationsOutput.add_member(:edge_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: ListEdgeAgentConfigurationsEdgeConfigList, name: "EdgeConfigs"))
     ListEdgeAgentConfigurationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListEdgeAgentConfigurationsOutput.type = Types::ListEdgeAgentConfigurationsOutput
-    ListOfProtocols.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelProtocol, name: "member")
+    ListOfProtocols.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelProtocol, name: "member"))
     ListSignalingChannelsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListStreamsInputLimit, name: "MaxResults"))
     ListSignalingChannelsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListSignalingChannelsInput.add_member(:channel_name_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelNameCondition, name: "ChannelNameCondition"))
@@ -389,7 +389,7 @@ module Aws::KinesisVideo
     LocalSizeConfig.add_member(:max_local_media_size_in_mb, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxLocalMediaSizeInMB, name: "MaxLocalMediaSizeInMB"))
     LocalSizeConfig.add_member(:strategy_on_full_size, ::Smithy::Schema::Shapes::MemberShape.new(target: StrategyOnFullSize, name: "StrategyOnFullSize"))
     LocalSizeConfig.type = Types::LocalSizeConfig
-    MappedResourceConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MappedResourceConfigurationListItem, name: "member")
+    MappedResourceConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MappedResourceConfigurationListItem, name: "member"))
     MappedResourceConfigurationListItem.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, name: "Type"))
     MappedResourceConfigurationListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "ARN"))
     MappedResourceConfigurationListItem.type = Types::MappedResourceConfigurationListItem
@@ -418,7 +418,7 @@ module Aws::KinesisVideo
     RecorderStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
     RecorderStatus.add_member(:user_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER_ERROR", traits: {"smithy.api#enumValue" => "USER_ERROR"}))
     RecorderStatus.add_member(:system_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYSTEM_ERROR", traits: {"smithy.api#enumValue" => "SYSTEM_ERROR"}))
-    ResourceEndpointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceEndpointListItem, name: "member")
+    ResourceEndpointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceEndpointListItem, name: "member"))
     ResourceEndpointListItem.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelProtocol, name: "Protocol"))
     ResourceEndpointListItem.add_member(:resource_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceEndpoint, name: "ResourceEndpoint"))
     ResourceEndpointListItem.type = Types::ResourceEndpointListItem
@@ -426,8 +426,8 @@ module Aws::KinesisVideo
     ResourceInUseException.type = Types::ResourceInUseException
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourceTags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    ResourceTags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    ResourceTags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    ResourceTags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     ScheduleConfig.add_member(:schedule_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleExpression, name: "ScheduleExpression", traits: {"smithy.api#required" => {}}))
     ScheduleConfig.add_member(:duration_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationInSeconds, name: "DurationInSeconds", traits: {"smithy.api#required" => {}}))
     ScheduleConfig.type = Types::ScheduleConfig
@@ -466,7 +466,7 @@ module Aws::KinesisVideo
     StreamInfo.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
     StreamInfo.add_member(:data_retention_in_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: DataRetentionInHours, name: "DataRetentionInHours"))
     StreamInfo.type = Types::StreamInfo
-    StreamInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamInfo, name: "member")
+    StreamInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamInfo, name: "member"))
     StreamNameCondition.add_member(:comparison_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonOperator, name: "ComparisonOperator"))
     StreamNameCondition.add_member(:comparison_value, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamName, name: "ComparisonValue"))
     StreamNameCondition.type = Types::StreamNameCondition
@@ -480,9 +480,9 @@ module Aws::KinesisVideo
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
-    TagOnCreateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    TagOnCreateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput

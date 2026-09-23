@@ -241,11 +241,11 @@ module Aws::Inspector
     AddAttributesToFindingsRequest.type = Types::AddAttributesToFindingsRequest
     AddAttributesToFindingsResponse.add_member(:failed_items, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedItems, name: "failedItems", traits: {"smithy.api#required" => {}}))
     AddAttributesToFindingsResponse.type = Types::AddAttributesToFindingsResponse
-    AddRemoveAttributesFindingArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    AddRemoveAttributesFindingArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     AgentAlreadyRunningAssessment.add_member(:agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentId, name: "agentId", traits: {"smithy.api#required" => {}}))
     AgentAlreadyRunningAssessment.add_member(:assessment_run_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "assessmentRunArn", traits: {"smithy.api#required" => {}}))
     AgentAlreadyRunningAssessment.type = Types::AgentAlreadyRunningAssessment
-    AgentAlreadyRunningAssessmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentAlreadyRunningAssessment, name: "member")
+    AgentAlreadyRunningAssessmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentAlreadyRunningAssessment, name: "member"))
     AgentFilter.add_member(:agent_healths, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentHealthList, name: "agentHealths", traits: {"smithy.api#required" => {}}))
     AgentFilter.add_member(:agent_health_codes, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentHealthCodeList, name: "agentHealthCodes", traits: {"smithy.api#required" => {}}))
     AgentFilter.type = Types::AgentFilter
@@ -258,9 +258,9 @@ module Aws::Inspector
     AgentHealthCode.add_member(:unhealthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNHEALTHY", traits: {"smithy.api#enumValue" => "UNHEALTHY"}))
     AgentHealthCode.add_member(:throttled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THROTTLED", traits: {"smithy.api#enumValue" => "THROTTLED"}))
     AgentHealthCode.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
-    AgentHealthCodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentHealthCode, name: "member")
-    AgentHealthList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentHealth, name: "member")
-    AgentIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentId, name: "member")
+    AgentHealthCodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentHealthCode, name: "member"))
+    AgentHealthList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentHealth, name: "member"))
+    AgentIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentId, name: "member"))
     AgentPreview.add_member(:hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: Hostname, name: "hostname"))
     AgentPreview.add_member(:agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentId, name: "agentId", traits: {"smithy.api#required" => {}}))
     AgentPreview.add_member(:auto_scaling_group, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroup, name: "autoScalingGroup"))
@@ -270,13 +270,13 @@ module Aws::Inspector
     AgentPreview.add_member(:kernel_version, ::Smithy::Schema::Shapes::MemberShape.new(target: KernelVersion, name: "kernelVersion"))
     AgentPreview.add_member(:ipv4_address, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv4Address, name: "ipv4Address"))
     AgentPreview.type = Types::AgentPreview
-    AgentPreviewList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentPreview, name: "member")
+    AgentPreviewList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentPreview, name: "member"))
     AgentsAlreadyRunningAssessmentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     AgentsAlreadyRunningAssessmentException.add_member(:agents, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentAlreadyRunningAssessmentList, name: "agents", traits: {"smithy.api#required" => {}}))
     AgentsAlreadyRunningAssessmentException.add_member(:agents_truncated, ::Smithy::Schema::Shapes::MemberShape.new(target: Bool, name: "agentsTruncated", traits: {"smithy.api#required" => {}}))
     AgentsAlreadyRunningAssessmentException.add_member(:can_retry, ::Smithy::Schema::Shapes::MemberShape.new(target: Bool, name: "canRetry", traits: {"smithy.api#required" => {}}))
     AgentsAlreadyRunningAssessmentException.type = Types::AgentsAlreadyRunningAssessmentException
-    AssessmentRulesPackageArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    AssessmentRulesPackageArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     AssessmentRun.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#required" => {}}))
     AssessmentRun.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentRunName, name: "name", traits: {"smithy.api#required" => {}}))
     AssessmentRun.add_member(:assessment_template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "assessmentTemplateArn", traits: {"smithy.api#required" => {}}))
@@ -301,7 +301,7 @@ module Aws::Inspector
     AssessmentRunAgent.add_member(:auto_scaling_group, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroup, name: "autoScalingGroup"))
     AssessmentRunAgent.add_member(:telemetry_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: TelemetryMetadataList, name: "telemetryMetadata", traits: {"smithy.api#required" => {}}))
     AssessmentRunAgent.type = Types::AssessmentRunAgent
-    AssessmentRunAgentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentRunAgent, name: "member")
+    AssessmentRunAgentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentRunAgent, name: "member"))
     AssessmentRunFilter.add_member(:name_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: NamePattern, name: "namePattern"))
     AssessmentRunFilter.add_member(:states, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentRunStateList, name: "states"))
     AssessmentRunFilter.add_member(:duration_range, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationRange, name: "durationRange"))
@@ -310,15 +310,15 @@ module Aws::Inspector
     AssessmentRunFilter.add_member(:completion_time_range, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampRange, name: "completionTimeRange"))
     AssessmentRunFilter.add_member(:state_change_time_range, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampRange, name: "stateChangeTimeRange"))
     AssessmentRunFilter.type = Types::AssessmentRunFilter
-    AssessmentRunFindingCounts.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Severity, name: "key")
-    AssessmentRunFindingCounts.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingCount, name: "value")
-    AssessmentRunInProgressArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    AssessmentRunFindingCounts.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Severity, name: "key"))
+    AssessmentRunFindingCounts.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingCount, name: "value"))
+    AssessmentRunInProgressArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     AssessmentRunInProgressException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     AssessmentRunInProgressException.add_member(:assessment_run_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentRunInProgressArnList, name: "assessmentRunArns", traits: {"smithy.api#required" => {}}))
     AssessmentRunInProgressException.add_member(:assessment_run_arns_truncated, ::Smithy::Schema::Shapes::MemberShape.new(target: Bool, name: "assessmentRunArnsTruncated", traits: {"smithy.api#required" => {}}))
     AssessmentRunInProgressException.add_member(:can_retry, ::Smithy::Schema::Shapes::MemberShape.new(target: Bool, name: "canRetry", traits: {"smithy.api#required" => {}}))
     AssessmentRunInProgressException.type = Types::AssessmentRunInProgressException
-    AssessmentRunList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentRun, name: "member")
+    AssessmentRunList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentRun, name: "member"))
     AssessmentRunNotification.add_member(:date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "date", traits: {"smithy.api#required" => {}}))
     AssessmentRunNotification.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: InspectorEvent, name: "event", traits: {"smithy.api#required" => {}}))
     AssessmentRunNotification.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -326,7 +326,7 @@ module Aws::Inspector
     AssessmentRunNotification.add_member(:sns_topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "snsTopicArn"))
     AssessmentRunNotification.add_member(:sns_publish_status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentRunNotificationSnsStatusCode, name: "snsPublishStatusCode"))
     AssessmentRunNotification.type = Types::AssessmentRunNotification
-    AssessmentRunNotificationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentRunNotification, name: "member")
+    AssessmentRunNotificationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentRunNotification, name: "member"))
     AssessmentRunNotificationSnsStatusCode.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
     AssessmentRunNotificationSnsStatusCode.add_member(:topic_does_not_exist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOPIC_DOES_NOT_EXIST", traits: {"smithy.api#enumValue" => "TOPIC_DOES_NOT_EXIST"}))
     AssessmentRunNotificationSnsStatusCode.add_member(:access_denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS_DENIED", traits: {"smithy.api#enumValue" => "ACCESS_DENIED"}))
@@ -347,8 +347,8 @@ module Aws::Inspector
     AssessmentRunStateChange.add_member(:state_changed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "stateChangedAt", traits: {"smithy.api#required" => {}}))
     AssessmentRunStateChange.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentRunState, name: "state", traits: {"smithy.api#required" => {}}))
     AssessmentRunStateChange.type = Types::AssessmentRunStateChange
-    AssessmentRunStateChangeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentRunStateChange, name: "member")
-    AssessmentRunStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentRunState, name: "member")
+    AssessmentRunStateChangeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentRunStateChange, name: "member"))
+    AssessmentRunStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentRunState, name: "member"))
     AssessmentTarget.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#required" => {}}))
     AssessmentTarget.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentTargetName, name: "name", traits: {"smithy.api#required" => {}}))
     AssessmentTarget.add_member(:resource_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceGroupArn"))
@@ -357,7 +357,7 @@ module Aws::Inspector
     AssessmentTarget.type = Types::AssessmentTarget
     AssessmentTargetFilter.add_member(:assessment_target_name_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: NamePattern, name: "assessmentTargetNamePattern"))
     AssessmentTargetFilter.type = Types::AssessmentTargetFilter
-    AssessmentTargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentTarget, name: "member")
+    AssessmentTargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentTarget, name: "member"))
     AssessmentTemplate.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#required" => {}}))
     AssessmentTemplate.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentTemplateName, name: "name", traits: {"smithy.api#required" => {}}))
     AssessmentTemplate.add_member(:assessment_target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "assessmentTargetArn", traits: {"smithy.api#required" => {}}))
@@ -372,8 +372,8 @@ module Aws::Inspector
     AssessmentTemplateFilter.add_member(:duration_range, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationRange, name: "durationRange"))
     AssessmentTemplateFilter.add_member(:rules_package_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterRulesPackageArnList, name: "rulesPackageArns"))
     AssessmentTemplateFilter.type = Types::AssessmentTemplateFilter
-    AssessmentTemplateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentTemplate, name: "member")
-    AssessmentTemplateRulesPackageArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    AssessmentTemplateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentTemplate, name: "member"))
+    AssessmentTemplateRulesPackageArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     AssetAttributes.add_member(:schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NumericVersion, name: "schemaVersion", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     AssetAttributes.add_member(:agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentId, name: "agentId"))
     AssetAttributes.add_member(:auto_scaling_group, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroup, name: "autoScalingGroup"))
@@ -387,10 +387,10 @@ module Aws::Inspector
     Attribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKey, name: "key", traits: {"smithy.api#required" => {}}))
     Attribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     Attribute.type = Types::Attribute
-    AttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member")
-    AutoScalingGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroup, name: "member")
-    BatchDescribeArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
-    BatchDescribeExclusionsArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    AttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member"))
+    AutoScalingGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroup, name: "member"))
+    BatchDescribeArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
+    BatchDescribeExclusionsArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     CreateAssessmentTargetRequest.add_member(:assessment_target_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentTargetName, name: "assessmentTargetName", traits: {"smithy.api#required" => {}}))
     CreateAssessmentTargetRequest.add_member(:resource_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceGroupArn"))
     CreateAssessmentTargetRequest.type = Types::CreateAssessmentTargetRequest
@@ -466,7 +466,7 @@ module Aws::Inspector
     EventSubscription.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: InspectorEvent, name: "event", traits: {"smithy.api#required" => {}}))
     EventSubscription.add_member(:subscribed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "subscribedAt", traits: {"smithy.api#required" => {}}))
     EventSubscription.type = Types::EventSubscription
-    EventSubscriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventSubscription, name: "member")
+    EventSubscriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSubscription, name: "member"))
     Exclusion.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#required" => {}}))
     Exclusion.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "title", traits: {"smithy.api#required" => {}}))
     Exclusion.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "description", traits: {"smithy.api#required" => {}}))
@@ -474,15 +474,15 @@ module Aws::Inspector
     Exclusion.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeList, name: "scopes", traits: {"smithy.api#required" => {}}))
     Exclusion.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeList, name: "attributes"))
     Exclusion.type = Types::Exclusion
-    ExclusionMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "key")
-    ExclusionMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Exclusion, name: "value")
+    ExclusionMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "key"))
+    ExclusionMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Exclusion, name: "value"))
     ExclusionPreview.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "title", traits: {"smithy.api#required" => {}}))
     ExclusionPreview.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "description", traits: {"smithy.api#required" => {}}))
     ExclusionPreview.add_member(:recommendation, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "recommendation", traits: {"smithy.api#required" => {}}))
     ExclusionPreview.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeList, name: "scopes", traits: {"smithy.api#required" => {}}))
     ExclusionPreview.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeList, name: "attributes"))
     ExclusionPreview.type = Types::ExclusionPreview
-    ExclusionPreviewList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExclusionPreview, name: "member")
+    ExclusionPreviewList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExclusionPreview, name: "member"))
     FailedItemDetails.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedItemErrorCode, name: "failureCode", traits: {"smithy.api#required" => {}}))
     FailedItemDetails.add_member(:retryable, ::Smithy::Schema::Shapes::MemberShape.new(target: Bool, name: "retryable", traits: {"smithy.api#required" => {}}))
     FailedItemDetails.type = Types::FailedItemDetails
@@ -492,9 +492,9 @@ module Aws::Inspector
     FailedItemErrorCode.add_member(:access_denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS_DENIED", traits: {"smithy.api#enumValue" => "ACCESS_DENIED"}))
     FailedItemErrorCode.add_member(:limit_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LIMIT_EXCEEDED", traits: {"smithy.api#enumValue" => "LIMIT_EXCEEDED"}))
     FailedItemErrorCode.add_member(:internal_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_ERROR"}))
-    FailedItems.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "key")
-    FailedItems.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedItemDetails, name: "value")
-    FilterRulesPackageArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    FailedItems.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "key"))
+    FailedItems.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedItemDetails, name: "value"))
+    FilterRulesPackageArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     Finding.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#required" => {}}))
     Finding.add_member(:schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NumericVersion, name: "schemaVersion", traits: {"smithy.api#default" => 0}))
     Finding.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, name: "service"))
@@ -523,7 +523,7 @@ module Aws::Inspector
     FindingFilter.add_member(:user_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeList, name: "userAttributes"))
     FindingFilter.add_member(:creation_time_range, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampRange, name: "creationTimeRange"))
     FindingFilter.type = Types::FindingFilter
-    FindingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Finding, name: "member")
+    FindingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Finding, name: "member"))
     GetAssessmentReportRequest.add_member(:assessment_run_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "assessmentRunArn", traits: {"smithy.api#required" => {}}))
     GetAssessmentReportRequest.add_member(:report_file_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportFileFormat, name: "reportFileFormat", traits: {"smithy.api#required" => {}}))
     GetAssessmentReportRequest.add_member(:report_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportType, name: "reportType", traits: {"smithy.api#required" => {}}))
@@ -621,8 +621,8 @@ module Aws::Inspector
     InvalidInputException.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: InvalidInputErrorCode, name: "errorCode", traits: {"smithy.api#required" => {}}))
     InvalidInputException.add_member(:can_retry, ::Smithy::Schema::Shapes::MemberShape.new(target: Bool, name: "canRetry", traits: {"smithy.api#required" => {}}))
     InvalidInputException.type = Types::InvalidInputException
-    Ipv4AddressList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv4Address, name: "member")
-    Ipv6Addresses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "member")
+    Ipv4AddressList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv4Address, name: "member"))
+    Ipv6Addresses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "member"))
     LimitExceededErrorCode.add_member(:assessment_target_limit_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSESSMENT_TARGET_LIMIT_EXCEEDED", traits: {"smithy.api#enumValue" => "ASSESSMENT_TARGET_LIMIT_EXCEEDED"}))
     LimitExceededErrorCode.add_member(:assessment_template_limit_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSESSMENT_TEMPLATE_LIMIT_EXCEEDED", traits: {"smithy.api#enumValue" => "ASSESSMENT_TEMPLATE_LIMIT_EXCEEDED"}))
     LimitExceededErrorCode.add_member(:assessment_run_limit_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSESSMENT_RUN_LIMIT_EXCEEDED", traits: {"smithy.api#enumValue" => "ASSESSMENT_RUN_LIMIT_EXCEEDED"}))
@@ -685,8 +685,8 @@ module Aws::Inspector
     ListFindingsResponse.add_member(:finding_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ListReturnedArnList, name: "findingArns", traits: {"smithy.api#required" => {}}))
     ListFindingsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
     ListFindingsResponse.type = Types::ListFindingsResponse
-    ListParentArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
-    ListReturnedArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    ListParentArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
+    ListReturnedArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     ListRulesPackagesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
     ListRulesPackagesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListMaxResults, name: "maxResults"))
     ListRulesPackagesRequest.type = Types::ListRulesPackagesRequest
@@ -709,7 +709,7 @@ module Aws::Inspector
     NetworkInterface.add_member(:ipv6_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6Addresses, name: "ipv6Addresses"))
     NetworkInterface.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroups, name: "securityGroups"))
     NetworkInterface.type = Types::NetworkInterface
-    NetworkInterfaces.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface, name: "member")
+    NetworkInterfaces.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface, name: "member"))
     NoSuchEntityErrorCode.add_member(:assessment_target_does_not_exist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSESSMENT_TARGET_DOES_NOT_EXIST", traits: {"smithy.api#enumValue" => "ASSESSMENT_TARGET_DOES_NOT_EXIST"}))
     NoSuchEntityErrorCode.add_member(:assessment_template_does_not_exist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSESSMENT_TEMPLATE_DOES_NOT_EXIST", traits: {"smithy.api#enumValue" => "ASSESSMENT_TEMPLATE_DOES_NOT_EXIST"}))
     NoSuchEntityErrorCode.add_member(:assessment_run_does_not_exist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSESSMENT_RUN_DOES_NOT_EXIST", traits: {"smithy.api#enumValue" => "ASSESSMENT_RUN_DOES_NOT_EXIST"}))
@@ -736,7 +736,7 @@ module Aws::Inspector
     PrivateIp.add_member(:private_dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "privateDnsName"))
     PrivateIp.add_member(:private_ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "privateIpAddress"))
     PrivateIp.type = Types::PrivateIp
-    PrivateIpAddresses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateIp, name: "member")
+    PrivateIpAddresses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateIp, name: "member"))
     RegisterCrossAccountAccessRoleRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "roleArn", traits: {"smithy.api#required" => {}}))
     RegisterCrossAccountAccessRoleRequest.type = Types::RegisterCrossAccountAccessRoleRequest
     RemoveAttributesFromFindingsRequest.add_member(:finding_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AddRemoveAttributesFindingArnList, name: "findingArns", traits: {"smithy.api#required" => {}}))
@@ -755,29 +755,29 @@ module Aws::Inspector
     ResourceGroup.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGroupTags, name: "tags", traits: {"smithy.api#required" => {}}))
     ResourceGroup.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
     ResourceGroup.type = Types::ResourceGroup
-    ResourceGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGroup, name: "member")
+    ResourceGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGroup, name: "member"))
     ResourceGroupTag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
     ResourceGroupTag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     ResourceGroupTag.type = Types::ResourceGroupTag
-    ResourceGroupTags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGroupTag, name: "member")
-    RuleNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleName, name: "member")
+    ResourceGroupTags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGroupTag, name: "member"))
+    RuleNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleName, name: "member"))
     RulesPackage.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#required" => {}}))
     RulesPackage.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RulesPackageName, name: "name", traits: {"smithy.api#required" => {}}))
     RulesPackage.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version", traits: {"smithy.api#required" => {}}))
     RulesPackage.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderName, name: "provider", traits: {"smithy.api#required" => {}}))
     RulesPackage.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "description"))
     RulesPackage.type = Types::RulesPackage
-    RulesPackageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RulesPackage, name: "member")
+    RulesPackageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RulesPackage, name: "member"))
     Scope.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeType, name: "key"))
     Scope.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeValue, name: "value"))
     Scope.type = Types::Scope
-    ScopeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Scope, name: "member")
+    ScopeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Scope, name: "member"))
     ScopeType.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE_ID", traits: {"smithy.api#enumValue" => "INSTANCE_ID"}))
     ScopeType.add_member(:rules_package_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RULES_PACKAGE_ARN", traits: {"smithy.api#enumValue" => "RULES_PACKAGE_ARN"}))
     SecurityGroup.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "groupName"))
     SecurityGroup.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Text, name: "groupId"))
     SecurityGroup.type = Types::SecurityGroup
-    SecurityGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroup, name: "member")
+    SecurityGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroup, name: "member"))
     ServiceTemporarilyUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceTemporarilyUnavailableException.add_member(:can_retry, ::Smithy::Schema::Shapes::MemberShape.new(target: Bool, name: "canRetry", traits: {"smithy.api#required" => {}}))
     ServiceTemporarilyUnavailableException.type = Types::ServiceTemporarilyUnavailableException
@@ -789,7 +789,7 @@ module Aws::Inspector
     Severity.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "High"}))
     Severity.add_member(:informational, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFORMATIONAL", traits: {"smithy.api#enumValue" => "Informational"}))
     Severity.add_member(:undefined, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNDEFINED", traits: {"smithy.api#enumValue" => "Undefined"}))
-    SeverityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Severity, name: "member")
+    SeverityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Severity, name: "member"))
     StartAssessmentRunRequest.add_member(:assessment_template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "assessmentTemplateArn", traits: {"smithy.api#required" => {}}))
     StartAssessmentRunRequest.add_member(:assessment_run_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentRunName, name: "assessmentRunName"))
     StartAssessmentRunRequest.type = Types::StartAssessmentRunRequest
@@ -808,17 +808,17 @@ module Aws::Inspector
     Subscription.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "topicArn", traits: {"smithy.api#required" => {}}))
     Subscription.add_member(:event_subscriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSubscriptionList, name: "eventSubscriptions", traits: {"smithy.api#required" => {}}))
     Subscription.type = Types::Subscription
-    SubscriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Subscription, name: "member")
+    SubscriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Subscription, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     Tag.type = Types::Tag
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TelemetryMetadata.add_member(:message_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "messageType", traits: {"smithy.api#required" => {}}))
     TelemetryMetadata.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "count", traits: {"smithy.api#required" => {}}))
     TelemetryMetadata.add_member(:data_size, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "dataSize"))
     TelemetryMetadata.type = Types::TelemetryMetadata
-    TelemetryMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TelemetryMetadata, name: "member")
+    TelemetryMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TelemetryMetadata, name: "member"))
     TimestampRange.add_member(:begin_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "beginDate"))
     TimestampRange.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "endDate"))
     TimestampRange.type = Types::TimestampRange
@@ -833,8 +833,8 @@ module Aws::Inspector
     UpdateAssessmentTargetRequest.add_member(:assessment_target_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentTargetName, name: "assessmentTargetName", traits: {"smithy.api#required" => {}}))
     UpdateAssessmentTargetRequest.add_member(:resource_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceGroupArn"))
     UpdateAssessmentTargetRequest.type = Types::UpdateAssessmentTargetRequest
-    UserAttributeKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKey, name: "member")
-    UserAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member")
+    UserAttributeKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKey, name: "member"))
+    UserAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member"))
 
     InspectorService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.inspector#InspectorService"

@@ -148,7 +148,7 @@ module Aws::LicenseManagerUserSubscriptions
     Filter.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Operation"))
     Filter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Value"))
     Filter.type = Types::Filter
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     IdentityProvider.add_member(:active_directory_identity_provider, Types::IdentityProvider::ActiveDirectoryIdentityProvider, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveDirectoryIdentityProvider, name: "ActiveDirectoryIdentityProvider"))
     IdentityProvider.add_member(:unknown, Types::IdentityProvider::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     IdentityProvider.type = Types::IdentityProvider
@@ -160,7 +160,7 @@ module Aws::LicenseManagerUserSubscriptions
     IdentityProviderSummary.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "FailureMessage"))
     IdentityProviderSummary.add_member(:owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "OwnerAccountId"))
     IdentityProviderSummary.type = Types::IdentityProviderSummary
-    IdentityProviderSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderSummary, name: "member")
+    IdentityProviderSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderSummary, name: "member"))
     InstanceSummary.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "InstanceId", traits: {"smithy.api#required" => {}}))
     InstanceSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Status", traits: {"smithy.api#required" => {}}))
     InstanceSummary.add_member(:products, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "Products", traits: {"smithy.api#required" => {}}))
@@ -169,7 +169,7 @@ module Aws::LicenseManagerUserSubscriptions
     InstanceSummary.add_member(:owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "OwnerAccountId"))
     InstanceSummary.add_member(:identity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProvider, name: "IdentityProvider"))
     InstanceSummary.type = Types::InstanceSummary
-    InstanceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceSummary, name: "member")
+    InstanceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceSummary, name: "member"))
     InstanceUserSummary.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Username", traits: {"smithy.api#required" => {}}))
     InstanceUserSummary.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "InstanceId", traits: {"smithy.api#required" => {}}))
     InstanceUserSummary.add_member(:identity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProvider, name: "IdentityProvider", traits: {"smithy.api#required" => {}}))
@@ -180,10 +180,10 @@ module Aws::LicenseManagerUserSubscriptions
     InstanceUserSummary.add_member(:association_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "AssociationDate"))
     InstanceUserSummary.add_member(:disassociation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "DisassociationDate"))
     InstanceUserSummary.type = Types::InstanceUserSummary
-    InstanceUserSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceUserSummary, name: "member")
+    InstanceUserSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceUserSummary, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     InternalServerException.type = Types::InternalServerException
-    IpV4List.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpV4, name: "member")
+    IpV4List.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpV4, name: "member"))
     LicenseServer.add_member(:provisioning_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseServerEndpointProvisioningStatus, name: "ProvisioningStatus"))
     LicenseServer.add_member(:health_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseServerHealthStatus, name: "HealthStatus"))
     LicenseServer.add_member(:ipv4_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Ipv4Address"))
@@ -198,8 +198,8 @@ module Aws::LicenseManagerUserSubscriptions
     LicenseServerEndpoint.add_member(:license_servers, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseServerList, name: "LicenseServers"))
     LicenseServerEndpoint.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreationTime"))
     LicenseServerEndpoint.type = Types::LicenseServerEndpoint
-    LicenseServerEndpointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseServerEndpoint, name: "member")
-    LicenseServerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseServer, name: "member")
+    LicenseServerEndpointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseServerEndpoint, name: "member"))
+    LicenseServerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseServer, name: "member"))
     LicenseServerSettings.add_member(:server_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerType, name: "ServerType", traits: {"smithy.api#required" => {}}))
     LicenseServerSettings.add_member(:server_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSettings, name: "ServerSettings", traits: {"smithy.api#required" => {}}))
     LicenseServerSettings.type = Types::LicenseServerSettings
@@ -256,7 +256,7 @@ module Aws::LicenseManagerUserSubscriptions
     ProductUserSummary.add_member(:subscription_start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "SubscriptionStartDate"))
     ProductUserSummary.add_member(:subscription_end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "SubscriptionEndDate"))
     ProductUserSummary.type = Types::ProductUserSummary
-    ProductUserSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProductUserSummary, name: "member")
+    ProductUserSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductUserSummary, name: "member"))
     RdsSalSettings.add_member(:rds_sal_credentials_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialsProvider, name: "RdsSalCredentialsProvider", traits: {"smithy.api#required" => {}}))
     RdsSalSettings.type = Types::RdsSalSettings
     RegisterIdentityProviderRequest.add_member(:identity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProvider, name: "IdentityProvider", traits: {"smithy.api#required" => {}}))
@@ -296,15 +296,15 @@ module Aws::LicenseManagerUserSubscriptions
     StopProductSubscriptionRequest.type = Types::StopProductSubscriptionRequest
     StopProductSubscriptionResponse.add_member(:product_user_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductUserSummary, name: "ProductUserSummary", traits: {"smithy.api#required" => {}}))
     StopProductSubscriptionResponse.type = Types::StopProductSubscriptionResponse
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    Subnets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Subnet, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    Subnets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnet, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ThrottlingException.type = Types::ThrottlingException
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))

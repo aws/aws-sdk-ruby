@@ -50,7 +50,7 @@ module Aws::SSMGuiConnect
     S3Bucket.add_member(:bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "BucketOwner", traits: {"smithy.api#required" => {}}))
     S3Bucket.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "BucketName", traits: {"smithy.api#required" => {}}))
     S3Bucket.type = Types::S3Bucket
-    S3Buckets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: S3Bucket, name: "member")
+    S3Buckets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Bucket, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))

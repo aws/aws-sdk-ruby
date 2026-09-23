@@ -92,7 +92,7 @@ module Aws::Invoicing
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: BasicString, name: "message"))
     AccessDeniedException.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: InvoiceUnitArnString, name: "resourceName"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AccountIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdString, name: "member")
+    AccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdString, name: "member"))
     AmountBreakdown.add_member(:sub_total_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: BasicString, name: "SubTotalAmount"))
     AmountBreakdown.add_member(:discounts, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscountsBreakdown, name: "Discounts"))
     AmountBreakdown.add_member(:taxes, ::Smithy::Schema::Shapes::MemberShape.new(target: TaxesBreakdown, name: "Taxes"))
@@ -132,7 +132,7 @@ module Aws::Invoicing
     DiscountsBreakdownAmount.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: BasicString, name: "Amount"))
     DiscountsBreakdownAmount.add_member(:rate, ::Smithy::Schema::Shapes::MemberShape.new(target: BasicString, name: "Rate"))
     DiscountsBreakdownAmount.type = Types::DiscountsBreakdownAmount
-    DiscountsBreakdownAmountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DiscountsBreakdownAmount, name: "member")
+    DiscountsBreakdownAmountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscountsBreakdownAmount, name: "member"))
     Entity.add_member(:invoicing_entity, ::Smithy::Schema::Shapes::MemberShape.new(target: BasicString, name: "InvoicingEntity"))
     Entity.type = Types::Entity
     FeesBreakdown.add_member(:breakdown, ::Smithy::Schema::Shapes::MemberShape.new(target: FeesBreakdownAmountList, name: "Breakdown"))
@@ -142,7 +142,7 @@ module Aws::Invoicing
     FeesBreakdownAmount.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: BasicString, name: "Amount"))
     FeesBreakdownAmount.add_member(:rate, ::Smithy::Schema::Shapes::MemberShape.new(target: BasicString, name: "Rate"))
     FeesBreakdownAmount.type = Types::FeesBreakdownAmount
-    FeesBreakdownAmountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FeesBreakdownAmount, name: "member")
+    FeesBreakdownAmountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FeesBreakdownAmount, name: "member"))
     Filters.add_member(:names, ::Smithy::Schema::Shapes::MemberShape.new(target: InvoiceUnitNames, name: "Names"))
     Filters.add_member(:invoice_receivers, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdList, name: "InvoiceReceivers"))
     Filters.add_member(:accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdList, name: "Accounts"))
@@ -174,7 +174,7 @@ module Aws::Invoicing
     InvoiceProfile.add_member(:issuer, ::Smithy::Schema::Shapes::MemberShape.new(target: BasicStringWithoutSpace, name: "Issuer"))
     InvoiceProfile.add_member(:tax_registration_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBasicStringWithoutSpace, name: "TaxRegistrationNumber"))
     InvoiceProfile.type = Types::InvoiceProfile
-    InvoiceSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InvoiceSummary, name: "member")
+    InvoiceSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InvoiceSummary, name: "member"))
     InvoiceSummariesFilter.add_member(:time_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: DateInterval, name: "TimeInterval"))
     InvoiceSummariesFilter.add_member(:billing_period, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingPeriod, name: "BillingPeriod"))
     InvoiceSummariesFilter.add_member(:invoicing_entity, ::Smithy::Schema::Shapes::MemberShape.new(target: BasicString, name: "InvoicingEntity"))
@@ -205,10 +205,10 @@ module Aws::Invoicing
     InvoiceUnit.add_member(:rule, ::Smithy::Schema::Shapes::MemberShape.new(target: InvoiceUnitRule, name: "Rule"))
     InvoiceUnit.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModifiedTimestamp, name: "LastModified"))
     InvoiceUnit.type = Types::InvoiceUnit
-    InvoiceUnitNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InvoiceUnitName, name: "member")
+    InvoiceUnitNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InvoiceUnitName, name: "member"))
     InvoiceUnitRule.add_member(:linked_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdList, name: "LinkedAccounts"))
     InvoiceUnitRule.type = Types::InvoiceUnitRule
-    InvoiceUnits.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InvoiceUnit, name: "member")
+    InvoiceUnits.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InvoiceUnit, name: "member"))
     ListInvoiceSummariesRequest.add_member(:selector, ::Smithy::Schema::Shapes::MemberShape.new(target: InvoiceSummariesSelector, name: "Selector", traits: {"smithy.api#required" => {}}))
     ListInvoiceSummariesRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: InvoiceSummariesFilter, name: "Filter"))
     ListInvoiceSummariesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextTokenString, name: "NextToken"))
@@ -231,7 +231,7 @@ module Aws::Invoicing
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagList, name: "ResourceTags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    ProfileList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InvoiceProfile, name: "member")
+    ProfileList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InvoiceProfile, name: "member"))
     ReceiverAddress.add_member(:address_line1, ::Smithy::Schema::Shapes::MemberShape.new(target: BasicString, name: "AddressLine1"))
     ReceiverAddress.add_member(:address_line2, ::Smithy::Schema::Shapes::MemberShape.new(target: BasicString, name: "AddressLine2"))
     ReceiverAddress.add_member(:address_line3, ::Smithy::Schema::Shapes::MemberShape.new(target: BasicString, name: "AddressLine3"))
@@ -248,8 +248,8 @@ module Aws::Invoicing
     ResourceTag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     ResourceTag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     ResourceTag.type = Types::ResourceTag
-    ResourceTagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "member")
-    ResourceTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member")
+    ResourceTagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "member"))
+    ResourceTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: BasicString, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TagrisArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
@@ -263,7 +263,7 @@ module Aws::Invoicing
     TaxesBreakdownAmount.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: BasicString, name: "Amount"))
     TaxesBreakdownAmount.add_member(:rate, ::Smithy::Schema::Shapes::MemberShape.new(target: BasicString, name: "Rate"))
     TaxesBreakdownAmount.type = Types::TaxesBreakdownAmount
-    TaxesBreakdownAmountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaxesBreakdownAmount, name: "member")
+    TaxesBreakdownAmountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaxesBreakdownAmount, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: BasicString, name: "message"))
     ThrottlingException.type = Types::ThrottlingException
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TagrisArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
@@ -285,7 +285,7 @@ module Aws::Invoicing
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BasicString, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: BasicString, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:non_members_present, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NON_MEMBERS_PRESENT", traits: {"smithy.api#enumValue" => "nonMemberPresent"}))
     ValidationExceptionReason.add_member(:max_accounts_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAX_ACCOUNTS_EXCEEDED", traits: {"smithy.api#enumValue" => "maxAccountsExceeded"}))
     ValidationExceptionReason.add_member(:max_invoice_units_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAX_INVOICE_UNITS_EXCEEDED", traits: {"smithy.api#enumValue" => "maxInvoiceUnitsExceeded"}))

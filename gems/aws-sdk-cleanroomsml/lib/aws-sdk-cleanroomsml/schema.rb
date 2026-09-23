@@ -313,18 +313,18 @@ module Aws::CleanRoomsML
     AccessBudgetDetails.add_member(:budget_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessBudgetType, name: "budgetType", traits: {"smithy.api#required" => {}}))
     AccessBudgetDetails.add_member(:auto_refresh, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoRefreshMode, name: "autoRefresh"))
     AccessBudgetDetails.type = Types::AccessBudgetDetails
-    AccessBudgetDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessBudgetDetails, name: "member")
+    AccessBudgetDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessBudgetDetails, name: "member"))
     AccessBudgetType.add_member(:calendar_day, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CALENDAR_DAY", traits: {"smithy.api#enumValue" => "CALENDAR_DAY"}))
     AccessBudgetType.add_member(:calendar_month, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CALENDAR_MONTH", traits: {"smithy.api#enumValue" => "CALENDAR_MONTH"}))
     AccessBudgetType.add_member(:calendar_week, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CALENDAR_WEEK", traits: {"smithy.api#enumValue" => "CALENDAR_WEEK"}))
     AccessBudgetType.add_member(:lifetime, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LIFETIME", traits: {"smithy.api#enumValue" => "LIFETIME"}))
-    AccessBudgets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessBudget, name: "member")
+    AccessBudgets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessBudget, name: "member"))
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    AccountIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    AccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     AudienceDestination.add_member(:s3_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ConfigMap, name: "s3Destination", traits: {"smithy.api#required" => {}}))
     AudienceDestination.type = Types::AudienceDestination
-    AudienceExportJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AudienceExportJobSummary, name: "member")
+    AudienceExportJobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AudienceExportJobSummary, name: "member"))
     AudienceExportJobStatus.add_member(:create_pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_PENDING", traits: {"smithy.api#enumValue" => "CREATE_PENDING"}))
     AudienceExportJobStatus.add_member(:create_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
     AudienceExportJobStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
@@ -344,7 +344,7 @@ module Aws::CleanRoomsML
     AudienceGenerationJobDataSource.add_member(:sql_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedQuerySQLParameters, name: "sqlParameters"))
     AudienceGenerationJobDataSource.add_member(:sql_compute_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeConfiguration, name: "sqlComputeConfiguration"))
     AudienceGenerationJobDataSource.type = Types::AudienceGenerationJobDataSource
-    AudienceGenerationJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AudienceGenerationJobSummary, name: "member")
+    AudienceGenerationJobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AudienceGenerationJobSummary, name: "member"))
     AudienceGenerationJobStatus.add_member(:create_pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_PENDING", traits: {"smithy.api#enumValue" => "CREATE_PENDING"}))
     AudienceGenerationJobStatus.add_member(:create_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
     AudienceGenerationJobStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
@@ -362,7 +362,7 @@ module Aws::CleanRoomsML
     AudienceGenerationJobSummary.add_member(:collaboration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "collaborationId"))
     AudienceGenerationJobSummary.add_member(:started_by, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "startedBy"))
     AudienceGenerationJobSummary.type = Types::AudienceGenerationJobSummary
-    AudienceModelList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AudienceModelSummary, name: "member")
+    AudienceModelList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AudienceModelSummary, name: "member"))
     AudienceModelStatus.add_member(:create_pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_PENDING", traits: {"smithy.api#enumValue" => "CREATE_PENDING"}))
     AudienceModelStatus.add_member(:create_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
     AudienceModelStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
@@ -384,7 +384,7 @@ module Aws::CleanRoomsML
     AudienceSize.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AudienceSizeType, name: "type", traits: {"smithy.api#required" => {}}))
     AudienceSize.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AudienceSizeValue, name: "value", traits: {"smithy.api#required" => {}}))
     AudienceSize.type = Types::AudienceSize
-    AudienceSizeBins.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AudienceSizeValue, name: "member")
+    AudienceSizeBins.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AudienceSizeValue, name: "member"))
     AudienceSizeConfig.add_member(:audience_size_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AudienceSizeType, name: "audienceSizeType", traits: {"smithy.api#required" => {}}))
     AudienceSizeConfig.add_member(:audience_size_bins, ::Smithy::Schema::Shapes::MemberShape.new(target: AudienceSizeBins, name: "audienceSizeBins", traits: {"smithy.api#required" => {}}))
     AudienceSizeConfig.type = Types::AudienceSizeConfig
@@ -399,7 +399,7 @@ module Aws::CleanRoomsML
     CancelTrainedModelRequest.add_member(:trained_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelArn, name: "trainedModelArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelTrainedModelRequest.add_member(:version_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "versionIdentifier", traits: {"smithy.api#httpQuery" => "versionIdentifier"}))
     CancelTrainedModelRequest.type = Types::CancelTrainedModelRequest
-    CollaborationConfiguredModelAlgorithmAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationConfiguredModelAlgorithmAssociationSummary, name: "member")
+    CollaborationConfiguredModelAlgorithmAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationConfiguredModelAlgorithmAssociationSummary, name: "member"))
     CollaborationConfiguredModelAlgorithmAssociationSummary.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     CollaborationConfiguredModelAlgorithmAssociationSummary.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     CollaborationConfiguredModelAlgorithmAssociationSummary.add_member(:configured_model_algorithm_association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredModelAlgorithmAssociationArn, name: "configuredModelAlgorithmAssociationArn", traits: {"smithy.api#required" => {}}))
@@ -421,8 +421,8 @@ module Aws::CleanRoomsML
     CollaborationMLInputChannelSummary.add_member(:creator_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "creatorAccountId", traits: {"smithy.api#required" => {}}))
     CollaborationMLInputChannelSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, name: "description"))
     CollaborationMLInputChannelSummary.type = Types::CollaborationMLInputChannelSummary
-    CollaborationMLInputChannelsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationMLInputChannelSummary, name: "member")
-    CollaborationTrainedModelExportJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationTrainedModelExportJobSummary, name: "member")
+    CollaborationMLInputChannelsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationMLInputChannelSummary, name: "member"))
+    CollaborationTrainedModelExportJobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationTrainedModelExportJobSummary, name: "member"))
     CollaborationTrainedModelExportJobSummary.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     CollaborationTrainedModelExportJobSummary.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     CollaborationTrainedModelExportJobSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "name", traits: {"smithy.api#required" => {}}))
@@ -436,7 +436,7 @@ module Aws::CleanRoomsML
     CollaborationTrainedModelExportJobSummary.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "membershipIdentifier", traits: {"smithy.api#required" => {}}))
     CollaborationTrainedModelExportJobSummary.add_member(:collaboration_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "collaborationIdentifier", traits: {"smithy.api#required" => {}}))
     CollaborationTrainedModelExportJobSummary.type = Types::CollaborationTrainedModelExportJobSummary
-    CollaborationTrainedModelInferenceJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationTrainedModelInferenceJobSummary, name: "member")
+    CollaborationTrainedModelInferenceJobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationTrainedModelInferenceJobSummary, name: "member"))
     CollaborationTrainedModelInferenceJobSummary.add_member(:trained_model_inference_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelInferenceJobArn, name: "trainedModelInferenceJobArn", traits: {"smithy.api#required" => {}}))
     CollaborationTrainedModelInferenceJobSummary.add_member(:configured_model_algorithm_association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredModelAlgorithmAssociationArn, name: "configuredModelAlgorithmAssociationArn"))
     CollaborationTrainedModelInferenceJobSummary.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "membershipIdentifier", traits: {"smithy.api#required" => {}}))
@@ -455,7 +455,7 @@ module Aws::CleanRoomsML
     CollaborationTrainedModelInferenceJobSummary.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     CollaborationTrainedModelInferenceJobSummary.add_member(:creator_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "creatorAccountId", traits: {"smithy.api#required" => {}}))
     CollaborationTrainedModelInferenceJobSummary.type = Types::CollaborationTrainedModelInferenceJobSummary
-    CollaborationTrainedModelList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationTrainedModelSummary, name: "member")
+    CollaborationTrainedModelList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationTrainedModelSummary, name: "member"))
     CollaborationTrainedModelSummary.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     CollaborationTrainedModelSummary.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     CollaborationTrainedModelSummary.add_member(:trained_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelArn, name: "trainedModelArn", traits: {"smithy.api#required" => {}}))
@@ -477,11 +477,11 @@ module Aws::CleanRoomsML
     ColumnType.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMESTAMP", traits: {"smithy.api#enumValue" => "TIMESTAMP"}))
     ColumnType.add_member(:categorical_feature, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CATEGORICAL_FEATURE", traits: {"smithy.api#enumValue" => "CATEGORICAL_FEATURE"}))
     ColumnType.add_member(:numerical_feature, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NUMERICAL_FEATURE", traits: {"smithy.api#enumValue" => "NUMERICAL_FEATURE"}))
-    ColumnTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnType, name: "member")
+    ColumnTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnType, name: "member"))
     ComputeConfiguration.add_member(:worker, Types::ComputeConfiguration::Worker, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerComputeConfiguration, name: "worker"))
     ComputeConfiguration.add_member(:unknown, Types::ComputeConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ComputeConfiguration.type = Types::ComputeConfiguration
-    ConfiguredAudienceModelList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredAudienceModelSummary, name: "member")
+    ConfiguredAudienceModelList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredAudienceModelSummary, name: "member"))
     ConfiguredAudienceModelOutputConfig.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: AudienceDestination, name: "destination", traits: {"smithy.api#required" => {}}))
     ConfiguredAudienceModelOutputConfig.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
     ConfiguredAudienceModelOutputConfig.type = Types::ConfiguredAudienceModelOutputConfig
@@ -495,8 +495,8 @@ module Aws::CleanRoomsML
     ConfiguredAudienceModelSummary.add_member(:configured_audience_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredAudienceModelArn, name: "configuredAudienceModelArn", traits: {"smithy.api#required" => {}}))
     ConfiguredAudienceModelSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredAudienceModelStatus, name: "status", traits: {"smithy.api#required" => {}}))
     ConfiguredAudienceModelSummary.type = Types::ConfiguredAudienceModelSummary
-    ConfiguredModelAlgorithmAssociationArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredModelAlgorithmAssociationArn, name: "member")
-    ConfiguredModelAlgorithmAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredModelAlgorithmAssociationSummary, name: "member")
+    ConfiguredModelAlgorithmAssociationArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredModelAlgorithmAssociationArn, name: "member"))
+    ConfiguredModelAlgorithmAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredModelAlgorithmAssociationSummary, name: "member"))
     ConfiguredModelAlgorithmAssociationSummary.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     ConfiguredModelAlgorithmAssociationSummary.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     ConfiguredModelAlgorithmAssociationSummary.add_member(:configured_model_algorithm_association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredModelAlgorithmAssociationArn, name: "configuredModelAlgorithmAssociationArn", traits: {"smithy.api#required" => {}}))
@@ -506,7 +506,7 @@ module Aws::CleanRoomsML
     ConfiguredModelAlgorithmAssociationSummary.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "membershipIdentifier", traits: {"smithy.api#required" => {}}))
     ConfiguredModelAlgorithmAssociationSummary.add_member(:collaboration_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "collaborationIdentifier", traits: {"smithy.api#required" => {}}))
     ConfiguredModelAlgorithmAssociationSummary.type = Types::ConfiguredModelAlgorithmAssociationSummary
-    ConfiguredModelAlgorithmList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredModelAlgorithmSummary, name: "member")
+    ConfiguredModelAlgorithmList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredModelAlgorithmSummary, name: "member"))
     ConfiguredModelAlgorithmSummary.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     ConfiguredModelAlgorithmSummary.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     ConfiguredModelAlgorithmSummary.add_member(:configured_model_algorithm_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredModelAlgorithmArn, name: "configuredModelAlgorithmArn", traits: {"smithy.api#required" => {}}))
@@ -515,13 +515,13 @@ module Aws::CleanRoomsML
     ConfiguredModelAlgorithmSummary.type = Types::ConfiguredModelAlgorithmSummary
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
-    ContainerArguments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerArgument, name: "member")
+    ContainerArguments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerArgument, name: "member"))
     ContainerConfig.add_member(:image_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: AlgorithmImage, name: "imageUri", traits: {"smithy.api#required" => {}}))
     ContainerConfig.add_member(:entrypoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerEntrypoint, name: "entrypoint"))
     ContainerConfig.add_member(:arguments, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerArguments, name: "arguments"))
     ContainerConfig.add_member(:metric_definitions, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDefinitionList, name: "metricDefinitions"))
     ContainerConfig.type = Types::ContainerConfig
-    ContainerEntrypoint.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerEntrypointString, name: "member")
+    ContainerEntrypoint.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerEntrypointString, name: "member"))
     CreateAudienceModelRequest.add_member(:training_data_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "trainingDataStartTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
     CreateAudienceModelRequest.add_member(:training_data_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "trainingDataEndTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
     CreateAudienceModelRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "name", traits: {"smithy.api#required" => {}}))
@@ -599,7 +599,7 @@ module Aws::CleanRoomsML
     CreateTrainingDatasetRequest.type = Types::CreateTrainingDatasetRequest
     CreateTrainingDatasetResponse.add_member(:training_dataset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingDatasetArn, name: "trainingDatasetArn", traits: {"smithy.api#required" => {}}))
     CreateTrainingDatasetResponse.type = Types::CreateTrainingDatasetResponse
-    CustomDataIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDataIdentifier, name: "member")
+    CustomDataIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDataIdentifier, name: "member"))
     CustomEntityConfig.add_member(:custom_data_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDataIdentifierList, name: "customDataIdentifiers", traits: {"smithy.api#required" => {}}))
     CustomEntityConfig.type = Types::CustomEntityConfig
     DataSource.add_member(:glue_data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueDataSource, name: "glueDataSource", traits: {"smithy.api#required" => {}}))
@@ -610,8 +610,8 @@ module Aws::CleanRoomsML
     DatasetInputConfig.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetSchemaList, name: "schema", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#required" => {}}))
     DatasetInputConfig.add_member(:data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "dataSource", traits: {"smithy.api#required" => {}}))
     DatasetInputConfig.type = Types::DatasetInputConfig
-    DatasetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Dataset, name: "member")
-    DatasetSchemaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnSchema, name: "member")
+    DatasetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Dataset, name: "member"))
+    DatasetSchemaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnSchema, name: "member"))
     DatasetType.add_member(:interactions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERACTIONS", traits: {"smithy.api#enumValue" => "INTERACTIONS"}))
     DeleteAudienceGenerationJobRequest.add_member(:audience_generation_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AudienceGenerationJobArn, name: "audienceGenerationJobArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAudienceGenerationJobRequest.type = Types::DeleteAudienceGenerationJobRequest
@@ -642,9 +642,9 @@ module Aws::CleanRoomsML
     EntityType.add_member(:all_personally_identifiable_information, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL_PERSONALLY_IDENTIFIABLE_INFORMATION", traits: {"smithy.api#enumValue" => "ALL_PERSONALLY_IDENTIFIABLE_INFORMATION"}))
     EntityType.add_member(:numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NUMBERS", traits: {"smithy.api#enumValue" => "NUMBERS"}))
     EntityType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
-    EntityTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, name: "member")
-    Environment.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^[a-zA-Z_][a-zA-Z0-9_]*$"})
-    Environment.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^[\\S\\s]*$"})
+    EntityTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, name: "member"))
+    Environment.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^[a-zA-Z_][a-zA-Z0-9_]*$"}))
+    Environment.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^[\\S\\s]*$"}))
     GetAudienceGenerationJobRequest.add_member(:audience_generation_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AudienceGenerationJobArn, name: "audienceGenerationJobArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAudienceGenerationJobRequest.type = Types::GetAudienceGenerationJobRequest
     GetAudienceGenerationJobResponse.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
@@ -888,8 +888,8 @@ module Aws::CleanRoomsML
     GlueDataSource.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueDatabaseName, name: "databaseName", traits: {"smithy.api#required" => {}}))
     GlueDataSource.add_member(:catalog_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "catalogId"))
     GlueDataSource.type = Types::GlueDataSource
-    HyperParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^.*$"})
-    HyperParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 2500}, "smithy.api#pattern" => "^.*$"})
+    HyperParameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^.*$"}))
+    HyperParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 2500}, "smithy.api#pattern" => "^.*$"}))
     IncrementalTrainingDataChannel.add_member(:trained_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelArn, name: "trainedModelArn", traits: {"smithy.api#required" => {}}))
     IncrementalTrainingDataChannel.add_member(:version_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "versionIdentifier"))
     IncrementalTrainingDataChannel.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelTrainingDataChannelName, name: "channelName", traits: {"smithy.api#required" => {}}))
@@ -898,14 +898,14 @@ module Aws::CleanRoomsML
     IncrementalTrainingDataChannelOutput.add_member(:version_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "versionIdentifier"))
     IncrementalTrainingDataChannelOutput.add_member(:model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "modelName", traits: {"smithy.api#required" => {}}))
     IncrementalTrainingDataChannelOutput.type = Types::IncrementalTrainingDataChannelOutput
-    IncrementalTrainingDataChannels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IncrementalTrainingDataChannel, name: "member")
-    IncrementalTrainingDataChannelsOutput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IncrementalTrainingDataChannelOutput, name: "member")
+    IncrementalTrainingDataChannels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IncrementalTrainingDataChannel, name: "member"))
+    IncrementalTrainingDataChannelsOutput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IncrementalTrainingDataChannelOutput, name: "member"))
     InferenceContainerConfig.add_member(:image_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: AlgorithmImage, name: "imageUri", traits: {"smithy.api#required" => {}}))
     InferenceContainerConfig.type = Types::InferenceContainerConfig
     InferenceContainerExecutionParameters.add_member(:max_payload_in_mb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxPayloadInMB", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
     InferenceContainerExecutionParameters.type = Types::InferenceContainerExecutionParameters
-    InferenceEnvironmentMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[a-zA-Z_][a-zA-Z0-9_]*$"})
-    InferenceEnvironmentMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 10240}, "smithy.api#pattern" => "^[\\S\\s]*$"})
+    InferenceEnvironmentMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[a-zA-Z_][a-zA-Z0-9_]*$"}))
+    InferenceEnvironmentMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 10240}, "smithy.api#pattern" => "^[\\S\\s]*$"}))
     InferenceInstanceType.add_member(:ml_r7_i_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R7I_48XLARGE", traits: {"smithy.api#enumValue" => "ml.r7i.48xlarge"}))
     InferenceInstanceType.add_member(:ml_r6_i_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6I_16XLARGE", traits: {"smithy.api#enumValue" => "ml.r6i.16xlarge"}))
     InferenceInstanceType.add_member(:ml_m6_i_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M6I_XLARGE", traits: {"smithy.api#enumValue" => "ml.m6i.xlarge"}))
@@ -1005,7 +1005,7 @@ module Aws::CleanRoomsML
     InferenceOutputConfiguration.type = Types::InferenceOutputConfiguration
     InferenceReceiverMember.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId", traits: {"smithy.api#required" => {}}))
     InferenceReceiverMember.type = Types::InferenceReceiverMember
-    InferenceReceiverMembers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceReceiverMember, name: "member")
+    InferenceReceiverMembers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceReceiverMember, name: "member"))
     InferenceResourceConfig.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceInstanceType, name: "instanceType", traits: {"smithy.api#required" => {}}))
     InferenceResourceConfig.add_member(:instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "instanceCount", traits: {"smithy.api#default" => 1, "smithy.api#range" => {"min" => 1, "max" => 10}}))
     InferenceResourceConfig.type = Types::InferenceResourceConfig
@@ -1281,7 +1281,7 @@ module Aws::CleanRoomsML
     LogsConfigurationPolicy.add_member(:log_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogType, name: "logType", traits: {"smithy.api#default" => "ALL"}))
     LogsConfigurationPolicy.add_member(:log_redaction_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LogRedactionConfiguration, name: "logRedactionConfiguration"))
     LogsConfigurationPolicy.type = Types::LogsConfigurationPolicy
-    LogsConfigurationPolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogsConfigurationPolicy, name: "member")
+    LogsConfigurationPolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogsConfigurationPolicy, name: "member"))
     LogsStatus.add_member(:publish_succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLISH_SUCCEEDED", traits: {"smithy.api#enumValue" => "PUBLISH_SUCCEEDED"}))
     LogsStatus.add_member(:publish_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLISH_FAILED", traits: {"smithy.api#enumValue" => "PUBLISH_FAILED"}))
     MLInputChannelStatus.add_member(:create_pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_PENDING", traits: {"smithy.api#enumValue" => "CREATE_PENDING"}))
@@ -1303,17 +1303,17 @@ module Aws::CleanRoomsML
     MLInputChannelSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MLInputChannelStatus, name: "status", traits: {"smithy.api#required" => {}}))
     MLInputChannelSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, name: "description"))
     MLInputChannelSummary.type = Types::MLInputChannelSummary
-    MLInputChannelsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MLInputChannelSummary, name: "member")
+    MLInputChannelsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MLInputChannelSummary, name: "member"))
     MLOutputConfiguration.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "destination"))
     MLOutputConfiguration.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
     MLOutputConfiguration.type = Types::MLOutputConfiguration
     MetricDefinition.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "name", traits: {"smithy.api#required" => {}}))
     MetricDefinition.add_member(:regex, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricRegex, name: "regex", traits: {"smithy.api#required" => {}}))
     MetricDefinition.type = Types::MetricDefinition
-    MetricDefinitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDefinition, name: "member")
+    MetricDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDefinition, name: "member"))
     MetricsConfigurationPolicy.add_member(:noise_level, ::Smithy::Schema::Shapes::MemberShape.new(target: NoiseLevelType, name: "noiseLevel", traits: {"smithy.api#required" => {}}))
     MetricsConfigurationPolicy.type = Types::MetricsConfigurationPolicy
-    MetricsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SharedAudienceMetrics, name: "member")
+    MetricsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SharedAudienceMetrics, name: "member"))
     MetricsStatus.add_member(:publish_succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLISH_SUCCEEDED", traits: {"smithy.api#enumValue" => "PUBLISH_SUCCEEDED"}))
     MetricsStatus.add_member(:publish_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLISH_FAILED", traits: {"smithy.api#enumValue" => "PUBLISH_FAILED"}))
     ModelInferenceDataSource.add_member(:ml_input_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MLInputChannelArn, name: "mlInputChannelArn", traits: {"smithy.api#required" => {}}))
@@ -1322,13 +1322,13 @@ module Aws::CleanRoomsML
     ModelTrainingDataChannel.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelTrainingDataChannelName, name: "channelName", traits: {"smithy.api#required" => {}}))
     ModelTrainingDataChannel.add_member(:s3_data_distribution_type, ::Smithy::Schema::Shapes::MemberShape.new(target: S3DataDistributionType, name: "s3DataDistributionType", traits: {"smithy.api#default" => "FullyReplicated"}))
     ModelTrainingDataChannel.type = Types::ModelTrainingDataChannel
-    ModelTrainingDataChannels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ModelTrainingDataChannel, name: "member")
+    ModelTrainingDataChannels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelTrainingDataChannel, name: "member"))
     NoiseLevelType.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "HIGH"}))
     NoiseLevelType.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "MEDIUM"}))
     NoiseLevelType.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "LOW"}))
     NoiseLevelType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    ParameterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterKey, name: "key")
-    ParameterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value")
+    ParameterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterKey, name: "key"))
+    ParameterMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value"))
     PolicyExistenceCondition.add_member(:policy_must_exist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_MUST_EXIST", traits: {"smithy.api#enumValue" => "POLICY_MUST_EXIST"}))
     PolicyExistenceCondition.add_member(:policy_must_not_exist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_MUST_NOT_EXIST", traits: {"smithy.api#enumValue" => "POLICY_MUST_NOT_EXIST"}))
     PrivacyBudgets.add_member(:access_budgets, Types::PrivacyBudgets::AccessBudgets, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessBudgets, name: "accessBudgets"))
@@ -1362,7 +1362,7 @@ module Aws::CleanRoomsML
     RelevanceMetric.add_member(:audience_size, ::Smithy::Schema::Shapes::MemberShape.new(target: AudienceSize, name: "audienceSize", traits: {"smithy.api#required" => {}}))
     RelevanceMetric.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "score", traits: {"smithy.api#range" => {"min" => 0.0, "max" => 10.0}}))
     RelevanceMetric.type = Types::RelevanceMetric
-    RelevanceMetrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RelevanceMetric, name: "member")
+    RelevanceMetrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RelevanceMetric, name: "member"))
     ResourceConfig.add_member(:instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "instanceCount", traits: {"smithy.api#default" => 1, "smithy.api#range" => {"min" => 1, "max" => 5}}))
     ResourceConfig.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceType, name: "instanceType", traits: {"smithy.api#required" => {}}))
     ResourceConfig.add_member(:volume_size_in_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "volumeSizeInGB", traits: {"smithy.api#range" => {"min" => 1, "max" => 8192}, "smithy.api#required" => {}}))
@@ -1424,9 +1424,9 @@ module Aws::CleanRoomsML
     StatusDetails.type = Types::StatusDetails
     StoppingCondition.add_member(:max_runtime_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxRuntimeInSeconds", traits: {"smithy.api#default" => 86400, "smithy.api#range" => {"min" => 1, "max" => 2419200}}))
     StoppingCondition.type = Types::StoppingCondition
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagOnCreatePolicy.add_member(:from_parent_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FROM_PARENT_RESOURCE", traits: {"smithy.api#enumValue" => "FROM_PARENT_RESOURCE"}))
     TagOnCreatePolicy.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1441,7 +1441,7 @@ module Aws::CleanRoomsML
     TrainedModelArtifactMaxSizeUnitType.add_member(:gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GB", traits: {"smithy.api#enumValue" => "GB"}))
     TrainedModelExportFileType.add_member(:model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MODEL", traits: {"smithy.api#enumValue" => "MODEL"}))
     TrainedModelExportFileType.add_member(:output, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OUTPUT", traits: {"smithy.api#enumValue" => "OUTPUT"}))
-    TrainedModelExportFileTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelExportFileType, name: "member")
+    TrainedModelExportFileTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelExportFileType, name: "member"))
     TrainedModelExportJobStatus.add_member(:create_pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_PENDING", traits: {"smithy.api#enumValue" => "CREATE_PENDING"}))
     TrainedModelExportJobStatus.add_member(:create_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
     TrainedModelExportJobStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
@@ -1450,7 +1450,7 @@ module Aws::CleanRoomsML
     TrainedModelExportOutputConfiguration.type = Types::TrainedModelExportOutputConfiguration
     TrainedModelExportReceiverMember.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId", traits: {"smithy.api#required" => {}}))
     TrainedModelExportReceiverMember.type = Types::TrainedModelExportReceiverMember
-    TrainedModelExportReceiverMembers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelExportReceiverMember, name: "member")
+    TrainedModelExportReceiverMembers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelExportReceiverMember, name: "member"))
     TrainedModelExportsConfigurationPolicy.add_member(:max_size, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelExportsMaxSize, name: "maxSize", traits: {"smithy.api#required" => {}}))
     TrainedModelExportsConfigurationPolicy.add_member(:files_to_export, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelExportFileTypeList, name: "filesToExport", traits: {"smithy.api#required" => {}}))
     TrainedModelExportsConfigurationPolicy.type = Types::TrainedModelExportsConfigurationPolicy
@@ -1458,7 +1458,7 @@ module Aws::CleanRoomsML
     TrainedModelExportsMaxSize.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelExportsMaxSizeValue, name: "value", traits: {"smithy.api#required" => {}}))
     TrainedModelExportsMaxSize.type = Types::TrainedModelExportsMaxSize
     TrainedModelExportsMaxSizeUnitType.add_member(:gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GB", traits: {"smithy.api#enumValue" => "GB"}))
-    TrainedModelInferenceJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelInferenceJobSummary, name: "member")
+    TrainedModelInferenceJobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelInferenceJobSummary, name: "member"))
     TrainedModelInferenceJobStatus.add_member(:create_pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_PENDING", traits: {"smithy.api#enumValue" => "CREATE_PENDING"}))
     TrainedModelInferenceJobStatus.add_member(:create_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
     TrainedModelInferenceJobStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
@@ -1491,7 +1491,7 @@ module Aws::CleanRoomsML
     TrainedModelInferenceMaxOutputSize.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelInferenceMaxOutputSizeValue, name: "value", traits: {"smithy.api#required" => {}}))
     TrainedModelInferenceMaxOutputSize.type = Types::TrainedModelInferenceMaxOutputSize
     TrainedModelInferenceMaxOutputSizeUnitType.add_member(:gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GB", traits: {"smithy.api#enumValue" => "GB"}))
-    TrainedModelList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelSummary, name: "member")
+    TrainedModelList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelSummary, name: "member"))
     TrainedModelStatus.add_member(:create_pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_PENDING", traits: {"smithy.api#enumValue" => "CREATE_PENDING"}))
     TrainedModelStatus.add_member(:create_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
     TrainedModelStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
@@ -1519,7 +1519,7 @@ module Aws::CleanRoomsML
     TrainedModelsConfigurationPolicy.add_member(:container_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsConfigurationPolicy, name: "containerMetrics"))
     TrainedModelsConfigurationPolicy.add_member(:max_artifact_size, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelArtifactMaxSize, name: "maxArtifactSize"))
     TrainedModelsConfigurationPolicy.type = Types::TrainedModelsConfigurationPolicy
-    TrainingDatasetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingDatasetSummary, name: "member")
+    TrainingDatasetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingDatasetSummary, name: "member"))
     TrainingDatasetStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     TrainingDatasetSummary.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     TrainingDatasetSummary.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))

@@ -63,7 +63,7 @@ module Aws::CloudSearchDomain
     Bucket.type = Types::Bucket
     BucketInfo.add_member(:buckets, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketList, name: "buckets"))
     BucketInfo.type = Types::BucketInfo
-    BucketList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Bucket, name: "member")
+    BucketList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Bucket, name: "member"))
     ContentType.add_member(:application_json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "application_json", traits: {"smithy.api#enumValue" => "application/json"}))
     ContentType.add_member(:application_xml, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "application_xml", traits: {"smithy.api#enumValue" => "application/xml"}))
     DocumentServiceException.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "status"))
@@ -71,11 +71,11 @@ module Aws::CloudSearchDomain
     DocumentServiceException.type = Types::DocumentServiceException
     DocumentServiceWarning.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     DocumentServiceWarning.type = Types::DocumentServiceWarning
-    DocumentServiceWarnings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentServiceWarning, name: "member")
-    Exprs.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    Exprs.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
-    Facets.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    Facets.value = ::Smithy::Schema::Shapes::MemberShape.new(target: BucketInfo, name: "value")
+    DocumentServiceWarnings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentServiceWarning, name: "member"))
+    Exprs.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    Exprs.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
+    Facets.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    Facets.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketInfo, name: "value"))
     FieldStats.add_member(:min, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "min"))
     FieldStats.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "max"))
     FieldStats.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "count", traits: {"smithy.api#default" => 0}))
@@ -85,17 +85,17 @@ module Aws::CloudSearchDomain
     FieldStats.add_member(:mean, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "mean"))
     FieldStats.add_member(:stddev, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "stddev", traits: {"smithy.api#default" => 0}))
     FieldStats.type = Types::FieldStats
-    FieldValue.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    Fields.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    Fields.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValue, name: "value")
-    Highlights.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    Highlights.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    FieldValue.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    Fields.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    Fields.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValue, name: "value"))
+    Highlights.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    Highlights.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     Hit.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "id"))
     Hit.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: Fields, name: "fields"))
     Hit.add_member(:exprs, ::Smithy::Schema::Shapes::MemberShape.new(target: Exprs, name: "exprs"))
     Hit.add_member(:highlights, ::Smithy::Schema::Shapes::MemberShape.new(target: Highlights, name: "highlights"))
     Hit.type = Types::Hit
-    HitList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Hit, name: "member")
+    HitList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Hit, name: "member"))
     Hits.add_member(:found, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "found", traits: {"smithy.api#default" => 0}))
     Hits.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "start", traits: {"smithy.api#default" => 0}))
     Hits.add_member(:cursor, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cursor"))
@@ -130,8 +130,8 @@ module Aws::CloudSearchDomain
     SearchStatus.add_member(:timems, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "timems", traits: {"smithy.api#default" => 0}))
     SearchStatus.add_member(:rid, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "rid"))
     SearchStatus.type = Types::SearchStatus
-    Stats.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    Stats.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldStats, name: "value")
+    Stats.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    Stats.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldStats, name: "value"))
     SuggestModel.add_member(:query, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "query"))
     SuggestModel.add_member(:found, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "found", traits: {"smithy.api#default" => 0}))
     SuggestModel.add_member(:suggestions, ::Smithy::Schema::Shapes::MemberShape.new(target: Suggestions, name: "suggestions"))
@@ -150,7 +150,7 @@ module Aws::CloudSearchDomain
     SuggestionMatch.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "score", traits: {"smithy.api#default" => 0}))
     SuggestionMatch.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "id"))
     SuggestionMatch.type = Types::SuggestionMatch
-    Suggestions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestionMatch, name: "member")
+    Suggestions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestionMatch, name: "member"))
     UploadDocumentsRequest.add_member(:documents, ::Smithy::Schema::Shapes::MemberShape.new(target: Blob, name: "documents", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     UploadDocumentsRequest.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentType, name: "contentType", traits: {"smithy.api#httpHeader" => "Content-Type", "smithy.api#required" => {}}))
     UploadDocumentsRequest[:http_payload] = :documents

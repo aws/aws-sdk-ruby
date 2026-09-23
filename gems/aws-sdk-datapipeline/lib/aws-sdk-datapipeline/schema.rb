@@ -172,15 +172,15 @@ module Aws::DataPipeline
     ParameterAttribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameString, name: "key", traits: {"smithy.api#required" => {}}))
     ParameterAttribute.add_member(:string_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValueString, name: "stringValue", traits: {"smithy.api#required" => {}}))
     ParameterAttribute.type = Types::ParameterAttribute
-    ParameterAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterAttribute, name: "member")
+    ParameterAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterAttribute, name: "member"))
     ParameterObject.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldNameString, name: "id", traits: {"smithy.api#required" => {}}))
     ParameterObject.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterAttributeList, name: "attributes", traits: {"smithy.api#required" => {}}))
     ParameterObject.type = Types::ParameterObject
-    ParameterObjectList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterObject, name: "member")
+    ParameterObjectList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterObject, name: "member"))
     ParameterValue.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldNameString, name: "id", traits: {"smithy.api#required" => {}}))
     ParameterValue.add_member(:string_value, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldStringValue, name: "stringValue", traits: {"smithy.api#required" => {}}))
     ParameterValue.type = Types::ParameterValue
-    ParameterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "member")
+    ParameterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "member"))
     PipelineDeletedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     PipelineDeletedException.type = Types::PipelineDeletedException
     PipelineDescription.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "pipelineId", traits: {"smithy.api#required" => {}}))
@@ -189,7 +189,7 @@ module Aws::DataPipeline
     PipelineDescription.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "description"))
     PipelineDescription.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     PipelineDescription.type = Types::PipelineDescription
-    PipelineDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineDescription, name: "member")
+    PipelineDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineDescription, name: "member"))
     PipelineIdName.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "id"))
     PipelineIdName.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "name"))
     PipelineIdName.type = Types::PipelineIdName
@@ -199,9 +199,9 @@ module Aws::DataPipeline
     PipelineObject.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "name", traits: {"smithy.api#required" => {}}))
     PipelineObject.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldList, name: "fields", traits: {"smithy.api#required" => {}}))
     PipelineObject.type = Types::PipelineObject
-    PipelineObjectList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineObject, name: "member")
-    PipelineObjectMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "key")
-    PipelineObjectMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineObject, name: "value")
+    PipelineObjectList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineObject, name: "member"))
+    PipelineObjectMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "key"))
+    PipelineObjectMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineObject, name: "value"))
     PollForTaskInput.add_member(:worker_group, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "workerGroup", traits: {"smithy.api#required" => {}}))
     PollForTaskInput.add_member(:hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "hostname"))
     PollForTaskInput.add_member(:instance_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceIdentity, name: "instanceIdentity"))
@@ -247,7 +247,7 @@ module Aws::DataPipeline
     Selector.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "fieldName"))
     Selector.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: Operator, name: "operator"))
     Selector.type = Types::Selector
-    SelectorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Selector, name: "member")
+    SelectorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Selector, name: "member"))
     SetStatusInput.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "pipelineId", traits: {"smithy.api#required" => {}}))
     SetStatusInput.add_member(:object_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: IdList, name: "objectIds", traits: {"smithy.api#required" => {}}))
     SetStatusInput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "status", traits: {"smithy.api#required" => {}}))
@@ -284,17 +284,17 @@ module Aws::DataPipeline
     ValidationError.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "id"))
     ValidationError.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationMessages, name: "errors"))
     ValidationError.type = Types::ValidationError
-    ValidationErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationError, name: "member")
+    ValidationErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationError, name: "member"))
     ValidationWarning.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "id"))
     ValidationWarning.add_member(:warnings, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationMessages, name: "warnings"))
     ValidationWarning.type = Types::ValidationWarning
-    ValidationWarnings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationWarning, name: "member")
-    FieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Field, name: "member")
-    IdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "member")
-    PipelineList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineIdName, name: "member")
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
-    ValidationMessages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationMessage, name: "member")
+    ValidationWarnings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationWarning, name: "member"))
+    FieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Field, name: "member"))
+    IdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "member"))
+    PipelineList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineIdName, name: "member"))
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    ValidationMessages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationMessage, name: "member"))
 
     DataPipeline = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.datapipeline#DataPipeline"

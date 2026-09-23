@@ -188,7 +188,7 @@ module Aws::Route53Domains
     BillingRecord.add_member(:bill_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "BillDate"))
     BillingRecord.add_member(:price, ::Smithy::Schema::Shapes::MemberShape.new(target: Price, name: "Price", traits: {"smithy.api#default" => 0}))
     BillingRecord.type = Types::BillingRecord
-    BillingRecords.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BillingRecord, name: "member")
+    BillingRecords.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingRecord, name: "member"))
     CancelDomainTransferToAnotherAwsAccountRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#required" => {}}))
     CancelDomainTransferToAnotherAwsAccountRequest.type = Types::CancelDomainTransferToAnotherAwsAccountRequest
     CancelDomainTransferToAnotherAwsAccountResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, name: "OperationId"))
@@ -506,7 +506,7 @@ module Aws::Route53Domains
     DnssecKey.add_member(:key_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "KeyTag"))
     DnssecKey.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Id"))
     DnssecKey.type = Types::DnssecKey
-    DnssecKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DnssecKey, name: "member")
+    DnssecKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DnssecKey, name: "member"))
     DnssecLimitExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     DnssecLimitExceeded.type = Types::DnssecLimitExceeded
     DnssecSigningAttributes.add_member(:algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "Algorithm"))
@@ -532,18 +532,18 @@ module Aws::Route53Domains
     DomainPrice.add_member(:change_ownership_price, ::Smithy::Schema::Shapes::MemberShape.new(target: PriceWithCurrency, name: "ChangeOwnershipPrice"))
     DomainPrice.add_member(:restoration_price, ::Smithy::Schema::Shapes::MemberShape.new(target: PriceWithCurrency, name: "RestorationPrice"))
     DomainPrice.type = Types::DomainPrice
-    DomainPriceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainPrice, name: "member")
-    DomainStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainStatus, name: "member")
+    DomainPriceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainPrice, name: "member"))
+    DomainStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainStatus, name: "member"))
     DomainSuggestion.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName"))
     DomainSuggestion.add_member(:availability, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Availability"))
     DomainSuggestion.type = Types::DomainSuggestion
-    DomainSuggestionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainSuggestion, name: "member")
+    DomainSuggestionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainSuggestion, name: "member"))
     DomainSummary.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName"))
     DomainSummary.add_member(:auto_renew, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AutoRenew"))
     DomainSummary.add_member(:transfer_lock, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "TransferLock"))
     DomainSummary.add_member(:expiry, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Expiry"))
     DomainSummary.type = Types::DomainSummary
-    DomainSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainSummary, name: "member")
+    DomainSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainSummary, name: "member"))
     DomainTransferability.add_member(:transferable, ::Smithy::Schema::Shapes::MemberShape.new(target: Transferable, name: "Transferable"))
     DomainTransferability.type = Types::DomainTransferability
     DuplicateRequest.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "requestId"))
@@ -559,7 +559,7 @@ module Aws::Route53Domains
     ExtraParam.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtraParamName, name: "Name", traits: {"smithy.api#required" => {}}))
     ExtraParam.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtraParamValue, name: "Value", traits: {"smithy.api#required" => {}}))
     ExtraParam.type = Types::ExtraParam
-    ExtraParamList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExtraParam, name: "member")
+    ExtraParamList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtraParam, name: "member"))
     ExtraParamName.add_member(:duns_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUNS_NUMBER", traits: {"smithy.api#enumValue" => "DUNS_NUMBER"}))
     ExtraParamName.add_member(:brand_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BRAND_NUMBER", traits: {"smithy.api#enumValue" => "BRAND_NUMBER"}))
     ExtraParamName.add_member(:birth_department, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BIRTH_DEPARTMENT", traits: {"smithy.api#enumValue" => "BIRTH_DEPARTMENT"}))
@@ -598,7 +598,7 @@ module Aws::Route53Domains
     FilterCondition.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: Operator, name: "Operator", traits: {"smithy.api#required" => {}}))
     FilterCondition.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: Values, name: "Values", traits: {"smithy.api#required" => {}}))
     FilterCondition.type = Types::FilterCondition
-    FilterConditions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterCondition, name: "member")
+    FilterConditions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterCondition, name: "member"))
     GetContactReachabilityStatusRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "domainName"))
     GetContactReachabilityStatusRequest.type = Types::GetContactReachabilityStatusRequest
     GetContactReachabilityStatusResponse.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "domainName"))
@@ -648,7 +648,7 @@ module Aws::Route53Domains
     GetOperationDetailResponse.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedDate"))
     GetOperationDetailResponse.add_member(:status_flag, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusFlag, name: "StatusFlag"))
     GetOperationDetailResponse.type = Types::GetOperationDetailResponse
-    GlueIpList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GlueIp, name: "member")
+    GlueIpList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueIp, name: "member"))
     InvalidInput.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InvalidInput.type = Types::InvalidInput
     ListDomainsAttributeName.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DomainName", traits: {"smithy.api#enumValue" => "DomainName"}))
@@ -687,7 +687,7 @@ module Aws::Route53Domains
     Nameserver.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: HostName, name: "Name", traits: {"smithy.api#required" => {}}))
     Nameserver.add_member(:glue_ips, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueIpList, name: "GlueIps"))
     Nameserver.type = Types::Nameserver
-    NameserverList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Nameserver, name: "member")
+    NameserverList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Nameserver, name: "member"))
     OperationLimitExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     OperationLimitExceeded.type = Types::OperationLimitExceeded
     OperationStatus.add_member(:submitted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUBMITTED", traits: {"smithy.api#enumValue" => "SUBMITTED"}))
@@ -695,7 +695,7 @@ module Aws::Route53Domains
     OperationStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
     OperationStatus.add_member(:successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESSFUL", traits: {"smithy.api#enumValue" => "SUCCESSFUL"}))
     OperationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    OperationStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OperationStatus, name: "member")
+    OperationStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationStatus, name: "member"))
     OperationSummary.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, name: "OperationId"))
     OperationSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationStatus, name: "Status"))
     OperationSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationType, name: "Type"))
@@ -705,7 +705,7 @@ module Aws::Route53Domains
     OperationSummary.add_member(:status_flag, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusFlag, name: "StatusFlag"))
     OperationSummary.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedDate"))
     OperationSummary.type = Types::OperationSummary
-    OperationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OperationSummary, name: "member")
+    OperationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationSummary, name: "member"))
     OperationType.add_member(:register_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGISTER_DOMAIN", traits: {"smithy.api#enumValue" => "REGISTER_DOMAIN"}))
     OperationType.add_member(:delete_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_DOMAIN", traits: {"smithy.api#enumValue" => "DELETE_DOMAIN"}))
     OperationType.add_member(:transfer_in_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRANSFER_IN_DOMAIN", traits: {"smithy.api#enumValue" => "TRANSFER_IN_DOMAIN"}))
@@ -727,7 +727,7 @@ module Aws::Route53Domains
     OperationType.add_member(:release_to_gandi, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RELEASE_TO_GANDI", traits: {"smithy.api#enumValue" => "RELEASE_TO_GANDI"}))
     OperationType.add_member(:transfer_on_renew, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRANSFER_ON_RENEW", traits: {"smithy.api#enumValue" => "TRANSFER_ON_RENEW"}))
     OperationType.add_member(:restore_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESTORE_DOMAIN", traits: {"smithy.api#enumValue" => "RESTORE_DOMAIN"}))
-    OperationTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OperationType, name: "member")
+    OperationTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationType, name: "member"))
     Operator.add_member(:le, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LE", traits: {"smithy.api#enumValue" => "LE"}))
     Operator.add_member(:ge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GE", traits: {"smithy.api#enumValue" => "GE"}))
     Operator.add_member(:begins_with, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BEGINS_WITH", traits: {"smithy.api#enumValue" => "BEGINS_WITH"}))
@@ -792,8 +792,8 @@ module Aws::Route53Domains
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TransferDomainRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#required" => {}}))
     TransferDomainRequest.add_member(:idn_lang_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LangCode, name: "IdnLangCode"))
     TransferDomainRequest.add_member(:duration_in_years, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationInYears, name: "DurationInYears", traits: {"smithy.api#required" => {}}))
@@ -852,7 +852,7 @@ module Aws::Route53Domains
     UpdateTagsForDomainRequest.add_member(:tags_to_update, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "TagsToUpdate"))
     UpdateTagsForDomainRequest.type = Types::UpdateTagsForDomainRequest
     UpdateTagsForDomainResponse.type = Types::UpdateTagsForDomainResponse
-    Values.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "member")
+    Values.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "member"))
     ViewBillingRequest.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Start"))
     ViewBillingRequest.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "End"))
     ViewBillingRequest.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: PageMarker, name: "Marker"))

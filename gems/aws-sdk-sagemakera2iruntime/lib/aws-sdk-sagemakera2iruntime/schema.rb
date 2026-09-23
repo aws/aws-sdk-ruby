@@ -45,7 +45,7 @@ module Aws::SageMakerA2IRuntime
     ConflictException.type = Types::ConflictException
     ContentClassifier.add_member(:free_of_personally_identifiable_information, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION", traits: {"smithy.api#enumValue" => "FreeOfPersonallyIdentifiableInformation"}))
     ContentClassifier.add_member(:free_of_adult_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FREE_OF_ADULT_CONTENT", traits: {"smithy.api#enumValue" => "FreeOfAdultContent"}))
-    ContentClassifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContentClassifier, name: "member")
+    ContentClassifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentClassifier, name: "member"))
     DeleteHumanLoopRequest.add_member(:human_loop_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopName, name: "HumanLoopName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteHumanLoopRequest.type = Types::DeleteHumanLoopRequest
     DeleteHumanLoopResponse.type = Types::DeleteHumanLoopResponse
@@ -71,7 +71,7 @@ module Aws::SageMakerA2IRuntime
     HumanLoopStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
     HumanLoopStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "Stopped"}))
     HumanLoopStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPING", traits: {"smithy.api#enumValue" => "Stopping"}))
-    HumanLoopSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopSummary, name: "member")
+    HumanLoopSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopSummary, name: "member"))
     HumanLoopSummary.add_member(:human_loop_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopName, name: "HumanLoopName"))
     HumanLoopSummary.add_member(:human_loop_status, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopStatus, name: "HumanLoopStatus"))
     HumanLoopSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))

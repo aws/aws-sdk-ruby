@@ -179,7 +179,7 @@ module Aws::Chatbot
     AssociateToConfigurationRequest.add_member(:chat_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, name: "ChatConfiguration", traits: {"smithy.api#required" => {}}))
     AssociateToConfigurationRequest.type = Types::AssociateToConfigurationRequest
     AssociateToConfigurationResult.type = Types::AssociateToConfigurationResult
-    AssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationListing, name: "member")
+    AssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationListing, name: "member"))
     AssociationListing.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Resource", traits: {"smithy.api#required" => {}}))
     AssociationListing.type = Types::AssociationListing
     ChimeWebhookConfiguration.add_member(:webhook_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeWebhookDescription, name: "WebhookDescription", traits: {"smithy.api#required" => {}}))
@@ -192,14 +192,14 @@ module Aws::Chatbot
     ChimeWebhookConfiguration.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceState, name: "State"))
     ChimeWebhookConfiguration.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StateReason"))
     ChimeWebhookConfiguration.type = Types::ChimeWebhookConfiguration
-    ChimeWebhookConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeWebhookConfiguration, name: "member")
+    ChimeWebhookConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeWebhookConfiguration, name: "member"))
     ConfiguredTeam.add_member(:tenant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "TenantId", traits: {"smithy.api#required" => {}}))
     ConfiguredTeam.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "TeamId", traits: {"smithy.api#required" => {}}))
     ConfiguredTeam.add_member(:team_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "TeamName"))
     ConfiguredTeam.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceState, name: "State"))
     ConfiguredTeam.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StateReason"))
     ConfiguredTeam.type = Types::ConfiguredTeam
-    ConfiguredTeamsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredTeam, name: "member")
+    ConfiguredTeamsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredTeam, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ConflictException.type = Types::ConflictException
     CreateChimeWebhookConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -261,7 +261,7 @@ module Aws::Chatbot
     CustomAction.add_member(:attachments, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionAttachmentList, name: "Attachments"))
     CustomAction.add_member(:action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionName, name: "ActionName"))
     CustomAction.type = Types::CustomAction
-    CustomActionArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionArn, name: "member")
+    CustomActionArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionArn, name: "member"))
     CustomActionAttachment.add_member(:notification_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionAttachmentNotificationType, name: "NotificationType"))
     CustomActionAttachment.add_member(:button_text, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionButtonText, name: "ButtonText"))
     CustomActionAttachment.add_member(:criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionAttachmentCriteriaList, name: "Criteria"))
@@ -271,12 +271,12 @@ module Aws::Chatbot
     CustomActionAttachmentCriteria.add_member(:variable_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "VariableName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[A-Za-z0-9-_]+$", "smithy.api#required" => {}}))
     CustomActionAttachmentCriteria.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Value", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^[\\S\\s]+$"}))
     CustomActionAttachmentCriteria.type = Types::CustomActionAttachmentCriteria
-    CustomActionAttachmentCriteriaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionAttachmentCriteria, name: "member")
+    CustomActionAttachmentCriteriaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionAttachmentCriteria, name: "member"))
     CustomActionAttachmentCriteriaOperator.add_member(:has_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HAS_VALUE", traits: {"smithy.api#enumValue" => "HAS_VALUE"}))
     CustomActionAttachmentCriteriaOperator.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUALS", traits: {"smithy.api#enumValue" => "EQUALS"}))
-    CustomActionAttachmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionAttachment, name: "member")
-    CustomActionAttachmentVariables.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[A-Za-z0-9-_]+$"})
-    CustomActionAttachmentVariables.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^[\\x21-\\x7F]+$"})
+    CustomActionAttachmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActionAttachment, name: "member"))
+    CustomActionAttachmentVariables.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[A-Za-z0-9-_]+$"}))
+    CustomActionAttachmentVariables.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^[\\x21-\\x7F]+$"}))
     CustomActionDefinition.add_member(:command_text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "CommandText", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[\\S\\s]+$", "smithy.api#required" => {}}))
     CustomActionDefinition.type = Types::CustomActionDefinition
     DeleteChimeWebhookConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -374,7 +374,7 @@ module Aws::Chatbot
     GetTeamsChannelConfigurationRequest.type = Types::GetTeamsChannelConfigurationRequest
     GetTeamsChannelConfigurationResult.add_member(:channel_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamsChannelConfiguration, name: "ChannelConfiguration"))
     GetTeamsChannelConfigurationResult.type = Types::GetTeamsChannelConfigurationResult
-    GuardrailPolicyArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailPolicyArn, name: "member")
+    GuardrailPolicyArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailPolicyArn, name: "member"))
     InternalServiceError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InternalServiceError.type = Types::InternalServiceError
     InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
@@ -445,8 +445,8 @@ module Aws::Chatbot
     SlackChannelConfiguration.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceState, name: "State"))
     SlackChannelConfiguration.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StateReason"))
     SlackChannelConfiguration.type = Types::SlackChannelConfiguration
-    SlackChannelConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlackChannelConfiguration, name: "member")
-    SlackUserIdentitiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlackUserIdentity, name: "member")
+    SlackChannelConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackChannelConfiguration, name: "member"))
+    SlackUserIdentitiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackUserIdentity, name: "member"))
     SlackUserIdentity.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
     SlackUserIdentity.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
     SlackUserIdentity.add_member(:slack_team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackTeamId, name: "SlackTeamId", traits: {"smithy.api#required" => {}}))
@@ -458,19 +458,19 @@ module Aws::Chatbot
     SlackWorkspace.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceState, name: "State"))
     SlackWorkspace.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StateReason"))
     SlackWorkspace.type = Types::SlackWorkspace
-    SlackWorkspacesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlackWorkspace, name: "member")
-    SnsTopicArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    SlackWorkspacesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackWorkspace, name: "member"))
+    SnsTopicArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     Tag.add_member(:tag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "TagKey", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:tag_value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "TagValue", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"aws.api#data" => "tagging", "smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
-    TeamChannelConfigurationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TeamsChannelConfiguration, name: "member")
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    TeamChannelConfigurationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamsChannelConfiguration, name: "member"))
     TeamsChannelConfiguration.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamsChannelId, name: "ChannelId", traits: {"smithy.api#required" => {}}))
     TeamsChannelConfiguration.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamsChannelName, name: "ChannelName"))
     TeamsChannelConfiguration.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "TeamId", traits: {"smithy.api#required" => {}}))
@@ -487,7 +487,7 @@ module Aws::Chatbot
     TeamsChannelConfiguration.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceState, name: "State"))
     TeamsChannelConfiguration.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StateReason"))
     TeamsChannelConfiguration.type = Types::TeamsChannelConfiguration
-    TeamsUserIdentitiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TeamsUserIdentity, name: "member")
+    TeamsUserIdentitiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamsUserIdentity, name: "member"))
     TeamsUserIdentity.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
     TeamsUserIdentity.add_member(:chat_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatConfigurationArn, name: "ChatConfigurationArn", traits: {"smithy.api#required" => {}}))
     TeamsUserIdentity.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "TeamId", traits: {"smithy.api#required" => {}}))

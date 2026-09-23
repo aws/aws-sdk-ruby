@@ -322,7 +322,7 @@ module Aws::AccessAnalyzer
     Access.type = Types::Access
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    AccessList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Access, name: "member")
+    AccessList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Access, name: "member"))
     AccessPreview.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPreviewId, name: "id", traits: {"smithy.api#required" => {}}))
     AccessPreview.add_member(:analyzer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerArn, name: "analyzerArn", traits: {"smithy.api#required" => {}}))
     AccessPreview.add_member(:configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationsMap, name: "configurations", traits: {"smithy.api#required" => {}}))
@@ -347,7 +347,7 @@ module Aws::AccessAnalyzer
     AccessPreviewFinding.add_member(:sources, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingSourceList, name: "sources"))
     AccessPreviewFinding.add_member(:resource_control_policy_restriction, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceControlPolicyRestriction, name: "resourceControlPolicyRestriction"))
     AccessPreviewFinding.type = Types::AccessPreviewFinding
-    AccessPreviewFindingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPreviewFinding, name: "member")
+    AccessPreviewFindingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPreviewFinding, name: "member"))
     AccessPreviewStatusReason.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPreviewStatusReasonCode, name: "code", traits: {"smithy.api#required" => {}}))
     AccessPreviewStatusReason.type = Types::AccessPreviewStatusReason
     AccessPreviewSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPreviewId, name: "id", traits: {"smithy.api#required" => {}}))
@@ -356,21 +356,21 @@ module Aws::AccessAnalyzer
     AccessPreviewSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPreviewStatus, name: "status", traits: {"smithy.api#required" => {}}))
     AccessPreviewSummary.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPreviewStatusReason, name: "statusReason"))
     AccessPreviewSummary.type = Types::AccessPreviewSummary
-    AccessPreviewsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPreviewSummary, name: "member")
-    AccountAggregations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingAggregationAccountDetails, name: "member")
-    AccountIdsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    AccessPreviewsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPreviewSummary, name: "member"))
+    AccountAggregations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingAggregationAccountDetails, name: "member"))
+    AccountIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     AclGrantee.add_member(:id, Types::AclGrantee::Id, ::Smithy::Schema::Shapes::MemberShape.new(target: AclCanonicalId, name: "id"))
     AclGrantee.add_member(:uri, Types::AclGrantee::Uri, ::Smithy::Schema::Shapes::MemberShape.new(target: AclUri, name: "uri"))
     AclGrantee.add_member(:unknown, Types::AclGrantee::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AclGrantee.type = Types::AclGrantee
-    ActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    ActionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "member")
+    ActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    ActionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "member"))
     AnalysisRule.add_member(:exclusions, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisRuleCriteriaList, name: "exclusions"))
     AnalysisRule.type = Types::AnalysisRule
     AnalysisRuleCriteria.add_member(:account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdsList, name: "accountIds"))
     AnalysisRuleCriteria.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsList, name: "resourceTags"))
     AnalysisRuleCriteria.type = Types::AnalysisRuleCriteria
-    AnalysisRuleCriteriaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisRuleCriteria, name: "member")
+    AnalysisRuleCriteriaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisRuleCriteria, name: "member"))
     AnalyzedResource.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     AnalyzedResource.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType", traits: {"smithy.api#required" => {}}))
     AnalyzedResource.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
@@ -387,7 +387,7 @@ module Aws::AccessAnalyzer
     AnalyzedResourceSummary.add_member(:resource_owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceOwnerAccount", traits: {"smithy.api#required" => {}}))
     AnalyzedResourceSummary.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType", traits: {"smithy.api#required" => {}}))
     AnalyzedResourceSummary.type = Types::AnalyzedResourceSummary
-    AnalyzedResourcesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzedResourceSummary, name: "member")
+    AnalyzedResourcesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzedResourceSummary, name: "member"))
     AnalyzerConfiguration.add_member(:unused_access, Types::AnalyzerConfiguration::UnusedAccess, ::Smithy::Schema::Shapes::MemberShape.new(target: UnusedAccessConfiguration, name: "unusedAccess"))
     AnalyzerConfiguration.add_member(:internal_access, Types::AnalyzerConfiguration::InternalAccess, ::Smithy::Schema::Shapes::MemberShape.new(target: InternalAccessConfiguration, name: "internalAccess"))
     AnalyzerConfiguration.add_member(:unknown, Types::AnalyzerConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -403,7 +403,7 @@ module Aws::AccessAnalyzer
     AnalyzerSummary.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusReason, name: "statusReason"))
     AnalyzerSummary.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerConfiguration, name: "configuration"))
     AnalyzerSummary.type = Types::AnalyzerSummary
-    AnalyzersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerSummary, name: "member")
+    AnalyzersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerSummary, name: "member"))
     ApplyArchiveRuleInput.add_member(:analyzer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerArn, name: "analyzerArn", traits: {"smithy.api#required" => {}}))
     ApplyArchiveRuleInput.add_member(:rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ruleName", traits: {"smithy.api#required" => {}}))
     ApplyArchiveRuleInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
@@ -413,7 +413,7 @@ module Aws::AccessAnalyzer
     ArchiveRuleSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
     ArchiveRuleSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
     ArchiveRuleSummary.type = Types::ArchiveRuleSummary
-    ArchiveRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ArchiveRuleSummary, name: "member")
+    ArchiveRulesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchiveRuleSummary, name: "member"))
     CancelPolicyGenerationInput.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelPolicyGenerationInput.type = Types::CancelPolicyGenerationInput
     CancelPolicyGenerationOutput.type = Types::CancelPolicyGenerationOutput
@@ -449,8 +449,8 @@ module Aws::AccessAnalyzer
     CloudTrailProperties.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startTime", traits: {"smithy.api#required" => {}}))
     CloudTrailProperties.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "endTime", traits: {"smithy.api#required" => {}}))
     CloudTrailProperties.type = Types::CloudTrailProperties
-    ConditionKeyMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    ConditionKeyMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    ConditionKeyMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    ConditionKeyMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     Configuration.add_member(:ebs_snapshot, Types::Configuration::EbsSnapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: EbsSnapshotConfiguration, name: "ebsSnapshot"))
     Configuration.add_member(:ecr_repository, Types::Configuration::EcrRepository, ::Smithy::Schema::Shapes::MemberShape.new(target: EcrRepositoryConfiguration, name: "ecrRepository"))
     Configuration.add_member(:iam_role, Types::Configuration::IamRole, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleConfiguration, name: "iamRole"))
@@ -467,8 +467,8 @@ module Aws::AccessAnalyzer
     Configuration.add_member(:dynamodb_table, Types::Configuration::DynamodbTable, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamodbTableConfiguration, name: "dynamodbTable"))
     Configuration.add_member(:unknown, Types::Configuration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Configuration.type = Types::Configuration
-    ConfigurationsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationsMapKey, name: "key")
-    ConfigurationsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, name: "value")
+    ConfigurationsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationsMapKey, name: "key"))
+    ConfigurationsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, name: "value"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType", traits: {"smithy.api#required" => {}}))
@@ -509,12 +509,12 @@ module Aws::AccessAnalyzer
     DynamodbStreamConfiguration.type = Types::DynamodbStreamConfiguration
     DynamodbTableConfiguration.add_member(:table_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamodbTablePolicy, name: "tablePolicy"))
     DynamodbTableConfiguration.type = Types::DynamodbTableConfiguration
-    EbsGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EbsGroup, name: "member")
+    EbsGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EbsGroup, name: "member"))
     EbsSnapshotConfiguration.add_member(:user_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: EbsUserIdList, name: "userIds"))
     EbsSnapshotConfiguration.add_member(:groups, ::Smithy::Schema::Shapes::MemberShape.new(target: EbsGroupList, name: "groups"))
     EbsSnapshotConfiguration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EbsSnapshotDataEncryptionKeyId, name: "kmsKeyId"))
     EbsSnapshotConfiguration.type = Types::EbsSnapshotConfiguration
-    EbsUserIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EbsUserId, name: "member")
+    EbsUserIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EbsUserId, name: "member"))
     EcrRepositoryConfiguration.add_member(:repository_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: EcrRepositoryPolicy, name: "repositoryPolicy"))
     EcrRepositoryConfiguration.type = Types::EcrRepositoryConfiguration
     EfsFileSystemConfiguration.add_member(:file_system_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: EfsFileSystemPolicy, name: "fileSystemPolicy"))
@@ -531,8 +531,8 @@ module Aws::AccessAnalyzer
     ExternalAccessFindingsStatistics.add_member(:total_archived_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "totalArchivedFindings"))
     ExternalAccessFindingsStatistics.add_member(:total_resolved_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "totalResolvedFindings"))
     ExternalAccessFindingsStatistics.type = Types::ExternalAccessFindingsStatistics
-    FilterCriteriaMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    FilterCriteriaMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Criterion, name: "value")
+    FilterCriteriaMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    FilterCriteriaMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Criterion, name: "value"))
     Finding.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingId, name: "id", traits: {"smithy.api#required" => {}}))
     Finding.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalMap, name: "principal"))
     Finding.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionList, name: "action"))
@@ -553,8 +553,8 @@ module Aws::AccessAnalyzer
     FindingAggregationAccountDetails.add_member(:number_of_active_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "numberOfActiveFindings"))
     FindingAggregationAccountDetails.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingAggregationAccountDetailsMap, name: "details"))
     FindingAggregationAccountDetails.type = Types::FindingAggregationAccountDetails
-    FindingAggregationAccountDetailsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    FindingAggregationAccountDetailsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "value")
+    FindingAggregationAccountDetailsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    FindingAggregationAccountDetailsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "value"))
     FindingDetails.add_member(:internal_access_details, Types::FindingDetails::InternalAccessDetails, ::Smithy::Schema::Shapes::MemberShape.new(target: InternalAccessDetails, name: "internalAccessDetails"))
     FindingDetails.add_member(:external_access_details, Types::FindingDetails::ExternalAccessDetails, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalAccessDetails, name: "externalAccessDetails"))
     FindingDetails.add_member(:unused_permission_details, Types::FindingDetails::UnusedPermissionDetails, ::Smithy::Schema::Shapes::MemberShape.new(target: UnusedPermissionDetails, name: "unusedPermissionDetails"))
@@ -563,15 +563,15 @@ module Aws::AccessAnalyzer
     FindingDetails.add_member(:unused_iam_user_password_details, Types::FindingDetails::UnusedIamUserPasswordDetails, ::Smithy::Schema::Shapes::MemberShape.new(target: UnusedIamUserPasswordDetails, name: "unusedIamUserPasswordDetails"))
     FindingDetails.add_member(:unknown, Types::FindingDetails::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     FindingDetails.type = Types::FindingDetails
-    FindingDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingDetails, name: "member")
-    FindingIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingId, name: "member")
+    FindingDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingDetails, name: "member"))
+    FindingIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingId, name: "member"))
     FindingSource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingSourceType, name: "type", traits: {"smithy.api#required" => {}}))
     FindingSource.add_member(:detail, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingSourceDetail, name: "detail"))
     FindingSource.type = Types::FindingSource
     FindingSourceDetail.add_member(:access_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "accessPointArn"))
     FindingSourceDetail.add_member(:access_point_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "accessPointAccount"))
     FindingSourceDetail.type = Types::FindingSourceDetail
-    FindingSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingSource, name: "member")
+    FindingSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingSource, name: "member"))
     FindingSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingId, name: "id", traits: {"smithy.api#required" => {}}))
     FindingSummary.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalMap, name: "principal"))
     FindingSummary.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionList, name: "action"))
@@ -599,20 +599,20 @@ module Aws::AccessAnalyzer
     FindingSummaryV2.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
     FindingSummaryV2.add_member(:finding_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingType, name: "findingType"))
     FindingSummaryV2.type = Types::FindingSummaryV2
-    FindingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingSummary, name: "member")
-    FindingsListV2.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingSummaryV2, name: "member")
+    FindingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingSummary, name: "member"))
+    FindingsListV2.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingSummaryV2, name: "member"))
     FindingsStatistics.add_member(:external_access_findings_statistics, Types::FindingsStatistics::ExternalAccessFindingsStatistics, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalAccessFindingsStatistics, name: "externalAccessFindingsStatistics"))
     FindingsStatistics.add_member(:internal_access_findings_statistics, Types::FindingsStatistics::InternalAccessFindingsStatistics, ::Smithy::Schema::Shapes::MemberShape.new(target: InternalAccessFindingsStatistics, name: "internalAccessFindingsStatistics"))
     FindingsStatistics.add_member(:unused_access_findings_statistics, Types::FindingsStatistics::UnusedAccessFindingsStatistics, ::Smithy::Schema::Shapes::MemberShape.new(target: UnusedAccessFindingsStatistics, name: "unusedAccessFindingsStatistics"))
     FindingsStatistics.add_member(:unknown, Types::FindingsStatistics::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     FindingsStatistics.type = Types::FindingsStatistics
-    FindingsStatisticsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsStatistics, name: "member")
+    FindingsStatisticsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsStatistics, name: "member"))
     GenerateFindingRecommendationRequest.add_member(:analyzer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerArn, name: "analyzerArn", traits: {"smithy.api#httpQuery" => "analyzerArn", "smithy.api#required" => {}}))
     GenerateFindingRecommendationRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#required" => {}}))
     GenerateFindingRecommendationRequest.type = Types::GenerateFindingRecommendationRequest
     GeneratedPolicy.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "policy", traits: {"smithy.api#required" => {}}))
     GeneratedPolicy.type = Types::GeneratedPolicy
-    GeneratedPolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedPolicy, name: "member")
+    GeneratedPolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedPolicy, name: "member"))
     GeneratedPolicyProperties.add_member(:is_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isComplete"))
     GeneratedPolicyProperties.add_member(:principal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalArn, name: "principalArn", traits: {"smithy.api#required" => {}}))
     GeneratedPolicyProperties.add_member(:cloud_trail_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudTrailProperties, name: "cloudTrailProperties"))
@@ -693,14 +693,14 @@ module Aws::AccessAnalyzer
     InlineArchiveRule.add_member(:rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ruleName", traits: {"smithy.api#required" => {}}))
     InlineArchiveRule.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterCriteriaMap, name: "filter", traits: {"smithy.api#required" => {}}))
     InlineArchiveRule.type = Types::InlineArchiveRule
-    InlineArchiveRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InlineArchiveRule, name: "member")
+    InlineArchiveRulesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InlineArchiveRule, name: "member"))
     InternalAccessAnalysisRule.add_member(:inclusions, ::Smithy::Schema::Shapes::MemberShape.new(target: InternalAccessAnalysisRuleCriteriaList, name: "inclusions"))
     InternalAccessAnalysisRule.type = Types::InternalAccessAnalysisRule
     InternalAccessAnalysisRuleCriteria.add_member(:account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdsList, name: "accountIds"))
     InternalAccessAnalysisRuleCriteria.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeList, name: "resourceTypes"))
     InternalAccessAnalysisRuleCriteria.add_member(:resource_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArnsList, name: "resourceArns"))
     InternalAccessAnalysisRuleCriteria.type = Types::InternalAccessAnalysisRuleCriteria
-    InternalAccessAnalysisRuleCriteriaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InternalAccessAnalysisRuleCriteria, name: "member")
+    InternalAccessAnalysisRuleCriteriaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InternalAccessAnalysisRuleCriteria, name: "member"))
     InternalAccessConfiguration.add_member(:analysis_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: InternalAccessAnalysisRule, name: "analysisRule"))
     InternalAccessConfiguration.type = Types::InternalAccessConfiguration
     InternalAccessDetails.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionList, name: "action"))
@@ -722,8 +722,8 @@ module Aws::AccessAnalyzer
     InternalAccessResourceTypeDetails.add_member(:total_resolved_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "totalResolvedFindings"))
     InternalAccessResourceTypeDetails.add_member(:total_archived_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "totalArchivedFindings"))
     InternalAccessResourceTypeDetails.type = Types::InternalAccessResourceTypeDetails
-    InternalAccessResourceTypeStatisticsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "key")
-    InternalAccessResourceTypeStatisticsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: InternalAccessResourceTypeDetails, name: "value")
+    InternalAccessResourceTypeStatisticsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "key"))
+    InternalAccessResourceTypeStatisticsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: InternalAccessResourceTypeDetails, name: "value"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     InternalServerException.type = Types::InternalServerException
@@ -739,24 +739,24 @@ module Aws::AccessAnalyzer
     JobError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: JobErrorCode, name: "code", traits: {"smithy.api#required" => {}}))
     JobError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     JobError.type = Types::JobError
-    KmsConstraintsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: KmsConstraintsKey, name: "key")
-    KmsConstraintsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: KmsConstraintsValue, name: "value")
+    KmsConstraintsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsConstraintsKey, name: "key"))
+    KmsConstraintsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsConstraintsValue, name: "value"))
     KmsGrantConfiguration.add_member(:operations, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsGrantOperationsList, name: "operations", traits: {"smithy.api#required" => {}}))
     KmsGrantConfiguration.add_member(:grantee_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: GranteePrincipal, name: "granteePrincipal", traits: {"smithy.api#required" => {}}))
     KmsGrantConfiguration.add_member(:retiring_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: RetiringPrincipal, name: "retiringPrincipal"))
     KmsGrantConfiguration.add_member(:constraints, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsGrantConstraints, name: "constraints"))
     KmsGrantConfiguration.add_member(:issuing_account, ::Smithy::Schema::Shapes::MemberShape.new(target: IssuingAccount, name: "issuingAccount", traits: {"smithy.api#required" => {}}))
     KmsGrantConfiguration.type = Types::KmsGrantConfiguration
-    KmsGrantConfigurationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KmsGrantConfiguration, name: "member")
+    KmsGrantConfigurationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsGrantConfiguration, name: "member"))
     KmsGrantConstraints.add_member(:encryption_context_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsConstraintsMap, name: "encryptionContextEquals"))
     KmsGrantConstraints.add_member(:encryption_context_subset, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsConstraintsMap, name: "encryptionContextSubset"))
     KmsGrantConstraints.type = Types::KmsGrantConstraints
-    KmsGrantOperationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KmsGrantOperation, name: "member")
+    KmsGrantOperationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsGrantOperation, name: "member"))
     KmsKeyConfiguration.add_member(:key_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyPoliciesMap, name: "keyPolicies"))
     KmsKeyConfiguration.add_member(:grants, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsGrantConfigurationsList, name: "grants"))
     KmsKeyConfiguration.type = Types::KmsKeyConfiguration
-    KmsKeyPoliciesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "key")
-    KmsKeyPoliciesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyPolicy, name: "value")
+    KmsKeyPoliciesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "key"))
+    KmsKeyPoliciesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyPolicy, name: "value"))
     ListAccessPreviewFindingsInput.add_member(:access_preview_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPreviewId, name: "accessPreviewId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListAccessPreviewFindingsInput.add_member(:analyzer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerArn, name: "analyzerArn", traits: {"smithy.api#required" => {}}))
     ListAccessPreviewFindingsInput.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterCriteriaMap, name: "filter"))
@@ -827,7 +827,7 @@ module Aws::AccessAnalyzer
     Location.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: PathElementList, name: "path", traits: {"smithy.api#required" => {}}))
     Location.add_member(:span, ::Smithy::Schema::Shapes::MemberShape.new(target: Span, name: "span", traits: {"smithy.api#required" => {}}))
     Location.type = Types::Location
-    LocationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Location, name: "member")
+    LocationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Location, name: "member"))
     NetworkOriginConfiguration.add_member(:vpc_configuration, Types::NetworkOriginConfiguration::VpcConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfiguration, name: "vpcConfiguration"))
     NetworkOriginConfiguration.add_member(:internet_configuration, Types::NetworkOriginConfiguration::InternetConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetConfiguration, name: "internetConfiguration"))
     NetworkOriginConfiguration.add_member(:unknown, Types::NetworkOriginConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -838,7 +838,7 @@ module Aws::AccessAnalyzer
     PathElement.add_member(:value, Types::PathElement::Value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     PathElement.add_member(:unknown, Types::PathElement::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     PathElement.type = Types::PathElement
-    PathElementList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PathElement, name: "member")
+    PathElementList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PathElement, name: "member"))
     PolicyGeneration.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "jobId", traits: {"smithy.api#required" => {}}))
     PolicyGeneration.add_member(:principal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalArn, name: "principalArn", traits: {"smithy.api#required" => {}}))
     PolicyGeneration.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "status", traits: {"smithy.api#required" => {}}))
@@ -847,28 +847,28 @@ module Aws::AccessAnalyzer
     PolicyGeneration.type = Types::PolicyGeneration
     PolicyGenerationDetails.add_member(:principal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalArn, name: "principalArn", traits: {"smithy.api#required" => {}}))
     PolicyGenerationDetails.type = Types::PolicyGenerationDetails
-    PolicyGenerationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyGeneration, name: "member")
+    PolicyGenerationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyGeneration, name: "member"))
     Position.add_member(:line, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "line", traits: {"smithy.api#required" => {}}))
     Position.add_member(:column, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "column", traits: {"smithy.api#required" => {}}))
     Position.add_member(:offset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "offset", traits: {"smithy.api#required" => {}}))
     Position.type = Types::Position
-    PrincipalMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    PrincipalMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
-    RdsDbClusterSnapshotAccountIdsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbClusterSnapshotAccountId, name: "member")
+    PrincipalMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    PrincipalMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
+    RdsDbClusterSnapshotAccountIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbClusterSnapshotAccountId, name: "member"))
     RdsDbClusterSnapshotAttributeValue.add_member(:account_ids, Types::RdsDbClusterSnapshotAttributeValue::AccountIds, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbClusterSnapshotAccountIdsList, name: "accountIds"))
     RdsDbClusterSnapshotAttributeValue.add_member(:unknown, Types::RdsDbClusterSnapshotAttributeValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RdsDbClusterSnapshotAttributeValue.type = Types::RdsDbClusterSnapshotAttributeValue
-    RdsDbClusterSnapshotAttributesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbClusterSnapshotAttributeName, name: "key")
-    RdsDbClusterSnapshotAttributesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbClusterSnapshotAttributeValue, name: "value")
+    RdsDbClusterSnapshotAttributesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbClusterSnapshotAttributeName, name: "key"))
+    RdsDbClusterSnapshotAttributesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbClusterSnapshotAttributeValue, name: "value"))
     RdsDbClusterSnapshotConfiguration.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbClusterSnapshotAttributesMap, name: "attributes"))
     RdsDbClusterSnapshotConfiguration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbClusterSnapshotKmsKeyId, name: "kmsKeyId"))
     RdsDbClusterSnapshotConfiguration.type = Types::RdsDbClusterSnapshotConfiguration
-    RdsDbSnapshotAccountIdsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbSnapshotAccountId, name: "member")
+    RdsDbSnapshotAccountIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbSnapshotAccountId, name: "member"))
     RdsDbSnapshotAttributeValue.add_member(:account_ids, Types::RdsDbSnapshotAttributeValue::AccountIds, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbSnapshotAccountIdsList, name: "accountIds"))
     RdsDbSnapshotAttributeValue.add_member(:unknown, Types::RdsDbSnapshotAttributeValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RdsDbSnapshotAttributeValue.type = Types::RdsDbSnapshotAttributeValue
-    RdsDbSnapshotAttributesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbSnapshotAttributeName, name: "key")
-    RdsDbSnapshotAttributesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbSnapshotAttributeValue, name: "value")
+    RdsDbSnapshotAttributesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbSnapshotAttributeName, name: "key"))
+    RdsDbSnapshotAttributesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbSnapshotAttributeValue, name: "value"))
     RdsDbSnapshotConfiguration.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbSnapshotAttributesMap, name: "attributes"))
     RdsDbSnapshotConfiguration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbSnapshotKmsKeyId, name: "kmsKeyId"))
     RdsDbSnapshotConfiguration.type = Types::RdsDbSnapshotConfiguration
@@ -876,16 +876,16 @@ module Aws::AccessAnalyzer
     ReasonSummary.add_member(:statement_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "statementIndex"))
     ReasonSummary.add_member(:statement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statementId"))
     ReasonSummary.type = Types::ReasonSummary
-    ReasonSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReasonSummary, name: "member")
+    ReasonSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReasonSummary, name: "member"))
     RecommendationError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "code", traits: {"smithy.api#required" => {}}))
     RecommendationError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     RecommendationError.type = Types::RecommendationError
     RecommendedStep.add_member(:unused_permissions_recommended_step, Types::RecommendedStep::UnusedPermissionsRecommendedStep, ::Smithy::Schema::Shapes::MemberShape.new(target: UnusedPermissionsRecommendedStep, name: "unusedPermissionsRecommendedStep"))
     RecommendedStep.add_member(:unknown, Types::RecommendedStep::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RecommendedStep.type = Types::RecommendedStep
-    RecommendedStepList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendedStep, name: "member")
-    RegionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    ResourceArnsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    RecommendedStepList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendedStep, name: "member"))
+    RegionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    ResourceArnsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType", traits: {"smithy.api#required" => {}}))
@@ -893,20 +893,20 @@ module Aws::AccessAnalyzer
     ResourceTypeDetails.add_member(:total_active_public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "totalActivePublic"))
     ResourceTypeDetails.add_member(:total_active_cross_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "totalActiveCrossAccount"))
     ResourceTypeDetails.type = Types::ResourceTypeDetails
-    ResourceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "member")
-    ResourceTypeStatisticsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "key")
-    ResourceTypeStatisticsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeDetails, name: "value")
-    ResourcesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member")
+    ResourceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "member"))
+    ResourceTypeStatisticsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "key"))
+    ResourceTypeStatisticsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeDetails, name: "value"))
+    ResourcesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
     S3AccessPointConfiguration.add_member(:access_point_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointPolicy, name: "accessPointPolicy"))
     S3AccessPointConfiguration.add_member(:public_access_block, ::Smithy::Schema::Shapes::MemberShape.new(target: S3PublicAccessBlockConfiguration, name: "publicAccessBlock"))
     S3AccessPointConfiguration.add_member(:network_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkOriginConfiguration, name: "networkOrigin"))
     S3AccessPointConfiguration.type = Types::S3AccessPointConfiguration
-    S3AccessPointConfigurationsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointArn, name: "key")
-    S3AccessPointConfigurationsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointConfiguration, name: "value")
+    S3AccessPointConfigurationsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointArn, name: "key"))
+    S3AccessPointConfigurationsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointConfiguration, name: "value"))
     S3BucketAclGrantConfiguration.add_member(:permission, ::Smithy::Schema::Shapes::MemberShape.new(target: AclPermission, name: "permission", traits: {"smithy.api#required" => {}}))
     S3BucketAclGrantConfiguration.add_member(:grantee, ::Smithy::Schema::Shapes::MemberShape.new(target: AclGrantee, name: "grantee", traits: {"smithy.api#required" => {}}))
     S3BucketAclGrantConfiguration.type = Types::S3BucketAclGrantConfiguration
-    S3BucketAclGrantConfigurationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketAclGrantConfiguration, name: "member")
+    S3BucketAclGrantConfigurationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketAclGrantConfiguration, name: "member"))
     S3BucketConfiguration.add_member(:bucket_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketPolicy, name: "bucketPolicy"))
     S3BucketConfiguration.add_member(:bucket_acl_grants, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketAclGrantConfigurationsList, name: "bucketAclGrants"))
     S3BucketConfiguration.add_member(:bucket_public_access_block, ::Smithy::Schema::Shapes::MemberShape.new(target: S3PublicAccessBlockConfiguration, name: "bucketPublicAccessBlock"))
@@ -915,8 +915,8 @@ module Aws::AccessAnalyzer
     S3ExpressDirectoryAccessPointConfiguration.add_member(:access_point_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointPolicy, name: "accessPointPolicy"))
     S3ExpressDirectoryAccessPointConfiguration.add_member(:network_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkOriginConfiguration, name: "networkOrigin"))
     S3ExpressDirectoryAccessPointConfiguration.type = Types::S3ExpressDirectoryAccessPointConfiguration
-    S3ExpressDirectoryAccessPointConfigurationsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: S3ExpressDirectoryAccessPointArn, name: "key")
-    S3ExpressDirectoryAccessPointConfigurationsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: S3ExpressDirectoryAccessPointConfiguration, name: "value")
+    S3ExpressDirectoryAccessPointConfigurationsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ExpressDirectoryAccessPointArn, name: "key"))
+    S3ExpressDirectoryAccessPointConfigurationsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ExpressDirectoryAccessPointConfiguration, name: "value"))
     S3ExpressDirectoryBucketConfiguration.add_member(:bucket_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ExpressDirectoryBucketPolicy, name: "bucketPolicy"))
     S3ExpressDirectoryBucketConfiguration.add_member(:access_points, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ExpressDirectoryAccessPointConfigurationsMap, name: "accessPoints"))
     S3ExpressDirectoryBucketConfiguration.type = Types::S3ExpressDirectoryBucketConfiguration
@@ -930,7 +930,7 @@ module Aws::AccessAnalyzer
     ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    SharedViaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    SharedViaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     SnsTopicConfiguration.add_member(:topic_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopicPolicy, name: "topicPolicy"))
     SnsTopicConfiguration.type = Types::SnsTopicConfiguration
     SortCriteria.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "attributeName"))
@@ -956,14 +956,14 @@ module Aws::AccessAnalyzer
     Substring.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "start", traits: {"smithy.api#required" => {}}))
     Substring.add_member(:length, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "length", traits: {"smithy.api#required" => {}}))
     Substring.type = Types::Substring
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    TagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "member")
-    TagsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    TagsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    TagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "member"))
+    TagsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    TagsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     ThrottlingException.type = Types::ThrottlingException
@@ -971,12 +971,12 @@ module Aws::AccessAnalyzer
     Trail.add_member(:regions, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionList, name: "regions"))
     Trail.add_member(:all_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "allRegions"))
     Trail.type = Types::Trail
-    TrailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Trail, name: "member")
+    TrailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Trail, name: "member"))
     TrailProperties.add_member(:cloud_trail_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudTrailArn, name: "cloudTrailArn", traits: {"smithy.api#required" => {}}))
     TrailProperties.add_member(:regions, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionList, name: "regions"))
     TrailProperties.add_member(:all_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "allRegions"))
     TrailProperties.type = Types::TrailProperties
-    TrailPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrailProperties, name: "member")
+    TrailPropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrailProperties, name: "member"))
     UnprocessableEntityException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     UnprocessableEntityException.type = Types::UnprocessableEntityException
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -995,11 +995,11 @@ module Aws::AccessAnalyzer
     UnusedAccessTypeStatistics.add_member(:unused_access_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "unusedAccessType"))
     UnusedAccessTypeStatistics.add_member(:total, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "total"))
     UnusedAccessTypeStatistics.type = Types::UnusedAccessTypeStatistics
-    UnusedAccessTypeStatisticsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnusedAccessTypeStatistics, name: "member")
+    UnusedAccessTypeStatisticsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnusedAccessTypeStatistics, name: "member"))
     UnusedAction.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "action", traits: {"smithy.api#required" => {}}))
     UnusedAction.add_member(:last_accessed, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastAccessed"))
     UnusedAction.type = Types::UnusedAction
-    UnusedActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnusedAction, name: "member")
+    UnusedActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnusedAction, name: "member"))
     UnusedIamRoleDetails.add_member(:last_accessed, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastAccessed"))
     UnusedIamRoleDetails.type = Types::UnusedIamRoleDetails
     UnusedIamUserAccessKeyDetails.add_member(:access_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "accessKeyId", traits: {"smithy.api#required" => {}}))
@@ -1038,7 +1038,7 @@ module Aws::AccessAnalyzer
     ValidatePolicyFinding.add_member(:learn_more_link, ::Smithy::Schema::Shapes::MemberShape.new(target: LearnMoreLink, name: "learnMoreLink", traits: {"smithy.api#required" => {}}))
     ValidatePolicyFinding.add_member(:locations, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationList, name: "locations", traits: {"smithy.api#required" => {}}))
     ValidatePolicyFinding.type = Types::ValidatePolicyFinding
-    ValidatePolicyFindingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidatePolicyFinding, name: "member")
+    ValidatePolicyFindingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidatePolicyFinding, name: "member"))
     ValidatePolicyInput.add_member(:locale, ::Smithy::Schema::Shapes::MemberShape.new(target: Locale, name: "locale"))
     ValidatePolicyInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ValidatePolicyInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -1056,8 +1056,8 @@ module Aws::AccessAnalyzer
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
-    ValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
+    ValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     VpcConfiguration.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "vpcId", traits: {"smithy.api#required" => {}}))
     VpcConfiguration.type = Types::VpcConfiguration
 

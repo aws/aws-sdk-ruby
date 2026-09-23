@@ -242,7 +242,7 @@ module Aws::ChimeSDKMessaging
     BatchCreateChannelMembershipError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     BatchCreateChannelMembershipError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorMessage"))
     BatchCreateChannelMembershipError.type = Types::BatchCreateChannelMembershipError
-    BatchCreateChannelMembershipErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateChannelMembershipError, name: "member")
+    BatchCreateChannelMembershipErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateChannelMembershipError, name: "member"))
     BatchCreateChannelMembershipRequest.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, name: "ChannelArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BatchCreateChannelMembershipRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelMembershipType, name: "Type"))
     BatchCreateChannelMembershipRequest.add_member(:member_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberArns, name: "MemberArns", traits: {"smithy.api#required" => {}}))
@@ -271,7 +271,7 @@ module Aws::ChimeSDKMessaging
     ChannelAssociatedWithFlowSummary.add_member(:privacy, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelPrivacy, name: "Privacy"))
     ChannelAssociatedWithFlowSummary.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, name: "Metadata"))
     ChannelAssociatedWithFlowSummary.type = Types::ChannelAssociatedWithFlowSummary
-    ChannelAssociatedWithFlowSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelAssociatedWithFlowSummary, name: "member")
+    ChannelAssociatedWithFlowSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelAssociatedWithFlowSummary, name: "member"))
     ChannelBan.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "Member"))
     ChannelBan.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, name: "ChannelArn"))
     ChannelBan.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTimestamp"))
@@ -279,7 +279,7 @@ module Aws::ChimeSDKMessaging
     ChannelBan.type = Types::ChannelBan
     ChannelBanSummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "Member"))
     ChannelBanSummary.type = Types::ChannelBanSummary
-    ChannelBanSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelBanSummary, name: "member")
+    ChannelBanSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelBanSummary, name: "member"))
     ChannelFlow.add_member(:channel_flow_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, name: "ChannelFlowArn"))
     ChannelFlow.add_member(:processors, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessorList, name: "Processors"))
     ChannelFlow.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyResourceName, name: "Name"))
@@ -298,8 +298,8 @@ module Aws::ChimeSDKMessaging
     ChannelFlowSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyResourceName, name: "Name"))
     ChannelFlowSummary.add_member(:processors, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessorList, name: "Processors"))
     ChannelFlowSummary.type = Types::ChannelFlowSummary
-    ChannelFlowSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelFlowSummary, name: "member")
-    ChannelMemberArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, name: "member")
+    ChannelFlowSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelFlowSummary, name: "member"))
+    ChannelMemberArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, name: "member"))
     ChannelMembership.add_member(:invited_by, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "InvitedBy"))
     ChannelMembership.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelMembershipType, name: "Type"))
     ChannelMembership.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "Member"))
@@ -311,12 +311,12 @@ module Aws::ChimeSDKMessaging
     ChannelMembershipForAppInstanceUserSummary.add_member(:channel_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSummary, name: "ChannelSummary"))
     ChannelMembershipForAppInstanceUserSummary.add_member(:app_instance_user_membership_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceUserMembershipSummary, name: "AppInstanceUserMembershipSummary"))
     ChannelMembershipForAppInstanceUserSummary.type = Types::ChannelMembershipForAppInstanceUserSummary
-    ChannelMembershipForAppInstanceUserSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelMembershipForAppInstanceUserSummary, name: "member")
+    ChannelMembershipForAppInstanceUserSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelMembershipForAppInstanceUserSummary, name: "member"))
     ChannelMembershipPreferences.add_member(:push_notifications, ::Smithy::Schema::Shapes::MemberShape.new(target: PushNotificationPreferences, name: "PushNotifications"))
     ChannelMembershipPreferences.type = Types::ChannelMembershipPreferences
     ChannelMembershipSummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "Member"))
     ChannelMembershipSummary.type = Types::ChannelMembershipSummary
-    ChannelMembershipSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelMembershipSummary, name: "member")
+    ChannelMembershipSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelMembershipSummary, name: "member"))
     ChannelMembershipType.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "DEFAULT"}))
     ChannelMembershipType.add_member(:hidden, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIDDEN", traits: {"smithy.api#enumValue" => "HIDDEN"}))
     ChannelMessage.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, name: "ChannelArn"))
@@ -367,23 +367,23 @@ module Aws::ChimeSDKMessaging
     ChannelMessageSummary.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentType, name: "ContentType"))
     ChannelMessageSummary.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetList, name: "Target"))
     ChannelMessageSummary.type = Types::ChannelMessageSummary
-    ChannelMessageSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelMessageSummary, name: "member")
+    ChannelMessageSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelMessageSummary, name: "member"))
     ChannelMessageType.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
     ChannelMessageType.add_member(:control, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTROL", traits: {"smithy.api#enumValue" => "CONTROL"}))
     ChannelMode.add_member(:unrestricted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNRESTRICTED", traits: {"smithy.api#enumValue" => "UNRESTRICTED"}))
     ChannelMode.add_member(:restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESTRICTED", traits: {"smithy.api#enumValue" => "RESTRICTED"}))
     ChannelModeratedByAppInstanceUserSummary.add_member(:channel_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSummary, name: "ChannelSummary"))
     ChannelModeratedByAppInstanceUserSummary.type = Types::ChannelModeratedByAppInstanceUserSummary
-    ChannelModeratedByAppInstanceUserSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelModeratedByAppInstanceUserSummary, name: "member")
+    ChannelModeratedByAppInstanceUserSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelModeratedByAppInstanceUserSummary, name: "member"))
     ChannelModerator.add_member(:moderator, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "Moderator"))
     ChannelModerator.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, name: "ChannelArn"))
     ChannelModerator.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTimestamp"))
     ChannelModerator.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "CreatedBy"))
     ChannelModerator.type = Types::ChannelModerator
-    ChannelModeratorArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, name: "member")
+    ChannelModeratorArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, name: "member"))
     ChannelModeratorSummary.add_member(:moderator, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "Moderator"))
     ChannelModeratorSummary.type = Types::ChannelModeratorSummary
-    ChannelModeratorSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelModeratorSummary, name: "member")
+    ChannelModeratorSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelModeratorSummary, name: "member"))
     ChannelPrivacy.add_member(:public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLIC", traits: {"smithy.api#enumValue" => "PUBLIC"}))
     ChannelPrivacy.add_member(:private, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIVATE", traits: {"smithy.api#enumValue" => "PRIVATE"}))
     ChannelSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyResourceName, name: "Name"))
@@ -393,7 +393,7 @@ module Aws::ChimeSDKMessaging
     ChannelSummary.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, name: "Metadata"))
     ChannelSummary.add_member(:last_message_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastMessageTimestamp"))
     ChannelSummary.type = Types::ChannelSummary
-    ChannelSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSummary, name: "member")
+    ChannelSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSummary, name: "member"))
     ConflictException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "Code"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ConflictException.type = Types::ConflictException
@@ -675,11 +675,11 @@ module Aws::ChimeSDKMessaging
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    MemberArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, name: "member")
-    Members.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "member")
-    MessageAttributeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageAttributeName, name: "key")
-    MessageAttributeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageAttributeValue, name: "value")
-    MessageAttributeStringValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageAttributeStringValue, name: "member")
+    MemberArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, name: "member"))
+    Members.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "member"))
+    MessageAttributeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageAttributeName, name: "key"))
+    MessageAttributeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageAttributeValue, name: "value"))
+    MessageAttributeStringValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageAttributeStringValue, name: "member"))
     MessageAttributeValue.add_member(:string_values, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageAttributeStringValues, name: "StringValues"))
     MessageAttributeValue.type = Types::MessageAttributeValue
     MessagingDataType.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Channel", traits: {"smithy.api#enumValue" => "Channel"}))
@@ -698,7 +698,7 @@ module Aws::ChimeSDKMessaging
     Processor.type = Types::Processor
     ProcessorConfiguration.add_member(:lambda, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaConfiguration, name: "Lambda", traits: {"smithy.api#required" => {}}))
     ProcessorConfiguration.type = Types::ProcessorConfiguration
-    ProcessorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Processor, name: "member")
+    ProcessorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Processor, name: "member"))
     PushNotificationConfiguration.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: PushNotificationTitle, name: "Title"))
     PushNotificationConfiguration.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: PushNotificationBody, name: "Body"))
     PushNotificationConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PushNotificationType, name: "Type"))
@@ -756,8 +756,8 @@ module Aws::ChimeSDKMessaging
     SearchFieldKey.add_member(:members, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEMBERS", traits: {"smithy.api#enumValue" => "MEMBERS"}))
     SearchFieldOperator.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUALS", traits: {"smithy.api#enumValue" => "EQUALS"}))
     SearchFieldOperator.add_member(:includes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCLUDES", traits: {"smithy.api#enumValue" => "INCLUDES"}))
-    SearchFieldValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFieldValue, name: "member")
-    SearchFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchField, name: "member")
+    SearchFieldValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFieldValue, name: "member"))
+    SearchFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchField, name: "member"))
     SendChannelMessageRequest.add_member(:channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, name: "ChannelArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     SendChannelMessageRequest.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyContent, name: "Content", traits: {"smithy.api#required" => {}}))
     SendChannelMessageRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelMessageType, name: "Type", traits: {"smithy.api#required" => {}}))
@@ -787,22 +787,22 @@ module Aws::ChimeSDKMessaging
     StreamingConfiguration.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MessagingDataType, name: "DataType", traits: {"smithy.api#required" => {}}))
     StreamingConfiguration.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     StreamingConfiguration.type = Types::StreamingConfiguration
-    StreamingConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamingConfiguration, name: "member")
+    StreamingConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamingConfiguration, name: "member"))
     SubChannelSummary.add_member(:sub_channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubChannelId, name: "SubChannelId"))
     SubChannelSummary.add_member(:membership_count, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipCount, name: "MembershipCount"))
     SubChannelSummary.type = Types::SubChannelSummary
-    SubChannelSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubChannelSummary, name: "member")
+    SubChannelSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubChannelSummary, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     Target.add_member(:member_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeArn, name: "MemberArn"))
     Target.type = Types::Target
-    TargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "member")
+    TargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "member"))
     ThrottledClientException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "Code"))
     ThrottledClientException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ThrottledClientException.type = Types::ThrottledClientException

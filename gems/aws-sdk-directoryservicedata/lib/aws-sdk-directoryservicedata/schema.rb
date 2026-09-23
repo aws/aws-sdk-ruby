@@ -108,8 +108,8 @@ module Aws::DirectoryServiceData
     AttributeValue.add_member(:ss, Types::AttributeValue::SS, ::Smithy::Schema::Shapes::MemberShape.new(target: StringSetAttributeValue, name: "SS"))
     AttributeValue.add_member(:unknown, Types::AttributeValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AttributeValue.type = Types::AttributeValue
-    Attributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: LdapDisplayName, name: "key")
-    Attributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
+    Attributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LdapDisplayName, name: "key"))
+    Attributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     ConflictException.type = Types::ConflictException
     CreateGroupRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
@@ -196,7 +196,7 @@ module Aws::DirectoryServiceData
     Group.add_member(:group_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupScope, name: "GroupScope"))
     Group.add_member(:other_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "OtherAttributes"))
     Group.type = Types::Group
-    GroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Group, name: "member")
+    GroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Group, name: "member"))
     GroupScope.add_member(:domain_local, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOMAIN_LOCAL", traits: {"smithy.api#enumValue" => "DomainLocal"}))
     GroupScope.add_member(:global, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GLOBAL", traits: {"smithy.api#enumValue" => "Global"}))
     GroupScope.add_member(:universal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNIVERSAL", traits: {"smithy.api#enumValue" => "Universal"}))
@@ -206,12 +206,12 @@ module Aws::DirectoryServiceData
     GroupSummary.add_member(:group_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupType, name: "GroupType", traits: {"smithy.api#required" => {}}))
     GroupSummary.add_member(:group_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupScope, name: "GroupScope", traits: {"smithy.api#required" => {}}))
     GroupSummary.type = Types::GroupSummary
-    GroupSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSummary, name: "member")
+    GroupSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSummary, name: "member"))
     GroupType.add_member(:distribution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISTRIBUTION", traits: {"smithy.api#enumValue" => "Distribution"}))
     GroupType.add_member(:security, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECURITY", traits: {"smithy.api#enumValue" => "Security"}))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     InternalServerException.type = Types::InternalServerException
-    LdapDisplayNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LdapDisplayName, name: "member")
+    LdapDisplayNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LdapDisplayName, name: "member"))
     ListGroupMembersRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, name: "DirectoryId", traits: {"smithy.api#httpQuery" => "DirectoryId", "smithy.api#required" => {}}))
     ListGroupMembersRequest.add_member(:realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, name: "Realm"))
     ListGroupMembersRequest.add_member(:member_realm, ::Smithy::Schema::Shapes::MemberShape.new(target: Realm, name: "MemberRealm"))
@@ -262,7 +262,7 @@ module Aws::DirectoryServiceData
     Member.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberName, name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
     Member.add_member(:member_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberType, name: "MemberType", traits: {"smithy.api#required" => {}}))
     Member.type = Types::Member
-    MemberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Member, name: "member")
+    MemberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Member, name: "member"))
     MemberType.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
     MemberType.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GROUP", traits: {"smithy.api#enumValue" => "GROUP"}))
     MemberType.add_member(:computer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPUTER", traits: {"smithy.api#enumValue" => "COMPUTER"}))
@@ -299,7 +299,7 @@ module Aws::DirectoryServiceData
     SearchUsersResult.add_member(:users, ::Smithy::Schema::Shapes::MemberShape.new(target: UserList, name: "Users"))
     SearchUsersResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     SearchUsersResult.type = Types::SearchUsersResult
-    StringSetAttributeValue.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringAttributeValue, name: "member")
+    StringSetAttributeValue.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringAttributeValue, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "RetryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     ThrottlingException.type = Types::ThrottlingException
@@ -335,14 +335,14 @@ module Aws::DirectoryServiceData
     User.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "Enabled"))
     User.add_member(:other_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "OtherAttributes"))
     User.type = Types::User
-    UserList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member")
+    UserList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member"))
     UserSummary.add_member(:sid, ::Smithy::Schema::Shapes::MemberShape.new(target: SID, name: "SID", traits: {"smithy.api#required" => {}}))
     UserSummary.add_member(:sam_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, name: "SAMAccountName", traits: {"smithy.api#required" => {}}))
     UserSummary.add_member(:given_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GivenName, name: "GivenName"))
     UserSummary.add_member(:surname, ::Smithy::Schema::Shapes::MemberShape.new(target: Surname, name: "Surname"))
     UserSummary.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "Enabled", traits: {"smithy.api#required" => {}}))
     UserSummary.type = Types::UserSummary
-    UserSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserSummary, name: "member")
+    UserSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserSummary, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, name: "Reason"))
     ValidationException.type = Types::ValidationException

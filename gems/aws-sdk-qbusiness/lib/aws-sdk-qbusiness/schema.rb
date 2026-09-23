@@ -611,13 +611,13 @@ module Aws::QBusiness
     AccessControl.add_member(:principals, ::Smithy::Schema::Shapes::MemberShape.new(target: Principals, name: "principals", traits: {"smithy.api#required" => {}}))
     AccessControl.add_member(:member_relation, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberRelation, name: "memberRelation"))
     AccessControl.type = Types::AccessControl
-    AccessControls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControl, name: "member")
+    AccessControls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControl, name: "member"))
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
     ActionConfiguration.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: QIamAction, name: "action", traits: {"smithy.api#required" => {}}))
     ActionConfiguration.add_member(:filter_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionFilterConfiguration, name: "filterConfiguration"))
     ActionConfiguration.type = Types::ActionConfiguration
-    ActionConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionConfiguration, name: "member")
+    ActionConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionConfiguration, name: "member"))
     ActionExecution.add_member(:plugin_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PluginId, name: "pluginId", traits: {"smithy.api#required" => {}}))
     ActionExecution.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionExecutionPayload, name: "payload", traits: {"smithy.api#required" => {}}))
     ActionExecution.add_member(:payload_field_name_separator, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionPayloadFieldNameSeparator, name: "payloadFieldNameSeparator", traits: {"smithy.api#required" => {}}))
@@ -626,8 +626,8 @@ module Aws::QBusiness
     ActionExecutionEvent.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionExecutionPayload, name: "payload", traits: {"smithy.api#required" => {}}))
     ActionExecutionEvent.add_member(:payload_field_name_separator, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionPayloadFieldNameSeparator, name: "payloadFieldNameSeparator", traits: {"smithy.api#required" => {}}))
     ActionExecutionEvent.type = Types::ActionExecutionEvent
-    ActionExecutionPayload.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionPayloadFieldKey, name: "key")
-    ActionExecutionPayload.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionExecutionPayloadField, name: "value")
+    ActionExecutionPayload.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionPayloadFieldKey, name: "key"))
+    ActionExecutionPayload.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionExecutionPayloadField, name: "value"))
     ActionExecutionPayloadField.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionPayloadFieldValue, name: "value", traits: {"smithy.api#required" => {}}))
     ActionExecutionPayloadField.type = Types::ActionExecutionPayloadField
     ActionFilterConfiguration.add_member(:document_attribute_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeFilter, name: "documentAttributeFilter", traits: {"smithy.api#required" => {}}))
@@ -649,8 +649,8 @@ module Aws::QBusiness
     ActionReviewEvent.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionReviewPayload, name: "payload"))
     ActionReviewEvent.add_member(:payload_field_name_separator, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionPayloadFieldNameSeparator, name: "payloadFieldNameSeparator"))
     ActionReviewEvent.type = Types::ActionReviewEvent
-    ActionReviewPayload.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionPayloadFieldKey, name: "key")
-    ActionReviewPayload.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionReviewPayloadField, name: "value")
+    ActionReviewPayload.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionPayloadFieldKey, name: "key"))
+    ActionReviewPayload.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionReviewPayloadField, name: "value"))
     ActionReviewPayloadField.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "displayName"))
     ActionReviewPayloadField.add_member(:display_order, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "displayOrder"))
     ActionReviewPayloadField.add_member(:display_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "displayDescription"))
@@ -664,13 +664,13 @@ module Aws::QBusiness
     ActionReviewPayloadFieldAllowedValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionPayloadFieldValue, name: "value"))
     ActionReviewPayloadFieldAllowedValue.add_member(:display_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionPayloadFieldValue, name: "displayValue"))
     ActionReviewPayloadFieldAllowedValue.type = Types::ActionReviewPayloadFieldAllowedValue
-    ActionReviewPayloadFieldAllowedValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionReviewPayloadFieldAllowedValue, name: "member")
+    ActionReviewPayloadFieldAllowedValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionReviewPayloadFieldAllowedValue, name: "member"))
     ActionSummary.add_member(:action_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "actionIdentifier"))
     ActionSummary.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "displayName"))
     ActionSummary.add_member(:instruction_example, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "instructionExample"))
     ActionSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "description"))
     ActionSummary.type = Types::ActionSummary
-    Actions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionSummary, name: "member")
+    Actions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionSummary, name: "member"))
     Application.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "displayName"))
     Application.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId"))
     Application.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
@@ -684,7 +684,7 @@ module Aws::QBusiness
     ApplicationStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     ApplicationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     ApplicationStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
-    Applications.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Application, name: "member")
+    Applications.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Application, name: "member"))
     AppliedAttachmentsConfiguration.add_member(:attachments_control_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentsControlMode, name: "attachmentsControlMode"))
     AppliedAttachmentsConfiguration.type = Types::AppliedAttachmentsConfiguration
     AppliedCreatorModeConfiguration.add_member(:creator_mode_control, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatorModeControl, name: "creatorModeControl", traits: {"smithy.api#required" => {}}))
@@ -702,11 +702,11 @@ module Aws::QBusiness
     AssociatedGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, name: "name"))
     AssociatedGroup.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipType, name: "type"))
     AssociatedGroup.type = Types::AssociatedGroup
-    AssociatedGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedGroup, name: "member")
+    AssociatedGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedGroup, name: "member"))
     AssociatedUser.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "id"))
     AssociatedUser.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipType, name: "type"))
     AssociatedUser.type = Types::AssociatedUser
-    AssociatedUsers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedUser, name: "member")
+    AssociatedUsers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedUser, name: "member"))
     Attachment.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentId, name: "attachmentId"))
     Attachment.add_member(:conversation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationId, name: "conversationId"))
     Attachment.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentName, name: "name"))
@@ -724,7 +724,7 @@ module Aws::QBusiness
     AttachmentInput.type = Types::AttachmentInput
     AttachmentInputEvent.add_member(:attachment, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentInput, name: "attachment"))
     AttachmentInputEvent.type = Types::AttachmentInputEvent
-    AttachmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Attachment, name: "member")
+    AttachmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Attachment, name: "member"))
     AttachmentOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentName, name: "name"))
     AttachmentOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentStatus, name: "status"))
     AttachmentOutput.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail, name: "error"))
@@ -737,8 +737,8 @@ module Aws::QBusiness
     AttachmentsConfiguration.type = Types::AttachmentsConfiguration
     AttachmentsControlMode.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     AttachmentsControlMode.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    AttachmentsInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentInput, name: "member")
-    AttachmentsOutput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentOutput, name: "member")
+    AttachmentsInput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentInput, name: "member"))
+    AttachmentsOutput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentOutput, name: "member"))
     AttributeFilter.add_member(:and_all_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeFilters, name: "andAllFilters"))
     AttributeFilter.add_member(:or_all_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeFilters, name: "orAllFilters"))
     AttributeFilter.add_member(:not_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeFilter, name: "notFilter"))
@@ -750,7 +750,7 @@ module Aws::QBusiness
     AttributeFilter.add_member(:less_than, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttribute, name: "lessThan"))
     AttributeFilter.add_member(:less_than_or_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttribute, name: "lessThanOrEquals"))
     AttributeFilter.type = Types::AttributeFilter
-    AttributeFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeFilter, name: "member")
+    AttributeFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeFilter, name: "member"))
     AttributeType.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING", traits: {"smithy.api#enumValue" => "STRING"}))
     AttributeType.add_member(:string_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING_LIST", traits: {"smithy.api#enumValue" => "STRING_LIST"}))
     AttributeType.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NUMBER", traits: {"smithy.api#enumValue" => "NUMBER"}))
@@ -776,8 +776,8 @@ module Aws::QBusiness
     AuthChallengeResponse.type = Types::AuthChallengeResponse
     AuthChallengeResponseEvent.add_member(:response_map, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizationResponseMap, name: "responseMap", traits: {"smithy.api#required" => {}}))
     AuthChallengeResponseEvent.type = Types::AuthChallengeResponseEvent
-    AuthorizationResponseMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthResponseKey, name: "key")
-    AuthorizationResponseMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthResponseValue, name: "value")
+    AuthorizationResponseMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthResponseKey, name: "key"))
+    AuthorizationResponseMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthResponseValue, name: "value"))
     AutoSubscriptionConfiguration.add_member(:auto_subscribe, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoSubscriptionStatus, name: "autoSubscribe", traits: {"smithy.api#required" => {}}))
     AutoSubscriptionConfiguration.add_member(:default_subscription_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionType, name: "defaultSubscriptionType"))
     AutoSubscriptionConfiguration.type = Types::AutoSubscriptionConfiguration
@@ -801,7 +801,7 @@ module Aws::QBusiness
     BatchPutDocumentRequest.type = Types::BatchPutDocumentRequest
     BatchPutDocumentResponse.add_member(:failed_documents, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedDocuments, name: "failedDocuments"))
     BatchPutDocumentResponse.type = Types::BatchPutDocumentResponse
-    BlockedPhrases.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BlockedPhrase, name: "member")
+    BlockedPhrases.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockedPhrase, name: "member"))
     BlockedPhrasesConfiguration.add_member(:blocked_phrases, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockedPhrases, name: "blockedPhrases"))
     BlockedPhrasesConfiguration.add_member(:system_message_override, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemMessageOverride, name: "systemMessageOverride"))
     BlockedPhrasesConfiguration.type = Types::BlockedPhrasesConfiguration
@@ -811,7 +811,7 @@ module Aws::QBusiness
     BlockedPhrasesConfigurationUpdate.type = Types::BlockedPhrasesConfigurationUpdate
     BrowserExtensionConfiguration.add_member(:enabled_browser_extensions, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserExtensionList, name: "enabledBrowserExtensions", traits: {"smithy.api#required" => {}}))
     BrowserExtensionConfiguration.type = Types::BrowserExtensionConfiguration
-    BrowserExtensionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserExtension, name: "member")
+    BrowserExtensionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserExtension, name: "member"))
     CancelSubscriptionRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelSubscriptionRequest.add_member(:subscription_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionId, name: "subscriptionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelSubscriptionRequest.type = Types::CancelSubscriptionRequest
@@ -872,7 +872,7 @@ module Aws::QBusiness
     ChatResponseConfigurationStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
     ChatResponseConfigurationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     ChatResponseConfigurationStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    ChatResponseConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChatResponseConfiguration, name: "member")
+    ChatResponseConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatResponseConfiguration, name: "member"))
     ChatSyncInput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ChatSyncInput.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "userId", traits: {"smithy.api#httpQuery" => "userId"}))
     ChatSyncInput.add_member(:user_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: UserGroups, name: "userGroups", traits: {"smithy.api#httpQuery" => "userGroups"}))
@@ -907,7 +907,7 @@ module Aws::QBusiness
     CheckDocumentAccessResponse.add_member(:has_access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "hasAccess"))
     CheckDocumentAccessResponse.add_member(:document_acl, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAcl, name: "documentAcl"))
     CheckDocumentAccessResponse.type = Types::CheckDocumentAccessResponse
-    ClientIdsForOIDC.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdForOIDC, name: "member")
+    ClientIdsForOIDC.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdForOIDC, name: "member"))
     ConfigurationEvent.add_member(:chat_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatMode, name: "chatMode"))
     ConfigurationEvent.add_member(:chat_mode_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ChatModeConfiguration, name: "chatModeConfiguration"))
     ConfigurationEvent.add_member(:attribute_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeFilter, name: "attributeFilter"))
@@ -942,7 +942,7 @@ module Aws::QBusiness
     ConversationSource.add_member(:conversation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationId, name: "conversationId", traits: {"smithy.api#required" => {}}))
     ConversationSource.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentId, name: "attachmentId", traits: {"smithy.api#required" => {}}))
     ConversationSource.type = Types::ConversationSource
-    Conversations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Conversation, name: "member")
+    Conversations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Conversation, name: "member"))
     CopyFromSource.add_member(:conversation, Types::CopyFromSource::Conversation, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationSource, name: "conversation"))
     CopyFromSource.add_member(:unknown, Types::CopyFromSource::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     CopyFromSource.type = Types::CopyFromSource
@@ -1105,10 +1105,10 @@ module Aws::QBusiness
     DataAccessorAuthenticationDetail.type = Types::DataAccessorAuthenticationDetail
     DataAccessorAuthenticationType.add_member(:aws_iam_idc_tti, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_IAM_IDC_TTI", traits: {"smithy.api#enumValue" => "AWS_IAM_IDC_TTI"}))
     DataAccessorAuthenticationType.add_member(:aws_iam_idc_auth_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_IAM_IDC_AUTH_CODE", traits: {"smithy.api#enumValue" => "AWS_IAM_IDC_AUTH_CODE"}))
-    DataAccessorExternalIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataAccessorExternalId, name: "member")
+    DataAccessorExternalIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataAccessorExternalId, name: "member"))
     DataAccessorIdcTrustedTokenIssuerConfiguration.add_member(:idc_trusted_token_issuer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdcTrustedTokenIssuerArn, name: "idcTrustedTokenIssuerArn", traits: {"smithy.api#required" => {}}))
     DataAccessorIdcTrustedTokenIssuerConfiguration.type = Types::DataAccessorIdcTrustedTokenIssuerConfiguration
-    DataAccessors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataAccessor, name: "member")
+    DataAccessors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataAccessor, name: "member"))
     DataSource.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceName, name: "displayName"))
     DataSource.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceId, name: "dataSourceId"))
     DataSource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "type"))
@@ -1116,7 +1116,7 @@ module Aws::QBusiness
     DataSource.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt"))
     DataSource.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceStatus, name: "status"))
     DataSource.type = Types::DataSource
-    DataSourceIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceId, name: "member")
+    DataSourceIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceId, name: "member"))
     DataSourceStatus.add_member(:pending_creation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_CREATION", traits: {"smithy.api#enumValue" => "PENDING_CREATION"}))
     DataSourceStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     DataSourceStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
@@ -1144,11 +1144,11 @@ module Aws::QBusiness
     DataSourceSyncJobStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPING", traits: {"smithy.api#enumValue" => "STOPPING"}))
     DataSourceSyncJobStatus.add_member(:aborted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ABORTED", traits: {"smithy.api#enumValue" => "ABORTED"}))
     DataSourceSyncJobStatus.add_member(:syncing_indexing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYNCING_INDEXING", traits: {"smithy.api#enumValue" => "SYNCING_INDEXING"}))
-    DataSourceSyncJobs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceSyncJob, name: "member")
+    DataSourceSyncJobs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceSyncJob, name: "member"))
     DataSourceVpcConfiguration.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, name: "subnetIds", traits: {"smithy.api#required" => {}}))
     DataSourceVpcConfiguration.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, name: "securityGroupIds", traits: {"smithy.api#required" => {}}))
     DataSourceVpcConfiguration.type = Types::DataSourceVpcConfiguration
-    DataSources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "member")
+    DataSources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "member"))
     DateAttributeBoostingConfiguration.add_member(:boosting_level, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeBoostingLevel, name: "boostingLevel", traits: {"smithy.api#required" => {}}))
     DateAttributeBoostingConfiguration.add_member(:boosting_duration_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: BoostingDurationInSeconds, name: "boostingDurationInSeconds"))
     DateAttributeBoostingConfiguration.type = Types::DateAttributeBoostingConfiguration
@@ -1184,7 +1184,7 @@ module Aws::QBusiness
     DeleteDataSourceResponse.type = Types::DeleteDataSourceResponse
     DeleteDocument.add_member(:document_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentId, name: "documentId", traits: {"smithy.api#required" => {}}))
     DeleteDocument.type = Types::DeleteDocument
-    DeleteDocuments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteDocument, name: "member")
+    DeleteDocuments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteDocument, name: "member"))
     DeleteGroupRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteGroupRequest.add_member(:index_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexId, name: "indexId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteGroupRequest.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, name: "groupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1231,18 +1231,18 @@ module Aws::QBusiness
     DocumentAclCondition.add_member(:users, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAclUsers, name: "users"))
     DocumentAclCondition.add_member(:groups, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAclGroups, name: "groups"))
     DocumentAclCondition.type = Types::DocumentAclCondition
-    DocumentAclConditions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAclCondition, name: "member")
+    DocumentAclConditions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAclCondition, name: "member"))
     DocumentAclGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, name: "name"))
     DocumentAclGroup.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipType, name: "type"))
     DocumentAclGroup.type = Types::DocumentAclGroup
-    DocumentAclGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAclGroup, name: "member")
+    DocumentAclGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAclGroup, name: "member"))
     DocumentAclMembership.add_member(:member_relation, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberRelation, name: "memberRelation"))
     DocumentAclMembership.add_member(:conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAclConditions, name: "conditions"))
     DocumentAclMembership.type = Types::DocumentAclMembership
     DocumentAclUser.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "id"))
     DocumentAclUser.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipType, name: "type"))
     DocumentAclUser.type = Types::DocumentAclUser
-    DocumentAclUsers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAclUser, name: "member")
+    DocumentAclUsers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAclUser, name: "member"))
     DocumentAttribute.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeKey, name: "name", traits: {"smithy.api#required" => {}}))
     DocumentAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeValue, name: "value", traits: {"smithy.api#required" => {}}))
     DocumentAttribute.type = Types::DocumentAttribute
@@ -1259,8 +1259,8 @@ module Aws::QBusiness
     DocumentAttributeBoostingLevel.add_member(:very_high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERY_HIGH", traits: {"smithy.api#enumValue" => "VERY_HIGH"}))
     DocumentAttributeBoostingLevel.add_member(:one, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONE", traits: {"smithy.api#enumValue" => "ONE"}))
     DocumentAttributeBoostingLevel.add_member(:two, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TWO", traits: {"smithy.api#enumValue" => "TWO"}))
-    DocumentAttributeBoostingOverrideMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeKey, name: "key")
-    DocumentAttributeBoostingOverrideMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeBoostingConfiguration, name: "value")
+    DocumentAttributeBoostingOverrideMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeKey, name: "key"))
+    DocumentAttributeBoostingOverrideMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeBoostingConfiguration, name: "value"))
     DocumentAttributeCondition.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeKey, name: "key", traits: {"smithy.api#required" => {}}))
     DocumentAttributeCondition.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentEnrichmentConditionOperator, name: "operator", traits: {"smithy.api#required" => {}}))
     DocumentAttributeCondition.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeValue, name: "value"))
@@ -1269,8 +1269,8 @@ module Aws::QBusiness
     DocumentAttributeConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeType, name: "type"))
     DocumentAttributeConfiguration.add_member(:search, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "search"))
     DocumentAttributeConfiguration.type = Types::DocumentAttributeConfiguration
-    DocumentAttributeConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeConfiguration, name: "member")
-    DocumentAttributeStringListValue.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    DocumentAttributeConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeConfiguration, name: "member"))
+    DocumentAttributeStringListValue.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     DocumentAttributeTarget.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeKey, name: "key", traits: {"smithy.api#required" => {}}))
     DocumentAttributeTarget.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeValue, name: "value"))
     DocumentAttributeTarget.add_member(:attribute_value_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValueOperator, name: "attributeValueOperator"))
@@ -1281,13 +1281,13 @@ module Aws::QBusiness
     DocumentAttributeValue.add_member(:date_value, Types::DocumentAttributeValue::DateValue, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "dateValue"))
     DocumentAttributeValue.add_member(:unknown, Types::DocumentAttributeValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     DocumentAttributeValue.type = Types::DocumentAttributeValue
-    DocumentAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttribute, name: "member")
+    DocumentAttributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttribute, name: "member"))
     DocumentContent.add_member(:blob, Types::DocumentContent::Blob, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Blob, name: "blob"))
     DocumentContent.add_member(:s3, Types::DocumentContent::S3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3, name: "s3"))
     DocumentContent.add_member(:unknown, Types::DocumentContent::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     DocumentContent.type = Types::DocumentContent
     DocumentContentOperator.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE", traits: {"smithy.api#enumValue" => "DELETE"}))
-    DocumentDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentDetails, name: "member")
+    DocumentDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentDetails, name: "member"))
     DocumentDetails.add_member(:document_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentId, name: "documentId"))
     DocumentDetails.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentStatus, name: "status"))
     DocumentDetails.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail, name: "error"))
@@ -1317,11 +1317,11 @@ module Aws::QBusiness
     DocumentStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     DocumentStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
     DocumentStatus.add_member(:document_failed_to_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOCUMENT_FAILED_TO_INDEX", traits: {"smithy.api#enumValue" => "DOCUMENT_FAILED_TO_INDEX"}))
-    Documents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Document, name: "member")
+    Documents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Document, name: "member"))
     EligibleDataSource.add_member(:index_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexId, name: "indexId"))
     EligibleDataSource.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceId, name: "dataSourceId"))
     EligibleDataSource.type = Types::EligibleDataSource
-    EligibleDataSources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EligibleDataSource, name: "member")
+    EligibleDataSources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EligibleDataSource, name: "member"))
     EncryptionConfiguration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "kmsKeyId"))
     EncryptionConfiguration.type = Types::EncryptionConfiguration
     EndOfInputEvent.type = Types::EndOfInputEvent
@@ -1332,7 +1332,7 @@ module Aws::QBusiness
     ErrorDetail.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
     ErrorDetail.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "errorCode"))
     ErrorDetail.type = Types::ErrorDetail
-    ExampleChatMessages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExampleChatMessage, name: "member")
+    ExampleChatMessages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExampleChatMessage, name: "member"))
     ExternalResourceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ExternalResourceException.type = Types::ExternalResourceException
     FailedAttachmentEvent.add_member(:conversation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationId, name: "conversationId"))
@@ -1344,7 +1344,7 @@ module Aws::QBusiness
     FailedDocument.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail, name: "error"))
     FailedDocument.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceId, name: "dataSourceId"))
     FailedDocument.type = Types::FailedDocument
-    FailedDocuments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedDocument, name: "member")
+    FailedDocuments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedDocument, name: "member"))
     GetApplicationRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetApplicationRequest.type = Types::GetApplicationRequest
     GetApplicationResponse.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "displayName"))
@@ -1541,10 +1541,10 @@ module Aws::QBusiness
     GroupStatusDetail.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedAt"))
     GroupStatusDetail.add_member(:error_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail, name: "errorDetail"))
     GroupStatusDetail.type = Types::GroupStatusDetail
-    GroupStatusDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupStatusDetail, name: "member")
+    GroupStatusDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupStatusDetail, name: "member"))
     GroupSummary.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, name: "groupName"))
     GroupSummary.type = Types::GroupSummary
-    GroupSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSummary, name: "member")
+    GroupSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSummary, name: "member"))
     HallucinationReductionConfiguration.add_member(:hallucination_reduction_control, ::Smithy::Schema::Shapes::MemberShape.new(target: HallucinationReductionControl, name: "hallucinationReductionControl"))
     HallucinationReductionConfiguration.type = Types::HallucinationReductionConfiguration
     HallucinationReductionControl.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
@@ -1590,12 +1590,12 @@ module Aws::QBusiness
     IndexStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
     IndexType.add_member(:enterprise, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENTERPRISE", traits: {"smithy.api#enumValue" => "ENTERPRISE"}))
     IndexType.add_member(:starter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTER", traits: {"smithy.api#enumValue" => "STARTER"}))
-    Indices.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Index, name: "member")
+    Indices.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Index, name: "member"))
     InlineDocumentEnrichmentConfiguration.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeCondition, name: "condition"))
     InlineDocumentEnrichmentConfiguration.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeTarget, name: "target"))
     InlineDocumentEnrichmentConfiguration.add_member(:document_content_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentContentOperator, name: "documentContentOperator"))
     InlineDocumentEnrichmentConfiguration.type = Types::InlineDocumentEnrichmentConfiguration
-    InlineDocumentEnrichmentConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InlineDocumentEnrichmentConfiguration, name: "member")
+    InlineDocumentEnrichmentConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InlineDocumentEnrichmentConfiguration, name: "member"))
     InstructionCollection.add_member(:response_length, ::Smithy::Schema::Shapes::MemberShape.new(target: Instruction, name: "responseLength"))
     InstructionCollection.add_member(:target_audience, ::Smithy::Schema::Shapes::MemberShape.new(target: Instruction, name: "targetAudience"))
     InstructionCollection.add_member(:perspective, ::Smithy::Schema::Shapes::MemberShape.new(target: Instruction, name: "perspective"))
@@ -1724,7 +1724,7 @@ module Aws::QBusiness
     ListPluginTypeMetadataResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListPluginTypeMetadataResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ListPluginTypeMetadataSummaries, name: "items"))
     ListPluginTypeMetadataResponse.type = Types::ListPluginTypeMetadataResponse
-    ListPluginTypeMetadataSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PluginTypeMetadataSummary, name: "member")
+    ListPluginTypeMetadataSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PluginTypeMetadataSummary, name: "member"))
     ListPluginsRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListPluginsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListPluginsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResultsIntegerForListPlugins, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
@@ -1766,13 +1766,13 @@ module Aws::QBusiness
     MemberGroup.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, name: "groupName", traits: {"smithy.api#required" => {}}))
     MemberGroup.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipType, name: "type"))
     MemberGroup.type = Types::MemberGroup
-    MemberGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemberGroup, name: "member")
+    MemberGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberGroup, name: "member"))
     MemberRelation.add_member(:and, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AND", traits: {"smithy.api#enumValue" => "AND"}))
     MemberRelation.add_member(:or, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OR", traits: {"smithy.api#enumValue" => "OR"}))
     MemberUser.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceUserId, name: "userId", traits: {"smithy.api#required" => {}}))
     MemberUser.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipType, name: "type"))
     MemberUser.type = Types::MemberUser
-    MemberUsers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemberUser, name: "member")
+    MemberUsers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberUser, name: "member"))
     MembershipType.add_member(:index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INDEX", traits: {"smithy.api#enumValue" => "INDEX"}))
     MembershipType.add_member(:datasource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATASOURCE", traits: {"smithy.api#enumValue" => "DATASOURCE"}))
     Message.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "messageId"))
@@ -1805,7 +1805,7 @@ module Aws::QBusiness
     MessageUsefulnessReason.add_member(:not_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_COMPLETE", traits: {"smithy.api#enumValue" => "NOT_COMPLETE"}))
     MessageUsefulnessReason.add_member(:not_concise, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_CONCISE", traits: {"smithy.api#enumValue" => "NOT_CONCISE"}))
     MessageUsefulnessReason.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTHER", traits: {"smithy.api#enumValue" => "OTHER"}))
-    Messages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "member")
+    Messages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "member"))
     MetadataEvent.add_member(:conversation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationId, name: "conversationId"))
     MetadataEvent.add_member(:user_message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageId, name: "userMessageId"))
     MetadataEvent.add_member(:system_message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageId, name: "systemMessageId"))
@@ -1841,8 +1841,8 @@ module Aws::QBusiness
     PermissionCondition.add_member(:condition_values, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionConditionValues, name: "conditionValues", traits: {"smithy.api#required" => {}}))
     PermissionCondition.type = Types::PermissionCondition
     PermissionConditionOperator.add_member(:string_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING_EQUALS", traits: {"smithy.api#enumValue" => "StringEquals"}))
-    PermissionConditionValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionConditionValue, name: "member")
-    PermissionConditions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionCondition, name: "member")
+    PermissionConditionValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionConditionValue, name: "member"))
+    PermissionConditions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionCondition, name: "member"))
     PersonalizationConfiguration.add_member(:personalization_control_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonalizationControlMode, name: "personalizationControlMode", traits: {"smithy.api#required" => {}}))
     PersonalizationConfiguration.type = Types::PersonalizationConfiguration
     PersonalizationControlMode.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
@@ -1899,7 +1899,7 @@ module Aws::QBusiness
     PluginTypeMetadataSummary.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: PluginTypeCategory, name: "category"))
     PluginTypeMetadataSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "description"))
     PluginTypeMetadataSummary.type = Types::PluginTypeMetadataSummary
-    Plugins.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Plugin, name: "member")
+    Plugins.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Plugin, name: "member"))
     Principal.add_member(:user, Types::Principal::User, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalUser, name: "user"))
     Principal.add_member(:group, Types::Principal::Group, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalGroup, name: "group"))
     Principal.add_member(:unknown, Types::Principal::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -1912,7 +1912,7 @@ module Aws::QBusiness
     PrincipalUser.add_member(:access, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadAccessType, name: "access", traits: {"smithy.api#required" => {}}))
     PrincipalUser.add_member(:membership_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipType, name: "membershipType"))
     PrincipalUser.type = Types::PrincipalUser
-    Principals.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Principal, name: "member")
+    Principals.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Principal, name: "member"))
     PutFeedbackRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutFeedbackRequest.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "userId", traits: {"smithy.api#httpQuery" => "userId"}))
     PutFeedbackRequest.add_member(:conversation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationId, name: "conversationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1933,7 +1933,7 @@ module Aws::QBusiness
     QAppsConfiguration.type = Types::QAppsConfiguration
     QAppsControlMode.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     QAppsControlMode.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    QIamActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QIamAction, name: "member")
+    QIamActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QIamAction, name: "member"))
     QuickSightConfiguration.add_member(:client_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientNamespace, name: "clientNamespace", traits: {"smithy.api#required" => {}}))
     QuickSightConfiguration.type = Types::QuickSightConfiguration
     ReadAccessType.add_member(:allow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOW", traits: {"smithy.api#enumValue" => "ALLOW"}))
@@ -1945,7 +1945,7 @@ module Aws::QBusiness
     RelevantContent.add_member(:document_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributes, name: "documentAttributes"))
     RelevantContent.add_member(:score_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ScoreAttributes, name: "scoreAttributes"))
     RelevantContent.type = Types::RelevantContent
-    RelevantContentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RelevantContent, name: "member")
+    RelevantContentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RelevantContent, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceType", traits: {"smithy.api#required" => {}}))
@@ -1953,8 +1953,8 @@ module Aws::QBusiness
     ResponseConfiguration.add_member(:instruction_collection, ::Smithy::Schema::Shapes::MemberShape.new(target: InstructionCollection, name: "instructionCollection"))
     ResponseConfiguration.type = Types::ResponseConfiguration
     ResponseConfigurationType.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
-    ResponseConfigurations.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseConfigurationType, name: "key")
-    ResponseConfigurations.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseConfiguration, name: "value")
+    ResponseConfigurations.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseConfigurationType, name: "key"))
+    ResponseConfigurations.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseConfiguration, name: "value"))
     ResponseScope.add_member(:enterprise_content_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENTERPRISE_CONTENT_ONLY", traits: {"smithy.api#enumValue" => "ENTERPRISE_CONTENT_ONLY"}))
     ResponseScope.add_member(:extended_knowledge_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXTENDED_KNOWLEDGE_ENABLED", traits: {"smithy.api#enumValue" => "EXTENDED_KNOWLEDGE_ENABLED"}))
     Retriever.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId"))
@@ -1974,7 +1974,7 @@ module Aws::QBusiness
     RetrieverStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     RetrieverType.add_member(:native_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NATIVE_INDEX", traits: {"smithy.api#enumValue" => "NATIVE_INDEX"}))
     RetrieverType.add_member(:kendra_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KENDRA_INDEX", traits: {"smithy.api#enumValue" => "KENDRA_INDEX"}))
-    Retrievers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Retriever, name: "member")
+    Retrievers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Retriever, name: "member"))
     Rule.add_member(:included_users_and_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: UsersAndGroups, name: "includedUsersAndGroups"))
     Rule.add_member(:excluded_users_and_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: UsersAndGroups, name: "excludedUsersAndGroups"))
     Rule.add_member(:rule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleType, name: "ruleType", traits: {"smithy.api#required" => {}}))
@@ -1986,7 +1986,7 @@ module Aws::QBusiness
     RuleConfiguration.type = Types::RuleConfiguration
     RuleType.add_member(:content_blocker_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTENT_BLOCKER_RULE", traits: {"smithy.api#enumValue" => "CONTENT_BLOCKER_RULE"}))
     RuleType.add_member(:content_retrieval_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTENT_RETRIEVAL_RULE", traits: {"smithy.api#enumValue" => "CONTENT_RETRIEVAL_RULE"}))
-    Rules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "member")
+    Rules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "member"))
     S3.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketName, name: "bucket", traits: {"smithy.api#required" => {}}))
     S3.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ObjectKey, name: "key", traits: {"smithy.api#required" => {}}))
     S3.type = Types::S3
@@ -2014,7 +2014,7 @@ module Aws::QBusiness
     SearchRelevantContentResponse.add_member(:relevant_content, ::Smithy::Schema::Shapes::MemberShape.new(target: RelevantContentList, name: "relevantContent"))
     SearchRelevantContentResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     SearchRelevantContentResponse.type = Types::SearchRelevantContentResponse
-    SecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
+    SecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceType", traits: {"smithy.api#required" => {}}))
@@ -2031,7 +2031,7 @@ module Aws::QBusiness
     SourceAttribution.add_member(:index_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "indexId"))
     SourceAttribution.add_member(:datasource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "datasourceId"))
     SourceAttribution.type = Types::SourceAttribution
-    SourceAttributions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SourceAttribution, name: "member")
+    SourceAttributions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceAttribution, name: "member"))
     SourceDetails.add_member(:image_source_details, Types::SourceDetails::ImageSourceDetails, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSourceDetails, name: "imageSourceDetails"))
     SourceDetails.add_member(:audio_source_details, Types::SourceDetails::AudioSourceDetails, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioSourceDetails, name: "audioSourceDetails"))
     SourceDetails.add_member(:video_source_details, Types::SourceDetails::VideoSourceDetails, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoSourceDetails, name: "videoSourceDetails"))
@@ -2053,8 +2053,8 @@ module Aws::QBusiness
     StringAttributeBoostingConfiguration.add_member(:boosting_level, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeBoostingLevel, name: "boostingLevel", traits: {"smithy.api#required" => {}}))
     StringAttributeBoostingConfiguration.add_member(:attribute_value_boosting, ::Smithy::Schema::Shapes::MemberShape.new(target: StringAttributeValueBoosting, name: "attributeValueBoosting"))
     StringAttributeBoostingConfiguration.type = Types::StringAttributeBoostingConfiguration
-    StringAttributeValueBoosting.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    StringAttributeValueBoosting.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringAttributeValueBoostingLevel, name: "value")
+    StringAttributeValueBoosting.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    StringAttributeValueBoosting.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringAttributeValueBoostingLevel, name: "value"))
     StringAttributeValueBoostingLevel.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "LOW"}))
     StringAttributeValueBoostingLevel.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "MEDIUM"}))
     StringAttributeValueBoostingLevel.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "HIGH"}))
@@ -2066,7 +2066,7 @@ module Aws::QBusiness
     StringAttributeValueBoostingLevel.add_member(:five, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIVE", traits: {"smithy.api#enumValue" => "FIVE"}))
     StringListAttributeBoostingConfiguration.add_member(:boosting_level, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeBoostingLevel, name: "boostingLevel", traits: {"smithy.api#required" => {}}))
     StringListAttributeBoostingConfiguration.type = Types::StringListAttributeBoostingConfiguration
-    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
+    SubnetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
     Subscription.add_member(:subscription_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionId, name: "subscriptionId"))
     Subscription.add_member(:subscription_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionArn, name: "subscriptionArn"))
     Subscription.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionPrincipal, name: "principal"))
@@ -2081,18 +2081,18 @@ module Aws::QBusiness
     SubscriptionPrincipal.type = Types::SubscriptionPrincipal
     SubscriptionType.add_member(:q_lite, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Q_LITE", traits: {"smithy.api#enumValue" => "Q_LITE"}))
     SubscriptionType.add_member(:q_business, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Q_BUSINESS", traits: {"smithy.api#enumValue" => "Q_BUSINESS"}))
-    Subscriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Subscription, name: "member")
+    Subscriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Subscription, name: "member"))
     SystemMessageType.add_member(:response, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESPONSE", traits: {"smithy.api#enumValue" => "RESPONSE"}))
     SystemMessageType.add_member(:grounded_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GROUNDED_RESPONSE", traits: {"smithy.api#enumValue" => "GROUNDED_RESPONSE"}))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceARN", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TextDocumentStatistics.add_member(:indexed_text_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexedTextBytes, name: "indexedTextBytes"))
     TextDocumentStatistics.add_member(:indexed_text_document_count, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexedTextDocument, name: "indexedTextDocumentCount"))
     TextDocumentStatistics.type = Types::TextDocumentStatistics
@@ -2111,7 +2111,7 @@ module Aws::QBusiness
     TextSegment.add_member(:media_mime_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "mediaMimeType", traits: {"smithy.api#deprecated" => {"since" => "2025-02-28", "message" => "Deprecated in favor of using mediaMimeType within the respective sourceDetails field."}}))
     TextSegment.add_member(:source_details, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceDetails, name: "sourceDetails"))
     TextSegment.type = Types::TextSegment
-    TextSegmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TextSegment, name: "member")
+    TextSegmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TextSegment, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
     TopicConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicConfigurationName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -2119,7 +2119,7 @@ module Aws::QBusiness
     TopicConfiguration.add_member(:example_chat_messages, ::Smithy::Schema::Shapes::MemberShape.new(target: ExampleChatMessages, name: "exampleChatMessages"))
     TopicConfiguration.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: Rules, name: "rules", traits: {"smithy.api#required" => {}}))
     TopicConfiguration.type = Types::TopicConfiguration
-    TopicConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TopicConfiguration, name: "member")
+    TopicConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicConfiguration, name: "member"))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceARN", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeys, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -2232,9 +2232,9 @@ module Aws::QBusiness
     UserAlias.add_member(:data_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceId, name: "dataSourceId"))
     UserAlias.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "userId", traits: {"smithy.api#required" => {}}))
     UserAlias.type = Types::UserAlias
-    UserAliases.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserAlias, name: "member")
-    UserGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    UserIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    UserAliases.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAlias, name: "member"))
+    UserGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    UserIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     UsersAndGroups.add_member(:user_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: UserIds, name: "userIds"))
     UsersAndGroups.add_member(:user_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: UserGroups, name: "userGroups"))
     UsersAndGroups.type = Types::UsersAndGroups
@@ -2245,7 +2245,7 @@ module Aws::QBusiness
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "CANNOT_PARSE"}))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "FIELD_VALIDATION_FAILED"}))
     ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "UNKNOWN_OPERATION"}))
@@ -2270,7 +2270,7 @@ module Aws::QBusiness
     WebExperienceAuthConfiguration.add_member(:saml_configuration, Types::WebExperienceAuthConfiguration::SamlConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: SamlConfiguration, name: "samlConfiguration"))
     WebExperienceAuthConfiguration.add_member(:unknown, Types::WebExperienceAuthConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     WebExperienceAuthConfiguration.type = Types::WebExperienceAuthConfiguration
-    WebExperienceOrigins.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Origin, name: "member")
+    WebExperienceOrigins.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Origin, name: "member"))
     WebExperienceSamplePromptsControlMode.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     WebExperienceSamplePromptsControlMode.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     WebExperienceStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
@@ -2278,7 +2278,7 @@ module Aws::QBusiness
     WebExperienceStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     WebExperienceStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     WebExperienceStatus.add_member(:pending_auth_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_AUTH_CONFIG", traits: {"smithy.api#enumValue" => "PENDING_AUTH_CONFIG"}))
-    WebExperiences.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WebExperience, name: "member")
+    WebExperiences.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WebExperience, name: "member"))
 
     ExpertQ = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.qbusiness#ExpertQ"

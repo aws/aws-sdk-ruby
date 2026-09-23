@@ -230,7 +230,7 @@ module Aws::VerifiedPermissions
     ActionIdentifier.add_member(:action_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionType, name: "actionType", traits: {"smithy.api#required" => {}}))
     ActionIdentifier.add_member(:action_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionId, name: "actionId", traits: {"smithy.api#required" => {}}))
     ActionIdentifier.type = Types::ActionIdentifier
-    ActionIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionIdentifier, name: "member")
+    ActionIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionIdentifier, name: "member"))
     AttributeValue.add_member(:boolean, Types::AttributeValue::Boolean, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanAttribute, name: "boolean"))
     AttributeValue.add_member(:entity_identifier, Types::AttributeValue::EntityIdentifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, name: "entityIdentifier"))
     AttributeValue.add_member(:long, Types::AttributeValue::Long, ::Smithy::Schema::Shapes::MemberShape.new(target: LongAttribute, name: "long"))
@@ -243,7 +243,7 @@ module Aws::VerifiedPermissions
     AttributeValue.add_member(:duration, Types::AttributeValue::Duration, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, name: "duration"))
     AttributeValue.add_member(:unknown, Types::AttributeValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AttributeValue.type = Types::AttributeValue
-    Audiences.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Audience, name: "member")
+    Audiences.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Audience, name: "member"))
     BatchGetPolicyErrorCode.add_member(:policy_store_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_STORE_NOT_FOUND", traits: {"smithy.api#enumValue" => "POLICY_STORE_NOT_FOUND"}))
     BatchGetPolicyErrorCode.add_member(:policy_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_NOT_FOUND", traits: {"smithy.api#enumValue" => "POLICY_NOT_FOUND"}))
     BatchGetPolicyErrorItem.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetPolicyErrorCode, name: "code", traits: {"smithy.api#required" => {}}))
@@ -251,13 +251,13 @@ module Aws::VerifiedPermissions
     BatchGetPolicyErrorItem.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "policyId", traits: {"smithy.api#required" => {}}))
     BatchGetPolicyErrorItem.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     BatchGetPolicyErrorItem.type = Types::BatchGetPolicyErrorItem
-    BatchGetPolicyErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetPolicyErrorItem, name: "member")
+    BatchGetPolicyErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetPolicyErrorItem, name: "member"))
     BatchGetPolicyInput.add_member(:requests, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetPolicyInputList, name: "requests", traits: {"smithy.api#required" => {}}))
     BatchGetPolicyInput.type = Types::BatchGetPolicyInput
     BatchGetPolicyInputItem.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
     BatchGetPolicyInputItem.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, name: "policyId", traits: {"smithy.api#required" => {}}))
     BatchGetPolicyInputItem.type = Types::BatchGetPolicyInputItem
-    BatchGetPolicyInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetPolicyInputItem, name: "member")
+    BatchGetPolicyInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetPolicyInputItem, name: "member"))
     BatchGetPolicyOutput.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetPolicyOutputList, name: "results", traits: {"smithy.api#required" => {}}))
     BatchGetPolicyOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetPolicyErrorList, name: "errors", traits: {"smithy.api#required" => {}}))
     BatchGetPolicyOutput.type = Types::BatchGetPolicyOutput
@@ -268,7 +268,7 @@ module Aws::VerifiedPermissions
     BatchGetPolicyOutputItem.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "createdDate", traits: {"smithy.api#required" => {}}))
     BatchGetPolicyOutputItem.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "lastUpdatedDate", traits: {"smithy.api#required" => {}}))
     BatchGetPolicyOutputItem.type = Types::BatchGetPolicyOutputItem
-    BatchGetPolicyOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetPolicyOutputItem, name: "member")
+    BatchGetPolicyOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetPolicyOutputItem, name: "member"))
     BatchIsAuthorizedInput.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
     BatchIsAuthorizedInput.add_member(:entities, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitiesDefinition, name: "entities"))
     BatchIsAuthorizedInput.add_member(:requests, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchIsAuthorizedInputList, name: "requests", traits: {"smithy.api#required" => {}}))
@@ -278,7 +278,7 @@ module Aws::VerifiedPermissions
     BatchIsAuthorizedInputItem.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, name: "resource"))
     BatchIsAuthorizedInputItem.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextDefinition, name: "context"))
     BatchIsAuthorizedInputItem.type = Types::BatchIsAuthorizedInputItem
-    BatchIsAuthorizedInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchIsAuthorizedInputItem, name: "member")
+    BatchIsAuthorizedInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchIsAuthorizedInputItem, name: "member"))
     BatchIsAuthorizedOutput.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchIsAuthorizedOutputList, name: "results", traits: {"smithy.api#required" => {}}))
     BatchIsAuthorizedOutput.type = Types::BatchIsAuthorizedOutput
     BatchIsAuthorizedOutputItem.add_member(:request, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchIsAuthorizedInputItem, name: "request", traits: {"smithy.api#required" => {}}))
@@ -286,7 +286,7 @@ module Aws::VerifiedPermissions
     BatchIsAuthorizedOutputItem.add_member(:determining_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: DeterminingPolicyList, name: "determiningPolicies", traits: {"smithy.api#required" => {}}))
     BatchIsAuthorizedOutputItem.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationErrorList, name: "errors", traits: {"smithy.api#required" => {}}))
     BatchIsAuthorizedOutputItem.type = Types::BatchIsAuthorizedOutputItem
-    BatchIsAuthorizedOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchIsAuthorizedOutputItem, name: "member")
+    BatchIsAuthorizedOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchIsAuthorizedOutputItem, name: "member"))
     BatchIsAuthorizedWithTokenInput.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
     BatchIsAuthorizedWithTokenInput.add_member(:identity_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "identityToken"))
     BatchIsAuthorizedWithTokenInput.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "accessToken"))
@@ -297,7 +297,7 @@ module Aws::VerifiedPermissions
     BatchIsAuthorizedWithTokenInputItem.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, name: "resource"))
     BatchIsAuthorizedWithTokenInputItem.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextDefinition, name: "context"))
     BatchIsAuthorizedWithTokenInputItem.type = Types::BatchIsAuthorizedWithTokenInputItem
-    BatchIsAuthorizedWithTokenInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchIsAuthorizedWithTokenInputItem, name: "member")
+    BatchIsAuthorizedWithTokenInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchIsAuthorizedWithTokenInputItem, name: "member"))
     BatchIsAuthorizedWithTokenOutput.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, name: "principal"))
     BatchIsAuthorizedWithTokenOutput.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchIsAuthorizedWithTokenOutputList, name: "results", traits: {"smithy.api#required" => {}}))
     BatchIsAuthorizedWithTokenOutput.type = Types::BatchIsAuthorizedWithTokenOutput
@@ -306,10 +306,10 @@ module Aws::VerifiedPermissions
     BatchIsAuthorizedWithTokenOutputItem.add_member(:determining_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: DeterminingPolicyList, name: "determiningPolicies", traits: {"smithy.api#required" => {}}))
     BatchIsAuthorizedWithTokenOutputItem.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationErrorList, name: "errors", traits: {"smithy.api#required" => {}}))
     BatchIsAuthorizedWithTokenOutputItem.type = Types::BatchIsAuthorizedWithTokenOutputItem
-    BatchIsAuthorizedWithTokenOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchIsAuthorizedWithTokenOutputItem, name: "member")
+    BatchIsAuthorizedWithTokenOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchIsAuthorizedWithTokenOutputItem, name: "member"))
     CedarVersion.add_member(:cedar_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CEDAR_2", traits: {"smithy.api#enumValue" => "CEDAR_2"}))
     CedarVersion.add_member(:cedar_4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CEDAR_4", traits: {"smithy.api#enumValue" => "CEDAR_4"}))
-    ClientIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClientId, name: "member")
+    ClientIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientId, name: "member"))
     CognitoGroupConfiguration.add_member(:group_entity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupEntityType, name: "groupEntityType", traits: {"smithy.api#required" => {}}))
     CognitoGroupConfiguration.type = Types::CognitoGroupConfiguration
     CognitoGroupConfigurationDetail.add_member(:group_entity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupEntityType, name: "groupEntityType"))
@@ -349,8 +349,8 @@ module Aws::VerifiedPermissions
     ContextDefinition.add_member(:cedar_json, Types::ContextDefinition::CedarJson, ::Smithy::Schema::Shapes::MemberShape.new(target: CedarJson, name: "cedarJson"))
     ContextDefinition.add_member(:unknown, Types::ContextDefinition::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ContextDefinition.type = Types::ContextDefinition
-    ContextMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    ContextMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
+    ContextMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    ContextMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     CreateIdentitySourceInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateIdentitySourceInput.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
     CreateIdentitySourceInput.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, name: "configuration", traits: {"smithy.api#required" => {}}))
@@ -417,13 +417,13 @@ module Aws::VerifiedPermissions
     DeletionProtection.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     DeterminingPolicyItem.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, name: "policyId", traits: {"smithy.api#required" => {}}))
     DeterminingPolicyItem.type = Types::DeterminingPolicyItem
-    DeterminingPolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeterminingPolicyItem, name: "member")
+    DeterminingPolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeterminingPolicyItem, name: "member"))
     EntitiesDefinition.add_member(:entity_list, Types::EntitiesDefinition::EntityList, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityList, name: "entityList"))
     EntitiesDefinition.add_member(:cedar_json, Types::EntitiesDefinition::CedarJson, ::Smithy::Schema::Shapes::MemberShape.new(target: CedarJson, name: "cedarJson"))
     EntitiesDefinition.add_member(:unknown, Types::EntitiesDefinition::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     EntitiesDefinition.type = Types::EntitiesDefinition
-    EntityAttributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    EntityAttributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
+    EntityAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    EntityAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     EntityIdentifier.add_member(:entity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, name: "entityType", traits: {"smithy.api#required" => {}}))
     EntityIdentifier.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "entityId", traits: {"smithy.api#required" => {}}))
     EntityIdentifier.type = Types::EntityIdentifier
@@ -431,14 +431,14 @@ module Aws::VerifiedPermissions
     EntityItem.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityAttributes, name: "attributes"))
     EntityItem.add_member(:parents, ::Smithy::Schema::Shapes::MemberShape.new(target: ParentList, name: "parents"))
     EntityItem.type = Types::EntityItem
-    EntityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityItem, name: "member")
+    EntityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityItem, name: "member"))
     EntityReference.add_member(:unspecified, Types::EntityReference::Unspecified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "unspecified"))
     EntityReference.add_member(:identifier, Types::EntityReference::Identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, name: "identifier"))
     EntityReference.add_member(:unknown, Types::EntityReference::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     EntityReference.type = Types::EntityReference
     EvaluationErrorItem.add_member(:error_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorDescription", traits: {"smithy.api#required" => {}}))
     EvaluationErrorItem.type = Types::EvaluationErrorItem
-    EvaluationErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationErrorItem, name: "member")
+    EvaluationErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationErrorItem, name: "member"))
     GetIdentitySourceInput.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
     GetIdentitySourceInput.add_member(:identity_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentitySourceId, name: "identitySourceId", traits: {"smithy.api#required" => {}}))
     GetIdentitySourceInput.type = Types::GetIdentitySourceInput
@@ -502,7 +502,7 @@ module Aws::VerifiedPermissions
     IdentitySourceDetails.type = Types::IdentitySourceDetails
     IdentitySourceFilter.add_member(:principal_entity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalEntityType, name: "principalEntityType"))
     IdentitySourceFilter.type = Types::IdentitySourceFilter
-    IdentitySourceFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentitySourceFilter, name: "member")
+    IdentitySourceFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentitySourceFilter, name: "member"))
     IdentitySourceItem.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "createdDate", traits: {"smithy.api#required" => {}}))
     IdentitySourceItem.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentitySourceItemDetails, name: "details", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#deprecated" => {"message" => "This attribute has been replaced by configuration.cognitoUserPoolConfiguration"}}))
     IdentitySourceItem.add_member(:identity_source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentitySourceId, name: "identitySourceId", traits: {"smithy.api#required" => {}}))
@@ -516,7 +516,7 @@ module Aws::VerifiedPermissions
     IdentitySourceItemDetails.add_member(:discovery_url, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscoveryUrl, name: "discoveryUrl", traits: {"smithy.api#deprecated" => {"message" => "This attribute has been replaced by configuration.cognitoUserPoolConfiguration.issuer"}}))
     IdentitySourceItemDetails.add_member(:open_id_issuer, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenIdIssuer, name: "openIdIssuer", traits: {"smithy.api#deprecated" => {"message" => "This attribute has been replaced by configuration"}}))
     IdentitySourceItemDetails.type = Types::IdentitySourceItemDetails
-    IdentitySources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentitySourceItem, name: "member")
+    IdentitySources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentitySourceItem, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
     InvalidStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
@@ -578,7 +578,7 @@ module Aws::VerifiedPermissions
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
     ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    NamespaceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "member")
+    NamespaceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "member"))
     OpenIdConnectAccessTokenConfiguration.add_member(:principal_id_claim, ::Smithy::Schema::Shapes::MemberShape.new(target: Claim, name: "principalIdClaim", traits: {"smithy.api#default" => "sub"}))
     OpenIdConnectAccessTokenConfiguration.add_member(:audiences, ::Smithy::Schema::Shapes::MemberShape.new(target: Audiences, name: "audiences"))
     OpenIdConnectAccessTokenConfiguration.type = Types::OpenIdConnectAccessTokenConfiguration
@@ -634,7 +634,7 @@ module Aws::VerifiedPermissions
     OpenIdConnectTokenSelectionItem.add_member(:unknown, Types::OpenIdConnectTokenSelectionItem::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     OpenIdConnectTokenSelectionItem.type = Types::OpenIdConnectTokenSelectionItem
     OpenIdIssuer.add_member(:cognito, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COGNITO", traits: {"smithy.api#enumValue" => "COGNITO"}))
-    ParentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, name: "member")
+    ParentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdentifier, name: "member"))
     PolicyDefinition.add_member(:static, Types::PolicyDefinition::Static, ::Smithy::Schema::Shapes::MemberShape.new(target: StaticPolicyDefinition, name: "static"))
     PolicyDefinition.add_member(:template_linked, Types::PolicyDefinition::TemplateLinked, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateLinkedPolicyDefinition, name: "templateLinked"))
     PolicyDefinition.add_member(:unknown, Types::PolicyDefinition::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -665,21 +665,21 @@ module Aws::VerifiedPermissions
     PolicyItem.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "lastUpdatedDate", traits: {"smithy.api#required" => {}}))
     PolicyItem.add_member(:effect, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyEffect, name: "effect"))
     PolicyItem.type = Types::PolicyItem
-    PolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyItem, name: "member")
+    PolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyItem, name: "member"))
     PolicyStoreItem.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
     PolicyStoreItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "arn", traits: {"smithy.api#required" => {}}))
     PolicyStoreItem.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "createdDate", traits: {"smithy.api#required" => {}}))
     PolicyStoreItem.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "lastUpdatedDate"))
     PolicyStoreItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreDescription, name: "description"))
     PolicyStoreItem.type = Types::PolicyStoreItem
-    PolicyStoreList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreItem, name: "member")
+    PolicyStoreList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreItem, name: "member"))
     PolicyTemplateItem.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
     PolicyTemplateItem.add_member(:policy_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTemplateId, name: "policyTemplateId", traits: {"smithy.api#required" => {}}))
     PolicyTemplateItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTemplateDescription, name: "description"))
     PolicyTemplateItem.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "createdDate", traits: {"smithy.api#required" => {}}))
     PolicyTemplateItem.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "lastUpdatedDate", traits: {"smithy.api#required" => {}}))
     PolicyTemplateItem.type = Types::PolicyTemplateItem
-    PolicyTemplatesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTemplateItem, name: "member")
+    PolicyTemplatesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTemplateItem, name: "member"))
     PolicyType.add_member(:static, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATIC", traits: {"smithy.api#enumValue" => "STATIC"}))
     PolicyType.add_member(:template_linked, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEMPLATE_LINKED", traits: {"smithy.api#enumValue" => "TEMPLATE_LINKED"}))
     PutSchemaInput.add_member(:policy_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStoreId, name: "policyStoreId", traits: {"smithy.api#required" => {}}))
@@ -690,12 +690,12 @@ module Aws::VerifiedPermissions
     PutSchemaOutput.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "createdDate", traits: {"smithy.api#required" => {}}))
     PutSchemaOutput.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampFormat, name: "lastUpdatedDate", traits: {"smithy.api#required" => {}}))
     PutSchemaOutput.type = Types::PutSchemaOutput
-    RecordAttribute.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    RecordAttribute.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
+    RecordAttribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    RecordAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     ResourceConflict.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ResourceConflict.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType", traits: {"smithy.api#required" => {}}))
     ResourceConflict.type = Types::ResourceConflict
-    ResourceConflictList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConflict, name: "member")
+    ResourceConflictList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConflict, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType", traits: {"smithy.api#required" => {}}))
@@ -714,7 +714,7 @@ module Aws::VerifiedPermissions
     ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "serviceCode"))
     ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "quotaCode"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    SetAttribute.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "member")
+    SetAttribute.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "member"))
     StaticPolicyDefinition.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: StaticPolicyDescription, name: "description"))
     StaticPolicyDefinition.add_member(:statement, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStatement, name: "statement", traits: {"smithy.api#required" => {}}))
     StaticPolicyDefinition.type = Types::StaticPolicyDefinition
@@ -723,9 +723,9 @@ module Aws::VerifiedPermissions
     StaticPolicyDefinitionDetail.type = Types::StaticPolicyDefinitionDetail
     StaticPolicyDefinitionItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: StaticPolicyDescription, name: "description"))
     StaticPolicyDefinitionItem.type = Types::StaticPolicyDefinitionItem
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -837,7 +837,7 @@ module Aws::VerifiedPermissions
     ValidationExceptionField.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "path", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationMode.add_member(:off, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OFF", traits: {"smithy.api#enumValue" => "OFF"}))
     ValidationMode.add_member(:strict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRICT", traits: {"smithy.api#enumValue" => "STRICT"}))
     ValidationSettings.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationMode, name: "mode", traits: {"smithy.api#required" => {}}))

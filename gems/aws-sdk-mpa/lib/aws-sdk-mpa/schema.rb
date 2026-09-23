@@ -146,7 +146,7 @@ module Aws::MPA
     ApprovalTeamRequestApprover.add_member(:primary_identity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityId, name: "PrimaryIdentityId", traits: {"aws.api#data" => "usage", "smithy.api#required" => {}}))
     ApprovalTeamRequestApprover.add_member(:primary_identity_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PrimaryIdentitySourceArn", traits: {"aws.api#data" => "usage", "smithy.api#required" => {}}))
     ApprovalTeamRequestApprover.type = Types::ApprovalTeamRequestApprover
-    ApprovalTeamRequestApprovers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalTeamRequestApprover, name: "member")
+    ApprovalTeamRequestApprovers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalTeamRequestApprover, name: "member"))
     ApprovalTeamStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     ApprovalTeamStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     ApprovalTeamStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -205,7 +205,7 @@ module Aws::MPA
     FilterField.add_member(:vote, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VOTE", traits: {"smithy.api#enumValue" => "Vote"}))
     FilterField.add_member(:session_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SESSION_STATUS", traits: {"smithy.api#enumValue" => "SessionStatus"}))
     FilterField.add_member(:initiation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INITIATION_TIME", traits: {"smithy.api#enumValue" => "InitiationTime"}))
-    Filters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
+    Filters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     GetApprovalTeamRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalTeamArn, name: "Arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetApprovalTeamRequest.type = Types::GetApprovalTeamRequest
     GetApprovalTeamResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoTimestamp, name: "CreationTime"))
@@ -230,7 +230,7 @@ module Aws::MPA
     GetApprovalTeamResponseApprover.add_member(:primary_identity_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PrimaryIdentitySourceArn"))
     GetApprovalTeamResponseApprover.add_member(:primary_identity_status, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityStatus, name: "PrimaryIdentityStatus"))
     GetApprovalTeamResponseApprover.type = Types::GetApprovalTeamResponseApprover
-    GetApprovalTeamResponseApprovers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GetApprovalTeamResponseApprover, name: "member")
+    GetApprovalTeamResponseApprovers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GetApprovalTeamResponseApprover, name: "member"))
     GetIdentitySourceRequest.add_member(:identity_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IdentitySourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetIdentitySourceRequest.type = Types::GetIdentitySourceRequest
     GetIdentitySourceResponse.add_member(:identity_source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentitySourceType, name: "IdentitySourceType"))
@@ -287,7 +287,7 @@ module Aws::MPA
     GetSessionResponseApproverResponse.add_member(:response, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionResponse, name: "Response"))
     GetSessionResponseApproverResponse.add_member(:response_time, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoTimestamp, name: "ResponseTime"))
     GetSessionResponseApproverResponse.type = Types::GetSessionResponseApproverResponse
-    GetSessionResponseApproverResponses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GetSessionResponseApproverResponse, name: "member")
+    GetSessionResponseApproverResponses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GetSessionResponseApproverResponse, name: "member"))
     IamIdentityCenter.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdcInstanceArn, name: "InstanceArn", traits: {"aws.api#data" => "usage", "smithy.api#required" => {}}))
     IamIdentityCenter.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Region", traits: {"smithy.api#required" => {}}))
     IamIdentityCenter.type = Types::IamIdentityCenter
@@ -324,7 +324,7 @@ module Aws::MPA
     IdentitySourceStatusCode.add_member(:idc_instance_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IDC_INSTANCE_NOT_FOUND", traits: {"smithy.api#enumValue" => "IDC_INSTANCE_NOT_FOUND"}))
     IdentitySourceStatusCode.add_member(:idc_instance_not_valid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IDC_INSTANCE_NOT_VALID", traits: {"smithy.api#enumValue" => "IDC_INSTANCE_NOT_VALID"}))
     IdentitySourceType.add_member(:iam_identity_center, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IAM_IDENTITY_CENTER", traits: {"smithy.api#enumValue" => "IAM_IDENTITY_CENTER"}))
-    IdentitySources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentitySourceForList, name: "member", traits: {"aws.api#data" => "usage"})
+    IdentitySources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentitySourceForList, name: "member", traits: {"aws.api#data" => "usage"}))
     IdentityStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     IdentityStatus.add_member(:accepted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCEPTED", traits: {"smithy.api#enumValue" => "ACCEPTED"}))
     IdentityStatus.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
@@ -349,7 +349,7 @@ module Aws::MPA
     ListApprovalTeamsResponseApprovalTeam.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalTeamStatusCode, name: "StatusCode"))
     ListApprovalTeamsResponseApprovalTeam.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "StatusMessage"))
     ListApprovalTeamsResponseApprovalTeam.type = Types::ListApprovalTeamsResponseApprovalTeam
-    ListApprovalTeamsResponseApprovalTeams.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListApprovalTeamsResponseApprovalTeam, name: "member")
+    ListApprovalTeamsResponseApprovalTeams.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListApprovalTeamsResponseApprovalTeam, name: "member"))
     ListIdentitySourcesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#default" => 20, "smithy.api#httpQuery" => "MaxResults"}))
     ListIdentitySourcesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
     ListIdentitySourcesRequest.type = Types::ListIdentitySourcesRequest
@@ -376,7 +376,7 @@ module Aws::MPA
     ListResourcePoliciesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     ListResourcePoliciesResponse.add_member(:resource_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: ListResourcePoliciesResponseResourcePolicies, name: "ResourcePolicies"))
     ListResourcePoliciesResponse.type = Types::ListResourcePoliciesResponse
-    ListResourcePoliciesResponseResourcePolicies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListResourcePoliciesResponseResourcePolicy, name: "member")
+    ListResourcePoliciesResponseResourcePolicies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListResourcePoliciesResponseResourcePolicy, name: "member"))
     ListResourcePoliciesResponseResourcePolicy.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PolicyArn"))
     ListResourcePoliciesResponseResourcePolicy.add_member(:policy_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyType, name: "PolicyType"))
     ListResourcePoliciesResponseResourcePolicy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PolicyName"))
@@ -407,7 +407,7 @@ module Aws::MPA
     ListSessionsResponseSession.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "StatusMessage"))
     ListSessionsResponseSession.add_member(:action_completion_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionCompletionStrategy, name: "ActionCompletionStrategy"))
     ListSessionsResponseSession.type = Types::ListSessionsResponseSession
-    ListSessionsResponseSessions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListSessionsResponseSession, name: "member")
+    ListSessionsResponseSessions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListSessionsResponseSession, name: "member"))
     ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags"))
@@ -433,8 +433,8 @@ module Aws::MPA
     PendingUpdate.add_member(:approvers, ::Smithy::Schema::Shapes::MemberShape.new(target: GetApprovalTeamResponseApprovers, name: "Approvers", traits: {"aws.api#data" => "usage"}))
     PendingUpdate.add_member(:update_initiation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoTimestamp, name: "UpdateInitiationTime"))
     PendingUpdate.type = Types::PendingUpdate
-    Policies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, name: "member", traits: {"aws.api#data" => "usage"})
-    PoliciesReferences.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyReference, name: "member")
+    Policies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, name: "member", traits: {"aws.api#data" => "usage"}))
+    PoliciesReferences.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyReference, name: "member"))
     Policy.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: UnqualifiedPolicyArn, name: "Arn", traits: {"aws.api#data" => "usage", "smithy.api#required" => {}}))
     Policy.add_member(:default_version, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyVersionId, name: "DefaultVersion", traits: {"aws.api#data" => "usage", "smithy.api#required" => {}}))
     Policy.add_member(:policy_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyType, name: "PolicyType", traits: {"aws.api#data" => "usage", "smithy.api#required" => {}}))
@@ -467,7 +467,7 @@ module Aws::MPA
     PolicyVersionSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoTimestamp, name: "CreationTime", traits: {"smithy.api#required" => {}}))
     PolicyVersionSummary.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoTimestamp, name: "LastUpdatedTime", traits: {"smithy.api#required" => {}}))
     PolicyVersionSummary.type = Types::PolicyVersionSummary
-    PolicyVersions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyVersionSummary, name: "member", traits: {"aws.api#data" => "usage"})
+    PolicyVersions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyVersionSummary, name: "member", traits: {"aws.api#data" => "usage"}))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
@@ -475,8 +475,8 @@ module Aws::MPA
     SessionExecutionStatus.add_member(:executed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXECUTED", traits: {"smithy.api#enumValue" => "EXECUTED"}))
     SessionExecutionStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     SessionExecutionStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    SessionMetadata.key = ::Smithy::Schema::Shapes::MemberShape.new(target: SessionKey, name: "key")
-    SessionMetadata.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SessionValue, name: "value")
+    SessionMetadata.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionKey, name: "key"))
+    SessionMetadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionValue, name: "value"))
     SessionResponse.add_member(:approved, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPROVED", traits: {"smithy.api#enumValue" => "APPROVED"}))
     SessionResponse.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
     SessionResponse.add_member(:no_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_RESPONSE", traits: {"smithy.api#enumValue" => "NO_RESPONSE"}))
@@ -494,13 +494,13 @@ module Aws::MPA
     StartActiveApprovalTeamDeletionResponse.add_member(:deletion_completion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoTimestamp, name: "DeletionCompletionTime"))
     StartActiveApprovalTeamDeletionResponse.add_member(:deletion_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoTimestamp, name: "DeletionStartTime"))
     StartActiveApprovalTeamDeletionResponse.type = Types::StartActiveApprovalTeamDeletionResponse
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
     TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))

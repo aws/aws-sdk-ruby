@@ -258,7 +258,7 @@ module Aws::SupplyChain
     DataIntegrationEventDatasetTargetDetails.add_member(:operation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationEventDatasetOperationType, name: "operationType", traits: {"smithy.api#required" => {}}))
     DataIntegrationEventDatasetTargetDetails.add_member(:dataset_load_execution, ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationEventDatasetLoadExecutionDetails, name: "datasetLoadExecution", traits: {"smithy.api#required" => {}}))
     DataIntegrationEventDatasetTargetDetails.type = Types::DataIntegrationEventDatasetTargetDetails
-    DataIntegrationEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationEvent, name: "member")
+    DataIntegrationEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationEvent, name: "member"))
     DataIntegrationEventType.add_member(:forecast, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FORECAST", traits: {"smithy.api#enumValue" => "scn.data.forecast"}))
     DataIntegrationEventType.add_member(:inventory_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVENTORY_LEVEL", traits: {"smithy.api#enumValue" => "scn.data.inventorylevel"}))
     DataIntegrationEventType.add_member(:inbound_order, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INBOUND_ORDER", traits: {"smithy.api#enumValue" => "scn.data.inboundorder"}))
@@ -309,7 +309,7 @@ module Aws::SupplyChain
     DataIntegrationFlowExecution.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "endTime"))
     DataIntegrationFlowExecution.add_member(:output_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationFlowExecutionOutputMetadata, name: "outputMetadata"))
     DataIntegrationFlowExecution.type = Types::DataIntegrationFlowExecution
-    DataIntegrationFlowExecutionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationFlowExecution, name: "member")
+    DataIntegrationFlowExecutionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationFlowExecution, name: "member"))
     DataIntegrationFlowExecutionOutputMetadata.add_member(:diagnostic_reports_root_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationFlowExecutionDiagnosticReportsRootS3URI, name: "diagnosticReportsRootS3URI"))
     DataIntegrationFlowExecutionOutputMetadata.type = Types::DataIntegrationFlowExecutionOutputMetadata
     DataIntegrationFlowExecutionSourceInfo.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationFlowSourceType, name: "sourceType", traits: {"smithy.api#required" => {}}))
@@ -322,7 +322,7 @@ module Aws::SupplyChain
     DataIntegrationFlowFieldPriorityDedupeField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationFlowFieldPriorityDedupeFieldName, name: "name", traits: {"smithy.api#required" => {}}))
     DataIntegrationFlowFieldPriorityDedupeField.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationFlowFieldPriorityDedupeSortOrder, name: "sortOrder", traits: {"smithy.api#required" => {}}))
     DataIntegrationFlowFieldPriorityDedupeField.type = Types::DataIntegrationFlowFieldPriorityDedupeField
-    DataIntegrationFlowFieldPriorityDedupeFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationFlowFieldPriorityDedupeField, name: "member")
+    DataIntegrationFlowFieldPriorityDedupeFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationFlowFieldPriorityDedupeField, name: "member"))
     DataIntegrationFlowFieldPriorityDedupeSortOrder.add_member(:asc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASC", traits: {"smithy.api#enumValue" => "ASC"}))
     DataIntegrationFlowFieldPriorityDedupeSortOrder.add_member(:desc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESC", traits: {"smithy.api#enumValue" => "DESC"}))
     DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationFlowFieldPriorityDedupeFieldList, name: "fields", traits: {"smithy.api#required" => {}}))
@@ -330,7 +330,7 @@ module Aws::SupplyChain
     DataIntegrationFlowFileType.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
     DataIntegrationFlowFileType.add_member(:parquet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARQUET", traits: {"smithy.api#enumValue" => "PARQUET"}))
     DataIntegrationFlowFileType.add_member(:json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON", traits: {"smithy.api#enumValue" => "JSON"}))
-    DataIntegrationFlowList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationFlow, name: "member")
+    DataIntegrationFlowList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationFlow, name: "member"))
     DataIntegrationFlowLoadType.add_member(:incremental, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCREMENTAL", traits: {"smithy.api#enumValue" => "INCREMENTAL"}))
     DataIntegrationFlowLoadType.add_member(:replace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REPLACE", traits: {"smithy.api#enumValue" => "REPLACE"}))
     DataIntegrationFlowS3Options.add_member(:file_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationFlowFileType, name: "fileType"))
@@ -353,7 +353,7 @@ module Aws::SupplyChain
     DataIntegrationFlowSource.add_member(:s3_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationFlowS3SourceConfiguration, name: "s3Source"))
     DataIntegrationFlowSource.add_member(:dataset_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationFlowDatasetSourceConfiguration, name: "datasetSource"))
     DataIntegrationFlowSource.type = Types::DataIntegrationFlowSource
-    DataIntegrationFlowSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationFlowSource, name: "member")
+    DataIntegrationFlowSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationFlowSource, name: "member"))
     DataIntegrationFlowSourceType.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3", traits: {"smithy.api#enumValue" => "S3"}))
     DataIntegrationFlowSourceType.add_member(:dataset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATASET", traits: {"smithy.api#enumValue" => "DATASET"}))
     DataIntegrationFlowTarget.add_member(:target_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationFlowTargetType, name: "targetType", traits: {"smithy.api#required" => {}}))
@@ -377,11 +377,11 @@ module Aws::SupplyChain
     DataLakeDataset.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdTime", traits: {"smithy.api#required" => {}}))
     DataLakeDataset.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastModifiedTime", traits: {"smithy.api#required" => {}}))
     DataLakeDataset.type = Types::DataLakeDataset
-    DataLakeDatasetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeDataset, name: "member")
+    DataLakeDatasetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeDataset, name: "member"))
     DataLakeDatasetPartitionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeDatasetSchemaFieldName, name: "name", traits: {"smithy.api#required" => {}}))
     DataLakeDatasetPartitionField.add_member(:transform, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeDatasetPartitionFieldTransform, name: "transform", traits: {"smithy.api#required" => {}}))
     DataLakeDatasetPartitionField.type = Types::DataLakeDatasetPartitionField
-    DataLakeDatasetPartitionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeDatasetPartitionField, name: "member")
+    DataLakeDatasetPartitionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeDatasetPartitionField, name: "member"))
     DataLakeDatasetPartitionFieldTransform.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeDatasetPartitionTransformType, name: "type", traits: {"smithy.api#required" => {}}))
     DataLakeDatasetPartitionFieldTransform.type = Types::DataLakeDatasetPartitionFieldTransform
     DataLakeDatasetPartitionSpec.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeDatasetPartitionFieldList, name: "fields", traits: {"smithy.api#required" => {}}))
@@ -393,7 +393,7 @@ module Aws::SupplyChain
     DataLakeDatasetPartitionTransformType.add_member(:identity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IDENTITY", traits: {"smithy.api#enumValue" => "IDENTITY"}))
     DataLakeDatasetPrimaryKeyField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeDatasetSchemaFieldName, name: "name", traits: {"smithy.api#required" => {}}))
     DataLakeDatasetPrimaryKeyField.type = Types::DataLakeDatasetPrimaryKeyField
-    DataLakeDatasetPrimaryKeyFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeDatasetPrimaryKeyField, name: "member")
+    DataLakeDatasetPrimaryKeyFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeDatasetPrimaryKeyField, name: "member"))
     DataLakeDatasetSchema.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeDatasetSchemaName, name: "name", traits: {"smithy.api#required" => {}}))
     DataLakeDatasetSchema.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeDatasetSchemaFieldList, name: "fields", traits: {"smithy.api#required" => {}}))
     DataLakeDatasetSchema.add_member(:primary_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeDatasetPrimaryKeyFieldList, name: "primaryKeys"))
@@ -402,7 +402,7 @@ module Aws::SupplyChain
     DataLakeDatasetSchemaField.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeDatasetSchemaFieldType, name: "type", traits: {"smithy.api#required" => {}}))
     DataLakeDatasetSchemaField.add_member(:is_required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isRequired", traits: {"smithy.api#required" => {}}))
     DataLakeDatasetSchemaField.type = Types::DataLakeDatasetSchemaField
-    DataLakeDatasetSchemaFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeDatasetSchemaField, name: "member")
+    DataLakeDatasetSchemaFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeDatasetSchemaField, name: "member"))
     DataLakeDatasetSchemaFieldType.add_member(:int, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INT", traits: {"smithy.api#enumValue" => "INT"}))
     DataLakeDatasetSchemaFieldType.add_member(:double, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOUBLE", traits: {"smithy.api#enumValue" => "DOUBLE"}))
     DataLakeDatasetSchemaFieldType.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING", traits: {"smithy.api#enumValue" => "STRING"}))
@@ -415,7 +415,7 @@ module Aws::SupplyChain
     DataLakeNamespace.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdTime", traits: {"smithy.api#required" => {}}))
     DataLakeNamespace.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastModifiedTime", traits: {"smithy.api#required" => {}}))
     DataLakeNamespace.type = Types::DataLakeNamespace
-    DataLakeNamespaceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeNamespace, name: "member")
+    DataLakeNamespaceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataLakeNamespace, name: "member"))
     DeleteDataIntegrationFlowRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "instanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteDataIntegrationFlowRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationFlowName, name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteDataIntegrationFlowRequest.type = Types::DeleteDataIntegrationFlowRequest
@@ -488,15 +488,15 @@ module Aws::SupplyChain
     Instance.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "kmsKeyArn"))
     Instance.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "versionNumber"))
     Instance.type = Types::Instance
-    InstanceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Instance, name: "member")
-    InstanceNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceName, name: "member")
+    InstanceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Instance, name: "member"))
+    InstanceNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceName, name: "member"))
     InstanceState.add_member(:initializing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INITIALIZING", traits: {"smithy.api#enumValue" => "Initializing"}))
     InstanceState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "Active"}))
     InstanceState.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CreateFailed"}))
     InstanceState.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DeleteFailed"}))
     InstanceState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
     InstanceState.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "Deleted"}))
-    InstanceStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceState, name: "member")
+    InstanceStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceState, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     InternalServerException.type = Types::InternalServerException
     ListDataIntegrationEventsRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "instanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -563,9 +563,9 @@ module Aws::SupplyChain
     SendDataIntegrationEventResponse.type = Types::SendDataIntegrationEventResponse
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AscResourceArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest

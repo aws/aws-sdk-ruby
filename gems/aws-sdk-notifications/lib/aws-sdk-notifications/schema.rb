@@ -214,13 +214,13 @@ module Aws::Notifications
     AccessStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     AccessStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     AccessStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    AggregatedNotificationRegions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member")
+    AggregatedNotificationRegions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member"))
     AggregationDetail.add_member(:summarization_dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: SummarizationDimensionDetails, name: "summarizationDimensions"))
     AggregationDetail.type = Types::AggregationDetail
     AggregationKey.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     AggregationKey.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#required" => {}}))
     AggregationKey.type = Types::AggregationKey
-    AggregationKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationKey, name: "member")
+    AggregationKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationKey, name: "member"))
     AggregationSummary.add_member(:event_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "eventCount", traits: {"smithy.api#required" => {}}))
     AggregationSummary.add_member(:aggregated_by, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationKeys, name: "aggregatedBy", traits: {"smithy.api#required" => {}}))
     AggregationSummary.add_member(:aggregated_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: SummarizationDimensionOverview, name: "aggregatedAccounts", traits: {"smithy.api#required" => {}}))
@@ -244,7 +244,7 @@ module Aws::Notifications
     AssociateOrganizationalUnitRequest.add_member(:notification_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationConfigurationArn, name: "notificationConfigurationArn", traits: {"smithy.api#required" => {}}))
     AssociateOrganizationalUnitRequest.type = Types::AssociateOrganizationalUnitRequest
     AssociateOrganizationalUnitResponse.type = Types::AssociateOrganizationalUnitResponse
-    Channels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, name: "member")
+    Channels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
@@ -280,7 +280,7 @@ module Aws::Notifications
     Dimension.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TextPartReference, name: "name", traits: {"smithy.api#required" => {}}))
     Dimension.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TextPartReference, name: "value", traits: {"smithy.api#required" => {}}))
     Dimension.type = Types::Dimension
-    Dimensions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "member")
+    Dimensions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "member"))
     DisableNotificationsAccessForOrganizationRequest.type = Types::DisableNotificationsAccessForOrganizationRequest
     DisableNotificationsAccessForOrganizationResponse.type = Types::DisableNotificationsAccessForOrganizationResponse
     DisassociateChannelRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelArn, name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -314,7 +314,7 @@ module Aws::Notifications
     EventRuleStructure.add_member(:managed_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRuleArns, name: "managedRules", traits: {"smithy.api#required" => {}}))
     EventRuleStructure.add_member(:status_summary_by_region, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusSummaryByRegion, name: "statusSummaryByRegion", traits: {"smithy.api#required" => {}}))
     EventRuleStructure.type = Types::EventRuleStructure
-    EventRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventRuleStructure, name: "member")
+    EventRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventRuleStructure, name: "member"))
     GetEventRuleRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EventRuleArn, name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetEventRuleRequest.type = Types::GetEventRuleRequest
     GetEventRuleResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EventRuleArn, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -480,7 +480,7 @@ module Aws::Notifications
     ManagedNotificationChannelAssociationSummary.add_member(:channel_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelType, name: "channelType", traits: {"smithy.api#required" => {}}))
     ManagedNotificationChannelAssociationSummary.add_member(:override_option, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelAssociationOverrideOption, name: "overrideOption"))
     ManagedNotificationChannelAssociationSummary.type = Types::ManagedNotificationChannelAssociationSummary
-    ManagedNotificationChannelAssociations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedNotificationChannelAssociationSummary, name: "member")
+    ManagedNotificationChannelAssociations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedNotificationChannelAssociationSummary, name: "member"))
     ManagedNotificationChildEvent.add_member(:schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaVersion, name: "schemaVersion", traits: {"smithy.api#required" => {}}))
     ManagedNotificationChildEvent.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationEventId, name: "id", traits: {"smithy.api#required" => {}}))
     ManagedNotificationChildEvent.add_member(:message_components, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageComponents, name: "messageComponents", traits: {"smithy.api#required" => {}}))
@@ -510,12 +510,12 @@ module Aws::Notifications
     ManagedNotificationChildEventSummary.add_member(:event_status, ::Smithy::Schema::Shapes::MemberShape.new(target: EventStatus, name: "eventStatus", traits: {"smithy.api#required" => {}}))
     ManagedNotificationChildEventSummary.add_member(:notification_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationType, name: "notificationType", traits: {"smithy.api#required" => {}}))
     ManagedNotificationChildEventSummary.type = Types::ManagedNotificationChildEventSummary
-    ManagedNotificationChildEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedNotificationChildEventOverview, name: "member")
+    ManagedNotificationChildEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedNotificationChildEventOverview, name: "member"))
     ManagedNotificationConfigurationStructure.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedNotificationConfigurationOsArn, name: "arn", traits: {"smithy.api#required" => {}}))
     ManagedNotificationConfigurationStructure.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedNotificationConfigurationName, name: "name", traits: {"smithy.api#required" => {}}))
     ManagedNotificationConfigurationStructure.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedNotificationConfigurationDescription, name: "description", traits: {"smithy.api#required" => {}}))
     ManagedNotificationConfigurationStructure.type = Types::ManagedNotificationConfigurationStructure
-    ManagedNotificationConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedNotificationConfigurationStructure, name: "member")
+    ManagedNotificationConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedNotificationConfigurationStructure, name: "member"))
     ManagedNotificationEvent.add_member(:schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaVersion, name: "schemaVersion", traits: {"smithy.api#required" => {}}))
     ManagedNotificationEvent.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationEventId, name: "id", traits: {"smithy.api#required" => {}}))
     ManagedNotificationEvent.add_member(:message_components, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageComponents, name: "messageComponents", traits: {"smithy.api#required" => {}}))
@@ -546,13 +546,13 @@ module Aws::Notifications
     ManagedNotificationEventSummary.add_member(:event_status, ::Smithy::Schema::Shapes::MemberShape.new(target: EventStatus, name: "eventStatus", traits: {"smithy.api#required" => {}}))
     ManagedNotificationEventSummary.add_member(:notification_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationType, name: "notificationType", traits: {"smithy.api#required" => {}}))
     ManagedNotificationEventSummary.type = Types::ManagedNotificationEventSummary
-    ManagedNotificationEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedNotificationEventOverview, name: "member")
-    ManagedRuleArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRuleArn, name: "member")
+    ManagedNotificationEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedNotificationEventOverview, name: "member"))
+    ManagedRuleArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRuleArn, name: "member"))
     ManagedSourceEventMetadataSummary.add_member(:event_origin_region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "eventOriginRegion", traits: {"smithy.api#length" => {"max" => 32}}))
     ManagedSourceEventMetadataSummary.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "source", traits: {"smithy.api#required" => {}}))
     ManagedSourceEventMetadataSummary.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "eventType", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#required" => {}}))
     ManagedSourceEventMetadataSummary.type = Types::ManagedSourceEventMetadataSummary
-    Media.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MediaElement, name: "member")
+    Media.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaElement, name: "member"))
     MediaElement.add_member(:media_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaId, name: "mediaId", traits: {"smithy.api#required" => {}}))
     MediaElement.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaElementType, name: "type", traits: {"smithy.api#required" => {}}))
     MediaElement.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "url", traits: {"smithy.api#required" => {}}))
@@ -564,7 +564,7 @@ module Aws::Notifications
     MemberAccount.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason", traits: {"smithy.api#required" => {}}))
     MemberAccount.add_member(:organizational_unit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitId, name: "organizationalUnitId", traits: {"smithy.api#required" => {}}))
     MemberAccount.type = Types::MemberAccount
-    MemberAccounts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemberAccount, name: "member")
+    MemberAccounts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberAccount, name: "member"))
     MessageComponents.add_member(:headline, ::Smithy::Schema::Shapes::MemberShape.new(target: TextPartReference, name: "headline"))
     MessageComponents.add_member(:paragraph_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: TextPartReference, name: "paragraphSummary"))
     MessageComponents.add_member(:complete_description, ::Smithy::Schema::Shapes::MemberShape.new(target: TextPartReference, name: "completeDescription"))
@@ -580,7 +580,7 @@ module Aws::Notifications
     NotificationConfigurationStructure.add_member(:aggregation_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationDuration, name: "aggregationDuration"))
     NotificationConfigurationStructure.add_member(:subtype, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationConfigurationSubtype, name: "subtype"))
     NotificationConfigurationStructure.type = Types::NotificationConfigurationStructure
-    NotificationConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationConfigurationStructure, name: "member")
+    NotificationConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationConfigurationStructure, name: "member"))
     NotificationEventOverview.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationEventArn, name: "arn", traits: {"smithy.api#required" => {}}))
     NotificationEventOverview.add_member(:notification_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationConfigurationArn, name: "notificationConfigurationArn", traits: {"smithy.api#required" => {}}))
     NotificationEventOverview.add_member(:related_account, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "relatedAccount", traits: {"smithy.api#required" => {}}))
@@ -614,7 +614,7 @@ module Aws::Notifications
     NotificationEventSummary.add_member(:event_status, ::Smithy::Schema::Shapes::MemberShape.new(target: EventStatus, name: "eventStatus", traits: {"smithy.api#required" => {}}))
     NotificationEventSummary.add_member(:notification_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationType, name: "notificationType", traits: {"smithy.api#required" => {}}))
     NotificationEventSummary.type = Types::NotificationEventSummary
-    NotificationEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationEventOverview, name: "member")
+    NotificationEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationEventOverview, name: "member"))
     NotificationHubOverview.add_member(:notification_hub_region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "notificationHubRegion", traits: {"smithy.api#required" => {}}))
     NotificationHubOverview.add_member(:status_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationHubStatusSummary, name: "statusSummary", traits: {"smithy.api#required" => {}}))
     NotificationHubOverview.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, name: "creationTime", traits: {"smithy.api#required" => {}}))
@@ -623,11 +623,11 @@ module Aws::Notifications
     NotificationHubStatusSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationHubStatus, name: "status", traits: {"smithy.api#required" => {}}))
     NotificationHubStatusSummary.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationHubStatusReason, name: "reason", traits: {"smithy.api#required" => {}}))
     NotificationHubStatusSummary.type = Types::NotificationHubStatusSummary
-    NotificationHubs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationHubOverview, name: "member")
+    NotificationHubs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationHubOverview, name: "member"))
     NotificationsAccessForOrganization.add_member(:access_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessStatus, name: "accessStatus", traits: {"smithy.api#required" => {}}))
     NotificationsAccessForOrganization.type = Types::NotificationsAccessForOrganization
-    OrganizationalUnits.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitId, name: "member")
-    Regions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member")
+    OrganizationalUnits.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitId, name: "member"))
+    Regions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member"))
     RegisterNotificationHubRequest.add_member(:notification_hub_region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "notificationHubRegion", traits: {"smithy.api#required" => {}}))
     RegisterNotificationHubRequest.type = Types::RegisterNotificationHubRequest
     RegisterNotificationHubResponse.add_member(:notification_hub_region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "notificationHubRegion", traits: {"smithy.api#required" => {}}))
@@ -643,8 +643,8 @@ module Aws::Notifications
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    Resources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member")
-    SampleAggregationDimensionValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    Resources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
+    SampleAggregationDimensionValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}}))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "resourceId"))
@@ -664,34 +664,34 @@ module Aws::Notifications
     SourceEventMetadataSummary.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "source", traits: {"smithy.api#required" => {}}))
     SourceEventMetadataSummary.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "eventType", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#required" => {}}))
     SourceEventMetadataSummary.type = Types::SourceEventMetadataSummary
-    StatusSummaryByRegion.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "key")
-    StatusSummaryByRegion.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EventRuleStatusSummary, name: "value")
+    StatusSummaryByRegion.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "key"))
+    StatusSummaryByRegion.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EventRuleStatusSummary, name: "value"))
     SummarizationDimensionDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     SummarizationDimensionDetail.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#required" => {}}))
     SummarizationDimensionDetail.type = Types::SummarizationDimensionDetail
-    SummarizationDimensionDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SummarizationDimensionDetail, name: "member")
+    SummarizationDimensionDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SummarizationDimensionDetail, name: "member"))
     SummarizationDimensionOverview.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     SummarizationDimensionOverview.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "count", traits: {"smithy.api#required" => {}}))
     SummarizationDimensionOverview.add_member(:sample_values, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleAggregationDimensionValues, name: "sampleValues"))
     SummarizationDimensionOverview.type = Types::SummarizationDimensionOverview
-    SummarizationDimensionOverviews.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SummarizationDimensionOverview, name: "member")
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    SummarizationDimensionOverviews.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SummarizationDimensionOverview, name: "member"))
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationConfigurationArn, name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
-    TextByLocale.key = ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleCode, name: "key")
-    TextByLocale.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}}))
+    TextByLocale.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleCode, name: "key"))
+    TextByLocale.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     TextPartValue.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TextPartType, name: "type", traits: {"smithy.api#required" => {}}))
     TextPartValue.add_member(:display_text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "displayText", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}}))
     TextPartValue.add_member(:text_by_locale, ::Smithy::Schema::Shapes::MemberShape.new(target: TextByLocale, name: "textByLocale"))
     TextPartValue.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "url"))
     TextPartValue.type = Types::TextPartValue
-    TextParts.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TextPartId, name: "key")
-    TextParts.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TextPartValue, name: "value")
+    TextParts.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TextPartId, name: "key"))
+    TextParts.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TextPartValue, name: "value"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCode, name: "serviceCode"))
     ThrottlingException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: QuotaCode, name: "quotaCode"))
@@ -723,7 +723,7 @@ module Aws::Notifications
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
 
     Notifications = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.notifications#Notifications"

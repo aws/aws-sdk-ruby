@@ -175,7 +175,7 @@ module Aws::CodeConnections
     Connection.add_member(:connection_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionStatus, name: "ConnectionStatus"))
     Connection.add_member(:host_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: HostArn, name: "HostArn"))
     Connection.type = Types::Connection
-    ConnectionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Connection, name: "member")
+    ConnectionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Connection, name: "member"))
     ConnectionStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     ConnectionStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     ConnectionStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
@@ -276,12 +276,12 @@ module Aws::CodeConnections
     Host.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: HostStatus, name: "Status"))
     Host.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: HostStatusMessage, name: "StatusMessage"))
     Host.type = Types::Host
-    HostList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Host, name: "member")
+    HostList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Host, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InternalServerException.type = Types::InternalServerException
     InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InvalidInputException.type = Types::InvalidInputException
-    LatestSyncBlockerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SyncBlocker, name: "member")
+    LatestSyncBlockerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SyncBlocker, name: "member"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
     ListConnectionsInput.add_member(:provider_type_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderType, name: "ProviderTypeFilter"))
@@ -340,7 +340,7 @@ module Aws::CodeConnections
     RepositoryLinkInfo.add_member(:repository_link_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryLinkId, name: "RepositoryLinkId", traits: {"smithy.api#required" => {}}))
     RepositoryLinkInfo.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "RepositoryName", traits: {"smithy.api#required" => {}}))
     RepositoryLinkInfo.type = Types::RepositoryLinkInfo
-    RepositoryLinkList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryLinkInfo, name: "member")
+    RepositoryLinkList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryLinkInfo, name: "member"))
     RepositorySyncAttempt.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartedAt", traits: {"smithy.api#required" => {}}))
     RepositorySyncAttempt.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositorySyncStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     RepositorySyncAttempt.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositorySyncEventList, name: "Events", traits: {"smithy.api#required" => {}}))
@@ -350,13 +350,13 @@ module Aws::CodeConnections
     RepositorySyncDefinition.add_member(:parent, ::Smithy::Schema::Shapes::MemberShape.new(target: Parent, name: "Parent", traits: {"smithy.api#required" => {}}))
     RepositorySyncDefinition.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "Target", traits: {"smithy.api#required" => {}}))
     RepositorySyncDefinition.type = Types::RepositorySyncDefinition
-    RepositorySyncDefinitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositorySyncDefinition, name: "member")
+    RepositorySyncDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositorySyncDefinition, name: "member"))
     RepositorySyncEvent.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "Event", traits: {"smithy.api#required" => {}}))
     RepositorySyncEvent.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalId, name: "ExternalId"))
     RepositorySyncEvent.add_member(:time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Time", traits: {"smithy.api#required" => {}}))
     RepositorySyncEvent.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, name: "Type", traits: {"smithy.api#required" => {}}))
     RepositorySyncEvent.type = Types::RepositorySyncEvent
-    RepositorySyncEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositorySyncEvent, name: "member")
+    RepositorySyncEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositorySyncEvent, name: "member"))
     RepositorySyncStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     RepositorySyncStatus.add_member(:initiated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INITIATED", traits: {"smithy.api#enumValue" => "INITIATED"}))
     RepositorySyncStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
@@ -378,7 +378,7 @@ module Aws::CodeConnections
     ResourceSyncEvent.add_member(:time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Time", traits: {"smithy.api#required" => {}}))
     ResourceSyncEvent.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, name: "Type", traits: {"smithy.api#required" => {}}))
     ResourceSyncEvent.type = Types::ResourceSyncEvent
-    ResourceSyncEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSyncEvent, name: "member")
+    ResourceSyncEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSyncEvent, name: "member"))
     ResourceSyncStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     ResourceSyncStatus.add_member(:initiated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INITIATED", traits: {"smithy.api#enumValue" => "INITIATED"}))
     ResourceSyncStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
@@ -394,8 +394,8 @@ module Aws::CodeConnections
     Revision.add_member(:provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderType, name: "ProviderType", traits: {"smithy.api#required" => {}}))
     Revision.add_member(:sha, ::Smithy::Schema::Shapes::MemberShape.new(target: SHA, name: "Sha", traits: {"smithy.api#required" => {}}))
     Revision.type = Types::Revision
-    SecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
-    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
+    SecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
+    SubnetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
     SyncBlocker.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "Id", traits: {"smithy.api#required" => {}}))
     SyncBlocker.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockerType, name: "Type", traits: {"smithy.api#required" => {}}))
     SyncBlocker.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockerStatus, name: "Status", traits: {"smithy.api#required" => {}}))
@@ -408,7 +408,7 @@ module Aws::CodeConnections
     SyncBlockerContext.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SyncBlockerContextKey, name: "Key", traits: {"smithy.api#required" => {}}))
     SyncBlockerContext.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SyncBlockerContextValue, name: "Value", traits: {"smithy.api#required" => {}}))
     SyncBlockerContext.type = Types::SyncBlockerContext
-    SyncBlockerContextList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SyncBlockerContext, name: "member")
+    SyncBlockerContextList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SyncBlockerContext, name: "member"))
     SyncBlockerDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     SyncBlockerDoesNotExistException.type = Types::SyncBlockerDoesNotExistException
     SyncBlockerSummary.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "ResourceName", traits: {"smithy.api#required" => {}}))
@@ -428,15 +428,15 @@ module Aws::CodeConnections
     SyncConfiguration.add_member(:trigger_resource_update_on, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerResourceUpdateOn, name: "TriggerResourceUpdateOn"))
     SyncConfiguration.add_member(:pull_request_comment, ::Smithy::Schema::Shapes::MemberShape.new(target: PullRequestComment, name: "PullRequestComment"))
     SyncConfiguration.type = Types::SyncConfiguration
-    SyncConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SyncConfiguration, name: "member")
+    SyncConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SyncConfiguration, name: "member"))
     SyncConfigurationStillExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     SyncConfigurationStillExistsException.type = Types::SyncConfigurationStillExistsException
     SyncConfigurationType.add_member(:cfn_stack_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CFN_STACK_SYNC", traits: {"smithy.api#enumValue" => "CFN_STACK_SYNC"}))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput

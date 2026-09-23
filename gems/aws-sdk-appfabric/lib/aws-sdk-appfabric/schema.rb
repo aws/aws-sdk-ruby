@@ -154,13 +154,13 @@ module Aws::AppFabric
     AppAuthorizationSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AppAuthorizationStatus, name: "status", traits: {"smithy.api#required" => {}}))
     AppAuthorizationSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "updatedAt", traits: {"smithy.api#required" => {}}))
     AppAuthorizationSummary.type = Types::AppAuthorizationSummary
-    AppAuthorizationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppAuthorizationSummary, name: "member")
+    AppAuthorizationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppAuthorizationSummary, name: "member"))
     AppBundle.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#required" => {}}))
     AppBundle.add_member(:customer_managed_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "customerManagedKeyArn"))
     AppBundle.type = Types::AppBundle
     AppBundleSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#required" => {}}))
     AppBundleSummary.type = Types::AppBundleSummary
-    AppBundleSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppBundleSummary, name: "member")
+    AppBundleSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppBundleSummary, name: "member"))
     AuditLogDestinationConfiguration.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "destination", traits: {"smithy.api#required" => {}}))
     AuditLogDestinationConfiguration.type = Types::AuditLogDestinationConfiguration
     AuditLogProcessingConfiguration.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: Schema, name: "schema", traits: {"smithy.api#required" => {}}))
@@ -289,12 +289,12 @@ module Aws::AppFabric
     IngestionDestination.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "createdAt"))
     IngestionDestination.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "updatedAt"))
     IngestionDestination.type = Types::IngestionDestination
-    IngestionDestinationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IngestionDestinationSummary, name: "member")
+    IngestionDestinationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IngestionDestinationSummary, name: "member"))
     IngestionDestinationStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "Active"}))
     IngestionDestinationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
     IngestionDestinationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#required" => {}}))
     IngestionDestinationSummary.type = Types::IngestionDestinationSummary
-    IngestionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IngestionSummary, name: "member")
+    IngestionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IngestionSummary, name: "member"))
     IngestionState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "enabled"}))
     IngestionState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "disabled"}))
     IngestionSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -381,8 +381,8 @@ module Aws::AppFabric
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -390,7 +390,7 @@ module Aws::AppFabric
     TaskError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorCode"))
     TaskError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorMessage"))
     TaskError.type = Types::TaskError
-    TaskIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "member")
+    TaskIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "member"))
     Tenant.add_member(:tenant_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantIdentifier, name: "tenantIdentifier", traits: {"smithy.api#required" => {}}))
     Tenant.add_member(:tenant_display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String2048, name: "tenantDisplayName", traits: {"smithy.api#required" => {}}))
     Tenant.type = Types::Tenant
@@ -430,13 +430,13 @@ module Aws::AppFabric
     UserAccessResultItem.add_member(:user_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "userStatus"))
     UserAccessResultItem.add_member(:task_error, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskError, name: "taskError"))
     UserAccessResultItem.type = Types::UserAccessResultItem
-    UserAccessResultsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserAccessResultItem, name: "member")
+    UserAccessResultsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAccessResultItem, name: "member"))
     UserAccessTaskItem.add_member(:app, ::Smithy::Schema::Shapes::MemberShape.new(target: String255, name: "app", traits: {"smithy.api#required" => {}}))
     UserAccessTaskItem.add_member(:tenant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TenantIdentifier, name: "tenantId", traits: {"smithy.api#required" => {}}))
     UserAccessTaskItem.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "taskId"))
     UserAccessTaskItem.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskError, name: "error"))
     UserAccessTaskItem.type = Types::UserAccessTaskItem
-    UserAccessTasksList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserAccessTaskItem, name: "member")
+    UserAccessTasksList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAccessTaskItem, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, name: "reason", traits: {"smithy.api#required" => {}}))
     ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldList, name: "fieldList"))
@@ -444,7 +444,7 @@ module Aws::AppFabric
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "unknownOperation"}))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "cannotParse"}))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "fieldValidationFailed"}))

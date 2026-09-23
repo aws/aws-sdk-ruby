@@ -85,7 +85,7 @@ module Aws::BCMDataExports
     Column.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Type"))
     Column.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Description"))
     Column.type = Types::Column
-    ColumnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Column, name: "member")
+    ColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Column, name: "member"))
     CompressionOption.add_member(:gzip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GZIP", traits: {"smithy.api#enumValue" => "GZIP"}))
     CompressionOption.add_member(:parquet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARQUET", traits: {"smithy.api#enumValue" => "PARQUET"}))
     CreateExportRequest.add_member(:export, ::Smithy::Schema::Shapes::MemberShape.new(target: Export, name: "Export", traits: {"smithy.api#required" => {}}))
@@ -105,7 +105,7 @@ module Aws::BCMDataExports
     ExecutionReference.add_member(:execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "ExecutionId", traits: {"smithy.api#required" => {}}))
     ExecutionReference.add_member(:execution_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStatus, name: "ExecutionStatus", traits: {"smithy.api#required" => {}}))
     ExecutionReference.type = Types::ExecutionReference
-    ExecutionReferenceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionReference, name: "member")
+    ExecutionReferenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionReference, name: "member"))
     ExecutionStatus.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStatusCode, name: "StatusCode"))
     ExecutionStatus.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStatusReason, name: "StatusReason"))
     ExecutionStatus.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
@@ -133,7 +133,7 @@ module Aws::BCMDataExports
     ExportReference.add_member(:export_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportName, name: "ExportName", traits: {"smithy.api#required" => {}}))
     ExportReference.add_member(:export_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportStatus, name: "ExportStatus", traits: {"smithy.api#required" => {}}))
     ExportReference.type = Types::ExportReference
-    ExportReferenceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportReference, name: "member")
+    ExportReferenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportReference, name: "member"))
     ExportStatus.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportStatusCode, name: "StatusCode"))
     ExportStatus.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStatusReason, name: "StatusReason"))
     ExportStatus.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
@@ -145,7 +145,7 @@ module Aws::BCMDataExports
     FormatOption.add_member(:text_or_csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXT_OR_CSV", traits: {"smithy.api#enumValue" => "TEXT_OR_CSV"}))
     FormatOption.add_member(:parquet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARQUET", traits: {"smithy.api#enumValue" => "PARQUET"}))
     FrequencyOption.add_member(:synchronous, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYNCHRONOUS", traits: {"smithy.api#enumValue" => "SYNCHRONOUS"}))
-    GenericStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "member")
+    GenericStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "member"))
     GetExecutionRequest.add_member(:export_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ExportArn", traits: {"smithy.api#required" => {}}))
     GetExecutionRequest.add_member(:execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "ExecutionId", traits: {"smithy.api#required" => {}}))
     GetExecutionRequest.type = Types::GetExecutionRequest
@@ -205,8 +205,8 @@ module Aws::BCMDataExports
     ResourceTag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     ResourceTag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     ResourceTag.type = Types::ResourceTag
-    ResourceTagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "member")
-    ResourceTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member")
+    ResourceTagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "member"))
+    ResourceTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member"))
     S3Destination.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "S3Bucket", traits: {"smithy.api#required" => {}}))
     S3Destination.add_member(:s3_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "S3Prefix", traits: {"smithy.api#required" => {}}))
     S3Destination.add_member(:s3_region, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "S3Region", traits: {"smithy.api#required" => {}}))
@@ -228,17 +228,17 @@ module Aws::BCMDataExports
     Table.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Description"))
     Table.add_member(:table_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: TablePropertyDescriptionList, name: "TableProperties"))
     Table.type = Types::Table
-    TableConfigurations.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, name: "key")
-    TableConfigurations.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TableProperties, name: "value")
-    TableList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Table, name: "member")
-    TableProperties.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TableProperty, name: "key")
-    TableProperties.value = ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "value")
+    TableConfigurations.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, name: "key"))
+    TableConfigurations.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TableProperties, name: "value"))
+    TableList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Table, name: "member"))
+    TableProperties.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TableProperty, name: "key"))
+    TableProperties.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "value"))
     TablePropertyDescription.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Name"))
     TablePropertyDescription.add_member(:valid_values, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericStringList, name: "ValidValues"))
     TablePropertyDescription.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "DefaultValue"))
     TablePropertyDescription.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Description"))
     TablePropertyDescription.type = Types::TablePropertyDescription
-    TablePropertyDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TablePropertyDescription, name: "member")
+    TablePropertyDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TablePropertyDescription, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagList, name: "ResourceTags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -263,7 +263,7 @@ module Aws::BCMDataExports
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "unknownOperation"}))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "cannotParse"}))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "fieldValidationFailed"}))

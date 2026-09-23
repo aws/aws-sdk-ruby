@@ -139,12 +139,12 @@ module Aws::DLM
     Action.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionName, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Action.add_member(:cross_region_copy, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionCopyActionList, name: "CrossRegionCopy", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Action.type = Types::Action
-    ActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "member")
+    ActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "member"))
     ArchiveRetainRule.add_member(:retention_archive_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionArchiveTier, name: "RetentionArchiveTier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ArchiveRetainRule.type = Types::ArchiveRetainRule
     ArchiveRule.add_member(:retain_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchiveRetainRule, name: "RetainRule", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ArchiveRule.type = Types::ArchiveRule
-    AvailabilityZoneList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "member")
+    AvailabilityZoneList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "member"))
     CreateLifecyclePolicyRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionRoleArn, name: "ExecutionRoleArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateLifecyclePolicyRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDescription, name: "Description", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateLifecyclePolicyRequest.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: SettablePolicyStateValues, name: "State", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -171,7 +171,7 @@ module Aws::DLM
     CrossRegionCopyAction.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, name: "EncryptionConfiguration", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CrossRegionCopyAction.add_member(:retain_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionCopyRetainRule, name: "RetainRule"))
     CrossRegionCopyAction.type = Types::CrossRegionCopyAction
-    CrossRegionCopyActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionCopyAction, name: "member")
+    CrossRegionCopyActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionCopyAction, name: "member"))
     CrossRegionCopyDeprecateRule.add_member(:interval, ::Smithy::Schema::Shapes::MemberShape.new(target: Interval, name: "Interval"))
     CrossRegionCopyDeprecateRule.add_member(:interval_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionIntervalUnitValues, name: "IntervalUnit"))
     CrossRegionCopyDeprecateRule.type = Types::CrossRegionCopyDeprecateRule
@@ -186,10 +186,10 @@ module Aws::DLM
     CrossRegionCopyRule.add_member(:retain_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionCopyRetainRule, name: "RetainRule"))
     CrossRegionCopyRule.add_member(:deprecate_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionCopyDeprecateRule, name: "DeprecateRule"))
     CrossRegionCopyRule.type = Types::CrossRegionCopyRule
-    CrossRegionCopyRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionCopyRule, name: "member")
+    CrossRegionCopyRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionCopyRule, name: "member"))
     CrossRegionCopyTarget.add_member(:target_region, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetRegion, name: "TargetRegion"))
     CrossRegionCopyTarget.type = Types::CrossRegionCopyTarget
-    CrossRegionCopyTargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionCopyTarget, name: "member")
+    CrossRegionCopyTargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionCopyTarget, name: "member"))
     DefaultPoliciesTypeValues.add_member(:volume, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VOLUME", traits: {"smithy.api#enumValue" => "VOLUME"}))
     DefaultPoliciesTypeValues.add_member(:instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE", traits: {"smithy.api#enumValue" => "INSTANCE"}))
     DefaultPoliciesTypeValues.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
@@ -214,9 +214,9 @@ module Aws::DLM
     EventSource.type = Types::EventSource
     EventSourceValues.add_member(:managed_cwe, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANAGED_CWE", traits: {"smithy.api#enumValue" => "MANAGED_CWE"}))
     EventTypeValues.add_member(:share_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHARE_SNAPSHOT", traits: {"smithy.api#enumValue" => "shareSnapshot"}))
-    ExcludeDataVolumeTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
-    ExcludeTagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
-    ExcludeVolumeTypesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeTypeValues, name: "member")
+    ExcludeDataVolumeTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    ExcludeTagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    ExcludeVolumeTypesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeTypeValues, name: "member"))
     Exclusions.add_member(:exclude_boot_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeBootVolumes, name: "ExcludeBootVolumes"))
     Exclusions.add_member(:exclude_volume_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeVolumeTypesList, name: "ExcludeVolumeTypes"))
     Exclusions.add_member(:exclude_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeTagsList, name: "ExcludeTags"))
@@ -271,7 +271,7 @@ module Aws::DLM
     LifecyclePolicySummary.add_member(:policy_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTypeValues, name: "PolicyType"))
     LifecyclePolicySummary.add_member(:default_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultPolicy, name: "DefaultPolicy"))
     LifecyclePolicySummary.type = Types::LifecyclePolicySummary
-    LifecyclePolicySummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicySummary, name: "member")
+    LifecyclePolicySummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicySummary, name: "member"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     LimitExceededException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "Code"))
     LimitExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceType"))
@@ -283,7 +283,7 @@ module Aws::DLM
     LocationValues.add_member(:cloud, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUD", traits: {"smithy.api#enumValue" => "CLOUD"}))
     LocationValues.add_member(:outpost_local, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OUTPOST_LOCAL", traits: {"smithy.api#enumValue" => "OUTPOST_LOCAL"}))
     LocationValues.add_member(:local_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOCAL_ZONE", traits: {"smithy.api#enumValue" => "LOCAL_ZONE"}))
-    ParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Parameter, name: "member")
+    ParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameter, name: "member"))
     Parameters.add_member(:exclude_boot_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeBootVolume, name: "ExcludeBootVolume"))
     Parameters.add_member(:no_reboot, ::Smithy::Schema::Shapes::MemberShape.new(target: NoReboot, name: "NoReboot"))
     Parameters.add_member(:exclude_data_volume_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeDataVolumeTagList, name: "ExcludeDataVolumeTags"))
@@ -305,13 +305,13 @@ module Aws::DLM
     PolicyDetails.add_member(:extend_deletion, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtendDeletion, name: "ExtendDeletion"))
     PolicyDetails.add_member(:exclusions, ::Smithy::Schema::Shapes::MemberShape.new(target: Exclusions, name: "Exclusions"))
     PolicyDetails.type = Types::PolicyDetails
-    PolicyIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, name: "member")
+    PolicyIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, name: "member"))
     PolicyLanguageValues.add_member(:simplified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SIMPLIFIED", traits: {"smithy.api#enumValue" => "SIMPLIFIED"}))
     PolicyLanguageValues.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
     PolicyTypeValues.add_member(:ebs_snapshot_management, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EBS_SNAPSHOT_MANAGEMENT", traits: {"smithy.api#enumValue" => "EBS_SNAPSHOT_MANAGEMENT"}))
     PolicyTypeValues.add_member(:image_management, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMAGE_MANAGEMENT", traits: {"smithy.api#enumValue" => "IMAGE_MANAGEMENT"}))
     PolicyTypeValues.add_member(:event_based_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVENT_BASED_POLICY", traits: {"smithy.api#enumValue" => "EVENT_BASED_POLICY"}))
-    ResourceLocationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceLocationValues, name: "member")
+    ResourceLocationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceLocationValues, name: "member"))
     ResourceLocationValues.add_member(:cloud, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUD", traits: {"smithy.api#enumValue" => "CLOUD"}))
     ResourceLocationValues.add_member(:outpost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OUTPOST", traits: {"smithy.api#enumValue" => "OUTPOST"}))
     ResourceLocationValues.add_member(:local_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOCAL_ZONE", traits: {"smithy.api#enumValue" => "LOCAL_ZONE"}))
@@ -322,7 +322,7 @@ module Aws::DLM
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ResourceTypeValues.add_member(:volume, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VOLUME", traits: {"smithy.api#enumValue" => "VOLUME"}))
     ResourceTypeValues.add_member(:instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE", traits: {"smithy.api#enumValue" => "INSTANCE"}))
-    ResourceTypeValuesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeValues, name: "member")
+    ResourceTypeValuesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeValues, name: "member"))
     RetainRule.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardTierRetainRuleCount, name: "Count"))
     RetainRule.add_member(:interval, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardTierRetainRuleInterval, name: "Interval"))
     RetainRule.add_member(:interval_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionIntervalUnitValues, name: "IntervalUnit"))
@@ -347,7 +347,7 @@ module Aws::DLM
     Schedule.add_member(:deprecate_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: DeprecateRule, name: "DeprecateRule"))
     Schedule.add_member(:archive_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchiveRule, name: "ArchiveRule"))
     Schedule.type = Types::Schedule
-    ScheduleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Schedule, name: "member")
+    ScheduleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Schedule, name: "member"))
     Script.add_member(:stages, ::Smithy::Schema::Shapes::MemberShape.new(target: StagesList, name: "Stages"))
     Script.add_member(:execution_handler_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionHandlerServiceValues, name: "ExecutionHandlerService"))
     Script.add_member(:execution_handler, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionHandler, name: "ExecutionHandler", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -355,34 +355,34 @@ module Aws::DLM
     Script.add_member(:execution_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: ScriptExecutionTimeout, name: "ExecutionTimeout"))
     Script.add_member(:maximum_retry_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ScriptMaximumRetryCount, name: "MaximumRetryCount"))
     Script.type = Types::Script
-    ScriptsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Script, name: "member")
+    ScriptsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Script, name: "member"))
     SettablePolicyStateValues.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     SettablePolicyStateValues.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     ShareRule.add_member(:target_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareTargetAccountList, name: "TargetAccounts", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ShareRule.add_member(:unshare_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: Interval, name: "UnshareInterval"))
     ShareRule.add_member(:unshare_interval_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionIntervalUnitValues, name: "UnshareIntervalUnit"))
     ShareRule.type = Types::ShareRule
-    ShareRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShareRule, name: "member")
-    ShareTargetAccountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "member")
-    SnapshotOwnerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "member")
+    ShareRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareRule, name: "member"))
+    ShareTargetAccountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "member"))
+    SnapshotOwnerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "member"))
     StageValues.add_member(:pre, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE", traits: {"smithy.api#enumValue" => "PRE"}))
     StageValues.add_member(:post, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POST", traits: {"smithy.api#enumValue" => "POST"}))
-    StagesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StageValues, name: "member")
+    StagesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StageValues, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Key", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TagsToAddFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilter, name: "member")
-    TagsToAddList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
-    TargetTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
-    TargetTagsFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilter, name: "member")
-    TimesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "member")
+    TagsToAddFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilter, name: "member"))
+    TagsToAddList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    TargetTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    TargetTagsFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilter, name: "member"))
+    TimesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "member"))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#clientOptional" => {}, "smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -400,7 +400,7 @@ module Aws::DLM
     UpdateLifecyclePolicyRequest.add_member(:exclusions, ::Smithy::Schema::Shapes::MemberShape.new(target: Exclusions, name: "Exclusions"))
     UpdateLifecyclePolicyRequest.type = Types::UpdateLifecyclePolicyRequest
     UpdateLifecyclePolicyResponse.type = Types::UpdateLifecyclePolicyResponse
-    VariableTagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    VariableTagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
 
     Dlm20180112 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.dlm#dlm_20180112"

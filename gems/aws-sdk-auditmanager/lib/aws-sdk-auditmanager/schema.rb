@@ -334,10 +334,10 @@ module Aws::AuditManager
     AWSAccount.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "emailAddress"))
     AWSAccount.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountName, name: "name"))
     AWSAccount.type = Types::AWSAccount
-    AWSAccounts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccount, name: "member")
+    AWSAccounts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccount, name: "member"))
     AWSService.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSServiceName, name: "serviceName"))
     AWSService.type = Types::AWSService
-    AWSServices.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AWSService, name: "member")
+    AWSServices.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSService, name: "member"))
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
     AccountStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
@@ -376,8 +376,8 @@ module Aws::AuditManager
     AssessmentControlSet.add_member(:system_evidence_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "systemEvidenceCount", traits: {"smithy.api#default" => 0}))
     AssessmentControlSet.add_member(:manual_evidence_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "manualEvidenceCount", traits: {"smithy.api#default" => 0}))
     AssessmentControlSet.type = Types::AssessmentControlSet
-    AssessmentControlSets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentControlSet, name: "member")
-    AssessmentControls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentControl, name: "member")
+    AssessmentControlSets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentControlSet, name: "member"))
+    AssessmentControls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentControl, name: "member"))
     AssessmentEvidenceFolder.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentEvidenceFolderName, name: "name"))
     AssessmentEvidenceFolder.add_member(:date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "date"))
     AssessmentEvidenceFolder.add_member(:assessment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "assessmentId"))
@@ -397,7 +397,7 @@ module Aws::AuditManager
     AssessmentEvidenceFolder.add_member(:evidence_by_type_user_activity_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "evidenceByTypeUserActivityCount", traits: {"smithy.api#default" => 0}))
     AssessmentEvidenceFolder.add_member(:evidence_aws_service_source_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "evidenceAwsServiceSourceCount", traits: {"smithy.api#default" => 0}))
     AssessmentEvidenceFolder.type = Types::AssessmentEvidenceFolder
-    AssessmentEvidenceFolders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentEvidenceFolder, name: "member")
+    AssessmentEvidenceFolders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentEvidenceFolder, name: "member"))
     AssessmentFramework.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id"))
     AssessmentFramework.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditManagerArn, name: "arn"))
     AssessmentFramework.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameworkMetadata, name: "metadata"))
@@ -431,7 +431,7 @@ module Aws::AuditManager
     AssessmentFrameworkShareRequest.add_member(:custom_controls_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "customControlsCount"))
     AssessmentFrameworkShareRequest.add_member(:compliance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceType, name: "complianceType"))
     AssessmentFrameworkShareRequest.type = Types::AssessmentFrameworkShareRequest
-    AssessmentFrameworkShareRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentFrameworkShareRequest, name: "member")
+    AssessmentFrameworkShareRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentFrameworkShareRequest, name: "member"))
     AssessmentMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentName, name: "name"))
     AssessmentMetadata.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id"))
     AssessmentMetadata.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentDescription, name: "description"))
@@ -468,7 +468,7 @@ module Aws::AuditManager
     AssessmentReportEvidenceError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "errorCode"))
     AssessmentReportEvidenceError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
     AssessmentReportEvidenceError.type = Types::AssessmentReportEvidenceError
-    AssessmentReportEvidenceErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentReportEvidenceError, name: "member")
+    AssessmentReportEvidenceErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentReportEvidenceError, name: "member"))
     AssessmentReportMetadata.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id"))
     AssessmentReportMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentReportName, name: "name"))
     AssessmentReportMetadata.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentReportDescription, name: "description"))
@@ -484,7 +484,7 @@ module Aws::AuditManager
     AssessmentReportsDestination.add_member(:destination_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentReportDestinationType, name: "destinationType"))
     AssessmentReportsDestination.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Url, name: "destination"))
     AssessmentReportsDestination.type = Types::AssessmentReportsDestination
-    AssessmentReportsMetadata.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentReportMetadata, name: "member")
+    AssessmentReportsMetadata.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentReportMetadata, name: "member"))
     AssessmentStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     AssessmentStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     AssociateAssessmentReportEvidenceFolderRequest.add_member(:assessment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "assessmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -502,7 +502,7 @@ module Aws::AuditManager
     BatchCreateDelegationByAssessmentError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "errorCode"))
     BatchCreateDelegationByAssessmentError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
     BatchCreateDelegationByAssessmentError.type = Types::BatchCreateDelegationByAssessmentError
-    BatchCreateDelegationByAssessmentErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateDelegationByAssessmentError, name: "member")
+    BatchCreateDelegationByAssessmentErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateDelegationByAssessmentError, name: "member"))
     BatchCreateDelegationByAssessmentRequest.add_member(:create_delegation_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateDelegationRequests, name: "createDelegationRequests", traits: {"smithy.api#required" => {}}))
     BatchCreateDelegationByAssessmentRequest.add_member(:assessment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "assessmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BatchCreateDelegationByAssessmentRequest.type = Types::BatchCreateDelegationByAssessmentRequest
@@ -513,7 +513,7 @@ module Aws::AuditManager
     BatchDeleteDelegationByAssessmentError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "errorCode"))
     BatchDeleteDelegationByAssessmentError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
     BatchDeleteDelegationByAssessmentError.type = Types::BatchDeleteDelegationByAssessmentError
-    BatchDeleteDelegationByAssessmentErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteDelegationByAssessmentError, name: "member")
+    BatchDeleteDelegationByAssessmentErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteDelegationByAssessmentError, name: "member"))
     BatchDeleteDelegationByAssessmentRequest.add_member(:delegation_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegationIds, name: "delegationIds", traits: {"smithy.api#required" => {}}))
     BatchDeleteDelegationByAssessmentRequest.add_member(:assessment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "assessmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BatchDeleteDelegationByAssessmentRequest.type = Types::BatchDeleteDelegationByAssessmentRequest
@@ -530,7 +530,7 @@ module Aws::AuditManager
     BatchImportEvidenceToAssessmentControlError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "errorCode"))
     BatchImportEvidenceToAssessmentControlError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
     BatchImportEvidenceToAssessmentControlError.type = Types::BatchImportEvidenceToAssessmentControlError
-    BatchImportEvidenceToAssessmentControlErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchImportEvidenceToAssessmentControlError, name: "member")
+    BatchImportEvidenceToAssessmentControlErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchImportEvidenceToAssessmentControlError, name: "member"))
     BatchImportEvidenceToAssessmentControlRequest.add_member(:assessment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "assessmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BatchImportEvidenceToAssessmentControlRequest.add_member(:control_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlSetId, name: "controlSetId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BatchImportEvidenceToAssessmentControlRequest.add_member(:control_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "controlId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -544,7 +544,7 @@ module Aws::AuditManager
     ChangeLog.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
     ChangeLog.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: IamArn, name: "createdBy"))
     ChangeLog.type = Types::ChangeLog
-    ChangeLogs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeLog, name: "member")
+    ChangeLogs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeLog, name: "member"))
     Control.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditManagerArn, name: "arn"))
     Control.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id"))
     Control.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlType, name: "type"))
@@ -566,7 +566,7 @@ module Aws::AuditManager
     ControlComment.add_member(:comment_body, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlCommentBody, name: "commentBody"))
     ControlComment.add_member(:posted_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "postedDate"))
     ControlComment.type = Types::ControlComment
-    ControlComments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ControlComment, name: "member")
+    ControlComments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlComment, name: "member"))
     ControlDomainInsights.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     ControlDomainInsights.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlDomainId, name: "id"))
     ControlDomainInsights.add_member(:controls_count_by_noncompliant_evidence, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "controlsCountByNoncompliantEvidence"))
@@ -574,9 +574,9 @@ module Aws::AuditManager
     ControlDomainInsights.add_member(:evidence_insights, ::Smithy::Schema::Shapes::MemberShape.new(target: EvidenceInsights, name: "evidenceInsights"))
     ControlDomainInsights.add_member(:last_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdated"))
     ControlDomainInsights.type = Types::ControlDomainInsights
-    ControlDomainInsightsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ControlDomainInsights, name: "member")
-    ControlInsightsMetadata.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ControlInsightsMetadataItem, name: "member")
-    ControlInsightsMetadataByAssessment.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ControlInsightsMetadataByAssessmentItem, name: "member")
+    ControlDomainInsightsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlDomainInsights, name: "member"))
+    ControlInsightsMetadata.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlInsightsMetadataItem, name: "member"))
+    ControlInsightsMetadataByAssessment.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlInsightsMetadataByAssessmentItem, name: "member"))
     ControlInsightsMetadataByAssessmentItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     ControlInsightsMetadataByAssessmentItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlDomainId, name: "id"))
     ControlInsightsMetadataByAssessmentItem.add_member(:evidence_insights, ::Smithy::Schema::Shapes::MemberShape.new(target: EvidenceInsights, name: "evidenceInsights"))
@@ -597,7 +597,7 @@ module Aws::AuditManager
     ControlMappingSource.add_member(:source_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceFrequency, name: "sourceFrequency"))
     ControlMappingSource.add_member(:troubleshooting_text, ::Smithy::Schema::Shapes::MemberShape.new(target: TroubleshootingText, name: "troubleshootingText"))
     ControlMappingSource.type = Types::ControlMappingSource
-    ControlMappingSources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ControlMappingSource, name: "member")
+    ControlMappingSources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlMappingSource, name: "member"))
     ControlMetadata.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditManagerArn, name: "arn"))
     ControlMetadata.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id"))
     ControlMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlName, name: "name"))
@@ -605,7 +605,7 @@ module Aws::AuditManager
     ControlMetadata.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
     ControlMetadata.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedAt"))
     ControlMetadata.type = Types::ControlMetadata
-    ControlMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ControlMetadata, name: "member")
+    ControlMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlMetadata, name: "member"))
     ControlResponse.add_member(:manual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANUAL", traits: {"smithy.api#enumValue" => "MANUAL"}))
     ControlResponse.add_member(:automate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTOMATE", traits: {"smithy.api#enumValue" => "AUTOMATE"}))
     ControlResponse.add_member(:defer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFER", traits: {"smithy.api#enumValue" => "DEFER"}))
@@ -617,7 +617,7 @@ module Aws::AuditManager
     ControlSetStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     ControlSetStatus.add_member(:under_review, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNDER_REVIEW", traits: {"smithy.api#enumValue" => "UNDER_REVIEW"}))
     ControlSetStatus.add_member(:reviewed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REVIEWED", traits: {"smithy.api#enumValue" => "REVIEWED"}))
-    ControlSets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ControlSet, name: "member")
+    ControlSets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlSet, name: "member"))
     ControlState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     ControlState.add_member(:end_of_support, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "END_OF_SUPPORT", traits: {"smithy.api#enumValue" => "END_OF_SUPPORT"}))
     ControlStatus.add_member(:under_review, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNDER_REVIEW", traits: {"smithy.api#enumValue" => "UNDER_REVIEW"}))
@@ -626,14 +626,14 @@ module Aws::AuditManager
     ControlType.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "Standard"}))
     ControlType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "Custom"}))
     ControlType.add_member(:core, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CORE", traits: {"smithy.api#enumValue" => "Core"}))
-    Controls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Control, name: "member")
+    Controls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Control, name: "member"))
     CreateAssessmentFrameworkControl.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id", traits: {"smithy.api#required" => {}}))
     CreateAssessmentFrameworkControl.type = Types::CreateAssessmentFrameworkControl
     CreateAssessmentFrameworkControlSet.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlSetName, name: "name", traits: {"smithy.api#required" => {}}))
     CreateAssessmentFrameworkControlSet.add_member(:controls, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAssessmentFrameworkControls, name: "controls"))
     CreateAssessmentFrameworkControlSet.type = Types::CreateAssessmentFrameworkControlSet
-    CreateAssessmentFrameworkControlSets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAssessmentFrameworkControlSet, name: "member")
-    CreateAssessmentFrameworkControls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAssessmentFrameworkControl, name: "member")
+    CreateAssessmentFrameworkControlSets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAssessmentFrameworkControlSet, name: "member"))
+    CreateAssessmentFrameworkControls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAssessmentFrameworkControl, name: "member"))
     CreateAssessmentFrameworkRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameworkName, name: "name", traits: {"smithy.api#required" => {}}))
     CreateAssessmentFrameworkRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameworkDescription, name: "description"))
     CreateAssessmentFrameworkRequest.add_member(:compliance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceType, name: "complianceType"))
@@ -667,7 +667,7 @@ module Aws::AuditManager
     CreateControlMappingSource.add_member(:source_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceFrequency, name: "sourceFrequency"))
     CreateControlMappingSource.add_member(:troubleshooting_text, ::Smithy::Schema::Shapes::MemberShape.new(target: TroubleshootingText, name: "troubleshootingText"))
     CreateControlMappingSource.type = Types::CreateControlMappingSource
-    CreateControlMappingSources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CreateControlMappingSource, name: "member")
+    CreateControlMappingSources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateControlMappingSource, name: "member"))
     CreateControlRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlName, name: "name", traits: {"smithy.api#required" => {}}))
     CreateControlRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlDescription, name: "description"))
     CreateControlRequest.add_member(:testing_information, ::Smithy::Schema::Shapes::MemberShape.new(target: TestingInformation, name: "testingInformation"))
@@ -683,7 +683,7 @@ module Aws::AuditManager
     CreateDelegationRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamArn, name: "roleArn"))
     CreateDelegationRequest.add_member(:role_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleType, name: "roleType"))
     CreateDelegationRequest.type = Types::CreateDelegationRequest
-    CreateDelegationRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CreateDelegationRequest, name: "member")
+    CreateDelegationRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateDelegationRequest, name: "member"))
     DataSourceType.add_member(:aws_cloudtrail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_CLOUDTRAIL", traits: {"smithy.api#enumValue" => "AWS_Cloudtrail"}))
     DataSourceType.add_member(:aws_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_CONFIG", traits: {"smithy.api#enumValue" => "AWS_Config"}))
     DataSourceType.add_member(:aws_security_hub, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SECURITY_HUB", traits: {"smithy.api#enumValue" => "AWS_Security_Hub"}))
@@ -704,7 +704,7 @@ module Aws::AuditManager
     Delegation.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegationComment, name: "comment"))
     Delegation.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedBy, name: "createdBy"))
     Delegation.type = Types::Delegation
-    DelegationIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "member")
+    DelegationIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "member"))
     DelegationMetadata.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id"))
     DelegationMetadata.add_member(:assessment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentName, name: "assessmentName"))
     DelegationMetadata.add_member(:assessment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "assessmentId"))
@@ -713,11 +713,11 @@ module Aws::AuditManager
     DelegationMetadata.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime"))
     DelegationMetadata.add_member(:control_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "controlSetName"))
     DelegationMetadata.type = Types::DelegationMetadata
-    DelegationMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DelegationMetadata, name: "member")
+    DelegationMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegationMetadata, name: "member"))
     DelegationStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     DelegationStatus.add_member(:under_review, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNDER_REVIEW", traits: {"smithy.api#enumValue" => "UNDER_REVIEW"}))
     DelegationStatus.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
-    Delegations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Delegation, name: "member")
+    Delegations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Delegation, name: "member"))
     DeleteAssessmentFrameworkRequest.add_member(:framework_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "frameworkId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAssessmentFrameworkRequest.type = Types::DeleteAssessmentFrameworkRequest
     DeleteAssessmentFrameworkResponse.type = Types::DeleteAssessmentFrameworkResponse
@@ -765,8 +765,8 @@ module Aws::AuditManager
     Evidence.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id"))
     Evidence.add_member(:assessment_report_selection, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "assessmentReportSelection"))
     Evidence.type = Types::Evidence
-    EvidenceAttributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EvidenceAttributeKey, name: "key")
-    EvidenceAttributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EvidenceAttributeValue, name: "value")
+    EvidenceAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EvidenceAttributeKey, name: "key"))
+    EvidenceAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EvidenceAttributeValue, name: "value"))
     EvidenceFinderBackfillStatus.add_member(:not_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_STARTED", traits: {"smithy.api#enumValue" => "NOT_STARTED"}))
     EvidenceFinderBackfillStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     EvidenceFinderBackfillStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
@@ -779,13 +779,13 @@ module Aws::AuditManager
     EvidenceFinderEnablementStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     EvidenceFinderEnablementStatus.add_member(:enable_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "ENABLE_IN_PROGRESS"}))
     EvidenceFinderEnablementStatus.add_member(:disable_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DISABLE_IN_PROGRESS"}))
-    EvidenceIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "member")
+    EvidenceIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "member"))
     EvidenceInsights.add_member(:noncompliant_evidence_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "noncompliantEvidenceCount"))
     EvidenceInsights.add_member(:compliant_evidence_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "compliantEvidenceCount"))
     EvidenceInsights.add_member(:inconclusive_evidence_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "inconclusiveEvidenceCount"))
     EvidenceInsights.type = Types::EvidenceInsights
-    EvidenceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Evidence, name: "member")
-    EvidenceSources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    EvidenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Evidence, name: "member"))
+    EvidenceSources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     ExportDestinationType.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3", traits: {"smithy.api#enumValue" => "S3"}))
     Framework.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditManagerArn, name: "arn"))
     Framework.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id"))
@@ -807,7 +807,7 @@ module Aws::AuditManager
     FrameworkMetadata.add_member(:logo, ::Smithy::Schema::Shapes::MemberShape.new(target: Filename, name: "logo"))
     FrameworkMetadata.add_member(:compliance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceType, name: "complianceType"))
     FrameworkMetadata.type = Types::FrameworkMetadata
-    FrameworkMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentFrameworkMetadata, name: "member")
+    FrameworkMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentFrameworkMetadata, name: "member"))
     FrameworkType.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "Standard"}))
     FrameworkType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "Custom"}))
     GetAccountStatusRequest.type = Types::GetAccountStatusRequest
@@ -927,7 +927,7 @@ module Aws::AuditManager
     KeywordInputType.add_member(:select_from_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELECT_FROM_LIST", traits: {"smithy.api#enumValue" => "SELECT_FROM_LIST"}))
     KeywordInputType.add_member(:upload_file, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPLOAD_FILE", traits: {"smithy.api#enumValue" => "UPLOAD_FILE"}))
     KeywordInputType.add_member(:input_text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INPUT_TEXT", traits: {"smithy.api#enumValue" => "INPUT_TEXT"}))
-    Keywords.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordValue, name: "member")
+    Keywords.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordValue, name: "member"))
     ListAssessmentControlInsightsByControlDomainRequest.add_member(:control_domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlDomainId, name: "controlDomainId", traits: {"smithy.api#httpQuery" => "controlDomainId", "smithy.api#required" => {}}))
     ListAssessmentControlInsightsByControlDomainRequest.add_member(:assessment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "assessmentId", traits: {"smithy.api#httpQuery" => "assessmentId", "smithy.api#required" => {}}))
     ListAssessmentControlInsightsByControlDomainRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -950,7 +950,7 @@ module Aws::AuditManager
     ListAssessmentFrameworksResponse.add_member(:framework_metadata_list, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameworkMetadataList, name: "frameworkMetadataList"))
     ListAssessmentFrameworksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "nextToken"))
     ListAssessmentFrameworksResponse.type = Types::ListAssessmentFrameworksResponse
-    ListAssessmentMetadata.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentMetadataItem, name: "member")
+    ListAssessmentMetadata.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentMetadataItem, name: "member"))
     ListAssessmentReportsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListAssessmentReportsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListAssessmentReportsRequest.type = Types::ListAssessmentReportsRequest
@@ -1013,7 +1013,7 @@ module Aws::AuditManager
     ManualEvidence.add_member(:text_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ManualEvidenceTextResponse, name: "textResponse"))
     ManualEvidence.add_member(:evidence_file_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ManualEvidenceLocalFileName, name: "evidenceFileName"))
     ManualEvidence.type = Types::ManualEvidence
-    ManualEvidenceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManualEvidence, name: "member")
+    ManualEvidenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManualEvidence, name: "member"))
     Notification.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampUUID, name: "id"))
     Notification.add_member(:assessment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "assessmentId"))
     Notification.add_member(:assessment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentName, name: "assessmentName"))
@@ -1023,7 +1023,7 @@ module Aws::AuditManager
     Notification.add_member(:event_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "eventTime"))
     Notification.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "source"))
     Notification.type = Types::Notification
-    Notifications.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Notification, name: "member")
+    Notifications.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Notification, name: "member"))
     ObjectTypeEnum.add_member(:assessment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSESSMENT", traits: {"smithy.api#enumValue" => "ASSESSMENT"}))
     ObjectTypeEnum.add_member(:control_set, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTROL_SET", traits: {"smithy.api#enumValue" => "CONTROL_SET"}))
     ObjectTypeEnum.add_member(:control, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTROL", traits: {"smithy.api#enumValue" => "CONTROL"}))
@@ -1047,13 +1047,13 @@ module Aws::AuditManager
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceType", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    Resources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member")
+    Resources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
     Role.add_member(:role_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleType, name: "roleType", traits: {"smithy.api#required" => {}}))
     Role.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
     Role.type = Types::Role
     RoleType.add_member(:process_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROCESS_OWNER", traits: {"smithy.api#enumValue" => "PROCESS_OWNER"}))
     RoleType.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_OWNER", traits: {"smithy.api#enumValue" => "RESOURCE_OWNER"}))
-    Roles.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "member")
+    Roles.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "member"))
     Scope.add_member(:aws_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccounts, name: "awsAccounts"))
     Scope.add_member(:aws_services, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSServices, name: "awsServices", traits: {"smithy.api#deprecated" => {"message" => "You can't specify services in scope when creating/updating an assessment. If you use the parameter to specify one or more AWS services, Audit Manager ignores the input. Instead the value of the parameter will show as empty indicating that the services are defined and managed by Audit Manager."}}))
     Scope.type = Types::Scope
@@ -1062,7 +1062,7 @@ module Aws::AuditManager
     ServiceMetadata.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "description"))
     ServiceMetadata.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "category"))
     ServiceMetadata.type = Types::ServiceMetadata
-    ServiceMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceMetadata, name: "member")
+    ServiceMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceMetadata, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     SettingAttribute.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
@@ -1117,9 +1117,9 @@ module Aws::AuditManager
     StartAssessmentFrameworkShareRequest.type = Types::StartAssessmentFrameworkShareRequest
     StartAssessmentFrameworkShareResponse.add_member(:assessment_framework_share_request, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentFrameworkShareRequest, name: "assessmentFrameworkShareRequest"))
     StartAssessmentFrameworkShareResponse.type = Types::StartAssessmentFrameworkShareResponse
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditManagerArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -1152,7 +1152,7 @@ module Aws::AuditManager
     UpdateAssessmentFrameworkControlSet.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlSetName, name: "name", traits: {"smithy.api#required" => {}}))
     UpdateAssessmentFrameworkControlSet.add_member(:controls, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAssessmentFrameworkControls, name: "controls", traits: {"smithy.api#required" => {}}))
     UpdateAssessmentFrameworkControlSet.type = Types::UpdateAssessmentFrameworkControlSet
-    UpdateAssessmentFrameworkControlSets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateAssessmentFrameworkControlSet, name: "member")
+    UpdateAssessmentFrameworkControlSets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateAssessmentFrameworkControlSet, name: "member"))
     UpdateAssessmentFrameworkRequest.add_member(:framework_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "frameworkId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateAssessmentFrameworkRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameworkName, name: "name", traits: {"smithy.api#required" => {}}))
     UpdateAssessmentFrameworkRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameworkDescription, name: "description"))
@@ -1209,7 +1209,7 @@ module Aws::AuditManager
     ValidateAssessmentReportIntegrityResponse.add_member(:signature_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "signatureKeyId"))
     ValidateAssessmentReportIntegrityResponse.add_member(:validation_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationErrors, name: "validationErrors"))
     ValidateAssessmentReportIntegrityResponse.type = Types::ValidateAssessmentReportIntegrityResponse
-    ValidationErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    ValidationErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, name: "reason"))
     ValidationException.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldList, name: "fields"))
@@ -1217,7 +1217,7 @@ module Aws::AuditManager
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "unknownOperation"}))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "cannotParse"}))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "fieldValidationFailed"}))

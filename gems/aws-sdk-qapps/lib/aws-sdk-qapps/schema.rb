@@ -191,7 +191,7 @@ module Aws::QApps
     AppDefinitionInput.add_member(:cards, ::Smithy::Schema::Shapes::MemberShape.new(target: CardList, name: "cards", traits: {"smithy.api#required" => {}}))
     AppDefinitionInput.add_member(:initial_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: InitialPrompt, name: "initialPrompt"))
     AppDefinitionInput.type = Types::AppDefinitionInput
-    AppRequiredCapabilities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppRequiredCapability, name: "member")
+    AppRequiredCapabilities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppRequiredCapability, name: "member"))
     AppRequiredCapability.add_member(:file_upload, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FILE_UPLOAD", traits: {"smithy.api#enumValue" => "FileUpload"}))
     AppRequiredCapability.add_member(:creator_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATOR_MODE", traits: {"smithy.api#enumValue" => "CreatorMode"}))
     AppRequiredCapability.add_member(:retrieval_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RETRIEVAL_MODE", traits: {"smithy.api#enumValue" => "RetrievalMode"}))
@@ -216,7 +216,7 @@ module Aws::QApps
     AttributeFilter.add_member(:less_than, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttribute, name: "lessThan"))
     AttributeFilter.add_member(:less_than_or_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttribute, name: "lessThanOrEquals"))
     AttributeFilter.type = Types::AttributeFilter
-    AttributeFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeFilter, name: "member")
+    AttributeFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeFilter, name: "member"))
     BatchCreateCategoryInput.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "instanceId", traits: {"smithy.api#httpHeader" => "instance-id", "smithy.api#required" => {}}))
     BatchCreateCategoryInput.add_member(:categories, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateCategoryInputCategoryList, name: "categories", traits: {"smithy.api#required" => {}}))
     BatchCreateCategoryInput.type = Types::BatchCreateCategoryInput
@@ -224,7 +224,7 @@ module Aws::QApps
     BatchCreateCategoryInputCategory.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "title", traits: {"smithy.api#length" => {"min" => 1, "max" => 30}, "smithy.api#pattern" => "^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$", "smithy.api#required" => {}}))
     BatchCreateCategoryInputCategory.add_member(:color, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "color", traits: {"smithy.api#length" => {"min" => 4, "max" => 7}, "smithy.api#pattern" => "^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6})$"}))
     BatchCreateCategoryInputCategory.type = Types::BatchCreateCategoryInputCategory
-    BatchCreateCategoryInputCategoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateCategoryInputCategory, name: "member")
+    BatchCreateCategoryInputCategoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateCategoryInputCategory, name: "member"))
     BatchDeleteCategoryInput.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "instanceId", traits: {"smithy.api#httpHeader" => "instance-id", "smithy.api#required" => {}}))
     BatchDeleteCategoryInput.add_member(:categories, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteCategoryInputList, name: "categories", traits: {"smithy.api#required" => {}}))
     BatchDeleteCategoryInput.type = Types::BatchDeleteCategoryInput
@@ -245,16 +245,16 @@ module Aws::QApps
     CardInput.add_member(:form_input, Types::CardInput::FormInput, ::Smithy::Schema::Shapes::MemberShape.new(target: FormInputCardInput, name: "formInput"))
     CardInput.add_member(:unknown, Types::CardInput::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     CardInput.type = Types::CardInput
-    CardList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CardInput, name: "member")
-    CardModelList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Card, name: "member")
+    CardList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CardInput, name: "member"))
+    CardModelList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Card, name: "member"))
     CardOutputSource.add_member(:approved_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPROVED_SOURCES", traits: {"smithy.api#enumValue" => "approved-sources"}))
     CardOutputSource.add_member(:llm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LLM", traits: {"smithy.api#enumValue" => "llm"}))
     CardStatus.add_member(:current_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStatus, name: "currentState", traits: {"smithy.api#required" => {}}))
     CardStatus.add_member(:current_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "currentValue", traits: {"smithy.api#required" => {}}))
     CardStatus.add_member(:submissions, ::Smithy::Schema::Shapes::MemberShape.new(target: SubmissionList, name: "submissions"))
     CardStatus.type = Types::CardStatus
-    CardStatusMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "key")
-    CardStatusMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CardStatus, name: "value")
+    CardStatusMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "key"))
+    CardStatusMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CardStatus, name: "value"))
     CardType.add_member(:text_input, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXT_INPUT", traits: {"smithy.api#enumValue" => "text-input"}))
     CardType.add_member(:q_query, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Q_QUERY", traits: {"smithy.api#enumValue" => "q-query"}))
     CardType.add_member(:file_upload, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FILE_UPLOAD", traits: {"smithy.api#enumValue" => "file-upload"}))
@@ -264,20 +264,20 @@ module Aws::QApps
     CardValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"max" => 40000}, "smithy.api#required" => {}}))
     CardValue.add_member(:submission_mutation, ::Smithy::Schema::Shapes::MemberShape.new(target: SubmissionMutation, name: "submissionMutation"))
     CardValue.type = Types::CardValue
-    CardValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CardValue, name: "member")
-    CategoriesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Category, name: "member")
+    CardValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CardValue, name: "member"))
+    CategoriesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Category, name: "member"))
     Category.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id", traits: {"smithy.api#required" => {}}))
     Category.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "title", traits: {"smithy.api#required" => {}}))
     Category.add_member(:color, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "color"))
     Category.add_member(:app_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "appCount"))
     Category.type = Types::Category
-    CategoryIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "member")
+    CategoryIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "member"))
     CategoryInput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id", traits: {"smithy.api#required" => {}}))
     CategoryInput.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "title", traits: {"smithy.api#length" => {"min" => 1, "max" => 30}, "smithy.api#pattern" => "^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$", "smithy.api#required" => {}}))
     CategoryInput.add_member(:color, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "color", traits: {"smithy.api#length" => {"min" => 4, "max" => 7}, "smithy.api#pattern" => "^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6})$"}))
     CategoryInput.type = Types::CategoryInput
-    CategoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Category, name: "member")
-    CategoryListInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryInput, name: "member")
+    CategoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Category, name: "member"))
+    CategoryListInput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryInput, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType", traits: {"smithy.api#required" => {}}))
@@ -335,14 +335,14 @@ module Aws::QApps
     CreateQAppOutput.add_member(:updated_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "updatedBy", traits: {"smithy.api#required" => {}}))
     CreateQAppOutput.add_member(:required_capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: AppRequiredCapabilities, name: "requiredCapabilities"))
     CreateQAppOutput.type = Types::CreateQAppOutput
-    DeleteCategoryInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "member")
+    DeleteCategoryInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "member"))
     DeleteLibraryItemInput.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "instanceId", traits: {"smithy.api#httpHeader" => "instance-id", "smithy.api#required" => {}}))
     DeleteLibraryItemInput.add_member(:library_item_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "libraryItemId", traits: {"smithy.api#required" => {}}))
     DeleteLibraryItemInput.type = Types::DeleteLibraryItemInput
     DeleteQAppInput.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "instanceId", traits: {"smithy.api#httpHeader" => "instance-id", "smithy.api#required" => {}}))
     DeleteQAppInput.add_member(:app_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "appId", traits: {"smithy.api#required" => {}}))
     DeleteQAppInput.type = Types::DeleteQAppInput
-    DependencyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    DependencyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     DescribeQAppPermissionsInput.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "instanceId", traits: {"smithy.api#httpHeader" => "instance-id", "smithy.api#required" => {}}))
     DescribeQAppPermissionsInput.add_member(:app_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "appId", traits: {"smithy.api#httpQuery" => "appId", "smithy.api#required" => {}}))
     DescribeQAppPermissionsInput.type = Types::DescribeQAppPermissionsInput
@@ -359,7 +359,7 @@ module Aws::QApps
     DocumentAttribute.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeKey, name: "name", traits: {"smithy.api#required" => {}}))
     DocumentAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeValue, name: "value", traits: {"smithy.api#required" => {}}))
     DocumentAttribute.type = Types::DocumentAttribute
-    DocumentAttributeStringListValue.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlatoString, name: "member")
+    DocumentAttributeStringListValue.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatoString, name: "member"))
     DocumentAttributeValue.add_member(:string_value, Types::DocumentAttributeValue::StringValue, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeStringValue, name: "stringValue", traits: {"smithy.api#length" => {"max" => 2048}}))
     DocumentAttributeValue.add_member(:string_list_value, Types::DocumentAttributeValue::StringListValue, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentAttributeStringListValue, name: "stringListValue"))
     DocumentAttributeValue.add_member(:long_value, Types::DocumentAttributeValue::LongValue, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "longValue"))
@@ -481,7 +481,7 @@ module Aws::QApps
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     InternalServerException.type = Types::InternalServerException
-    LibraryItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LibraryItemMember, name: "member")
+    LibraryItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LibraryItemMember, name: "member"))
     LibraryItemMember.add_member(:library_item_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "libraryItemId", traits: {"smithy.api#required" => {}}))
     LibraryItemMember.add_member(:app_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "appId", traits: {"smithy.api#required" => {}}))
     LibraryItemMember.add_member(:app_version, ::Smithy::Schema::Shapes::MemberShape.new(target: AppVersion, name: "appVersion", traits: {"smithy.api#required" => {}}))
@@ -529,16 +529,16 @@ module Aws::QApps
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    MemoryReferenceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    MessageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationMessage, name: "member")
+    MemoryReferenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    MessageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationMessage, name: "member"))
     PermissionInput.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "action", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}, "smithy.api#required" => {}}))
     PermissionInput.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "principal", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#required" => {}}))
     PermissionInput.type = Types::PermissionInput
     PermissionOutput.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "action", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}, "smithy.api#required" => {}}))
     PermissionOutput.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalOutput, name: "principal", traits: {"smithy.api#required" => {}}))
     PermissionOutput.type = Types::PermissionOutput
-    PermissionsInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionInput, name: "member")
-    PermissionsOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionOutput, name: "member")
+    PermissionsInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionInput, name: "member"))
+    PermissionsOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionOutput, name: "member"))
     PluginType.add_member(:service_now, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE_NOW", traits: {"smithy.api#enumValue" => "SERVICE_NOW"}))
     PluginType.add_member(:salesforce, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SALESFORCE", traits: {"smithy.api#enumValue" => "SALESFORCE"}))
     PluginType.add_member(:jira, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JIRA", traits: {"smithy.api#enumValue" => "JIRA"}))
@@ -569,8 +569,8 @@ module Aws::QApps
     PredictQAppOutput.add_member(:app, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictAppDefinition, name: "app", traits: {"smithy.api#required" => {}}))
     PredictQAppOutput.add_member(:problem_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "problemStatement", traits: {"smithy.api#required" => {}}))
     PredictQAppOutput.type = Types::PredictQAppOutput
-    PresignedUrlFields.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    PresignedUrlFields.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    PresignedUrlFields.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    PresignedUrlFields.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     PrincipalOutput.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "userId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}}))
     PrincipalOutput.add_member(:user_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UserType, name: "userType", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}}))
     PrincipalOutput.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "email", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}}))
@@ -581,7 +581,7 @@ module Aws::QApps
     QAppSessionData.add_member(:submission_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "submissionId"))
     QAppSessionData.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: QAppsTimestamp, name: "timestamp"))
     QAppSessionData.type = Types::QAppSessionData
-    QAppSessionDataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QAppSessionData, name: "member")
+    QAppSessionDataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QAppSessionData, name: "member"))
     QPluginCard.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id", traits: {"smithy.api#required" => {}}))
     QPluginCard.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: Title, name: "title", traits: {"smithy.api#required" => {}}))
     QPluginCard.add_member(:dependencies, ::Smithy::Schema::Shapes::MemberShape.new(target: DependencyList, name: "dependencies", traits: {"smithy.api#required" => {}}))
@@ -647,22 +647,22 @@ module Aws::QApps
     Submission.add_member(:submission_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "submissionId"))
     Submission.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: QAppsTimestamp, name: "timestamp"))
     Submission.type = Types::Submission
-    SubmissionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Submission, name: "member")
+    SubmissionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Submission, name: "member"))
     SubmissionMutation.add_member(:submission_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "submissionId", traits: {"smithy.api#required" => {}}))
     SubmissionMutation.add_member(:mutation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SubmissionMutationKind, name: "mutationType", traits: {"smithy.api#required" => {}}))
     SubmissionMutation.type = Types::SubmissionMutation
     SubmissionMutationKind.add_member(:edit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "edit", traits: {"smithy.api#enumValue" => "edit"}))
     SubmissionMutationKind.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "delete", traits: {"smithy.api#enumValue" => "delete"}))
     SubmissionMutationKind.add_member(:add, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "add", traits: {"smithy.api#enumValue" => "add"}))
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceARN", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TextInputCard.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "id", traits: {"smithy.api#required" => {}}))
     TextInputCard.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: Title, name: "title", traits: {"smithy.api#required" => {}}))
     TextInputCard.add_member(:dependencies, ::Smithy::Schema::Shapes::MemberShape.new(target: DependencyList, name: "dependencies", traits: {"smithy.api#required" => {}}))
@@ -766,7 +766,7 @@ module Aws::QApps
     UserAppItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "status"))
     UserAppItem.add_member(:is_verified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isVerified", traits: {"smithy.api#default" => false}))
     UserAppItem.type = Types::UserAppItem
-    UserAppsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserAppItem, name: "member")
+    UserAppsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAppItem, name: "member"))
     UserType.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OWNER", traits: {"smithy.api#enumValue" => "owner"}))
     UserType.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER", traits: {"smithy.api#enumValue" => "user"}))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))

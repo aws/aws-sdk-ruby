@@ -357,7 +357,7 @@ module Aws::FraudDetector
     ATIMetricDataPoint.add_member(:threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "threshold"))
     ATIMetricDataPoint.add_member(:atodr, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "atodr"))
     ATIMetricDataPoint.type = Types::ATIMetricDataPoint
-    ATIMetricDataPointsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ATIMetricDataPoint, name: "member")
+    ATIMetricDataPointsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ATIMetricDataPoint, name: "member"))
     ATIModelPerformance.add_member(:asi, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "asi"))
     ATIModelPerformance.type = Types::ATIModelPerformance
     ATITrainingMetricsValue.add_member(:metric_data_points, ::Smithy::Schema::Shapes::MemberShape.new(target: ATIMetricDataPointsList, name: "metricDataPoints"))
@@ -381,7 +381,7 @@ module Aws::FraudDetector
     AllowDenyList.add_member(:updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "updatedTime"))
     AllowDenyList.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudDetectorArn, name: "arn"))
     AllowDenyList.type = Types::AllowDenyList
-    AllowDenyLists.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AllowDenyList, name: "member")
+    AllowDenyLists.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowDenyList, name: "member"))
     AsyncJobStatus.add_member(:in_progress_initializing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS_INITIALIZING", traits: {"smithy.api#enumValue" => "IN_PROGRESS_INITIALIZING"}))
     AsyncJobStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     AsyncJobStatus.add_member(:cancel_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCEL_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CANCEL_IN_PROGRESS"}))
@@ -392,7 +392,7 @@ module Aws::FraudDetector
     BatchCreateVariableError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer2, name: "code", traits: {"smithy.api#default" => 0}))
     BatchCreateVariableError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     BatchCreateVariableError.type = Types::BatchCreateVariableError
-    BatchCreateVariableErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateVariableError, name: "member")
+    BatchCreateVariableErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateVariableError, name: "member"))
     BatchCreateVariableRequest.add_member(:variable_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableEntryList, name: "variableEntries", traits: {"smithy.api#required" => {}}))
     BatchCreateVariableRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     BatchCreateVariableRequest.type = Types::BatchCreateVariableRequest
@@ -402,7 +402,7 @@ module Aws::FraudDetector
     BatchGetVariableError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer2, name: "code", traits: {"smithy.api#default" => 0}))
     BatchGetVariableError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     BatchGetVariableError.type = Types::BatchGetVariableError
-    BatchGetVariableErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetVariableError, name: "member")
+    BatchGetVariableErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetVariableError, name: "member"))
     BatchGetVariableRequest.add_member(:names, ::Smithy::Schema::Shapes::MemberShape.new(target: NameList, name: "names", traits: {"smithy.api#required" => {}}))
     BatchGetVariableRequest.type = Types::BatchGetVariableRequest
     BatchGetVariableResult.add_member(:variables, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableList, name: "variables"))
@@ -422,7 +422,7 @@ module Aws::FraudDetector
     BatchImport.add_member(:failed_records_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "failedRecordsCount"))
     BatchImport.add_member(:total_records_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "totalRecordsCount"))
     BatchImport.type = Types::BatchImport
-    BatchImportList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchImport, name: "member")
+    BatchImportList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchImport, name: "member"))
     BatchPrediction.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "jobId"))
     BatchPrediction.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AsyncJobStatus, name: "status"))
     BatchPrediction.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "failureReason"))
@@ -439,7 +439,7 @@ module Aws::FraudDetector
     BatchPrediction.add_member(:processed_records_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "processedRecordsCount"))
     BatchPrediction.add_member(:total_records_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "totalRecordsCount"))
     BatchPrediction.type = Types::BatchPrediction
-    BatchPredictionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPrediction, name: "member")
+    BatchPredictionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPrediction, name: "member"))
     CancelBatchImportJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "jobId", traits: {"smithy.api#required" => {}}))
     CancelBatchImportJobRequest.type = Types::CancelBatchImportJobRequest
     CancelBatchImportJobResult.type = Types::CancelBatchImportJobResult
@@ -524,8 +524,8 @@ module Aws::FraudDetector
     CreateVariableRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     CreateVariableRequest.type = Types::CreateVariableRequest
     CreateVariableResult.type = Types::CreateVariableResult
-    CsvIndexToVariableMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    CsvIndexToVariableMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    CsvIndexToVariableMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    CsvIndexToVariableMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     DataSource.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVENT", traits: {"smithy.api#enumValue" => "EVENT"}))
     DataSource.add_member(:model_score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MODEL_SCORE", traits: {"smithy.api#enumValue" => "MODEL_SCORE"}))
     DataSource.add_member(:external_model_score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXTERNAL_MODEL_SCORE", traits: {"smithy.api#enumValue" => "EXTERNAL_MODEL_SCORE"}))
@@ -618,7 +618,7 @@ module Aws::FraudDetector
     Detector.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "createdTime"))
     Detector.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudDetectorArn, name: "arn"))
     Detector.type = Types::Detector
-    DetectorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Detector, name: "member")
+    DetectorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Detector, name: "member"))
     DetectorVersionStatus.add_member(:draft, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DRAFT", traits: {"smithy.api#enumValue" => "DRAFT"}))
     DetectorVersionStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     DetectorVersionStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
@@ -627,8 +627,8 @@ module Aws::FraudDetector
     DetectorVersionSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     DetectorVersionSummary.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "lastUpdatedTime"))
     DetectorVersionSummary.type = Types::DetectorVersionSummary
-    DetectorVersionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorVersionSummary, name: "member")
-    ElementsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Elements, name: "member")
+    DetectorVersionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorVersionSummary, name: "member"))
+    ElementsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Elements, name: "member"))
     Entity.add_member(:entity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "entityType", traits: {"smithy.api#required" => {}}))
     Entity.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRestrictedString, name: "entityId", traits: {"smithy.api#required" => {}}))
     Entity.type = Types::Entity
@@ -656,7 +656,7 @@ module Aws::FraudDetector
     EvaluatedRule.add_member(:evaluated, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "evaluated"))
     EvaluatedRule.add_member(:matched, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "matched"))
     EvaluatedRule.type = Types::EvaluatedRule
-    EvaluatedRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluatedRule, name: "member")
+    EvaluatedRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluatedRule, name: "member"))
     Event.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "eventId"))
     Event.add_member(:event_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "eventTypeName"))
     Event.add_member(:event_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "eventTimestamp"))
@@ -665,8 +665,8 @@ module Aws::FraudDetector
     Event.add_member(:label_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "labelTimestamp"))
     Event.add_member(:entities, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfEntities, name: "entities"))
     Event.type = Types::Event
-    EventAttributeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKey, name: "key")
-    EventAttributeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
+    EventAttributeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKey, name: "key"))
+    EventAttributeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     EventIngestion.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     EventIngestion.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     EventOrchestration.add_member(:event_bridge_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "eventBridgeEnabled", traits: {"smithy.api#required" => {}}))
@@ -690,8 +690,8 @@ module Aws::FraudDetector
     EventType.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudDetectorArn, name: "arn"))
     EventType.add_member(:event_orchestration, ::Smithy::Schema::Shapes::MemberShape.new(target: EventOrchestration, name: "eventOrchestration"))
     EventType.type = Types::EventType
-    EventVariableMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: VariableName, name: "key")
-    EventVariableMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: VariableValue, name: "value")
+    EventVariableMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableName, name: "key"))
+    EventVariableMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableValue, name: "value"))
     EventVariableSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "name"))
     EventVariableSummary.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "value"))
     EventVariableSummary.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "source"))
@@ -709,14 +709,14 @@ module Aws::FraudDetector
     ExternalModel.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "createdTime"))
     ExternalModel.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudDetectorArn, name: "arn"))
     ExternalModel.type = Types::ExternalModel
-    ExternalModelEndpointDataBlobMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerEndpointIdentifier, name: "key")
-    ExternalModelEndpointDataBlobMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ModelEndpointDataBlob, name: "value")
-    ExternalModelList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalModel, name: "member")
+    ExternalModelEndpointDataBlobMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerEndpointIdentifier, name: "key"))
+    ExternalModelEndpointDataBlobMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelEndpointDataBlob, name: "value"))
+    ExternalModelList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalModel, name: "member"))
     ExternalModelOutputs.add_member(:external_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalModelSummary, name: "externalModel"))
     ExternalModelOutputs.add_member(:outputs, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalModelPredictionMap, name: "outputs"))
     ExternalModelOutputs.type = Types::ExternalModelOutputs
-    ExternalModelPredictionMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    ExternalModelPredictionMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    ExternalModelPredictionMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    ExternalModelPredictionMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     ExternalModelSummary.add_member(:model_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "modelEndpoint"))
     ExternalModelSummary.add_member(:model_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelSource, name: "modelSource"))
     ExternalModelSummary.type = Types::ExternalModelSummary
@@ -915,8 +915,8 @@ module Aws::FraudDetector
     IngestedEventsTimeWindow.type = Types::IngestedEventsTimeWindow
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
-    JsonKeyToVariableMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    JsonKeyToVariableMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    JsonKeyToVariableMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    JsonKeyToVariableMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     KMSKey.add_member(:kms_encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsEncryptionKeyArn, name: "kmsEncryptionKeyArn"))
     KMSKey.type = Types::KMSKey
     Label.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
@@ -940,19 +940,19 @@ module Aws::FraudDetector
     ListEventPredictionsResult.add_member(:event_prediction_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfEventPredictionSummaries, name: "eventPredictionSummaries"))
     ListEventPredictionsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
     ListEventPredictionsResult.type = Types::ListEventPredictionsResult
-    ListOfAggregatedLogOddsMetrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedLogOddsMetric, name: "member")
-    ListOfAggregatedVariablesImpactExplanations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedVariablesImpactExplanation, name: "member")
-    ListOfEvaluatedExternalModels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluatedExternalModel, name: "member")
-    ListOfEvaluatedModelVersions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluatedModelVersion, name: "member")
-    ListOfEventPredictionSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventPredictionSummary, name: "member")
-    ListOfEventVariableSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventVariableSummary, name: "member")
-    ListOfExternalModelOutputs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalModelOutputs, name: "member")
-    ListOfLogOddsMetrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogOddsMetric, name: "member")
-    ListOfModelScores.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ModelScores, name: "member")
-    ListOfModelVersionEvaluations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ModelVersionEvaluation, name: "member")
-    ListOfModelVersions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ModelVersion, name: "member")
-    ListOfRuleResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleResult, name: "member")
-    ListOfStrings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ListOfAggregatedLogOddsMetrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedLogOddsMetric, name: "member"))
+    ListOfAggregatedVariablesImpactExplanations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedVariablesImpactExplanation, name: "member"))
+    ListOfEvaluatedExternalModels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluatedExternalModel, name: "member"))
+    ListOfEvaluatedModelVersions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluatedModelVersion, name: "member"))
+    ListOfEventPredictionSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventPredictionSummary, name: "member"))
+    ListOfEventVariableSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventVariableSummary, name: "member"))
+    ListOfExternalModelOutputs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalModelOutputs, name: "member"))
+    ListOfLogOddsMetrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogOddsMetric, name: "member"))
+    ListOfModelScores.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelScores, name: "member"))
+    ListOfModelVersionEvaluations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelVersionEvaluation, name: "member"))
+    ListOfModelVersions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelVersion, name: "member"))
+    ListOfRuleResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleResult, name: "member"))
+    ListOfStrings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudDetectorArn, name: "resourceARN", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
     ListTagsForResourceRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMaxResults, name: "maxResults"))
@@ -967,8 +967,8 @@ module Aws::FraudDetector
     LogOddsMetric.add_member(:variable_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "variableType", traits: {"smithy.api#required" => {}}))
     LogOddsMetric.add_member(:variable_importance, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "variableImportance", traits: {"smithy.api#required" => {}}))
     LogOddsMetric.type = Types::LogOddsMetric
-    MapOfStrings.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    MapOfStrings.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    MapOfStrings.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    MapOfStrings.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     MetricDataPoint.add_member(:fpr, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "fpr"))
     MetricDataPoint.add_member(:precision, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "precision"))
     MetricDataPoint.add_member(:tpr, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "tpr"))
@@ -1001,8 +1001,8 @@ module Aws::FraudDetector
     ModelOutputConfiguration.type = Types::ModelOutputConfiguration
     ModelOutputDataFormat.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CSV", traits: {"smithy.api#enumValue" => "TEXT_CSV"}))
     ModelOutputDataFormat.add_member(:jsonlines, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSONLINES", traits: {"smithy.api#enumValue" => "APPLICATION_JSONLINES"}))
-    ModelPredictionMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    ModelPredictionMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "value")
+    ModelPredictionMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    ModelPredictionMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "value"))
     ModelScores.add_member(:model_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelVersion, name: "modelVersion"))
     ModelScores.add_member(:scores, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPredictionMap, name: "scores"))
     ModelScores.type = Types::ModelScores
@@ -1036,14 +1036,14 @@ module Aws::FraudDetector
     ModelVersionStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     ModelVersionStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     ModelVersionStatus.add_member(:training_cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRAINING_CANCELLED", traits: {"smithy.api#enumValue" => "TRAINING_CANCELLED"}))
-    NameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    NonEmptyListOfStrings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    NameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    NonEmptyListOfStrings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     OFIMetricDataPoint.add_member(:fpr, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "fpr"))
     OFIMetricDataPoint.add_member(:precision, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "precision"))
     OFIMetricDataPoint.add_member(:tpr, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "tpr"))
     OFIMetricDataPoint.add_member(:threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "threshold"))
     OFIMetricDataPoint.type = Types::OFIMetricDataPoint
-    OFIMetricDataPointsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OFIMetricDataPoint, name: "member")
+    OFIMetricDataPointsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OFIMetricDataPoint, name: "member"))
     OFIModelPerformance.add_member(:auc, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "auc"))
     OFIModelPerformance.add_member(:uncertainty_range, ::Smithy::Schema::Shapes::MemberShape.new(target: UncertaintyRange, name: "uncertaintyRange"))
     OFIModelPerformance.type = Types::OFIModelPerformance
@@ -1056,7 +1056,7 @@ module Aws::FraudDetector
     Outcome.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "createdTime"))
     Outcome.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudDetectorArn, name: "arn"))
     Outcome.type = Types::Outcome
-    OutcomeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Outcome, name: "member")
+    OutcomeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Outcome, name: "member"))
     PredictionExplanations.add_member(:variable_impact_explanations, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfVariableImpactExplanations, name: "variableImpactExplanations"))
     PredictionExplanations.add_member(:aggregated_variables_impact_explanations, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfAggregatedVariablesImpactExplanations, name: "aggregatedVariablesImpactExplanations"))
     PredictionExplanations.type = Types::PredictionExplanations
@@ -1125,10 +1125,10 @@ module Aws::FraudDetector
     RuleDetail.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "createdTime"))
     RuleDetail.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudDetectorArn, name: "arn"))
     RuleDetail.type = Types::RuleDetail
-    RuleDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleDetail, name: "member")
+    RuleDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleDetail, name: "member"))
     RuleExecutionMode.add_member(:all_matched, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL_MATCHED", traits: {"smithy.api#enumValue" => "ALL_MATCHED"}))
     RuleExecutionMode.add_member(:first_matched, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIRST_MATCHED", traits: {"smithy.api#enumValue" => "FIRST_MATCHED"}))
-    RuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "member")
+    RuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "member"))
     RuleResult.add_member(:rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ruleId"))
     RuleResult.add_member(:outcomes, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfStrings, name: "outcomes"))
     RuleResult.type = Types::RuleResult
@@ -1146,7 +1146,7 @@ module Aws::FraudDetector
     TFIMetricDataPoint.add_member(:tpr, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "tpr"))
     TFIMetricDataPoint.add_member(:threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "threshold"))
     TFIMetricDataPoint.type = Types::TFIMetricDataPoint
-    TFIMetricDataPointsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TFIMetricDataPoint, name: "member")
+    TFIMetricDataPointsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TFIMetricDataPoint, name: "member"))
     TFIModelPerformance.add_member(:auc, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "auc"))
     TFIModelPerformance.add_member(:uncertainty_range, ::Smithy::Schema::Shapes::MemberShape.new(target: UncertaintyRange, name: "uncertaintyRange"))
     TFIModelPerformance.type = Types::TFIModelPerformance
@@ -1287,28 +1287,28 @@ module Aws::FraudDetector
     VariableEntry.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "description"))
     VariableEntry.add_member(:variable_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "variableType"))
     VariableEntry.type = Types::VariableEntry
-    VariableEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VariableEntry, name: "member")
+    VariableEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableEntry, name: "member"))
     VariableImpactExplanation.add_member(:event_variable_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "eventVariableName"))
     VariableImpactExplanation.add_member(:relative_impact, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "relativeImpact"))
     VariableImpactExplanation.add_member(:log_odds_impact, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "logOddsImpact"))
     VariableImpactExplanation.type = Types::VariableImpactExplanation
     VariableImportanceMetrics.add_member(:log_odds_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfLogOddsMetrics, name: "logOddsMetrics"))
     VariableImportanceMetrics.type = Types::VariableImportanceMetrics
-    VariableList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Variable, name: "member")
-    EntityTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, name: "member")
-    EventTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "member")
-    FieldValidationMessageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValidationMessage, name: "member")
-    FileValidationMessageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileValidationMessage, name: "member")
-    LabelList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Label, name: "member")
-    LabelMapper.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    LabelMapper.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfStrings, name: "value")
-    ListOfEntities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Entity, name: "member")
-    ListOfVariableImpactExplanations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VariableImpactExplanation, name: "member")
-    MetricDataPointsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDataPoint, name: "member")
-    ModelList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Model, name: "member")
-    ModelVersionDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ModelVersionDetail, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    VariableList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Variable, name: "member"))
+    EntityTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, name: "member"))
+    EventTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "member"))
+    FieldValidationMessageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValidationMessage, name: "member"))
+    FileValidationMessageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FileValidationMessage, name: "member"))
+    LabelList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Label, name: "member"))
+    LabelMapper.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    LabelMapper.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfStrings, name: "value"))
+    ListOfEntities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Entity, name: "member"))
+    ListOfVariableImpactExplanations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableImpactExplanation, name: "member"))
+    MetricDataPointsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDataPoint, name: "member"))
+    ModelList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Model, name: "member"))
+    ModelVersionDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelVersionDetail, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
 
     AWSHawksNestServiceFacade = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.frauddetector#AWSHawksNestServiceFacade"

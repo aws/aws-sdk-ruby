@@ -393,16 +393,16 @@ module Aws::BedrockAgentCoreControl
     AgentRuntimeEndpointStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
     AgentRuntimeEndpointStatus.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
     AgentRuntimeEndpointStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    AgentRuntimeEndpoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentRuntimeEndpoint, name: "member")
+    AgentRuntimeEndpoints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentRuntimeEndpoint, name: "member"))
     AgentRuntimeStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     AgentRuntimeStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
     AgentRuntimeStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
     AgentRuntimeStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
     AgentRuntimeStatus.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
     AgentRuntimeStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    AgentRuntimes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentRuntime, name: "member")
-    AllowedAudienceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedAudience, name: "member")
-    AllowedClientsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedClient, name: "member")
+    AgentRuntimes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentRuntime, name: "member"))
+    AllowedAudienceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedAudience, name: "member"))
+    AllowedClientsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedClient, name: "member"))
     ApiKeyCredentialLocation.add_member(:header, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HEADER", traits: {"smithy.api#enumValue" => "HEADER"}))
     ApiKeyCredentialLocation.add_member(:query_parameter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUERY_PARAMETER", traits: {"smithy.api#enumValue" => "QUERY_PARAMETER"}))
     ApiKeyCredentialProviderItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialProviderName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -410,7 +410,7 @@ module Aws::BedrockAgentCoreControl
     ApiKeyCredentialProviderItem.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdTime", traits: {"smithy.api#required" => {}}))
     ApiKeyCredentialProviderItem.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastUpdatedTime", traits: {"smithy.api#required" => {}}))
     ApiKeyCredentialProviderItem.type = Types::ApiKeyCredentialProviderItem
-    ApiKeyCredentialProviders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApiKeyCredentialProviderItem, name: "member")
+    ApiKeyCredentialProviders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiKeyCredentialProviderItem, name: "member"))
     ApiSchemaConfiguration.add_member(:s3, Types::ApiSchemaConfiguration::S3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Configuration, name: "s3"))
     ApiSchemaConfiguration.add_member(:inline_payload, Types::ApiSchemaConfiguration::InlinePayload, ::Smithy::Schema::Shapes::MemberShape.new(target: InlinePayload, name: "inlinePayload"))
     ApiSchemaConfiguration.add_member(:unknown, Types::ApiSchemaConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -430,7 +430,7 @@ module Aws::BedrockAgentCoreControl
     BrowserStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     BrowserStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
     BrowserStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
-    BrowserSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserSummary, name: "member")
+    BrowserSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserSummary, name: "member"))
     BrowserSummary.add_member(:browser_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserId, name: "browserId", traits: {"smithy.api#required" => {}}))
     BrowserSummary.add_member(:browser_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserArn, name: "browserArn", traits: {"smithy.api#required" => {}}))
     BrowserSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SandboxName, name: "name"))
@@ -451,7 +451,7 @@ module Aws::BedrockAgentCoreControl
     CodeInterpreterStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     CodeInterpreterStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
     CodeInterpreterStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
-    CodeInterpreterSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CodeInterpreterSummary, name: "member")
+    CodeInterpreterSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeInterpreterSummary, name: "member"))
     CodeInterpreterSummary.add_member(:code_interpreter_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeInterpreterId, name: "codeInterpreterId", traits: {"smithy.api#required" => {}}))
     CodeInterpreterSummary.add_member(:code_interpreter_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeInterpreterArn, name: "codeInterpreterArn", traits: {"smithy.api#required" => {}}))
     CodeInterpreterSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SandboxName, name: "name"))
@@ -613,7 +613,7 @@ module Aws::BedrockAgentCoreControl
     CredentialProviderConfiguration.add_member(:credential_provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialProviderType, name: "credentialProviderType", traits: {"smithy.api#required" => {}}))
     CredentialProviderConfiguration.add_member(:credential_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialProvider, name: "credentialProvider"))
     CredentialProviderConfiguration.type = Types::CredentialProviderConfiguration
-    CredentialProviderConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialProviderConfiguration, name: "member")
+    CredentialProviderConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialProviderConfiguration, name: "member"))
     CredentialProviderType.add_member(:gateway_iam_role, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GATEWAY_IAM_ROLE", traits: {"smithy.api#enumValue" => "GATEWAY_IAM_ROLE"}))
     CredentialProviderType.add_member(:oauth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OAUTH", traits: {"smithy.api#enumValue" => "OAUTH"}))
     CredentialProviderType.add_member(:api_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "API_KEY", traits: {"smithy.api#enumValue" => "API_KEY"}))
@@ -710,7 +710,7 @@ module Aws::BedrockAgentCoreControl
     DeleteMemoryOutput.add_member(:memory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryId, name: "memoryId", traits: {"smithy.api#required" => {}}))
     DeleteMemoryOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryStatus, name: "status"))
     DeleteMemoryOutput.type = Types::DeleteMemoryOutput
-    DeleteMemoryStrategiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteMemoryStrategyInput, name: "member")
+    DeleteMemoryStrategiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteMemoryStrategyInput, name: "member"))
     DeleteMemoryStrategyInput.add_member(:memory_strategy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "memoryStrategyId", traits: {"smithy.api#required" => {}}))
     DeleteMemoryStrategyInput.type = Types::DeleteMemoryStrategyInput
     DeleteOauth2CredentialProviderRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialProviderName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -721,8 +721,8 @@ module Aws::BedrockAgentCoreControl
     DeleteWorkloadIdentityResponse.type = Types::DeleteWorkloadIdentityResponse
     EncryptionFailure.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     EncryptionFailure.type = Types::EncryptionFailure
-    EnvironmentVariablesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableKey, name: "key")
-    EnvironmentVariablesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableValue, name: "value")
+    EnvironmentVariablesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableKey, name: "key"))
+    EnvironmentVariablesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableValue, name: "value"))
     ExceptionLevel.add_member(:debug, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEBUG", traits: {"smithy.api#enumValue" => "DEBUG"}))
     ExtractionConfiguration.add_member(:custom_extraction_configuration, Types::ExtractionConfiguration::CustomExtractionConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomExtractionConfiguration, name: "customExtractionConfiguration"))
     ExtractionConfiguration.add_member(:unknown, Types::ExtractionConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -742,7 +742,7 @@ module Aws::BedrockAgentCoreControl
     GatewayStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     GatewayStatus.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
     GatewayStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    GatewaySummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GatewaySummary, name: "member")
+    GatewaySummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewaySummary, name: "member"))
     GatewaySummary.add_member(:gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayId, name: "gatewayId", traits: {"smithy.api#required" => {}}))
     GatewaySummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayName, name: "name", traits: {"smithy.api#required" => {}}))
     GatewaySummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayStatus, name: "status", traits: {"smithy.api#required" => {}}))
@@ -983,7 +983,7 @@ module Aws::BedrockAgentCoreControl
     McpLambdaTargetConfiguration.add_member(:lambda_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaFunctionArn, name: "lambdaArn", traits: {"smithy.api#required" => {}}))
     McpLambdaTargetConfiguration.add_member(:tool_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolSchema, name: "toolSchema", traits: {"smithy.api#required" => {}}))
     McpLambdaTargetConfiguration.type = Types::McpLambdaTargetConfiguration
-    McpSupportedVersions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: McpVersion, name: "member")
+    McpSupportedVersions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: McpVersion, name: "member"))
     McpTargetConfiguration.add_member(:open_api_schema, Types::McpTargetConfiguration::OpenApiSchema, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiSchemaConfiguration, name: "openApiSchema"))
     McpTargetConfiguration.add_member(:smithy_model, Types::McpTargetConfiguration::SmithyModel, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiSchemaConfiguration, name: "smithyModel"))
     McpTargetConfiguration.add_member(:lambda, Types::McpTargetConfiguration::Lambda, ::Smithy::Schema::Shapes::MemberShape.new(target: McpLambdaTargetConfiguration, name: "lambda"))
@@ -1022,8 +1022,8 @@ module Aws::BedrockAgentCoreControl
     MemoryStrategyInput.add_member(:custom_memory_strategy, Types::MemoryStrategyInput::CustomMemoryStrategy, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomMemoryStrategyInput, name: "customMemoryStrategy"))
     MemoryStrategyInput.add_member(:unknown, Types::MemoryStrategyInput::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     MemoryStrategyInput.type = Types::MemoryStrategyInput
-    MemoryStrategyInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryStrategyInput, name: "member")
-    MemoryStrategyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryStrategy, name: "member")
+    MemoryStrategyInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryStrategyInput, name: "member"))
+    MemoryStrategyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryStrategy, name: "member"))
     MemoryStrategyStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     MemoryStrategyStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     MemoryStrategyStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -1038,7 +1038,7 @@ module Aws::BedrockAgentCoreControl
     MemorySummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
     MemorySummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
     MemorySummary.type = Types::MemorySummary
-    MemorySummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemorySummary, name: "member")
+    MemorySummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemorySummary, name: "member"))
     MicrosoftOauth2ProviderConfigInput.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientIdType, name: "clientId", traits: {"smithy.api#required" => {}}))
     MicrosoftOauth2ProviderConfigInput.add_member(:client_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientSecretType, name: "clientSecret", traits: {"smithy.api#required" => {}}))
     MicrosoftOauth2ProviderConfigInput.type = Types::MicrosoftOauth2ProviderConfigInput
@@ -1054,7 +1054,7 @@ module Aws::BedrockAgentCoreControl
     ModifyMemoryStrategies.add_member(:modify_memory_strategies, ::Smithy::Schema::Shapes::MemberShape.new(target: ModifyMemoryStrategiesList, name: "modifyMemoryStrategies"))
     ModifyMemoryStrategies.add_member(:delete_memory_strategies, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteMemoryStrategiesList, name: "deleteMemoryStrategies"))
     ModifyMemoryStrategies.type = Types::ModifyMemoryStrategies
-    ModifyMemoryStrategiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ModifyMemoryStrategyInput, name: "member")
+    ModifyMemoryStrategiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ModifyMemoryStrategyInput, name: "member"))
     ModifyMemoryStrategyInput.add_member(:memory_strategy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "memoryStrategyId", traits: {"smithy.api#required" => {}}))
     ModifyMemoryStrategyInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     ModifyMemoryStrategyInput.add_member(:namespaces, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespacesList, name: "namespaces"))
@@ -1063,7 +1063,7 @@ module Aws::BedrockAgentCoreControl
     ModifyStrategyConfiguration.add_member(:extraction, ::Smithy::Schema::Shapes::MemberShape.new(target: ModifyExtractionConfiguration, name: "extraction"))
     ModifyStrategyConfiguration.add_member(:consolidation, ::Smithy::Schema::Shapes::MemberShape.new(target: ModifyConsolidationConfiguration, name: "consolidation"))
     ModifyStrategyConfiguration.type = Types::ModifyStrategyConfiguration
-    NamespacesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "member")
+    NamespacesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "member"))
     NetworkConfiguration.add_member(:network_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkMode, name: "networkMode", traits: {"smithy.api#required" => {}}))
     NetworkConfiguration.add_member(:network_mode_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "networkModeConfig"))
     NetworkConfiguration.type = Types::NetworkConfiguration
@@ -1073,9 +1073,9 @@ module Aws::BedrockAgentCoreControl
     OAuthCredentialProvider.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthScopes, name: "scopes", traits: {"smithy.api#required" => {}}))
     OAuthCredentialProvider.add_member(:custom_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthCustomParameters, name: "customParameters"))
     OAuthCredentialProvider.type = Types::OAuthCredentialProvider
-    OAuthCustomParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthCustomParametersKey, name: "key")
-    OAuthCustomParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthCustomParametersValue, name: "value")
-    OAuthScopes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthScope, name: "member")
+    OAuthCustomParameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthCustomParametersKey, name: "key"))
+    OAuthCustomParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthCustomParametersValue, name: "value"))
+    OAuthScopes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthScope, name: "member"))
     Oauth2AuthorizationServerMetadata.add_member(:issuer, ::Smithy::Schema::Shapes::MemberShape.new(target: IssuerUrlType, name: "issuer", traits: {"smithy.api#required" => {}}))
     Oauth2AuthorizationServerMetadata.add_member(:authorization_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizationEndpointType, name: "authorizationEndpoint", traits: {"smithy.api#required" => {}}))
     Oauth2AuthorizationServerMetadata.add_member(:token_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenEndpointType, name: "tokenEndpoint", traits: {"smithy.api#required" => {}}))
@@ -1087,7 +1087,7 @@ module Aws::BedrockAgentCoreControl
     Oauth2CredentialProviderItem.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdTime", traits: {"smithy.api#required" => {}}))
     Oauth2CredentialProviderItem.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastUpdatedTime", traits: {"smithy.api#required" => {}}))
     Oauth2CredentialProviderItem.type = Types::Oauth2CredentialProviderItem
-    Oauth2CredentialProviders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Oauth2CredentialProviderItem, name: "member")
+    Oauth2CredentialProviders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Oauth2CredentialProviderItem, name: "member"))
     Oauth2Discovery.add_member(:discovery_url, Types::Oauth2Discovery::DiscoveryUrl, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscoveryUrlType, name: "discoveryUrl"))
     Oauth2Discovery.add_member(:authorization_server_metadata, Types::Oauth2Discovery::AuthorizationServerMetadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Oauth2AuthorizationServerMetadata, name: "authorizationServerMetadata"))
     Oauth2Discovery.add_member(:unknown, Types::Oauth2Discovery::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -1116,19 +1116,19 @@ module Aws::BedrockAgentCoreControl
     RecordingConfig.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enabled", traits: {"smithy.api#default" => false}))
     RecordingConfig.add_member(:s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "s3Location"))
     RecordingConfig.type = Types::RecordingConfig
-    RequestHeaderAllowlist.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderName, name: "member")
+    RequestHeaderAllowlist.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderName, name: "member"))
     RequestHeaderConfiguration.add_member(:request_header_allowlist, Types::RequestHeaderConfiguration::RequestHeaderAllowlist, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestHeaderAllowlist, name: "requestHeaderAllowlist"))
     RequestHeaderConfiguration.add_member(:unknown, Types::RequestHeaderConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RequestHeaderConfiguration.type = Types::RequestHeaderConfiguration
-    RequiredProperties.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    RequiredProperties.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     ResourceLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ResourceLimitExceededException.type = Types::ResourceLimitExceededException
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResourceOauth2ReturnUrlListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceOauth2ReturnUrlType, name: "member")
+    ResourceOauth2ReturnUrlListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceOauth2ReturnUrlType, name: "member"))
     ResourceType.add_member(:system, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYSTEM", traits: {"smithy.api#enumValue" => "SYSTEM"}))
     ResourceType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
-    ResponseListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseType, name: "member")
+    ResponseListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseType, name: "member"))
     S3Configuration.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketUri, name: "uri"))
     S3Configuration.add_member(:bucket_owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "bucketOwnerAccountId"))
     S3Configuration.type = Types::S3Configuration
@@ -1146,8 +1146,8 @@ module Aws::BedrockAgentCoreControl
     SchemaDefinition.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaDefinition, name: "items"))
     SchemaDefinition.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
     SchemaDefinition.type = Types::SchemaDefinition
-    SchemaProperties.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    SchemaProperties.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaDefinition, name: "value")
+    SchemaProperties.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    SchemaProperties.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaDefinition, name: "value"))
     SchemaType.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING", traits: {"smithy.api#enumValue" => "string"}))
     SchemaType.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NUMBER", traits: {"smithy.api#enumValue" => "number"}))
     SchemaType.add_member(:object, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OBJECT", traits: {"smithy.api#enumValue" => "object"}))
@@ -1157,7 +1157,7 @@ module Aws::BedrockAgentCoreControl
     SearchType.add_member(:semantic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEMANTIC", traits: {"smithy.api#enumValue" => "SEMANTIC"}))
     Secret.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "secretArn", traits: {"smithy.api#required" => {}}))
     Secret.type = Types::Secret
-    SecurityGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
+    SecurityGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     SemanticConsolidationOverride.add_member(:append_to_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: Prompt, name: "appendToPrompt", traits: {"smithy.api#required" => {}}))
     SemanticConsolidationOverride.add_member(:model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "modelId", traits: {"smithy.api#required" => {}}))
     SemanticConsolidationOverride.type = Types::SemanticConsolidationOverride
@@ -1195,12 +1195,12 @@ module Aws::BedrockAgentCoreControl
     SlackOauth2ProviderConfigInput.type = Types::SlackOauth2ProviderConfigInput
     SlackOauth2ProviderConfigOutput.add_member(:oauth_discovery, ::Smithy::Schema::Shapes::MemberShape.new(target: Oauth2Discovery, name: "oauthDiscovery", traits: {"smithy.api#required" => {}}))
     SlackOauth2ProviderConfigOutput.type = Types::SlackOauth2ProviderConfigOutput
-    StatusReasons.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StatusReason, name: "member")
+    StatusReasons.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusReason, name: "member"))
     StrategyConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: OverrideType, name: "type"))
     StrategyConfiguration.add_member(:extraction, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtractionConfiguration, name: "extraction"))
     StrategyConfiguration.add_member(:consolidation, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsolidationConfiguration, name: "consolidation"))
     StrategyConfiguration.type = Types::StrategyConfiguration
-    Subnets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
+    Subnets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
     SummaryConsolidationOverride.add_member(:append_to_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: Prompt, name: "appendToPrompt", traits: {"smithy.api#required" => {}}))
     SummaryConsolidationOverride.add_member(:model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "modelId", traits: {"smithy.api#required" => {}}))
     SummaryConsolidationOverride.type = Types::SummaryConsolidationOverride
@@ -1213,13 +1213,13 @@ module Aws::BedrockAgentCoreControl
     SummaryOverrideConsolidationConfigurationInput.add_member(:append_to_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: Prompt, name: "appendToPrompt", traits: {"smithy.api#required" => {}}))
     SummaryOverrideConsolidationConfigurationInput.add_member(:model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "modelId", traits: {"smithy.api#required" => {}}))
     SummaryOverrideConsolidationConfigurationInput.type = Types::SummaryOverrideConsolidationConfigurationInput
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourcesArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TagsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TargetConfiguration.add_member(:mcp, Types::TargetConfiguration::Mcp, ::Smithy::Schema::Shapes::MemberShape.new(target: McpTargetConfiguration, name: "mcp"))
     TargetConfiguration.add_member(:unknown, Types::TargetConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     TargetConfiguration.type = Types::TargetConfiguration
@@ -1229,7 +1229,7 @@ module Aws::BedrockAgentCoreControl
     TargetStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     TargetStatus.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
     TargetStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    TargetSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetSummary, name: "member")
+    TargetSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetSummary, name: "member"))
     TargetSummary.add_member(:target_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetId, name: "targetId", traits: {"smithy.api#required" => {}}))
     TargetSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetName, name: "name", traits: {"smithy.api#required" => {}}))
     TargetSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetStatus, name: "status", traits: {"smithy.api#required" => {}}))
@@ -1246,7 +1246,7 @@ module Aws::BedrockAgentCoreControl
     ToolDefinition.add_member(:input_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaDefinition, name: "inputSchema", traits: {"smithy.api#required" => {}}))
     ToolDefinition.add_member(:output_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaDefinition, name: "outputSchema"))
     ToolDefinition.type = Types::ToolDefinition
-    ToolDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ToolDefinition, name: "member")
+    ToolDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolDefinition, name: "member"))
     ToolSchema.add_member(:s3, Types::ToolSchema::S3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Configuration, name: "s3"))
     ToolSchema.add_member(:inline_payload, Types::ToolSchema::InlinePayload, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolDefinitions, name: "inlinePayload"))
     ToolSchema.add_member(:unknown, Types::ToolSchema::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -1402,7 +1402,7 @@ module Aws::BedrockAgentCoreControl
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "CannotParse"}))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "FieldValidationFailed"}))
     ValidationExceptionReason.add_member(:idempotent_parameter_mismatch_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION", traits: {"smithy.api#enumValue" => "IdempotentParameterMismatchException"}))
@@ -1413,7 +1413,7 @@ module Aws::BedrockAgentCoreControl
     VpcConfig.type = Types::VpcConfig
     WorkloadIdentityDetails.add_member(:workload_identity_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadIdentityArn, name: "workloadIdentityArn", traits: {"smithy.api#required" => {}}))
     WorkloadIdentityDetails.type = Types::WorkloadIdentityDetails
-    WorkloadIdentityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadIdentityType, name: "member")
+    WorkloadIdentityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadIdentityType, name: "member"))
     WorkloadIdentityType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadIdentityNameType, name: "name", traits: {"smithy.api#required" => {}}))
     WorkloadIdentityType.add_member(:workload_identity_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadIdentityArnType, name: "workloadIdentityArn", traits: {"smithy.api#required" => {}}))
     WorkloadIdentityType.type = Types::WorkloadIdentityType

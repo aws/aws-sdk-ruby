@@ -342,7 +342,7 @@ module Aws::AppMesh
     AwsCloudMapInstanceAttribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudMapInstanceAttributeKey, name: "key", traits: {"smithy.api#required" => {}}))
     AwsCloudMapInstanceAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudMapInstanceAttributeValue, name: "value", traits: {"smithy.api#required" => {}}))
     AwsCloudMapInstanceAttribute.type = Types::AwsCloudMapInstanceAttribute
-    AwsCloudMapInstanceAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudMapInstanceAttribute, name: "member")
+    AwsCloudMapInstanceAttributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudMapInstanceAttribute, name: "member"))
     AwsCloudMapServiceDiscovery.add_member(:namespace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudMapName, name: "namespaceName", traits: {"smithy.api#required" => {}}))
     AwsCloudMapServiceDiscovery.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudMapName, name: "serviceName", traits: {"smithy.api#required" => {}}))
     AwsCloudMapServiceDiscovery.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsCloudMapInstanceAttributes, name: "attributes"))
@@ -353,10 +353,10 @@ module Aws::AppMesh
     Backend.type = Types::Backend
     BackendDefaults.add_member(:client_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientPolicy, name: "clientPolicy"))
     BackendDefaults.type = Types::BackendDefaults
-    Backends.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Backend, name: "member")
+    Backends.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Backend, name: "member"))
     BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     BadRequestException.type = Types::BadRequestException
-    CertificateAuthorityArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    CertificateAuthorityArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     ClientPolicy.add_member(:tls, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientPolicyTls, name: "tls"))
     ClientPolicy.type = Types::ClientPolicy
     ClientPolicyTls.add_member(:enforce, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enforce", traits: {"smithy.api#default" => nil}))
@@ -586,7 +586,7 @@ module Aws::AppMesh
     GatewayRouteHostnameMatch.type = Types::GatewayRouteHostnameMatch
     GatewayRouteHostnameRewrite.add_member(:default_target_hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultGatewayRouteRewrite, name: "defaultTargetHostname"))
     GatewayRouteHostnameRewrite.type = Types::GatewayRouteHostnameRewrite
-    GatewayRouteList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRouteRef, name: "member")
+    GatewayRouteList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRouteRef, name: "member"))
     GatewayRouteRef.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "meshName", traits: {"smithy.api#required" => {}}))
     GatewayRouteRef.add_member(:gateway_route_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "gatewayRouteName", traits: {"smithy.api#required" => {}}))
     GatewayRouteRef.add_member(:virtual_gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "virtualGatewayName", traits: {"smithy.api#required" => {}}))
@@ -624,7 +624,7 @@ module Aws::AppMesh
     GrpcGatewayRouteMetadata.add_member(:invert, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "invert"))
     GrpcGatewayRouteMetadata.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcMetadataMatchMethod, name: "match"))
     GrpcGatewayRouteMetadata.type = Types::GrpcGatewayRouteMetadata
-    GrpcGatewayRouteMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcGatewayRouteMetadata, name: "member")
+    GrpcGatewayRouteMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcGatewayRouteMetadata, name: "member"))
     GrpcGatewayRouteRewrite.add_member(:hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayRouteHostnameRewrite, name: "hostname"))
     GrpcGatewayRouteRewrite.type = Types::GrpcGatewayRouteRewrite
     GrpcMetadataMatchMethod.add_member(:exact, Types::GrpcMetadataMatchMethod::Exact, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatch, name: "exact"))
@@ -640,7 +640,7 @@ module Aws::AppMesh
     GrpcRetryPolicy.add_member(:tcp_retry_events, ::Smithy::Schema::Shapes::MemberShape.new(target: TcpRetryPolicyEvents, name: "tcpRetryEvents"))
     GrpcRetryPolicy.add_member(:grpc_retry_events, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcRetryPolicyEvents, name: "grpcRetryEvents"))
     GrpcRetryPolicy.type = Types::GrpcRetryPolicy
-    GrpcRetryPolicyEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcRetryPolicyEvent, name: "member")
+    GrpcRetryPolicyEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcRetryPolicyEvent, name: "member"))
     GrpcRoute.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcRouteAction, name: "action", traits: {"smithy.api#required" => {}}))
     GrpcRoute.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcRouteMatch, name: "match", traits: {"smithy.api#required" => {}}))
     GrpcRoute.add_member(:retry_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcRetryPolicy, name: "retryPolicy"))
@@ -657,7 +657,7 @@ module Aws::AppMesh
     GrpcRouteMetadata.add_member(:invert, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "invert"))
     GrpcRouteMetadata.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcRouteMetadataMatchMethod, name: "match"))
     GrpcRouteMetadata.type = Types::GrpcRouteMetadata
-    GrpcRouteMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcRouteMetadata, name: "member")
+    GrpcRouteMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcRouteMetadata, name: "member"))
     GrpcRouteMetadataMatchMethod.add_member(:exact, Types::GrpcRouteMetadataMatchMethod::Exact, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatch, name: "exact"))
     GrpcRouteMetadataMatchMethod.add_member(:regex, Types::GrpcRouteMetadataMatchMethod::Regex, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatch, name: "regex"))
     GrpcRouteMetadataMatchMethod.add_member(:range, Types::GrpcRouteMetadataMatchMethod::Range, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchRange, name: "range"))
@@ -693,7 +693,7 @@ module Aws::AppMesh
     HttpGatewayRouteHeader.add_member(:invert, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "invert"))
     HttpGatewayRouteHeader.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatchMethod, name: "match"))
     HttpGatewayRouteHeader.type = Types::HttpGatewayRouteHeader
-    HttpGatewayRouteHeaders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HttpGatewayRouteHeader, name: "member")
+    HttpGatewayRouteHeaders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpGatewayRouteHeader, name: "member"))
     HttpGatewayRouteMatch.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "prefix"))
     HttpGatewayRouteMatch.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpPathMatch, name: "path"))
     HttpGatewayRouteMatch.add_member(:query_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpQueryParameters, name: "queryParameters"))
@@ -717,13 +717,13 @@ module Aws::AppMesh
     HttpQueryParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryParameterName, name: "name", traits: {"smithy.api#required" => {}}))
     HttpQueryParameter.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryParameterMatch, name: "match"))
     HttpQueryParameter.type = Types::HttpQueryParameter
-    HttpQueryParameters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HttpQueryParameter, name: "member")
+    HttpQueryParameters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpQueryParameter, name: "member"))
     HttpRetryPolicy.add_member(:per_retry_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, name: "perRetryTimeout", traits: {"smithy.api#required" => {}}))
     HttpRetryPolicy.add_member(:max_retries, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxRetries, name: "maxRetries", traits: {"smithy.api#required" => {}}))
     HttpRetryPolicy.add_member(:http_retry_events, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRetryPolicyEvents, name: "httpRetryEvents"))
     HttpRetryPolicy.add_member(:tcp_retry_events, ::Smithy::Schema::Shapes::MemberShape.new(target: TcpRetryPolicyEvents, name: "tcpRetryEvents"))
     HttpRetryPolicy.type = Types::HttpRetryPolicy
-    HttpRetryPolicyEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRetryPolicyEvent, name: "member")
+    HttpRetryPolicyEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRetryPolicyEvent, name: "member"))
     HttpRoute.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRouteMatch, name: "match", traits: {"smithy.api#required" => {}}))
     HttpRoute.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRouteAction, name: "action", traits: {"smithy.api#required" => {}}))
     HttpRoute.add_member(:retry_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRetryPolicy, name: "retryPolicy"))
@@ -735,7 +735,7 @@ module Aws::AppMesh
     HttpRouteHeader.add_member(:invert, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "invert"))
     HttpRouteHeader.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatchMethod, name: "match"))
     HttpRouteHeader.type = Types::HttpRouteHeader
-    HttpRouteHeaders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRouteHeader, name: "member")
+    HttpRouteHeaders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRouteHeader, name: "member"))
     HttpRouteMatch.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "prefix"))
     HttpRouteMatch.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpPathMatch, name: "path"))
     HttpRouteMatch.add_member(:query_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpQueryParameters, name: "queryParameters"))
@@ -749,7 +749,7 @@ module Aws::AppMesh
     HttpTimeout.type = Types::HttpTimeout
     InternalServerErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     InternalServerErrorException.type = Types::InternalServerErrorException
-    JsonFormat.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JsonFormatRef, name: "member")
+    JsonFormat.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonFormatRef, name: "member"))
     JsonFormatRef.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonKey, name: "key", traits: {"smithy.api#required" => {}}))
     JsonFormatRef.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonValue, name: "value", traits: {"smithy.api#required" => {}}))
     JsonFormatRef.type = Types::JsonFormatRef
@@ -854,7 +854,7 @@ module Aws::AppMesh
     ListenerTlsValidationContextTrust.add_member(:sds, Types::ListenerTlsValidationContextTrust::Sds, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsValidationContextSdsTrust, name: "sds"))
     ListenerTlsValidationContextTrust.add_member(:unknown, Types::ListenerTlsValidationContextTrust::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ListenerTlsValidationContextTrust.type = Types::ListenerTlsValidationContextTrust
-    Listeners.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Listener, name: "member")
+    Listeners.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Listener, name: "member"))
     Logging.add_member(:access_log, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessLog, name: "accessLog"))
     Logging.type = Types::Logging
     LoggingFormat.add_member(:text, Types::LoggingFormat::Text, ::Smithy::Schema::Shapes::MemberShape.new(target: TextFormat, name: "text"))
@@ -869,7 +869,7 @@ module Aws::AppMesh
     MeshData.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMetadata, name: "metadata", traits: {"smithy.api#required" => {}}))
     MeshData.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MeshStatus, name: "status", traits: {"smithy.api#required" => {}}))
     MeshData.type = Types::MeshData
-    MeshList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MeshRef, name: "member")
+    MeshList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MeshRef, name: "member"))
     MeshRef.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "meshName", traits: {"smithy.api#required" => {}}))
     MeshRef.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "meshOwner", traits: {"smithy.api#required" => {}}))
     MeshRef.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "resourceOwner", traits: {"smithy.api#required" => {}}))
@@ -895,7 +895,7 @@ module Aws::AppMesh
     PortMapping.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "port", traits: {"smithy.api#required" => {}}))
     PortMapping.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: PortProtocol, name: "protocol", traits: {"smithy.api#required" => {}}))
     PortMapping.type = Types::PortMapping
-    PortSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "member")
+    PortSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "member"))
     QueryParameterMatch.add_member(:exact, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "exact"))
     QueryParameterMatch.type = Types::QueryParameterMatch
     ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
@@ -915,7 +915,7 @@ module Aws::AppMesh
     RouteData.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMetadata, name: "metadata", traits: {"smithy.api#required" => {}}))
     RouteData.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteStatus, name: "status", traits: {"smithy.api#required" => {}}))
     RouteData.type = Types::RouteData
-    RouteList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteRef, name: "member")
+    RouteList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteRef, name: "member"))
     RouteRef.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "meshName", traits: {"smithy.api#required" => {}}))
     RouteRef.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "virtualRouterName", traits: {"smithy.api#required" => {}}))
     RouteRef.add_member(:route_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "routeName", traits: {"smithy.api#required" => {}}))
@@ -940,13 +940,13 @@ module Aws::AppMesh
     ServiceDiscovery.type = Types::ServiceDiscovery
     ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
-    SubjectAlternativeNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectAlternativeName, name: "member")
+    SubjectAlternativeNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectAlternativeName, name: "member"))
     SubjectAlternativeNameMatchers.add_member(:exact, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectAlternativeNameList, name: "exact", traits: {"smithy.api#required" => {}}))
     SubjectAlternativeNameMatchers.type = Types::SubjectAlternativeNameMatchers
     SubjectAlternativeNames.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectAlternativeNameMatchers, name: "match", traits: {"smithy.api#required" => {}}))
     SubjectAlternativeNames.type = Types::SubjectAlternativeNames
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagRef, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagRef, name: "member"))
     TagRef.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
     TagRef.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#required" => {}}))
     TagRef.type = Types::TagRef
@@ -954,7 +954,7 @@ module Aws::AppMesh
     TagResourceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceOperationInput.type = Types::TagResourceOperationInput
     TagResourceOperationOutput.type = Types::TagResourceOperationOutput
-    TcpRetryPolicyEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TcpRetryPolicyEvent, name: "member")
+    TcpRetryPolicyEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TcpRetryPolicyEvent, name: "member"))
     TcpRoute.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: TcpRouteAction, name: "action", traits: {"smithy.api#required" => {}}))
     TcpRoute.add_member(:timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: TcpTimeout, name: "timeout"))
     TcpRoute.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: TcpRouteMatch, name: "match"))
@@ -1062,7 +1062,7 @@ module Aws::AppMesh
     VirtualGatewayAccessLog.type = Types::VirtualGatewayAccessLog
     VirtualGatewayBackendDefaults.add_member(:client_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayClientPolicy, name: "clientPolicy"))
     VirtualGatewayBackendDefaults.type = Types::VirtualGatewayBackendDefaults
-    VirtualGatewayCertificateAuthorityArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    VirtualGatewayCertificateAuthorityArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     VirtualGatewayClientPolicy.add_member(:tls, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayClientPolicyTls, name: "tls"))
     VirtualGatewayClientPolicy.type = Types::VirtualGatewayClientPolicy
     VirtualGatewayClientPolicyTls.add_member(:enforce, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enforce", traits: {"smithy.api#default" => nil}))
@@ -1103,7 +1103,7 @@ module Aws::AppMesh
     VirtualGatewayHttpConnectionPool.add_member(:max_connections, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxConnections, name: "maxConnections", traits: {"smithy.api#required" => {}}))
     VirtualGatewayHttpConnectionPool.add_member(:max_pending_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxPendingRequests, name: "maxPendingRequests", traits: {"smithy.api#default" => nil}))
     VirtualGatewayHttpConnectionPool.type = Types::VirtualGatewayHttpConnectionPool
-    VirtualGatewayList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayRef, name: "member")
+    VirtualGatewayList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayRef, name: "member"))
     VirtualGatewayListener.add_member(:health_check, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayHealthCheckPolicy, name: "healthCheck"))
     VirtualGatewayListener.add_member(:port_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayPortMapping, name: "portMapping", traits: {"smithy.api#required" => {}}))
     VirtualGatewayListener.add_member(:tls, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayListenerTls, name: "tls"))
@@ -1132,7 +1132,7 @@ module Aws::AppMesh
     VirtualGatewayListenerTlsValidationContextTrust.add_member(:sds, Types::VirtualGatewayListenerTlsValidationContextTrust::Sds, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayTlsValidationContextSdsTrust, name: "sds"))
     VirtualGatewayListenerTlsValidationContextTrust.add_member(:unknown, Types::VirtualGatewayListenerTlsValidationContextTrust::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     VirtualGatewayListenerTlsValidationContextTrust.type = Types::VirtualGatewayListenerTlsValidationContextTrust
-    VirtualGatewayListeners.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayListener, name: "member")
+    VirtualGatewayListeners.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayListener, name: "member"))
     VirtualGatewayLogging.add_member(:access_log, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayAccessLog, name: "accessLog"))
     VirtualGatewayLogging.type = Types::VirtualGatewayLogging
     VirtualGatewayPortMapping.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortNumber, name: "port", traits: {"smithy.api#required" => {}}))
@@ -1186,7 +1186,7 @@ module Aws::AppMesh
     VirtualNodeHttpConnectionPool.add_member(:max_connections, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxConnections, name: "maxConnections", traits: {"smithy.api#required" => {}}))
     VirtualNodeHttpConnectionPool.add_member(:max_pending_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxPendingRequests, name: "maxPendingRequests", traits: {"smithy.api#default" => nil}))
     VirtualNodeHttpConnectionPool.type = Types::VirtualNodeHttpConnectionPool
-    VirtualNodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualNodeRef, name: "member")
+    VirtualNodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualNodeRef, name: "member"))
     VirtualNodeRef.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "meshName", traits: {"smithy.api#required" => {}}))
     VirtualNodeRef.add_member(:virtual_node_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "virtualNodeName", traits: {"smithy.api#required" => {}}))
     VirtualNodeRef.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "meshOwner", traits: {"smithy.api#required" => {}}))
@@ -1214,10 +1214,10 @@ module Aws::AppMesh
     VirtualRouterData.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMetadata, name: "metadata", traits: {"smithy.api#required" => {}}))
     VirtualRouterData.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualRouterStatus, name: "status", traits: {"smithy.api#required" => {}}))
     VirtualRouterData.type = Types::VirtualRouterData
-    VirtualRouterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualRouterRef, name: "member")
+    VirtualRouterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualRouterRef, name: "member"))
     VirtualRouterListener.add_member(:port_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: PortMapping, name: "portMapping", traits: {"smithy.api#required" => {}}))
     VirtualRouterListener.type = Types::VirtualRouterListener
-    VirtualRouterListeners.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualRouterListener, name: "member")
+    VirtualRouterListeners.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualRouterListener, name: "member"))
     VirtualRouterRef.add_member(:mesh_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "meshName", traits: {"smithy.api#required" => {}}))
     VirtualRouterRef.add_member(:virtual_router_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "virtualRouterName", traits: {"smithy.api#required" => {}}))
     VirtualRouterRef.add_member(:mesh_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "meshOwner", traits: {"smithy.api#required" => {}}))
@@ -1242,7 +1242,7 @@ module Aws::AppMesh
     VirtualServiceData.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMetadata, name: "metadata", traits: {"smithy.api#required" => {}}))
     VirtualServiceData.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualServiceStatus, name: "status", traits: {"smithy.api#required" => {}}))
     VirtualServiceData.type = Types::VirtualServiceData
-    VirtualServiceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualServiceRef, name: "member")
+    VirtualServiceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualServiceRef, name: "member"))
     VirtualServiceProvider.add_member(:virtual_node, Types::VirtualServiceProvider::VirtualNode, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualNodeServiceProvider, name: "virtualNode"))
     VirtualServiceProvider.add_member(:virtual_router, Types::VirtualServiceProvider::VirtualRouter, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualRouterServiceProvider, name: "virtualRouter"))
     VirtualServiceProvider.add_member(:unknown, Types::VirtualServiceProvider::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -1264,7 +1264,7 @@ module Aws::AppMesh
     WeightedTarget.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: PercentInt, name: "weight", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     WeightedTarget.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerPort, name: "port"))
     WeightedTarget.type = Types::WeightedTarget
-    WeightedTargets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WeightedTarget, name: "member")
+    WeightedTargets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WeightedTarget, name: "member"))
 
     AppMesh = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.appmesh#AppMesh"

@@ -60,7 +60,7 @@ module Aws::Artifact
     AccessDeniedException.type = Types::AccessDeniedException
     AccountSettings.add_member(:notification_subscription_status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationSubscriptionStatus, name: "notificationSubscriptionStatus"))
     AccountSettings.type = Types::AccountSettings
-    AgreementTerms.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LongStringAttribute, name: "member")
+    AgreementTerms.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LongStringAttribute, name: "member"))
     AgreementType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
     AgreementType.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "DEFAULT"}))
     AgreementType.add_member(:modified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MODIFIED", traits: {"smithy.api#enumValue" => "MODIFIED"}))
@@ -68,7 +68,7 @@ module Aws::Artifact
     ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
-    CustomerAgreementList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerAgreementSummary, name: "member")
+    CustomerAgreementList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerAgreementSummary, name: "member"))
     CustomerAgreementState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     CustomerAgreementState.add_member(:customer_terminated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER_TERMINATED", traits: {"smithy.api#enumValue" => "CUSTOMER_TERMINATED"}))
     CustomerAgreementState.add_member(:aws_terminated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_TERMINATED", traits: {"smithy.api#enumValue" => "AWS_TERMINATED"}))
@@ -166,7 +166,7 @@ module Aws::Artifact
     ReportSummary.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessage, name: "statusMessage"))
     ReportSummary.add_member(:acceptance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceptanceType, name: "acceptanceType"))
     ReportSummary.type = Types::ReportSummary
-    ReportsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReportSummary, name: "member")
+    ReportsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportSummary, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType", traits: {"smithy.api#required" => {}}))
@@ -193,7 +193,7 @@ module Aws::Artifact
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
 
     Artifact = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.artifact#Artifact"

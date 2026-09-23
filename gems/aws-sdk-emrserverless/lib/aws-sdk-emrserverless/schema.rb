@@ -173,8 +173,8 @@ module Aws::EMRServerless
     Application.add_member(:scheduler_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SchedulerConfiguration, name: "schedulerConfiguration"))
     Application.add_member(:identity_center_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterConfiguration, name: "identityCenterConfiguration"))
     Application.type = Types::Application
-    ApplicationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary, name: "member")
-    ApplicationStateSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationState, name: "member")
+    ApplicationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary, name: "member"))
+    ApplicationStateSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationState, name: "member"))
     ApplicationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
     ApplicationSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "name"))
     ApplicationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -208,7 +208,7 @@ module Aws::EMRServerless
     Configuration.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitivePropertiesMap, name: "properties"))
     Configuration.add_member(:configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, name: "configurations"))
     Configuration.type = Types::Configuration
-    ConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, name: "member")
+    ConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, name: "member"))
     ConfigurationOverrides.add_member(:application_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, name: "applicationConfiguration"))
     ConfigurationOverrides.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringConfiguration, name: "monitoringConfiguration"))
     ConfigurationOverrides.type = Types::ConfigurationOverrides
@@ -240,7 +240,7 @@ module Aws::EMRServerless
     DeleteApplicationInput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
     DeleteApplicationInput.type = Types::DeleteApplicationInput
     DeleteApplicationOutput.type = Types::DeleteApplicationOutput
-    EntryPointArguments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntryPointArgument, name: "member")
+    EntryPointArguments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryPointArgument, name: "member"))
     GetApplicationInput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
     GetApplicationInput.type = Types::GetApplicationInput
     GetApplicationOutput.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: Application, name: "application", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}}))
@@ -275,8 +275,8 @@ module Aws::EMRServerless
     InitialCapacityConfig.add_member(:worker_count, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerCounts, name: "workerCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     InitialCapacityConfig.add_member(:worker_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerResourceConfig, name: "workerConfiguration", traits: {"smithy.api#recommended" => {}}))
     InitialCapacityConfig.type = Types::InitialCapacityConfig
-    InitialCapacityConfigMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeString, name: "key")
-    InitialCapacityConfigMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: InitialCapacityConfig, name: "value")
+    InitialCapacityConfigMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeString, name: "key"))
+    InitialCapacityConfigMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: InitialCapacityConfig, name: "value"))
     InteractiveConfiguration.add_member(:studio_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "studioEnabled"))
     InteractiveConfiguration.add_member(:livy_endpoint_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "livyEndpointEnabled"))
     InteractiveConfiguration.type = Types::InteractiveConfiguration
@@ -331,11 +331,11 @@ module Aws::EMRServerless
     JobRunAttemptSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunType, name: "type"))
     JobRunAttemptSummary.add_member(:attempt, ::Smithy::Schema::Shapes::MemberShape.new(target: AttemptNumber, name: "attempt"))
     JobRunAttemptSummary.type = Types::JobRunAttemptSummary
-    JobRunAttempts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunAttemptSummary, name: "member")
+    JobRunAttempts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunAttemptSummary, name: "member"))
     JobRunExecutionIamPolicy.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDocument, name: "policy"))
     JobRunExecutionIamPolicy.add_member(:policy_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyArnList, name: "policyArns"))
     JobRunExecutionIamPolicy.type = Types::JobRunExecutionIamPolicy
-    JobRunStateSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunState, name: "member")
+    JobRunStateSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunState, name: "member"))
     JobRunSummary.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
     JobRunSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunId, name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
     JobRunSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "name"))
@@ -353,7 +353,7 @@ module Aws::EMRServerless
     JobRunSummary.add_member(:attempt_created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "attemptCreatedAt"))
     JobRunSummary.add_member(:attempt_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "attemptUpdatedAt"))
     JobRunSummary.type = Types::JobRunSummary
-    JobRuns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunSummary, name: "member")
+    JobRuns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunSummary, name: "member"))
     ListApplicationsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListApplicationsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#default" => nil, "smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 50}}))
     ListApplicationsInput.add_member(:states, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStateSet, name: "states", traits: {"smithy.api#httpQuery" => "states"}))
@@ -384,9 +384,9 @@ module Aws::EMRServerless
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
     ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    LogTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypeString, name: "member")
-    LogTypeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeString, name: "key")
-    LogTypeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypeList, name: "value")
+    LogTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypeString, name: "member"))
+    LogTypeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeString, name: "key"))
+    LogTypeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypeList, name: "value"))
     ManagedPersistenceMonitoringConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enabled"))
     ManagedPersistenceMonitoringConfiguration.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKeyArn, name: "encryptionKeyArn"))
     ManagedPersistenceMonitoringConfiguration.type = Types::ManagedPersistenceMonitoringConfiguration
@@ -402,7 +402,7 @@ module Aws::EMRServerless
     NetworkConfiguration.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, name: "subnetIds"))
     NetworkConfiguration.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, name: "securityGroupIds"))
     NetworkConfiguration.type = Types::NetworkConfiguration
-    PolicyArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    PolicyArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     PrometheusMonitoringConfiguration.add_member(:remote_write_url, ::Smithy::Schema::Shapes::MemberShape.new(target: PrometheusUrlString, name: "remoteWriteUrl"))
     PrometheusMonitoringConfiguration.type = Types::PrometheusMonitoringConfiguration
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "message", traits: {"smithy.api#required" => {}}))
@@ -420,9 +420,9 @@ module Aws::EMRServerless
     SchedulerConfiguration.add_member(:queue_timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "queueTimeoutMinutes"))
     SchedulerConfiguration.add_member(:max_concurrent_runs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxConcurrentRuns"))
     SchedulerConfiguration.type = Types::SchedulerConfiguration
-    SecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupString, name: "member")
-    SensitivePropertiesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationPropertyKey, name: "key")
-    SensitivePropertiesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationPropertyValue, name: "value")
+    SecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupString, name: "member"))
+    SensitivePropertiesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationPropertyKey, name: "key"))
+    SensitivePropertiesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationPropertyValue, name: "value"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     SparkSubmit.add_member(:entry_point, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryPointPath, name: "entryPoint", traits: {"smithy.api#required" => {}}))
@@ -451,10 +451,10 @@ module Aws::EMRServerless
     StopApplicationInput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
     StopApplicationInput.type = Types::StopApplicationInput
     StopApplicationOutput.type = Types::StopApplicationOutput
-    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetString, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    SubnetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetString, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -497,10 +497,10 @@ module Aws::EMRServerless
     WorkerTypeSpecification.type = Types::WorkerTypeSpecification
     WorkerTypeSpecificationInput.add_member(:image_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageConfigurationInput, name: "imageConfiguration"))
     WorkerTypeSpecificationInput.type = Types::WorkerTypeSpecificationInput
-    WorkerTypeSpecificationInputMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeString, name: "key")
-    WorkerTypeSpecificationInputMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeSpecificationInput, name: "value")
-    WorkerTypeSpecificationMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeString, name: "key")
-    WorkerTypeSpecificationMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeSpecification, name: "value")
+    WorkerTypeSpecificationInputMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeString, name: "key"))
+    WorkerTypeSpecificationInputMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeSpecificationInput, name: "value"))
+    WorkerTypeSpecificationMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeString, name: "key"))
+    WorkerTypeSpecificationMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeSpecification, name: "value"))
 
     AwsToledoWebService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.emrserverless#AwsToledoWebService"

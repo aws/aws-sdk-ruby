@@ -142,12 +142,12 @@ module Aws::CodeGuruProfiler
     AgentConfiguration.type = Types::AgentConfiguration
     AgentOrchestrationConfig.add_member(:profiling_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "profilingEnabled", traits: {"smithy.api#required" => {}}))
     AgentOrchestrationConfig.type = Types::AgentOrchestrationConfig
-    AgentParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentParameterField, name: "key")
-    AgentParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    AgentParameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentParameterField, name: "key"))
+    AgentParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     AggregatedProfileTime.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "start"))
     AggregatedProfileTime.add_member(:period, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationPeriod, name: "period"))
     AggregatedProfileTime.type = Types::AggregatedProfileTime
-    Anomalies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Anomaly, name: "member")
+    Anomalies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Anomaly, name: "member"))
     Anomaly.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: Metric, name: "metric", traits: {"smithy.api#required" => {}}))
     Anomaly.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "reason", traits: {"smithy.api#required" => {}}))
     Anomaly.add_member(:instances, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyInstances, name: "instances", traits: {"smithy.api#required" => {}}))
@@ -157,7 +157,7 @@ module Aws::CodeGuruProfiler
     AnomalyInstance.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "endTime"))
     AnomalyInstance.add_member(:user_feedback, ::Smithy::Schema::Shapes::MemberShape.new(target: UserFeedback, name: "userFeedback"))
     AnomalyInstance.type = Types::AnomalyInstance
-    AnomalyInstances.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyInstance, name: "member")
+    AnomalyInstances.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyInstance, name: "member"))
     BatchGetFrameMetricDataInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BatchGetFrameMetricDataInput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startTime", traits: {"smithy.api#httpQuery" => "startTime"}))
     BatchGetFrameMetricDataInput.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "endTime", traits: {"smithy.api#httpQuery" => "endTime"}))
@@ -176,7 +176,7 @@ module Aws::CodeGuruProfiler
     Channel.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelUri, name: "uri", traits: {"smithy.api#required" => {}}))
     Channel.add_member(:event_publishers, ::Smithy::Schema::Shapes::MemberShape.new(target: EventPublishers, name: "eventPublishers", traits: {"smithy.api#required" => {}}))
     Channel.type = Types::Channel
-    Channels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "member")
+    Channels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "member"))
     ConfigureAgentInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ConfigureAgentInput.add_member(:fleet_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FleetInstanceId, name: "fleetInstanceId"))
     ConfigureAgentInput.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, name: "metadata"))
@@ -206,8 +206,8 @@ module Aws::CodeGuruProfiler
     DescribeProfilingGroupOutput[:http_payload] = :profiling_group
     DescribeProfilingGroupOutput[:http_payload_member] = DescribeProfilingGroupOutput.member(:profiling_group)
     DescribeProfilingGroupOutput.type = Types::DescribeProfilingGroupOutput
-    EventPublishers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventPublisher, name: "member")
-    FindingsReportSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsReportSummary, name: "member")
+    EventPublishers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventPublisher, name: "member"))
+    FindingsReportSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsReportSummary, name: "member"))
     FindingsReportSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsReportId, name: "id"))
     FindingsReportSummary.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "profilingGroupName"))
     FindingsReportSummary.add_member(:profile_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "profileStartTime"))
@@ -218,12 +218,12 @@ module Aws::CodeGuruProfiler
     FrameMetric.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricType, name: "type", traits: {"smithy.api#required" => {}}))
     FrameMetric.add_member(:thread_states, ::Smithy::Schema::Shapes::MemberShape.new(target: ThreadStates, name: "threadStates", traits: {"smithy.api#required" => {}}))
     FrameMetric.type = Types::FrameMetric
-    FrameMetricData.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FrameMetricDatum, name: "member")
+    FrameMetricData.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameMetricDatum, name: "member"))
     FrameMetricDatum.add_member(:frame_metric, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameMetric, name: "frameMetric", traits: {"smithy.api#required" => {}}))
     FrameMetricDatum.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameMetricValues, name: "values", traits: {"smithy.api#required" => {}}))
     FrameMetricDatum.type = Types::FrameMetricDatum
-    FrameMetricValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FrameMetricValue, name: "member")
-    FrameMetrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FrameMetric, name: "member")
+    FrameMetricValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameMetricValue, name: "member"))
+    FrameMetrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameMetric, name: "member"))
     GetFindingsReportAccountSummaryInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     GetFindingsReportAccountSummaryInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     GetFindingsReportAccountSummaryInput.add_member(:daily_reports_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "dailyReportsOnly", traits: {"smithy.api#httpQuery" => "dailyReportsOnly"}))
@@ -276,7 +276,7 @@ module Aws::CodeGuruProfiler
     ListFindingsReportsOutput.add_member(:findings_report_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsReportSummaries, name: "findingsReportSummaries", traits: {"smithy.api#required" => {}}))
     ListFindingsReportsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
     ListFindingsReportsOutput.type = Types::ListFindingsReportsOutput
-    ListOfTimestamps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampStructure, name: "member")
+    ListOfTimestamps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampStructure, name: "member"))
     ListProfileTimesInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListProfileTimesInput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startTime", traits: {"smithy.api#httpQuery" => "startTime", "smithy.api#required" => {}}))
     ListProfileTimesInput.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "endTime", traits: {"smithy.api#httpQuery" => "endTime", "smithy.api#required" => {}}))
@@ -304,9 +304,9 @@ module Aws::CodeGuruProfiler
     Match.add_member(:frame_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "frameAddress"))
     Match.add_member(:threshold_breach_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "thresholdBreachValue"))
     Match.type = Types::Match
-    Matches.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Match, name: "member")
-    Metadata.key = ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataField, name: "key")
-    Metadata.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    Matches.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Match, name: "member"))
+    Metadata.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataField, name: "key"))
+    Metadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     Metric.add_member(:frame_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "frameName", traits: {"smithy.api#required" => {}}))
     Metric.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricType, name: "type", traits: {"smithy.api#required" => {}}))
     Metric.add_member(:thread_states, ::Smithy::Schema::Shapes::MemberShape.new(target: Strings, name: "threadStates", traits: {"smithy.api#required" => {}}))
@@ -329,10 +329,10 @@ module Aws::CodeGuruProfiler
     PostAgentProfileInput[:http_payload_member] = PostAgentProfileInput.member(:agent_profile)
     PostAgentProfileInput.type = Types::PostAgentProfileInput
     PostAgentProfileOutput.type = Types::PostAgentProfileOutput
-    Principals.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Principal, name: "member")
+    Principals.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Principal, name: "member"))
     ProfileTime.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "start"))
     ProfileTime.type = Types::ProfileTime
-    ProfileTimes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileTime, name: "member")
+    ProfileTimes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileTime, name: "member"))
     ProfilingGroupDescription.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, name: "name"))
     ProfilingGroupDescription.add_member(:agent_orchestration_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentOrchestrationConfig, name: "agentOrchestrationConfig"))
     ProfilingGroupDescription.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupArn, name: "arn"))
@@ -342,8 +342,8 @@ module Aws::CodeGuruProfiler
     ProfilingGroupDescription.add_member(:compute_platform, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputePlatform, name: "computePlatform"))
     ProfilingGroupDescription.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
     ProfilingGroupDescription.type = Types::ProfilingGroupDescription
-    ProfilingGroupDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupDescription, name: "member")
-    ProfilingGroupNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, name: "member")
+    ProfilingGroupDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupDescription, name: "member"))
+    ProfilingGroupNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, name: "member"))
     ProfilingStatus.add_member(:latest_agent_profile_reported_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "latestAgentProfileReportedAt"))
     ProfilingStatus.add_member(:latest_aggregated_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedProfileTime, name: "latestAggregatedProfile"))
     ProfilingStatus.add_member(:latest_agent_orchestrated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "latestAgentOrchestratedAt"))
@@ -363,7 +363,7 @@ module Aws::CodeGuruProfiler
     Recommendation.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startTime", traits: {"smithy.api#required" => {}}))
     Recommendation.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "endTime", traits: {"smithy.api#required" => {}}))
     Recommendation.type = Types::Recommendation
-    Recommendations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendation, name: "member")
+    Recommendations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendation, name: "member"))
     RemoveNotificationChannelInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RemoveNotificationChannelInput.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, name: "channelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RemoveNotificationChannelInput.type = Types::RemoveNotificationChannelInput
@@ -380,29 +380,29 @@ module Aws::CodeGuruProfiler
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    Strings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    Strings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     SubmitFeedbackInput.add_member(:profiling_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupName, name: "profilingGroupName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     SubmitFeedbackInput.add_member(:anomaly_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyInstanceId, name: "anomalyInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     SubmitFeedbackInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: FeedbackType, name: "type", traits: {"smithy.api#required" => {}}))
     SubmitFeedbackInput.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "comment"))
     SubmitFeedbackInput.type = Types::SubmitFeedbackInput
     SubmitFeedbackOutput.type = Types::SubmitFeedbackOutput
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    TagsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    TagsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
-    TargetFrame.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    TargetFrames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetFrame, name: "member")
-    ThreadStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    TagsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    TagsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
+    TargetFrame.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    TargetFrames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetFrame, name: "member"))
+    ThreadStates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
     TimestampStructure.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "value", traits: {"smithy.api#required" => {}}))
     TimestampStructure.type = Types::TimestampStructure
-    UnprocessedEndTimeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    UnprocessedEndTimeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfTimestamps, name: "value")
+    UnprocessedEndTimeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    UnprocessedEndTimeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfTimestamps, name: "value"))
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilingGroupArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeys, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput

@@ -210,7 +210,7 @@ module Aws::M2
     AlternateKey.add_member(:length, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "length", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     AlternateKey.add_member(:allow_duplicates, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "allowDuplicates", traits: {"smithy.api#default" => false}))
     AlternateKey.type = Types::AlternateKey
-    AlternateKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AlternateKey, name: "member")
+    AlternateKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AlternateKey, name: "member"))
     ApplicationSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "name", traits: {"smithy.api#required" => {}}))
     ApplicationSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDescription, name: "description"))
     ApplicationSummary.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "applicationId", traits: {"smithy.api#required" => {}}))
@@ -225,19 +225,19 @@ module Aws::M2
     ApplicationSummary.add_member(:deployment_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationDeploymentLifecycle, name: "deploymentStatus"))
     ApplicationSummary.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "roleArn"))
     ApplicationSummary.type = Types::ApplicationSummary
-    ApplicationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary, name: "member")
+    ApplicationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary, name: "member"))
     ApplicationVersionSummary.add_member(:application_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "applicationVersion", traits: {"smithy.api#required" => {}}))
     ApplicationVersionSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationVersionLifecycle, name: "status", traits: {"smithy.api#required" => {}}))
     ApplicationVersionSummary.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
     ApplicationVersionSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime", traits: {"smithy.api#required" => {}}))
     ApplicationVersionSummary.type = Types::ApplicationVersionSummary
-    ApplicationVersionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationVersionSummary, name: "member")
-    ArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    ApplicationVersionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationVersionSummary, name: "member"))
+    ArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     BatchJobDefinition.add_member(:file_batch_job_definition, Types::BatchJobDefinition::FileBatchJobDefinition, ::Smithy::Schema::Shapes::MemberShape.new(target: FileBatchJobDefinition, name: "fileBatchJobDefinition"))
     BatchJobDefinition.add_member(:script_batch_job_definition, Types::BatchJobDefinition::ScriptBatchJobDefinition, ::Smithy::Schema::Shapes::MemberShape.new(target: ScriptBatchJobDefinition, name: "scriptBatchJobDefinition"))
     BatchJobDefinition.add_member(:unknown, Types::BatchJobDefinition::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     BatchJobDefinition.type = Types::BatchJobDefinition
-    BatchJobDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchJobDefinition, name: "member")
+    BatchJobDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchJobDefinition, name: "member"))
     BatchJobExecutionSummary.add_member(:execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "executionId", traits: {"smithy.api#required" => {}}))
     BatchJobExecutionSummary.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "applicationId", traits: {"smithy.api#required" => {}}))
     BatchJobExecutionSummary.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String100, name: "jobId"))
@@ -249,16 +249,16 @@ module Aws::M2
     BatchJobExecutionSummary.add_member(:return_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "returnCode"))
     BatchJobExecutionSummary.add_member(:batch_job_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchJobIdentifier, name: "batchJobIdentifier"))
     BatchJobExecutionSummary.type = Types::BatchJobExecutionSummary
-    BatchJobExecutionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchJobExecutionSummary, name: "member")
+    BatchJobExecutionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchJobExecutionSummary, name: "member"))
     BatchJobIdentifier.add_member(:file_batch_job_identifier, Types::BatchJobIdentifier::FileBatchJobIdentifier, ::Smithy::Schema::Shapes::MemberShape.new(target: FileBatchJobIdentifier, name: "fileBatchJobIdentifier"))
     BatchJobIdentifier.add_member(:script_batch_job_identifier, Types::BatchJobIdentifier::ScriptBatchJobIdentifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ScriptBatchJobIdentifier, name: "scriptBatchJobIdentifier"))
     BatchJobIdentifier.add_member(:s3_batch_job_identifier, Types::BatchJobIdentifier::S3BatchJobIdentifier, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BatchJobIdentifier, name: "s3BatchJobIdentifier"))
     BatchJobIdentifier.add_member(:restart_batch_job_identifier, Types::BatchJobIdentifier::RestartBatchJobIdentifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RestartBatchJobIdentifier, name: "restartBatchJobIdentifier"))
     BatchJobIdentifier.add_member(:unknown, Types::BatchJobIdentifier::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     BatchJobIdentifier.type = Types::BatchJobIdentifier
-    BatchJobParametersMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchParamKey, name: "key")
-    BatchJobParametersMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchParamValue, name: "value")
-    BatchJobStepList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobStep, name: "member")
+    BatchJobParametersMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchParamKey, name: "key"))
+    BatchJobParametersMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchParamValue, name: "value"))
+    BatchJobStepList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStep, name: "member"))
     CancelBatchJobExecutionInput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelBatchJobExecutionInput.add_member(:execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "executionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelBatchJobExecutionInput.add_member(:auth_secrets_manager_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthSecretsManagerArn, name: "authSecretsManagerArn"))
@@ -332,7 +332,7 @@ module Aws::M2
     DataSetExportItem.add_member(:dataset_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String200, name: "datasetName", traits: {"smithy.api#required" => {}}))
     DataSetExportItem.add_member(:external_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalLocation, name: "externalLocation", traits: {"smithy.api#required" => {}}))
     DataSetExportItem.type = Types::DataSetExportItem
-    DataSetExportList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetExportItem, name: "member")
+    DataSetExportList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetExportItem, name: "member"))
     DataSetExportSummary.add_member(:total, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "total", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     DataSetExportSummary.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "succeeded", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     DataSetExportSummary.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "failed", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
@@ -344,7 +344,7 @@ module Aws::M2
     DataSetExportTask.add_member(:summary, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetExportSummary, name: "summary", traits: {"smithy.api#required" => {}}))
     DataSetExportTask.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
     DataSetExportTask.type = Types::DataSetExportTask
-    DataSetExportTaskList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetExportTask, name: "member")
+    DataSetExportTaskList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetExportTask, name: "member"))
     DataSetImportConfig.add_member(:s3_location, Types::DataSetImportConfig::S3Location, ::Smithy::Schema::Shapes::MemberShape.new(target: String2000, name: "s3Location"))
     DataSetImportConfig.add_member(:data_sets, Types::DataSetImportConfig::DataSets, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetImportList, name: "dataSets"))
     DataSetImportConfig.add_member(:unknown, Types::DataSetImportConfig::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -352,7 +352,7 @@ module Aws::M2
     DataSetImportItem.add_member(:data_set, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSet, name: "dataSet", traits: {"smithy.api#required" => {}}))
     DataSetImportItem.add_member(:external_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalLocation, name: "externalLocation", traits: {"smithy.api#required" => {}}))
     DataSetImportItem.type = Types::DataSetImportItem
-    DataSetImportList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetImportItem, name: "member")
+    DataSetImportList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetImportItem, name: "member"))
     DataSetImportSummary.add_member(:total, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "total", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     DataSetImportSummary.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "succeeded", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     DataSetImportSummary.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "failed", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
@@ -364,7 +364,7 @@ module Aws::M2
     DataSetImportTask.add_member(:summary, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetImportSummary, name: "summary", traits: {"smithy.api#required" => {}}))
     DataSetImportTask.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
     DataSetImportTask.type = Types::DataSetImportTask
-    DataSetImportTaskList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetImportTask, name: "member")
+    DataSetImportTaskList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetImportTask, name: "member"))
     DataSetSummary.add_member(:data_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String200, name: "dataSetName", traits: {"smithy.api#required" => {}}))
     DataSetSummary.add_member(:data_set_org, ::Smithy::Schema::Shapes::MemberShape.new(target: String20, name: "dataSetOrg"))
     DataSetSummary.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: String20, name: "format"))
@@ -372,7 +372,7 @@ module Aws::M2
     DataSetSummary.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedTime"))
     DataSetSummary.add_member(:last_referenced_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastReferencedTime"))
     DataSetSummary.type = Types::DataSetSummary
-    DataSetsSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetSummary, name: "member")
+    DataSetsSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetSummary, name: "member"))
     DatasetDetailOrgAttributes.add_member(:vsam, Types::DatasetDetailOrgAttributes::Vsam, ::Smithy::Schema::Shapes::MemberShape.new(target: VsamDetailAttributes, name: "vsam"))
     DatasetDetailOrgAttributes.add_member(:gdg, Types::DatasetDetailOrgAttributes::Gdg, ::Smithy::Schema::Shapes::MemberShape.new(target: GdgDetailAttributes, name: "gdg"))
     DatasetDetailOrgAttributes.add_member(:po, Types::DatasetDetailOrgAttributes::Po, ::Smithy::Schema::Shapes::MemberShape.new(target: PoDetailAttributes, name: "po"))
@@ -403,7 +403,7 @@ module Aws::M2
     DeployedVersionSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentLifecycle, name: "status", traits: {"smithy.api#required" => {}}))
     DeployedVersionSummary.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
     DeployedVersionSummary.type = Types::DeployedVersionSummary
-    DeploymentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentSummary, name: "member")
+    DeploymentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentSummary, name: "member"))
     DeploymentSummary.add_member(:deployment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "deploymentId", traits: {"smithy.api#required" => {}}))
     DeploymentSummary.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "applicationId", traits: {"smithy.api#required" => {}}))
     DeploymentSummary.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "environmentId", traits: {"smithy.api#required" => {}}))
@@ -418,8 +418,8 @@ module Aws::M2
     EngineVersionsSummary.add_member(:engine_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "engineType", traits: {"smithy.api#required" => {}}))
     EngineVersionsSummary.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "engineVersion", traits: {"smithy.api#required" => {}}))
     EngineVersionsSummary.type = Types::EngineVersionsSummary
-    EngineVersionsSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EngineVersionsSummary, name: "member")
-    EntityNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "member")
+    EngineVersionsSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineVersionsSummary, name: "member"))
+    EntityNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "member"))
     EnvironmentSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "name", traits: {"smithy.api#required" => {}}))
     EnvironmentSummary.add_member(:environment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "environmentArn", traits: {"smithy.api#required" => {}}))
     EnvironmentSummary.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "environmentId", traits: {"smithy.api#required" => {}}))
@@ -430,7 +430,7 @@ module Aws::M2
     EnvironmentSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationTime", traits: {"smithy.api#required" => {}}))
     EnvironmentSummary.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, name: "networkType"))
     EnvironmentSummary.type = Types::EnvironmentSummary
-    EnvironmentSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentSummary, name: "member")
+    EnvironmentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentSummary, name: "member"))
     ExecutionTimeoutException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ExecutionTimeoutException.type = Types::ExecutionTimeoutException
     ExternalLocation.add_member(:s3_location, Types::ExternalLocation::S3Location, ::Smithy::Schema::Shapes::MemberShape.new(target: String2000, name: "s3Location"))
@@ -572,7 +572,7 @@ module Aws::M2
     GetSignedBluinsightsUrlResponse.type = Types::GetSignedBluinsightsUrlResponse
     HighAvailabilityConfig.add_member(:desired_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityValue, name: "desiredCapacity", traits: {"smithy.api#required" => {}}))
     HighAvailabilityConfig.type = Types::HighAvailabilityConfig
-    IdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "member")
+    IdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "retryAfterSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Retry-After"}))
     InternalServerException.type = Types::InternalServerException
@@ -687,7 +687,7 @@ module Aws::M2
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
     ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    LogGroupSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupSummary, name: "member")
+    LogGroupSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupSummary, name: "member"))
     LogGroupSummary.add_member(:log_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String20, name: "logType", traits: {"smithy.api#required" => {}}))
     LogGroupSummary.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupIdentifier, name: "logGroupName", traits: {"smithy.api#required" => {}}))
     LogGroupSummary.type = Types::LogGroupSummary
@@ -704,7 +704,7 @@ module Aws::M2
     PoDetailAttributes.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "format", traits: {"smithy.api#required" => {}}))
     PoDetailAttributes.add_member(:encoding, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "encoding", traits: {"smithy.api#required" => {}}))
     PoDetailAttributes.type = Types::PoDetailAttributes
-    PortList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "member")
+    PortList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "member"))
     PrimaryKey.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name"))
     PrimaryKey.add_member(:offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "offset", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     PrimaryKey.add_member(:length, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "length", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
@@ -759,12 +759,12 @@ module Aws::M2
     StorageConfiguration.add_member(:fsx, Types::StorageConfiguration::Fsx, ::Smithy::Schema::Shapes::MemberShape.new(target: FsxStorageConfiguration, name: "fsx"))
     StorageConfiguration.add_member(:unknown, Types::StorageConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     StorageConfiguration.type = Types::StorageConfiguration
-    StorageConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StorageConfiguration, name: "member")
-    String20List.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String20, name: "member")
-    String50List.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String50, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    StorageConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageConfiguration, name: "member"))
+    String20List.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String20, name: "member"))
+    String50List.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String50, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -802,7 +802,7 @@ module Aws::M2
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     VsamAttributes.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "format", traits: {"smithy.api#required" => {}}))
     VsamAttributes.add_member(:encoding, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "encoding"))
     VsamAttributes.add_member(:compressed, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "compressed", traits: {"smithy.api#default" => false}))

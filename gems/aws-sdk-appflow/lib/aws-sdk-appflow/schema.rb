@@ -440,7 +440,7 @@ module Aws::Appflow
     ApiKeyCredentials.add_member(:api_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiKey, name: "apiKey", traits: {"smithy.api#required" => {}}))
     ApiKeyCredentials.add_member(:api_secret_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiSecretKey, name: "apiSecretKey"))
     ApiKeyCredentials.type = Types::ApiKeyCredentials
-    AuthCodeUrlList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthCodeUrl, name: "member")
+    AuthCodeUrlList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthCodeUrl, name: "member"))
     AuthParameter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "key"))
     AuthParameter.add_member(:is_required, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isRequired", traits: {"smithy.api#default" => false}))
     AuthParameter.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: Label, name: "label"))
@@ -448,7 +448,7 @@ module Aws::Appflow
     AuthParameter.add_member(:is_sensitive_field, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isSensitiveField", traits: {"smithy.api#default" => false}))
     AuthParameter.add_member(:connector_supplied_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorSuppliedValueList, name: "connectorSuppliedValues"))
     AuthParameter.type = Types::AuthParameter
-    AuthParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthParameter, name: "member")
+    AuthParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthParameter, name: "member"))
     AuthenticationConfig.add_member(:is_basic_auth_supported, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isBasicAuthSupported", traits: {"smithy.api#default" => false}))
     AuthenticationConfig.add_member(:is_api_key_auth_supported, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isApiKeyAuthSupported", traits: {"smithy.api#default" => false}))
     AuthenticationConfig.add_member(:is_o_auth2_supported, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isOAuth2Supported", traits: {"smithy.api#default" => false}))
@@ -504,8 +504,8 @@ module Aws::Appflow
     ConnectorConfiguration.add_member(:supported_data_transfer_types, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedDataTransferTypeList, name: "supportedDataTransferTypes"))
     ConnectorConfiguration.add_member(:supported_data_transfer_apis, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedDataTransferApis, name: "supportedDataTransferApis"))
     ConnectorConfiguration.type = Types::ConnectorConfiguration
-    ConnectorConfigurationsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorType, name: "key")
-    ConnectorConfigurationsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorConfiguration, name: "value")
+    ConnectorConfigurationsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorType, name: "key"))
+    ConnectorConfigurationsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorConfiguration, name: "value"))
     ConnectorDetail.add_member(:connector_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorDescription, name: "connectorDescription"))
     ConnectorDetail.add_member(:connector_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorName, name: "connectorName"))
     ConnectorDetail.add_member(:connector_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorOwner, name: "connectorOwner"))
@@ -535,11 +535,11 @@ module Aws::Appflow
     ConnectorEntityField.add_member(:destination_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationFieldProperties, name: "destinationProperties"))
     ConnectorEntityField.add_member(:custom_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomProperties, name: "customProperties"))
     ConnectorEntityField.type = Types::ConnectorEntityField
-    ConnectorEntityFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorEntityField, name: "member")
-    ConnectorEntityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorEntity, name: "member")
-    ConnectorEntityMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Group, name: "key")
-    ConnectorEntityMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorEntityList, name: "value")
-    ConnectorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorDetail, name: "member")
+    ConnectorEntityFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorEntityField, name: "member"))
+    ConnectorEntityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorEntity, name: "member"))
+    ConnectorEntityMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Group, name: "key"))
+    ConnectorEntityMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorEntityList, name: "value"))
+    ConnectorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorDetail, name: "member"))
     ConnectorMetadata.add_member(:amplitude, ::Smithy::Schema::Shapes::MemberShape.new(target: AmplitudeMetadata, name: "Amplitude"))
     ConnectorMetadata.add_member(:datadog, ::Smithy::Schema::Shapes::MemberShape.new(target: DatadogMetadata, name: "Datadog"))
     ConnectorMetadata.add_member(:dynatrace, ::Smithy::Schema::Shapes::MemberShape.new(target: DynatraceMetadata, name: "Dynatrace"))
@@ -563,7 +563,7 @@ module Aws::Appflow
     ConnectorMetadata.add_member(:sapo_data, ::Smithy::Schema::Shapes::MemberShape.new(target: SAPODataMetadata, name: "SAPOData"))
     ConnectorMetadata.add_member(:pardot, ::Smithy::Schema::Shapes::MemberShape.new(target: PardotMetadata, name: "Pardot"))
     ConnectorMetadata.type = Types::ConnectorMetadata
-    ConnectorModeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorMode, name: "member")
+    ConnectorModeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorMode, name: "member"))
     ConnectorOAuthRequest.add_member(:auth_code, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthCode, name: "authCode"))
     ConnectorOAuthRequest.add_member(:redirect_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: RedirectUri, name: "redirectUri"))
     ConnectorOAuthRequest.type = Types::ConnectorOAuthRequest
@@ -619,8 +619,8 @@ module Aws::Appflow
     ConnectorProfileCredentials.add_member(:custom_connector, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomConnectorProfileCredentials, name: "CustomConnector"))
     ConnectorProfileCredentials.add_member(:pardot, ::Smithy::Schema::Shapes::MemberShape.new(target: PardotConnectorProfileCredentials, name: "Pardot"))
     ConnectorProfileCredentials.type = Types::ConnectorProfileCredentials
-    ConnectorProfileDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProfile, name: "member")
-    ConnectorProfileNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProfileName, name: "member")
+    ConnectorProfileDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProfile, name: "member"))
+    ConnectorProfileNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProfileName, name: "member"))
     ConnectorProfileProperties.add_member(:amplitude, ::Smithy::Schema::Shapes::MemberShape.new(target: AmplitudeConnectorProfileProperties, name: "Amplitude"))
     ConnectorProfileProperties.add_member(:datadog, ::Smithy::Schema::Shapes::MemberShape.new(target: DatadogConnectorProfileProperties, name: "Datadog"))
     ConnectorProfileProperties.add_member(:dynatrace, ::Smithy::Schema::Shapes::MemberShape.new(target: DynatraceConnectorProfileProperties, name: "Dynatrace"))
@@ -652,11 +652,11 @@ module Aws::Appflow
     ConnectorRuntimeSetting.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorRuntimeSettingScope, name: "scope"))
     ConnectorRuntimeSetting.add_member(:connector_supplied_value_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorSuppliedValueOptionList, name: "connectorSuppliedValueOptions"))
     ConnectorRuntimeSetting.type = Types::ConnectorRuntimeSetting
-    ConnectorRuntimeSettingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorRuntimeSetting, name: "member")
+    ConnectorRuntimeSettingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorRuntimeSetting, name: "member"))
     ConnectorServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ConnectorServerException.type = Types::ConnectorServerException
-    ConnectorSuppliedValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorSuppliedValue, name: "member")
-    ConnectorSuppliedValueOptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorSuppliedValue, name: "member")
+    ConnectorSuppliedValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorSuppliedValue, name: "member"))
+    ConnectorSuppliedValueOptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorSuppliedValue, name: "member"))
     ConnectorType.add_member(:salesforce, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SALESFORCE", traits: {"smithy.api#enumValue" => "Salesforce"}))
     ConnectorType.add_member(:singular, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGULAR", traits: {"smithy.api#enumValue" => "Singular"}))
     ConnectorType.add_member(:slack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SLACK", traits: {"smithy.api#enumValue" => "Slack"}))
@@ -681,7 +681,7 @@ module Aws::Appflow
     ConnectorType.add_member(:sapodata, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAPODATA", traits: {"smithy.api#enumValue" => "SAPOData"}))
     ConnectorType.add_member(:customconnector, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMCONNECTOR", traits: {"smithy.api#enumValue" => "CustomConnector"}))
     ConnectorType.add_member(:pardot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARDOT", traits: {"smithy.api#enumValue" => "Pardot"}))
-    ConnectorTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorType, name: "member")
+    ConnectorTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorType, name: "member"))
     CreateConnectorProfileRequest.add_member(:connector_profile_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProfileName, name: "connectorProfileName", traits: {"smithy.api#required" => {}}))
     CreateConnectorProfileRequest.add_member(:kms_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSArn, name: "kmsArn"))
     CreateConnectorProfileRequest.add_member(:connector_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorType, name: "connectorType", traits: {"smithy.api#required" => {}}))
@@ -706,12 +706,12 @@ module Aws::Appflow
     CreateFlowResponse.add_member(:flow_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowArn, name: "flowArn"))
     CreateFlowResponse.add_member(:flow_status, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowStatus, name: "flowStatus"))
     CreateFlowResponse.type = Types::CreateFlowResponse
-    CredentialsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialsMapKey, name: "key")
-    CredentialsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialsMapValue, name: "value")
+    CredentialsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialsMapKey, name: "key"))
+    CredentialsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialsMapValue, name: "value"))
     CustomAuthConfig.add_member(:custom_authentication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomAuthenticationType, name: "customAuthenticationType"))
     CustomAuthConfig.add_member(:auth_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthParameterList, name: "authParameters"))
     CustomAuthConfig.type = Types::CustomAuthConfig
-    CustomAuthConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomAuthConfig, name: "member")
+    CustomAuthConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomAuthConfig, name: "member"))
     CustomAuthCredentials.add_member(:custom_authentication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomAuthenticationType, name: "customAuthenticationType", traits: {"smithy.api#required" => {}}))
     CustomAuthCredentials.add_member(:credentials_map, ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialsMap, name: "credentialsMap"))
     CustomAuthCredentials.type = Types::CustomAuthCredentials
@@ -734,8 +734,8 @@ module Aws::Appflow
     CustomConnectorSourceProperties.add_member(:custom_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomProperties, name: "customProperties"))
     CustomConnectorSourceProperties.add_member(:data_transfer_api, ::Smithy::Schema::Shapes::MemberShape.new(target: DataTransferApi, name: "dataTransferApi"))
     CustomConnectorSourceProperties.type = Types::CustomConnectorSourceProperties
-    CustomProperties.key = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPropertyKey, name: "key")
-    CustomProperties.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPropertyValue, name: "value")
+    CustomProperties.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPropertyKey, name: "key"))
+    CustomProperties.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPropertyValue, name: "value"))
     CustomerProfilesDestinationProperties.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "domainName", traits: {"smithy.api#required" => {}}))
     CustomerProfilesDestinationProperties.add_member(:object_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectTypeName, name: "objectTypeName"))
     CustomerProfilesDestinationProperties.type = Types::CustomerProfilesDestinationProperties
@@ -863,7 +863,7 @@ module Aws::Appflow
     DestinationFlowConfig.add_member(:connector_profile_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProfileName, name: "connectorProfileName"))
     DestinationFlowConfig.add_member(:destination_connector_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationConnectorProperties, name: "destinationConnectorProperties", traits: {"smithy.api#required" => {}}))
     DestinationFlowConfig.type = Types::DestinationFlowConfig
-    DestinationFlowConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationFlowConfig, name: "member")
+    DestinationFlowConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationFlowConfig, name: "member"))
     DynatraceConnectorOperator.add_member(:projection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROJECTION", traits: {"smithy.api#enumValue" => "PROJECTION"}))
     DynatraceConnectorOperator.add_member(:between, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BETWEEN", traits: {"smithy.api#enumValue" => "BETWEEN"}))
     DynatraceConnectorOperator.add_member(:equal_to, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUAL_TO", traits: {"smithy.api#enumValue" => "EQUAL_TO"}))
@@ -901,7 +901,7 @@ module Aws::Appflow
     ExecutionDetails.add_member(:most_recent_execution_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "mostRecentExecutionTime"))
     ExecutionDetails.add_member(:most_recent_execution_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStatus, name: "mostRecentExecutionStatus"))
     ExecutionDetails.type = Types::ExecutionDetails
-    ExecutionIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionId, name: "member")
+    ExecutionIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionId, name: "member"))
     ExecutionRecord.add_member(:execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionId, name: "executionId"))
     ExecutionRecord.add_member(:execution_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStatus, name: "executionStatus"))
     ExecutionRecord.add_member(:execution_result, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionResult, name: "executionResult"))
@@ -934,7 +934,7 @@ module Aws::Appflow
     FileType.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
     FileType.add_member(:json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON", traits: {"smithy.api#enumValue" => "JSON"}))
     FileType.add_member(:parquet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARQUET", traits: {"smithy.api#enumValue" => "PARQUET"}))
-    FilterOperatorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Operator, name: "member")
+    FilterOperatorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Operator, name: "member"))
     FlowDefinition.add_member(:flow_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowArn, name: "flowArn"))
     FlowDefinition.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowDescription, name: "description"))
     FlowDefinition.add_member(:flow_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowName, name: "flowName"))
@@ -951,8 +951,8 @@ module Aws::Appflow
     FlowDefinition.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     FlowDefinition.add_member(:last_run_execution_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionDetails, name: "lastRunExecutionDetails"))
     FlowDefinition.type = Types::FlowDefinition
-    FlowExecutionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionRecord, name: "member")
-    FlowList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FlowDefinition, name: "member")
+    FlowExecutionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionRecord, name: "member"))
+    FlowList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowDefinition, name: "member"))
     FlowStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "Active"}))
     FlowStatus.add_member(:deprecated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPRECATED", traits: {"smithy.api#enumValue" => "Deprecated"}))
     FlowStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "Deleted"}))
@@ -986,7 +986,7 @@ module Aws::Appflow
     HoneycodeDestinationProperties.type = Types::HoneycodeDestinationProperties
     HoneycodeMetadata.add_member(:o_auth_scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthScopeList, name: "oAuthScopes"))
     HoneycodeMetadata.type = Types::HoneycodeMetadata
-    IdFieldNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "member")
+    IdFieldNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "member"))
     IncrementalPullConfig.add_member(:datetime_type_field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DatetimeTypeFieldName, name: "datetimeTypeFieldName"))
     IncrementalPullConfig.type = Types::IncrementalPullConfig
     InforNexusConnectorOperator.add_member(:projection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROJECTION", traits: {"smithy.api#enumValue" => "PROJECTION"}))
@@ -1081,7 +1081,7 @@ module Aws::Appflow
     MetadataCatalogDetail.add_member(:table_registration_output, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationOutput, name: "tableRegistrationOutput"))
     MetadataCatalogDetail.add_member(:partition_registration_output, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationOutput, name: "partitionRegistrationOutput"))
     MetadataCatalogDetail.type = Types::MetadataCatalogDetail
-    MetadataCatalogDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataCatalogDetail, name: "member")
+    MetadataCatalogDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataCatalogDetail, name: "member"))
     OAuth2Credentials.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientId, name: "clientId"))
     OAuth2Credentials.add_member(:client_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientSecret, name: "clientSecret"))
     OAuth2Credentials.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessToken, name: "accessToken"))
@@ -1098,7 +1098,7 @@ module Aws::Appflow
     OAuth2CustomParameter.type = Types::OAuth2CustomParameter
     OAuth2CustomPropType.add_member(:token_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOKEN_URL", traits: {"smithy.api#enumValue" => "TOKEN_URL"}))
     OAuth2CustomPropType.add_member(:auth_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTH_URL", traits: {"smithy.api#enumValue" => "AUTH_URL"}))
-    OAuth2CustomPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OAuth2CustomParameter, name: "member")
+    OAuth2CustomPropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuth2CustomParameter, name: "member"))
     OAuth2Defaults.add_member(:oauth_scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthScopeList, name: "oauthScopes"))
     OAuth2Defaults.add_member(:token_urls, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenUrlList, name: "tokenUrls"))
     OAuth2Defaults.add_member(:auth_code_urls, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthCodeUrlList, name: "authCodeUrls"))
@@ -1108,7 +1108,7 @@ module Aws::Appflow
     OAuth2GrantType.add_member(:client_credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLIENT_CREDENTIALS", traits: {"smithy.api#enumValue" => "CLIENT_CREDENTIALS"}))
     OAuth2GrantType.add_member(:authorization_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTHORIZATION_CODE", traits: {"smithy.api#enumValue" => "AUTHORIZATION_CODE"}))
     OAuth2GrantType.add_member(:jwt_bearer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JWT_BEARER", traits: {"smithy.api#enumValue" => "JWT_BEARER"}))
-    OAuth2GrantTypeSupportedList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OAuth2GrantType, name: "member")
+    OAuth2GrantTypeSupportedList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuth2GrantType, name: "member"))
     OAuth2Properties.add_member(:token_url, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenUrl, name: "tokenUrl", traits: {"smithy.api#required" => {}}))
     OAuth2Properties.add_member(:o_auth2_grant_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuth2GrantType, name: "oAuth2GrantType", traits: {"smithy.api#required" => {}}))
     OAuth2Properties.add_member(:token_url_custom_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenUrlCustomProperties, name: "tokenUrlCustomProperties"))
@@ -1123,7 +1123,7 @@ module Aws::Appflow
     OAuthProperties.add_member(:auth_code_url, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthCodeUrl, name: "authCodeUrl", traits: {"smithy.api#required" => {}}))
     OAuthProperties.add_member(:o_auth_scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthScopeList, name: "oAuthScopes", traits: {"smithy.api#required" => {}}))
     OAuthProperties.type = Types::OAuthProperties
-    OAuthScopeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthScope, name: "member")
+    OAuthScopeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthScope, name: "member"))
     Operator.add_member(:projection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROJECTION", traits: {"smithy.api#enumValue" => "PROJECTION"}))
     Operator.add_member(:less_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LESS_THAN", traits: {"smithy.api#enumValue" => "LESS_THAN"}))
     Operator.add_member(:greater_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GREATER_THAN", traits: {"smithy.api#enumValue" => "GREATER_THAN"}))
@@ -1211,7 +1211,7 @@ module Aws::Appflow
     PardotSourceProperties.type = Types::PardotSourceProperties
     PathPrefix.add_member(:execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXECUTION_ID", traits: {"smithy.api#enumValue" => "EXECUTION_ID"}))
     PathPrefix.add_member(:schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHEMA_VERSION", traits: {"smithy.api#enumValue" => "SCHEMA_VERSION"}))
-    PathPrefixHierarchy.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PathPrefix, name: "member")
+    PathPrefixHierarchy.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PathPrefix, name: "member"))
     PrefixConfig.add_member(:prefix_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixType, name: "prefixType"))
     PrefixConfig.add_member(:prefix_format, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixFormat, name: "prefixFormat"))
     PrefixConfig.add_member(:path_prefix_hierarchy, ::Smithy::Schema::Shapes::MemberShape.new(target: PathPrefixHierarchy, name: "pathPrefixHierarchy"))
@@ -1236,8 +1236,8 @@ module Aws::Appflow
     PrivateConnectionProvisioningStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     PrivateConnectionProvisioningStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     PrivateConnectionProvisioningStatus.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
-    ProfilePropertiesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilePropertyKey, name: "key")
-    ProfilePropertiesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilePropertyValue, name: "value")
+    ProfilePropertiesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilePropertyKey, name: "key"))
+    ProfilePropertiesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilePropertyValue, name: "value"))
     Range.add_member(:maximum, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "maximum", traits: {"smithy.api#default" => 0}))
     Range.add_member(:minimum, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "minimum", traits: {"smithy.api#default" => 0}))
     Range.type = Types::Range
@@ -1260,7 +1260,7 @@ module Aws::Appflow
     RedshiftDestinationProperties.add_member(:error_handling_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorHandlingConfig, name: "errorHandlingConfig"))
     RedshiftDestinationProperties.type = Types::RedshiftDestinationProperties
     RedshiftMetadata.type = Types::RedshiftMetadata
-    RegionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member")
+    RegionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member"))
     RegisterConnectorRequest.add_member(:connector_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorLabel, name: "connectorLabel"))
     RegisterConnectorRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     RegisterConnectorRequest.add_member(:connector_provisioning_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProvisioningType, name: "connectorProvisioningType"))
@@ -1403,7 +1403,7 @@ module Aws::Appflow
     SalesforceDataTransferApi.add_member(:automatic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTOMATIC", traits: {"smithy.api#enumValue" => "AUTOMATIC"}))
     SalesforceDataTransferApi.add_member(:bulkv2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BULKV2", traits: {"smithy.api#enumValue" => "BULKV2"}))
     SalesforceDataTransferApi.add_member(:rest_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REST_SYNC", traits: {"smithy.api#enumValue" => "REST_SYNC"}))
-    SalesforceDataTransferApiList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SalesforceDataTransferApi, name: "member")
+    SalesforceDataTransferApiList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SalesforceDataTransferApi, name: "member"))
     SalesforceDestinationProperties.add_member(:object, ::Smithy::Schema::Shapes::MemberShape.new(target: Object, name: "object", traits: {"smithy.api#required" => {}}))
     SalesforceDestinationProperties.add_member(:id_field_names, ::Smithy::Schema::Shapes::MemberShape.new(target: IdFieldNameList, name: "idFieldNames"))
     SalesforceDestinationProperties.add_member(:error_handling_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorHandlingConfig, name: "errorHandlingConfig"))
@@ -1434,7 +1434,7 @@ module Aws::Appflow
     ScheduledTriggerProperties.add_member(:first_execution_from, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "firstExecutionFrom"))
     ScheduledTriggerProperties.add_member(:flow_error_deactivation_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowErrorDeactivationThreshold, name: "flowErrorDeactivationThreshold"))
     ScheduledTriggerProperties.type = Types::ScheduledTriggerProperties
-    SchedulingFrequencyTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleFrequencyType, name: "member")
+    SchedulingFrequencyTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleFrequencyType, name: "member"))
     ServiceNowConnectorOperator.add_member(:projection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROJECTION", traits: {"smithy.api#enumValue" => "PROJECTION"}))
     ServiceNowConnectorOperator.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINS", traits: {"smithy.api#enumValue" => "CONTAINS"}))
     ServiceNowConnectorOperator.add_member(:less_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LESS_THAN", traits: {"smithy.api#enumValue" => "LESS_THAN"}))
@@ -1557,7 +1557,7 @@ module Aws::Appflow
     SourceFieldProperties.add_member(:is_queryable, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isQueryable", traits: {"smithy.api#default" => false}))
     SourceFieldProperties.add_member(:is_timestamp_field_for_incremental_queries, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isTimestampFieldForIncrementalQueries", traits: {"smithy.api#default" => false}))
     SourceFieldProperties.type = Types::SourceFieldProperties
-    SourceFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    SourceFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     SourceFlowConfig.add_member(:connector_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorType, name: "connectorType", traits: {"smithy.api#required" => {}}))
     SourceFlowConfig.add_member(:api_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiVersion, name: "apiVersion"))
     SourceFlowConfig.add_member(:connector_profile_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorProfileName, name: "connectorProfileName"))
@@ -1579,19 +1579,19 @@ module Aws::Appflow
     SuccessResponseHandlingConfig.add_member(:bucket_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketPrefix, name: "bucketPrefix"))
     SuccessResponseHandlingConfig.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "bucketName"))
     SuccessResponseHandlingConfig.type = Types::SuccessResponseHandlingConfig
-    SupportedApiVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedApiVersion, name: "member")
-    SupportedDataTransferApis.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataTransferApi, name: "member")
+    SupportedApiVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedApiVersion, name: "member"))
+    SupportedDataTransferApis.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataTransferApi, name: "member"))
     SupportedDataTransferType.add_member(:record, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECORD", traits: {"smithy.api#enumValue" => "RECORD"}))
     SupportedDataTransferType.add_member(:file, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FILE", traits: {"smithy.api#enumValue" => "FILE"}))
-    SupportedDataTransferTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedDataTransferType, name: "member")
+    SupportedDataTransferTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedDataTransferType, name: "member"))
     SupportedFieldTypeDetails.add_member(:v1, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldTypeDetails, name: "v1", traits: {"smithy.api#required" => {}}))
     SupportedFieldTypeDetails.type = Types::SupportedFieldTypeDetails
-    SupportedOperatorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Operators, name: "member")
-    SupportedValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "member")
-    SupportedWriteOperationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WriteOperationType, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    SupportedOperatorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Operators, name: "member"))
+    SupportedValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "member"))
+    SupportedWriteOperationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WriteOperationType, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -1602,8 +1602,8 @@ module Aws::Appflow
     Task.add_member(:task_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskType, name: "taskType", traits: {"smithy.api#required" => {}}))
     Task.add_member(:task_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskPropertiesMap, name: "taskProperties"))
     Task.type = Types::Task
-    TaskPropertiesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: OperatorPropertiesKeys, name: "key")
-    TaskPropertiesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Property, name: "value")
+    TaskPropertiesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: OperatorPropertiesKeys, name: "key"))
+    TaskPropertiesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Property, name: "value"))
     TaskType.add_member(:arithmetic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARITHMETIC", traits: {"smithy.api#enumValue" => "Arithmetic"}))
     TaskType.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FILTER", traits: {"smithy.api#enumValue" => "Filter"}))
     TaskType.add_member(:map, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAP", traits: {"smithy.api#enumValue" => "Map"}))
@@ -1614,12 +1614,12 @@ module Aws::Appflow
     TaskType.add_member(:truncate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRUNCATE", traits: {"smithy.api#enumValue" => "Truncate"}))
     TaskType.add_member(:validate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALIDATE", traits: {"smithy.api#enumValue" => "Validate"}))
     TaskType.add_member(:partition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARTITION", traits: {"smithy.api#enumValue" => "Partition"}))
-    Tasks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Task, name: "member")
+    Tasks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Task, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ThrottlingException.type = Types::ThrottlingException
-    TokenUrlCustomProperties.key = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPropertyKey, name: "key")
-    TokenUrlCustomProperties.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPropertyValue, name: "value")
-    TokenUrlList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TokenUrl, name: "member")
+    TokenUrlCustomProperties.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPropertyKey, name: "key"))
+    TokenUrlCustomProperties.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPropertyValue, name: "value"))
+    TokenUrlList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenUrl, name: "member"))
     TrendmicroConnectorOperator.add_member(:projection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROJECTION", traits: {"smithy.api#enumValue" => "PROJECTION"}))
     TrendmicroConnectorOperator.add_member(:equal_to, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUAL_TO", traits: {"smithy.api#enumValue" => "EQUAL_TO"}))
     TrendmicroConnectorOperator.add_member(:addition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADDITION", traits: {"smithy.api#enumValue" => "ADDITION"}))
@@ -1648,7 +1648,7 @@ module Aws::Appflow
     TriggerType.add_member(:scheduled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHEDULED", traits: {"smithy.api#enumValue" => "Scheduled"}))
     TriggerType.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVENT", traits: {"smithy.api#enumValue" => "Event"}))
     TriggerType.add_member(:ondemand, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONDEMAND", traits: {"smithy.api#enumValue" => "OnDemand"}))
-    TriggerTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerType, name: "member")
+    TriggerTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerType, name: "member"))
     UnregisterConnectorRequest.add_member(:connector_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorLabel, name: "connectorLabel", traits: {"smithy.api#required" => {}}))
     UnregisterConnectorRequest.add_member(:force_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "forceDelete", traits: {"smithy.api#default" => false}))
     UnregisterConnectorRequest.type = Types::UnregisterConnectorRequest

@@ -149,7 +149,7 @@ module Aws::PCS
     Cluster.add_member(:endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoints, name: "endpoints"))
     Cluster.add_member(:error_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorInfoList, name: "errorInfo"))
     Cluster.type = Types::Cluster
-    ClusterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterSummary, name: "member")
+    ClusterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterSummary, name: "member"))
     ClusterSlurmConfiguration.add_member(:scale_down_idle_time_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "scaleDownIdleTimeInSeconds", traits: {"smithy.api#range" => {"min" => 1}}))
     ClusterSlurmConfiguration.add_member(:slurm_custom_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SlurmCustomSettings, name: "slurmCustomSettings"))
     ClusterSlurmConfiguration.add_member(:auth_key, ::Smithy::Schema::Shapes::MemberShape.new(target: SlurmAuthKey, name: "authKey"))
@@ -195,8 +195,8 @@ module Aws::PCS
     ComputeNodeGroup.type = Types::ComputeNodeGroup
     ComputeNodeGroupConfiguration.add_member(:compute_node_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "computeNodeGroupId"))
     ComputeNodeGroupConfiguration.type = Types::ComputeNodeGroupConfiguration
-    ComputeNodeGroupConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeNodeGroupConfiguration, name: "member")
-    ComputeNodeGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeNodeGroupSummary, name: "member")
+    ComputeNodeGroupConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeNodeGroupConfiguration, name: "member"))
+    ComputeNodeGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeNodeGroupSummary, name: "member"))
     ComputeNodeGroupSlurmConfiguration.add_member(:slurm_custom_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SlurmCustomSettings, name: "slurmCustomSettings"))
     ComputeNodeGroupSlurmConfiguration.type = Types::ComputeNodeGroupSlurmConfiguration
     ComputeNodeGroupSlurmConfigurationRequest.add_member(:slurm_custom_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SlurmCustomSettings, name: "slurmCustomSettings"))
@@ -283,11 +283,11 @@ module Aws::PCS
     Endpoint.type = Types::Endpoint
     EndpointType.add_member(:slurmctld, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SLURMCTLD", traits: {"smithy.api#enumValue" => "SLURMCTLD"}))
     EndpointType.add_member(:slurmdbd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SLURMDBD", traits: {"smithy.api#enumValue" => "SLURMDBD"}))
-    Endpoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "member")
+    Endpoints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "member"))
     ErrorInfo.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "code"))
     ErrorInfo.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ErrorInfo.type = Types::ErrorInfo
-    ErrorInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorInfo, name: "member")
+    ErrorInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorInfo, name: "member"))
     GetClusterRequest.add_member(:cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterIdentifier, name: "clusterIdentifier", traits: {"smithy.api#required" => {}}))
     GetClusterRequest.type = Types::GetClusterRequest
     GetClusterResponse.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "cluster"))
@@ -304,7 +304,7 @@ module Aws::PCS
     GetQueueResponse.type = Types::GetQueueResponse
     InstanceConfig.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "instanceType"))
     InstanceConfig.type = Types::InstanceConfig
-    InstanceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceConfig, name: "member")
+    InstanceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceConfig, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
     ListClustersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -355,7 +355,7 @@ module Aws::PCS
     Queue.add_member(:slurm_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueSlurmConfiguration, name: "slurmConfiguration"))
     Queue.add_member(:error_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorInfoList, name: "errorInfo"))
     Queue.type = Types::Queue
-    QueueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueueSummary, name: "member")
+    QueueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueSummary, name: "member"))
     QueueSlurmConfiguration.add_member(:slurm_custom_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SlurmCustomSettings, name: "slurmCustomSettings"))
     QueueSlurmConfiguration.type = Types::QueueSlurmConfiguration
     QueueSlurmConfigurationRequest.add_member(:slurm_custom_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SlurmCustomSettings, name: "slurmCustomSettings"))
@@ -384,14 +384,14 @@ module Aws::PCS
     RegisterComputeNodeGroupInstanceResponse.add_member(:shared_secret, ::Smithy::Schema::Shapes::MemberShape.new(target: SharedSecret, name: "sharedSecret", traits: {"smithy.api#required" => {}}))
     RegisterComputeNodeGroupInstanceResponse.add_member(:endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoints, name: "endpoints", traits: {"smithy.api#required" => {}}))
     RegisterComputeNodeGroupInstanceResponse.type = Types::RegisterComputeNodeGroupInstanceResponse
-    RequestTagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    RequestTagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    RequestTagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    RequestTagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResponseTagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    ResponseTagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    ResponseTagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    ResponseTagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     ScalingConfiguration.add_member(:min_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "minInstanceCount", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
     ScalingConfiguration.add_member(:max_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxInstanceCount", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
     ScalingConfiguration.type = Types::ScalingConfiguration
@@ -405,7 +405,7 @@ module Aws::PCS
     SchedulerRequest.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "version", traits: {"smithy.api#required" => {}}))
     SchedulerRequest.type = Types::SchedulerRequest
     SchedulerType.add_member(:slurm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SLURM", traits: {"smithy.api#enumValue" => "SLURM"}))
-    SecurityGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
+    SecurityGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "serviceCode", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId"))
@@ -421,15 +421,15 @@ module Aws::PCS
     SlurmCustomSetting.add_member(:parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "parameterName", traits: {"smithy.api#required" => {}}))
     SlurmCustomSetting.add_member(:parameter_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "parameterValue", traits: {"smithy.api#required" => {}}))
     SlurmCustomSetting.type = Types::SlurmCustomSetting
-    SlurmCustomSettings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlurmCustomSetting, name: "member")
+    SlurmCustomSettings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SlurmCustomSetting, name: "member"))
     SpotAllocationStrategy.add_member(:lowest_price, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOWEST_PRICE", traits: {"smithy.api#enumValue" => "lowest-price"}))
     SpotAllocationStrategy.add_member(:capacity_optimized, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAPACITY_OPTIMIZED", traits: {"smithy.api#enumValue" => "capacity-optimized"}))
     SpotAllocationStrategy.add_member(:price_capacity_optimized, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRICE_CAPACITY_OPTIMIZED", traits: {"smithy.api#enumValue" => "price-capacity-optimized"}))
     SpotOptions.add_member(:allocation_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: SpotAllocationStrategy, name: "allocationStrategy"))
     SpotOptions.type = Types::SpotOptions
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    SubnetIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    SubnetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestTagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -485,7 +485,7 @@ module Aws::PCS
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "unknownOperation"}))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "cannotParse"}))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "fieldValidationFailed"}))

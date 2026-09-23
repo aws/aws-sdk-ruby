@@ -379,7 +379,7 @@ module Aws::EKS
     AccessEntry.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "username"))
     AccessEntry.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "type"))
     AccessEntry.type = Types::AccessEntry
-    AccessPoliciesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPolicy, name: "member")
+    AccessPoliciesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPolicy, name: "member"))
     AccessPolicy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     AccessPolicy.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
     AccessPolicy.type = Types::AccessPolicy
@@ -388,8 +388,8 @@ module Aws::EKS
     AccessScope.type = Types::AccessScope
     AccessScopeType.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "cluster", traits: {"smithy.api#enumValue" => "cluster"}))
     AccessScopeType.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "namespace", traits: {"smithy.api#enumValue" => "namespace"}))
-    AdditionalInfoMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    AdditionalInfoMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    AdditionalInfoMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    AdditionalInfoMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     Addon.add_member(:addon_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "addonName"))
     Addon.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterName, name: "clusterName"))
     Addon.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AddonStatus, name: "status"))
@@ -410,7 +410,7 @@ module Aws::EKS
     AddonCompatibilityDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     AddonCompatibilityDetail.add_member(:compatible_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "compatibleVersions"))
     AddonCompatibilityDetail.type = Types::AddonCompatibilityDetail
-    AddonCompatibilityDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AddonCompatibilityDetail, name: "member")
+    AddonCompatibilityDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AddonCompatibilityDetail, name: "member"))
     AddonHealth.add_member(:issues, ::Smithy::Schema::Shapes::MemberShape.new(target: AddonIssueList, name: "issues"))
     AddonHealth.type = Types::AddonHealth
     AddonInfo.add_member(:addon_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "addonName"))
@@ -435,7 +435,7 @@ module Aws::EKS
     AddonIssueCode.add_member(:k8_s_resource_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "K8S_RESOURCE_NOT_FOUND", traits: {"smithy.api#enumValue" => "K8sResourceNotFound"}))
     AddonIssueCode.add_member(:addon_subscription_needed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADDON_SUBSCRIPTION_NEEDED", traits: {"smithy.api#enumValue" => "AddonSubscriptionNeeded"}))
     AddonIssueCode.add_member(:addon_permission_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADDON_PERMISSION_FAILURE", traits: {"smithy.api#enumValue" => "AddonPermissionFailure"}))
-    AddonIssueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AddonIssue, name: "member")
+    AddonIssueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AddonIssue, name: "member"))
     AddonNamespaceConfigRequest.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "namespace"))
     AddonNamespaceConfigRequest.type = Types::AddonNamespaceConfigRequest
     AddonNamespaceConfigResponse.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "namespace"))
@@ -443,11 +443,11 @@ module Aws::EKS
     AddonPodIdentityAssociations.add_member(:service_account, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceAccount", traits: {"smithy.api#required" => {}}))
     AddonPodIdentityAssociations.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "roleArn", traits: {"smithy.api#required" => {}}))
     AddonPodIdentityAssociations.type = Types::AddonPodIdentityAssociations
-    AddonPodIdentityAssociationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AddonPodIdentityAssociations, name: "member")
+    AddonPodIdentityAssociationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AddonPodIdentityAssociations, name: "member"))
     AddonPodIdentityConfiguration.add_member(:service_account, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceAccount"))
     AddonPodIdentityConfiguration.add_member(:recommended_managed_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "recommendedManagedPolicies"))
     AddonPodIdentityConfiguration.type = Types::AddonPodIdentityConfiguration
-    AddonPodIdentityConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AddonPodIdentityConfiguration, name: "member")
+    AddonPodIdentityConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AddonPodIdentityConfiguration, name: "member"))
     AddonStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     AddonStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     AddonStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
@@ -463,8 +463,8 @@ module Aws::EKS
     AddonVersionInfo.add_member(:requires_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "requiresConfiguration", traits: {"smithy.api#default" => false}))
     AddonVersionInfo.add_member(:requires_iam_permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "requiresIamPermissions", traits: {"smithy.api#default" => false}))
     AddonVersionInfo.type = Types::AddonVersionInfo
-    AddonVersionInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AddonVersionInfo, name: "member")
-    Addons.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AddonInfo, name: "member")
+    AddonVersionInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AddonVersionInfo, name: "member"))
+    Addons.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AddonInfo, name: "member"))
     AssociateAccessPolicyRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clusterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AssociateAccessPolicyRequest.add_member(:principal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "principalArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AssociateAccessPolicyRequest.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "policyArn", traits: {"smithy.api#required" => {}}))
@@ -488,7 +488,7 @@ module Aws::EKS
     AssociateIdentityProviderConfigResponse.add_member(:update, ::Smithy::Schema::Shapes::MemberShape.new(target: Update, name: "update"))
     AssociateIdentityProviderConfigResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     AssociateIdentityProviderConfigResponse.type = Types::AssociateIdentityProviderConfigResponse
-    AssociatedAccessPoliciesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedAccessPolicy, name: "member")
+    AssociatedAccessPoliciesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedAccessPolicy, name: "member"))
     AssociatedAccessPolicy.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "policyArn"))
     AssociatedAccessPolicy.add_member(:access_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessScope, name: "accessScope"))
     AssociatedAccessPolicy.add_member(:associated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "associatedAt"))
@@ -499,7 +499,7 @@ module Aws::EKS
     AuthenticationMode.add_member(:config_map, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONFIG_MAP", traits: {"smithy.api#enumValue" => "CONFIG_MAP"}))
     AutoScalingGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     AutoScalingGroup.type = Types::AutoScalingGroup
-    AutoScalingGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroup, name: "member")
+    AutoScalingGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroup, name: "member"))
     BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     BadRequestException.type = Types::BadRequestException
     BlockStorage.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "enabled"))
@@ -509,7 +509,7 @@ module Aws::EKS
     CapacityTypes.add_member(:capacity_block, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAPACITY_BLOCK", traits: {"smithy.api#enumValue" => "CAPACITY_BLOCK"}))
     Category.add_member(:upgrade_readiness, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPGRADE_READINESS", traits: {"smithy.api#enumValue" => "UPGRADE_READINESS"}))
     Category.add_member(:misconfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISCONFIGURATION", traits: {"smithy.api#enumValue" => "MISCONFIGURATION"}))
-    CategoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Category, name: "member")
+    CategoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Category, name: "member"))
     Certificate.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "data"))
     Certificate.type = Types::Certificate
     ClientException.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clusterName"))
@@ -522,7 +522,7 @@ module Aws::EKS
     ClientStat.add_member(:number_of_requests_last30_days, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "numberOfRequestsLast30Days", traits: {"smithy.api#default" => 0}))
     ClientStat.add_member(:last_request_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastRequestTime"))
     ClientStat.type = Types::ClientStat
-    ClientStats.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClientStat, name: "member")
+    ClientStats.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientStat, name: "member"))
     Cluster.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     Cluster.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
     Cluster.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
@@ -576,7 +576,7 @@ module Aws::EKS
     ClusterIssueCode.add_member(:sts_regional_endpoint_disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STS_REGIONAL_ENDPOINT_DISABLED", traits: {"smithy.api#enumValue" => "StsRegionalEndpointDisabled"}))
     ClusterIssueCode.add_member(:unsupported_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNSUPPORTED_VERSION", traits: {"smithy.api#enumValue" => "UnsupportedVersion"}))
     ClusterIssueCode.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTHER", traits: {"smithy.api#enumValue" => "Other"}))
-    ClusterIssueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterIssue, name: "member")
+    ClusterIssueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterIssue, name: "member"))
     ClusterStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     ClusterStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     ClusterStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -594,11 +594,11 @@ module Aws::EKS
     ClusterVersionInformation.add_member(:version_status, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionStatus, name: "versionStatus"))
     ClusterVersionInformation.add_member(:kubernetes_patch_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "kubernetesPatchVersion"))
     ClusterVersionInformation.type = Types::ClusterVersionInformation
-    ClusterVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterVersionInformation, name: "member")
+    ClusterVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterVersionInformation, name: "member"))
     ClusterVersionStatus.add_member(:unsupported, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "unsupported", traits: {"smithy.api#enumValue" => "unsupported"}))
     ClusterVersionStatus.add_member(:standard_support, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "standard_support", traits: {"smithy.api#enumValue" => "standard-support"}))
     ClusterVersionStatus.add_member(:extended_support, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "extended_support", traits: {"smithy.api#enumValue" => "extended-support"}))
-    Compatibilities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Compatibility, name: "member")
+    Compatibilities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Compatibility, name: "member"))
     Compatibility.add_member(:cluster_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clusterVersion"))
     Compatibility.add_member(:platform_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "platformVersions"))
     Compatibility.add_member(:default_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "defaultVersion", traits: {"smithy.api#default" => false}))
@@ -772,7 +772,7 @@ module Aws::EKS
     DeprecationDetail.add_member(:start_serving_replacement_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "startServingReplacementVersion"))
     DeprecationDetail.add_member(:client_stats, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientStats, name: "clientStats"))
     DeprecationDetail.type = Types::DeprecationDetail
-    DeprecationDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeprecationDetail, name: "member")
+    DeprecationDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeprecationDetail, name: "member"))
     DeregisterClusterRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeregisterClusterRequest.type = Types::DeregisterClusterRequest
     DeregisterClusterResponse.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "cluster"))
@@ -891,14 +891,14 @@ module Aws::EKS
     EksAnywhereSubscription.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     EksAnywhereSubscription.type = Types::EksAnywhereSubscription
     EksAnywhereSubscriptionLicenseType.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Cluster", traits: {"smithy.api#enumValue" => "Cluster"}))
-    EksAnywhereSubscriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EksAnywhereSubscription, name: "member")
+    EksAnywhereSubscriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EksAnywhereSubscription, name: "member"))
     EksAnywhereSubscriptionStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     EksAnywhereSubscriptionStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     EksAnywhereSubscriptionStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
     EksAnywhereSubscriptionStatus.add_member(:expiring, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRING", traits: {"smithy.api#enumValue" => "EXPIRING"}))
     EksAnywhereSubscriptionStatus.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
     EksAnywhereSubscriptionStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    EksAnywhereSubscriptionStatusValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EksAnywhereSubscriptionStatus, name: "member")
+    EksAnywhereSubscriptionStatusValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EksAnywhereSubscriptionStatus, name: "member"))
     EksAnywhereSubscriptionTerm.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "duration", traits: {"smithy.api#default" => 0}))
     EksAnywhereSubscriptionTerm.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: EksAnywhereSubscriptionTermUnit, name: "unit"))
     EksAnywhereSubscriptionTerm.type = Types::EksAnywhereSubscriptionTerm
@@ -908,7 +908,7 @@ module Aws::EKS
     EncryptionConfig.add_member(:resources, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "resources"))
     EncryptionConfig.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: Provider, name: "provider"))
     EncryptionConfig.type = Types::EncryptionConfig
-    EncryptionConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfig, name: "member")
+    EncryptionConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfig, name: "member"))
     ErrorCode.add_member(:subnet_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUBNET_NOT_FOUND", traits: {"smithy.api#enumValue" => "SubnetNotFound"}))
     ErrorCode.add_member(:security_group_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECURITY_GROUP_NOT_FOUND", traits: {"smithy.api#enumValue" => "SecurityGroupNotFound"}))
     ErrorCode.add_member(:eni_limit_reached, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENI_LIMIT_REACHED", traits: {"smithy.api#enumValue" => "EniLimitReached"}))
@@ -930,7 +930,7 @@ module Aws::EKS
     ErrorDetail.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "errorMessage"))
     ErrorDetail.add_member(:resource_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "resourceIds"))
     ErrorDetail.type = Types::ErrorDetail
-    ErrorDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail, name: "member")
+    ErrorDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail, name: "member"))
     FargateProfile.add_member(:fargate_profile_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "fargateProfileName"))
     FargateProfile.add_member(:fargate_profile_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "fargateProfileArn"))
     FargateProfile.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clusterName"))
@@ -952,13 +952,13 @@ module Aws::EKS
     FargateProfileIssueCode.add_member(:access_denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS_DENIED", traits: {"smithy.api#enumValue" => "AccessDenied"}))
     FargateProfileIssueCode.add_member(:cluster_unreachable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLUSTER_UNREACHABLE", traits: {"smithy.api#enumValue" => "ClusterUnreachable"}))
     FargateProfileIssueCode.add_member(:internal_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_FAILURE", traits: {"smithy.api#enumValue" => "InternalFailure"}))
-    FargateProfileIssueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FargateProfileIssue, name: "member")
-    FargateProfileLabel.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    FargateProfileLabel.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    FargateProfileIssueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FargateProfileIssue, name: "member"))
+    FargateProfileLabel.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    FargateProfileLabel.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     FargateProfileSelector.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "namespace"))
     FargateProfileSelector.add_member(:labels, ::Smithy::Schema::Shapes::MemberShape.new(target: FargateProfileLabel, name: "labels"))
     FargateProfileSelector.type = Types::FargateProfileSelector
-    FargateProfileSelectors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FargateProfileSelector, name: "member")
+    FargateProfileSelectors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FargateProfileSelector, name: "member"))
     FargateProfileStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     FargateProfileStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     FargateProfileStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -971,8 +971,8 @@ module Aws::EKS
     IdentityProviderConfig.type = Types::IdentityProviderConfig
     IdentityProviderConfigResponse.add_member(:oidc, ::Smithy::Schema::Shapes::MemberShape.new(target: OidcIdentityProviderConfig, name: "oidc"))
     IdentityProviderConfigResponse.type = Types::IdentityProviderConfigResponse
-    IdentityProviderConfigs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderConfig, name: "member")
-    IncludeClustersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    IdentityProviderConfigs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderConfig, name: "member"))
+    IncludeClustersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Insight.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "id"))
     Insight.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     Insight.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: Category, name: "category"))
@@ -993,7 +993,7 @@ module Aws::EKS
     InsightResourceDetail.add_member(:kubernetes_resource_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "kubernetesResourceUri"))
     InsightResourceDetail.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
     InsightResourceDetail.type = Types::InsightResourceDetail
-    InsightResourceDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InsightResourceDetail, name: "member")
+    InsightResourceDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightResourceDetail, name: "member"))
     InsightStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightStatusValue, name: "status"))
     InsightStatus.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "reason"))
     InsightStatus.type = Types::InsightStatus
@@ -1001,8 +1001,8 @@ module Aws::EKS
     InsightStatusValue.add_member(:warning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WARNING", traits: {"smithy.api#enumValue" => "WARNING"}))
     InsightStatusValue.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
     InsightStatusValue.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
-    InsightStatusValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InsightStatusValue, name: "member")
-    InsightSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InsightSummary, name: "member")
+    InsightStatusValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightStatusValue, name: "member"))
+    InsightSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightSummary, name: "member"))
     InsightSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "id"))
     InsightSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     InsightSummary.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: Category, name: "category"))
@@ -1041,7 +1041,7 @@ module Aws::EKS
     Issue.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     Issue.add_member(:resource_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "resourceIds"))
     Issue.type = Types::Issue
-    IssueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Issue, name: "member")
+    IssueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Issue, name: "member"))
     KubernetesNetworkConfigRequest.add_member(:service_ipv4_cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceIpv4Cidr"))
     KubernetesNetworkConfigRequest.add_member(:ip_family, ::Smithy::Schema::Shapes::MemberShape.new(target: IpFamily, name: "ipFamily"))
     KubernetesNetworkConfigRequest.add_member(:elastic_load_balancing, ::Smithy::Schema::Shapes::MemberShape.new(target: ElasticLoadBalancing, name: "elasticLoadBalancing"))
@@ -1058,7 +1058,7 @@ module Aws::EKS
     License.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "id"))
     License.add_member(:token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "token"))
     License.type = Types::License
-    LicenseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: License, name: "member")
+    LicenseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: License, name: "member"))
     ListAccessEntriesRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clusterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListAccessEntriesRequest.add_member(:associated_policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "associatedPolicyArn", traits: {"smithy.api#httpQuery" => "associatedPolicyArn"}))
     ListAccessEntriesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListAccessEntriesRequestMaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
@@ -1158,13 +1158,13 @@ module Aws::EKS
     LogSetup.add_member(:types, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTypes, name: "types"))
     LogSetup.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "enabled"))
     LogSetup.type = Types::LogSetup
-    LogSetups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogSetup, name: "member")
+    LogSetups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogSetup, name: "member"))
     LogType.add_member(:api, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "API", traits: {"smithy.api#enumValue" => "api"}))
     LogType.add_member(:audit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUDIT", traits: {"smithy.api#enumValue" => "audit"}))
     LogType.add_member(:authenticator, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTHENTICATOR", traits: {"smithy.api#enumValue" => "authenticator"}))
     LogType.add_member(:controller_manager, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTROLLER_MANAGER", traits: {"smithy.api#enumValue" => "controllerManager"}))
     LogType.add_member(:scheduler, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHEDULER", traits: {"smithy.api#enumValue" => "scheduler"}))
-    LogTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogType, name: "member")
+    LogTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogType, name: "member"))
     Logging.add_member(:cluster_logging, ::Smithy::Schema::Shapes::MemberShape.new(target: LogSetups, name: "clusterLogging"))
     Logging.type = Types::Logging
     MarketplaceInformation.add_member(:product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "productId"))
@@ -1182,7 +1182,7 @@ module Aws::EKS
     NodeRepairConfigOverrides.add_member(:min_repair_wait_time_mins, ::Smithy::Schema::Shapes::MemberShape.new(target: NonZeroInteger, name: "minRepairWaitTimeMins"))
     NodeRepairConfigOverrides.add_member(:repair_action, ::Smithy::Schema::Shapes::MemberShape.new(target: RepairAction, name: "repairAction"))
     NodeRepairConfigOverrides.type = Types::NodeRepairConfigOverrides
-    NodeRepairConfigOverridesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NodeRepairConfigOverrides, name: "member")
+    NodeRepairConfigOverridesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeRepairConfigOverrides, name: "member"))
     Nodegroup.add_member(:nodegroup_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nodegroupName"))
     Nodegroup.add_member(:nodegroup_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nodegroupArn"))
     Nodegroup.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clusterName"))
@@ -1314,7 +1314,7 @@ module Aws::EKS
     PodIdentityAssociation.add_member(:target_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "targetRoleArn"))
     PodIdentityAssociation.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "externalId"))
     PodIdentityAssociation.type = Types::PodIdentityAssociation
-    PodIdentityAssociationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PodIdentityAssociationSummary, name: "member")
+    PodIdentityAssociationSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PodIdentityAssociationSummary, name: "member"))
     PodIdentityAssociationSummary.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clusterName"))
     PodIdentityAssociationSummary.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "namespace"))
     PodIdentityAssociationSummary.add_member(:service_account, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceAccount"))
@@ -1342,10 +1342,10 @@ module Aws::EKS
     RemoteNetworkConfigResponse.type = Types::RemoteNetworkConfigResponse
     RemoteNodeNetwork.add_member(:cidrs, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "cidrs"))
     RemoteNodeNetwork.type = Types::RemoteNodeNetwork
-    RemoteNodeNetworkList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RemoteNodeNetwork, name: "member")
+    RemoteNodeNetworkList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RemoteNodeNetwork, name: "member"))
     RemotePodNetwork.add_member(:cidrs, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "cidrs"))
     RemotePodNetwork.type = Types::RemotePodNetwork
-    RemotePodNetworkList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RemotePodNetwork, name: "member")
+    RemotePodNetworkList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RemotePodNetwork, name: "member"))
     RepairAction.add_member(:replace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Replace", traits: {"smithy.api#enumValue" => "Replace"}))
     RepairAction.add_member(:reboot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Reboot", traits: {"smithy.api#enumValue" => "Reboot"}))
     RepairAction.add_member(:no_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NoAction", traits: {"smithy.api#enumValue" => "NoAction"}))
@@ -1388,12 +1388,12 @@ module Aws::EKS
     StorageConfigRequest.type = Types::StorageConfigRequest
     StorageConfigResponse.add_member(:block_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockStorage, name: "blockStorage"))
     StorageConfigResponse.type = Types::StorageConfigResponse
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     SupportType.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
     SupportType.add_member(:extended, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXTENDED", traits: {"smithy.api#enumValue" => "EXTENDED"}))
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -1538,7 +1538,7 @@ module Aws::EKS
     UpdateParamType.add_member(:remote_network_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMOTE_NETWORK_CONFIG", traits: {"smithy.api#enumValue" => "RemoteNetworkConfig"}))
     UpdateParamType.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETION_PROTECTION", traits: {"smithy.api#enumValue" => "DeletionProtection"}))
     UpdateParamType.add_member(:node_repair_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NODE_REPAIR_CONFIG", traits: {"smithy.api#enumValue" => "NodeRepairConfig"}))
-    UpdateParams.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateParam, name: "member")
+    UpdateParams.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateParam, name: "member"))
     UpdatePodIdentityAssociationRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clusterName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdatePodIdentityAssociationRequest.add_member(:association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "associationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdatePodIdentityAssociationRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "roleArn"))
@@ -1598,12 +1598,12 @@ module Aws::EKS
     ConfigStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     ConfigStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     ConfigStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    LabelsKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    LabelsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: LabelKey, name: "key")
-    LabelsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: LabelValue, name: "value")
-    RequiredClaimsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: RequiredClaimsKey, name: "key")
-    RequiredClaimsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RequiredClaimsValue, name: "value")
-    TaintsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Taint, name: "member")
+    LabelsKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    LabelsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelKey, name: "key"))
+    LabelsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelValue, name: "value"))
+    RequiredClaimsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RequiredClaimsKey, name: "key"))
+    RequiredClaimsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RequiredClaimsValue, name: "value"))
+    TaintsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Taint, name: "member"))
 
     AWSWesleyFrontend = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.eks#AWSWesleyFrontend"

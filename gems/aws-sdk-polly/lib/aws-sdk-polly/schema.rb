@@ -106,7 +106,7 @@ module Aws::Polly
     Engine.add_member(:neural, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEURAL", traits: {"smithy.api#enumValue" => "neural"}))
     Engine.add_member(:long_form, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LONG_FORM", traits: {"smithy.api#enumValue" => "long-form"}))
     Engine.add_member(:generative, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GENERATIVE", traits: {"smithy.api#enumValue" => "generative"}))
-    EngineList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Engine, name: "member")
+    EngineList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Engine, name: "member"))
     EngineNotSupportedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     EngineNotSupportedException.type = Types::EngineNotSupportedException
     Gender.add_member(:female, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Female", traits: {"smithy.api#enumValue" => "Female"}))
@@ -178,7 +178,7 @@ module Aws::Polly
     LanguageCode.add_member(:cs_cz, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "cs_CZ", traits: {"smithy.api#enumValue" => "cs-CZ"}))
     LanguageCode.add_member(:de_ch, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "de_CH", traits: {"smithy.api#enumValue" => "de-CH"}))
     LanguageCode.add_member(:en_sg, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "en_SG", traits: {"smithy.api#enumValue" => "en-SG"}))
-    LanguageCodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "member")
+    LanguageCodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "member"))
     LanguageNotSupportedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     LanguageNotSupportedException.type = Types::LanguageNotSupportedException
     Lexicon.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: LexiconContent, name: "Content"))
@@ -194,8 +194,8 @@ module Aws::Polly
     LexiconDescription.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: LexiconName, name: "Name"))
     LexiconDescription.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: LexiconAttributes, name: "Attributes"))
     LexiconDescription.type = Types::LexiconDescription
-    LexiconDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LexiconDescription, name: "member")
-    LexiconNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LexiconName, name: "member")
+    LexiconDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LexiconDescription, name: "member"))
+    LexiconNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LexiconName, name: "member"))
     LexiconNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     LexiconNotFoundException.type = Types::LexiconNotFoundException
     LexiconSizeExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
@@ -233,7 +233,7 @@ module Aws::Polly
     SpeechMarkType.add_member(:ssml, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSML", traits: {"smithy.api#enumValue" => "ssml"}))
     SpeechMarkType.add_member(:viseme, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VISEME", traits: {"smithy.api#enumValue" => "viseme"}))
     SpeechMarkType.add_member(:word, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WORD", traits: {"smithy.api#enumValue" => "word"}))
-    SpeechMarkTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SpeechMarkType, name: "member")
+    SpeechMarkTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeechMarkType, name: "member"))
     SsmlMarksNotSupportedForTextTypeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     SsmlMarksNotSupportedForTextTypeException.type = Types::SsmlMarksNotSupportedForTextTypeException
     StartSpeechSynthesisTaskInput.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: Engine, name: "Engine"))
@@ -269,7 +269,7 @@ module Aws::Polly
     SynthesisTask.type = Types::SynthesisTask
     SynthesisTaskNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     SynthesisTaskNotFoundException.type = Types::SynthesisTaskNotFoundException
-    SynthesisTasks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SynthesisTask, name: "member")
+    SynthesisTasks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SynthesisTask, name: "member"))
     SynthesizeSpeechInput.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: Engine, name: "Engine"))
     SynthesizeSpeechInput.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "LanguageCode"))
     SynthesizeSpeechInput.add_member(:lexicon_names, ::Smithy::Schema::Shapes::MemberShape.new(target: LexiconNameList, name: "LexiconNames"))
@@ -406,7 +406,7 @@ module Aws::Polly
     VoiceId.add_member(:sabrina, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Sabrina", traits: {"smithy.api#enumValue" => "Sabrina"}))
     VoiceId.add_member(:jasmine, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Jasmine", traits: {"smithy.api#enumValue" => "Jasmine"}))
     VoiceId.add_member(:jihye, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Jihye", traits: {"smithy.api#enumValue" => "Jihye"}))
-    VoiceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Voice, name: "member")
+    VoiceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Voice, name: "member"))
 
     ParrotV1 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.polly#Parrot_v1"

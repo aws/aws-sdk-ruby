@@ -112,7 +112,7 @@ module Aws::SSOOIDC
     ExpiredTokenException.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: Error, name: "error"))
     ExpiredTokenException.add_member(:error_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "error_description"))
     ExpiredTokenException.type = Types::ExpiredTokenException
-    GrantTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GrantType, name: "member")
+    GrantTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantType, name: "member"))
     InternalServerException.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: Error, name: "error"))
     InternalServerException.add_member(:error_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "error_description"))
     InternalServerException.type = Types::InternalServerException
@@ -144,7 +144,7 @@ module Aws::SSOOIDC
     InvalidScopeException.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: Error, name: "error"))
     InvalidScopeException.add_member(:error_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "error_description"))
     InvalidScopeException.type = Types::InvalidScopeException
-    RedirectUris.member = ::Smithy::Schema::Shapes::MemberShape.new(target: URI, name: "member")
+    RedirectUris.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: URI, name: "member"))
     RegisterClientRequest.add_member(:client_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientName, name: "clientName", traits: {"smithy.api#required" => {}}))
     RegisterClientRequest.add_member(:client_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientType, name: "clientType", traits: {"smithy.api#required" => {}}))
     RegisterClientRequest.add_member(:scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: Scopes, name: "scopes"))
@@ -160,7 +160,7 @@ module Aws::SSOOIDC
     RegisterClientResponse.add_member(:authorization_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: URI, name: "authorizationEndpoint"))
     RegisterClientResponse.add_member(:token_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: URI, name: "tokenEndpoint"))
     RegisterClientResponse.type = Types::RegisterClientResponse
-    Scopes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Scope, name: "member")
+    Scopes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Scope, name: "member"))
     SlowDownException.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: Error, name: "error"))
     SlowDownException.add_member(:error_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "error_description"))
     SlowDownException.type = Types::SlowDownException

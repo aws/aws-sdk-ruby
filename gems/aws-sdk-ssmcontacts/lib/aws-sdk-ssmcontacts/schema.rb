@@ -238,18 +238,18 @@ module Aws::SSMContacts
     ContactChannel.type = Types::ContactChannel
     ContactChannelAddress.add_member(:simple_address, ::Smithy::Schema::Shapes::MemberShape.new(target: SimpleAddress, name: "SimpleAddress"))
     ContactChannelAddress.type = Types::ContactChannelAddress
-    ContactChannelList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContactChannel, name: "member")
+    ContactChannelList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactChannel, name: "member"))
     ContactTargetInfo.add_member(:contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, name: "ContactId"))
     ContactTargetInfo.add_member(:is_essential, ::Smithy::Schema::Shapes::MemberShape.new(target: IsEssential, name: "IsEssential", traits: {"smithy.api#required" => {}}))
     ContactTargetInfo.type = Types::ContactTargetInfo
     ContactType.add_member(:personal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PERSONAL", traits: {"smithy.api#enumValue" => "PERSONAL"}))
     ContactType.add_member(:escalation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ESCALATION", traits: {"smithy.api#enumValue" => "ESCALATION"}))
     ContactType.add_member(:oncall_schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONCALL_SCHEDULE", traits: {"smithy.api#enumValue" => "ONCALL_SCHEDULE"}))
-    ContactsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Contact, name: "member")
+    ContactsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Contact, name: "member"))
     CoverageTime.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: HandOffTime, name: "Start"))
     CoverageTime.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: HandOffTime, name: "End"))
     CoverageTime.type = Types::CoverageTime
-    CoverageTimes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageTime, name: "member")
+    CoverageTimes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageTime, name: "member"))
     CreateContactChannelRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, name: "ContactId", traits: {"smithy.api#required" => {}}))
     CreateContactChannelRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, name: "Name", traits: {"smithy.api#required" => {}}))
     CreateContactChannelRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelType, name: "Type", traits: {"smithy.api#required" => {}}))
@@ -286,7 +286,7 @@ module Aws::SSMContacts
     CreateRotationRequest.type = Types::CreateRotationRequest
     CreateRotationResult.add_member(:rotation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, name: "RotationArn", traits: {"smithy.api#required" => {}}))
     CreateRotationResult.type = Types::CreateRotationResult
-    DailySettings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HandOffTime, name: "member")
+    DailySettings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HandOffTime, name: "member"))
     DataEncryptionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     DataEncryptionException.type = Types::DataEncryptionException
     DayOfWeek.add_member(:mon, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MON", traits: {"smithy.api#enumValue" => "MON"}))
@@ -315,7 +315,7 @@ module Aws::SSMContacts
     DependentEntity.add_member(:relation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RelationType", traits: {"smithy.api#required" => {}}))
     DependentEntity.add_member(:dependent_resource_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArnList, name: "DependentResourceIds", traits: {"smithy.api#required" => {}}))
     DependentEntity.type = Types::DependentEntity
-    DependentEntityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DependentEntity, name: "member")
+    DependentEntityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DependentEntity, name: "member"))
     DescribeEngagementRequest.add_member(:engagement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, name: "EngagementId", traits: {"smithy.api#required" => {}}))
     DescribeEngagementRequest.type = Types::DescribeEngagementRequest
     DescribeEngagementResult.add_member(:contact_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, name: "ContactArn", traits: {"smithy.api#required" => {}}))
@@ -351,7 +351,7 @@ module Aws::SSMContacts
     Engagement.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "StartTime"))
     Engagement.add_member(:stop_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "StopTime"))
     Engagement.type = Types::Engagement
-    EngagementsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Engagement, name: "member")
+    EngagementsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Engagement, name: "member"))
     GetContactChannelRequest.add_member(:contact_channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, name: "ContactChannelId", traits: {"smithy.api#required" => {}}))
     GetContactChannelRequest.type = Types::GetContactChannelRequest
     GetContactChannelResult.add_member(:contact_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, name: "ContactArn", traits: {"smithy.api#required" => {}}))
@@ -494,8 +494,8 @@ module Aws::SSMContacts
     MonthlySetting.add_member(:day_of_month, ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfMonth, name: "DayOfMonth", traits: {"smithy.api#required" => {}}))
     MonthlySetting.add_member(:hand_off_time, ::Smithy::Schema::Shapes::MemberShape.new(target: HandOffTime, name: "HandOffTime", traits: {"smithy.api#required" => {}}))
     MonthlySetting.type = Types::MonthlySetting
-    MonthlySettings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlySetting, name: "member")
-    OverrideList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PreviewOverride, name: "member")
+    MonthlySettings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlySetting, name: "member"))
+    OverrideList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PreviewOverride, name: "member"))
     Page.add_member(:page_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, name: "PageArn", traits: {"smithy.api#required" => {}}))
     Page.add_member(:engagement_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, name: "EngagementArn", traits: {"smithy.api#required" => {}}))
     Page.add_member(:contact_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, name: "ContactArn", traits: {"smithy.api#required" => {}}))
@@ -505,7 +505,7 @@ module Aws::SSMContacts
     Page.add_member(:delivery_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "DeliveryTime"))
     Page.add_member(:read_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "ReadTime"))
     Page.type = Types::Page
-    PagesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Page, name: "member")
+    PagesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Page, name: "member"))
     Plan.add_member(:stages, ::Smithy::Schema::Shapes::MemberShape.new(target: StagesList, name: "Stages"))
     Plan.add_member(:rotation_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArnList, name: "RotationIds"))
     Plan.type = Types::Plan
@@ -527,7 +527,7 @@ module Aws::SSMContacts
     ReceiptType.add_member(:read, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READ", traits: {"smithy.api#enumValue" => "READ"}))
     ReceiptType.add_member(:sent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SENT", traits: {"smithy.api#enumValue" => "SENT"}))
     ReceiptType.add_member(:stop, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOP", traits: {"smithy.api#enumValue" => "STOP"}))
-    ReceiptsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Receipt, name: "member")
+    ReceiptsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Receipt, name: "member"))
     RecurrenceSettings.add_member(:monthly_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlySettings, name: "MonthlySettings"))
     RecurrenceSettings.add_member(:weekly_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklySettings, name: "WeeklySettings"))
     RecurrenceSettings.add_member(:daily_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DailySettings, name: "DailySettings"))
@@ -539,7 +539,7 @@ module Aws::SSMContacts
     ResolutionContact.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactType, name: "Type", traits: {"smithy.api#required" => {}}))
     ResolutionContact.add_member(:stage_index, ::Smithy::Schema::Shapes::MemberShape.new(target: StageIndex, name: "StageIndex", traits: {"smithy.api#default" => nil}))
     ResolutionContact.type = Types::ResolutionContact
-    ResolutionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResolutionContact, name: "member")
+    ResolutionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResolutionContact, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceType", traits: {"smithy.api#required" => {}}))
@@ -551,25 +551,25 @@ module Aws::SSMContacts
     Rotation.add_member(:time_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeZoneId, name: "TimeZoneId"))
     Rotation.add_member(:recurrence, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurrenceSettings, name: "Recurrence"))
     Rotation.type = Types::Rotation
-    RotationContactsArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, name: "member")
+    RotationContactsArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, name: "member"))
     RotationOverride.add_member(:rotation_override_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "RotationOverrideId", traits: {"smithy.api#required" => {}}))
     RotationOverride.add_member(:new_contact_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArnList, name: "NewContactIds", traits: {"smithy.api#required" => {}}))
     RotationOverride.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "StartTime", traits: {"smithy.api#required" => {}}))
     RotationOverride.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "EndTime", traits: {"smithy.api#required" => {}}))
     RotationOverride.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "CreateTime", traits: {"smithy.api#required" => {}}))
     RotationOverride.type = Types::RotationOverride
-    RotationOverrideContactsArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, name: "member")
-    RotationOverridePreviewMemberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Member, name: "member")
-    RotationOverrides.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RotationOverride, name: "member")
-    RotationPreviewMemberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Member, name: "member")
+    RotationOverrideContactsArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, name: "member"))
+    RotationOverridePreviewMemberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Member, name: "member"))
+    RotationOverrides.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationOverride, name: "member"))
+    RotationPreviewMemberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Member, name: "member"))
     RotationShift.add_member(:contact_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArnList, name: "ContactIds"))
     RotationShift.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "StartTime", traits: {"smithy.api#required" => {}}))
     RotationShift.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "EndTime", traits: {"smithy.api#required" => {}}))
     RotationShift.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ShiftType, name: "Type"))
     RotationShift.add_member(:shift_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ShiftDetails, name: "ShiftDetails"))
     RotationShift.type = Types::RotationShift
-    RotationShifts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RotationShift, name: "member")
-    Rotations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Rotation, name: "member")
+    RotationShifts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RotationShift, name: "member"))
+    Rotations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Rotation, name: "member"))
     SendActivationCodeRequest.add_member(:contact_channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, name: "ContactChannelId", traits: {"smithy.api#required" => {}}))
     SendActivationCodeRequest.type = Types::SendActivationCodeRequest
     SendActivationCodeResult.type = Types::SendActivationCodeResult
@@ -579,17 +579,17 @@ module Aws::SSMContacts
     ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "QuotaCode", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServiceCode", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    ShiftCoveragesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfWeek, name: "key")
-    ShiftCoveragesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageTimes, name: "value")
+    ShiftCoveragesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfWeek, name: "key"))
+    ShiftCoveragesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageTimes, name: "value"))
     ShiftDetails.add_member(:overridden_contact_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArnList, name: "OverriddenContactIds", traits: {"smithy.api#required" => {}}))
     ShiftDetails.type = Types::ShiftDetails
     ShiftType.add_member(:regular, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGULAR", traits: {"smithy.api#enumValue" => "REGULAR"}))
     ShiftType.add_member(:overridden, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OVERRIDDEN", traits: {"smithy.api#enumValue" => "OVERRIDDEN"}))
-    SsmContactsArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, name: "member")
+    SsmContactsArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, name: "member"))
     Stage.add_member(:duration_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: StageDurationInMins, name: "DurationInMinutes", traits: {"smithy.api#required" => {}}))
     Stage.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetsList, name: "Targets", traits: {"smithy.api#required" => {}}))
     Stage.type = Types::Stage
-    StagesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Stage, name: "member")
+    StagesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Stage, name: "member"))
     StartEngagementRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmContactsArn, name: "ContactId", traits: {"smithy.api#required" => {}}))
     StartEngagementRequest.add_member(:sender, ::Smithy::Schema::Shapes::MemberShape.new(target: Sender, name: "Sender", traits: {"smithy.api#required" => {}}))
     StartEngagementRequest.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: Subject, name: "Subject", traits: {"smithy.api#required" => {}}))
@@ -608,16 +608,16 @@ module Aws::SSMContacts
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResult.type = Types::TagResourceResult
-    TagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     Target.add_member(:channel_target_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelTargetInfo, name: "ChannelTargetInfo"))
     Target.add_member(:contact_target_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactTargetInfo, name: "ContactTargetInfo"))
     Target.type = Types::Target
-    TargetsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "member")
+    TargetsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "QuotaCode"))
     ThrottlingException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServiceCode"))
@@ -654,7 +654,7 @@ module Aws::SSMContacts
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "UNKNOWN_OPERATION"}))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "CANNOT_PARSE"}))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "FIELD_VALIDATION_FAILED"}))
@@ -662,7 +662,7 @@ module Aws::SSMContacts
     WeeklySetting.add_member(:day_of_week, ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfWeek, name: "DayOfWeek", traits: {"smithy.api#required" => {}}))
     WeeklySetting.add_member(:hand_off_time, ::Smithy::Schema::Shapes::MemberShape.new(target: HandOffTime, name: "HandOffTime", traits: {"smithy.api#required" => {}}))
     WeeklySetting.type = Types::WeeklySetting
-    WeeklySettings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklySetting, name: "member")
+    WeeklySettings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklySetting, name: "member"))
 
     SSMContacts = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.ssmcontacts#SSMContacts"

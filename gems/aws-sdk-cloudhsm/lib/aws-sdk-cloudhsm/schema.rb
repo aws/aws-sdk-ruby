@@ -88,13 +88,13 @@ module Aws::CloudHSM
     Timestamp = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudhsm#Timestamp", name: "Timestamp", traits: {"smithy.api#pattern" => "^\\d*$"})
     VpcId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cloudhsm#VpcId", name: "VpcId", traits: {"smithy.api#pattern" => "^vpc-[0-9a-f]{8}$"})
 
-    AZList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AZ, name: "member")
+    AZList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AZ, name: "member"))
     AddTagsToResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     AddTagsToResourceRequest.add_member(:tag_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "TagList", traits: {"smithy.api#required" => {}}))
     AddTagsToResourceRequest.type = Types::AddTagsToResourceRequest
     AddTagsToResourceResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status", traits: {"smithy.api#required" => {}}))
     AddTagsToResourceResponse.type = Types::AddTagsToResourceResponse
-    ClientList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClientArn, name: "member")
+    ClientList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientArn, name: "member"))
     ClientVersion.add_member(:five_one, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIVE_ONE", traits: {"smithy.api#enumValue" => "5.1"}))
     ClientVersion.add_member(:five_three, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIVE_THREE", traits: {"smithy.api#enumValue" => "5.3"}))
     CloudHsmInternalException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
@@ -192,8 +192,8 @@ module Aws::CloudHSM
     GetConfigResponse.add_member(:config_file, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ConfigFile"))
     GetConfigResponse.add_member(:config_cred, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ConfigCred"))
     GetConfigResponse.type = Types::GetConfigResponse
-    HapgList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HapgArn, name: "member")
-    HsmList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HsmArn, name: "member")
+    HapgList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HapgArn, name: "member"))
+    HsmList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HsmArn, name: "member"))
     HsmStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     HsmStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     HsmStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
@@ -246,8 +246,8 @@ module Aws::CloudHSM
     ModifyLunaClientRequest.type = Types::ModifyLunaClientRequest
     ModifyLunaClientResponse.add_member(:client_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientArn, name: "ClientArn"))
     ModifyLunaClientResponse.type = Types::ModifyLunaClientResponse
-    PartitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionArn, name: "member")
-    PartitionSerialList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionSerial, name: "member")
+    PartitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionArn, name: "member"))
+    PartitionSerialList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PartitionSerial, name: "member"))
     RemoveTagsFromResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     RemoveTagsFromResourceRequest.add_member(:tag_key_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeyList", traits: {"smithy.api#required" => {}}))
     RemoveTagsFromResourceRequest.type = Types::RemoveTagsFromResourceRequest
@@ -257,8 +257,8 @@ module Aws::CloudHSM
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
 
     CloudHsmFrontendService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.cloudhsm#CloudHsmFrontendService"

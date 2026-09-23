@@ -144,8 +144,8 @@ module Aws::GameLiftStreams
     ApplicationSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "LastUpdatedAt"))
     ApplicationSummary.add_member(:runtime_environment, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeEnvironment, name: "RuntimeEnvironment"))
     ApplicationSummary.type = Types::ApplicationSummary
-    ApplicationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary, name: "member")
-    ArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    ApplicationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary, name: "member"))
+    ArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     AssociateApplicationsInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
     AssociateApplicationsInput.add_member(:application_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifiers, name: "ApplicationIdentifiers", traits: {"smithy.api#required" => {}}))
     AssociateApplicationsInput.type = Types::AssociateApplicationsInput
@@ -217,8 +217,8 @@ module Aws::GameLiftStreams
     DisassociateApplicationsOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     DisassociateApplicationsOutput.add_member(:application_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, name: "ApplicationArns"))
     DisassociateApplicationsOutput.type = Types::DisassociateApplicationsOutput
-    EnvironmentVariables.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[_a-zA-Z][_a-zA-Z0-9]*$"})
-    EnvironmentVariables.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    EnvironmentVariables.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[_a-zA-Z][_a-zA-Z0-9]*$"}))
+    EnvironmentVariables.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}}))
     ExportFilesMetadata.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilesStatus, name: "Status"))
     ExportFilesMetadata.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilesReason, name: "StatusReason"))
     ExportFilesMetadata.add_member(:output_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputUri, name: "OutputUri"))
@@ -231,8 +231,8 @@ module Aws::GameLiftStreams
     ExportStreamSessionFilesInput.add_member(:output_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputUri, name: "OutputUri", traits: {"smithy.api#required" => {}}))
     ExportStreamSessionFilesInput.type = Types::ExportStreamSessionFilesInput
     ExportStreamSessionFilesOutput.type = Types::ExportStreamSessionFilesOutput
-    FilePaths.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilePath, name: "member")
-    GameLaunchArgList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    FilePaths.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePath, name: "member"))
+    GameLaunchArgList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     GetApplicationInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
     GetApplicationInput.type = Types::GetApplicationInput
     GetApplicationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "Arn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
@@ -288,7 +288,7 @@ module Aws::GameLiftStreams
     GetStreamSessionOutput.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ApplicationArn"))
     GetStreamSessionOutput.add_member(:export_files_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilesMetadata, name: "ExportFilesMetadata"))
     GetStreamSessionOutput.type = Types::GetStreamSessionOutput
-    Identifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "member")
+    Identifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
     ListApplicationsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
@@ -328,8 +328,8 @@ module Aws::GameLiftStreams
     LocationConfiguration.add_member(:always_on_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: AlwaysOnCapacity, name: "AlwaysOnCapacity"))
     LocationConfiguration.add_member(:on_demand_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: OnDemandCapacity, name: "OnDemandCapacity"))
     LocationConfiguration.type = Types::LocationConfiguration
-    LocationConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LocationConfiguration, name: "member")
-    LocationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LocationName, name: "member")
+    LocationConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationConfiguration, name: "member"))
+    LocationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationName, name: "member"))
     LocationState.add_member(:location_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationName, name: "LocationName"))
     LocationState.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamGroupLocationStatus, name: "Status", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
     LocationState.add_member(:always_on_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: AlwaysOnCapacity, name: "AlwaysOnCapacity", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
@@ -338,8 +338,8 @@ module Aws::GameLiftStreams
     LocationState.add_member(:allocated_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityValue, name: "AllocatedCapacity", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
     LocationState.add_member(:idle_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityValue, name: "IdleCapacity", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
     LocationState.type = Types::LocationState
-    LocationStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LocationState, name: "member")
-    LocationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    LocationStates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationState, name: "member"))
+    LocationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     Protocol.add_member(:webrtc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEBRTC", traits: {"smithy.api#enumValue" => "WebRTC"}))
     RemoveStreamGroupLocationsInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
     RemoveStreamGroupLocationsInput.add_member(:locations, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationsList, name: "Locations", traits: {"smithy.api#httpQuery" => "locations", "smithy.api#notProperty" => {}, "smithy.api#required" => {}}))
@@ -349,7 +349,7 @@ module Aws::GameLiftStreams
     ReplicationStatus.type = Types::ReplicationStatus
     ReplicationStatusType.add_member(:replicating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REPLICATING", traits: {"smithy.api#enumValue" => "REPLICATING"}))
     ReplicationStatusType.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    ReplicationStatuses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatus, name: "member")
+    ReplicationStatuses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatus, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     RuntimeEnvironment.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeEnvironmentType, name: "Type", traits: {"smithy.api#required" => {}}))
@@ -421,7 +421,7 @@ module Aws::GameLiftStreams
     StreamGroupSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedAt"))
     StreamGroupSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "LastUpdatedAt"))
     StreamGroupSummary.type = Types::StreamGroupSummary
-    StreamGroupSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamGroupSummary, name: "member")
+    StreamGroupSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamGroupSummary, name: "member"))
     StreamSessionStatus.add_member(:activating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVATING", traits: {"smithy.api#enumValue" => "ACTIVATING"}))
     StreamSessionStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     StreamSessionStatus.add_member(:connected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECTED", traits: {"smithy.api#enumValue" => "CONNECTED"}))
@@ -444,14 +444,14 @@ module Aws::GameLiftStreams
     StreamSessionSummary.add_member(:export_files_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilesMetadata, name: "ExportFilesMetadata"))
     StreamSessionSummary.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationName, name: "Location"))
     StreamSessionSummary.type = Types::StreamSessionSummary
-    StreamSessionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSessionSummary, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    StreamSessionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSessionSummary, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TerminateStreamSessionInput.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TerminateStreamSessionInput.add_member(:stream_session_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "StreamSessionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TerminateStreamSessionInput.type = Types::TerminateStreamSessionInput

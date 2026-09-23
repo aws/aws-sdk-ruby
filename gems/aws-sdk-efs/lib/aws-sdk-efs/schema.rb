@@ -191,7 +191,7 @@ module Aws::EFS
     AccessPointDescription.add_member(:owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "OwnerId"))
     AccessPointDescription.add_member(:life_cycle_state, ::Smithy::Schema::Shapes::MemberShape.new(target: LifeCycleState, name: "LifeCycleState"))
     AccessPointDescription.type = Types::AccessPointDescription
-    AccessPointDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointDescription, name: "member")
+    AccessPointDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointDescription, name: "member"))
     AccessPointLimitExceeded.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode", traits: {"smithy.api#required" => {}}))
     AccessPointLimitExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     AccessPointLimitExceeded.type = Types::AccessPointLimitExceeded
@@ -390,8 +390,8 @@ module Aws::EFS
     DestinationToCreate.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, name: "FileSystemId"))
     DestinationToCreate.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn"))
     DestinationToCreate.type = Types::DestinationToCreate
-    Destinations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "member")
-    DestinationsToCreate.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationToCreate, name: "member")
+    Destinations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "member"))
+    DestinationsToCreate.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationToCreate, name: "member"))
     FileSystemAlreadyExists.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode", traits: {"smithy.api#required" => {}}))
     FileSystemAlreadyExists.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     FileSystemAlreadyExists.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, name: "FileSystemId", traits: {"smithy.api#required" => {}}))
@@ -415,7 +415,7 @@ module Aws::EFS
     FileSystemDescription.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     FileSystemDescription.add_member(:file_system_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemProtectionDescription, name: "FileSystemProtection"))
     FileSystemDescription.type = Types::FileSystemDescription
-    FileSystemDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemDescription, name: "member")
+    FileSystemDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemDescription, name: "member"))
     FileSystemInUse.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode", traits: {"smithy.api#required" => {}}))
     FileSystemInUse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     FileSystemInUse.type = Types::FileSystemInUse
@@ -460,7 +460,7 @@ module Aws::EFS
     LifeCycleState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "deleting"}))
     LifeCycleState.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "deleted"}))
     LifeCycleState.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "error"}))
-    LifecyclePolicies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicy, name: "member")
+    LifecyclePolicies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicy, name: "member"))
     LifecyclePolicy.add_member(:transition_to_ia, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitionToIARules, name: "TransitionToIA"))
     LifecyclePolicy.add_member(:transition_to_primary_storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitionToPrimaryStorageClassRules, name: "TransitionToPrimaryStorageClass"))
     LifecyclePolicy.add_member(:transition_to_archive, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitionToArchiveRules, name: "TransitionToArchive"))
@@ -490,7 +490,7 @@ module Aws::EFS
     MountTargetDescription.add_member(:availability_zone_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneName, name: "AvailabilityZoneName"))
     MountTargetDescription.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "VpcId"))
     MountTargetDescription.type = Types::MountTargetDescription
-    MountTargetDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MountTargetDescription, name: "member")
+    MountTargetDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MountTargetDescription, name: "member"))
     MountTargetNotFound.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode", traits: {"smithy.api#required" => {}}))
     MountTargetNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     MountTargetNotFound.type = Types::MountTargetNotFound
@@ -541,7 +541,7 @@ module Aws::EFS
     ReplicationConfigurationDescription.add_member(:destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: Destinations, name: "Destinations", traits: {"smithy.api#required" => {}}))
     ReplicationConfigurationDescription.add_member(:source_file_system_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "SourceFileSystemOwnerId"))
     ReplicationConfigurationDescription.type = Types::ReplicationConfigurationDescription
-    ReplicationConfigurationDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationDescription, name: "member")
+    ReplicationConfigurationDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfigurationDescription, name: "member"))
     ReplicationNotFound.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     ReplicationNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ReplicationNotFound.type = Types::ReplicationNotFound
@@ -561,18 +561,18 @@ module Aws::EFS
     ResourceIdPreference.type = Types::ResourceIdPreference
     ResourceIdType.add_member(:long_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LongId", traits: {"smithy.api#enumValue" => "LONG_ID"}))
     ResourceIdType.add_member(:short_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ShortId", traits: {"smithy.api#enumValue" => "SHORT_ID"}))
-    Resources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member")
+    Resources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
     RootDirectory.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "Path"))
     RootDirectory.add_member(:creation_info, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationInfo, name: "CreationInfo"))
     RootDirectory.type = Types::RootDirectory
-    SecondaryGids.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Gid, name: "member")
+    SecondaryGids.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Gid, name: "member"))
     SecurityGroupLimitExceeded.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode", traits: {"smithy.api#required" => {}}))
     SecurityGroupLimitExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     SecurityGroupLimitExceeded.type = Types::SecurityGroupLimitExceeded
     SecurityGroupNotFound.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode", traits: {"smithy.api#required" => {}}))
     SecurityGroupNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     SecurityGroupNotFound.type = Types::SecurityGroupNotFound
-    SecurityGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroup, name: "member")
+    SecurityGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroup, name: "member"))
     Status.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     Status.add_member(:enabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLING", traits: {"smithy.api#enumValue" => "ENABLING"}))
     Status.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
@@ -583,11 +583,11 @@ module Aws::EFS
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "ResourceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     ThrottlingException.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ThrottlingException.type = Types::ThrottlingException

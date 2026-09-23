@@ -42,7 +42,7 @@ module Aws::SageMakerMetrics
     BatchPutMetricsError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: PutMetricsErrorCode, name: "Code"))
     BatchPutMetricsError.add_member(:metric_index, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "MetricIndex"))
     BatchPutMetricsError.type = Types::BatchPutMetricsError
-    BatchPutMetricsErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutMetricsError, name: "member")
+    BatchPutMetricsErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutMetricsError, name: "member"))
     BatchPutMetricsRequest.add_member(:trial_component_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentEntityName, name: "TrialComponentName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BatchPutMetricsRequest.add_member(:metric_data, ::Smithy::Schema::Shapes::MemberShape.new(target: RawMetricDataList, name: "MetricData", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BatchPutMetricsRequest.type = Types::BatchPutMetricsRequest
@@ -56,13 +56,13 @@ module Aws::SageMakerMetrics
     MetricQuery.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "Start"))
     MetricQuery.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "End"))
     MetricQuery.type = Types::MetricQuery
-    MetricQueryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricQuery, name: "member")
+    MetricQueryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricQuery, name: "member"))
     MetricQueryResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricQueryResultStatus, name: "Status", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     MetricQueryResult.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     MetricQueryResult.add_member(:x_axis_values, ::Smithy::Schema::Shapes::MemberShape.new(target: XAxisValues, name: "XAxisValues", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     MetricQueryResult.add_member(:metric_values, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricValues, name: "MetricValues", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     MetricQueryResult.type = Types::MetricQueryResult
-    MetricQueryResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricQueryResult, name: "member")
+    MetricQueryResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricQueryResult, name: "member"))
     MetricQueryResultStatus.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETE", traits: {"smithy.api#enumValue" => "Complete"}))
     MetricQueryResultStatus.add_member(:truncated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRUNCATED", traits: {"smithy.api#enumValue" => "Truncated"}))
     MetricQueryResultStatus.add_member(:internal_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "InternalError"}))
@@ -73,7 +73,7 @@ module Aws::SageMakerMetrics
     MetricStatistic.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COUNT", traits: {"smithy.api#enumValue" => "Count"}))
     MetricStatistic.add_member(:std_dev, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STD_DEV", traits: {"smithy.api#enumValue" => "StdDev"}))
     MetricStatistic.add_member(:last, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAST", traits: {"smithy.api#enumValue" => "Last"}))
-    MetricValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "member")
+    MetricValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "member"))
     Period.add_member(:one_minute, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONE_MINUTE", traits: {"smithy.api#enumValue" => "OneMinute"}))
     Period.add_member(:five_minute, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIVE_MINUTE", traits: {"smithy.api#enumValue" => "FiveMinute"}))
     Period.add_member(:one_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONE_HOUR", traits: {"smithy.api#enumValue" => "OneHour"}))
@@ -87,10 +87,10 @@ module Aws::SageMakerMetrics
     RawMetricData.add_member(:step, ::Smithy::Schema::Shapes::MemberShape.new(target: Step, name: "Step"))
     RawMetricData.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Value", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RawMetricData.type = Types::RawMetricData
-    RawMetricDataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RawMetricData, name: "member")
+    RawMetricDataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RawMetricData, name: "member"))
     XAxisType.add_member(:iteration_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ITERATION_NUMBER", traits: {"smithy.api#enumValue" => "IterationNumber"}))
     XAxisType.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMESTAMP", traits: {"smithy.api#enumValue" => "Timestamp"}))
-    XAxisValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "member")
+    XAxisValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "member"))
 
     SageMakerMetricsService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.sagemakermetrics#SageMakerMetricsService"

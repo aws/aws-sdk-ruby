@@ -94,7 +94,7 @@ module Aws::ResourceExplorer2
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AccountIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member")
+    AccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
     AssociateDefaultViewOperationInput.add_member(:view_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ViewArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}, "smithy.api#required" => {}}))
     AssociateDefaultViewOperationInput.type = Types::AssociateDefaultViewOperationInput
     AssociateDefaultViewOperationOutput.add_member(:view_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ViewArn"))
@@ -102,7 +102,7 @@ module Aws::ResourceExplorer2
     BatchGetViewError.add_member(:view_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ViewArn", traits: {"smithy.api#required" => {}}))
     BatchGetViewError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ErrorMessage", traits: {"smithy.api#required" => {}}))
     BatchGetViewError.type = Types::BatchGetViewError
-    BatchGetViewErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetViewError, name: "member")
+    BatchGetViewErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetViewError, name: "member"))
     BatchGetViewOperationInput.add_member(:view_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewArnList, name: "ViewArns", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}}))
     BatchGetViewOperationInput.type = Types::BatchGetViewOperationInput
     BatchGetViewOperationOutput.add_member(:views, ::Smithy::Schema::Shapes::MemberShape.new(target: ViewList, name: "Views"))
@@ -160,12 +160,12 @@ module Aws::ResourceExplorer2
     GetViewOperationOutput.type = Types::GetViewOperationOutput
     IncludedProperty.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}, "smithy.api#required" => {}}))
     IncludedProperty.type = Types::IncludedProperty
-    IncludedPropertyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IncludedProperty, name: "member")
+    IncludedPropertyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludedProperty, name: "member"))
     Index.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Region"))
     Index.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Arn"))
     Index.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexType, name: "Type"))
     Index.type = Types::Index
-    IndexList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Index, name: "member")
+    IndexList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Index, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
     InternalServerException.type = Types::InternalServerException
     ListIndexesForMembersInput.add_member(:account_id_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdList, name: "AccountIdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#required" => {}}))
@@ -226,17 +226,17 @@ module Aws::ResourceExplorer2
     ManagedView.add_member(:resource_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResourcePolicy"))
     ManagedView.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Version"))
     ManagedView.type = Types::ManagedView
-    ManagedViewArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    ManagedViewArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     MemberIndex.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "AccountId"))
     MemberIndex.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Region"))
     MemberIndex.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Arn"))
     MemberIndex.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexType, name: "Type"))
     MemberIndex.type = Types::MemberIndex
-    MemberIndexList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemberIndex, name: "member")
+    MemberIndexList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberIndex, name: "member"))
     OrgConfiguration.add_member(:aws_service_access_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSServiceAccessStatus, name: "AWSServiceAccessStatus", traits: {"smithy.api#required" => {}}))
     OrgConfiguration.add_member(:service_linked_role, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ServiceLinkedRole"))
     OrgConfiguration.type = Types::OrgConfiguration
-    RegionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    RegionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     Resource.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Arn"))
     Resource.add_member(:owning_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "OwningAccountId"))
     Resource.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Region"))
@@ -248,15 +248,15 @@ module Aws::ResourceExplorer2
     ResourceCount.add_member(:total_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "TotalResources"))
     ResourceCount.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "Complete"))
     ResourceCount.type = Types::ResourceCount
-    ResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member")
+    ResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ResourceProperty.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name"))
     ResourceProperty.add_member(:last_reported_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "LastReportedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ResourceProperty.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Document, name: "Data"))
     ResourceProperty.type = Types::ResourceProperty
-    ResourcePropertyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceProperty, name: "member")
-    ResourceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedResourceType, name: "member")
+    ResourcePropertyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceProperty, name: "member"))
+    ResourceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedResourceType, name: "member"))
     SearchFilter.add_member(:filter_string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "FilterString", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#required" => {}}))
     SearchFilter.type = Types::SearchFilter
     SearchOperationInput.add_member(:query_string, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryString, name: "QueryString", traits: {"smithy.api#required" => {}}))
@@ -273,12 +273,12 @@ module Aws::ResourceExplorer2
     ServiceQuotaExceededException.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Value", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     SupportedResourceType.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Service"))
     SupportedResourceType.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResourceType"))
     SupportedResourceType.type = Types::SupportedResourceType
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     TagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     TagResourceOperationInput.type = Types::TagResourceOperationInput
@@ -311,7 +311,7 @@ module Aws::ResourceExplorer2
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:validation_issue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ValidationIssue", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     View.add_member(:view_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ViewArn"))
     View.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Owner"))
     View.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "LastUpdatedAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
@@ -319,8 +319,8 @@ module Aws::ResourceExplorer2
     View.add_member(:included_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludedPropertyList, name: "IncludedProperties"))
     View.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilter, name: "Filters"))
     View.type = Types::View
-    ViewArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    ViewList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: View, name: "member")
+    ViewArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    ViewList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: View, name: "member"))
 
     ResourceExplorer = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.resourceexplorer2#ResourceExplorer"

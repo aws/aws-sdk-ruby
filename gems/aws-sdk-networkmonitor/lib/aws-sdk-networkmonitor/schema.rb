@@ -90,7 +90,7 @@ module Aws::NetworkMonitor
     CreateMonitorProbeInput.add_member(:packet_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PacketSize, name: "packetSize"))
     CreateMonitorProbeInput.add_member(:probe_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "probeTags"))
     CreateMonitorProbeInput.type = Types::CreateMonitorProbeInput
-    CreateMonitorProbeInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CreateMonitorProbeInput, name: "member")
+    CreateMonitorProbeInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateMonitorProbeInput, name: "member"))
     CreateProbeInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "monitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateProbeInput.add_member(:probe, ::Smithy::Schema::Shapes::MemberShape.new(target: ProbeInput, name: "probe", traits: {"smithy.api#required" => {}}))
     CreateProbeInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
@@ -158,7 +158,7 @@ module Aws::NetworkMonitor
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
     ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    MonitorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorSummary, name: "member")
+    MonitorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorSummary, name: "member"))
     MonitorState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     MonitorState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     MonitorState.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
@@ -191,7 +191,7 @@ module Aws::NetworkMonitor
     ProbeInput.add_member(:packet_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PacketSize, name: "packetSize"))
     ProbeInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     ProbeInput.type = Types::ProbeInput
-    ProbeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Probe, name: "member")
+    ProbeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Probe, name: "member"))
     ProbeState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     ProbeState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     ProbeState.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
@@ -204,9 +204,9 @@ module Aws::NetworkMonitor
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput

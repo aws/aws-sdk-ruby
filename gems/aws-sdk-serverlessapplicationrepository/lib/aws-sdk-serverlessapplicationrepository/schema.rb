@@ -310,16 +310,16 @@ module Aws::ServerlessApplicationRepository
     VersionSummary.add_member(:semantic_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SemanticVersion", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "semanticVersion", "smithy.api#required" => {}}))
     VersionSummary.add_member(:source_code_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceCodeUrl", traits: {"smithy.api#jsonName" => "sourceCodeUrl"}))
     VersionSummary.type = Types::VersionSummary
-    Listofapplicationdependencysummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationDependencySummary, name: "member")
-    Listofapplicationpolicystatement.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationPolicyStatement, name: "member")
-    Listofapplicationsummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary, name: "member")
-    Listofcapability.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Capability, name: "member")
-    Listofparameterdefinition.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterDefinition, name: "member")
-    Listofparametervalue.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "member")
-    Listofrollbacktrigger.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RollbackTrigger, name: "member")
-    Listoftag.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
-    Listofversionsummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VersionSummary, name: "member")
-    ListofString.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    Listofapplicationdependencysummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationDependencySummary, name: "member"))
+    Listofapplicationpolicystatement.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationPolicyStatement, name: "member"))
+    Listofapplicationsummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary, name: "member"))
+    Listofcapability.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Capability, name: "member"))
+    Listofparameterdefinition.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterDefinition, name: "member"))
+    Listofparametervalue.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "member"))
+    Listofrollbacktrigger.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RollbackTrigger, name: "member"))
+    Listoftag.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    Listofversionsummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionSummary, name: "member"))
+    ListofString.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
 
     ServerlessApplicationRepository = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.serverlessapplicationrepository#ServerlessApplicationRepository"

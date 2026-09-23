@@ -226,7 +226,7 @@ module Aws::ApplicationInsights
     ApplicationComponent.add_member(:monitor, ::Smithy::Schema::Shapes::MemberShape.new(target: Monitor, name: "Monitor"))
     ApplicationComponent.add_member(:detected_workload, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectedWorkload, name: "DetectedWorkload"))
     ApplicationComponent.type = Types::ApplicationComponent
-    ApplicationComponentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationComponent, name: "member")
+    ApplicationComponentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationComponent, name: "member"))
     ApplicationInfo.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     ApplicationInfo.add_member(:resource_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGroupName, name: "ResourceGroupName"))
     ApplicationInfo.add_member(:life_cycle, ::Smithy::Schema::Shapes::MemberShape.new(target: LifeCycle, name: "LifeCycle"))
@@ -239,7 +239,7 @@ module Aws::ApplicationInsights
     ApplicationInfo.add_member(:discovery_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscoveryType, name: "DiscoveryType"))
     ApplicationInfo.add_member(:attach_missing_permission, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachMissingPermission, name: "AttachMissingPermission"))
     ApplicationInfo.type = Types::ApplicationInfo
-    ApplicationInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationInfo, name: "member")
+    ApplicationInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationInfo, name: "member"))
     BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMsg, name: "Message"))
     BadRequestException.type = Types::BadRequestException
     CloudWatchEventSource.add_member(:ec2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EC2", traits: {"smithy.api#enumValue" => "EC2"}))
@@ -255,7 +255,7 @@ module Aws::ApplicationInsights
     ConfigurationEvent.add_member(:event_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationEventDetail, name: "EventDetail"))
     ConfigurationEvent.add_member(:event_resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationEventResourceName, name: "EventResourceName"))
     ConfigurationEvent.type = Types::ConfigurationEvent
-    ConfigurationEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationEvent, name: "member")
+    ConfigurationEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationEvent, name: "member"))
     ConfigurationEventResourceType.add_member(:cloudwatch_alarm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUDWATCH_ALARM", traits: {"smithy.api#enumValue" => "CLOUDWATCH_ALARM"}))
     ConfigurationEventResourceType.add_member(:cloudwatch_log, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUDWATCH_LOG", traits: {"smithy.api#enumValue" => "CLOUDWATCH_LOG"}))
     ConfigurationEventResourceType.add_member(:cloudformation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUDFORMATION", traits: {"smithy.api#enumValue" => "CLOUDFORMATION"}))
@@ -364,12 +364,12 @@ module Aws::ApplicationInsights
     DescribeWorkloadResponse.add_member(:workload_remarks, ::Smithy::Schema::Shapes::MemberShape.new(target: Remarks, name: "WorkloadRemarks"))
     DescribeWorkloadResponse.add_member(:workload_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadConfiguration, name: "WorkloadConfiguration"))
     DescribeWorkloadResponse.type = Types::DescribeWorkloadResponse
-    DetectedWorkload.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Tier, name: "key")
-    DetectedWorkload.value = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadMetaData, name: "value")
+    DetectedWorkload.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Tier, name: "key"))
+    DetectedWorkload.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadMetaData, name: "value"))
     DiscoveryType.add_member(:resource_group_based, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_GROUP_BASED", traits: {"smithy.api#enumValue" => "RESOURCE_GROUP_BASED"}))
     DiscoveryType.add_member(:account_based, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_BASED", traits: {"smithy.api#enumValue" => "ACCOUNT_BASED"}))
-    Feedback.key = ::Smithy::Schema::Shapes::MemberShape.new(target: FeedbackKey, name: "key")
-    Feedback.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FeedbackValue, name: "value")
+    Feedback.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: FeedbackKey, name: "key"))
+    Feedback.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FeedbackValue, name: "value"))
     FeedbackKey.add_member(:insights_feedback, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSIGHTS_FEEDBACK", traits: {"smithy.api#enumValue" => "INSIGHTS_FEEDBACK"}))
     FeedbackValue.add_member(:not_specified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_SPECIFIED", traits: {"smithy.api#enumValue" => "NOT_SPECIFIED"}))
     FeedbackValue.add_member(:useful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USEFUL", traits: {"smithy.api#enumValue" => "USEFUL"}))
@@ -459,8 +459,8 @@ module Aws::ApplicationInsights
     LogPattern.add_member(:pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: LogPatternRegex, name: "Pattern"))
     LogPattern.add_member(:rank, ::Smithy::Schema::Shapes::MemberShape.new(target: LogPatternRank, name: "Rank", traits: {"smithy.api#default" => 0}))
     LogPattern.type = Types::LogPattern
-    LogPatternList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogPattern, name: "member")
-    LogPatternSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogPatternSetName, name: "member")
+    LogPatternList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogPattern, name: "member"))
+    LogPatternSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogPatternSetName, name: "member"))
     Observation.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObservationId, name: "Id"))
     Observation.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTime, name: "StartTime"))
     Observation.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: EndTime, name: "EndTime"))
@@ -507,7 +507,7 @@ module Aws::ApplicationInsights
     Observation.add_member(:x_ray_node_name, ::Smithy::Schema::Shapes::MemberShape.new(target: XRayNodeName, name: "XRayNodeName"))
     Observation.add_member(:x_ray_node_type, ::Smithy::Schema::Shapes::MemberShape.new(target: XRayNodeType, name: "XRayNodeType"))
     Observation.type = Types::Observation
-    ObservationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Observation, name: "member")
+    ObservationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Observation, name: "member"))
     OsType.add_member(:windows, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WINDOWS", traits: {"smithy.api#enumValue" => "WINDOWS"}))
     OsType.add_member(:linux, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINUX", traits: {"smithy.api#enumValue" => "LINUX"}))
     Problem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProblemId, name: "Id"))
@@ -527,7 +527,7 @@ module Aws::ApplicationInsights
     Problem.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: Visibility, name: "Visibility"))
     Problem.add_member(:resolution_method, ::Smithy::Schema::Shapes::MemberShape.new(target: ResolutionMethod, name: "ResolutionMethod"))
     Problem.type = Types::Problem
-    ProblemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Problem, name: "member")
+    ProblemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Problem, name: "member"))
     RecommendationType.add_member(:infra_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFRA_ONLY", traits: {"smithy.api#enumValue" => "INFRA_ONLY"}))
     RecommendationType.add_member(:workload_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WORKLOAD_ONLY", traits: {"smithy.api#enumValue" => "WORKLOAD_ONLY"}))
     RecommendationType.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
@@ -543,7 +543,7 @@ module Aws::ApplicationInsights
     ResolutionMethod.add_member(:unresolved, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNRESOLVED", traits: {"smithy.api#enumValue" => "UNRESOLVED"}))
     ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMsg, name: "Message"))
     ResourceInUseException.type = Types::ResourceInUseException
-    ResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "member")
+    ResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMsg, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     SeverityLevel.add_member(:informative, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Informative", traits: {"smithy.api#enumValue" => "Informative"}))
@@ -558,8 +558,8 @@ module Aws::ApplicationInsights
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -659,9 +659,9 @@ module Aws::ApplicationInsights
     WorkloadConfiguration.add_member(:tier, ::Smithy::Schema::Shapes::MemberShape.new(target: Tier, name: "Tier"))
     WorkloadConfiguration.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentConfiguration, name: "Configuration"))
     WorkloadConfiguration.type = Types::WorkloadConfiguration
-    WorkloadList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Workload, name: "member")
-    WorkloadMetaData.key = ::Smithy::Schema::Shapes::MemberShape.new(target: MetaDataKey, name: "key")
-    WorkloadMetaData.value = ::Smithy::Schema::Shapes::MemberShape.new(target: MetaDataValue, name: "value")
+    WorkloadList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Workload, name: "member"))
+    WorkloadMetaData.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: MetaDataKey, name: "key"))
+    WorkloadMetaData.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetaDataValue, name: "value"))
 
     EC2WindowsBarleyService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.applicationinsights#EC2WindowsBarleyService"

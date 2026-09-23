@@ -109,7 +109,7 @@ module Aws::IotDeviceAdvisor
     DeviceUnderTest.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "certificateArn"))
     DeviceUnderTest.add_member(:device_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "deviceRoleArn"))
     DeviceUnderTest.type = Types::DeviceUnderTest
-    DeviceUnderTestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceUnderTest, name: "member")
+    DeviceUnderTestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceUnderTest, name: "member"))
     GetEndpointRequest.add_member(:thing_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "thingArn", traits: {"smithy.api#httpQuery" => "thingArn"}))
     GetEndpointRequest.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "certificateArn", traits: {"smithy.api#httpQuery" => "certificateArn"}))
     GetEndpointRequest.add_member(:device_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "deviceRoleArn", traits: {"smithy.api#httpQuery" => "deviceRoleArn"}))
@@ -153,7 +153,7 @@ module Aws::IotDeviceAdvisor
     GroupResult.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, name: "groupName"))
     GroupResult.add_member(:tests, ::Smithy::Schema::Shapes::MemberShape.new(target: TestCaseRuns, name: "tests"))
     GroupResult.type = Types::GroupResult
-    GroupResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupResult, name: "member")
+    GroupResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupResult, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     InternalServerException.type = Types::InternalServerException
     ListSuiteDefinitionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
@@ -180,7 +180,7 @@ module Aws::IotDeviceAdvisor
     Protocol.add_member(:mqtt_v5_over_web_socket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MqttV5_OverWebSocket", traits: {"smithy.api#enumValue" => "MqttV5_OverWebSocket"}))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    SelectedTestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "member")
+    SelectedTestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "member"))
     StartSuiteRunRequest.add_member(:suite_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "suiteDefinitionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartSuiteRunRequest.add_member(:suite_definition_version, ::Smithy::Schema::Shapes::MemberShape.new(target: SuiteDefinitionVersion, name: "suiteDefinitionVersion"))
     StartSuiteRunRequest.add_member(:suite_run_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SuiteRunConfiguration, name: "suiteRunConfiguration", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -220,7 +220,7 @@ module Aws::IotDeviceAdvisor
     SuiteDefinitionInformation.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, name: "protocol"))
     SuiteDefinitionInformation.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
     SuiteDefinitionInformation.type = Types::SuiteDefinitionInformation
-    SuiteDefinitionInformationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuiteDefinitionInformation, name: "member")
+    SuiteDefinitionInformationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuiteDefinitionInformation, name: "member"))
     SuiteRunConfiguration.add_member(:primary_device, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceUnderTest, name: "primaryDevice", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SuiteRunConfiguration.add_member(:selected_test_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectedTestList, name: "selectedTestList"))
     SuiteRunConfiguration.add_member(:parallel_run, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelRun, name: "parallelRun"))
@@ -245,10 +245,10 @@ module Aws::IotDeviceAdvisor
     SuiteRunStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
     SuiteRunStatus.add_member(:pass_with_warnings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASS_WITH_WARNINGS", traits: {"smithy.api#enumValue" => "PASS_WITH_WARNINGS"}))
     SuiteRunStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
-    SuiteRunsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuiteRunInformation, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "value")
+    SuiteRunsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuiteRunInformation, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -264,7 +264,7 @@ module Aws::IotDeviceAdvisor
     TestCaseRun.add_member(:failure, ::Smithy::Schema::Shapes::MemberShape.new(target: Failure, name: "failure"))
     TestCaseRun.add_member(:test_scenarios, ::Smithy::Schema::Shapes::MemberShape.new(target: TestCaseScenariosList, name: "testScenarios"))
     TestCaseRun.type = Types::TestCaseRun
-    TestCaseRuns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TestCaseRun, name: "member")
+    TestCaseRuns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TestCaseRun, name: "member"))
     TestCaseScenario.add_member(:test_case_scenario_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TestCaseScenarioId, name: "testCaseScenarioId"))
     TestCaseScenario.add_member(:test_case_scenario_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TestCaseScenarioType, name: "testCaseScenarioType"))
     TestCaseScenario.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TestCaseScenarioStatus, name: "status"))
@@ -282,7 +282,7 @@ module Aws::IotDeviceAdvisor
     TestCaseScenarioStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
     TestCaseScenarioType.add_member(:advanced, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Advanced", traits: {"smithy.api#enumValue" => "Advanced"}))
     TestCaseScenarioType.add_member(:basic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Basic", traits: {"smithy.api#enumValue" => "Basic"}))
-    TestCaseScenariosList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TestCaseScenario, name: "member")
+    TestCaseScenariosList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TestCaseScenario, name: "member"))
     TestResult.add_member(:groups, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupResultList, name: "groups"))
     TestResult.type = Types::TestResult
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))

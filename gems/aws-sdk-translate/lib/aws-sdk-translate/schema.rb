@@ -131,7 +131,7 @@ module Aws::Translate
     AppliedTerminology.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
     AppliedTerminology.add_member(:terms, ::Smithy::Schema::Shapes::MemberShape.new(target: TermList, name: "Terms"))
     AppliedTerminology.type = Types::AppliedTerminology
-    AppliedTerminologyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppliedTerminology, name: "member")
+    AppliedTerminologyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppliedTerminology, name: "member"))
     Brevity.add_member(:on, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON", traits: {"smithy.api#enumValue" => "ON"}))
     ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ConcurrentModificationException.type = Types::ConcurrentModificationException
@@ -231,8 +231,8 @@ module Aws::Translate
     Language.add_member(:language_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalizedNameString, name: "LanguageName", traits: {"smithy.api#required" => {}}))
     Language.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, name: "LanguageCode", traits: {"smithy.api#required" => {}}))
     Language.type = Types::Language
-    LanguageCodeStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, name: "member")
-    LanguagesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Language, name: "member")
+    LanguageCodeStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, name: "member"))
+    LanguagesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Language, name: "member"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
     ListLanguagesRequest.add_member(:display_language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayLanguageCode, name: "DisplayLanguageCode"))
@@ -297,14 +297,14 @@ module Aws::Translate
     ParallelDataProperties.add_member(:latest_update_attempt_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelDataStatus, name: "LatestUpdateAttemptStatus"))
     ParallelDataProperties.add_member(:latest_update_attempt_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LatestUpdateAttemptAt"))
     ParallelDataProperties.type = Types::ParallelDataProperties
-    ParallelDataPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelDataProperties, name: "member")
+    ParallelDataPropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelDataProperties, name: "member"))
     ParallelDataStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     ParallelDataStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
     ParallelDataStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     ParallelDataStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     ParallelDataStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     Profanity.add_member(:mask, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MASK", traits: {"smithy.api#enumValue" => "MASK"}))
-    ResourceNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "member")
+    ResourceNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
@@ -331,17 +331,17 @@ module Aws::Translate
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TargetLanguageCodeStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, name: "member")
+    TargetLanguageCodeStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeString, name: "member"))
     Term.add_member(:source_text, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceText"))
     Term.add_member(:target_text, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TargetText"))
     Term.type = Types::Term
-    TermList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Term, name: "member")
+    TermList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Term, name: "member"))
     TerminologyData.add_member(:file, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminologyFile, name: "File", traits: {"smithy.api#required" => {}}))
     TerminologyData.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminologyDataFormat, name: "Format", traits: {"smithy.api#required" => {}}))
     TerminologyData.add_member(:directionality, ::Smithy::Schema::Shapes::MemberShape.new(target: Directionality, name: "Directionality"))
@@ -367,7 +367,7 @@ module Aws::Translate
     TerminologyProperties.add_member(:skipped_term_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "SkippedTermCount"))
     TerminologyProperties.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminologyDataFormat, name: "Format"))
     TerminologyProperties.type = Types::TerminologyProperties
-    TerminologyPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TerminologyProperties, name: "member")
+    TerminologyPropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminologyProperties, name: "member"))
     TextSizeLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     TextSizeLimitExceededException.type = Types::TextSizeLimitExceededException
     TextTranslationJobFilter.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, name: "JobName"))
@@ -391,7 +391,7 @@ module Aws::Translate
     TextTranslationJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "DataAccessRoleArn"))
     TextTranslationJobProperties.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslationSettings, name: "Settings"))
     TextTranslationJobProperties.type = Types::TextTranslationJobProperties
-    TextTranslationJobPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TextTranslationJobProperties, name: "member")
+    TextTranslationJobPropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TextTranslationJobProperties, name: "member"))
     TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     TooManyRequestsException.type = Types::TooManyRequestsException
     TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))

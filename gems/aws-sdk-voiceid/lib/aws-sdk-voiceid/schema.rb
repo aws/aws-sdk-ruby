@@ -251,7 +251,7 @@ module Aws::VoiceID
     Domain.add_member(:server_side_encryption_update_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideEncryptionUpdateDetails, name: "ServerSideEncryptionUpdateDetails"))
     Domain.add_member(:watchlist_details, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistDetails, name: "WatchlistDetails"))
     Domain.type = Types::Domain
-    DomainSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainSummary, name: "member")
+    DomainSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainSummary, name: "member"))
     DomainSummary.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "DomainId"))
     DomainSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     DomainSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "Name"))
@@ -270,7 +270,7 @@ module Aws::VoiceID
     EnrollmentJobFraudDetectionConfig.add_member(:risk_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Score, name: "RiskThreshold"))
     EnrollmentJobFraudDetectionConfig.add_member(:watchlist_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrollmentJobFraudDetectionConfigWatchlistIds, name: "WatchlistIds"))
     EnrollmentJobFraudDetectionConfig.type = Types::EnrollmentJobFraudDetectionConfig
-    EnrollmentJobFraudDetectionConfigWatchlistIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId, name: "member")
+    EnrollmentJobFraudDetectionConfigWatchlistIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId, name: "member"))
     EvaluateSessionInput.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "DomainId", traits: {"smithy.api#required" => {}}))
     EvaluateSessionInput.add_member(:session_name_or_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionNameOrId, name: "SessionNameOrId", traits: {"smithy.api#required" => {}}))
     EvaluateSessionInput.type = Types::EvaluateSessionInput
@@ -287,7 +287,7 @@ module Aws::VoiceID
     FraudDetectionConfiguration.add_member(:risk_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Score, name: "RiskThreshold"))
     FraudDetectionConfiguration.add_member(:watchlist_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId, name: "WatchlistId"))
     FraudDetectionConfiguration.type = Types::FraudDetectionConfiguration
-    FraudDetectionReasons.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FraudDetectionReason, name: "member")
+    FraudDetectionReasons.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudDetectionReason, name: "member"))
     FraudDetectionResult.add_member(:fraud_detection_result_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UniqueIdLarge, name: "FraudDetectionResultId"))
     FraudDetectionResult.add_member(:audio_aggregation_started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "AudioAggregationStartedAt"))
     FraudDetectionResult.add_member(:audio_aggregation_ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "AudioAggregationEndedAt"))
@@ -317,7 +317,7 @@ module Aws::VoiceID
     FraudsterRegistrationJob.add_member(:failure_details, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureDetails, name: "FailureDetails"))
     FraudsterRegistrationJob.add_member(:job_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: JobProgress, name: "JobProgress"))
     FraudsterRegistrationJob.type = Types::FraudsterRegistrationJob
-    FraudsterRegistrationJobSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FraudsterRegistrationJobSummary, name: "member")
+    FraudsterRegistrationJobSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudsterRegistrationJobSummary, name: "member"))
     FraudsterRegistrationJobSummary.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, name: "JobName"))
     FraudsterRegistrationJobSummary.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "JobId"))
     FraudsterRegistrationJobSummary.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudsterRegistrationJobStatus, name: "JobStatus"))
@@ -327,7 +327,7 @@ module Aws::VoiceID
     FraudsterRegistrationJobSummary.add_member(:failure_details, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureDetails, name: "FailureDetails"))
     FraudsterRegistrationJobSummary.add_member(:job_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: JobProgress, name: "JobProgress"))
     FraudsterRegistrationJobSummary.type = Types::FraudsterRegistrationJobSummary
-    FraudsterSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FraudsterSummary, name: "member")
+    FraudsterSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FraudsterSummary, name: "member"))
     FraudsterSummary.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "DomainId"))
     FraudsterSummary.add_member(:generated_fraudster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedFraudsterId, name: "GeneratedFraudsterId"))
     FraudsterSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
@@ -402,11 +402,11 @@ module Aws::VoiceID
     RegistrationConfig.add_member(:fraudster_similarity_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Score, name: "FraudsterSimilarityThreshold"))
     RegistrationConfig.add_member(:watchlist_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationConfigWatchlistIds, name: "WatchlistIds"))
     RegistrationConfig.type = Types::RegistrationConfig
-    RegistrationConfigWatchlistIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId, name: "member")
+    RegistrationConfigWatchlistIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    ResponseWatchlistIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId, name: "member")
+    ResponseWatchlistIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId, name: "member"))
     ServerSideEncryptionConfiguration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "KmsKeyId", traits: {"smithy.api#required" => {}}))
     ServerSideEncryptionConfiguration.type = Types::ServerSideEncryptionConfiguration
     ServerSideEncryptionUpdateDetails.add_member(:old_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "OldKmsKeyId"))
@@ -436,7 +436,7 @@ module Aws::VoiceID
     SpeakerEnrollmentJob.add_member(:failure_details, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureDetails, name: "FailureDetails"))
     SpeakerEnrollmentJob.add_member(:job_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: JobProgress, name: "JobProgress"))
     SpeakerEnrollmentJob.type = Types::SpeakerEnrollmentJob
-    SpeakerEnrollmentJobSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerEnrollmentJobSummary, name: "member")
+    SpeakerEnrollmentJobSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerEnrollmentJobSummary, name: "member"))
     SpeakerEnrollmentJobSummary.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, name: "JobName"))
     SpeakerEnrollmentJobSummary.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "JobId"))
     SpeakerEnrollmentJobSummary.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerEnrollmentJobStatus, name: "JobStatus"))
@@ -446,7 +446,7 @@ module Aws::VoiceID
     SpeakerEnrollmentJobSummary.add_member(:failure_details, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureDetails, name: "FailureDetails"))
     SpeakerEnrollmentJobSummary.add_member(:job_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: JobProgress, name: "JobProgress"))
     SpeakerEnrollmentJobSummary.type = Types::SpeakerEnrollmentJobSummary
-    SpeakerSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerSummary, name: "member")
+    SpeakerSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerSummary, name: "member"))
     SpeakerSummary.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "DomainId"))
     SpeakerSummary.add_member(:customer_speaker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerSpeakerId, name: "CustomerSpeakerId"))
     SpeakerSummary.add_member(:generated_speaker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedSpeakerId, name: "GeneratedSpeakerId"))
@@ -478,8 +478,8 @@ module Aws::VoiceID
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -518,7 +518,7 @@ module Aws::VoiceID
     Watchlist.type = Types::Watchlist
     WatchlistDetails.add_member(:default_watchlist_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId, name: "DefaultWatchlistId", traits: {"smithy.api#required" => {}}))
     WatchlistDetails.type = Types::WatchlistDetails
-    WatchlistSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistSummary, name: "member")
+    WatchlistSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistSummary, name: "member"))
     WatchlistSummary.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "DomainId"))
     WatchlistSummary.add_member(:watchlist_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistId, name: "WatchlistId"))
     WatchlistSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WatchlistName, name: "Name"))

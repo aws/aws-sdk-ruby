@@ -129,7 +129,7 @@ module Aws::HealthLake
     DatastoreProperties.add_member(:identity_provider_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderConfiguration, name: "IdentityProviderConfiguration"))
     DatastoreProperties.add_member(:error_cause, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCause, name: "ErrorCause"))
     DatastoreProperties.type = Types::DatastoreProperties
-    DatastorePropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreProperties, name: "member")
+    DatastorePropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreProperties, name: "member"))
     DatastoreStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     DatastoreStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     DatastoreStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -171,7 +171,7 @@ module Aws::HealthLake
     ExportJobProperties.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "DataAccessRoleArn"))
     ExportJobProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     ExportJobProperties.type = Types::ExportJobProperties
-    ExportJobPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportJobProperties, name: "member")
+    ExportJobPropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportJobProperties, name: "member"))
     FHIRVersion.add_member(:r4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "R4", traits: {"smithy.api#enumValue" => "R4"}))
     IdentityProviderConfiguration.add_member(:authorization_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizationStrategy, name: "AuthorizationStrategy", traits: {"smithy.api#required" => {}}))
     IdentityProviderConfiguration.add_member(:fine_grained_authorization_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "FineGrainedAuthorizationEnabled", traits: {"smithy.api#default" => false}))
@@ -191,7 +191,7 @@ module Aws::HealthLake
     ImportJobProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     ImportJobProperties.add_member(:validation_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationLevel, name: "ValidationLevel"))
     ImportJobProperties.type = Types::ImportJobProperties
-    ImportJobPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportJobProperties, name: "member")
+    ImportJobPropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportJobProperties, name: "member"))
     InputDataConfig.add_member(:s3_uri, Types::InputDataConfig::S3Uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "S3Uri"))
     InputDataConfig.add_member(:unknown, Types::InputDataConfig::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     InputDataConfig.type = Types::InputDataConfig
@@ -290,8 +290,8 @@ module Aws::HealthLake
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest

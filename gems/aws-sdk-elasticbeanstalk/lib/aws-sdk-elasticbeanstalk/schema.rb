@@ -354,7 +354,7 @@ module Aws::ElasticBeanstalk
     ApplicationDescription.add_member(:configuration_templates, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationTemplateNamesList, name: "ConfigurationTemplates"))
     ApplicationDescription.add_member(:resource_lifecycle_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationResourceLifecycleConfig, name: "ResourceLifecycleConfig"))
     ApplicationDescription.type = Types::ApplicationDescription
-    ApplicationDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationDescription, name: "member")
+    ApplicationDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationDescription, name: "member"))
     ApplicationDescriptionsMessage.add_member(:applications, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationDescriptionList, name: "Applications"))
     ApplicationDescriptionsMessage.type = Types::ApplicationDescriptionsMessage
     ApplicationMetrics.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "Duration"))
@@ -362,7 +362,7 @@ module Aws::ElasticBeanstalk
     ApplicationMetrics.add_member(:status_codes, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusCodes, name: "StatusCodes"))
     ApplicationMetrics.add_member(:latency, ::Smithy::Schema::Shapes::MemberShape.new(target: Latency, name: "Latency"))
     ApplicationMetrics.type = Types::ApplicationMetrics
-    ApplicationNamesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "member")
+    ApplicationNamesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "member"))
     ApplicationResourceLifecycleConfig.add_member(:service_role, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServiceRole"))
     ApplicationResourceLifecycleConfig.add_member(:version_lifecycle_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationVersionLifecycleConfig, name: "VersionLifecycleConfig"))
     ApplicationResourceLifecycleConfig.type = Types::ApplicationResourceLifecycleConfig
@@ -380,7 +380,7 @@ module Aws::ElasticBeanstalk
     ApplicationVersionDescription.add_member(:date_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateDate, name: "DateUpdated"))
     ApplicationVersionDescription.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationVersionStatus, name: "Status"))
     ApplicationVersionDescription.type = Types::ApplicationVersionDescription
-    ApplicationVersionDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationVersionDescription, name: "member")
+    ApplicationVersionDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationVersionDescription, name: "member"))
     ApplicationVersionDescriptionsMessage.add_member(:application_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationVersionDescriptionList, name: "ApplicationVersions"))
     ApplicationVersionDescriptionsMessage.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     ApplicationVersionDescriptionsMessage.type = Types::ApplicationVersionDescriptionsMessage
@@ -406,9 +406,9 @@ module Aws::ElasticBeanstalk
     AssociateEnvironmentOperationsRoleMessage.type = Types::AssociateEnvironmentOperationsRoleMessage
     AutoScalingGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "Name"))
     AutoScalingGroup.type = Types::AutoScalingGroup
-    AutoScalingGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroup, name: "member")
-    AvailableSolutionStackDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionStackDescription, name: "member")
-    AvailableSolutionStackNamesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionStackName, name: "member")
+    AutoScalingGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroup, name: "member"))
+    AvailableSolutionStackDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionStackDescription, name: "member"))
+    AvailableSolutionStackNamesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionStackName, name: "member"))
     BuildConfiguration.add_member(:artifact_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ArtifactName"))
     BuildConfiguration.add_member(:code_build_service_role, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CodeBuildServiceRole", traits: {"smithy.api#required" => {}}))
     BuildConfiguration.add_member(:compute_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeType, name: "ComputeType"))
@@ -426,7 +426,7 @@ module Aws::ElasticBeanstalk
     CPUUtilization.add_member(:soft_irq, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableDouble, name: "SoftIRQ"))
     CPUUtilization.add_member(:privileged, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableDouble, name: "Privileged"))
     CPUUtilization.type = Types::CPUUtilization
-    Causes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Cause, name: "member")
+    Causes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Cause, name: "member"))
     CheckDNSAvailabilityMessage.add_member(:cname_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSCnamePrefix, name: "CNAMEPrefix", traits: {"smithy.api#required" => {}}))
     CheckDNSAvailabilityMessage.type = Types::CheckDNSAvailabilityMessage
     CheckDNSAvailabilityResultMessage.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: CnameAvailability, name: "Available"))
@@ -459,14 +459,14 @@ module Aws::ElasticBeanstalk
     ConfigurationOptionDescription.add_member(:max_length, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionRestrictionMaxLength, name: "MaxLength"))
     ConfigurationOptionDescription.add_member(:regex, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionRestrictionRegex, name: "Regex"))
     ConfigurationOptionDescription.type = Types::ConfigurationOptionDescription
-    ConfigurationOptionDescriptionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOptionDescription, name: "member")
-    ConfigurationOptionPossibleValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOptionPossibleValue, name: "member")
+    ConfigurationOptionDescriptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOptionDescription, name: "member"))
+    ConfigurationOptionPossibleValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOptionPossibleValue, name: "member"))
     ConfigurationOptionSetting.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "ResourceName"))
     ConfigurationOptionSetting.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionNamespace, name: "Namespace"))
     ConfigurationOptionSetting.add_member(:option_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOptionName, name: "OptionName"))
     ConfigurationOptionSetting.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOptionValue, name: "Value"))
     ConfigurationOptionSetting.type = Types::ConfigurationOptionSetting
-    ConfigurationOptionSettingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOptionSetting, name: "member")
+    ConfigurationOptionSettingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOptionSetting, name: "member"))
     ConfigurationOptionValueType.add_member(:scalar, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Scalar", traits: {"smithy.api#enumValue" => "Scalar"}))
     ConfigurationOptionValueType.add_member(:list, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "List", traits: {"smithy.api#enumValue" => "List"}))
     ConfigurationSettingsDescription.add_member(:solution_stack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionStackName, name: "SolutionStackName"))
@@ -480,8 +480,8 @@ module Aws::ElasticBeanstalk
     ConfigurationSettingsDescription.add_member(:date_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateDate, name: "DateUpdated"))
     ConfigurationSettingsDescription.add_member(:option_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOptionSettingsList, name: "OptionSettings"))
     ConfigurationSettingsDescription.type = Types::ConfigurationSettingsDescription
-    ConfigurationSettingsDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSettingsDescription, name: "member")
-    ConfigurationTemplateNamesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationTemplateName, name: "member")
+    ConfigurationSettingsDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSettingsDescription, name: "member"))
+    ConfigurationTemplateNamesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationTemplateName, name: "member"))
     CreateApplicationMessage.add_member(:application_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "ApplicationName", traits: {"smithy.api#required" => {}}))
     CreateApplicationMessage.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     CreateApplicationMessage.add_member(:resource_lifecycle_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationResourceLifecycleConfig, name: "ResourceLifecycleConfig"))
@@ -574,7 +574,7 @@ module Aws::ElasticBeanstalk
     CustomAmi.add_member(:virtualization_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualizationType, name: "VirtualizationType"))
     CustomAmi.add_member(:image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageId, name: "ImageId"))
     CustomAmi.type = Types::CustomAmi
-    CustomAmiList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomAmi, name: "member")
+    CustomAmiList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomAmi, name: "member"))
     DeleteApplicationMessage.add_member(:application_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "ApplicationName", traits: {"smithy.api#required" => {}}))
     DeleteApplicationMessage.add_member(:terminate_env_by_force, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminateEnvForce, name: "TerminateEnvByForce"))
     DeleteApplicationMessage.type = Types::DeleteApplicationMessage
@@ -717,7 +717,7 @@ module Aws::ElasticBeanstalk
     EnvironmentDescription.add_member(:environment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentArn, name: "EnvironmentArn"))
     EnvironmentDescription.add_member(:operations_role, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationsRole, name: "OperationsRole"))
     EnvironmentDescription.type = Types::EnvironmentDescription
-    EnvironmentDescriptionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentDescription, name: "member")
+    EnvironmentDescriptionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentDescription, name: "member"))
     EnvironmentHealth.add_member(:green, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Green", traits: {"smithy.api#enumValue" => "Green"}))
     EnvironmentHealth.add_member(:yellow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Yellow", traits: {"smithy.api#enumValue" => "Yellow"}))
     EnvironmentHealth.add_member(:red, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Red", traits: {"smithy.api#enumValue" => "Red"}))
@@ -730,7 +730,7 @@ module Aws::ElasticBeanstalk
     EnvironmentHealthAttribute.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "All", traits: {"smithy.api#enumValue" => "All"}))
     EnvironmentHealthAttribute.add_member(:health_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HealthStatus", traits: {"smithy.api#enumValue" => "HealthStatus"}))
     EnvironmentHealthAttribute.add_member(:refreshed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RefreshedAt", traits: {"smithy.api#enumValue" => "RefreshedAt"}))
-    EnvironmentHealthAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentHealthAttribute, name: "member")
+    EnvironmentHealthAttributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentHealthAttribute, name: "member"))
     EnvironmentHealthStatus.add_member(:no_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NoData", traits: {"smithy.api#enumValue" => "NoData"}))
     EnvironmentHealthStatus.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Unknown", traits: {"smithy.api#enumValue" => "Unknown"}))
     EnvironmentHealthStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Pending", traits: {"smithy.api#enumValue" => "Pending"}))
@@ -740,20 +740,20 @@ module Aws::ElasticBeanstalk
     EnvironmentHealthStatus.add_member(:degraded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Degraded", traits: {"smithy.api#enumValue" => "Degraded"}))
     EnvironmentHealthStatus.add_member(:severe, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Severe", traits: {"smithy.api#enumValue" => "Severe"}))
     EnvironmentHealthStatus.add_member(:suspended, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Suspended", traits: {"smithy.api#enumValue" => "Suspended"}))
-    EnvironmentIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "member")
+    EnvironmentIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "member"))
     EnvironmentInfoDescription.add_member(:info_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentInfoType, name: "InfoType"))
     EnvironmentInfoDescription.add_member(:ec2_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2InstanceId, name: "Ec2InstanceId"))
     EnvironmentInfoDescription.add_member(:sample_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleTimestamp, name: "SampleTimestamp"))
     EnvironmentInfoDescription.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     EnvironmentInfoDescription.type = Types::EnvironmentInfoDescription
-    EnvironmentInfoDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentInfoDescription, name: "member")
+    EnvironmentInfoDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentInfoDescription, name: "member"))
     EnvironmentInfoType.add_member(:tail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "tail", traits: {"smithy.api#enumValue" => "tail"}))
     EnvironmentInfoType.add_member(:bundle, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "bundle", traits: {"smithy.api#enumValue" => "bundle"}))
     EnvironmentLink.add_member(:link_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LinkName"))
     EnvironmentLink.add_member(:environment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EnvironmentName"))
     EnvironmentLink.type = Types::EnvironmentLink
-    EnvironmentLinks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentLink, name: "member")
-    EnvironmentNamesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, name: "member")
+    EnvironmentLinks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentLink, name: "member"))
+    EnvironmentNamesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, name: "member"))
     EnvironmentResourceDescription.add_member(:environment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, name: "EnvironmentName"))
     EnvironmentResourceDescription.add_member(:auto_scaling_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroupList, name: "AutoScalingGroups"))
     EnvironmentResourceDescription.add_member(:instances, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceList, name: "Instances"))
@@ -789,7 +789,7 @@ module Aws::ElasticBeanstalk
     EventDescription.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "RequestId"))
     EventDescription.add_member(:severity, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSeverity, name: "Severity"))
     EventDescription.type = Types::EventDescription
-    EventDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventDescription, name: "member")
+    EventDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDescription, name: "member"))
     EventDescriptionsMessage.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDescriptionList, name: "Events"))
     EventDescriptionsMessage.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     EventDescriptionsMessage.type = Types::EventDescriptionsMessage
@@ -808,7 +808,7 @@ module Aws::ElasticBeanstalk
     FailureType.add_member(:permissions_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PermissionsError", traits: {"smithy.api#enumValue" => "PermissionsError"}))
     Instance.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "Id"))
     Instance.type = Types::Instance
-    InstanceHealthList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SingleInstanceHealth, name: "member")
+    InstanceHealthList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SingleInstanceHealth, name: "member"))
     InstanceHealthSummary.add_member(:no_data, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "NoData"))
     InstanceHealthSummary.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "Unknown"))
     InstanceHealthSummary.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "Pending"))
@@ -818,7 +818,7 @@ module Aws::ElasticBeanstalk
     InstanceHealthSummary.add_member(:degraded, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "Degraded"))
     InstanceHealthSummary.add_member(:severe, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "Severe"))
     InstanceHealthSummary.type = Types::InstanceHealthSummary
-    InstanceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Instance, name: "member")
+    InstanceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Instance, name: "member"))
     InstancesHealthAttribute.add_member(:health_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HealthStatus", traits: {"smithy.api#enumValue" => "HealthStatus"}))
     InstancesHealthAttribute.add_member(:color, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Color", traits: {"smithy.api#enumValue" => "Color"}))
     InstancesHealthAttribute.add_member(:causes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Causes", traits: {"smithy.api#enumValue" => "Causes"}))
@@ -830,7 +830,7 @@ module Aws::ElasticBeanstalk
     InstancesHealthAttribute.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AvailabilityZone", traits: {"smithy.api#enumValue" => "AvailabilityZone"}))
     InstancesHealthAttribute.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InstanceType", traits: {"smithy.api#enumValue" => "InstanceType"}))
     InstancesHealthAttribute.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "All", traits: {"smithy.api#enumValue" => "All"}))
-    InstancesHealthAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstancesHealthAttribute, name: "member")
+    InstancesHealthAttributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancesHealthAttribute, name: "member"))
     InsufficientPrivilegesException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     InsufficientPrivilegesException.type = Types::InsufficientPrivilegesException
     InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -846,10 +846,10 @@ module Aws::ElasticBeanstalk
     Latency.type = Types::Latency
     LaunchConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "Name"))
     LaunchConfiguration.type = Types::LaunchConfiguration
-    LaunchConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchConfiguration, name: "member")
+    LaunchConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchConfiguration, name: "member"))
     LaunchTemplate.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "Id"))
     LaunchTemplate.type = Types::LaunchTemplate
-    LaunchTemplateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplate, name: "member")
+    LaunchTemplateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplate, name: "member"))
     ListAvailableSolutionStacksResultMessage.add_member(:solution_stacks, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailableSolutionStackNamesList, name: "SolutionStacks"))
     ListAvailableSolutionStacksResultMessage.add_member(:solution_stack_details, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailableSolutionStackDetailsList, name: "SolutionStackDetails"))
     ListAvailableSolutionStacksResultMessage.type = Types::ListAvailableSolutionStacksResultMessage
@@ -872,15 +872,15 @@ module Aws::ElasticBeanstalk
     Listener.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Protocol"))
     Listener.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Port", traits: {"smithy.api#default" => 0}))
     Listener.type = Types::Listener
-    LoadAverage.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoadAverageValue, name: "member")
+    LoadAverage.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadAverageValue, name: "member"))
     LoadBalancer.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "Name"))
     LoadBalancer.type = Types::LoadBalancer
     LoadBalancerDescription.add_member(:load_balancer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LoadBalancerName"))
     LoadBalancerDescription.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Domain"))
     LoadBalancerDescription.add_member(:listeners, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerListenersDescription, name: "Listeners"))
     LoadBalancerDescription.type = Types::LoadBalancerDescription
-    LoadBalancerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancer, name: "member")
-    LoadBalancerListenersDescription.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Listener, name: "member")
+    LoadBalancerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancer, name: "member"))
+    LoadBalancerListenersDescription.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Listener, name: "member"))
     ManagedAction.add_member(:action_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ActionId"))
     ManagedAction.add_member(:action_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ActionDescription"))
     ManagedAction.add_member(:action_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionType, name: "ActionType"))
@@ -896,10 +896,10 @@ module Aws::ElasticBeanstalk
     ManagedActionHistoryItem.add_member(:executed_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ExecutedTime"))
     ManagedActionHistoryItem.add_member(:finished_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "FinishedTime"))
     ManagedActionHistoryItem.type = Types::ManagedActionHistoryItem
-    ManagedActionHistoryItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedActionHistoryItem, name: "member")
+    ManagedActionHistoryItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedActionHistoryItem, name: "member"))
     ManagedActionInvalidStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ManagedActionInvalidStateException.type = Types::ManagedActionInvalidStateException
-    ManagedActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedAction, name: "member")
+    ManagedActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedAction, name: "member"))
     MaxAgeRule.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "Enabled", traits: {"smithy.api#required" => {}}))
     MaxAgeRule.add_member(:max_age_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInt, name: "MaxAgeInDays"))
     MaxAgeRule.add_member(:delete_source_from_s3, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "DeleteSourceFromS3"))
@@ -917,14 +917,14 @@ module Aws::ElasticBeanstalk
     OptionSpecification.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionNamespace, name: "Namespace"))
     OptionSpecification.add_member(:option_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOptionName, name: "OptionName"))
     OptionSpecification.type = Types::OptionSpecification
-    OptionsSpecifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OptionSpecification, name: "member")
+    OptionsSpecifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionSpecification, name: "member"))
     PlatformBranchSummary.add_member(:platform_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformName, name: "PlatformName"))
     PlatformBranchSummary.add_member(:branch_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, name: "BranchName"))
     PlatformBranchSummary.add_member(:lifecycle_state, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformBranchLifecycleState, name: "LifecycleState"))
     PlatformBranchSummary.add_member(:branch_order, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchOrder, name: "BranchOrder", traits: {"smithy.api#default" => 0}))
     PlatformBranchSummary.add_member(:supported_tier_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedTierList, name: "SupportedTierList"))
     PlatformBranchSummary.type = Types::PlatformBranchSummary
-    PlatformBranchSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformBranchSummary, name: "member")
+    PlatformBranchSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformBranchSummary, name: "member"))
     PlatformDescription.add_member(:platform_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformArn, name: "PlatformArn"))
     PlatformDescription.add_member(:platform_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformOwner, name: "PlatformOwner"))
     PlatformDescription.add_member(:platform_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformName, name: "PlatformName"))
@@ -951,16 +951,16 @@ module Aws::ElasticBeanstalk
     PlatformFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformFilterOperator, name: "Operator"))
     PlatformFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformFilterValueList, name: "Values"))
     PlatformFilter.type = Types::PlatformFilter
-    PlatformFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformFilterValue, name: "member")
-    PlatformFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformFilter, name: "member")
+    PlatformFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformFilterValue, name: "member"))
+    PlatformFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformFilter, name: "member"))
     PlatformFramework.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     PlatformFramework.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Version"))
     PlatformFramework.type = Types::PlatformFramework
-    PlatformFrameworks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformFramework, name: "member")
+    PlatformFrameworks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformFramework, name: "member"))
     PlatformProgrammingLanguage.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     PlatformProgrammingLanguage.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Version"))
     PlatformProgrammingLanguage.type = Types::PlatformProgrammingLanguage
-    PlatformProgrammingLanguages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformProgrammingLanguage, name: "member")
+    PlatformProgrammingLanguages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformProgrammingLanguage, name: "member"))
     PlatformStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Creating", traits: {"smithy.api#enumValue" => "Creating"}))
     PlatformStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
     PlatformStatus.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Ready", traits: {"smithy.api#enumValue" => "Ready"}))
@@ -979,13 +979,13 @@ module Aws::ElasticBeanstalk
     PlatformSummary.add_member(:platform_branch_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, name: "PlatformBranchName"))
     PlatformSummary.add_member(:platform_branch_lifecycle_state, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformBranchLifecycleState, name: "PlatformBranchLifecycleState"))
     PlatformSummary.type = Types::PlatformSummary
-    PlatformSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformSummary, name: "member")
+    PlatformSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformSummary, name: "member"))
     PlatformVersionStillReferencedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     PlatformVersionStillReferencedException.type = Types::PlatformVersionStillReferencedException
     Queue.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     Queue.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "URL"))
     Queue.type = Types::Queue
-    QueueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Queue, name: "member")
+    QueueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Queue, name: "member"))
     RebuildEnvironmentMessage.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "EnvironmentId"))
     RebuildEnvironmentMessage.add_member(:environment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, name: "EnvironmentName"))
     RebuildEnvironmentMessage.type = Types::RebuildEnvironmentMessage
@@ -1028,8 +1028,8 @@ module Aws::ElasticBeanstalk
     SearchFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilterOperator, name: "Operator"))
     SearchFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilterValues, name: "Values"))
     SearchFilter.type = Types::SearchFilter
-    SearchFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilterValue, name: "member")
-    SearchFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilter, name: "member")
+    SearchFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilterValue, name: "member"))
+    SearchFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilter, name: "member"))
     SingleInstanceHealth.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId"))
     SingleInstanceHealth.add_member(:health_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "HealthStatus"))
     SingleInstanceHealth.add_member(:color, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Color"))
@@ -1044,7 +1044,7 @@ module Aws::ElasticBeanstalk
     SolutionStackDescription.add_member(:solution_stack_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionStackName, name: "SolutionStackName"))
     SolutionStackDescription.add_member(:permitted_file_types, ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionStackFileTypeList, name: "PermittedFileTypes"))
     SolutionStackDescription.type = Types::SolutionStackDescription
-    SolutionStackFileTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FileTypeExtension, name: "member")
+    SolutionStackFileTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FileTypeExtension, name: "member"))
     SourceBuildInformation.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceType, name: "SourceType", traits: {"smithy.api#required" => {}}))
     SourceBuildInformation.add_member(:source_repository, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceRepository, name: "SourceRepository", traits: {"smithy.api#required" => {}}))
     SourceBuildInformation.add_member(:source_location, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceLocation, name: "SourceLocation", traits: {"smithy.api#required" => {}}))
@@ -1063,8 +1063,8 @@ module Aws::ElasticBeanstalk
     StatusCodes.add_member(:status4xx, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "Status4xx"))
     StatusCodes.add_member(:status5xx, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "Status5xx"))
     StatusCodes.type = Types::StatusCodes
-    SupportedAddonList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedAddon, name: "member")
-    SupportedTierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedTier, name: "member")
+    SupportedAddonList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedAddon, name: "member"))
+    SupportedTierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedTier, name: "member"))
     SwapEnvironmentCNAMEsMessage.add_member(:source_environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "SourceEnvironmentId"))
     SwapEnvironmentCNAMEsMessage.add_member(:source_environment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, name: "SourceEnvironmentName"))
     SwapEnvironmentCNAMEsMessage.add_member(:destination_environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "DestinationEnvironmentId"))
@@ -1076,9 +1076,9 @@ module Aws::ElasticBeanstalk
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TerminateEnvironmentMessage.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "EnvironmentId"))
     TerminateEnvironmentMessage.add_member(:environment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, name: "EnvironmentName"))
     TerminateEnvironmentMessage.add_member(:terminate_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminateEnvironmentResources, name: "TerminateResources"))
@@ -1122,7 +1122,7 @@ module Aws::ElasticBeanstalk
     TooManyTagsException.type = Types::TooManyTagsException
     Trigger.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "Name"))
     Trigger.type = Types::Trigger
-    TriggerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Trigger, name: "member")
+    TriggerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Trigger, name: "member"))
     UpdateApplicationMessage.add_member(:application_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "ApplicationName", traits: {"smithy.api#required" => {}}))
     UpdateApplicationMessage.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     UpdateApplicationMessage.type = Types::UpdateApplicationMessage
@@ -1205,11 +1205,11 @@ module Aws::ElasticBeanstalk
     ValidationMessage.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionNamespace, name: "Namespace"))
     ValidationMessage.add_member(:option_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationOptionName, name: "OptionName"))
     ValidationMessage.type = Types::ValidationMessage
-    ValidationMessagesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationMessage, name: "member")
+    ValidationMessagesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationMessage, name: "member"))
     ValidationSeverity.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "error", traits: {"smithy.api#enumValue" => "error"}))
     ValidationSeverity.add_member(:warning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "warning", traits: {"smithy.api#enumValue" => "warning"}))
-    VersionLabels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VersionLabel, name: "member")
-    VersionLabelsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VersionLabel, name: "member")
+    VersionLabels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionLabel, name: "member"))
+    VersionLabelsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionLabel, name: "member"))
 
     AWSElasticBeanstalkService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.elasticbeanstalk#AWSElasticBeanstalkService"

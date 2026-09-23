@@ -297,7 +297,7 @@ module Aws::Tnb
     GetSolNetworkOperationTaskDetails.add_member(:task_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "taskStartTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
     GetSolNetworkOperationTaskDetails.add_member(:task_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "taskEndTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
     GetSolNetworkOperationTaskDetails.type = Types::GetSolNetworkOperationTaskDetails
-    GetSolNetworkOperationTasksList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GetSolNetworkOperationTaskDetails, name: "member")
+    GetSolNetworkOperationTasksList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GetSolNetworkOperationTaskDetails, name: "member"))
     GetSolNetworkPackageContentInput.add_member(:nsd_info_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NsdInfoId, name: "nsdInfoId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetSolNetworkPackageContentInput.add_member(:accept, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageContentType, name: "accept", traits: {"smithy.api#httpHeader" => "Accept", "smithy.api#required" => {}}))
     GetSolNetworkPackageContentInput.type = Types::GetSolNetworkPackageContentInput
@@ -336,7 +336,7 @@ module Aws::Tnb
     GetSolVnfInfo.type = Types::GetSolVnfInfo
     GetSolVnfcResourceInfo.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: GetSolVnfcResourceInfoMetadata, name: "metadata"))
     GetSolVnfcResourceInfo.type = Types::GetSolVnfcResourceInfo
-    GetSolVnfcResourceInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GetSolVnfcResourceInfo, name: "member")
+    GetSolVnfcResourceInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GetSolVnfcResourceInfo, name: "member"))
     GetSolVnfcResourceInfoMetadata.add_member(:node_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nodeGroup"))
     GetSolVnfcResourceInfoMetadata.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "cluster"))
     GetSolVnfcResourceInfoMetadata.add_member(:helm_chart, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "helmChart"))
@@ -371,7 +371,7 @@ module Aws::Tnb
     ListSolFunctionInstanceMetadata.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     ListSolFunctionInstanceMetadata.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastModified", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     ListSolFunctionInstanceMetadata.type = Types::ListSolFunctionInstanceMetadata
-    ListSolFunctionInstanceResources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListSolFunctionInstanceInfo, name: "member")
+    ListSolFunctionInstanceResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListSolFunctionInstanceInfo, name: "member"))
     ListSolFunctionInstancesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#httpQuery" => "max_results", "smithy.api#range" => {"min" => 1, "max" => 100}}))
     ListSolFunctionInstancesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextpage_opaque_marker"}))
     ListSolFunctionInstancesInput.type = Types::ListSolFunctionInstancesInput
@@ -392,7 +392,7 @@ module Aws::Tnb
     ListSolFunctionPackageMetadata.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     ListSolFunctionPackageMetadata.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastModified", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     ListSolFunctionPackageMetadata.type = Types::ListSolFunctionPackageMetadata
-    ListSolFunctionPackageResources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListSolFunctionPackageInfo, name: "member")
+    ListSolFunctionPackageResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListSolFunctionPackageInfo, name: "member"))
     ListSolFunctionPackagesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#httpQuery" => "max_results", "smithy.api#range" => {"min" => 1, "max" => 100}}))
     ListSolFunctionPackagesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextpage_opaque_marker"}))
     ListSolFunctionPackagesInput.type = Types::ListSolFunctionPackagesInput
@@ -411,7 +411,7 @@ module Aws::Tnb
     ListSolNetworkInstanceMetadata.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     ListSolNetworkInstanceMetadata.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastModified", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     ListSolNetworkInstanceMetadata.type = Types::ListSolNetworkInstanceMetadata
-    ListSolNetworkInstanceResources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListSolNetworkInstanceInfo, name: "member")
+    ListSolNetworkInstanceResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListSolNetworkInstanceInfo, name: "member"))
     ListSolNetworkInstancesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#httpQuery" => "max_results", "smithy.api#range" => {"min" => 1, "max" => 100}}))
     ListSolNetworkInstancesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextpage_opaque_marker"}))
     ListSolNetworkInstancesInput.type = Types::ListSolNetworkInstancesInput
@@ -439,7 +439,7 @@ module Aws::Tnb
     ListSolNetworkOperationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
     ListSolNetworkOperationsOutput.add_member(:network_operations, ::Smithy::Schema::Shapes::MemberShape.new(target: ListSolNetworkOperationsResources, name: "networkOperations"))
     ListSolNetworkOperationsOutput.type = Types::ListSolNetworkOperationsOutput
-    ListSolNetworkOperationsResources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListSolNetworkOperationsInfo, name: "member")
+    ListSolNetworkOperationsResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListSolNetworkOperationsInfo, name: "member"))
     ListSolNetworkPackageInfo.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NsdInfoId, name: "id", traits: {"smithy.api#required" => {}}))
     ListSolNetworkPackageInfo.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NsdInfoArn, name: "arn", traits: {"smithy.api#required" => {}}))
     ListSolNetworkPackageInfo.add_member(:nsd_onboarding_state, ::Smithy::Schema::Shapes::MemberShape.new(target: NsdOnboardingState, name: "nsdOnboardingState", traits: {"smithy.api#required" => {}}))
@@ -456,7 +456,7 @@ module Aws::Tnb
     ListSolNetworkPackageMetadata.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     ListSolNetworkPackageMetadata.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastModified", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     ListSolNetworkPackageMetadata.type = Types::ListSolNetworkPackageMetadata
-    ListSolNetworkPackageResources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListSolNetworkPackageInfo, name: "member")
+    ListSolNetworkPackageResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListSolNetworkPackageInfo, name: "member"))
     ListSolNetworkPackagesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#httpQuery" => "max_results", "smithy.api#range" => {"min" => 1, "max" => 100}}))
     ListSolNetworkPackagesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextpage_opaque_marker"}))
     ListSolNetworkPackagesInput.type = Types::ListSolNetworkPackagesInput
@@ -500,7 +500,7 @@ module Aws::Tnb
     OnboardingState.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
     OperationalState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     OperationalState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    OverrideList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ToscaOverride, name: "member")
+    OverrideList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ToscaOverride, name: "member"))
     PackageContentType.add_member(:application_zip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPLICATION_ZIP", traits: {"smithy.api#enumValue" => "application/zip"}))
     ProblemDetails.add_member(:detail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "detail", traits: {"smithy.api#required" => {}}))
     ProblemDetails.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "title"))
@@ -540,11 +540,11 @@ module Aws::Tnb
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    StringMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    StringMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    StringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    StringMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TNBResourceArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -640,7 +640,7 @@ module Aws::Tnb
     VnfInstantiationState.add_member(:not_instantiated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_INSTANTIATED", traits: {"smithy.api#enumValue" => "NOT_INSTANTIATED"}))
     VnfOperationalState.add_member(:started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTED", traits: {"smithy.api#enumValue" => "STARTED"}))
     VnfOperationalState.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
-    VnfPkgIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VnfPkgId, name: "member")
+    VnfPkgIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VnfPkgId, name: "member"))
 
     TNB = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.tnb#TNB"

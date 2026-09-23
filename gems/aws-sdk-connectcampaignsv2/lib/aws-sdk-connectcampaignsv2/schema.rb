@@ -199,8 +199,8 @@ module Aws::ConnectCampaignsV2
     AnswerMachineDetectionConfig.add_member(:enable_answer_machine_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enableAnswerMachineDetection", traits: {"smithy.api#required" => {}}))
     AnswerMachineDetectionConfig.add_member(:await_answer_machine_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "awaitAnswerMachinePrompt", traits: {"smithy.api#default" => nil}))
     AnswerMachineDetectionConfig.type = Types::AnswerMachineDetectionConfig
-    Attributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
-    Attributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
+    Attributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
+    Attributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     Campaign.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "id", traits: {"smithy.api#required" => {}}))
     Campaign.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignArn, name: "arn", traits: {"smithy.api#required" => {}}))
     Campaign.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -215,7 +215,7 @@ module Aws::ConnectCampaignsV2
     Campaign.type = Types::Campaign
     CampaignFilters.add_member(:instance_id_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceIdFilter, name: "instanceIdFilter"))
     CampaignFilters.type = Types::CampaignFilters
-    CampaignIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "member")
+    CampaignIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "member"))
     CampaignSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "id", traits: {"smithy.api#required" => {}}))
     CampaignSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignArn, name: "arn", traits: {"smithy.api#required" => {}}))
     CampaignSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -224,12 +224,12 @@ module Aws::ConnectCampaignsV2
     CampaignSummary.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: Schedule, name: "schedule"))
     CampaignSummary.add_member(:connect_campaign_flow_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "connectCampaignFlowArn"))
     CampaignSummary.type = Types::CampaignSummary
-    CampaignSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignSummary, name: "member")
+    CampaignSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignSummary, name: "member"))
     ChannelSubtypeConfig.add_member(:telephony, ::Smithy::Schema::Shapes::MemberShape.new(target: TelephonyChannelSubtypeConfig, name: "telephony"))
     ChannelSubtypeConfig.add_member(:sms, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsChannelSubtypeConfig, name: "sms"))
     ChannelSubtypeConfig.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailChannelSubtypeConfig, name: "email"))
     ChannelSubtypeConfig.type = Types::ChannelSubtypeConfig
-    ChannelSubtypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSubtype, name: "member")
+    ChannelSubtypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSubtype, name: "member"))
     ChannelSubtypeParameters.add_member(:telephony, Types::ChannelSubtypeParameters::Telephony, ::Smithy::Schema::Shapes::MemberShape.new(target: TelephonyChannelSubtypeParameters, name: "telephony"))
     ChannelSubtypeParameters.add_member(:sms, Types::ChannelSubtypeParameters::Sms, ::Smithy::Schema::Shapes::MemberShape.new(target: SmsChannelSubtypeParameters, name: "sms"))
     ChannelSubtypeParameters.add_member(:email, Types::ChannelSubtypeParameters::Email, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailChannelSubtypeParameters, name: "email"))
@@ -239,7 +239,7 @@ module Aws::ConnectCampaignsV2
     CommunicationLimit.add_member(:frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "frequency", traits: {"smithy.api#range" => {"min" => 1, "max" => 30}, "smithy.api#required" => {}}))
     CommunicationLimit.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationLimitTimeUnit, name: "unit", traits: {"smithy.api#required" => {}}))
     CommunicationLimit.type = Types::CommunicationLimit
-    CommunicationLimitList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationLimit, name: "member")
+    CommunicationLimitList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationLimit, name: "member"))
     CommunicationLimits.add_member(:communication_limits_list, Types::CommunicationLimits::CommunicationLimitsList, ::Smithy::Schema::Shapes::MemberShape.new(target: CommunicationLimitList, name: "communicationLimitsList"))
     CommunicationLimits.add_member(:unknown, Types::CommunicationLimits::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     CommunicationLimits.type = Types::CommunicationLimits
@@ -276,8 +276,8 @@ module Aws::ConnectCampaignsV2
     CustomerProfilesIntegrationSummary.add_member(:domain_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "domainArn", traits: {"smithy.api#required" => {}}))
     CustomerProfilesIntegrationSummary.add_member(:object_type_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectTypeNamesMap, name: "objectTypeNames", traits: {"smithy.api#required" => {}}))
     CustomerProfilesIntegrationSummary.type = Types::CustomerProfilesIntegrationSummary
-    DailyHours.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfWeek, name: "key")
-    DailyHours.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TimeRangeList, name: "value")
+    DailyHours.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfWeek, name: "key"))
+    DailyHours.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeRangeList, name: "value"))
     DeleteCampaignChannelSubtypeConfigRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteCampaignChannelSubtypeConfigRequest.add_member(:channel_subtype, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSubtype, name: "channelSubtype", traits: {"smithy.api#httpQuery" => "channelSubtype", "smithy.api#required" => {}}))
     DeleteCampaignChannelSubtypeConfigRequest.type = Types::DeleteCampaignChannelSubtypeConfigRequest
@@ -326,17 +326,17 @@ module Aws::ConnectCampaignsV2
     FailedCampaignStateResponse.add_member(:campaign_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "campaignId"))
     FailedCampaignStateResponse.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: GetCampaignStateBatchFailureCode, name: "failureCode"))
     FailedCampaignStateResponse.type = Types::FailedCampaignStateResponse
-    FailedCampaignStateResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedCampaignStateResponse, name: "member")
+    FailedCampaignStateResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedCampaignStateResponse, name: "member"))
     FailedProfileOutboundRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken"))
     FailedProfileOutboundRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileOutboundRequestId, name: "id"))
     FailedProfileOutboundRequest.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileOutboundRequestFailureCode, name: "failureCode"))
     FailedProfileOutboundRequest.type = Types::FailedProfileOutboundRequest
-    FailedProfileOutboundRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedProfileOutboundRequest, name: "member")
+    FailedProfileOutboundRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedProfileOutboundRequest, name: "member"))
     FailedRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken"))
     FailedRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: DialRequestId, name: "id"))
     FailedRequest.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureCode, name: "failureCode"))
     FailedRequest.type = Types::FailedRequest
-    FailedRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedRequest, name: "member")
+    FailedRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedRequest, name: "member"))
     GetCampaignStateBatchRequest.add_member(:campaign_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignIdList, name: "campaignIds", traits: {"smithy.api#length" => {"min" => 1, "max" => 25}, "smithy.api#required" => {}}))
     GetCampaignStateBatchRequest.type = Types::GetCampaignStateBatchRequest
     GetCampaignStateBatchResponse.add_member(:successful_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulCampaignStateResponseList, name: "successfulRequests"))
@@ -383,7 +383,7 @@ module Aws::ConnectCampaignsV2
     IntegrationSummary.add_member(:q_connect, Types::IntegrationSummary::QConnect, ::Smithy::Schema::Shapes::MemberShape.new(target: QConnectIntegrationSummary, name: "qConnect"))
     IntegrationSummary.add_member(:unknown, Types::IntegrationSummary::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     IntegrationSummary.type = Types::IntegrationSummary
-    IntegrationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationSummary, name: "member")
+    IntegrationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationSummary, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: XAmazonErrorType, name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     InternalServerException.type = Types::InternalServerException
@@ -415,9 +415,9 @@ module Aws::ConnectCampaignsV2
     LocalTimeZoneConfig.add_member(:default_time_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeZone, name: "defaultTimeZone"))
     LocalTimeZoneConfig.add_member(:local_time_zone_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalTimeZoneDetection, name: "localTimeZoneDetection"))
     LocalTimeZoneConfig.type = Types::LocalTimeZoneConfig
-    LocalTimeZoneDetection.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LocalTimeZoneDetectionType, name: "member")
-    ObjectTypeNamesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "key")
-    ObjectTypeNamesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectTypeName, name: "value")
+    LocalTimeZoneDetection.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalTimeZoneDetectionType, name: "member"))
+    ObjectTypeNamesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "key"))
+    ObjectTypeNamesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectTypeName, name: "value"))
     OpenHours.add_member(:daily_hours, Types::OpenHours::DailyHours, ::Smithy::Schema::Shapes::MemberShape.new(target: DailyHours, name: "dailyHours"))
     OpenHours.add_member(:unknown, Types::OpenHours::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     OpenHours.type = Types::OpenHours
@@ -425,7 +425,7 @@ module Aws::ConnectCampaignsV2
     OutboundRequest.add_member(:expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, name: "expirationTime", traits: {"smithy.api#required" => {}}))
     OutboundRequest.add_member(:channel_subtype_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSubtypeParameters, name: "channelSubtypeParameters", traits: {"smithy.api#required" => {}}))
     OutboundRequest.type = Types::OutboundRequest
-    OutboundRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OutboundRequest, name: "member")
+    OutboundRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutboundRequest, name: "member"))
     PauseCampaignRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PauseCampaignRequest.type = Types::PauseCampaignRequest
     PredictiveConfig.add_member(:bandwidth_allocation, ::Smithy::Schema::Shapes::MemberShape.new(target: BandwidthAllocation, name: "bandwidthAllocation", traits: {"smithy.api#required" => {}}))
@@ -434,7 +434,7 @@ module Aws::ConnectCampaignsV2
     ProfileOutboundRequest.add_member(:profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileId, name: "profileId", traits: {"smithy.api#required" => {}}))
     ProfileOutboundRequest.add_member(:expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, name: "expirationTime"))
     ProfileOutboundRequest.type = Types::ProfileOutboundRequest
-    ProfileOutboundRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileOutboundRequest, name: "member")
+    ProfileOutboundRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileOutboundRequest, name: "member"))
     ProgressiveConfig.add_member(:bandwidth_allocation, ::Smithy::Schema::Shapes::MemberShape.new(target: BandwidthAllocation, name: "bandwidthAllocation", traits: {"smithy.api#required" => {}}))
     ProgressiveConfig.type = Types::ProgressiveConfig
     PutConnectInstanceIntegrationRequest.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "connectInstanceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -468,7 +468,7 @@ module Aws::ConnectCampaignsV2
     RestrictedPeriod.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Date, name: "startDate", traits: {"smithy.api#required" => {}}))
     RestrictedPeriod.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Date, name: "endDate", traits: {"smithy.api#required" => {}}))
     RestrictedPeriod.type = Types::RestrictedPeriod
-    RestrictedPeriodList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictedPeriod, name: "member")
+    RestrictedPeriodList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictedPeriod, name: "member"))
     RestrictedPeriods.add_member(:restricted_period_list, Types::RestrictedPeriods::RestrictedPeriodList, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictedPeriodList, name: "restrictedPeriodList"))
     RestrictedPeriods.add_member(:unknown, Types::RestrictedPeriods::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RestrictedPeriods.type = Types::RestrictedPeriods
@@ -512,18 +512,18 @@ module Aws::ConnectCampaignsV2
     SuccessfulCampaignStateResponse.add_member(:campaign_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "campaignId"))
     SuccessfulCampaignStateResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignState, name: "state"))
     SuccessfulCampaignStateResponse.type = Types::SuccessfulCampaignStateResponse
-    SuccessfulCampaignStateResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulCampaignStateResponse, name: "member")
+    SuccessfulCampaignStateResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulCampaignStateResponse, name: "member"))
     SuccessfulProfileOutboundRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken"))
     SuccessfulProfileOutboundRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileOutboundRequestId, name: "id"))
     SuccessfulProfileOutboundRequest.type = Types::SuccessfulProfileOutboundRequest
-    SuccessfulProfileOutboundRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulProfileOutboundRequest, name: "member")
+    SuccessfulProfileOutboundRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulProfileOutboundRequest, name: "member"))
     SuccessfulRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken"))
     SuccessfulRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: DialRequestId, name: "id"))
     SuccessfulRequest.type = Types::SuccessfulRequest
-    SuccessfulRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulRequest, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    SuccessfulRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulRequest, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -552,7 +552,7 @@ module Aws::ConnectCampaignsV2
     TimeRange.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Time, name: "startTime", traits: {"smithy.api#required" => {}}))
     TimeRange.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Time, name: "endTime", traits: {"smithy.api#required" => {}}))
     TimeRange.type = Types::TimeRange
-    TimeRangeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TimeRange, name: "member")
+    TimeRangeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeRange, name: "member"))
     TimeWindow.add_member(:open_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenHours, name: "openHours", traits: {"smithy.api#required" => {}}))
     TimeWindow.add_member(:restricted_periods, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictedPeriods, name: "restrictedPeriods"))
     TimeWindow.type = Types::TimeWindow

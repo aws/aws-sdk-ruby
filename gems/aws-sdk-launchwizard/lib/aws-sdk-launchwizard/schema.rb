@@ -76,7 +76,7 @@ module Aws::LaunchWizard
     WorkloadStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.launchwizard#WorkloadStatus", name: "WorkloadStatus")
     WorkloadVersionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.launchwizard#WorkloadVersionName", name: "WorkloadVersionName", traits: {"smithy.api#length" => {"min" => 5, "max" => 30}, "smithy.api#pattern" => "^[A-Za-z0-9][a-zA-Z0-9-]*$"})
 
-    AllowedValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValueString, name: "member")
+    AllowedValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueString, name: "member"))
     CreateDeploymentInput.add_member(:workload_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadName, name: "workloadName", traits: {"smithy.api#required" => {}}))
     CreateDeploymentInput.add_member(:deployment_pattern_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentPatternName, name: "deploymentPatternName", traits: {"smithy.api#required" => {}}))
     CreateDeploymentInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -114,24 +114,24 @@ module Aws::LaunchWizard
     DeploymentDataSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStatus, name: "status"))
     DeploymentDataSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
     DeploymentDataSummary.type = Types::DeploymentDataSummary
-    DeploymentDataSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentDataSummary, name: "member")
+    DeploymentDataSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentDataSummary, name: "member"))
     DeploymentEventDataSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name"))
     DeploymentEventDataSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
     DeploymentEventDataSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EventStatus, name: "status"))
     DeploymentEventDataSummary.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
     DeploymentEventDataSummary.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "timestamp"))
     DeploymentEventDataSummary.type = Types::DeploymentEventDataSummary
-    DeploymentEventDataSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentEventDataSummary, name: "member")
+    DeploymentEventDataSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentEventDataSummary, name: "member"))
     DeploymentFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentFilterKey, name: "name"))
     DeploymentFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentFilterValues, name: "values"))
     DeploymentFilter.type = Types::DeploymentFilter
     DeploymentFilterKey.add_member(:workload_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WORKLOAD_NAME", traits: {"smithy.api#enumValue" => "WORKLOAD_NAME"}))
     DeploymentFilterKey.add_member(:deployment_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPLOYMENT_STATUS", traits: {"smithy.api#enumValue" => "DEPLOYMENT_STATUS"}))
-    DeploymentFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentFilter, name: "member")
-    DeploymentFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
-    DeploymentSpecifications.key = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyString, name: "key")
-    DeploymentSpecifications.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ValueString, name: "value")
-    DeploymentSpecificationsData.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentSpecificationsField, name: "member")
+    DeploymentFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentFilter, name: "member"))
+    DeploymentFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}}))
+    DeploymentSpecifications.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyString, name: "key"))
+    DeploymentSpecifications.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueString, name: "value"))
+    DeploymentSpecificationsData.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentSpecificationsField, name: "member"))
     DeploymentSpecificationsField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name"))
     DeploymentSpecificationsField.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
     DeploymentSpecificationsField.add_member(:allowed_values, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedValues, name: "allowedValues"))
@@ -205,14 +205,14 @@ module Aws::LaunchWizard
     ResourceLimitException.type = Types::ResourceLimitException
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    SpecificationsConditionalData.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentConditionalField, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    SpecificationsConditionalData.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentConditionalField, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
@@ -230,7 +230,7 @@ module Aws::LaunchWizard
     WorkloadDataSummary.add_member(:workload_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadName, name: "workloadName"))
     WorkloadDataSummary.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "displayName"))
     WorkloadDataSummary.type = Types::WorkloadDataSummary
-    WorkloadDataSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadDataSummary, name: "member")
+    WorkloadDataSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadDataSummary, name: "member"))
     WorkloadDeploymentPatternData.add_member(:workload_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadName, name: "workloadName"))
     WorkloadDeploymentPatternData.add_member(:deployment_pattern_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentPatternName, name: "deploymentPatternName"))
     WorkloadDeploymentPatternData.add_member(:workload_version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadVersionName, name: "workloadVersionName"))
@@ -248,7 +248,7 @@ module Aws::LaunchWizard
     WorkloadDeploymentPatternDataSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadDeploymentPatternStatus, name: "status"))
     WorkloadDeploymentPatternDataSummary.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusMessage"))
     WorkloadDeploymentPatternDataSummary.type = Types::WorkloadDeploymentPatternDataSummary
-    WorkloadDeploymentPatternDataSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadDeploymentPatternDataSummary, name: "member")
+    WorkloadDeploymentPatternDataSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadDeploymentPatternDataSummary, name: "member"))
     WorkloadDeploymentPatternStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     WorkloadDeploymentPatternStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     WorkloadDeploymentPatternStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))

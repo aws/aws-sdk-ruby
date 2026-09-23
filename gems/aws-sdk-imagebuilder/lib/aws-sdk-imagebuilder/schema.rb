@@ -476,7 +476,7 @@ module Aws::Imagebuilder
     AccountAggregation.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "accountId"))
     AccountAggregation.add_member(:severity_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityCounts, name: "severityCounts"))
     AccountAggregation.type = Types::AccountAggregation
-    AccountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member")
+    AccountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
     AdditionalInstanceConfiguration.add_member(:systems_manager_agent, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemsManagerAgent, name: "systemsManagerAgent"))
     AdditionalInstanceConfiguration.add_member(:user_data_override, ::Smithy::Schema::Shapes::MemberShape.new(target: UserDataOverride, name: "userDataOverride"))
     AdditionalInstanceConfiguration.type = Types::AdditionalInstanceConfiguration
@@ -494,7 +494,7 @@ module Aws::Imagebuilder
     AmiDistributionConfiguration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "kmsKeyId"))
     AmiDistributionConfiguration.add_member(:launch_permission, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchPermissionConfiguration, name: "launchPermission"))
     AmiDistributionConfiguration.type = Types::AmiDistributionConfiguration
-    AmiList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ami, name: "member")
+    AmiList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ami, name: "member"))
     AutoDisablePolicy.add_member(:failure_count, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoDisableFailureCount, name: "failureCount", traits: {"smithy.api#required" => {}}))
     AutoDisablePolicy.type = Types::AutoDisablePolicy
     BuildType.add_member(:user_initiated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER_INITIATED", traits: {"smithy.api#enumValue" => "USER_INITIATED"}))
@@ -540,7 +540,7 @@ module Aws::Imagebuilder
     ComponentConfiguration.add_member(:component_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentVersionArnOrBuildVersionArn, name: "componentArn", traits: {"smithy.api#required" => {}}))
     ComponentConfiguration.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentParameterList, name: "parameters"))
     ComponentConfiguration.type = Types::ComponentConfiguration
-    ComponentConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentConfiguration, name: "member")
+    ComponentConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentConfiguration, name: "member"))
     ComponentFormat.add_member(:shell, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHELL", traits: {"smithy.api#enumValue" => "SHELL"}))
     ComponentParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentParameterName, name: "name", traits: {"smithy.api#required" => {}}))
     ComponentParameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentParameterValueList, name: "value", traits: {"smithy.api#required" => {}}))
@@ -550,9 +550,9 @@ module Aws::Imagebuilder
     ComponentParameterDetail.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentParameterValueList, name: "defaultValue"))
     ComponentParameterDetail.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentParameterDescription, name: "description"))
     ComponentParameterDetail.type = Types::ComponentParameterDetail
-    ComponentParameterDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentParameterDetail, name: "member")
-    ComponentParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentParameter, name: "member")
-    ComponentParameterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentParameterValue, name: "member")
+    ComponentParameterDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentParameterDetail, name: "member"))
+    ComponentParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentParameter, name: "member"))
+    ComponentParameterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentParameterValue, name: "member"))
     ComponentState.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentStatus, name: "status"))
     ComponentState.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "reason"))
     ComponentState.type = Types::ComponentState
@@ -574,7 +574,7 @@ module Aws::Imagebuilder
     ComponentSummary.add_member(:publisher, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "publisher"))
     ComponentSummary.add_member(:obfuscate, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "obfuscate", traits: {"smithy.api#default" => false}))
     ComponentSummary.type = Types::ComponentSummary
-    ComponentSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentSummary, name: "member")
+    ComponentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentSummary, name: "member"))
     ComponentType.add_member(:build, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUILD", traits: {"smithy.api#enumValue" => "BUILD"}))
     ComponentType.add_member(:test, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEST", traits: {"smithy.api#enumValue" => "TEST"}))
     ComponentVersion.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageBuilderArn, name: "arn"))
@@ -589,7 +589,7 @@ module Aws::Imagebuilder
     ComponentVersion.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentStatus, name: "status"))
     ComponentVersion.add_member(:product_codes, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCodeList, name: "productCodes"))
     ComponentVersion.type = Types::ComponentVersion
-    ComponentVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentVersion, name: "member")
+    ComponentVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentVersion, name: "member"))
     Container.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "region"))
     Container.add_member(:image_uris, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "imageUris"))
     Container.type = Types::Container
@@ -597,7 +597,7 @@ module Aws::Imagebuilder
     ContainerDistributionConfiguration.add_member(:container_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "containerTags"))
     ContainerDistributionConfiguration.add_member(:target_repository, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetContainerRepository, name: "targetRepository", traits: {"smithy.api#required" => {}}))
     ContainerDistributionConfiguration.type = Types::ContainerDistributionConfiguration
-    ContainerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Container, name: "member")
+    ContainerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Container, name: "member"))
     ContainerRecipe.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageBuilderArn, name: "arn"))
     ContainerRecipe.add_member(:container_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerType, name: "containerType"))
     ContainerRecipe.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name"))
@@ -626,7 +626,7 @@ module Aws::Imagebuilder
     ContainerRecipeSummary.add_member(:instance_image, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "instanceImage"))
     ContainerRecipeSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     ContainerRecipeSummary.type = Types::ContainerRecipeSummary
-    ContainerRecipeSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerRecipeSummary, name: "member")
+    ContainerRecipeSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerRecipeSummary, name: "member"))
     ContainerRepositoryService.add_member(:ecr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ECR", traits: {"smithy.api#enumValue" => "ECR"}))
     ContainerType.add_member(:docker, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOCKER", traits: {"smithy.api#enumValue" => "DOCKER"}))
     CreateComponentRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -785,7 +785,7 @@ module Aws::Imagebuilder
     CvssScoreAdjustment.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "metric"))
     CvssScoreAdjustment.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "reason"))
     CvssScoreAdjustment.type = Types::CvssScoreAdjustment
-    CvssScoreAdjustmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CvssScoreAdjustment, name: "member")
+    CvssScoreAdjustmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CvssScoreAdjustment, name: "member"))
     CvssScoreDetails.add_member(:score_source, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "scoreSource"))
     CvssScoreDetails.add_member(:cvss_source, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "cvssSource"))
     CvssScoreDetails.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "version"))
@@ -793,7 +793,7 @@ module Aws::Imagebuilder
     CvssScoreDetails.add_member(:scoring_vector, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "scoringVector"))
     CvssScoreDetails.add_member(:adjustments, ::Smithy::Schema::Shapes::MemberShape.new(target: CvssScoreAdjustmentList, name: "adjustments"))
     CvssScoreDetails.type = Types::CvssScoreDetails
-    CvssScoreList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CvssScore, name: "member")
+    CvssScoreList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CvssScore, name: "member"))
     DeleteComponentRequest.add_member(:component_build_version_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentBuildVersionArn, name: "componentBuildVersionArn", traits: {"smithy.api#httpQuery" => "componentBuildVersionArn", "smithy.api#required" => {}}))
     DeleteComponentRequest.type = Types::DeleteComponentRequest
     DeleteComponentResponse.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "requestId"))
@@ -866,8 +866,8 @@ module Aws::Imagebuilder
     DistributionConfigurationSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     DistributionConfigurationSummary.add_member(:regions, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionList, name: "regions"))
     DistributionConfigurationSummary.type = Types::DistributionConfigurationSummary
-    DistributionConfigurationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DistributionConfigurationSummary, name: "member")
-    DistributionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Distribution, name: "member")
+    DistributionConfigurationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DistributionConfigurationSummary, name: "member"))
+    DistributionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Distribution, name: "member"))
     EbsInstanceBlockDeviceSpecification.add_member(:encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "encrypted"))
     EbsInstanceBlockDeviceSpecification.add_member(:delete_on_termination, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "deleteOnTermination"))
     EbsInstanceBlockDeviceSpecification.add_member(:iops, ::Smithy::Schema::Shapes::MemberShape.new(target: EbsIopsInteger, name: "iops"))
@@ -893,7 +893,7 @@ module Aws::Imagebuilder
     FastLaunchConfiguration.add_member(:launch_template, ::Smithy::Schema::Shapes::MemberShape.new(target: FastLaunchLaunchTemplateSpecification, name: "launchTemplate"))
     FastLaunchConfiguration.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId"))
     FastLaunchConfiguration.type = Types::FastLaunchConfiguration
-    FastLaunchConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FastLaunchConfiguration, name: "member")
+    FastLaunchConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FastLaunchConfiguration, name: "member"))
     FastLaunchLaunchTemplateSpecification.add_member(:launch_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplateId, name: "launchTemplateId"))
     FastLaunchLaunchTemplateSpecification.add_member(:launch_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "launchTemplateName"))
     FastLaunchLaunchTemplateSpecification.add_member(:launch_template_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "launchTemplateVersion"))
@@ -903,8 +903,8 @@ module Aws::Imagebuilder
     Filter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, name: "name"))
     Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, name: "values"))
     Filter.type = Types::Filter
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
-    FilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member")
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
+    FilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member"))
     ForbiddenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ForbiddenException.type = Types::ForbiddenException
     GetComponentPolicyRequest.add_member(:component_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentBuildVersionArn, name: "componentArn", traits: {"smithy.api#httpQuery" => "componentArn", "smithy.api#required" => {}}))
@@ -1057,7 +1057,7 @@ module Aws::Imagebuilder
     ImagePackage.add_member(:package_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "packageName"))
     ImagePackage.add_member(:package_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "packageVersion"))
     ImagePackage.type = Types::ImagePackage
-    ImagePackageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImagePackage, name: "member")
+    ImagePackageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImagePackage, name: "member"))
     ImagePipeline.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageBuilderArn, name: "arn"))
     ImagePipeline.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name"))
     ImagePipeline.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "description"))
@@ -1085,7 +1085,7 @@ module Aws::Imagebuilder
     ImagePipelineAggregation.add_member(:image_pipeline_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ImagePipelineArn, name: "imagePipelineArn"))
     ImagePipelineAggregation.add_member(:severity_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityCounts, name: "severityCounts"))
     ImagePipelineAggregation.type = Types::ImagePipelineAggregation
-    ImagePipelineList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImagePipeline, name: "member")
+    ImagePipelineList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImagePipeline, name: "member"))
     ImageRecipe.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageBuilderArn, name: "arn"))
     ImageRecipe.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageType, name: "type"))
     ImageRecipe.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name"))
@@ -1110,7 +1110,7 @@ module Aws::Imagebuilder
     ImageRecipeSummary.add_member(:date_created, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "dateCreated"))
     ImageRecipeSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     ImageRecipeSummary.type = Types::ImageRecipeSummary
-    ImageRecipeSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageRecipeSummary, name: "member")
+    ImageRecipeSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageRecipeSummary, name: "member"))
     ImageScanFinding.add_member(:aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "awsAccountId"))
     ImageScanFinding.add_member(:image_build_version_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageBuildVersionArn, name: "imageBuildVersionArn"))
     ImageScanFinding.add_member(:image_pipeline_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ImagePipelineArn, name: "imagePipelineArn"))
@@ -1131,13 +1131,13 @@ module Aws::Imagebuilder
     ImageScanFindingAggregation.add_member(:image_pipeline_aggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: ImagePipelineAggregation, name: "imagePipelineAggregation"))
     ImageScanFindingAggregation.add_member(:vulnerability_id_aggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: VulnerabilityIdAggregation, name: "vulnerabilityIdAggregation"))
     ImageScanFindingAggregation.type = Types::ImageScanFindingAggregation
-    ImageScanFindingAggregationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageScanFindingAggregation, name: "member")
+    ImageScanFindingAggregationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageScanFindingAggregation, name: "member"))
     ImageScanFindingsFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, name: "name"))
     ImageScanFindingsFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageScanFindingsFilterValues, name: "values"))
     ImageScanFindingsFilter.type = Types::ImageScanFindingsFilter
-    ImageScanFindingsFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageScanFindingsFilter, name: "member")
-    ImageScanFindingsFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member")
-    ImageScanFindingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageScanFinding, name: "member")
+    ImageScanFindingsFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageScanFindingsFilter, name: "member"))
+    ImageScanFindingsFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member"))
+    ImageScanFindingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageScanFinding, name: "member"))
     ImageScanState.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageScanStatus, name: "status"))
     ImageScanState.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "reason"))
     ImageScanState.type = Types::ImageScanState
@@ -1187,7 +1187,7 @@ module Aws::Imagebuilder
     ImageSummary.add_member(:lifecycle_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleExecutionId, name: "lifecycleExecutionId"))
     ImageSummary.add_member(:logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageLoggingConfiguration, name: "loggingConfiguration"))
     ImageSummary.type = Types::ImageSummary
-    ImageSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSummary, name: "member")
+    ImageSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSummary, name: "member"))
     ImageTestsConfiguration.add_member(:image_tests_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "imageTestsEnabled"))
     ImageTestsConfiguration.add_member(:timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTestsTimeoutMinutes, name: "timeoutMinutes"))
     ImageTestsConfiguration.type = Types::ImageTestsConfiguration
@@ -1204,7 +1204,7 @@ module Aws::Imagebuilder
     ImageVersion.add_member(:build_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BuildType, name: "buildType"))
     ImageVersion.add_member(:image_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSource, name: "imageSource"))
     ImageVersion.type = Types::ImageVersion
-    ImageVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageVersion, name: "member")
+    ImageVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageVersion, name: "member"))
     ImportComponentRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name", traits: {"smithy.api#required" => {}}))
     ImportComponentRequest.add_member(:semantic_version, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionNumber, name: "semanticVersion", traits: {"smithy.api#required" => {}}))
     ImportComponentRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "description"))
@@ -1280,7 +1280,7 @@ module Aws::Imagebuilder
     InfrastructureConfigurationSummary.add_member(:instance_profile_name, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceProfileNameType, name: "instanceProfileName"))
     InfrastructureConfigurationSummary.add_member(:placement, ::Smithy::Schema::Shapes::MemberShape.new(target: Placement, name: "placement"))
     InfrastructureConfigurationSummary.type = Types::InfrastructureConfigurationSummary
-    InfrastructureConfigurationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InfrastructureConfigurationSummary, name: "member")
+    InfrastructureConfigurationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InfrastructureConfigurationSummary, name: "member"))
     InspectorScoreDetails.add_member(:adjusted_cvss, ::Smithy::Schema::Shapes::MemberShape.new(target: CvssScoreDetails, name: "adjustedCvss"))
     InspectorScoreDetails.type = Types::InspectorScoreDetails
     InstanceBlockDeviceMapping.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "deviceName"))
@@ -1288,14 +1288,14 @@ module Aws::Imagebuilder
     InstanceBlockDeviceMapping.add_member(:virtual_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "virtualName"))
     InstanceBlockDeviceMapping.add_member(:no_device, ::Smithy::Schema::Shapes::MemberShape.new(target: EmptyString, name: "noDevice"))
     InstanceBlockDeviceMapping.type = Types::InstanceBlockDeviceMapping
-    InstanceBlockDeviceMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceBlockDeviceMapping, name: "member")
+    InstanceBlockDeviceMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceBlockDeviceMapping, name: "member"))
     InstanceConfiguration.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "image"))
     InstanceConfiguration.add_member(:block_device_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceBlockDeviceMappings, name: "blockDeviceMappings"))
     InstanceConfiguration.type = Types::InstanceConfiguration
     InstanceMetadataOptions.add_member(:http_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpTokens, name: "httpTokens"))
     InstanceMetadataOptions.add_member(:http_put_response_hop_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpPutResponseHopLimit, name: "httpPutResponseHopLimit"))
     InstanceMetadataOptions.type = Types::InstanceMetadataOptions
-    InstanceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceType, name: "member")
+    InstanceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceType, name: "member"))
     InvalidPaginationTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InvalidPaginationTokenException.type = Types::InvalidPaginationTokenException
     InvalidParameterCombinationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
@@ -1317,8 +1317,8 @@ module Aws::Imagebuilder
     LaunchTemplateConfiguration.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId"))
     LaunchTemplateConfiguration.add_member(:set_default_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "setDefaultVersion", traits: {"smithy.api#default" => false}))
     LaunchTemplateConfiguration.type = Types::LaunchTemplateConfiguration
-    LaunchTemplateConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplateConfiguration, name: "member")
-    LicenseConfigurationArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfigurationArn, name: "member")
+    LaunchTemplateConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplateConfiguration, name: "member"))
+    LicenseConfigurationArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfigurationArn, name: "member"))
     LifecycleExecution.add_member(:lifecycle_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleExecutionId, name: "lifecycleExecutionId"))
     LifecycleExecution.add_member(:lifecycle_policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyArn, name: "lifecyclePolicyArn"))
     LifecycleExecution.add_member(:resources_impacted_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleExecutionResourcesImpactedSummary, name: "resourcesImpactedSummary"))
@@ -1343,7 +1343,7 @@ module Aws::Imagebuilder
     LifecycleExecutionResourceActionName.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE", traits: {"smithy.api#enumValue" => "DELETE"}))
     LifecycleExecutionResourceActionName.add_member(:deprecate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPRECATE", traits: {"smithy.api#enumValue" => "DEPRECATE"}))
     LifecycleExecutionResourceActionName.add_member(:disable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLE", traits: {"smithy.api#enumValue" => "DISABLE"}))
-    LifecycleExecutionResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleExecutionResource, name: "member")
+    LifecycleExecutionResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleExecutionResource, name: "member"))
     LifecycleExecutionResourceState.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleExecutionResourceStatus, name: "status"))
     LifecycleExecutionResourceState.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "reason"))
     LifecycleExecutionResourceState.type = Types::LifecycleExecutionResourceState
@@ -1356,7 +1356,7 @@ module Aws::Imagebuilder
     LifecycleExecutionSnapshotResource.add_member(:snapshot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "snapshotId"))
     LifecycleExecutionSnapshotResource.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleExecutionResourceState, name: "state"))
     LifecycleExecutionSnapshotResource.type = Types::LifecycleExecutionSnapshotResource
-    LifecycleExecutionSnapshotResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleExecutionSnapshotResource, name: "member")
+    LifecycleExecutionSnapshotResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleExecutionSnapshotResource, name: "member"))
     LifecycleExecutionState.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleExecutionStatus, name: "status"))
     LifecycleExecutionState.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "reason"))
     LifecycleExecutionState.type = Types::LifecycleExecutionState
@@ -1366,7 +1366,7 @@ module Aws::Imagebuilder
     LifecycleExecutionStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     LifecycleExecutionStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
     LifecycleExecutionStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
-    LifecycleExecutionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleExecution, name: "member")
+    LifecycleExecutionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleExecution, name: "member"))
     LifecyclePolicy.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyArn, name: "arn"))
     LifecyclePolicy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name"))
     LifecyclePolicy.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "description"))
@@ -1413,14 +1413,14 @@ module Aws::Imagebuilder
     LifecyclePolicyDetailFilter.type = Types::LifecyclePolicyDetailFilter
     LifecyclePolicyDetailFilterType.add_member(:age, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGE", traits: {"smithy.api#enumValue" => "AGE"}))
     LifecyclePolicyDetailFilterType.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COUNT", traits: {"smithy.api#enumValue" => "COUNT"}))
-    LifecyclePolicyDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyDetail, name: "member")
+    LifecyclePolicyDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyDetail, name: "member"))
     LifecyclePolicyResourceSelection.add_member(:recipes, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyResourceSelectionRecipes, name: "recipes"))
     LifecyclePolicyResourceSelection.add_member(:tag_map, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tagMap"))
     LifecyclePolicyResourceSelection.type = Types::LifecyclePolicyResourceSelection
     LifecyclePolicyResourceSelectionRecipe.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name", traits: {"smithy.api#required" => {}}))
     LifecyclePolicyResourceSelectionRecipe.add_member(:semantic_version, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionNumber, name: "semanticVersion", traits: {"smithy.api#required" => {}}))
     LifecyclePolicyResourceSelectionRecipe.type = Types::LifecyclePolicyResourceSelectionRecipe
-    LifecyclePolicyResourceSelectionRecipes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyResourceSelectionRecipe, name: "member")
+    LifecyclePolicyResourceSelectionRecipes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyResourceSelectionRecipe, name: "member"))
     LifecyclePolicyResourceType.add_member(:ami_image, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMI_IMAGE", traits: {"smithy.api#enumValue" => "AMI_IMAGE"}))
     LifecyclePolicyResourceType.add_member(:container_image, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINER_IMAGE", traits: {"smithy.api#enumValue" => "CONTAINER_IMAGE"}))
     LifecyclePolicyStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
@@ -1436,7 +1436,7 @@ module Aws::Imagebuilder
     LifecyclePolicySummary.add_member(:date_last_run, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeTimestamp, name: "dateLastRun"))
     LifecyclePolicySummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     LifecyclePolicySummary.type = Types::LifecyclePolicySummary
-    LifecyclePolicySummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicySummary, name: "member")
+    LifecyclePolicySummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicySummary, name: "member"))
     LifecyclePolicyTimeUnit.add_member(:days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DAYS", traits: {"smithy.api#enumValue" => "DAYS"}))
     LifecyclePolicyTimeUnit.add_member(:weeks, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEEKS", traits: {"smithy.api#enumValue" => "WEEKS"}))
     LifecyclePolicyTimeUnit.add_member(:months, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MONTHS", traits: {"smithy.api#enumValue" => "MONTHS"}))
@@ -1630,12 +1630,12 @@ module Aws::Imagebuilder
     Logging.type = Types::Logging
     MarketplaceResourceType.add_member(:component_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPONENT_DATA", traits: {"smithy.api#enumValue" => "COMPONENT_DATA"}))
     MarketplaceResourceType.add_member(:component_artifact, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPONENT_ARTIFACT", traits: {"smithy.api#enumValue" => "COMPONENT_ARTIFACT"}))
-    NonEmptyStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    NonEmptyStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     OnWorkflowFailure.add_member(:continue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTINUE", traits: {"smithy.api#enumValue" => "CONTINUE"}))
     OnWorkflowFailure.add_member(:abort, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ABORT", traits: {"smithy.api#enumValue" => "ABORT"}))
-    OrganizationArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationArn, name: "member")
-    OrganizationalUnitArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitArn, name: "member")
-    OsVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OsVersion, name: "member")
+    OrganizationArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationArn, name: "member"))
+    OrganizationalUnitArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitArn, name: "member"))
+    OsVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OsVersion, name: "member"))
     OutputResources.add_member(:amis, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiList, name: "amis"))
     OutputResources.add_member(:containers, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerList, name: "containers"))
     OutputResources.type = Types::OutputResources
@@ -1670,7 +1670,7 @@ module Aws::Imagebuilder
     Platform.add_member(:windows, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WINDOWS", traits: {"smithy.api#enumValue" => "Windows"}))
     Platform.add_member(:linux, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINUX", traits: {"smithy.api#enumValue" => "Linux"}))
     Platform.add_member(:macos, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MACOS", traits: {"smithy.api#enumValue" => "macOS"}))
-    ProductCodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCodeListItem, name: "member")
+    ProductCodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCodeListItem, name: "member"))
     ProductCodeListItem.add_member(:product_code_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCodeId, name: "productCodeId", traits: {"smithy.api#required" => {}}))
     ProductCodeListItem.add_member(:product_code_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCodeType, name: "productCodeType", traits: {"smithy.api#required" => {}}))
     ProductCodeListItem.type = Types::ProductCodeListItem
@@ -1699,7 +1699,7 @@ module Aws::Imagebuilder
     PutImageRecipePolicyResponse.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "requestId"))
     PutImageRecipePolicyResponse.add_member(:image_recipe_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageRecipeArn, name: "imageRecipeArn"))
     PutImageRecipePolicyResponse.type = Types::PutImageRecipePolicyResponse
-    RegionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    RegionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     Remediation.add_member(:recommendation, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationRecommendation, name: "recommendation"))
     Remediation.type = Types::Remediation
     RemediationRecommendation.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "text"))
@@ -1725,8 +1725,8 @@ module Aws::Imagebuilder
     ResourceStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
     ResourceStatus.add_member(:deprecated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPRECATED", traits: {"smithy.api#enumValue" => "DEPRECATED"}))
     ResourceStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    ResourceTagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    ResourceTagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    ResourceTagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    ResourceTagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     S3ExportConfiguration.add_member(:role_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "roleName", traits: {"smithy.api#required" => {}}))
     S3ExportConfiguration.add_member(:disk_image_format, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskImageFormat, name: "diskImageFormat", traits: {"smithy.api#required" => {}}))
     S3ExportConfiguration.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "s3Bucket", traits: {"smithy.api#required" => {}}))
@@ -1740,7 +1740,7 @@ module Aws::Imagebuilder
     Schedule.add_member(:pipeline_execution_start_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineExecutionStartCondition, name: "pipelineExecutionStartCondition"))
     Schedule.add_member(:auto_disable_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoDisablePolicy, name: "autoDisablePolicy"))
     Schedule.type = Types::Schedule
-    SecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    SecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     SendWorkflowStepActionRequest.add_member(:step_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStepExecutionId, name: "stepExecutionId", traits: {"smithy.api#required" => {}}))
     SendWorkflowStepActionRequest.add_member(:image_build_version_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageBuildVersionArn, name: "imageBuildVersionArn", traits: {"smithy.api#required" => {}}))
     SendWorkflowStepActionRequest.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStepActionType, name: "action", traits: {"smithy.api#required" => {}}))
@@ -1766,7 +1766,7 @@ module Aws::Imagebuilder
     SsmParameterConfiguration.add_member(:parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmParameterName, name: "parameterName", traits: {"smithy.api#required" => {}}))
     SsmParameterConfiguration.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmParameterDataType, name: "dataType"))
     SsmParameterConfiguration.type = Types::SsmParameterConfiguration
-    SsmParameterConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SsmParameterConfiguration, name: "member")
+    SsmParameterConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SsmParameterConfiguration, name: "member"))
     SsmParameterDataType.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXT", traits: {"smithy.api#enumValue" => "text"}))
     SsmParameterDataType.add_member(:aws_ec2_image, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_EC2_IMAGE", traits: {"smithy.api#enumValue" => "aws:ec2:image"}))
     StartImagePipelineExecutionRequest.add_member(:image_pipeline_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ImagePipelineArn, name: "imagePipelineArn", traits: {"smithy.api#required" => {}}))
@@ -1788,12 +1788,12 @@ module Aws::Imagebuilder
     StartResourceStateUpdateResponse.add_member(:lifecycle_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleExecutionId, name: "lifecycleExecutionId"))
     StartResourceStateUpdateResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageBuildVersionArn, name: "resourceArn"))
     StartResourceStateUpdateResponse.type = Types::StartResourceStateUpdateResponse
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     SystemsManagerAgent.add_member(:uninstall_after_build, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "uninstallAfterBuild"))
     SystemsManagerAgent.type = Types::SystemsManagerAgent
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageBuilderArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -1870,7 +1870,7 @@ module Aws::Imagebuilder
     VulnerabilityIdAggregation.add_member(:vulnerability_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "vulnerabilityId"))
     VulnerabilityIdAggregation.add_member(:severity_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityCounts, name: "severityCounts"))
     VulnerabilityIdAggregation.type = Types::VulnerabilityIdAggregation
-    VulnerabilityIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VulnerabilityId, name: "member")
+    VulnerabilityIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VulnerabilityId, name: "member"))
     VulnerablePackage.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "name"))
     VulnerablePackage.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "version"))
     VulnerablePackage.add_member(:source_layer_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceLayerHash, name: "sourceLayerHash"))
@@ -1882,7 +1882,7 @@ module Aws::Imagebuilder
     VulnerablePackage.add_member(:fixed_in_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "fixedInVersion"))
     VulnerablePackage.add_member(:remediation, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "remediation"))
     VulnerablePackage.type = Types::VulnerablePackage
-    VulnerablePackageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VulnerablePackage, name: "member")
+    VulnerablePackageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VulnerablePackage, name: "member"))
     Workflow.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowBuildVersionArn, name: "arn"))
     Workflow.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name"))
     Workflow.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionNumber, name: "version"))
@@ -1902,7 +1902,7 @@ module Aws::Imagebuilder
     WorkflowConfiguration.add_member(:parallel_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelGroup, name: "parallelGroup"))
     WorkflowConfiguration.add_member(:on_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: OnWorkflowFailure, name: "onFailure"))
     WorkflowConfiguration.type = Types::WorkflowConfiguration
-    WorkflowConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowConfiguration, name: "member")
+    WorkflowConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowConfiguration, name: "member"))
     WorkflowExecutionMetadata.add_member(:workflow_build_version_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowBuildVersionArn, name: "workflowBuildVersionArn"))
     WorkflowExecutionMetadata.add_member(:workflow_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowExecutionId, name: "workflowExecutionId"))
     WorkflowExecutionMetadata.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowType, name: "type"))
@@ -1924,7 +1924,7 @@ module Aws::Imagebuilder
     WorkflowExecutionStatus.add_member(:rollback_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLBACK_IN_PROGRESS", traits: {"smithy.api#enumValue" => "ROLLBACK_IN_PROGRESS"}))
     WorkflowExecutionStatus.add_member(:rollback_completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLBACK_COMPLETED", traits: {"smithy.api#enumValue" => "ROLLBACK_COMPLETED"}))
     WorkflowExecutionStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
-    WorkflowExecutionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowExecutionMetadata, name: "member")
+    WorkflowExecutionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowExecutionMetadata, name: "member"))
     WorkflowParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameterName, name: "name", traits: {"smithy.api#required" => {}}))
     WorkflowParameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameterValueList, name: "value", traits: {"smithy.api#required" => {}}))
     WorkflowParameter.type = Types::WorkflowParameter
@@ -1933,9 +1933,9 @@ module Aws::Imagebuilder
     WorkflowParameterDetail.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameterValueList, name: "defaultValue"))
     WorkflowParameterDetail.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameterDescription, name: "description"))
     WorkflowParameterDetail.type = Types::WorkflowParameterDetail
-    WorkflowParameterDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameterDetail, name: "member")
-    WorkflowParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameter, name: "member")
-    WorkflowParameterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameterValue, name: "member")
+    WorkflowParameterDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameterDetail, name: "member"))
+    WorkflowParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameter, name: "member"))
+    WorkflowParameterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameterValue, name: "member"))
     WorkflowState.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStatus, name: "status"))
     WorkflowState.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "reason"))
     WorkflowState.type = Types::WorkflowState
@@ -1950,7 +1950,7 @@ module Aws::Imagebuilder
     WorkflowStepExecution.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStepAction, name: "action"))
     WorkflowStepExecution.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "startTime"))
     WorkflowStepExecution.type = Types::WorkflowStepExecution
-    WorkflowStepExecutionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStepExecution, name: "member")
+    WorkflowStepExecutionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStepExecution, name: "member"))
     WorkflowStepExecutionRollbackStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     WorkflowStepExecutionRollbackStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     WorkflowStepExecutionRollbackStatus.add_member(:skipped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SKIPPED", traits: {"smithy.api#enumValue" => "SKIPPED"}))
@@ -1961,7 +1961,7 @@ module Aws::Imagebuilder
     WorkflowStepExecutionStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     WorkflowStepExecutionStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     WorkflowStepExecutionStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
-    WorkflowStepExecutionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStepMetadata, name: "member")
+    WorkflowStepExecutionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStepMetadata, name: "member"))
     WorkflowStepMetadata.add_member(:step_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStepExecutionId, name: "stepExecutionId"))
     WorkflowStepMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStepName, name: "name"))
     WorkflowStepMetadata.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowStepDescription, name: "description"))
@@ -1985,7 +1985,7 @@ module Aws::Imagebuilder
     WorkflowSummary.add_member(:date_created, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "dateCreated"))
     WorkflowSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     WorkflowSummary.type = Types::WorkflowSummary
-    WorkflowSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowSummary, name: "member")
+    WorkflowSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowSummary, name: "member"))
     WorkflowType.add_member(:build, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUILD", traits: {"smithy.api#enumValue" => "BUILD"}))
     WorkflowType.add_member(:test, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEST", traits: {"smithy.api#enumValue" => "TEST"}))
     WorkflowType.add_member(:distribution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISTRIBUTION", traits: {"smithy.api#enumValue" => "DISTRIBUTION"}))
@@ -1997,7 +1997,7 @@ module Aws::Imagebuilder
     WorkflowVersion.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "owner"))
     WorkflowVersion.add_member(:date_created, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "dateCreated"))
     WorkflowVersion.type = Types::WorkflowVersion
-    WorkflowVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersion, name: "member")
+    WorkflowVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersion, name: "member"))
 
     Imagebuilder = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.imagebuilder#imagebuilder"

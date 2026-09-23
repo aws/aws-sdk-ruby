@@ -93,7 +93,7 @@ module Aws::ManagedBlockchainQuery
     AssetContract.add_member(:token_standard, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryTokenStandard, name: "tokenStandard", traits: {"smithy.api#required" => {}}))
     AssetContract.add_member(:deployer_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddress, name: "deployerAddress", traits: {"smithy.api#required" => {}}))
     AssetContract.type = Types::AssetContract
-    AssetContractList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetContract, name: "member")
+    AssetContractList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetContract, name: "member"))
     BatchGetTokenBalanceErrorItem.add_member(:token_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenIdentifier, name: "tokenIdentifier"))
     BatchGetTokenBalanceErrorItem.add_member(:owner_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerIdentifier, name: "ownerIdentifier"))
     BatchGetTokenBalanceErrorItem.add_member(:at_blockchain_instant, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainInstant, name: "atBlockchainInstant"))
@@ -101,7 +101,7 @@ module Aws::ManagedBlockchainQuery
     BatchGetTokenBalanceErrorItem.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorMessage", traits: {"smithy.api#required" => {}}))
     BatchGetTokenBalanceErrorItem.add_member(:error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorType, name: "errorType", traits: {"smithy.api#required" => {}}))
     BatchGetTokenBalanceErrorItem.type = Types::BatchGetTokenBalanceErrorItem
-    BatchGetTokenBalanceErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetTokenBalanceErrorItem, name: "member")
+    BatchGetTokenBalanceErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetTokenBalanceErrorItem, name: "member"))
     BatchGetTokenBalanceInput.add_member(:get_token_balance_inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: GetTokenBalanceInputList, name: "getTokenBalanceInputs"))
     BatchGetTokenBalanceInput.type = Types::BatchGetTokenBalanceInput
     BatchGetTokenBalanceInputItem.add_member(:token_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenIdentifier, name: "tokenIdentifier", traits: {"smithy.api#required" => {}}))
@@ -117,13 +117,13 @@ module Aws::ManagedBlockchainQuery
     BatchGetTokenBalanceOutputItem.add_member(:at_blockchain_instant, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainInstant, name: "atBlockchainInstant", traits: {"smithy.api#required" => {}}))
     BatchGetTokenBalanceOutputItem.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainInstant, name: "lastUpdatedTime"))
     BatchGetTokenBalanceOutputItem.type = Types::BatchGetTokenBalanceOutputItem
-    BatchGetTokenBalanceOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetTokenBalanceOutputItem, name: "member")
+    BatchGetTokenBalanceOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetTokenBalanceOutputItem, name: "member"))
     BlockchainInstant.add_member(:time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "time"))
     BlockchainInstant.type = Types::BlockchainInstant
-    ChainAddresses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddress, name: "member")
+    ChainAddresses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddress, name: "member"))
     ConfirmationStatusFilter.add_member(:include, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfirmationStatusIncludeList, name: "include", traits: {"smithy.api#required" => {}}))
     ConfirmationStatusFilter.type = Types::ConfirmationStatusFilter
-    ConfirmationStatusIncludeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfirmationStatus, name: "member")
+    ConfirmationStatusIncludeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfirmationStatus, name: "member"))
     ContractFilter.add_member(:network, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryNetwork, name: "network", traits: {"smithy.api#required" => {}}))
     ContractFilter.add_member(:token_standard, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryTokenStandard, name: "tokenStandard", traits: {"smithy.api#required" => {}}))
     ContractFilter.add_member(:deployer_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddress, name: "deployerAddress", traits: {"smithy.api#required" => {}}))
@@ -146,7 +146,7 @@ module Aws::ManagedBlockchainQuery
     GetTokenBalanceInput.add_member(:owner_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerIdentifier, name: "ownerIdentifier", traits: {"smithy.api#required" => {}}))
     GetTokenBalanceInput.add_member(:at_blockchain_instant, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainInstant, name: "atBlockchainInstant"))
     GetTokenBalanceInput.type = Types::GetTokenBalanceInput
-    GetTokenBalanceInputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetTokenBalanceInputItem, name: "member")
+    GetTokenBalanceInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetTokenBalanceInputItem, name: "member"))
     GetTokenBalanceOutput.add_member(:owner_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerIdentifier, name: "ownerIdentifier"))
     GetTokenBalanceOutput.add_member(:token_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenIdentifier, name: "tokenIdentifier"))
     GetTokenBalanceOutput.add_member(:balance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "balance", traits: {"smithy.api#required" => {}}))
@@ -244,7 +244,7 @@ module Aws::ManagedBlockchainQuery
     TokenBalance.add_member(:at_blockchain_instant, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainInstant, name: "atBlockchainInstant", traits: {"smithy.api#required" => {}}))
     TokenBalance.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainInstant, name: "lastUpdatedTime"))
     TokenBalance.type = Types::TokenBalance
-    TokenBalanceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TokenBalance, name: "member")
+    TokenBalanceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenBalance, name: "member"))
     TokenFilter.add_member(:network, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryNetwork, name: "network", traits: {"smithy.api#required" => {}}))
     TokenFilter.add_member(:contract_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ChainAddress, name: "contractAddress"))
     TokenFilter.add_member(:token_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryTokenId, name: "tokenId"))
@@ -291,14 +291,14 @@ module Aws::ManagedBlockchainQuery
     TransactionEvent.add_member(:blockchain_instant, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockchainInstant, name: "blockchainInstant"))
     TransactionEvent.add_member(:confirmation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfirmationStatus, name: "confirmationStatus"))
     TransactionEvent.type = Types::TransactionEvent
-    TransactionEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionEvent, name: "member")
+    TransactionEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionEvent, name: "member"))
     TransactionOutputItem.add_member(:transaction_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryTransactionHash, name: "transactionHash", traits: {"smithy.api#required" => {}}))
     TransactionOutputItem.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryTransactionId, name: "transactionId"))
     TransactionOutputItem.add_member(:network, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryNetwork, name: "network", traits: {"smithy.api#required" => {}}))
     TransactionOutputItem.add_member(:transaction_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "transactionTimestamp", traits: {"smithy.api#required" => {}}))
     TransactionOutputItem.add_member(:confirmation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfirmationStatus, name: "confirmationStatus"))
     TransactionOutputItem.type = Types::TransactionOutputItem
-    TransactionOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionOutputItem, name: "member")
+    TransactionOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionOutputItem, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, name: "reason", traits: {"smithy.api#required" => {}}))
     ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldList, name: "fieldList"))
@@ -306,7 +306,7 @@ module Aws::ManagedBlockchainQuery
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     VoutFilter.add_member(:vout_spent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "voutSpent", traits: {"smithy.api#required" => {}}))
     VoutFilter.type = Types::VoutFilter
 

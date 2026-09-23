@@ -379,8 +379,8 @@ module Aws::GeoRoutes
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    BeforeWaypointsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointIndex, name: "member")
-    BoundingBox.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member")
+    BeforeWaypointsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointIndex, name: "member"))
+    BoundingBox.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member"))
     CalculateIsolinesRequest.add_member(:allow, ::Smithy::Schema::Shapes::MemberShape.new(target: IsolineAllowOptions, name: "Allow"))
     CalculateIsolinesRequest.add_member(:arrival_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampWithTimezoneOffset, name: "ArrivalTime"))
     CalculateIsolinesRequest.add_member(:avoid, ::Smithy::Schema::Shapes::MemberShape.new(target: IsolineAvoidanceOptions, name: "Avoid"))
@@ -464,9 +464,9 @@ module Aws::GeoRoutes
     Corridor.add_member(:line_string, ::Smithy::Schema::Shapes::MemberShape.new(target: LineString, name: "LineString", traits: {"smithy.api#required" => {}}))
     Corridor.add_member(:radius, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "Radius", traits: {"smithy.api#required" => {}}))
     Corridor.type = Types::Corridor
-    CountryCodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode, name: "member")
-    DistanceThresholdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "member", traits: {"smithy.api#range" => {"min" => 0, "max" => 300000}})
-    IndexList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "member")
+    CountryCodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode, name: "member"))
+    DistanceThresholdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "member", traits: {"smithy.api#range" => {"min" => 0, "max" => 300000}}))
+    IndexList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
     Isoline.add_member(:connections, ::Smithy::Schema::Shapes::MemberShape.new(target: IsolineConnectionList, name: "Connections", traits: {"smithy.api#required" => {}}))
@@ -486,8 +486,8 @@ module Aws::GeoRoutes
     IsolineAvoidanceAreaGeometry.add_member(:polyline_corridor, ::Smithy::Schema::Shapes::MemberShape.new(target: PolylineCorridor, name: "PolylineCorridor"))
     IsolineAvoidanceAreaGeometry.add_member(:polyline_polygon, ::Smithy::Schema::Shapes::MemberShape.new(target: PolylineRingList, name: "PolylinePolygon", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}}))
     IsolineAvoidanceAreaGeometry.type = Types::IsolineAvoidanceAreaGeometry
-    IsolineAvoidanceAreaGeometryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IsolineAvoidanceAreaGeometry, name: "member")
-    IsolineAvoidanceAreaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IsolineAvoidanceArea, name: "member")
+    IsolineAvoidanceAreaGeometryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IsolineAvoidanceAreaGeometry, name: "member"))
+    IsolineAvoidanceAreaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IsolineAvoidanceArea, name: "member"))
     IsolineAvoidanceOptions.add_member(:areas, ::Smithy::Schema::Shapes::MemberShape.new(target: IsolineAvoidanceAreaList, name: "Areas"))
     IsolineAvoidanceOptions.add_member(:car_shuttle_trains, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "CarShuttleTrains"))
     IsolineAvoidanceOptions.add_member(:controlled_access_highways, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "ControlledAccessHighways"))
@@ -503,7 +503,7 @@ module Aws::GeoRoutes
     IsolineAvoidanceOptions.type = Types::IsolineAvoidanceOptions
     IsolineAvoidanceZoneCategory.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: IsolineZoneCategory, name: "Category"))
     IsolineAvoidanceZoneCategory.type = Types::IsolineAvoidanceZoneCategory
-    IsolineAvoidanceZoneCategoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IsolineAvoidanceZoneCategory, name: "member")
+    IsolineAvoidanceZoneCategoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IsolineAvoidanceZoneCategory, name: "member"))
     IsolineCarOptions.add_member(:engine_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IsolineEngineType, name: "EngineType"))
     IsolineCarOptions.add_member(:license_plate, ::Smithy::Schema::Shapes::MemberShape.new(target: IsolineVehicleLicensePlate, name: "LicensePlate"))
     IsolineCarOptions.add_member(:max_speed, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeedKilometersPerHour, name: "MaxSpeed", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 3.6, "max" => 252.0}}))
@@ -516,7 +516,7 @@ module Aws::GeoRoutes
     IsolineConnectionGeometry.add_member(:line_string, ::Smithy::Schema::Shapes::MemberShape.new(target: LineString, name: "LineString"))
     IsolineConnectionGeometry.add_member(:polyline, ::Smithy::Schema::Shapes::MemberShape.new(target: Polyline, name: "Polyline"))
     IsolineConnectionGeometry.type = Types::IsolineConnectionGeometry
-    IsolineConnectionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IsolineConnection, name: "member")
+    IsolineConnectionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IsolineConnection, name: "member"))
     IsolineDestinationOptions.add_member(:avoid_actions_for_distance, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "AvoidActionsForDistance", traits: {"smithy.api#default" => 0}))
     IsolineDestinationOptions.add_member(:heading, ::Smithy::Schema::Shapes::MemberShape.new(target: Heading, name: "Heading", traits: {"smithy.api#default" => 0}))
     IsolineDestinationOptions.add_member(:matching, ::Smithy::Schema::Shapes::MemberShape.new(target: IsolineMatchingOptions, name: "Matching"))
@@ -525,8 +525,8 @@ module Aws::GeoRoutes
     IsolineGranularityOptions.add_member(:max_points, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MaxPoints", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 31}}))
     IsolineGranularityOptions.add_member(:max_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "MaxResolution", traits: {"smithy.api#default" => 0}))
     IsolineGranularityOptions.type = Types::IsolineGranularityOptions
-    IsolineHazardousCargoTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IsolineHazardousCargoType, name: "member")
-    IsolineList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Isoline, name: "member")
+    IsolineHazardousCargoTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IsolineHazardousCargoType, name: "member"))
+    IsolineList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Isoline, name: "member"))
     IsolineMatchingOptions.add_member(:name_hint, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "NameHint"))
     IsolineMatchingOptions.add_member(:on_road_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "OnRoadThreshold", traits: {"smithy.api#default" => 0}))
     IsolineMatchingOptions.add_member(:radius, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "Radius", traits: {"smithy.api#default" => 0}))
@@ -545,7 +545,7 @@ module Aws::GeoRoutes
     IsolineShapeGeometry.add_member(:polygon, ::Smithy::Schema::Shapes::MemberShape.new(target: LinearRings, name: "Polygon"))
     IsolineShapeGeometry.add_member(:polyline_polygon, ::Smithy::Schema::Shapes::MemberShape.new(target: PolylineRingList, name: "PolylinePolygon"))
     IsolineShapeGeometry.type = Types::IsolineShapeGeometry
-    IsolineShapeGeometryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IsolineShapeGeometry, name: "member")
+    IsolineShapeGeometryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IsolineShapeGeometry, name: "member"))
     IsolineSideOfStreetOptions.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "Position", traits: {"smithy.api#required" => {}}))
     IsolineSideOfStreetOptions.add_member(:use_with, ::Smithy::Schema::Shapes::MemberShape.new(target: SideOfStreetMatchingStrategy, name: "UseWith"))
     IsolineSideOfStreetOptions.type = Types::IsolineSideOfStreetOptions
@@ -584,14 +584,14 @@ module Aws::GeoRoutes
     IsolineTruckOptions.type = Types::IsolineTruckOptions
     IsolineVehicleLicensePlate.add_member(:last_character, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "LastCharacter", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}}))
     IsolineVehicleLicensePlate.type = Types::IsolineVehicleLicensePlate
-    LanguageTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageTag, name: "member")
-    LineString.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "member")
-    LinearRing.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "member")
-    LinearRings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LinearRing, name: "member")
+    LanguageTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageTag, name: "member"))
+    LineString.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "member"))
+    LinearRing.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "member"))
+    LinearRings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LinearRing, name: "member"))
     LocalizedString.add_member(:language, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageTag, name: "Language"))
     LocalizedString.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Value", traits: {"smithy.api#required" => {}}))
     LocalizedString.type = Types::LocalizedString
-    LocalizedStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LocalizedString, name: "member")
+    LocalizedStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalizedString, name: "member"))
     OptimizeWaypointsRequest.add_member(:avoid, ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationAvoidanceOptions, name: "Avoid"))
     OptimizeWaypointsRequest.add_member(:clustering, ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationClusteringOptions, name: "Clustering"))
     OptimizeWaypointsRequest.add_member(:departure_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampWithTimezoneOffset, name: "DepartureTime"))
@@ -619,15 +619,15 @@ module Aws::GeoRoutes
     PolylineCorridor.add_member(:polyline, ::Smithy::Schema::Shapes::MemberShape.new(target: Polyline, name: "Polyline", traits: {"smithy.api#required" => {}}))
     PolylineCorridor.add_member(:radius, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "Radius", traits: {"smithy.api#required" => {}}))
     PolylineCorridor.type = Types::PolylineCorridor
-    PolylineRingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolylineRing, name: "member")
-    Position.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member")
-    Position23.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member")
-    RoadSnapHazardousCargoTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoadSnapHazardousCargoType, name: "member")
+    PolylineRingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolylineRing, name: "member"))
+    Position.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member"))
+    Position23.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member"))
+    RoadSnapHazardousCargoTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoadSnapHazardousCargoType, name: "member"))
     RoadSnapNotice.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: RoadSnapNoticeCode, name: "Code", traits: {"smithy.api#required" => {}}))
     RoadSnapNotice.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Title", traits: {"smithy.api#required" => {}}))
     RoadSnapNotice.add_member(:trace_point_indexes, ::Smithy::Schema::Shapes::MemberShape.new(target: RoadSnapTracePointIndexList, name: "TracePointIndexes", traits: {"smithy.api#required" => {}}))
     RoadSnapNotice.type = Types::RoadSnapNotice
-    RoadSnapNoticeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoadSnapNotice, name: "member")
+    RoadSnapNoticeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoadSnapNotice, name: "member"))
     RoadSnapSnappedGeometry.add_member(:line_string, ::Smithy::Schema::Shapes::MemberShape.new(target: LineString, name: "LineString"))
     RoadSnapSnappedGeometry.add_member(:polyline, ::Smithy::Schema::Shapes::MemberShape.new(target: Polyline, name: "Polyline"))
     RoadSnapSnappedGeometry.type = Types::RoadSnapSnappedGeometry
@@ -635,14 +635,14 @@ module Aws::GeoRoutes
     RoadSnapSnappedTracePoint.add_member(:original_position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "OriginalPosition", traits: {"smithy.api#required" => {}}))
     RoadSnapSnappedTracePoint.add_member(:snapped_position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "SnappedPosition", traits: {"smithy.api#required" => {}}))
     RoadSnapSnappedTracePoint.type = Types::RoadSnapSnappedTracePoint
-    RoadSnapSnappedTracePointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoadSnapSnappedTracePoint, name: "member")
+    RoadSnapSnappedTracePointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoadSnapSnappedTracePoint, name: "member"))
     RoadSnapTracePoint.add_member(:heading, ::Smithy::Schema::Shapes::MemberShape.new(target: Heading, name: "Heading", traits: {"smithy.api#default" => 0}))
     RoadSnapTracePoint.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "Position", traits: {"smithy.api#required" => {}}))
     RoadSnapTracePoint.add_member(:speed, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeedKilometersPerHour, name: "Speed", traits: {"smithy.api#default" => 0}))
     RoadSnapTracePoint.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampWithTimezoneOffset, name: "Timestamp"))
     RoadSnapTracePoint.type = Types::RoadSnapTracePoint
-    RoadSnapTracePointIndexList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "member")
-    RoadSnapTracePointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoadSnapTracePoint, name: "member")
+    RoadSnapTracePointIndexList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "member"))
+    RoadSnapTracePointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoadSnapTracePoint, name: "member"))
     RoadSnapTrailerOptions.add_member(:trailer_count, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveInteger, name: "TrailerCount", traits: {"smithy.api#range" => {"min" => 0, "max" => 255}}))
     RoadSnapTrailerOptions.type = Types::RoadSnapTrailerOptions
     RoadSnapTravelModeOptions.add_member(:truck, ::Smithy::Schema::Shapes::MemberShape.new(target: RoadSnapTruckOptions, name: "Truck"))
@@ -671,8 +671,8 @@ module Aws::GeoRoutes
     RouteAvoidanceAreaGeometry.add_member(:polyline_corridor, ::Smithy::Schema::Shapes::MemberShape.new(target: PolylineCorridor, name: "PolylineCorridor"))
     RouteAvoidanceAreaGeometry.add_member(:polyline_polygon, ::Smithy::Schema::Shapes::MemberShape.new(target: PolylineRingList, name: "PolylinePolygon", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}}))
     RouteAvoidanceAreaGeometry.type = Types::RouteAvoidanceAreaGeometry
-    RouteAvoidanceAreaGeometryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteAvoidanceAreaGeometry, name: "member")
-    RouteAvoidanceAreaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteAvoidanceArea, name: "member")
+    RouteAvoidanceAreaGeometryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteAvoidanceAreaGeometry, name: "member"))
+    RouteAvoidanceAreaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteAvoidanceArea, name: "member"))
     RouteAvoidanceOptions.add_member(:areas, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteAvoidanceAreaList, name: "Areas"))
     RouteAvoidanceOptions.add_member(:car_shuttle_trains, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "CarShuttleTrains"))
     RouteAvoidanceOptions.add_member(:controlled_access_highways, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "ControlledAccessHighways"))
@@ -688,7 +688,7 @@ module Aws::GeoRoutes
     RouteAvoidanceOptions.type = Types::RouteAvoidanceOptions
     RouteAvoidanceZoneCategory.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteZoneCategory, name: "Category", traits: {"smithy.api#required" => {}}))
     RouteAvoidanceZoneCategory.type = Types::RouteAvoidanceZoneCategory
-    RouteAvoidanceZoneCategoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteAvoidanceZoneCategory, name: "member")
+    RouteAvoidanceZoneCategoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteAvoidanceZoneCategory, name: "member"))
     RouteCarOptions.add_member(:engine_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteEngineType, name: "EngineType"))
     RouteCarOptions.add_member(:license_plate, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteVehicleLicensePlate, name: "LicensePlate"))
     RouteCarOptions.add_member(:max_speed, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeedKilometersPerHour, name: "MaxSpeed", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 3.6, "max" => 252.0}}))
@@ -713,7 +713,7 @@ module Aws::GeoRoutes
     RouteDriverScheduleInterval.add_member(:drive_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationSeconds, name: "DriveDuration", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     RouteDriverScheduleInterval.add_member(:rest_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationSeconds, name: "RestDuration", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     RouteDriverScheduleInterval.type = Types::RouteDriverScheduleInterval
-    RouteDriverScheduleIntervalList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteDriverScheduleInterval, name: "member")
+    RouteDriverScheduleIntervalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteDriverScheduleInterval, name: "member"))
     RouteEmissionType.add_member(:co2_emission_class, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Co2EmissionClass"))
     RouteEmissionType.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Type", traits: {"smithy.api#required" => {}}))
     RouteEmissionType.type = Types::RouteEmissionType
@@ -734,7 +734,7 @@ module Aws::GeoRoutes
     RouteFerryAfterTravelStep.add_member(:instruction, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Instruction"))
     RouteFerryAfterTravelStep.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFerryAfterTravelStepType, name: "Type", traits: {"smithy.api#required" => {}}))
     RouteFerryAfterTravelStep.type = Types::RouteFerryAfterTravelStep
-    RouteFerryAfterTravelStepList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFerryAfterTravelStep, name: "member")
+    RouteFerryAfterTravelStepList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFerryAfterTravelStep, name: "member"))
     RouteFerryArrival.add_member(:place, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFerryPlace, name: "Place", traits: {"smithy.api#required" => {}}))
     RouteFerryArrival.add_member(:time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampWithTimezoneOffset, name: "Time"))
     RouteFerryArrival.type = Types::RouteFerryArrival
@@ -742,7 +742,7 @@ module Aws::GeoRoutes
     RouteFerryBeforeTravelStep.add_member(:instruction, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Instruction"))
     RouteFerryBeforeTravelStep.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFerryBeforeTravelStepType, name: "Type", traits: {"smithy.api#required" => {}}))
     RouteFerryBeforeTravelStep.type = Types::RouteFerryBeforeTravelStep
-    RouteFerryBeforeTravelStepList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFerryBeforeTravelStep, name: "member")
+    RouteFerryBeforeTravelStepList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFerryBeforeTravelStep, name: "member"))
     RouteFerryDeparture.add_member(:place, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFerryPlace, name: "Place", traits: {"smithy.api#required" => {}}))
     RouteFerryDeparture.add_member(:time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampWithTimezoneOffset, name: "Time"))
     RouteFerryDeparture.type = Types::RouteFerryDeparture
@@ -760,7 +760,7 @@ module Aws::GeoRoutes
     RouteFerryNotice.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFerryNoticeCode, name: "Code", traits: {"smithy.api#required" => {}}))
     RouteFerryNotice.add_member(:impact, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteNoticeImpact, name: "Impact"))
     RouteFerryNotice.type = Types::RouteFerryNotice
-    RouteFerryNoticeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFerryNotice, name: "member")
+    RouteFerryNoticeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFerryNotice, name: "member"))
     RouteFerryOverviewSummary.add_member(:distance, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "Distance", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     RouteFerryOverviewSummary.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationSeconds, name: "Duration", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     RouteFerryOverviewSummary.type = Types::RouteFerryOverviewSummary
@@ -776,7 +776,7 @@ module Aws::GeoRoutes
     RouteFerrySpan.add_member(:names, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalizedStringList, name: "Names"))
     RouteFerrySpan.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Region", traits: {"smithy.api#length" => {"min" => 0, "max" => 3}}))
     RouteFerrySpan.type = Types::RouteFerrySpan
-    RouteFerrySpanList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFerrySpan, name: "member")
+    RouteFerrySpanList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFerrySpan, name: "member"))
     RouteFerrySummary.add_member(:overview, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFerryOverviewSummary, name: "Overview"))
     RouteFerrySummary.add_member(:travel_only, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFerryTravelOnlySummary, name: "TravelOnly"))
     RouteFerrySummary.type = Types::RouteFerrySummary
@@ -788,8 +788,8 @@ module Aws::GeoRoutes
     RouteFerryTravelStep.add_member(:instruction, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Instruction"))
     RouteFerryTravelStep.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFerryTravelStepType, name: "Type", traits: {"smithy.api#required" => {}}))
     RouteFerryTravelStep.type = Types::RouteFerryTravelStep
-    RouteFerryTravelStepList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFerryTravelStep, name: "member")
-    RouteHazardousCargoTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteHazardousCargoType, name: "member")
+    RouteFerryTravelStepList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFerryTravelStep, name: "member"))
+    RouteHazardousCargoTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteHazardousCargoType, name: "member"))
     RouteKeepStepDetails.add_member(:intersection, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalizedStringList, name: "Intersection", traits: {"smithy.api#required" => {}}))
     RouteKeepStepDetails.add_member(:steering_direction, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSteeringDirection, name: "SteeringDirection"))
     RouteKeepStepDetails.add_member(:turn_angle, ::Smithy::Schema::Shapes::MemberShape.new(target: TurnAngle, name: "TurnAngle", traits: {"smithy.api#default" => 0}))
@@ -803,22 +803,22 @@ module Aws::GeoRoutes
     RouteLeg.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteLegType, name: "Type", traits: {"smithy.api#required" => {}}))
     RouteLeg.add_member(:vehicle_leg_details, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteVehicleLegDetails, name: "VehicleLegDetails"))
     RouteLeg.type = Types::RouteLeg
-    RouteLegAdditionalFeatureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteLegAdditionalFeature, name: "member")
+    RouteLegAdditionalFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteLegAdditionalFeature, name: "member"))
     RouteLegGeometry.add_member(:line_string, ::Smithy::Schema::Shapes::MemberShape.new(target: LineString, name: "LineString"))
     RouteLegGeometry.add_member(:polyline, ::Smithy::Schema::Shapes::MemberShape.new(target: Polyline, name: "Polyline"))
     RouteLegGeometry.type = Types::RouteLegGeometry
-    RouteLegList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteLeg, name: "member")
-    RouteList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Route, name: "member")
+    RouteLegList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteLeg, name: "member"))
+    RouteList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Route, name: "member"))
     RouteMajorRoadLabel.add_member(:road_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalizedString, name: "RoadName"))
     RouteMajorRoadLabel.add_member(:route_number, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteNumber, name: "RouteNumber"))
     RouteMajorRoadLabel.type = Types::RouteMajorRoadLabel
-    RouteMajorRoadLabelList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMajorRoadLabel, name: "member")
+    RouteMajorRoadLabelList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMajorRoadLabel, name: "member"))
     RouteMatchingOptions.add_member(:name_hint, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "NameHint", traits: {"smithy.api#length" => {"max" => 100}}))
     RouteMatchingOptions.add_member(:on_road_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "OnRoadThreshold", traits: {"smithy.api#default" => 0}))
     RouteMatchingOptions.add_member(:radius, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "Radius", traits: {"smithy.api#default" => 0}))
     RouteMatchingOptions.add_member(:strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchingStrategy, name: "Strategy"))
     RouteMatchingOptions.type = Types::RouteMatchingOptions
-    RouteMatrix.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixRow, name: "member")
+    RouteMatrix.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixRow, name: "member"))
     RouteMatrixAllowOptions.add_member(:hot, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "Hot"))
     RouteMatrixAllowOptions.add_member(:hov, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "Hov"))
     RouteMatrixAllowOptions.type = Types::RouteMatrixAllowOptions
@@ -831,7 +831,7 @@ module Aws::GeoRoutes
     RouteMatrixAvoidanceAreaGeometry.add_member(:polygon, ::Smithy::Schema::Shapes::MemberShape.new(target: LinearRings, name: "Polygon", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}}))
     RouteMatrixAvoidanceAreaGeometry.add_member(:polyline_polygon, ::Smithy::Schema::Shapes::MemberShape.new(target: PolylineRingList, name: "PolylinePolygon", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}}))
     RouteMatrixAvoidanceAreaGeometry.type = Types::RouteMatrixAvoidanceAreaGeometry
-    RouteMatrixAvoidanceAreaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixAvoidanceArea, name: "member")
+    RouteMatrixAvoidanceAreaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixAvoidanceArea, name: "member"))
     RouteMatrixAvoidanceOptions.add_member(:areas, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixAvoidanceAreaList, name: "Areas", traits: {"smithy.api#length" => {"max" => 250}}))
     RouteMatrixAvoidanceOptions.add_member(:car_shuttle_trains, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "CarShuttleTrains"))
     RouteMatrixAvoidanceOptions.add_member(:controlled_access_highways, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "ControlledAccessHighways"))
@@ -846,7 +846,7 @@ module Aws::GeoRoutes
     RouteMatrixAvoidanceOptions.type = Types::RouteMatrixAvoidanceOptions
     RouteMatrixAvoidanceZoneCategory.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixZoneCategory, name: "Category"))
     RouteMatrixAvoidanceZoneCategory.type = Types::RouteMatrixAvoidanceZoneCategory
-    RouteMatrixAvoidanceZoneCategoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixAvoidanceZoneCategory, name: "member")
+    RouteMatrixAvoidanceZoneCategoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixAvoidanceZoneCategory, name: "member"))
     RouteMatrixBoundary.add_member(:geometry, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixBoundaryGeometry, name: "Geometry"))
     RouteMatrixBoundary.add_member(:unbounded, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "Unbounded"))
     RouteMatrixBoundary.type = Types::RouteMatrixBoundary
@@ -862,7 +862,7 @@ module Aws::GeoRoutes
     RouteMatrixDestination.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixDestinationOptions, name: "Options"))
     RouteMatrixDestination.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "Position", traits: {"smithy.api#required" => {}}))
     RouteMatrixDestination.type = Types::RouteMatrixDestination
-    RouteMatrixDestinationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixDestination, name: "member")
+    RouteMatrixDestinationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixDestination, name: "member"))
     RouteMatrixDestinationOptions.add_member(:avoid_actions_for_distance, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "AvoidActionsForDistance", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}}))
     RouteMatrixDestinationOptions.add_member(:heading, ::Smithy::Schema::Shapes::MemberShape.new(target: Heading, name: "Heading", traits: {"smithy.api#default" => 0}))
     RouteMatrixDestinationOptions.add_member(:matching, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixMatchingOptions, name: "Matching"))
@@ -874,7 +874,7 @@ module Aws::GeoRoutes
     RouteMatrixEntry.type = Types::RouteMatrixEntry
     RouteMatrixExclusionOptions.add_member(:countries, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCodeList, name: "Countries", traits: {"smithy.api#required" => {}}))
     RouteMatrixExclusionOptions.type = Types::RouteMatrixExclusionOptions
-    RouteMatrixHazardousCargoTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixHazardousCargoType, name: "member")
+    RouteMatrixHazardousCargoTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixHazardousCargoType, name: "member"))
     RouteMatrixMatchingOptions.add_member(:name_hint, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "NameHint"))
     RouteMatrixMatchingOptions.add_member(:on_road_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "OnRoadThreshold", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}}))
     RouteMatrixMatchingOptions.add_member(:radius, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "Radius", traits: {"smithy.api#default" => 0}))
@@ -883,13 +883,13 @@ module Aws::GeoRoutes
     RouteMatrixOrigin.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixOriginOptions, name: "Options"))
     RouteMatrixOrigin.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "Position", traits: {"smithy.api#required" => {}}))
     RouteMatrixOrigin.type = Types::RouteMatrixOrigin
-    RouteMatrixOriginList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixOrigin, name: "member")
+    RouteMatrixOriginList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixOrigin, name: "member"))
     RouteMatrixOriginOptions.add_member(:avoid_actions_for_distance, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "AvoidActionsForDistance", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}}))
     RouteMatrixOriginOptions.add_member(:heading, ::Smithy::Schema::Shapes::MemberShape.new(target: Heading, name: "Heading", traits: {"smithy.api#default" => 0}))
     RouteMatrixOriginOptions.add_member(:matching, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixMatchingOptions, name: "Matching"))
     RouteMatrixOriginOptions.add_member(:side_of_street, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixSideOfStreetOptions, name: "SideOfStreet"))
     RouteMatrixOriginOptions.type = Types::RouteMatrixOriginOptions
-    RouteMatrixRow.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixEntry, name: "member")
+    RouteMatrixRow.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixEntry, name: "member"))
     RouteMatrixScooterOptions.add_member(:license_plate, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixVehicleLicensePlate, name: "LicensePlate"))
     RouteMatrixScooterOptions.add_member(:max_speed, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeedKilometersPerHour, name: "MaxSpeed", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 3.6, "max" => 252.0}}))
     RouteMatrixScooterOptions.add_member(:occupancy, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveInteger, name: "Occupancy", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1}}))
@@ -932,7 +932,7 @@ module Aws::GeoRoutes
     RouteNumber.add_member(:language, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageTag, name: "Language"))
     RouteNumber.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Value", traits: {"smithy.api#required" => {}}))
     RouteNumber.type = Types::RouteNumber
-    RouteNumberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteNumber, name: "member")
+    RouteNumberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteNumber, name: "member"))
     RouteOriginOptions.add_member(:avoid_actions_for_distance, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "AvoidActionsForDistance", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"max" => 2000}}))
     RouteOriginOptions.add_member(:avoid_u_turns, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "AvoidUTurns"))
     RouteOriginOptions.add_member(:heading, ::Smithy::Schema::Shapes::MemberShape.new(target: Heading, name: "Heading", traits: {"smithy.api#default" => 0}))
@@ -946,7 +946,7 @@ module Aws::GeoRoutes
     RoutePassThroughWaypoint.add_member(:geometry_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "GeometryOffset", traits: {"smithy.api#range" => {"min" => 0}}))
     RoutePassThroughWaypoint.add_member(:place, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutePassThroughPlace, name: "Place", traits: {"smithy.api#required" => {}}))
     RoutePassThroughWaypoint.type = Types::RoutePassThroughWaypoint
-    RoutePassThroughWaypointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoutePassThroughWaypoint, name: "member")
+    RoutePassThroughWaypointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutePassThroughWaypoint, name: "member"))
     RoutePedestrianArrival.add_member(:place, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutePedestrianPlace, name: "Place", traits: {"smithy.api#required" => {}}))
     RoutePedestrianArrival.add_member(:time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampWithTimezoneOffset, name: "Time"))
     RoutePedestrianArrival.type = Types::RoutePedestrianArrival
@@ -964,7 +964,7 @@ module Aws::GeoRoutes
     RoutePedestrianNotice.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutePedestrianNoticeCode, name: "Code", traits: {"smithy.api#required" => {}}))
     RoutePedestrianNotice.add_member(:impact, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteNoticeImpact, name: "Impact"))
     RoutePedestrianNotice.type = Types::RoutePedestrianNotice
-    RoutePedestrianNoticeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoutePedestrianNotice, name: "member")
+    RoutePedestrianNoticeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutePedestrianNotice, name: "member"))
     RoutePedestrianOptions.add_member(:speed, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeedKilometersPerHour, name: "Speed", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1.8, "max" => 7.2}}))
     RoutePedestrianOptions.type = Types::RoutePedestrianOptions
     RoutePedestrianOverviewSummary.add_member(:distance, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "Distance", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
@@ -992,7 +992,7 @@ module Aws::GeoRoutes
     RoutePedestrianSpan.add_member(:speed_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSpanSpeedLimitDetails, name: "SpeedLimit"))
     RoutePedestrianSpan.add_member(:typical_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationSeconds, name: "TypicalDuration", traits: {"smithy.api#default" => 0}))
     RoutePedestrianSpan.type = Types::RoutePedestrianSpan
-    RoutePedestrianSpanList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoutePedestrianSpan, name: "member")
+    RoutePedestrianSpanList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutePedestrianSpan, name: "member"))
     RoutePedestrianSummary.add_member(:overview, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutePedestrianOverviewSummary, name: "Overview"))
     RoutePedestrianSummary.add_member(:travel_only, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutePedestrianTravelOnlySummary, name: "TravelOnly"))
     RoutePedestrianSummary.type = Types::RoutePedestrianSummary
@@ -1014,7 +1014,7 @@ module Aws::GeoRoutes
     RoutePedestrianTravelStep.add_member(:turn_step_details, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTurnStepDetails, name: "TurnStepDetails"))
     RoutePedestrianTravelStep.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutePedestrianTravelStepType, name: "Type", traits: {"smithy.api#required" => {}}))
     RoutePedestrianTravelStep.type = Types::RoutePedestrianTravelStep
-    RoutePedestrianTravelStepList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoutePedestrianTravelStep, name: "member")
+    RoutePedestrianTravelStepList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutePedestrianTravelStep, name: "member"))
     RouteRampStepDetails.add_member(:intersection, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalizedStringList, name: "Intersection", traits: {"smithy.api#required" => {}}))
     RouteRampStepDetails.add_member(:steering_direction, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSteeringDirection, name: "SteeringDirection"))
     RouteRampStepDetails.add_member(:turn_angle, ::Smithy::Schema::Shapes::MemberShape.new(target: TurnAngle, name: "TurnAngle", traits: {"smithy.api#default" => 0}))
@@ -1023,7 +1023,7 @@ module Aws::GeoRoutes
     RouteResponseNotice.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteResponseNoticeCode, name: "Code", traits: {"smithy.api#required" => {}}))
     RouteResponseNotice.add_member(:impact, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteNoticeImpact, name: "Impact"))
     RouteResponseNotice.type = Types::RouteResponseNotice
-    RouteResponseNoticeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteResponseNotice, name: "member")
+    RouteResponseNoticeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteResponseNotice, name: "member"))
     RouteRoad.add_member(:road_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalizedStringList, name: "RoadName", traits: {"smithy.api#required" => {}}))
     RouteRoad.add_member(:route_number, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteNumberList, name: "RouteNumber", traits: {"smithy.api#required" => {}}))
     RouteRoad.add_member(:towards, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalizedStringList, name: "Towards", traits: {"smithy.api#required" => {}}))
@@ -1057,20 +1057,20 @@ module Aws::GeoRoutes
     RouteSignpostLabel.add_member(:route_number, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteNumber, name: "RouteNumber"))
     RouteSignpostLabel.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalizedString, name: "Text"))
     RouteSignpostLabel.type = Types::RouteSignpostLabel
-    RouteSignpostLabelList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSignpostLabel, name: "member")
-    RouteSpanAdditionalFeatureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSpanAdditionalFeature, name: "member")
-    RouteSpanCarAccessAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSpanCarAccessAttribute, name: "member")
+    RouteSignpostLabelList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSignpostLabel, name: "member"))
+    RouteSpanAdditionalFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSpanAdditionalFeature, name: "member"))
+    RouteSpanCarAccessAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSpanCarAccessAttribute, name: "member"))
     RouteSpanDynamicSpeedDetails.add_member(:best_case_speed, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeedKilometersPerHour, name: "BestCaseSpeed", traits: {"smithy.api#default" => 0}))
     RouteSpanDynamicSpeedDetails.add_member(:turn_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationSeconds, name: "TurnDuration", traits: {"smithy.api#default" => 0}))
     RouteSpanDynamicSpeedDetails.add_member(:typical_speed, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeedKilometersPerHour, name: "TypicalSpeed", traits: {"smithy.api#default" => 0}))
     RouteSpanDynamicSpeedDetails.type = Types::RouteSpanDynamicSpeedDetails
-    RouteSpanPedestrianAccessAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSpanPedestrianAccessAttribute, name: "member")
-    RouteSpanRoadAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSpanRoadAttribute, name: "member")
-    RouteSpanScooterAccessAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSpanScooterAccessAttribute, name: "member")
+    RouteSpanPedestrianAccessAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSpanPedestrianAccessAttribute, name: "member"))
+    RouteSpanRoadAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSpanRoadAttribute, name: "member"))
+    RouteSpanScooterAccessAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSpanScooterAccessAttribute, name: "member"))
     RouteSpanSpeedLimitDetails.add_member(:max_speed, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeedKilometersPerHour, name: "MaxSpeed", traits: {"smithy.api#default" => 0}))
     RouteSpanSpeedLimitDetails.add_member(:unlimited, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "Unlimited"))
     RouteSpanSpeedLimitDetails.type = Types::RouteSpanSpeedLimitDetails
-    RouteSpanTruckAccessAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSpanTruckAccessAttribute, name: "member")
+    RouteSpanTruckAccessAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSpanTruckAccessAttribute, name: "member"))
     RouteSummary.add_member(:distance, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "Distance", traits: {"smithy.api#default" => 0}))
     RouteSummary.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationSeconds, name: "Duration", traits: {"smithy.api#default" => 0}))
     RouteSummary.add_member(:tolls, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTollSummary, name: "Tolls"))
@@ -1080,7 +1080,7 @@ module Aws::GeoRoutes
     RouteToll.add_member(:rates, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTollRateList, name: "Rates", traits: {"smithy.api#required" => {}}))
     RouteToll.add_member(:systems, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexList, name: "Systems", traits: {"smithy.api#required" => {}}))
     RouteToll.type = Types::RouteToll
-    RouteTollList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteToll, name: "member")
+    RouteTollList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteToll, name: "member"))
     RouteTollOptions.add_member(:all_transponders, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "AllTransponders"))
     RouteTollOptions.add_member(:all_vignettes, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "AllVignettes"))
     RouteTollOptions.add_member(:currency, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, name: "Currency"))
@@ -1096,11 +1096,11 @@ module Aws::GeoRoutes
     RouteTollPassValidityPeriod.add_member(:period, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTollPassValidityPeriodType, name: "Period", traits: {"smithy.api#required" => {}}))
     RouteTollPassValidityPeriod.add_member(:period_count, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveInteger, name: "PeriodCount", traits: {"smithy.api#range" => {"min" => 0}}))
     RouteTollPassValidityPeriod.type = Types::RouteTollPassValidityPeriod
-    RouteTollPaymentMethodList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTollPaymentMethod, name: "member")
+    RouteTollPaymentMethodList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTollPaymentMethod, name: "member"))
     RouteTollPaymentSite.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name"))
     RouteTollPaymentSite.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position23, name: "Position", traits: {"smithy.api#required" => {}}))
     RouteTollPaymentSite.type = Types::RouteTollPaymentSite
-    RouteTollPaymentSiteList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTollPaymentSite, name: "member")
+    RouteTollPaymentSiteList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTollPaymentSite, name: "member"))
     RouteTollPrice.add_member(:currency, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, name: "Currency", traits: {"smithy.api#required" => {}}))
     RouteTollPrice.add_member(:estimate, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "Estimate", traits: {"smithy.api#required" => {}}))
     RouteTollPrice.add_member(:per_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationSeconds, name: "PerDuration", traits: {"smithy.api#default" => 0}))
@@ -1126,12 +1126,12 @@ module Aws::GeoRoutes
     RouteTollRate.add_member(:payment_methods, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTollPaymentMethodList, name: "PaymentMethods", traits: {"smithy.api#required" => {}}))
     RouteTollRate.add_member(:transponders, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTransponderList, name: "Transponders", traits: {"smithy.api#required" => {}}))
     RouteTollRate.type = Types::RouteTollRate
-    RouteTollRateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTollRate, name: "member")
+    RouteTollRateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTollRate, name: "member"))
     RouteTollSummary.add_member(:total, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTollPriceSummary, name: "Total"))
     RouteTollSummary.type = Types::RouteTollSummary
     RouteTollSystem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Name"))
     RouteTollSystem.type = Types::RouteTollSystem
-    RouteTollSystemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTollSystem, name: "member")
+    RouteTollSystemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTollSystem, name: "member"))
     RouteTrafficOptions.add_member(:flow_event_threshold_override, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationSeconds, name: "FlowEventThresholdOverride", traits: {"smithy.api#default" => 0}))
     RouteTrafficOptions.add_member(:usage, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficUsage, name: "Usage"))
     RouteTrafficOptions.type = Types::RouteTrafficOptions
@@ -1140,7 +1140,7 @@ module Aws::GeoRoutes
     RouteTrailerOptions.type = Types::RouteTrailerOptions
     RouteTransponder.add_member(:system_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "SystemName"))
     RouteTransponder.type = Types::RouteTransponder
-    RouteTransponderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTransponder, name: "member")
+    RouteTransponderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteTransponder, name: "member"))
     RouteTravelModeOptions.add_member(:car, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteCarOptions, name: "Car"))
     RouteTravelModeOptions.add_member(:pedestrian, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutePedestrianOptions, name: "Pedestrian"))
     RouteTravelModeOptions.add_member(:scooter, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteScooterOptions, name: "Scooter"))
@@ -1188,7 +1188,7 @@ module Aws::GeoRoutes
     RouteVehicleIncident.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampWithTimezoneOffset, name: "StartTime"))
     RouteVehicleIncident.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteVehicleIncidentType, name: "Type"))
     RouteVehicleIncident.type = Types::RouteVehicleIncident
-    RouteVehicleIncidentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteVehicleIncident, name: "member")
+    RouteVehicleIncidentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteVehicleIncident, name: "member"))
     RouteVehicleLegDetails.add_member(:arrival, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteVehicleArrival, name: "Arrival", traits: {"smithy.api#required" => {}}))
     RouteVehicleLegDetails.add_member(:departure, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteVehicleDeparture, name: "Departure", traits: {"smithy.api#required" => {}}))
     RouteVehicleLegDetails.add_member(:incidents, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteVehicleIncidentList, name: "Incidents", traits: {"smithy.api#required" => {}}))
@@ -1211,8 +1211,8 @@ module Aws::GeoRoutes
     RouteVehicleNoticeDetail.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Title"))
     RouteVehicleNoticeDetail.add_member(:violated_constraints, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteViolatedConstraints, name: "ViolatedConstraints"))
     RouteVehicleNoticeDetail.type = Types::RouteVehicleNoticeDetail
-    RouteVehicleNoticeDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteVehicleNoticeDetail, name: "member")
-    RouteVehicleNoticeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteVehicleNotice, name: "member")
+    RouteVehicleNoticeDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteVehicleNoticeDetail, name: "member"))
+    RouteVehicleNoticeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteVehicleNotice, name: "member"))
     RouteVehicleOverviewSummary.add_member(:best_case_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationSeconds, name: "BestCaseDuration", traits: {"smithy.api#default" => 0}))
     RouteVehicleOverviewSummary.add_member(:distance, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "Distance", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     RouteVehicleOverviewSummary.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationSeconds, name: "Duration", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
@@ -1248,7 +1248,7 @@ module Aws::GeoRoutes
     RouteVehicleSpan.add_member(:typical_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationSeconds, name: "TypicalDuration", traits: {"smithy.api#default" => 0}))
     RouteVehicleSpan.add_member(:zones, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexList, name: "Zones"))
     RouteVehicleSpan.type = Types::RouteVehicleSpan
-    RouteVehicleSpanList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteVehicleSpan, name: "member")
+    RouteVehicleSpanList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteVehicleSpan, name: "member"))
     RouteVehicleSummary.add_member(:overview, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteVehicleOverviewSummary, name: "Overview"))
     RouteVehicleSummary.add_member(:travel_only, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteVehicleTravelOnlySummary, name: "TravelOnly"))
     RouteVehicleSummary.type = Types::RouteVehicleSummary
@@ -1277,7 +1277,7 @@ module Aws::GeoRoutes
     RouteVehicleTravelStep.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteVehicleTravelStepType, name: "Type", traits: {"smithy.api#required" => {}}))
     RouteVehicleTravelStep.add_member(:u_turn_step_details, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteUTurnStepDetails, name: "UTurnStepDetails"))
     RouteVehicleTravelStep.type = Types::RouteVehicleTravelStep
-    RouteVehicleTravelStepList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteVehicleTravelStep, name: "member")
+    RouteVehicleTravelStepList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteVehicleTravelStep, name: "member"))
     RouteViolatedConstraints.add_member(:all_hazards_restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "AllHazardsRestricted"))
     RouteViolatedConstraints.add_member(:axle_count, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteNoticeDetailRange, name: "AxleCount"))
     RouteViolatedConstraints.add_member(:hazardous_cargos, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteHazardousCargoTypeList, name: "HazardousCargos", traits: {"smithy.api#required" => {}}))
@@ -1307,14 +1307,14 @@ module Aws::GeoRoutes
     RouteWaypoint.add_member(:side_of_street, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteSideOfStreetOptions, name: "SideOfStreet"))
     RouteWaypoint.add_member(:stop_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationSeconds, name: "StopDuration", traits: {"smithy.api#default" => 0}))
     RouteWaypoint.type = Types::RouteWaypoint
-    RouteWaypointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteWaypoint, name: "member")
+    RouteWaypointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteWaypoint, name: "member"))
     RouteWeightConstraint.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteWeightConstraintType, name: "Type", traits: {"smithy.api#required" => {}}))
     RouteWeightConstraint.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: WeightKilograms, name: "Value", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     RouteWeightConstraint.type = Types::RouteWeightConstraint
     RouteZone.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteZoneCategory, name: "Category"))
     RouteZone.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Name"))
     RouteZone.type = Types::RouteZone
-    RouteZoneList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteZone, name: "member")
+    RouteZoneList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteZone, name: "member"))
     SnapToRoadsRequest.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiKey, name: "Key", traits: {"smithy.api#httpQuery" => "key"}))
     SnapToRoadsRequest.add_member(:snapped_geometry_format, ::Smithy::Schema::Shapes::MemberShape.new(target: GeometryFormat, name: "SnappedGeometryFormat"))
     SnapToRoadsRequest.add_member(:snap_radius, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "SnapRadius", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 10000}}))
@@ -1330,8 +1330,8 @@ module Aws::GeoRoutes
     SnapToRoadsResponse.type = Types::SnapToRoadsResponse
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
-    TimeThresholdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DurationSeconds, name: "member", traits: {"smithy.api#range" => {"min" => 0, "max" => 10800}})
-    TruckRoadTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TruckRoadType, name: "member")
+    TimeThresholdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationSeconds, name: "member", traits: {"smithy.api#range" => {"min" => 0, "max" => 10800}}))
+    TruckRoadTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TruckRoadType, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, name: "Reason", traits: {"smithy.api#jsonName" => "reason", "smithy.api#required" => {}}))
     ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldList, name: "FieldList", traits: {"smithy.api#jsonName" => "fieldList", "smithy.api#required" => {}}))
@@ -1339,7 +1339,7 @@ module Aws::GeoRoutes
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name", traits: {"smithy.api#jsonName" => "name", "smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     WaypointOptimizationAccessHours.add_member(:from, ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationAccessHoursEntry, name: "From", traits: {"smithy.api#required" => {}}))
     WaypointOptimizationAccessHours.add_member(:to, ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationAccessHoursEntry, name: "To", traits: {"smithy.api#required" => {}}))
     WaypointOptimizationAccessHours.type = Types::WaypointOptimizationAccessHours
@@ -1350,7 +1350,7 @@ module Aws::GeoRoutes
     WaypointOptimizationAvoidanceArea.type = Types::WaypointOptimizationAvoidanceArea
     WaypointOptimizationAvoidanceAreaGeometry.add_member(:bounding_box, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundingBox, name: "BoundingBox"))
     WaypointOptimizationAvoidanceAreaGeometry.type = Types::WaypointOptimizationAvoidanceAreaGeometry
-    WaypointOptimizationAvoidanceAreaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationAvoidanceArea, name: "member")
+    WaypointOptimizationAvoidanceAreaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationAvoidanceArea, name: "member"))
     WaypointOptimizationAvoidanceOptions.add_member(:areas, ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationAvoidanceAreaList, name: "Areas", traits: {"smithy.api#length" => {"max" => 20}}))
     WaypointOptimizationAvoidanceOptions.add_member(:car_shuttle_trains, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "CarShuttleTrains"))
     WaypointOptimizationAvoidanceOptions.add_member(:controlled_access_highways, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "ControlledAccessHighways"))
@@ -1370,7 +1370,7 @@ module Aws::GeoRoutes
     WaypointOptimizationConnection.add_member(:travel_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationSeconds, name: "TravelDuration", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     WaypointOptimizationConnection.add_member(:wait_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationSeconds, name: "WaitDuration", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     WaypointOptimizationConnection.type = Types::WaypointOptimizationConnection
-    WaypointOptimizationConnectionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationConnection, name: "member")
+    WaypointOptimizationConnectionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationConnection, name: "member"))
     WaypointOptimizationDestinationOptions.add_member(:access_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationAccessHours, name: "AccessHours"))
     WaypointOptimizationDestinationOptions.add_member(:appointment_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampWithTimezoneOffset, name: "AppointmentTime"))
     WaypointOptimizationDestinationOptions.add_member(:heading, ::Smithy::Schema::Shapes::MemberShape.new(target: Heading, name: "Heading", traits: {"smithy.api#default" => 0}))
@@ -1389,20 +1389,20 @@ module Aws::GeoRoutes
     WaypointOptimizationFailedConstraint.add_member(:constraint, ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationConstraint, name: "Constraint"))
     WaypointOptimizationFailedConstraint.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Reason"))
     WaypointOptimizationFailedConstraint.type = Types::WaypointOptimizationFailedConstraint
-    WaypointOptimizationFailedConstraintList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationFailedConstraint, name: "member")
-    WaypointOptimizationHazardousCargoTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationHazardousCargoType, name: "member")
+    WaypointOptimizationFailedConstraintList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationFailedConstraint, name: "member"))
+    WaypointOptimizationHazardousCargoTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationHazardousCargoType, name: "member"))
     WaypointOptimizationImpedingWaypoint.add_member(:failed_constraints, ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationFailedConstraintList, name: "FailedConstraints", traits: {"smithy.api#required" => {}}))
     WaypointOptimizationImpedingWaypoint.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointId, name: "Id", traits: {"smithy.api#required" => {}}))
     WaypointOptimizationImpedingWaypoint.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "Position", traits: {"smithy.api#required" => {}}))
     WaypointOptimizationImpedingWaypoint.type = Types::WaypointOptimizationImpedingWaypoint
-    WaypointOptimizationImpedingWaypointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationImpedingWaypoint, name: "member")
+    WaypointOptimizationImpedingWaypointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationImpedingWaypoint, name: "member"))
     WaypointOptimizationOptimizedWaypoint.add_member(:arrival_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampWithTimezoneOffset, name: "ArrivalTime"))
     WaypointOptimizationOptimizedWaypoint.add_member(:cluster_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterIndex, name: "ClusterIndex"))
     WaypointOptimizationOptimizedWaypoint.add_member(:departure_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampWithTimezoneOffset, name: "DepartureTime", traits: {"smithy.api#required" => {}}))
     WaypointOptimizationOptimizedWaypoint.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointId, name: "Id", traits: {"smithy.api#required" => {}}))
     WaypointOptimizationOptimizedWaypoint.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "Position", traits: {"smithy.api#required" => {}}))
     WaypointOptimizationOptimizedWaypoint.type = Types::WaypointOptimizationOptimizedWaypoint
-    WaypointOptimizationOptimizedWaypointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationOptimizedWaypoint, name: "member")
+    WaypointOptimizationOptimizedWaypointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationOptimizedWaypoint, name: "member"))
     WaypointOptimizationOriginOptions.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointId, name: "Id"))
     WaypointOptimizationOriginOptions.type = Types::WaypointOptimizationOriginOptions
     WaypointOptimizationPedestrianOptions.add_member(:speed, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeedKilometersPerHour, name: "Speed", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1.8, "max" => 7.2}}))
@@ -1449,7 +1449,7 @@ module Aws::GeoRoutes
     WaypointOptimizationWaypoint.add_member(:service_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationSeconds, name: "ServiceDuration", traits: {"smithy.api#default" => 0}))
     WaypointOptimizationWaypoint.add_member(:side_of_street, ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationSideOfStreetOptions, name: "SideOfStreet"))
     WaypointOptimizationWaypoint.type = Types::WaypointOptimizationWaypoint
-    WaypointOptimizationWaypointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationWaypoint, name: "member")
+    WaypointOptimizationWaypointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WaypointOptimizationWaypoint, name: "member"))
     WeightPerAxleGroup.add_member(:single, ::Smithy::Schema::Shapes::MemberShape.new(target: WeightKilograms, name: "Single", traits: {"smithy.api#default" => 0}))
     WeightPerAxleGroup.add_member(:tandem, ::Smithy::Schema::Shapes::MemberShape.new(target: WeightKilograms, name: "Tandem", traits: {"smithy.api#default" => 0}))
     WeightPerAxleGroup.add_member(:triple, ::Smithy::Schema::Shapes::MemberShape.new(target: WeightKilograms, name: "Triple", traits: {"smithy.api#default" => 0}))

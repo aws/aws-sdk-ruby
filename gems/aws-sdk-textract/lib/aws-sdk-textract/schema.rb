@@ -219,21 +219,21 @@ module Aws::Textract
     Adapter.add_member(:pages, ::Smithy::Schema::Shapes::MemberShape.new(target: AdapterPages, name: "Pages"))
     Adapter.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: AdapterVersion, name: "Version", traits: {"smithy.api#required" => {}}))
     Adapter.type = Types::Adapter
-    AdapterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdapterOverview, name: "member")
+    AdapterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdapterOverview, name: "member"))
     AdapterOverview.add_member(:adapter_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AdapterId, name: "AdapterId"))
     AdapterOverview.add_member(:adapter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AdapterName, name: "AdapterName"))
     AdapterOverview.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "CreationTime"))
     AdapterOverview.add_member(:feature_types, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureTypes, name: "FeatureTypes"))
     AdapterOverview.type = Types::AdapterOverview
-    AdapterPages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdapterPage, name: "member")
+    AdapterPages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdapterPage, name: "member"))
     AdapterVersionDatasetConfig.add_member(:manifest_s3_object, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Object, name: "ManifestS3Object"))
     AdapterVersionDatasetConfig.type = Types::AdapterVersionDatasetConfig
     AdapterVersionEvaluationMetric.add_member(:baseline, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationMetric, name: "Baseline"))
     AdapterVersionEvaluationMetric.add_member(:adapter_version, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationMetric, name: "AdapterVersion"))
     AdapterVersionEvaluationMetric.add_member(:feature_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureType, name: "FeatureType"))
     AdapterVersionEvaluationMetric.type = Types::AdapterVersionEvaluationMetric
-    AdapterVersionEvaluationMetrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdapterVersionEvaluationMetric, name: "member")
-    AdapterVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdapterVersionOverview, name: "member")
+    AdapterVersionEvaluationMetrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdapterVersionEvaluationMetric, name: "member"))
+    AdapterVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdapterVersionOverview, name: "member"))
     AdapterVersionOverview.add_member(:adapter_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AdapterId, name: "AdapterId"))
     AdapterVersionOverview.add_member(:adapter_version, ::Smithy::Schema::Shapes::MemberShape.new(target: AdapterVersion, name: "AdapterVersion"))
     AdapterVersionOverview.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "CreationTime"))
@@ -246,7 +246,7 @@ module Aws::Textract
     AdapterVersionStatus.add_member(:deprecated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPRECATED", traits: {"smithy.api#enumValue" => "DEPRECATED"}))
     AdapterVersionStatus.add_member(:creation_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATION_ERROR", traits: {"smithy.api#enumValue" => "CREATION_ERROR"}))
     AdapterVersionStatus.add_member(:creation_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATION_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATION_IN_PROGRESS"}))
-    Adapters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Adapter, name: "member")
+    Adapters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Adapter, name: "member"))
     AdaptersConfig.add_member(:adapters, ::Smithy::Schema::Shapes::MemberShape.new(target: Adapters, name: "Adapters", traits: {"smithy.api#required" => {}}))
     AdaptersConfig.type = Types::AdaptersConfig
     AnalyzeDocumentRequest.add_member(:document, ::Smithy::Schema::Shapes::MemberShape.new(target: Document, name: "Document", traits: {"smithy.api#required" => {}}))
@@ -296,7 +296,7 @@ module Aws::Textract
     Block.add_member(:page, ::Smithy::Schema::Shapes::MemberShape.new(target: UInteger, name: "Page"))
     Block.add_member(:query, ::Smithy::Schema::Shapes::MemberShape.new(target: Query, name: "Query"))
     Block.type = Types::Block
-    BlockList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Block, name: "member")
+    BlockList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Block, name: "member"))
     BlockType.add_member(:key_value_set, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KEY_VALUE_SET", traits: {"smithy.api#enumValue" => "KEY_VALUE_SET"}))
     BlockType.add_member(:page, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PAGE", traits: {"smithy.api#enumValue" => "PAGE"}))
     BlockType.add_member(:line, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINE", traits: {"smithy.api#enumValue" => "LINE"}))
@@ -331,7 +331,7 @@ module Aws::Textract
     ConflictException.type = Types::ConflictException
     ContentClassifier.add_member(:free_of_personally_identifiable_information, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION", traits: {"smithy.api#enumValue" => "FreeOfPersonallyIdentifiableInformation"}))
     ContentClassifier.add_member(:free_of_adult_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FREE_OF_ADULT_CONTENT", traits: {"smithy.api#enumValue" => "FreeOfAdultContent"}))
-    ContentClassifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContentClassifier, name: "member")
+    ContentClassifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentClassifier, name: "member"))
     CreateAdapterRequest.add_member(:adapter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AdapterName, name: "AdapterName", traits: {"smithy.api#required" => {}}))
     CreateAdapterRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateAdapterRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: AdapterDescription, name: "Description"))
@@ -366,7 +366,7 @@ module Aws::Textract
     DetectDocumentTextResponse.type = Types::DetectDocumentTextResponse
     DetectedSignature.add_member(:page, ::Smithy::Schema::Shapes::MemberShape.new(target: UInteger, name: "Page"))
     DetectedSignature.type = Types::DetectedSignature
-    DetectedSignatureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DetectedSignature, name: "member")
+    DetectedSignatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectedSignature, name: "member"))
     Document.add_member(:bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageBlob, name: "Bytes"))
     Document.add_member(:s3_object, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Object, name: "S3Object"))
     Document.type = Types::Document
@@ -375,12 +375,12 @@ module Aws::Textract
     DocumentGroup.add_member(:detected_signatures, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectedSignatureList, name: "DetectedSignatures"))
     DocumentGroup.add_member(:undetected_signatures, ::Smithy::Schema::Shapes::MemberShape.new(target: UndetectedSignatureList, name: "UndetectedSignatures"))
     DocumentGroup.type = Types::DocumentGroup
-    DocumentGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentGroup, name: "member")
+    DocumentGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentGroup, name: "member"))
     DocumentLocation.add_member(:s3_object, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Object, name: "S3Object"))
     DocumentLocation.type = Types::DocumentLocation
     DocumentMetadata.add_member(:pages, ::Smithy::Schema::Shapes::MemberShape.new(target: UInteger, name: "Pages"))
     DocumentMetadata.type = Types::DocumentMetadata
-    DocumentPages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Document, name: "member")
+    DocumentPages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Document, name: "member"))
     DocumentTooLargeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     DocumentTooLargeException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     DocumentTooLargeException.type = Types::DocumentTooLargeException
@@ -393,7 +393,7 @@ module Aws::Textract
     EntityType.add_member(:table_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TABLE_SUMMARY", traits: {"smithy.api#enumValue" => "TABLE_SUMMARY"}))
     EntityType.add_member(:structured_table, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRUCTURED_TABLE", traits: {"smithy.api#enumValue" => "STRUCTURED_TABLE"}))
     EntityType.add_member(:semi_structured_table, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEMI_STRUCTURED_TABLE", traits: {"smithy.api#enumValue" => "SEMI_STRUCTURED_TABLE"}))
-    EntityTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, name: "member")
+    EntityTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, name: "member"))
     EvaluationMetric.add_member(:f1_score, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "F1Score", traits: {"smithy.api#default" => 0}))
     EvaluationMetric.add_member(:precision, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "Precision", traits: {"smithy.api#default" => 0}))
     EvaluationMetric.add_member(:recall, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "Recall", traits: {"smithy.api#default" => 0}))
@@ -410,7 +410,7 @@ module Aws::Textract
     ExpenseDocument.add_member(:line_item_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: LineItemGroupList, name: "LineItemGroups"))
     ExpenseDocument.add_member(:blocks, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockList, name: "Blocks"))
     ExpenseDocument.type = Types::ExpenseDocument
-    ExpenseDocumentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExpenseDocument, name: "member")
+    ExpenseDocumentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpenseDocument, name: "member"))
     ExpenseField.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpenseType, name: "Type"))
     ExpenseField.add_member(:label_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpenseDetection, name: "LabelDetection"))
     ExpenseField.add_member(:value_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpenseDetection, name: "ValueDetection"))
@@ -418,11 +418,11 @@ module Aws::Textract
     ExpenseField.add_member(:currency, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpenseCurrency, name: "Currency"))
     ExpenseField.add_member(:group_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpenseGroupPropertyList, name: "GroupProperties"))
     ExpenseField.type = Types::ExpenseField
-    ExpenseFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExpenseField, name: "member")
+    ExpenseFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpenseField, name: "member"))
     ExpenseGroupProperty.add_member(:types, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "Types"))
     ExpenseGroupProperty.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Id"))
     ExpenseGroupProperty.type = Types::ExpenseGroupProperty
-    ExpenseGroupPropertyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExpenseGroupProperty, name: "member")
+    ExpenseGroupPropertyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpenseGroupProperty, name: "member"))
     ExpenseType.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Text"))
     ExpenseType.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Confidence"))
     ExpenseType.type = Types::ExpenseType
@@ -430,13 +430,13 @@ module Aws::Textract
     Extraction.add_member(:expense_document, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpenseDocument, name: "ExpenseDocument"))
     Extraction.add_member(:identity_document, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityDocument, name: "IdentityDocument"))
     Extraction.type = Types::Extraction
-    ExtractionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Extraction, name: "member")
+    ExtractionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Extraction, name: "member"))
     FeatureType.add_member(:tables, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TABLES", traits: {"smithy.api#enumValue" => "TABLES"}))
     FeatureType.add_member(:forms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FORMS", traits: {"smithy.api#enumValue" => "FORMS"}))
     FeatureType.add_member(:queries, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUERIES", traits: {"smithy.api#enumValue" => "QUERIES"}))
     FeatureType.add_member(:signatures, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SIGNATURES", traits: {"smithy.api#enumValue" => "SIGNATURES"}))
     FeatureType.add_member(:layout, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAYOUT", traits: {"smithy.api#enumValue" => "LAYOUT"}))
-    FeatureTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureType, name: "member")
+    FeatureTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureType, name: "member"))
     Geometry.add_member(:bounding_box, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundingBox, name: "BoundingBox"))
     Geometry.add_member(:polygon, ::Smithy::Schema::Shapes::MemberShape.new(target: Polygon, name: "Polygon"))
     Geometry.add_member(:rotation_angle, ::Smithy::Schema::Shapes::MemberShape.new(target: Angle, name: "RotationAngle"))
@@ -527,7 +527,7 @@ module Aws::Textract
     HumanLoopActivationOutput.add_member(:human_loop_activation_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopActivationReasons, name: "HumanLoopActivationReasons"))
     HumanLoopActivationOutput.add_member(:human_loop_activation_conditions_evaluation_results, ::Smithy::Schema::Shapes::MemberShape.new(target: SynthesizedJsonHumanLoopActivationConditionsEvaluationResults, name: "HumanLoopActivationConditionsEvaluationResults"))
     HumanLoopActivationOutput.type = Types::HumanLoopActivationOutput
-    HumanLoopActivationReasons.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopActivationReason, name: "member")
+    HumanLoopActivationReasons.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopActivationReason, name: "member"))
     HumanLoopConfig.add_member(:human_loop_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopName, name: "HumanLoopName", traits: {"smithy.api#required" => {}}))
     HumanLoopConfig.add_member(:flow_definition_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowDefinitionArn, name: "FlowDefinitionArn", traits: {"smithy.api#required" => {}}))
     HumanLoopConfig.add_member(:data_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: HumanLoopDataAttributes, name: "DataAttributes"))
@@ -540,7 +540,7 @@ module Aws::Textract
     HumanLoopQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     HumanLoopQuotaExceededException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     HumanLoopQuotaExceededException.type = Types::HumanLoopQuotaExceededException
-    IdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    IdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     IdempotentParameterMismatchException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     IdempotentParameterMismatchException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     IdempotentParameterMismatchException.type = Types::IdempotentParameterMismatchException
@@ -551,8 +551,8 @@ module Aws::Textract
     IdentityDocumentField.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzeIDDetections, name: "Type"))
     IdentityDocumentField.add_member(:value_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzeIDDetections, name: "ValueDetection"))
     IdentityDocumentField.type = Types::IdentityDocumentField
-    IdentityDocumentFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityDocumentField, name: "member")
-    IdentityDocumentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityDocument, name: "member")
+    IdentityDocumentFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityDocumentField, name: "member"))
+    IdentityDocumentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityDocument, name: "member"))
     InternalServerError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     InternalServerError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     InternalServerError.type = Types::InternalServerError
@@ -577,7 +577,7 @@ module Aws::Textract
     LendingDetection.add_member(:geometry, ::Smithy::Schema::Shapes::MemberShape.new(target: Geometry, name: "Geometry"))
     LendingDetection.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Confidence"))
     LendingDetection.type = Types::LendingDetection
-    LendingDetectionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LendingDetection, name: "member")
+    LendingDetectionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LendingDetection, name: "member"))
     LendingDocument.add_member(:lending_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: LendingFieldList, name: "LendingFields"))
     LendingDocument.add_member(:signature_detections, ::Smithy::Schema::Shapes::MemberShape.new(target: SignatureDetectionList, name: "SignatureDetections"))
     LendingDocument.type = Types::LendingDocument
@@ -585,12 +585,12 @@ module Aws::Textract
     LendingField.add_member(:key_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: LendingDetection, name: "KeyDetection"))
     LendingField.add_member(:value_detections, ::Smithy::Schema::Shapes::MemberShape.new(target: LendingDetectionList, name: "ValueDetections"))
     LendingField.type = Types::LendingField
-    LendingFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LendingField, name: "member")
+    LendingFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LendingField, name: "member"))
     LendingResult.add_member(:page, ::Smithy::Schema::Shapes::MemberShape.new(target: UInteger, name: "Page"))
     LendingResult.add_member(:page_classification, ::Smithy::Schema::Shapes::MemberShape.new(target: PageClassification, name: "PageClassification"))
     LendingResult.add_member(:extractions, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtractionList, name: "Extractions"))
     LendingResult.type = Types::LendingResult
-    LendingResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LendingResult, name: "member")
+    LendingResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LendingResult, name: "member"))
     LendingSummary.add_member(:document_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentGroupList, name: "DocumentGroups"))
     LendingSummary.add_member(:undetected_document_types, ::Smithy::Schema::Shapes::MemberShape.new(target: UndetectedDocumentTypeList, name: "UndetectedDocumentTypes"))
     LendingSummary.type = Types::LendingSummary
@@ -602,8 +602,8 @@ module Aws::Textract
     LineItemGroup.add_member(:line_item_group_index, ::Smithy::Schema::Shapes::MemberShape.new(target: UInteger, name: "LineItemGroupIndex"))
     LineItemGroup.add_member(:line_items, ::Smithy::Schema::Shapes::MemberShape.new(target: LineItemList, name: "LineItems"))
     LineItemGroup.type = Types::LineItemGroup
-    LineItemGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LineItemGroup, name: "member")
-    LineItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LineItemFields, name: "member")
+    LineItemGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LineItemGroup, name: "member"))
+    LineItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LineItemFields, name: "member"))
     ListAdapterVersionsRequest.add_member(:adapter_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AdapterId, name: "AdapterId"))
     ListAdapterVersionsRequest.add_member(:after_creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "AfterCreationTime"))
     ListAdapterVersionsRequest.add_member(:before_creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "BeforeCreationTime"))
@@ -637,31 +637,31 @@ module Aws::Textract
     PageClassification.add_member(:page_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictionList, name: "PageType", traits: {"smithy.api#required" => {}}))
     PageClassification.add_member(:page_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictionList, name: "PageNumber", traits: {"smithy.api#required" => {}}))
     PageClassification.type = Types::PageClassification
-    PageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UInteger, name: "member")
-    Pages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UInteger, name: "member")
+    PageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UInteger, name: "member"))
+    Pages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UInteger, name: "member"))
     Point.add_member(:x, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "X", traits: {"smithy.api#default" => 0}))
     Point.add_member(:y, ::Smithy::Schema::Shapes::MemberShape.new(target: Float, name: "Y", traits: {"smithy.api#default" => 0}))
     Point.type = Types::Point
-    Polygon.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Point, name: "member")
+    Polygon.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Point, name: "member"))
     Prediction.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Value"))
     Prediction.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Confidence"))
     Prediction.type = Types::Prediction
-    PredictionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Prediction, name: "member")
+    PredictionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Prediction, name: "member"))
     ProvisionedThroughputExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ProvisionedThroughputExceededException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     ProvisionedThroughputExceededException.type = Types::ProvisionedThroughputExceededException
-    Queries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Query, name: "member")
+    Queries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Query, name: "member"))
     QueriesConfig.add_member(:queries, ::Smithy::Schema::Shapes::MemberShape.new(target: Queries, name: "Queries", traits: {"smithy.api#required" => {}}))
     QueriesConfig.type = Types::QueriesConfig
     Query.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryInput, name: "Text", traits: {"smithy.api#required" => {}}))
     Query.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryInput, name: "Alias"))
     Query.add_member(:pages, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryPages, name: "Pages"))
     Query.type = Types::Query
-    QueryPages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryPage, name: "member")
+    QueryPages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryPage, name: "member"))
     Relationship.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RelationshipType, name: "Type"))
     Relationship.add_member(:ids, ::Smithy::Schema::Shapes::MemberShape.new(target: IdList, name: "Ids"))
     Relationship.type = Types::Relationship
-    RelationshipList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Relationship, name: "member")
+    RelationshipList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Relationship, name: "member"))
     RelationshipType.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALUE", traits: {"smithy.api#enumValue" => "VALUE"}))
     RelationshipType.add_member(:child, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CHILD", traits: {"smithy.api#enumValue" => "CHILD"}))
     RelationshipType.add_member(:complex_features, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLEX_FEATURES", traits: {"smithy.api#enumValue" => "COMPLEX_FEATURES"}))
@@ -686,11 +686,11 @@ module Aws::Textract
     SignatureDetection.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Confidence"))
     SignatureDetection.add_member(:geometry, ::Smithy::Schema::Shapes::MemberShape.new(target: Geometry, name: "Geometry"))
     SignatureDetection.type = Types::SignatureDetection
-    SignatureDetectionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SignatureDetection, name: "member")
+    SignatureDetectionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SignatureDetection, name: "member"))
     SplitDocument.add_member(:index, ::Smithy::Schema::Shapes::MemberShape.new(target: UInteger, name: "Index"))
     SplitDocument.add_member(:pages, ::Smithy::Schema::Shapes::MemberShape.new(target: PageList, name: "Pages"))
     SplitDocument.type = Types::SplitDocument
-    SplitDocumentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SplitDocument, name: "member")
+    SplitDocumentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SplitDocument, name: "member"))
     StartDocumentAnalysisRequest.add_member(:document_location, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentLocation, name: "DocumentLocation", traits: {"smithy.api#required" => {}}))
     StartDocumentAnalysisRequest.add_member(:feature_types, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureTypes, name: "FeatureTypes", traits: {"smithy.api#required" => {}}))
     StartDocumentAnalysisRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, name: "ClientRequestToken"))
@@ -730,10 +730,10 @@ module Aws::Textract
     StartLendingAnalysisRequest.type = Types::StartLendingAnalysisRequest
     StartLendingAnalysisResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "JobId"))
     StartLendingAnalysisResponse.type = Types::StartLendingAnalysisResponse
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -743,10 +743,10 @@ module Aws::Textract
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ThrottlingException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     ThrottlingException.type = Types::ThrottlingException
-    UndetectedDocumentTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    UndetectedDocumentTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     UndetectedSignature.add_member(:page, ::Smithy::Schema::Shapes::MemberShape.new(target: UInteger, name: "Page"))
     UndetectedSignature.type = Types::UndetectedSignature
-    UndetectedSignatureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UndetectedSignature, name: "member")
+    UndetectedSignatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UndetectedSignature, name: "member"))
     UnsupportedDocumentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     UnsupportedDocumentException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     UnsupportedDocumentException.type = Types::UnsupportedDocumentException
@@ -773,7 +773,7 @@ module Aws::Textract
     Warning.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     Warning.add_member(:pages, ::Smithy::Schema::Shapes::MemberShape.new(target: Pages, name: "Pages"))
     Warning.type = Types::Warning
-    Warnings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Warning, name: "member")
+    Warnings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Warning, name: "member"))
 
     Textract = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.textract#Textract"

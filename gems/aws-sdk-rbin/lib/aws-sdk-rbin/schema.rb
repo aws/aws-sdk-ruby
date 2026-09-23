@@ -92,7 +92,7 @@ module Aws::Rbin
     DeleteRuleRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIdentifier, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteRuleRequest.type = Types::DeleteRuleRequest
     DeleteRuleResponse.type = Types::DeleteRuleResponse
-    ExcludeResourceTags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member")
+    ExcludeResourceTags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member"))
     GetRuleRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIdentifier, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetRuleRequest.type = Types::GetRuleRequest
     GetRuleResponse.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIdentifier, name: "Identifier"))
@@ -149,7 +149,7 @@ module Aws::Rbin
     ResourceTag.add_member(:resource_tag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "ResourceTagKey", traits: {"smithy.api#required" => {}}))
     ResourceTag.add_member(:resource_tag_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagValue, name: "ResourceTagValue"))
     ResourceTag.type = Types::ResourceTag
-    ResourceTags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member")
+    ResourceTags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member"))
     ResourceType.add_member(:ebs_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EBS_SNAPSHOT", traits: {"smithy.api#enumValue" => "EBS_SNAPSHOT"}))
     ResourceType.add_member(:ec2_image, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EC2_IMAGE", traits: {"smithy.api#enumValue" => "EC2_IMAGE"}))
     RetentionPeriod.add_member(:retention_period_value, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionPeriodValue, name: "RetentionPeriodValue", traits: {"smithy.api#required" => {}}))
@@ -164,7 +164,7 @@ module Aws::Rbin
     RuleSummary.add_member(:lock_state, ::Smithy::Schema::Shapes::MemberShape.new(target: LockState, name: "LockState"))
     RuleSummary.add_member(:rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleArn, name: "RuleArn"))
     RuleSummary.type = Types::RuleSummary
-    RuleSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSummary, name: "member")
+    RuleSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSummary, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ServiceQuotaExceededException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuotaExceededExceptionReason, name: "Reason"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
@@ -172,8 +172,8 @@ module Aws::Rbin
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest

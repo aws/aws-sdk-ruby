@@ -377,13 +377,13 @@ module Aws::MailManager
     AddonInstance.add_member(:addon_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AddonInstanceArn, name: "AddonInstanceArn"))
     AddonInstance.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp"))
     AddonInstance.type = Types::AddonInstance
-    AddonInstances.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AddonInstance, name: "member")
+    AddonInstances.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AddonInstance, name: "member"))
     AddonSubscription.add_member(:addon_subscription_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AddonSubscriptionId, name: "AddonSubscriptionId"))
     AddonSubscription.add_member(:addon_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AddonName, name: "AddonName"))
     AddonSubscription.add_member(:addon_subscription_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AddonSubscriptionArn, name: "AddonSubscriptionArn"))
     AddonSubscription.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp"))
     AddonSubscription.type = Types::AddonSubscription
-    AddonSubscriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AddonSubscription, name: "member")
+    AddonSubscriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AddonSubscription, name: "member"))
     AddressFilter.add_member(:address_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressPrefix, name: "AddressPrefix"))
     AddressFilter.type = Types::AddressFilter
     AddressList.add_member(:address_list_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressListId, name: "AddressListId", traits: {"smithy.api#required" => {}}))
@@ -392,7 +392,7 @@ module Aws::MailManager
     AddressList.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
     AddressList.add_member(:last_updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "LastUpdatedTimestamp", traits: {"smithy.api#required" => {}}))
     AddressList.type = Types::AddressList
-    AddressLists.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AddressList, name: "member")
+    AddressLists.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressList, name: "member"))
     Analysis.add_member(:analyzer, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerArn, name: "Analyzer", traits: {"smithy.api#required" => {}}))
     Analysis.add_member(:result_field, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultField, name: "ResultField", traits: {"smithy.api#required" => {}}))
     Analysis.type = Types::Analysis
@@ -417,7 +417,7 @@ module Aws::MailManager
     ArchiveFilterCondition.add_member(:boolean_expression, Types::ArchiveFilterCondition::BooleanExpression, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchiveBooleanExpression, name: "BooleanExpression"))
     ArchiveFilterCondition.add_member(:unknown, Types::ArchiveFilterCondition::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ArchiveFilterCondition.type = Types::ArchiveFilterCondition
-    ArchiveFilterConditions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ArchiveFilterCondition, name: "member")
+    ArchiveFilterConditions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchiveFilterCondition, name: "member"))
     ArchiveFilters.add_member(:include, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchiveFilterConditions, name: "Include"))
     ArchiveFilters.add_member(:unless, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchiveFilterConditions, name: "Unless"))
     ArchiveFilters.type = Types::ArchiveFilters
@@ -440,7 +440,7 @@ module Aws::MailManager
     ArchiveStringToEvaluate.add_member(:attribute, Types::ArchiveStringToEvaluate::Attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchiveStringEmailAttribute, name: "Attribute"))
     ArchiveStringToEvaluate.add_member(:unknown, Types::ArchiveStringToEvaluate::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ArchiveStringToEvaluate.type = Types::ArchiveStringToEvaluate
-    ArchivesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Archive, name: "member")
+    ArchivesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Archive, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ConflictException.type = Types::ConflictException
     CreateAddonInstanceRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
@@ -551,7 +551,7 @@ module Aws::MailManager
     DeregisterMemberFromAddressListRequest.type = Types::DeregisterMemberFromAddressListRequest
     DeregisterMemberFromAddressListResponse.type = Types::DeregisterMemberFromAddressListResponse
     DropAction.type = Types::DropAction
-    EmailReceivedHeadersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    EmailReceivedHeadersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     Envelope.add_member(:helo, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Helo"))
     Envelope.add_member(:from, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "From"))
     Envelope.add_member(:to, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "To"))
@@ -573,7 +573,7 @@ module Aws::MailManager
     ExportSummary.add_member(:export_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportId, name: "ExportId"))
     ExportSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportStatus, name: "Status"))
     ExportSummary.type = Types::ExportSummary
-    ExportSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportSummary, name: "member")
+    ExportSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportSummary, name: "member"))
     GetAddonInstanceRequest.add_member(:addon_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AddonInstanceId, name: "AddonInstanceId", traits: {"smithy.api#required" => {}}))
     GetAddonInstanceRequest.type = Types::GetAddonInstanceRequest
     GetAddonInstanceResponse.add_member(:addon_subscription_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AddonSubscriptionId, name: "AddonSubscriptionId"))
@@ -728,8 +728,8 @@ module Aws::MailManager
     ImportJobStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     ImportJobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     ImportJobStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
-    ImportJobs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportJob, name: "member")
-    IngressAddressListArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AddressListArn, name: "member")
+    ImportJobs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportJob, name: "member"))
+    IngressAddressListArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressListArn, name: "member"))
     IngressAddressListEmailAttribute.add_member(:recipient, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECIPIENT", traits: {"smithy.api#enumValue" => "RECIPIENT"}))
     IngressAnalysis.add_member(:analyzer, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerArn, name: "Analyzer", traits: {"smithy.api#required" => {}}))
     IngressAnalysis.add_member(:result_field, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultField, name: "ResultField", traits: {"smithy.api#required" => {}}))
@@ -791,7 +791,7 @@ module Aws::MailManager
     IngressPointStatusToUpdate.add_member(:closed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOSED", traits: {"smithy.api#enumValue" => "CLOSED"}))
     IngressPointType.add_member(:open, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPEN", traits: {"smithy.api#enumValue" => "OPEN"}))
     IngressPointType.add_member(:auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTH", traits: {"smithy.api#enumValue" => "AUTH"}))
-    IngressPointsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IngressPoint, name: "member")
+    IngressPointsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IngressPoint, name: "member"))
     IngressStringEmailAttribute.add_member(:recipient, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECIPIENT", traits: {"smithy.api#enumValue" => "RECIPIENT"}))
     IngressStringExpression.add_member(:evaluate, ::Smithy::Schema::Shapes::MemberShape.new(target: IngressStringToEvaluate, name: "Evaluate", traits: {"smithy.api#required" => {}}))
     IngressStringExpression.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: IngressStringOperator, name: "Operator", traits: {"smithy.api#required" => {}}))
@@ -820,8 +820,8 @@ module Aws::MailManager
     IngressTlsProtocolToEvaluate.type = Types::IngressTlsProtocolToEvaluate
     IpType.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4", traits: {"smithy.api#enumValue" => "IPV4"}))
     IpType.add_member(:dual_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUAL_STACK", traits: {"smithy.api#enumValue" => "DUAL_STACK"}))
-    Ipv4Cidrs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv4Cidr, name: "member")
-    Ipv6Cidrs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6Cidr, name: "member")
+    Ipv4Cidrs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv4Cidr, name: "member"))
+    Ipv6Cidrs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6Cidr, name: "member"))
     ListAddonInstancesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken"))
     ListAddonInstancesRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, name: "PageSize"))
     ListAddonInstancesRequest.type = Types::ListAddonInstancesRequest
@@ -935,16 +935,16 @@ module Aws::MailManager
     PolicyCondition.add_member(:boolean_expression, Types::PolicyCondition::BooleanExpression, ::Smithy::Schema::Shapes::MemberShape.new(target: IngressBooleanExpression, name: "BooleanExpression"))
     PolicyCondition.add_member(:unknown, Types::PolicyCondition::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     PolicyCondition.type = Types::PolicyCondition
-    PolicyConditions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyCondition, name: "member")
+    PolicyConditions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyCondition, name: "member"))
     PolicyStatement.add_member(:conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyConditions, name: "Conditions", traits: {"smithy.api#required" => {}}))
     PolicyStatement.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceptAction, name: "Action", traits: {"smithy.api#required" => {}}))
     PolicyStatement.type = Types::PolicyStatement
-    PolicyStatementList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStatement, name: "member")
+    PolicyStatementList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyStatement, name: "member"))
     PrivateNetworkConfiguration.add_member(:vpc_endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointId, name: "VpcEndpointId", traits: {"smithy.api#required" => {}}))
     PrivateNetworkConfiguration.type = Types::PrivateNetworkConfiguration
     PublicNetworkConfiguration.add_member(:ip_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IpType, name: "IpType", traits: {"smithy.api#default" => "IPV4", "smithy.api#required" => {}}))
     PublicNetworkConfiguration.type = Types::PublicNetworkConfiguration
-    Recipients.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "member")
+    Recipients.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "member"))
     RegisterMemberToAddressListRequest.add_member(:address_list_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressListId, name: "AddressListId", traits: {"smithy.api#required" => {}}))
     RegisterMemberToAddressListRequest.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: Address, name: "Address", traits: {"smithy.api#required" => {}}))
     RegisterMemberToAddressListRequest.type = Types::RegisterMemberToAddressListRequest
@@ -961,7 +961,7 @@ module Aws::MailManager
     RelayAuthentication.add_member(:no_authentication, Types::RelayAuthentication::NoAuthentication, ::Smithy::Schema::Shapes::MemberShape.new(target: NoAuthentication, name: "NoAuthentication"))
     RelayAuthentication.add_member(:unknown, Types::RelayAuthentication::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RelayAuthentication.type = Types::RelayAuthentication
-    Relays.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Relay, name: "member")
+    Relays.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Relay, name: "member"))
     ReplaceRecipientAction.add_member(:replace_with, ::Smithy::Schema::Shapes::MemberShape.new(target: Recipients, name: "ReplaceWith"))
     ReplaceRecipientAction.type = Types::ReplaceRecipientAction
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -1002,7 +1002,7 @@ module Aws::MailManager
     Row.add_member(:envelope, ::Smithy::Schema::Shapes::MemberShape.new(target: Envelope, name: "Envelope"))
     Row.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "SourceArn"))
     Row.type = Types::Row
-    RowsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Row, name: "member")
+    RowsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Row, name: "member"))
     Rule.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleName, name: "Name"))
     Rule.add_member(:conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleConditions, name: "Conditions"))
     Rule.add_member(:unless, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleConditions, name: "Unless"))
@@ -1020,8 +1020,8 @@ module Aws::MailManager
     RuleAction.add_member(:publish_to_sns, Types::RuleAction::PublishToSns, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsAction, name: "PublishToSns"))
     RuleAction.add_member(:unknown, Types::RuleAction::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RuleAction.type = Types::RuleAction
-    RuleActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleAction, name: "member")
-    RuleAddressListArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AddressListArn, name: "member")
+    RuleActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleAction, name: "member"))
+    RuleAddressListArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressListArn, name: "member"))
     RuleAddressListEmailAttribute.add_member(:recipient, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECIPIENT", traits: {"smithy.api#enumValue" => "RECIPIENT"}))
     RuleAddressListEmailAttribute.add_member(:mail_from, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAIL_FROM", traits: {"smithy.api#enumValue" => "MAIL_FROM"}))
     RuleAddressListEmailAttribute.add_member(:sender, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SENDER", traits: {"smithy.api#enumValue" => "SENDER"}))
@@ -1049,7 +1049,7 @@ module Aws::MailManager
     RuleCondition.add_member(:dmarc_expression, Types::RuleCondition::DmarcExpression, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleDmarcExpression, name: "DmarcExpression"))
     RuleCondition.add_member(:unknown, Types::RuleCondition::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RuleCondition.type = Types::RuleCondition
-    RuleConditions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleCondition, name: "member")
+    RuleConditions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleCondition, name: "member"))
     RuleDmarcExpression.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleDmarcOperator, name: "Operator", traits: {"smithy.api#required" => {}}))
     RuleDmarcExpression.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleDmarcValueList, name: "Values", traits: {"smithy.api#required" => {}}))
     RuleDmarcExpression.type = Types::RuleDmarcExpression
@@ -1058,7 +1058,7 @@ module Aws::MailManager
     RuleDmarcPolicy.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     RuleDmarcPolicy.add_member(:quarantine, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUARANTINE", traits: {"smithy.api#enumValue" => "QUARANTINE"}))
     RuleDmarcPolicy.add_member(:reject, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECT", traits: {"smithy.api#enumValue" => "REJECT"}))
-    RuleDmarcValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleDmarcPolicy, name: "member")
+    RuleDmarcValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleDmarcPolicy, name: "member"))
     RuleIpEmailAttribute.add_member(:source_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOURCE_IP", traits: {"smithy.api#enumValue" => "SOURCE_IP"}))
     RuleIpExpression.add_member(:evaluate, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIpToEvaluate, name: "Evaluate", traits: {"smithy.api#required" => {}}))
     RuleIpExpression.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIpOperator, name: "Operator", traits: {"smithy.api#required" => {}}))
@@ -1069,7 +1069,7 @@ module Aws::MailManager
     RuleIpToEvaluate.add_member(:attribute, Types::RuleIpToEvaluate::Attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIpEmailAttribute, name: "Attribute"))
     RuleIpToEvaluate.add_member(:unknown, Types::RuleIpToEvaluate::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RuleIpToEvaluate.type = Types::RuleIpToEvaluate
-    RuleIpValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIpStringValue, name: "member")
+    RuleIpValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIpStringValue, name: "member"))
     RuleIsInAddressList.add_member(:attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleAddressListEmailAttribute, name: "Attribute", traits: {"smithy.api#required" => {}}))
     RuleIsInAddressList.add_member(:address_lists, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleAddressListArnList, name: "AddressLists", traits: {"smithy.api#required" => {}}))
     RuleIsInAddressList.type = Types::RuleIsInAddressList
@@ -1091,7 +1091,7 @@ module Aws::MailManager
     RuleSet.add_member(:rule_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSetName, name: "RuleSetName"))
     RuleSet.add_member(:last_modification_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "LastModificationDate"))
     RuleSet.type = Types::RuleSet
-    RuleSets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSet, name: "member")
+    RuleSets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSet, name: "member"))
     RuleStringEmailAttribute.add_member(:mail_from, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAIL_FROM", traits: {"smithy.api#enumValue" => "MAIL_FROM"}))
     RuleStringEmailAttribute.add_member(:helo, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HELO", traits: {"smithy.api#enumValue" => "HELO"}))
     RuleStringEmailAttribute.add_member(:recipient, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECIPIENT", traits: {"smithy.api#enumValue" => "RECIPIENT"}))
@@ -1104,7 +1104,7 @@ module Aws::MailManager
     RuleStringExpression.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleStringOperator, name: "Operator", traits: {"smithy.api#required" => {}}))
     RuleStringExpression.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleStringList, name: "Values", traits: {"smithy.api#required" => {}}))
     RuleStringExpression.type = Types::RuleStringExpression
-    RuleStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleStringValue, name: "member")
+    RuleStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleStringValue, name: "member"))
     RuleStringOperator.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUALS", traits: {"smithy.api#enumValue" => "EQUALS"}))
     RuleStringOperator.add_member(:not_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_EQUALS", traits: {"smithy.api#enumValue" => "NOT_EQUALS"}))
     RuleStringOperator.add_member(:starts_with, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTS_WITH", traits: {"smithy.api#enumValue" => "STARTS_WITH"}))
@@ -1131,8 +1131,8 @@ module Aws::MailManager
     RuleVerdictToEvaluate.add_member(:analysis, Types::RuleVerdictToEvaluate::Analysis, ::Smithy::Schema::Shapes::MemberShape.new(target: Analysis, name: "Analysis"))
     RuleVerdictToEvaluate.add_member(:unknown, Types::RuleVerdictToEvaluate::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     RuleVerdictToEvaluate.type = Types::RuleVerdictToEvaluate
-    RuleVerdictValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleVerdict, name: "member")
-    Rules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "member")
+    RuleVerdictValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleVerdict, name: "member"))
+    Rules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "member"))
     S3Action.add_member(:action_failure_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionFailurePolicy, name: "ActionFailurePolicy"))
     S3Action.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "RoleArn", traits: {"smithy.api#required" => {}}))
     S3Action.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Bucket, name: "S3Bucket", traits: {"smithy.api#required" => {}}))
@@ -1144,7 +1144,7 @@ module Aws::MailManager
     SavedAddress.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: Address, name: "Address", traits: {"smithy.api#required" => {}}))
     SavedAddress.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
     SavedAddress.type = Types::SavedAddress
-    SavedAddresses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SavedAddress, name: "member")
+    SavedAddresses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SavedAddress, name: "member"))
     SearchState.add_member(:queued, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUEUED", traits: {"smithy.api#enumValue" => "QUEUED"}))
     SearchState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     SearchState.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
@@ -1158,7 +1158,7 @@ module Aws::MailManager
     SearchSummary.add_member(:search_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchId, name: "SearchId"))
     SearchSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchStatus, name: "Status"))
     SearchSummary.type = Types::SearchSummary
-    SearchSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSummary, name: "member")
+    SearchSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSummary, name: "member"))
     SendAction.add_member(:action_failure_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionFailurePolicy, name: "ActionFailurePolicy"))
     SendAction.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "RoleArn", traits: {"smithy.api#required" => {}}))
     SendAction.type = Types::SendAction
@@ -1204,13 +1204,13 @@ module Aws::MailManager
     StopArchiveSearchRequest.add_member(:search_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchId, name: "SearchId", traits: {"smithy.api#required" => {}}))
     StopArchiveSearchRequest.type = Types::StopArchiveSearchRequest
     StopArchiveSearchResponse.type = Types::StopArchiveSearchResponse
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    StringValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    StringValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -1221,7 +1221,7 @@ module Aws::MailManager
     TrafficPolicy.add_member(:traffic_policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicyId, name: "TrafficPolicyId", traits: {"smithy.api#required" => {}}))
     TrafficPolicy.add_member(:default_action, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceptAction, name: "DefaultAction", traits: {"smithy.api#required" => {}}))
     TrafficPolicy.type = Types::TrafficPolicy
-    TrafficPolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicy, name: "member")
+    TrafficPolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicy, name: "member"))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest

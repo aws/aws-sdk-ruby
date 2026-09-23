@@ -108,12 +108,12 @@ module Aws::MigrationHub
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    ApplicationIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "member")
+    ApplicationIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "member"))
     ApplicationState.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "ApplicationId"))
     ApplicationState.add_member(:application_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStatus, name: "ApplicationStatus"))
     ApplicationState.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateDateTime, name: "LastUpdatedTime"))
     ApplicationState.type = Types::ApplicationState
-    ApplicationStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationState, name: "member")
+    ApplicationStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationState, name: "member"))
     ApplicationStatus.add_member(:not_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_STARTED", traits: {"smithy.api#enumValue" => "NOT_STARTED"}))
     ApplicationStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     ApplicationStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
@@ -142,7 +142,7 @@ module Aws::MigrationHub
     CreatedArtifact.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedArtifactName, name: "Name", traits: {"smithy.api#required" => {}}))
     CreatedArtifact.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedArtifactDescription, name: "Description"))
     CreatedArtifact.type = Types::CreatedArtifact
-    CreatedArtifactList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedArtifact, name: "member")
+    CreatedArtifactList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedArtifact, name: "member"))
     DeleteProgressUpdateStreamRequest.add_member(:progress_update_stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, name: "ProgressUpdateStreamName", traits: {"smithy.api#required" => {}}))
     DeleteProgressUpdateStreamRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRun, name: "DryRun", traits: {"smithy.api#default" => false}))
     DeleteProgressUpdateStreamRequest.type = Types::DeleteProgressUpdateStreamRequest
@@ -178,7 +178,7 @@ module Aws::MigrationHub
     DiscoveredResource.add_member(:configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationId, name: "ConfigurationId", traits: {"smithy.api#required" => {}}))
     DiscoveredResource.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscoveredResourceDescription, name: "Description"))
     DiscoveredResource.type = Types::DiscoveredResource
-    DiscoveredResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DiscoveredResource, name: "member")
+    DiscoveredResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscoveredResource, name: "member"))
     DryRunOperation.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     DryRunOperation.type = Types::DryRunOperation
     HomeRegionNotSetException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -192,7 +192,7 @@ module Aws::MigrationHub
     InternalServerError.type = Types::InternalServerError
     InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InvalidInputException.type = Types::InvalidInputException
-    LatestResourceAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceAttribute, name: "member")
+    LatestResourceAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceAttribute, name: "member"))
     ListApplicationStatesRequest.add_member(:application_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationIds, name: "ApplicationIds"))
     ListApplicationStatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     ListApplicationStatesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
@@ -258,12 +258,12 @@ module Aws::MigrationHub
     MigrationTaskSummary.add_member(:status_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusDetail, name: "StatusDetail"))
     MigrationTaskSummary.add_member(:update_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateDateTime, name: "UpdateDateTime"))
     MigrationTaskSummary.type = Types::MigrationTaskSummary
-    MigrationTaskSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskSummary, name: "member")
+    MigrationTaskSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskSummary, name: "member"))
     MigrationTaskUpdate.add_member(:update_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateDateTime, name: "UpdateDateTime"))
     MigrationTaskUpdate.add_member(:update_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateType, name: "UpdateType"))
     MigrationTaskUpdate.add_member(:migration_task_state, ::Smithy::Schema::Shapes::MemberShape.new(target: Task, name: "MigrationTaskState"))
     MigrationTaskUpdate.type = Types::MigrationTaskUpdate
-    MigrationTaskUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskUpdate, name: "member")
+    MigrationTaskUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskUpdate, name: "member"))
     NotifyApplicationStateRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "ApplicationId", traits: {"smithy.api#required" => {}}))
     NotifyApplicationStateRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     NotifyApplicationStateRequest.add_member(:update_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateDateTime, name: "UpdateDateTime"))
@@ -282,7 +282,7 @@ module Aws::MigrationHub
     PolicyErrorException.type = Types::PolicyErrorException
     ProgressUpdateStreamSummary.add_member(:progress_update_stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, name: "ProgressUpdateStreamName"))
     ProgressUpdateStreamSummary.type = Types::ProgressUpdateStreamSummary
-    ProgressUpdateStreamSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStreamSummary, name: "member")
+    ProgressUpdateStreamSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStreamSummary, name: "member"))
     PutResourceAttributesRequest.add_member(:progress_update_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressUpdateStream, name: "ProgressUpdateStream", traits: {"smithy.api#required" => {}}))
     PutResourceAttributesRequest.add_member(:migration_task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationTaskName, name: "MigrationTaskName", traits: {"smithy.api#required" => {}}))
     PutResourceAttributesRequest.add_member(:resource_attribute_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceAttributeList, name: "ResourceAttributeList", traits: {"smithy.api#required" => {}}))
@@ -292,7 +292,7 @@ module Aws::MigrationHub
     ResourceAttribute.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceAttributeType, name: "Type", traits: {"smithy.api#required" => {}}))
     ResourceAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceAttributeValue, name: "Value", traits: {"smithy.api#required" => {}}))
     ResourceAttribute.type = Types::ResourceAttribute
-    ResourceAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceAttribute, name: "member")
+    ResourceAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceAttribute, name: "member"))
     ResourceAttributeType.add_member(:ipv4_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4_ADDRESS", traits: {"smithy.api#enumValue" => "IPV4_ADDRESS"}))
     ResourceAttributeType.add_member(:ipv6_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV6_ADDRESS", traits: {"smithy.api#enumValue" => "IPV6_ADDRESS"}))
     ResourceAttributeType.add_member(:mac_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAC_ADDRESS", traits: {"smithy.api#enumValue" => "MAC_ADDRESS"}))
@@ -311,7 +311,7 @@ module Aws::MigrationHub
     SourceResource.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceResourceDescription, name: "Description"))
     SourceResource.add_member(:status_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusDetail, name: "StatusDetail"))
     SourceResource.type = Types::SourceResource
-    SourceResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SourceResource, name: "member")
+    SourceResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceResource, name: "member"))
     Status.add_member(:not_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_STARTED", traits: {"smithy.api#enumValue" => "NOT_STARTED"}))
     Status.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     Status.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))

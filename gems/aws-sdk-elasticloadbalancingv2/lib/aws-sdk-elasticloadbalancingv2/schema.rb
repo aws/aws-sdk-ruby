@@ -421,7 +421,7 @@ module Aws::ElasticLoadBalancingV2
     ActionTypeEnum.add_member(:authenticate_cognito, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTHENTICATE_COGNITO", traits: {"smithy.api#enumValue" => "authenticate-cognito"}))
     ActionTypeEnum.add_member(:redirect, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REDIRECT", traits: {"smithy.api#enumValue" => "redirect"}))
     ActionTypeEnum.add_member(:fixed_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIXED_RESPONSE", traits: {"smithy.api#enumValue" => "fixed-response"}))
-    Actions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "member")
+    Actions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "member"))
     AddListenerCertificatesInput.add_member(:listener_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerArn, name: "ListenerArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AddListenerCertificatesInput.add_member(:certificates, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateList, name: "Certificates", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AddListenerCertificatesInput.type = Types::AddListenerCertificatesInput
@@ -444,14 +444,14 @@ module Aws::ElasticLoadBalancingV2
     AdvertiseTrustStoreCaNamesEnum.add_member(:off, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "off", traits: {"smithy.api#enumValue" => "off"}))
     AllocationIdNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     AllocationIdNotFoundException.type = Types::AllocationIdNotFoundException
-    AlpnPolicyName.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AlpnPolicyValue, name: "member")
+    AlpnPolicyName.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AlpnPolicyValue, name: "member"))
     AnomalyDetection.add_member(:result, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyResultEnum, name: "Result"))
     AnomalyDetection.add_member(:mitigation_in_effect, ::Smithy::Schema::Shapes::MemberShape.new(target: MitigationInEffectEnum, name: "MitigationInEffect"))
     AnomalyDetection.type = Types::AnomalyDetection
     AnomalyResultEnum.add_member(:anomalous, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANOMALOUS", traits: {"smithy.api#enumValue" => "anomalous"}))
     AnomalyResultEnum.add_member(:normal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NORMAL", traits: {"smithy.api#enumValue" => "normal"}))
-    AuthenticateCognitoActionAuthenticationRequestExtraParams.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticateCognitoActionAuthenticationRequestParamName, name: "key")
-    AuthenticateCognitoActionAuthenticationRequestExtraParams.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticateCognitoActionAuthenticationRequestParamValue, name: "value")
+    AuthenticateCognitoActionAuthenticationRequestExtraParams.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticateCognitoActionAuthenticationRequestParamName, name: "key"))
+    AuthenticateCognitoActionAuthenticationRequestExtraParams.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticateCognitoActionAuthenticationRequestParamValue, name: "value"))
     AuthenticateCognitoActionConditionalBehaviorEnum.add_member(:deny, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DENY", traits: {"smithy.api#enumValue" => "deny"}))
     AuthenticateCognitoActionConditionalBehaviorEnum.add_member(:allow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOW", traits: {"smithy.api#enumValue" => "allow"}))
     AuthenticateCognitoActionConditionalBehaviorEnum.add_member(:authenticate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTHENTICATE", traits: {"smithy.api#enumValue" => "authenticate"}))
@@ -464,8 +464,8 @@ module Aws::ElasticLoadBalancingV2
     AuthenticateCognitoActionConfig.add_member(:authentication_request_extra_params, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticateCognitoActionAuthenticationRequestExtraParams, name: "AuthenticationRequestExtraParams"))
     AuthenticateCognitoActionConfig.add_member(:on_unauthenticated_request, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticateCognitoActionConditionalBehaviorEnum, name: "OnUnauthenticatedRequest"))
     AuthenticateCognitoActionConfig.type = Types::AuthenticateCognitoActionConfig
-    AuthenticateOidcActionAuthenticationRequestExtraParams.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticateOidcActionAuthenticationRequestParamName, name: "key")
-    AuthenticateOidcActionAuthenticationRequestExtraParams.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticateOidcActionAuthenticationRequestParamValue, name: "value")
+    AuthenticateOidcActionAuthenticationRequestExtraParams.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticateOidcActionAuthenticationRequestParamName, name: "key"))
+    AuthenticateOidcActionAuthenticationRequestExtraParams.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticateOidcActionAuthenticationRequestParamValue, name: "value"))
     AuthenticateOidcActionConditionalBehaviorEnum.add_member(:deny, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DENY", traits: {"smithy.api#enumValue" => "deny"}))
     AuthenticateOidcActionConditionalBehaviorEnum.add_member(:allow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOW", traits: {"smithy.api#enumValue" => "allow"}))
     AuthenticateOidcActionConditionalBehaviorEnum.add_member(:authenticate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTHENTICATE", traits: {"smithy.api#enumValue" => "authenticate"}))
@@ -490,7 +490,7 @@ module Aws::ElasticLoadBalancingV2
     AvailabilityZone.type = Types::AvailabilityZone
     AvailabilityZoneNotSupportedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     AvailabilityZoneNotSupportedException.type = Types::AvailabilityZoneNotSupportedException
-    AvailabilityZones.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "member")
+    AvailabilityZones.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "member"))
     CaCertificatesBundleNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     CaCertificatesBundleNotFoundException.type = Types::CaCertificatesBundleNotFoundException
     CapacityDecreaseRequestsLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
@@ -509,13 +509,13 @@ module Aws::ElasticLoadBalancingV2
     Certificate.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateArn, name: "CertificateArn"))
     Certificate.add_member(:is_default, ::Smithy::Schema::Shapes::MemberShape.new(target: Default, name: "IsDefault"))
     Certificate.type = Types::Certificate
-    CertificateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Certificate, name: "member")
+    CertificateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Certificate, name: "member"))
     CertificateNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     CertificateNotFoundException.type = Types::CertificateNotFoundException
     Cipher.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CipherName, name: "Name"))
     Cipher.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: CipherPriority, name: "Priority"))
     Cipher.type = Types::Cipher
-    Ciphers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Cipher, name: "member")
+    Ciphers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Cipher, name: "member"))
     CreateListenerInput.add_member(:load_balancer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerArn, name: "LoadBalancerArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateListenerInput.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtocolEnum, name: "Protocol"))
     CreateListenerInput.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "Port"))
@@ -700,7 +700,7 @@ module Aws::ElasticLoadBalancingV2
     DescribeTrustStoreRevocation.add_member(:revocation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RevocationType, name: "RevocationType"))
     DescribeTrustStoreRevocation.add_member(:number_of_revoked_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfRevokedEntries, name: "NumberOfRevokedEntries"))
     DescribeTrustStoreRevocation.type = Types::DescribeTrustStoreRevocation
-    DescribeTrustStoreRevocationResponse.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeTrustStoreRevocation, name: "member")
+    DescribeTrustStoreRevocationResponse.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeTrustStoreRevocation, name: "member"))
     DescribeTrustStoreRevocationsInput.add_member(:trust_store_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustStoreArn, name: "TrustStoreArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeTrustStoreRevocationsInput.add_member(:revocation_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RevocationIds, name: "RevocationIds"))
     DescribeTrustStoreRevocationsInput.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: Marker, name: "Marker"))
@@ -788,9 +788,9 @@ module Aws::ElasticLoadBalancingV2
     Limit.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
     Limit.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: Max, name: "Max"))
     Limit.type = Types::Limit
-    Limits.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, name: "member")
-    ListOfDescribeTargetHealthIncludeOptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeTargetHealthInputIncludeEnum, name: "member")
-    ListOfString.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue, name: "member")
+    Limits.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, name: "member"))
+    ListOfDescribeTargetHealthIncludeOptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeTargetHealthInputIncludeEnum, name: "member"))
+    ListOfString.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue, name: "member"))
     Listener.add_member(:listener_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerArn, name: "ListenerArn"))
     Listener.add_member(:load_balancer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerArn, name: "LoadBalancerArn"))
     Listener.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "Port"))
@@ -801,14 +801,14 @@ module Aws::ElasticLoadBalancingV2
     Listener.add_member(:alpn_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AlpnPolicyName, name: "AlpnPolicy"))
     Listener.add_member(:mutual_authentication, ::Smithy::Schema::Shapes::MemberShape.new(target: MutualAuthenticationAttributes, name: "MutualAuthentication"))
     Listener.type = Types::Listener
-    ListenerArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerArn, name: "member")
+    ListenerArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerArn, name: "member"))
     ListenerAttribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerAttributeKey, name: "Key"))
     ListenerAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerAttributeValue, name: "Value"))
     ListenerAttribute.type = Types::ListenerAttribute
-    ListenerAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerAttribute, name: "member")
+    ListenerAttributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerAttribute, name: "member"))
     ListenerNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     ListenerNotFoundException.type = Types::ListenerNotFoundException
-    Listeners.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Listener, name: "member")
+    Listeners.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Listener, name: "member"))
     LoadBalancer.add_member(:load_balancer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerArn, name: "LoadBalancerArn"))
     LoadBalancer.add_member(:dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSName, name: "DNSName"))
     LoadBalancer.add_member(:canonical_hosted_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CanonicalHostedZoneId, name: "CanonicalHostedZoneId"))
@@ -831,13 +831,13 @@ module Aws::ElasticLoadBalancingV2
     LoadBalancerAddress.add_member(:private_i_pv4_address, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateIPv4Address, name: "PrivateIPv4Address"))
     LoadBalancerAddress.add_member(:i_pv6_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IPv6Address, name: "IPv6Address"))
     LoadBalancerAddress.type = Types::LoadBalancerAddress
-    LoadBalancerAddresses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerAddress, name: "member")
-    LoadBalancerArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerArn, name: "member")
+    LoadBalancerAddresses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerAddress, name: "member"))
+    LoadBalancerArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerArn, name: "member"))
     LoadBalancerAttribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerAttributeKey, name: "Key"))
     LoadBalancerAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerAttributeValue, name: "Value"))
     LoadBalancerAttribute.type = Types::LoadBalancerAttribute
-    LoadBalancerAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerAttribute, name: "member")
-    LoadBalancerNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerName, name: "member")
+    LoadBalancerAttributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerAttribute, name: "member"))
+    LoadBalancerNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerName, name: "member"))
     LoadBalancerNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     LoadBalancerNotFoundException.type = Types::LoadBalancerNotFoundException
     LoadBalancerSchemeEnum.add_member(:internet_facing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNET_FACING", traits: {"smithy.api#enumValue" => "internet-facing"}))
@@ -852,7 +852,7 @@ module Aws::ElasticLoadBalancingV2
     LoadBalancerTypeEnum.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPLICATION", traits: {"smithy.api#enumValue" => "application"}))
     LoadBalancerTypeEnum.add_member(:network, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NETWORK", traits: {"smithy.api#enumValue" => "network"}))
     LoadBalancerTypeEnum.add_member(:gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GATEWAY", traits: {"smithy.api#enumValue" => "gateway"}))
-    LoadBalancers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancer, name: "member")
+    LoadBalancers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancer, name: "member"))
     Matcher.add_member(:http_code, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpCode, name: "HttpCode"))
     Matcher.add_member(:grpc_code, ::Smithy::Schema::Shapes::MemberShape.new(target: GrpcCode, name: "GrpcCode"))
     Matcher.type = Types::Matcher
@@ -953,7 +953,7 @@ module Aws::ElasticLoadBalancingV2
     QueryStringKeyValuePair.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue, name: "Key"))
     QueryStringKeyValuePair.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue, name: "Value"))
     QueryStringKeyValuePair.type = Types::QueryStringKeyValuePair
-    QueryStringKeyValuePairList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStringKeyValuePair, name: "member")
+    QueryStringKeyValuePairList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStringKeyValuePair, name: "member"))
     RedirectActionConfig.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: RedirectActionProtocol, name: "Protocol"))
     RedirectActionConfig.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: RedirectActionPort, name: "Port"))
     RedirectActionConfig.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: RedirectActionHost, name: "Host"))
@@ -968,7 +968,7 @@ module Aws::ElasticLoadBalancingV2
     RegisterTargetsInput.type = Types::RegisterTargetsInput
     RegisterTargetsOutput.type = Types::RegisterTargetsOutput
     RemoveIpamPoolEnum.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ipv4", traits: {"smithy.api#enumValue" => "ipv4"}))
-    RemoveIpamPools.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RemoveIpamPoolEnum, name: "member")
+    RemoveIpamPools.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RemoveIpamPoolEnum, name: "member"))
     RemoveListenerCertificatesInput.add_member(:listener_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerArn, name: "ListenerArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RemoveListenerCertificatesInput.add_member(:certificates, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateList, name: "Certificates", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RemoveListenerCertificatesInput.type = Types::RemoveListenerCertificatesInput
@@ -981,7 +981,7 @@ module Aws::ElasticLoadBalancingV2
     RemoveTrustStoreRevocationsInput.add_member(:revocation_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RevocationIds, name: "RevocationIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RemoveTrustStoreRevocationsInput.type = Types::RemoveTrustStoreRevocationsInput
     RemoveTrustStoreRevocationsOutput.type = Types::RemoveTrustStoreRevocationsOutput
-    ResourceArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member")
+    ResourceArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member"))
     ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     ResourceInUseException.type = Types::ResourceInUseException
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
@@ -993,10 +993,10 @@ module Aws::ElasticLoadBalancingV2
     RevocationContent.type = Types::RevocationContent
     RevocationContentNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     RevocationContentNotFoundException.type = Types::RevocationContentNotFoundException
-    RevocationContents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RevocationContent, name: "member")
+    RevocationContents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RevocationContent, name: "member"))
     RevocationIdNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     RevocationIdNotFoundException.type = Types::RevocationIdNotFoundException
-    RevocationIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RevocationId, name: "member")
+    RevocationIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RevocationId, name: "member"))
     RevocationType.add_member(:crl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CRL", traits: {"smithy.api#enumValue" => "CRL"}))
     Rule.add_member(:rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleArn, name: "RuleArn"))
     Rule.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Priority"))
@@ -1004,7 +1004,7 @@ module Aws::ElasticLoadBalancingV2
     Rule.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: Actions, name: "Actions"))
     Rule.add_member(:is_default, ::Smithy::Schema::Shapes::MemberShape.new(target: IsDefault, name: "IsDefault"))
     Rule.type = Types::Rule
-    RuleArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleArn, name: "member")
+    RuleArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleArn, name: "member"))
     RuleCondition.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionFieldName, name: "Field"))
     RuleCondition.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfString, name: "Values"))
     RuleCondition.add_member(:host_header_config, ::Smithy::Schema::Shapes::MemberShape.new(target: HostHeaderConditionConfig, name: "HostHeaderConfig"))
@@ -1014,17 +1014,17 @@ module Aws::ElasticLoadBalancingV2
     RuleCondition.add_member(:http_request_method_config, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRequestMethodConditionConfig, name: "HttpRequestMethodConfig"))
     RuleCondition.add_member(:source_ip_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceIpConditionConfig, name: "SourceIpConfig"))
     RuleCondition.type = Types::RuleCondition
-    RuleConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleCondition, name: "member")
+    RuleConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleCondition, name: "member"))
     RuleNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     RuleNotFoundException.type = Types::RuleNotFoundException
-    RulePriorityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RulePriorityPair, name: "member")
+    RulePriorityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RulePriorityPair, name: "member"))
     RulePriorityPair.add_member(:rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleArn, name: "RuleArn"))
     RulePriorityPair.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: RulePriority, name: "Priority"))
     RulePriorityPair.type = Types::RulePriorityPair
-    Rules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "member")
+    Rules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "member"))
     SSLPolicyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     SSLPolicyNotFoundException.type = Types::SSLPolicyNotFoundException
-    SecurityGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
+    SecurityGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     SetIpAddressTypeInput.add_member(:load_balancer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerArn, name: "LoadBalancerArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SetIpAddressTypeInput.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddressType, name: "IpAddressType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SetIpAddressTypeInput.type = Types::SetIpAddressTypeInput
@@ -1053,34 +1053,34 @@ module Aws::ElasticLoadBalancingV2
     SetSubnetsOutput.type = Types::SetSubnetsOutput
     SourceIpConditionConfig.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfString, name: "Values"))
     SourceIpConditionConfig.type = Types::SourceIpConditionConfig
-    SourceNatIpv6Prefixes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SourceNatIpv6Prefix, name: "member")
-    SslPolicies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SslPolicy, name: "member")
+    SourceNatIpv6Prefixes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceNatIpv6Prefix, name: "member"))
+    SslPolicies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SslPolicy, name: "member"))
     SslPolicy.add_member(:ssl_protocols, ::Smithy::Schema::Shapes::MemberShape.new(target: SslProtocols, name: "SslProtocols"))
     SslPolicy.add_member(:ciphers, ::Smithy::Schema::Shapes::MemberShape.new(target: Ciphers, name: "Ciphers"))
     SslPolicy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SslPolicyName, name: "Name"))
     SslPolicy.add_member(:supported_load_balancer_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfString, name: "SupportedLoadBalancerTypes"))
     SslPolicy.type = Types::SslPolicy
-    SslPolicyNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SslPolicyName, name: "member")
-    SslProtocols.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SslProtocol, name: "member")
+    SslPolicyNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SslPolicyName, name: "member"))
+    SslProtocols.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SslProtocol, name: "member"))
     SubnetMapping.add_member(:subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "SubnetId"))
     SubnetMapping.add_member(:allocation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AllocationId, name: "AllocationId"))
     SubnetMapping.add_member(:private_i_pv4_address, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateIPv4Address, name: "PrivateIPv4Address"))
     SubnetMapping.add_member(:i_pv6_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IPv6Address, name: "IPv6Address"))
     SubnetMapping.add_member(:source_nat_ipv6_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceNatIpv6Prefix, name: "SourceNatIpv6Prefix"))
     SubnetMapping.type = Types::SubnetMapping
-    SubnetMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetMapping, name: "member")
+    SubnetMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetMapping, name: "member"))
     SubnetNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     SubnetNotFoundException.type = Types::SubnetNotFoundException
-    Subnets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
+    Subnets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
     TagDescription.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn"))
     TagDescription.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     TagDescription.type = Types::TagDescription
-    TagDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagDescription, name: "member")
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagDescription, name: "member"))
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TargetAdministrativeOverrideReasonEnum.add_member(:internal_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "AdministrativeOverride.Unknown"}))
     TargetAdministrativeOverrideReasonEnum.add_member(:no_override_engaged, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_OVERRIDE_ENGAGED", traits: {"smithy.api#enumValue" => "AdministrativeOverride.NoOverride"}))
     TargetAdministrativeOverrideReasonEnum.add_member(:zonal_shift_engaged, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ZONAL_SHIFT_ENGAGED", traits: {"smithy.api#enumValue" => "AdministrativeOverride.ZonalShiftActive"}))
@@ -1093,7 +1093,7 @@ module Aws::ElasticLoadBalancingV2
     TargetDescription.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "Port"))
     TargetDescription.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ZoneName, name: "AvailabilityZone"))
     TargetDescription.type = Types::TargetDescription
-    TargetDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetDescription, name: "member")
+    TargetDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetDescription, name: "member"))
     TargetGroup.add_member(:target_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupArn, name: "TargetGroupArn"))
     TargetGroup.add_member(:target_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupName, name: "TargetGroupName"))
     TargetGroup.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtocolEnum, name: "Protocol"))
@@ -1113,17 +1113,17 @@ module Aws::ElasticLoadBalancingV2
     TargetGroup.add_member(:protocol_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtocolVersion, name: "ProtocolVersion"))
     TargetGroup.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupIpAddressTypeEnum, name: "IpAddressType"))
     TargetGroup.type = Types::TargetGroup
-    TargetGroupArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupArn, name: "member")
+    TargetGroupArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupArn, name: "member"))
     TargetGroupAssociationLimitException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     TargetGroupAssociationLimitException.type = Types::TargetGroupAssociationLimitException
     TargetGroupAttribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupAttributeKey, name: "Key"))
     TargetGroupAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupAttributeValue, name: "Value"))
     TargetGroupAttribute.type = Types::TargetGroupAttribute
-    TargetGroupAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupAttribute, name: "member")
+    TargetGroupAttributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupAttribute, name: "member"))
     TargetGroupIpAddressTypeEnum.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4", traits: {"smithy.api#enumValue" => "ipv4"}))
     TargetGroupIpAddressTypeEnum.add_member(:ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV6", traits: {"smithy.api#enumValue" => "ipv6"}))
-    TargetGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupTuple, name: "member")
-    TargetGroupNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupName, name: "member")
+    TargetGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupTuple, name: "member"))
+    TargetGroupNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupName, name: "member"))
     TargetGroupNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     TargetGroupNotFoundException.type = Types::TargetGroupNotFoundException
     TargetGroupStickinessConfig.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupStickinessEnabled, name: "Enabled"))
@@ -1132,7 +1132,7 @@ module Aws::ElasticLoadBalancingV2
     TargetGroupTuple.add_member(:target_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupArn, name: "TargetGroupArn"))
     TargetGroupTuple.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupWeight, name: "Weight"))
     TargetGroupTuple.type = Types::TargetGroupTuple
-    TargetGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroup, name: "member")
+    TargetGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroup, name: "member"))
     TargetHealth.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetHealthStateEnum, name: "State"))
     TargetHealth.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetHealthReasonEnum, name: "Reason"))
     TargetHealth.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
@@ -1143,7 +1143,7 @@ module Aws::ElasticLoadBalancingV2
     TargetHealthDescription.add_member(:anomaly_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetection, name: "AnomalyDetection"))
     TargetHealthDescription.add_member(:administrative_override, ::Smithy::Schema::Shapes::MemberShape.new(target: AdministrativeOverride, name: "AdministrativeOverride"))
     TargetHealthDescription.type = Types::TargetHealthDescription
-    TargetHealthDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetHealthDescription, name: "member")
+    TargetHealthDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetHealthDescription, name: "member"))
     TargetHealthReasonEnum.add_member(:registration_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGISTRATION_IN_PROGRESS", traits: {"smithy.api#enumValue" => "Elb.RegistrationInProgress"}))
     TargetHealthReasonEnum.add_member(:initial_health_checking, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INITIAL_HEALTH_CHECKING", traits: {"smithy.api#enumValue" => "Elb.InitialHealthChecking"}))
     TargetHealthReasonEnum.add_member(:response_code_mismatch, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESPONSE_CODE_MISMATCH", traits: {"smithy.api#enumValue" => "Target.ResponseCodeMismatch"}))
@@ -1197,17 +1197,17 @@ module Aws::ElasticLoadBalancingV2
     TrustStore.add_member(:number_of_ca_certificates, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfCaCertificates, name: "NumberOfCaCertificates"))
     TrustStore.add_member(:total_revoked_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: TotalRevokedEntries, name: "TotalRevokedEntries"))
     TrustStore.type = Types::TrustStore
-    TrustStoreArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrustStoreArn, name: "member")
+    TrustStoreArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustStoreArn, name: "member"))
     TrustStoreAssociation.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustStoreAssociationResourceArn, name: "ResourceArn"))
     TrustStoreAssociation.type = Types::TrustStoreAssociation
     TrustStoreAssociationNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     TrustStoreAssociationNotFoundException.type = Types::TrustStoreAssociationNotFoundException
     TrustStoreAssociationStatusEnum.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "active"}))
     TrustStoreAssociationStatusEnum.add_member(:removed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMOVED", traits: {"smithy.api#enumValue" => "removed"}))
-    TrustStoreAssociations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrustStoreAssociation, name: "member")
+    TrustStoreAssociations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustStoreAssociation, name: "member"))
     TrustStoreInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     TrustStoreInUseException.type = Types::TrustStoreInUseException
-    TrustStoreNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrustStoreName, name: "member")
+    TrustStoreNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustStoreName, name: "member"))
     TrustStoreNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     TrustStoreNotFoundException.type = Types::TrustStoreNotFoundException
     TrustStoreNotReadyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
@@ -1217,17 +1217,17 @@ module Aws::ElasticLoadBalancingV2
     TrustStoreRevocation.add_member(:revocation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RevocationType, name: "RevocationType"))
     TrustStoreRevocation.add_member(:number_of_revoked_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfRevokedEntries, name: "NumberOfRevokedEntries"))
     TrustStoreRevocation.type = Types::TrustStoreRevocation
-    TrustStoreRevocations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrustStoreRevocation, name: "member")
+    TrustStoreRevocations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustStoreRevocation, name: "member"))
     TrustStoreStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     TrustStoreStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
-    TrustStores.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrustStore, name: "member")
+    TrustStores.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustStore, name: "member"))
     UnsupportedProtocolException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     UnsupportedProtocolException.type = Types::UnsupportedProtocolException
     ZonalCapacityReservationState.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityReservationStatus, name: "State"))
     ZonalCapacityReservationState.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ZoneName, name: "AvailabilityZone"))
     ZonalCapacityReservationState.add_member(:effective_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityUnitsDouble, name: "EffectiveCapacityUnits"))
     ZonalCapacityReservationState.type = Types::ZonalCapacityReservationState
-    ZonalCapacityReservationStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalCapacityReservationState, name: "member")
+    ZonalCapacityReservationStates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalCapacityReservationState, name: "member"))
 
     ElasticLoadBalancingV10 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.elasticloadbalancingv2#ElasticLoadBalancing_v10"

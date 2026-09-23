@@ -297,7 +297,7 @@ module Aws::SWF
     ActivityTypeInfo.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDate", traits: {"smithy.api#required" => {}}))
     ActivityTypeInfo.add_member(:deprecation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "deprecationDate"))
     ActivityTypeInfo.type = Types::ActivityTypeInfo
-    ActivityTypeInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActivityTypeInfo, name: "member")
+    ActivityTypeInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivityTypeInfo, name: "member"))
     CancelTimerDecisionAttributes.add_member(:timer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimerId, name: "timerId", traits: {"smithy.api#required" => {}}))
     CancelTimerDecisionAttributes.type = Types::CancelTimerDecisionAttributes
     CancelTimerFailedCause.add_member(:timer_id_unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMER_ID_UNKNOWN", traits: {"smithy.api#enumValue" => "TIMER_ID_UNKNOWN"}))
@@ -434,7 +434,7 @@ module Aws::SWF
     Decision.add_member(:start_child_workflow_execution_decision_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: StartChildWorkflowExecutionDecisionAttributes, name: "startChildWorkflowExecutionDecisionAttributes"))
     Decision.add_member(:schedule_lambda_function_decision_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleLambdaFunctionDecisionAttributes, name: "scheduleLambdaFunctionDecisionAttributes"))
     Decision.type = Types::Decision
-    DecisionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Decision, name: "member")
+    DecisionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Decision, name: "member"))
     DecisionTaskCompletedEventAttributes.add_member(:execution_context, ::Smithy::Schema::Shapes::MemberShape.new(target: Data, name: "executionContext"))
     DecisionTaskCompletedEventAttributes.add_member(:scheduled_event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EventId, name: "scheduledEventId", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     DecisionTaskCompletedEventAttributes.add_member(:started_event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EventId, name: "startedEventId", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
@@ -521,7 +521,7 @@ module Aws::SWF
     DomainInfo.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     DomainInfo.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
     DomainInfo.type = Types::DomainInfo
-    DomainInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainInfo, name: "member")
+    DomainInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainInfo, name: "member"))
     EventType.add_member(:workflow_execution_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WorkflowExecutionStarted", traits: {"smithy.api#enumValue" => "WorkflowExecutionStarted"}))
     EventType.add_member(:workflow_execution_cancel_requested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WorkflowExecutionCancelRequested", traits: {"smithy.api#enumValue" => "WorkflowExecutionCancelRequested"}))
     EventType.add_member(:workflow_execution_completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WorkflowExecutionCompleted", traits: {"smithy.api#enumValue" => "WorkflowExecutionCompleted"}))
@@ -662,7 +662,7 @@ module Aws::SWF
     HistoryEvent.add_member(:schedule_lambda_function_failed_event_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleLambdaFunctionFailedEventAttributes, name: "scheduleLambdaFunctionFailedEventAttributes"))
     HistoryEvent.add_member(:start_lambda_function_failed_event_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: StartLambdaFunctionFailedEventAttributes, name: "startLambdaFunctionFailedEventAttributes"))
     HistoryEvent.type = Types::HistoryEvent
-    HistoryEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HistoryEvent, name: "member")
+    HistoryEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HistoryEvent, name: "member"))
     LambdaFunctionCompletedEventAttributes.add_member(:scheduled_event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EventId, name: "scheduledEventId", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     LambdaFunctionCompletedEventAttributes.add_member(:started_event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EventId, name: "startedEventId", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     LambdaFunctionCompletedEventAttributes.add_member(:result, ::Smithy::Schema::Shapes::MemberShape.new(target: Data, name: "result"))
@@ -855,8 +855,8 @@ module Aws::SWF
     ResourceTag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "key", traits: {"smithy.api#required" => {}}))
     ResourceTag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagValue, name: "value"))
     ResourceTag.type = Types::ResourceTag
-    ResourceTagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "member")
-    ResourceTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member")
+    ResourceTagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "member"))
+    ResourceTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member"))
     RespondActivityTaskCanceledInput.add_member(:task_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskToken, name: "taskToken", traits: {"smithy.api#required" => {}}))
     RespondActivityTaskCanceledInput.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: Data, name: "details"))
     RespondActivityTaskCanceledInput.type = Types::RespondActivityTaskCanceledInput
@@ -1020,7 +1020,7 @@ module Aws::SWF
     StartWorkflowExecutionOutput.type = Types::StartWorkflowExecutionOutput
     TagFilter.add_member(:tag, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "tag", traits: {"smithy.api#required" => {}}))
     TagFilter.type = Types::TagFilter
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -1117,7 +1117,7 @@ module Aws::SWF
     WorkflowExecutionInfo.add_member(:tag_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tagList"))
     WorkflowExecutionInfo.add_member(:cancel_requested, ::Smithy::Schema::Shapes::MemberShape.new(target: Canceled, name: "cancelRequested", traits: {"smithy.api#default" => false}))
     WorkflowExecutionInfo.type = Types::WorkflowExecutionInfo
-    WorkflowExecutionInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowExecutionInfo, name: "member")
+    WorkflowExecutionInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowExecutionInfo, name: "member"))
     WorkflowExecutionOpenCounts.add_member(:open_activity_tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "openActivityTasks", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     WorkflowExecutionOpenCounts.add_member(:open_decision_tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenDecisionTasksCount, name: "openDecisionTasks", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     WorkflowExecutionOpenCounts.add_member(:open_timers, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "openTimers", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
@@ -1173,7 +1173,7 @@ module Aws::SWF
     WorkflowTypeInfo.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDate", traits: {"smithy.api#required" => {}}))
     WorkflowTypeInfo.add_member(:deprecation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "deprecationDate"))
     WorkflowTypeInfo.type = Types::WorkflowTypeInfo
-    WorkflowTypeInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowTypeInfo, name: "member")
+    WorkflowTypeInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowTypeInfo, name: "member"))
 
     SimpleWorkflowService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.swf#SimpleWorkflowService"

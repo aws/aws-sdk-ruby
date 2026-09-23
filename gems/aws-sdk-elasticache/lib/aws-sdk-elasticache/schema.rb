@@ -466,7 +466,7 @@ module Aws::ElastiCache
     AutomaticFailoverStatus.add_member(:disabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLING", traits: {"smithy.api#enumValue" => "disabling"}))
     AvailabilityZone.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     AvailabilityZone.type = Types::AvailabilityZone
-    AvailabilityZonesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "AvailabilityZone"})
+    AvailabilityZonesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "AvailabilityZone"}))
     BatchApplyUpdateActionMessage.add_member(:replication_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationGroupIdList, name: "ReplicationGroupIds"))
     BatchApplyUpdateActionMessage.add_member(:cache_cluster_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheClusterIdList, name: "CacheClusterIds"))
     BatchApplyUpdateActionMessage.add_member(:service_update_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServiceUpdateName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -517,8 +517,8 @@ module Aws::ElastiCache
     CacheCluster.type = Types::CacheCluster
     CacheClusterAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     CacheClusterAlreadyExistsFault.type = Types::CacheClusterAlreadyExistsFault
-    CacheClusterIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    CacheClusterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CacheCluster, name: "member", traits: {"smithy.api#xmlName" => "CacheCluster"})
+    CacheClusterIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    CacheClusterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheCluster, name: "member", traits: {"smithy.api#xmlName" => "CacheCluster"}))
     CacheClusterMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     CacheClusterMessage.add_member(:cache_clusters, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheClusterList, name: "CacheClusters"))
     CacheClusterMessage.type = Types::CacheClusterMessage
@@ -530,7 +530,7 @@ module Aws::ElastiCache
     CacheEngineVersion.add_member(:cache_engine_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CacheEngineDescription"))
     CacheEngineVersion.add_member(:cache_engine_version_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CacheEngineVersionDescription"))
     CacheEngineVersion.type = Types::CacheEngineVersion
-    CacheEngineVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CacheEngineVersion, name: "member", traits: {"smithy.api#xmlName" => "CacheEngineVersion"})
+    CacheEngineVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheEngineVersion, name: "member", traits: {"smithy.api#xmlName" => "CacheEngineVersion"}))
     CacheEngineVersionMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     CacheEngineVersionMessage.add_member(:cache_engine_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheEngineVersionList, name: "CacheEngineVersions"))
     CacheEngineVersionMessage.type = Types::CacheEngineVersionMessage
@@ -543,8 +543,8 @@ module Aws::ElastiCache
     CacheNode.add_member(:customer_availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CustomerAvailabilityZone"))
     CacheNode.add_member(:customer_outpost_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CustomerOutpostArn"))
     CacheNode.type = Types::CacheNode
-    CacheNodeIdsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "CacheNodeId"})
-    CacheNodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CacheNode, name: "member", traits: {"smithy.api#xmlName" => "CacheNode"})
+    CacheNodeIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "CacheNodeId"}))
+    CacheNodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheNode, name: "member", traits: {"smithy.api#xmlName" => "CacheNode"}))
     CacheNodeTypeSpecificParameter.add_member(:parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ParameterName"))
     CacheNodeTypeSpecificParameter.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
     CacheNodeTypeSpecificParameter.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Source"))
@@ -555,11 +555,11 @@ module Aws::ElastiCache
     CacheNodeTypeSpecificParameter.add_member(:cache_node_type_specific_values, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheNodeTypeSpecificValueList, name: "CacheNodeTypeSpecificValues"))
     CacheNodeTypeSpecificParameter.add_member(:change_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeType, name: "ChangeType"))
     CacheNodeTypeSpecificParameter.type = Types::CacheNodeTypeSpecificParameter
-    CacheNodeTypeSpecificParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CacheNodeTypeSpecificParameter, name: "member", traits: {"smithy.api#xmlName" => "CacheNodeTypeSpecificParameter"})
+    CacheNodeTypeSpecificParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheNodeTypeSpecificParameter, name: "member", traits: {"smithy.api#xmlName" => "CacheNodeTypeSpecificParameter"}))
     CacheNodeTypeSpecificValue.add_member(:cache_node_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CacheNodeType"))
     CacheNodeTypeSpecificValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     CacheNodeTypeSpecificValue.type = Types::CacheNodeTypeSpecificValue
-    CacheNodeTypeSpecificValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CacheNodeTypeSpecificValue, name: "member", traits: {"smithy.api#xmlName" => "CacheNodeTypeSpecificValue"})
+    CacheNodeTypeSpecificValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheNodeTypeSpecificValue, name: "member", traits: {"smithy.api#xmlName" => "CacheNodeTypeSpecificValue"}))
     CacheNodeUpdateStatus.add_member(:cache_node_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CacheNodeId"))
     CacheNodeUpdateStatus.add_member(:node_update_status, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeUpdateStatus, name: "NodeUpdateStatus"))
     CacheNodeUpdateStatus.add_member(:node_deletion_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "NodeDeletionDate"))
@@ -569,7 +569,7 @@ module Aws::ElastiCache
     CacheNodeUpdateStatus.add_member(:node_update_initiated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "NodeUpdateInitiatedDate"))
     CacheNodeUpdateStatus.add_member(:node_update_status_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "NodeUpdateStatusModifiedDate"))
     CacheNodeUpdateStatus.type = Types::CacheNodeUpdateStatus
-    CacheNodeUpdateStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CacheNodeUpdateStatus, name: "member", traits: {"smithy.api#xmlName" => "CacheNodeUpdateStatus"})
+    CacheNodeUpdateStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheNodeUpdateStatus, name: "member", traits: {"smithy.api#xmlName" => "CacheNodeUpdateStatus"}))
     CacheParameterGroup.add_member(:cache_parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CacheParameterGroupName"))
     CacheParameterGroup.add_member(:cache_parameter_group_family, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CacheParameterGroupFamily"))
     CacheParameterGroup.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
@@ -578,7 +578,7 @@ module Aws::ElastiCache
     CacheParameterGroup.type = Types::CacheParameterGroup
     CacheParameterGroupAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     CacheParameterGroupAlreadyExistsFault.type = Types::CacheParameterGroupAlreadyExistsFault
-    CacheParameterGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CacheParameterGroup, name: "member", traits: {"smithy.api#xmlName" => "CacheParameterGroup"})
+    CacheParameterGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheParameterGroup, name: "member", traits: {"smithy.api#xmlName" => "CacheParameterGroup"}))
     CacheParameterGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     CacheParameterGroupNotFoundFault.type = Types::CacheParameterGroupNotFoundFault
     CacheParameterGroupQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -601,16 +601,16 @@ module Aws::ElastiCache
     CacheSecurityGroupMembership.add_member(:cache_security_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CacheSecurityGroupName"))
     CacheSecurityGroupMembership.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     CacheSecurityGroupMembership.type = Types::CacheSecurityGroupMembership
-    CacheSecurityGroupMembershipList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CacheSecurityGroupMembership, name: "member", traits: {"smithy.api#xmlName" => "CacheSecurityGroup"})
+    CacheSecurityGroupMembershipList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheSecurityGroupMembership, name: "member", traits: {"smithy.api#xmlName" => "CacheSecurityGroup"}))
     CacheSecurityGroupMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     CacheSecurityGroupMessage.add_member(:cache_security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheSecurityGroups, name: "CacheSecurityGroups"))
     CacheSecurityGroupMessage.type = Types::CacheSecurityGroupMessage
-    CacheSecurityGroupNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "CacheSecurityGroupName"})
+    CacheSecurityGroupNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "CacheSecurityGroupName"}))
     CacheSecurityGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     CacheSecurityGroupNotFoundFault.type = Types::CacheSecurityGroupNotFoundFault
     CacheSecurityGroupQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     CacheSecurityGroupQuotaExceededFault.type = Types::CacheSecurityGroupQuotaExceededFault
-    CacheSecurityGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CacheSecurityGroup, name: "member", traits: {"smithy.api#xmlName" => "CacheSecurityGroup"})
+    CacheSecurityGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheSecurityGroup, name: "member", traits: {"smithy.api#xmlName" => "CacheSecurityGroup"}))
     CacheSubnetGroup.add_member(:cache_subnet_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CacheSubnetGroupName"))
     CacheSubnetGroup.add_member(:cache_subnet_group_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CacheSubnetGroupDescription"))
     CacheSubnetGroup.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VpcId"))
@@ -629,7 +629,7 @@ module Aws::ElastiCache
     CacheSubnetGroupNotFoundFault.type = Types::CacheSubnetGroupNotFoundFault
     CacheSubnetGroupQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     CacheSubnetGroupQuotaExceededFault.type = Types::CacheSubnetGroupQuotaExceededFault
-    CacheSubnetGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CacheSubnetGroup, name: "member", traits: {"smithy.api#xmlName" => "CacheSubnetGroup"})
+    CacheSubnetGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheSubnetGroup, name: "member", traits: {"smithy.api#xmlName" => "CacheSubnetGroup"}))
     CacheSubnetQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     CacheSubnetQuotaExceededFault.type = Types::CacheSubnetQuotaExceededFault
     CacheUsageLimits.add_member(:data_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: DataStorage, name: "DataStorage"))
@@ -639,7 +639,7 @@ module Aws::ElastiCache
     ChangeType.add_member(:requires_reboot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "requires_reboot", traits: {"smithy.api#enumValue" => "requires-reboot"}))
     CloudWatchLogsDestinationDetails.add_member(:log_group, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LogGroup"))
     CloudWatchLogsDestinationDetails.type = Types::CloudWatchLogsDestinationDetails
-    ClusterIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "ClusterId"})
+    ClusterIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "ClusterId"}))
     ClusterMode.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "enabled"}))
     ClusterMode.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "disabled"}))
     ClusterMode.add_member(:compatible, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPATIBLE", traits: {"smithy.api#enumValue" => "compatible"}))
@@ -839,7 +839,7 @@ module Aws::ElastiCache
     CustomerNodeEndpoint.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Address"))
     CustomerNodeEndpoint.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "Port"))
     CustomerNodeEndpoint.type = Types::CustomerNodeEndpoint
-    CustomerNodeEndpointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerNodeEndpoint, name: "member")
+    CustomerNodeEndpointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerNodeEndpoint, name: "member"))
     DataStorage.add_member(:maximum, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "Maximum"))
     DataStorage.add_member(:minimum, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "Minimum"))
     DataStorage.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: DataStorageUnit, name: "Unit", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1079,7 +1079,7 @@ module Aws::ElastiCache
     EC2SecurityGroup.add_member(:ec2_security_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EC2SecurityGroupName"))
     EC2SecurityGroup.add_member(:ec2_security_group_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EC2SecurityGroupOwnerId"))
     EC2SecurityGroup.type = Types::EC2SecurityGroup
-    EC2SecurityGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EC2SecurityGroup, name: "member", traits: {"smithy.api#xmlName" => "EC2SecurityGroup"})
+    EC2SecurityGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2SecurityGroup, name: "member", traits: {"smithy.api#xmlName" => "EC2SecurityGroup"}))
     ECPUPerSecond.add_member(:maximum, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "Maximum"))
     ECPUPerSecond.add_member(:minimum, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "Minimum"))
     ECPUPerSecond.type = Types::ECPUPerSecond
@@ -1096,7 +1096,7 @@ module Aws::ElastiCache
     Event.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     Event.add_member(:date, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "Date"))
     Event.type = Types::Event
-    EventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member", traits: {"smithy.api#xmlName" => "Event"})
+    EventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member", traits: {"smithy.api#xmlName" => "Event"}))
     EventsMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     EventsMessage.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: EventList, name: "Events"))
     EventsMessage.type = Types::EventsMessage
@@ -1114,13 +1114,13 @@ module Aws::ElastiCache
     Filter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, name: "Values", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Filter.type = Types::Filter
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
-    FilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member")
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
+    FilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member"))
     GlobalNodeGroup.add_member(:global_node_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "GlobalNodeGroupId"))
     GlobalNodeGroup.add_member(:slots, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Slots"))
     GlobalNodeGroup.type = Types::GlobalNodeGroup
-    GlobalNodeGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "GlobalNodeGroupId"})
-    GlobalNodeGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalNodeGroup, name: "member", traits: {"smithy.api#xmlName" => "GlobalNodeGroup"})
+    GlobalNodeGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "GlobalNodeGroupId"}))
+    GlobalNodeGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalNodeGroup, name: "member", traits: {"smithy.api#xmlName" => "GlobalNodeGroup"}))
     GlobalReplicationGroup.add_member(:global_replication_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "GlobalReplicationGroupId"))
     GlobalReplicationGroup.add_member(:global_replication_group_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "GlobalReplicationGroupDescription"))
     GlobalReplicationGroup.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
@@ -1140,14 +1140,14 @@ module Aws::ElastiCache
     GlobalReplicationGroupInfo.add_member(:global_replication_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "GlobalReplicationGroupId"))
     GlobalReplicationGroupInfo.add_member(:global_replication_group_member_role, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "GlobalReplicationGroupMemberRole"))
     GlobalReplicationGroupInfo.type = Types::GlobalReplicationGroupInfo
-    GlobalReplicationGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalReplicationGroup, name: "member", traits: {"smithy.api#xmlName" => "GlobalReplicationGroup"})
+    GlobalReplicationGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalReplicationGroup, name: "member", traits: {"smithy.api#xmlName" => "GlobalReplicationGroup"}))
     GlobalReplicationGroupMember.add_member(:replication_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationGroupId"))
     GlobalReplicationGroupMember.add_member(:replication_group_region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationGroupRegion"))
     GlobalReplicationGroupMember.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Role"))
     GlobalReplicationGroupMember.add_member(:automatic_failover, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticFailoverStatus, name: "AutomaticFailover"))
     GlobalReplicationGroupMember.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     GlobalReplicationGroupMember.type = Types::GlobalReplicationGroupMember
-    GlobalReplicationGroupMemberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalReplicationGroupMember, name: "member", traits: {"smithy.api#xmlName" => "GlobalReplicationGroupMember"})
+    GlobalReplicationGroupMemberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalReplicationGroupMember, name: "member", traits: {"smithy.api#xmlName" => "GlobalReplicationGroupMember"}))
     GlobalReplicationGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     GlobalReplicationGroupNotFoundFault.type = Types::GlobalReplicationGroupNotFoundFault
     IncreaseNodeGroupsInGlobalReplicationGroupMessage.add_member(:global_replication_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "GlobalReplicationGroupId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1205,7 +1205,7 @@ module Aws::ElastiCache
     InvalidVPCNetworkStateFault.type = Types::InvalidVPCNetworkStateFault
     IpDiscovery.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4", traits: {"smithy.api#enumValue" => "ipv4"}))
     IpDiscovery.add_member(:ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV6", traits: {"smithy.api#enumValue" => "ipv6"}))
-    KeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    KeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     KinesisFirehoseDestinationDetails.add_member(:delivery_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DeliveryStream"))
     KinesisFirehoseDestinationDetails.type = Types::KinesisFirehoseDestinationDetails
     ListAllowedNodeTypeModificationsMessage.add_member(:cache_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CacheClusterId"))
@@ -1222,14 +1222,14 @@ module Aws::ElastiCache
     LogDeliveryConfiguration.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDeliveryConfigurationStatus, name: "Status"))
     LogDeliveryConfiguration.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     LogDeliveryConfiguration.type = Types::LogDeliveryConfiguration
-    LogDeliveryConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogDeliveryConfiguration, name: "member", traits: {"smithy.api#xmlName" => "LogDeliveryConfiguration"})
+    LogDeliveryConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDeliveryConfiguration, name: "member", traits: {"smithy.api#xmlName" => "LogDeliveryConfiguration"}))
     LogDeliveryConfigurationRequest.add_member(:log_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogType, name: "LogType"))
     LogDeliveryConfigurationRequest.add_member(:destination_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationType, name: "DestinationType"))
     LogDeliveryConfigurationRequest.add_member(:destination_details, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationDetails, name: "DestinationDetails"))
     LogDeliveryConfigurationRequest.add_member(:log_format, ::Smithy::Schema::Shapes::MemberShape.new(target: LogFormat, name: "LogFormat"))
     LogDeliveryConfigurationRequest.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "Enabled"))
     LogDeliveryConfigurationRequest.type = Types::LogDeliveryConfigurationRequest
-    LogDeliveryConfigurationRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogDeliveryConfigurationRequest, name: "member", traits: {"smithy.api#xmlName" => "LogDeliveryConfigurationRequest"})
+    LogDeliveryConfigurationRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDeliveryConfigurationRequest, name: "member", traits: {"smithy.api#xmlName" => "LogDeliveryConfigurationRequest"}))
     LogDeliveryConfigurationStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "active"}))
     LogDeliveryConfigurationStatus.add_member(:enabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLING", traits: {"smithy.api#enumValue" => "enabling"}))
     LogDeliveryConfigurationStatus.add_member(:modifying, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MODIFYING", traits: {"smithy.api#enumValue" => "modifying"}))
@@ -1380,7 +1380,7 @@ module Aws::ElastiCache
     NetworkType.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4", traits: {"smithy.api#enumValue" => "ipv4"}))
     NetworkType.add_member(:ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV6", traits: {"smithy.api#enumValue" => "ipv6"}))
     NetworkType.add_member(:dual_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUAL_STACK", traits: {"smithy.api#enumValue" => "dual_stack"}))
-    NetworkTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, name: "member")
+    NetworkTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, name: "member"))
     NoOperationFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     NoOperationFault.type = Types::NoOperationFault
     NodeGroup.add_member(:node_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NodeGroupId"))
@@ -1398,8 +1398,8 @@ module Aws::ElastiCache
     NodeGroupConfiguration.add_member(:primary_outpost_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PrimaryOutpostArn"))
     NodeGroupConfiguration.add_member(:replica_outpost_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: OutpostArnsList, name: "ReplicaOutpostArns"))
     NodeGroupConfiguration.type = Types::NodeGroupConfiguration
-    NodeGroupConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NodeGroupConfiguration, name: "member", traits: {"smithy.api#xmlName" => "NodeGroupConfiguration"})
-    NodeGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NodeGroup, name: "member", traits: {"smithy.api#xmlName" => "NodeGroup"})
+    NodeGroupConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeGroupConfiguration, name: "member", traits: {"smithy.api#xmlName" => "NodeGroupConfiguration"}))
+    NodeGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeGroup, name: "member", traits: {"smithy.api#xmlName" => "NodeGroup"}))
     NodeGroupMember.add_member(:cache_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CacheClusterId"))
     NodeGroupMember.add_member(:cache_node_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CacheNodeId"))
     NodeGroupMember.add_member(:read_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "ReadEndpoint"))
@@ -1407,7 +1407,7 @@ module Aws::ElastiCache
     NodeGroupMember.add_member(:preferred_outpost_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PreferredOutpostArn"))
     NodeGroupMember.add_member(:current_role, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CurrentRole"))
     NodeGroupMember.type = Types::NodeGroupMember
-    NodeGroupMemberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NodeGroupMember, name: "member", traits: {"smithy.api#xmlName" => "NodeGroupMember"})
+    NodeGroupMemberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeGroupMember, name: "member", traits: {"smithy.api#xmlName" => "NodeGroupMember"}))
     NodeGroupMemberUpdateStatus.add_member(:cache_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CacheClusterId"))
     NodeGroupMemberUpdateStatus.add_member(:cache_node_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CacheNodeId"))
     NodeGroupMemberUpdateStatus.add_member(:node_update_status, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeUpdateStatus, name: "NodeUpdateStatus"))
@@ -1418,17 +1418,17 @@ module Aws::ElastiCache
     NodeGroupMemberUpdateStatus.add_member(:node_update_initiated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "NodeUpdateInitiatedDate"))
     NodeGroupMemberUpdateStatus.add_member(:node_update_status_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "NodeUpdateStatusModifiedDate"))
     NodeGroupMemberUpdateStatus.type = Types::NodeGroupMemberUpdateStatus
-    NodeGroupMemberUpdateStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NodeGroupMemberUpdateStatus, name: "member", traits: {"smithy.api#xmlName" => "NodeGroupMemberUpdateStatus"})
+    NodeGroupMemberUpdateStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeGroupMemberUpdateStatus, name: "member", traits: {"smithy.api#xmlName" => "NodeGroupMemberUpdateStatus"}))
     NodeGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     NodeGroupNotFoundFault.type = Types::NodeGroupNotFoundFault
     NodeGroupUpdateStatus.add_member(:node_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NodeGroupId"))
     NodeGroupUpdateStatus.add_member(:node_group_member_update_status, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeGroupMemberUpdateStatusList, name: "NodeGroupMemberUpdateStatus"))
     NodeGroupUpdateStatus.type = Types::NodeGroupUpdateStatus
-    NodeGroupUpdateStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NodeGroupUpdateStatus, name: "member", traits: {"smithy.api#xmlName" => "NodeGroupUpdateStatus"})
+    NodeGroupUpdateStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeGroupUpdateStatus, name: "member", traits: {"smithy.api#xmlName" => "NodeGroupUpdateStatus"}))
     NodeGroupsPerReplicationGroupQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     NodeGroupsPerReplicationGroupQuotaExceededFault.type = Types::NodeGroupsPerReplicationGroupQuotaExceededFault
-    NodeGroupsToRemoveList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedNodeGroupId, name: "member", traits: {"smithy.api#xmlName" => "NodeGroupToRemove"})
-    NodeGroupsToRetainList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedNodeGroupId, name: "member", traits: {"smithy.api#xmlName" => "NodeGroupToRetain"})
+    NodeGroupsToRemoveList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedNodeGroupId, name: "member", traits: {"smithy.api#xmlName" => "NodeGroupToRemove"}))
+    NodeGroupsToRetainList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedNodeGroupId, name: "member", traits: {"smithy.api#xmlName" => "NodeGroupToRetain"}))
     NodeQuotaForClusterExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     NodeQuotaForClusterExceededFault.type = Types::NodeQuotaForClusterExceededFault
     NodeQuotaForCustomerExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -1441,8 +1441,8 @@ module Aws::ElastiCache
     NodeSnapshot.add_member(:cache_node_create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "CacheNodeCreateTime"))
     NodeSnapshot.add_member(:snapshot_create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "SnapshotCreateTime"))
     NodeSnapshot.type = Types::NodeSnapshot
-    NodeSnapshotList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NodeSnapshot, name: "member", traits: {"smithy.api#xmlName" => "NodeSnapshot"})
-    NodeTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    NodeSnapshotList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeSnapshot, name: "member", traits: {"smithy.api#xmlName" => "NodeSnapshot"}))
+    NodeTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     NodeUpdateInitiatedBy.add_member(:system, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYSTEM", traits: {"smithy.api#enumValue" => "system"}))
     NodeUpdateInitiatedBy.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER", traits: {"smithy.api#enumValue" => "customer"}))
     NodeUpdateStatus.add_member(:not_applied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_APPLIED", traits: {"smithy.api#enumValue" => "not-applied"}))
@@ -1454,7 +1454,7 @@ module Aws::ElastiCache
     NotificationConfiguration.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TopicArn"))
     NotificationConfiguration.add_member(:topic_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TopicStatus"))
     NotificationConfiguration.type = Types::NotificationConfiguration
-    OutpostArnsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "OutpostArn"})
+    OutpostArnsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "OutpostArn"}))
     OutpostMode.add_member(:single_outpost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE_OUTPOST", traits: {"smithy.api#enumValue" => "single-outpost"}))
     OutpostMode.add_member(:cross_outpost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CROSS_OUTPOST", traits: {"smithy.api#enumValue" => "cross-outpost"}))
     Parameter.add_member(:parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ParameterName"))
@@ -1470,9 +1470,9 @@ module Aws::ElastiCache
     ParameterNameValue.add_member(:parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ParameterName"))
     ParameterNameValue.add_member(:parameter_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ParameterValue"))
     ParameterNameValue.type = Types::ParameterNameValue
-    ParameterNameValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterNameValue, name: "member", traits: {"smithy.api#xmlName" => "ParameterNameValue"})
-    ParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Parameter, name: "member", traits: {"smithy.api#xmlName" => "Parameter"})
-    PasswordListInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ParameterNameValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterNameValue, name: "member", traits: {"smithy.api#xmlName" => "ParameterNameValue"}))
+    ParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameter, name: "member", traits: {"smithy.api#xmlName" => "Parameter"}))
+    PasswordListInput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     PendingAutomaticFailoverStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "enabled"}))
     PendingAutomaticFailoverStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "disabled"}))
     PendingLogDeliveryConfiguration.add_member(:log_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogType, name: "LogType"))
@@ -1480,7 +1480,7 @@ module Aws::ElastiCache
     PendingLogDeliveryConfiguration.add_member(:destination_details, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationDetails, name: "DestinationDetails"))
     PendingLogDeliveryConfiguration.add_member(:log_format, ::Smithy::Schema::Shapes::MemberShape.new(target: LogFormat, name: "LogFormat"))
     PendingLogDeliveryConfiguration.type = Types::PendingLogDeliveryConfiguration
-    PendingLogDeliveryConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PendingLogDeliveryConfiguration, name: "member")
+    PendingLogDeliveryConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PendingLogDeliveryConfiguration, name: "member"))
     PendingModifiedValues.add_member(:num_cache_nodes, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "NumCacheNodes"))
     PendingModifiedValues.add_member(:cache_node_ids_to_remove, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheNodeIdsList, name: "CacheNodeIdsToRemove"))
     PendingModifiedValues.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EngineVersion"))
@@ -1491,14 +1491,14 @@ module Aws::ElastiCache
     PendingModifiedValues.add_member(:transit_encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitEncryptionMode, name: "TransitEncryptionMode"))
     PendingModifiedValues.add_member(:scale_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ScaleConfig, name: "ScaleConfig"))
     PendingModifiedValues.type = Types::PendingModifiedValues
-    PreferredAvailabilityZoneList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "PreferredAvailabilityZone"})
-    PreferredOutpostArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "PreferredOutpostArn"})
+    PreferredAvailabilityZoneList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "PreferredAvailabilityZone"}))
+    PreferredOutpostArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "PreferredOutpostArn"}))
     ProcessedUpdateAction.add_member(:replication_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationGroupId"))
     ProcessedUpdateAction.add_member(:cache_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CacheClusterId"))
     ProcessedUpdateAction.add_member(:service_update_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServiceUpdateName"))
     ProcessedUpdateAction.add_member(:update_action_status, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateActionStatus, name: "UpdateActionStatus"))
     ProcessedUpdateAction.type = Types::ProcessedUpdateAction
-    ProcessedUpdateActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessedUpdateAction, name: "member", traits: {"smithy.api#xmlName" => "ProcessedUpdateAction"})
+    ProcessedUpdateActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessedUpdateAction, name: "member", traits: {"smithy.api#xmlName" => "ProcessedUpdateAction"}))
     PurchaseReservedCacheNodesOfferingMessage.add_member(:reserved_cache_nodes_offering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReservedCacheNodesOfferingId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     PurchaseReservedCacheNodesOfferingMessage.add_member(:reserved_cache_node_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReservedCacheNodeId"))
     PurchaseReservedCacheNodesOfferingMessage.add_member(:cache_node_count, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "CacheNodeCount"))
@@ -1519,19 +1519,19 @@ module Aws::ElastiCache
     RecurringCharge.add_member(:recurring_charge_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "RecurringChargeAmount"))
     RecurringCharge.add_member(:recurring_charge_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RecurringChargeFrequency"))
     RecurringCharge.type = Types::RecurringCharge
-    RecurringChargeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringCharge, name: "member", traits: {"smithy.api#xmlName" => "RecurringCharge"})
+    RecurringChargeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringCharge, name: "member", traits: {"smithy.api#xmlName" => "RecurringCharge"}))
     RegionalConfiguration.add_member(:replication_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationGroupId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RegionalConfiguration.add_member(:replication_group_region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationGroupRegion", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RegionalConfiguration.add_member(:resharding_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ReshardingConfigurationList, name: "ReshardingConfiguration", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RegionalConfiguration.type = Types::RegionalConfiguration
-    RegionalConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegionalConfiguration, name: "member", traits: {"smithy.api#xmlName" => "RegionalConfiguration"})
-    RemoveReplicasList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    RegionalConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionalConfiguration, name: "member", traits: {"smithy.api#xmlName" => "RegionalConfiguration"}))
+    RemoveReplicasList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     RemoveTagsFromResourceMessage.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RemoveTagsFromResourceMessage.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyList, name: "TagKeys", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RemoveTagsFromResourceMessage.type = Types::RemoveTagsFromResourceMessage
     RemoveTagsFromResourceOutput.add_member(:tag_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "TagList"))
     RemoveTagsFromResourceOutput.type = Types::RemoveTagsFromResourceOutput
-    ReplicaConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigureShard, name: "member", traits: {"smithy.api#xmlName" => "ConfigureShard"})
+    ReplicaConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigureShard, name: "member", traits: {"smithy.api#xmlName" => "ConfigureShard"}))
     ReplicationGroup.add_member(:replication_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationGroupId"))
     ReplicationGroup.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
     ReplicationGroup.add_member(:global_replication_group_info, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalReplicationGroupInfo, name: "GlobalReplicationGroupInfo"))
@@ -1569,8 +1569,8 @@ module Aws::ElastiCache
     ReplicationGroupAlreadyExistsFault.type = Types::ReplicationGroupAlreadyExistsFault
     ReplicationGroupAlreadyUnderMigrationFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ReplicationGroupAlreadyUnderMigrationFault.type = Types::ReplicationGroupAlreadyUnderMigrationFault
-    ReplicationGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    ReplicationGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationGroup, name: "member", traits: {"smithy.api#xmlName" => "ReplicationGroup"})
+    ReplicationGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    ReplicationGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationGroup, name: "member", traits: {"smithy.api#xmlName" => "ReplicationGroup"}))
     ReplicationGroupMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     ReplicationGroupMessage.add_member(:replication_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationGroupList, name: "ReplicationGroups"))
     ReplicationGroupMessage.type = Types::ReplicationGroupMessage
@@ -1578,7 +1578,7 @@ module Aws::ElastiCache
     ReplicationGroupNotFoundFault.type = Types::ReplicationGroupNotFoundFault
     ReplicationGroupNotUnderMigrationFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ReplicationGroupNotUnderMigrationFault.type = Types::ReplicationGroupNotUnderMigrationFault
-    ReplicationGroupOutpostArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "ReplicationGroupOutpostArn"})
+    ReplicationGroupOutpostArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "ReplicationGroupOutpostArn"}))
     ReplicationGroupPendingModifiedValues.add_member(:primary_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PrimaryClusterId"))
     ReplicationGroupPendingModifiedValues.add_member(:automatic_failover_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PendingAutomaticFailoverStatus, name: "AutomaticFailoverStatus"))
     ReplicationGroupPendingModifiedValues.add_member(:resharding, ::Smithy::Schema::Shapes::MemberShape.new(target: ReshardingStatus, name: "Resharding"))
@@ -1605,7 +1605,7 @@ module Aws::ElastiCache
     ReservedCacheNode.type = Types::ReservedCacheNode
     ReservedCacheNodeAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ReservedCacheNodeAlreadyExistsFault.type = Types::ReservedCacheNodeAlreadyExistsFault
-    ReservedCacheNodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedCacheNode, name: "member", traits: {"smithy.api#xmlName" => "ReservedCacheNode"})
+    ReservedCacheNodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedCacheNode, name: "member", traits: {"smithy.api#xmlName" => "ReservedCacheNode"}))
     ReservedCacheNodeMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     ReservedCacheNodeMessage.add_member(:reserved_cache_nodes, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedCacheNodeList, name: "ReservedCacheNodes"))
     ReservedCacheNodeMessage.type = Types::ReservedCacheNodeMessage
@@ -1622,7 +1622,7 @@ module Aws::ElastiCache
     ReservedCacheNodesOffering.add_member(:offering_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "OfferingType"))
     ReservedCacheNodesOffering.add_member(:recurring_charges, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringChargeList, name: "RecurringCharges"))
     ReservedCacheNodesOffering.type = Types::ReservedCacheNodesOffering
-    ReservedCacheNodesOfferingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedCacheNodesOffering, name: "member", traits: {"smithy.api#xmlName" => "ReservedCacheNodesOffering"})
+    ReservedCacheNodesOfferingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedCacheNodesOffering, name: "member", traits: {"smithy.api#xmlName" => "ReservedCacheNodesOffering"}))
     ReservedCacheNodesOfferingMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     ReservedCacheNodesOfferingMessage.add_member(:reserved_cache_nodes_offerings, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedCacheNodesOfferingList, name: "ReservedCacheNodesOfferings"))
     ReservedCacheNodesOfferingMessage.type = Types::ReservedCacheNodesOfferingMessage
@@ -1637,7 +1637,7 @@ module Aws::ElastiCache
     ReshardingConfiguration.add_member(:node_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedNodeGroupId, name: "NodeGroupId"))
     ReshardingConfiguration.add_member(:preferred_availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZonesList, name: "PreferredAvailabilityZones"))
     ReshardingConfiguration.type = Types::ReshardingConfiguration
-    ReshardingConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReshardingConfiguration, name: "member", traits: {"smithy.api#xmlName" => "ReshardingConfiguration"})
+    ReshardingConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReshardingConfiguration, name: "member", traits: {"smithy.api#xmlName" => "ReshardingConfiguration"}))
     ReshardingStatus.add_member(:slot_migration, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotMigration, name: "SlotMigration"))
     ReshardingStatus.type = Types::ReshardingStatus
     RevokeCacheSecurityGroupIngressMessage.add_member(:cache_security_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CacheSecurityGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1649,11 +1649,11 @@ module Aws::ElastiCache
     ScaleConfig.add_member(:scale_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "ScalePercentage"))
     ScaleConfig.add_member(:scale_interval_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "ScaleIntervalMinutes"))
     ScaleConfig.type = Types::ScaleConfig
-    SecurityGroupIdsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SecurityGroupId"})
+    SecurityGroupIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SecurityGroupId"}))
     SecurityGroupMembership.add_member(:security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SecurityGroupId"))
     SecurityGroupMembership.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     SecurityGroupMembership.type = Types::SecurityGroupMembership
-    SecurityGroupMembershipList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupMembership, name: "member")
+    SecurityGroupMembershipList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupMembership, name: "member"))
     ServerlessCache.add_member(:serverless_cache_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServerlessCacheName"))
     ServerlessCache.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
     ServerlessCache.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "CreateTime"))
@@ -1678,7 +1678,7 @@ module Aws::ElastiCache
     ServerlessCacheConfiguration.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Engine"))
     ServerlessCacheConfiguration.add_member(:major_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MajorEngineVersion"))
     ServerlessCacheConfiguration.type = Types::ServerlessCacheConfiguration
-    ServerlessCacheList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessCache, name: "member")
+    ServerlessCacheList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessCache, name: "member"))
     ServerlessCacheNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ServerlessCacheNotFoundFault.type = Types::ServerlessCacheNotFoundFault
     ServerlessCacheQuotaForCustomerExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -1695,7 +1695,7 @@ module Aws::ElastiCache
     ServerlessCacheSnapshot.type = Types::ServerlessCacheSnapshot
     ServerlessCacheSnapshotAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ServerlessCacheSnapshotAlreadyExistsFault.type = Types::ServerlessCacheSnapshotAlreadyExistsFault
-    ServerlessCacheSnapshotList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessCacheSnapshot, name: "member", traits: {"smithy.api#xmlName" => "ServerlessCacheSnapshot"})
+    ServerlessCacheSnapshotList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessCacheSnapshot, name: "member", traits: {"smithy.api#xmlName" => "ServerlessCacheSnapshot"}))
     ServerlessCacheSnapshotNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ServerlessCacheSnapshotNotFoundFault.type = Types::ServerlessCacheSnapshotNotFoundFault
     ServerlessCacheSnapshotQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -1715,7 +1715,7 @@ module Aws::ElastiCache
     ServiceUpdate.add_member(:auto_update_after_recommended_apply_by_date, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "AutoUpdateAfterRecommendedApplyByDate"))
     ServiceUpdate.add_member(:estimated_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EstimatedUpdateTime"))
     ServiceUpdate.type = Types::ServiceUpdate
-    ServiceUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUpdate, name: "member", traits: {"smithy.api#xmlName" => "ServiceUpdate"})
+    ServiceUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUpdate, name: "member", traits: {"smithy.api#xmlName" => "ServiceUpdate"}))
     ServiceUpdateNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ServiceUpdateNotFoundFault.type = Types::ServiceUpdateNotFoundFault
     ServiceUpdateSeverity.add_member(:critical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CRITICAL", traits: {"smithy.api#enumValue" => "critical"}))
@@ -1725,7 +1725,7 @@ module Aws::ElastiCache
     ServiceUpdateStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "available"}))
     ServiceUpdateStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLED", traits: {"smithy.api#enumValue" => "cancelled"}))
     ServiceUpdateStatus.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRED", traits: {"smithy.api#enumValue" => "expired"}))
-    ServiceUpdateStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUpdateStatus, name: "member")
+    ServiceUpdateStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUpdateStatus, name: "member"))
     ServiceUpdateType.add_member(:security_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECURITY_UPDATE", traits: {"smithy.api#enumValue" => "security-update"}))
     ServiceUpdatesMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     ServiceUpdatesMessage.add_member(:service_updates, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUpdateList, name: "ServiceUpdates"))
@@ -1766,10 +1766,10 @@ module Aws::ElastiCache
     Snapshot.type = Types::Snapshot
     SnapshotAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SnapshotAlreadyExistsFault.type = Types::SnapshotAlreadyExistsFault
-    SnapshotArnsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SnapshotArn"})
+    SnapshotArnsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SnapshotArn"}))
     SnapshotFeatureNotSupportedFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SnapshotFeatureNotSupportedFault.type = Types::SnapshotFeatureNotSupportedFault
-    SnapshotList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Snapshot, name: "member", traits: {"smithy.api#xmlName" => "Snapshot"})
+    SnapshotList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Snapshot, name: "member", traits: {"smithy.api#xmlName" => "Snapshot"}))
     SnapshotNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SnapshotNotFoundFault.type = Types::SnapshotNotFoundFault
     SnapshotQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -1793,11 +1793,11 @@ module Aws::ElastiCache
     Subnet.add_member(:subnet_outpost, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetOutpost, name: "SubnetOutpost"))
     Subnet.add_member(:supported_network_types, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkTypeList, name: "SupportedNetworkTypes"))
     Subnet.type = Types::Subnet
-    SubnetIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SubnetIdentifier"})
-    SubnetIdsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SubnetId"})
+    SubnetIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SubnetIdentifier"}))
+    SubnetIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SubnetId"}))
     SubnetInUse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SubnetInUse.type = Types::SubnetInUse
-    SubnetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Subnet, name: "member", traits: {"smithy.api#xmlName" => "Subnet"})
+    SubnetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnet, name: "member", traits: {"smithy.api#xmlName" => "Subnet"}))
     SubnetNotAllowedFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SubnetNotAllowedFault.type = Types::SubnetNotAllowedFault
     SubnetOutpost.add_member(:subnet_outpost_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SubnetOutpostArn"))
@@ -1805,7 +1805,7 @@ module Aws::ElastiCache
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     Tag.type = Types::Tag
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member", traits: {"smithy.api#xmlName" => "Tag"})
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member", traits: {"smithy.api#xmlName" => "Tag"}))
     TagNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     TagNotFoundFault.type = Types::TagNotFoundFault
     TagQuotaPerResourceExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -1827,15 +1827,15 @@ module Aws::ElastiCache
     TimeRangeFilter.type = Types::TimeRangeFilter
     TransitEncryptionMode.add_member(:preferred, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PREFERRED", traits: {"smithy.api#enumValue" => "preferred"}))
     TransitEncryptionMode.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUIRED", traits: {"smithy.api#enumValue" => "required"}))
-    UGReplicationGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    UGServerlessCacheIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    UGReplicationGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    UGServerlessCacheIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     UnprocessedUpdateAction.add_member(:replication_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationGroupId"))
     UnprocessedUpdateAction.add_member(:cache_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CacheClusterId"))
     UnprocessedUpdateAction.add_member(:service_update_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServiceUpdateName"))
     UnprocessedUpdateAction.add_member(:error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorType"))
     UnprocessedUpdateAction.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorMessage"))
     UnprocessedUpdateAction.type = Types::UnprocessedUpdateAction
-    UnprocessedUpdateActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedUpdateAction, name: "member", traits: {"smithy.api#xmlName" => "UnprocessedUpdateAction"})
+    UnprocessedUpdateActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedUpdateAction, name: "member", traits: {"smithy.api#xmlName" => "UnprocessedUpdateAction"}))
     UpdateAction.add_member(:replication_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReplicationGroupId"))
     UpdateAction.add_member(:cache_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CacheClusterId"))
     UpdateAction.add_member(:service_update_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServiceUpdateName"))
@@ -1854,7 +1854,7 @@ module Aws::ElastiCache
     UpdateAction.add_member(:estimated_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EstimatedUpdateTime"))
     UpdateAction.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Engine"))
     UpdateAction.type = Types::UpdateAction
-    UpdateActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateAction, name: "member", traits: {"smithy.api#xmlName" => "UpdateAction"})
+    UpdateActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateAction, name: "member", traits: {"smithy.api#xmlName" => "UpdateAction"}))
     UpdateActionStatus.add_member(:not_applied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_APPLIED", traits: {"smithy.api#enumValue" => "not-applied"}))
     UpdateActionStatus.add_member(:waiting_to_start, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WAITING_TO_START", traits: {"smithy.api#enumValue" => "waiting-to-start"}))
     UpdateActionStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "in-progress"}))
@@ -1864,7 +1864,7 @@ module Aws::ElastiCache
     UpdateActionStatus.add_member(:scheduling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHEDULING", traits: {"smithy.api#enumValue" => "scheduling"}))
     UpdateActionStatus.add_member(:scheduled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHEDULED", traits: {"smithy.api#enumValue" => "scheduled"}))
     UpdateActionStatus.add_member(:not_applicable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_APPLICABLE", traits: {"smithy.api#enumValue" => "not-applicable"}))
-    UpdateActionStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateActionStatus, name: "member")
+    UpdateActionStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateActionStatus, name: "member"))
     UpdateActionsMessage.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Marker"))
     UpdateActionsMessage.add_member(:update_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateActionList, name: "UpdateActions"))
     UpdateActionsMessage.type = Types::UpdateActionsMessage
@@ -1892,9 +1892,9 @@ module Aws::ElastiCache
     UserGroup.type = Types::UserGroup
     UserGroupAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     UserGroupAlreadyExistsFault.type = Types::UserGroupAlreadyExistsFault
-    UserGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserGroupId, name: "member")
-    UserGroupIdListInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserGroupId, name: "member")
-    UserGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserGroup, name: "member")
+    UserGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserGroupId, name: "member"))
+    UserGroupIdListInput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserGroupId, name: "member"))
+    UserGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserGroup, name: "member"))
     UserGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     UserGroupNotFoundFault.type = Types::UserGroupNotFoundFault
     UserGroupPendingChanges.add_member(:user_ids_to_remove, ::Smithy::Schema::Shapes::MemberShape.new(target: UserIdList, name: "UserIdsToRemove"))
@@ -1905,9 +1905,9 @@ module Aws::ElastiCache
     UserGroupsUpdateStatus.add_member(:user_group_ids_to_add, ::Smithy::Schema::Shapes::MemberShape.new(target: UserGroupIdList, name: "UserGroupIdsToAdd"))
     UserGroupsUpdateStatus.add_member(:user_group_ids_to_remove, ::Smithy::Schema::Shapes::MemberShape.new(target: UserGroupIdList, name: "UserGroupIdsToRemove"))
     UserGroupsUpdateStatus.type = Types::UserGroupsUpdateStatus
-    UserIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "member")
-    UserIdListInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "member")
-    UserList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member")
+    UserIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "member"))
+    UserIdListInput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "member"))
+    UserList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member"))
     UserNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     UserNotFoundFault.type = Types::UserNotFoundFault
     UserQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))

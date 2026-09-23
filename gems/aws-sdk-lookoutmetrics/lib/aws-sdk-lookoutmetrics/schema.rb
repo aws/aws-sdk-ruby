@@ -288,7 +288,7 @@ module Aws::LookoutMetrics
     AlertSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
     AlertSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     AlertSummary.type = Types::AlertSummary
-    AlertSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AlertSummary, name: "member")
+    AlertSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AlertSummary, name: "member"))
     AlertType.add_member(:sns, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SNS", traits: {"smithy.api#enumValue" => "SNS"}))
     AlertType.add_member(:lambda, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAMBDA", traits: {"smithy.api#enumValue" => "LAMBDA"}))
     AnomalyDetectionTaskStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
@@ -303,7 +303,7 @@ module Aws::LookoutMetrics
     AnomalyDetectorDataQualityMetric.add_member(:start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTimestamp"))
     AnomalyDetectorDataQualityMetric.add_member(:metric_set_data_quality_metric_list, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricSetDataQualityMetricList, name: "MetricSetDataQualityMetricList"))
     AnomalyDetectorDataQualityMetric.type = Types::AnomalyDetectorDataQualityMetric
-    AnomalyDetectorDataQualityMetricList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorDataQualityMetric, name: "member")
+    AnomalyDetectorDataQualityMetricList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorDataQualityMetric, name: "member"))
     AnomalyDetectorFailureType.add_member(:activation_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVATION_FAILURE", traits: {"smithy.api#enumValue" => "ACTIVATION_FAILURE"}))
     AnomalyDetectorFailureType.add_member(:back_test_activation_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BACK_TEST_ACTIVATION_FAILURE", traits: {"smithy.api#enumValue" => "BACK_TEST_ACTIVATION_FAILURE"}))
     AnomalyDetectorFailureType.add_member(:deletion_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETION_FAILURE", traits: {"smithy.api#enumValue" => "DELETION_FAILURE"}))
@@ -327,7 +327,7 @@ module Aws::LookoutMetrics
     AnomalyDetectorSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorStatus, name: "Status"))
     AnomalyDetectorSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     AnomalyDetectorSummary.type = Types::AnomalyDetectorSummary
-    AnomalyDetectorSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorSummary, name: "member")
+    AnomalyDetectorSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorSummary, name: "member"))
     AnomalyGroup.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampString, name: "StartTime"))
     AnomalyGroup.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampString, name: "EndTime"))
     AnomalyGroup.add_member(:anomaly_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "AnomalyGroupId"))
@@ -345,7 +345,7 @@ module Aws::LookoutMetrics
     AnomalyGroupSummary.add_member(:anomaly_group_score, ::Smithy::Schema::Shapes::MemberShape.new(target: Score, name: "AnomalyGroupScore"))
     AnomalyGroupSummary.add_member(:primary_metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "PrimaryMetricName"))
     AnomalyGroupSummary.type = Types::AnomalyGroupSummary
-    AnomalyGroupSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyGroupSummary, name: "member")
+    AnomalyGroupSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyGroupSummary, name: "member"))
     AnomalyGroupTimeSeries.add_member(:anomaly_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "AnomalyGroupId", traits: {"smithy.api#required" => {}}))
     AnomalyGroupTimeSeries.add_member(:time_series_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesId, name: "TimeSeriesId"))
     AnomalyGroupTimeSeries.type = Types::AnomalyGroupTimeSeries
@@ -381,7 +381,7 @@ module Aws::LookoutMetrics
     BackTestAnomalyDetectorResponse.type = Types::BackTestAnomalyDetectorResponse
     BackTestConfiguration.add_member(:run_back_test_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "RunBackTestMode", traits: {"smithy.api#required" => {}}))
     BackTestConfiguration.type = Types::BackTestConfiguration
-    BinaryListAttributeValue.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BinaryAttributeValue, name: "member")
+    BinaryListAttributeValue.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BinaryAttributeValue, name: "member"))
     CSVFileCompression.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     CSVFileCompression.add_member(:gzip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GZIP", traits: {"smithy.api#enumValue" => "GZIP"}))
     CloudWatchConfig.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "RoleArn"))
@@ -441,7 +441,7 @@ module Aws::LookoutMetrics
     DataQualityMetric.add_member(:related_column_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedColumnName, name: "RelatedColumnName"))
     DataQualityMetric.add_member(:metric_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "MetricValue"))
     DataQualityMetric.type = Types::DataQualityMetric
-    DataQualityMetricList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityMetric, name: "member")
+    DataQualityMetricList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityMetric, name: "member"))
     DataQualityMetricType.add_member(:column_completeness, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COLUMN_COMPLETENESS", traits: {"smithy.api#enumValue" => "COLUMN_COMPLETENESS"}))
     DataQualityMetricType.add_member(:dimension_uniqueness, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIMENSION_UNIQUENESS", traits: {"smithy.api#enumValue" => "DIMENSION_UNIQUENESS"}))
     DataQualityMetricType.add_member(:time_series_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIME_SERIES_COUNT", traits: {"smithy.api#enumValue" => "TIME_SERIES_COUNT"}))
@@ -536,22 +536,22 @@ module Aws::LookoutMetrics
     DimensionContribution.add_member(:dimension_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "DimensionName"))
     DimensionContribution.add_member(:dimension_value_contribution_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValueContributionList, name: "DimensionValueContributionList"))
     DimensionContribution.type = Types::DimensionContribution
-    DimensionContributionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionContribution, name: "member")
+    DimensionContributionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionContribution, name: "member"))
     DimensionFilter.add_member(:dimension_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "DimensionName"))
     DimensionFilter.add_member(:dimension_value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValueList, name: "DimensionValueList"))
     DimensionFilter.type = Types::DimensionFilter
-    DimensionFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionFilter, name: "member")
-    DimensionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "member")
+    DimensionFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionFilter, name: "member"))
+    DimensionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "member"))
     DimensionNameValue.add_member(:dimension_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "DimensionName", traits: {"smithy.api#required" => {}}))
     DimensionNameValue.add_member(:dimension_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValue, name: "DimensionValue", traits: {"smithy.api#required" => {}}))
     DimensionNameValue.type = Types::DimensionNameValue
-    DimensionNameValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionNameValue, name: "member")
+    DimensionNameValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionNameValue, name: "member"))
     DimensionValueContribution.add_member(:dimension_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValue, name: "DimensionValue"))
     DimensionValueContribution.add_member(:contribution_score, ::Smithy::Schema::Shapes::MemberShape.new(target: Score, name: "ContributionScore"))
     DimensionValueContribution.type = Types::DimensionValueContribution
-    DimensionValueContributionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValueContribution, name: "member")
-    DimensionValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValue, name: "member")
-    ExecutionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStatus, name: "member")
+    DimensionValueContributionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValueContribution, name: "member"))
+    DimensionValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValue, name: "member"))
+    ExecutionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStatus, name: "member"))
     ExecutionStatus.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampString, name: "Timestamp"))
     ExecutionStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectionTaskStatus, name: "Status"))
     ExecutionStatus.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectionTaskStatusMessage, name: "FailureReason"))
@@ -562,7 +562,7 @@ module Aws::LookoutMetrics
     Filter.add_member(:dimension_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValue, name: "DimensionValue"))
     Filter.add_member(:filter_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterOperation, name: "FilterOperation"))
     Filter.type = Types::Filter
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     FilterOperation.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUALS", traits: {"smithy.api#enumValue" => "EQUALS"}))
     Frequency.add_member(:p1_d, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "P1D", traits: {"smithy.api#enumValue" => "P1D"}))
     Frequency.add_member(:pt1_h, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PT1H", traits: {"smithy.api#enumValue" => "PT1H"}))
@@ -591,21 +591,21 @@ module Aws::LookoutMetrics
     GetSampleDataResponse.add_member(:header_values, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderValueList, name: "HeaderValues"))
     GetSampleDataResponse.add_member(:sample_rows, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleRows, name: "SampleRows"))
     GetSampleDataResponse.type = Types::GetSampleDataResponse
-    HeaderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "member")
-    HeaderValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderValue, name: "member")
-    HistoricalDataPathList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HistoricalDataPath, name: "member")
+    HeaderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "member"))
+    HeaderValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderValue, name: "member"))
+    HistoricalDataPathList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HistoricalDataPath, name: "member"))
     InterMetricImpactDetails.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "MetricName"))
     InterMetricImpactDetails.add_member(:anomaly_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "AnomalyGroupId"))
     InterMetricImpactDetails.add_member(:relationship_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RelationshipType, name: "RelationshipType"))
     InterMetricImpactDetails.add_member(:contribution_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricChangePercentage, name: "ContributionPercentage"))
     InterMetricImpactDetails.type = Types::InterMetricImpactDetails
-    InterMetricImpactList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InterMetricImpactDetails, name: "member")
+    InterMetricImpactList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InterMetricImpactDetails, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
     ItemizedMetricStats.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "MetricName"))
     ItemizedMetricStats.add_member(:occurrence_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "OccurrenceCount", traits: {"smithy.api#default" => 0}))
     ItemizedMetricStats.type = Types::ItemizedMetricStats
-    ItemizedMetricStatsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ItemizedMetricStats, name: "member")
+    ItemizedMetricStatsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemizedMetricStats, name: "member"))
     JsonFileCompression.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     JsonFileCompression.add_member(:gzip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GZIP", traits: {"smithy.api#enumValue" => "GZIP"}))
     JsonFormatDescriptor.add_member(:file_compression, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonFileCompression, name: "FileCompression"))
@@ -676,17 +676,17 @@ module Aws::LookoutMetrics
     MetricLevelImpact.add_member(:num_time_series, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "NumTimeSeries", traits: {"smithy.api#default" => 0}))
     MetricLevelImpact.add_member(:contribution_matrix, ::Smithy::Schema::Shapes::MemberShape.new(target: ContributionMatrix, name: "ContributionMatrix"))
     MetricLevelImpact.type = Types::MetricLevelImpact
-    MetricLevelImpactList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricLevelImpact, name: "member")
-    MetricList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Metric, name: "member")
-    MetricNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "member")
+    MetricLevelImpactList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricLevelImpact, name: "member"))
+    MetricList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Metric, name: "member"))
+    MetricNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "member"))
     MetricSetDataQualityMetric.add_member(:metric_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "MetricSetArn"))
     MetricSetDataQualityMetric.add_member(:data_quality_metric_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DataQualityMetricList, name: "DataQualityMetricList"))
     MetricSetDataQualityMetric.type = Types::MetricSetDataQualityMetric
-    MetricSetDataQualityMetricList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricSetDataQualityMetric, name: "member")
+    MetricSetDataQualityMetricList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricSetDataQualityMetric, name: "member"))
     MetricSetDimensionFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "Name"))
     MetricSetDimensionFilter.add_member(:filter_list, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, name: "FilterList"))
     MetricSetDimensionFilter.type = Types::MetricSetDimensionFilter
-    MetricSetDimensionFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricSetDimensionFilter, name: "member")
+    MetricSetDimensionFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricSetDimensionFilter, name: "member"))
     MetricSetSummary.add_member(:metric_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "MetricSetArn"))
     MetricSetSummary.add_member(:anomaly_detector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "AnomalyDetectorArn"))
     MetricSetSummary.add_member(:metric_set_description, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricSetDescription, name: "MetricSetDescription"))
@@ -695,7 +695,7 @@ module Aws::LookoutMetrics
     MetricSetSummary.add_member(:last_modification_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModificationTime"))
     MetricSetSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     MetricSetSummary.type = Types::MetricSetSummary
-    MetricSetSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricSetSummary, name: "member")
+    MetricSetSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricSetSummary, name: "member"))
     MetricSource.add_member(:s3_source_config, ::Smithy::Schema::Shapes::MemberShape.new(target: S3SourceConfig, name: "S3SourceConfig"))
     MetricSource.add_member(:app_flow_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AppFlowConfig, name: "AppFlowConfig"))
     MetricSource.add_member(:cloud_watch_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchConfig, name: "CloudWatchConfig"))
@@ -703,8 +703,8 @@ module Aws::LookoutMetrics
     MetricSource.add_member(:redshift_source_config, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftSourceConfig, name: "RedshiftSourceConfig"))
     MetricSource.add_member(:athena_source_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AthenaSourceConfig, name: "AthenaSourceConfig"))
     MetricSource.type = Types::MetricSource
-    MetricValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricValue, name: "member")
-    NumberListAttributeValue.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NumberAttributeValue, name: "member")
+    MetricValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricValue, name: "member"))
+    NumberListAttributeValue.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberAttributeValue, name: "member"))
     PutFeedbackRequest.add_member(:anomaly_detector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "AnomalyDetectorArn", traits: {"smithy.api#required" => {}}))
     PutFeedbackRequest.add_member(:anomaly_group_time_series_feedback, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyGroupTimeSeriesFeedback, name: "AnomalyGroupTimeSeriesFeedback", traits: {"smithy.api#required" => {}}))
     PutFeedbackRequest.type = Types::PutFeedbackRequest
@@ -747,9 +747,9 @@ module Aws::LookoutMetrics
     SampleDataS3SourceConfig.add_member(:historical_data_path_list, ::Smithy::Schema::Shapes::MemberShape.new(target: HistoricalDataPathList, name: "HistoricalDataPathList"))
     SampleDataS3SourceConfig.add_member(:file_format_descriptor, ::Smithy::Schema::Shapes::MemberShape.new(target: FileFormatDescriptor, name: "FileFormatDescriptor", traits: {"smithy.api#required" => {}}))
     SampleDataS3SourceConfig.type = Types::SampleDataS3SourceConfig
-    SampleRow.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataItem, name: "member")
-    SampleRows.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SampleRow, name: "member")
-    SecurityGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
+    SampleRow.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataItem, name: "member"))
+    SampleRows.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleRow, name: "member"))
+    SecurityGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "ResourceId"))
     ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
@@ -759,16 +759,16 @@ module Aws::LookoutMetrics
     SnsFormat.add_member(:long_text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LONG_TEXT", traits: {"smithy.api#enumValue" => "LONG_TEXT"}))
     SnsFormat.add_member(:short_text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHORT_TEXT", traits: {"smithy.api#enumValue" => "SHORT_TEXT"}))
     SnsFormat.add_member(:json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON", traits: {"smithy.api#enumValue" => "JSON"}))
-    StringListAttributeValue.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringAttributeValue, name: "member")
-    SubnetIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    StringListAttributeValue.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringAttributeValue, name: "member"))
+    SubnetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "resourceArn", "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#jsonName" => "tags", "smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TemplatedPathList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplatedPath, name: "member")
+    TemplatedPathList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplatedPath, name: "member"))
     TimeSeries.add_member(:time_series_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesId, name: "TimeSeriesId", traits: {"smithy.api#required" => {}}))
     TimeSeries.add_member(:dimension_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionNameValueList, name: "DimensionList", traits: {"smithy.api#required" => {}}))
     TimeSeries.add_member(:metric_value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricValueList, name: "MetricValueList", traits: {"smithy.api#required" => {}}))
@@ -776,12 +776,12 @@ module Aws::LookoutMetrics
     TimeSeriesFeedback.add_member(:time_series_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesId, name: "TimeSeriesId"))
     TimeSeriesFeedback.add_member(:is_anomaly, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsAnomaly"))
     TimeSeriesFeedback.type = Types::TimeSeriesFeedback
-    TimeSeriesFeedbackList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesFeedback, name: "member")
-    TimeSeriesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeries, name: "member")
+    TimeSeriesFeedbackList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesFeedback, name: "member"))
+    TimeSeriesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeries, name: "member"))
     TimestampColumn.add_member(:column_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "ColumnName"))
     TimestampColumn.add_member(:column_format, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeFormat, name: "ColumnFormat"))
     TimestampColumn.type = Types::TimestampColumn
-    TimestampList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampString, name: "member")
+    TimestampList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampString, name: "member"))
     TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message", traits: {"smithy.api#required" => {}}))
     TooManyRequestsException.type = Types::TooManyRequestsException
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#jsonName" => "resourceArn", "smithy.api#required" => {}}))
@@ -822,7 +822,7 @@ module Aws::LookoutMetrics
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldName, name: "Name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "UNKNOWN_OPERATION"}))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "CANNOT_PARSE"}))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "FIELD_VALIDATION_FAILED"}))

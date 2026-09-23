@@ -182,7 +182,7 @@ module Aws::ARCRegionswitch
     AbbreviatedExecution.add_member(:execution_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "executionRegion", traits: {"smithy.api#required" => {}}))
     AbbreviatedExecution.add_member(:actual_recovery_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, name: "actualRecoveryTime"))
     AbbreviatedExecution.type = Types::AbbreviatedExecution
-    AbbreviatedExecutionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AbbreviatedExecution, name: "member")
+    AbbreviatedExecutionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AbbreviatedExecution, name: "member"))
     AbbreviatedPlan.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanArn, name: "arn", traits: {"smithy.api#required" => {}}))
     AbbreviatedPlan.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "owner", traits: {"aws.cloudformation#cfnMutability" => "read", "smithy.api#required" => {}}))
     AbbreviatedPlan.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanName, name: "name", traits: {"aws.cloudformation#cfnMutability" => "create-and-read", "smithy.api#required" => {}}))
@@ -219,20 +219,20 @@ module Aws::ARCRegionswitch
     ArcRoutingControlState.add_member(:routing_control_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingControlArn, name: "routingControlArn", traits: {"smithy.api#required" => {}}))
     ArcRoutingControlState.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingControlStateChange, name: "state", traits: {"smithy.api#required" => {}}))
     ArcRoutingControlState.type = Types::ArcRoutingControlState
-    ArcRoutingControlStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ArcRoutingControlState, name: "member")
+    ArcRoutingControlStates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ArcRoutingControlState, name: "member"))
     Asg.add_member(:cross_account_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "crossAccountRole"))
     Asg.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "externalId"))
     Asg.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AsgArn, name: "arn"))
     Asg.type = Types::Asg
-    AsgList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Asg, name: "member")
+    AsgList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Asg, name: "member"))
     AssociatedAlarm.add_member(:cross_account_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "crossAccountRole"))
     AssociatedAlarm.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "externalId"))
     AssociatedAlarm.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
     AssociatedAlarm.add_member(:alarm_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmType, name: "alarmType", traits: {"smithy.api#required" => {}}))
     AssociatedAlarm.type = Types::AssociatedAlarm
-    AssociatedAlarmMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    AssociatedAlarmMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedAlarm, name: "value")
-    AuroraClusterArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuroraClusterArn, name: "member")
+    AssociatedAlarmMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    AssociatedAlarmMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedAlarm, name: "value"))
+    AuroraClusterArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuroraClusterArn, name: "member"))
     CancelPlanExecutionRequest.add_member(:plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanArn, name: "planArn", traits: {"smithy.api#required" => {}}))
     CancelPlanExecutionRequest.add_member(:execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionId, name: "executionId", traits: {"smithy.api#required" => {}}))
     CancelPlanExecutionRequest.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionComment, name: "comment"))
@@ -286,7 +286,7 @@ module Aws::ARCRegionswitch
     EksCluster.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "externalId"))
     EksCluster.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EksClusterArn, name: "clusterArn", traits: {"smithy.api#required" => {}}))
     EksCluster.type = Types::EksCluster
-    EksClusters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EksCluster, name: "member")
+    EksClusters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EksCluster, name: "member"))
     EksResourceScalingConfiguration.add_member(:timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "timeoutMinutes", traits: {"smithy.api#default" => 60, "smithy.api#range" => {"min" => 1}}))
     EksResourceScalingConfiguration.add_member(:kubernetes_resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: KubernetesResourceType, name: "kubernetesResourceType", traits: {"smithy.api#required" => {}}))
     EksResourceScalingConfiguration.add_member(:scaling_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: KubernetesScalingApps, name: "scalingResources"))
@@ -338,7 +338,7 @@ module Aws::ARCRegionswitch
     ExecutionEvent.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "eventId", traits: {"smithy.api#required" => {}}))
     ExecutionEvent.add_member(:previous_event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "previousEventId"))
     ExecutionEvent.type = Types::ExecutionEvent
-    ExecutionEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionEvent, name: "member")
+    ExecutionEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionEvent, name: "member"))
     ExecutionEventType.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN", traits: {"smithy.api#enumValue" => "unknown"}))
     ExecutionEventType.add_member(:execution_pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXECUTION_PENDING", traits: {"smithy.api#enumValue" => "executionPending"}))
     ExecutionEventType.add_member(:execution_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXECUTION_STARTED", traits: {"smithy.api#enumValue" => "executionStarted"}))
@@ -440,14 +440,14 @@ module Aws::ARCRegionswitch
     KubernetesResourceType.add_member(:api_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "apiVersion", traits: {"smithy.api#required" => {}}))
     KubernetesResourceType.add_member(:kind, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "kind", traits: {"smithy.api#required" => {}}))
     KubernetesResourceType.type = Types::KubernetesResourceType
-    KubernetesScalingApplication.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    KubernetesScalingApplication.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RegionalScalingResource, name: "value")
-    KubernetesScalingApps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KubernetesScalingApplication, name: "member")
+    KubernetesScalingApplication.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    KubernetesScalingApplication.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionalScalingResource, name: "value"))
+    KubernetesScalingApps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KubernetesScalingApplication, name: "member"))
     KubernetesScalingResource.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: KubernetesNamespace, name: "namespace", traits: {"smithy.api#required" => {}}))
     KubernetesScalingResource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     KubernetesScalingResource.add_member(:hpa_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "hpaName"))
     KubernetesScalingResource.type = Types::KubernetesScalingResource
-    LambdaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Lambdas, name: "member")
+    LambdaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Lambdas, name: "member"))
     LambdaUngraceful.add_member(:behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaUngracefulBehavior, name: "behavior", traits: {"smithy.api#default" => "skip"}))
     LambdaUngraceful.type = Types::LambdaUngraceful
     LambdaUngracefulBehavior.add_member(:skip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SKIP", traits: {"smithy.api#enumValue" => "skip"}))
@@ -517,21 +517,21 @@ module Aws::ARCRegionswitch
     Plan.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "version", traits: {"aws.cloudformation#cfnMutability" => "read"}))
     Plan.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
     Plan.type = Types::Plan
-    PlanList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AbbreviatedPlan, name: "member")
-    PlanWarnings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceWarning, name: "member")
+    PlanList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AbbreviatedPlan, name: "member"))
+    PlanWarnings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceWarning, name: "member"))
     RecoveryApproach.add_member(:active_active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE_ACTIVE", traits: {"smithy.api#enumValue" => "activeActive"}))
     RecoveryApproach.add_member(:active_passive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE_PASSIVE", traits: {"smithy.api#enumValue" => "activePassive"}))
-    RegionAndRoutingControls.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    RegionAndRoutingControls.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ArcRoutingControlStates, name: "value")
-    RegionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member")
+    RegionAndRoutingControls.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    RegionAndRoutingControls.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ArcRoutingControlStates, name: "value"))
+    RegionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member"))
     RegionSwitchPlanConfiguration.add_member(:cross_account_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "crossAccountRole"))
     RegionSwitchPlanConfiguration.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "externalId"))
     RegionSwitchPlanConfiguration.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanArn, name: "arn", traits: {"smithy.api#required" => {}}))
     RegionSwitchPlanConfiguration.type = Types::RegionSwitchPlanConfiguration
     RegionToRunIn.add_member(:activating_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVATING_REGION", traits: {"smithy.api#enumValue" => "activatingRegion"}))
     RegionToRunIn.add_member(:deactivating_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEACTIVATING_REGION", traits: {"smithy.api#enumValue" => "deactivatingRegion"}))
-    RegionalScalingResource.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "key")
-    RegionalScalingResource.value = ::Smithy::Schema::Shapes::MemberShape.new(target: KubernetesScalingResource, name: "value")
+    RegionalScalingResource.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "key"))
+    RegionalScalingResource.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: KubernetesScalingResource, name: "value"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ResourceWarning.add_member(:workflow, ::Smithy::Schema::Shapes::MemberShape.new(target: MinimalWorkflow, name: "workflow"))
@@ -544,7 +544,7 @@ module Aws::ARCRegionswitch
     ResourceWarning.type = Types::ResourceWarning
     ResourceWarningStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "active"}))
     ResourceWarningStatus.add_member(:resolved, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOLVED", traits: {"smithy.api#enumValue" => "resolved"}))
-    Resources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    Resources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     Route53HealthCheck.add_member(:hosted_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53HostedZoneId, name: "hostedZoneId", traits: {"smithy.api#required" => {}}))
     Route53HealthCheck.add_member(:record_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53RecordName, name: "recordName", traits: {"smithy.api#required" => {}}))
     Route53HealthCheck.add_member(:health_check_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53HealthCheckId, name: "healthCheckId"))
@@ -557,11 +557,11 @@ module Aws::ARCRegionswitch
     Route53HealthCheckConfiguration.add_member(:record_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53RecordName, name: "recordName", traits: {"smithy.api#required" => {}}))
     Route53HealthCheckConfiguration.add_member(:record_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53ResourceRecordSetList, name: "recordSets"))
     Route53HealthCheckConfiguration.type = Types::Route53HealthCheckConfiguration
-    Route53HealthCheckList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Route53HealthCheck, name: "member")
+    Route53HealthCheckList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53HealthCheck, name: "member"))
     Route53ResourceRecordSet.add_member(:record_set_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53ResourceRecordSetIdentifier, name: "recordSetIdentifier"))
     Route53ResourceRecordSet.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "region"))
     Route53ResourceRecordSet.type = Types::Route53ResourceRecordSet
-    Route53ResourceRecordSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Route53ResourceRecordSet, name: "member")
+    Route53ResourceRecordSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Route53ResourceRecordSet, name: "member"))
     RoutingControlStateChange.add_member(:on, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON", traits: {"smithy.api#enumValue" => "On"}))
     RoutingControlStateChange.add_member(:off, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OFF", traits: {"smithy.api#enumValue" => "Off"}))
     Service.add_member(:cross_account_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "crossAccountRole"))
@@ -569,7 +569,7 @@ module Aws::ARCRegionswitch
     Service.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EcsClusterArn, name: "clusterArn"))
     Service.add_member(:service_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EcsServiceArn, name: "serviceArn"))
     Service.type = Types::Service
-    ServiceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "member")
+    ServiceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "member"))
     StartPlanExecutionRequest.add_member(:plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanArn, name: "planArn", traits: {"smithy.api#required" => {}}))
     StartPlanExecutionRequest.add_member(:target_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "targetRegion", traits: {"smithy.api#required" => {}}))
     StartPlanExecutionRequest.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionAction, name: "action", traits: {"smithy.api#required" => {}}))
@@ -594,7 +594,7 @@ module Aws::ARCRegionswitch
     StepState.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "endTime"))
     StepState.add_member(:step_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionMode, name: "stepMode"))
     StepState.type = Types::StepState
-    StepStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StepState, name: "member")
+    StepStates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StepState, name: "member"))
     StepStatus.add_member(:not_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_STARTED", traits: {"smithy.api#enumValue" => "notStarted"}))
     StepStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "running"}))
     StepStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "failed"}))
@@ -602,14 +602,14 @@ module Aws::ARCRegionswitch
     StepStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLED", traits: {"smithy.api#enumValue" => "canceled"}))
     StepStatus.add_member(:skipped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SKIPPED", traits: {"smithy.api#enumValue" => "skipped"}))
     StepStatus.add_member(:pending_approval, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_APPROVAL", traits: {"smithy.api#enumValue" => "pendingApproval"}))
-    Steps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Step, name: "member")
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    Steps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Step, name: "member"))
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanArn, name: "arn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     Trigger.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
     Trigger.add_member(:target_region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "targetRegion", traits: {"smithy.api#required" => {}}))
     Trigger.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowTargetAction, name: "action", traits: {"smithy.api#required" => {}}))
@@ -619,8 +619,8 @@ module Aws::ARCRegionswitch
     TriggerCondition.add_member(:associated_alarm_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "associatedAlarmName", traits: {"smithy.api#required" => {}}))
     TriggerCondition.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmCondition, name: "condition", traits: {"smithy.api#required" => {}}))
     TriggerCondition.type = Types::TriggerCondition
-    TriggerConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerCondition, name: "member")
-    TriggerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Trigger, name: "member")
+    TriggerConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerCondition, name: "member"))
+    TriggerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Trigger, name: "member"))
     UntagResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PlanArn, name: "arn", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:resource_tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeys, name: "resourceTagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -659,7 +659,7 @@ module Aws::ARCRegionswitch
     Workflow.add_member(:workflow_target_region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "workflowTargetRegion"))
     Workflow.add_member(:workflow_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "workflowDescription"))
     Workflow.type = Types::Workflow
-    WorkflowList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Workflow, name: "member")
+    WorkflowList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Workflow, name: "member"))
     WorkflowTargetAction.add_member(:activate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVATE", traits: {"smithy.api#enumValue" => "activate"}))
     WorkflowTargetAction.add_member(:deactivate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEACTIVATE", traits: {"smithy.api#enumValue" => "deactivate"}))
 

@@ -64,7 +64,7 @@ module Aws::MigrationHubConfig
     HomeRegionControl.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "Target"))
     HomeRegionControl.add_member(:requested_time, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestedTime, name: "RequestedTime"))
     HomeRegionControl.type = Types::HomeRegionControl
-    HomeRegionControls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HomeRegionControl, name: "member")
+    HomeRegionControls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HomeRegionControl, name: "member"))
     InternalServerError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InternalServerError.type = Types::InternalServerError
     InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))

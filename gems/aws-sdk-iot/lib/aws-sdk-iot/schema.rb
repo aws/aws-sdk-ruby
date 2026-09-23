@@ -1490,7 +1490,7 @@ module Aws::IoT
     AbortCriteria.add_member(:threshold_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: AbortThresholdPercentage, name: "thresholdPercentage", traits: {"smithy.api#required" => {}}))
     AbortCriteria.add_member(:min_number_of_executed_things, ::Smithy::Schema::Shapes::MemberShape.new(target: MinimumNumberOfExecutedThings, name: "minNumberOfExecutedThings", traits: {"smithy.api#required" => {}}))
     AbortCriteria.type = Types::AbortCriteria
-    AbortCriteriaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AbortCriteria, name: "member")
+    AbortCriteriaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AbortCriteria, name: "member"))
     AcceptCertificateTransferRequest.add_member(:certificate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateId, name: "certificateId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AcceptCertificateTransferRequest.add_member(:set_as_active, ::Smithy::Schema::Shapes::MemberShape.new(target: SetAsActive, name: "setAsActive", traits: {"smithy.api#default" => false, "smithy.api#httpQuery" => "setAsActive"}))
     AcceptCertificateTransferRequest.type = Types::AcceptCertificateTransferRequest
@@ -1518,7 +1518,7 @@ module Aws::IoT
     Action.add_member(:open_search, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenSearchAction, name: "openSearch"))
     Action.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationAction, name: "location"))
     Action.type = Types::Action
-    ActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "member")
+    ActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "member"))
     ActionType.add_member(:publish, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLISH", traits: {"smithy.api#enumValue" => "PUBLISH"}))
     ActionType.add_member(:subscribe, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUBSCRIBE", traits: {"smithy.api#enumValue" => "SUBSCRIBE"}))
     ActionType.add_member(:receive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECEIVE", traits: {"smithy.api#enumValue" => "RECEIVE"}))
@@ -1534,7 +1534,7 @@ module Aws::IoT
     ActiveViolation.add_member(:last_violation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastViolationTime"))
     ActiveViolation.add_member(:violation_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "violationStartTime"))
     ActiveViolation.type = Types::ActiveViolation
-    ActiveViolations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveViolation, name: "member")
+    ActiveViolations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveViolation, name: "member"))
     AddThingToBillingGroupRequest.add_member(:billing_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupName, name: "billingGroupName"))
     AddThingToBillingGroupRequest.add_member(:billing_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupArn, name: "billingGroupArn"))
     AddThingToBillingGroupRequest.add_member(:thing_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingName, name: "thingName"))
@@ -1551,23 +1551,23 @@ module Aws::IoT
     AddThingsToThingGroupParams.add_member(:thing_group_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingGroupNames, name: "thingGroupNames", traits: {"smithy.api#required" => {}}))
     AddThingsToThingGroupParams.add_member(:override_dynamic_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "overrideDynamicGroups"))
     AddThingsToThingGroupParams.type = Types::AddThingsToThingGroupParams
-    AdditionalMetricsToRetainList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BehaviorMetric, name: "member")
-    AdditionalMetricsToRetainV2List.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricToRetain, name: "member")
-    AdditionalParameterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKey, name: "key")
-    AdditionalParameterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "value")
+    AdditionalMetricsToRetainList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BehaviorMetric, name: "member"))
+    AdditionalMetricsToRetainV2List.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricToRetain, name: "member"))
+    AdditionalParameterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKey, name: "key"))
+    AdditionalParameterMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "value"))
     AggregationType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationTypeName, name: "name", traits: {"smithy.api#required" => {}}))
     AggregationType.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationTypeValues, name: "values"))
     AggregationType.type = Types::AggregationType
     AggregationTypeName.add_member(:statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATISTICS", traits: {"smithy.api#enumValue" => "Statistics"}))
     AggregationTypeName.add_member(:percentiles, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PERCENTILES", traits: {"smithy.api#enumValue" => "Percentiles"}))
     AggregationTypeName.add_member(:cardinality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CARDINALITY", traits: {"smithy.api#enumValue" => "Cardinality"}))
-    AggregationTypeValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationTypeValue, name: "member")
+    AggregationTypeValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationTypeValue, name: "member"))
     AlertTarget.add_member(:alert_target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AlertTargetArn, name: "alertTargetArn", traits: {"smithy.api#required" => {}}))
     AlertTarget.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
     AlertTarget.type = Types::AlertTarget
     AlertTargetType.add_member(:sns, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SNS", traits: {"smithy.api#enumValue" => "SNS"}))
-    AlertTargets.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AlertTargetType, name: "key")
-    AlertTargets.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AlertTarget, name: "value")
+    AlertTargets.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AlertTargetType, name: "key"))
+    AlertTargets.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AlertTarget, name: "value"))
     Allowed.add_member(:policies, ::Smithy::Schema::Shapes::MemberShape.new(target: Policies, name: "policies"))
     Allowed.type = Types::Allowed
     ApplicationProtocol.add_member(:secure_mqtt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECURE_MQTT", traits: {"smithy.api#enumValue" => "SECURE_MQTT"}))
@@ -1581,7 +1581,7 @@ module Aws::IoT
     AssetPropertyValue.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyTimestamp, name: "timestamp", traits: {"smithy.api#required" => {}}))
     AssetPropertyValue.add_member(:quality, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyQuality, name: "quality"))
     AssetPropertyValue.type = Types::AssetPropertyValue
-    AssetPropertyValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyValue, name: "member")
+    AssetPropertyValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyValue, name: "member"))
     AssetPropertyVariant.add_member(:string_value, Types::AssetPropertyVariant::StringValue, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyStringValue, name: "stringValue"))
     AssetPropertyVariant.add_member(:integer_value, Types::AssetPropertyVariant::IntegerValue, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyIntegerValue, name: "integerValue"))
     AssetPropertyVariant.add_member(:double_value, Types::AssetPropertyVariant::DoubleValue, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyDoubleValue, name: "doubleValue"))
@@ -1625,15 +1625,15 @@ module Aws::IoT
     AttributePayload.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "attributes"))
     AttributePayload.add_member(:merge, ::Smithy::Schema::Shapes::MemberShape.new(target: Flag, name: "merge", traits: {"smithy.api#default" => false}))
     AttributePayload.type = Types::AttributePayload
-    Attributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
-    Attributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
-    AttributesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKey, name: "key")
-    AttributesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "value")
+    Attributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
+    Attributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
+    AttributesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKey, name: "key"))
+    AttributesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "value"))
     AuditCheckConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, name: "enabled", traits: {"smithy.api#default" => false}))
     AuditCheckConfiguration.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CheckCustomConfiguration, name: "configuration"))
     AuditCheckConfiguration.type = Types::AuditCheckConfiguration
-    AuditCheckConfigurations.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AuditCheckName, name: "key")
-    AuditCheckConfigurations.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AuditCheckConfiguration, name: "value")
+    AuditCheckConfigurations.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditCheckName, name: "key"))
+    AuditCheckConfigurations.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditCheckConfiguration, name: "value"))
     AuditCheckDetails.add_member(:check_run_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditCheckRunStatus, name: "checkRunStatus"))
     AuditCheckDetails.add_member(:check_compliant, ::Smithy::Schema::Shapes::MemberShape.new(target: CheckCompliant, name: "checkCompliant"))
     AuditCheckDetails.add_member(:total_resources_count, ::Smithy::Schema::Shapes::MemberShape.new(target: TotalResourcesCount, name: "totalResourcesCount"))
@@ -1648,12 +1648,12 @@ module Aws::IoT
     AuditCheckRunStatus.add_member(:completed_compliant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED_COMPLIANT", traits: {"smithy.api#enumValue" => "COMPLETED_COMPLIANT"}))
     AuditCheckRunStatus.add_member(:completed_non_compliant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED_NON_COMPLIANT", traits: {"smithy.api#enumValue" => "COMPLETED_NON_COMPLIANT"}))
     AuditCheckRunStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    AuditCheckToActionsMapping.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AuditCheckName, name: "key")
-    AuditCheckToActionsMapping.value = ::Smithy::Schema::Shapes::MemberShape.new(target: MitigationActionNameList, name: "value")
-    AuditCheckToReasonCodeFilter.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AuditCheckName, name: "key")
-    AuditCheckToReasonCodeFilter.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ReasonForNonComplianceCodes, name: "value")
-    AuditDetails.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AuditCheckName, name: "key")
-    AuditDetails.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AuditCheckDetails, name: "value")
+    AuditCheckToActionsMapping.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditCheckName, name: "key"))
+    AuditCheckToActionsMapping.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MitigationActionNameList, name: "value"))
+    AuditCheckToReasonCodeFilter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditCheckName, name: "key"))
+    AuditCheckToReasonCodeFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ReasonForNonComplianceCodes, name: "value"))
+    AuditDetails.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditCheckName, name: "key"))
+    AuditDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditCheckDetails, name: "value"))
     AuditFinding.add_member(:finding_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingId, name: "findingId"))
     AuditFinding.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditTaskId, name: "taskId"))
     AuditFinding.add_member(:check_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditCheckName, name: "checkName"))
@@ -1670,7 +1670,7 @@ module Aws::IoT
     AuditFindingSeverity.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "HIGH"}))
     AuditFindingSeverity.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "MEDIUM"}))
     AuditFindingSeverity.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "LOW"}))
-    AuditFindings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuditFinding, name: "member")
+    AuditFindings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditFinding, name: "member"))
     AuditFrequency.add_member(:daily, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DAILY", traits: {"smithy.api#enumValue" => "DAILY"}))
     AuditFrequency.add_member(:weekly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEEKLY", traits: {"smithy.api#enumValue" => "WEEKLY"}))
     AuditFrequency.add_member(:biweekly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BIWEEKLY", traits: {"smithy.api#enumValue" => "BIWEEKLY"}))
@@ -1685,7 +1685,7 @@ module Aws::IoT
     AuditMitigationActionExecutionMetadata.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "errorCode"))
     AuditMitigationActionExecutionMetadata.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     AuditMitigationActionExecutionMetadata.type = Types::AuditMitigationActionExecutionMetadata
-    AuditMitigationActionExecutionMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuditMitigationActionExecutionMetadata, name: "member")
+    AuditMitigationActionExecutionMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditMitigationActionExecutionMetadata, name: "member"))
     AuditMitigationActionsExecutionStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     AuditMitigationActionsExecutionStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     AuditMitigationActionsExecutionStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -1696,9 +1696,9 @@ module Aws::IoT
     AuditMitigationActionsTaskMetadata.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startTime"))
     AuditMitigationActionsTaskMetadata.add_member(:task_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditMitigationActionsTaskStatus, name: "taskStatus"))
     AuditMitigationActionsTaskMetadata.type = Types::AuditMitigationActionsTaskMetadata
-    AuditMitigationActionsTaskMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuditMitigationActionsTaskMetadata, name: "member")
-    AuditMitigationActionsTaskStatistics.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AuditCheckName, name: "key")
-    AuditMitigationActionsTaskStatistics.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskStatisticsForAuditCheck, name: "value")
+    AuditMitigationActionsTaskMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditMitigationActionsTaskMetadata, name: "member"))
+    AuditMitigationActionsTaskStatistics.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditCheckName, name: "key"))
+    AuditMitigationActionsTaskStatistics.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskStatisticsForAuditCheck, name: "value"))
     AuditMitigationActionsTaskStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     AuditMitigationActionsTaskStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     AuditMitigationActionsTaskStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -1711,8 +1711,8 @@ module Aws::IoT
     AuditNotificationTarget.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "roleArn"))
     AuditNotificationTarget.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, name: "enabled", traits: {"smithy.api#default" => false}))
     AuditNotificationTarget.type = Types::AuditNotificationTarget
-    AuditNotificationTargetConfigurations.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AuditNotificationType, name: "key")
-    AuditNotificationTargetConfigurations.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AuditNotificationTarget, name: "value")
+    AuditNotificationTargetConfigurations.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditNotificationType, name: "key"))
+    AuditNotificationTargetConfigurations.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditNotificationTarget, name: "value"))
     AuditNotificationType.add_member(:sns, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SNS", traits: {"smithy.api#enumValue" => "SNS"}))
     AuditSuppression.add_member(:check_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditCheckName, name: "checkName", traits: {"smithy.api#required" => {}}))
     AuditSuppression.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
@@ -1720,12 +1720,12 @@ module Aws::IoT
     AuditSuppression.add_member(:suppress_indefinitely, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressIndefinitely, name: "suppressIndefinitely"))
     AuditSuppression.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditDescription, name: "description"))
     AuditSuppression.type = Types::AuditSuppression
-    AuditSuppressionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuditSuppression, name: "member")
+    AuditSuppressionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditSuppression, name: "member"))
     AuditTaskMetadata.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditTaskId, name: "taskId"))
     AuditTaskMetadata.add_member(:task_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditTaskStatus, name: "taskStatus"))
     AuditTaskMetadata.add_member(:task_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditTaskType, name: "taskType"))
     AuditTaskMetadata.type = Types::AuditTaskMetadata
-    AuditTaskMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuditTaskMetadata, name: "member")
+    AuditTaskMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditTaskMetadata, name: "member"))
     AuditTaskStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     AuditTaskStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     AuditTaskStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -1738,14 +1738,14 @@ module Aws::IoT
     AuthInfo.add_member(:action_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionType, name: "actionType"))
     AuthInfo.add_member(:resources, ::Smithy::Schema::Shapes::MemberShape.new(target: Resources, name: "resources", traits: {"smithy.api#required" => {}}))
     AuthInfo.type = Types::AuthInfo
-    AuthInfos.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthInfo, name: "member")
+    AuthInfos.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthInfo, name: "member"))
     AuthResult.add_member(:auth_info, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthInfo, name: "authInfo"))
     AuthResult.add_member(:allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: Allowed, name: "allowed"))
     AuthResult.add_member(:denied, ::Smithy::Schema::Shapes::MemberShape.new(target: Denied, name: "denied"))
     AuthResult.add_member(:auth_decision, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthDecision, name: "authDecision"))
     AuthResult.add_member(:missing_context_values, ::Smithy::Schema::Shapes::MemberShape.new(target: MissingContextValues, name: "missingContextValues"))
     AuthResult.type = Types::AuthResult
-    AuthResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthResult, name: "member")
+    AuthResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthResult, name: "member"))
     AuthenticationType.add_member(:custom_auth_x509, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM_AUTH_X509", traits: {"smithy.api#enumValue" => "CUSTOM_AUTH_X509"}))
     AuthenticationType.add_member(:custom_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM_AUTH", traits: {"smithy.api#enumValue" => "CUSTOM_AUTH"}))
     AuthenticationType.add_member(:aws_x509, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_X509", traits: {"smithy.api#enumValue" => "AWS_X509"}))
@@ -1770,7 +1770,7 @@ module Aws::IoT
     AuthorizerSummary.add_member(:authorizer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizerName, name: "authorizerName"))
     AuthorizerSummary.add_member(:authorizer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizerArn, name: "authorizerArn"))
     AuthorizerSummary.type = Types::AuthorizerSummary
-    Authorizers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizerSummary, name: "member")
+    Authorizers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizerSummary, name: "member"))
     AutoRegistrationStatus.add_member(:enable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLE", traits: {"smithy.api#enumValue" => "ENABLE"}))
     AutoRegistrationStatus.add_member(:disable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLE", traits: {"smithy.api#enumValue" => "DISABLE"}))
     AwsJobAbortConfig.add_member(:abort_criteria_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsJobAbortCriteriaList, name: "abortCriteriaList", traits: {"smithy.api#required" => {}}))
@@ -1785,7 +1785,7 @@ module Aws::IoT
     AwsJobAbortCriteriaFailureType.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
     AwsJobAbortCriteriaFailureType.add_member(:timed_out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMED_OUT", traits: {"smithy.api#enumValue" => "TIMED_OUT"}))
     AwsJobAbortCriteriaFailureType.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
-    AwsJobAbortCriteriaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsJobAbortCriteria, name: "member")
+    AwsJobAbortCriteriaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsJobAbortCriteria, name: "member"))
     AwsJobExecutionsRolloutConfig.add_member(:maximum_per_minute, ::Smithy::Schema::Shapes::MemberShape.new(target: MaximumPerMinute, name: "maximumPerMinute"))
     AwsJobExecutionsRolloutConfig.add_member(:exponential_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsJobExponentialRolloutRate, name: "exponentialRate"))
     AwsJobExecutionsRolloutConfig.type = Types::AwsJobExecutionsRolloutConfig
@@ -1818,7 +1818,7 @@ module Aws::IoT
     BehaviorCriteriaType.add_member(:static, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATIC", traits: {"smithy.api#enumValue" => "STATIC"}))
     BehaviorCriteriaType.add_member(:statistical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATISTICAL", traits: {"smithy.api#enumValue" => "STATISTICAL"}))
     BehaviorCriteriaType.add_member(:machine_learning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MACHINE_LEARNING", traits: {"smithy.api#enumValue" => "MACHINE_LEARNING"}))
-    BehaviorModelTrainingSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BehaviorModelTrainingSummary, name: "member")
+    BehaviorModelTrainingSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BehaviorModelTrainingSummary, name: "member"))
     BehaviorModelTrainingSummary.add_member(:security_profile_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileName, name: "securityProfileName"))
     BehaviorModelTrainingSummary.add_member(:behavior_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BehaviorName, name: "behaviorName"))
     BehaviorModelTrainingSummary.add_member(:training_data_collection_start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "trainingDataCollectionStartDate"))
@@ -1826,16 +1826,16 @@ module Aws::IoT
     BehaviorModelTrainingSummary.add_member(:datapoints_collection_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: DataCollectionPercentage, name: "datapointsCollectionPercentage"))
     BehaviorModelTrainingSummary.add_member(:last_model_refresh_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastModelRefreshDate"))
     BehaviorModelTrainingSummary.type = Types::BehaviorModelTrainingSummary
-    Behaviors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Behavior, name: "member")
+    Behaviors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Behavior, name: "member"))
     BillingGroupMetadata.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationDate, name: "creationDate"))
     BillingGroupMetadata.type = Types::BillingGroupMetadata
-    BillingGroupNameAndArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameAndArn, name: "member")
+    BillingGroupNameAndArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameAndArn, name: "member"))
     BillingGroupProperties.add_member(:billing_group_description, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupDescription, name: "billingGroupDescription"))
     BillingGroupProperties.type = Types::BillingGroupProperties
     Bucket.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketKeyValue, name: "keyValue"))
     Bucket.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Count, name: "count", traits: {"smithy.api#default" => 0}))
     Bucket.type = Types::Bucket
-    Buckets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Bucket, name: "member")
+    Buckets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Bucket, name: "member"))
     BucketsAggregationType.add_member(:terms_aggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: TermsAggregation, name: "termsAggregation"))
     BucketsAggregationType.type = Types::BucketsAggregationType
     CACertificate.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateArn, name: "certificateArn"))
@@ -1859,7 +1859,7 @@ module Aws::IoT
     CACertificateStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     CACertificateStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     CACertificateUpdateAction.add_member(:deactivate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEACTIVATE", traits: {"smithy.api#enumValue" => "DEACTIVATE"}))
-    CACertificates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CACertificate, name: "member")
+    CACertificates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CACertificate, name: "member"))
     CancelAuditMitigationActionsTaskRequest.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MitigationActionsTaskId, name: "taskId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelAuditMitigationActionsTaskRequest.type = Types::CancelAuditMitigationActionsTaskRequest
     CancelAuditMitigationActionsTaskResponse.type = Types::CancelAuditMitigationActionsTaskResponse
@@ -1919,12 +1919,12 @@ module Aws::IoT
     CertificateDescription.type = Types::CertificateDescription
     CertificateMode.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "DEFAULT"}))
     CertificateMode.add_member(:sni_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SNI_ONLY", traits: {"smithy.api#enumValue" => "SNI_ONLY"}))
-    CertificateProviderAccountDefaultForOperations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateProviderOperation, name: "member")
+    CertificateProviderAccountDefaultForOperations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateProviderOperation, name: "member"))
     CertificateProviderOperation.add_member(:create_certificate_from_csr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CreateCertificateFromCsr", traits: {"smithy.api#enumValue" => "CreateCertificateFromCsr"}))
     CertificateProviderSummary.add_member(:certificate_provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateProviderName, name: "certificateProviderName"))
     CertificateProviderSummary.add_member(:certificate_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateProviderArn, name: "certificateProviderArn"))
     CertificateProviderSummary.type = Types::CertificateProviderSummary
-    CertificateProviders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateProviderSummary, name: "member")
+    CertificateProviders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateProviderSummary, name: "member"))
     CertificateStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage2, name: "message"))
     CertificateStateException.type = Types::CertificateStateException
     CertificateStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
@@ -1938,16 +1938,16 @@ module Aws::IoT
     CertificateValidity.add_member(:not_before, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "notBefore"))
     CertificateValidity.add_member(:not_after, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "notAfter"))
     CertificateValidity.type = Types::CertificateValidity
-    Certificates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Certificate, name: "member")
-    CheckCustomConfiguration.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigName, name: "key")
-    CheckCustomConfiguration.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigValue, name: "value")
-    Cidrs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Cidr, name: "member")
+    Certificates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Certificate, name: "member"))
+    CheckCustomConfiguration.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigName, name: "key"))
+    CheckCustomConfiguration.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigValue, name: "value"))
+    Cidrs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Cidr, name: "member"))
     ClearDefaultAuthorizerRequest.type = Types::ClearDefaultAuthorizerRequest
     ClearDefaultAuthorizerResponse.type = Types::ClearDefaultAuthorizerResponse
     ClientCertificateConfig.add_member(:client_certificate_callback_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientCertificateCallbackArn, name: "clientCertificateCallbackArn"))
     ClientCertificateConfig.type = Types::ClientCertificateConfig
-    ClientProperties.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    ClientProperties.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    ClientProperties.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    ClientProperties.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     CloudwatchAlarmAction.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
     CloudwatchAlarmAction.add_member(:alarm_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmName, name: "alarmName", traits: {"smithy.api#required" => {}}))
     CloudwatchAlarmAction.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StateReason, name: "stateReason", traits: {"smithy.api#required" => {}}))
@@ -1973,14 +1973,14 @@ module Aws::IoT
     CodeSigningCertificateChain.type = Types::CodeSigningCertificateChain
     CodeSigningSignature.add_member(:inline_document, ::Smithy::Schema::Shapes::MemberShape.new(target: Signature, name: "inlineDocument"))
     CodeSigningSignature.type = Types::CodeSigningSignature
-    CommandExecutionParameterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: CommandParameterName, name: "key")
-    CommandExecutionParameterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CommandParameterValue, name: "value")
+    CommandExecutionParameterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: CommandParameterName, name: "key"))
+    CommandExecutionParameterMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CommandParameterValue, name: "value"))
     CommandExecutionResult.add_member(:s, ::Smithy::Schema::Shapes::MemberShape.new(target: StringCommandExecutionResult, name: "S"))
     CommandExecutionResult.add_member(:b, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanCommandExecutionResult, name: "B"))
     CommandExecutionResult.add_member(:bin, ::Smithy::Schema::Shapes::MemberShape.new(target: BinaryCommandExecutionResult, name: "BIN"))
     CommandExecutionResult.type = Types::CommandExecutionResult
-    CommandExecutionResultMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: CommandExecutionResultName, name: "key")
-    CommandExecutionResultMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CommandExecutionResult, name: "value")
+    CommandExecutionResultMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: CommandExecutionResultName, name: "key"))
+    CommandExecutionResultMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CommandExecutionResult, name: "value"))
     CommandExecutionStatus.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
     CommandExecutionStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     CommandExecutionStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
@@ -1995,7 +1995,7 @@ module Aws::IoT
     CommandExecutionSummary.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "startedAt"))
     CommandExecutionSummary.add_member(:completed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "completedAt"))
     CommandExecutionSummary.type = Types::CommandExecutionSummary
-    CommandExecutionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CommandExecutionSummary, name: "member")
+    CommandExecutionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CommandExecutionSummary, name: "member"))
     CommandNamespace.add_member(:aws_io_t, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWSIoT", traits: {"smithy.api#enumValue" => "AWS-IoT"}))
     CommandNamespace.add_member(:aws_io_t_fleet_wise, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWSIoTFleetWise", traits: {"smithy.api#enumValue" => "AWS-IoT-FleetWise"}))
     CommandParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CommandParameterName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -2003,7 +2003,7 @@ module Aws::IoT
     CommandParameter.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: CommandParameterValue, name: "defaultValue"))
     CommandParameter.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: CommandParameterDescription, name: "description"))
     CommandParameter.type = Types::CommandParameter
-    CommandParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CommandParameter, name: "member")
+    CommandParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CommandParameter, name: "member"))
     CommandParameterValue.add_member(:s, ::Smithy::Schema::Shapes::MemberShape.new(target: StringParameterValue, name: "S"))
     CommandParameterValue.add_member(:b, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanParameterValue, name: "B"))
     CommandParameterValue.add_member(:i, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerParameterValue, name: "I"))
@@ -2023,7 +2023,7 @@ module Aws::IoT
     CommandSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "lastUpdatedAt"))
     CommandSummary.add_member(:pending_deletion, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanWrapperObject, name: "pendingDeletion"))
     CommandSummary.type = Types::CommandSummary
-    CommandSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CommandSummary, name: "member")
+    CommandSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CommandSummary, name: "member"))
     ComparisonOperator.add_member(:less_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LESS_THAN", traits: {"smithy.api#enumValue" => "less-than"}))
     ComparisonOperator.add_member(:less_than_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LESS_THAN_EQUALS", traits: {"smithy.api#enumValue" => "less-than-equals"}))
     ComparisonOperator.add_member(:greater_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GREATER_THAN", traits: {"smithy.api#enumValue" => "greater-than"}))
@@ -2843,7 +2843,7 @@ module Aws::IoT
     DescribeThingTypeResponse.type = Types::DescribeThingTypeResponse
     Destination.add_member(:s3_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Destination, name: "s3Destination"))
     Destination.type = Types::Destination
-    DestinationPackageVersions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PackageVersionArn, name: "member")
+    DestinationPackageVersions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageVersionArn, name: "member"))
     DetachPolicyRequest.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "policyName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DetachPolicyRequest.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTarget, name: "target", traits: {"smithy.api#required" => {}}))
     DetachPolicyRequest.type = Types::DetachPolicyRequest
@@ -2858,8 +2858,8 @@ module Aws::IoT
     DetachThingPrincipalRequest.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: Principal, name: "principal", traits: {"smithy.api#httpHeader" => "x-amzn-principal", "smithy.api#required" => {}}))
     DetachThingPrincipalRequest.type = Types::DetachThingPrincipalRequest
     DetachThingPrincipalResponse.type = Types::DetachThingPrincipalResponse
-    DetailsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DetailsKey, name: "key")
-    DetailsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: DetailsValue, name: "value")
+    DetailsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DetailsKey, name: "key"))
+    DetailsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DetailsValue, name: "value"))
     DetectMitigationActionExecution.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MitigationActionsTaskId, name: "taskId"))
     DetectMitigationActionExecution.add_member(:violation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ViolationId, name: "violationId"))
     DetectMitigationActionExecution.add_member(:action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MitigationActionName, name: "actionName"))
@@ -2870,7 +2870,7 @@ module Aws::IoT
     DetectMitigationActionExecution.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectMitigationActionExecutionErrorCode, name: "errorCode"))
     DetectMitigationActionExecution.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     DetectMitigationActionExecution.type = Types::DetectMitigationActionExecution
-    DetectMitigationActionExecutionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DetectMitigationActionExecution, name: "member")
+    DetectMitigationActionExecutionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectMitigationActionExecution, name: "member"))
     DetectMitigationActionExecutionStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     DetectMitigationActionExecutionStatus.add_member(:successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESSFUL", traits: {"smithy.api#enumValue" => "SUCCESSFUL"}))
     DetectMitigationActionExecutionStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -2894,17 +2894,17 @@ module Aws::IoT
     DetectMitigationActionsTaskSummary.add_member(:actions_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: MitigationActionList, name: "actionsDefinition"))
     DetectMitigationActionsTaskSummary.add_member(:task_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectMitigationActionsTaskStatistics, name: "taskStatistics"))
     DetectMitigationActionsTaskSummary.type = Types::DetectMitigationActionsTaskSummary
-    DetectMitigationActionsTaskSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DetectMitigationActionsTaskSummary, name: "member")
+    DetectMitigationActionsTaskSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectMitigationActionsTaskSummary, name: "member"))
     DetectMitigationActionsTaskTarget.add_member(:violation_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetViolationIdsForDetectMitigationActions, name: "violationIds"))
     DetectMitigationActionsTaskTarget.add_member(:security_profile_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileName, name: "securityProfileName"))
     DetectMitigationActionsTaskTarget.add_member(:behavior_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BehaviorName, name: "behaviorName"))
     DetectMitigationActionsTaskTarget.type = Types::DetectMitigationActionsTaskTarget
-    DetectMitigationActionsToExecuteList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MitigationActionName, name: "member")
+    DetectMitigationActionsToExecuteList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MitigationActionName, name: "member"))
     DeviceCertificateUpdateAction.add_member(:deactivate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEACTIVATE", traits: {"smithy.api#enumValue" => "DEACTIVATE"}))
     DeviceDefenderIndexingMode.add_member(:off, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OFF", traits: {"smithy.api#enumValue" => "OFF"}))
     DeviceDefenderIndexingMode.add_member(:violations, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VIOLATIONS", traits: {"smithy.api#enumValue" => "VIOLATIONS"}))
-    DimensionNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionName, name: "member")
-    DimensionStringValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionStringValue, name: "member")
+    DimensionNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionName, name: "member"))
+    DimensionStringValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionStringValue, name: "member"))
     DimensionType.add_member(:topic_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOPIC_FILTER", traits: {"smithy.api#enumValue" => "TOPIC_FILTER"}))
     DimensionValueOperator.add_member(:in, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN", traits: {"smithy.api#enumValue" => "IN"}))
     DimensionValueOperator.add_member(:not_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_IN", traits: {"smithy.api#enumValue" => "NOT_IN"}))
@@ -2935,14 +2935,14 @@ module Aws::IoT
     DocumentParameter.add_member(:example, ::Smithy::Schema::Shapes::MemberShape.new(target: Example, name: "example"))
     DocumentParameter.add_member(:optional, ::Smithy::Schema::Shapes::MemberShape.new(target: Optional, name: "optional", traits: {"smithy.api#default" => false}))
     DocumentParameter.type = Types::DocumentParameter
-    DocumentParameters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentParameter, name: "member")
+    DocumentParameters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentParameter, name: "member"))
     DomainConfigurationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     DomainConfigurationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     DomainConfigurationSummary.add_member(:domain_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedDomainConfigurationName, name: "domainConfigurationName"))
     DomainConfigurationSummary.add_member(:domain_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainConfigurationArn, name: "domainConfigurationArn"))
     DomainConfigurationSummary.add_member(:service_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceType, name: "serviceType"))
     DomainConfigurationSummary.type = Types::DomainConfigurationSummary
-    DomainConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainConfigurationSummary, name: "member")
+    DomainConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainConfigurationSummary, name: "member"))
     DomainType.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENDPOINT", traits: {"smithy.api#enumValue" => "ENDPOINT"}))
     DomainType.add_member(:aws_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_MANAGED", traits: {"smithy.api#enumValue" => "AWS_MANAGED"}))
     DomainType.add_member(:customer_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER_MANAGED", traits: {"smithy.api#enumValue" => "CUSTOMER_MANAGED"}))
@@ -2965,7 +2965,7 @@ module Aws::IoT
     DynamoDBv2Action.type = Types::DynamoDBv2Action
     DynamoKeyType.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING", traits: {"smithy.api#enumValue" => "STRING"}))
     DynamoKeyType.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NUMBER", traits: {"smithy.api#enumValue" => "NUMBER"}))
-    EffectivePolicies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EffectivePolicy, name: "member")
+    EffectivePolicies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EffectivePolicy, name: "member"))
     EffectivePolicy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "policyName"))
     EffectivePolicy.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyArn, name: "policyArn"))
     EffectivePolicy.add_member(:policy_document, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDocument, name: "policyDocument"))
@@ -2983,12 +2983,12 @@ module Aws::IoT
     EnableTopicRuleRequest.type = Types::EnableTopicRuleRequest
     EncryptionType.add_member(:customer_managed_kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER_MANAGED_KMS_KEY", traits: {"smithy.api#enumValue" => "CUSTOMER_MANAGED_KMS_KEY"}))
     EncryptionType.add_member(:aws_owned_kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_OWNED_KMS_KEY", traits: {"smithy.api#enumValue" => "AWS_OWNED_KMS_KEY"}))
-    Environments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Environment, name: "member")
+    Environments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Environment, name: "member"))
     ErrorInfo.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: Code, name: "code"))
     ErrorInfo.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: OTAUpdateErrorMessage, name: "message"))
     ErrorInfo.type = Types::ErrorInfo
-    EventConfigurations.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "key")
-    EventConfigurations.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, name: "value")
+    EventConfigurations.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "key"))
+    EventConfigurations.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, name: "value"))
     EventType.add_member(:thing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THING", traits: {"smithy.api#enumValue" => "THING"}))
     EventType.add_member(:thing_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THING_GROUP", traits: {"smithy.api#enumValue" => "THING_GROUP"}))
     EventType.add_member(:thing_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THING_TYPE", traits: {"smithy.api#enumValue" => "THING_TYPE"}))
@@ -3012,11 +3012,11 @@ module Aws::IoT
     FieldType.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NUMBER", traits: {"smithy.api#enumValue" => "Number"}))
     FieldType.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING", traits: {"smithy.api#enumValue" => "String"}))
     FieldType.add_member(:boolean, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BOOLEAN", traits: {"smithy.api#enumValue" => "Boolean"}))
-    Fields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Field, name: "member")
+    Fields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Field, name: "member"))
     FileLocation.add_member(:stream, ::Smithy::Schema::Shapes::MemberShape.new(target: Stream, name: "stream"))
     FileLocation.add_member(:s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "s3Location"))
     FileLocation.type = Types::FileLocation
-    FindingIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingId, name: "member")
+    FindingIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingId, name: "member"))
     FirehoseAction.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
     FirehoseAction.add_member(:delivery_stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryStreamName, name: "deliveryStreamName", traits: {"smithy.api#required" => {}}))
     FirehoseAction.add_member(:separator, ::Smithy::Schema::Shapes::MemberShape.new(target: FirehoseSeparator, name: "separator"))
@@ -3025,7 +3025,7 @@ module Aws::IoT
     FleetMetricNameAndArn.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FleetMetricName, name: "metricName"))
     FleetMetricNameAndArn.add_member(:metric_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FleetMetricArn, name: "metricArn"))
     FleetMetricNameAndArn.type = Types::FleetMetricNameAndArn
-    FleetMetricNameAndArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FleetMetricNameAndArn, name: "member")
+    FleetMetricNameAndArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FleetMetricNameAndArn, name: "member"))
     FleetMetricUnit.add_member(:seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Seconds", traits: {"smithy.api#enumValue" => "Seconds"}))
     FleetMetricUnit.add_member(:microseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Microseconds", traits: {"smithy.api#enumValue" => "Microseconds"}))
     FleetMetricUnit.add_member(:milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Milliseconds", traits: {"smithy.api#enumValue" => "Milliseconds"}))
@@ -3056,7 +3056,7 @@ module Aws::IoT
     GeoLocationTarget.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetFieldName, name: "name"))
     GeoLocationTarget.add_member(:order, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetFieldOrder, name: "order"))
     GeoLocationTarget.type = Types::GeoLocationTarget
-    GeoLocationsFilter.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GeoLocationTarget, name: "member")
+    GeoLocationsFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoLocationTarget, name: "member"))
     GetBehaviorModelTrainingSummariesRequest.add_member(:security_profile_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileName, name: "securityProfileName", traits: {"smithy.api#httpQuery" => "securityProfileName"}))
     GetBehaviorModelTrainingSummariesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: TinyMaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     GetBehaviorModelTrainingSummariesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -3229,7 +3229,7 @@ module Aws::IoT
     GroupNameAndArn.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingGroupName, name: "groupName"))
     GroupNameAndArn.add_member(:group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingGroupArn, name: "groupArn"))
     GroupNameAndArn.type = Types::GroupNameAndArn
-    HeaderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HttpActionHeader, name: "member")
+    HeaderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpActionHeader, name: "member"))
     HttpAction.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "url", traits: {"smithy.api#required" => {}}))
     HttpAction.add_member(:confirmation_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "confirmationUrl"))
     HttpAction.add_member(:headers, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderList, name: "headers"))
@@ -3243,8 +3243,8 @@ module Aws::IoT
     HttpContext.add_member(:headers, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpHeaders, name: "headers"))
     HttpContext.add_member(:query_string, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpQueryString, name: "queryString"))
     HttpContext.type = Types::HttpContext
-    HttpHeaders.key = ::Smithy::Schema::Shapes::MemberShape.new(target: HttpHeaderName, name: "key")
-    HttpHeaders.value = ::Smithy::Schema::Shapes::MemberShape.new(target: HttpHeaderValue, name: "value")
+    HttpHeaders.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpHeaderName, name: "key"))
+    HttpHeaders.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpHeaderValue, name: "value"))
     HttpUrlDestinationConfiguration.add_member(:confirmation_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "confirmationUrl", traits: {"smithy.api#required" => {}}))
     HttpUrlDestinationConfiguration.type = Types::HttpUrlDestinationConfiguration
     HttpUrlDestinationProperties.add_member(:confirmation_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "confirmationUrl"))
@@ -3253,7 +3253,7 @@ module Aws::IoT
     HttpUrlDestinationSummary.type = Types::HttpUrlDestinationSummary
     ImplicitDeny.add_member(:policies, ::Smithy::Schema::Shapes::MemberShape.new(target: Policies, name: "policies"))
     ImplicitDeny.type = Types::ImplicitDeny
-    IndexNamesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "member")
+    IndexNamesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "member"))
     IndexNotReadyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage2, name: "message"))
     IndexNotReadyException.type = Types::IndexNotReadyException
     IndexStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
@@ -3360,11 +3360,11 @@ module Aws::IoT
     JobExecutionSummaryForJob.add_member(:thing_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingArn, name: "thingArn"))
     JobExecutionSummaryForJob.add_member(:job_execution_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: JobExecutionSummary, name: "jobExecutionSummary"))
     JobExecutionSummaryForJob.type = Types::JobExecutionSummaryForJob
-    JobExecutionSummaryForJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobExecutionSummaryForJob, name: "member")
+    JobExecutionSummaryForJobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobExecutionSummaryForJob, name: "member"))
     JobExecutionSummaryForThing.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "jobId"))
     JobExecutionSummaryForThing.add_member(:job_execution_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: JobExecutionSummary, name: "jobExecutionSummary"))
     JobExecutionSummaryForThing.type = Types::JobExecutionSummaryForThing
-    JobExecutionSummaryForThingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobExecutionSummaryForThing, name: "member")
+    JobExecutionSummaryForThingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobExecutionSummaryForThing, name: "member"))
     JobExecutionsRetryConfig.add_member(:criteria_list, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryCriteriaList, name: "criteriaList", traits: {"smithy.api#required" => {}}))
     JobExecutionsRetryConfig.type = Types::JobExecutionsRetryConfig
     JobExecutionsRolloutConfig.add_member(:maximum_per_minute, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxJobExecutionsPerMin, name: "maximumPerMinute"))
@@ -3395,14 +3395,14 @@ module Aws::IoT
     JobSummary.add_member(:completed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "completedAt"))
     JobSummary.add_member(:is_concurrent, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanWrapperObject, name: "isConcurrent"))
     JobSummary.type = Types::JobSummary
-    JobSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobSummary, name: "member")
-    JobTargets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetArn, name: "member")
+    JobSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobSummary, name: "member"))
+    JobTargets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetArn, name: "member"))
     JobTemplateSummary.add_member(:job_template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: JobTemplateArn, name: "jobTemplateArn"))
     JobTemplateSummary.add_member(:job_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobTemplateId, name: "jobTemplateId"))
     JobTemplateSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: JobDescription, name: "description"))
     JobTemplateSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "createdAt"))
     JobTemplateSummary.type = Types::JobTemplateSummary
-    JobTemplateSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobTemplateSummary, name: "member")
+    JobTemplateSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobTemplateSummary, name: "member"))
     KafkaAction.add_member(:destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsArn, name: "destinationArn", traits: {"smithy.api#required" => {}}))
     KafkaAction.add_member(:topic, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "topic", traits: {"smithy.api#required" => {}}))
     KafkaAction.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
@@ -3413,7 +3413,7 @@ module Aws::IoT
     KafkaActionHeader.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: KafkaHeaderKey, name: "key", traits: {"smithy.api#required" => {}}))
     KafkaActionHeader.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: KafkaHeaderValue, name: "value", traits: {"smithy.api#required" => {}}))
     KafkaActionHeader.type = Types::KafkaActionHeader
-    KafkaHeaders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KafkaActionHeader, name: "member")
+    KafkaHeaders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KafkaActionHeader, name: "member"))
     KeyPair.add_member(:public_key, ::Smithy::Schema::Shapes::MemberShape.new(target: PublicKey, name: "PublicKey"))
     KeyPair.add_member(:private_key, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateKey, name: "PrivateKey"))
     KeyPair.type = Types::KeyPair
@@ -3961,7 +3961,7 @@ module Aws::IoT
     LogTargetConfiguration.add_member(:log_target, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTarget, name: "logTarget"))
     LogTargetConfiguration.add_member(:log_level, ::Smithy::Schema::Shapes::MemberShape.new(target: LogLevel, name: "logLevel"))
     LogTargetConfiguration.type = Types::LogTargetConfiguration
-    LogTargetConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogTargetConfiguration, name: "member")
+    LogTargetConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogTargetConfiguration, name: "member"))
     LogTargetType.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "DEFAULT"}))
     LogTargetType.add_member(:thing_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THING_GROUP", traits: {"smithy.api#enumValue" => "THING_GROUP"}))
     LogTargetType.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLIENT_ID", traits: {"smithy.api#enumValue" => "CLIENT_ID"}))
@@ -3975,7 +3975,7 @@ module Aws::IoT
     MaintenanceWindow.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CronExpression, name: "startTime", traits: {"smithy.api#required" => {}}))
     MaintenanceWindow.add_member(:duration_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationInMinutes, name: "durationInMinutes", traits: {"smithy.api#required" => {}}))
     MaintenanceWindow.type = Types::MaintenanceWindow
-    MaintenanceWindows.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MaintenanceWindow, name: "member")
+    MaintenanceWindows.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MaintenanceWindow, name: "member"))
     MalformedPolicyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage2, name: "message"))
     MalformedPolicyException.type = Types::MalformedPolicyException
     ManagedJobTemplateSummary.add_member(:template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: JobTemplateArn, name: "templateArn"))
@@ -3984,17 +3984,17 @@ module Aws::IoT
     ManagedJobTemplateSummary.add_member(:environments, ::Smithy::Schema::Shapes::MemberShape.new(target: Environments, name: "environments"))
     ManagedJobTemplateSummary.add_member(:template_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedTemplateVersion, name: "templateVersion"))
     ManagedJobTemplateSummary.type = Types::ManagedJobTemplateSummary
-    ManagedJobTemplatesSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedJobTemplateSummary, name: "member")
+    ManagedJobTemplatesSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedJobTemplateSummary, name: "member"))
     MessageFormat.add_member(:raw, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RAW", traits: {"smithy.api#enumValue" => "RAW"}))
     MessageFormat.add_member(:json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON", traits: {"smithy.api#enumValue" => "JSON"}))
     MetricDatum.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "timestamp"))
     MetricDatum.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricValue, name: "value"))
     MetricDatum.type = Types::MetricDatum
-    MetricDatumList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDatum, name: "member")
+    MetricDatumList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDatum, name: "member"))
     MetricDimension.add_member(:dimension_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionName, name: "dimensionName", traits: {"smithy.api#required" => {}}))
     MetricDimension.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValueOperator, name: "operator"))
     MetricDimension.type = Types::MetricDimension
-    MetricNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "member")
+    MetricNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "member"))
     MetricToRetain.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: BehaviorMetric, name: "metric", traits: {"smithy.api#required" => {}}))
     MetricToRetain.add_member(:metric_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDimension, name: "metricDimension"))
     MetricToRetain.add_member(:export_metric, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportMetric, name: "exportMetric"))
@@ -4009,7 +4009,7 @@ module Aws::IoT
     MetricsExportConfig.add_member(:mqtt_topic, ::Smithy::Schema::Shapes::MemberShape.new(target: MqttTopic, name: "mqttTopic", traits: {"smithy.api#required" => {}}))
     MetricsExportConfig.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
     MetricsExportConfig.type = Types::MetricsExportConfig
-    MissingContextValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MissingContextValue, name: "member")
+    MissingContextValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MissingContextValue, name: "member"))
     MitigationAction.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MitigationActionName, name: "name"))
     MitigationAction.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: MitigationActionId, name: "id"))
     MitigationAction.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "roleArn"))
@@ -4019,9 +4019,9 @@ module Aws::IoT
     MitigationActionIdentifier.add_member(:action_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MitigationActionArn, name: "actionArn"))
     MitigationActionIdentifier.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDate"))
     MitigationActionIdentifier.type = Types::MitigationActionIdentifier
-    MitigationActionIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MitigationActionIdentifier, name: "member")
-    MitigationActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MitigationAction, name: "member")
-    MitigationActionNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MitigationActionName, name: "member")
+    MitigationActionIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MitigationActionIdentifier, name: "member"))
+    MitigationActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MitigationAction, name: "member"))
+    MitigationActionNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MitigationActionName, name: "member"))
     MitigationActionParams.add_member(:update_device_certificate_params, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateDeviceCertificateParams, name: "updateDeviceCertificateParams"))
     MitigationActionParams.add_member(:update_ca_certificate_params, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateCACertificateParams, name: "updateCACertificateParams"))
     MitigationActionParams.add_member(:add_things_to_thing_group_params, ::Smithy::Schema::Shapes::MemberShape.new(target: AddThingsToThingGroupParams, name: "addThingsToThingGroupParams"))
@@ -4053,14 +4053,14 @@ module Aws::IoT
     MqttHeaders.type = Types::MqttHeaders
     NamedShadowIndexingMode.add_member(:off, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OFF", traits: {"smithy.api#enumValue" => "OFF"}))
     NamedShadowIndexingMode.add_member(:on, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON", traits: {"smithy.api#enumValue" => "ON"}))
-    NamedShadowNamesFilter.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShadowName, name: "member")
+    NamedShadowNamesFilter.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ShadowName, name: "member"))
     NonCompliantResource.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType"))
     NonCompliantResource.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, name: "resourceIdentifier"))
     NonCompliantResource.add_member(:additional_info, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMap, name: "additionalInfo"))
     NonCompliantResource.type = Types::NonCompliantResource
     NotConfiguredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage2, name: "message"))
     NotConfiguredException.type = Types::NotConfiguredException
-    NumberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Number, name: "member")
+    NumberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Number, name: "member"))
     OTAUpdateFile.add_member(:file_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FileName, name: "fileName"))
     OTAUpdateFile.add_member(:file_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FileType, name: "fileType"))
     OTAUpdateFile.add_member(:file_version, ::Smithy::Schema::Shapes::MemberShape.new(target: OTAUpdateFileVersion, name: "fileVersion"))
@@ -4068,7 +4068,7 @@ module Aws::IoT
     OTAUpdateFile.add_member(:code_signing, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeSigning, name: "codeSigning"))
     OTAUpdateFile.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributesMap, name: "attributes"))
     OTAUpdateFile.type = Types::OTAUpdateFile
-    OTAUpdateFiles.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OTAUpdateFile, name: "member")
+    OTAUpdateFiles.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OTAUpdateFile, name: "member"))
     OTAUpdateInfo.add_member(:ota_update_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OTAUpdateId, name: "otaUpdateId"))
     OTAUpdateInfo.add_member(:ota_update_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: OTAUpdateArn, name: "otaUpdateArn"))
     OTAUpdateInfo.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "creationDate"))
@@ -4096,7 +4096,7 @@ module Aws::IoT
     OTAUpdateSummary.add_member(:ota_update_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: OTAUpdateArn, name: "otaUpdateArn"))
     OTAUpdateSummary.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "creationDate"))
     OTAUpdateSummary.type = Types::OTAUpdateSummary
-    OTAUpdatesSummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OTAUpdateSummary, name: "member")
+    OTAUpdatesSummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OTAUpdateSummary, name: "member"))
     OpenSearchAction.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
     OpenSearchAction.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ElasticsearchEndpoint, name: "endpoint", traits: {"smithy.api#required" => {}}))
     OpenSearchAction.add_member(:index, ::Smithy::Schema::Shapes::MemberShape.new(target: ElasticsearchIndex, name: "index", traits: {"smithy.api#required" => {}}))
@@ -4110,13 +4110,13 @@ module Aws::IoT
     OutgoingCertificate.add_member(:transfer_message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "transferMessage"))
     OutgoingCertificate.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "creationDate"))
     OutgoingCertificate.type = Types::OutgoingCertificate
-    OutgoingCertificates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OutgoingCertificate, name: "member")
+    OutgoingCertificates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutgoingCertificate, name: "member"))
     PackageSummary.add_member(:package_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageName, name: "packageName"))
     PackageSummary.add_member(:default_version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionName, name: "defaultVersionName"))
     PackageSummary.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationDate, name: "creationDate"))
     PackageSummary.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModifiedDate, name: "lastModifiedDate"))
     PackageSummary.type = Types::PackageSummary
-    PackageSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PackageSummary, name: "member")
+    PackageSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageSummary, name: "member"))
     PackageVersionAction.add_member(:publish, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLISH", traits: {"smithy.api#enumValue" => "PUBLISH"}))
     PackageVersionAction.add_member(:deprecate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPRECATE", traits: {"smithy.api#enumValue" => "DEPRECATE"}))
     PackageVersionArtifact.add_member(:s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "s3Location"))
@@ -4130,23 +4130,23 @@ module Aws::IoT
     PackageVersionSummary.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationDate, name: "creationDate"))
     PackageVersionSummary.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModifiedDate, name: "lastModifiedDate"))
     PackageVersionSummary.type = Types::PackageVersionSummary
-    PackageVersionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PackageVersionSummary, name: "member")
-    ParameterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterKey, name: "key")
-    ParameterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value")
-    Parameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Parameter, name: "key")
-    Parameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "value")
-    PercentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "member")
+    PackageVersionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageVersionSummary, name: "member"))
+    ParameterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterKey, name: "key"))
+    ParameterMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value"))
+    Parameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameter, name: "key"))
+    Parameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "value"))
+    PercentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "member"))
     PercentPair.add_member(:percent, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "percent", traits: {"smithy.api#default" => 0}))
     PercentPair.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PercentValue, name: "value", traits: {"smithy.api#default" => 0}))
     PercentPair.type = Types::PercentPair
-    Percentiles.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PercentPair, name: "member")
-    Policies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, name: "member")
+    Percentiles.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PercentPair, name: "member"))
+    Policies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, name: "member"))
     Policy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "policyName"))
     Policy.add_member(:policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyArn, name: "policyArn"))
     Policy.type = Types::Policy
-    PolicyDocuments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDocument, name: "member")
-    PolicyNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "member")
-    PolicyTargets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTarget, name: "member")
+    PolicyDocuments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDocument, name: "member"))
+    PolicyNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "member"))
+    PolicyTargets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyTarget, name: "member"))
     PolicyTemplateName.add_member(:blank_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BLANK_POLICY", traits: {"smithy.api#enumValue" => "BLANK_POLICY"}))
     PolicyVersion.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyVersionId, name: "versionId"))
     PolicyVersion.add_member(:is_default_version, ::Smithy::Schema::Shapes::MemberShape.new(target: IsDefaultVersion, name: "isDefaultVersion", traits: {"smithy.api#default" => false}))
@@ -4155,29 +4155,29 @@ module Aws::IoT
     PolicyVersionIdentifier.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "policyName"))
     PolicyVersionIdentifier.add_member(:policy_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyVersionId, name: "policyVersionId"))
     PolicyVersionIdentifier.type = Types::PolicyVersionIdentifier
-    PolicyVersions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyVersion, name: "member")
-    Ports.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "member")
+    PolicyVersions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyVersion, name: "member"))
+    Ports.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "member"))
     PresignedUrlConfig.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "roleArn"))
     PresignedUrlConfig.add_member(:expires_in_sec, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpiresInSec, name: "expiresInSec"))
     PresignedUrlConfig.type = Types::PresignedUrlConfig
     PrincipalThingObject.add_member(:thing_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingName, name: "thingName", traits: {"smithy.api#required" => {}}))
     PrincipalThingObject.add_member(:thing_principal_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingPrincipalType, name: "thingPrincipalType"))
     PrincipalThingObject.type = Types::PrincipalThingObject
-    PrincipalThingObjects.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalThingObject, name: "member")
-    Principals.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalArn, name: "member")
-    ProcessingTargetNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingTargetName, name: "member")
+    PrincipalThingObjects.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalThingObject, name: "member"))
+    Principals.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalArn, name: "member"))
+    ProcessingTargetNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingTargetName, name: "member"))
     PropagatingAttribute.add_member(:user_property_key, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPropertyKeyName, name: "userPropertyKey"))
     PropagatingAttribute.add_member(:thing_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "thingAttribute"))
     PropagatingAttribute.add_member(:connection_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionAttributeName, name: "connectionAttribute"))
     PropagatingAttribute.type = Types::PropagatingAttribute
-    PropagatingAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PropagatingAttribute, name: "member")
+    PropagatingAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PropagatingAttribute, name: "member"))
     Protocol.add_member(:mqtt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MQTT", traits: {"smithy.api#enumValue" => "MQTT"}))
     Protocol.add_member(:http, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTP", traits: {"smithy.api#enumValue" => "HTTP"}))
-    Protocols.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, name: "member")
+    Protocols.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, name: "member"))
     ProvisioningHook.add_member(:payload_version, ::Smithy::Schema::Shapes::MemberShape.new(target: PayloadVersion, name: "payloadVersion"))
     ProvisioningHook.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetArn, name: "targetArn", traits: {"smithy.api#required" => {}}))
     ProvisioningHook.type = Types::ProvisioningHook
-    ProvisioningTemplateListing.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningTemplateSummary, name: "member")
+    ProvisioningTemplateListing.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningTemplateSummary, name: "member"))
     ProvisioningTemplateSummary.add_member(:template_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateArn, name: "templateArn"))
     ProvisioningTemplateSummary.add_member(:template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateName, name: "templateName"))
     ProvisioningTemplateSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateDescription, name: "description"))
@@ -4186,13 +4186,13 @@ module Aws::IoT
     ProvisioningTemplateSummary.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled2, name: "enabled"))
     ProvisioningTemplateSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateType, name: "type"))
     ProvisioningTemplateSummary.type = Types::ProvisioningTemplateSummary
-    ProvisioningTemplateVersionListing.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningTemplateVersionSummary, name: "member")
+    ProvisioningTemplateVersionListing.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningTemplateVersionSummary, name: "member"))
     ProvisioningTemplateVersionSummary.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateVersionId, name: "versionId"))
     ProvisioningTemplateVersionSummary.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "creationDate"))
     ProvisioningTemplateVersionSummary.add_member(:is_default_version, ::Smithy::Schema::Shapes::MemberShape.new(target: IsDefaultVersion, name: "isDefaultVersion", traits: {"smithy.api#default" => false}))
     ProvisioningTemplateVersionSummary.type = Types::ProvisioningTemplateVersionSummary
-    PublicKeyMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyName, name: "key")
-    PublicKeyMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, name: "value")
+    PublicKeyMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyName, name: "key"))
+    PublicKeyMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, name: "value"))
     PublishFindingToSnsParams.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsTopicArn, name: "topicArn", traits: {"smithy.api#required" => {}}))
     PublishFindingToSnsParams.type = Types::PublishFindingToSnsParams
     PutAssetPropertyValueEntry.add_member(:entry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyEntryId, name: "entryId"))
@@ -4201,7 +4201,7 @@ module Aws::IoT
     PutAssetPropertyValueEntry.add_member(:property_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyAlias, name: "propertyAlias"))
     PutAssetPropertyValueEntry.add_member(:property_values, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyValueList, name: "propertyValues", traits: {"smithy.api#required" => {}}))
     PutAssetPropertyValueEntry.type = Types::PutAssetPropertyValueEntry
-    PutAssetPropertyValueEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PutAssetPropertyValueEntry, name: "member")
+    PutAssetPropertyValueEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PutAssetPropertyValueEntry, name: "member"))
     PutItemInput.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, name: "tableName", traits: {"smithy.api#required" => {}}))
     PutItemInput.type = Types::PutItemInput
     PutVerificationStateOnViolationRequest.add_member(:violation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ViolationId, name: "violationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -4212,7 +4212,7 @@ module Aws::IoT
     RateIncreaseCriteria.add_member(:number_of_notified_things, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfThings, name: "numberOfNotifiedThings"))
     RateIncreaseCriteria.add_member(:number_of_succeeded_things, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfThings, name: "numberOfSucceededThings"))
     RateIncreaseCriteria.type = Types::RateIncreaseCriteria
-    ReasonForNonComplianceCodes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReasonForNonComplianceCode, name: "member")
+    ReasonForNonComplianceCodes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReasonForNonComplianceCode, name: "member"))
     RegisterCACertificateRequest.add_member(:ca_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificatePem, name: "caCertificate", traits: {"smithy.api#required" => {}}))
     RegisterCACertificateRequest.add_member(:verification_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificatePem, name: "verificationCertificate"))
     RegisterCACertificateRequest.add_member(:set_as_active, ::Smithy::Schema::Shapes::MemberShape.new(target: SetAsActive, name: "setAsActive", traits: {"smithy.api#default" => false, "smithy.api#httpQuery" => "setAsActive"}))
@@ -4257,7 +4257,7 @@ module Aws::IoT
     RelatedResource.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, name: "resourceIdentifier"))
     RelatedResource.add_member(:additional_info, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMap, name: "additionalInfo"))
     RelatedResource.type = Types::RelatedResource
-    RelatedResources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedResource, name: "member")
+    RelatedResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedResource, name: "member"))
     RemoveThingFromBillingGroupRequest.add_member(:billing_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupName, name: "billingGroupName"))
     RemoveThingFromBillingGroupRequest.add_member(:billing_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupArn, name: "billingGroupArn"))
     RemoveThingFromBillingGroupRequest.add_member(:thing_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingName, name: "thingName"))
@@ -4288,10 +4288,10 @@ module Aws::IoT
     ResourceAlreadyExistsException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "resourceId"))
     ResourceAlreadyExistsException.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn"))
     ResourceAlreadyExistsException.type = Types::ResourceAlreadyExistsException
-    ResourceArns.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceLogicalId, name: "key")
-    ResourceArns.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "value")
-    ResourceAttributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceAttributeKey, name: "key")
-    ResourceAttributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceAttributeValue, name: "value")
+    ResourceArns.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceLogicalId, name: "key"))
+    ResourceArns.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "value"))
+    ResourceAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceAttributeKey, name: "key"))
+    ResourceAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceAttributeValue, name: "value"))
     ResourceIdentifier.add_member(:device_certificate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateId, name: "deviceCertificateId"))
     ResourceIdentifier.add_member(:ca_certificate_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateId, name: "caCertificateId"))
     ResourceIdentifier.add_member(:cognito_identity_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CognitoIdentityPoolId, name: "cognitoIdentityPoolId"))
@@ -4316,11 +4316,11 @@ module Aws::IoT
     ResourceType.add_member(:role_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLE_ALIAS", traits: {"smithy.api#enumValue" => "ROLE_ALIAS"}))
     ResourceType.add_member(:iam_role, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IAM_ROLE", traits: {"smithy.api#enumValue" => "IAM_ROLE"}))
     ResourceType.add_member(:issuer_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ISSUER_CERTIFICATE", traits: {"smithy.api#enumValue" => "ISSUER_CERTIFICATE"}))
-    Resources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member")
+    Resources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
     RetryCriteria.add_member(:failure_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryableFailureType, name: "failureType", traits: {"smithy.api#required" => {}}))
     RetryCriteria.add_member(:number_of_retries, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfRetries, name: "numberOfRetries", traits: {"smithy.api#required" => {}}))
     RetryCriteria.type = Types::RetryCriteria
-    RetryCriteriaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RetryCriteria, name: "member")
+    RetryCriteriaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryCriteria, name: "member"))
     RetryableFailureType.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     RetryableFailureType.add_member(:timed_out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMED_OUT", traits: {"smithy.api#enumValue" => "TIMED_OUT"}))
     RetryableFailureType.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
@@ -4332,7 +4332,7 @@ module Aws::IoT
     RoleAliasDescription.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "creationDate"))
     RoleAliasDescription.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateType, name: "lastModifiedDate"))
     RoleAliasDescription.type = Types::RoleAliasDescription
-    RoleAliases.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoleAlias, name: "member")
+    RoleAliases.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleAlias, name: "member"))
     S3Action.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
     S3Action.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "bucketName", traits: {"smithy.api#required" => {}}))
     S3Action.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "key", traits: {"smithy.api#required" => {}}))
@@ -4341,7 +4341,7 @@ module Aws::IoT
     S3Destination.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Bucket, name: "bucket"))
     S3Destination.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: Prefix, name: "prefix"))
     S3Destination.type = Types::S3Destination
-    S3FileUrlList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: S3FileUrl, name: "member")
+    S3FileUrlList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3FileUrl, name: "member"))
     S3Location.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Bucket, name: "bucket"))
     S3Location.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Key, name: "key"))
     S3Location.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Version, name: "version"))
@@ -4360,7 +4360,7 @@ module Aws::IoT
     SbomValidationResultSummary.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: SbomValidationErrorCode, name: "errorCode"))
     SbomValidationResultSummary.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: SbomValidationErrorMessage, name: "errorMessage"))
     SbomValidationResultSummary.type = Types::SbomValidationResultSummary
-    SbomValidationResultSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SbomValidationResultSummary, name: "member")
+    SbomValidationResultSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SbomValidationResultSummary, name: "member"))
     SbomValidationStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     SbomValidationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     SbomValidationStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
@@ -4370,10 +4370,10 @@ module Aws::IoT
     ScheduledAuditMetadata.add_member(:day_of_month, ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfMonth, name: "dayOfMonth"))
     ScheduledAuditMetadata.add_member(:day_of_week, ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfWeek, name: "dayOfWeek"))
     ScheduledAuditMetadata.type = Types::ScheduledAuditMetadata
-    ScheduledAuditMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledAuditMetadata, name: "member")
+    ScheduledAuditMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledAuditMetadata, name: "member"))
     ScheduledJobRollout.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StringDateTime, name: "startTime"))
     ScheduledJobRollout.type = Types::ScheduledJobRollout
-    ScheduledJobRolloutList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledJobRollout, name: "member")
+    ScheduledJobRolloutList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledJobRollout, name: "member"))
     SchedulingConfig.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StringDateTime, name: "startTime"))
     SchedulingConfig.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StringDateTime, name: "endTime"))
     SchedulingConfig.add_member(:end_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: JobEndBehavior, name: "endBehavior"))
@@ -4389,20 +4389,20 @@ module Aws::IoT
     SearchIndexResponse.add_member(:things, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingDocumentList, name: "things"))
     SearchIndexResponse.add_member(:thing_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingGroupDocumentList, name: "thingGroups"))
     SearchIndexResponse.type = Types::SearchIndexResponse
-    SearchableAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "member")
-    SecurityGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
+    SearchableAttributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "member"))
+    SecurityGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     SecurityProfileIdentifier.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileName, name: "name", traits: {"smithy.api#required" => {}}))
     SecurityProfileIdentifier.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileArn, name: "arn", traits: {"smithy.api#required" => {}}))
     SecurityProfileIdentifier.type = Types::SecurityProfileIdentifier
-    SecurityProfileIdentifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileIdentifier, name: "member")
+    SecurityProfileIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileIdentifier, name: "member"))
     SecurityProfileTarget.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileTargetArn, name: "arn", traits: {"smithy.api#required" => {}}))
     SecurityProfileTarget.type = Types::SecurityProfileTarget
     SecurityProfileTargetMapping.add_member(:security_profile_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileIdentifier, name: "securityProfileIdentifier"))
     SecurityProfileTargetMapping.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileTarget, name: "target"))
     SecurityProfileTargetMapping.type = Types::SecurityProfileTargetMapping
-    SecurityProfileTargetMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileTargetMapping, name: "member")
-    SecurityProfileTargets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileTarget, name: "member")
-    ServerCertificateArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AcmCertificateArn, name: "member")
+    SecurityProfileTargetMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileTargetMapping, name: "member"))
+    SecurityProfileTargets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityProfileTarget, name: "member"))
+    ServerCertificateArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AcmCertificateArn, name: "member"))
     ServerCertificateConfig.add_member(:enable_ocsp_check, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableOCSPCheck, name: "enableOCSPCheck"))
     ServerCertificateConfig.add_member(:ocsp_lambda_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: OCSPLambdaArn, name: "ocspLambdaArn"))
     ServerCertificateConfig.add_member(:ocsp_authorized_responder_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AcmCertificateArn, name: "ocspAuthorizedResponderArn"))
@@ -4413,7 +4413,7 @@ module Aws::IoT
     ServerCertificateSummary.add_member(:server_certificate_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerCertificateStatus, name: "serverCertificateStatus"))
     ServerCertificateSummary.add_member(:server_certificate_status_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerCertificateStatusDetail, name: "serverCertificateStatusDetail"))
     ServerCertificateSummary.type = Types::ServerCertificateSummary
-    ServerCertificates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServerCertificateSummary, name: "member")
+    ServerCertificates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerCertificateSummary, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage2, name: "message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     ServiceType.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATA", traits: {"smithy.api#enumValue" => "DATA"}))
@@ -4524,7 +4524,7 @@ module Aws::IoT
     StreamFile.add_member(:file_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileId, name: "fileId"))
     StreamFile.add_member(:s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "s3Location"))
     StreamFile.type = Types::StreamFile
-    StreamFiles.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamFile, name: "member")
+    StreamFiles.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamFile, name: "member"))
     StreamInfo.add_member(:stream_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamId, name: "streamId"))
     StreamInfo.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamArn, name: "streamArn"))
     StreamInfo.add_member(:stream_version, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamVersion, name: "streamVersion"))
@@ -4539,32 +4539,32 @@ module Aws::IoT
     StreamSummary.add_member(:stream_version, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamVersion, name: "streamVersion"))
     StreamSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamDescription, name: "description"))
     StreamSummary.type = Types::StreamSummary
-    StreamsSummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSummary, name: "member")
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue, name: "member")
-    StringMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    StringMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
-    SubnetIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
+    StreamsSummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamSummary, name: "member"))
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue, name: "member"))
+    StringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    StringMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
+    SubnetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    TargetAuditCheckNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuditCheckName, name: "member")
+    TargetAuditCheckNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditCheckName, name: "member"))
     TargetFieldOrder.add_member(:lat_lon, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LatLon", traits: {"smithy.api#enumValue" => "LatLon"}))
     TargetFieldOrder.add_member(:lon_lat, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LonLat", traits: {"smithy.api#enumValue" => "LonLat"}))
     TargetSelection.add_member(:continuous, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTINUOUS", traits: {"smithy.api#enumValue" => "CONTINUOUS"}))
     TargetSelection.add_member(:snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SNAPSHOT", traits: {"smithy.api#enumValue" => "SNAPSHOT"}))
-    TargetViolationIdsForDetectMitigationActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ViolationId, name: "member")
-    Targets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "member")
+    TargetViolationIdsForDetectMitigationActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ViolationId, name: "member"))
+    Targets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "member"))
     TaskAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage2, name: "message"))
     TaskAlreadyExistsException.type = Types::TaskAlreadyExistsException
-    TaskIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TaskId, name: "member")
+    TaskIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskId, name: "member"))
     TaskStatistics.add_member(:total_checks, ::Smithy::Schema::Shapes::MemberShape.new(target: TotalChecksCount, name: "totalChecks"))
     TaskStatistics.add_member(:in_progress_checks, ::Smithy::Schema::Shapes::MemberShape.new(target: InProgressChecksCount, name: "inProgressChecks"))
     TaskStatistics.add_member(:waiting_for_data_collection_checks, ::Smithy::Schema::Shapes::MemberShape.new(target: WaitingForDataCollectionChecksCount, name: "waitingForDataCollectionChecks"))
@@ -4611,7 +4611,7 @@ module Aws::IoT
     ThingAttribute.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "attributes"))
     ThingAttribute.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version", traits: {"smithy.api#default" => 0}))
     ThingAttribute.type = Types::ThingAttribute
-    ThingAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThingAttribute, name: "member")
+    ThingAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingAttribute, name: "member"))
     ThingConnectivity.add_member(:connected, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "connected"))
     ThingConnectivity.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectivityTimestamp, name: "timestamp"))
     ThingConnectivity.add_member(:disconnect_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: DisconnectReason, name: "disconnectReason"))
@@ -4627,28 +4627,28 @@ module Aws::IoT
     ThingDocument.add_member(:device_defender, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonDocument, name: "deviceDefender"))
     ThingDocument.add_member(:connectivity, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingConnectivity, name: "connectivity"))
     ThingDocument.type = Types::ThingDocument
-    ThingDocumentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThingDocument, name: "member")
+    ThingDocumentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingDocument, name: "member"))
     ThingGroupDocument.add_member(:thing_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingGroupName, name: "thingGroupName"))
     ThingGroupDocument.add_member(:thing_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingGroupId, name: "thingGroupId"))
     ThingGroupDocument.add_member(:thing_group_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingGroupDescription, name: "thingGroupDescription"))
     ThingGroupDocument.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "attributes"))
     ThingGroupDocument.add_member(:parent_group_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingGroupNameList, name: "parentGroupNames"))
     ThingGroupDocument.type = Types::ThingGroupDocument
-    ThingGroupDocumentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThingGroupDocument, name: "member")
+    ThingGroupDocumentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingGroupDocument, name: "member"))
     ThingGroupIndexingConfiguration.add_member(:thing_group_indexing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingGroupIndexingMode, name: "thingGroupIndexingMode", traits: {"smithy.api#required" => {}}))
     ThingGroupIndexingConfiguration.add_member(:managed_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: Fields, name: "managedFields"))
     ThingGroupIndexingConfiguration.add_member(:custom_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: Fields, name: "customFields"))
     ThingGroupIndexingConfiguration.type = Types::ThingGroupIndexingConfiguration
     ThingGroupIndexingMode.add_member(:off, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OFF", traits: {"smithy.api#enumValue" => "OFF"}))
     ThingGroupIndexingMode.add_member(:on, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON", traits: {"smithy.api#enumValue" => "ON"}))
-    ThingGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThingGroupName, name: "member")
+    ThingGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingGroupName, name: "member"))
     ThingGroupMetadata.add_member(:parent_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingGroupName, name: "parentGroupName"))
     ThingGroupMetadata.add_member(:root_to_parent_thing_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingGroupNameAndArnList, name: "rootToParentThingGroups"))
     ThingGroupMetadata.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationDate, name: "creationDate"))
     ThingGroupMetadata.type = Types::ThingGroupMetadata
-    ThingGroupNameAndArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameAndArn, name: "member")
-    ThingGroupNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThingGroupName, name: "member")
-    ThingGroupNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThingGroupName, name: "member")
+    ThingGroupNameAndArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameAndArn, name: "member"))
+    ThingGroupNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingGroupName, name: "member"))
+    ThingGroupNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingGroupName, name: "member"))
     ThingGroupProperties.add_member(:thing_group_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingGroupDescription, name: "thingGroupDescription"))
     ThingGroupProperties.add_member(:attribute_payload, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributePayload, name: "attributePayload"))
     ThingGroupProperties.type = Types::ThingGroupProperties
@@ -4663,11 +4663,11 @@ module Aws::IoT
     ThingIndexingMode.add_member(:off, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OFF", traits: {"smithy.api#enumValue" => "OFF"}))
     ThingIndexingMode.add_member(:registry, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGISTRY", traits: {"smithy.api#enumValue" => "REGISTRY"}))
     ThingIndexingMode.add_member(:registry_and_shadow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGISTRY_AND_SHADOW", traits: {"smithy.api#enumValue" => "REGISTRY_AND_SHADOW"}))
-    ThingNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThingName, name: "member")
+    ThingNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingName, name: "member"))
     ThingPrincipalObject.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: Principal, name: "principal", traits: {"smithy.api#required" => {}}))
     ThingPrincipalObject.add_member(:thing_principal_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingPrincipalType, name: "thingPrincipalType"))
     ThingPrincipalObject.type = Types::ThingPrincipalObject
-    ThingPrincipalObjects.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThingPrincipalObject, name: "member")
+    ThingPrincipalObjects.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingPrincipalObject, name: "member"))
     ThingPrincipalType.add_member(:exclusive_thing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXCLUSIVE_THING", traits: {"smithy.api#enumValue" => "EXCLUSIVE_THING"}))
     ThingPrincipalType.add_member(:non_exclusive_thing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NON_EXCLUSIVE_THING", traits: {"smithy.api#enumValue" => "NON_EXCLUSIVE_THING"}))
     ThingTypeDefinition.add_member(:thing_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingTypeName, name: "thingTypeName"))
@@ -4675,7 +4675,7 @@ module Aws::IoT
     ThingTypeDefinition.add_member(:thing_type_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingTypeProperties, name: "thingTypeProperties"))
     ThingTypeDefinition.add_member(:thing_type_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingTypeMetadata, name: "thingTypeMetadata"))
     ThingTypeDefinition.type = Types::ThingTypeDefinition
-    ThingTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThingTypeDefinition, name: "member")
+    ThingTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThingTypeDefinition, name: "member"))
     ThingTypeMetadata.add_member(:deprecated, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, name: "deprecated", traits: {"smithy.api#default" => false}))
     ThingTypeMetadata.add_member(:deprecation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DeprecationDate, name: "deprecationDate"))
     ThingTypeMetadata.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationDate, name: "creationDate"))
@@ -4700,7 +4700,7 @@ module Aws::IoT
     TimestreamDimension.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestreamDimensionName, name: "name", traits: {"smithy.api#required" => {}}))
     TimestreamDimension.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestreamDimensionValue, name: "value", traits: {"smithy.api#required" => {}}))
     TimestreamDimension.type = Types::TimestreamDimension
-    TimestreamDimensionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TimestreamDimension, name: "member")
+    TimestreamDimensionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestreamDimension, name: "member"))
     TimestreamTimestamp.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestreamTimestampValue, name: "value", traits: {"smithy.api#required" => {}}))
     TimestreamTimestamp.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestreamTimestampUnit, name: "unit", traits: {"smithy.api#required" => {}}))
     TimestreamTimestamp.type = Types::TimestreamTimestamp
@@ -4733,7 +4733,7 @@ module Aws::IoT
     TopicRuleDestinationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     TopicRuleDestinationStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
     TopicRuleDestinationStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    TopicRuleDestinationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TopicRuleDestinationSummary, name: "member")
+    TopicRuleDestinationSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicRuleDestinationSummary, name: "member"))
     TopicRuleDestinationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsArn, name: "arn"))
     TopicRuleDestinationSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicRuleDestinationStatus, name: "status"))
     TopicRuleDestinationSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedAtDate, name: "createdAt"))
@@ -4742,7 +4742,7 @@ module Aws::IoT
     TopicRuleDestinationSummary.add_member(:http_url_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpUrlDestinationSummary, name: "httpUrlSummary"))
     TopicRuleDestinationSummary.add_member(:vpc_destination_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcDestinationSummary, name: "vpcDestinationSummary"))
     TopicRuleDestinationSummary.type = Types::TopicRuleDestinationSummary
-    TopicRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TopicRuleListItem, name: "member")
+    TopicRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicRuleListItem, name: "member"))
     TopicRuleListItem.add_member(:rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleArn, name: "ruleArn"))
     TopicRuleListItem.add_member(:rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleName, name: "ruleName"))
     TopicRuleListItem.add_member(:topic_pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicPattern, name: "topicPattern"))
@@ -5025,7 +5025,7 @@ module Aws::IoT
     UpdateTopicRuleDestinationRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicRuleDestinationStatus, name: "status", traits: {"smithy.api#required" => {}}))
     UpdateTopicRuleDestinationRequest.type = Types::UpdateTopicRuleDestinationRequest
     UpdateTopicRuleDestinationResponse.type = Types::UpdateTopicRuleDestinationResponse
-    UserProperties.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserProperty, name: "member")
+    UserProperties.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserProperty, name: "member"))
     UserProperty.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPropertyKey, name: "key", traits: {"smithy.api#required" => {}}))
     UserProperty.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPropertyValue, name: "value", traits: {"smithy.api#required" => {}}))
     UserProperty.type = Types::UserProperty
@@ -5036,7 +5036,7 @@ module Aws::IoT
     ValidateSecurityProfileBehaviorsResponse.type = Types::ValidateSecurityProfileBehaviorsResponse
     ValidationError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
     ValidationError.type = Types::ValidationError
-    ValidationErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationError, name: "member")
+    ValidationErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationError, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage2, name: "message"))
     ValidationException.type = Types::ValidationException
     VerificationState.add_member(:false_positive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FALSE_POSITIVE", traits: {"smithy.api#enumValue" => "FALSE_POSITIVE"}))
@@ -5069,7 +5069,7 @@ module Aws::IoT
     ViolationEventType.add_member(:in_alarm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_ALARM", traits: {"smithy.api#enumValue" => "in-alarm"}))
     ViolationEventType.add_member(:alarm_cleared, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALARM_CLEARED", traits: {"smithy.api#enumValue" => "alarm-cleared"}))
     ViolationEventType.add_member(:alarm_invalidated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALARM_INVALIDATED", traits: {"smithy.api#enumValue" => "alarm-invalidated"}))
-    ViolationEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ViolationEvent, name: "member")
+    ViolationEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ViolationEvent, name: "member"))
     VpcDestinationConfiguration.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIdList, name: "subnetIds", traits: {"smithy.api#required" => {}}))
     VpcDestinationConfiguration.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupList, name: "securityGroups"))
     VpcDestinationConfiguration.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "vpcId", traits: {"smithy.api#required" => {}}))

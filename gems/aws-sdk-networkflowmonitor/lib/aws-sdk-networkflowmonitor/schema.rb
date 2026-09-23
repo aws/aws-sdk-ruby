@@ -275,7 +275,7 @@ module Aws::NetworkFlowMonitor
     MetricUnit.add_member(:terabits_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERABITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Terabits/Second"}))
     MetricUnit.add_member(:count_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COUNT_PER_SECOND", traits: {"smithy.api#enumValue" => "Count/Second"}))
     MetricUnit.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "None"}))
-    MonitorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorSummary, name: "member")
+    MonitorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorSummary, name: "member"))
     MonitorLocalResource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorLocalResourceType, name: "type", traits: {"smithy.api#required" => {}}))
     MonitorLocalResource.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "identifier", traits: {"smithy.api#required" => {}}))
     MonitorLocalResource.type = Types::MonitorLocalResource
@@ -283,7 +283,7 @@ module Aws::NetworkFlowMonitor
     MonitorLocalResourceType.add_member(:aws_az, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_AZ", traits: {"smithy.api#enumValue" => "AWS::AvailabilityZone"}))
     MonitorLocalResourceType.add_member(:aws_subnet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SUBNET", traits: {"smithy.api#enumValue" => "AWS::EC2::Subnet"}))
     MonitorLocalResourceType.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_REGION", traits: {"smithy.api#enumValue" => "AWS::Region"}))
-    MonitorLocalResources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorLocalResource, name: "member")
+    MonitorLocalResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorLocalResource, name: "member"))
     MonitorMetric.add_member(:round_trip_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROUND_TRIP_TIME", traits: {"smithy.api#enumValue" => "ROUND_TRIP_TIME"}))
     MonitorMetric.add_member(:timeouts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMEOUTS", traits: {"smithy.api#enumValue" => "TIMEOUTS"}))
     MonitorMetric.add_member(:retransmissions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RETRANSMISSIONS", traits: {"smithy.api#enumValue" => "RETRANSMISSIONS"}))
@@ -296,7 +296,7 @@ module Aws::NetworkFlowMonitor
     MonitorRemoteResourceType.add_member(:aws_subnet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SUBNET", traits: {"smithy.api#enumValue" => "AWS::EC2::Subnet"}))
     MonitorRemoteResourceType.add_member(:aws_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SERVICE", traits: {"smithy.api#enumValue" => "AWS::AWSService"}))
     MonitorRemoteResourceType.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_REGION", traits: {"smithy.api#enumValue" => "AWS::Region"}))
-    MonitorRemoteResources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorRemoteResource, name: "member")
+    MonitorRemoteResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorRemoteResource, name: "member"))
     MonitorStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     MonitorStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     MonitorStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
@@ -332,7 +332,7 @@ module Aws::NetworkFlowMonitor
     MonitorTopContributorsRow.add_member(:remote_subnet_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetArn, name: "remoteSubnetArn"))
     MonitorTopContributorsRow.add_member(:remote_vpc_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcArn, name: "remoteVpcArn"))
     MonitorTopContributorsRow.type = Types::MonitorTopContributorsRow
-    MonitorTopContributorsRowList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorTopContributorsRow, name: "member")
+    MonitorTopContributorsRowList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorTopContributorsRow, name: "member"))
     QueryStatus.add_member(:queued, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUEUED", traits: {"smithy.api#enumValue" => "QUEUED"}))
     QueryStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     QueryStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
@@ -349,7 +349,7 @@ module Aws::NetworkFlowMonitor
     ScopeSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeStatus, name: "status", traits: {"smithy.api#required" => {}}))
     ScopeSummary.add_member(:scope_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "scopeArn", traits: {"smithy.api#required" => {}}))
     ScopeSummary.type = Types::ScopeSummary
-    ScopeSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeSummary, name: "member")
+    ScopeSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeSummary, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     StartQueryMonitorTopContributorsInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "monitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -390,9 +390,9 @@ module Aws::NetworkFlowMonitor
     StopQueryWorkloadInsightsTopContributorsInput.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "queryId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopQueryWorkloadInsightsTopContributorsInput.type = Types::StopQueryWorkloadInsightsTopContributorsInput
     StopQueryWorkloadInsightsTopContributorsOutput.type = Types::StopQueryWorkloadInsightsTopContributorsOutput
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -406,7 +406,7 @@ module Aws::NetworkFlowMonitor
     TargetResource.add_member(:target_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetIdentifier, name: "targetIdentifier", traits: {"smithy.api#required" => {}}))
     TargetResource.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, name: "region", traits: {"smithy.api#required" => {}}))
     TargetResource.type = Types::TargetResource
-    TargetResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResource, name: "member")
+    TargetResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResource, name: "member"))
     TargetType.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ThrottlingException.type = Types::ThrottlingException
@@ -415,7 +415,7 @@ module Aws::NetworkFlowMonitor
     TraversedComponent.add_member(:component_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "componentArn"))
     TraversedComponent.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "serviceName"))
     TraversedComponent.type = Types::TraversedComponent
-    TraversedConstructsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TraversedComponent, name: "member")
+    TraversedConstructsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TraversedComponent, name: "member"))
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
@@ -454,7 +454,7 @@ module Aws::NetworkFlowMonitor
     WorkloadInsightsTopContributorsDataPoint.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadInsightsTopContributorsValuesList, name: "values", traits: {"smithy.api#required" => {}}))
     WorkloadInsightsTopContributorsDataPoint.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "label", traits: {"smithy.api#required" => {}}))
     WorkloadInsightsTopContributorsDataPoint.type = Types::WorkloadInsightsTopContributorsDataPoint
-    WorkloadInsightsTopContributorsDataPoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadInsightsTopContributorsDataPoint, name: "member")
+    WorkloadInsightsTopContributorsDataPoints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadInsightsTopContributorsDataPoint, name: "member"))
     WorkloadInsightsTopContributorsRow.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId"))
     WorkloadInsightsTopContributorsRow.add_member(:local_subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "localSubnetId"))
     WorkloadInsightsTopContributorsRow.add_member(:local_az, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "localAz"))
@@ -465,9 +465,9 @@ module Aws::NetworkFlowMonitor
     WorkloadInsightsTopContributorsRow.add_member(:local_subnet_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetArn, name: "localSubnetArn"))
     WorkloadInsightsTopContributorsRow.add_member(:local_vpc_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcArn, name: "localVpcArn"))
     WorkloadInsightsTopContributorsRow.type = Types::WorkloadInsightsTopContributorsRow
-    WorkloadInsightsTopContributorsRowList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadInsightsTopContributorsRow, name: "member")
-    WorkloadInsightsTopContributorsTimestampsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "member", traits: {"smithy.api#timestampFormat" => "date-time"})
-    WorkloadInsightsTopContributorsValuesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member")
+    WorkloadInsightsTopContributorsRowList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadInsightsTopContributorsRow, name: "member"))
+    WorkloadInsightsTopContributorsTimestampsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "member", traits: {"smithy.api#timestampFormat" => "date-time"}))
+    WorkloadInsightsTopContributorsValuesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member"))
 
     NetworkFlowMonitor = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.networkflowmonitor#NetworkFlowMonitor"

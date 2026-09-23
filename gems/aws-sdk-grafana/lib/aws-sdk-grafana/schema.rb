@@ -150,7 +150,7 @@ module Aws::Grafana
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    AllowedOrganizations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOrganization, name: "member")
+    AllowedOrganizations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOrganization, name: "member"))
     AssertionAttributes.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssertionAttribute, name: "name"))
     AssertionAttributes.add_member(:login, ::Smithy::Schema::Shapes::MemberShape.new(target: AssertionAttribute, name: "login"))
     AssertionAttributes.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: AssertionAttribute, name: "email"))
@@ -168,7 +168,7 @@ module Aws::Grafana
     AuthenticationDescription.add_member(:saml, ::Smithy::Schema::Shapes::MemberShape.new(target: SamlAuthentication, name: "saml"))
     AuthenticationDescription.add_member(:aws_sso, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsSsoAuthentication, name: "awsSso"))
     AuthenticationDescription.type = Types::AuthenticationDescription
-    AuthenticationProviders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationProviderTypes, name: "member")
+    AuthenticationProviders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationProviderTypes, name: "member"))
     AuthenticationSummary.add_member(:providers, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationProviders, name: "providers", traits: {"smithy.api#required" => {}}))
     AuthenticationSummary.add_member(:saml_configuration_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SamlConfigurationStatus, name: "samlConfigurationStatus"))
     AuthenticationSummary.type = Types::AuthenticationSummary
@@ -225,7 +225,7 @@ module Aws::Grafana
     CreateWorkspaceServiceAccountTokenResponse.add_member(:service_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "serviceAccountId", traits: {"smithy.api#required" => {}}))
     CreateWorkspaceServiceAccountTokenResponse.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "workspaceId", traits: {"smithy.api#required" => {}}))
     CreateWorkspaceServiceAccountTokenResponse.type = Types::CreateWorkspaceServiceAccountTokenResponse
-    DataSourceTypesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceType, name: "member")
+    DataSourceTypesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceType, name: "member"))
     DeleteWorkspaceApiKeyInput.add_member(:key_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiKeyName, name: "keyName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteWorkspaceApiKeyInput.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "workspaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteWorkspaceApiKeyInput.type = Types::DeleteWorkspaceApiKeyInput
@@ -268,7 +268,7 @@ module Aws::Grafana
     DisassociateLicenseInput.type = Types::DisassociateLicenseInput
     DisassociateLicenseOutput.add_member(:workspace, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceDescription, name: "workspace", traits: {"smithy.api#required" => {}}))
     DisassociateLicenseOutput.type = Types::DisassociateLicenseOutput
-    GrafanaVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GrafanaVersion, name: "member")
+    GrafanaVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GrafanaVersion, name: "member"))
     IdpMetadata.add_member(:url, Types::IdpMetadata::Url, ::Smithy::Schema::Shapes::MemberShape.new(target: IdpMetadataUrl, name: "url"))
     IdpMetadata.add_member(:xml, Types::IdpMetadata::Xml, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "xml"))
     IdpMetadata.add_member(:unknown, Types::IdpMetadata::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -324,18 +324,18 @@ module Aws::Grafana
     NetworkAccessConfiguration.add_member(:prefix_list_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixListIds, name: "prefixListIds", traits: {"smithy.api#required" => {}}))
     NetworkAccessConfiguration.add_member(:vpce_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: VpceIds, name: "vpceIds", traits: {"smithy.api#required" => {}}))
     NetworkAccessConfiguration.type = Types::NetworkAccessConfiguration
-    NotificationDestinationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationDestinationType, name: "member")
-    OrganizationalUnitList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnit, name: "member")
+    NotificationDestinationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationDestinationType, name: "member"))
+    OrganizationalUnitList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnit, name: "member"))
     PermissionEntry.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "user", traits: {"smithy.api#required" => {}}))
     PermissionEntry.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "role", traits: {"smithy.api#required" => {}}))
     PermissionEntry.type = Types::PermissionEntry
-    PermissionEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionEntry, name: "member")
-    PrefixListIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixListId, name: "member")
+    PermissionEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionEntry, name: "member"))
+    PrefixListIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixListId, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RoleValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoleValue, name: "member")
+    RoleValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleValue, name: "member"))
     RoleValues.add_member(:editor, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleValueList, name: "editor"))
     RoleValues.add_member(:admin, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleValueList, name: "admin"))
     RoleValues.type = Types::RoleValues
@@ -348,14 +348,14 @@ module Aws::Grafana
     SamlConfiguration.add_member(:allowed_organizations, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOrganizations, name: "allowedOrganizations"))
     SamlConfiguration.add_member(:login_validity_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: LoginValidityDuration, name: "loginValidityDuration", traits: {"smithy.api#default" => 0}))
     SamlConfiguration.type = Types::SamlConfiguration
-    SecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
-    ServiceAccountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceAccountSummary, name: "member")
+    SecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
+    ServiceAccountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceAccountSummary, name: "member"))
     ServiceAccountSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id", traits: {"smithy.api#required" => {}}))
     ServiceAccountSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ServiceAccountSummary.add_member(:is_disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "isDisabled", traits: {"smithy.api#required" => {}}))
     ServiceAccountSummary.add_member(:grafana_role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "grafanaRole", traits: {"smithy.api#required" => {}}))
     ServiceAccountSummary.type = Types::ServiceAccountSummary
-    ServiceAccountTokenList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceAccountTokenSummary, name: "member")
+    ServiceAccountTokenList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceAccountTokenSummary, name: "member"))
     ServiceAccountTokenSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id", traits: {"smithy.api#required" => {}}))
     ServiceAccountTokenSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ServiceAccountTokenSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
@@ -372,10 +372,10 @@ module Aws::Grafana
     ServiceQuotaExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "serviceCode", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "quotaCode", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    SubnetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -393,12 +393,12 @@ module Aws::Grafana
     UpdateError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     UpdateError.add_member(:caused_by, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateInstruction, name: "causedBy", traits: {"smithy.api#required" => {}}))
     UpdateError.type = Types::UpdateError
-    UpdateErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateError, name: "member")
+    UpdateErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateError, name: "member"))
     UpdateInstruction.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateAction, name: "action", traits: {"smithy.api#required" => {}}))
     UpdateInstruction.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "role", traits: {"smithy.api#required" => {}}))
     UpdateInstruction.add_member(:users, ::Smithy::Schema::Shapes::MemberShape.new(target: UserList, name: "users", traits: {"smithy.api#required" => {}}))
     UpdateInstruction.type = Types::UpdateInstruction
-    UpdateInstructionBatch.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateInstruction, name: "member")
+    UpdateInstructionBatch.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateInstruction, name: "member"))
     UpdatePermissionsInput.add_member(:update_instruction_batch, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateInstructionBatch, name: "updateInstructionBatch", traits: {"smithy.api#required" => {}}))
     UpdatePermissionsInput.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "workspaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdatePermissionsInput.type = Types::UpdatePermissionsInput
@@ -436,7 +436,7 @@ module Aws::Grafana
     User.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SsoId, name: "id", traits: {"smithy.api#required" => {}}))
     User.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: UserType, name: "type", traits: {"smithy.api#required" => {}}))
     User.type = Types::User
-    UserList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member")
+    UserList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, name: "reason", traits: {"smithy.api#required" => {}}))
     ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldList, name: "fieldList"))
@@ -444,11 +444,11 @@ module Aws::Grafana
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     VpcConfiguration.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, name: "securityGroupIds", traits: {"smithy.api#required" => {}}))
     VpcConfiguration.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, name: "subnetIds", traits: {"smithy.api#required" => {}}))
     VpcConfiguration.type = Types::VpcConfiguration
-    VpceIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpceId, name: "member")
+    VpceIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpceId, name: "member"))
     WorkspaceDescription.add_member(:account_access_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAccessType, name: "accountAccessType"))
     WorkspaceDescription.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "created", traits: {"smithy.api#required" => {}}))
     WorkspaceDescription.add_member(:data_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceTypesList, name: "dataSources", traits: {"smithy.api#required" => {}}))
@@ -475,7 +475,7 @@ module Aws::Grafana
     WorkspaceDescription.add_member(:network_access_control, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkAccessConfiguration, name: "networkAccessControl"))
     WorkspaceDescription.add_member(:grafana_token, ::Smithy::Schema::Shapes::MemberShape.new(target: GrafanaToken, name: "grafanaToken"))
     WorkspaceDescription.type = Types::WorkspaceDescription
-    WorkspaceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceSummary, name: "member")
+    WorkspaceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceSummary, name: "member"))
     WorkspaceSummary.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "created", traits: {"smithy.api#required" => {}}))
     WorkspaceSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     WorkspaceSummary.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "endpoint", traits: {"smithy.api#required" => {}}))

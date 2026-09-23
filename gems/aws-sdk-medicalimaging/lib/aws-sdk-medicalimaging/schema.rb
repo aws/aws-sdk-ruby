@@ -187,7 +187,7 @@ module Aws::MedicalImaging
     DICOMImportJobProperties.add_member(:output_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "outputS3Uri", traits: {"smithy.api#required" => {}}))
     DICOMImportJobProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     DICOMImportJobProperties.type = Types::DICOMImportJobProperties
-    DICOMImportJobSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DICOMImportJobSummary, name: "member")
+    DICOMImportJobSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DICOMImportJobSummary, name: "member"))
     DICOMImportJobSummary.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "jobId", traits: {"smithy.api#required" => {}}))
     DICOMImportJobSummary.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, name: "jobName", traits: {"smithy.api#required" => {}}))
     DICOMImportJobSummary.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "jobStatus", traits: {"smithy.api#required" => {}}))
@@ -234,7 +234,7 @@ module Aws::MedicalImaging
     DatastoreStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     DatastoreStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     DatastoreStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
-    DatastoreSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreSummary, name: "member")
+    DatastoreSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreSummary, name: "member"))
     DatastoreSummary.add_member(:datastore_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreId, name: "datastoreId", traits: {"smithy.api#required" => {}}))
     DatastoreSummary.add_member(:datastore_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreName, name: "datastoreName", traits: {"smithy.api#required" => {}}))
     DatastoreSummary.add_member(:datastore_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreStatus, name: "datastoreStatus", traits: {"smithy.api#required" => {}}))
@@ -315,7 +315,7 @@ module Aws::MedicalImaging
     ImageSetProperties.add_member(:overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: Overrides, name: "overrides"))
     ImageSetProperties.add_member(:is_primary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isPrimary"))
     ImageSetProperties.type = Types::ImageSetProperties
-    ImageSetPropertiesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSetProperties, name: "member")
+    ImageSetPropertiesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSetProperties, name: "member"))
     ImageSetState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     ImageSetState.add_member(:locked, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOCKED", traits: {"smithy.api#enumValue" => "LOCKED"}))
     ImageSetState.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
@@ -332,7 +332,7 @@ module Aws::MedicalImaging
     ImageSetWorkflowStatus.add_member(:importing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMPORTING", traits: {"smithy.api#enumValue" => "IMPORTING"}))
     ImageSetWorkflowStatus.add_member(:imported, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMPORTED", traits: {"smithy.api#enumValue" => "IMPORTED"}))
     ImageSetWorkflowStatus.add_member(:import_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMPORT_FAILED", traits: {"smithy.api#enumValue" => "IMPORT_FAILED"}))
-    ImageSetsMetadataSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSetsMetadataSummary, name: "member")
+    ImageSetsMetadataSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSetsMetadataSummary, name: "member"))
     ImageSetsMetadataSummary.add_member(:image_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSetId, name: "imageSetId", traits: {"smithy.api#required" => {}}))
     ImageSetsMetadataSummary.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "version"))
     ImageSetsMetadataSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "createdAt"))
@@ -396,14 +396,14 @@ module Aws::MedicalImaging
     SearchByAttributeValue.add_member(:is_primary, Types::SearchByAttributeValue::IsPrimary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isPrimary"))
     SearchByAttributeValue.add_member(:unknown, Types::SearchByAttributeValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     SearchByAttributeValue.type = Types::SearchByAttributeValue
-    SearchByAttributeValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchByAttributeValue, name: "member")
+    SearchByAttributeValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchByAttributeValue, name: "member"))
     SearchCriteria.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilters, name: "filters", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}}))
     SearchCriteria.add_member(:sort, ::Smithy::Schema::Shapes::MemberShape.new(target: Sort, name: "sort"))
     SearchCriteria.type = Types::SearchCriteria
     SearchFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchByAttributeValues, name: "values", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}, "smithy.api#required" => {}}))
     SearchFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: Operator, name: "operator", traits: {"smithy.api#required" => {}}))
     SearchFilter.type = Types::SearchFilter
-    SearchFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilter, name: "member")
+    SearchFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilter, name: "member"))
     SearchImageSetsRequest.add_member(:datastore_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreId, name: "datastoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     SearchImageSetsRequest.add_member(:search_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchCriteria, name: "searchCriteria", traits: {"smithy.api#httpPayload" => {}}))
     SearchImageSetsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 50}}))
@@ -438,9 +438,9 @@ module Aws::MedicalImaging
     StartDICOMImportJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "jobStatus", traits: {"smithy.api#required" => {}}))
     StartDICOMImportJobResponse.add_member(:submitted_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "submittedAt", traits: {"smithy.api#required" => {}}))
     StartDICOMImportJobResponse.type = Types::StartDICOMImportJobResponse
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest

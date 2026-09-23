@@ -140,7 +140,7 @@ module Aws::CodeGuruReviewer
     AccessDeniedException.type = Types::AccessDeniedException
     AnalysisType.add_member(:security, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECURITY", traits: {"smithy.api#enumValue" => "Security"}))
     AnalysisType.add_member(:code_quality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CODE_QUALITY", traits: {"smithy.api#enumValue" => "CodeQuality"}))
-    AnalysisTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisType, name: "member")
+    AnalysisTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisType, name: "member"))
     AssociateRepositoryRequest.add_member(:repository, ::Smithy::Schema::Shapes::MemberShape.new(target: Repository, name: "Repository", traits: {"smithy.api#required" => {}}))
     AssociateRepositoryRequest.add_member(:client_request_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientRequestToken, name: "ClientRequestToken", traits: {"smithy.api#idempotencyToken" => {}}))
     AssociateRepositoryRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
@@ -174,7 +174,7 @@ module Aws::CodeGuruReviewer
     CodeReview.add_member(:analysis_types, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisTypes, name: "AnalysisTypes"))
     CodeReview.add_member(:config_file_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigFileState, name: "ConfigFileState"))
     CodeReview.type = Types::CodeReview
-    CodeReviewSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CodeReviewSummary, name: "member")
+    CodeReviewSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeReviewSummary, name: "member"))
     CodeReviewSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
     CodeReviewSummary.add_member(:code_review_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "CodeReviewArn"))
     CodeReviewSummary.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "RepositoryName"))
@@ -238,7 +238,7 @@ module Aws::CodeGuruReviewer
     JobState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "Pending"}))
     JobState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
     JobState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
-    JobStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobState, name: "member")
+    JobStates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobState, name: "member"))
     KMSKeyDetails.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKeyId, name: "KMSKeyId"))
     KMSKeyDetails.add_member(:encryption_option, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionOption, name: "EncryptionOption"))
     KMSKeyDetails.type = Types::KMSKeyDetails
@@ -290,16 +290,16 @@ module Aws::CodeGuruReviewer
     MetricsSummary.add_member(:suppressed_lines_of_code_count, ::Smithy::Schema::Shapes::MemberShape.new(target: LinesOfCodeCount, name: "SuppressedLinesOfCodeCount"))
     MetricsSummary.add_member(:findings_count, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingsCount, name: "FindingsCount"))
     MetricsSummary.type = Types::MetricsSummary
-    Names.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "member")
+    Names.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "member"))
     NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     NotFoundException.type = Types::NotFoundException
-    Owners.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Owner, name: "member")
+    Owners.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Owner, name: "member"))
     ProviderType.add_member(:code_commit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CODE_COMMIT", traits: {"smithy.api#enumValue" => "CodeCommit"}))
     ProviderType.add_member(:git_hub, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GIT_HUB", traits: {"smithy.api#enumValue" => "GitHub"}))
     ProviderType.add_member(:bitbucket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BITBUCKET", traits: {"smithy.api#enumValue" => "Bitbucket"}))
     ProviderType.add_member(:git_hub_enterprise_server, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GIT_HUB_ENTERPRISE_SERVER", traits: {"smithy.api#enumValue" => "GitHubEnterpriseServer"}))
     ProviderType.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3_BUCKET", traits: {"smithy.api#enumValue" => "S3Bucket"}))
-    ProviderTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderType, name: "member")
+    ProviderTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderType, name: "member"))
     PutRecommendationFeedbackRequest.add_member(:code_review_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "CodeReviewArn", traits: {"smithy.api#required" => {}}))
     PutRecommendationFeedbackRequest.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationId, name: "RecommendationId", traits: {"smithy.api#required" => {}}))
     PutRecommendationFeedbackRequest.add_member(:reactions, ::Smithy::Schema::Shapes::MemberShape.new(target: Reactions, name: "Reactions", traits: {"smithy.api#required" => {}}))
@@ -307,7 +307,7 @@ module Aws::CodeGuruReviewer
     PutRecommendationFeedbackResponse.type = Types::PutRecommendationFeedbackResponse
     Reaction.add_member(:thumbs_up, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THUMBS_UP", traits: {"smithy.api#enumValue" => "ThumbsUp"}))
     Reaction.add_member(:thumbs_down, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THUMBS_DOWN", traits: {"smithy.api#enumValue" => "ThumbsDown"}))
-    Reactions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Reaction, name: "member")
+    Reactions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Reaction, name: "member"))
     RecommendationCategory.add_member(:aws_best_practices, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_BEST_PRACTICES", traits: {"smithy.api#enumValue" => "AWSBestPractices"}))
     RecommendationCategory.add_member(:aws_cloudformation_issues, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_CLOUDFORMATION_ISSUES", traits: {"smithy.api#enumValue" => "AWSCloudFormationIssues"}))
     RecommendationCategory.add_member(:duplicate_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUPLICATE_CODE", traits: {"smithy.api#enumValue" => "DuplicateCode"}))
@@ -326,13 +326,13 @@ module Aws::CodeGuruReviewer
     RecommendationFeedback.add_member(:created_time_stamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, name: "CreatedTimeStamp"))
     RecommendationFeedback.add_member(:last_updated_time_stamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, name: "LastUpdatedTimeStamp"))
     RecommendationFeedback.type = Types::RecommendationFeedback
-    RecommendationFeedbackSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationFeedbackSummary, name: "member")
+    RecommendationFeedbackSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationFeedbackSummary, name: "member"))
     RecommendationFeedbackSummary.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationId, name: "RecommendationId"))
     RecommendationFeedbackSummary.add_member(:reactions, ::Smithy::Schema::Shapes::MemberShape.new(target: Reactions, name: "Reactions"))
     RecommendationFeedbackSummary.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "UserId"))
     RecommendationFeedbackSummary.type = Types::RecommendationFeedbackSummary
-    RecommendationIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationId, name: "member")
-    RecommendationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationSummary, name: "member")
+    RecommendationIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationId, name: "member"))
+    RecommendationSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationSummary, name: "member"))
     RecommendationSummary.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePath, name: "FilePath"))
     RecommendationSummary.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationId, name: "RecommendationId"))
     RecommendationSummary.add_member(:start_line, ::Smithy::Schema::Shapes::MemberShape.new(target: LineNumber, name: "StartLine"))
@@ -368,8 +368,8 @@ module Aws::CodeGuruReviewer
     RepositoryAssociationState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
     RepositoryAssociationState.add_member(:disassociating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISASSOCIATING", traits: {"smithy.api#enumValue" => "Disassociating"}))
     RepositoryAssociationState.add_member(:disassociated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISASSOCIATED", traits: {"smithy.api#enumValue" => "Disassociated"}))
-    RepositoryAssociationStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryAssociationState, name: "member")
-    RepositoryAssociationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryAssociationSummary, name: "member")
+    RepositoryAssociationStates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryAssociationState, name: "member"))
+    RepositoryAssociationSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryAssociationSummary, name: "member"))
     RepositoryAssociationSummary.add_member(:association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "AssociationArn"))
     RepositoryAssociationSummary.add_member(:connection_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionArn, name: "ConnectionArn"))
     RepositoryAssociationSummary.add_member(:last_updated_time_stamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, name: "LastUpdatedTimeStamp"))
@@ -381,7 +381,7 @@ module Aws::CodeGuruReviewer
     RepositoryAssociationSummary.type = Types::RepositoryAssociationSummary
     RepositoryHeadSourceCodeType.add_member(:branch_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BranchName, name: "BranchName", traits: {"smithy.api#required" => {}}))
     RepositoryHeadSourceCodeType.type = Types::RepositoryHeadSourceCodeType
-    RepositoryNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "member")
+    RepositoryNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "member"))
     RequestMetadata.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "RequestId"))
     RequestMetadata.add_member(:requester, ::Smithy::Schema::Shapes::MemberShape.new(target: Requester, name: "Requester"))
     RequestMetadata.add_member(:event_info, ::Smithy::Schema::Shapes::MemberShape.new(target: EventInfo, name: "EventInfo"))
@@ -395,7 +395,7 @@ module Aws::CodeGuruReviewer
     RuleMetadata.add_member(:long_description, ::Smithy::Schema::Shapes::MemberShape.new(target: LongDescription, name: "LongDescription"))
     RuleMetadata.add_member(:rule_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleTags, name: "RuleTags"))
     RuleMetadata.type = Types::RuleMetadata
-    RuleTags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleTag, name: "member")
+    RuleTags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleTag, name: "member"))
     S3BucketRepository.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name", traits: {"smithy.api#required" => {}}))
     S3BucketRepository.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: S3RepositoryDetails, name: "Details"))
     S3BucketRepository.type = Types::S3BucketRepository
@@ -416,9 +416,9 @@ module Aws::CodeGuruReviewer
     SourceCodeType.add_member(:s3_bucket_repository, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketRepository, name: "S3BucketRepository"))
     SourceCodeType.add_member(:request_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestMetadata, name: "RequestMetadata"))
     SourceCodeType.type = Types::SourceCodeType
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -435,7 +435,7 @@ module Aws::CodeGuruReviewer
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
-    UserIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "member")
+    UserIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserId, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ValidationException.type = Types::ValidationException
     VendorName.add_member(:github, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GITHUB", traits: {"smithy.api#enumValue" => "GitHub"}))

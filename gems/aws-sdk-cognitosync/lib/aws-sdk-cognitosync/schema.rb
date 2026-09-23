@@ -94,7 +94,7 @@ module Aws::CognitoSync
 
     AlreadyStreamedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message", traits: {"smithy.api#required" => {}}))
     AlreadyStreamedException.type = Types::AlreadyStreamedException
-    ApplicationArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, name: "member")
+    ApplicationArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, name: "member"))
     BulkPublishRequest.add_member(:identity_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityPoolId, name: "IdentityPoolId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BulkPublishRequest.type = Types::BulkPublishRequest
     BulkPublishResponse.add_member(:identity_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityPoolId, name: "IdentityPoolId"))
@@ -117,7 +117,7 @@ module Aws::CognitoSync
     Dataset.add_member(:data_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "DataStorage"))
     Dataset.add_member(:num_records, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "NumRecords"))
     Dataset.type = Types::Dataset
-    DatasetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Dataset, name: "member")
+    DatasetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Dataset, name: "member"))
     DeleteDatasetRequest.add_member(:identity_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityPoolId, name: "IdentityPoolId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteDatasetRequest.add_member(:identity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityId, name: "IdentityId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteDatasetRequest.add_member(:dataset_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetName, name: "DatasetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -141,8 +141,8 @@ module Aws::CognitoSync
     DescribeIdentityUsageResponse.type = Types::DescribeIdentityUsageResponse
     DuplicateRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message", traits: {"smithy.api#required" => {}}))
     DuplicateRequestException.type = Types::DuplicateRequestException
-    Events.key = ::Smithy::Schema::Shapes::MemberShape.new(target: CognitoEventType, name: "key")
-    Events.value = ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaFunctionArn, name: "value")
+    Events.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: CognitoEventType, name: "key"))
+    Events.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaFunctionArn, name: "value"))
     GetBulkPublishDetailsRequest.add_member(:identity_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityPoolId, name: "IdentityPoolId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetBulkPublishDetailsRequest.type = Types::GetBulkPublishDetailsRequest
     GetBulkPublishDetailsResponse.add_member(:identity_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityPoolId, name: "IdentityPoolId"))
@@ -166,7 +166,7 @@ module Aws::CognitoSync
     IdentityPoolUsage.add_member(:data_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "DataStorage"))
     IdentityPoolUsage.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "LastModifiedDate"))
     IdentityPoolUsage.type = Types::IdentityPoolUsage
-    IdentityPoolUsageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityPoolUsage, name: "member")
+    IdentityPoolUsageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityPoolUsage, name: "member"))
     IdentityUsage.add_member(:identity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityId, name: "IdentityId"))
     IdentityUsage.add_member(:identity_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityPoolId, name: "IdentityPoolId"))
     IdentityUsage.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "LastModifiedDate"))
@@ -220,7 +220,7 @@ module Aws::CognitoSync
     ListRecordsResponse.add_member(:dataset_deleted_after_requested_sync_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "DatasetDeletedAfterRequestedSyncCount", traits: {"smithy.api#default" => false}))
     ListRecordsResponse.add_member(:sync_session_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SyncSessionToken"))
     ListRecordsResponse.type = Types::ListRecordsResponse
-    MergedDatasetNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    MergedDatasetNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     NotAuthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message", traits: {"smithy.api#required" => {}}))
     NotAuthorizedException.type = Types::NotAuthorizedException
     Operation.add_member(:replace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "replace", traits: {"smithy.api#enumValue" => "replace"}))
@@ -239,14 +239,14 @@ module Aws::CognitoSync
     Record.add_member(:last_modified_by, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LastModifiedBy"))
     Record.add_member(:device_last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "DeviceLastModifiedDate"))
     Record.type = Types::Record
-    RecordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Record, name: "member")
+    RecordList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Record, name: "member"))
     RecordPatch.add_member(:op, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, name: "Op", traits: {"smithy.api#required" => {}}))
     RecordPatch.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordKey, name: "Key", traits: {"smithy.api#required" => {}}))
     RecordPatch.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordValue, name: "Value"))
     RecordPatch.add_member(:sync_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "SyncCount", traits: {"smithy.api#required" => {}}))
     RecordPatch.add_member(:device_last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "DeviceLastModifiedDate"))
     RecordPatch.type = Types::RecordPatch
-    RecordPatchList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecordPatch, name: "member")
+    RecordPatchList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordPatch, name: "member"))
     RegisterDeviceRequest.add_member(:identity_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityPoolId, name: "IdentityPoolId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RegisterDeviceRequest.add_member(:identity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityId, name: "IdentityId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RegisterDeviceRequest.add_member(:platform, ::Smithy::Schema::Shapes::MemberShape.new(target: Platform, name: "Platform", traits: {"smithy.api#required" => {}}))

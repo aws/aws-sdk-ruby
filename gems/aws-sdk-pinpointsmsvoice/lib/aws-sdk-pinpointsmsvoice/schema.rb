@@ -56,7 +56,7 @@ module Aws::PinpointSMSVoice
     CloudWatchLogsDestination.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IamRoleArn"))
     CloudWatchLogsDestination.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LogGroupArn"))
     CloudWatchLogsDestination.type = Types::CloudWatchLogsDestination
-    ConfigurationSets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WordCharactersWithDelimiters, name: "member")
+    ConfigurationSets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WordCharactersWithDelimiters, name: "member"))
     CreateConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateConfigurationSetEventDestinationRequest.add_member(:event_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationDefinition, name: "EventDestination"))
     CreateConfigurationSetEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "EventDestinationName"))
@@ -85,7 +85,7 @@ module Aws::PinpointSMSVoice
     EventDestinationDefinition.add_member(:matching_event_types, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypes, name: "MatchingEventTypes"))
     EventDestinationDefinition.add_member(:sns_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsDestination, name: "SnsDestination"))
     EventDestinationDefinition.type = Types::EventDestinationDefinition
-    EventDestinations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestination, name: "member")
+    EventDestinations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestination, name: "member"))
     EventType.add_member(:initiated_call, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INITIATED_CALL", traits: {"smithy.api#enumValue" => "INITIATED_CALL"}))
     EventType.add_member(:ringing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RINGING", traits: {"smithy.api#enumValue" => "RINGING"}))
     EventType.add_member(:answered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANSWERED", traits: {"smithy.api#enumValue" => "ANSWERED"}))
@@ -93,7 +93,7 @@ module Aws::PinpointSMSVoice
     EventType.add_member(:busy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUSY", traits: {"smithy.api#enumValue" => "BUSY"}))
     EventType.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     EventType.add_member(:no_answer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_ANSWER", traits: {"smithy.api#enumValue" => "NO_ANSWER"}))
-    EventTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "member")
+    EventTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "member"))
     GetConfigurationSetEventDestinationsRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetConfigurationSetEventDestinationsRequest.type = Types::GetConfigurationSetEventDestinationsRequest
     GetConfigurationSetEventDestinationsResponse.add_member(:event_destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinations, name: "EventDestinations"))

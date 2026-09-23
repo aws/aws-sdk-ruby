@@ -472,8 +472,8 @@ module Aws::CodePipeline
     ActionCategory.add_member(:compute, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Compute", traits: {"smithy.api#enumValue" => "Compute"}))
     ActionConfiguration.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionConfigurationMap, name: "configuration"))
     ActionConfiguration.type = Types::ActionConfiguration
-    ActionConfigurationMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionConfigurationKey, name: "key")
-    ActionConfigurationMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionConfigurationValue, name: "value")
+    ActionConfigurationMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionConfigurationKey, name: "key"))
+    ActionConfigurationMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionConfigurationValue, name: "value"))
     ActionConfigurationProperty.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionConfigurationKey, name: "name", traits: {"smithy.api#required" => {}}))
     ActionConfigurationProperty.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "required", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     ActionConfigurationProperty.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "key", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
@@ -482,7 +482,7 @@ module Aws::CodePipeline
     ActionConfigurationProperty.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     ActionConfigurationProperty.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionConfigurationPropertyType, name: "type"))
     ActionConfigurationProperty.type = Types::ActionConfigurationProperty
-    ActionConfigurationPropertyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionConfigurationProperty, name: "member")
+    ActionConfigurationPropertyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionConfigurationProperty, name: "member"))
     ActionConfigurationPropertyType.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "String", traits: {"smithy.api#enumValue" => "String"}))
     ActionConfigurationPropertyType.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Number", traits: {"smithy.api#enumValue" => "Number"}))
     ActionConfigurationPropertyType.add_member(:boolean, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Boolean", traits: {"smithy.api#enumValue" => "Boolean"}))
@@ -527,7 +527,7 @@ module Aws::CodePipeline
     ActionExecutionDetail.add_member(:input, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionExecutionInput, name: "input"))
     ActionExecutionDetail.add_member(:output, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionExecutionOutput, name: "output"))
     ActionExecutionDetail.type = Types::ActionExecutionDetail
-    ActionExecutionDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionExecutionDetail, name: "member")
+    ActionExecutionDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionExecutionDetail, name: "member"))
     ActionExecutionFilter.add_member(:pipeline_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineExecutionId, name: "pipelineExecutionId"))
     ActionExecutionFilter.add_member(:latest_in_pipeline_execution, ::Smithy::Schema::Shapes::MemberShape.new(target: LatestInPipelineExecutionFilter, name: "latestInPipelineExecution"))
     ActionExecutionFilter.type = Types::ActionExecutionFilter
@@ -570,7 +570,7 @@ module Aws::CodePipeline
     ActionState.add_member(:entity_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "entityUrl"))
     ActionState.add_member(:revision_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "revisionUrl"))
     ActionState.type = Types::ActionState
-    ActionStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionState, name: "member")
+    ActionStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionState, name: "member"))
     ActionType.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionTypeId, name: "id", traits: {"smithy.api#required" => {}}))
     ActionType.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionTypeSettings, name: "settings"))
     ActionType.add_member(:action_configuration_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionConfigurationPropertyList, name: "actionConfigurationProperties"))
@@ -604,12 +604,12 @@ module Aws::CodePipeline
     ActionTypeIdentifier.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionProvider, name: "provider", traits: {"smithy.api#required" => {}}))
     ActionTypeIdentifier.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version", traits: {"smithy.api#required" => {}}))
     ActionTypeIdentifier.type = Types::ActionTypeIdentifier
-    ActionTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionType, name: "member")
+    ActionTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionType, name: "member"))
     ActionTypeNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ActionTypeNotFoundException.type = Types::ActionTypeNotFoundException
     ActionTypePermissions.add_member(:allowed_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedAccounts, name: "allowedAccounts", traits: {"smithy.api#required" => {}}))
     ActionTypePermissions.type = Types::ActionTypePermissions
-    ActionTypeProperties.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionTypeProperty, name: "member")
+    ActionTypeProperties.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionTypeProperty, name: "member"))
     ActionTypeProperty.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionConfigurationKey, name: "name", traits: {"smithy.api#required" => {}}))
     ActionTypeProperty.add_member(:optional, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "optional", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     ActionTypeProperty.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "key", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
@@ -627,7 +627,7 @@ module Aws::CodePipeline
     ActionTypeUrls.add_member(:execution_url_template, ::Smithy::Schema::Shapes::MemberShape.new(target: UrlTemplate, name: "executionUrlTemplate"))
     ActionTypeUrls.add_member(:revision_url_template, ::Smithy::Schema::Shapes::MemberShape.new(target: UrlTemplate, name: "revisionUrlTemplate"))
     ActionTypeUrls.type = Types::ActionTypeUrls
-    AllowedAccounts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedAccount, name: "member")
+    AllowedAccounts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedAccount, name: "member"))
     ApprovalAlreadyCompletedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ApprovalAlreadyCompletedException.type = Types::ApprovalAlreadyCompletedException
     ApprovalResult.add_member(:summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalSummary, name: "summary", traits: {"smithy.api#required" => {}}))
@@ -642,11 +642,11 @@ module Aws::CodePipeline
     ArtifactDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactName, name: "name"))
     ArtifactDetail.add_member(:s3location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "s3location"))
     ArtifactDetail.type = Types::ArtifactDetail
-    ArtifactDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactDetail, name: "member")
+    ArtifactDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactDetail, name: "member"))
     ArtifactDetails.add_member(:minimum_count, ::Smithy::Schema::Shapes::MemberShape.new(target: MinimumArtifactCount, name: "minimumCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     ArtifactDetails.add_member(:maximum_count, ::Smithy::Schema::Shapes::MemberShape.new(target: MaximumArtifactCount, name: "maximumCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     ArtifactDetails.type = Types::ArtifactDetails
-    ArtifactList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Artifact, name: "member")
+    ArtifactList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Artifact, name: "member"))
     ArtifactLocation.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactLocationType, name: "type"))
     ArtifactLocation.add_member(:s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ArtifactLocation, name: "s3Location"))
     ArtifactLocation.type = Types::ArtifactLocation
@@ -658,13 +658,13 @@ module Aws::CodePipeline
     ArtifactRevision.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "created"))
     ArtifactRevision.add_member(:revision_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "revisionUrl"))
     ArtifactRevision.type = Types::ArtifactRevision
-    ArtifactRevisionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactRevision, name: "member")
+    ArtifactRevisionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactRevision, name: "member"))
     ArtifactStore.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactStoreType, name: "type", traits: {"smithy.api#required" => {}}))
     ArtifactStore.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactStoreLocation, name: "location", traits: {"smithy.api#required" => {}}))
     ArtifactStore.add_member(:encryption_key, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKey, name: "encryptionKey"))
     ArtifactStore.type = Types::ArtifactStore
-    ArtifactStoreMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AWSRegionName, name: "key")
-    ArtifactStoreMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactStore, name: "value")
+    ArtifactStoreMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSRegionName, name: "key"))
+    ArtifactStoreMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactStore, name: "value"))
     ArtifactStoreType.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3", traits: {"smithy.api#enumValue" => "S3"}))
     BeforeEntryConditions.add_member(:conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionList, name: "conditions", traits: {"smithy.api#required" => {}}))
     BeforeEntryConditions.type = Types::BeforeEntryConditions
@@ -672,7 +672,7 @@ module Aws::CodePipeline
     BlockerDeclaration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockerType, name: "type", traits: {"smithy.api#required" => {}}))
     BlockerDeclaration.type = Types::BlockerDeclaration
     BlockerType.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Schedule", traits: {"smithy.api#enumValue" => "Schedule"}))
-    CommandList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Command, name: "member")
+    CommandList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Command, name: "member"))
     ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ConcurrentModificationException.type = Types::ConcurrentModificationException
     ConcurrentPipelineExecutionsLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -691,13 +691,13 @@ module Aws::CodePipeline
     ConditionExecutionStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Cancelled", traits: {"smithy.api#enumValue" => "Cancelled"}))
     ConditionExecutionStatus.add_member(:abandoned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Abandoned", traits: {"smithy.api#enumValue" => "Abandoned"}))
     ConditionExecutionStatus.add_member(:overridden, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Overridden", traits: {"smithy.api#enumValue" => "Overridden"}))
-    ConditionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "member")
+    ConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "member"))
     ConditionNotOverridableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ConditionNotOverridableException.type = Types::ConditionNotOverridableException
     ConditionState.add_member(:latest_execution, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionExecution, name: "latestExecution"))
     ConditionState.add_member(:rule_states, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleStateList, name: "ruleStates"))
     ConditionState.type = Types::ConditionState
-    ConditionStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionState, name: "member")
+    ConditionStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionState, name: "member"))
     ConditionType.add_member(:before_entry, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BEFORE_ENTRY", traits: {"smithy.api#enumValue" => "BEFORE_ENTRY"}))
     ConditionType.add_member(:on_success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON_SUCCESS", traits: {"smithy.api#enumValue" => "ON_SUCCESS"}))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -741,7 +741,7 @@ module Aws::CodePipeline
     DeployActionExecutionTarget.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "endTime"))
     DeployActionExecutionTarget.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: DeployTargetEventList, name: "events"))
     DeployActionExecutionTarget.type = Types::DeployActionExecutionTarget
-    DeployActionExecutionTargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeployActionExecutionTarget, name: "member")
+    DeployActionExecutionTargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeployActionExecutionTarget, name: "member"))
     DeployTargetEvent.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     DeployTargetEvent.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "status"))
     DeployTargetEvent.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startTime"))
@@ -751,7 +751,7 @@ module Aws::CodePipeline
     DeployTargetEventContext.add_member(:ssm_command_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ssmCommandId"))
     DeployTargetEventContext.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     DeployTargetEventContext.type = Types::DeployTargetEventContext
-    DeployTargetEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeployTargetEvent, name: "member")
+    DeployTargetEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeployTargetEvent, name: "member"))
     DeregisterWebhookWithThirdPartyInput.add_member(:webhook_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WebhookName, name: "webhookName"))
     DeregisterWebhookWithThirdPartyInput.type = Types::DeregisterWebhookWithThirdPartyInput
     DeregisterWebhookWithThirdPartyOutput.type = Types::DeregisterWebhookWithThirdPartyOutput
@@ -774,7 +774,7 @@ module Aws::CodePipeline
     EnvironmentVariable.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableValue, name: "value", traits: {"smithy.api#required" => {}}))
     EnvironmentVariable.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableType, name: "type"))
     EnvironmentVariable.type = Types::EnvironmentVariable
-    EnvironmentVariableList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariable, name: "member")
+    EnvironmentVariableList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariable, name: "member"))
     EnvironmentVariableType.add_member(:plaintext, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PLAINTEXT", traits: {"smithy.api#enumValue" => "PLAINTEXT"}))
     EnvironmentVariableType.add_member(:secrets_manager, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECRETS_MANAGER", traits: {"smithy.api#enumValue" => "SECRETS_MANAGER"}))
     ErrorDetails.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: Code, name: "code"))
@@ -811,7 +811,7 @@ module Aws::CodePipeline
     FailureType.add_member(:revision_out_of_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RevisionOutOfSync", traits: {"smithy.api#enumValue" => "RevisionOutOfSync"}))
     FailureType.add_member(:revision_unavailable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RevisionUnavailable", traits: {"smithy.api#enumValue" => "RevisionUnavailable"}))
     FailureType.add_member(:system_unavailable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SystemUnavailable", traits: {"smithy.api#enumValue" => "SystemUnavailable"}))
-    FilePathList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilePath, name: "member")
+    FilePathList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePath, name: "member"))
     GetActionTypeInput.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionCategory, name: "category", traits: {"smithy.api#required" => {}}))
     GetActionTypeInput.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionTypeOwner, name: "owner", traits: {"smithy.api#required" => {}}))
     GetActionTypeInput.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionProvider, name: "provider", traits: {"smithy.api#required" => {}}))
@@ -850,7 +850,7 @@ module Aws::CodePipeline
     GitBranchFilterCriteria.add_member(:includes, ::Smithy::Schema::Shapes::MemberShape.new(target: GitBranchPatternList, name: "includes"))
     GitBranchFilterCriteria.add_member(:excludes, ::Smithy::Schema::Shapes::MemberShape.new(target: GitBranchPatternList, name: "excludes"))
     GitBranchFilterCriteria.type = Types::GitBranchFilterCriteria
-    GitBranchPatternList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GitBranchNamePattern, name: "member")
+    GitBranchPatternList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GitBranchNamePattern, name: "member"))
     GitConfiguration.add_member(:source_action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionName, name: "sourceActionName", traits: {"smithy.api#required" => {}}))
     GitConfiguration.add_member(:push, ::Smithy::Schema::Shapes::MemberShape.new(target: GitPushFilterList, name: "push"))
     GitConfiguration.add_member(:pull_request, ::Smithy::Schema::Shapes::MemberShape.new(target: GitPullRequestFilterList, name: "pullRequest"))
@@ -858,28 +858,28 @@ module Aws::CodePipeline
     GitFilePathFilterCriteria.add_member(:includes, ::Smithy::Schema::Shapes::MemberShape.new(target: GitFilePathPatternList, name: "includes"))
     GitFilePathFilterCriteria.add_member(:excludes, ::Smithy::Schema::Shapes::MemberShape.new(target: GitFilePathPatternList, name: "excludes"))
     GitFilePathFilterCriteria.type = Types::GitFilePathFilterCriteria
-    GitFilePathPatternList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GitFilePathPattern, name: "member")
+    GitFilePathPatternList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GitFilePathPattern, name: "member"))
     GitPullRequestEventType.add_member(:open, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPEN", traits: {"smithy.api#enumValue" => "OPEN"}))
     GitPullRequestEventType.add_member(:updated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATED", traits: {"smithy.api#enumValue" => "UPDATED"}))
     GitPullRequestEventType.add_member(:closed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOSED", traits: {"smithy.api#enumValue" => "CLOSED"}))
-    GitPullRequestEventTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GitPullRequestEventType, name: "member")
+    GitPullRequestEventTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GitPullRequestEventType, name: "member"))
     GitPullRequestFilter.add_member(:events, ::Smithy::Schema::Shapes::MemberShape.new(target: GitPullRequestEventTypeList, name: "events"))
     GitPullRequestFilter.add_member(:branches, ::Smithy::Schema::Shapes::MemberShape.new(target: GitBranchFilterCriteria, name: "branches"))
     GitPullRequestFilter.add_member(:file_paths, ::Smithy::Schema::Shapes::MemberShape.new(target: GitFilePathFilterCriteria, name: "filePaths"))
     GitPullRequestFilter.type = Types::GitPullRequestFilter
-    GitPullRequestFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GitPullRequestFilter, name: "member")
+    GitPullRequestFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GitPullRequestFilter, name: "member"))
     GitPushFilter.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: GitTagFilterCriteria, name: "tags"))
     GitPushFilter.add_member(:branches, ::Smithy::Schema::Shapes::MemberShape.new(target: GitBranchFilterCriteria, name: "branches"))
     GitPushFilter.add_member(:file_paths, ::Smithy::Schema::Shapes::MemberShape.new(target: GitFilePathFilterCriteria, name: "filePaths"))
     GitPushFilter.type = Types::GitPushFilter
-    GitPushFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GitPushFilter, name: "member")
+    GitPushFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GitPushFilter, name: "member"))
     GitTagFilterCriteria.add_member(:includes, ::Smithy::Schema::Shapes::MemberShape.new(target: GitTagPatternList, name: "includes"))
     GitTagFilterCriteria.add_member(:excludes, ::Smithy::Schema::Shapes::MemberShape.new(target: GitTagPatternList, name: "excludes"))
     GitTagFilterCriteria.type = Types::GitTagFilterCriteria
-    GitTagPatternList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GitTagNamePattern, name: "member")
+    GitTagPatternList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GitTagNamePattern, name: "member"))
     InputArtifact.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactName, name: "name", traits: {"smithy.api#required" => {}}))
     InputArtifact.type = Types::InputArtifact
-    InputArtifactList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InputArtifact, name: "member")
+    InputArtifactList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InputArtifact, name: "member"))
     InvalidActionDeclarationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     InvalidActionDeclarationException.type = Types::InvalidActionDeclarationException
     InvalidApprovalTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -926,7 +926,7 @@ module Aws::CodePipeline
     JobDetails.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: JobData, name: "data"))
     JobDetails.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId"))
     JobDetails.type = Types::JobDetails
-    JobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Job, name: "member")
+    JobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Job, name: "member"))
     JobNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     JobNotFoundException.type = Types::JobNotFoundException
     JobStatus.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Created", traits: {"smithy.api#enumValue" => "Created"}))
@@ -1023,10 +1023,10 @@ module Aws::CodePipeline
     OutputArtifact.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactName, name: "name", traits: {"smithy.api#required" => {}}))
     OutputArtifact.add_member(:files, ::Smithy::Schema::Shapes::MemberShape.new(target: FilePathList, name: "files"))
     OutputArtifact.type = Types::OutputArtifact
-    OutputArtifactList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OutputArtifact, name: "member")
-    OutputVariableList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OutputVariable, name: "member")
-    OutputVariablesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: OutputVariablesKey, name: "key")
-    OutputVariablesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: OutputVariablesValue, name: "value")
+    OutputArtifactList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputArtifact, name: "member"))
+    OutputVariableList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputVariable, name: "member"))
+    OutputVariablesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputVariablesKey, name: "key"))
+    OutputVariablesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputVariablesValue, name: "value"))
     OutputVariablesSizeExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     OutputVariablesSizeExceededException.type = Types::OutputVariablesSizeExceededException
     OverrideStageConditionInput.add_member(:pipeline_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineName, name: "pipelineName", traits: {"smithy.api#required" => {}}))
@@ -1090,8 +1090,8 @@ module Aws::CodePipeline
     PipelineExecutionSummary.add_member(:execution_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionType, name: "executionType"))
     PipelineExecutionSummary.add_member(:rollback_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineRollbackMetadata, name: "rollbackMetadata"))
     PipelineExecutionSummary.type = Types::PipelineExecutionSummary
-    PipelineExecutionSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineExecutionSummary, name: "member")
-    PipelineList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineSummary, name: "member")
+    PipelineExecutionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineExecutionSummary, name: "member"))
+    PipelineList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineSummary, name: "member"))
     PipelineMetadata.add_member(:pipeline_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineArn, name: "pipelineArn"))
     PipelineMetadata.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "created"))
     PipelineMetadata.add_member(:updated, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updated"))
@@ -1103,7 +1103,7 @@ module Aws::CodePipeline
     PipelineNotFoundException.type = Types::PipelineNotFoundException
     PipelineRollbackMetadata.add_member(:rollback_target_pipeline_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineExecutionId, name: "rollbackTargetPipelineExecutionId"))
     PipelineRollbackMetadata.type = Types::PipelineRollbackMetadata
-    PipelineStageDeclarationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StageDeclaration, name: "member")
+    PipelineStageDeclarationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StageDeclaration, name: "member"))
     PipelineSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineName, name: "name"))
     PipelineSummary.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineVersion, name: "version"))
     PipelineSummary.add_member(:pipeline_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineType, name: "pipelineType"))
@@ -1114,7 +1114,7 @@ module Aws::CodePipeline
     PipelineTriggerDeclaration.add_member(:provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineTriggerProviderType, name: "providerType", traits: {"smithy.api#required" => {}}))
     PipelineTriggerDeclaration.add_member(:git_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: GitConfiguration, name: "gitConfiguration", traits: {"smithy.api#required" => {}}))
     PipelineTriggerDeclaration.type = Types::PipelineTriggerDeclaration
-    PipelineTriggerDeclarationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineTriggerDeclaration, name: "member")
+    PipelineTriggerDeclarationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineTriggerDeclaration, name: "member"))
     PipelineTriggerProviderType.add_member(:code_star_source_connection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CodeStarSourceConnection", traits: {"smithy.api#enumValue" => "CodeStarSourceConnection"}))
     PipelineType.add_member(:v1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "V1", traits: {"smithy.api#enumValue" => "V1"}))
     PipelineType.add_member(:v2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "V2", traits: {"smithy.api#enumValue" => "V2"}))
@@ -1125,8 +1125,8 @@ module Aws::CodePipeline
     PipelineVariableDeclaration.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineVariableValue, name: "defaultValue"))
     PipelineVariableDeclaration.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineVariableDescription, name: "description"))
     PipelineVariableDeclaration.type = Types::PipelineVariableDeclaration
-    PipelineVariableDeclarationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineVariableDeclaration, name: "member")
-    PipelineVariableList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineVariable, name: "member")
+    PipelineVariableDeclarationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineVariableDeclaration, name: "member"))
+    PipelineVariableList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineVariable, name: "member"))
     PipelineVersionNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     PipelineVersionNotFoundException.type = Types::PipelineVersionNotFoundException
     PollForJobsInput.add_member(:action_type_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionTypeId, name: "actionTypeId", traits: {"smithy.api#required" => {}}))
@@ -1140,8 +1140,8 @@ module Aws::CodePipeline
     PollForThirdPartyJobsInput.type = Types::PollForThirdPartyJobsInput
     PollForThirdPartyJobsOutput.add_member(:jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: ThirdPartyJobList, name: "jobs"))
     PollForThirdPartyJobsOutput.type = Types::PollForThirdPartyJobsOutput
-    PollingAccountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member")
-    PollingServicePrincipalList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipal, name: "member")
+    PollingAccountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
+    PollingServicePrincipalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrincipal, name: "member"))
     PutActionRevisionInput.add_member(:pipeline_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineName, name: "pipelineName", traits: {"smithy.api#required" => {}}))
     PutActionRevisionInput.add_member(:stage_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StageName, name: "stageName", traits: {"smithy.api#required" => {}}))
     PutActionRevisionInput.add_member(:action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionName, name: "actionName", traits: {"smithy.api#required" => {}}))
@@ -1182,21 +1182,21 @@ module Aws::CodePipeline
     PutWebhookInput.type = Types::PutWebhookInput
     PutWebhookOutput.add_member(:webhook, ::Smithy::Schema::Shapes::MemberShape.new(target: ListWebhookItem, name: "webhook"))
     PutWebhookOutput.type = Types::PutWebhookOutput
-    QueryParamMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionConfigurationKey, name: "key")
-    QueryParamMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionConfigurationQueryableValue, name: "value")
+    QueryParamMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionConfigurationKey, name: "key"))
+    QueryParamMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionConfigurationQueryableValue, name: "value"))
     RegisterWebhookWithThirdPartyInput.add_member(:webhook_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WebhookName, name: "webhookName"))
     RegisterWebhookWithThirdPartyInput.type = Types::RegisterWebhookWithThirdPartyInput
     RegisterWebhookWithThirdPartyOutput.type = Types::RegisterWebhookWithThirdPartyOutput
     RequestFailedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     RequestFailedException.type = Types::RequestFailedException
-    ResolvedActionConfigurationMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    ResolvedActionConfigurationMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    ResolvedActionConfigurationMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    ResolvedActionConfigurationMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     ResolvedPipelineVariable.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     ResolvedPipelineVariable.add_member(:resolved_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resolvedValue"))
     ResolvedPipelineVariable.type = Types::ResolvedPipelineVariable
-    ResolvedPipelineVariableList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResolvedPipelineVariable, name: "member")
-    ResolvedRuleConfigurationMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    ResolvedRuleConfigurationMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    ResolvedPipelineVariableList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResolvedPipelineVariable, name: "member"))
+    ResolvedRuleConfigurationMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    ResolvedRuleConfigurationMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     Result.add_member(:rollback, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLBACK", traits: {"smithy.api#enumValue" => "ROLLBACK"}))
@@ -1225,8 +1225,8 @@ module Aws::CodePipeline
     RollbackStageOutput.add_member(:pipeline_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineExecutionId, name: "pipelineExecutionId", traits: {"smithy.api#required" => {}}))
     RollbackStageOutput.type = Types::RollbackStageOutput
     RuleCategory.add_member(:rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Rule", traits: {"smithy.api#enumValue" => "Rule"}))
-    RuleConfigurationMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleConfigurationKey, name: "key")
-    RuleConfigurationMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleConfigurationValue, name: "value")
+    RuleConfigurationMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleConfigurationKey, name: "key"))
+    RuleConfigurationMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleConfigurationValue, name: "value"))
     RuleConfigurationProperty.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleConfigurationKey, name: "name", traits: {"smithy.api#required" => {}}))
     RuleConfigurationProperty.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "required", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     RuleConfigurationProperty.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "key", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
@@ -1235,7 +1235,7 @@ module Aws::CodePipeline
     RuleConfigurationProperty.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     RuleConfigurationProperty.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleConfigurationPropertyType, name: "type"))
     RuleConfigurationProperty.type = Types::RuleConfigurationProperty
-    RuleConfigurationPropertyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleConfigurationProperty, name: "member")
+    RuleConfigurationPropertyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleConfigurationProperty, name: "member"))
     RuleConfigurationPropertyType.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "String", traits: {"smithy.api#enumValue" => "String"}))
     RuleConfigurationPropertyType.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Number", traits: {"smithy.api#enumValue" => "Number"}))
     RuleConfigurationPropertyType.add_member(:boolean, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Boolean", traits: {"smithy.api#enumValue" => "Boolean"}))
@@ -1248,7 +1248,7 @@ module Aws::CodePipeline
     RuleDeclaration.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSRegionName, name: "region"))
     RuleDeclaration.add_member(:timeout_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleTimeout, name: "timeoutInMinutes"))
     RuleDeclaration.type = Types::RuleDeclaration
-    RuleDeclarationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleDeclaration, name: "member")
+    RuleDeclarationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleDeclaration, name: "member"))
     RuleExecution.add_member(:rule_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleExecutionId, name: "ruleExecutionId"))
     RuleExecution.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleExecutionStatus, name: "status"))
     RuleExecution.add_member(:summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionSummary, name: "summary"))
@@ -1271,7 +1271,7 @@ module Aws::CodePipeline
     RuleExecutionDetail.add_member(:input, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleExecutionInput, name: "input"))
     RuleExecutionDetail.add_member(:output, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleExecutionOutput, name: "output"))
     RuleExecutionDetail.type = Types::RuleExecutionDetail
-    RuleExecutionDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleExecutionDetail, name: "member")
+    RuleExecutionDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleExecutionDetail, name: "member"))
     RuleExecutionFilter.add_member(:pipeline_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineExecutionId, name: "pipelineExecutionId"))
     RuleExecutionFilter.add_member(:latest_in_pipeline_execution, ::Smithy::Schema::Shapes::MemberShape.new(target: LatestInPipelineExecutionFilter, name: "latestInPipelineExecution"))
     RuleExecutionFilter.type = Types::RuleExecutionFilter
@@ -1304,7 +1304,7 @@ module Aws::CodePipeline
     RuleState.add_member(:entity_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "entityUrl"))
     RuleState.add_member(:revision_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "revisionUrl"))
     RuleState.type = Types::RuleState
-    RuleStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleState, name: "member")
+    RuleStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleState, name: "member"))
     RuleType.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleTypeId, name: "id", traits: {"smithy.api#required" => {}}))
     RuleType.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleTypeSettings, name: "settings"))
     RuleType.add_member(:rule_configuration_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleConfigurationPropertyList, name: "ruleConfigurationProperties"))
@@ -1315,7 +1315,7 @@ module Aws::CodePipeline
     RuleTypeId.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleProvider, name: "provider", traits: {"smithy.api#required" => {}}))
     RuleTypeId.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version"))
     RuleTypeId.type = Types::RuleTypeId
-    RuleTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleType, name: "member")
+    RuleTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleType, name: "member"))
     RuleTypeSettings.add_member(:third_party_configuration_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "thirdPartyConfigurationUrl"))
     RuleTypeSettings.add_member(:entity_url_template, ::Smithy::Schema::Shapes::MemberShape.new(target: UrlTemplate, name: "entityUrlTemplate"))
     RuleTypeSettings.add_member(:execution_url_template, ::Smithy::Schema::Shapes::MemberShape.new(target: UrlTemplate, name: "executionUrlTemplate"))
@@ -1332,18 +1332,18 @@ module Aws::CodePipeline
     SourceRevision.add_member(:revision_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: RevisionSummary, name: "revisionSummary"))
     SourceRevision.add_member(:revision_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "revisionUrl"))
     SourceRevision.type = Types::SourceRevision
-    SourceRevisionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SourceRevision, name: "member")
+    SourceRevisionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceRevision, name: "member"))
     SourceRevisionOverride.add_member(:action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionName, name: "actionName", traits: {"smithy.api#required" => {}}))
     SourceRevisionOverride.add_member(:revision_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceRevisionType, name: "revisionType", traits: {"smithy.api#required" => {}}))
     SourceRevisionOverride.add_member(:revision_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Revision, name: "revisionValue", traits: {"smithy.api#required" => {}}))
     SourceRevisionOverride.type = Types::SourceRevisionOverride
-    SourceRevisionOverrideList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SourceRevisionOverride, name: "member")
+    SourceRevisionOverrideList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceRevisionOverride, name: "member"))
     SourceRevisionType.add_member(:commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMMIT_ID", traits: {"smithy.api#enumValue" => "COMMIT_ID"}))
     SourceRevisionType.add_member(:image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMAGE_DIGEST", traits: {"smithy.api#enumValue" => "IMAGE_DIGEST"}))
     SourceRevisionType.add_member(:s3_object_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3_OBJECT_VERSION_ID", traits: {"smithy.api#enumValue" => "S3_OBJECT_VERSION_ID"}))
     SourceRevisionType.add_member(:s3_object_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3_OBJECT_KEY", traits: {"smithy.api#enumValue" => "S3_OBJECT_KEY"}))
-    StageActionDeclarationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionDeclaration, name: "member")
-    StageBlockerDeclarationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BlockerDeclaration, name: "member")
+    StageActionDeclarationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionDeclaration, name: "member"))
+    StageBlockerDeclarationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockerDeclaration, name: "member"))
     StageConditionState.add_member(:latest_execution, ::Smithy::Schema::Shapes::MemberShape.new(target: StageConditionsExecution, name: "latestExecution"))
     StageConditionState.add_member(:condition_states, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionStateList, name: "conditionStates"))
     StageConditionState.type = Types::StageConditionState
@@ -1363,7 +1363,7 @@ module Aws::CodePipeline
     StageExecution.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StageExecutionStatus, name: "status", traits: {"smithy.api#required" => {}}))
     StageExecution.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionType, name: "type"))
     StageExecution.type = Types::StageExecution
-    StageExecutionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StageExecution, name: "member")
+    StageExecutionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StageExecution, name: "member"))
     StageExecutionStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Cancelled", traits: {"smithy.api#enumValue" => "Cancelled"}))
     StageExecutionStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InProgress", traits: {"smithy.api#enumValue" => "InProgress"}))
     StageExecutionStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
@@ -1388,7 +1388,7 @@ module Aws::CodePipeline
     StageState.add_member(:on_failure_condition_state, ::Smithy::Schema::Shapes::MemberShape.new(target: StageConditionState, name: "onFailureConditionState"))
     StageState.add_member(:retry_stage_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryStageMetadata, name: "retryStageMetadata"))
     StageState.type = Types::StageState
-    StageStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StageState, name: "member")
+    StageStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StageState, name: "member"))
     StageTransitionType.add_member(:inbound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Inbound", traits: {"smithy.api#enumValue" => "Inbound"}))
     StageTransitionType.add_member(:outbound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Outbound", traits: {"smithy.api#enumValue" => "Outbound"}))
     StartPipelineExecutionInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -1416,8 +1416,8 @@ module Aws::CodePipeline
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -1425,9 +1425,9 @@ module Aws::CodePipeline
     TargetFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetFilterName, name: "name"))
     TargetFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetFilterValueList, name: "values"))
     TargetFilter.type = Types::TargetFilter
-    TargetFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetFilter, name: "member")
+    TargetFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetFilter, name: "member"))
     TargetFilterName.add_member(:target_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TARGET_STATUS", traits: {"smithy.api#enumValue" => "TARGET_STATUS"}))
-    TargetFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetFilterValue, name: "member")
+    TargetFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetFilterValue, name: "member"))
     ThirdPartyJob.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientId, name: "clientId"))
     ThirdPartyJob.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "jobId"))
     ThirdPartyJob.type = Types::ThirdPartyJob
@@ -1444,7 +1444,7 @@ module Aws::CodePipeline
     ThirdPartyJobDetails.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: ThirdPartyJobData, name: "data"))
     ThirdPartyJobDetails.add_member(:nonce, ::Smithy::Schema::Shapes::MemberShape.new(target: Nonce, name: "nonce"))
     ThirdPartyJobDetails.type = Types::ThirdPartyJobDetails
-    ThirdPartyJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThirdPartyJob, name: "member")
+    ThirdPartyJobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThirdPartyJob, name: "member"))
     TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     TooManyTagsException.type = Types::TooManyTagsException
     TransitionState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, name: "enabled", traits: {"smithy.api#default" => false}))
@@ -1491,8 +1491,8 @@ module Aws::CodePipeline
     WebhookFilterRule.add_member(:json_path, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonPath, name: "jsonPath", traits: {"smithy.api#required" => {}}))
     WebhookFilterRule.add_member(:match_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchEquals, name: "matchEquals"))
     WebhookFilterRule.type = Types::WebhookFilterRule
-    WebhookFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WebhookFilterRule, name: "member")
-    WebhookList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListWebhookItem, name: "member")
+    WebhookFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WebhookFilterRule, name: "member"))
+    WebhookList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListWebhookItem, name: "member"))
     WebhookNotFoundException.type = Types::WebhookNotFoundException
 
     CodePipeline20150709 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|

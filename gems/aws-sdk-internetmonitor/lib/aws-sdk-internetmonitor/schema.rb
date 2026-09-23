@@ -141,12 +141,12 @@ module Aws::InternetMonitor
     DeleteMonitorInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteMonitorInput.type = Types::DeleteMonitorInput
     DeleteMonitorOutput.type = Types::DeleteMonitorOutput
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     FilterParameter.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Field"))
     FilterParameter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: Operator, name: "Operator"))
     FilterParameter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, name: "Values"))
     FilterParameter.type = Types::FilterParameter
-    FilterParameters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterParameter, name: "member")
+    FilterParameters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterParameter, name: "member"))
     GetHealthEventOperationInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetHealthEventOperationInput.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthEventName, name: "EventId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetHealthEventOperationInput.add_member(:linked_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "LinkedAccountId", traits: {"smithy.api#httpQuery" => "LinkedAccountId"}))
@@ -216,7 +216,7 @@ module Aws::InternetMonitor
     HealthEvent.add_member(:impact_type, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthEventImpactType, name: "ImpactType", traits: {"smithy.api#required" => {}}))
     HealthEvent.add_member(:health_score_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, name: "HealthScoreThreshold", traits: {"smithy.api#default" => 0}))
     HealthEvent.type = Types::HealthEvent
-    HealthEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HealthEvent, name: "member")
+    HealthEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthEvent, name: "member"))
     HealthEventsConfig.add_member(:availability_score_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, name: "AvailabilityScoreThreshold", traits: {"smithy.api#default" => 0}))
     HealthEventsConfig.add_member(:performance_score_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, name: "PerformanceScoreThreshold", traits: {"smithy.api#default" => 0}))
     HealthEventsConfig.add_member(:availability_local_health_events_config, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalHealthEventsConfig, name: "AvailabilityLocalHealthEventsConfig"))
@@ -238,7 +238,7 @@ module Aws::InternetMonitor
     ImpactedLocation.add_member(:internet_health, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetHealth, name: "InternetHealth"))
     ImpactedLocation.add_member(:ipv4_prefixes, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv4PrefixList, name: "Ipv4Prefixes"))
     ImpactedLocation.type = Types::ImpactedLocation
-    ImpactedLocationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImpactedLocation, name: "member")
+    ImpactedLocationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImpactedLocation, name: "member"))
     InternalServerErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     InternalServerErrorException.type = Types::InternalServerErrorException
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
@@ -251,13 +251,13 @@ module Aws::InternetMonitor
     InternetEventSummary.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetEventType, name: "EventType", traits: {"smithy.api#required" => {}}))
     InternetEventSummary.add_member(:event_status, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetEventStatus, name: "EventStatus", traits: {"smithy.api#required" => {}}))
     InternetEventSummary.type = Types::InternetEventSummary
-    InternetEventsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InternetEventSummary, name: "member")
+    InternetEventsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InternetEventSummary, name: "member"))
     InternetHealth.add_member(:availability, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityMeasurement, name: "Availability"))
     InternetHealth.add_member(:performance, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceMeasurement, name: "Performance"))
     InternetHealth.type = Types::InternetHealth
     InternetMeasurementsLogDelivery.add_member(:s3_config, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Config, name: "S3Config"))
     InternetMeasurementsLogDelivery.type = Types::InternetMeasurementsLogDelivery
-    Ipv4PrefixList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    Ipv4PrefixList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     LimitExceededException.type = Types::LimitExceededException
     ListHealthEventsOperationInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -302,7 +302,7 @@ module Aws::InternetMonitor
     Monitor.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorConfigState, name: "Status", traits: {"smithy.api#required" => {}}))
     Monitor.add_member(:processing_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorProcessingStatusCode, name: "ProcessingStatus"))
     Monitor.type = Types::Monitor
-    MonitorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Monitor, name: "member")
+    MonitorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Monitor, name: "member"))
     Network.add_member(:as_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ASName", traits: {"smithy.api#required" => {}}))
     Network.add_member(:as_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "ASNumber", traits: {"smithy.api#required" => {}}))
     Network.type = Types::Network
@@ -310,7 +310,7 @@ module Aws::InternetMonitor
     NetworkImpairment.add_member(:as_path, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkList, name: "AsPath", traits: {"smithy.api#required" => {}}))
     NetworkImpairment.add_member(:network_event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TriangulationEventType, name: "NetworkEventType", traits: {"smithy.api#required" => {}}))
     NetworkImpairment.type = Types::NetworkImpairment
-    NetworkList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Network, name: "member")
+    NetworkList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Network, name: "member"))
     NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     NotFoundException.type = Types::NotFoundException
     PerformanceMeasurement.add_member(:experience_score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "ExperienceScore"))
@@ -318,12 +318,12 @@ module Aws::InternetMonitor
     PerformanceMeasurement.add_member(:percent_of_client_location_impacted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "PercentOfClientLocationImpacted"))
     PerformanceMeasurement.add_member(:round_trip_time, ::Smithy::Schema::Shapes::MemberShape.new(target: RoundTripTime, name: "RoundTripTime"))
     PerformanceMeasurement.type = Types::PerformanceMeasurement
-    QueryData.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryRow, name: "member")
+    QueryData.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryRow, name: "member"))
     QueryField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name"))
     QueryField.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Type"))
     QueryField.type = Types::QueryField
-    QueryFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryField, name: "member")
-    QueryRow.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    QueryFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryField, name: "member"))
+    QueryRow.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     RoundTripTime.add_member(:p50, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "P50"))
@@ -334,7 +334,7 @@ module Aws::InternetMonitor
     S3Config.add_member(:bucket_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "BucketPrefix"))
     S3Config.add_member(:log_delivery_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDeliveryStatus, name: "LogDeliveryStatus"))
     S3Config.type = Types::S3Config
-    SetOfARNs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    SetOfARNs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     StartQueryInput.add_member(:monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "MonitorName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartQueryInput.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "StartTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     StartQueryInput.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "EndTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
@@ -348,9 +348,9 @@ module Aws::InternetMonitor
     StopQueryInput.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "QueryId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopQueryInput.type = Types::StopQueryInput
     StopQueryOutput.type = Types::StopQueryOutput
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceOperationInput.type = Types::TagResourceOperationInput

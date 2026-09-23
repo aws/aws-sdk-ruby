@@ -291,20 +291,20 @@ module Aws::XRay
     Alias.add_member(:names, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasNames, name: "Names"))
     Alias.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
     Alias.type = Types::Alias
-    AliasList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Alias, name: "member")
-    AliasNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    AliasList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Alias, name: "member"))
+    AliasNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     AnnotationValue.add_member(:number_value, Types::AnnotationValue::NumberValue, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableDouble, name: "NumberValue"))
     AnnotationValue.add_member(:boolean_value, Types::AnnotationValue::BooleanValue, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "BooleanValue"))
     AnnotationValue.add_member(:string_value, Types::AnnotationValue::StringValue, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StringValue"))
     AnnotationValue.add_member(:unknown, Types::AnnotationValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AnnotationValue.type = Types::AnnotationValue
-    Annotations.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationKey, name: "key")
-    Annotations.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ValuesWithServiceIds, name: "value")
+    Annotations.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationKey, name: "key"))
+    Annotations.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ValuesWithServiceIds, name: "value"))
     AnomalousService.add_member(:service_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceId, name: "ServiceId"))
     AnomalousService.type = Types::AnomalousService
-    AnomalousServiceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalousService, name: "member")
-    AttributeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKey, name: "key")
-    AttributeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
+    AnomalousServiceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalousService, name: "member"))
+    AttributeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKey, name: "key"))
+    AttributeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     AvailabilityZoneDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     AvailabilityZoneDetail.type = Types::AvailabilityZoneDetail
     BackendConnectionErrors.add_member(:timeout_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "TimeoutCount"))
@@ -358,7 +358,7 @@ module Aws::XRay
     Edge.add_member(:edge_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EdgeType"))
     Edge.add_member(:received_event_age_histogram, ::Smithy::Schema::Shapes::MemberShape.new(target: Histogram, name: "ReceivedEventAgeHistogram"))
     Edge.type = Types::Edge
-    EdgeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Edge, name: "member")
+    EdgeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Edge, name: "member"))
     EdgeStatistics.add_member(:ok_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableLong, name: "OkCount"))
     EdgeStatistics.add_member(:error_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorStatistics, name: "ErrorStatistics"))
     EdgeStatistics.add_member(:fault_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: FaultStatistics, name: "FaultStatistics"))
@@ -380,7 +380,7 @@ module Aws::XRay
     ErrorRootCauseEntity.add_member(:exceptions, ::Smithy::Schema::Shapes::MemberShape.new(target: RootCauseExceptions, name: "Exceptions"))
     ErrorRootCauseEntity.add_member(:remote, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "Remote"))
     ErrorRootCauseEntity.type = Types::ErrorRootCauseEntity
-    ErrorRootCauseEntityPath.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorRootCauseEntity, name: "member")
+    ErrorRootCauseEntityPath.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorRootCauseEntity, name: "member"))
     ErrorRootCauseService.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     ErrorRootCauseService.add_member(:names, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNames, name: "Names"))
     ErrorRootCauseService.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
@@ -388,8 +388,8 @@ module Aws::XRay
     ErrorRootCauseService.add_member(:entity_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorRootCauseEntityPath, name: "EntityPath"))
     ErrorRootCauseService.add_member(:inferred, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "Inferred"))
     ErrorRootCauseService.type = Types::ErrorRootCauseService
-    ErrorRootCauseServices.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorRootCauseService, name: "member")
-    ErrorRootCauses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorRootCause, name: "member")
+    ErrorRootCauseServices.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorRootCauseService, name: "member"))
+    ErrorRootCauses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorRootCause, name: "member"))
     ErrorStatistics.add_member(:throttle_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableLong, name: "ThrottleCount"))
     ErrorStatistics.add_member(:other_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableLong, name: "OtherCount"))
     ErrorStatistics.add_member(:total_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableLong, name: "TotalCount"))
@@ -401,7 +401,7 @@ module Aws::XRay
     FaultRootCauseEntity.add_member(:exceptions, ::Smithy::Schema::Shapes::MemberShape.new(target: RootCauseExceptions, name: "Exceptions"))
     FaultRootCauseEntity.add_member(:remote, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "Remote"))
     FaultRootCauseEntity.type = Types::FaultRootCauseEntity
-    FaultRootCauseEntityPath.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FaultRootCauseEntity, name: "member")
+    FaultRootCauseEntityPath.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FaultRootCauseEntity, name: "member"))
     FaultRootCauseService.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     FaultRootCauseService.add_member(:names, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNames, name: "Names"))
     FaultRootCauseService.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
@@ -409,8 +409,8 @@ module Aws::XRay
     FaultRootCauseService.add_member(:entity_path, ::Smithy::Schema::Shapes::MemberShape.new(target: FaultRootCauseEntityPath, name: "EntityPath"))
     FaultRootCauseService.add_member(:inferred, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "Inferred"))
     FaultRootCauseService.type = Types::FaultRootCauseService
-    FaultRootCauseServices.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FaultRootCauseService, name: "member")
-    FaultRootCauses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FaultRootCause, name: "member")
+    FaultRootCauseServices.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FaultRootCauseService, name: "member"))
+    FaultRootCauses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FaultRootCause, name: "member"))
     FaultStatistics.add_member(:other_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableLong, name: "OtherCount"))
     FaultStatistics.add_member(:total_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableLong, name: "TotalCount"))
     FaultStatistics.type = Types::FaultStatistics
@@ -557,8 +557,8 @@ module Aws::XRay
     GroupSummary.add_member(:filter_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FilterExpression"))
     GroupSummary.add_member(:insights_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightsConfiguration, name: "InsightsConfiguration"))
     GroupSummary.type = Types::GroupSummary
-    GroupSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSummary, name: "member")
-    Histogram.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HistogramEntry, name: "member")
+    GroupSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupSummary, name: "member"))
+    Histogram.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HistogramEntry, name: "member"))
     HistogramEntry.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Value", traits: {"smithy.api#default" => 0}))
     HistogramEntry.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Count", traits: {"smithy.api#default" => 0}))
     HistogramEntry.type = Types::HistogramEntry
@@ -572,7 +572,7 @@ module Aws::XRay
     IndexingRule.add_member(:modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ModifiedAt"))
     IndexingRule.add_member(:rule, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexingRuleValue, name: "Rule"))
     IndexingRule.type = Types::IndexingRule
-    IndexingRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IndexingRule, name: "member")
+    IndexingRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexingRule, name: "member"))
     IndexingRuleValue.add_member(:probabilistic, Types::IndexingRuleValue::Probabilistic, ::Smithy::Schema::Shapes::MemberShape.new(target: ProbabilisticRuleValue, name: "Probabilistic"))
     IndexingRuleValue.add_member(:unknown, Types::IndexingRuleValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     IndexingRuleValue.type = Types::IndexingRuleValue
@@ -593,17 +593,17 @@ module Aws::XRay
     Insight.add_member(:top_anomalous_services, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalousServiceList, name: "TopAnomalousServices"))
     Insight.type = Types::Insight
     InsightCategory.add_member(:fault, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAULT", traits: {"smithy.api#enumValue" => "FAULT"}))
-    InsightCategoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InsightCategory, name: "member")
+    InsightCategoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightCategory, name: "member"))
     InsightEvent.add_member(:summary, ::Smithy::Schema::Shapes::MemberShape.new(target: EventSummaryText, name: "Summary"))
     InsightEvent.add_member(:event_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EventTime"))
     InsightEvent.add_member(:client_request_impact_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestImpactStatistics, name: "ClientRequestImpactStatistics"))
     InsightEvent.add_member(:root_cause_service_request_impact_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestImpactStatistics, name: "RootCauseServiceRequestImpactStatistics"))
     InsightEvent.add_member(:top_anomalous_services, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalousServiceList, name: "TopAnomalousServices"))
     InsightEvent.type = Types::InsightEvent
-    InsightEventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InsightEvent, name: "member")
+    InsightEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightEvent, name: "member"))
     InsightImpactGraphEdge.add_member(:reference_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "ReferenceId"))
     InsightImpactGraphEdge.type = Types::InsightImpactGraphEdge
-    InsightImpactGraphEdgeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InsightImpactGraphEdge, name: "member")
+    InsightImpactGraphEdgeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightImpactGraphEdge, name: "member"))
     InsightImpactGraphService.add_member(:reference_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "ReferenceId"))
     InsightImpactGraphService.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
     InsightImpactGraphService.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
@@ -611,10 +611,10 @@ module Aws::XRay
     InsightImpactGraphService.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AccountId"))
     InsightImpactGraphService.add_member(:edges, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightImpactGraphEdgeList, name: "Edges"))
     InsightImpactGraphService.type = Types::InsightImpactGraphService
-    InsightImpactGraphServiceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InsightImpactGraphService, name: "member")
+    InsightImpactGraphServiceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightImpactGraphService, name: "member"))
     InsightState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     InsightState.add_member(:closed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOSED", traits: {"smithy.api#enumValue" => "CLOSED"}))
-    InsightStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InsightState, name: "member")
+    InsightStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightState, name: "member"))
     InsightSummary.add_member(:insight_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightId, name: "InsightId"))
     InsightSummary.add_member(:group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupARN, name: "GroupARN"))
     InsightSummary.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupName, name: "GroupName"))
@@ -629,7 +629,7 @@ module Aws::XRay
     InsightSummary.add_member(:top_anomalous_services, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalousServiceList, name: "TopAnomalousServices"))
     InsightSummary.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdateTime"))
     InsightSummary.type = Types::InsightSummary
-    InsightSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InsightSummary, name: "member")
+    InsightSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightSummary, name: "member"))
     InsightsConfiguration.add_member(:insights_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "InsightsEnabled"))
     InsightsConfiguration.add_member(:notifications_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "NotificationsEnabled"))
     InsightsConfiguration.type = Types::InsightsConfiguration
@@ -639,7 +639,7 @@ module Aws::XRay
     InvalidPolicyRevisionIdException.type = Types::InvalidPolicyRevisionIdException
     InvalidRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InvalidRequestException.type = Types::InvalidRequestException
-    LinksList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GraphLink, name: "member")
+    LinksList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GraphLink, name: "member"))
     ListResourcePoliciesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicyNextToken, name: "NextToken"))
     ListResourcePoliciesRequest.type = Types::ListResourcePoliciesRequest
     ListResourcePoliciesResult.add_member(:resource_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicyList, name: "ResourcePolicies"))
@@ -709,7 +709,7 @@ module Aws::XRay
     ResourcePolicy.add_member(:policy_revision_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyRevisionId, name: "PolicyRevisionId"))
     ResourcePolicy.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedTime"))
     ResourcePolicy.type = Types::ResourcePolicy
-    ResourcePolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicy, name: "member")
+    ResourcePolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicy, name: "member"))
     ResponseTimeRootCause.add_member(:services, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseTimeRootCauseServices, name: "Services"))
     ResponseTimeRootCause.add_member(:client_impacting, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "ClientImpacting"))
     ResponseTimeRootCause.type = Types::ResponseTimeRootCause
@@ -717,7 +717,7 @@ module Aws::XRay
     ResponseTimeRootCauseEntity.add_member(:coverage, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableDouble, name: "Coverage"))
     ResponseTimeRootCauseEntity.add_member(:remote, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "Remote"))
     ResponseTimeRootCauseEntity.type = Types::ResponseTimeRootCauseEntity
-    ResponseTimeRootCauseEntityPath.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseTimeRootCauseEntity, name: "member")
+    ResponseTimeRootCauseEntityPath.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseTimeRootCauseEntity, name: "member"))
     ResponseTimeRootCauseService.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     ResponseTimeRootCauseService.add_member(:names, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNames, name: "Names"))
     ResponseTimeRootCauseService.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
@@ -725,8 +725,8 @@ module Aws::XRay
     ResponseTimeRootCauseService.add_member(:entity_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseTimeRootCauseEntityPath, name: "EntityPath"))
     ResponseTimeRootCauseService.add_member(:inferred, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "Inferred"))
     ResponseTimeRootCauseService.type = Types::ResponseTimeRootCauseService
-    ResponseTimeRootCauseServices.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseTimeRootCauseService, name: "member")
-    ResponseTimeRootCauses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseTimeRootCause, name: "member")
+    ResponseTimeRootCauseServices.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseTimeRootCauseService, name: "member"))
+    ResponseTimeRootCauses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseTimeRootCause, name: "member"))
     RetrievalStatus.add_member(:scheduled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHEDULED", traits: {"smithy.api#enumValue" => "SCHEDULED"}))
     RetrievalStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     RetrievalStatus.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
@@ -736,7 +736,7 @@ module Aws::XRay
     RetrievedService.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "Service"))
     RetrievedService.add_member(:links, ::Smithy::Schema::Shapes::MemberShape.new(target: LinksList, name: "Links"))
     RetrievedService.type = Types::RetrievedService
-    RetrievedServicesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievedService, name: "member")
+    RetrievedServicesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievedService, name: "member"))
     RetrievedTrace.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: TraceId, name: "Id"))
     RetrievedTrace.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableDouble, name: "Duration"))
     RetrievedTrace.add_member(:spans, ::Smithy::Schema::Shapes::MemberShape.new(target: SpanList, name: "Spans"))
@@ -744,7 +744,7 @@ module Aws::XRay
     RootCauseException.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     RootCauseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     RootCauseException.type = Types::RootCauseException
-    RootCauseExceptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RootCauseException, name: "member")
+    RootCauseExceptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RootCauseException, name: "member"))
     RuleLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     RuleLimitExceededException.type = Types::RuleLimitExceededException
     SamplingBoost.add_member(:boost_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "BoostRate", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
@@ -757,7 +757,7 @@ module Aws::XRay
     SamplingBoostStatisticsDocument.add_member(:total_count, ::Smithy::Schema::Shapes::MemberShape.new(target: TotalCount, name: "TotalCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     SamplingBoostStatisticsDocument.add_member(:sampled_anomaly_count, ::Smithy::Schema::Shapes::MemberShape.new(target: SampledAnomalyCount, name: "SampledAnomalyCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     SamplingBoostStatisticsDocument.type = Types::SamplingBoostStatisticsDocument
-    SamplingBoostStatisticsDocumentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SamplingBoostStatisticsDocument, name: "member")
+    SamplingBoostStatisticsDocumentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SamplingBoostStatisticsDocument, name: "member"))
     SamplingRateBoost.add_member(:max_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxRate, name: "MaxRate", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     SamplingRateBoost.add_member(:cooldown_window_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: CooldownWindowMinutes, name: "CooldownWindowMinutes", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     SamplingRateBoost.type = Types::SamplingRateBoost
@@ -780,7 +780,7 @@ module Aws::XRay
     SamplingRuleRecord.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAt"))
     SamplingRuleRecord.add_member(:modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ModifiedAt"))
     SamplingRuleRecord.type = Types::SamplingRuleRecord
-    SamplingRuleRecordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SamplingRuleRecord, name: "member")
+    SamplingRuleRecordList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SamplingRuleRecord, name: "member"))
     SamplingRuleUpdate.add_member(:rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleName, name: "RuleName"))
     SamplingRuleUpdate.add_member(:rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RuleARN"))
     SamplingRuleUpdate.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "ResourceARN"))
@@ -801,7 +801,7 @@ module Aws::XRay
     SamplingStatisticSummary.add_member(:borrow_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "BorrowCount", traits: {"smithy.api#default" => 0}))
     SamplingStatisticSummary.add_member(:sampled_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "SampledCount", traits: {"smithy.api#default" => 0}))
     SamplingStatisticSummary.type = Types::SamplingStatisticSummary
-    SamplingStatisticSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SamplingStatisticSummary, name: "member")
+    SamplingStatisticSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SamplingStatisticSummary, name: "member"))
     SamplingStatisticsDocument.add_member(:rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleName, name: "RuleName", traits: {"smithy.api#required" => {}}))
     SamplingStatisticsDocument.add_member(:client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientID, name: "ClientID", traits: {"smithy.api#required" => {}}))
     SamplingStatisticsDocument.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp", traits: {"smithy.api#required" => {}}))
@@ -809,7 +809,7 @@ module Aws::XRay
     SamplingStatisticsDocument.add_member(:sampled_count, ::Smithy::Schema::Shapes::MemberShape.new(target: SampledCount, name: "SampledCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     SamplingStatisticsDocument.add_member(:borrow_count, ::Smithy::Schema::Shapes::MemberShape.new(target: BorrowCount, name: "BorrowCount", traits: {"smithy.api#default" => 0}))
     SamplingStatisticsDocument.type = Types::SamplingStatisticsDocument
-    SamplingStatisticsDocumentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SamplingStatisticsDocument, name: "member")
+    SamplingStatisticsDocumentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SamplingStatisticsDocument, name: "member"))
     SamplingStrategy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SamplingStrategyName, name: "Name"))
     SamplingStrategy.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableDouble, name: "Value"))
     SamplingStrategy.type = Types::SamplingStrategy
@@ -822,11 +822,11 @@ module Aws::XRay
     SamplingTargetDocument.add_member(:interval, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "Interval"))
     SamplingTargetDocument.add_member(:sampling_boost, ::Smithy::Schema::Shapes::MemberShape.new(target: SamplingBoost, name: "SamplingBoost"))
     SamplingTargetDocument.type = Types::SamplingTargetDocument
-    SamplingTargetDocumentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SamplingTargetDocument, name: "member")
+    SamplingTargetDocumentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SamplingTargetDocument, name: "member"))
     Segment.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentId, name: "Id"))
     Segment.add_member(:document, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentDocument, name: "Document"))
     Segment.type = Types::Segment
-    SegmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Segment, name: "member")
+    SegmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Segment, name: "member"))
     Service.add_member(:reference_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "ReferenceId"))
     Service.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     Service.add_member(:names, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNames, name: "Names"))
@@ -846,9 +846,9 @@ module Aws::XRay
     ServiceId.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AccountId"))
     ServiceId.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
     ServiceId.type = Types::ServiceId
-    ServiceIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceId, name: "member")
-    ServiceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "member")
-    ServiceNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ServiceIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceId, name: "member"))
+    ServiceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "member"))
+    ServiceNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ServiceStatistics.add_member(:ok_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableLong, name: "OkCount"))
     ServiceStatistics.add_member(:error_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorStatistics, name: "ErrorStatistics"))
     ServiceStatistics.add_member(:fault_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: FaultStatistics, name: "FaultStatistics"))
@@ -858,7 +858,7 @@ module Aws::XRay
     Span.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: SpanId, name: "Id"))
     Span.add_member(:document, ::Smithy::Schema::Shapes::MemberShape.new(target: SpanDocument, name: "Document"))
     Span.type = Types::Span
-    SpanList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Span, name: "member")
+    SpanList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Span, name: "member"))
     StartTraceRetrievalRequest.add_member(:trace_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: TraceIdListForRetrieval, name: "TraceIds", traits: {"smithy.api#required" => {}}))
     StartTraceRetrievalRequest.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime", traits: {"smithy.api#required" => {}}))
     StartTraceRetrievalRequest.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime", traits: {"smithy.api#required" => {}}))
@@ -868,8 +868,8 @@ module Aws::XRay
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -881,7 +881,7 @@ module Aws::XRay
     TelemetryRecord.add_member(:segments_rejected_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableInteger, name: "SegmentsRejectedCount"))
     TelemetryRecord.add_member(:backend_connection_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BackendConnectionErrors, name: "BackendConnectionErrors"))
     TelemetryRecord.type = Types::TelemetryRecord
-    TelemetryRecordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TelemetryRecord, name: "member")
+    TelemetryRecordList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TelemetryRecord, name: "member"))
     ThrottledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ThrottledException.type = Types::ThrottledException
     TimeRangeType.add_member(:trace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TraceId", traits: {"smithy.api#enumValue" => "TraceId"}))
@@ -893,7 +893,7 @@ module Aws::XRay
     TimeSeriesServiceStatistics.add_member(:service_forecast_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: ForecastStatistics, name: "ServiceForecastStatistics"))
     TimeSeriesServiceStatistics.add_member(:response_time_histogram, ::Smithy::Schema::Shapes::MemberShape.new(target: Histogram, name: "ResponseTimeHistogram"))
     TimeSeriesServiceStatistics.type = Types::TimeSeriesServiceStatistics
-    TimeSeriesServiceStatisticsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesServiceStatistics, name: "member")
+    TimeSeriesServiceStatisticsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesServiceStatistics, name: "member"))
     TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     TooManyTagsException.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceName"))
     TooManyTagsException.type = Types::TooManyTagsException
@@ -902,20 +902,20 @@ module Aws::XRay
     Trace.add_member(:limit_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "LimitExceeded"))
     Trace.add_member(:segments, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentList, name: "Segments"))
     Trace.type = Types::Trace
-    TraceAvailabilityZones.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneDetail, name: "member")
+    TraceAvailabilityZones.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneDetail, name: "member"))
     TraceFormatType.add_member(:xray, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "XRAY", traits: {"smithy.api#enumValue" => "XRAY"}))
     TraceFormatType.add_member(:otel, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTEL", traits: {"smithy.api#enumValue" => "OTEL"}))
-    TraceIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TraceId, name: "member")
-    TraceIdListForRetrieval.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TraceId, name: "member")
-    TraceInstanceIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceIdDetail, name: "member")
-    TraceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Trace, name: "member")
-    TraceResourceARNs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARNDetail, name: "member")
+    TraceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TraceId, name: "member"))
+    TraceIdListForRetrieval.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TraceId, name: "member"))
+    TraceInstanceIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceIdDetail, name: "member"))
+    TraceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Trace, name: "member"))
+    TraceResourceARNs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARNDetail, name: "member"))
     TraceSegmentDestination.add_member(:x_ray, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "XRay", traits: {"smithy.api#enumValue" => "XRay"}))
     TraceSegmentDestination.add_member(:cloud_watch_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CloudWatchLogs", traits: {"smithy.api#enumValue" => "CloudWatchLogs"}))
     TraceSegmentDestinationStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     TraceSegmentDestinationStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
-    TraceSegmentDocumentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TraceSegmentDocument, name: "member")
-    TraceSpanList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievedTrace, name: "member")
+    TraceSegmentDocumentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TraceSegmentDocument, name: "member"))
+    TraceSpanList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RetrievedTrace, name: "member"))
     TraceSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: TraceId, name: "Id"))
     TraceSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime"))
     TraceSummary.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableDouble, name: "Duration"))
@@ -938,22 +938,22 @@ module Aws::XRay
     TraceSummary.add_member(:revision, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Revision", traits: {"smithy.api#default" => 0}))
     TraceSummary.add_member(:matched_event_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "MatchedEventTime"))
     TraceSummary.type = Types::TraceSummary
-    TraceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TraceSummary, name: "member")
+    TraceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TraceSummary, name: "member"))
     TraceUser.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "UserName"))
     TraceUser.add_member(:service_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceIds, name: "ServiceIds"))
     TraceUser.type = Types::TraceUser
-    TraceUsers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TraceUser, name: "member")
+    TraceUsers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TraceUser, name: "member"))
     UnprocessedStatistics.add_member(:rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RuleName"))
     UnprocessedStatistics.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorCode"))
     UnprocessedStatistics.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     UnprocessedStatistics.type = Types::UnprocessedStatistics
-    UnprocessedStatisticsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedStatistics, name: "member")
-    UnprocessedTraceIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TraceId, name: "member")
+    UnprocessedStatisticsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedStatistics, name: "member"))
+    UnprocessedTraceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TraceId, name: "member"))
     UnprocessedTraceSegment.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Id"))
     UnprocessedTraceSegment.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorCode"))
     UnprocessedTraceSegment.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     UnprocessedTraceSegment.type = Types::UnprocessedTraceSegment
-    UnprocessedTraceSegmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedTraceSegment, name: "member")
+    UnprocessedTraceSegmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedTraceSegment, name: "member"))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -982,7 +982,7 @@ module Aws::XRay
     ValueWithServiceIds.add_member(:annotation_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationValue, name: "AnnotationValue"))
     ValueWithServiceIds.add_member(:service_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceIds, name: "ServiceIds"))
     ValueWithServiceIds.type = Types::ValueWithServiceIds
-    ValuesWithServiceIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValueWithServiceIds, name: "member")
+    ValuesWithServiceIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueWithServiceIds, name: "member"))
 
     AWSXRay = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.xray#AWSXRay"

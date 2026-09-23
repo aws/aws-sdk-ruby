@@ -108,7 +108,7 @@ module Aws::IoTDataPlane
     ListRetainedMessagesResponse.type = Types::ListRetainedMessagesResponse
     MethodNotAllowedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     MethodNotAllowedException.type = Types::MethodNotAllowedException
-    NamedShadowList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShadowName, name: "member")
+    NamedShadowList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ShadowName, name: "member"))
     PayloadFormatIndicator.add_member(:unspecified_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNSPECIFIED_BYTES", traits: {"smithy.api#enumValue" => "UNSPECIFIED_BYTES"}))
     PayloadFormatIndicator.add_member(:utf8_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UTF8_DATA", traits: {"smithy.api#enumValue" => "UTF8_DATA"}))
     PublishRequest.add_member(:topic, ::Smithy::Schema::Shapes::MemberShape.new(target: Topic, name: "topic", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -128,7 +128,7 @@ module Aws::IoTDataPlane
     RequestEntityTooLargeException.type = Types::RequestEntityTooLargeException
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RetainedMessageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RetainedMessageSummary, name: "member")
+    RetainedMessageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RetainedMessageSummary, name: "member"))
     RetainedMessageSummary.add_member(:topic, ::Smithy::Schema::Shapes::MemberShape.new(target: Topic, name: "topic"))
     RetainedMessageSummary.add_member(:payload_size, ::Smithy::Schema::Shapes::MemberShape.new(target: PayloadSize, name: "payloadSize", traits: {"smithy.api#default" => 0}))
     RetainedMessageSummary.add_member(:qos, ::Smithy::Schema::Shapes::MemberShape.new(target: Qos, name: "qos", traits: {"smithy.api#default" => 0}))

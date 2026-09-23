@@ -115,8 +115,8 @@ module Aws::ConnectCampaigns
     AnswerMachineDetectionConfig.add_member(:enable_answer_machine_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enableAnswerMachineDetection", traits: {"smithy.api#required" => {}}))
     AnswerMachineDetectionConfig.add_member(:await_answer_machine_prompt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "awaitAnswerMachinePrompt", traits: {"smithy.api#default" => nil}))
     AnswerMachineDetectionConfig.type = Types::AnswerMachineDetectionConfig
-    Attributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
-    Attributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
+    Attributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
+    Attributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     Campaign.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "id", traits: {"smithy.api#required" => {}}))
     Campaign.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignArn, name: "arn", traits: {"smithy.api#required" => {}}))
     Campaign.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -127,13 +127,13 @@ module Aws::ConnectCampaigns
     Campaign.type = Types::Campaign
     CampaignFilters.add_member(:instance_id_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceIdFilter, name: "instanceIdFilter"))
     CampaignFilters.type = Types::CampaignFilters
-    CampaignIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "member")
+    CampaignIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "member"))
     CampaignSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "id", traits: {"smithy.api#required" => {}}))
     CampaignSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignArn, name: "arn", traits: {"smithy.api#required" => {}}))
     CampaignSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignName, name: "name", traits: {"smithy.api#required" => {}}))
     CampaignSummary.add_member(:connect_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "connectInstanceId", traits: {"smithy.api#required" => {}}))
     CampaignSummary.type = Types::CampaignSummary
-    CampaignSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignSummary, name: "member")
+    CampaignSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignSummary, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:x_amz_error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: XAmazonErrorType, name: "xAmzErrorType", traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ConflictException.type = Types::ConflictException
@@ -162,7 +162,7 @@ module Aws::ConnectCampaigns
     DialRequest.add_member(:expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, name: "expirationTime", traits: {"smithy.api#required" => {}}))
     DialRequest.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "attributes", traits: {"smithy.api#required" => {}}))
     DialRequest.type = Types::DialRequest
-    DialRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DialRequest, name: "member")
+    DialRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DialRequest, name: "member"))
     DialerConfig.add_member(:progressive_dialer_config, Types::DialerConfig::ProgressiveDialerConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgressiveDialerConfig, name: "progressiveDialerConfig"))
     DialerConfig.add_member(:predictive_dialer_config, Types::DialerConfig::PredictiveDialerConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: PredictiveDialerConfig, name: "predictiveDialerConfig"))
     DialerConfig.add_member(:agentless_dialer_config, Types::DialerConfig::AgentlessDialerConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentlessDialerConfig, name: "agentlessDialerConfig"))
@@ -175,12 +175,12 @@ module Aws::ConnectCampaigns
     FailedCampaignStateResponse.add_member(:campaign_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "campaignId"))
     FailedCampaignStateResponse.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: GetCampaignStateBatchFailureCode, name: "failureCode"))
     FailedCampaignStateResponse.type = Types::FailedCampaignStateResponse
-    FailedCampaignStateResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedCampaignStateResponse, name: "member")
+    FailedCampaignStateResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedCampaignStateResponse, name: "member"))
     FailedRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken"))
     FailedRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: DialRequestId, name: "id"))
     FailedRequest.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureCode, name: "failureCode"))
     FailedRequest.type = Types::FailedRequest
-    FailedRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedRequest, name: "member")
+    FailedRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedRequest, name: "member"))
     GetCampaignStateBatchInput.add_member(:campaign_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignIdList, name: "campaignIds", traits: {"smithy.api#length" => {"min" => 1, "max" => 25}, "smithy.api#required" => {}}))
     GetCampaignStateBatchInput.type = Types::GetCampaignStateBatchInput
     GetCampaignStateBatchOutput.add_member(:successful_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulCampaignStateResponseList, name: "successfulRequests"))
@@ -269,14 +269,14 @@ module Aws::ConnectCampaigns
     SuccessfulCampaignStateResponse.add_member(:campaign_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "campaignId"))
     SuccessfulCampaignStateResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignState, name: "state"))
     SuccessfulCampaignStateResponse.type = Types::SuccessfulCampaignStateResponse
-    SuccessfulCampaignStateResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulCampaignStateResponse, name: "member")
+    SuccessfulCampaignStateResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulCampaignStateResponse, name: "member"))
     SuccessfulRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken"))
     SuccessfulRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: DialRequestId, name: "id"))
     SuccessfulRequest.type = Types::SuccessfulRequest
-    SuccessfulRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulRequest, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    SuccessfulRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulRequest, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput

@@ -248,7 +248,7 @@ module Aws::Panorama
     AccessDeniedException.type = Types::AccessDeniedException
     AlternateSoftwareMetadata.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "Version"))
     AlternateSoftwareMetadata.type = Types::AlternateSoftwareMetadata
-    AlternateSoftwares.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AlternateSoftwareMetadata, name: "member")
+    AlternateSoftwares.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AlternateSoftwareMetadata, name: "member"))
     ApplicationInstance.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationInstanceName, name: "Name"))
     ApplicationInstance.add_member(:application_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationInstanceId, name: "ApplicationInstanceId"))
     ApplicationInstance.add_member(:default_runtime_context_device, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultRuntimeContextDevice, name: "DefaultRuntimeContextDevice"))
@@ -262,7 +262,7 @@ module Aws::Panorama
     ApplicationInstance.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     ApplicationInstance.add_member(:runtime_context_states, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportedRuntimeContextStates, name: "RuntimeContextStates"))
     ApplicationInstance.type = Types::ApplicationInstance
-    ApplicationInstances.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationInstance, name: "member")
+    ApplicationInstances.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationInstance, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceId", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceType", traits: {"smithy.api#required" => {}}))
@@ -272,7 +272,7 @@ module Aws::Panorama
     ConflictExceptionErrorArgument.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#required" => {}}))
     ConflictExceptionErrorArgument.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value", traits: {"smithy.api#required" => {}}))
     ConflictExceptionErrorArgument.type = Types::ConflictExceptionErrorArgument
-    ConflictExceptionErrorArgumentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictExceptionErrorArgument, name: "member")
+    ConflictExceptionErrorArgumentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictExceptionErrorArgument, name: "member"))
     CreateApplicationInstanceInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationInstanceName, name: "Name"))
     CreateApplicationInstanceInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     CreateApplicationInstanceInput.add_member(:manifest_payload, ::Smithy::Schema::Shapes::MemberShape.new(target: ManifestPayload, name: "ManifestPayload", traits: {"smithy.api#required" => {}}))
@@ -482,7 +482,7 @@ module Aws::Panorama
     Device.add_member(:latest_device_job, ::Smithy::Schema::Shapes::MemberShape.new(target: LatestDeviceJob, name: "LatestDeviceJob"))
     Device.add_member(:device_aggregated_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceAggregatedStatus, name: "DeviceAggregatedStatus"))
     Device.type = Types::Device
-    DeviceIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceId, name: "member")
+    DeviceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceId, name: "member"))
     DeviceJob.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceName, name: "DeviceName"))
     DeviceJob.add_member(:device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceId, name: "DeviceId"))
     DeviceJob.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "JobId"))
@@ -491,9 +491,9 @@ module Aws::Panorama
     DeviceJob.type = Types::DeviceJob
     DeviceJobConfig.add_member(:ota_job_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OTAJobConfig, name: "OTAJobConfig"))
     DeviceJobConfig.type = Types::DeviceJobConfig
-    DeviceJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceJob, name: "member")
-    DeviceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Device, name: "member")
-    DnsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Dns, name: "member")
+    DeviceJobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceJob, name: "member"))
+    DeviceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Device, name: "member"))
+    DnsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Dns, name: "member"))
     EthernetPayload.add_member(:connection_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionType, name: "ConnectionType", traits: {"smithy.api#required" => {}}))
     EthernetPayload.add_member(:static_ip_connection_info, ::Smithy::Schema::Shapes::MemberShape.new(target: StaticIpConnectionInfo, name: "StaticIpConnectionInfo"))
     EthernetPayload.type = Types::EthernetPayload
@@ -501,18 +501,18 @@ module Aws::Panorama
     EthernetStatus.add_member(:connection_status, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkConnectionStatus, name: "ConnectionStatus"))
     EthernetStatus.add_member(:hw_address, ::Smithy::Schema::Shapes::MemberShape.new(target: HwAddress, name: "HwAddress"))
     EthernetStatus.type = Types::EthernetStatus
-    InputPortList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NodeInputPort, name: "member")
+    InputPortList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeInputPort, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryAfterSeconds, name: "RetryAfterSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Retry-After"}))
     InternalServerException.type = Types::InternalServerException
     Job.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "JobId"))
     Job.add_member(:device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceId, name: "DeviceId"))
     Job.type = Types::Job
-    JobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Job, name: "member")
+    JobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Job, name: "member"))
     JobResourceTags.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: JobResourceType, name: "ResourceType", traits: {"smithy.api#required" => {}}))
     JobResourceTags.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     JobResourceTags.type = Types::JobResourceTags
-    JobTagsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobResourceTags, name: "member")
+    JobTagsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobResourceTags, name: "member"))
     LatestDeviceJob.add_member(:image_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageVersion, name: "ImageVersion"))
     LatestDeviceJob.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateProgress, name: "Status"))
     LatestDeviceJob.add_member(:job_type, ::Smithy::Schema::Shapes::MemberShape.new(target: JobType, name: "JobType"))
@@ -623,7 +623,7 @@ module Aws::Panorama
     NodeFromTemplateJob.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedTime, name: "CreatedTime"))
     NodeFromTemplateJob.add_member(:node_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeName, name: "NodeName"))
     NodeFromTemplateJob.type = Types::NodeFromTemplateJob
-    NodeFromTemplateJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NodeFromTemplateJob, name: "member")
+    NodeFromTemplateJobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeFromTemplateJob, name: "member"))
     NodeInputPort.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PortName, name: "Name"))
     NodeInputPort.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     NodeInputPort.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PortType, name: "Type"))
@@ -638,7 +638,7 @@ module Aws::Panorama
     NodeInstance.add_member(:node_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeName, name: "NodeName"))
     NodeInstance.add_member(:current_status, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeInstanceStatus, name: "CurrentStatus", traits: {"smithy.api#required" => {}}))
     NodeInstance.type = Types::NodeInstance
-    NodeInstances.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NodeInstance, name: "member")
+    NodeInstances.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeInstance, name: "member"))
     NodeInterface.add_member(:inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: InputPortList, name: "Inputs", traits: {"smithy.api#required" => {}}))
     NodeInterface.add_member(:outputs, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputPortList, name: "Outputs", traits: {"smithy.api#required" => {}}))
     NodeInterface.type = Types::NodeInterface
@@ -649,11 +649,11 @@ module Aws::Panorama
     NodeSignal.add_member(:node_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeInstanceId, name: "NodeInstanceId", traits: {"smithy.api#required" => {}}))
     NodeSignal.add_member(:signal, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeSignalValue, name: "Signal", traits: {"smithy.api#required" => {}}))
     NodeSignal.type = Types::NodeSignal
-    NodeSignalList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NodeSignal, name: "member")
-    NodesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Node, name: "member")
+    NodeSignalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeSignal, name: "member"))
+    NodesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Node, name: "member"))
     NtpPayload.add_member(:ntp_servers, ::Smithy::Schema::Shapes::MemberShape.new(target: NtpServerList, name: "NtpServers", traits: {"smithy.api#required" => {}}))
     NtpPayload.type = Types::NtpPayload
-    NtpServerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddressOrServerName, name: "member")
+    NtpServerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddressOrServerName, name: "member"))
     NtpStatus.add_member(:connection_status, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkConnectionStatus, name: "ConnectionStatus"))
     NtpStatus.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, name: "IpAddress"))
     NtpStatus.add_member(:ntp_server_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NtpServerName, name: "NtpServerName"))
@@ -664,7 +664,7 @@ module Aws::Panorama
     OutPutS3Location.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketName, name: "BucketName", traits: {"smithy.api#required" => {}}))
     OutPutS3Location.add_member(:object_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectKey, name: "ObjectKey", traits: {"smithy.api#required" => {}}))
     OutPutS3Location.type = Types::OutPutS3Location
-    OutputPortList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NodeOutputPort, name: "member")
+    OutputPortList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeOutputPort, name: "member"))
     PackageImportJob.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "JobId"))
     PackageImportJob.add_member(:job_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageImportJobType, name: "JobType"))
     PackageImportJob.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageImportJobStatus, name: "Status"))
@@ -674,7 +674,7 @@ module Aws::Panorama
     PackageImportJob.type = Types::PackageImportJob
     PackageImportJobInputConfig.add_member(:package_version_input_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageVersionInputConfig, name: "PackageVersionInputConfig"))
     PackageImportJobInputConfig.type = Types::PackageImportJobInputConfig
-    PackageImportJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PackageImportJob, name: "member")
+    PackageImportJobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageImportJob, name: "member"))
     PackageImportJobOutput.add_member(:package_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NodePackageId, name: "PackageId", traits: {"smithy.api#required" => {}}))
     PackageImportJobOutput.add_member(:package_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NodePackageVersion, name: "PackageVersion", traits: {"smithy.api#required" => {}}))
     PackageImportJobOutput.add_member(:patch_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NodePackagePatchVersion, name: "PatchVersion", traits: {"smithy.api#required" => {}}))
@@ -682,7 +682,7 @@ module Aws::Panorama
     PackageImportJobOutput.type = Types::PackageImportJobOutput
     PackageImportJobOutputConfig.add_member(:package_version_output_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageVersionOutputConfig, name: "PackageVersionOutputConfig"))
     PackageImportJobOutputConfig.type = Types::PackageImportJobOutputConfig
-    PackageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PackageListItem, name: "member")
+    PackageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageListItem, name: "member"))
     PackageListItem.add_member(:package_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NodePackageId, name: "PackageId"))
     PackageListItem.add_member(:package_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NodePackageName, name: "PackageName"))
     PackageListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NodePackageArn, name: "Arn"))
@@ -693,14 +693,14 @@ module Aws::Panorama
     PackageObject.add_member(:package_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NodePackageVersion, name: "PackageVersion", traits: {"smithy.api#required" => {}}))
     PackageObject.add_member(:patch_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NodePackagePatchVersion, name: "PatchVersion", traits: {"smithy.api#required" => {}}))
     PackageObject.type = Types::PackageObject
-    PackageObjects.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PackageObject, name: "member")
+    PackageObjects.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageObject, name: "member"))
     PackageVersionInputConfig.add_member(:s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "S3Location", traits: {"smithy.api#required" => {}}))
     PackageVersionInputConfig.type = Types::PackageVersionInputConfig
     PackageVersionOutputConfig.add_member(:package_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NodePackageName, name: "PackageName", traits: {"smithy.api#required" => {}}))
     PackageVersionOutputConfig.add_member(:package_version, ::Smithy::Schema::Shapes::MemberShape.new(target: NodePackageVersion, name: "PackageVersion", traits: {"smithy.api#required" => {}}))
     PackageVersionOutputConfig.add_member(:mark_latest, ::Smithy::Schema::Shapes::MemberShape.new(target: MarkLatestPatch, name: "MarkLatest", traits: {"smithy.api#default" => false}))
     PackageVersionOutputConfig.type = Types::PackageVersionOutputConfig
-    PrincipalArnsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalArn, name: "member")
+    PrincipalArnsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalArn, name: "member"))
     ProvisionDeviceInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceName, name: "Name", traits: {"smithy.api#required" => {}}))
     ProvisionDeviceInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     ProvisionDeviceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
@@ -727,7 +727,7 @@ module Aws::Panorama
     ReportedRuntimeContextState.add_member(:device_reported_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceReportedStatus, name: "DeviceReportedStatus", traits: {"smithy.api#required" => {}}))
     ReportedRuntimeContextState.add_member(:device_reported_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, name: "DeviceReportedTime", traits: {"smithy.api#required" => {}}))
     ReportedRuntimeContextState.type = Types::ReportedRuntimeContextState
-    ReportedRuntimeContextStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReportedRuntimeContextState, name: "member")
+    ReportedRuntimeContextStates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportedRuntimeContextState, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceType", traits: {"smithy.api#required" => {}}))
@@ -758,15 +758,15 @@ module Aws::Panorama
     StorageLocation.add_member(:binary_prefix_location, ::Smithy::Schema::Shapes::MemberShape.new(target: Object, name: "BinaryPrefixLocation", traits: {"smithy.api#required" => {}}))
     StorageLocation.add_member(:manifest_prefix_location, ::Smithy::Schema::Shapes::MemberShape.new(target: Object, name: "ManifestPrefixLocation", traits: {"smithy.api#required" => {}}))
     StorageLocation.type = Types::StorageLocation
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    TemplateParametersMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateKey, name: "key")
-    TemplateParametersMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateValue, name: "value")
+    TemplateParametersMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateKey, name: "key"))
+    TemplateParametersMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateValue, name: "value"))
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
@@ -785,11 +785,11 @@ module Aws::Panorama
     ValidationExceptionErrorArgument.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionErrorArgument.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value", traits: {"smithy.api#required" => {}}))
     ValidationExceptionErrorArgument.type = Types::ValidationExceptionErrorArgument
-    ValidationExceptionErrorArgumentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionErrorArgument, name: "member")
+    ValidationExceptionErrorArgumentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionErrorArgument, name: "member"))
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
 
     OmniCloudServiceLambda = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.panorama#OmniCloudServiceLambda"

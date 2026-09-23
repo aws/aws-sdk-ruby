@@ -318,7 +318,7 @@ module Aws::ChimeSDKMediaPipelines
     ArtifactsConfiguration.type = Types::ArtifactsConfiguration
     ArtifactsState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
     ArtifactsState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
-    AttendeeIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GuidString, name: "member")
+    AttendeeIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuidString, name: "member"))
     AudioArtifactsConcatenationState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
     AudioArtifactsConfiguration.add_member(:mux_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioMuxType, name: "MuxType", traits: {"smithy.api#required" => {}}))
     AudioArtifactsConfiguration.type = Types::AudioArtifactsConfiguration
@@ -350,11 +350,11 @@ module Aws::ChimeSDKMediaPipelines
     CallAnalyticsLanguageCode.add_member(:pt_br, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PT_BR", traits: {"smithy.api#enumValue" => "pt-BR"}))
     CanvasOrientation.add_member(:landscape, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Landscape", traits: {"smithy.api#enumValue" => "Landscape"}))
     CanvasOrientation.add_member(:portrait, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Portrait", traits: {"smithy.api#enumValue" => "Portrait"}))
-    CategoryNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryName, name: "member")
+    CategoryNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryName, name: "member"))
     ChannelDefinition.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, name: "ChannelId", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     ChannelDefinition.add_member(:participant_role, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantRole, name: "ParticipantRole"))
     ChannelDefinition.type = Types::ChannelDefinition
-    ChannelDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelDefinition, name: "member")
+    ChannelDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelDefinition, name: "member"))
     ChimeSdkMeetingConcatenationConfiguration.add_member(:artifacts_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactsConcatenationConfiguration, name: "ArtifactsConfiguration", traits: {"smithy.api#required" => {}}))
     ChimeSdkMeetingConcatenationConfiguration.type = Types::ChimeSdkMeetingConcatenationConfiguration
     ChimeSdkMeetingConfiguration.add_member(:source_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceConfiguration, name: "SourceConfiguration"))
@@ -374,12 +374,12 @@ module Aws::ChimeSDKMediaPipelines
     ConcatenationSink.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConcatenationSinkType, name: "Type", traits: {"smithy.api#required" => {}}))
     ConcatenationSink.add_member(:s3_bucket_sink_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketSinkConfiguration, name: "S3BucketSinkConfiguration", traits: {"smithy.api#required" => {}}))
     ConcatenationSink.type = Types::ConcatenationSink
-    ConcatenationSinkList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConcatenationSink, name: "member")
+    ConcatenationSinkList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConcatenationSink, name: "member"))
     ConcatenationSinkType.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3Bucket", traits: {"smithy.api#enumValue" => "S3Bucket"}))
     ConcatenationSource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConcatenationSourceType, name: "Type", traits: {"smithy.api#required" => {}}))
     ConcatenationSource.add_member(:media_capture_pipeline_source_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaCapturePipelineSourceConfiguration, name: "MediaCapturePipelineSourceConfiguration", traits: {"smithy.api#required" => {}}))
     ConcatenationSource.type = Types::ConcatenationSource
-    ConcatenationSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConcatenationSource, name: "member")
+    ConcatenationSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConcatenationSource, name: "member"))
     ConcatenationSourceType.add_member(:media_capture_pipeline, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MediaCapturePipeline", traits: {"smithy.api#enumValue" => "MediaCapturePipeline"}))
     ConflictException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "Code"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
@@ -474,7 +474,7 @@ module Aws::ChimeSDKMediaPipelines
     ErrorCode.add_member(:service_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ServiceFailure", traits: {"smithy.api#enumValue" => "ServiceFailure"}))
     ErrorCode.add_member(:service_unavailable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ServiceUnavailable", traits: {"smithy.api#enumValue" => "ServiceUnavailable"}))
     ErrorCode.add_member(:throttling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Throttling", traits: {"smithy.api#enumValue" => "Throttling"}))
-    ExternalUserIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalUserIdType, name: "member")
+    ExternalUserIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalUserIdType, name: "member"))
     ForbiddenException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "Code"))
     ForbiddenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ForbiddenException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RequestId"))
@@ -537,7 +537,7 @@ module Aws::ChimeSDKMediaPipelines
     KeywordMatchConfiguration.add_member(:keywords, ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordMatchWordList, name: "Keywords", traits: {"smithy.api#required" => {}}))
     KeywordMatchConfiguration.add_member(:negate, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Negate", traits: {"smithy.api#default" => false}))
     KeywordMatchConfiguration.type = Types::KeywordMatchConfiguration
-    KeywordMatchWordList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Keyword, name: "member")
+    KeywordMatchWordList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Keyword, name: "member"))
     KinesisDataStreamSinkConfiguration.add_member(:insights_target, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "InsightsTarget"))
     KinesisDataStreamSinkConfiguration.type = Types::KinesisDataStreamSinkConfiguration
     KinesisVideoStreamConfiguration.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsRegion, name: "Region", traits: {"smithy.api#required" => {}}))
@@ -563,7 +563,7 @@ module Aws::ChimeSDKMediaPipelines
     KinesisVideoStreamPoolSummary.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisVideoStreamPoolId, name: "PoolId"))
     KinesisVideoStreamPoolSummary.add_member(:pool_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "PoolArn"))
     KinesisVideoStreamPoolSummary.type = Types::KinesisVideoStreamPoolSummary
-    KinesisVideoStreamPoolSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisVideoStreamPoolSummary, name: "member")
+    KinesisVideoStreamPoolSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisVideoStreamPoolSummary, name: "member"))
     KinesisVideoStreamRecordingSourceRuntimeConfiguration.add_member(:streams, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingStreamList, name: "Streams", traits: {"smithy.api#required" => {}}))
     KinesisVideoStreamRecordingSourceRuntimeConfiguration.add_member(:fragment_selector, ::Smithy::Schema::Shapes::MemberShape.new(target: FragmentSelector, name: "FragmentSelector", traits: {"smithy.api#required" => {}}))
     KinesisVideoStreamRecordingSourceRuntimeConfiguration.type = Types::KinesisVideoStreamRecordingSourceRuntimeConfiguration
@@ -615,12 +615,12 @@ module Aws::ChimeSDKMediaPipelines
     LiveConnectorSinkConfiguration.add_member(:sink_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LiveConnectorSinkType, name: "SinkType", traits: {"smithy.api#required" => {}}))
     LiveConnectorSinkConfiguration.add_member(:rtmp_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LiveConnectorRTMPConfiguration, name: "RTMPConfiguration", traits: {"smithy.api#required" => {}}))
     LiveConnectorSinkConfiguration.type = Types::LiveConnectorSinkConfiguration
-    LiveConnectorSinkList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LiveConnectorSinkConfiguration, name: "member")
+    LiveConnectorSinkList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LiveConnectorSinkConfiguration, name: "member"))
     LiveConnectorSinkType.add_member(:rtmp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RTMP", traits: {"smithy.api#enumValue" => "RTMP"}))
     LiveConnectorSourceConfiguration.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LiveConnectorSourceType, name: "SourceType", traits: {"smithy.api#required" => {}}))
     LiveConnectorSourceConfiguration.add_member(:chime_sdk_meeting_live_connector_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ChimeSdkMeetingLiveConnectorConfiguration, name: "ChimeSdkMeetingLiveConnectorConfiguration", traits: {"smithy.api#required" => {}}))
     LiveConnectorSourceConfiguration.type = Types::LiveConnectorSourceConfiguration
-    LiveConnectorSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LiveConnectorSourceConfiguration, name: "member")
+    LiveConnectorSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LiveConnectorSourceConfiguration, name: "member"))
     LiveConnectorSourceType.add_member(:chime_sdk_meeting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ChimeSdkMeeting", traits: {"smithy.api#enumValue" => "ChimeSdkMeeting"}))
     MediaCapturePipeline.add_member(:media_pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GuidString, name: "MediaPipelineId"))
     MediaCapturePipeline.add_member(:media_pipeline_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "MediaPipelineArn"))
@@ -641,7 +641,7 @@ module Aws::ChimeSDKMediaPipelines
     MediaCapturePipelineSummary.add_member(:media_pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GuidString, name: "MediaPipelineId"))
     MediaCapturePipelineSummary.add_member(:media_pipeline_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "MediaPipelineArn"))
     MediaCapturePipelineSummary.type = Types::MediaCapturePipelineSummary
-    MediaCapturePipelineSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MediaCapturePipelineSummary, name: "member")
+    MediaCapturePipelineSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaCapturePipelineSummary, name: "member"))
     MediaConcatenationPipeline.add_member(:media_pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GuidString, name: "MediaPipelineId"))
     MediaConcatenationPipeline.add_member(:media_pipeline_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "MediaPipelineArn"))
     MediaConcatenationPipeline.add_member(:sources, ::Smithy::Schema::Shapes::MemberShape.new(target: ConcatenationSourceList, name: "Sources"))
@@ -691,18 +691,18 @@ module Aws::ChimeSDKMediaPipelines
     MediaInsightsPipelineConfigurationElementType.add_member(:sns_topic_sink, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SNS_TOPIC_SINK", traits: {"smithy.api#enumValue" => "SnsTopicSink"}))
     MediaInsightsPipelineConfigurationElementType.add_member(:s3_recording_sink, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3_RECORDING_SINK", traits: {"smithy.api#enumValue" => "S3RecordingSink"}))
     MediaInsightsPipelineConfigurationElementType.add_member(:voice_enhancement_sink, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VOICE_ENHANCEMENT_SINK", traits: {"smithy.api#enumValue" => "VoiceEnhancementSink"}))
-    MediaInsightsPipelineConfigurationElements.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MediaInsightsPipelineConfigurationElement, name: "member")
+    MediaInsightsPipelineConfigurationElements.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaInsightsPipelineConfigurationElement, name: "member"))
     MediaInsightsPipelineConfigurationSummary.add_member(:media_insights_pipeline_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaInsightsPipelineConfigurationNameString, name: "MediaInsightsPipelineConfigurationName"))
     MediaInsightsPipelineConfigurationSummary.add_member(:media_insights_pipeline_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GuidString, name: "MediaInsightsPipelineConfigurationId"))
     MediaInsightsPipelineConfigurationSummary.add_member(:media_insights_pipeline_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "MediaInsightsPipelineConfigurationArn"))
     MediaInsightsPipelineConfigurationSummary.type = Types::MediaInsightsPipelineConfigurationSummary
-    MediaInsightsPipelineConfigurationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MediaInsightsPipelineConfigurationSummary, name: "member")
+    MediaInsightsPipelineConfigurationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaInsightsPipelineConfigurationSummary, name: "member"))
     MediaInsightsPipelineElementStatus.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaInsightsPipelineConfigurationElementType, name: "Type"))
     MediaInsightsPipelineElementStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaPipelineElementStatus, name: "Status"))
     MediaInsightsPipelineElementStatus.type = Types::MediaInsightsPipelineElementStatus
-    MediaInsightsPipelineElementStatuses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MediaInsightsPipelineElementStatus, name: "member")
-    MediaInsightsRuntimeMetadata.key = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key")
-    MediaInsightsRuntimeMetadata.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    MediaInsightsPipelineElementStatuses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaInsightsPipelineElementStatus, name: "member"))
+    MediaInsightsRuntimeMetadata.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
+    MediaInsightsRuntimeMetadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     MediaLiveConnectorPipeline.add_member(:sources, ::Smithy::Schema::Shapes::MemberShape.new(target: LiveConnectorSourceList, name: "Sources"))
     MediaLiveConnectorPipeline.add_member(:sinks, ::Smithy::Schema::Shapes::MemberShape.new(target: LiveConnectorSinkList, name: "Sinks"))
     MediaLiveConnectorPipeline.add_member(:media_pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GuidString, name: "MediaPipelineId"))
@@ -725,7 +725,7 @@ module Aws::ChimeSDKMediaPipelines
     MediaPipelineElementStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Stopping", traits: {"smithy.api#enumValue" => "Stopping"}))
     MediaPipelineElementStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Stopped", traits: {"smithy.api#enumValue" => "Stopped"}))
     MediaPipelineElementStatus.add_member(:paused, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Paused", traits: {"smithy.api#enumValue" => "Paused"}))
-    MediaPipelineList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MediaPipelineSummary, name: "member")
+    MediaPipelineList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaPipelineSummary, name: "member"))
     MediaPipelineSinkType.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3Bucket", traits: {"smithy.api#enumValue" => "S3Bucket"}))
     MediaPipelineSourceType.add_member(:chime_sdk_meeting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ChimeSdkMeeting", traits: {"smithy.api#enumValue" => "ChimeSdkMeeting"}))
     MediaPipelineStatus.add_member(:initializing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Initializing", traits: {"smithy.api#enumValue" => "Initializing"}))
@@ -760,11 +760,11 @@ module Aws::ChimeSDKMediaPipelines
     MediaStreamSink.add_member(:reserved_stream_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedStreamCapacity, name: "ReservedStreamCapacity", traits: {"smithy.api#required" => {}}))
     MediaStreamSink.add_member(:media_stream_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaStreamType, name: "MediaStreamType", traits: {"smithy.api#required" => {}}))
     MediaStreamSink.type = Types::MediaStreamSink
-    MediaStreamSinkList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MediaStreamSink, name: "member")
+    MediaStreamSinkList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaStreamSink, name: "member"))
     MediaStreamSource.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaPipelineSourceType, name: "SourceType", traits: {"smithy.api#required" => {}}))
     MediaStreamSource.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "SourceArn", traits: {"smithy.api#required" => {}}))
     MediaStreamSource.type = Types::MediaStreamSource
-    MediaStreamSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MediaStreamSource, name: "member")
+    MediaStreamSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaStreamSource, name: "member"))
     MediaStreamType.add_member(:mixed_audio, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MixedAudio", traits: {"smithy.api#enumValue" => "MixedAudio"}))
     MediaStreamType.add_member(:individual_audio, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IndividualAudio", traits: {"smithy.api#enumValue" => "IndividualAudio"}))
     MeetingEventsConcatenationConfiguration.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactsConcatenationState, name: "State", traits: {"smithy.api#required" => {}}))
@@ -797,7 +797,7 @@ module Aws::ChimeSDKMediaPipelines
     RealTimeAlertRule.add_member(:sentiment_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SentimentConfiguration, name: "SentimentConfiguration"))
     RealTimeAlertRule.add_member(:issue_detection_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IssueDetectionConfiguration, name: "IssueDetectionConfiguration"))
     RealTimeAlertRule.type = Types::RealTimeAlertRule
-    RealTimeAlertRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeAlertRule, name: "member")
+    RealTimeAlertRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RealTimeAlertRule, name: "member"))
     RealTimeAlertRuleType.add_member(:keyword_match, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KeywordMatch", traits: {"smithy.api#enumValue" => "KeywordMatch"}))
     RealTimeAlertRuleType.add_member(:sentiment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Sentiment", traits: {"smithy.api#enumValue" => "Sentiment"}))
     RealTimeAlertRuleType.add_member(:issue_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IssueDetection", traits: {"smithy.api#enumValue" => "IssueDetection"}))
@@ -805,7 +805,7 @@ module Aws::ChimeSDKMediaPipelines
     RecordingFileFormat.add_member(:opus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Opus", traits: {"smithy.api#enumValue" => "Opus"}))
     RecordingStreamConfiguration.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisVideoStreamArn, name: "StreamArn"))
     RecordingStreamConfiguration.type = Types::RecordingStreamConfiguration
-    RecordingStreamList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingStreamConfiguration, name: "member")
+    RecordingStreamList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordingStreamConfiguration, name: "member"))
     ResolutionOption.add_member(:hd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HD", traits: {"smithy.api#enumValue" => "HD"}))
     ResolutionOption.add_member(:fhd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FHD", traits: {"smithy.api#enumValue" => "FHD"}))
     ResourceLimitExceededException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "Code"))
@@ -877,12 +877,12 @@ module Aws::ChimeSDKMediaPipelines
     StreamConfiguration.add_member(:fragment_number, ::Smithy::Schema::Shapes::MemberShape.new(target: FragmentNumberString, name: "FragmentNumber"))
     StreamConfiguration.add_member(:stream_channel_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamChannelDefinition, name: "StreamChannelDefinition", traits: {"smithy.api#required" => {}}))
     StreamConfiguration.type = Types::StreamConfiguration
-    Streams.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StreamConfiguration, name: "member")
+    Streams.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamConfiguration, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest

@@ -170,7 +170,7 @@ module Aws::CodeCatalyst
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    AccessTokenSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessTokenSummary, name: "member")
+    AccessTokenSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessTokenSummary, name: "member"))
     AccessTokenSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessTokenId, name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "accessTokenId"}))
     AccessTokenSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessTokenName, name: "name", traits: {"smithy.api#required" => {}}))
     AccessTokenSummary.add_member(:expires_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "expiresTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
@@ -265,7 +265,7 @@ module Aws::CodeCatalyst
     DevEnvironmentAccessDetails.add_member(:stream_url, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "streamUrl", traits: {"smithy.api#required" => {}}))
     DevEnvironmentAccessDetails.add_member(:token_value, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "tokenValue", traits: {"smithy.api#required" => {}}))
     DevEnvironmentAccessDetails.type = Types::DevEnvironmentAccessDetails
-    DevEnvironmentRepositorySummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DevEnvironmentRepositorySummary, name: "member")
+    DevEnvironmentRepositorySummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DevEnvironmentRepositorySummary, name: "member"))
     DevEnvironmentRepositorySummary.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceRepositoryNameString, name: "repositoryName", traits: {"smithy.api#required" => {}}))
     DevEnvironmentRepositorySummary.add_member(:branch_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceRepositoryBranchString, name: "branchName"))
     DevEnvironmentRepositorySummary.type = Types::DevEnvironmentRepositorySummary
@@ -278,7 +278,7 @@ module Aws::CodeCatalyst
     DevEnvironmentSessionSummary.add_member(:started_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startedTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     DevEnvironmentSessionSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id", traits: {"smithy.api#length" => {"min" => 1, "max" => 96}, "smithy.api#required" => {}}))
     DevEnvironmentSessionSummary.type = Types::DevEnvironmentSessionSummary
-    DevEnvironmentSessionsSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DevEnvironmentSessionSummary, name: "member")
+    DevEnvironmentSessionsSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DevEnvironmentSessionSummary, name: "member"))
     DevEnvironmentSummary.add_member(:space_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "spaceName"))
     DevEnvironmentSummary.add_member(:project_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "projectName"))
     DevEnvironmentSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "devEnvironmentId"}))
@@ -294,11 +294,11 @@ module Aws::CodeCatalyst
     DevEnvironmentSummary.add_member(:persistent_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: PersistentStorage, name: "persistentStorage", traits: {"smithy.api#required" => {}}))
     DevEnvironmentSummary.add_member(:vpc_connection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "vpcConnectionName"))
     DevEnvironmentSummary.type = Types::DevEnvironmentSummary
-    DevEnvironmentSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DevEnvironmentSummary, name: "member")
+    DevEnvironmentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DevEnvironmentSummary, name: "member"))
     EmailAddress.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "email"))
     EmailAddress.add_member(:verified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "verified"))
     EmailAddress.type = Types::EmailAddress
-    EventLogEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventLogEntry, name: "member")
+    EventLogEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventLogEntry, name: "member"))
     EventLogEntry.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id", traits: {"smithy.api#required" => {}}))
     EventLogEntry.add_member(:event_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "eventName", traits: {"smithy.api#required" => {}}))
     EventLogEntry.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "eventType", traits: {"smithy.api#required" => {}}))
@@ -321,12 +321,12 @@ module Aws::CodeCatalyst
     ExecuteCommandSessionConfiguration.add_member(:command, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "command", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#required" => {}}))
     ExecuteCommandSessionConfiguration.add_member(:arguments, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecuteCommandSessionConfigurationArguments, name: "arguments"))
     ExecuteCommandSessionConfiguration.type = Types::ExecuteCommandSessionConfiguration
-    ExecuteCommandSessionConfigurationArguments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
+    ExecuteCommandSessionConfigurationArguments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}}))
     Filter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#required" => {}}))
     Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "values", traits: {"smithy.api#required" => {}}))
     Filter.add_member(:comparison_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "comparisonOperator"))
     Filter.type = Types::Filter
-    Filters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
+    Filters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     GetDevEnvironmentRequest.add_member(:space_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "spaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetDevEnvironmentRequest.add_member(:project_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "projectName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetDevEnvironmentRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "devEnvironmentId"}))
@@ -430,8 +430,8 @@ module Aws::CodeCatalyst
     IdeConfiguration.add_member(:runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "runtime", traits: {"smithy.api#length" => {"min" => 1, "max" => 400}}))
     IdeConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}}))
     IdeConfiguration.type = Types::IdeConfiguration
-    IdeConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IdeConfiguration, name: "member")
-    Ides.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ide, name: "member")
+    IdeConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdeConfiguration, name: "member"))
+    Ides.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ide, name: "member"))
     ListAccessTokensRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#range" => {"max" => 10}}))
     ListAccessTokensRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 10000}}))
     ListAccessTokensRequest.type = Types::ListAccessTokensRequest
@@ -480,7 +480,7 @@ module Aws::CodeCatalyst
     ListSourceRepositoriesItem.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedTime", traits: {"smithy.api#required" => {}}))
     ListSourceRepositoriesItem.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdTime", traits: {"smithy.api#required" => {}}))
     ListSourceRepositoriesItem.type = Types::ListSourceRepositoriesItem
-    ListSourceRepositoriesItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListSourceRepositoriesItem, name: "member")
+    ListSourceRepositoriesItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListSourceRepositoriesItem, name: "member"))
     ListSourceRepositoriesRequest.add_member(:space_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "spaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListSourceRepositoriesRequest.add_member(:project_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "projectName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListSourceRepositoriesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 10000}}))
@@ -494,7 +494,7 @@ module Aws::CodeCatalyst
     ListSourceRepositoryBranchesItem.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedTime", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ListSourceRepositoryBranchesItem.add_member(:head_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "headCommitId"))
     ListSourceRepositoryBranchesItem.type = Types::ListSourceRepositoryBranchesItem
-    ListSourceRepositoryBranchesItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListSourceRepositoryBranchesItem, name: "member")
+    ListSourceRepositoryBranchesItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListSourceRepositoryBranchesItem, name: "member"))
     ListSourceRepositoryBranchesRequest.add_member(:space_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "spaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListSourceRepositoryBranchesRequest.add_member(:project_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "projectName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListSourceRepositoryBranchesRequest.add_member(:source_repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceRepositoryNameString, name: "sourceRepositoryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -539,13 +539,13 @@ module Aws::CodeCatalyst
     ProjectListFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "values", traits: {"smithy.api#required" => {}}))
     ProjectListFilter.add_member(:comparison_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonOperator, name: "comparisonOperator"))
     ProjectListFilter.type = Types::ProjectListFilter
-    ProjectListFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectListFilter, name: "member")
-    ProjectSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectSummary, name: "member")
+    ProjectListFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectListFilter, name: "member"))
+    ProjectSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectSummary, name: "member"))
     ProjectSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ProjectSummary.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "displayName"))
     ProjectSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
     ProjectSummary.type = Types::ProjectSummary
-    RepositoriesInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryInput, name: "member")
+    RepositoriesInput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryInput, name: "member"))
     RepositoryInput.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceRepositoryNameString, name: "repositoryName", traits: {"smithy.api#required" => {}}))
     RepositoryInput.add_member(:branch_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceRepositoryBranchString, name: "branchName"))
     RepositoryInput.type = Types::RepositoryInput
@@ -553,7 +553,7 @@ module Aws::CodeCatalyst
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    SpaceSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceSummary, name: "member")
+    SpaceSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceSummary, name: "member"))
     SpaceSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "name", traits: {"smithy.api#required" => {}}))
     SpaceSummary.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionString, name: "regionName", traits: {"smithy.api#required" => {}}))
     SpaceSummary.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "displayName"))
@@ -611,7 +611,7 @@ module Aws::CodeCatalyst
     StopDevEnvironmentSessionResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "devEnvironmentId"}))
     StopDevEnvironmentSessionResponse.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "sessionId", traits: {"smithy.api#length" => {"min" => 1, "max" => 96}, "smithy.api#required" => {}}))
     StopDevEnvironmentSessionResponse.type = Types::StopDevEnvironmentSessionResponse
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
     UpdateDevEnvironmentRequest.add_member(:space_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "spaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -662,10 +662,10 @@ module Aws::CodeCatalyst
     WorkflowDefinitionSummary.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "path", traits: {"smithy.api#required" => {}}))
     WorkflowDefinitionSummary.type = Types::WorkflowDefinitionSummary
     WorkflowRunSortCriteria.type = Types::WorkflowRunSortCriteria
-    WorkflowRunSortCriteriaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowRunSortCriteria, name: "member")
+    WorkflowRunSortCriteriaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowRunSortCriteria, name: "member"))
     WorkflowRunStatusReason.type = Types::WorkflowRunStatusReason
-    WorkflowRunStatusReasons.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowRunStatusReason, name: "member")
-    WorkflowRunSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowRunSummary, name: "member")
+    WorkflowRunStatusReasons.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowRunStatusReason, name: "member"))
+    WorkflowRunSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowRunSummary, name: "member"))
     WorkflowRunSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "workflowRunId"}))
     WorkflowRunSummary.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "workflowId", traits: {"smithy.api#required" => {}}))
     WorkflowRunSummary.add_member(:workflow_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "workflowName", traits: {"smithy.api#required" => {}}))
@@ -676,8 +676,8 @@ module Aws::CodeCatalyst
     WorkflowRunSummary.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     WorkflowRunSummary.type = Types::WorkflowRunSummary
     WorkflowSortCriteria.type = Types::WorkflowSortCriteria
-    WorkflowSortCriteriaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowSortCriteria, name: "member")
-    WorkflowSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowSummary, name: "member")
+    WorkflowSortCriteriaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowSortCriteria, name: "member"))
+    WorkflowSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowSummary, name: "member"))
     WorkflowSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "workflowId"}))
     WorkflowSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     WorkflowSummary.add_member(:source_repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceRepositoryNameString, name: "sourceRepositoryName", traits: {"smithy.api#required" => {}}))

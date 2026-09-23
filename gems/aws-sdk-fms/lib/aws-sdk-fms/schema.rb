@@ -307,9 +307,9 @@ module Aws::FMS
     WebACLHasIncompatibleConfigurationViolation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fms#WebACLHasIncompatibleConfigurationViolation", name: "WebACLHasIncompatibleConfigurationViolation")
     WebACLHasOutOfScopeResourcesViolation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.fms#WebACLHasOutOfScopeResourcesViolation", name: "WebACLHasOutOfScopeResourcesViolation")
 
-    AWSAccountIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, name: "member")
-    AWSRegionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AWSRegion, name: "member")
-    AccountIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, name: "member")
+    AWSAccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, name: "member"))
+    AWSRegionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSRegion, name: "member"))
+    AccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, name: "member"))
     AccountRoleStatus.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Ready", traits: {"smithy.api#enumValue" => "READY"}))
     AccountRoleStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Creating", traits: {"smithy.api#enumValue" => "CREATING"}))
     AccountRoleStatus.add_member(:pending_deletion, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PendingDeletion", traits: {"smithy.api#enumValue" => "PENDING_DELETION"}))
@@ -326,7 +326,7 @@ module Aws::FMS
     AdminAccountSummary.add_member(:default_admin, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "DefaultAdmin", traits: {"smithy.api#default" => false}))
     AdminAccountSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationStatus, name: "Status"))
     AdminAccountSummary.type = Types::AdminAccountSummary
-    AdminAccountSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdminAccountSummary, name: "member")
+    AdminAccountSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminAccountSummary, name: "member"))
     AdminScope.add_member(:account_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountScope, name: "AccountScope"))
     AdminScope.add_member(:organizational_unit_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitScope, name: "OrganizationalUnitScope"))
     AdminScope.add_member(:region_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionScope, name: "RegionScope"))
@@ -336,7 +336,7 @@ module Aws::FMS
     App.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, name: "Protocol", traits: {"smithy.api#required" => {}}))
     App.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: IPPortNumber, name: "Port", traits: {"smithy.api#required" => {}}))
     App.type = Types::App
-    AppsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: App, name: "member")
+    AppsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: App, name: "member"))
     AppsListData.add_member(:list_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ListId, name: "ListId"))
     AppsListData.add_member(:list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "ListName", traits: {"smithy.api#required" => {}}))
     AppsListData.add_member(:list_update_token, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateToken, name: "ListUpdateToken"))
@@ -350,7 +350,7 @@ module Aws::FMS
     AppsListDataSummary.add_member(:list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "ListName"))
     AppsListDataSummary.add_member(:apps_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AppsList, name: "AppsList"))
     AppsListDataSummary.type = Types::AppsListDataSummary
-    AppsListsData.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AppsListDataSummary, name: "member")
+    AppsListsData.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppsListDataSummary, name: "member"))
     AssociateAdminAccountRequest.add_member(:admin_account, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, name: "AdminAccount", traits: {"smithy.api#required" => {}}))
     AssociateAdminAccountRequest.type = Types::AssociateAdminAccountRequest
     AssociateThirdPartyFirewallRequest.add_member(:third_party_firewall, ::Smithy::Schema::Shapes::MemberShape.new(target: ThirdPartyFirewall, name: "ThirdPartyFirewall", traits: {"smithy.api#required" => {}}))
@@ -363,7 +363,7 @@ module Aws::FMS
     AwsEc2NetworkInterfaceViolation.add_member(:violation_target, ::Smithy::Schema::Shapes::MemberShape.new(target: ViolationTarget, name: "ViolationTarget"))
     AwsEc2NetworkInterfaceViolation.add_member(:violating_security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdList, name: "ViolatingSecurityGroups"))
     AwsEc2NetworkInterfaceViolation.type = Types::AwsEc2NetworkInterfaceViolation
-    AwsEc2NetworkInterfaceViolations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2NetworkInterfaceViolation, name: "member")
+    AwsEc2NetworkInterfaceViolations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2NetworkInterfaceViolation, name: "member"))
     AwsVPCSecurityGroupViolation.add_member(:violation_target, ::Smithy::Schema::Shapes::MemberShape.new(target: ViolationTarget, name: "ViolationTarget"))
     AwsVPCSecurityGroupViolation.add_member(:violation_target_description, ::Smithy::Schema::Shapes::MemberShape.new(target: LengthBoundedString, name: "ViolationTargetDescription"))
     AwsVPCSecurityGroupViolation.add_member(:partial_matches, ::Smithy::Schema::Shapes::MemberShape.new(target: PartialMatches, name: "PartialMatches"))
@@ -386,9 +386,9 @@ module Aws::FMS
     ComplianceViolator.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
     ComplianceViolator.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceViolatorMetadata, name: "Metadata"))
     ComplianceViolator.type = Types::ComplianceViolator
-    ComplianceViolatorMetadata.key = ::Smithy::Schema::Shapes::MemberShape.new(target: LengthBoundedString, name: "key")
-    ComplianceViolatorMetadata.value = ::Smithy::Schema::Shapes::MemberShape.new(target: LengthBoundedString, name: "value")
-    ComplianceViolators.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceViolator, name: "member")
+    ComplianceViolatorMetadata.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LengthBoundedString, name: "key"))
+    ComplianceViolatorMetadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LengthBoundedString, name: "value"))
+    ComplianceViolators.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceViolator, name: "member"))
     CreateNetworkAclAction.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: LengthBoundedString, name: "Description"))
     CreateNetworkAclAction.add_member(:vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionTarget, name: "Vpc"))
     CreateNetworkAclAction.add_member(:fms_can_remediate, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "FMSCanRemediate", traits: {"smithy.api#default" => false}))
@@ -398,11 +398,11 @@ module Aws::FMS
     CreateNetworkAclEntriesAction.add_member(:network_acl_entries_to_be_created, ::Smithy::Schema::Shapes::MemberShape.new(target: EntriesDescription, name: "NetworkAclEntriesToBeCreated"))
     CreateNetworkAclEntriesAction.add_member(:fms_can_remediate, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "FMSCanRemediate", traits: {"smithy.api#default" => false}))
     CreateNetworkAclEntriesAction.type = Types::CreateNetworkAclEntriesAction
-    CustomerPolicyScopeIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerPolicyScopeId, name: "member")
+    CustomerPolicyScopeIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerPolicyScopeId, name: "member"))
     CustomerPolicyScopeIdType.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
     CustomerPolicyScopeIdType.add_member(:org_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ORG_UNIT", traits: {"smithy.api#enumValue" => "ORG_UNIT"}))
-    CustomerPolicyScopeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerPolicyScopeIdType, name: "key")
-    CustomerPolicyScopeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerPolicyScopeIdList, name: "value")
+    CustomerPolicyScopeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerPolicyScopeIdType, name: "key"))
+    CustomerPolicyScopeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerPolicyScopeIdList, name: "value"))
     CustomerPolicyStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     CustomerPolicyStatus.add_member(:out_of_admin_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OUT_OF_ADMIN_SCOPE", traits: {"smithy.api#enumValue" => "OUT_OF_ADMIN_SCOPE"}))
     DeleteAppsListRequest.add_member(:list_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ListId, name: "ListId", traits: {"smithy.api#required" => {}}))
@@ -437,7 +437,7 @@ module Aws::FMS
     DiscoveredResource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "Type"))
     DiscoveredResource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
     DiscoveredResource.type = Types::DiscoveredResource
-    DiscoveredResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DiscoveredResource, name: "member")
+    DiscoveredResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscoveredResource, name: "member"))
     DnsDuplicateRuleGroupViolation.add_member(:violation_target, ::Smithy::Schema::Shapes::MemberShape.new(target: ViolationTarget, name: "ViolationTarget"))
     DnsDuplicateRuleGroupViolation.add_member(:violation_target_description, ::Smithy::Schema::Shapes::MemberShape.new(target: LengthBoundedString, name: "ViolationTargetDescription"))
     DnsDuplicateRuleGroupViolation.type = Types::DnsDuplicateRuleGroupViolation
@@ -445,7 +445,7 @@ module Aws::FMS
     DnsRuleGroupLimitExceededViolation.add_member(:violation_target_description, ::Smithy::Schema::Shapes::MemberShape.new(target: LengthBoundedString, name: "ViolationTargetDescription"))
     DnsRuleGroupLimitExceededViolation.add_member(:number_of_rule_groups_already_associated, ::Smithy::Schema::Shapes::MemberShape.new(target: BasicInteger, name: "NumberOfRuleGroupsAlreadyAssociated", traits: {"smithy.api#default" => 0}))
     DnsRuleGroupLimitExceededViolation.type = Types::DnsRuleGroupLimitExceededViolation
-    DnsRuleGroupPriorities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DnsRuleGroupPriority, name: "member")
+    DnsRuleGroupPriorities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsRuleGroupPriority, name: "member"))
     DnsRuleGroupPriorityConflictViolation.add_member(:violation_target, ::Smithy::Schema::Shapes::MemberShape.new(target: ViolationTarget, name: "ViolationTarget"))
     DnsRuleGroupPriorityConflictViolation.add_member(:violation_target_description, ::Smithy::Schema::Shapes::MemberShape.new(target: LengthBoundedString, name: "ViolationTargetDescription"))
     DnsRuleGroupPriorityConflictViolation.add_member(:conflicting_priority, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsRuleGroupPriority, name: "ConflictingPriority", traits: {"smithy.api#default" => 0}))
@@ -489,8 +489,8 @@ module Aws::FMS
     EC2ReplaceRouteTableAssociationAction.add_member(:association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionTarget, name: "AssociationId", traits: {"smithy.api#required" => {}}))
     EC2ReplaceRouteTableAssociationAction.add_member(:route_table_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionTarget, name: "RouteTableId", traits: {"smithy.api#required" => {}}))
     EC2ReplaceRouteTableAssociationAction.type = Types::EC2ReplaceRouteTableAssociationAction
-    EntriesDescription.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntryDescription, name: "member")
-    EntriesWithConflicts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntryDescription, name: "member")
+    EntriesDescription.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryDescription, name: "member"))
+    EntriesWithConflicts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryDescription, name: "member"))
     EntryDescription.add_member(:entry_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkAclEntry, name: "EntryDetail"))
     EntryDescription.add_member(:entry_rule_number, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerObjectMinimum0, name: "EntryRuleNumber", traits: {"smithy.api#default" => 0}))
     EntryDescription.add_member(:entry_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryType, name: "EntryType"))
@@ -508,13 +508,13 @@ module Aws::FMS
     EntryViolationReason.add_member(:missing_expected_entry, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MissingExpectedEntry", traits: {"smithy.api#enumValue" => "MISSING_EXPECTED_ENTRY"}))
     EntryViolationReason.add_member(:incorrect_entry_order, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IncorrectEntryOrder", traits: {"smithy.api#enumValue" => "INCORRECT_ENTRY_ORDER"}))
     EntryViolationReason.add_member(:entry_conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EntryConflict", traits: {"smithy.api#enumValue" => "ENTRY_CONFLICT"}))
-    EntryViolationReasons.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntryViolationReason, name: "member")
-    EntryViolations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntryViolation, name: "member")
+    EntryViolationReasons.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryViolationReason, name: "member"))
+    EntryViolations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryViolation, name: "member"))
     EvaluationResult.add_member(:compliance_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyComplianceStatusType, name: "ComplianceStatus"))
     EvaluationResult.add_member(:violator_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCount, name: "ViolatorCount", traits: {"smithy.api#default" => 0}))
     EvaluationResult.add_member(:evaluation_limit_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EvaluationLimitExceeded", traits: {"smithy.api#default" => false}))
     EvaluationResult.type = Types::EvaluationResult
-    EvaluationResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationResult, name: "member")
+    EvaluationResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationResult, name: "member"))
     ExpectedRoute.add_member(:ip_v4_cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: CIDR, name: "IpV4Cidr"))
     ExpectedRoute.add_member(:prefix_list_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CIDR, name: "PrefixListId"))
     ExpectedRoute.add_member(:ip_v6_cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: CIDR, name: "IpV6Cidr"))
@@ -522,14 +522,14 @@ module Aws::FMS
     ExpectedRoute.add_member(:allowed_targets, ::Smithy::Schema::Shapes::MemberShape.new(target: LengthBoundedStringList, name: "AllowedTargets"))
     ExpectedRoute.add_member(:route_table_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "RouteTableId"))
     ExpectedRoute.type = Types::ExpectedRoute
-    ExpectedRoutes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExpectedRoute, name: "member")
+    ExpectedRoutes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpectedRoute, name: "member"))
     FMSPolicyUpdateFirewallCreationConfigAction.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: LengthBoundedString, name: "Description"))
     FMSPolicyUpdateFirewallCreationConfigAction.add_member(:firewall_creation_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedServiceData, name: "FirewallCreationConfig"))
     FMSPolicyUpdateFirewallCreationConfigAction.type = Types::FMSPolicyUpdateFirewallCreationConfigAction
     FailedItem.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "URI"))
     FailedItem.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedItemReason, name: "Reason"))
     FailedItem.type = Types::FailedItem
-    FailedItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedItem, name: "member")
+    FailedItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedItem, name: "member"))
     FailedItemReason.add_member(:not_valid_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NotValidArn", traits: {"smithy.api#enumValue" => "NOT_VALID_ARN"}))
     FailedItemReason.add_member(:not_valid_partition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NotValidPartition", traits: {"smithy.api#enumValue" => "NOT_VALID_PARTITION"}))
     FailedItemReason.add_member(:not_valid_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NotValidRegion", traits: {"smithy.api#enumValue" => "NOT_VALID_REGION"}))
@@ -613,7 +613,7 @@ module Aws::FMS
     GetViolationDetailsRequest.type = Types::GetViolationDetailsRequest
     GetViolationDetailsResponse.add_member(:violation_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: ViolationDetail, name: "ViolationDetail"))
     GetViolationDetailsResponse.type = Types::GetViolationDetailsResponse
-    IdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "member")
+    IdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "member"))
     InternalErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InternalErrorException.type = Types::InternalErrorException
     InvalidInputException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -628,9 +628,9 @@ module Aws::FMS
     InvalidOperationException.type = Types::InvalidOperationException
     InvalidTypeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InvalidTypeException.type = Types::InvalidTypeException
-    IssueInfoMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DependentServiceName, name: "key")
-    IssueInfoMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: DetailedInfo, name: "value")
-    LengthBoundedStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LengthBoundedString, name: "member")
+    IssueInfoMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DependentServiceName, name: "key"))
+    IssueInfoMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DetailedInfo, name: "value"))
+    LengthBoundedStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LengthBoundedString, name: "member"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
     ListAdminAccountsForOrganizationRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken"))
@@ -713,10 +713,10 @@ module Aws::FMS
     MarketplaceSubscriptionOnboardingStatus.add_member(:no_subscription, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_SUBSCRIPTION", traits: {"smithy.api#enumValue" => "NO_SUBSCRIPTION"}))
     MarketplaceSubscriptionOnboardingStatus.add_member(:not_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_COMPLETE", traits: {"smithy.api#enumValue" => "NOT_COMPLETE"}))
     MarketplaceSubscriptionOnboardingStatus.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
-    MemberAccounts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, name: "member")
+    MemberAccounts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, name: "member"))
     NetworkAclCommonPolicy.add_member(:network_acl_entry_set, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkAclEntrySet, name: "NetworkAclEntrySet", traits: {"smithy.api#required" => {}}))
     NetworkAclCommonPolicy.type = Types::NetworkAclCommonPolicy
-    NetworkAclEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkAclEntry, name: "member")
+    NetworkAclEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkAclEntry, name: "member"))
     NetworkAclEntry.add_member(:icmp_type_code, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkAclIcmpTypeCode, name: "IcmpTypeCode"))
     NetworkAclEntry.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: LengthBoundedString, name: "Protocol", traits: {"smithy.api#required" => {}}))
     NetworkAclEntry.add_member(:port_range, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkAclPortRange, name: "PortRange"))
@@ -738,7 +738,7 @@ module Aws::FMS
     NetworkAclPortRange.type = Types::NetworkAclPortRange
     NetworkAclRuleAction.add_member(:allow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOW", traits: {"smithy.api#enumValue" => "allow"}))
     NetworkAclRuleAction.add_member(:deny, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DENY", traits: {"smithy.api#enumValue" => "deny"}))
-    NetworkFirewallActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkFirewallAction, name: "member")
+    NetworkFirewallActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkFirewallAction, name: "member"))
     NetworkFirewallBlackHoleRouteDetectedViolation.add_member(:violation_target, ::Smithy::Schema::Shapes::MemberShape.new(target: ViolationTarget, name: "ViolationTarget"))
     NetworkFirewallBlackHoleRouteDetectedViolation.add_member(:route_table_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "RouteTableId"))
     NetworkFirewallBlackHoleRouteDetectedViolation.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "VpcId"))
@@ -825,12 +825,12 @@ module Aws::FMS
     NetworkFirewallUnexpectedGatewayRoutesViolation.add_member(:route_table_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "RouteTableId"))
     NetworkFirewallUnexpectedGatewayRoutesViolation.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "VpcId"))
     NetworkFirewallUnexpectedGatewayRoutesViolation.type = Types::NetworkFirewallUnexpectedGatewayRoutesViolation
-    OrderedRemediationActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationActionWithOrder, name: "member")
+    OrderedRemediationActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationActionWithOrder, name: "member"))
     OrganizationStatus.add_member(:onboarding, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Onboarding", traits: {"smithy.api#enumValue" => "ONBOARDING"}))
     OrganizationStatus.add_member(:onboarding_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OnboardingComplete", traits: {"smithy.api#enumValue" => "ONBOARDING_COMPLETE"}))
     OrganizationStatus.add_member(:offboarding, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Offboarding", traits: {"smithy.api#enumValue" => "OFFBOARDING"}))
     OrganizationStatus.add_member(:offboarding_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OffboardingComplete", traits: {"smithy.api#enumValue" => "OFFBOARDING_COMPLETE"}))
-    OrganizationalUnitIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitId, name: "member")
+    OrganizationalUnitIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitId, name: "member"))
     OrganizationalUnitScope.add_member(:organizational_units, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationalUnitIdList, name: "OrganizationalUnits"))
     OrganizationalUnitScope.add_member(:all_organizational_units_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AllOrganizationalUnitsEnabled", traits: {"smithy.api#default" => false}))
     OrganizationalUnitScope.add_member(:exclude_specified_organizational_units, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ExcludeSpecifiedOrganizationalUnits", traits: {"smithy.api#default" => false}))
@@ -838,7 +838,7 @@ module Aws::FMS
     PartialMatch.add_member(:reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceRule, name: "Reference"))
     PartialMatch.add_member(:target_violation_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetViolationReasons, name: "TargetViolationReasons"))
     PartialMatch.type = Types::PartialMatch
-    PartialMatches.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PartialMatch, name: "member")
+    PartialMatches.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PartialMatch, name: "member"))
     Policy.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, name: "PolicyId"))
     Policy.add_member(:policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "PolicyName", traits: {"smithy.api#required" => {}}))
     Policy.add_member(:policy_update_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyUpdateToken, name: "PolicyUpdateToken"))
@@ -872,7 +872,7 @@ module Aws::FMS
     PolicyComplianceStatus.add_member(:last_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, name: "LastUpdated"))
     PolicyComplianceStatus.add_member(:issue_info_map, ::Smithy::Schema::Shapes::MemberShape.new(target: IssueInfoMap, name: "IssueInfoMap"))
     PolicyComplianceStatus.type = Types::PolicyComplianceStatus
-    PolicyComplianceStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyComplianceStatus, name: "member")
+    PolicyComplianceStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyComplianceStatus, name: "member"))
     PolicyComplianceStatusType.add_member(:compliant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Compliant", traits: {"smithy.api#enumValue" => "COMPLIANT"}))
     PolicyComplianceStatusType.add_member(:non_compliant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NonCompliant", traits: {"smithy.api#enumValue" => "NON_COMPLIANT"}))
     PolicyOption.add_member(:network_firewall_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkFirewallPolicy, name: "NetworkFirewallPolicy"))
@@ -888,7 +888,7 @@ module Aws::FMS
     PolicySummary.add_member(:delete_unused_fm_managed_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "DeleteUnusedFMManagedResources", traits: {"smithy.api#default" => false}))
     PolicySummary.add_member(:policy_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerPolicyStatus, name: "PolicyStatus"))
     PolicySummary.type = Types::PolicySummary
-    PolicySummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicySummary, name: "member")
+    PolicySummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicySummary, name: "member"))
     PolicyTypeScope.add_member(:policy_types, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityServiceTypeList, name: "PolicyTypes"))
     PolicyTypeScope.add_member(:all_policy_types_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AllPolicyTypesEnabled", traits: {"smithy.api#default" => false}))
     PolicyTypeScope.type = Types::PolicyTypeScope
@@ -896,15 +896,15 @@ module Aws::FMS
     PossibleRemediationAction.add_member(:ordered_remediation_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderedRemediationActions, name: "OrderedRemediationActions", traits: {"smithy.api#required" => {}}))
     PossibleRemediationAction.add_member(:is_default_action, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsDefaultAction", traits: {"smithy.api#default" => false}))
     PossibleRemediationAction.type = Types::PossibleRemediationAction
-    PossibleRemediationActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PossibleRemediationAction, name: "member")
+    PossibleRemediationActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PossibleRemediationAction, name: "member"))
     PossibleRemediationActions.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: LengthBoundedString, name: "Description"))
     PossibleRemediationActions.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: PossibleRemediationActionList, name: "Actions"))
     PossibleRemediationActions.type = Types::PossibleRemediationActions
-    PreviousAppsList.key = ::Smithy::Schema::Shapes::MemberShape.new(target: PreviousListVersion, name: "key")
-    PreviousAppsList.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AppsList, name: "value")
-    PreviousProtocolsList.key = ::Smithy::Schema::Shapes::MemberShape.new(target: PreviousListVersion, name: "key")
-    PreviousProtocolsList.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ProtocolsList, name: "value")
-    ProtocolsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, name: "member")
+    PreviousAppsList.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: PreviousListVersion, name: "key"))
+    PreviousAppsList.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AppsList, name: "value"))
+    PreviousProtocolsList.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: PreviousListVersion, name: "key"))
+    PreviousProtocolsList.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtocolsList, name: "value"))
+    ProtocolsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, name: "member"))
     ProtocolsListData.add_member(:list_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ListId, name: "ListId"))
     ProtocolsListData.add_member(:list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "ListName", traits: {"smithy.api#required" => {}}))
     ProtocolsListData.add_member(:list_update_token, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateToken, name: "ListUpdateToken"))
@@ -918,7 +918,7 @@ module Aws::FMS
     ProtocolsListDataSummary.add_member(:list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "ListName"))
     ProtocolsListDataSummary.add_member(:protocols_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtocolsList, name: "ProtocolsList"))
     ProtocolsListDataSummary.type = Types::ProtocolsListDataSummary
-    ProtocolsListsData.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProtocolsListDataSummary, name: "member")
+    ProtocolsListsData.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtocolsListDataSummary, name: "member"))
     PutAdminAccountRequest.add_member(:admin_account, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, name: "AdminAccount", traits: {"smithy.api#required" => {}}))
     PutAdminAccountRequest.add_member(:admin_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminScope, name: "AdminScope"))
     PutAdminAccountRequest.type = Types::PutAdminAccountRequest
@@ -979,9 +979,9 @@ module Aws::FMS
     Resource.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "URI", traits: {"smithy.api#required" => {}}))
     Resource.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, name: "AccountId"))
     Resource.type = Types::Resource
-    ResourceArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member")
-    ResourceIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "member")
-    ResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member")
+    ResourceArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member"))
+    ResourceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "member"))
+    ResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ResourceSet.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Base62Id, name: "Id"))
@@ -992,7 +992,7 @@ module Aws::FMS
     ResourceSet.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, name: "LastUpdateTime"))
     ResourceSet.add_member(:resource_set_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSetStatus, name: "ResourceSetStatus"))
     ResourceSet.type = Types::ResourceSet
-    ResourceSetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Base62Id, name: "member")
+    ResourceSetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Base62Id, name: "member"))
     ResourceSetStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     ResourceSetStatus.add_member(:out_of_admin_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OUT_OF_ADMIN_SCOPE", traits: {"smithy.api#enumValue" => "OUT_OF_ADMIN_SCOPE"}))
     ResourceSetSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Base62Id, name: "Id"))
@@ -1001,14 +1001,14 @@ module Aws::FMS
     ResourceSetSummary.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, name: "LastUpdateTime"))
     ResourceSetSummary.add_member(:resource_set_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSetStatus, name: "ResourceSetStatus"))
     ResourceSetSummary.type = Types::ResourceSetSummary
-    ResourceSetSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSetSummary, name: "member")
+    ResourceSetSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSetSummary, name: "member"))
     ResourceTag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     ResourceTag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagValue, name: "Value"))
     ResourceTag.type = Types::ResourceTag
     ResourceTagLogicalOperator.add_member(:and, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AND", traits: {"smithy.api#enumValue" => "AND"}))
     ResourceTagLogicalOperator.add_member(:or, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OR", traits: {"smithy.api#enumValue" => "OR"}))
-    ResourceTags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member")
-    ResourceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "member")
+    ResourceTags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member"))
+    ResourceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "member"))
     ResourceViolation.add_member(:aws_vpc_security_group_violation, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsVPCSecurityGroupViolation, name: "AwsVPCSecurityGroupViolation"))
     ResourceViolation.add_member(:aws_ec2_network_interface_violation, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2NetworkInterfaceViolation, name: "AwsEc2NetworkInterfaceViolation"))
     ResourceViolation.add_member(:aws_ec2_instance_violation, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2InstanceViolation, name: "AwsEc2InstanceViolation"))
@@ -1036,7 +1036,7 @@ module Aws::FMS
     ResourceViolation.add_member(:web_acl_has_incompatible_configuration_violation, ::Smithy::Schema::Shapes::MemberShape.new(target: WebACLHasIncompatibleConfigurationViolation, name: "WebACLHasIncompatibleConfigurationViolation"))
     ResourceViolation.add_member(:web_acl_has_out_of_scope_resources_violation, ::Smithy::Schema::Shapes::MemberShape.new(target: WebACLHasOutOfScopeResourcesViolation, name: "WebACLHasOutOfScopeResourcesViolation"))
     ResourceViolation.type = Types::ResourceViolation
-    ResourceViolations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceViolation, name: "member")
+    ResourceViolations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceViolation, name: "member"))
     Route.add_member(:destination_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationType, name: "DestinationType"))
     Route.add_member(:target_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetType, name: "TargetType"))
     Route.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: LengthBoundedString, name: "Destination"))
@@ -1055,7 +1055,7 @@ module Aws::FMS
     RouteHasOutOfScopeEndpointViolation.add_member(:current_internet_gateway_route_table, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "CurrentInternetGatewayRouteTable"))
     RouteHasOutOfScopeEndpointViolation.add_member(:internet_gateway_routes, ::Smithy::Schema::Shapes::MemberShape.new(target: Routes, name: "InternetGatewayRoutes"))
     RouteHasOutOfScopeEndpointViolation.type = Types::RouteHasOutOfScopeEndpointViolation
-    Routes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Route, name: "member")
+    Routes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Route, name: "member"))
     RuleOrder.add_member(:strict_order, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRICT_ORDER", traits: {"smithy.api#enumValue" => "STRICT_ORDER"}))
     RuleOrder.add_member(:default_action_order, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT_ACTION_ORDER", traits: {"smithy.api#enumValue" => "DEFAULT_ACTION_ORDER"}))
     SecurityGroupRemediationAction.add_member(:remediation_action_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationActionType, name: "RemediationActionType"))
@@ -1063,7 +1063,7 @@ module Aws::FMS
     SecurityGroupRemediationAction.add_member(:remediation_result, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupRuleDescription, name: "RemediationResult"))
     SecurityGroupRemediationAction.add_member(:is_default_action, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsDefaultAction", traits: {"smithy.api#default" => false}))
     SecurityGroupRemediationAction.type = Types::SecurityGroupRemediationAction
-    SecurityGroupRemediationActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupRemediationAction, name: "member")
+    SecurityGroupRemediationActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupRemediationAction, name: "member"))
     SecurityGroupRuleDescription.add_member(:ipv4_range, ::Smithy::Schema::Shapes::MemberShape.new(target: CIDR, name: "IPV4Range"))
     SecurityGroupRuleDescription.add_member(:ipv6_range, ::Smithy::Schema::Shapes::MemberShape.new(target: CIDR, name: "IPV6Range"))
     SecurityGroupRuleDescription.add_member(:prefix_list_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "PrefixListId"))
@@ -1086,7 +1086,7 @@ module Aws::FMS
     SecurityServiceType.add_member(:third_party_firewall, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THIRD_PARTY_FIREWALL", traits: {"smithy.api#enumValue" => "THIRD_PARTY_FIREWALL"}))
     SecurityServiceType.add_member(:import_network_firewall, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMPORT_NETWORK_FIREWALL", traits: {"smithy.api#enumValue" => "IMPORT_NETWORK_FIREWALL"}))
     SecurityServiceType.add_member(:network_acl_common, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NETWORK_ACL_COMMON", traits: {"smithy.api#enumValue" => "NETWORK_ACL_COMMON"}))
-    SecurityServiceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityServiceType, name: "member")
+    SecurityServiceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityServiceType, name: "member"))
     StatefulEngineOptions.add_member(:rule_order, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleOrder, name: "RuleOrder"))
     StatefulEngineOptions.add_member(:stream_exception_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamExceptionPolicy, name: "StreamExceptionPolicy"))
     StatefulEngineOptions.type = Types::StatefulEngineOptions
@@ -1095,12 +1095,12 @@ module Aws::FMS
     StatefulRuleGroup.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: PriorityNumber, name: "Priority"))
     StatefulRuleGroup.add_member(:override, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkFirewallStatefulRuleGroupOverride, name: "Override"))
     StatefulRuleGroup.type = Types::StatefulRuleGroup
-    StatefulRuleGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StatefulRuleGroup, name: "member")
+    StatefulRuleGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StatefulRuleGroup, name: "member"))
     StatelessRuleGroup.add_member(:rule_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkFirewallResourceName, name: "RuleGroupName"))
     StatelessRuleGroup.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "ResourceId"))
     StatelessRuleGroup.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: StatelessRuleGroupPriority, name: "Priority"))
     StatelessRuleGroup.type = Types::StatelessRuleGroup
-    StatelessRuleGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StatelessRuleGroup, name: "member")
+    StatelessRuleGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StatelessRuleGroup, name: "member"))
     StreamExceptionPolicy.add_member(:drop, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DROP", traits: {"smithy.api#enumValue" => "DROP"}))
     StreamExceptionPolicy.add_member(:continue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTINUE", traits: {"smithy.api#enumValue" => "CONTINUE"}))
     StreamExceptionPolicy.add_member(:reject, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECT", traits: {"smithy.api#enumValue" => "REJECT"}))
@@ -1108,8 +1108,8 @@ module Aws::FMS
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tag_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "TagList", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -1124,7 +1124,7 @@ module Aws::FMS
     TargetType.add_member(:vpc_peering_connection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VPCPeeringConnection", traits: {"smithy.api#enumValue" => "VPC_PEERING_CONNECTION"}))
     TargetType.add_member(:egress_only_internet_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EgressOnlyInternetGateway", traits: {"smithy.api#enumValue" => "EGRESS_ONLY_INTERNET_GATEWAY"}))
     TargetType.add_member(:transit_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TransitGateway", traits: {"smithy.api#enumValue" => "TRANSIT_GATEWAY"}))
-    TargetViolationReasons.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetViolationReason, name: "member")
+    TargetViolationReasons.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetViolationReason, name: "member"))
     ThirdPartyFirewall.add_member(:palo_alto_networks_cloud_ngfw, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PALO_ALTO_NETWORKS_CLOUD_NGFW", traits: {"smithy.api#enumValue" => "PALO_ALTO_NETWORKS_CLOUD_NGFW"}))
     ThirdPartyFirewall.add_member(:fortigate_cloud_native_firewall, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FORTIGATE_CLOUD_NATIVE_FIREWALL", traits: {"smithy.api#enumValue" => "FORTIGATE_CLOUD_NATIVE_FIREWALL"}))
     ThirdPartyFirewallAssociationStatus.add_member(:onboarding, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONBOARDING", traits: {"smithy.api#enumValue" => "ONBOARDING"}))
@@ -1132,7 +1132,7 @@ module Aws::FMS
     ThirdPartyFirewallAssociationStatus.add_member(:offboarding, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OFFBOARDING", traits: {"smithy.api#enumValue" => "OFFBOARDING"}))
     ThirdPartyFirewallAssociationStatus.add_member(:offboard_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OFFBOARD_COMPLETE", traits: {"smithy.api#enumValue" => "OFFBOARD_COMPLETE"}))
     ThirdPartyFirewallAssociationStatus.add_member(:not_exist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_EXIST", traits: {"smithy.api#enumValue" => "NOT_EXIST"}))
-    ThirdPartyFirewallFirewallPolicies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ThirdPartyFirewallFirewallPolicy, name: "member")
+    ThirdPartyFirewallFirewallPolicies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ThirdPartyFirewallFirewallPolicy, name: "member"))
     ThirdPartyFirewallFirewallPolicy.add_member(:firewall_policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallPolicyId, name: "FirewallPolicyId"))
     ThirdPartyFirewallFirewallPolicy.add_member(:firewall_policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallPolicyName, name: "FirewallPolicyName"))
     ThirdPartyFirewallFirewallPolicy.type = Types::ThirdPartyFirewallFirewallPolicy

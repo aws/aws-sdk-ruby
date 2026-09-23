@@ -302,7 +302,7 @@ module Aws::S3Tables
     ListTablesResponse.type = Types::ListTablesResponse
     MaintenanceStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "enabled"}))
     MaintenanceStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "disabled"}))
-    NamespaceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceName, name: "member")
+    NamespaceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceName, name: "member"))
     NamespaceSummary.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceList, name: "namespace", traits: {"smithy.api#required" => {}}))
     NamespaceSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     NamespaceSummary.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "createdBy", traits: {"smithy.api#required" => {}}))
@@ -310,7 +310,7 @@ module Aws::S3Tables
     NamespaceSummary.add_member(:namespace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceId, name: "namespaceId"))
     NamespaceSummary.add_member(:table_bucket_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TableBucketId, name: "tableBucketId"))
     NamespaceSummary.type = Types::NamespaceSummary
-    NamespaceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceSummary, name: "member")
+    NamespaceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceSummary, name: "member"))
     NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     NotFoundException.type = Types::NotFoundException
     OpenTableFormat.add_member(:iceberg, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ICEBERG", traits: {"smithy.api#enumValue" => "ICEBERG"}))
@@ -348,9 +348,9 @@ module Aws::S3Tables
     SchemaField.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "type", traits: {"smithy.api#required" => {}}))
     SchemaField.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "required", traits: {"smithy.api#default" => false}))
     SchemaField.type = Types::SchemaField
-    SchemaFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaField, name: "member")
-    TableBucketMaintenanceConfiguration.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TableBucketMaintenanceType, name: "key")
-    TableBucketMaintenanceConfiguration.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TableBucketMaintenanceConfigurationValue, name: "value")
+    SchemaFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaField, name: "member"))
+    TableBucketMaintenanceConfiguration.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TableBucketMaintenanceType, name: "key"))
+    TableBucketMaintenanceConfiguration.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TableBucketMaintenanceConfigurationValue, name: "value"))
     TableBucketMaintenanceConfigurationValue.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MaintenanceStatus, name: "status"))
     TableBucketMaintenanceConfigurationValue.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: TableBucketMaintenanceSettings, name: "settings"))
     TableBucketMaintenanceConfigurationValue.type = Types::TableBucketMaintenanceConfigurationValue
@@ -365,16 +365,16 @@ module Aws::S3Tables
     TableBucketSummary.add_member(:table_bucket_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TableBucketId, name: "tableBucketId"))
     TableBucketSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TableBucketType, name: "type"))
     TableBucketSummary.type = Types::TableBucketSummary
-    TableBucketSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TableBucketSummary, name: "member")
+    TableBucketSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableBucketSummary, name: "member"))
     TableBucketType.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER", traits: {"smithy.api#enumValue" => "customer"}))
     TableBucketType.add_member(:aws, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS", traits: {"smithy.api#enumValue" => "aws"}))
-    TableMaintenanceConfiguration.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TableMaintenanceType, name: "key")
-    TableMaintenanceConfiguration.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TableMaintenanceConfigurationValue, name: "value")
+    TableMaintenanceConfiguration.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TableMaintenanceType, name: "key"))
+    TableMaintenanceConfiguration.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TableMaintenanceConfigurationValue, name: "value"))
     TableMaintenanceConfigurationValue.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MaintenanceStatus, name: "status"))
     TableMaintenanceConfigurationValue.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: TableMaintenanceSettings, name: "settings"))
     TableMaintenanceConfigurationValue.type = Types::TableMaintenanceConfigurationValue
-    TableMaintenanceJobStatus.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TableMaintenanceJobType, name: "key")
-    TableMaintenanceJobStatus.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TableMaintenanceJobStatusValue, name: "value")
+    TableMaintenanceJobStatus.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TableMaintenanceJobType, name: "key"))
+    TableMaintenanceJobStatus.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TableMaintenanceJobStatusValue, name: "value"))
     TableMaintenanceJobStatusValue.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "status", traits: {"smithy.api#required" => {}}))
     TableMaintenanceJobStatusValue.add_member(:last_run_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastRunTimestamp", traits: {"smithy.api#timestampFormat" => "date-time"}))
     TableMaintenanceJobStatusValue.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureMessage"))
@@ -400,7 +400,7 @@ module Aws::S3Tables
     TableSummary.add_member(:namespace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceId, name: "namespaceId"))
     TableSummary.add_member(:table_bucket_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TableBucketId, name: "tableBucketId"))
     TableSummary.type = Types::TableSummary
-    TableSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TableSummary, name: "member")
+    TableSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableSummary, name: "member"))
     TableType.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER", traits: {"smithy.api#enumValue" => "customer"}))
     TableType.add_member(:aws, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS", traits: {"smithy.api#enumValue" => "aws"}))
     TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))

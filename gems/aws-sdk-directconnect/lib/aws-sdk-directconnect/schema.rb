@@ -290,7 +290,7 @@ module Aws::DirectConnect
     AcceptDirectConnectGatewayAssociationProposalResult.type = Types::AcceptDirectConnectGatewayAssociationProposalResult
     AddressFamily.add_member(:i_pv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPv4", traits: {"smithy.api#enumValue" => "ipv4"}))
     AddressFamily.add_member(:i_pv6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPv6", traits: {"smithy.api#enumValue" => "ipv6"}))
-    AgreementList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerAgreement, name: "member")
+    AgreementList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerAgreement, name: "member"))
     AllocateConnectionOnInterconnectOutput.add_member(:owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerAccount, name: "ownerAccount"))
     AllocateConnectionOnInterconnectOutput.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "connectionId"))
     AllocateConnectionOnInterconnectOutput.add_member(:connection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionName, name: "connectionName"))
@@ -524,8 +524,8 @@ module Aws::DirectConnect
     AssociatedGateway.add_member(:owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerAccount, name: "ownerAccount"))
     AssociatedGateway.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "region"))
     AssociatedGateway.type = Types::AssociatedGateway
-    AvailableMacSecPortSpeeds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PortSpeed, name: "member")
-    AvailablePortSpeeds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PortSpeed, name: "member")
+    AvailableMacSecPortSpeeds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortSpeed, name: "member"))
+    AvailablePortSpeeds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortSpeed, name: "member"))
     BGPPeer.add_member(:bgp_peer_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BGPPeerId, name: "bgpPeerId"))
     BGPPeer.add_member(:asn, ::Smithy::Schema::Shapes::MemberShape.new(target: ASN, name: "asn", traits: {"smithy.api#default" => 0}))
     BGPPeer.add_member(:asn_long, ::Smithy::Schema::Shapes::MemberShape.new(target: LongAsn, name: "asnLong"))
@@ -538,8 +538,8 @@ module Aws::DirectConnect
     BGPPeer.add_member(:aws_device_v2, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsDeviceV2, name: "awsDeviceV2"))
     BGPPeer.add_member(:aws_logical_device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLogicalDeviceId, name: "awsLogicalDeviceId"))
     BGPPeer.type = Types::BGPPeer
-    BGPPeerIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BGPPeerId, name: "member")
-    BGPPeerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BGPPeer, name: "member")
+    BGPPeerIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BGPPeerId, name: "member"))
+    BGPPeerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BGPPeer, name: "member"))
     BGPPeerState.add_member(:verifying, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Verifying", traits: {"smithy.api#enumValue" => "verifying"}))
     BGPPeerState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Pending", traits: {"smithy.api#enumValue" => "pending"}))
     BGPPeerState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Available", traits: {"smithy.api#enumValue" => "available"}))
@@ -595,7 +595,7 @@ module Aws::DirectConnect
     Connection.add_member(:mac_sec_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecKeyList, name: "macSecKeys"))
     Connection.add_member(:partner_interconnect_mac_sec_capable, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerInterconnectMacSecCapable, name: "partnerInterconnectMacSecCapable"))
     Connection.type = Types::Connection
-    ConnectionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Connection, name: "member")
+    ConnectionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Connection, name: "member"))
     ConnectionState.add_member(:ordering, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ordering", traits: {"smithy.api#enumValue" => "ordering"}))
     ConnectionState.add_member(:requested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "requested", traits: {"smithy.api#enumValue" => "requested"}))
     ConnectionState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "pending", traits: {"smithy.api#enumValue" => "pending"}))
@@ -1008,7 +1008,7 @@ module Aws::DirectConnect
     DirectConnectGatewayAssociation.add_member(:virtual_gateway_region, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayRegion, name: "virtualGatewayRegion"))
     DirectConnectGatewayAssociation.add_member(:virtual_gateway_owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerAccount, name: "virtualGatewayOwnerAccount"))
     DirectConnectGatewayAssociation.type = Types::DirectConnectGatewayAssociation
-    DirectConnectGatewayAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DirectConnectGatewayAssociation, name: "member")
+    DirectConnectGatewayAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectConnectGatewayAssociation, name: "member"))
     DirectConnectGatewayAssociationProposal.add_member(:proposal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectConnectGatewayAssociationProposalId, name: "proposalId"))
     DirectConnectGatewayAssociationProposal.add_member(:direct_connect_gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectConnectGatewayId, name: "directConnectGatewayId"))
     DirectConnectGatewayAssociationProposal.add_member(:direct_connect_gateway_owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerAccount, name: "directConnectGatewayOwnerAccount"))
@@ -1017,7 +1017,7 @@ module Aws::DirectConnect
     DirectConnectGatewayAssociationProposal.add_member(:existing_allowed_prefixes_to_direct_connect_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFilterPrefixList, name: "existingAllowedPrefixesToDirectConnectGateway"))
     DirectConnectGatewayAssociationProposal.add_member(:requested_allowed_prefixes_to_direct_connect_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFilterPrefixList, name: "requestedAllowedPrefixesToDirectConnectGateway"))
     DirectConnectGatewayAssociationProposal.type = Types::DirectConnectGatewayAssociationProposal
-    DirectConnectGatewayAssociationProposalList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DirectConnectGatewayAssociationProposal, name: "member")
+    DirectConnectGatewayAssociationProposalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectConnectGatewayAssociationProposal, name: "member"))
     DirectConnectGatewayAssociationProposalState.add_member(:requested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "requested", traits: {"smithy.api#enumValue" => "requested"}))
     DirectConnectGatewayAssociationProposalState.add_member(:accepted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "accepted", traits: {"smithy.api#enumValue" => "accepted"}))
     DirectConnectGatewayAssociationProposalState.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "deleted", traits: {"smithy.api#enumValue" => "deleted"}))
@@ -1034,14 +1034,14 @@ module Aws::DirectConnect
     DirectConnectGatewayAttachment.add_member(:attachment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectConnectGatewayAttachmentType, name: "attachmentType"))
     DirectConnectGatewayAttachment.add_member(:state_change_error, ::Smithy::Schema::Shapes::MemberShape.new(target: StateChangeError, name: "stateChangeError"))
     DirectConnectGatewayAttachment.type = Types::DirectConnectGatewayAttachment
-    DirectConnectGatewayAttachmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DirectConnectGatewayAttachment, name: "member")
+    DirectConnectGatewayAttachmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectConnectGatewayAttachment, name: "member"))
     DirectConnectGatewayAttachmentState.add_member(:attaching, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "attaching", traits: {"smithy.api#enumValue" => "attaching"}))
     DirectConnectGatewayAttachmentState.add_member(:attached, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "attached", traits: {"smithy.api#enumValue" => "attached"}))
     DirectConnectGatewayAttachmentState.add_member(:detaching, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "detaching", traits: {"smithy.api#enumValue" => "detaching"}))
     DirectConnectGatewayAttachmentState.add_member(:detached, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "detached", traits: {"smithy.api#enumValue" => "detached"}))
     DirectConnectGatewayAttachmentType.add_member(:transit_virtual_interface, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TransitVirtualInterface", traits: {"smithy.api#enumValue" => "TransitVirtualInterface"}))
     DirectConnectGatewayAttachmentType.add_member(:private_virtual_interface, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PrivateVirtualInterface", traits: {"smithy.api#enumValue" => "PrivateVirtualInterface"}))
-    DirectConnectGatewayList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DirectConnectGateway, name: "member")
+    DirectConnectGatewayList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectConnectGateway, name: "member"))
     DirectConnectGatewayState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "pending", traits: {"smithy.api#enumValue" => "pending"}))
     DirectConnectGatewayState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "available", traits: {"smithy.api#enumValue" => "available"}))
     DirectConnectGatewayState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "deleting", traits: {"smithy.api#enumValue" => "deleting"}))
@@ -1108,7 +1108,7 @@ module Aws::DirectConnect
     Interconnect.add_member(:encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, name: "encryptionMode"))
     Interconnect.add_member(:mac_sec_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecKeyList, name: "macSecKeys"))
     Interconnect.type = Types::Interconnect
-    InterconnectList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Interconnect, name: "member")
+    InterconnectList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Interconnect, name: "member"))
     InterconnectState.add_member(:requested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "requested", traits: {"smithy.api#enumValue" => "requested"}))
     InterconnectState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "pending", traits: {"smithy.api#enumValue" => "pending"}))
     InterconnectState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "available", traits: {"smithy.api#enumValue" => "available"}))
@@ -1138,7 +1138,7 @@ module Aws::DirectConnect
     Lag.add_member(:encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, name: "encryptionMode"))
     Lag.add_member(:mac_sec_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecKeyList, name: "macSecKeys"))
     Lag.type = Types::Lag
-    LagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Lag, name: "member")
+    LagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Lag, name: "member"))
     LagState.add_member(:requested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "requested", traits: {"smithy.api#enumValue" => "requested"}))
     LagState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "pending", traits: {"smithy.api#enumValue" => "pending"}))
     LagState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "available", traits: {"smithy.api#enumValue" => "available"}))
@@ -1167,13 +1167,13 @@ module Aws::DirectConnect
     Location.add_member(:available_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderList, name: "availableProviders"))
     Location.add_member(:available_mac_sec_port_speeds, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailableMacSecPortSpeeds, name: "availableMacSecPortSpeeds"))
     Location.type = Types::Location
-    LocationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Location, name: "member")
+    LocationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Location, name: "member"))
     MacSecKey.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretARN, name: "secretARN"))
     MacSecKey.add_member(:ckn, ::Smithy::Schema::Shapes::MemberShape.new(target: Ckn, name: "ckn"))
     MacSecKey.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: State, name: "state"))
     MacSecKey.add_member(:start_on, ::Smithy::Schema::Shapes::MemberShape.new(target: StartOnDate, name: "startOn"))
     MacSecKey.type = Types::MacSecKey
-    MacSecKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecKey, name: "member")
+    MacSecKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MacSecKey, name: "member"))
     NewBGPPeer.add_member(:asn, ::Smithy::Schema::Shapes::MemberShape.new(target: ASN, name: "asn", traits: {"smithy.api#default" => 0}))
     NewBGPPeer.add_member(:asn_long, ::Smithy::Schema::Shapes::MemberShape.new(target: LongAsn, name: "asnLong"))
     NewBGPPeer.add_member(:auth_key, ::Smithy::Schema::Shapes::MemberShape.new(target: BGPAuthKey, name: "authKey"))
@@ -1255,15 +1255,15 @@ module Aws::DirectConnect
     NniPartnerType.add_member(:v1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "V1", traits: {"smithy.api#enumValue" => "v1"}))
     NniPartnerType.add_member(:v2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "V2", traits: {"smithy.api#enumValue" => "v2"}))
     NniPartnerType.add_member(:non_partner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NonPartner", traits: {"smithy.api#enumValue" => "nonPartner"}))
-    ProviderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderName, name: "member")
-    ResourceArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member")
+    ProviderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderName, name: "member"))
+    ResourceArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member"))
     ResourceTag.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn"))
     ResourceTag.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     ResourceTag.type = Types::ResourceTag
-    ResourceTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member")
+    ResourceTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member"))
     RouteFilterPrefix.add_member(:cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: CIDR, name: "cidr"))
     RouteFilterPrefix.type = Types::RouteFilterPrefix
-    RouteFilterPrefixList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFilterPrefix, name: "member")
+    RouteFilterPrefixList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteFilterPrefix, name: "member"))
     RouterType.add_member(:vendor, ::Smithy::Schema::Shapes::MemberShape.new(target: Vendor, name: "vendor"))
     RouterType.add_member(:platform, ::Smithy::Schema::Shapes::MemberShape.new(target: Platform, name: "platform"))
     RouterType.add_member(:software, ::Smithy::Schema::Shapes::MemberShape.new(target: Software, name: "software"))
@@ -1284,8 +1284,8 @@ module Aws::DirectConnect
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -1398,7 +1398,7 @@ module Aws::DirectConnect
     VirtualGateway.add_member(:virtual_gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayId, name: "virtualGatewayId"))
     VirtualGateway.add_member(:virtual_gateway_state, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGatewayState, name: "virtualGatewayState"))
     VirtualGateway.type = Types::VirtualGateway
-    VirtualGatewayList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGateway, name: "member")
+    VirtualGatewayList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualGateway, name: "member"))
     VirtualInterface.add_member(:owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerAccount, name: "ownerAccount"))
     VirtualInterface.add_member(:virtual_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterfaceId, name: "virtualInterfaceId"))
     VirtualInterface.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationCode, name: "location"))
@@ -1427,7 +1427,7 @@ module Aws::DirectConnect
     VirtualInterface.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     VirtualInterface.add_member(:site_link_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: SiteLinkEnabled, name: "siteLinkEnabled"))
     VirtualInterface.type = Types::VirtualInterface
-    VirtualInterfaceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterface, name: "member")
+    VirtualInterfaceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterface, name: "member"))
     VirtualInterfaceState.add_member(:confirming, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "confirming", traits: {"smithy.api#enumValue" => "confirming"}))
     VirtualInterfaceState.add_member(:verifying, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "verifying", traits: {"smithy.api#enumValue" => "verifying"}))
     VirtualInterfaceState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "pending", traits: {"smithy.api#enumValue" => "pending"}))
@@ -1447,7 +1447,7 @@ module Aws::DirectConnect
     VirtualInterfaceTestHistory.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTime, name: "startTime"))
     VirtualInterfaceTestHistory.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: EndTime, name: "endTime"))
     VirtualInterfaceTestHistory.type = Types::VirtualInterfaceTestHistory
-    VirtualInterfaceTestHistoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterfaceTestHistory, name: "member")
+    VirtualInterfaceTestHistoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualInterfaceTestHistory, name: "member"))
 
     OvertureService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.directconnect#OvertureService"

@@ -186,10 +186,10 @@ module Aws::KafkaConnect
     CloudWatchLogsLogDeliveryDescription.type = Types::CloudWatchLogsLogDeliveryDescription
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ConflictException.type = Types::ConflictException
-    ConnectorConfiguration.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    ConnectorConfiguration.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
-    ConnectorConfigurationUpdate.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    ConnectorConfigurationUpdate.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    ConnectorConfiguration.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    ConnectorConfiguration.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
+    ConnectorConfigurationUpdate.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    ConnectorConfigurationUpdate.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     ConnectorOperationStep.add_member(:step_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorOperationStepType, name: "stepType"))
     ConnectorOperationStep.add_member(:step_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorOperationStepState, name: "stepState"))
     ConnectorOperationStep.type = Types::ConnectorOperationStep
@@ -458,13 +458,13 @@ module Aws::KafkaConnect
     StateDescription.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "code"))
     StateDescription.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     StateDescription.type = Types::StateDescription
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceOutput.type = Types::TagResourceOutput
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     TooManyRequestsException.type = Types::TooManyRequestsException
     UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
@@ -520,14 +520,14 @@ module Aws::KafkaConnect
     WorkerLogDeliveryDescription.type = Types::WorkerLogDeliveryDescription
     WorkerSetting.add_member(:capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityDescription, name: "capacity"))
     WorkerSetting.type = Types::WorkerSetting
-    Listofconnectoroperationstep.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorOperationStep, name: "member")
-    Listofconnectoroperationsummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorOperationSummary, name: "member")
-    Listofconnectorsummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorSummary, name: "member")
-    Listofcustompluginsummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPluginSummary, name: "member")
-    Listofplugin.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Plugin, name: "member")
-    Listofplugindescription.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PluginDescription, name: "member")
-    Listofworkerconfigurationsummary.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerConfigurationSummary, name: "member")
-    ListofString.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    Listofconnectoroperationstep.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorOperationStep, name: "member"))
+    Listofconnectoroperationsummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorOperationSummary, name: "member"))
+    Listofconnectorsummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorSummary, name: "member"))
+    Listofcustompluginsummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomPluginSummary, name: "member"))
+    Listofplugin.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Plugin, name: "member"))
+    Listofplugindescription.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PluginDescription, name: "member"))
+    Listofworkerconfigurationsummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerConfigurationSummary, name: "member"))
+    ListofString.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
 
     KafkaConnect = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.kafkaconnect#KafkaConnect"

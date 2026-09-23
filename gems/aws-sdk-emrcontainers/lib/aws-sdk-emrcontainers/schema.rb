@@ -185,7 +185,7 @@ module Aws::EMRcontainers
     Configuration.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitivePropertiesMap, name: "properties"))
     Configuration.add_member(:configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, name: "configurations"))
     Configuration.type = Types::Configuration
-    ConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, name: "member")
+    ConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, name: "member"))
     ConfigurationOverrides.add_member(:application_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, name: "applicationConfiguration"))
     ConfigurationOverrides.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringConfiguration, name: "monitoringConfiguration"))
     ConfigurationOverrides.type = Types::ConfigurationOverrides
@@ -316,10 +316,10 @@ module Aws::EMRcontainers
     EndpointState.add_member(:terminating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERMINATING", traits: {"smithy.api#enumValue" => "TERMINATING"}))
     EndpointState.add_member(:terminated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERMINATED", traits: {"smithy.api#enumValue" => "TERMINATED"}))
     EndpointState.add_member(:terminated_with_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERMINATED_WITH_ERRORS", traits: {"smithy.api#enumValue" => "TERMINATED_WITH_ERRORS"}))
-    EndpointStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointState, name: "member")
-    EndpointTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointType, name: "member")
-    Endpoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "member")
-    EntryPointArguments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntryPointArgument, name: "member")
+    EndpointStates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointState, name: "member"))
+    EndpointTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointType, name: "member"))
+    Endpoints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "member"))
+    EntryPointArguments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryPointArgument, name: "member"))
     FailureReason.add_member(:internal_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_ERROR"}))
     FailureReason.add_member(:user_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER_ERROR", traits: {"smithy.api#enumValue" => "USER_ERROR"}))
     FailureReason.add_member(:validation_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALIDATION_ERROR", traits: {"smithy.api#enumValue" => "VALIDATION_ERROR"}))
@@ -369,8 +369,8 @@ module Aws::EMRcontainers
     JobRunState.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
     JobRunState.add_member(:cancel_pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCEL_PENDING", traits: {"smithy.api#enumValue" => "CANCEL_PENDING"}))
     JobRunState.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
-    JobRunStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunState, name: "member")
-    JobRuns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobRun, name: "member")
+    JobRunStates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunState, name: "member"))
+    JobRuns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRun, name: "member"))
     JobTemplate.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameString, name: "name"))
     JobTemplate.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "id"))
     JobTemplate.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: JobTemplateArn, name: "arn"))
@@ -388,7 +388,7 @@ module Aws::EMRcontainers
     JobTemplateData.add_member(:parameter_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateParameterConfigurationMap, name: "parameterConfiguration"))
     JobTemplateData.add_member(:job_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "jobTags"))
     JobTemplateData.type = Types::JobTemplateData
-    JobTemplates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobTemplate, name: "member")
+    JobTemplates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobTemplate, name: "member"))
     LakeFormationConfiguration.add_member(:authorized_session_tag_value, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionTagValue, name: "authorizedSessionTagValue"))
     LakeFormationConfiguration.add_member(:secure_namespace_info, ::Smithy::Schema::Shapes::MemberShape.new(target: SecureNamespaceInfo, name: "secureNamespaceInfo"))
     LakeFormationConfiguration.add_member(:query_engine_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, name: "queryEngineRoleArn"))
@@ -493,9 +493,9 @@ module Aws::EMRcontainers
     SecurityConfiguration.type = Types::SecurityConfiguration
     SecurityConfigurationData.add_member(:authorization_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizationConfiguration, name: "authorizationConfiguration"))
     SecurityConfigurationData.type = Types::SecurityConfigurationData
-    SecurityConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityConfiguration, name: "member")
-    SensitivePropertiesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "key")
-    SensitivePropertiesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "value")
+    SecurityConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityConfiguration, name: "member"))
+    SensitivePropertiesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "key"))
+    SensitivePropertiesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "value"))
     SparkSqlJobDriver.add_member(:entry_point, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryPointPath, name: "entryPoint"))
     SparkSqlJobDriver.add_member(:spark_sql_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkSqlParameters, name: "sparkSqlParameters"))
     SparkSqlJobDriver.type = Types::SparkSqlJobDriver
@@ -520,14 +520,14 @@ module Aws::EMRcontainers
     StartJobRunResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: JobArn, name: "arn"))
     StartJobRunResponse.add_member(:virtual_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdString, name: "virtualClusterId"))
     StartJobRunResponse.type = Types::StartJobRunResponse
-    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "member")
+    SubnetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "member"))
     TLSCertificateConfiguration.add_member(:certificate_provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateProviderType, name: "certificateProviderType"))
     TLSCertificateConfiguration.add_member(:public_certificate_secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretsManagerArn, name: "publicCertificateSecretArn"))
     TLSCertificateConfiguration.add_member(:private_certificate_secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretsManagerArn, name: "privateCertificateSecretArn"))
     TLSCertificateConfiguration.type = Types::TLSCertificateConfiguration
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: StringEmpty256, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String128, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringEmpty256, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RsiArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -535,12 +535,12 @@ module Aws::EMRcontainers
     TemplateParameterConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateParameterDataType, name: "type"))
     TemplateParameterConfiguration.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "defaultValue"))
     TemplateParameterConfiguration.type = Types::TemplateParameterConfiguration
-    TemplateParameterConfigurationMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateParameterName, name: "key")
-    TemplateParameterConfigurationMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateParameterConfiguration, name: "value")
+    TemplateParameterConfigurationMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateParameterName, name: "key"))
+    TemplateParameterConfigurationMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateParameterConfiguration, name: "value"))
     TemplateParameterDataType.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NUMBER", traits: {"smithy.api#enumValue" => "NUMBER"}))
     TemplateParameterDataType.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING", traits: {"smithy.api#enumValue" => "STRING"}))
-    TemplateParameterInputMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateParameterName, name: "key")
-    TemplateParameterInputMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "value")
+    TemplateParameterInputMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateParameterName, name: "key"))
+    TemplateParameterInputMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "value"))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RsiArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -560,8 +560,8 @@ module Aws::EMRcontainers
     VirtualClusterState.add_member(:terminating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERMINATING", traits: {"smithy.api#enumValue" => "TERMINATING"}))
     VirtualClusterState.add_member(:terminated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERMINATED", traits: {"smithy.api#enumValue" => "TERMINATED"}))
     VirtualClusterState.add_member(:arrested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARRESTED", traits: {"smithy.api#enumValue" => "ARRESTED"}))
-    VirtualClusterStates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualClusterState, name: "member")
-    VirtualClusters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualCluster, name: "member")
+    VirtualClusterStates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualClusterState, name: "member"))
+    VirtualClusters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VirtualCluster, name: "member"))
 
     AwsChicagoWebService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.emrcontainers#AwsChicagoWebService"

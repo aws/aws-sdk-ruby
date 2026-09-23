@@ -87,7 +87,7 @@ module Aws::ApplicationCostProfiler
     ReportDefinition.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
     ReportDefinition.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedAt"))
     ReportDefinition.type = Types::ReportDefinition
-    ReportDefinitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReportDefinition, name: "member")
+    ReportDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportDefinition, name: "member"))
     ReportFrequency.add_member(:monthly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MONTHLY", traits: {"smithy.api#enumValue" => "MONTHLY"}))
     ReportFrequency.add_member(:daily, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DAILY", traits: {"smithy.api#enumValue" => "DAILY"}))
     ReportFrequency.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))

@@ -470,7 +470,7 @@ module Aws::KinesisAnalyticsV2
     ApplicationOperationInfoDetails.add_member(:application_version_change_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationVersionChangeDetails, name: "ApplicationVersionChangeDetails"))
     ApplicationOperationInfoDetails.add_member(:operation_failure_details, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationFailureDetails, name: "OperationFailureDetails"))
     ApplicationOperationInfoDetails.type = Types::ApplicationOperationInfoDetails
-    ApplicationOperationInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationOperationInfo, name: "member")
+    ApplicationOperationInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationOperationInfo, name: "member"))
     ApplicationRestoreConfiguration.add_member(:application_restore_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationRestoreType, name: "ApplicationRestoreType", traits: {"smithy.api#required" => {}}))
     ApplicationRestoreConfiguration.add_member(:snapshot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotName, name: "SnapshotName"))
     ApplicationRestoreConfiguration.type = Types::ApplicationRestoreConfiguration
@@ -494,7 +494,7 @@ module Aws::KinesisAnalyticsV2
     ApplicationStatus.add_member(:rolling_back, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLING_BACK", traits: {"smithy.api#enumValue" => "ROLLING_BACK"}))
     ApplicationStatus.add_member(:maintenance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAINTENANCE", traits: {"smithy.api#enumValue" => "MAINTENANCE"}))
     ApplicationStatus.add_member(:rolled_back, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLED_BACK", traits: {"smithy.api#enumValue" => "ROLLED_BACK"}))
-    ApplicationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary, name: "member")
+    ApplicationSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary, name: "member"))
     ApplicationSummary.add_member(:application_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "ApplicationName", traits: {"smithy.api#required" => {}}))
     ApplicationSummary.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "ApplicationARN", traits: {"smithy.api#required" => {}}))
     ApplicationSummary.add_member(:application_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStatus, name: "ApplicationStatus", traits: {"smithy.api#required" => {}}))
@@ -511,7 +511,7 @@ module Aws::KinesisAnalyticsV2
     ApplicationVersionChangeDetails.add_member(:application_version_updated_from, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationVersionId, name: "ApplicationVersionUpdatedFrom", traits: {"smithy.api#required" => {}}))
     ApplicationVersionChangeDetails.add_member(:application_version_updated_to, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationVersionId, name: "ApplicationVersionUpdatedTo", traits: {"smithy.api#required" => {}}))
     ApplicationVersionChangeDetails.type = Types::ApplicationVersionChangeDetails
-    ApplicationVersionSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationVersionSummary, name: "member")
+    ApplicationVersionSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationVersionSummary, name: "member"))
     ApplicationVersionSummary.add_member(:application_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationVersionId, name: "ApplicationVersionId", traits: {"smithy.api#required" => {}}))
     ApplicationVersionSummary.add_member(:application_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStatus, name: "ApplicationStatus", traits: {"smithy.api#required" => {}}))
     ApplicationVersionSummary.type = Types::ApplicationVersionSummary
@@ -547,12 +547,12 @@ module Aws::KinesisAnalyticsV2
     CloudWatchLoggingOptionDescription.add_member(:log_stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LogStreamARN, name: "LogStreamARN", traits: {"smithy.api#required" => {}}))
     CloudWatchLoggingOptionDescription.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleARN, name: "RoleARN"))
     CloudWatchLoggingOptionDescription.type = Types::CloudWatchLoggingOptionDescription
-    CloudWatchLoggingOptionDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLoggingOptionDescription, name: "member")
+    CloudWatchLoggingOptionDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLoggingOptionDescription, name: "member"))
     CloudWatchLoggingOptionUpdate.add_member(:cloud_watch_logging_option_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "CloudWatchLoggingOptionId", traits: {"smithy.api#required" => {}}))
     CloudWatchLoggingOptionUpdate.add_member(:log_stream_arn_update, ::Smithy::Schema::Shapes::MemberShape.new(target: LogStreamARN, name: "LogStreamARNUpdate"))
     CloudWatchLoggingOptionUpdate.type = Types::CloudWatchLoggingOptionUpdate
-    CloudWatchLoggingOptionUpdates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLoggingOptionUpdate, name: "member")
-    CloudWatchLoggingOptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLoggingOption, name: "member")
+    CloudWatchLoggingOptionUpdates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLoggingOptionUpdate, name: "member"))
+    CloudWatchLoggingOptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLoggingOption, name: "member"))
     CodeContent.add_member(:text_content, ::Smithy::Schema::Shapes::MemberShape.new(target: TextContent, name: "TextContent"))
     CodeContent.add_member(:zip_file_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ZipFileContent, name: "ZipFileContent"))
     CodeContent.add_member(:s3_content_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ContentLocation, name: "S3ContentLocation"))
@@ -603,8 +603,8 @@ module Aws::KinesisAnalyticsV2
     CustomArtifactConfigurationDescription.add_member(:s3_content_location_description, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ContentLocation, name: "S3ContentLocationDescription"))
     CustomArtifactConfigurationDescription.add_member(:maven_reference_description, ::Smithy::Schema::Shapes::MemberShape.new(target: MavenReference, name: "MavenReferenceDescription"))
     CustomArtifactConfigurationDescription.type = Types::CustomArtifactConfigurationDescription
-    CustomArtifactsConfigurationDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomArtifactConfigurationDescription, name: "member")
-    CustomArtifactsConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomArtifactConfiguration, name: "member")
+    CustomArtifactsConfigurationDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomArtifactConfigurationDescription, name: "member"))
+    CustomArtifactsConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomArtifactConfiguration, name: "member"))
     DeleteApplicationCloudWatchLoggingOptionRequest.add_member(:application_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "ApplicationName", traits: {"smithy.api#required" => {}}))
     DeleteApplicationCloudWatchLoggingOptionRequest.add_member(:current_application_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationVersionId, name: "CurrentApplicationVersionId"))
     DeleteApplicationCloudWatchLoggingOptionRequest.add_member(:cloud_watch_logging_option_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "CloudWatchLoggingOptionId", traits: {"smithy.api#required" => {}}))
@@ -722,7 +722,7 @@ module Aws::KinesisAnalyticsV2
     GlueDataCatalogConfigurationDescription.type = Types::GlueDataCatalogConfigurationDescription
     GlueDataCatalogConfigurationUpdate.add_member(:database_arn_update, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseARN, name: "DatabaseARNUpdate", traits: {"smithy.api#required" => {}}))
     GlueDataCatalogConfigurationUpdate.type = Types::GlueDataCatalogConfigurationUpdate
-    InAppStreamNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InAppStreamName, name: "member")
+    InAppStreamNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InAppStreamName, name: "member"))
     Input.add_member(:name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: InAppStreamName, name: "NamePrefix", traits: {"smithy.api#required" => {}}))
     Input.add_member(:input_processing_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: InputProcessingConfiguration, name: "InputProcessingConfiguration"))
     Input.add_member(:kinesis_streams_input, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisStreamsInput, name: "KinesisStreamsInput"))
@@ -740,7 +740,7 @@ module Aws::KinesisAnalyticsV2
     InputDescription.add_member(:input_parallelism, ::Smithy::Schema::Shapes::MemberShape.new(target: InputParallelism, name: "InputParallelism"))
     InputDescription.add_member(:input_starting_position_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: InputStartingPositionConfiguration, name: "InputStartingPositionConfiguration"))
     InputDescription.type = Types::InputDescription
-    InputDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InputDescription, name: "member")
+    InputDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDescription, name: "member"))
     InputLambdaProcessor.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     InputLambdaProcessor.type = Types::InputLambdaProcessor
     InputLambdaProcessorDescription.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
@@ -775,8 +775,8 @@ module Aws::KinesisAnalyticsV2
     InputUpdate.add_member(:input_schema_update, ::Smithy::Schema::Shapes::MemberShape.new(target: InputSchemaUpdate, name: "InputSchemaUpdate"))
     InputUpdate.add_member(:input_parallelism_update, ::Smithy::Schema::Shapes::MemberShape.new(target: InputParallelismUpdate, name: "InputParallelismUpdate"))
     InputUpdate.type = Types::InputUpdate
-    InputUpdates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InputUpdate, name: "member")
-    Inputs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Input, name: "member")
+    InputUpdates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InputUpdate, name: "member"))
+    Inputs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Input, name: "member"))
     InvalidApplicationConfigurationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InvalidApplicationConfigurationException.type = Types::InvalidApplicationConfigurationException
     InvalidArgumentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -904,7 +904,7 @@ module Aws::KinesisAnalyticsV2
     OutputDescription.add_member(:lambda_output_description, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaOutputDescription, name: "LambdaOutputDescription"))
     OutputDescription.add_member(:destination_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationSchema, name: "DestinationSchema"))
     OutputDescription.type = Types::OutputDescription
-    OutputDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDescription, name: "member")
+    OutputDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDescription, name: "member"))
     OutputUpdate.add_member(:output_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "OutputId", traits: {"smithy.api#required" => {}}))
     OutputUpdate.add_member(:name_update, ::Smithy::Schema::Shapes::MemberShape.new(target: InAppStreamName, name: "NameUpdate"))
     OutputUpdate.add_member(:kinesis_streams_output_update, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisStreamsOutputUpdate, name: "KinesisStreamsOutputUpdate"))
@@ -912,8 +912,8 @@ module Aws::KinesisAnalyticsV2
     OutputUpdate.add_member(:lambda_output_update, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaOutputUpdate, name: "LambdaOutputUpdate"))
     OutputUpdate.add_member(:destination_schema_update, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationSchema, name: "DestinationSchemaUpdate"))
     OutputUpdate.type = Types::OutputUpdate
-    OutputUpdates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OutputUpdate, name: "member")
-    Outputs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Output, name: "member")
+    OutputUpdates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputUpdate, name: "member"))
+    Outputs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Output, name: "member"))
     ParallelismConfiguration.add_member(:configuration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationType, name: "ConfigurationType", traits: {"smithy.api#required" => {}}))
     ParallelismConfiguration.add_member(:parallelism, ::Smithy::Schema::Shapes::MemberShape.new(target: Parallelism, name: "Parallelism"))
     ParallelismConfiguration.add_member(:parallelism_per_kpu, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelismPerKPU, name: "ParallelismPerKPU"))
@@ -930,21 +930,21 @@ module Aws::KinesisAnalyticsV2
     ParallelismConfigurationUpdate.add_member(:parallelism_per_kpu_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelismPerKPU, name: "ParallelismPerKPUUpdate"))
     ParallelismConfigurationUpdate.add_member(:auto_scaling_enabled_update, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanObject, name: "AutoScalingEnabledUpdate"))
     ParallelismConfigurationUpdate.type = Types::ParallelismConfigurationUpdate
-    ParsedInputRecord.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParsedInputRecordField, name: "member")
-    ParsedInputRecords.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParsedInputRecord, name: "member")
-    ProcessedInputRecords.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessedInputRecord, name: "member")
+    ParsedInputRecord.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParsedInputRecordField, name: "member"))
+    ParsedInputRecords.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParsedInputRecord, name: "member"))
+    ProcessedInputRecords.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessedInputRecord, name: "member"))
     PropertyGroup.add_member(:property_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "PropertyGroupId", traits: {"smithy.api#required" => {}}))
     PropertyGroup.add_member(:property_map, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyMap, name: "PropertyMap", traits: {"smithy.api#required" => {}}))
     PropertyGroup.type = Types::PropertyGroup
-    PropertyGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyGroup, name: "member")
-    PropertyMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyKey, name: "key")
-    PropertyMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyValue, name: "value")
-    RawInputRecords.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RawInputRecord, name: "member")
+    PropertyGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyGroup, name: "member"))
+    PropertyMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyKey, name: "key"))
+    PropertyMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyValue, name: "value"))
+    RawInputRecords.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RawInputRecord, name: "member"))
     RecordColumn.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordColumnName, name: "Name", traits: {"smithy.api#required" => {}}))
     RecordColumn.add_member(:mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordColumnMapping, name: "Mapping"))
     RecordColumn.add_member(:sql_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordColumnSqlType, name: "SqlType", traits: {"smithy.api#required" => {}}))
     RecordColumn.type = Types::RecordColumn
-    RecordColumns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecordColumn, name: "member")
+    RecordColumns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordColumn, name: "member"))
     RecordFormat.add_member(:record_format_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordFormatType, name: "RecordFormatType", traits: {"smithy.api#required" => {}}))
     RecordFormat.add_member(:mapping_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: MappingParameters, name: "MappingParameters"))
     RecordFormat.type = Types::RecordFormat
@@ -959,14 +959,14 @@ module Aws::KinesisAnalyticsV2
     ReferenceDataSourceDescription.add_member(:s3_reference_data_source_description, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ReferenceDataSourceDescription, name: "S3ReferenceDataSourceDescription", traits: {"smithy.api#required" => {}}))
     ReferenceDataSourceDescription.add_member(:reference_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceSchema, name: "ReferenceSchema"))
     ReferenceDataSourceDescription.type = Types::ReferenceDataSourceDescription
-    ReferenceDataSourceDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceDataSourceDescription, name: "member")
+    ReferenceDataSourceDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceDataSourceDescription, name: "member"))
     ReferenceDataSourceUpdate.add_member(:reference_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ReferenceId", traits: {"smithy.api#required" => {}}))
     ReferenceDataSourceUpdate.add_member(:table_name_update, ::Smithy::Schema::Shapes::MemberShape.new(target: InAppTableName, name: "TableNameUpdate"))
     ReferenceDataSourceUpdate.add_member(:s3_reference_data_source_update, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ReferenceDataSourceUpdate, name: "S3ReferenceDataSourceUpdate"))
     ReferenceDataSourceUpdate.add_member(:reference_schema_update, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceSchema, name: "ReferenceSchemaUpdate"))
     ReferenceDataSourceUpdate.type = Types::ReferenceDataSourceUpdate
-    ReferenceDataSourceUpdates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceDataSourceUpdate, name: "member")
-    ReferenceDataSources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceDataSource, name: "member")
+    ReferenceDataSourceUpdates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceDataSourceUpdate, name: "member"))
+    ReferenceDataSources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceDataSource, name: "member"))
     ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ResourceInUseException.type = Types::ResourceInUseException
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -1035,7 +1035,7 @@ module Aws::KinesisAnalyticsV2
     S3ReferenceDataSourceUpdate.add_member(:bucket_arn_update, ::Smithy::Schema::Shapes::MemberShape.new(target: BucketARN, name: "BucketARNUpdate"))
     S3ReferenceDataSourceUpdate.add_member(:file_key_update, ::Smithy::Schema::Shapes::MemberShape.new(target: FileKey, name: "FileKeyUpdate"))
     S3ReferenceDataSourceUpdate.type = Types::S3ReferenceDataSourceUpdate
-    SecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
+    SecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
     SnapshotDetails.add_member(:snapshot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotName, name: "SnapshotName", traits: {"smithy.api#required" => {}}))
@@ -1049,7 +1049,7 @@ module Aws::KinesisAnalyticsV2
     SnapshotStatus.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
     SnapshotStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     SnapshotStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    SnapshotSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotDetails, name: "member")
+    SnapshotSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotDetails, name: "member"))
     SourceSchema.add_member(:record_format, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordFormat, name: "RecordFormat", traits: {"smithy.api#required" => {}}))
     SourceSchema.add_member(:record_encoding, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordEncoding, name: "RecordEncoding"))
     SourceSchema.add_member(:record_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordColumns, name: "RecordColumns", traits: {"smithy.api#required" => {}}))
@@ -1069,7 +1069,7 @@ module Aws::KinesisAnalyticsV2
     SqlRunConfiguration.add_member(:input_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "InputId", traits: {"smithy.api#required" => {}}))
     SqlRunConfiguration.add_member(:input_starting_position_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: InputStartingPositionConfiguration, name: "InputStartingPositionConfiguration", traits: {"smithy.api#required" => {}}))
     SqlRunConfiguration.type = Types::SqlRunConfiguration
-    SqlRunConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SqlRunConfiguration, name: "member")
+    SqlRunConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlRunConfiguration, name: "member"))
     StartApplicationRequest.add_member(:application_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "ApplicationName", traits: {"smithy.api#required" => {}}))
     StartApplicationRequest.add_member(:run_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RunConfiguration, name: "RunConfiguration"))
     StartApplicationRequest.type = Types::StartApplicationRequest
@@ -1080,16 +1080,16 @@ module Aws::KinesisAnalyticsV2
     StopApplicationRequest.type = Types::StopApplicationRequest
     StopApplicationResponse.add_member(:operation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationId, name: "OperationId"))
     StopApplicationResponse.type = Types::StopApplicationResponse
-    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
+    SubnetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisAnalyticsARN, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     TooManyTagsException.type = Types::TooManyTagsException
     UnableToDetectSchemaException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -1130,13 +1130,13 @@ module Aws::KinesisAnalyticsV2
     VpcConfigurationDescription.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, name: "SubnetIds", traits: {"smithy.api#required" => {}}))
     VpcConfigurationDescription.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, name: "SecurityGroupIds", traits: {"smithy.api#required" => {}}))
     VpcConfigurationDescription.type = Types::VpcConfigurationDescription
-    VpcConfigurationDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfigurationDescription, name: "member")
+    VpcConfigurationDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfigurationDescription, name: "member"))
     VpcConfigurationUpdate.add_member(:vpc_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "VpcConfigurationId", traits: {"smithy.api#required" => {}}))
     VpcConfigurationUpdate.add_member(:subnet_id_updates, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, name: "SubnetIdUpdates"))
     VpcConfigurationUpdate.add_member(:security_group_id_updates, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, name: "SecurityGroupIdUpdates"))
     VpcConfigurationUpdate.type = Types::VpcConfigurationUpdate
-    VpcConfigurationUpdates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfigurationUpdate, name: "member")
-    VpcConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfiguration, name: "member")
+    VpcConfigurationUpdates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfigurationUpdate, name: "member"))
+    VpcConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfiguration, name: "member"))
     ZeppelinApplicationConfiguration.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ZeppelinMonitoringConfiguration, name: "MonitoringConfiguration"))
     ZeppelinApplicationConfiguration.add_member(:catalog_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogConfiguration, name: "CatalogConfiguration"))
     ZeppelinApplicationConfiguration.add_member(:deploy_as_application_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DeployAsApplicationConfiguration, name: "DeployAsApplicationConfiguration"))

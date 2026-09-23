@@ -128,7 +128,7 @@ module Aws::Scheduler
     AwsVpcConfiguration.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroups, name: "SecurityGroups"))
     AwsVpcConfiguration.add_member(:assign_public_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: AssignPublicIp, name: "AssignPublicIp"))
     AwsVpcConfiguration.type = Types::AwsVpcConfiguration
-    CapacityProviderStrategy.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategyItem, name: "member")
+    CapacityProviderStrategy.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategyItem, name: "member"))
     CapacityProviderStrategyItem.add_member(:capacity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProvider, name: "capacityProvider", traits: {"smithy.api#required" => {}}))
     CapacityProviderStrategyItem.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategyItemWeight, name: "weight", traits: {"smithy.api#default" => 0}))
     CapacityProviderStrategyItem.add_member(:base, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategyItemBase, name: "base", traits: {"smithy.api#default" => 0}))
@@ -245,8 +245,8 @@ module Aws::Scheduler
     PlacementConstraint.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementConstraintType, name: "type"))
     PlacementConstraint.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementConstraintExpression, name: "expression"))
     PlacementConstraint.type = Types::PlacementConstraint
-    PlacementConstraints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementConstraint, name: "member")
-    PlacementStrategies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStrategy, name: "member")
+    PlacementConstraints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementConstraint, name: "member"))
+    PlacementStrategies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStrategy, name: "member"))
     PlacementStrategy.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStrategyType, name: "type"))
     PlacementStrategy.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStrategyField, name: "field"))
     PlacementStrategy.type = Types::PlacementStrategy
@@ -258,17 +258,17 @@ module Aws::Scheduler
     SageMakerPipelineParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerPipelineParameterName, name: "Name", traits: {"smithy.api#required" => {}}))
     SageMakerPipelineParameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerPipelineParameterValue, name: "Value", traits: {"smithy.api#required" => {}}))
     SageMakerPipelineParameter.type = Types::SageMakerPipelineParameter
-    SageMakerPipelineParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerPipelineParameter, name: "member")
+    SageMakerPipelineParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerPipelineParameter, name: "member"))
     SageMakerPipelineParameters.add_member(:pipeline_parameter_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerPipelineParameterList, name: "PipelineParameterList"))
     SageMakerPipelineParameters.type = Types::SageMakerPipelineParameters
-    ScheduleGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupSummary, name: "member")
+    ScheduleGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupSummary, name: "member"))
     ScheduleGroupSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupArn, name: "Arn"))
     ScheduleGroupSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupName, name: "Name"))
     ScheduleGroupSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupState, name: "State"))
     ScheduleGroupSummary.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationDate, name: "CreationDate"))
     ScheduleGroupSummary.add_member(:last_modification_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModificationDate, name: "LastModificationDate"))
     ScheduleGroupSummary.type = Types::ScheduleGroupSummary
-    ScheduleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleSummary, name: "member")
+    ScheduleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleSummary, name: "member"))
     ScheduleSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleArn, name: "Arn"))
     ScheduleSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
     ScheduleSummary.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleGroupName, name: "GroupName"))
@@ -277,24 +277,24 @@ module Aws::Scheduler
     ScheduleSummary.add_member(:last_modification_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModificationDate, name: "LastModificationDate"))
     ScheduleSummary.add_member(:target, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetSummary, name: "Target"))
     ScheduleSummary.type = Types::ScheduleSummary
-    SecurityGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroup, name: "member")
+    SecurityGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroup, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     SqsParameters.add_member(:message_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageGroupId, name: "MessageGroupId"))
     SqsParameters.type = Types::SqsParameters
-    Subnets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Subnet, name: "member")
+    Subnets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnet, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TagResourceArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceOperationInput.type = Types::TagResourceOperationInput
     TagResourceOperationOutput.type = Types::TagResourceOperationOutput
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "member")
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "member"))
     Target.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetArn, name: "Arn", traits: {"smithy.api#required" => {}}))
     Target.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn", traits: {"smithy.api#required" => {}}))
     Target.add_member(:dead_letter_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DeadLetterConfig, name: "DeadLetterConfig"))

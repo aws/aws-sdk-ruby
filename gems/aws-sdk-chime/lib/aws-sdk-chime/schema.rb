@@ -237,7 +237,7 @@ module Aws::Chime
     Account.add_member(:account_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountStatus, name: "AccountStatus"))
     Account.add_member(:signin_delegate_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: SigninDelegateGroupList, name: "SigninDelegateGroups"))
     Account.type = Types::Account
-    AccountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Account, name: "member")
+    AccountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Account, name: "member"))
     AccountSettings.add_member(:disable_remote_control, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "DisableRemoteControl"))
     AccountSettings.add_member(:enable_dial_out, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableDialOut"))
     AccountSettings.type = Types::AccountSettings
@@ -301,7 +301,7 @@ module Aws::Chime
     Bot.add_member(:bot_email, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "BotEmail"))
     Bot.add_member(:security_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "SecurityToken"))
     Bot.type = Types::Bot
-    BotList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Bot, name: "member")
+    BotList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Bot, name: "member"))
     BotType.add_member(:chat_bot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ChatBot", traits: {"smithy.api#enumValue" => "ChatBot"}))
     BusinessCallingSettings.add_member(:cdr_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CdrBucket"))
     BusinessCallingSettings.type = Types::BusinessCallingSettings
@@ -379,7 +379,7 @@ module Aws::Chime
     DisassociateSigninDelegateGroupsFromAccountRequest.add_member(:group_names, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "GroupNames", traits: {"smithy.api#required" => {}}))
     DisassociateSigninDelegateGroupsFromAccountRequest.type = Types::DisassociateSigninDelegateGroupsFromAccountRequest
     DisassociateSigninDelegateGroupsFromAccountResponse.type = Types::DisassociateSigninDelegateGroupsFromAccountResponse
-    E164PhoneNumberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumber, name: "member")
+    E164PhoneNumberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumber, name: "member"))
     EmailStatus.add_member(:not_sent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NotSent", traits: {"smithy.api#enumValue" => "NotSent"}))
     EmailStatus.add_member(:sent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Sent", traits: {"smithy.api#enumValue" => "Sent"}))
     EmailStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
@@ -462,7 +462,7 @@ module Aws::Chime
     Invite.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "EmailAddress"))
     Invite.add_member(:email_status, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailStatus, name: "EmailStatus"))
     Invite.type = Types::Invite
-    InviteList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Invite, name: "member")
+    InviteList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Invite, name: "member"))
     InviteStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Pending", traits: {"smithy.api#enumValue" => "Pending"}))
     InviteStatus.add_member(:accepted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Accepted", traits: {"smithy.api#enumValue" => "Accepted"}))
     InviteStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
@@ -476,7 +476,7 @@ module Aws::Chime
     License.add_member(:plus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Plus", traits: {"smithy.api#enumValue" => "Plus"}))
     License.add_member(:pro, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Pro", traits: {"smithy.api#enumValue" => "Pro"}))
     License.add_member(:pro_trial, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ProTrial", traits: {"smithy.api#enumValue" => "ProTrial"}))
-    LicenseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: License, name: "member")
+    LicenseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: License, name: "member"))
     ListAccountsRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountName, name: "Name", traits: {"smithy.api#httpQuery" => "name"}))
     ListAccountsRequest.add_member(:user_email, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "UserEmail", traits: {"smithy.api#httpQuery" => "user-email"}))
     ListAccountsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#httpQuery" => "next-token"}))
@@ -551,22 +551,22 @@ module Aws::Chime
     MemberError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     MemberError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorMessage"))
     MemberError.type = Types::MemberError
-    MemberErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemberError, name: "member")
+    MemberErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberError, name: "member"))
     MemberType.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "User", traits: {"smithy.api#enumValue" => "User"}))
     MemberType.add_member(:bot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Bot", traits: {"smithy.api#enumValue" => "Bot"}))
     MemberType.add_member(:webhook, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Webhook", traits: {"smithy.api#enumValue" => "Webhook"}))
     MembershipItem.add_member(:member_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "MemberId"))
     MembershipItem.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: RoomMembershipRole, name: "Role"))
     MembershipItem.type = Types::MembershipItem
-    MembershipItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipItem, name: "member")
-    NonEmptyStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    MembershipItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipItem, name: "member"))
+    NonEmptyStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     NotFoundException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "Code"))
     NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     NotFoundException.type = Types::NotFoundException
     OrderedPhoneNumber.add_member(:e164_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumber, name: "E164PhoneNumber"))
     OrderedPhoneNumber.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderedPhoneNumberStatus, name: "Status"))
     OrderedPhoneNumber.type = Types::OrderedPhoneNumber
-    OrderedPhoneNumberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrderedPhoneNumber, name: "member")
+    OrderedPhoneNumberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderedPhoneNumber, name: "member"))
     OrderedPhoneNumberStatus.add_member(:processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Processing", traits: {"smithy.api#enumValue" => "Processing"}))
     OrderedPhoneNumberStatus.add_member(:acquired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Acquired", traits: {"smithy.api#enumValue" => "Acquired"}))
     OrderedPhoneNumberStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
@@ -588,7 +588,7 @@ module Aws::Chime
     PhoneNumberAssociation.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberAssociationName, name: "Name"))
     PhoneNumberAssociation.add_member(:associated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "AssociatedTimestamp"))
     PhoneNumberAssociation.type = Types::PhoneNumberAssociation
-    PhoneNumberAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberAssociation, name: "member")
+    PhoneNumberAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberAssociation, name: "member"))
     PhoneNumberAssociationName.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AccountId", traits: {"smithy.api#enumValue" => "AccountId"}))
     PhoneNumberAssociationName.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UserId", traits: {"smithy.api#enumValue" => "UserId"}))
     PhoneNumberAssociationName.add_member(:voice_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VoiceConnectorId", traits: {"smithy.api#enumValue" => "VoiceConnectorId"}))
@@ -601,7 +601,7 @@ module Aws::Chime
     PhoneNumberCapabilities.add_member(:inbound_mms, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "InboundMMS"))
     PhoneNumberCapabilities.add_member(:outbound_mms, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "OutboundMMS"))
     PhoneNumberCapabilities.type = Types::PhoneNumberCapabilities
-    PhoneNumberCountriesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberCountry, name: "member")
+    PhoneNumberCountriesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberCountry, name: "member"))
     PhoneNumberCountry.add_member(:country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: Alpha2CountryCode, name: "CountryCode"))
     PhoneNumberCountry.add_member(:supported_phone_number_types, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberTypeList, name: "SupportedPhoneNumberTypes"))
     PhoneNumberCountry.type = Types::PhoneNumberCountry
@@ -609,8 +609,8 @@ module Aws::Chime
     PhoneNumberError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     PhoneNumberError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorMessage"))
     PhoneNumberError.type = Types::PhoneNumberError
-    PhoneNumberErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberError, name: "member")
-    PhoneNumberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "member")
+    PhoneNumberErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberError, name: "member"))
+    PhoneNumberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "member"))
     PhoneNumberOrder.add_member(:phone_number_order_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GuidString, name: "PhoneNumberOrderId"))
     PhoneNumberOrder.add_member(:product_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberProductType, name: "ProductType"))
     PhoneNumberOrder.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberOrderStatus, name: "Status"))
@@ -618,7 +618,7 @@ module Aws::Chime
     PhoneNumberOrder.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "CreatedTimestamp"))
     PhoneNumberOrder.add_member(:updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "UpdatedTimestamp"))
     PhoneNumberOrder.type = Types::PhoneNumberOrder
-    PhoneNumberOrderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberOrder, name: "member")
+    PhoneNumberOrderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberOrder, name: "member"))
     PhoneNumberOrderStatus.add_member(:processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Processing", traits: {"smithy.api#enumValue" => "Processing"}))
     PhoneNumberOrderStatus.add_member(:successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Successful", traits: {"smithy.api#enumValue" => "Successful"}))
     PhoneNumberOrderStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
@@ -636,7 +636,7 @@ module Aws::Chime
     PhoneNumberStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DeleteFailed", traits: {"smithy.api#enumValue" => "DeleteFailed"}))
     PhoneNumberType.add_member(:local, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Local", traits: {"smithy.api#enumValue" => "Local"}))
     PhoneNumberType.add_member(:toll_free, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TollFree", traits: {"smithy.api#enumValue" => "TollFree"}))
-    PhoneNumberTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberType, name: "member")
+    PhoneNumberTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberType, name: "member"))
     PutEventsConfigurationRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "AccountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutEventsConfigurationRequest.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "BotId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutEventsConfigurationRequest.add_member(:outbound_events_https_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "OutboundEventsHTTPSEndpoint"))
@@ -690,14 +690,14 @@ module Aws::Chime
     Room.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "CreatedTimestamp"))
     Room.add_member(:updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "UpdatedTimestamp"))
     Room.type = Types::Room
-    RoomList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Room, name: "member")
+    RoomList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Room, name: "member"))
     RoomMembership.add_member(:room_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "RoomId"))
     RoomMembership.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Member, name: "Member"))
     RoomMembership.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: RoomMembershipRole, name: "Role"))
     RoomMembership.add_member(:invited_by, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "InvitedBy"))
     RoomMembership.add_member(:updated_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601Timestamp, name: "UpdatedTimestamp"))
     RoomMembership.type = Types::RoomMembership
-    RoomMembershipList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoomMembership, name: "member")
+    RoomMembershipList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoomMembership, name: "member"))
     RoomMembershipRole.add_member(:administrator, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Administrator", traits: {"smithy.api#enumValue" => "Administrator"}))
     RoomMembershipRole.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Member", traits: {"smithy.api#enumValue" => "Member"}))
     RoomRetentionSettings.add_member(:retention_days, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionDays, name: "RetentionDays"))
@@ -722,7 +722,7 @@ module Aws::Chime
     ServiceUnavailableException.type = Types::ServiceUnavailableException
     SigninDelegateGroup.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "GroupName"))
     SigninDelegateGroup.type = Types::SigninDelegateGroup
-    SigninDelegateGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SigninDelegateGroup, name: "member")
+    SigninDelegateGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SigninDelegateGroup, name: "member"))
     TelephonySettings.add_member(:inbound_calling, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "InboundCalling", traits: {"smithy.api#required" => {}}))
     TelephonySettings.add_member(:outbound_calling, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "OutboundCalling", traits: {"smithy.api#required" => {}}))
     TelephonySettings.add_member(:sms, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SMS", traits: {"smithy.api#required" => {}}))
@@ -763,7 +763,7 @@ module Aws::Chime
     UpdatePhoneNumberRequestItem.add_member(:product_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberProductType, name: "ProductType"))
     UpdatePhoneNumberRequestItem.add_member(:calling_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CallingName, name: "CallingName"))
     UpdatePhoneNumberRequestItem.type = Types::UpdatePhoneNumberRequestItem
-    UpdatePhoneNumberRequestItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatePhoneNumberRequestItem, name: "member")
+    UpdatePhoneNumberRequestItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdatePhoneNumberRequestItem, name: "member"))
     UpdatePhoneNumberResponse.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "PhoneNumber"))
     UpdatePhoneNumberResponse.type = Types::UpdatePhoneNumberResponse
     UpdatePhoneNumberSettingsRequest.add_member(:calling_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CallingName, name: "CallingName", traits: {"smithy.api#required" => {}}))
@@ -792,7 +792,7 @@ module Aws::Chime
     UpdateUserRequestItem.add_member(:user_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UserType, name: "UserType"))
     UpdateUserRequestItem.add_member(:alexa_for_business_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: AlexaForBusinessMetadata, name: "AlexaForBusinessMetadata"))
     UpdateUserRequestItem.type = Types::UpdateUserRequestItem
-    UpdateUserRequestItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateUserRequestItem, name: "member")
+    UpdateUserRequestItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateUserRequestItem, name: "member"))
     UpdateUserResponse.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "User"))
     UpdateUserResponse.type = Types::UpdateUserResponse
     UpdateUserSettingsRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AccountId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -813,14 +813,14 @@ module Aws::Chime
     User.add_member(:alexa_for_business_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: AlexaForBusinessMetadata, name: "AlexaForBusinessMetadata"))
     User.add_member(:personal_pin, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PersonalPIN"))
     User.type = Types::User
-    UserEmailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "member")
+    UserEmailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "member"))
     UserError.add_member(:user_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "UserId"))
     UserError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     UserError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorMessage"))
     UserError.type = Types::UserError
-    UserErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserError, name: "member")
-    UserIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
-    UserList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member")
+    UserErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserError, name: "member"))
+    UserIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
+    UserList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member"))
     UserSettings.add_member(:telephony, ::Smithy::Schema::Shapes::MemberShape.new(target: TelephonySettings, name: "Telephony", traits: {"smithy.api#required" => {}}))
     UserSettings.type = Types::UserSettings
     UserType.add_member(:private_user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PrivateUser", traits: {"smithy.api#enumValue" => "PrivateUser"}))

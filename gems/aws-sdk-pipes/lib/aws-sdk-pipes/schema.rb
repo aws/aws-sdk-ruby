@@ -252,23 +252,23 @@ module Aws::Pipes
     BatchContainerOverrides.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "InstanceType"))
     BatchContainerOverrides.add_member(:resource_requirements, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchResourceRequirementsList, name: "ResourceRequirements"))
     BatchContainerOverrides.type = Types::BatchContainerOverrides
-    BatchDependsOn.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchJobDependency, name: "member")
+    BatchDependsOn.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchJobDependency, name: "member"))
     BatchEnvironmentVariable.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name"))
     BatchEnvironmentVariable.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Value"))
     BatchEnvironmentVariable.type = Types::BatchEnvironmentVariable
-    BatchEnvironmentVariableList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchEnvironmentVariable, name: "member")
+    BatchEnvironmentVariableList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchEnvironmentVariable, name: "member"))
     BatchJobDependency.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "JobId"))
     BatchJobDependency.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchJobDependencyType, name: "Type"))
     BatchJobDependency.type = Types::BatchJobDependency
-    BatchParametersMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    BatchParametersMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    BatchParametersMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    BatchParametersMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     BatchResourceRequirement.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchResourceRequirementType, name: "Type", traits: {"smithy.api#required" => {}}))
     BatchResourceRequirement.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Value", traits: {"smithy.api#required" => {}}))
     BatchResourceRequirement.type = Types::BatchResourceRequirement
-    BatchResourceRequirementsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchResourceRequirement, name: "member")
+    BatchResourceRequirementsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchResourceRequirement, name: "member"))
     BatchRetryStrategy.add_member(:attempts, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchRetryAttempts, name: "Attempts"))
     BatchRetryStrategy.type = Types::BatchRetryStrategy
-    CapacityProviderStrategy.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategyItem, name: "member")
+    CapacityProviderStrategy.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategyItem, name: "member"))
     CapacityProviderStrategyItem.add_member(:capacity_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProvider, name: "capacityProvider", traits: {"smithy.api#required" => {}}))
     CapacityProviderStrategyItem.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategyItemWeight, name: "weight", traits: {"smithy.api#default" => 0}))
     CapacityProviderStrategyItem.add_member(:base, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityProviderStrategyItemBase, name: "base", traits: {"smithy.api#default" => 0}))
@@ -338,7 +338,7 @@ module Aws::Pipes
     DimensionMapping.add_member(:dimension_value_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValueType, name: "DimensionValueType", traits: {"smithy.api#required" => {}}))
     DimensionMapping.add_member(:dimension_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionName, name: "DimensionName", traits: {"smithy.api#required" => {}}))
     DimensionMapping.type = Types::DimensionMapping
-    DimensionMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionMapping, name: "member")
+    DimensionMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionMapping, name: "member"))
     EcsContainerOverride.add_member(:command, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "Command"))
     EcsContainerOverride.add_member(:cpu, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "Cpu"))
     EcsContainerOverride.add_member(:environment, ::Smithy::Schema::Shapes::MemberShape.new(target: EcsEnvironmentVariableList, name: "Environment"))
@@ -348,25 +348,25 @@ module Aws::Pipes
     EcsContainerOverride.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     EcsContainerOverride.add_member(:resource_requirements, ::Smithy::Schema::Shapes::MemberShape.new(target: EcsResourceRequirementsList, name: "ResourceRequirements"))
     EcsContainerOverride.type = Types::EcsContainerOverride
-    EcsContainerOverrideList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EcsContainerOverride, name: "member")
+    EcsContainerOverrideList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EcsContainerOverride, name: "member"))
     EcsEnvironmentFile.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EcsEnvironmentFileType, name: "type", traits: {"smithy.api#required" => {}}))
     EcsEnvironmentFile.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value", traits: {"smithy.api#required" => {}}))
     EcsEnvironmentFile.type = Types::EcsEnvironmentFile
-    EcsEnvironmentFileList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EcsEnvironmentFile, name: "member")
+    EcsEnvironmentFileList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EcsEnvironmentFile, name: "member"))
     EcsEnvironmentVariable.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     EcsEnvironmentVariable.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     EcsEnvironmentVariable.type = Types::EcsEnvironmentVariable
-    EcsEnvironmentVariableList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EcsEnvironmentVariable, name: "member")
+    EcsEnvironmentVariableList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EcsEnvironmentVariable, name: "member"))
     EcsEphemeralStorage.add_member(:size_in_gi_b, ::Smithy::Schema::Shapes::MemberShape.new(target: EphemeralStorageSize, name: "sizeInGiB", traits: {"smithy.api#required" => {}}))
     EcsEphemeralStorage.type = Types::EcsEphemeralStorage
     EcsInferenceAcceleratorOverride.add_member(:device_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "deviceName"))
     EcsInferenceAcceleratorOverride.add_member(:device_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "deviceType"))
     EcsInferenceAcceleratorOverride.type = Types::EcsInferenceAcceleratorOverride
-    EcsInferenceAcceleratorOverrideList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EcsInferenceAcceleratorOverride, name: "member")
+    EcsInferenceAcceleratorOverrideList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EcsInferenceAcceleratorOverride, name: "member"))
     EcsResourceRequirement.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EcsResourceRequirementType, name: "type", traits: {"smithy.api#required" => {}}))
     EcsResourceRequirement.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value", traits: {"smithy.api#required" => {}}))
     EcsResourceRequirement.type = Types::EcsResourceRequirement
-    EcsResourceRequirementsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EcsResourceRequirement, name: "member")
+    EcsResourceRequirementsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EcsResourceRequirement, name: "member"))
     EcsTaskOverride.add_member(:container_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: EcsContainerOverrideList, name: "ContainerOverrides"))
     EcsTaskOverride.add_member(:cpu, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Cpu"))
     EcsTaskOverride.add_member(:ephemeral_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: EcsEphemeralStorage, name: "EphemeralStorage"))
@@ -375,23 +375,23 @@ module Aws::Pipes
     EcsTaskOverride.add_member(:memory, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Memory"))
     EcsTaskOverride.add_member(:task_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnOrJsonPath, name: "TaskRoleArn"))
     EcsTaskOverride.type = Types::EcsTaskOverride
-    EventBridgeEventResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ArnOrJsonPath, name: "member")
+    EventBridgeEventResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnOrJsonPath, name: "member"))
     Filter.add_member(:pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: EventPattern, name: "Pattern"))
     Filter.type = Types::Filter
     FilterCriteria.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, name: "Filters"))
     FilterCriteria.type = Types::FilterCriteria
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     FirehoseLogDestination.add_member(:delivery_stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FirehoseArn, name: "DeliveryStreamArn"))
     FirehoseLogDestination.type = Types::FirehoseLogDestination
     FirehoseLogDestinationParameters.add_member(:delivery_stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FirehoseArn, name: "DeliveryStreamArn", traits: {"smithy.api#required" => {}}))
     FirehoseLogDestinationParameters.type = Types::FirehoseLogDestinationParameters
-    HeaderParametersMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderKey, name: "key")
-    HeaderParametersMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderValue, name: "value")
-    IncludeExecutionData.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IncludeExecutionDataOption, name: "member")
+    HeaderParametersMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderKey, name: "key"))
+    HeaderParametersMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderValue, name: "value"))
+    IncludeExecutionData.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludeExecutionDataOption, name: "member"))
     InternalException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     InternalException.type = Types::InternalException
-    KafkaBootstrapServers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointString, name: "member")
+    KafkaBootstrapServers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointString, name: "member"))
     ListPipesRequest.add_member(:name_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: PipeName, name: "NamePrefix", traits: {"smithy.api#httpQuery" => "NamePrefix"}))
     ListPipesRequest.add_member(:desired_state, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestedPipeState, name: "DesiredState", traits: {"smithy.api#httpQuery" => "DesiredState"}))
     ListPipesRequest.add_member(:current_state, ::Smithy::Schema::Shapes::MemberShape.new(target: PipeState, name: "CurrentState", traits: {"smithy.api#httpQuery" => "CurrentState"}))
@@ -418,16 +418,16 @@ module Aws::Pipes
     MultiMeasureAttributeMapping.add_member(:measure_value_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureValueType, name: "MeasureValueType", traits: {"smithy.api#required" => {}}))
     MultiMeasureAttributeMapping.add_member(:multi_measure_attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiMeasureAttributeName, name: "MultiMeasureAttributeName", traits: {"smithy.api#required" => {}}))
     MultiMeasureAttributeMapping.type = Types::MultiMeasureAttributeMapping
-    MultiMeasureAttributeMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MultiMeasureAttributeMapping, name: "member")
+    MultiMeasureAttributeMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiMeasureAttributeMapping, name: "member"))
     MultiMeasureMapping.add_member(:multi_measure_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiMeasureName, name: "MultiMeasureName", traits: {"smithy.api#required" => {}}))
     MultiMeasureMapping.add_member(:multi_measure_attribute_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiMeasureAttributeMappings, name: "MultiMeasureAttributeMappings", traits: {"smithy.api#required" => {}}))
     MultiMeasureMapping.type = Types::MultiMeasureMapping
-    MultiMeasureMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MultiMeasureMapping, name: "member")
+    MultiMeasureMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiMeasureMapping, name: "member"))
     NetworkConfiguration.add_member(:awsvpc_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsVpcConfiguration, name: "awsvpcConfiguration"))
     NetworkConfiguration.type = Types::NetworkConfiguration
     NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     NotFoundException.type = Types::NotFoundException
-    PathParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PathParameter, name: "member")
+    PathParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PathParameter, name: "member"))
     Pipe.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PipeName, name: "Name"))
     Pipe.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PipeArn, name: "Arn", traits: {"aws.cloudformation#cfnAdditionalIdentifier" => {}}))
     Pipe.add_member(:desired_state, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestedPipeState, name: "DesiredState"))
@@ -446,7 +446,7 @@ module Aws::Pipes
     PipeEnrichmentParameters.add_member(:input_template, ::Smithy::Schema::Shapes::MemberShape.new(target: InputTemplate, name: "InputTemplate"))
     PipeEnrichmentParameters.add_member(:http_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: PipeEnrichmentHttpParameters, name: "HttpParameters"))
     PipeEnrichmentParameters.type = Types::PipeEnrichmentParameters
-    PipeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Pipe, name: "member")
+    PipeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Pipe, name: "member"))
     PipeLogConfiguration.add_member(:s3_log_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: S3LogDestination, name: "S3LogDestination"))
     PipeLogConfiguration.add_member(:firehose_log_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: FirehoseLogDestination, name: "FirehoseLogDestination"))
     PipeLogConfiguration.add_member(:cloudwatch_logs_log_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudwatchLogsLogDestination, name: "CloudwatchLogsLogDestination"))
@@ -599,13 +599,13 @@ module Aws::Pipes
     PlacementConstraint.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementConstraintType, name: "type"))
     PlacementConstraint.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementConstraintExpression, name: "expression"))
     PlacementConstraint.type = Types::PlacementConstraint
-    PlacementConstraints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementConstraint, name: "member")
-    PlacementStrategies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStrategy, name: "member")
+    PlacementConstraints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementConstraint, name: "member"))
+    PlacementStrategies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStrategy, name: "member"))
     PlacementStrategy.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStrategyType, name: "type"))
     PlacementStrategy.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStrategyField, name: "field"))
     PlacementStrategy.type = Types::PlacementStrategy
-    QueryStringParametersMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStringKey, name: "key")
-    QueryStringParametersMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStringValue, name: "value")
+    QueryStringParametersMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStringKey, name: "key"))
+    QueryStringParametersMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStringValue, name: "value"))
     S3LogDestination.add_member(:bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BucketName"))
     S3LogDestination.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Prefix"))
     S3LogDestination.add_member(:bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BucketOwner"))
@@ -619,9 +619,9 @@ module Aws::Pipes
     SageMakerPipelineParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerPipelineParameterName, name: "Name", traits: {"smithy.api#required" => {}}))
     SageMakerPipelineParameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerPipelineParameterValue, name: "Value", traits: {"smithy.api#required" => {}}))
     SageMakerPipelineParameter.type = Types::SageMakerPipelineParameter
-    SageMakerPipelineParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerPipelineParameter, name: "member")
-    SecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
-    SecurityGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroup, name: "member")
+    SageMakerPipelineParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerPipelineParameter, name: "member"))
+    SecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
+    SecurityGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroup, name: "member"))
     SelfManagedKafkaAccessConfigurationCredentials.add_member(:basic_auth, Types::SelfManagedKafkaAccessConfigurationCredentials::BasicAuth, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretManagerArn, name: "BasicAuth"))
     SelfManagedKafkaAccessConfigurationCredentials.add_member(:sasl_scram512_auth, Types::SelfManagedKafkaAccessConfigurationCredentials::SaslScram512Auth, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretManagerArn, name: "SaslScram512Auth"))
     SelfManagedKafkaAccessConfigurationCredentials.add_member(:sasl_scram256_auth, Types::SelfManagedKafkaAccessConfigurationCredentials::SaslScram256Auth, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretManagerArn, name: "SaslScram256Auth"))
@@ -641,8 +641,8 @@ module Aws::Pipes
     SingleMeasureMapping.add_member(:measure_value_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureValueType, name: "MeasureValueType", traits: {"smithy.api#required" => {}}))
     SingleMeasureMapping.add_member(:measure_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MeasureName, name: "MeasureName", traits: {"smithy.api#required" => {}}))
     SingleMeasureMapping.type = Types::SingleMeasureMapping
-    SingleMeasureMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SingleMeasureMapping, name: "member")
-    Sqls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Sql, name: "member")
+    SingleMeasureMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SingleMeasureMapping, name: "member"))
+    Sqls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Sql, name: "member"))
     StartPipeRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PipeName, name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartPipeRequest.type = Types::StartPipeRequest
     StartPipeResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PipeArn, name: "Arn"))
@@ -661,16 +661,16 @@ module Aws::Pipes
     StopPipeResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
     StopPipeResponse.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     StopPipeResponse.type = Types::StopPipeResponse
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
-    Subnets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Subnet, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    SubnetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
+    Subnets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnet, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PipeArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -755,7 +755,7 @@ module Aws::Pipes
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
 
     Pipes = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.pipes#Pipes"

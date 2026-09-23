@@ -30,11 +30,11 @@ module Aws::CloudTrailData
     AuditEvent.add_member(:event_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "eventData", traits: {"smithy.api#required" => {}}))
     AuditEvent.add_member(:event_data_checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "eventDataChecksum"))
     AuditEvent.type = Types::AuditEvent
-    AuditEventResultEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuditEventResultEntry, name: "member")
+    AuditEventResultEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditEventResultEntry, name: "member"))
     AuditEventResultEntry.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "id", traits: {"smithy.api#required" => {}}))
     AuditEventResultEntry.add_member(:event_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "eventID", traits: {"smithy.api#required" => {}}))
     AuditEventResultEntry.type = Types::AuditEventResultEntry
-    AuditEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuditEvent, name: "member")
+    AuditEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditEvent, name: "member"))
     ChannelInsufficientPermission.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ChannelInsufficientPermission.type = Types::ChannelInsufficientPermission
     ChannelNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
@@ -52,7 +52,7 @@ module Aws::CloudTrailData
     PutAuditEventsOutput.add_member(:successful, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditEventResultEntries, name: "successful", traits: {"smithy.api#required" => {}}))
     PutAuditEventsOutput.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultErrorEntries, name: "failed", traits: {"smithy.api#required" => {}}))
     PutAuditEventsOutput.type = Types::PutAuditEventsOutput
-    ResultErrorEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResultErrorEntry, name: "member")
+    ResultErrorEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultErrorEntry, name: "member"))
     ResultErrorEntry.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "id", traits: {"smithy.api#required" => {}}))
     ResultErrorEntry.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "errorCode", traits: {"smithy.api#required" => {}}))
     ResultErrorEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage", traits: {"smithy.api#required" => {}}))

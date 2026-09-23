@@ -221,7 +221,7 @@ module Aws::Billingconductor
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    AccountAssociationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAssociationsListElement, name: "member")
+    AccountAssociationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAssociationsListElement, name: "member"))
     AccountAssociationsListElement.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     AccountAssociationsListElement.add_member(:billing_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupArn, name: "BillingGroupArn"))
     AccountAssociationsListElement.add_member(:account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountName, name: "AccountName"))
@@ -230,8 +230,8 @@ module Aws::Billingconductor
     AccountGrouping.add_member(:linked_account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdList, name: "LinkedAccountIds", traits: {"smithy.api#required" => {}}))
     AccountGrouping.add_member(:auto_associate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "AutoAssociate"))
     AccountGrouping.type = Types::AccountGrouping
-    AccountIdFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member")
-    AccountIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member")
+    AccountIdFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
+    AccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
     AssociateAccountsOperationInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupArn, name: "Arn", traits: {"smithy.api#required" => {}}))
     AssociateAccountsOperationInput.add_member(:account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdList, name: "AccountIds", traits: {"smithy.api#required" => {}}))
     AssociateAccountsOperationInput.type = Types::AssociateAccountsOperationInput
@@ -248,11 +248,11 @@ module Aws::Billingconductor
     AssociateResourceResponseElement.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemAssociationElement, name: "Arn"))
     AssociateResourceResponseElement.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociateResourceError, name: "Error"))
     AssociateResourceResponseElement.type = Types::AssociateResourceResponseElement
-    AssociateResourcesResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociateResourceResponseElement, name: "member")
+    AssociateResourcesResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociateResourceResponseElement, name: "member"))
     Attribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Key"))
     Attribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Value"))
     Attribute.type = Types::Attribute
-    AttributesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member")
+    AttributesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member"))
     BatchAssociateResourcesToCustomLineItemOperationInput.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemArn, name: "TargetArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
     BatchAssociateResourcesToCustomLineItemOperationInput.add_member(:resource_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemBatchAssociationsList, name: "ResourceArns", traits: {"smithy.api#required" => {}}))
     BatchAssociateResourcesToCustomLineItemOperationInput.add_member(:billing_period_range, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemBillingPeriodRange, name: "BillingPeriodRange"))
@@ -267,7 +267,7 @@ module Aws::Billingconductor
     BatchDisassociateResourcesFromCustomLineItemOperationOutput.add_member(:successfully_disassociated_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: DisassociateResourcesResponseList, name: "SuccessfullyDisassociatedResources"))
     BatchDisassociateResourcesFromCustomLineItemOperationOutput.add_member(:failed_disassociated_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: DisassociateResourcesResponseList, name: "FailedDisassociatedResources"))
     BatchDisassociateResourcesFromCustomLineItemOperationOutput.type = Types::BatchDisassociateResourcesFromCustomLineItemOperationOutput
-    BillingGroupArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupArn, name: "member")
+    BillingGroupArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupArn, name: "member"))
     BillingGroupCostReportElement.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupArn, name: "Arn"))
     BillingGroupCostReportElement.add_member(:aws_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSCost, name: "AWSCost"))
     BillingGroupCostReportElement.add_member(:proforma_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: ProformaCost, name: "ProformaCost"))
@@ -275,7 +275,7 @@ module Aws::Billingconductor
     BillingGroupCostReportElement.add_member(:margin_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: MarginPercentage, name: "MarginPercentage"))
     BillingGroupCostReportElement.add_member(:currency, ::Smithy::Schema::Shapes::MemberShape.new(target: Currency, name: "Currency"))
     BillingGroupCostReportElement.type = Types::BillingGroupCostReportElement
-    BillingGroupCostReportList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupCostReportElement, name: "member")
+    BillingGroupCostReportList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupCostReportElement, name: "member"))
     BillingGroupCostReportResultElement.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupArn, name: "Arn"))
     BillingGroupCostReportResultElement.add_member(:aws_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSCost, name: "AWSCost"))
     BillingGroupCostReportResultElement.add_member(:proforma_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: ProformaCost, name: "ProformaCost"))
@@ -284,8 +284,8 @@ module Aws::Billingconductor
     BillingGroupCostReportResultElement.add_member(:currency, ::Smithy::Schema::Shapes::MemberShape.new(target: Currency, name: "Currency"))
     BillingGroupCostReportResultElement.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributesList, name: "Attributes"))
     BillingGroupCostReportResultElement.type = Types::BillingGroupCostReportResultElement
-    BillingGroupCostReportResultsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupCostReportResultElement, name: "member")
-    BillingGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupListElement, name: "member")
+    BillingGroupCostReportResultsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupCostReportResultElement, name: "member"))
+    BillingGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupListElement, name: "member"))
     BillingGroupListElement.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupName, name: "Name"))
     BillingGroupListElement.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupArn, name: "Arn"))
     BillingGroupListElement.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupDescription, name: "Description"))
@@ -298,7 +298,7 @@ module Aws::Billingconductor
     BillingGroupListElement.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupStatusReason, name: "StatusReason"))
     BillingGroupListElement.add_member(:account_grouping, ::Smithy::Schema::Shapes::MemberShape.new(target: ListBillingGroupAccountGrouping, name: "AccountGrouping"))
     BillingGroupListElement.type = Types::BillingGroupListElement
-    BillingGroupStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupStatus, name: "member")
+    BillingGroupStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupStatus, name: "member"))
     BillingPeriodRange.add_member(:inclusive_start_billing_period, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingPeriod, name: "InclusiveStartBillingPeriod", traits: {"smithy.api#required" => {}}))
     BillingPeriodRange.add_member(:exclusive_end_billing_period, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingPeriod, name: "ExclusiveEndBillingPeriod", traits: {"smithy.api#required" => {}}))
     BillingPeriodRange.type = Types::BillingPeriodRange
@@ -357,10 +357,10 @@ module Aws::Billingconductor
     CreatePricingRuleOperationOutput.type = Types::CreatePricingRuleOperationOutput
     CreateTieringInput.add_member(:free_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateFreeTierConfig, name: "FreeTier", traits: {"smithy.api#required" => {}}))
     CreateTieringInput.type = Types::CreateTieringInput
-    CustomLineItemArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemArn, name: "member")
-    CustomLineItemAssociationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemAssociationElement, name: "member")
-    CustomLineItemBatchAssociationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemAssociationElement, name: "member")
-    CustomLineItemBatchDisassociationsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemAssociationElement, name: "member")
+    CustomLineItemArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemArn, name: "member"))
+    CustomLineItemAssociationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemAssociationElement, name: "member"))
+    CustomLineItemBatchAssociationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemAssociationElement, name: "member"))
+    CustomLineItemBatchDisassociationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemAssociationElement, name: "member"))
     CustomLineItemBillingPeriodRange.add_member(:inclusive_start_billing_period, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingPeriod, name: "InclusiveStartBillingPeriod", traits: {"smithy.api#required" => {}}))
     CustomLineItemBillingPeriodRange.add_member(:exclusive_end_billing_period, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingPeriod, name: "ExclusiveEndBillingPeriod"))
     CustomLineItemBillingPeriodRange.type = Types::CustomLineItemBillingPeriodRange
@@ -371,7 +371,7 @@ module Aws::Billingconductor
     CustomLineItemChargeDetails.type = Types::CustomLineItemChargeDetails
     CustomLineItemFlatChargeDetails.add_member(:charge_value, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemChargeValue, name: "ChargeValue", traits: {"smithy.api#required" => {}}))
     CustomLineItemFlatChargeDetails.type = Types::CustomLineItemFlatChargeDetails
-    CustomLineItemList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemListElement, name: "member")
+    CustomLineItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemListElement, name: "member"))
     CustomLineItemListElement.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemArn, name: "Arn"))
     CustomLineItemListElement.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemName, name: "Name"))
     CustomLineItemListElement.add_member(:charge_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ListCustomLineItemChargeDetails, name: "ChargeDetails"))
@@ -384,11 +384,11 @@ module Aws::Billingconductor
     CustomLineItemListElement.add_member(:association_size, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfAssociations, name: "AssociationSize", traits: {"smithy.api#default" => 0}))
     CustomLineItemListElement.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     CustomLineItemListElement.type = Types::CustomLineItemListElement
-    CustomLineItemNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemName, name: "member")
+    CustomLineItemNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemName, name: "member"))
     CustomLineItemPercentageChargeDetails.add_member(:percentage_value, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemPercentageChargeValue, name: "PercentageValue", traits: {"smithy.api#required" => {}}))
     CustomLineItemPercentageChargeDetails.add_member(:associated_values, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemAssociationsList, name: "AssociatedValues"))
     CustomLineItemPercentageChargeDetails.type = Types::CustomLineItemPercentageChargeDetails
-    CustomLineItemVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemVersionListElement, name: "member")
+    CustomLineItemVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemVersionListElement, name: "member"))
     CustomLineItemVersionListElement.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemName, name: "Name"))
     CustomLineItemVersionListElement.add_member(:charge_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ListCustomLineItemChargeDetails, name: "ChargeDetails"))
     CustomLineItemVersionListElement.add_member(:currency_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, name: "CurrencyCode"))
@@ -434,7 +434,7 @@ module Aws::Billingconductor
     DisassociateResourceResponseElement.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemAssociationElement, name: "Arn"))
     DisassociateResourceResponseElement.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociateResourceError, name: "Error"))
     DisassociateResourceResponseElement.type = Types::DisassociateResourceResponseElement
-    DisassociateResourcesResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DisassociateResourceResponseElement, name: "member")
+    DisassociateResourcesResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DisassociateResourceResponseElement, name: "member"))
     FreeTierConfig.add_member(:activated, ::Smithy::Schema::Shapes::MemberShape.new(target: TieringActivated, name: "Activated", traits: {"smithy.api#required" => {}}))
     FreeTierConfig.type = Types::FreeTierConfig
     GetBillingGroupCostReportInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupArn, name: "Arn", traits: {"smithy.api#required" => {}}))
@@ -446,7 +446,7 @@ module Aws::Billingconductor
     GetBillingGroupCostReportOutput.add_member(:billing_group_cost_report_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupCostReportResultsList, name: "BillingGroupCostReportResults"))
     GetBillingGroupCostReportOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     GetBillingGroupCostReportOutput.type = Types::GetBillingGroupCostReportOutput
-    GroupByAttributesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByAttributeName, name: "member")
+    GroupByAttributesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByAttributeName, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryAfterSeconds, name: "RetryAfterSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Retry-After"}))
     InternalServerException.type = Types::InternalServerException
@@ -454,8 +454,8 @@ module Aws::Billingconductor
     LineItemFilter.add_member(:match_option, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOption, name: "MatchOption", traits: {"smithy.api#required" => {}}))
     LineItemFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: LineItemFilterValuesList, name: "Values", traits: {"smithy.api#required" => {}}))
     LineItemFilter.type = Types::LineItemFilter
-    LineItemFilterValuesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LineItemFilterValue, name: "member")
-    LineItemFiltersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LineItemFilter, name: "member")
+    LineItemFilterValuesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LineItemFilterValue, name: "member"))
+    LineItemFiltersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LineItemFilter, name: "member"))
     ListAccountAssociationsFilter.add_member(:association, ::Smithy::Schema::Shapes::MemberShape.new(target: Association, name: "Association"))
     ListAccountAssociationsFilter.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     ListAccountAssociationsFilter.add_member(:account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdFilterList, name: "AccountIds"))
@@ -585,13 +585,13 @@ module Aws::Billingconductor
     ListResourcesAssociatedToCustomLineItemResponseElement.add_member(:relationship, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemRelationship, name: "Relationship"))
     ListResourcesAssociatedToCustomLineItemResponseElement.add_member(:end_billing_period, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingPeriod, name: "EndBillingPeriod"))
     ListResourcesAssociatedToCustomLineItemResponseElement.type = Types::ListResourcesAssociatedToCustomLineItemResponseElement
-    ListResourcesAssociatedToCustomLineItemResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListResourcesAssociatedToCustomLineItemResponseElement, name: "member")
+    ListResourcesAssociatedToCustomLineItemResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListResourcesAssociatedToCustomLineItemResponseElement, name: "member"))
     ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
     ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
-    PricingPlanArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PricingPlanArn, name: "member")
-    PricingPlanList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PricingPlanListElement, name: "member")
+    PricingPlanArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingPlanArn, name: "member"))
+    PricingPlanList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingPlanListElement, name: "member"))
     PricingPlanListElement.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingPlanName, name: "Name"))
     PricingPlanListElement.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingPlanArn, name: "Arn"))
     PricingPlanListElement.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingPlanDescription, name: "Description"))
@@ -599,10 +599,10 @@ module Aws::Billingconductor
     PricingPlanListElement.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Instant, name: "CreationTime", traits: {"smithy.api#default" => 0}))
     PricingPlanListElement.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Instant, name: "LastModifiedTime", traits: {"smithy.api#default" => 0}))
     PricingPlanListElement.type = Types::PricingPlanListElement
-    PricingRuleArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PricingRuleArn, name: "member")
-    PricingRuleArnsInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PricingRuleArn, name: "member")
-    PricingRuleArnsNonEmptyInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PricingRuleArn, name: "member")
-    PricingRuleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PricingRuleListElement, name: "member")
+    PricingRuleArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingRuleArn, name: "member"))
+    PricingRuleArnsInput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingRuleArn, name: "member"))
+    PricingRuleArnsNonEmptyInput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingRuleArn, name: "member"))
+    PricingRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingRuleListElement, name: "member"))
     PricingRuleListElement.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingRuleName, name: "Name"))
     PricingRuleListElement.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingRuleArn, name: "Arn"))
     PricingRuleListElement.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingRuleDescription, name: "Description"))
@@ -628,9 +628,9 @@ module Aws::Billingconductor
     ServiceLimitExceededException.add_member(:limit_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LimitCode", traits: {"smithy.api#required" => {}}))
     ServiceLimitExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServiceCode", traits: {"smithy.api#required" => {}}))
     ServiceLimitExceededException.type = Types::ServiceLimitExceededException
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -728,7 +728,7 @@ module Aws::Billingconductor
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
 
     AWSBillingConductor = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.billingconductor#AWSBillingConductor"

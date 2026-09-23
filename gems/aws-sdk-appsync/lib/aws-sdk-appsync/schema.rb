@@ -331,7 +331,7 @@ module Aws::AppSync
     AdditionalAuthenticationProvider.add_member(:user_pool_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CognitoUserPoolConfig, name: "userPoolConfig"))
     AdditionalAuthenticationProvider.add_member(:lambda_authorizer_config, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaAuthorizerConfig, name: "lambdaAuthorizerConfig"))
     AdditionalAuthenticationProvider.type = Types::AdditionalAuthenticationProvider
-    AdditionalAuthenticationProviders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalAuthenticationProvider, name: "member")
+    AdditionalAuthenticationProviders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalAuthenticationProvider, name: "member"))
     Api.add_member(:api_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "apiId"))
     Api.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiName, name: "name"))
     Api.add_member(:owner_contact, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerContact, name: "ownerContact"))
@@ -388,10 +388,10 @@ module Aws::AppSync
     ApiKeyLimitExceededException.type = Types::ApiKeyLimitExceededException
     ApiKeyValidityOutOfBoundsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ApiKeyValidityOutOfBoundsException.type = Types::ApiKeyValidityOutOfBoundsException
-    ApiKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApiKey, name: "member")
+    ApiKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiKey, name: "member"))
     ApiLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     ApiLimitExceededException.type = Types::ApiLimitExceededException
-    Apis.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Api, name: "member")
+    Apis.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Api, name: "member"))
     AppSyncRuntime.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeName, name: "name", traits: {"smithy.api#required" => {}}))
     AppSyncRuntime.add_member(:runtime_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "runtimeVersion", traits: {"smithy.api#required" => {}}))
     AppSyncRuntime.type = Types::AppSyncRuntime
@@ -419,13 +419,13 @@ module Aws::AppSync
     AssociationStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Success", traits: {"smithy.api#enumValue" => "SUCCESS"}))
     AuthMode.add_member(:auth_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationType, name: "authType", traits: {"smithy.api#required" => {}}))
     AuthMode.type = Types::AuthMode
-    AuthModes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthMode, name: "member")
+    AuthModes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthMode, name: "member"))
     AuthProvider.add_member(:auth_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationType, name: "authType", traits: {"smithy.api#required" => {}}))
     AuthProvider.add_member(:cognito_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CognitoConfig, name: "cognitoConfig"))
     AuthProvider.add_member(:open_id_connect_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenIDConnectConfig, name: "openIDConnectConfig"))
     AuthProvider.add_member(:lambda_authorizer_config, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaAuthorizerConfig, name: "lambdaAuthorizerConfig"))
     AuthProvider.type = Types::AuthProvider
-    AuthProviders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthProvider, name: "member")
+    AuthProviders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthProvider, name: "member"))
     AuthenticationType.add_member(:api_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "API_KEY", traits: {"smithy.api#enumValue" => "API_KEY"}))
     AuthenticationType.add_member(:aws_iam, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_IAM", traits: {"smithy.api#enumValue" => "AWS_IAM"}))
     AuthenticationType.add_member(:amazon_cognito_user_pools, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMAZON_COGNITO_USER_POOLS", traits: {"smithy.api#enumValue" => "AMAZON_COGNITO_USER_POOLS"}))
@@ -450,7 +450,7 @@ module Aws::AppSync
     CachingConfig.add_member(:ttl, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "ttl", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     CachingConfig.add_member(:caching_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: CachingKeys, name: "cachingKeys"))
     CachingConfig.type = Types::CachingConfig
-    CachingKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    CachingKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ChannelNamespace.add_member(:api_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "apiId"))
     ChannelNamespace.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "name"))
     ChannelNamespace.add_member(:subscribe_auth_modes, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthModes, name: "subscribeAuthModes"))
@@ -462,7 +462,7 @@ module Aws::AppSync
     ChannelNamespace.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastModified"))
     ChannelNamespace.add_member(:handler_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: HandlerConfigs, name: "handlerConfigs"))
     ChannelNamespace.type = Types::ChannelNamespace
-    ChannelNamespaces.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelNamespace, name: "member")
+    ChannelNamespaces.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelNamespace, name: "member"))
     CodeError.add_member(:error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "errorType"))
     CodeError.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     CodeError.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeErrorLocation, name: "location"))
@@ -471,7 +471,7 @@ module Aws::AppSync
     CodeErrorLocation.add_member(:column, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeErrorColumn, name: "column", traits: {"smithy.api#default" => 0}))
     CodeErrorLocation.add_member(:span, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeErrorSpan, name: "span", traits: {"smithy.api#default" => 0}))
     CodeErrorLocation.type = Types::CodeErrorLocation
-    CodeErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CodeError, name: "member")
+    CodeErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeError, name: "member"))
     CognitoConfig.add_member(:user_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "userPoolId", traits: {"smithy.api#required" => {}}))
     CognitoConfig.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "awsRegion", traits: {"smithy.api#required" => {}}))
     CognitoConfig.add_member(:app_id_client_regex, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "appIdClientRegex"))
@@ -632,14 +632,14 @@ module Aws::AppSync
     DataSourceIntrospectionModelFieldType.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceIntrospectionModelFieldType, name: "type"))
     DataSourceIntrospectionModelFieldType.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceIntrospectionModelFieldTypeValues, name: "values"))
     DataSourceIntrospectionModelFieldType.type = Types::DataSourceIntrospectionModelFieldType
-    DataSourceIntrospectionModelFieldTypeValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    DataSourceIntrospectionModelFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceIntrospectionModelField, name: "member")
+    DataSourceIntrospectionModelFieldTypeValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    DataSourceIntrospectionModelFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceIntrospectionModelField, name: "member"))
     DataSourceIntrospectionModelIndex.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     DataSourceIntrospectionModelIndex.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceIntrospectionModelIndexFields, name: "fields"))
     DataSourceIntrospectionModelIndex.type = Types::DataSourceIntrospectionModelIndex
-    DataSourceIntrospectionModelIndexFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    DataSourceIntrospectionModelIndexes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceIntrospectionModelIndex, name: "member")
-    DataSourceIntrospectionModels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceIntrospectionModel, name: "member")
+    DataSourceIntrospectionModelIndexFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    DataSourceIntrospectionModelIndexes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceIntrospectionModelIndex, name: "member"))
+    DataSourceIntrospectionModels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceIntrospectionModel, name: "member"))
     DataSourceIntrospectionResult.add_member(:models, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceIntrospectionModels, name: "models"))
     DataSourceIntrospectionResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
     DataSourceIntrospectionResult.type = Types::DataSourceIntrospectionResult
@@ -659,7 +659,7 @@ module Aws::AppSync
     DataSourceType.add_member(:amazon_opensearch_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMAZON_OPENSEARCH_SERVICE", traits: {"smithy.api#enumValue" => "AMAZON_OPENSEARCH_SERVICE"}))
     DataSourceType.add_member(:amazon_eventbridge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMAZON_EVENTBRIDGE", traits: {"smithy.api#enumValue" => "AMAZON_EVENTBRIDGE"}))
     DataSourceType.add_member(:amazon_bedrock_runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMAZON_BEDROCK_RUNTIME", traits: {"smithy.api#enumValue" => "AMAZON_BEDROCK_RUNTIME"}))
-    DataSources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "member")
+    DataSources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "member"))
     DefaultAction.add_member(:allow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOW", traits: {"smithy.api#enumValue" => "ALLOW"}))
     DefaultAction.add_member(:deny, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DENY", traits: {"smithy.api#enumValue" => "DENY"}))
     DeleteApiCacheRequest.add_member(:api_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "apiId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -724,7 +724,7 @@ module Aws::AppSync
     DomainNameConfig.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     DomainNameConfig.add_member(:domain_name_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "domainNameArn"))
     DomainNameConfig.type = Types::DomainNameConfig
-    DomainNameConfigs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainNameConfig, name: "member")
+    DomainNameConfigs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainNameConfig, name: "member"))
     DynamodbDataSourceConfig.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "tableName", traits: {"smithy.api#required" => {}}))
     DynamodbDataSourceConfig.add_member(:aws_region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "awsRegion", traits: {"smithy.api#required" => {}}))
     DynamodbDataSourceConfig.add_member(:use_caller_credentials, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "useCallerCredentials", traits: {"smithy.api#default" => false}))
@@ -738,8 +738,8 @@ module Aws::AppSync
     EnhancedMetricsConfig.add_member(:data_source_level_metrics_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceLevelMetricsBehavior, name: "dataSourceLevelMetricsBehavior", traits: {"smithy.api#required" => {}}))
     EnhancedMetricsConfig.add_member(:operation_level_metrics_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationLevelMetricsConfig, name: "operationLevelMetricsConfig", traits: {"smithy.api#required" => {}}))
     EnhancedMetricsConfig.type = Types::EnhancedMetricsConfig
-    EnvironmentVariableMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableKey, name: "key")
-    EnvironmentVariableMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableValue, name: "value")
+    EnvironmentVariableMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableKey, name: "key"))
+    EnvironmentVariableMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableValue, name: "value"))
     ErrorDetail.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ErrorDetail.type = Types::ErrorDetail
     EvaluateCodeErrorDetail.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
@@ -802,8 +802,8 @@ module Aws::AppSync
     FunctionConfiguration.add_member(:runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: AppSyncRuntime, name: "runtime"))
     FunctionConfiguration.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: Code, name: "code"))
     FunctionConfiguration.type = Types::FunctionConfiguration
-    Functions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionConfiguration, name: "member")
-    FunctionsIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    Functions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionConfiguration, name: "member"))
+    FunctionsIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     GetApiAssociationRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "domainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetApiAssociationRequest.type = Types::GetApiAssociationRequest
     GetApiAssociationResponse.add_member(:api_association, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiAssociation, name: "apiAssociation"))
@@ -915,7 +915,7 @@ module Aws::AppSync
     GraphqlApi.add_member(:resolver_count_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ResolverCountLimit, name: "resolverCountLimit", traits: {"smithy.api#default" => 0}))
     GraphqlApi.add_member(:enhanced_metrics_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EnhancedMetricsConfig, name: "enhancedMetricsConfig"))
     GraphqlApi.type = Types::GraphqlApi
-    GraphqlApis.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GraphqlApi, name: "member")
+    GraphqlApis.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GraphqlApi, name: "member"))
     HandlerBehavior.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CODE", traits: {"smithy.api#enumValue" => "CODE"}))
     HandlerBehavior.add_member(:direct, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECT", traits: {"smithy.api#enumValue" => "DIRECT"}))
     HandlerConfig.add_member(:behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: HandlerBehavior, name: "behavior", traits: {"smithy.api#required" => {}}))
@@ -1042,9 +1042,9 @@ module Aws::AppSync
     LogConfig.add_member(:cloud_watch_logs_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "cloudWatchLogsRoleArn", traits: {"smithy.api#required" => {}}))
     LogConfig.add_member(:exclude_verbose_content, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "excludeVerboseContent", traits: {"smithy.api#default" => false}))
     LogConfig.type = Types::LogConfig
-    Logs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    MapOfStringToString.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    MapOfStringToString.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    Logs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    MapOfStringToString.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    MapOfStringToString.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     MergeType.add_member(:manual_merge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANUAL_MERGE", traits: {"smithy.api#enumValue" => "MANUAL_MERGE"}))
     MergeType.add_member(:auto_merge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTO_MERGE", traits: {"smithy.api#enumValue" => "AUTO_MERGE"}))
     NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
@@ -1105,7 +1105,7 @@ module Aws::AppSync
     ResolverLevelMetricsBehavior.add_member(:per_resolver_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PER_RESOLVER_METRICS", traits: {"smithy.api#enumValue" => "PER_RESOLVER_METRICS"}))
     ResolverLevelMetricsConfig.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     ResolverLevelMetricsConfig.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    Resolvers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resolver, name: "member")
+    Resolvers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resolver, name: "member"))
     RuntimeName.add_member(:appsync_js, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPSYNC_JS", traits: {"smithy.api#enumValue" => "APPSYNC_JS"}))
     SchemaStatus.add_member(:processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Processing", traits: {"smithy.api#enumValue" => "PROCESSING"}))
     SchemaStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Active", traits: {"smithy.api#enumValue" => "ACTIVE"}))
@@ -1145,7 +1145,7 @@ module Aws::AppSync
     SourceApiAssociationSummary.add_member(:merged_api_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "mergedApiArn"))
     SourceApiAssociationSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "description"))
     SourceApiAssociationSummary.type = Types::SourceApiAssociationSummary
-    SourceApiAssociationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SourceApiAssociationSummary, name: "member")
+    SourceApiAssociationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceApiAssociationSummary, name: "member"))
     StartDataSourceIntrospectionRequest.add_member(:rds_data_api_config, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDataApiConfig, name: "rdsDataApiConfig"))
     StartDataSourceIntrospectionRequest.type = Types::StartDataSourceIntrospectionRequest
     StartDataSourceIntrospectionResponse.add_member(:introspection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "introspectionId"))
@@ -1166,9 +1166,9 @@ module Aws::AppSync
     SyncConfig.add_member(:conflict_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictDetectionType, name: "conflictDetection"))
     SyncConfig.add_member(:lambda_conflict_handler_config, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaConflictHandlerConfig, name: "lambdaConflictHandlerConfig"))
     SyncConfig.type = Types::SyncConfig
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -1181,7 +1181,7 @@ module Aws::AppSync
     Type.type = Types::Type
     TypeDefinitionFormat.add_member(:sdl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SDL", traits: {"smithy.api#enumValue" => "SDL"}))
     TypeDefinitionFormat.add_member(:json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON", traits: {"smithy.api#enumValue" => "JSON"}))
-    TypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Type, name: "member")
+    TypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, name: "member"))
     UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     UnauthorizedException.type = Types::UnauthorizedException
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))

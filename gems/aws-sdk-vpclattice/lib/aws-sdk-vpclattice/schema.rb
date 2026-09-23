@@ -336,7 +336,7 @@ module Aws::VPCLattice
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    AccessLogSubscriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessLogSubscriptionSummary, name: "member")
+    AccessLogSubscriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessLogSubscriptionSummary, name: "member"))
     AccessLogSubscriptionSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessLogSubscriptionId, name: "id", traits: {"smithy.api#required" => {}}))
     AccessLogSubscriptionSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessLogSubscriptionArn, name: "arn", traits: {"smithy.api#required" => {}}))
     AccessLogSubscriptionSummary.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "resourceId", traits: {"smithy.api#required" => {}}))
@@ -792,7 +792,7 @@ module Aws::VPCLattice
     HeaderMatch.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatchType, name: "match", traits: {"smithy.api#required" => {}}))
     HeaderMatch.add_member(:case_sensitive, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "caseSensitive"))
     HeaderMatch.type = Types::HeaderMatch
-    HeaderMatchList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatch, name: "member")
+    HeaderMatchList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatch, name: "member"))
     HeaderMatchType.add_member(:exact, Types::HeaderMatchType::Exact, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatchExact, name: "exact"))
     HeaderMatchType.add_member(:prefix, Types::HeaderMatchType::Prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatchPrefix, name: "prefix"))
     HeaderMatchType.add_member(:contains, Types::HeaderMatchType::Contains, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderMatchContains, name: "contains"))
@@ -936,7 +936,7 @@ module Aws::VPCLattice
     ListenerSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
     ListenerSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedAt"))
     ListenerSummary.type = Types::ListenerSummary
-    ListenerSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerSummary, name: "member")
+    ListenerSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerSummary, name: "member"))
     Matcher.add_member(:http_code, Types::Matcher::HttpCode, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpCodeMatcher, name: "httpCode"))
     Matcher.add_member(:unknown, Types::Matcher::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Matcher.type = Types::Matcher
@@ -947,7 +947,7 @@ module Aws::VPCLattice
     PathMatchType.add_member(:prefix, Types::PathMatchType::Prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: PathMatchPrefix, name: "prefix"))
     PathMatchType.add_member(:unknown, Types::PathMatchType::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     PathMatchType.type = Types::PathMatchType
-    PortRangeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PortRange, name: "member")
+    PortRangeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortRange, name: "member"))
     PutAuthPolicyInput.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, name: "resourceIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutAuthPolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthPolicyString, name: "policy", traits: {"smithy.api#required" => {}}))
     PutAuthPolicyInput.type = Types::PutAuthPolicyInput
@@ -980,8 +980,8 @@ module Aws::VPCLattice
     ResourceConfigurationSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
     ResourceConfigurationSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedAt"))
     ResourceConfigurationSummary.type = Types::ResourceConfigurationSummary
-    ResourceConfigurationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfigurationSummary, name: "member")
-    ResourceEndpointAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceEndpointAssociationSummary, name: "member")
+    ResourceConfigurationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfigurationSummary, name: "member"))
+    ResourceEndpointAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceEndpointAssociationSummary, name: "member"))
     ResourceEndpointAssociationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceEndpointAssociationId, name: "id"))
     ResourceEndpointAssociationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceEndpointAssociationArn, name: "arn"))
     ResourceEndpointAssociationSummary.add_member(:resource_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfigurationId, name: "resourceConfigurationId"))
@@ -992,7 +992,7 @@ module Aws::VPCLattice
     ResourceEndpointAssociationSummary.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "createdBy"))
     ResourceEndpointAssociationSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
     ResourceEndpointAssociationSummary.type = Types::ResourceEndpointAssociationSummary
-    ResourceGatewayList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGatewaySummary, name: "member")
+    ResourceGatewayList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGatewaySummary, name: "member"))
     ResourceGatewaySummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGatewayName, name: "name"))
     ResourceGatewaySummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGatewayId, name: "id"))
     ResourceGatewaySummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGatewayArn, name: "arn"))
@@ -1024,7 +1024,7 @@ module Aws::VPCLattice
     RuleSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
     RuleSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedAt"))
     RuleSummary.type = Types::RuleSummary
-    RuleSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSummary, name: "member")
+    RuleSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSummary, name: "member"))
     RuleUpdate.add_member(:rule_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIdentifier, name: "ruleIdentifier", traits: {"smithy.api#required" => {}}))
     RuleUpdate.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleMatch, name: "match"))
     RuleUpdate.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: RulePriority, name: "priority"))
@@ -1034,8 +1034,8 @@ module Aws::VPCLattice
     RuleUpdateFailure.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureCode, name: "failureCode"))
     RuleUpdateFailure.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureMessage, name: "failureMessage"))
     RuleUpdateFailure.type = Types::RuleUpdateFailure
-    RuleUpdateFailureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleUpdateFailure, name: "member")
-    RuleUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleUpdate, name: "member")
+    RuleUpdateFailureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleUpdateFailure, name: "member"))
+    RuleUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleUpdate, name: "member"))
     RuleUpdateSuccess.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleArn, name: "arn"))
     RuleUpdateSuccess.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleId, name: "id"))
     RuleUpdateSuccess.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleName, name: "name"))
@@ -1044,10 +1044,10 @@ module Aws::VPCLattice
     RuleUpdateSuccess.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: RulePriority, name: "priority"))
     RuleUpdateSuccess.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleAction, name: "action"))
     RuleUpdateSuccess.type = Types::RuleUpdateSuccess
-    RuleUpdateSuccessList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleUpdateSuccess, name: "member")
-    SecurityGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
-    ServiceArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceArn, name: "member")
-    ServiceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceSummary, name: "member")
+    RuleUpdateSuccessList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleUpdateSuccess, name: "member"))
+    SecurityGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
+    ServiceArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceArn, name: "member"))
+    ServiceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceSummary, name: "member"))
     ServiceNetworkEndpointAssociation.add_member(:vpc_endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "vpcEndpointId"))
     ServiceNetworkEndpointAssociation.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "vpcId"))
     ServiceNetworkEndpointAssociation.add_member(:vpc_endpoint_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "vpcEndpointOwnerId"))
@@ -1056,8 +1056,8 @@ module Aws::VPCLattice
     ServiceNetworkEndpointAssociation.add_member(:service_network_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkArn, name: "serviceNetworkArn"))
     ServiceNetworkEndpointAssociation.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
     ServiceNetworkEndpointAssociation.type = Types::ServiceNetworkEndpointAssociation
-    ServiceNetworkList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkSummary, name: "member")
-    ServiceNetworkResourceAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkResourceAssociationSummary, name: "member")
+    ServiceNetworkList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkSummary, name: "member"))
+    ServiceNetworkResourceAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkResourceAssociationSummary, name: "member"))
     ServiceNetworkResourceAssociationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkResourceAssociationId, name: "id"))
     ServiceNetworkResourceAssociationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkResourceAssociationArn, name: "arn"))
     ServiceNetworkResourceAssociationSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkResourceAssociationStatus, name: "status"))
@@ -1074,7 +1074,7 @@ module Aws::VPCLattice
     ServiceNetworkResourceAssociationSummary.add_member(:is_managed_association, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isManagedAssociation"))
     ServiceNetworkResourceAssociationSummary.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureCode"))
     ServiceNetworkResourceAssociationSummary.type = Types::ServiceNetworkResourceAssociationSummary
-    ServiceNetworkServiceAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkServiceAssociationSummary, name: "member")
+    ServiceNetworkServiceAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkServiceAssociationSummary, name: "member"))
     ServiceNetworkServiceAssociationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkServiceAssociationIdentifier, name: "id"))
     ServiceNetworkServiceAssociationSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkServiceAssociationStatus, name: "status"))
     ServiceNetworkServiceAssociationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkServiceAssociationArn, name: "arn"))
@@ -1098,7 +1098,7 @@ module Aws::VPCLattice
     ServiceNetworkSummary.add_member(:number_of_associated_services, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "numberOfAssociatedServices"))
     ServiceNetworkSummary.add_member(:number_of_associated_resource_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "numberOfAssociatedResourceConfigurations"))
     ServiceNetworkSummary.type = Types::ServiceNetworkSummary
-    ServiceNetworkVpcAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkVpcAssociationSummary, name: "member")
+    ServiceNetworkVpcAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkVpcAssociationSummary, name: "member"))
     ServiceNetworkVpcAssociationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkVpcAssociationId, name: "id"))
     ServiceNetworkVpcAssociationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkVpcAssociationArn, name: "arn"))
     ServiceNetworkVpcAssociationSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkVpcAssociationStatus, name: "status"))
@@ -1110,7 +1110,7 @@ module Aws::VPCLattice
     ServiceNetworkVpcAssociationSummary.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "vpcId"))
     ServiceNetworkVpcAssociationSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedAt"))
     ServiceNetworkVpcAssociationSummary.type = Types::ServiceNetworkVpcAssociationSummary
-    ServiceNetworkVpcEndpointAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkEndpointAssociation, name: "member")
+    ServiceNetworkVpcEndpointAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkEndpointAssociation, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId"))
     ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType", traits: {"smithy.api#required" => {}}))
@@ -1128,10 +1128,10 @@ module Aws::VPCLattice
     ServiceSummary.type = Types::ServiceSummary
     SharingConfig.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enabled"))
     SharingConfig.type = Types::SharingConfig
-    SubnetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    SubnetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -1144,7 +1144,7 @@ module Aws::VPCLattice
     TargetFailure.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureCode"))
     TargetFailure.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureMessage"))
     TargetFailure.type = Types::TargetFailure
-    TargetFailureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetFailure, name: "member")
+    TargetFailureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetFailure, name: "member"))
     TargetGroupConfig.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "port"))
     TargetGroupConfig.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupProtocol, name: "protocol"))
     TargetGroupConfig.add_member(:protocol_version, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupProtocolVersion, name: "protocolVersion"))
@@ -1153,7 +1153,7 @@ module Aws::VPCLattice
     TargetGroupConfig.add_member(:health_check, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckConfig, name: "healthCheck"))
     TargetGroupConfig.add_member(:lambda_event_structure_version, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaEventStructureVersion, name: "lambdaEventStructureVersion"))
     TargetGroupConfig.type = Types::TargetGroupConfig
-    TargetGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupSummary, name: "member")
+    TargetGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupSummary, name: "member"))
     TargetGroupSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupId, name: "id"))
     TargetGroupSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupArn, name: "arn"))
     TargetGroupSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupName, name: "name"))
@@ -1168,13 +1168,13 @@ module Aws::VPCLattice
     TargetGroupSummary.add_member(:service_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceArnList, name: "serviceArns"))
     TargetGroupSummary.add_member(:lambda_event_structure_version, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaEventStructureVersion, name: "lambdaEventStructureVersion"))
     TargetGroupSummary.type = Types::TargetGroupSummary
-    TargetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "member")
+    TargetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "member"))
     TargetSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id"))
     TargetSummary.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "port"))
     TargetSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetStatus, name: "status"))
     TargetSummary.add_member(:reason_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "reasonCode"))
     TargetSummary.type = Types::TargetSummary
-    TargetSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetSummary, name: "member")
+    TargetSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetSummary, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "serviceCode"))
     ThrottlingException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "quotaCode"))
@@ -1295,11 +1295,11 @@ module Aws::VPCLattice
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     WeightedTargetGroup.add_member(:target_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupIdentifier, name: "targetGroupIdentifier", traits: {"smithy.api#required" => {}}))
     WeightedTargetGroup.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupWeight, name: "weight"))
     WeightedTargetGroup.type = Types::WeightedTargetGroup
-    WeightedTargetGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WeightedTargetGroup, name: "member")
+    WeightedTargetGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WeightedTargetGroup, name: "member"))
 
     MercuryControlPlane = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.vpclattice#MercuryControlPlane"

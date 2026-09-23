@@ -355,8 +355,8 @@ module Aws::DeviceFarm
     AccountSettings.add_member(:default_job_timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: JobTimeoutMinutes, name: "defaultJobTimeoutMinutes"))
     AccountSettings.add_member(:skip_app_resign, ::Smithy::Schema::Shapes::MemberShape.new(target: SkipAppResign, name: "skipAppResign"))
     AccountSettings.type = Types::AccountSettings
-    AmazonResourceNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "member")
-    AndroidPaths.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    AmazonResourceNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "member"))
+    AndroidPaths.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ArgumentException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ArgumentException.type = Types::ArgumentException
     Artifact.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "arn"))
@@ -396,7 +396,7 @@ module Aws::DeviceFarm
     ArtifactType.add_member(:customer_artifact, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER_ARTIFACT", traits: {"smithy.api#enumValue" => "CUSTOMER_ARTIFACT"}))
     ArtifactType.add_member(:customer_artifact_log, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER_ARTIFACT_LOG", traits: {"smithy.api#enumValue" => "CUSTOMER_ARTIFACT_LOG"}))
     ArtifactType.add_member(:testspec_output, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TESTSPEC_OUTPUT", traits: {"smithy.api#enumValue" => "TESTSPEC_OUTPUT"}))
-    Artifacts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Artifact, name: "member")
+    Artifacts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Artifact, name: "member"))
     BillingMethod.add_member(:metered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METERED", traits: {"smithy.api#enumValue" => "METERED"}))
     BillingMethod.add_member(:unmetered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNMETERED", traits: {"smithy.api#enumValue" => "UNMETERED"}))
     CPU.add_member(:frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "frequency"))
@@ -582,11 +582,11 @@ module Aws::DeviceFarm
     DeviceFilterAttribute.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE_ARN", traits: {"smithy.api#enumValue" => "INSTANCE_ARN"}))
     DeviceFilterAttribute.add_member(:instance_labels, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE_LABELS", traits: {"smithy.api#enumValue" => "INSTANCE_LABELS"}))
     DeviceFilterAttribute.add_member(:fleet_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLEET_TYPE", traits: {"smithy.api#enumValue" => "FLEET_TYPE"}))
-    DeviceFilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    DeviceFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceFilter, name: "member")
+    DeviceFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    DeviceFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceFilter, name: "member"))
     DeviceFormFactor.add_member(:phone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PHONE", traits: {"smithy.api#enumValue" => "PHONE"}))
     DeviceFormFactor.add_member(:tablet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TABLET", traits: {"smithy.api#enumValue" => "TABLET"}))
-    DeviceHostPaths.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    DeviceHostPaths.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     DeviceInstance.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "arn"))
     DeviceInstance.add_member(:device_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "deviceArn"))
     DeviceInstance.add_member(:labels, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceLabels, name: "labels"))
@@ -594,7 +594,7 @@ module Aws::DeviceFarm
     DeviceInstance.add_member(:udid, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "udid"))
     DeviceInstance.add_member(:instance_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceProfile, name: "instanceProfile"))
     DeviceInstance.type = Types::DeviceInstance
-    DeviceInstances.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceInstance, name: "member")
+    DeviceInstances.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceInstance, name: "member"))
     DeviceMinutes.add_member(:total, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "total"))
     DeviceMinutes.add_member(:metered, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "metered"))
     DeviceMinutes.add_member(:unmetered, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "unmetered"))
@@ -612,10 +612,10 @@ module Aws::DeviceFarm
     DevicePoolCompatibilityResult.add_member(:compatible, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "compatible"))
     DevicePoolCompatibilityResult.add_member(:incompatibility_messages, ::Smithy::Schema::Shapes::MemberShape.new(target: IncompatibilityMessages, name: "incompatibilityMessages"))
     DevicePoolCompatibilityResult.type = Types::DevicePoolCompatibilityResult
-    DevicePoolCompatibilityResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DevicePoolCompatibilityResult, name: "member")
+    DevicePoolCompatibilityResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DevicePoolCompatibilityResult, name: "member"))
     DevicePoolType.add_member(:curated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CURATED", traits: {"smithy.api#enumValue" => "CURATED"}))
     DevicePoolType.add_member(:private, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIVATE", traits: {"smithy.api#enumValue" => "PRIVATE"}))
-    DevicePools.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DevicePool, name: "member")
+    DevicePools.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DevicePool, name: "member"))
     DeviceProxy.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceProxyHost, name: "host", traits: {"smithy.api#required" => {}}))
     DeviceProxy.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceProxyPort, name: "port", traits: {"smithy.api#default" => 3128, "smithy.api#required" => {}}))
     DeviceProxy.type = Types::DeviceProxy
@@ -626,7 +626,7 @@ module Aws::DeviceFarm
     DeviceSelectionResult.add_member(:matched_devices_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "matchedDevicesCount"))
     DeviceSelectionResult.add_member(:max_devices, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "maxDevices"))
     DeviceSelectionResult.type = Types::DeviceSelectionResult
-    Devices.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Device, name: "member")
+    Devices.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Device, name: "member"))
     ExecutionConfiguration.add_member(:job_timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: JobTimeoutMinutes, name: "jobTimeoutMinutes"))
     ExecutionConfiguration.add_member(:accounts_cleanup, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountsCleanup, name: "accountsCleanup"))
     ExecutionConfiguration.add_member(:app_packages_cleanup, ::Smithy::Schema::Shapes::MemberShape.new(target: AppPackagesCleanup, name: "appPackagesCleanup"))
@@ -737,13 +737,13 @@ module Aws::DeviceFarm
     IncompatibilityMessage.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     IncompatibilityMessage.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceAttribute, name: "type"))
     IncompatibilityMessage.type = Types::IncompatibilityMessage
-    IncompatibilityMessages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IncompatibilityMessage, name: "member")
+    IncompatibilityMessages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IncompatibilityMessage, name: "member"))
     InstallToRemoteAccessSessionRequest.add_member(:remote_access_session_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "remoteAccessSessionArn", traits: {"smithy.api#required" => {}}))
     InstallToRemoteAccessSessionRequest.add_member(:app_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "appArn", traits: {"smithy.api#required" => {}}))
     InstallToRemoteAccessSessionRequest.type = Types::InstallToRemoteAccessSessionRequest
     InstallToRemoteAccessSessionResult.add_member(:app_upload, ::Smithy::Schema::Shapes::MemberShape.new(target: Upload, name: "appUpload"))
     InstallToRemoteAccessSessionResult.type = Types::InstallToRemoteAccessSessionResult
-    InstanceLabels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    InstanceLabels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     InstanceProfile.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "arn"))
     InstanceProfile.add_member(:package_cleanup, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "packageCleanup"))
     InstanceProfile.add_member(:exclude_app_packages_from_cleanup, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageIds, name: "excludeAppPackagesFromCleanup"))
@@ -751,7 +751,7 @@ module Aws::DeviceFarm
     InstanceProfile.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     InstanceProfile.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "description"))
     InstanceProfile.type = Types::InstanceProfile
-    InstanceProfiles.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceProfile, name: "member")
+    InstanceProfiles.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceProfile, name: "member"))
     InstanceStatus.add_member(:in_use, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_USE", traits: {"smithy.api#enumValue" => "IN_USE"}))
     InstanceStatus.add_member(:preparing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PREPARING", traits: {"smithy.api#enumValue" => "PREPARING"}))
     InstanceStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
@@ -763,7 +763,7 @@ module Aws::DeviceFarm
     InternalServiceException.type = Types::InternalServiceException
     InvalidOperationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     InvalidOperationException.type = Types::InvalidOperationException
-    IosPaths.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    IosPaths.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Job.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "arn"))
     Job.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     Job.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TestType, name: "type"))
@@ -780,7 +780,7 @@ module Aws::DeviceFarm
     Job.add_member(:video_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "videoEndpoint"))
     Job.add_member(:video_capture, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoCapture, name: "videoCapture"))
     Job.type = Types::Job
-    Jobs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Job, name: "member")
+    Jobs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Job, name: "member"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     LimitExceededException.type = Types::LimitExceededException
     ListArtifactsRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -939,8 +939,8 @@ module Aws::DeviceFarm
     Location.add_member(:latitude, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "latitude", traits: {"smithy.api#required" => {}}))
     Location.add_member(:longitude, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "longitude", traits: {"smithy.api#required" => {}}))
     Location.type = Types::Location
-    MaxSlotMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    MaxSlotMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "value")
+    MaxSlotMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    MaxSlotMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "value"))
     MonetaryAmount.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "amount"))
     MonetaryAmount.add_member(:currency_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, name: "currencyCode"))
     MonetaryAmount.type = Types::MonetaryAmount
@@ -959,7 +959,7 @@ module Aws::DeviceFarm
     NetworkProfile.type = Types::NetworkProfile
     NetworkProfileType.add_member(:curated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CURATED", traits: {"smithy.api#enumValue" => "CURATED"}))
     NetworkProfileType.add_member(:private, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIVATE", traits: {"smithy.api#enumValue" => "PRIVATE"}))
-    NetworkProfiles.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkProfile, name: "member")
+    NetworkProfiles.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkProfile, name: "member"))
     NotEligibleException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     NotEligibleException.type = Types::NotEligibleException
     NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -973,14 +973,14 @@ module Aws::DeviceFarm
     OfferingPromotion.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferingPromotionIdentifier, name: "id"))
     OfferingPromotion.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "description"))
     OfferingPromotion.type = Types::OfferingPromotion
-    OfferingPromotions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OfferingPromotion, name: "member")
+    OfferingPromotions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferingPromotion, name: "member"))
     OfferingStatus.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferingTransactionType, name: "type"))
     OfferingStatus.add_member(:offering, ::Smithy::Schema::Shapes::MemberShape.new(target: Offering, name: "offering"))
     OfferingStatus.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "quantity"))
     OfferingStatus.add_member(:effective_on, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "effectiveOn"))
     OfferingStatus.type = Types::OfferingStatus
-    OfferingStatusMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: OfferingIdentifier, name: "key")
-    OfferingStatusMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: OfferingStatus, name: "value")
+    OfferingStatusMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferingIdentifier, name: "key"))
+    OfferingStatusMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferingStatus, name: "value"))
     OfferingTransaction.add_member(:offering_status, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferingStatus, name: "offeringStatus"))
     OfferingTransaction.add_member(:transaction_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionIdentifier, name: "transactionId"))
     OfferingTransaction.add_member(:offering_promotion_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferingPromotionIdentifier, name: "offeringPromotionId"))
@@ -990,10 +990,10 @@ module Aws::DeviceFarm
     OfferingTransactionType.add_member(:purchase, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PURCHASE", traits: {"smithy.api#enumValue" => "PURCHASE"}))
     OfferingTransactionType.add_member(:renew, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RENEW", traits: {"smithy.api#enumValue" => "RENEW"}))
     OfferingTransactionType.add_member(:system, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYSTEM", traits: {"smithy.api#enumValue" => "SYSTEM"}))
-    OfferingTransactions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OfferingTransaction, name: "member")
+    OfferingTransactions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferingTransaction, name: "member"))
     OfferingType.add_member(:recurring, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECURRING", traits: {"smithy.api#enumValue" => "RECURRING"}))
-    Offerings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Offering, name: "member")
-    PackageIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    Offerings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Offering, name: "member"))
+    PackageIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Problem.add_member(:run, ::Smithy::Schema::Shapes::MemberShape.new(target: ProblemDetail, name: "run"))
     Problem.add_member(:job, ::Smithy::Schema::Shapes::MemberShape.new(target: ProblemDetail, name: "job"))
     Problem.add_member(:suite, ::Smithy::Schema::Shapes::MemberShape.new(target: ProblemDetail, name: "suite"))
@@ -1005,22 +1005,22 @@ module Aws::DeviceFarm
     ProblemDetail.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "arn"))
     ProblemDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     ProblemDetail.type = Types::ProblemDetail
-    Problems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Problem, name: "member")
+    Problems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Problem, name: "member"))
     Project.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "arn"))
     Project.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     Project.add_member(:default_job_timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: JobTimeoutMinutes, name: "defaultJobTimeoutMinutes"))
     Project.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "created"))
     Project.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "vpcConfig"))
     Project.type = Types::Project
-    Projects.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Project, name: "member")
+    Projects.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Project, name: "member"))
     PurchaseOfferingRequest.add_member(:offering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferingIdentifier, name: "offeringId", traits: {"smithy.api#required" => {}}))
     PurchaseOfferingRequest.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "quantity", traits: {"smithy.api#required" => {}}))
     PurchaseOfferingRequest.add_member(:offering_promotion_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferingPromotionIdentifier, name: "offeringPromotionId"))
     PurchaseOfferingRequest.type = Types::PurchaseOfferingRequest
     PurchaseOfferingResult.add_member(:offering_transaction, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferingTransaction, name: "offeringTransaction"))
     PurchaseOfferingResult.type = Types::PurchaseOfferingResult
-    PurchasedDevicesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DevicePlatform, name: "key")
-    PurchasedDevicesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "value")
+    PurchasedDevicesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DevicePlatform, name: "key"))
+    PurchasedDevicesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "value"))
     Radios.add_member(:wifi, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "wifi"))
     Radios.add_member(:bluetooth, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "bluetooth"))
     Radios.add_member(:nfc, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "nfc"))
@@ -1030,7 +1030,7 @@ module Aws::DeviceFarm
     RecurringCharge.add_member(:frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringChargeFrequency, name: "frequency"))
     RecurringCharge.type = Types::RecurringCharge
     RecurringChargeFrequency.add_member(:monthly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MONTHLY", traits: {"smithy.api#enumValue" => "MONTHLY"}))
-    RecurringCharges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringCharge, name: "member")
+    RecurringCharges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringCharge, name: "member"))
     RemoteAccessSession.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "arn"))
     RemoteAccessSession.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     RemoteAccessSession.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "created"))
@@ -1055,7 +1055,7 @@ module Aws::DeviceFarm
     RemoteAccessSession.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "vpcConfig"))
     RemoteAccessSession.add_member(:device_proxy, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceProxy, name: "deviceProxy"))
     RemoteAccessSession.type = Types::RemoteAccessSession
-    RemoteAccessSessions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RemoteAccessSession, name: "member")
+    RemoteAccessSessions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RemoteAccessSession, name: "member"))
     RenewOfferingRequest.add_member(:offering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferingIdentifier, name: "offeringId", traits: {"smithy.api#required" => {}}))
     RenewOfferingRequest.add_member(:quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "quantity", traits: {"smithy.api#required" => {}}))
     RenewOfferingRequest.type = Types::RenewOfferingRequest
@@ -1076,7 +1076,7 @@ module Aws::DeviceFarm
     RuleOperator.add_member(:in, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN", traits: {"smithy.api#enumValue" => "IN"}))
     RuleOperator.add_member(:not_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_IN", traits: {"smithy.api#enumValue" => "NOT_IN"}))
     RuleOperator.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINS", traits: {"smithy.api#enumValue" => "CONTAINS"}))
-    Rules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "member")
+    Rules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "member"))
     Run.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "arn"))
     Run.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     Run.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TestType, name: "type"))
@@ -1111,7 +1111,7 @@ module Aws::DeviceFarm
     Run.add_member(:device_selection_result, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceSelectionResult, name: "deviceSelectionResult"))
     Run.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "vpcConfig"))
     Run.type = Types::Run
-    Runs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Run, name: "member")
+    Runs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Run, name: "member"))
     Sample.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "arn"))
     Sample.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleType, name: "type"))
     Sample.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: URL, name: "url"))
@@ -1133,7 +1133,7 @@ module Aws::DeviceFarm
     SampleType.add_member(:opengl_min_drawtime, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPENGL_MIN_DRAWTIME", traits: {"smithy.api#enumValue" => "OPENGL_MIN_DRAWTIME"}))
     SampleType.add_member(:opengl_avg_drawtime, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPENGL_AVG_DRAWTIME", traits: {"smithy.api#enumValue" => "OPENGL_AVG_DRAWTIME"}))
     SampleType.add_member(:opengl_max_drawtime, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPENGL_MAX_DRAWTIME", traits: {"smithy.api#enumValue" => "OPENGL_MAX_DRAWTIME"}))
-    Samples.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Sample, name: "member")
+    Samples.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Sample, name: "member"))
     ScheduleRunConfiguration.add_member(:extra_data_package_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "extraDataPackageArn"))
     ScheduleRunConfiguration.add_member(:network_profile_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "networkProfileArn"))
     ScheduleRunConfiguration.add_member(:locale, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "locale"))
@@ -1162,7 +1162,7 @@ module Aws::DeviceFarm
     ScheduleRunTest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "filter"))
     ScheduleRunTest.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: TestParameters, name: "parameters"))
     ScheduleRunTest.type = Types::ScheduleRunTest
-    SecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    SecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     ServiceAccountException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ServiceAccountException.type = Types::ServiceAccountException
     StopJobRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -1177,7 +1177,7 @@ module Aws::DeviceFarm
     StopRunRequest.type = Types::StopRunRequest
     StopRunResult.add_member(:run, ::Smithy::Schema::Shapes::MemberShape.new(target: Run, name: "run"))
     StopRunResult.type = Types::StopRunResult
-    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    SubnetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     Suite.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "arn"))
     Suite.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     Suite.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TestType, name: "type"))
@@ -1190,12 +1190,12 @@ module Aws::DeviceFarm
     Suite.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     Suite.add_member(:device_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceMinutes, name: "deviceMinutes"))
     Suite.type = Types::Suite
-    Suites.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Suite, name: "member")
+    Suites.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Suite, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagOperationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     TagOperationException.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceName"))
     TagOperationException.type = Types::TagOperationException
@@ -1224,7 +1224,7 @@ module Aws::DeviceFarm
     TestGridProject.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TestGridVpcConfig, name: "vpcConfig"))
     TestGridProject.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "created"))
     TestGridProject.type = Types::TestGridProject
-    TestGridProjects.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TestGridProject, name: "member")
+    TestGridProjects.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TestGridProject, name: "member"))
     TestGridSession.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceFarmArn, name: "arn"))
     TestGridSession.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TestGridSessionStatus, name: "status"))
     TestGridSession.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "created"))
@@ -1238,7 +1238,7 @@ module Aws::DeviceFarm
     TestGridSessionAction.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "statusCode"))
     TestGridSessionAction.add_member(:request_method, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "requestMethod"))
     TestGridSessionAction.type = Types::TestGridSessionAction
-    TestGridSessionActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TestGridSessionAction, name: "member")
+    TestGridSessionActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TestGridSessionAction, name: "member"))
     TestGridSessionArtifact.add_member(:filename, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "filename"))
     TestGridSessionArtifact.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TestGridSessionArtifactType, name: "type"))
     TestGridSessionArtifact.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "url"))
@@ -1248,17 +1248,17 @@ module Aws::DeviceFarm
     TestGridSessionArtifactType.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
     TestGridSessionArtifactType.add_member(:video, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VIDEO", traits: {"smithy.api#enumValue" => "VIDEO"}))
     TestGridSessionArtifactType.add_member(:selenium_log, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELENIUM_LOG", traits: {"smithy.api#enumValue" => "SELENIUM_LOG"}))
-    TestGridSessionArtifacts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TestGridSessionArtifact, name: "member")
+    TestGridSessionArtifacts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TestGridSessionArtifact, name: "member"))
     TestGridSessionStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     TestGridSessionStatus.add_member(:closed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOSED", traits: {"smithy.api#enumValue" => "CLOSED"}))
     TestGridSessionStatus.add_member(:errored, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERRORED", traits: {"smithy.api#enumValue" => "ERRORED"}))
-    TestGridSessions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TestGridSession, name: "member")
+    TestGridSessions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TestGridSession, name: "member"))
     TestGridVpcConfig.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, name: "securityGroupIds", traits: {"smithy.api#required" => {}}))
     TestGridVpcConfig.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, name: "subnetIds", traits: {"smithy.api#required" => {}}))
     TestGridVpcConfig.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "vpcId", traits: {"smithy.api#required" => {}}))
     TestGridVpcConfig.type = Types::TestGridVpcConfig
-    TestParameters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    TestParameters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    TestParameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    TestParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     TestType.add_member(:builtin_fuzz, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUILTIN_FUZZ", traits: {"smithy.api#enumValue" => "BUILTIN_FUZZ"}))
     TestType.add_member(:appium_java_junit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPIUM_JAVA_JUNIT", traits: {"smithy.api#enumValue" => "APPIUM_JAVA_JUNIT"}))
     TestType.add_member(:appium_java_testng, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPIUM_JAVA_TESTNG", traits: {"smithy.api#enumValue" => "APPIUM_JAVA_TESTNG"}))
@@ -1273,7 +1273,7 @@ module Aws::DeviceFarm
     TestType.add_member(:instrumentation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTRUMENTATION", traits: {"smithy.api#enumValue" => "INSTRUMENTATION"}))
     TestType.add_member(:xctest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "XCTEST", traits: {"smithy.api#enumValue" => "XCTEST"}))
     TestType.add_member(:xctest_ui, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "XCTEST_UI", traits: {"smithy.api#enumValue" => "XCTEST_UI"}))
-    Tests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Test, name: "member")
+    Tests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Test, name: "member"))
     TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     TooManyTagsException.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceName"))
     TooManyTagsException.type = Types::TooManyTagsException
@@ -1283,9 +1283,9 @@ module Aws::DeviceFarm
     UniqueProblem.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     UniqueProblem.add_member(:problems, ::Smithy::Schema::Shapes::MemberShape.new(target: Problems, name: "problems"))
     UniqueProblem.type = Types::UniqueProblem
-    UniqueProblems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UniqueProblem, name: "member")
-    UniqueProblemsByExecutionResultMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionResult, name: "key")
-    UniqueProblemsByExecutionResultMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: UniqueProblems, name: "value")
+    UniqueProblems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UniqueProblem, name: "member"))
+    UniqueProblemsByExecutionResultMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionResult, name: "key"))
+    UniqueProblemsByExecutionResultMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: UniqueProblems, name: "value"))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceFarmArn, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -1407,20 +1407,20 @@ module Aws::DeviceFarm
     UploadType.add_member(:appium_web_ruby_test_spec, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPIUM_WEB_RUBY_TEST_SPEC", traits: {"smithy.api#enumValue" => "APPIUM_WEB_RUBY_TEST_SPEC"}))
     UploadType.add_member(:instrumentation_test_spec, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTRUMENTATION_TEST_SPEC", traits: {"smithy.api#enumValue" => "INSTRUMENTATION_TEST_SPEC"}))
     UploadType.add_member(:xctest_ui_test_spec, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "XCTEST_UI_TEST_SPEC", traits: {"smithy.api#enumValue" => "XCTEST_UI_TEST_SPEC"}))
-    Uploads.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Upload, name: "member")
+    Uploads.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Upload, name: "member"))
     VPCEConfiguration.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "arn"))
     VPCEConfiguration.add_member(:vpce_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VPCEConfigurationName, name: "vpceConfigurationName"))
     VPCEConfiguration.add_member(:vpce_service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VPCEServiceName, name: "vpceServiceName"))
     VPCEConfiguration.add_member(:service_dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceDnsName, name: "serviceDnsName"))
     VPCEConfiguration.add_member(:vpce_configuration_description, ::Smithy::Schema::Shapes::MemberShape.new(target: VPCEConfigurationDescription, name: "vpceConfigurationDescription"))
     VPCEConfiguration.type = Types::VPCEConfiguration
-    VPCEConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VPCEConfiguration, name: "member")
+    VPCEConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VPCEConfiguration, name: "member"))
     VpcConfig.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcSecurityGroupIds, name: "securityGroupIds", traits: {"smithy.api#required" => {}}))
     VpcConfig.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcSubnetIds, name: "subnetIds", traits: {"smithy.api#required" => {}}))
     VpcConfig.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "vpcId", traits: {"smithy.api#required" => {}}))
     VpcConfig.type = Types::VpcConfig
-    VpcSecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
-    VpcSubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
+    VpcSecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
+    VpcSubnetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
 
     DeviceFarm20150623 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.devicefarm#DeviceFarm_20150623"

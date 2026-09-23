@@ -321,21 +321,21 @@ module Aws::Amp
     EksConfiguration.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, name: "securityGroupIds"))
     EksConfiguration.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, name: "subnetIds", traits: {"smithy.api#required" => {}}))
     EksConfiguration.type = Types::EksConfiguration
-    FilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member")
+    FilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member"))
     GetDefaultScraperConfigurationRequest.type = Types::GetDefaultScraperConfigurationRequest
     GetDefaultScraperConfigurationResponse.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Blob, name: "configuration", traits: {"smithy.api#required" => {}}))
     GetDefaultScraperConfigurationResponse.type = Types::GetDefaultScraperConfigurationResponse
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     InternalServerException.type = Types::InternalServerException
-    LabelSet.key = ::Smithy::Schema::Shapes::MemberShape.new(target: LabelName, name: "key")
-    LabelSet.value = ::Smithy::Schema::Shapes::MemberShape.new(target: LabelValue, name: "value")
+    LabelSet.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelName, name: "key"))
+    LabelSet.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelValue, name: "value"))
     LimitsPerLabelSet.add_member(:limits, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitsPerLabelSetEntry, name: "limits", traits: {"smithy.api#required" => {}}))
     LimitsPerLabelSet.add_member(:label_set, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelSet, name: "labelSet", traits: {"smithy.api#required" => {}}))
     LimitsPerLabelSet.type = Types::LimitsPerLabelSet
     LimitsPerLabelSetEntry.add_member(:max_series, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "maxSeries", traits: {"smithy.api#range" => {"min" => 0}}))
     LimitsPerLabelSetEntry.type = Types::LimitsPerLabelSetEntry
-    LimitsPerLabelSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LimitsPerLabelSet, name: "member")
+    LimitsPerLabelSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitsPerLabelSet, name: "member"))
     ListRuleGroupsNamespacesInput.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "workspaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListRuleGroupsNamespacesInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupsNamespaceName, name: "name", traits: {"smithy.api#httpQuery" => "name"}))
     ListRuleGroupsNamespacesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -374,7 +374,7 @@ module Aws::Amp
     LoggingDestination.add_member(:cloud_watch_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogDestination, name: "cloudWatchLogs", traits: {"smithy.api#required" => {}}))
     LoggingDestination.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingFilter, name: "filters", traits: {"smithy.api#required" => {}}))
     LoggingDestination.type = Types::LoggingDestination
-    LoggingDestinations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingDestination, name: "member")
+    LoggingDestinations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingDestination, name: "member"))
     LoggingFilter.add_member(:qsp_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "qspThreshold", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
     LoggingFilter.type = Types::LoggingFilter
     PutAlertManagerDefinitionInput.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "workspaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -435,14 +435,14 @@ module Aws::Amp
     RuleGroupsNamespaceSummary.add_member(:modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "modifiedAt", traits: {"smithy.api#required" => {}}))
     RuleGroupsNamespaceSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     RuleGroupsNamespaceSummary.type = Types::RuleGroupsNamespaceSummary
-    RuleGroupsNamespaceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupsNamespaceSummary, name: "member")
+    RuleGroupsNamespaceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupsNamespaceSummary, name: "member"))
     ScrapeConfiguration.add_member(:configuration_blob, Types::ScrapeConfiguration::ConfigurationBlob, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Blob, name: "configurationBlob"))
     ScrapeConfiguration.add_member(:unknown, Types::ScrapeConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ScrapeConfiguration.type = Types::ScrapeConfiguration
     ScraperComponent.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScraperComponentType, name: "type", traits: {"smithy.api#required" => {}}))
     ScraperComponent.add_member(:config, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentConfig, name: "config"))
     ScraperComponent.type = Types::ScraperComponent
-    ScraperComponents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScraperComponent, name: "member")
+    ScraperComponents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScraperComponent, name: "member"))
     ScraperDescription.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: ScraperAlias, name: "alias"))
     ScraperDescription.add_member(:scraper_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ScraperId, name: "scraperId", traits: {"smithy.api#required" => {}}))
     ScraperDescription.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScraperArn, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -457,8 +457,8 @@ module Aws::Amp
     ScraperDescription.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "destination", traits: {"smithy.api#required" => {}}))
     ScraperDescription.add_member(:role_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleConfiguration, name: "roleConfiguration"))
     ScraperDescription.type = Types::ScraperDescription
-    ScraperFilters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterKey, name: "key")
-    ScraperFilters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, name: "value")
+    ScraperFilters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterKey, name: "key"))
+    ScraperFilters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, name: "value"))
     ScraperLoggingConfigurationStatus.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ScraperLoggingConfigurationStatusCode, name: "statusCode", traits: {"smithy.api#required" => {}}))
     ScraperLoggingConfigurationStatus.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
     ScraperLoggingConfigurationStatus.type = Types::ScraperLoggingConfigurationStatus
@@ -480,8 +480,8 @@ module Aws::Amp
     ScraperSummary.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "destination", traits: {"smithy.api#required" => {}}))
     ScraperSummary.add_member(:role_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleConfiguration, name: "roleConfiguration"))
     ScraperSummary.type = Types::ScraperSummary
-    ScraperSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScraperSummary, name: "member")
-    SecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
+    ScraperSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScraperSummary, name: "member"))
+    SecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType", traits: {"smithy.api#required" => {}}))
@@ -491,12 +491,12 @@ module Aws::Amp
     Source.add_member(:eks_configuration, Types::Source::EksConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: EksConfiguration, name: "eksConfiguration"))
     Source.add_member(:unknown, Types::Source::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Source.type = Types::Source
-    StringMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    StringMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
-    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    StringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    StringMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
+    SubnetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -558,7 +558,7 @@ module Aws::Amp
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     WorkspaceConfigurationDescription.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceConfigurationStatus, name: "status", traits: {"smithy.api#required" => {}}))
     WorkspaceConfigurationDescription.add_member(:limits_per_label_set, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitsPerLabelSetList, name: "limitsPerLabelSet"))
     WorkspaceConfigurationDescription.add_member(:retention_period_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "retentionPeriodInDays", traits: {"smithy.api#range" => {"min" => 1}}))
@@ -585,7 +585,7 @@ module Aws::Amp
     WorkspaceSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     WorkspaceSummary.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "kmsKeyArn"))
     WorkspaceSummary.type = Types::WorkspaceSummary
-    WorkspaceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceSummary, name: "member")
+    WorkspaceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceSummary, name: "member"))
 
     AmazonPrometheusService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.amp#AmazonPrometheusService"

@@ -727,14 +727,14 @@ module Aws::Inspector2
     AccountAggregationResponse.add_member(:exploit_available_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "exploitAvailableCount"))
     AccountAggregationResponse.add_member(:fix_available_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "fixAvailableCount"))
     AccountAggregationResponse.type = Types::AccountAggregationResponse
-    AccountIdFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member")
-    AccountIdSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member")
-    AccountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Account, name: "member")
+    AccountIdFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member"))
+    AccountIdSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
+    AccountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Account, name: "member"))
     AccountState.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId", traits: {"smithy.api#required" => {}}))
     AccountState.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: State, name: "state", traits: {"smithy.api#required" => {}}))
     AccountState.add_member(:resource_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceState, name: "resourceState", traits: {"smithy.api#required" => {}}))
     AccountState.type = Types::AccountState
-    AccountStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountState, name: "member")
+    AccountStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountState, name: "member"))
     AggregationRequest.add_member(:account_aggregation, Types::AggregationRequest::AccountAggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAggregation, name: "accountAggregation"))
     AggregationRequest.add_member(:ami_aggregation, Types::AggregationRequest::AmiAggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiAggregation, name: "amiAggregation"))
     AggregationRequest.add_member(:aws_ecr_container_aggregation, Types::AggregationRequest::AwsEcrContainerAggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcrContainerAggregation, name: "awsEcrContainerAggregation"))
@@ -763,7 +763,7 @@ module Aws::Inspector2
     AggregationResponse.add_member(:code_repository_aggregation, Types::AggregationResponse::CodeRepositoryAggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeRepositoryAggregationResponse, name: "codeRepositoryAggregation"))
     AggregationResponse.add_member(:unknown, Types::AggregationResponse::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AggregationResponse.type = Types::AggregationResponse
-    AggregationResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationResponse, name: "member")
+    AggregationResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationResponse, name: "member"))
     AmiAggregation.add_member(:amis, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "amis"))
     AmiAggregation.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "sortOrder"))
     AmiAggregation.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiSortBy, name: "sortBy"))
@@ -773,11 +773,11 @@ module Aws::Inspector2
     AmiAggregationResponse.add_member(:severity_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityCounts, name: "severityCounts"))
     AmiAggregationResponse.add_member(:affected_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "affectedInstances"))
     AmiAggregationResponse.type = Types::AmiAggregationResponse
-    ArchitectureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Architecture, name: "member")
+    ArchitectureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Architecture, name: "member"))
     AssociateConfigurationRequest.add_member(:scan_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanConfigurationArn, name: "scanConfigurationArn", traits: {"smithy.api#required" => {}}))
     AssociateConfigurationRequest.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeSecurityResource, name: "resource", traits: {"smithy.api#required" => {}}))
     AssociateConfigurationRequest.type = Types::AssociateConfigurationRequest
-    AssociateConfigurationRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssociateConfigurationRequest, name: "member")
+    AssociateConfigurationRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociateConfigurationRequest, name: "member"))
     AssociateMemberInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId", traits: {"smithy.api#required" => {}}))
     AssociateMemberInput.type = Types::AssociateMemberInput
     AssociateMemberOutput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId", traits: {"smithy.api#required" => {}}))
@@ -850,7 +850,7 @@ module Aws::Inspector2
     AwsEksWorkloadInfo.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#required" => {}}))
     AwsEksWorkloadInfo.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "type", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#required" => {}}))
     AwsEksWorkloadInfo.type = Types::AwsEksWorkloadInfo
-    AwsEksWorkloadInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEksWorkloadInfo, name: "member")
+    AwsEksWorkloadInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEksWorkloadInfo, name: "member"))
     AwsLambdaFunctionDetails.add_member(:function_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionName, name: "functionName", traits: {"smithy.api#required" => {}}))
     AwsLambdaFunctionDetails.add_member(:runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: Runtime, name: "runtime", traits: {"smithy.api#required" => {}}))
     AwsLambdaFunctionDetails.add_member(:code_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "codeSha256", traits: {"smithy.api#required" => {}}))
@@ -912,8 +912,8 @@ module Aws::Inspector2
     CancelSbomExportRequest.type = Types::CancelSbomExportRequest
     CancelSbomExportResponse.add_member(:report_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportId, name: "reportId"))
     CancelSbomExportResponse.type = Types::CancelSbomExportResponse
-    CheckIdFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member")
-    CisAccountIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member")
+    CheckIdFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member"))
+    CisAccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
     CisCheckAggregation.add_member(:scan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CisScanArn, name: "scanArn", traits: {"smithy.api#required" => {}}))
     CisCheckAggregation.add_member(:check_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "checkId"))
     CisCheckAggregation.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "title"))
@@ -923,11 +923,11 @@ module Aws::Inspector2
     CisCheckAggregation.add_member(:status_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusCounts, name: "statusCounts"))
     CisCheckAggregation.add_member(:platform, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "platform"))
     CisCheckAggregation.type = Types::CisCheckAggregation
-    CisCheckAggregationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisCheckAggregation, name: "member")
+    CisCheckAggregationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisCheckAggregation, name: "member"))
     CisDateFilter.add_member(:earliest_scan_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "earliestScanStartTime"))
     CisDateFilter.add_member(:latest_scan_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "latestScanStartTime"))
     CisDateFilter.type = Types::CisDateFilter
-    CisFindingArnFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member")
+    CisFindingArnFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member"))
     CisFindingStatus.add_member(:passed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASSED", traits: {"smithy.api#enumValue" => "PASSED"}))
     CisFindingStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     CisFindingStatus.add_member(:skipped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SKIPPED", traits: {"smithy.api#enumValue" => "SKIPPED"}))
@@ -935,11 +935,11 @@ module Aws::Inspector2
     CisFindingStatusFilter.add_member(:comparison, ::Smithy::Schema::Shapes::MemberShape.new(target: CisFindingStatusComparison, name: "comparison", traits: {"smithy.api#required" => {}}))
     CisFindingStatusFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CisFindingStatus, name: "value", traits: {"smithy.api#required" => {}}))
     CisFindingStatusFilter.type = Types::CisFindingStatusFilter
-    CisFindingStatusFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisFindingStatusFilter, name: "member")
+    CisFindingStatusFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisFindingStatusFilter, name: "member"))
     CisNumberFilter.add_member(:upper_inclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "upperInclusive"))
     CisNumberFilter.add_member(:lower_inclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "lowerInclusive"))
     CisNumberFilter.type = Types::CisNumberFilter
-    CisNumberFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisNumberFilter, name: "member")
+    CisNumberFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisNumberFilter, name: "member"))
     CisReportFormat.add_member(:pdf, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PDF", traits: {"smithy.api#enumValue" => "PDF"}))
     CisReportFormat.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
     CisReportStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
@@ -952,7 +952,7 @@ module Aws::Inspector2
     CisResultStatusFilter.add_member(:comparison, ::Smithy::Schema::Shapes::MemberShape.new(target: CisResultStatusComparison, name: "comparison", traits: {"smithy.api#required" => {}}))
     CisResultStatusFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CisResultStatus, name: "value", traits: {"smithy.api#required" => {}}))
     CisResultStatusFilter.type = Types::CisResultStatusFilter
-    CisResultStatusFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisResultStatusFilter, name: "member")
+    CisResultStatusFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisResultStatusFilter, name: "member"))
     CisRuleStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     CisRuleStatus.add_member(:passed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASSED", traits: {"smithy.api#enumValue" => "PASSED"}))
     CisRuleStatus.add_member(:not_evaluated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_EVALUATED", traits: {"smithy.api#enumValue" => "NOT_EVALUATED"}))
@@ -971,7 +971,7 @@ module Aws::Inspector2
     CisScan.add_member(:scheduled_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "scheduledBy"))
     CisScan.add_member(:security_level, ::Smithy::Schema::Shapes::MemberShape.new(target: CisSecurityLevel, name: "securityLevel"))
     CisScan.type = Types::CisScan
-    CisScanArnFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member")
+    CisScanArnFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member"))
     CisScanConfiguration.add_member(:scan_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CisScanConfigurationArn, name: "scanConfigurationArn", traits: {"smithy.api#required" => {}}))
     CisScanConfiguration.add_member(:owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CisOwnerId, name: "ownerId"))
     CisScanConfiguration.add_member(:scan_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CisScanName, name: "scanName"))
@@ -980,13 +980,13 @@ module Aws::Inspector2
     CisScanConfiguration.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: CisTargets, name: "targets"))
     CisScanConfiguration.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: CisTagMap, name: "tags"))
     CisScanConfiguration.type = Types::CisScanConfiguration
-    CisScanConfigurationArnFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member")
-    CisScanConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisScanConfiguration, name: "member")
+    CisScanConfigurationArnFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member"))
+    CisScanConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisScanConfiguration, name: "member"))
     CisScanConfigurationsSortBy.add_member(:scan_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCAN_NAME", traits: {"smithy.api#enumValue" => "SCAN_NAME"}))
     CisScanConfigurationsSortBy.add_member(:scan_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCAN_CONFIGURATION_ARN", traits: {"smithy.api#enumValue" => "SCAN_CONFIGURATION_ARN"}))
-    CisScanDateFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisDateFilter, name: "member")
-    CisScanList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisScan, name: "member")
-    CisScanNameFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member")
+    CisScanDateFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisDateFilter, name: "member"))
+    CisScanList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisScan, name: "member"))
+    CisScanNameFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member"))
     CisScanResultDetails.add_member(:scan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CisScanArn, name: "scanArn", traits: {"smithy.api#required" => {}}))
     CisScanResultDetails.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId"))
     CisScanResultDetails.add_member(:target_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "targetResourceId"))
@@ -1006,7 +1006,7 @@ module Aws::Inspector2
     CisScanResultDetailsFilterCriteria.add_member(:security_level_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: CisSecurityLevelFilterList, name: "securityLevelFilters"))
     CisScanResultDetailsFilterCriteria.add_member(:finding_arn_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: CisFindingArnFilterList, name: "findingArnFilters"))
     CisScanResultDetailsFilterCriteria.type = Types::CisScanResultDetailsFilterCriteria
-    CisScanResultDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisScanResultDetails, name: "member")
+    CisScanResultDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisScanResultDetails, name: "member"))
     CisScanResultDetailsSortBy.add_member(:check_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CHECK_ID", traits: {"smithy.api#enumValue" => "CHECK_ID"}))
     CisScanResultDetailsSortBy.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATUS", traits: {"smithy.api#enumValue" => "STATUS"}))
     CisScanResultsAggregatedByChecksFilterCriteria.add_member(:account_id_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: OneAccountIdFilterList, name: "accountIdFilters"))
@@ -1045,20 +1045,20 @@ module Aws::Inspector2
     CisScanStatusFilter.add_member(:comparison, ::Smithy::Schema::Shapes::MemberShape.new(target: CisScanStatusComparison, name: "comparison", traits: {"smithy.api#required" => {}}))
     CisScanStatusFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CisScanStatus, name: "value", traits: {"smithy.api#required" => {}}))
     CisScanStatusFilter.type = Types::CisScanStatusFilter
-    CisScanStatusFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisScanStatusFilter, name: "member")
-    CisScheduledByFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member")
+    CisScanStatusFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisScanStatusFilter, name: "member"))
+    CisScheduledByFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member"))
     CisSecurityLevel.add_member(:level_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LEVEL_1", traits: {"smithy.api#enumValue" => "LEVEL_1"}))
     CisSecurityLevel.add_member(:level_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LEVEL_2", traits: {"smithy.api#enumValue" => "LEVEL_2"}))
     CisSecurityLevelComparison.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUALS", traits: {"smithy.api#enumValue" => "EQUALS"}))
     CisSecurityLevelFilter.add_member(:comparison, ::Smithy::Schema::Shapes::MemberShape.new(target: CisSecurityLevelComparison, name: "comparison", traits: {"smithy.api#required" => {}}))
     CisSecurityLevelFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CisSecurityLevel, name: "value", traits: {"smithy.api#required" => {}}))
     CisSecurityLevelFilter.type = Types::CisSecurityLevelFilter
-    CisSecurityLevelFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisSecurityLevelFilter, name: "member")
+    CisSecurityLevelFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisSecurityLevelFilter, name: "member"))
     CisSessionMessage.add_member(:rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleId, name: "ruleId", traits: {"smithy.api#required" => {}}))
     CisSessionMessage.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CisRuleStatus, name: "status", traits: {"smithy.api#required" => {}}))
     CisSessionMessage.add_member(:cis_rule_details, ::Smithy::Schema::Shapes::MemberShape.new(target: CisRuleDetails, name: "cisRuleDetails", traits: {"smithy.api#required" => {}}))
     CisSessionMessage.type = Types::CisSessionMessage
-    CisSessionMessages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisSessionMessage, name: "member")
+    CisSessionMessages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisSessionMessage, name: "member"))
     CisSortOrder.add_member(:asc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASC", traits: {"smithy.api#enumValue" => "ASC"}))
     CisSortOrder.add_member(:desc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESC", traits: {"smithy.api#enumValue" => "DESC"}))
     CisStringComparison.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUALS", traits: {"smithy.api#enumValue" => "EQUALS"}))
@@ -1067,8 +1067,8 @@ module Aws::Inspector2
     CisStringFilter.add_member(:comparison, ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringComparison, name: "comparison", traits: {"smithy.api#required" => {}}))
     CisStringFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#required" => {}}))
     CisStringFilter.type = Types::CisStringFilter
-    CisTagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: MapKey, name: "key")
-    CisTagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: MapValue, name: "value")
+    CisTagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: MapKey, name: "key"))
+    CisTagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MapValue, name: "value"))
     CisTargetResourceAggregation.add_member(:scan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CisScanArn, name: "scanArn", traits: {"smithy.api#required" => {}}))
     CisTargetResourceAggregation.add_member(:target_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "targetResourceId"))
     CisTargetResourceAggregation.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId"))
@@ -1078,7 +1078,7 @@ module Aws::Inspector2
     CisTargetResourceAggregation.add_member(:target_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CisTargetStatus, name: "targetStatus"))
     CisTargetResourceAggregation.add_member(:target_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: CisTargetStatusReason, name: "targetStatusReason"))
     CisTargetResourceAggregation.type = Types::CisTargetResourceAggregation
-    CisTargetResourceAggregationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisTargetResourceAggregation, name: "member")
+    CisTargetResourceAggregationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisTargetResourceAggregation, name: "member"))
     CisTargetStatus.add_member(:timed_out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMED_OUT", traits: {"smithy.api#enumValue" => "TIMED_OUT"}))
     CisTargetStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
     CisTargetStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
@@ -1104,13 +1104,13 @@ module Aws::Inspector2
     ClusterDetails.add_member(:stopped_unit_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "stoppedUnitCount"))
     ClusterDetails.add_member(:cluster_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterMetadata, name: "clusterMetadata", traits: {"smithy.api#required" => {}}))
     ClusterDetails.type = Types::ClusterDetails
-    ClusterDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterDetails, name: "member")
+    ClusterDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterDetails, name: "member"))
     ClusterForImageFilterCriteria.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#pattern" => "^arn:.*:ecr:.*:\\d{12}:repository\\/(?:[a-z0-9]+(?:[._-][a-z0-9]+)*\\/)*[a-z0-9]+(?:[._-][a-z0-9]+)*(\\/sha256:[a-z0-9]{64})?$", "smithy.api#required" => {}}))
     ClusterForImageFilterCriteria.type = Types::ClusterForImageFilterCriteria
     ClusterInformation.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clusterArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(?:-[a-z0-9-]+)?:(?:ecs|eks):[a-z0-9-]+:[0-9]{12}:cluster/[a-zA-Z0-9_-]+$", "smithy.api#required" => {}}))
     ClusterInformation.add_member(:cluster_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterDetailsList, name: "clusterDetails", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}}))
     ClusterInformation.type = Types::ClusterInformation
-    ClusterInformationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInformation, name: "member")
+    ClusterInformationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInformation, name: "member"))
     ClusterMetadata.add_member(:aws_ecs_metadata_details, Types::ClusterMetadata::AwsEcsMetadataDetails, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcsMetadataDetails, name: "awsEcsMetadataDetails"))
     ClusterMetadata.add_member(:aws_eks_metadata_details, Types::ClusterMetadata::AwsEksMetadataDetails, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEksMetadataDetails, name: "awsEksMetadataDetails"))
     ClusterMetadata.add_member(:unknown, Types::ClusterMetadata::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -1123,7 +1123,7 @@ module Aws::Inspector2
     CodeLine.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "content", traits: {"smithy.api#length" => {"min" => 0, "max" => 240}, "smithy.api#required" => {}}))
     CodeLine.add_member(:line_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "lineNumber", traits: {"smithy.api#required" => {}}))
     CodeLine.type = Types::CodeLine
-    CodeLineList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CodeLine, name: "member")
+    CodeLineList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeLine, name: "member"))
     CodeRepositoryAggregation.add_member(:project_names, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "projectNames"))
     CodeRepositoryAggregation.add_member(:provider_types, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "providerTypes"))
     CodeRepositoryAggregation.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "sortOrder"))
@@ -1174,10 +1174,10 @@ module Aws::Inspector2
     CodeSecurityScanConfiguration.add_member(:continuous_integration_scan_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousIntegrationScanConfiguration, name: "continuousIntegrationScanConfiguration"))
     CodeSecurityScanConfiguration.add_member(:rule_set_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSetCategories, name: "ruleSetCategories", traits: {"smithy.api#required" => {}}))
     CodeSecurityScanConfiguration.type = Types::CodeSecurityScanConfiguration
-    CodeSecurityScanConfigurationAssociationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CodeSecurityScanConfigurationAssociationSummary, name: "member")
+    CodeSecurityScanConfigurationAssociationSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeSecurityScanConfigurationAssociationSummary, name: "member"))
     CodeSecurityScanConfigurationAssociationSummary.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeSecurityResource, name: "resource"))
     CodeSecurityScanConfigurationAssociationSummary.type = Types::CodeSecurityScanConfigurationAssociationSummary
-    CodeSecurityScanConfigurationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CodeSecurityScanConfigurationSummary, name: "member")
+    CodeSecurityScanConfigurationSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeSecurityScanConfigurationSummary, name: "member"))
     CodeSecurityScanConfigurationSummary.add_member(:scan_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanConfigurationArn, name: "scanConfigurationArn", traits: {"smithy.api#required" => {}}))
     CodeSecurityScanConfigurationSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanConfigurationName, name: "name", traits: {"smithy.api#required" => {}}))
     CodeSecurityScanConfigurationSummary.add_member(:owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerId, name: "ownerAccountId", traits: {"smithy.api#required" => {}}))
@@ -1192,14 +1192,14 @@ module Aws::Inspector2
     CodeSnippetError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeSnippetErrorCode, name: "errorCode", traits: {"smithy.api#required" => {}}))
     CodeSnippetError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "errorMessage", traits: {"smithy.api#required" => {}}))
     CodeSnippetError.type = Types::CodeSnippetError
-    CodeSnippetErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CodeSnippetError, name: "member")
+    CodeSnippetErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeSnippetError, name: "member"))
     CodeSnippetResult.add_member(:finding_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingArn, name: "findingArn"))
     CodeSnippetResult.add_member(:start_line, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "startLine"))
     CodeSnippetResult.add_member(:end_line, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "endLine"))
     CodeSnippetResult.add_member(:code_snippet, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeLineList, name: "codeSnippet"))
     CodeSnippetResult.add_member(:suggested_fixes, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestedFixes, name: "suggestedFixes"))
     CodeSnippetResult.type = Types::CodeSnippetResult
-    CodeSnippetResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CodeSnippetResult, name: "member")
+    CodeSnippetResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeSnippetResult, name: "member"))
     CodeVulnerabilityDetails.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeFilePath, name: "filePath", traits: {"smithy.api#required" => {}}))
     CodeVulnerabilityDetails.add_member(:detector_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorTagList, name: "detectorTags"))
     CodeVulnerabilityDetails.add_member(:reference_urls, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceUrls, name: "referenceUrls"))
@@ -1223,15 +1223,15 @@ module Aws::Inspector2
     ContinuousIntegrationScanConfiguration.type = Types::ContinuousIntegrationScanConfiguration
     ContinuousIntegrationScanEvent.add_member(:pull_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PULL_REQUEST", traits: {"smithy.api#enumValue" => "PULL_REQUEST"}))
     ContinuousIntegrationScanEvent.add_member(:push, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUSH", traits: {"smithy.api#enumValue" => "PUSH"}))
-    ContinuousIntegrationScanSupportedEvents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousIntegrationScanEvent, name: "member")
+    ContinuousIntegrationScanSupportedEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousIntegrationScanEvent, name: "member"))
     Counts.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: AggCounts, name: "count", traits: {"smithy.api#default" => 0}))
     Counts.add_member(:group_key, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupKey, name: "groupKey"))
     Counts.type = Types::Counts
-    CountsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Counts, name: "member")
+    CountsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Counts, name: "member"))
     CoverageDateFilter.add_member(:start_inclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeTimestamp, name: "startInclusive"))
     CoverageDateFilter.add_member(:end_inclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeTimestamp, name: "endInclusive"))
     CoverageDateFilter.type = Types::CoverageDateFilter
-    CoverageDateFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageDateFilter, name: "member")
+    CoverageDateFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageDateFilter, name: "member"))
     CoverageFilterCriteria.add_member(:scan_status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStringFilterList, name: "scanStatusCode"))
     CoverageFilterCriteria.add_member(:scan_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStringFilterList, name: "scanStatusReason"))
     CoverageFilterCriteria.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStringFilterList, name: "accountId"))
@@ -1258,15 +1258,15 @@ module Aws::Inspector2
     CoverageMapFilter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key", traits: {"smithy.api#required" => {}}))
     CoverageMapFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value"))
     CoverageMapFilter.type = Types::CoverageMapFilter
-    CoverageMapFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageMapFilter, name: "member")
+    CoverageMapFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageMapFilter, name: "member"))
     CoverageNumberFilter.add_member(:upper_inclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "upperInclusive"))
     CoverageNumberFilter.add_member(:lower_inclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "lowerInclusive"))
     CoverageNumberFilter.type = Types::CoverageNumberFilter
-    CoverageNumberFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageNumberFilter, name: "member")
+    CoverageNumberFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageNumberFilter, name: "member"))
     CoverageStringFilter.add_member(:comparison, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStringComparison, name: "comparison", traits: {"smithy.api#required" => {}}))
     CoverageStringFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStringInput, name: "value", traits: {"smithy.api#required" => {}}))
     CoverageStringFilter.type = Types::CoverageStringFilter
-    CoverageStringFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStringFilter, name: "member")
+    CoverageStringFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStringFilter, name: "member"))
     CoveredResource.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageResourceType, name: "resourceType", traits: {"smithy.api#required" => {}}))
     CoveredResource.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "resourceId", traits: {"smithy.api#required" => {}}))
     CoveredResource.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId", traits: {"smithy.api#required" => {}}))
@@ -1276,7 +1276,7 @@ module Aws::Inspector2
     CoveredResource.add_member(:last_scanned_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeTimestamp, name: "lastScannedAt"))
     CoveredResource.add_member(:scan_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanMode, name: "scanMode"))
     CoveredResource.type = Types::CoveredResource
-    CoveredResources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CoveredResource, name: "member")
+    CoveredResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoveredResource, name: "member"))
     CreateCisScanConfigurationRequest.add_member(:scan_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CisScanName, name: "scanName", traits: {"smithy.api#required" => {}}))
     CreateCisScanConfigurationRequest.add_member(:security_level, ::Smithy::Schema::Shapes::MemberShape.new(target: CisSecurityLevel, name: "securityLevel", traits: {"smithy.api#required" => {}}))
     CreateCisScanConfigurationRequest.add_member(:schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: Schedule, name: "schedule", traits: {"smithy.api#required" => {}}))
@@ -1349,7 +1349,7 @@ module Aws::Inspector2
     CvssScoreAdjustment.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "metric", traits: {"smithy.api#required" => {}}))
     CvssScoreAdjustment.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "reason", traits: {"smithy.api#required" => {}}))
     CvssScoreAdjustment.type = Types::CvssScoreAdjustment
-    CvssScoreAdjustmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CvssScoreAdjustment, name: "member")
+    CvssScoreAdjustmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CvssScoreAdjustment, name: "member"))
     CvssScoreDetails.add_member(:score_source, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "scoreSource", traits: {"smithy.api#required" => {}}))
     CvssScoreDetails.add_member(:cvss_source, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "cvssSource"))
     CvssScoreDetails.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "version", traits: {"smithy.api#required" => {}}))
@@ -1357,15 +1357,15 @@ module Aws::Inspector2
     CvssScoreDetails.add_member(:scoring_vector, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "scoringVector", traits: {"smithy.api#required" => {}}))
     CvssScoreDetails.add_member(:adjustments, ::Smithy::Schema::Shapes::MemberShape.new(target: CvssScoreAdjustmentList, name: "adjustments"))
     CvssScoreDetails.type = Types::CvssScoreDetails
-    CvssScoreList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CvssScore, name: "member")
-    CweList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
-    Cwes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Cwe, name: "member")
+    CvssScoreList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CvssScore, name: "member"))
+    CweList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
+    Cwes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Cwe, name: "member"))
     DailySchedule.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "startTime", traits: {"smithy.api#required" => {}}))
     DailySchedule.type = Types::DailySchedule
     DateFilter.add_member(:start_inclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "startInclusive"))
     DateFilter.add_member(:end_inclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "endInclusive"))
     DateFilter.type = Types::DateFilter
-    DateFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DateFilter, name: "member")
+    DateFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DateFilter, name: "member"))
     Day.add_member(:sun, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUN", traits: {"smithy.api#enumValue" => "SUN"}))
     Day.add_member(:mon, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MON", traits: {"smithy.api#enumValue" => "MON"}))
     Day.add_member(:tue, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TUE", traits: {"smithy.api#enumValue" => "TUE"}))
@@ -1373,14 +1373,14 @@ module Aws::Inspector2
     Day.add_member(:thu, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THU", traits: {"smithy.api#enumValue" => "THU"}))
     Day.add_member(:fri, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FRI", traits: {"smithy.api#enumValue" => "FRI"}))
     Day.add_member(:sat, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAT", traits: {"smithy.api#enumValue" => "SAT"}))
-    DaysList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Day, name: "member")
+    DaysList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Day, name: "member"))
     DelegatedAdmin.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId"))
     DelegatedAdmin.add_member(:relationship_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RelationshipStatus, name: "relationshipStatus"))
     DelegatedAdmin.type = Types::DelegatedAdmin
     DelegatedAdminAccount.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId"))
     DelegatedAdminAccount.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegatedAdminStatus, name: "status"))
     DelegatedAdminAccount.type = Types::DelegatedAdminAccount
-    DelegatedAdminAccountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DelegatedAdminAccount, name: "member")
+    DelegatedAdminAccountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DelegatedAdminAccount, name: "member"))
     DeleteCisScanConfigurationRequest.add_member(:scan_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CisScanConfigurationArn, name: "scanConfigurationArn", traits: {"smithy.api#required" => {}}))
     DeleteCisScanConfigurationRequest.type = Types::DeleteCisScanConfigurationRequest
     DeleteCisScanConfigurationResponse.add_member(:scan_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CisScanConfigurationArn, name: "scanConfigurationArn", traits: {"smithy.api#required" => {}}))
@@ -1405,8 +1405,8 @@ module Aws::Inspector2
     Destination.add_member(:key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "keyPrefix"))
     Destination.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "kmsKeyArn", traits: {"smithy.api#required" => {}}))
     Destination.type = Types::Destination
-    DetectionPlatforms.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
-    DetectorTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    DetectionPlatforms.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
+    DetectorTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     DisableDelegatedAdminAccountInput.add_member(:delegated_admin_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "delegatedAdminAccountId", traits: {"smithy.api#required" => {}}))
     DisableDelegatedAdminAccountInput.type = Types::DisableDelegatedAdminAccountInput
     DisableDelegatedAdminAccountOutput.add_member(:delegated_admin_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "delegatedAdminAccountId", traits: {"smithy.api#required" => {}}))
@@ -1417,11 +1417,11 @@ module Aws::Inspector2
     DisableOutput.add_member(:accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountList, name: "accounts", traits: {"smithy.api#required" => {}}))
     DisableOutput.add_member(:failed_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedAccountList, name: "failedAccounts"))
     DisableOutput.type = Types::DisableOutput
-    DisableResourceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceScanType, name: "member")
+    DisableResourceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceScanType, name: "member"))
     DisassociateConfigurationRequest.add_member(:scan_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanConfigurationArn, name: "scanConfigurationArn", traits: {"smithy.api#required" => {}}))
     DisassociateConfigurationRequest.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeSecurityResource, name: "resource", traits: {"smithy.api#required" => {}}))
     DisassociateConfigurationRequest.type = Types::DisassociateConfigurationRequest
-    DisassociateConfigurationRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DisassociateConfigurationRequest, name: "member")
+    DisassociateConfigurationRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DisassociateConfigurationRequest, name: "member"))
     DisassociateMemberInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId", traits: {"smithy.api#required" => {}}))
     DisassociateMemberInput.type = Types::DisassociateMemberInput
     DisassociateMemberOutput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId", traits: {"smithy.api#required" => {}}))
@@ -1484,7 +1484,7 @@ module Aws::Inspector2
     EnableOutput.add_member(:accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountList, name: "accounts", traits: {"smithy.api#required" => {}}))
     EnableOutput.add_member(:failed_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedAccountList, name: "failedAccounts"))
     EnableOutput.type = Types::EnableOutput
-    EnableResourceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceScanType, name: "member")
+    EnableResourceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceScanType, name: "member"))
     Epss.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: EpssScore, name: "score", traits: {"smithy.api#default" => 0}))
     Epss.type = Types::Epss
     EpssDetails.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: EpssScoreValue, name: "score", traits: {"smithy.api#default" => 0}))
@@ -1493,7 +1493,7 @@ module Aws::Inspector2
     Evidence.add_member(:evidence_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: EvidenceDetail, name: "evidenceDetail"))
     Evidence.add_member(:severity, ::Smithy::Schema::Shapes::MemberShape.new(target: EvidenceSeverity, name: "severity"))
     Evidence.type = Types::Evidence
-    EvidenceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Evidence, name: "member")
+    EvidenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Evidence, name: "member"))
     ExploitObserved.add_member(:last_seen, ::Smithy::Schema::Shapes::MemberShape.new(target: LastSeen, name: "lastSeen"))
     ExploitObserved.add_member(:first_seen, ::Smithy::Schema::Shapes::MemberShape.new(target: FirstSeen, name: "firstSeen"))
     ExploitObserved.type = Types::ExploitObserved
@@ -1505,18 +1505,18 @@ module Aws::Inspector2
     FailedAccount.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "errorCode", traits: {"smithy.api#required" => {}}))
     FailedAccount.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "errorMessage", traits: {"smithy.api#required" => {}}))
     FailedAccount.type = Types::FailedAccount
-    FailedAccountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedAccount, name: "member")
+    FailedAccountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedAccount, name: "member"))
     FailedAssociationResult.add_member(:scan_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanConfigurationArn, name: "scanConfigurationArn"))
     FailedAssociationResult.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeSecurityResource, name: "resource"))
     FailedAssociationResult.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationResultStatusCode, name: "statusCode"))
     FailedAssociationResult.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationResultStatusMessage, name: "statusMessage"))
     FailedAssociationResult.type = Types::FailedAssociationResult
-    FailedAssociationResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedAssociationResult, name: "member")
+    FailedAssociationResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedAssociationResult, name: "member"))
     FailedMemberAccountEc2DeepInspectionStatusState.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId", traits: {"smithy.api#required" => {}}))
     FailedMemberAccountEc2DeepInspectionStatusState.add_member(:ec2_scan_status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "ec2ScanStatus"))
     FailedMemberAccountEc2DeepInspectionStatusState.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "errorMessage"))
     FailedMemberAccountEc2DeepInspectionStatusState.type = Types::FailedMemberAccountEc2DeepInspectionStatusState
-    FailedMemberAccountEc2DeepInspectionStatusStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedMemberAccountEc2DeepInspectionStatusState, name: "member")
+    FailedMemberAccountEc2DeepInspectionStatusStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedMemberAccountEc2DeepInspectionStatusState, name: "member"))
     Filter.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterArn, name: "arn", traits: {"smithy.api#required" => {}}))
     Filter.add_member(:owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OwnerId, name: "ownerId", traits: {"smithy.api#required" => {}}))
     Filter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -1528,7 +1528,7 @@ module Aws::Inspector2
     Filter.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterReason, name: "reason"))
     Filter.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     Filter.type = Types::Filter
-    FilterArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterArn, name: "member")
+    FilterArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterArn, name: "member"))
     FilterCriteria.add_member(:finding_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "findingArn"))
     FilterCriteria.add_member(:aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "awsAccountId"))
     FilterCriteria.add_member(:finding_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "findingType"))
@@ -1576,7 +1576,7 @@ module Aws::Inspector2
     FilterCriteria.add_member(:code_repository_project_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "codeRepositoryProjectName"))
     FilterCriteria.add_member(:code_repository_provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "codeRepositoryProviderType"))
     FilterCriteria.type = Types::FilterCriteria
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     Finding.add_member(:finding_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingArn, name: "findingArn", traits: {"smithy.api#required" => {}}))
     Finding.add_member(:aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "awsAccountId", traits: {"smithy.api#required" => {}}))
     Finding.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingType, name: "type", traits: {"smithy.api#required" => {}}))
@@ -1599,8 +1599,8 @@ module Aws::Inspector2
     Finding.add_member(:code_vulnerability_details, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeVulnerabilityDetails, name: "codeVulnerabilityDetails"))
     Finding.add_member(:epss, ::Smithy::Schema::Shapes::MemberShape.new(target: EpssDetails, name: "epss"))
     Finding.type = Types::Finding
-    FindingArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingArn, name: "member")
-    FindingArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingArn, name: "member")
+    FindingArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingArn, name: "member"))
+    FindingArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingArn, name: "member"))
     FindingDetail.add_member(:finding_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingArn, name: "findingArn"))
     FindingDetail.add_member(:cisa_data, ::Smithy::Schema::Shapes::MemberShape.new(target: CisaData, name: "cisaData"))
     FindingDetail.add_member(:risk_score, ::Smithy::Schema::Shapes::MemberShape.new(target: RiskScore, name: "riskScore"))
@@ -1612,13 +1612,13 @@ module Aws::Inspector2
     FindingDetail.add_member(:cwes, ::Smithy::Schema::Shapes::MemberShape.new(target: Cwes, name: "cwes"))
     FindingDetail.add_member(:epss_score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "epssScore"))
     FindingDetail.type = Types::FindingDetail
-    FindingDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingDetail, name: "member")
+    FindingDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingDetail, name: "member"))
     FindingDetailsError.add_member(:finding_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingArn, name: "findingArn", traits: {"smithy.api#required" => {}}))
     FindingDetailsError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingDetailsErrorCode, name: "errorCode", traits: {"smithy.api#required" => {}}))
     FindingDetailsError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "errorMessage", traits: {"smithy.api#required" => {}}))
     FindingDetailsError.type = Types::FindingDetailsError
-    FindingDetailsErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingDetailsError, name: "member")
-    FindingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Finding, name: "member")
+    FindingDetailsErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingDetailsError, name: "member"))
+    FindingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Finding, name: "member"))
     FindingTypeAggregation.add_member(:finding_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationFindingType, name: "findingType"))
     FindingTypeAggregation.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationResourceType, name: "resourceType"))
     FindingTypeAggregation.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "sortOrder"))
@@ -1632,7 +1632,7 @@ module Aws::Inspector2
     FreeTrialAccountInfo.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MeteringAccountId, name: "accountId", traits: {"smithy.api#required" => {}}))
     FreeTrialAccountInfo.add_member(:free_trial_info, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialInfoList, name: "freeTrialInfo", traits: {"smithy.api#required" => {}}))
     FreeTrialAccountInfo.type = Types::FreeTrialAccountInfo
-    FreeTrialAccountInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialAccountInfo, name: "member")
+    FreeTrialAccountInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialAccountInfo, name: "member"))
     FreeTrialInfo.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialType, name: "type", traits: {"smithy.api#required" => {}}))
     FreeTrialInfo.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "start", traits: {"smithy.api#required" => {}}))
     FreeTrialInfo.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "end", traits: {"smithy.api#required" => {}}))
@@ -1642,8 +1642,8 @@ module Aws::Inspector2
     FreeTrialInfoError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialInfoErrorCode, name: "code", traits: {"smithy.api#required" => {}}))
     FreeTrialInfoError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     FreeTrialInfoError.type = Types::FreeTrialInfoError
-    FreeTrialInfoErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialInfoError, name: "member")
-    FreeTrialInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialInfo, name: "member")
+    FreeTrialInfoErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialInfoError, name: "member"))
+    FreeTrialInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialInfo, name: "member"))
     GetCisScanReportRequest.add_member(:scan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CisScanArn, name: "scanArn", traits: {"smithy.api#required" => {}}))
     GetCisScanReportRequest.add_member(:target_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportTargetAccounts, name: "targetAccounts"))
     GetCisScanReportRequest.add_member(:report_format, ::Smithy::Schema::Shapes::MemberShape.new(target: CisReportFormat, name: "reportFormat", traits: {"smithy.api#default" => "PDF"}))
@@ -1759,7 +1759,7 @@ module Aws::Inspector2
     ImageLayerAggregationResponse.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId", traits: {"smithy.api#required" => {}}))
     ImageLayerAggregationResponse.add_member(:severity_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityCounts, name: "severityCounts"))
     ImageLayerAggregationResponse.type = Types::ImageLayerAggregationResponse
-    ImageTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    ImageTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     InspectorScoreDetails.add_member(:adjusted_cvss, ::Smithy::Schema::Shapes::MemberShape.new(target: CvssScoreDetails, name: "adjustedCvss"))
     InspectorScoreDetails.type = Types::InspectorScoreDetails
     IntegrationStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
@@ -1767,14 +1767,14 @@ module Aws::Inspector2
     IntegrationStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     IntegrationStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "INACTIVE"}))
     IntegrationStatus.add_member(:disabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLING", traits: {"smithy.api#enumValue" => "DISABLING"}))
-    IntegrationSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CodeSecurityIntegrationSummary, name: "member")
+    IntegrationSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeSecurityIntegrationSummary, name: "member"))
     IntegrationType.add_member(:gitlab_self_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GITLAB_SELF_MANAGED", traits: {"smithy.api#enumValue" => "GITLAB_SELF_MANAGED"}))
     IntegrationType.add_member(:github, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GITHUB", traits: {"smithy.api#enumValue" => "GITHUB"}))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     InternalServerException.type = Types::InternalServerException
-    IpV4AddressList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpV4Address, name: "member")
-    IpV6AddressList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpV6Address, name: "member")
+    IpV4AddressList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpV4Address, name: "member"))
+    IpV6AddressList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpV6Address, name: "member"))
     LambdaFunctionAggregation.add_member(:resource_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "resourceIds"))
     LambdaFunctionAggregation.add_member(:function_names, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "functionNames"))
     LambdaFunctionAggregation.add_member(:runtimes, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "runtimes"))
@@ -1807,12 +1807,12 @@ module Aws::Inspector2
     LambdaLayerAggregationResponse.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId", traits: {"smithy.api#required" => {}}))
     LambdaLayerAggregationResponse.add_member(:severity_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityCounts, name: "severityCounts"))
     LambdaLayerAggregationResponse.type = Types::LambdaLayerAggregationResponse
-    LambdaLayerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    LambdaLayerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     LambdaVpcConfig.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIdList, name: "subnetIds"))
     LambdaVpcConfig.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIdList, name: "securityGroupIds"))
     LambdaVpcConfig.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "vpcId"))
     LambdaVpcConfig.type = Types::LambdaVpcConfig
-    LayerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaLayerArn, name: "member")
+    LayerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaLayerArn, name: "member"))
     ListAccountPermissionsInput.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "service"))
     ListAccountPermissionsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListAccountPermissionsMaxResults, name: "maxResults"))
     ListAccountPermissionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
@@ -1968,7 +1968,7 @@ module Aws::Inspector2
     MapFilter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: MapKey, name: "key", traits: {"smithy.api#required" => {}}))
     MapFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MapValue, name: "value"))
     MapFilter.type = Types::MapFilter
-    MapFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MapFilter, name: "member")
+    MapFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MapFilter, name: "member"))
     Member.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId"))
     Member.add_member(:relationship_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RelationshipStatus, name: "relationshipStatus"))
     Member.add_member(:delegated_admin_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "delegatedAdminAccountId"))
@@ -1977,14 +1977,14 @@ module Aws::Inspector2
     MemberAccountEc2DeepInspectionStatus.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId", traits: {"smithy.api#required" => {}}))
     MemberAccountEc2DeepInspectionStatus.add_member(:activate_deep_inspection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "activateDeepInspection", traits: {"smithy.api#required" => {}}))
     MemberAccountEc2DeepInspectionStatus.type = Types::MemberAccountEc2DeepInspectionStatus
-    MemberAccountEc2DeepInspectionStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemberAccountEc2DeepInspectionStatus, name: "member")
+    MemberAccountEc2DeepInspectionStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberAccountEc2DeepInspectionStatus, name: "member"))
     MemberAccountEc2DeepInspectionStatusState.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId", traits: {"smithy.api#required" => {}}))
     MemberAccountEc2DeepInspectionStatusState.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2DeepInspectionStatus, name: "status"))
     MemberAccountEc2DeepInspectionStatusState.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "errorMessage"))
     MemberAccountEc2DeepInspectionStatusState.type = Types::MemberAccountEc2DeepInspectionStatusState
-    MemberAccountEc2DeepInspectionStatusStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemberAccountEc2DeepInspectionStatusState, name: "member")
-    MemberList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Member, name: "member")
-    MeteringAccountIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MeteringAccountId, name: "member")
+    MemberAccountEc2DeepInspectionStatusStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberAccountEc2DeepInspectionStatusState, name: "member"))
+    MemberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Member, name: "member"))
+    MeteringAccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MeteringAccountId, name: "member"))
     MonthlySchedule.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "startTime", traits: {"smithy.api#required" => {}}))
     MonthlySchedule.add_member(:day, ::Smithy::Schema::Shapes::MemberShape.new(target: Day, name: "day", traits: {"smithy.api#required" => {}}))
     MonthlySchedule.type = Types::MonthlySchedule
@@ -1994,12 +1994,12 @@ module Aws::Inspector2
     NetworkReachabilityDetails.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkProtocol, name: "protocol", traits: {"smithy.api#required" => {}}))
     NetworkReachabilityDetails.add_member(:network_path, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkPath, name: "networkPath", traits: {"smithy.api#required" => {}}))
     NetworkReachabilityDetails.type = Types::NetworkReachabilityDetails
-    NonEmptyStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    NonEmptyStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     NumberFilter.add_member(:upper_inclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "upperInclusive"))
     NumberFilter.add_member(:lower_inclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "lowerInclusive"))
     NumberFilter.type = Types::NumberFilter
-    NumberFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NumberFilter, name: "member")
-    OneAccountIdFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member")
+    NumberFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberFilter, name: "member"))
+    OneAccountIdFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member"))
     OneTimeSchedule.type = Types::OneTimeSchedule
     PackageAggregation.add_member(:package_names, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "packageNames"))
     PackageAggregation.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "sortOrder"))
@@ -2018,7 +2018,7 @@ module Aws::Inspector2
     PackageFilter.add_member(:source_lambda_layer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilter, name: "sourceLambdaLayerArn"))
     PackageFilter.add_member(:file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilter, name: "filePath"))
     PackageFilter.type = Types::PackageFilter
-    PackageFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PackageFilter, name: "member")
+    PackageFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageFilter, name: "member"))
     PackageVulnerabilityDetails.add_member(:vulnerability_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VulnerabilityId, name: "vulnerabilityId", traits: {"smithy.api#required" => {}}))
     PackageVulnerabilityDetails.add_member(:vulnerable_packages, ::Smithy::Schema::Shapes::MemberShape.new(target: VulnerablePackageList, name: "vulnerablePackages"))
     PackageVulnerabilityDetails.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "source", traits: {"smithy.api#required" => {}}))
@@ -2030,7 +2030,7 @@ module Aws::Inspector2
     PackageVulnerabilityDetails.add_member(:vendor_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeTimestamp, name: "vendorUpdatedAt"))
     PackageVulnerabilityDetails.add_member(:reference_urls, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyStringList, name: "referenceUrls"))
     PackageVulnerabilityDetails.type = Types::PackageVulnerabilityDetails
-    PathList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "member")
+    PathList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Path, name: "member"))
     PeriodicScanConfiguration.add_member(:frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: PeriodicScanFrequency, name: "frequency"))
     PeriodicScanConfiguration.add_member(:frequency_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: FrequencyExpression, name: "frequencyExpression"))
     PeriodicScanConfiguration.type = Types::PeriodicScanConfiguration
@@ -2040,35 +2040,35 @@ module Aws::Inspector2
     Permission.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "service", traits: {"smithy.api#required" => {}}))
     Permission.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, name: "operation", traits: {"smithy.api#required" => {}}))
     Permission.type = Types::Permission
-    Permissions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Permission, name: "member")
-    PlatformFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member")
+    Permissions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Permission, name: "member"))
+    PlatformFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member"))
     PortRange.add_member(:begin, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "begin", traits: {"smithy.api#required" => {}}))
     PortRange.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "end", traits: {"smithy.api#required" => {}}))
     PortRange.type = Types::PortRange
     PortRangeFilter.add_member(:begin_inclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "beginInclusive"))
     PortRangeFilter.add_member(:end_inclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "endInclusive"))
     PortRangeFilter.type = Types::PortRangeFilter
-    PortRangeFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PortRangeFilter, name: "member")
+    PortRangeFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortRangeFilter, name: "member"))
     ProjectCodeSecurityScanConfiguration.add_member(:periodic_scan_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectPeriodicScanConfigurationList, name: "periodicScanConfigurations"))
     ProjectCodeSecurityScanConfiguration.add_member(:continuous_integration_scan_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectContinuousIntegrationScanConfigurationList, name: "continuousIntegrationScanConfigurations"))
     ProjectCodeSecurityScanConfiguration.type = Types::ProjectCodeSecurityScanConfiguration
     ProjectContinuousIntegrationScanConfiguration.add_member(:supported_event, ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousIntegrationScanEvent, name: "supportedEvent"))
     ProjectContinuousIntegrationScanConfiguration.add_member(:rule_set_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSetCategories, name: "ruleSetCategories"))
     ProjectContinuousIntegrationScanConfiguration.type = Types::ProjectContinuousIntegrationScanConfiguration
-    ProjectContinuousIntegrationScanConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectContinuousIntegrationScanConfiguration, name: "member")
+    ProjectContinuousIntegrationScanConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectContinuousIntegrationScanConfiguration, name: "member"))
     ProjectPeriodicScanConfiguration.add_member(:frequency_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: FrequencyExpression, name: "frequencyExpression"))
     ProjectPeriodicScanConfiguration.add_member(:rule_set_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSetCategories, name: "ruleSetCategories"))
     ProjectPeriodicScanConfiguration.type = Types::ProjectPeriodicScanConfiguration
-    ProjectPeriodicScanConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectPeriodicScanConfiguration, name: "member")
+    ProjectPeriodicScanConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectPeriodicScanConfiguration, name: "member"))
     ProjectSelectionScope.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
     Recommendation.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "text"))
     Recommendation.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Url"))
     Recommendation.type = Types::Recommendation
-    ReferenceUrls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
-    RelatedVulnerabilities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedVulnerability, name: "member")
+    ReferenceUrls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
+    RelatedVulnerabilities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedVulnerability, name: "member"))
     Remediation.add_member(:recommendation, ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendation, name: "recommendation"))
     Remediation.type = Types::Remediation
-    ReportTargetAccounts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member")
+    ReportTargetAccounts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
     RepositoryAggregation.add_member(:repositories, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "repositories"))
     RepositoryAggregation.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "sortOrder"))
     RepositoryAggregation.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositorySortBy, name: "sortBy"))
@@ -2103,13 +2103,13 @@ module Aws::Inspector2
     ResourceFilterCriteria.add_member(:ec2_instance_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMapFilterList, name: "ec2InstanceTags"))
     ResourceFilterCriteria.add_member(:lambda_function_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMapFilterList, name: "lambdaFunctionTags"))
     ResourceFilterCriteria.type = Types::ResourceFilterCriteria
-    ResourceIdFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member")
-    ResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member")
+    ResourceIdFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member"))
+    ResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
     ResourceMapFilter.add_member(:comparison, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMapComparison, name: "comparison", traits: {"smithy.api#required" => {}}))
     ResourceMapFilter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key", traits: {"smithy.api#required" => {}}))
     ResourceMapFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value"))
     ResourceMapFilter.type = Types::ResourceMapFilter
-    ResourceMapFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMapFilter, name: "member")
+    ResourceMapFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMapFilter, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ResourceScanMetadata.add_member(:ecr_repository, ::Smithy::Schema::Shapes::MemberShape.new(target: EcrRepositoryMetadata, name: "ecrRepository"))
@@ -2133,9 +2133,9 @@ module Aws::Inspector2
     ResourceStringFilter.add_member(:comparison, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStringComparison, name: "comparison", traits: {"smithy.api#required" => {}}))
     ResourceStringFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStringInput, name: "value", traits: {"smithy.api#required" => {}}))
     ResourceStringFilter.type = Types::ResourceStringFilter
-    ResourceStringFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStringFilter, name: "member")
-    ResourceTagFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilter, name: "member")
-    RuleSetCategories.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSetCategory, name: "member")
+    ResourceStringFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStringFilter, name: "member"))
+    ResourceTagFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilter, name: "member"))
+    RuleSetCategories.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSetCategory, name: "member"))
     RuleSetCategory.add_member(:sast, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAST", traits: {"smithy.api#enumValue" => "SAST"}))
     RuleSetCategory.add_member(:iac, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IAC", traits: {"smithy.api#enumValue" => "IAC"}))
     RuleSetCategory.add_member(:sca, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCA", traits: {"smithy.api#enumValue" => "SCA"}))
@@ -2158,7 +2158,7 @@ module Aws::Inspector2
     SearchVulnerabilitiesResponse.add_member(:vulnerabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: Vulnerabilities, name: "vulnerabilities", traits: {"smithy.api#required" => {}}))
     SearchVulnerabilitiesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     SearchVulnerabilitiesResponse.type = Types::SearchVulnerabilitiesResponse
-    SecurityGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
+    SecurityGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     SendCisSessionHealthRequest.add_member(:scan_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "scanJobId", traits: {"smithy.api#required" => {}}))
     SendCisSessionHealthRequest.add_member(:session_token, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "sessionToken", traits: {"smithy.api#required" => {}}))
     SendCisSessionHealthRequest.type = Types::SendCisSessionHealthRequest
@@ -2203,7 +2203,7 @@ module Aws::Inspector2
     Step.add_member(:component_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentType, name: "componentType", traits: {"smithy.api#required" => {}}))
     Step.add_member(:component_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComponentArn, name: "componentArn"))
     Step.type = Types::Step
-    StepList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Step, name: "member")
+    StepList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Step, name: "member"))
     StopCisMessageProgress.add_member(:total_checks, ::Smithy::Schema::Shapes::MemberShape.new(target: CheckCount, name: "totalChecks", traits: {"smithy.api#default" => 0}))
     StopCisMessageProgress.add_member(:successful_checks, ::Smithy::Schema::Shapes::MemberShape.new(target: CheckCount, name: "successfulChecks", traits: {"smithy.api#default" => 0}))
     StopCisMessageProgress.add_member(:failed_checks, ::Smithy::Schema::Shapes::MemberShape.new(target: CheckCount, name: "failedChecks", traits: {"smithy.api#default" => 0}))
@@ -2232,37 +2232,37 @@ module Aws::Inspector2
     StringFilter.add_member(:comparison, ::Smithy::Schema::Shapes::MemberShape.new(target: StringComparison, name: "comparison", traits: {"smithy.api#required" => {}}))
     StringFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringInput, name: "value", traits: {"smithy.api#required" => {}}))
     StringFilter.type = Types::StringFilter
-    StringFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilter, name: "member")
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
-    SubnetIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
+    StringFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilter, name: "member"))
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
+    SubnetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
     SuccessfulAssociationResult.add_member(:scan_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanConfigurationArn, name: "scanConfigurationArn"))
     SuccessfulAssociationResult.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeSecurityResource, name: "resource"))
     SuccessfulAssociationResult.type = Types::SuccessfulAssociationResult
-    SuccessfulAssociationResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulAssociationResult, name: "member")
+    SuccessfulAssociationResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuccessfulAssociationResult, name: "member"))
     SuggestedFix.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description", traits: {"smithy.api#length" => {"min" => 1, "max" => 1000}}))
     SuggestedFix.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "code", traits: {"smithy.api#length" => {"min" => 1, "max" => 2500}}))
     SuggestedFix.type = Types::SuggestedFix
-    SuggestedFixes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestedFix, name: "member")
+    SuggestedFixes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestedFix, name: "member"))
     TagComparison.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUALS", traits: {"smithy.api#enumValue" => "EQUALS"}))
     TagFilter.add_member(:comparison, ::Smithy::Schema::Shapes::MemberShape.new(target: TagComparison, name: "comparison", traits: {"smithy.api#required" => {}}))
     TagFilter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key", traits: {"smithy.api#required" => {}}))
     TagFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value", traits: {"smithy.api#required" => {}}))
     TagFilter.type = Types::TagFilter
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: MapKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: MapValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: MapKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MapValue, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    TagValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTagsValue, name: "member")
-    TargetAccountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccount, name: "member")
-    TargetResourceTags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTagsKey, name: "key")
-    TargetResourceTags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValueList, name: "value")
-    TargetStatusFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisTargetStatusFilter, name: "member")
-    TargetStatusReasonFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisTargetStatusReasonFilter, name: "member")
-    Targets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "member")
+    TagValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTagsValue, name: "member"))
+    TargetAccountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAccount, name: "member"))
+    TargetResourceTags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceTagsKey, name: "key"))
+    TargetResourceTags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValueList, name: "value"))
+    TargetStatusFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisTargetStatusFilter, name: "member"))
+    TargetStatusReasonFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisTargetStatusReasonFilter, name: "member"))
+    Targets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     ThrottlingException.type = Types::ThrottlingException
@@ -2281,9 +2281,9 @@ module Aws::Inspector2
     TitleAggregationResponse.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId"))
     TitleAggregationResponse.add_member(:severity_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityCounts, name: "severityCounts"))
     TitleAggregationResponse.type = Types::TitleAggregationResponse
-    TitleFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member")
-    Tools.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tool, name: "member")
-    Ttps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ttp, name: "member")
+    TitleFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member"))
+    Tools.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tool, name: "member"))
+    Ttps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ttp, name: "member"))
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
@@ -2357,12 +2357,12 @@ module Aws::Inspector2
     Usage.add_member(:estimated_monthly_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlyCostEstimate, name: "estimatedMonthlyCost", traits: {"smithy.api#default" => 0}))
     Usage.add_member(:currency, ::Smithy::Schema::Shapes::MemberShape.new(target: Currency, name: "currency"))
     Usage.type = Types::Usage
-    UsageAccountIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageAccountId, name: "member")
-    UsageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Usage, name: "member")
+    UsageAccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageAccountId, name: "member"))
+    UsageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Usage, name: "member"))
     UsageTotal.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MeteringAccountId, name: "accountId"))
     UsageTotal.add_member(:usage, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageList, name: "usage"))
     UsageTotal.type = Types::UsageTotal
-    UsageTotalList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageTotal, name: "member")
+    UsageTotalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageTotal, name: "member"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, name: "reason", traits: {"smithy.api#required" => {}}))
     ValidationException.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFields, name: "fields"))
@@ -2370,9 +2370,9 @@ module Aws::Inspector2
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
-    VulnIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VulnId, name: "member")
-    Vulnerabilities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Vulnerability, name: "member")
+    ValidationExceptionFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
+    VulnIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VulnId, name: "member"))
+    Vulnerabilities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Vulnerability, name: "member"))
     Vulnerability.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "id", traits: {"smithy.api#required" => {}}))
     Vulnerability.add_member(:cwes, ::Smithy::Schema::Shapes::MemberShape.new(target: Cwes, name: "cwes"))
     Vulnerability.add_member(:cisa_data, ::Smithy::Schema::Shapes::MemberShape.new(target: CisaData, name: "cisaData"))
@@ -2392,8 +2392,8 @@ module Aws::Inspector2
     Vulnerability.add_member(:detection_platforms, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectionPlatforms, name: "detectionPlatforms"))
     Vulnerability.add_member(:epss, ::Smithy::Schema::Shapes::MemberShape.new(target: Epss, name: "epss"))
     Vulnerability.type = Types::Vulnerability
-    VulnerabilityIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VulnerabilityId, name: "member")
-    VulnerabilityReferenceUrls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VulnerabilityReferenceUrl, name: "member")
+    VulnerabilityIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VulnerabilityId, name: "member"))
+    VulnerabilityReferenceUrls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VulnerabilityReferenceUrl, name: "member"))
     VulnerablePackage.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageName, name: "name", traits: {"smithy.api#required" => {}}))
     VulnerablePackage.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageVersion, name: "version", traits: {"smithy.api#required" => {}}))
     VulnerablePackage.add_member(:source_layer_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceLayerHash, name: "sourceLayerHash"))
@@ -2406,7 +2406,7 @@ module Aws::Inspector2
     VulnerablePackage.add_member(:remediation, ::Smithy::Schema::Shapes::MemberShape.new(target: VulnerablePackageRemediation, name: "remediation"))
     VulnerablePackage.add_member(:source_lambda_layer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaLayerArn, name: "sourceLambdaLayerArn"))
     VulnerablePackage.type = Types::VulnerablePackage
-    VulnerablePackageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VulnerablePackage, name: "member")
+    VulnerablePackageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VulnerablePackage, name: "member"))
     WeeklySchedule.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Time, name: "startTime", traits: {"smithy.api#required" => {}}))
     WeeklySchedule.add_member(:days, ::Smithy::Schema::Shapes::MemberShape.new(target: DaysList, name: "days", traits: {"smithy.api#required" => {}}))
     WeeklySchedule.type = Types::WeeklySchedule

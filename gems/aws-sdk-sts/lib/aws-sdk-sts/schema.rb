@@ -204,15 +204,15 @@ module Aws::STS
     ProvidedContext.add_member(:provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnType, name: "ProviderArn"))
     ProvidedContext.add_member(:context_assertion, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextAssertionType, name: "ContextAssertion"))
     ProvidedContext.type = Types::ProvidedContext
-    ProvidedContextsListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProvidedContext, name: "member")
+    ProvidedContextsListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvidedContext, name: "member"))
     RegionDisabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionDisabledMessage, name: "message"))
     RegionDisabledException.type = Types::RegionDisabledException
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyType, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValueType, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    PolicyDescriptorListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDescriptorType, name: "member")
-    TagKeyListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyType, name: "member")
-    TagListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    PolicyDescriptorListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDescriptorType, name: "member"))
+    TagKeyListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyType, name: "member"))
+    TagListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
 
     AWSSecurityTokenServiceV20110615 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.sts#AWSSecurityTokenServiceV20110615"

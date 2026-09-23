@@ -92,7 +92,7 @@ module Aws::Billing
     AssociateSourceViewsRequest.type = Types::AssociateSourceViewsRequest
     AssociateSourceViewsResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingViewArn, name: "arn", traits: {"smithy.api#required" => {}}))
     AssociateSourceViewsResponse.type = Types::AssociateSourceViewsResponse
-    BillingViewArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BillingViewArn, name: "member")
+    BillingViewArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingViewArn, name: "member"))
     BillingViewElement.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingViewArn, name: "arn"))
     BillingViewElement.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingViewName, name: "name"))
     BillingViewElement.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingViewDescription, name: "description"))
@@ -112,7 +112,7 @@ module Aws::Billing
     BillingViewHealthStatus.type = Types::BillingViewHealthStatus
     BillingViewHealthStatusException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     BillingViewHealthStatusException.type = Types::BillingViewHealthStatusException
-    BillingViewList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BillingViewListElement, name: "member")
+    BillingViewList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingViewListElement, name: "member"))
     BillingViewListElement.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingViewArn, name: "arn"))
     BillingViewListElement.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingViewName, name: "name"))
     BillingViewListElement.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingViewDescription, name: "description"))
@@ -121,7 +121,7 @@ module Aws::Billing
     BillingViewListElement.add_member(:billing_view_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingViewType, name: "billingViewType"))
     BillingViewListElement.add_member(:health_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingViewHealthStatus, name: "healthStatus"))
     BillingViewListElement.type = Types::BillingViewListElement
-    BillingViewSourceViewsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BillingViewArn, name: "member")
+    BillingViewSourceViewsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingViewArn, name: "member"))
     BillingViewStatus.add_member(:healthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HEALTHY", traits: {"smithy.api#enumValue" => "HEALTHY"}))
     BillingViewStatus.add_member(:unhealthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNHEALTHY", traits: {"smithy.api#enumValue" => "UNHEALTHY"}))
     BillingViewStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
@@ -134,11 +134,11 @@ module Aws::Billing
     BillingViewStatusReason.add_member(:source_view_depth_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOURCE_VIEW_DEPTH_EXCEEDED", traits: {"smithy.api#enumValue" => "SOURCE_VIEW_DEPTH_EXCEEDED"}))
     BillingViewStatusReason.add_member(:aggregate_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGGREGATE_SOURCE", traits: {"smithy.api#enumValue" => "AGGREGATE_SOURCE"}))
     BillingViewStatusReason.add_member(:view_owner_not_management_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VIEW_OWNER_NOT_MANAGEMENT_ACCOUNT", traits: {"smithy.api#enumValue" => "VIEW_OWNER_NOT_MANAGEMENT_ACCOUNT"}))
-    BillingViewStatusReasons.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BillingViewStatusReason, name: "member")
+    BillingViewStatusReasons.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingViewStatusReason, name: "member"))
     BillingViewType.add_member(:primary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIMARY", traits: {"smithy.api#enumValue" => "PRIMARY"}))
     BillingViewType.add_member(:billing_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BILLING_GROUP", traits: {"smithy.api#enumValue" => "BILLING_GROUP"}))
     BillingViewType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
-    BillingViewTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BillingViewType, name: "member")
+    BillingViewTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingViewType, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType", traits: {"smithy.api#required" => {}}))
@@ -211,8 +211,8 @@ module Aws::Billing
     ResourceTag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "key", traits: {"smithy.api#required" => {}}))
     ResourceTag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagValue, name: "value"))
     ResourceTag.type = Types::ResourceTag
-    ResourceTagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "member")
-    ResourceTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member")
+    ResourceTagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "member"))
+    ResourceTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType", traits: {"smithy.api#required" => {}}))
@@ -250,12 +250,12 @@ module Aws::Billing
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldName, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "unknownOperation"}))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "cannotParse"}))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "fieldValidationFailed"}))
     ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTHER", traits: {"smithy.api#enumValue" => "other"}))
-    Values.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "member")
+    Values.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "member"))
 
     AWSBilling = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.billing#AWSBilling"

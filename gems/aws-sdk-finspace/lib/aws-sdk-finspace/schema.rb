@@ -305,9 +305,9 @@ module Aws::Finspace
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage2, name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AttachedClusterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KxClusterName, name: "member")
-    AttributeMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: FederationAttributeKey, name: "key")
-    AttributeMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FederationAttributeValue, name: "value")
+    AttachedClusterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KxClusterName, name: "member"))
+    AttributeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: FederationAttributeKey, name: "key"))
+    AttributeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FederationAttributeValue, name: "value"))
     AutoScalingConfiguration.add_member(:min_node_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeCount, name: "minNodeCount"))
     AutoScalingConfiguration.add_member(:max_node_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeCount, name: "maxNodeCount"))
     AutoScalingConfiguration.add_member(:auto_scaling_metric, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingMetric, name: "autoScalingMetric"))
@@ -316,7 +316,7 @@ module Aws::Finspace
     AutoScalingConfiguration.add_member(:scale_out_cooldown_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: CooldownTime, name: "scaleOutCooldownSeconds"))
     AutoScalingConfiguration.type = Types::AutoScalingConfiguration
     AutoScalingMetric.add_member(:cpu_utilization_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CPU_UTILIZATION_PERCENTAGE", traits: {"smithy.api#enumValue" => "CPU_UTILIZATION_PERCENTAGE"}))
-    AvailabilityZoneIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneId, name: "member")
+    AvailabilityZoneIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneId, name: "member"))
     CapacityConfiguration.add_member(:node_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeType, name: "nodeType"))
     CapacityConfiguration.add_member(:node_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeCount, name: "nodeCount"))
     CapacityConfiguration.type = Types::CapacityConfiguration
@@ -324,7 +324,7 @@ module Aws::Finspace
     ChangeRequest.add_member(:s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Path, name: "s3Path"))
     ChangeRequest.add_member(:db_path, ::Smithy::Schema::Shapes::MemberShape.new(target: DbPath, name: "dbPath", traits: {"smithy.api#required" => {}}))
     ChangeRequest.type = Types::ChangeRequest
-    ChangeRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeRequest, name: "member")
+    ChangeRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeRequest, name: "member"))
     ChangeType.add_member(:put, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUT", traits: {"smithy.api#enumValue" => "PUT"}))
     ChangeType.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE", traits: {"smithy.api#enumValue" => "DELETE"}))
     ChangesetStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
@@ -514,12 +514,12 @@ module Aws::Finspace
     CreateKxVolumeResponse.add_member(:availability_zone_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneIds, name: "availabilityZoneIds"))
     CreateKxVolumeResponse.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdTimestamp"))
     CreateKxVolumeResponse.type = Types::CreateKxVolumeResponse
-    CustomDNSConfiguration.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDNSServer, name: "member")
+    CustomDNSConfiguration.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDNSServer, name: "member"))
     CustomDNSServer.add_member(:custom_dns_server_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidHostname, name: "customDNSServerName", traits: {"smithy.api#required" => {}}))
     CustomDNSServer.add_member(:custom_dns_server_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidIPAddress, name: "customDNSServerIP", traits: {"smithy.api#required" => {}}))
     CustomDNSServer.type = Types::CustomDNSServer
-    DataBundleArns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataBundleArn, name: "member")
-    DbPaths.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DbPath, name: "member")
+    DataBundleArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataBundleArn, name: "member"))
+    DbPaths.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DbPath, name: "member"))
     DeleteEnvironmentRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdType, name: "environmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteEnvironmentRequest.type = Types::DeleteEnvironmentRequest
     DeleteEnvironmentResponse.type = Types::DeleteEnvironmentResponse
@@ -576,7 +576,7 @@ module Aws::Finspace
     Environment.add_member(:federation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: FederationMode, name: "federationMode"))
     Environment.add_member(:federation_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: FederationParameters, name: "federationParameters"))
     Environment.type = Types::Environment
-    EnvironmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Environment, name: "member")
+    EnvironmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Environment, name: "member"))
     EnvironmentStatus.add_member(:create_requested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_REQUESTED", traits: {"smithy.api#enumValue" => "CREATE_REQUESTED"}))
     EnvironmentStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     EnvironmentStatus.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
@@ -765,20 +765,20 @@ module Aws::Finspace
     KxAttachedCluster.add_member(:cluster_type, ::Smithy::Schema::Shapes::MemberShape.new(target: KxClusterType, name: "clusterType"))
     KxAttachedCluster.add_member(:cluster_status, ::Smithy::Schema::Shapes::MemberShape.new(target: KxClusterStatus, name: "clusterStatus"))
     KxAttachedCluster.type = Types::KxAttachedCluster
-    KxAttachedClusters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KxAttachedCluster, name: "member")
+    KxAttachedClusters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KxAttachedCluster, name: "member"))
     KxAzMode.add_member(:single, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE", traits: {"smithy.api#enumValue" => "SINGLE"}))
     KxAzMode.add_member(:multi, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTI", traits: {"smithy.api#enumValue" => "MULTI"}))
     KxCacheStorageConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: KxCacheStorageType, name: "type", traits: {"smithy.api#required" => {}}))
     KxCacheStorageConfiguration.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: KxCacheStorageSize, name: "size", traits: {"smithy.api#required" => {}}))
     KxCacheStorageConfiguration.type = Types::KxCacheStorageConfiguration
-    KxCacheStorageConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KxCacheStorageConfiguration, name: "member")
+    KxCacheStorageConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KxCacheStorageConfiguration, name: "member"))
     KxChangesetListEntry.add_member(:changeset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangesetId, name: "changesetId"))
     KxChangesetListEntry.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdTimestamp"))
     KxChangesetListEntry.add_member(:active_from_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "activeFromTimestamp"))
     KxChangesetListEntry.add_member(:last_modified_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastModifiedTimestamp"))
     KxChangesetListEntry.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangesetStatus, name: "status"))
     KxChangesetListEntry.type = Types::KxChangesetListEntry
-    KxChangesets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KxChangesetListEntry, name: "member")
+    KxChangesets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KxChangesetListEntry, name: "member"))
     KxCluster.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: KxClusterStatus, name: "status"))
     KxCluster.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: KxClusterStatusReason, name: "statusReason"))
     KxCluster.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KxClusterName, name: "clusterName"))
@@ -798,7 +798,7 @@ module Aws::Finspace
     KxClusterCodeDeploymentStrategy.add_member(:no_restart, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_RESTART", traits: {"smithy.api#enumValue" => "NO_RESTART"}))
     KxClusterCodeDeploymentStrategy.add_member(:rolling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLING", traits: {"smithy.api#enumValue" => "ROLLING"}))
     KxClusterCodeDeploymentStrategy.add_member(:force, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FORCE", traits: {"smithy.api#enumValue" => "FORCE"}))
-    KxClusterNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KxClusterName, name: "member")
+    KxClusterNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KxClusterName, name: "member"))
     KxClusterStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     KxClusterStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     KxClusterStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
@@ -812,35 +812,35 @@ module Aws::Finspace
     KxClusterType.add_member(:gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GATEWAY", traits: {"smithy.api#enumValue" => "GATEWAY"}))
     KxClusterType.add_member(:gp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GP", traits: {"smithy.api#enumValue" => "GP"}))
     KxClusterType.add_member(:tickerplant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TICKERPLANT", traits: {"smithy.api#enumValue" => "TICKERPLANT"}))
-    KxClusters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KxCluster, name: "member")
+    KxClusters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KxCluster, name: "member"))
     KxCommandLineArgument.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: KxCommandLineArgumentKey, name: "key"))
     KxCommandLineArgument.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: KxCommandLineArgumentValue, name: "value"))
     KxCommandLineArgument.type = Types::KxCommandLineArgument
-    KxCommandLineArguments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KxCommandLineArgument, name: "member")
+    KxCommandLineArguments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KxCommandLineArgument, name: "member"))
     KxDatabaseCacheConfiguration.add_member(:cache_type, ::Smithy::Schema::Shapes::MemberShape.new(target: KxCacheStorageType, name: "cacheType", traits: {"smithy.api#required" => {}}))
     KxDatabaseCacheConfiguration.add_member(:db_paths, ::Smithy::Schema::Shapes::MemberShape.new(target: DbPaths, name: "dbPaths", traits: {"smithy.api#required" => {}}))
     KxDatabaseCacheConfiguration.add_member(:dataview_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KxDataviewName, name: "dataviewName"))
     KxDatabaseCacheConfiguration.type = Types::KxDatabaseCacheConfiguration
-    KxDatabaseCacheConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KxDatabaseCacheConfiguration, name: "member")
+    KxDatabaseCacheConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KxDatabaseCacheConfiguration, name: "member"))
     KxDatabaseConfiguration.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseName, name: "databaseName", traits: {"smithy.api#required" => {}}))
     KxDatabaseConfiguration.add_member(:cache_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: KxDatabaseCacheConfigurations, name: "cacheConfigurations"))
     KxDatabaseConfiguration.add_member(:changeset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangesetId, name: "changesetId"))
     KxDatabaseConfiguration.add_member(:dataview_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KxDataviewName, name: "dataviewName"))
     KxDatabaseConfiguration.add_member(:dataview_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: KxDataviewConfiguration, name: "dataviewConfiguration"))
     KxDatabaseConfiguration.type = Types::KxDatabaseConfiguration
-    KxDatabaseConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KxDatabaseConfiguration, name: "member")
+    KxDatabaseConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KxDatabaseConfiguration, name: "member"))
     KxDatabaseListEntry.add_member(:database_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseName, name: "databaseName"))
     KxDatabaseListEntry.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdTimestamp"))
     KxDatabaseListEntry.add_member(:last_modified_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastModifiedTimestamp"))
     KxDatabaseListEntry.type = Types::KxDatabaseListEntry
-    KxDatabases.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KxDatabaseListEntry, name: "member")
+    KxDatabases.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KxDatabaseListEntry, name: "member"))
     KxDataviewActiveVersion.add_member(:changeset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangesetId, name: "changesetId"))
     KxDataviewActiveVersion.add_member(:segment_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: KxDataviewSegmentConfigurationList, name: "segmentConfigurations"))
     KxDataviewActiveVersion.add_member(:attached_clusters, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachedClusterList, name: "attachedClusters"))
     KxDataviewActiveVersion.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdTimestamp"))
     KxDataviewActiveVersion.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionId, name: "versionId"))
     KxDataviewActiveVersion.type = Types::KxDataviewActiveVersion
-    KxDataviewActiveVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KxDataviewActiveVersion, name: "member")
+    KxDataviewActiveVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KxDataviewActiveVersion, name: "member"))
     KxDataviewConfiguration.add_member(:dataview_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KxDataviewName, name: "dataviewName"))
     KxDataviewConfiguration.add_member(:dataview_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionId, name: "dataviewVersionId"))
     KxDataviewConfiguration.add_member(:changeset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangesetId, name: "changesetId"))
@@ -866,13 +866,13 @@ module Aws::Finspace
     KxDataviewSegmentConfiguration.add_member(:volume_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KxVolumeName, name: "volumeName", traits: {"smithy.api#required" => {}}))
     KxDataviewSegmentConfiguration.add_member(:on_demand, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, name: "onDemand", traits: {"smithy.api#default" => false}))
     KxDataviewSegmentConfiguration.type = Types::KxDataviewSegmentConfiguration
-    KxDataviewSegmentConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KxDataviewSegmentConfiguration, name: "member")
+    KxDataviewSegmentConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KxDataviewSegmentConfiguration, name: "member"))
     KxDataviewStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     KxDataviewStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     KxDataviewStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
     KxDataviewStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     KxDataviewStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
-    KxDataviews.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KxDataviewListEntry, name: "member")
+    KxDataviews.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KxDataviewListEntry, name: "member"))
     KxDeploymentConfiguration.add_member(:deployment_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: KxDeploymentStrategy, name: "deploymentStrategy", traits: {"smithy.api#required" => {}}))
     KxDeploymentConfiguration.type = Types::KxDeploymentConfiguration
     KxDeploymentStrategy.add_member(:no_restart, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_RESTART", traits: {"smithy.api#enumValue" => "NO_RESTART"}))
@@ -895,7 +895,7 @@ module Aws::Finspace
     KxEnvironment.add_member(:availability_zone_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneIds, name: "availabilityZoneIds"))
     KxEnvironment.add_member(:certificate_authority_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValueLength1to255, name: "certificateAuthorityArn"))
     KxEnvironment.type = Types::KxEnvironment
-    KxEnvironmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KxEnvironment, name: "member")
+    KxEnvironmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KxEnvironment, name: "member"))
     KxNAS1Configuration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: KxNAS1Type, name: "type"))
     KxNAS1Configuration.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: KxNAS1Size, name: "size"))
     KxNAS1Configuration.type = Types::KxNAS1Configuration
@@ -909,7 +909,7 @@ module Aws::Finspace
     KxNode.type = Types::KxNode
     KxNodeStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     KxNodeStatus.add_member(:provisioning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROVISIONING", traits: {"smithy.api#enumValue" => "PROVISIONING"}))
-    KxNodeSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KxNode, name: "member")
+    KxNodeSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KxNode, name: "member"))
     KxSavedownStorageConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: KxSavedownStorageType, name: "type"))
     KxSavedownStorageConfiguration.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: KxSavedownStorageSize, name: "size"))
     KxSavedownStorageConfiguration.add_member(:volume_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KxVolumeName, name: "volumeName"))
@@ -930,7 +930,7 @@ module Aws::Finspace
     KxScalingGroupConfiguration.add_member(:node_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeCount, name: "nodeCount", traits: {"smithy.api#required" => {}}))
     KxScalingGroupConfiguration.add_member(:cpu, ::Smithy::Schema::Shapes::MemberShape.new(target: CpuCount, name: "cpu"))
     KxScalingGroupConfiguration.type = Types::KxScalingGroupConfiguration
-    KxScalingGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KxScalingGroup, name: "member")
+    KxScalingGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KxScalingGroup, name: "member"))
     KxScalingGroupStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     KxScalingGroupStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
     KxScalingGroupStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
@@ -943,7 +943,7 @@ module Aws::Finspace
     KxUser.add_member(:create_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createTimestamp"))
     KxUser.add_member(:update_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updateTimestamp"))
     KxUser.type = Types::KxUser
-    KxUserList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KxUser, name: "member")
+    KxUserList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KxUser, name: "member"))
     KxVolume.add_member(:volume_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KxVolumeName, name: "volumeName"))
     KxVolume.add_member(:volume_type, ::Smithy::Schema::Shapes::MemberShape.new(target: KxVolumeType, name: "volumeType"))
     KxVolume.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: KxVolumeStatus, name: "status"))
@@ -964,7 +964,7 @@ module Aws::Finspace
     KxVolumeStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
     KxVolumeStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
     KxVolumeType.add_member(:nas_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAS_1", traits: {"smithy.api#enumValue" => "NAS_1"}))
-    KxVolumes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: KxVolume, name: "member")
+    KxVolumes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: KxVolume, name: "member"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage2, name: "message"))
     LimitExceededException.type = Types::LimitExceededException
     ListEnvironmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -1044,7 +1044,7 @@ module Aws::Finspace
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    NetworkACLConfiguration.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkACLEntry, name: "member")
+    NetworkACLConfiguration.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkACLEntry, name: "member"))
     NetworkACLEntry.add_member(:rule_number, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleNumber, name: "ruleNumber", traits: {"smithy.api#required" => {}}))
     NetworkACLEntry.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: Protocol, name: "protocol", traits: {"smithy.api#required" => {}}))
     NetworkACLEntry.add_member(:rule_action, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleAction, name: "ruleAction", traits: {"smithy.api#required" => {}}))
@@ -1061,18 +1061,18 @@ module Aws::Finspace
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     RuleAction.add_member(:allow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOW", traits: {"smithy.api#enumValue" => "allow"}))
     RuleAction.add_member(:deny, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DENY", traits: {"smithy.api#enumValue" => "deny"}))
-    SecurityGroupIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIdString, name: "member")
-    SegmentConfigurationDbPathList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DbPath, name: "member")
+    SecurityGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIdString, name: "member"))
+    SegmentConfigurationDbPathList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DbPath, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage2, name: "message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
-    SubnetIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIdString, name: "member")
+    SubnetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIdString, name: "member"))
     SuperuserParameters.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailId, name: "emailAddress", traits: {"smithy.api#required" => {}}))
     SuperuserParameters.add_member(:first_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "firstName", traits: {"smithy.api#required" => {}}))
     SuperuserParameters.add_member(:last_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "lastName", traits: {"smithy.api#required" => {}}))
     SuperuserParameters.type = Types::SuperuserParameters
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FinSpaceTaggableArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -1081,7 +1081,7 @@ module Aws::Finspace
     ThrottlingException.type = Types::ThrottlingException
     TickerplantLogConfiguration.add_member(:tickerplant_log_volumes, ::Smithy::Schema::Shapes::MemberShape.new(target: TickerplantLogVolumes, name: "tickerplantLogVolumes"))
     TickerplantLogConfiguration.type = Types::TickerplantLogConfiguration
-    TickerplantLogVolumes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeName, name: "member")
+    TickerplantLogVolumes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeName, name: "member"))
     TransitGatewayConfiguration.add_member(:transit_gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitGatewayID, name: "transitGatewayID", traits: {"smithy.api#required" => {}}))
     TransitGatewayConfiguration.add_member(:routable_cidr_space, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidCIDRSpace, name: "routableCIDRSpace", traits: {"smithy.api#required" => {}}))
     TransitGatewayConfiguration.add_member(:attachment_network_acl_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkACLConfiguration, name: "attachmentNetworkAclConfiguration"))
@@ -1227,7 +1227,7 @@ module Aws::Finspace
     Volume.add_member(:volume_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeType, name: "volumeType"))
     Volume.type = Types::Volume
     VolumeType.add_member(:nas_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAS_1", traits: {"smithy.api#enumValue" => "NAS_1"}))
-    Volumes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, name: "member")
+    Volumes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, name: "member"))
     VpcConfiguration.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcIdString, name: "vpcId"))
     VpcConfiguration.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIdList, name: "securityGroupIds"))
     VpcConfiguration.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIdList, name: "subnetIds"))

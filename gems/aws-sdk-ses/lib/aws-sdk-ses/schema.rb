@@ -329,7 +329,7 @@ module Aws::SES
     AddHeaderAction.add_member(:header_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderName, name: "HeaderName", traits: {"smithy.api#required" => {}}))
     AddHeaderAction.add_member(:header_value, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderValue, name: "HeaderValue", traits: {"smithy.api#required" => {}}))
     AddHeaderAction.type = Types::AddHeaderAction
-    AddressList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Address, name: "member")
+    AddressList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Address, name: "member"))
     AlreadyExistsException.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleOrRuleSetName, name: "Name"))
     AlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     AlreadyExistsException.type = Types::AlreadyExistsException
@@ -355,17 +355,17 @@ module Aws::SES
     BouncedRecipientInfo.add_member(:bounce_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BounceType, name: "BounceType"))
     BouncedRecipientInfo.add_member(:recipient_dsn_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: RecipientDsnFields, name: "RecipientDsnFields"))
     BouncedRecipientInfo.type = Types::BouncedRecipientInfo
-    BouncedRecipientInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BouncedRecipientInfo, name: "member")
+    BouncedRecipientInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BouncedRecipientInfo, name: "member"))
     BulkEmailDestination.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "Destination", traits: {"smithy.api#required" => {}}))
     BulkEmailDestination.add_member(:replacement_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTagList, name: "ReplacementTags"))
     BulkEmailDestination.add_member(:replacement_template_data, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateData, name: "ReplacementTemplateData"))
     BulkEmailDestination.type = Types::BulkEmailDestination
-    BulkEmailDestinationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BulkEmailDestination, name: "member")
+    BulkEmailDestinationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BulkEmailDestination, name: "member"))
     BulkEmailDestinationStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BulkEmailStatus, name: "Status"))
     BulkEmailDestinationStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: Error, name: "Error"))
     BulkEmailDestinationStatus.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageId, name: "MessageId"))
     BulkEmailDestinationStatus.type = Types::BulkEmailDestinationStatus
-    BulkEmailDestinationStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BulkEmailDestinationStatus, name: "member")
+    BulkEmailDestinationStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BulkEmailDestinationStatus, name: "member"))
     BulkEmailStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Success", traits: {"smithy.api#enumValue" => "Success"}))
     BulkEmailStatus.add_member(:message_rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MessageRejected", traits: {"smithy.api#enumValue" => "MessageRejected"}))
     BulkEmailStatus.add_member(:mail_from_domain_not_verified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MailFromDomainNotVerified", traits: {"smithy.api#enumValue" => "MailFromDomainNotVerified"}))
@@ -393,7 +393,7 @@ module Aws::SES
     CloudWatchDimensionConfiguration.add_member(:dimension_value_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValueSource, name: "DimensionValueSource", traits: {"smithy.api#required" => {}}))
     CloudWatchDimensionConfiguration.add_member(:default_dimension_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultDimensionValue, name: "DefaultDimensionValue", traits: {"smithy.api#required" => {}}))
     CloudWatchDimensionConfiguration.type = Types::CloudWatchDimensionConfiguration
-    CloudWatchDimensionConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchDimensionConfiguration, name: "member")
+    CloudWatchDimensionConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchDimensionConfiguration, name: "member"))
     ConfigurationSet.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, name: "Name", traits: {"smithy.api#required" => {}}))
     ConfigurationSet.type = Types::ConfigurationSet
     ConfigurationSetAlreadyExistsException.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, name: "ConfigurationSetName"))
@@ -403,14 +403,14 @@ module Aws::SES
     ConfigurationSetAttribute.add_member(:tracking_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRACKING_OPTIONS", traits: {"smithy.api#enumValue" => "trackingOptions"}))
     ConfigurationSetAttribute.add_member(:delivery_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELIVERY_OPTIONS", traits: {"smithy.api#enumValue" => "deliveryOptions"}))
     ConfigurationSetAttribute.add_member(:reputation_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REPUTATION_OPTIONS", traits: {"smithy.api#enumValue" => "reputationOptions"}))
-    ConfigurationSetAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetAttribute, name: "member")
+    ConfigurationSetAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetAttribute, name: "member"))
     ConfigurationSetDoesNotExistException.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, name: "ConfigurationSetName"))
     ConfigurationSetDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ConfigurationSetDoesNotExistException.type = Types::ConfigurationSetDoesNotExistException
     ConfigurationSetSendingPausedException.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, name: "ConfigurationSetName"))
     ConfigurationSetSendingPausedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ConfigurationSetSendingPausedException.type = Types::ConfigurationSetSendingPausedException
-    ConfigurationSets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSet, name: "member")
+    ConfigurationSets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSet, name: "member"))
     ConnectAction.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectInstanceArn, name: "InstanceARN", traits: {"smithy.api#required" => {}}))
     ConnectAction.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleARN, name: "IAMRoleARN", traits: {"smithy.api#required" => {}}))
     ConnectAction.type = Types::ConnectAction
@@ -467,7 +467,7 @@ module Aws::SES
     CustomVerificationEmailTemplateDoesNotExistException.add_member(:custom_verification_email_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateName, name: "CustomVerificationEmailTemplateName"))
     CustomVerificationEmailTemplateDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     CustomVerificationEmailTemplateDoesNotExistException.type = Types::CustomVerificationEmailTemplateDoesNotExistException
-    CustomVerificationEmailTemplates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomVerificationEmailTemplate, name: "member")
+    CustomVerificationEmailTemplates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomVerificationEmailTemplate, name: "member"))
     DeleteConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
     DeleteConfigurationSetEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationName, name: "EventDestinationName", traits: {"smithy.api#required" => {}}))
     DeleteConfigurationSetEventDestinationRequest.type = Types::DeleteConfigurationSetEventDestinationRequest
@@ -534,8 +534,8 @@ module Aws::SES
     DimensionValueSource.add_member(:message_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MESSAGE_TAG", traits: {"smithy.api#enumValue" => "messageTag"}))
     DimensionValueSource.add_member(:email_header, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMAIL_HEADER", traits: {"smithy.api#enumValue" => "emailHeader"}))
     DimensionValueSource.add_member(:link_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINK_TAG", traits: {"smithy.api#enumValue" => "linkTag"}))
-    DkimAttributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "key")
-    DkimAttributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityDkimAttributes, name: "value")
+    DkimAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "key"))
+    DkimAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityDkimAttributes, name: "value"))
     DsnAction.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "failed"}))
     DsnAction.add_member(:delayed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELAYED", traits: {"smithy.api#enumValue" => "delayed"}))
     DsnAction.add_member(:delivered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELIVERED", traits: {"smithy.api#enumValue" => "delivered"}))
@@ -556,7 +556,7 @@ module Aws::SES
     EventDestinationDoesNotExistException.add_member(:event_destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationName, name: "EventDestinationName"))
     EventDestinationDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     EventDestinationDoesNotExistException.type = Types::EventDestinationDoesNotExistException
-    EventDestinations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestination, name: "member")
+    EventDestinations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestination, name: "member"))
     EventType.add_member(:send, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEND", traits: {"smithy.api#enumValue" => "send"}))
     EventType.add_member(:reject, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECT", traits: {"smithy.api#enumValue" => "reject"}))
     EventType.add_member(:bounce, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BOUNCE", traits: {"smithy.api#enumValue" => "bounce"}))
@@ -565,11 +565,11 @@ module Aws::SES
     EventType.add_member(:open, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPEN", traits: {"smithy.api#enumValue" => "open"}))
     EventType.add_member(:click, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLICK", traits: {"smithy.api#enumValue" => "click"}))
     EventType.add_member(:rendering_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RENDERING_FAILURE", traits: {"smithy.api#enumValue" => "renderingFailure"}))
-    EventTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "member")
+    EventTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "member"))
     ExtensionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtensionFieldName, name: "Name", traits: {"smithy.api#required" => {}}))
     ExtensionField.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtensionFieldValue, name: "Value", traits: {"smithy.api#required" => {}}))
     ExtensionField.type = Types::ExtensionField
-    ExtensionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExtensionField, name: "member")
+    ExtensionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtensionField, name: "member"))
     FromEmailAddressNotVerifiedException.add_member(:from_email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: FromAddress, name: "FromEmailAddress"))
     FromEmailAddressNotVerifiedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     FromEmailAddressNotVerifiedException.type = Types::FromEmailAddressNotVerifiedException
@@ -619,7 +619,7 @@ module Aws::SES
     IdentityDkimAttributes.add_member(:dkim_verification_status, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationStatus, name: "DkimVerificationStatus", traits: {"smithy.api#required" => {}}))
     IdentityDkimAttributes.add_member(:dkim_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationTokenList, name: "DkimTokens"))
     IdentityDkimAttributes.type = Types::IdentityDkimAttributes
-    IdentityList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "member")
+    IdentityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "member"))
     IdentityMailFromDomainAttributes.add_member(:mail_from_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: MailFromDomainName, name: "MailFromDomain", traits: {"smithy.api#required" => {}}))
     IdentityMailFromDomainAttributes.add_member(:mail_from_domain_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomMailFromStatus, name: "MailFromDomainStatus", traits: {"smithy.api#required" => {}}))
     IdentityMailFromDomainAttributes.add_member(:behavior_on_mx_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: BehaviorOnMXFailure, name: "BehaviorOnMXFailure", traits: {"smithy.api#required" => {}}))
@@ -722,8 +722,8 @@ module Aws::SES
     ListTemplatesResponse.type = Types::ListTemplatesResponse
     ListVerifiedEmailAddressesResponse.add_member(:verified_email_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressList, name: "VerifiedEmailAddresses"))
     ListVerifiedEmailAddressesResponse.type = Types::ListVerifiedEmailAddressesResponse
-    MailFromDomainAttributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "key")
-    MailFromDomainAttributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityMailFromDomainAttributes, name: "value")
+    MailFromDomainAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "key"))
+    MailFromDomainAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityMailFromDomainAttributes, name: "value"))
     MailFromDomainNotVerifiedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     MailFromDomainNotVerifiedException.type = Types::MailFromDomainNotVerifiedException
     Message.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: Content, name: "Subject", traits: {"smithy.api#required" => {}}))
@@ -738,18 +738,18 @@ module Aws::SES
     MessageTag.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTagName, name: "Name", traits: {"smithy.api#required" => {}}))
     MessageTag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     MessageTag.type = Types::MessageTag
-    MessageTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTag, name: "member")
+    MessageTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTag, name: "member"))
     MissingRenderingAttributeException.add_member(:template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateName, name: "TemplateName"))
     MissingRenderingAttributeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     MissingRenderingAttributeException.type = Types::MissingRenderingAttributeException
-    NotificationAttributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "key")
-    NotificationAttributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityNotificationAttributes, name: "value")
+    NotificationAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "key"))
+    NotificationAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityNotificationAttributes, name: "value"))
     NotificationType.add_member(:bounce, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Bounce", traits: {"smithy.api#enumValue" => "Bounce"}))
     NotificationType.add_member(:complaint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Complaint", traits: {"smithy.api#enumValue" => "Complaint"}))
     NotificationType.add_member(:delivery, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Delivery", traits: {"smithy.api#enumValue" => "Delivery"}))
-    PolicyMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "key")
-    PolicyMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, name: "value")
-    PolicyNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "member")
+    PolicyMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "key"))
+    PolicyMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, name: "value"))
+    PolicyNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "member"))
     ProductionAccessNotGrantedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ProductionAccessNotGrantedException.type = Types::ProductionAccessNotGrantedException
     PutConfigurationSetDeliveryOptionsRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
@@ -772,11 +772,11 @@ module Aws::SES
     ReceiptAction.add_member(:sns_action, ::Smithy::Schema::Shapes::MemberShape.new(target: SNSAction, name: "SNSAction"))
     ReceiptAction.add_member(:connect_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectAction, name: "ConnectAction"))
     ReceiptAction.type = Types::ReceiptAction
-    ReceiptActionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiptAction, name: "member")
+    ReceiptActionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiptAction, name: "member"))
     ReceiptFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiptFilterName, name: "Name", traits: {"smithy.api#required" => {}}))
     ReceiptFilter.add_member(:ip_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiptIpFilter, name: "IpFilter", traits: {"smithy.api#required" => {}}))
     ReceiptFilter.type = Types::ReceiptFilter
-    ReceiptFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiptFilter, name: "member")
+    ReceiptFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiptFilter, name: "member"))
     ReceiptFilterPolicy.add_member(:block, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Block", traits: {"smithy.api#enumValue" => "Block"}))
     ReceiptFilterPolicy.add_member(:allow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Allow", traits: {"smithy.api#enumValue" => "Allow"}))
     ReceiptIpFilter.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiptFilterPolicy, name: "Policy", traits: {"smithy.api#required" => {}}))
@@ -789,12 +789,12 @@ module Aws::SES
     ReceiptRule.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiptActionsList, name: "Actions"))
     ReceiptRule.add_member(:scan_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, name: "ScanEnabled", traits: {"smithy.api#default" => false}))
     ReceiptRule.type = Types::ReceiptRule
-    ReceiptRuleNamesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiptRuleName, name: "member")
+    ReceiptRuleNamesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiptRuleName, name: "member"))
     ReceiptRuleSetMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiptRuleSetName, name: "Name"))
     ReceiptRuleSetMetadata.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTimestamp"))
     ReceiptRuleSetMetadata.type = Types::ReceiptRuleSetMetadata
-    ReceiptRuleSetsLists.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiptRuleSetMetadata, name: "member")
-    ReceiptRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiptRule, name: "member")
+    ReceiptRuleSetsLists.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiptRuleSetMetadata, name: "member"))
+    ReceiptRulesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiptRule, name: "member"))
     RecipientDsnFields.add_member(:final_recipient, ::Smithy::Schema::Shapes::MemberShape.new(target: Address, name: "FinalRecipient"))
     RecipientDsnFields.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: DsnAction, name: "Action", traits: {"smithy.api#required" => {}}))
     RecipientDsnFields.add_member(:remote_mta, ::Smithy::Schema::Shapes::MemberShape.new(target: RemoteMta, name: "RemoteMta"))
@@ -803,7 +803,7 @@ module Aws::SES
     RecipientDsnFields.add_member(:last_attempt_date, ::Smithy::Schema::Shapes::MemberShape.new(target: LastAttemptDate, name: "LastAttemptDate"))
     RecipientDsnFields.add_member(:extension_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtensionFieldList, name: "ExtensionFields"))
     RecipientDsnFields.type = Types::RecipientDsnFields
-    RecipientsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Recipient, name: "member")
+    RecipientsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Recipient, name: "member"))
     ReorderReceiptRuleSetRequest.add_member(:rule_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiptRuleSetName, name: "RuleSetName", traits: {"smithy.api#required" => {}}))
     ReorderReceiptRuleSetRequest.add_member(:rule_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiptRuleNamesList, name: "RuleNames", traits: {"smithy.api#required" => {}}))
     ReorderReceiptRuleSetRequest.type = Types::ReorderReceiptRuleSetRequest
@@ -866,7 +866,7 @@ module Aws::SES
     SendDataPoint.add_member(:complaints, ::Smithy::Schema::Shapes::MemberShape.new(target: Counter, name: "Complaints", traits: {"smithy.api#default" => 0}))
     SendDataPoint.add_member(:rejects, ::Smithy::Schema::Shapes::MemberShape.new(target: Counter, name: "Rejects", traits: {"smithy.api#default" => 0}))
     SendDataPoint.type = Types::SendDataPoint
-    SendDataPointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SendDataPoint, name: "member")
+    SendDataPointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SendDataPoint, name: "member"))
     SendEmailRequest.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Address, name: "Source", traits: {"smithy.api#required" => {}}))
     SendEmailRequest.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "Destination", traits: {"smithy.api#required" => {}}))
     SendEmailRequest.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message", traits: {"smithy.api#required" => {}}))
@@ -950,7 +950,7 @@ module Aws::SES
     TemplateMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateName, name: "Name"))
     TemplateMetadata.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTimestamp"))
     TemplateMetadata.type = Types::TemplateMetadata
-    TemplateMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateMetadata, name: "member")
+    TemplateMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateMetadata, name: "member"))
     TestRenderTemplateRequest.add_member(:template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateName, name: "TemplateName", traits: {"smithy.api#required" => {}}))
     TestRenderTemplateRequest.add_member(:template_data, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateData, name: "TemplateData", traits: {"smithy.api#required" => {}}))
     TestRenderTemplateRequest.type = Types::TestRenderTemplateRequest
@@ -996,14 +996,14 @@ module Aws::SES
     UpdateTemplateRequest.add_member(:template, ::Smithy::Schema::Shapes::MemberShape.new(target: Template, name: "Template", traits: {"smithy.api#required" => {}}))
     UpdateTemplateRequest.type = Types::UpdateTemplateRequest
     UpdateTemplateResponse.type = Types::UpdateTemplateResponse
-    VerificationAttributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "key")
-    VerificationAttributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityVerificationAttributes, name: "value")
+    VerificationAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "key"))
+    VerificationAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityVerificationAttributes, name: "value"))
     VerificationStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Pending", traits: {"smithy.api#enumValue" => "Pending"}))
     VerificationStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Success", traits: {"smithy.api#enumValue" => "Success"}))
     VerificationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
     VerificationStatus.add_member(:temporary_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TemporaryFailure", traits: {"smithy.api#enumValue" => "TemporaryFailure"}))
     VerificationStatus.add_member(:not_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NotStarted", traits: {"smithy.api#enumValue" => "NotStarted"}))
-    VerificationTokenList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationToken, name: "member")
+    VerificationTokenList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationToken, name: "member"))
     VerifyDomainDkimRequest.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: Domain, name: "Domain", traits: {"smithy.api#required" => {}}))
     VerifyDomainDkimRequest.type = Types::VerifyDomainDkimRequest
     VerifyDomainDkimResponse.add_member(:dkim_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationTokenList, name: "DkimTokens", traits: {"smithy.api#required" => {}}))

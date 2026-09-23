@@ -310,10 +310,10 @@ module Aws::SSOAdmin
     AccessControlAttribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlAttributeKey, name: "Key", traits: {"smithy.api#required" => {}}))
     AccessControlAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlAttributeValue, name: "Value", traits: {"smithy.api#required" => {}}))
     AccessControlAttribute.type = Types::AccessControlAttribute
-    AccessControlAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlAttribute, name: "member")
+    AccessControlAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlAttribute, name: "member"))
     AccessControlAttributeValue.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlAttributeValueSourceList, name: "Source", traits: {"smithy.api#required" => {}}))
     AccessControlAttributeValue.type = Types::AccessControlAttributeValue
-    AccessControlAttributeValueSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlAttributeValueSource, name: "member")
+    AccessControlAttributeValueSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlAttributeValueSource, name: "member"))
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessDeniedExceptionMessage, name: "Message"))
     AccessDeniedException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessDeniedExceptionReason, name: "Reason"))
     AccessDeniedException.type = Types::AccessDeniedException
@@ -328,8 +328,8 @@ module Aws::SSOAdmin
     AccountAssignmentForPrincipal.add_member(:principal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalId, name: "PrincipalId"))
     AccountAssignmentForPrincipal.add_member(:principal_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalType, name: "PrincipalType"))
     AccountAssignmentForPrincipal.type = Types::AccountAssignmentForPrincipal
-    AccountAssignmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAssignment, name: "member")
-    AccountAssignmentListForPrincipal.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAssignmentForPrincipal, name: "member")
+    AccountAssignmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAssignment, name: "member"))
+    AccountAssignmentListForPrincipal.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAssignmentForPrincipal, name: "member"))
     AccountAssignmentOperationStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusValues, name: "Status"))
     AccountAssignmentOperationStatus.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUId, name: "RequestId"))
     AccountAssignmentOperationStatus.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: Reason, name: "FailureReason"))
@@ -340,12 +340,12 @@ module Aws::SSOAdmin
     AccountAssignmentOperationStatus.add_member(:principal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalId, name: "PrincipalId"))
     AccountAssignmentOperationStatus.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreatedDate"))
     AccountAssignmentOperationStatus.type = Types::AccountAssignmentOperationStatus
-    AccountAssignmentOperationStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAssignmentOperationStatusMetadata, name: "member")
+    AccountAssignmentOperationStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAssignmentOperationStatusMetadata, name: "member"))
     AccountAssignmentOperationStatusMetadata.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusValues, name: "Status"))
     AccountAssignmentOperationStatusMetadata.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUId, name: "RequestId"))
     AccountAssignmentOperationStatusMetadata.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreatedDate"))
     AccountAssignmentOperationStatusMetadata.type = Types::AccountAssignmentOperationStatusMetadata
-    AccountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member")
+    AccountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
     Application.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, name: "ApplicationArn"))
     Application.add_member(:application_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationProviderArn, name: "ApplicationProviderArn"))
     Application.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationNameType, name: "Name"))
@@ -364,15 +364,15 @@ module Aws::SSOAdmin
     ApplicationAssignmentForPrincipal.add_member(:principal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalId, name: "PrincipalId"))
     ApplicationAssignmentForPrincipal.add_member(:principal_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalType, name: "PrincipalType"))
     ApplicationAssignmentForPrincipal.type = Types::ApplicationAssignmentForPrincipal
-    ApplicationAssignmentListForPrincipal.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationAssignmentForPrincipal, name: "member")
-    ApplicationAssignmentsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationAssignment, name: "member")
-    ApplicationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Application, name: "member")
+    ApplicationAssignmentListForPrincipal.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationAssignmentForPrincipal, name: "member"))
+    ApplicationAssignmentsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationAssignment, name: "member"))
+    ApplicationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Application, name: "member"))
     ApplicationProvider.add_member(:application_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationProviderArn, name: "ApplicationProviderArn", traits: {"smithy.api#required" => {}}))
     ApplicationProvider.add_member(:federation_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: FederationProtocol, name: "FederationProtocol"))
     ApplicationProvider.add_member(:display_data, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayData, name: "DisplayData"))
     ApplicationProvider.add_member(:resource_server_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerConfig, name: "ResourceServerConfig"))
     ApplicationProvider.type = Types::ApplicationProvider
-    ApplicationProviderList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationProvider, name: "member")
+    ApplicationProviderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationProvider, name: "member"))
     ApplicationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     ApplicationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     ApplicationVisibility.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
@@ -390,7 +390,7 @@ module Aws::SSOAdmin
     AttachedManagedPolicy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
     AttachedManagedPolicy.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedPolicyArn, name: "Arn"))
     AttachedManagedPolicy.type = Types::AttachedManagedPolicy
-    AttachedManagedPolicyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttachedManagedPolicy, name: "member")
+    AttachedManagedPolicyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachedManagedPolicy, name: "member"))
     AuthenticationMethod.add_member(:iam, Types::AuthenticationMethod::Iam, ::Smithy::Schema::Shapes::MemberShape.new(target: IamAuthenticationMethod, name: "Iam"))
     AuthenticationMethod.add_member(:unknown, Types::AuthenticationMethod::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AuthenticationMethod.type = Types::AuthenticationMethod
@@ -398,13 +398,13 @@ module Aws::SSOAdmin
     AuthenticationMethodItem.add_member(:authentication_method, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationMethod, name: "AuthenticationMethod"))
     AuthenticationMethodItem.type = Types::AuthenticationMethodItem
     AuthenticationMethodType.add_member(:iam, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IAM", traits: {"smithy.api#enumValue" => "IAM"}))
-    AuthenticationMethods.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationMethodItem, name: "member")
+    AuthenticationMethods.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationMethodItem, name: "member"))
     AuthorizationCodeGrant.add_member(:redirect_uris, ::Smithy::Schema::Shapes::MemberShape.new(target: RedirectUris, name: "RedirectUris"))
     AuthorizationCodeGrant.type = Types::AuthorizationCodeGrant
     AuthorizedTokenIssuer.add_member(:trusted_token_issuer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedTokenIssuerArn, name: "TrustedTokenIssuerArn"))
     AuthorizedTokenIssuer.add_member(:authorized_audiences, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenIssuerAudiences, name: "AuthorizedAudiences"))
     AuthorizedTokenIssuer.type = Types::AuthorizedTokenIssuer
-    AuthorizedTokenIssuers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizedTokenIssuer, name: "member")
+    AuthorizedTokenIssuers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizedTokenIssuer, name: "member"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictExceptionMessage, name: "Message"))
     ConflictException.type = Types::ConflictException
     CreateAccountAssignmentRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn", traits: {"smithy.api#required" => {}}))
@@ -463,7 +463,7 @@ module Aws::SSOAdmin
     CustomerManagedPolicyReference.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedPolicyName, name: "Name", traits: {"smithy.api#required" => {}}))
     CustomerManagedPolicyReference.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedPolicyPath, name: "Path"))
     CustomerManagedPolicyReference.type = Types::CustomerManagedPolicyReference
-    CustomerManagedPolicyReferenceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerManagedPolicyReference, name: "member")
+    CustomerManagedPolicyReferenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerManagedPolicyReference, name: "member"))
     DeleteAccountAssignmentRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn", traits: {"smithy.api#required" => {}}))
     DeleteAccountAssignmentRequest.add_member(:target_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetId, name: "TargetId", traits: {"smithy.api#required" => {}}))
     DeleteAccountAssignmentRequest.add_member(:target_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetType, name: "TargetType", traits: {"smithy.api#required" => {}}))
@@ -653,7 +653,7 @@ module Aws::SSOAdmin
     GrantType.add_member(:refresh_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REFRESH_TOKEN", traits: {"smithy.api#enumValue" => "refresh_token"}))
     GrantType.add_member(:jwt_bearer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JWT_BEARER", traits: {"smithy.api#enumValue" => "urn:ietf:params:oauth:grant-type:jwt-bearer"}))
     GrantType.add_member(:token_exchange, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOKEN_EXCHANGE", traits: {"smithy.api#enumValue" => "urn:ietf:params:oauth:grant-type:token-exchange"}))
-    Grants.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GrantItem, name: "member")
+    Grants.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantItem, name: "member"))
     IamAuthenticationMethod.add_member(:actor_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ActorPolicyDocument, name: "ActorPolicy", traits: {"smithy.api#required" => {}}))
     IamAuthenticationMethod.type = Types::IamAuthenticationMethod
     InstanceAccessControlAttributeConfiguration.add_member(:access_control_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessControlAttributeList, name: "AccessControlAttributes", traits: {"smithy.api#required" => {}}))
@@ -661,7 +661,7 @@ module Aws::SSOAdmin
     InstanceAccessControlAttributeConfigurationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     InstanceAccessControlAttributeConfigurationStatus.add_member(:creation_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATION_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATION_IN_PROGRESS"}))
     InstanceAccessControlAttributeConfigurationStatus.add_member(:creation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATION_FAILED", traits: {"smithy.api#enumValue" => "CREATION_FAILED"}))
-    InstanceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceMetadata, name: "member")
+    InstanceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceMetadata, name: "member"))
     InstanceMetadata.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn"))
     InstanceMetadata.add_member(:identity_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "IdentityStoreId"))
     InstanceMetadata.add_member(:owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "OwnerAccountId"))
@@ -863,7 +863,7 @@ module Aws::SSOAdmin
     PermissionSet.add_member(:session_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, name: "SessionDuration"))
     PermissionSet.add_member(:relay_state, ::Smithy::Schema::Shapes::MemberShape.new(target: RelayState, name: "RelayState"))
     PermissionSet.type = Types::PermissionSet
-    PermissionSetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionSetArn, name: "member")
+    PermissionSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionSetArn, name: "member"))
     PermissionSetProvisioningStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusValues, name: "Status"))
     PermissionSetProvisioningStatus.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUId, name: "RequestId"))
     PermissionSetProvisioningStatus.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
@@ -871,7 +871,7 @@ module Aws::SSOAdmin
     PermissionSetProvisioningStatus.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: Reason, name: "FailureReason"))
     PermissionSetProvisioningStatus.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreatedDate"))
     PermissionSetProvisioningStatus.type = Types::PermissionSetProvisioningStatus
-    PermissionSetProvisioningStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionSetProvisioningStatusMetadata, name: "member")
+    PermissionSetProvisioningStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionSetProvisioningStatusMetadata, name: "member"))
     PermissionSetProvisioningStatusMetadata.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusValues, name: "Status"))
     PermissionSetProvisioningStatusMetadata.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUId, name: "RequestId"))
     PermissionSetProvisioningStatusMetadata.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreatedDate"))
@@ -925,7 +925,7 @@ module Aws::SSOAdmin
     PutPermissionsBoundaryToPermissionSetRequest.add_member(:permissions_boundary, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionsBoundary, name: "PermissionsBoundary", traits: {"smithy.api#required" => {}}))
     PutPermissionsBoundaryToPermissionSetRequest.type = Types::PutPermissionsBoundaryToPermissionSetRequest
     PutPermissionsBoundaryToPermissionSetResponse.type = Types::PutPermissionsBoundaryToPermissionSetResponse
-    RedirectUris.member = ::Smithy::Schema::Shapes::MemberShape.new(target: URI, name: "member")
+    RedirectUris.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: URI, name: "member"))
     RefreshTokenGrant.type = Types::RefreshTokenGrant
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNotFoundMessage, name: "Message"))
     ResourceNotFoundException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNotFoundExceptionReason, name: "Reason"))
@@ -936,13 +936,13 @@ module Aws::SSOAdmin
     ResourceServerScopeDetails.add_member(:long_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "LongDescription"))
     ResourceServerScopeDetails.add_member(:detailed_title, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "DetailedTitle"))
     ResourceServerScopeDetails.type = Types::ResourceServerScopeDetails
-    ResourceServerScopes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerScope, name: "key")
-    ResourceServerScopes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerScopeDetails, name: "value")
+    ResourceServerScopes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerScope, name: "key"))
+    ResourceServerScopes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceServerScopeDetails, name: "value"))
     ScopeDetails.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: Scope, name: "Scope", traits: {"smithy.api#required" => {}}))
     ScopeDetails.add_member(:authorized_targets, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeTargets, name: "AuthorizedTargets"))
     ScopeDetails.type = Types::ScopeDetails
-    ScopeTargets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeTarget, name: "member")
-    Scopes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeDetails, name: "member")
+    ScopeTargets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeTarget, name: "member"))
+    Scopes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeDetails, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceQuotaExceededMessage, name: "Message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     SignInOptions.add_member(:origin, ::Smithy::Schema::Shapes::MemberShape.new(target: SignInOrigin, name: "Origin", traits: {"smithy.api#required" => {}}))
@@ -956,8 +956,8 @@ module Aws::SSOAdmin
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
@@ -969,11 +969,11 @@ module Aws::SSOAdmin
     ThrottlingException.type = Types::ThrottlingException
     ThrottlingExceptionReason.add_member(:kms_throttling_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KMS_THROTTLING_EXCEPTION", traits: {"smithy.api#enumValue" => "KMS_ThrottlingException"}))
     TokenExchangeGrant.type = Types::TokenExchangeGrant
-    TokenIssuerAudiences.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TokenIssuerAudience, name: "member")
+    TokenIssuerAudiences.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenIssuerAudience, name: "member"))
     TrustedTokenIssuerConfiguration.add_member(:oidc_jwt_configuration, Types::TrustedTokenIssuerConfiguration::OidcJwtConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: OidcJwtConfiguration, name: "OidcJwtConfiguration"))
     TrustedTokenIssuerConfiguration.add_member(:unknown, Types::TrustedTokenIssuerConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     TrustedTokenIssuerConfiguration.type = Types::TrustedTokenIssuerConfiguration
-    TrustedTokenIssuerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedTokenIssuerMetadata, name: "member")
+    TrustedTokenIssuerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedTokenIssuerMetadata, name: "member"))
     TrustedTokenIssuerMetadata.add_member(:trusted_token_issuer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedTokenIssuerArn, name: "TrustedTokenIssuerArn"))
     TrustedTokenIssuerMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedTokenIssuerName, name: "Name"))
     TrustedTokenIssuerMetadata.add_member(:trusted_token_issuer_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedTokenIssuerType, name: "TrustedTokenIssuerType"))

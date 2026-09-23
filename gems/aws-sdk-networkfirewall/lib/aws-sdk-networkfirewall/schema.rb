@@ -372,19 +372,19 @@ module Aws::NetworkFirewall
     ActionDefinition.type = Types::ActionDefinition
     Address.add_member(:address_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressDefinition, name: "AddressDefinition", traits: {"smithy.api#required" => {}}))
     Address.type = Types::Address
-    Addresses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Address, name: "member")
+    Addresses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Address, name: "member"))
     AnalysisReport.add_member(:analysis_report_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisReportId, name: "AnalysisReportId"))
     AnalysisReport.add_member(:analysis_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledAnalysisType, name: "AnalysisType"))
     AnalysisReport.add_member(:report_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportTime, name: "ReportTime"))
     AnalysisReport.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "Status"))
     AnalysisReport.type = Types::AnalysisReport
-    AnalysisReportResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisTypeReportResult, name: "member")
-    AnalysisReports.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisReport, name: "member")
+    AnalysisReportResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisTypeReportResult, name: "member"))
+    AnalysisReports.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisReport, name: "member"))
     AnalysisResult.add_member(:identified_rule_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleIdList, name: "IdentifiedRuleIds"))
     AnalysisResult.add_member(:identified_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentifiedType, name: "IdentifiedType"))
     AnalysisResult.add_member(:analysis_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionMemberString, name: "AnalysisDetail"))
     AnalysisResult.type = Types::AnalysisResult
-    AnalysisResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisResult, name: "member")
+    AnalysisResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisResult, name: "member"))
     AnalysisTypeReportResult.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionMemberString, name: "Protocol"))
     AnalysisTypeReportResult.add_member(:first_accessed, ::Smithy::Schema::Shapes::MemberShape.new(target: FirstAccessed, name: "FirstAccessed"))
     AnalysisTypeReportResult.add_member(:last_accessed, ::Smithy::Schema::Shapes::MemberShape.new(target: LastAccessed, name: "LastAccessed"))
@@ -422,8 +422,8 @@ module Aws::NetworkFirewall
     AssociateSubnetsResponse.add_member(:subnet_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetMappings, name: "SubnetMappings"))
     AssociateSubnetsResponse.add_member(:update_token, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateToken, name: "UpdateToken"))
     AssociateSubnetsResponse.type = Types::AssociateSubnetsResponse
-    AssociationSyncState.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "key")
-    AssociationSyncState.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AZSyncState, name: "value")
+    AssociationSyncState.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "key"))
+    AssociationSyncState.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AZSyncState, name: "value"))
     Attachment.add_member(:subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AzSubnet, name: "SubnetId"))
     Attachment.add_member(:endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointId, name: "EndpointId"))
     Attachment.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentStatus, name: "Status"))
@@ -437,17 +437,17 @@ module Aws::NetworkFirewall
     AttachmentStatus.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
     AvailabilityZoneMapping.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneMappingString, name: "AvailabilityZone", traits: {"smithy.api#required" => {}}))
     AvailabilityZoneMapping.type = Types::AvailabilityZoneMapping
-    AvailabilityZoneMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneMapping, name: "member")
+    AvailabilityZoneMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneMapping, name: "member"))
     AvailabilityZoneMetadata.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IPAddressType, name: "IPAddressType"))
     AvailabilityZoneMetadata.type = Types::AvailabilityZoneMetadata
-    AzSubnets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AzSubnet, name: "member")
+    AzSubnets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AzSubnet, name: "member"))
     CIDRSummary.add_member(:available_cidr_count, ::Smithy::Schema::Shapes::MemberShape.new(target: CIDRCount, name: "AvailableCIDRCount"))
     CIDRSummary.add_member(:utilized_cidr_count, ::Smithy::Schema::Shapes::MemberShape.new(target: CIDRCount, name: "UtilizedCIDRCount"))
     CIDRSummary.add_member(:ip_set_references, ::Smithy::Schema::Shapes::MemberShape.new(target: IPSetMetadataMap, name: "IPSetReferences"))
     CIDRSummary.type = Types::CIDRSummary
     CapacityUsageSummary.add_member(:cid_rs, ::Smithy::Schema::Shapes::MemberShape.new(target: CIDRSummary, name: "CIDRs"))
     CapacityUsageSummary.type = Types::CapacityUsageSummary
-    Certificates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TlsCertificateData, name: "member")
+    Certificates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsCertificateData, name: "member"))
     CheckCertificateRevocationStatusActions.add_member(:revoked_status_action, ::Smithy::Schema::Shapes::MemberShape.new(target: RevocationCheckAction, name: "RevokedStatusAction"))
     CheckCertificateRevocationStatusActions.add_member(:unknown_status_action, ::Smithy::Schema::Shapes::MemberShape.new(target: RevocationCheckAction, name: "UnknownStatusAction"))
     CheckCertificateRevocationStatusActions.type = Types::CheckCertificateRevocationStatusActions
@@ -519,7 +519,7 @@ module Aws::NetworkFirewall
     CustomAction.add_member(:action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionName, name: "ActionName", traits: {"smithy.api#required" => {}}))
     CustomAction.add_member(:action_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionDefinition, name: "ActionDefinition", traits: {"smithy.api#required" => {}}))
     CustomAction.type = Types::CustomAction
-    CustomActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomAction, name: "member")
+    CustomActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomAction, name: "member"))
     DeleteFirewallPolicyRequest.add_member(:firewall_policy_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "FirewallPolicyName"))
     DeleteFirewallPolicyRequest.add_member(:firewall_policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "FirewallPolicyArn"))
     DeleteFirewallPolicyRequest.type = Types::DeleteFirewallPolicyRequest
@@ -649,7 +649,7 @@ module Aws::NetworkFirewall
     DescribeVpcEndpointAssociationResponse.type = Types::DescribeVpcEndpointAssociationResponse
     Dimension.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Dimension.type = Types::Dimension
-    Dimensions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "member")
+    Dimensions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "member"))
     DisassociateAvailabilityZonesRequest.add_member(:update_token, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateToken, name: "UpdateToken"))
     DisassociateAvailabilityZonesRequest.add_member(:firewall_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "FirewallArn"))
     DisassociateAvailabilityZonesRequest.add_member(:firewall_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "FirewallName"))
@@ -672,7 +672,7 @@ module Aws::NetworkFirewall
     DisassociateSubnetsResponse.type = Types::DisassociateSubnetsResponse
     EnabledAnalysisType.add_member(:tls_sni, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLS_SNI", traits: {"smithy.api#enumValue" => "TLS_SNI"}))
     EnabledAnalysisType.add_member(:http_host, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTP_HOST", traits: {"smithy.api#enumValue" => "HTTP_HOST"}))
-    EnabledAnalysisTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledAnalysisType, name: "member")
+    EnabledAnalysisTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledAnalysisType, name: "member"))
     EncryptionConfiguration.add_member(:key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyId, name: "KeyId"))
     EncryptionConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, name: "Type", traits: {"smithy.api#required" => {}}))
     EncryptionConfiguration.type = Types::EncryptionConfiguration
@@ -701,7 +701,7 @@ module Aws::NetworkFirewall
     FirewallMetadata.add_member(:firewall_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "FirewallArn"))
     FirewallMetadata.add_member(:transit_gateway_attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitGatewayAttachmentId, name: "TransitGatewayAttachmentId"))
     FirewallMetadata.type = Types::FirewallMetadata
-    FirewallPolicies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallPolicyMetadata, name: "member")
+    FirewallPolicies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallPolicyMetadata, name: "member"))
     FirewallPolicy.add_member(:stateless_rule_group_references, ::Smithy::Schema::Shapes::MemberShape.new(target: StatelessRuleGroupReferences, name: "StatelessRuleGroupReferences"))
     FirewallPolicy.add_member(:stateless_default_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: StatelessActions, name: "StatelessDefaultActions", traits: {"smithy.api#required" => {}}))
     FirewallPolicy.add_member(:stateless_fragment_default_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: StatelessActions, name: "StatelessFragmentDefaultActions", traits: {"smithy.api#required" => {}}))
@@ -737,8 +737,8 @@ module Aws::NetworkFirewall
     FirewallStatusValue.add_member(:provisioning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROVISIONING", traits: {"smithy.api#enumValue" => "PROVISIONING"}))
     FirewallStatusValue.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     FirewallStatusValue.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
-    Firewalls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallMetadata, name: "member")
-    Flags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TCPFlag, name: "member")
+    Firewalls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallMetadata, name: "member"))
+    Flags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TCPFlag, name: "member"))
     Flow.add_member(:source_address, ::Smithy::Schema::Shapes::MemberShape.new(target: Address, name: "SourceAddress"))
     Flow.add_member(:destination_address, ::Smithy::Schema::Shapes::MemberShape.new(target: Address, name: "DestinationAddress"))
     Flow.add_member(:source_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "SourcePort"))
@@ -754,7 +754,7 @@ module Aws::NetworkFirewall
     FlowFilter.add_member(:destination_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "DestinationPort"))
     FlowFilter.add_member(:protocols, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtocolStrings, name: "Protocols"))
     FlowFilter.type = Types::FlowFilter
-    FlowFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FlowFilter, name: "member")
+    FlowFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowFilter, name: "member"))
     FlowOperation.add_member(:minimum_flow_age_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Age, name: "MinimumFlowAgeInSeconds"))
     FlowOperation.add_member(:flow_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowFilters, name: "FlowFilters"))
     FlowOperation.type = Types::FlowOperation
@@ -769,10 +769,10 @@ module Aws::NetworkFirewall
     FlowOperationStatus.add_member(:completed_with_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED_WITH_ERRORS", traits: {"smithy.api#enumValue" => "COMPLETED_WITH_ERRORS"}))
     FlowOperationType.add_member(:flow_flush, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLOW_FLUSH", traits: {"smithy.api#enumValue" => "FLOW_FLUSH"}))
     FlowOperationType.add_member(:flow_capture, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLOW_CAPTURE", traits: {"smithy.api#enumValue" => "FLOW_CAPTURE"}))
-    FlowOperations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FlowOperationMetadata, name: "member")
+    FlowOperations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowOperationMetadata, name: "member"))
     FlowTimeouts.add_member(:tcp_idle_timeout_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: TcpIdleTimeoutRangeBound, name: "TcpIdleTimeoutSeconds"))
     FlowTimeouts.type = Types::FlowTimeouts
-    Flows.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Flow, name: "member")
+    Flows.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Flow, name: "member"))
     GeneratedRulesType.add_member(:allowlist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOWLIST", traits: {"smithy.api#enumValue" => "ALLOWLIST"}))
     GeneratedRulesType.add_member(:denylist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DENYLIST", traits: {"smithy.api#enumValue" => "DENYLIST"}))
     GeneratedRulesType.add_member(:rejectlist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECTLIST", traits: {"smithy.api#enumValue" => "REJECTLIST"}))
@@ -807,14 +807,14 @@ module Aws::NetworkFirewall
     IPSet.type = Types::IPSet
     IPSetMetadata.add_member(:resolved_cidr_count, ::Smithy::Schema::Shapes::MemberShape.new(target: CIDRCount, name: "ResolvedCIDRCount"))
     IPSetMetadata.type = Types::IPSetMetadata
-    IPSetMetadataMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: IPSetArn, name: "key")
-    IPSetMetadataMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: IPSetMetadata, name: "value")
+    IPSetMetadataMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: IPSetArn, name: "key"))
+    IPSetMetadataMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: IPSetMetadata, name: "value"))
     IPSetReference.add_member(:reference_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ReferenceArn"))
     IPSetReference.type = Types::IPSetReference
-    IPSetReferenceMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: IPSetReferenceName, name: "key")
-    IPSetReferenceMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: IPSetReference, name: "value")
-    IPSets.key = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleVariableName, name: "key")
-    IPSets.value = ::Smithy::Schema::Shapes::MemberShape.new(target: IPSet, name: "value")
+    IPSetReferenceMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: IPSetReferenceName, name: "key"))
+    IPSetReferenceMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: IPSetReference, name: "value"))
+    IPSets.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleVariableName, name: "key"))
+    IPSets.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: IPSet, name: "value"))
     IdentifiedType.add_member(:stateless_rule_forwarding_asymmetrically, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATELESS_RULE_FORWARDING_ASYMMETRICALLY", traits: {"smithy.api#enumValue" => "STATELESS_RULE_FORWARDING_ASYMMETRICALLY"}))
     IdentifiedType.add_member(:stateless_rule_contains_tcp_flags, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATELESS_RULE_CONTAINS_TCP_FLAGS", traits: {"smithy.api#enumValue" => "STATELESS_RULE_CONTAINS_TCP_FLAGS"}))
     InsufficientCapacityException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -915,9 +915,9 @@ module Aws::NetworkFirewall
     LogDestinationConfig.add_member(:log_destination_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDestinationType, name: "LogDestinationType", traits: {"smithy.api#required" => {}}))
     LogDestinationConfig.add_member(:log_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDestinationMap, name: "LogDestination", traits: {"smithy.api#required" => {}}))
     LogDestinationConfig.type = Types::LogDestinationConfig
-    LogDestinationConfigs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogDestinationConfig, name: "member")
-    LogDestinationMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: HashMapKey, name: "key")
-    LogDestinationMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: HashMapValue, name: "value")
+    LogDestinationConfigs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDestinationConfig, name: "member"))
+    LogDestinationMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: HashMapKey, name: "key"))
+    LogDestinationMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: HashMapValue, name: "value"))
     LogDestinationPermissionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     LogDestinationPermissionException.type = Types::LogDestinationPermissionException
     LogDestinationType.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3", traits: {"smithy.api#enumValue" => "S3"}))
@@ -947,13 +947,13 @@ module Aws::NetworkFirewall
     PortRange.add_member(:from_port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortRangeBound, name: "FromPort", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     PortRange.add_member(:to_port, ::Smithy::Schema::Shapes::MemberShape.new(target: PortRangeBound, name: "ToPort", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     PortRange.type = Types::PortRange
-    PortRanges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PortRange, name: "member")
+    PortRanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortRange, name: "member"))
     PortSet.add_member(:definition, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableDefinitionList, name: "Definition"))
     PortSet.type = Types::PortSet
-    PortSets.key = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleVariableName, name: "key")
-    PortSets.value = ::Smithy::Schema::Shapes::MemberShape.new(target: PortSet, name: "value")
-    ProtocolNumbers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProtocolNumber, name: "member")
-    ProtocolStrings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProtocolString, name: "member")
+    PortSets.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleVariableName, name: "key"))
+    PortSets.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PortSet, name: "value"))
+    ProtocolNumbers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtocolNumber, name: "member"))
+    ProtocolStrings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtocolString, name: "member"))
     PublishMetricAction.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimensions, name: "Dimensions", traits: {"smithy.api#required" => {}}))
     PublishMetricAction.type = Types::PublishMetricAction
     PutResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
@@ -1012,20 +1012,20 @@ module Aws::NetworkFirewall
     RuleGroupResponse.type = Types::RuleGroupResponse
     RuleGroupType.add_member(:stateless, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATELESS", traits: {"smithy.api#enumValue" => "STATELESS"}))
     RuleGroupType.add_member(:stateful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATEFUL", traits: {"smithy.api#enumValue" => "STATEFUL"}))
-    RuleGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupMetadata, name: "member")
-    RuleIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionMemberString, name: "member")
+    RuleGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupMetadata, name: "member"))
+    RuleIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionMemberString, name: "member"))
     RuleOption.add_member(:keyword, ::Smithy::Schema::Shapes::MemberShape.new(target: Keyword, name: "Keyword", traits: {"smithy.api#required" => {}}))
     RuleOption.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Settings, name: "Settings"))
     RuleOption.type = Types::RuleOption
-    RuleOptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleOption, name: "member")
+    RuleOptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleOption, name: "member"))
     RuleOrder.add_member(:default_action_order, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT_ACTION_ORDER", traits: {"smithy.api#enumValue" => "DEFAULT_ACTION_ORDER"}))
     RuleOrder.add_member(:strict_order, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRICT_ORDER", traits: {"smithy.api#enumValue" => "STRICT_ORDER"}))
-    RuleSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSummary, name: "member")
+    RuleSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSummary, name: "member"))
     RuleSummary.add_member(:sid, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionMemberString, name: "SID"))
     RuleSummary.add_member(:msg, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionMemberString, name: "Msg"))
     RuleSummary.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionMemberString, name: "Metadata"))
     RuleSummary.type = Types::RuleSummary
-    RuleTargets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionMemberString, name: "member")
+    RuleTargets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionMemberString, name: "member"))
     RuleVariables.add_member(:ip_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: IPSets, name: "IPSets"))
     RuleVariables.add_member(:port_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: PortSets, name: "PortSets"))
     RuleVariables.type = Types::RuleVariables
@@ -1045,16 +1045,16 @@ module Aws::NetworkFirewall
     ServerCertificateConfiguration.add_member(:certificate_authority_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "CertificateAuthorityArn"))
     ServerCertificateConfiguration.add_member(:check_certificate_revocation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CheckCertificateRevocationStatusActions, name: "CheckCertificateRevocationStatus"))
     ServerCertificateConfiguration.type = Types::ServerCertificateConfiguration
-    ServerCertificateConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServerCertificateConfiguration, name: "member")
+    ServerCertificateConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerCertificateConfiguration, name: "member"))
     ServerCertificateScope.add_member(:sources, ::Smithy::Schema::Shapes::MemberShape.new(target: Addresses, name: "Sources"))
     ServerCertificateScope.add_member(:destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: Addresses, name: "Destinations"))
     ServerCertificateScope.add_member(:source_ports, ::Smithy::Schema::Shapes::MemberShape.new(target: PortRanges, name: "SourcePorts"))
     ServerCertificateScope.add_member(:destination_ports, ::Smithy::Schema::Shapes::MemberShape.new(target: PortRanges, name: "DestinationPorts"))
     ServerCertificateScope.add_member(:protocols, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtocolNumbers, name: "Protocols"))
     ServerCertificateScope.type = Types::ServerCertificateScope
-    ServerCertificateScopes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServerCertificateScope, name: "member")
-    ServerCertificates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServerCertificate, name: "member")
-    Settings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Setting, name: "member")
+    ServerCertificateScopes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerCertificateScope, name: "member"))
+    ServerCertificates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerCertificate, name: "member"))
+    Settings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Setting, name: "member"))
     SourceMetadata.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "SourceArn"))
     SourceMetadata.add_member(:source_update_token, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateToken, name: "SourceUpdateToken"))
     SourceMetadata.type = Types::SourceMetadata
@@ -1090,7 +1090,7 @@ module Aws::NetworkFirewall
     StatefulAction.add_member(:drop, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DROP", traits: {"smithy.api#enumValue" => "DROP"}))
     StatefulAction.add_member(:alert, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALERT", traits: {"smithy.api#enumValue" => "ALERT"}))
     StatefulAction.add_member(:reject, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECT", traits: {"smithy.api#enumValue" => "REJECT"}))
-    StatefulActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionMemberString, name: "member")
+    StatefulActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionMemberString, name: "member"))
     StatefulEngineOptions.add_member(:rule_order, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleOrder, name: "RuleOrder"))
     StatefulEngineOptions.add_member(:stream_exception_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamExceptionPolicy, name: "StreamExceptionPolicy"))
     StatefulEngineOptions.add_member(:flow_timeouts, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowTimeouts, name: "FlowTimeouts"))
@@ -1108,7 +1108,7 @@ module Aws::NetworkFirewall
     StatefulRuleGroupReference.add_member(:override, ::Smithy::Schema::Shapes::MemberShape.new(target: StatefulRuleGroupOverride, name: "Override"))
     StatefulRuleGroupReference.add_member(:deep_threat_inspection, ::Smithy::Schema::Shapes::MemberShape.new(target: DeepThreatInspection, name: "DeepThreatInspection"))
     StatefulRuleGroupReference.type = Types::StatefulRuleGroupReference
-    StatefulRuleGroupReferences.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StatefulRuleGroupReference, name: "member")
+    StatefulRuleGroupReferences.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StatefulRuleGroupReference, name: "member"))
     StatefulRuleOptions.add_member(:rule_order, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleOrder, name: "RuleOrder"))
     StatefulRuleOptions.type = Types::StatefulRuleOptions
     StatefulRuleProtocol.add_member(:any, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANY", traits: {"smithy.api#enumValue" => "IP"}))
@@ -1132,16 +1132,16 @@ module Aws::NetworkFirewall
     StatefulRuleProtocol.add_member(:dhcp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DHCP", traits: {"smithy.api#enumValue" => "DHCP"}))
     StatefulRuleProtocol.add_member(:http2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTP2", traits: {"smithy.api#enumValue" => "HTTP2"}))
     StatefulRuleProtocol.add_member(:quic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUIC", traits: {"smithy.api#enumValue" => "QUIC"}))
-    StatefulRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StatefulRule, name: "member")
-    StatelessActions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionMemberString, name: "member")
+    StatefulRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StatefulRule, name: "member"))
+    StatelessActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionMemberString, name: "member"))
     StatelessRule.add_member(:rule_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleDefinition, name: "RuleDefinition", traits: {"smithy.api#required" => {}}))
     StatelessRule.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: Priority, name: "Priority", traits: {"smithy.api#required" => {}}))
     StatelessRule.type = Types::StatelessRule
     StatelessRuleGroupReference.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     StatelessRuleGroupReference.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: Priority, name: "Priority", traits: {"smithy.api#required" => {}}))
     StatelessRuleGroupReference.type = Types::StatelessRuleGroupReference
-    StatelessRuleGroupReferences.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StatelessRuleGroupReference, name: "member")
-    StatelessRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StatelessRule, name: "member")
+    StatelessRuleGroupReferences.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StatelessRuleGroupReference, name: "member"))
+    StatelessRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StatelessRule, name: "member"))
     StatelessRulesAndCustomActions.add_member(:stateless_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: StatelessRules, name: "StatelessRules", traits: {"smithy.api#required" => {}}))
     StatelessRulesAndCustomActions.add_member(:custom_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomActions, name: "CustomActions"))
     StatelessRulesAndCustomActions.type = Types::StatelessRulesAndCustomActions
@@ -1151,7 +1151,7 @@ module Aws::NetworkFirewall
     SubnetMapping.add_member(:subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionMemberString, name: "SubnetId", traits: {"smithy.api#required" => {}}))
     SubnetMapping.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IPAddressType, name: "IPAddressType"))
     SubnetMapping.type = Types::SubnetMapping
-    SubnetMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetMapping, name: "member")
+    SubnetMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetMapping, name: "member"))
     Summary.add_member(:rule_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSummaries, name: "RuleSummaries"))
     Summary.type = Types::Summary
     SummaryConfiguration.add_member(:rule_options, ::Smithy::Schema::Shapes::MemberShape.new(target: SummaryRuleOptions, name: "RuleOptions"))
@@ -1159,16 +1159,16 @@ module Aws::NetworkFirewall
     SummaryRuleOption.add_member(:sid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SID", traits: {"smithy.api#enumValue" => "SID"}))
     SummaryRuleOption.add_member(:msg, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MSG", traits: {"smithy.api#enumValue" => "MSG"}))
     SummaryRuleOption.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METADATA", traits: {"smithy.api#enumValue" => "METADATA"}))
-    SummaryRuleOptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SummaryRuleOption, name: "member")
-    SupportedAvailabilityZones.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "key")
-    SupportedAvailabilityZones.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneMetadata, name: "value")
+    SummaryRuleOptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SummaryRuleOption, name: "member"))
+    SupportedAvailabilityZones.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "key"))
+    SupportedAvailabilityZones.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneMetadata, name: "value"))
     SyncState.add_member(:attachment, ::Smithy::Schema::Shapes::MemberShape.new(target: Attachment, name: "Attachment"))
     SyncState.add_member(:config, ::Smithy::Schema::Shapes::MemberShape.new(target: SyncStateConfig, name: "Config"))
     SyncState.type = Types::SyncState
-    SyncStateConfig.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "key")
-    SyncStateConfig.value = ::Smithy::Schema::Shapes::MemberShape.new(target: PerObjectStatus, name: "value")
-    SyncStates.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "key")
-    SyncStates.value = ::Smithy::Schema::Shapes::MemberShape.new(target: SyncState, name: "value")
+    SyncStateConfig.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "key"))
+    SyncStateConfig.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PerObjectStatus, name: "value"))
+    SyncStates.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "key"))
+    SyncStates.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SyncState, name: "value"))
     TCPFlag.add_member(:fin, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIN", traits: {"smithy.api#enumValue" => "FIN"}))
     TCPFlag.add_member(:syn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYN", traits: {"smithy.api#enumValue" => "SYN"}))
     TCPFlag.add_member(:rst, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RST", traits: {"smithy.api#enumValue" => "RST"}))
@@ -1180,7 +1180,7 @@ module Aws::NetworkFirewall
     TCPFlagField.add_member(:flags, ::Smithy::Schema::Shapes::MemberShape.new(target: Flags, name: "Flags", traits: {"smithy.api#required" => {}}))
     TCPFlagField.add_member(:masks, ::Smithy::Schema::Shapes::MemberShape.new(target: Flags, name: "Masks"))
     TCPFlagField.type = Types::TCPFlagField
-    TCPFlags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TCPFlagField, name: "member")
+    TCPFlags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TCPFlagField, name: "member"))
     TLSInspectionConfiguration.add_member(:server_certificate_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerCertificateConfigurations, name: "ServerCertificateConfigurations"))
     TLSInspectionConfiguration.type = Types::TLSInspectionConfiguration
     TLSInspectionConfigurationMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
@@ -1198,19 +1198,19 @@ module Aws::NetworkFirewall
     TLSInspectionConfigurationResponse.add_member(:certificates, ::Smithy::Schema::Shapes::MemberShape.new(target: Certificates, name: "Certificates"))
     TLSInspectionConfigurationResponse.add_member(:certificate_authority, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsCertificateData, name: "CertificateAuthority"))
     TLSInspectionConfigurationResponse.type = Types::TLSInspectionConfigurationResponse
-    TLSInspectionConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TLSInspectionConfigurationMetadata, name: "member")
+    TLSInspectionConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TLSInspectionConfigurationMetadata, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
     TargetType.add_member(:tls_sni, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLS_SNI", traits: {"smithy.api#enumValue" => "TLS_SNI"}))
     TargetType.add_member(:http_host, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTP_HOST", traits: {"smithy.api#enumValue" => "HTTP_HOST"}))
-    TargetTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetType, name: "member")
+    TargetTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetType, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ThrottlingException.type = Types::ThrottlingException
     TlsCertificateData.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "CertificateArn"))
@@ -1356,7 +1356,7 @@ module Aws::NetworkFirewall
     UpdateTLSInspectionConfigurationResponse.add_member(:update_token, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateToken, name: "UpdateToken", traits: {"smithy.api#required" => {}}))
     UpdateTLSInspectionConfigurationResponse.add_member(:tls_inspection_configuration_response, ::Smithy::Schema::Shapes::MemberShape.new(target: TLSInspectionConfigurationResponse, name: "TLSInspectionConfigurationResponse", traits: {"smithy.api#required" => {}}))
     UpdateTLSInspectionConfigurationResponse.type = Types::UpdateTLSInspectionConfigurationResponse
-    VariableDefinitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VariableDefinition, name: "member")
+    VariableDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableDefinition, name: "member"))
     VpcEndpointAssociation.add_member(:vpc_endpoint_association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "VpcEndpointAssociationId"))
     VpcEndpointAssociation.add_member(:vpc_endpoint_association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "VpcEndpointAssociationArn", traits: {"smithy.api#required" => {}}))
     VpcEndpointAssociation.add_member(:firewall_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "FirewallArn", traits: {"smithy.api#required" => {}}))
@@ -1370,8 +1370,8 @@ module Aws::NetworkFirewall
     VpcEndpointAssociationStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallStatusValue, name: "Status", traits: {"smithy.api#required" => {}}))
     VpcEndpointAssociationStatus.add_member(:association_sync_state, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationSyncState, name: "AssociationSyncState"))
     VpcEndpointAssociationStatus.type = Types::VpcEndpointAssociationStatus
-    VpcEndpointAssociations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointAssociationMetadata, name: "member")
-    VpcIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "member")
+    VpcEndpointAssociations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointAssociationMetadata, name: "member"))
+    VpcIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "member"))
 
     NetworkFirewall20201112 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.networkfirewall#NetworkFirewall_20201112"

@@ -263,7 +263,7 @@ module Aws::MarketplaceCatalog
     AccessDeniedException.type = Types::AccessDeniedException
     AmiProductEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductEntityIdFilterValueList, name: "ValueList"))
     AmiProductEntityIdFilter.type = Types::AmiProductEntityIdFilter
-    AmiProductEntityIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductEntityIdString, name: "member")
+    AmiProductEntityIdFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductEntityIdString, name: "member"))
     AmiProductFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductEntityIdFilter, name: "EntityId"))
     AmiProductFilters.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductLastModifiedDateFilter, name: "LastModifiedDate"))
     AmiProductFilters.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductTitleFilter, name: "ProductTitle"))
@@ -287,10 +287,10 @@ module Aws::MarketplaceCatalog
     AmiProductTitleFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductTitleFilterValueList, name: "ValueList"))
     AmiProductTitleFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductTitleString, name: "WildCardValue"))
     AmiProductTitleFilter.type = Types::AmiProductTitleFilter
-    AmiProductTitleFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductTitleString, name: "member")
+    AmiProductTitleFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductTitleString, name: "member"))
     AmiProductVisibilityFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductVisibilityFilterValueList, name: "ValueList"))
     AmiProductVisibilityFilter.type = Types::AmiProductVisibilityFilter
-    AmiProductVisibilityFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductVisibilityString, name: "member")
+    AmiProductVisibilityFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductVisibilityString, name: "member"))
     AmiProductVisibilityString.add_member(:limited, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Limited", traits: {"smithy.api#enumValue" => "Limited"}))
     AmiProductVisibilityString.add_member(:public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Public", traits: {"smithy.api#enumValue" => "Public"}))
     AmiProductVisibilityString.add_member(:restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Restricted", traits: {"smithy.api#enumValue" => "Restricted"}))
@@ -316,8 +316,8 @@ module Aws::MarketplaceCatalog
     Change.add_member(:details_document, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonDocumentType, name: "DetailsDocument"))
     Change.add_member(:change_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeName, name: "ChangeName"))
     Change.type = Types::Change
-    ChangeSetDescription.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeSummary, name: "member")
-    ChangeSetSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeSetSummaryListItem, name: "member")
+    ChangeSetDescription.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeSummary, name: "member"))
+    ChangeSetSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeSetSummaryListItem, name: "member"))
     ChangeSetSummaryListItem.add_member(:change_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "ChangeSetId"))
     ChangeSetSummaryListItem.add_member(:change_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "ChangeSetArn"))
     ChangeSetSummaryListItem.add_member(:change_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeSetName, name: "ChangeSetName"))
@@ -341,7 +341,7 @@ module Aws::MarketplaceCatalog
     ChangeSummary.type = Types::ChangeSummary
     ContainerProductEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductEntityIdFilterValueList, name: "ValueList"))
     ContainerProductEntityIdFilter.type = Types::ContainerProductEntityIdFilter
-    ContainerProductEntityIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductEntityIdString, name: "member")
+    ContainerProductEntityIdFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductEntityIdString, name: "member"))
     ContainerProductFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductEntityIdFilter, name: "EntityId"))
     ContainerProductFilters.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductLastModifiedDateFilter, name: "LastModifiedDate"))
     ContainerProductFilters.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductTitleFilter, name: "ProductTitle"))
@@ -365,17 +365,17 @@ module Aws::MarketplaceCatalog
     ContainerProductTitleFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductTitleFilterValueList, name: "ValueList"))
     ContainerProductTitleFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductTitleString, name: "WildCardValue"))
     ContainerProductTitleFilter.type = Types::ContainerProductTitleFilter
-    ContainerProductTitleFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductTitleString, name: "member")
+    ContainerProductTitleFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductTitleString, name: "member"))
     ContainerProductVisibilityFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductVisibilityFilterValueList, name: "ValueList"))
     ContainerProductVisibilityFilter.type = Types::ContainerProductVisibilityFilter
-    ContainerProductVisibilityFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductVisibilityString, name: "member")
+    ContainerProductVisibilityFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductVisibilityString, name: "member"))
     ContainerProductVisibilityString.add_member(:limited, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Limited", traits: {"smithy.api#enumValue" => "Limited"}))
     ContainerProductVisibilityString.add_member(:public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Public", traits: {"smithy.api#enumValue" => "Public"}))
     ContainerProductVisibilityString.add_member(:restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Restricted", traits: {"smithy.api#enumValue" => "Restricted"}))
     ContainerProductVisibilityString.add_member(:draft, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Draft", traits: {"smithy.api#enumValue" => "Draft"}))
     DataProductEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductEntityIdFilterValueList, name: "ValueList"))
     DataProductEntityIdFilter.type = Types::DataProductEntityIdFilter
-    DataProductEntityIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductEntityIdString, name: "member")
+    DataProductEntityIdFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductEntityIdString, name: "member"))
     DataProductFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductEntityIdFilter, name: "EntityId"))
     DataProductFilters.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductTitleFilter, name: "ProductTitle"))
     DataProductFilters.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductVisibilityFilter, name: "Visibility"))
@@ -399,10 +399,10 @@ module Aws::MarketplaceCatalog
     DataProductTitleFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductTitleFilterValueList, name: "ValueList"))
     DataProductTitleFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductTitleString, name: "WildCardValue"))
     DataProductTitleFilter.type = Types::DataProductTitleFilter
-    DataProductTitleFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductTitleString, name: "member")
+    DataProductTitleFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductTitleString, name: "member"))
     DataProductVisibilityFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductVisibilityFilterValueList, name: "ValueList"))
     DataProductVisibilityFilter.type = Types::DataProductVisibilityFilter
-    DataProductVisibilityFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductVisibilityString, name: "member")
+    DataProductVisibilityFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductVisibilityString, name: "member"))
     DataProductVisibilityString.add_member(:limited, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Limited", traits: {"smithy.api#enumValue" => "Limited"}))
     DataProductVisibilityString.add_member(:public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Public", traits: {"smithy.api#enumValue" => "Public"}))
     DataProductVisibilityString.add_member(:restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Restricted", traits: {"smithy.api#enumValue" => "Restricted"}))
@@ -444,12 +444,12 @@ module Aws::MarketplaceCatalog
     EntityDetail.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "LastModifiedDate"))
     EntityDetail.add_member(:details_document, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonDocumentType, name: "DetailsDocument"))
     EntityDetail.type = Types::EntityDetail
-    EntityDetails.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "key")
-    EntityDetails.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDetail, name: "value")
+    EntityDetails.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "key"))
+    EntityDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDetail, name: "value"))
     EntityRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: Catalog, name: "Catalog", traits: {"smithy.api#required" => {}}))
     EntityRequest.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "EntityId", traits: {"smithy.api#required" => {}}))
     EntityRequest.type = Types::EntityRequest
-    EntityRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRequest, name: "member")
+    EntityRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRequest, name: "member"))
     EntitySummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityNameString, name: "Name"))
     EntitySummary.add_member(:entity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, name: "EntityType"))
     EntitySummary.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "EntityId"))
@@ -464,7 +464,7 @@ module Aws::MarketplaceCatalog
     EntitySummary.add_member(:resale_authorization_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationSummary, name: "ResaleAuthorizationSummary"))
     EntitySummary.add_member(:machine_learning_product_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductSummary, name: "MachineLearningProductSummary"))
     EntitySummary.type = Types::EntitySummary
-    EntitySummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntitySummary, name: "member")
+    EntitySummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitySummary, name: "member"))
     EntityTypeFilters.add_member(:data_product_filters, Types::EntityTypeFilters::DataProductFilters, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductFilters, name: "DataProductFilters"))
     EntityTypeFilters.add_member(:saa_s_product_filters, Types::EntityTypeFilters::SaaSProductFilters, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductFilters, name: "SaaSProductFilters"))
     EntityTypeFilters.add_member(:ami_product_filters, Types::EntityTypeFilters::AmiProductFilters, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductFilters, name: "AmiProductFilters"))
@@ -486,15 +486,15 @@ module Aws::MarketplaceCatalog
     ErrorDetail.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCodeString, name: "ErrorCode"))
     ErrorDetail.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessageContent, name: "ErrorMessage"))
     ErrorDetail.type = Types::ErrorDetail
-    ErrorDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail, name: "member")
-    Errors.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "key")
-    Errors.value = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDescribeErrorDetail, name: "value")
+    ErrorDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail, name: "member"))
+    Errors.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "key"))
+    Errors.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDescribeErrorDetail, name: "value"))
     FailureCode.add_member(:client_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ClientError", traits: {"smithy.api#enumValue" => "CLIENT_ERROR"}))
     FailureCode.add_member(:server_fault, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ServerFault", traits: {"smithy.api#enumValue" => "SERVER_FAULT"}))
     Filter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, name: "Name"))
     Filter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueList, name: "ValueList"))
     Filter.type = Types::Filter
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     GetResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "ResourceArn", traits: {"smithy.api#httpQuery" => "resourceArn", "smithy.api#required" => {}}))
     GetResourcePolicyRequest.type = Types::GetResourcePolicyRequest
     GetResourcePolicyResponse.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicyJson, name: "Policy"))
@@ -532,7 +532,7 @@ module Aws::MarketplaceCatalog
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
     MachineLearningProductEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductEntityIdFilterValueList, name: "ValueList"))
     MachineLearningProductEntityIdFilter.type = Types::MachineLearningProductEntityIdFilter
-    MachineLearningProductEntityIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductEntityIdString, name: "member")
+    MachineLearningProductEntityIdFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductEntityIdString, name: "member"))
     MachineLearningProductFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductEntityIdFilter, name: "EntityId"))
     MachineLearningProductFilters.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductLastModifiedDateFilter, name: "LastModifiedDate"))
     MachineLearningProductFilters.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductTitleFilter, name: "ProductTitle"))
@@ -556,10 +556,10 @@ module Aws::MarketplaceCatalog
     MachineLearningProductTitleFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductTitleFilterValueList, name: "ValueList"))
     MachineLearningProductTitleFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductTitleString, name: "WildCardValue"))
     MachineLearningProductTitleFilter.type = Types::MachineLearningProductTitleFilter
-    MachineLearningProductTitleFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductTitleString, name: "member")
+    MachineLearningProductTitleFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductTitleString, name: "member"))
     MachineLearningProductVisibilityFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductVisibilityFilterValueList, name: "ValueList"))
     MachineLearningProductVisibilityFilter.type = Types::MachineLearningProductVisibilityFilter
-    MachineLearningProductVisibilityFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductVisibilityString, name: "member")
+    MachineLearningProductVisibilityFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductVisibilityString, name: "member"))
     MachineLearningProductVisibilityString.add_member(:limited, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Limited", traits: {"smithy.api#enumValue" => "Limited"}))
     MachineLearningProductVisibilityString.add_member(:public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Public", traits: {"smithy.api#enumValue" => "Public"}))
     MachineLearningProductVisibilityString.add_member(:restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Restricted", traits: {"smithy.api#enumValue" => "Restricted"}))
@@ -571,10 +571,10 @@ module Aws::MarketplaceCatalog
     OfferAvailabilityEndDateFilterDateRange.type = Types::OfferAvailabilityEndDateFilterDateRange
     OfferBuyerAccountsFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferBuyerAccountsFilterWildcard, name: "WildCardValue"))
     OfferBuyerAccountsFilter.type = Types::OfferBuyerAccountsFilter
-    OfferBuyerAccountsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OfferBuyerAccountsString, name: "member")
+    OfferBuyerAccountsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferBuyerAccountsString, name: "member"))
     OfferEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferEntityIdFilterValueList, name: "ValueList"))
     OfferEntityIdFilter.type = Types::OfferEntityIdFilter
-    OfferEntityIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OfferEntityIdString, name: "member")
+    OfferEntityIdFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferEntityIdString, name: "member"))
     OfferFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferEntityIdFilter, name: "EntityId"))
     OfferFilters.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferNameFilter, name: "Name"))
     OfferFilters.add_member(:product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferProductIdFilter, name: "ProductId"))
@@ -594,10 +594,10 @@ module Aws::MarketplaceCatalog
     OfferNameFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferNameFilterValueList, name: "ValueList"))
     OfferNameFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferNameString, name: "WildCardValue"))
     OfferNameFilter.type = Types::OfferNameFilter
-    OfferNameFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OfferNameString, name: "member")
+    OfferNameFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferNameString, name: "member"))
     OfferProductIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferProductIdFilterValueList, name: "ValueList"))
     OfferProductIdFilter.type = Types::OfferProductIdFilter
-    OfferProductIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OfferProductIdString, name: "member")
+    OfferProductIdFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferProductIdString, name: "member"))
     OfferReleaseDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferReleaseDateFilterDateRange, name: "DateRange"))
     OfferReleaseDateFilter.type = Types::OfferReleaseDateFilter
     OfferReleaseDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "AfterValue"))
@@ -605,7 +605,7 @@ module Aws::MarketplaceCatalog
     OfferReleaseDateFilterDateRange.type = Types::OfferReleaseDateFilterDateRange
     OfferResaleAuthorizationIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferResaleAuthorizationIdFilterValueList, name: "ValueList"))
     OfferResaleAuthorizationIdFilter.type = Types::OfferResaleAuthorizationIdFilter
-    OfferResaleAuthorizationIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OfferResaleAuthorizationIdString, name: "member")
+    OfferResaleAuthorizationIdFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferResaleAuthorizationIdString, name: "member"))
     OfferSort.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSortBy, name: "SortBy"))
     OfferSort.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "SortOrder"))
     OfferSort.type = Types::OfferSort
@@ -621,7 +621,7 @@ module Aws::MarketplaceCatalog
     OfferSortBy.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
     OfferStateFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferStateFilterValueList, name: "ValueList"))
     OfferStateFilter.type = Types::OfferStateFilter
-    OfferStateFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OfferStateString, name: "member")
+    OfferStateFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferStateString, name: "member"))
     OfferStateString.add_member(:draft, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Draft", traits: {"smithy.api#enumValue" => "Draft"}))
     OfferStateString.add_member(:released, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Released", traits: {"smithy.api#enumValue" => "Released"}))
     OfferSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferNameString, name: "Name"))
@@ -635,8 +635,8 @@ module Aws::MarketplaceCatalog
     OfferSummary.type = Types::OfferSummary
     OfferTargetingFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetingFilterValueList, name: "ValueList"))
     OfferTargetingFilter.type = Types::OfferTargetingFilter
-    OfferTargetingFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetingString, name: "member")
-    OfferTargetingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetingString, name: "member")
+    OfferTargetingFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetingString, name: "member"))
+    OfferTargetingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetingString, name: "member"))
     OfferTargetingString.add_member(:buyer_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BuyerAccounts", traits: {"smithy.api#enumValue" => "BuyerAccounts"}))
     OfferTargetingString.add_member(:participating_programs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ParticipatingPrograms", traits: {"smithy.api#enumValue" => "ParticipatingPrograms"}))
     OfferTargetingString.add_member(:country_codes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CountryCodes", traits: {"smithy.api#enumValue" => "CountryCodes"}))
@@ -647,24 +647,24 @@ module Aws::MarketplaceCatalog
     PutResourcePolicyRequest.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicyJson, name: "Policy", traits: {"smithy.api#required" => {}}))
     PutResourcePolicyRequest.type = Types::PutResourcePolicyRequest
     PutResourcePolicyResponse.type = Types::PutResourcePolicyResponse
-    RequestedChangeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Change, name: "member")
+    RequestedChangeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Change, name: "member"))
     ResaleAuthorizationAvailabilityEndDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationAvailabilityEndDateFilterDateRange, name: "DateRange"))
     ResaleAuthorizationAvailabilityEndDateFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationAvailabilityEndDateFilterValueList, name: "ValueList"))
     ResaleAuthorizationAvailabilityEndDateFilter.type = Types::ResaleAuthorizationAvailabilityEndDateFilter
     ResaleAuthorizationAvailabilityEndDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "AfterValue"))
     ResaleAuthorizationAvailabilityEndDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "BeforeValue"))
     ResaleAuthorizationAvailabilityEndDateFilterDateRange.type = Types::ResaleAuthorizationAvailabilityEndDateFilterDateRange
-    ResaleAuthorizationAvailabilityEndDateFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "member")
+    ResaleAuthorizationAvailabilityEndDateFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "member"))
     ResaleAuthorizationCreatedDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationCreatedDateFilterDateRange, name: "DateRange"))
     ResaleAuthorizationCreatedDateFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationCreatedDateFilterValueList, name: "ValueList"))
     ResaleAuthorizationCreatedDateFilter.type = Types::ResaleAuthorizationCreatedDateFilter
     ResaleAuthorizationCreatedDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "AfterValue"))
     ResaleAuthorizationCreatedDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "BeforeValue"))
     ResaleAuthorizationCreatedDateFilterDateRange.type = Types::ResaleAuthorizationCreatedDateFilterDateRange
-    ResaleAuthorizationCreatedDateFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "member")
+    ResaleAuthorizationCreatedDateFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "member"))
     ResaleAuthorizationEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationEntityIdFilterValueList, name: "ValueList"))
     ResaleAuthorizationEntityIdFilter.type = Types::ResaleAuthorizationEntityIdFilter
-    ResaleAuthorizationEntityIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationEntityIdString, name: "member")
+    ResaleAuthorizationEntityIdFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationEntityIdString, name: "member"))
     ResaleAuthorizationFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationEntityIdFilter, name: "EntityId"))
     ResaleAuthorizationFilters.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationNameFilter, name: "Name"))
     ResaleAuthorizationFilters.add_member(:product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationProductIdFilter, name: "ProductId"))
@@ -687,34 +687,34 @@ module Aws::MarketplaceCatalog
     ResaleAuthorizationManufacturerAccountIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationManufacturerAccountIdFilterValueList, name: "ValueList"))
     ResaleAuthorizationManufacturerAccountIdFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationManufacturerAccountIdFilterWildcard, name: "WildCardValue"))
     ResaleAuthorizationManufacturerAccountIdFilter.type = Types::ResaleAuthorizationManufacturerAccountIdFilter
-    ResaleAuthorizationManufacturerAccountIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationManufacturerAccountIdString, name: "member")
+    ResaleAuthorizationManufacturerAccountIdFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationManufacturerAccountIdString, name: "member"))
     ResaleAuthorizationManufacturerLegalNameFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationManufacturerLegalNameFilterValueList, name: "ValueList"))
     ResaleAuthorizationManufacturerLegalNameFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationManufacturerLegalNameFilterWildcard, name: "WildCardValue"))
     ResaleAuthorizationManufacturerLegalNameFilter.type = Types::ResaleAuthorizationManufacturerLegalNameFilter
-    ResaleAuthorizationManufacturerLegalNameFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationManufacturerLegalNameString, name: "member")
+    ResaleAuthorizationManufacturerLegalNameFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationManufacturerLegalNameString, name: "member"))
     ResaleAuthorizationNameFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationNameFilterValueList, name: "ValueList"))
     ResaleAuthorizationNameFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationNameFilterWildcard, name: "WildCardValue"))
     ResaleAuthorizationNameFilter.type = Types::ResaleAuthorizationNameFilter
-    ResaleAuthorizationNameFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationNameString, name: "member")
+    ResaleAuthorizationNameFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationNameString, name: "member"))
     ResaleAuthorizationOfferExtendedStatusFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationOfferExtendedStatusFilterValueList, name: "ValueList"))
     ResaleAuthorizationOfferExtendedStatusFilter.type = Types::ResaleAuthorizationOfferExtendedStatusFilter
-    ResaleAuthorizationOfferExtendedStatusFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationOfferExtendedStatusString, name: "member")
+    ResaleAuthorizationOfferExtendedStatusFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationOfferExtendedStatusString, name: "member"))
     ResaleAuthorizationProductIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationProductIdFilterValueList, name: "ValueList"))
     ResaleAuthorizationProductIdFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationProductIdFilterWildcard, name: "WildCardValue"))
     ResaleAuthorizationProductIdFilter.type = Types::ResaleAuthorizationProductIdFilter
-    ResaleAuthorizationProductIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationProductIdString, name: "member")
+    ResaleAuthorizationProductIdFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationProductIdString, name: "member"))
     ResaleAuthorizationProductNameFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationProductNameFilterValueList, name: "ValueList"))
     ResaleAuthorizationProductNameFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationProductNameFilterWildcard, name: "WildCardValue"))
     ResaleAuthorizationProductNameFilter.type = Types::ResaleAuthorizationProductNameFilter
-    ResaleAuthorizationProductNameFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationProductNameString, name: "member")
+    ResaleAuthorizationProductNameFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationProductNameString, name: "member"))
     ResaleAuthorizationResellerAccountIDFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerAccountIDFilterValueList, name: "ValueList"))
     ResaleAuthorizationResellerAccountIDFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerAccountIDFilterWildcard, name: "WildCardValue"))
     ResaleAuthorizationResellerAccountIDFilter.type = Types::ResaleAuthorizationResellerAccountIDFilter
-    ResaleAuthorizationResellerAccountIDFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerAccountIDString, name: "member")
+    ResaleAuthorizationResellerAccountIDFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerAccountIDString, name: "member"))
     ResaleAuthorizationResellerLegalNameFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerLegalNameFilterValueList, name: "ValueList"))
     ResaleAuthorizationResellerLegalNameFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerLegalNameFilterWildcard, name: "WildCardValue"))
     ResaleAuthorizationResellerLegalNameFilter.type = Types::ResaleAuthorizationResellerLegalNameFilter
-    ResaleAuthorizationResellerLegalNameFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerLegalNameString, name: "member")
+    ResaleAuthorizationResellerLegalNameFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerLegalNameString, name: "member"))
     ResaleAuthorizationSort.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationSortBy, name: "SortBy"))
     ResaleAuthorizationSort.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "SortOrder"))
     ResaleAuthorizationSort.type = Types::ResaleAuthorizationSort
@@ -733,7 +733,7 @@ module Aws::MarketplaceCatalog
     ResaleAuthorizationSortBy.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
     ResaleAuthorizationStatusFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationStatusFilterValueList, name: "ValueList"))
     ResaleAuthorizationStatusFilter.type = Types::ResaleAuthorizationStatusFilter
-    ResaleAuthorizationStatusFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationStatusString, name: "member")
+    ResaleAuthorizationStatusFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationStatusString, name: "member"))
     ResaleAuthorizationStatusString.add_member(:draft, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Draft", traits: {"smithy.api#enumValue" => "Draft"}))
     ResaleAuthorizationStatusString.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Active", traits: {"smithy.api#enumValue" => "Active"}))
     ResaleAuthorizationStatusString.add_member(:restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Restricted", traits: {"smithy.api#enumValue" => "Restricted"}))
@@ -749,7 +749,7 @@ module Aws::MarketplaceCatalog
     ResaleAuthorizationSummary.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "CreatedDate"))
     ResaleAuthorizationSummary.add_member(:availability_end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "AvailabilityEndDate"))
     ResaleAuthorizationSummary.type = Types::ResaleAuthorizationSummary
-    ResourceIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "member")
+    ResourceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "member"))
     ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessageContent, name: "Message"))
     ResourceInUseException.type = Types::ResourceInUseException
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessageContent, name: "Message"))
@@ -758,7 +758,7 @@ module Aws::MarketplaceCatalog
     ResourceNotSupportedException.type = Types::ResourceNotSupportedException
     SaaSProductEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductEntityIdFilterValueList, name: "ValueList"))
     SaaSProductEntityIdFilter.type = Types::SaaSProductEntityIdFilter
-    SaaSProductEntityIdFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductEntityIdString, name: "member")
+    SaaSProductEntityIdFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductEntityIdString, name: "member"))
     SaaSProductFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductEntityIdFilter, name: "EntityId"))
     SaaSProductFilters.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductTitleFilter, name: "ProductTitle"))
     SaaSProductFilters.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductVisibilityFilter, name: "Visibility"))
@@ -782,10 +782,10 @@ module Aws::MarketplaceCatalog
     SaaSProductTitleFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductTitleFilterValueList, name: "ValueList"))
     SaaSProductTitleFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductTitleString, name: "WildCardValue"))
     SaaSProductTitleFilter.type = Types::SaaSProductTitleFilter
-    SaaSProductTitleFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductTitleString, name: "member")
+    SaaSProductTitleFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductTitleString, name: "member"))
     SaaSProductVisibilityFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductVisibilityFilterValueList, name: "ValueList"))
     SaaSProductVisibilityFilter.type = Types::SaaSProductVisibilityFilter
-    SaaSProductVisibilityFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductVisibilityString, name: "member")
+    SaaSProductVisibilityFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductVisibilityString, name: "member"))
     SaaSProductVisibilityString.add_member(:limited, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Limited", traits: {"smithy.api#enumValue" => "Limited"}))
     SaaSProductVisibilityString.add_member(:public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Public", traits: {"smithy.api#enumValue" => "Public"}))
     SaaSProductVisibilityString.add_member(:restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Restricted", traits: {"smithy.api#enumValue" => "Restricted"}))
@@ -810,8 +810,8 @@ module Aws::MarketplaceCatalog
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -824,7 +824,7 @@ module Aws::MarketplaceCatalog
     UntagResourceResponse.type = Types::UntagResourceResponse
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessageContent, name: "Message"))
     ValidationException.type = Types::ValidationException
-    ValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueContent, name: "member")
+    ValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueContent, name: "member"))
 
     AWSMPSeymour = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.marketplacecatalog#AWSMPSeymour"

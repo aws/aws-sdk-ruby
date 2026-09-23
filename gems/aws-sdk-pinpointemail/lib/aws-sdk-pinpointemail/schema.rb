@@ -228,14 +228,14 @@ module Aws::PinpointEmail
     BadRequestException.type = Types::BadRequestException
     BehaviorOnMxFailure.add_member(:use_default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USE_DEFAULT_VALUE", traits: {"smithy.api#enumValue" => "USE_DEFAULT_VALUE"}))
     BehaviorOnMxFailure.add_member(:reject_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECT_MESSAGE", traits: {"smithy.api#enumValue" => "REJECT_MESSAGE"}))
-    BlacklistEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BlacklistEntry, name: "member")
+    BlacklistEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BlacklistEntry, name: "member"))
     BlacklistEntry.add_member(:rbl_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RblName, name: "RblName"))
     BlacklistEntry.add_member(:listing_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ListingTime"))
     BlacklistEntry.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: BlacklistingDescription, name: "Description"))
     BlacklistEntry.type = Types::BlacklistEntry
-    BlacklistItemNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BlacklistItemName, name: "member")
-    BlacklistReport.key = ::Smithy::Schema::Shapes::MemberShape.new(target: BlacklistItemName, name: "key")
-    BlacklistReport.value = ::Smithy::Schema::Shapes::MemberShape.new(target: BlacklistEntries, name: "value")
+    BlacklistItemNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BlacklistItemName, name: "member"))
+    BlacklistReport.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: BlacklistItemName, name: "key"))
+    BlacklistReport.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: BlacklistEntries, name: "value"))
     Body.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: Content, name: "Text"))
     Body.add_member(:html, ::Smithy::Schema::Shapes::MemberShape.new(target: Content, name: "Html"))
     Body.type = Types::Body
@@ -245,10 +245,10 @@ module Aws::PinpointEmail
     CloudWatchDimensionConfiguration.add_member(:dimension_value_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValueSource, name: "DimensionValueSource", traits: {"smithy.api#required" => {}}))
     CloudWatchDimensionConfiguration.add_member(:default_dimension_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultDimensionValue, name: "DefaultDimensionValue", traits: {"smithy.api#required" => {}}))
     CloudWatchDimensionConfiguration.type = Types::CloudWatchDimensionConfiguration
-    CloudWatchDimensionConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchDimensionConfiguration, name: "member")
+    CloudWatchDimensionConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchDimensionConfiguration, name: "member"))
     ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ConcurrentModificationException.type = Types::ConcurrentModificationException
-    ConfigurationSetNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, name: "member")
+    ConfigurationSetNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, name: "member"))
     Content.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageData, name: "Data", traits: {"smithy.api#required" => {}}))
     Content.add_member(:charset, ::Smithy::Schema::Shapes::MemberShape.new(target: Charset, name: "Charset"))
     Content.type = Types::Content
@@ -288,13 +288,13 @@ module Aws::PinpointEmail
     DailyVolume.add_member(:volume_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeStatistics, name: "VolumeStatistics"))
     DailyVolume.add_member(:domain_isp_placements, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainIspPlacements, name: "DomainIspPlacements"))
     DailyVolume.type = Types::DailyVolume
-    DailyVolumes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DailyVolume, name: "member")
+    DailyVolumes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DailyVolume, name: "member"))
     DedicatedIp.add_member(:ip, ::Smithy::Schema::Shapes::MemberShape.new(target: Ip, name: "Ip", traits: {"smithy.api#required" => {}}))
     DedicatedIp.add_member(:warmup_status, ::Smithy::Schema::Shapes::MemberShape.new(target: WarmupStatus, name: "WarmupStatus", traits: {"smithy.api#required" => {}}))
     DedicatedIp.add_member(:warmup_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage100Wrapper, name: "WarmupPercentage", traits: {"smithy.api#required" => {}}))
     DedicatedIp.add_member(:pool_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolName, name: "PoolName"))
     DedicatedIp.type = Types::DedicatedIp
-    DedicatedIpList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DedicatedIp, name: "member")
+    DedicatedIpList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DedicatedIp, name: "member"))
     DeleteConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, name: "ConfigurationSetName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteConfigurationSetEventDestinationRequest.add_member(:event_destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationName, name: "EventDestinationName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteConfigurationSetEventDestinationRequest.type = Types::DeleteConfigurationSetEventDestinationRequest
@@ -318,7 +318,7 @@ module Aws::PinpointEmail
     DeliverabilityTestReport.add_member(:create_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreateDate"))
     DeliverabilityTestReport.add_member(:deliverability_test_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverabilityTestStatus, name: "DeliverabilityTestStatus"))
     DeliverabilityTestReport.type = Types::DeliverabilityTestReport
-    DeliverabilityTestReports.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverabilityTestReport, name: "member")
+    DeliverabilityTestReports.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliverabilityTestReport, name: "member"))
     DeliverabilityTestStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     DeliverabilityTestStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     DeliveryOptions.add_member(:tls_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: TlsPolicy, name: "TlsPolicy"))
@@ -340,7 +340,7 @@ module Aws::PinpointEmail
     DkimStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     DkimStatus.add_member(:temporary_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEMPORARY_FAILURE", traits: {"smithy.api#enumValue" => "TEMPORARY_FAILURE"}))
     DkimStatus.add_member(:not_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_STARTED", traits: {"smithy.api#enumValue" => "NOT_STARTED"}))
-    DnsTokenList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DnsToken, name: "member")
+    DnsTokenList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsToken, name: "member"))
     DomainDeliverabilityCampaign.add_member(:campaign_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CampaignId, name: "CampaignId"))
     DomainDeliverabilityCampaign.add_member(:image_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageUrl, name: "ImageUrl"))
     DomainDeliverabilityCampaign.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: Subject, name: "Subject"))
@@ -356,25 +356,25 @@ module Aws::PinpointEmail
     DomainDeliverabilityCampaign.add_member(:projected_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, name: "ProjectedVolume"))
     DomainDeliverabilityCampaign.add_member(:esps, ::Smithy::Schema::Shapes::MemberShape.new(target: Esps, name: "Esps"))
     DomainDeliverabilityCampaign.type = Types::DomainDeliverabilityCampaign
-    DomainDeliverabilityCampaignList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainDeliverabilityCampaign, name: "member")
+    DomainDeliverabilityCampaignList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainDeliverabilityCampaign, name: "member"))
     DomainDeliverabilityTrackingOption.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: Domain, name: "Domain"))
     DomainDeliverabilityTrackingOption.add_member(:subscription_start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "SubscriptionStartDate"))
     DomainDeliverabilityTrackingOption.add_member(:inbox_placement_tracking_option, ::Smithy::Schema::Shapes::MemberShape.new(target: InboxPlacementTrackingOption, name: "InboxPlacementTrackingOption"))
     DomainDeliverabilityTrackingOption.type = Types::DomainDeliverabilityTrackingOption
-    DomainDeliverabilityTrackingOptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainDeliverabilityTrackingOption, name: "member")
+    DomainDeliverabilityTrackingOptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainDeliverabilityTrackingOption, name: "member"))
     DomainIspPlacement.add_member(:isp_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IspName, name: "IspName"))
     DomainIspPlacement.add_member(:inbox_raw_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, name: "InboxRawCount"))
     DomainIspPlacement.add_member(:spam_raw_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Volume, name: "SpamRawCount"))
     DomainIspPlacement.add_member(:inbox_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, name: "InboxPercentage"))
     DomainIspPlacement.add_member(:spam_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Percentage, name: "SpamPercentage"))
     DomainIspPlacement.type = Types::DomainIspPlacement
-    DomainIspPlacements.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainIspPlacement, name: "member")
-    EmailAddressList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "member")
+    DomainIspPlacements.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainIspPlacement, name: "member"))
+    EmailAddressList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "member"))
     EmailContent.add_member(:simple, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Simple"))
     EmailContent.add_member(:raw, ::Smithy::Schema::Shapes::MemberShape.new(target: RawMessage, name: "Raw"))
     EmailContent.add_member(:template, ::Smithy::Schema::Shapes::MemberShape.new(target: Template, name: "Template"))
     EmailContent.type = Types::EmailContent
-    Esps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Esp, name: "member")
+    Esps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Esp, name: "member"))
     EventDestination.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationName, name: "Name", traits: {"smithy.api#required" => {}}))
     EventDestination.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, name: "Enabled", traits: {"smithy.api#default" => false}))
     EventDestination.add_member(:matching_event_types, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypes, name: "MatchingEventTypes", traits: {"smithy.api#required" => {}}))
@@ -390,7 +390,7 @@ module Aws::PinpointEmail
     EventDestinationDefinition.add_member(:sns_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: SnsDestination, name: "SnsDestination"))
     EventDestinationDefinition.add_member(:pinpoint_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: PinpointDestination, name: "PinpointDestination"))
     EventDestinationDefinition.type = Types::EventDestinationDefinition
-    EventDestinations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestination, name: "member")
+    EventDestinations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestination, name: "member"))
     EventType.add_member(:send, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEND", traits: {"smithy.api#enumValue" => "SEND"}))
     EventType.add_member(:reject, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECT", traits: {"smithy.api#enumValue" => "REJECT"}))
     EventType.add_member(:bounce, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BOUNCE", traits: {"smithy.api#enumValue" => "BOUNCE"}))
@@ -399,7 +399,7 @@ module Aws::PinpointEmail
     EventType.add_member(:open, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPEN", traits: {"smithy.api#enumValue" => "OPEN"}))
     EventType.add_member(:click, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLICK", traits: {"smithy.api#enumValue" => "CLICK"}))
     EventType.add_member(:rendering_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RENDERING_FAILURE", traits: {"smithy.api#enumValue" => "RENDERING_FAILURE"}))
-    EventTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "member")
+    EventTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "member"))
     GetAccountRequest.type = Types::GetAccountRequest
     GetAccountResponse.add_member(:send_quota, ::Smithy::Schema::Shapes::MemberShape.new(target: SendQuota, name: "SendQuota"))
     GetAccountResponse.add_member(:sending_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, name: "SendingEnabled", traits: {"smithy.api#default" => false}))
@@ -474,19 +474,19 @@ module Aws::PinpointEmail
     IdentityInfo.add_member(:identity_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Identity, name: "IdentityName"))
     IdentityInfo.add_member(:sending_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, name: "SendingEnabled", traits: {"smithy.api#default" => false}))
     IdentityInfo.type = Types::IdentityInfo
-    IdentityInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityInfo, name: "member")
+    IdentityInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityInfo, name: "member"))
     IdentityType.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMAIL_ADDRESS", traits: {"smithy.api#enumValue" => "EMAIL_ADDRESS"}))
     IdentityType.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOMAIN", traits: {"smithy.api#enumValue" => "DOMAIN"}))
     IdentityType.add_member(:managed_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANAGED_DOMAIN", traits: {"smithy.api#enumValue" => "MANAGED_DOMAIN"}))
     InboxPlacementTrackingOption.add_member(:global, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, name: "Global", traits: {"smithy.api#default" => false}))
     InboxPlacementTrackingOption.add_member(:tracked_isps, ::Smithy::Schema::Shapes::MemberShape.new(target: IspNameList, name: "TrackedIsps"))
     InboxPlacementTrackingOption.type = Types::InboxPlacementTrackingOption
-    IpList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ip, name: "member")
-    IspNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IspName, name: "member")
+    IpList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ip, name: "member"))
+    IspNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IspName, name: "member"))
     IspPlacement.add_member(:isp_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IspName, name: "IspName"))
     IspPlacement.add_member(:placement_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementStatistics, name: "PlacementStatistics"))
     IspPlacement.type = Types::IspPlacement
-    IspPlacements.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IspPlacement, name: "member")
+    IspPlacements.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IspPlacement, name: "member"))
     KinesisFirehoseDestination.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
     KinesisFirehoseDestination.add_member(:delivery_stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "DeliveryStreamArn", traits: {"smithy.api#required" => {}}))
     KinesisFirehoseDestination.type = Types::KinesisFirehoseDestination
@@ -525,7 +525,7 @@ module Aws::PinpointEmail
     ListEmailIdentitiesResponse.add_member(:email_identities, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityInfoList, name: "EmailIdentities"))
     ListEmailIdentitiesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListEmailIdentitiesResponse.type = Types::ListEmailIdentitiesResponse
-    ListOfDedicatedIpPools.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PoolName, name: "member")
+    ListOfDedicatedIpPools.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolName, name: "member"))
     ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceArn", traits: {"smithy.api#httpQuery" => "ResourceArn", "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
@@ -548,7 +548,7 @@ module Aws::PinpointEmail
     MessageTag.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTagName, name: "Name", traits: {"smithy.api#required" => {}}))
     MessageTag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     MessageTag.type = Types::MessageTag
-    MessageTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTag, name: "member")
+    MessageTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageTag, name: "member"))
     NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     NotFoundException.type = Types::NotFoundException
     OverallVolume.add_member(:volume_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeStatistics, name: "VolumeStatistics"))
@@ -639,8 +639,8 @@ module Aws::PinpointEmail
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest

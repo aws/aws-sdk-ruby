@@ -394,7 +394,7 @@ module Aws::CostExplorer
     AccountScope.add_member(:linked, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINKED", traits: {"smithy.api#enumValue" => "LINKED"}))
     AnalysisDetails.add_member(:savings_plans_purchase_analysis_details, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansPurchaseAnalysisDetails, name: "SavingsPlansPurchaseAnalysisDetails"))
     AnalysisDetails.type = Types::AnalysisDetails
-    AnalysisIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisId, name: "member")
+    AnalysisIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisId, name: "member"))
     AnalysisNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     AnalysisNotFoundException.type = Types::AnalysisNotFoundException
     AnalysisStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
@@ -408,10 +408,10 @@ module Aws::CostExplorer
     AnalysisSummary.add_member(:analysis_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisId, name: "AnalysisId"))
     AnalysisSummary.add_member(:commitment_purchase_analysis_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitmentPurchaseAnalysisConfiguration, name: "CommitmentPurchaseAnalysisConfiguration"))
     AnalysisSummary.type = Types::AnalysisSummary
-    AnalysisSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisSummary, name: "member")
+    AnalysisSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisSummary, name: "member"))
     AnalysisType.add_member(:max_savings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAX_SAVINGS", traits: {"smithy.api#enumValue" => "MAX_SAVINGS"}))
     AnalysisType.add_member(:custom_commitment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM_COMMITMENT", traits: {"smithy.api#enumValue" => "CUSTOM_COMMITMENT"}))
-    Anomalies.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Anomaly, name: "member")
+    Anomalies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Anomaly, name: "member"))
     Anomaly.add_member(:anomaly_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "AnomalyId", traits: {"smithy.api#required" => {}}))
     Anomaly.add_member(:anomaly_start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: YearMonthDay, name: "AnomalyStartDate"))
     Anomaly.add_member(:anomaly_end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: YearMonthDay, name: "AnomalyEndDate"))
@@ -438,7 +438,7 @@ module Aws::CostExplorer
     AnomalyMonitor.add_member(:monitor_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "MonitorSpecification"))
     AnomalyMonitor.add_member(:dimensional_value_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeInteger, name: "DimensionalValueCount", traits: {"smithy.api#default" => 0}))
     AnomalyMonitor.type = Types::AnomalyMonitor
-    AnomalyMonitors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyMonitor, name: "member")
+    AnomalyMonitors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyMonitor, name: "member"))
     AnomalyScore.add_member(:max_score, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericDouble, name: "MaxScore", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     AnomalyScore.add_member(:current_score, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericDouble, name: "CurrentScore", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     AnomalyScore.type = Types::AnomalyScore
@@ -454,13 +454,13 @@ module Aws::CostExplorer
     AnomalySubscriptionFrequency.add_member(:daily, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DAILY", traits: {"smithy.api#enumValue" => "DAILY"}))
     AnomalySubscriptionFrequency.add_member(:immediate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMMEDIATE", traits: {"smithy.api#enumValue" => "IMMEDIATE"}))
     AnomalySubscriptionFrequency.add_member(:weekly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEEKLY", traits: {"smithy.api#enumValue" => "WEEKLY"}))
-    AnomalySubscriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalySubscription, name: "member")
-    ApproximateUsageRecordsPerService.key = ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "key")
-    ApproximateUsageRecordsPerService.value = ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeLong, name: "value")
+    AnomalySubscriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalySubscription, name: "member"))
+    ApproximateUsageRecordsPerService.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "key"))
+    ApproximateUsageRecordsPerService.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeLong, name: "value"))
     ApproximationDimension.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE", traits: {"smithy.api#enumValue" => "SERVICE"}))
     ApproximationDimension.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE", traits: {"smithy.api#enumValue" => "RESOURCE"}))
-    Attributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeType, name: "key")
-    Attributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
+    Attributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeType, name: "key"))
+    Attributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     BackfillLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     BackfillLimitExceededException.type = Types::BackfillLimitExceededException
     BillExpirationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -474,8 +474,8 @@ module Aws::CostExplorer
     ComparisonMetricValue.add_member(:difference, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Difference"))
     ComparisonMetricValue.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Unit"))
     ComparisonMetricValue.type = Types::ComparisonMetricValue
-    ComparisonMetrics.key = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "key")
-    ComparisonMetrics.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonMetricValue, name: "value")
+    ComparisonMetrics.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "key"))
+    ComparisonMetrics.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonMetricValue, name: "value"))
     Context.add_member(:cost_and_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COST_AND_USAGE", traits: {"smithy.api#enumValue" => "COST_AND_USAGE"}))
     Context.add_member(:reservations, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESERVATIONS", traits: {"smithy.api#enumValue" => "RESERVATIONS"}))
     Context.add_member(:savings_plans, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAVINGS_PLANS", traits: {"smithy.api#enumValue" => "SAVINGS_PLANS"}))
@@ -491,24 +491,24 @@ module Aws::CostExplorer
     CostAllocationTagBackfillRequest.add_member(:backfill_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CostAllocationTagBackfillStatus, name: "BackfillStatus"))
     CostAllocationTagBackfillRequest.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonedDateTime, name: "LastUpdatedAt"))
     CostAllocationTagBackfillRequest.type = Types::CostAllocationTagBackfillRequest
-    CostAllocationTagBackfillRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CostAllocationTagBackfillRequest, name: "member")
+    CostAllocationTagBackfillRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CostAllocationTagBackfillRequest, name: "member"))
     CostAllocationTagBackfillStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
     CostAllocationTagBackfillStatus.add_member(:processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROCESSING", traits: {"smithy.api#enumValue" => "PROCESSING"}))
     CostAllocationTagBackfillStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    CostAllocationTagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    CostAllocationTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CostAllocationTag, name: "member")
+    CostAllocationTagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    CostAllocationTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CostAllocationTag, name: "member"))
     CostAllocationTagStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "Active"}))
     CostAllocationTagStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "Inactive"}))
     CostAllocationTagStatusEntry.add_member(:tag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "TagKey", traits: {"smithy.api#required" => {}}))
     CostAllocationTagStatusEntry.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CostAllocationTagStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     CostAllocationTagStatusEntry.type = Types::CostAllocationTagStatusEntry
-    CostAllocationTagStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CostAllocationTagStatusEntry, name: "member")
+    CostAllocationTagStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CostAllocationTagStatusEntry, name: "member"))
     CostAllocationTagType.add_member(:aws_generated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_GENERATED", traits: {"smithy.api#enumValue" => "AWSGenerated"}))
     CostAllocationTagType.add_member(:user_defined, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER_DEFINED", traits: {"smithy.api#enumValue" => "UserDefined"}))
     CostAndUsageComparison.add_member(:cost_and_usage_selector, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "CostAndUsageSelector"))
     CostAndUsageComparison.add_member(:metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonMetrics, name: "Metrics"))
     CostAndUsageComparison.type = Types::CostAndUsageComparison
-    CostAndUsageComparisons.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CostAndUsageComparison, name: "member")
+    CostAndUsageComparisons.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CostAndUsageComparison, name: "member"))
     CostCategory.add_member(:cost_category_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "CostCategoryArn", traits: {"smithy.api#required" => {}}))
     CostCategory.add_member(:effective_start, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonedDateTime, name: "EffectiveStart", traits: {"smithy.api#required" => {}}))
     CostCategory.add_member(:effective_end, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonedDateTime, name: "EffectiveEnd"))
@@ -524,11 +524,11 @@ module Aws::CostExplorer
     CostCategoryInheritedValueDimension.type = Types::CostCategoryInheritedValueDimension
     CostCategoryInheritedValueDimensionName.add_member(:linked_account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINKED_ACCOUNT_NAME", traits: {"smithy.api#enumValue" => "LINKED_ACCOUNT_NAME"}))
     CostCategoryInheritedValueDimensionName.add_member(:tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAG", traits: {"smithy.api#enumValue" => "TAG"}))
-    CostCategoryNamesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryName, name: "member")
+    CostCategoryNamesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryName, name: "member"))
     CostCategoryProcessingStatus.add_member(:component, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryStatusComponent, name: "Component"))
     CostCategoryProcessingStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryStatus, name: "Status"))
     CostCategoryProcessingStatus.type = Types::CostCategoryProcessingStatus
-    CostCategoryProcessingStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryProcessingStatus, name: "member")
+    CostCategoryProcessingStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryProcessingStatus, name: "member"))
     CostCategoryReference.add_member(:cost_category_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "CostCategoryArn"))
     CostCategoryReference.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryName, name: "Name"))
     CostCategoryReference.add_member(:effective_start, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonedDateTime, name: "EffectiveStart"))
@@ -538,7 +538,7 @@ module Aws::CostExplorer
     CostCategoryReference.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryValuesList, name: "Values"))
     CostCategoryReference.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryValue, name: "DefaultValue"))
     CostCategoryReference.type = Types::CostCategoryReference
-    CostCategoryReferencesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryReference, name: "member")
+    CostCategoryReferencesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryReference, name: "member"))
     CostCategoryRule.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryValue, name: "Value"))
     CostCategoryRule.add_member(:rule, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "Rule"))
     CostCategoryRule.add_member(:inherited_value, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryInheritedValueDimension, name: "InheritedValue"))
@@ -547,7 +547,7 @@ module Aws::CostExplorer
     CostCategoryRuleType.add_member(:regular, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGULAR", traits: {"smithy.api#enumValue" => "REGULAR"}))
     CostCategoryRuleType.add_member(:inherited_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INHERITED_VALUE", traits: {"smithy.api#enumValue" => "INHERITED_VALUE"}))
     CostCategoryRuleVersion.add_member(:cost_category_expression_v1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CostCategoryExpressionV1", traits: {"smithy.api#enumValue" => "CostCategoryExpression.v1"}))
-    CostCategoryRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryRule, name: "member")
+    CostCategoryRulesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryRule, name: "member"))
     CostCategorySplitChargeMethod.add_member(:fixed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIXED", traits: {"smithy.api#enumValue" => "FIXED"}))
     CostCategorySplitChargeMethod.add_member(:proportional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROPORTIONAL", traits: {"smithy.api#enumValue" => "PROPORTIONAL"}))
     CostCategorySplitChargeMethod.add_member(:even, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVEN", traits: {"smithy.api#enumValue" => "EVEN"}))
@@ -560,10 +560,10 @@ module Aws::CostExplorer
     CostCategorySplitChargeRuleParameter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategorySplitChargeRuleParameterValuesList, name: "Values", traits: {"smithy.api#required" => {}}))
     CostCategorySplitChargeRuleParameter.type = Types::CostCategorySplitChargeRuleParameter
     CostCategorySplitChargeRuleParameterType.add_member(:allocation_percentages, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALLOCATION_PERCENTAGES", traits: {"smithy.api#enumValue" => "ALLOCATION_PERCENTAGES"}))
-    CostCategorySplitChargeRuleParameterValuesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "member")
-    CostCategorySplitChargeRuleParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategorySplitChargeRuleParameter, name: "member")
-    CostCategorySplitChargeRuleTargetsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "member")
-    CostCategorySplitChargeRulesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategorySplitChargeRule, name: "member")
+    CostCategorySplitChargeRuleParameterValuesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "member"))
+    CostCategorySplitChargeRuleParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategorySplitChargeRuleParameter, name: "member"))
+    CostCategorySplitChargeRuleTargetsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "member"))
+    CostCategorySplitChargeRulesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategorySplitChargeRule, name: "member"))
     CostCategoryStatus.add_member(:processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROCESSING", traits: {"smithy.api#enumValue" => "PROCESSING"}))
     CostCategoryStatus.add_member(:applied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPLIED", traits: {"smithy.api#enumValue" => "APPLIED"}))
     CostCategoryStatusComponent.add_member(:cost_explorer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COST_EXPLORER", traits: {"smithy.api#enumValue" => "COST_EXPLORER"}))
@@ -571,17 +571,17 @@ module Aws::CostExplorer
     CostCategoryValues.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: Values, name: "Values"))
     CostCategoryValues.add_member(:match_options, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOptions, name: "MatchOptions"))
     CostCategoryValues.type = Types::CostCategoryValues
-    CostCategoryValuesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryValue, name: "member")
+    CostCategoryValuesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryValue, name: "member"))
     CostComparisonDriver.add_member(:cost_selector, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "CostSelector"))
     CostComparisonDriver.add_member(:metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonMetrics, name: "Metrics"))
     CostComparisonDriver.add_member(:cost_drivers, ::Smithy::Schema::Shapes::MemberShape.new(target: CostDrivers, name: "CostDrivers"))
     CostComparisonDriver.type = Types::CostComparisonDriver
-    CostComparisonDrivers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CostComparisonDriver, name: "member")
+    CostComparisonDrivers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CostComparisonDriver, name: "member"))
     CostDriver.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Type"))
     CostDriver.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Name"))
     CostDriver.add_member(:metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonMetrics, name: "Metrics"))
     CostDriver.type = Types::CostDriver
-    CostDrivers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CostDriver, name: "member")
+    CostDrivers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CostDriver, name: "member"))
     Coverage.add_member(:coverage_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageHours, name: "CoverageHours"))
     Coverage.add_member(:coverage_normalized_units, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageNormalizedUnits, name: "CoverageNormalizedUnits"))
     Coverage.add_member(:coverage_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageCost, name: "CoverageCost"))
@@ -602,7 +602,7 @@ module Aws::CostExplorer
     CoverageNormalizedUnits.add_member(:total_running_normalized_units, ::Smithy::Schema::Shapes::MemberShape.new(target: TotalRunningNormalizedUnits, name: "TotalRunningNormalizedUnits"))
     CoverageNormalizedUnits.add_member(:coverage_normalized_units_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageNormalizedUnitsPercentage, name: "CoverageNormalizedUnitsPercentage"))
     CoverageNormalizedUnits.type = Types::CoverageNormalizedUnits
-    CoveragesByTime.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageByTime, name: "member")
+    CoveragesByTime.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageByTime, name: "member"))
     CreateAnomalyMonitorRequest.add_member(:anomaly_monitor, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyMonitor, name: "AnomalyMonitor", traits: {"smithy.api#required" => {}}))
     CreateAnomalyMonitorRequest.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagList, name: "ResourceTags"))
     CreateAnomalyMonitorRequest.type = Types::CreateAnomalyMonitorRequest
@@ -699,7 +699,7 @@ module Aws::CostExplorer
     DimensionValuesWithAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "Value"))
     DimensionValuesWithAttributes.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "Attributes"))
     DimensionValuesWithAttributes.type = Types::DimensionValuesWithAttributes
-    DimensionValuesWithAttributesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValuesWithAttributes, name: "member")
+    DimensionValuesWithAttributesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValuesWithAttributes, name: "member"))
     DiskResourceUtilization.add_member(:disk_read_ops_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "DiskReadOpsPerSecond"))
     DiskResourceUtilization.add_member(:disk_write_ops_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "DiskWriteOpsPerSecond"))
     DiskResourceUtilization.add_member(:disk_read_bytes_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "DiskReadBytesPerSecond"))
@@ -766,7 +766,7 @@ module Aws::CostExplorer
     Expression.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValues, name: "Tags"))
     Expression.add_member(:cost_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryValues, name: "CostCategories"))
     Expression.type = Types::Expression
-    Expressions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "member")
+    Expressions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "member"))
     FindingReasonCode.add_member(:cpu_over_provisioned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CPU_OVER_PROVISIONED", traits: {"smithy.api#enumValue" => "CPU_OVER_PROVISIONED"}))
     FindingReasonCode.add_member(:cpu_under_provisioned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CPU_UNDER_PROVISIONED", traits: {"smithy.api#enumValue" => "CPU_UNDER_PROVISIONED"}))
     FindingReasonCode.add_member(:memory_over_provisioned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEMORY_OVER_PROVISIONED", traits: {"smithy.api#enumValue" => "MEMORY_OVER_PROVISIONED"}))
@@ -783,13 +783,13 @@ module Aws::CostExplorer
     FindingReasonCode.add_member(:disk_iops_under_provisioned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISK_IOPS_UNDER_PROVISIONED", traits: {"smithy.api#enumValue" => "DISK_IOPS_UNDER_PROVISIONED"}))
     FindingReasonCode.add_member(:disk_throughput_over_provisioned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISK_THROUGHPUT_OVER_PROVISIONED", traits: {"smithy.api#enumValue" => "DISK_THROUGHPUT_OVER_PROVISIONED"}))
     FindingReasonCode.add_member(:disk_throughput_under_provisioned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISK_THROUGHPUT_UNDER_PROVISIONED", traits: {"smithy.api#enumValue" => "DISK_THROUGHPUT_UNDER_PROVISIONED"}))
-    FindingReasonCodes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingReasonCode, name: "member")
+    FindingReasonCodes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingReasonCode, name: "member"))
     ForecastResult.add_member(:time_period, ::Smithy::Schema::Shapes::MemberShape.new(target: DateInterval, name: "TimePeriod"))
     ForecastResult.add_member(:mean_value, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "MeanValue"))
     ForecastResult.add_member(:prediction_interval_lower_bound, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "PredictionIntervalLowerBound"))
     ForecastResult.add_member(:prediction_interval_upper_bound, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "PredictionIntervalUpperBound"))
     ForecastResult.type = Types::ForecastResult
-    ForecastResultsByTime.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ForecastResult, name: "member")
+    ForecastResultsByTime.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ForecastResult, name: "member"))
     GenerationExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     GenerationExistsException.type = Types::GenerationExistsException
     GenerationStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
@@ -801,7 +801,7 @@ module Aws::CostExplorer
     GenerationSummary.add_member(:generation_completion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonedDateTime, name: "GenerationCompletionTime"))
     GenerationSummary.add_member(:estimated_completion_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonedDateTime, name: "EstimatedCompletionTime"))
     GenerationSummary.type = Types::GenerationSummary
-    GenerationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GenerationSummary, name: "member")
+    GenerationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GenerationSummary, name: "member"))
     GetAnomaliesRequest.add_member(:monitor_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "MonitorArn"))
     GetAnomaliesRequest.add_member(:date_interval, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDateInterval, name: "DateInterval", traits: {"smithy.api#required" => {}}))
     GetAnomaliesRequest.add_member(:feedback, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyFeedbackType, name: "Feedback"))
@@ -1075,8 +1075,8 @@ module Aws::CostExplorer
     GroupDefinitionType.add_member(:dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIMENSION", traits: {"smithy.api#enumValue" => "DIMENSION"}))
     GroupDefinitionType.add_member(:tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAG", traits: {"smithy.api#enumValue" => "TAG"}))
     GroupDefinitionType.add_member(:cost_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COST_CATEGORY", traits: {"smithy.api#enumValue" => "COST_CATEGORY"}))
-    GroupDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupDefinition, name: "member")
-    Groups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Group, name: "member")
+    GroupDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupDefinition, name: "member"))
+    Groups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Group, name: "member"))
     Impact.add_member(:max_impact, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericDouble, name: "MaxImpact", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     Impact.add_member(:total_impact, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericDouble, name: "TotalImpact", traits: {"smithy.api#default" => 0}))
     Impact.add_member(:total_actual_spend, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableNonNegativeDouble, name: "TotalActualSpend"))
@@ -1092,7 +1092,7 @@ module Aws::CostExplorer
     InstanceDetails.type = Types::InstanceDetails
     InvalidNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InvalidNextTokenException.type = Types::InvalidNextTokenException
-    Keys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "member")
+    Keys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "member"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     LimitExceededException.type = Types::LimitExceededException
     ListCommitmentPurchaseAnalysesRequest.add_member(:analysis_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisStatus, name: "AnalysisStatus"))
@@ -1148,7 +1148,7 @@ module Aws::CostExplorer
     MatchOption.add_member(:case_sensitive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CASE_SENSITIVE", traits: {"smithy.api#enumValue" => "CASE_SENSITIVE"}))
     MatchOption.add_member(:case_insensitive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CASE_INSENSITIVE", traits: {"smithy.api#enumValue" => "CASE_INSENSITIVE"}))
     MatchOption.add_member(:greater_than_or_equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GREATER_THAN_OR_EQUAL", traits: {"smithy.api#enumValue" => "GREATER_THAN_OR_EQUAL"}))
-    MatchOptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOption, name: "member")
+    MatchOptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOption, name: "member"))
     MemoryDBInstanceDetails.add_member(:family, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Family"))
     MemoryDBInstanceDetails.add_member(:node_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "NodeType"))
     MemoryDBInstanceDetails.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Region"))
@@ -1162,16 +1162,16 @@ module Aws::CostExplorer
     Metric.add_member(:net_amortized_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NET_AMORTIZED_COST", traits: {"smithy.api#enumValue" => "NET_AMORTIZED_COST"}))
     Metric.add_member(:usage_quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USAGE_QUANTITY", traits: {"smithy.api#enumValue" => "USAGE_QUANTITY"}))
     Metric.add_member(:normalized_usage_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NORMALIZED_USAGE_AMOUNT", traits: {"smithy.api#enumValue" => "NORMALIZED_USAGE_AMOUNT"}))
-    MetricNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "member")
+    MetricNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "member"))
     MetricValue.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricAmount, name: "Amount"))
     MetricValue.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricUnit, name: "Unit"))
     MetricValue.type = Types::MetricValue
-    Metrics.key = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "key")
-    Metrics.value = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricValue, name: "value")
-    MetricsOverLookbackPeriod.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationDetailHourlyMetrics, name: "member")
+    Metrics.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "key"))
+    Metrics.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricValue, name: "value"))
+    MetricsOverLookbackPeriod.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationDetailHourlyMetrics, name: "member"))
     ModifyRecommendationDetail.add_member(:target_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetInstancesList, name: "TargetInstances"))
     ModifyRecommendationDetail.type = Types::ModifyRecommendationDetail
-    MonitorArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    MonitorArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     MonitorDimension.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE", traits: {"smithy.api#enumValue" => "SERVICE"}))
     MonitorType.add_member(:dimensional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIMENSIONAL", traits: {"smithy.api#enumValue" => "DIMENSIONAL"}))
     MonitorType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
@@ -1199,7 +1199,7 @@ module Aws::CostExplorer
     PlatformDifference.add_member(:storage_interface, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STORAGE_INTERFACE", traits: {"smithy.api#enumValue" => "STORAGE_INTERFACE"}))
     PlatformDifference.add_member(:instance_store_availability, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE_STORE_AVAILABILITY", traits: {"smithy.api#enumValue" => "INSTANCE_STORE_AVAILABILITY"}))
     PlatformDifference.add_member(:virtualization_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VIRTUALIZATION_TYPE", traits: {"smithy.api#enumValue" => "VIRTUALIZATION_TYPE"}))
-    PlatformDifferences.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformDifference, name: "member")
+    PlatformDifferences.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformDifference, name: "member"))
     ProvideAnomalyFeedbackRequest.add_member(:anomaly_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "AnomalyId", traits: {"smithy.api#required" => {}}))
     ProvideAnomalyFeedbackRequest.add_member(:feedback, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyFeedbackType, name: "Feedback", traits: {"smithy.api#required" => {}}))
     ProvideAnomalyFeedbackRequest.type = Types::ProvideAnomalyFeedbackRequest
@@ -1251,7 +1251,7 @@ module Aws::CostExplorer
     RecommendationDetailHourlyMetrics.add_member(:estimated_coverage, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "EstimatedCoverage"))
     RecommendationDetailHourlyMetrics.add_member(:estimated_new_commitment_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "EstimatedNewCommitmentUtilization"))
     RecommendationDetailHourlyMetrics.type = Types::RecommendationDetailHourlyMetrics
-    RecommendationIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationId, name: "member")
+    RecommendationIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationId, name: "member"))
     RecommendationTarget.add_member(:same_instance_family, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAME_INSTANCE_FAMILY", traits: {"smithy.api#enumValue" => "SAME_INSTANCE_FAMILY"}))
     RecommendationTarget.add_member(:cross_instance_family, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CROSS_INSTANCE_FAMILY", traits: {"smithy.api#enumValue" => "CROSS_INSTANCE_FAMILY"}))
     RedshiftInstanceDetails.add_member(:family, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Family"))
@@ -1283,7 +1283,7 @@ module Aws::CostExplorer
     ReservationCoverageGroup.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "Attributes"))
     ReservationCoverageGroup.add_member(:coverage, ::Smithy::Schema::Shapes::MemberShape.new(target: Coverage, name: "Coverage"))
     ReservationCoverageGroup.type = Types::ReservationCoverageGroup
-    ReservationCoverageGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReservationCoverageGroup, name: "member")
+    ReservationCoverageGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservationCoverageGroup, name: "member"))
     ReservationPurchaseRecommendation.add_member(:account_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountScope, name: "AccountScope"))
     ReservationPurchaseRecommendation.add_member(:lookback_period_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: LookbackPeriodInDays, name: "LookbackPeriodInDays"))
     ReservationPurchaseRecommendation.add_member(:term_in_years, ::Smithy::Schema::Shapes::MemberShape.new(target: TermInYears, name: "TermInYears"))
@@ -1317,7 +1317,7 @@ module Aws::CostExplorer
     ReservationPurchaseRecommendationDetail.add_member(:maximum_number_of_capacity_units_used_per_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "MaximumNumberOfCapacityUnitsUsedPerHour"))
     ReservationPurchaseRecommendationDetail.add_member(:average_number_of_capacity_units_used_per_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "AverageNumberOfCapacityUnitsUsedPerHour"))
     ReservationPurchaseRecommendationDetail.type = Types::ReservationPurchaseRecommendationDetail
-    ReservationPurchaseRecommendationDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReservationPurchaseRecommendationDetail, name: "member")
+    ReservationPurchaseRecommendationDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservationPurchaseRecommendationDetail, name: "member"))
     ReservationPurchaseRecommendationMetadata.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "RecommendationId"))
     ReservationPurchaseRecommendationMetadata.add_member(:generation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "GenerationTimestamp"))
     ReservationPurchaseRecommendationMetadata.add_member(:additional_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "AdditionalMetadata"))
@@ -1326,13 +1326,13 @@ module Aws::CostExplorer
     ReservationPurchaseRecommendationSummary.add_member(:total_estimated_monthly_savings_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "TotalEstimatedMonthlySavingsPercentage"))
     ReservationPurchaseRecommendationSummary.add_member(:currency_code, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "CurrencyCode"))
     ReservationPurchaseRecommendationSummary.type = Types::ReservationPurchaseRecommendationSummary
-    ReservationPurchaseRecommendations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReservationPurchaseRecommendation, name: "member")
+    ReservationPurchaseRecommendations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservationPurchaseRecommendation, name: "member"))
     ReservationUtilizationGroup.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservationGroupKey, name: "Key"))
     ReservationUtilizationGroup.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservationGroupValue, name: "Value"))
     ReservationUtilizationGroup.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: Attributes, name: "Attributes"))
     ReservationUtilizationGroup.add_member(:utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservationAggregates, name: "Utilization"))
     ReservationUtilizationGroup.type = Types::ReservationUtilizationGroup
-    ReservationUtilizationGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReservationUtilizationGroup, name: "member")
+    ReservationUtilizationGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservationUtilizationGroup, name: "member"))
     ReservedCapacityDetails.add_member(:dynamo_db_capacity_details, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamoDBCapacityDetails, name: "DynamoDBCapacityDetails"))
     ReservedCapacityDetails.type = Types::ReservedCapacityDetails
     ResourceDetails.add_member(:ec2_resource_details, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2ResourceDetails, name: "EC2ResourceDetails"))
@@ -1343,8 +1343,8 @@ module Aws::CostExplorer
     ResourceTag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     ResourceTag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     ResourceTag.type = Types::ResourceTag
-    ResourceTagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "member")
-    ResourceTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member")
+    ResourceTagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "member"))
+    ResourceTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member"))
     ResourceUtilization.add_member(:ec2_resource_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2ResourceUtilization, name: "EC2ResourceUtilization"))
     ResourceUtilization.type = Types::ResourceUtilization
     ResultByTime.add_member(:time_period, ::Smithy::Schema::Shapes::MemberShape.new(target: DateInterval, name: "TimePeriod"))
@@ -1352,7 +1352,7 @@ module Aws::CostExplorer
     ResultByTime.add_member(:groups, ::Smithy::Schema::Shapes::MemberShape.new(target: Groups, name: "Groups"))
     ResultByTime.add_member(:estimated, ::Smithy::Schema::Shapes::MemberShape.new(target: Estimated, name: "Estimated", traits: {"smithy.api#default" => false}))
     ResultByTime.type = Types::ResultByTime
-    ResultsByTime.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResultByTime, name: "member")
+    ResultsByTime.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultByTime, name: "member"))
     RightsizingRecommendation.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "AccountId"))
     RightsizingRecommendation.add_member(:current_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrentInstance, name: "CurrentInstance"))
     RightsizingRecommendation.add_member(:rightsizing_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RightsizingType, name: "RightsizingType"))
@@ -1363,7 +1363,7 @@ module Aws::CostExplorer
     RightsizingRecommendationConfiguration.add_member(:recommendation_target, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationTarget, name: "RecommendationTarget", traits: {"smithy.api#required" => {}}))
     RightsizingRecommendationConfiguration.add_member(:benefits_considered, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericBoolean, name: "BenefitsConsidered", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     RightsizingRecommendationConfiguration.type = Types::RightsizingRecommendationConfiguration
-    RightsizingRecommendationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RightsizingRecommendation, name: "member")
+    RightsizingRecommendationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RightsizingRecommendation, name: "member"))
     RightsizingRecommendationMetadata.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "RecommendationId"))
     RightsizingRecommendationMetadata.add_member(:generation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "GenerationTimestamp"))
     RightsizingRecommendationMetadata.add_member(:lookback_period_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: LookbackPeriodInDays, name: "LookbackPeriodInDays"))
@@ -1385,7 +1385,7 @@ module Aws::CostExplorer
     RootCause.type = Types::RootCause
     RootCauseImpact.add_member(:contribution, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericDouble, name: "Contribution", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     RootCauseImpact.type = Types::RootCauseImpact
-    RootCauses.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RootCause, name: "member")
+    RootCauses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RootCause, name: "member"))
     SavingsPlans.add_member(:payment_option, ::Smithy::Schema::Shapes::MemberShape.new(target: PaymentOption, name: "PaymentOption"))
     SavingsPlans.add_member(:savings_plans_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedSavingsPlansType, name: "SavingsPlansType"))
     SavingsPlans.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Region"))
@@ -1407,12 +1407,12 @@ module Aws::CostExplorer
     SavingsPlansCoverageData.add_member(:total_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "TotalCost"))
     SavingsPlansCoverageData.add_member(:coverage_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "CoveragePercentage"))
     SavingsPlansCoverageData.type = Types::SavingsPlansCoverageData
-    SavingsPlansCoverages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansCoverage, name: "member")
+    SavingsPlansCoverages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansCoverage, name: "member"))
     SavingsPlansDataType.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ATTRIBUTES", traits: {"smithy.api#enumValue" => "ATTRIBUTES"}))
     SavingsPlansDataType.add_member(:utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UTILIZATION", traits: {"smithy.api#enumValue" => "UTILIZATION"}))
     SavingsPlansDataType.add_member(:amortized_commitment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMORTIZED_COMMITMENT", traits: {"smithy.api#enumValue" => "AMORTIZED_COMMITMENT"}))
     SavingsPlansDataType.add_member(:savings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAVINGS", traits: {"smithy.api#enumValue" => "SAVINGS"}))
-    SavingsPlansDataTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansDataType, name: "member")
+    SavingsPlansDataTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansDataType, name: "member"))
     SavingsPlansDetails.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Region"))
     SavingsPlansDetails.add_member(:instance_family, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "InstanceFamily"))
     SavingsPlansDetails.add_member(:offering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "OfferingId"))
@@ -1473,7 +1473,7 @@ module Aws::CostExplorer
     SavingsPlansPurchaseRecommendationDetail.add_member(:current_average_hourly_on_demand_spend, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "CurrentAverageHourlyOnDemandSpend"))
     SavingsPlansPurchaseRecommendationDetail.add_member(:recommendation_detail_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationDetailId, name: "RecommendationDetailId"))
     SavingsPlansPurchaseRecommendationDetail.type = Types::SavingsPlansPurchaseRecommendationDetail
-    SavingsPlansPurchaseRecommendationDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansPurchaseRecommendationDetail, name: "member")
+    SavingsPlansPurchaseRecommendationDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansPurchaseRecommendationDetail, name: "member"))
     SavingsPlansPurchaseRecommendationMetadata.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "RecommendationId"))
     SavingsPlansPurchaseRecommendationMetadata.add_member(:generation_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "GenerationTimestamp"))
     SavingsPlansPurchaseRecommendationMetadata.add_member(:additional_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "AdditionalMetadata"))
@@ -1493,8 +1493,8 @@ module Aws::CostExplorer
     SavingsPlansSavings.add_member(:net_savings, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "NetSavings"))
     SavingsPlansSavings.add_member(:on_demand_cost_equivalent, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "OnDemandCostEquivalent"))
     SavingsPlansSavings.type = Types::SavingsPlansSavings
-    SavingsPlansToAdd.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlans, name: "member")
-    SavingsPlansToExclude.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansId, name: "member")
+    SavingsPlansToAdd.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlans, name: "member"))
+    SavingsPlansToExclude.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansId, name: "member"))
     SavingsPlansUtilization.add_member(:total_commitment, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "TotalCommitment"))
     SavingsPlansUtilization.add_member(:used_commitment, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "UsedCommitment"))
     SavingsPlansUtilization.add_member(:unused_commitment, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "UnusedCommitment"))
@@ -1515,8 +1515,8 @@ module Aws::CostExplorer
     SavingsPlansUtilizationDetail.add_member(:savings, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansSavings, name: "Savings"))
     SavingsPlansUtilizationDetail.add_member(:amortized_commitment, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansAmortizedCommitment, name: "AmortizedCommitment"))
     SavingsPlansUtilizationDetail.type = Types::SavingsPlansUtilizationDetail
-    SavingsPlansUtilizationDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansUtilizationDetail, name: "member")
-    SavingsPlansUtilizationsByTime.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansUtilizationByTime, name: "member")
+    SavingsPlansUtilizationDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansUtilizationDetail, name: "member"))
+    SavingsPlansUtilizationsByTime.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansUtilizationByTime, name: "member"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     ServiceSpecification.add_member(:ec2_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2Specification, name: "EC2Specification"))
@@ -1524,7 +1524,7 @@ module Aws::CostExplorer
     SortDefinition.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SortDefinitionKey, name: "Key", traits: {"smithy.api#required" => {}}))
     SortDefinition.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "SortOrder"))
     SortDefinition.type = Types::SortDefinition
-    SortDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SortDefinition, name: "member")
+    SortDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SortDefinition, name: "member"))
     SortOrder.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASCENDING", traits: {"smithy.api#enumValue" => "ASCENDING"}))
     SortOrder.add_member(:descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESCENDING", traits: {"smithy.api#enumValue" => "DESCENDING"}))
     StartCommitmentPurchaseAnalysisRequest.add_member(:commitment_purchase_analysis_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CommitmentPurchaseAnalysisConfiguration, name: "CommitmentPurchaseAnalysisConfiguration", traits: {"smithy.api#required" => {}}))
@@ -1550,11 +1550,11 @@ module Aws::CostExplorer
     SubscriberStatus.add_member(:declined, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DECLINED", traits: {"smithy.api#enumValue" => "DECLINED"}))
     SubscriberType.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMAIL", traits: {"smithy.api#enumValue" => "EMAIL"}))
     SubscriberType.add_member(:sns, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SNS", traits: {"smithy.api#enumValue" => "SNS"}))
-    Subscribers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Subscriber, name: "member")
+    Subscribers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Subscriber, name: "member"))
     SupportedSavingsPlansType.add_member(:compute_sp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPUTE_SP", traits: {"smithy.api#enumValue" => "COMPUTE_SP"}))
     SupportedSavingsPlansType.add_member(:ec2_instance_sp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EC2_INSTANCE_SP", traits: {"smithy.api#enumValue" => "EC2_INSTANCE_SP"}))
     SupportedSavingsPlansType.add_member(:sagemaker_sp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAGEMAKER_SP", traits: {"smithy.api#enumValue" => "SAGEMAKER_SP"}))
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Entity, name: "member")
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Entity, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagList, name: "ResourceTags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -1563,7 +1563,7 @@ module Aws::CostExplorer
     TagValues.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: Values, name: "Values"))
     TagValues.add_member(:match_options, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOptions, name: "MatchOptions"))
     TagValues.type = Types::TagValues
-    TagValuesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValues, name: "member")
+    TagValuesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValues, name: "member"))
     TargetInstance.add_member(:estimated_monthly_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "EstimatedMonthlyCost"))
     TargetInstance.add_member(:estimated_monthly_savings, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "EstimatedMonthlySavings"))
     TargetInstance.add_member(:currency_code, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "CurrencyCode"))
@@ -1572,7 +1572,7 @@ module Aws::CostExplorer
     TargetInstance.add_member(:expected_resource_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceUtilization, name: "ExpectedResourceUtilization"))
     TargetInstance.add_member(:platform_differences, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformDifferences, name: "PlatformDifferences"))
     TargetInstance.type = Types::TargetInstance
-    TargetInstancesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetInstance, name: "member")
+    TargetInstancesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetInstance, name: "member"))
     TermInYears.add_member(:one_year, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONE_YEAR", traits: {"smithy.api#enumValue" => "ONE_YEAR"}))
     TermInYears.add_member(:three_years, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THREE_YEARS", traits: {"smithy.api#enumValue" => "THREE_YEARS"}))
     TerminateRecommendationDetail.add_member(:estimated_monthly_savings, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "EstimatedMonthlySavings"))
@@ -1614,7 +1614,7 @@ module Aws::CostExplorer
     UpdateCostAllocationTagsStatusError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Code"))
     UpdateCostAllocationTagsStatusError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     UpdateCostAllocationTagsStatusError.type = Types::UpdateCostAllocationTagsStatusError
-    UpdateCostAllocationTagsStatusErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateCostAllocationTagsStatusError, name: "member")
+    UpdateCostAllocationTagsStatusErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateCostAllocationTagsStatusError, name: "member"))
     UpdateCostAllocationTagsStatusRequest.add_member(:cost_allocation_tags_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CostAllocationTagStatusList, name: "CostAllocationTagsStatus", traits: {"smithy.api#required" => {}}))
     UpdateCostAllocationTagsStatusRequest.type = Types::UpdateCostAllocationTagsStatusRequest
     UpdateCostAllocationTagsStatusResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateCostAllocationTagsStatusErrors, name: "Errors"))
@@ -1629,13 +1629,13 @@ module Aws::CostExplorer
     UpdateCostCategoryDefinitionResponse.add_member(:cost_category_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "CostCategoryArn"))
     UpdateCostCategoryDefinitionResponse.add_member(:effective_start, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonedDateTime, name: "EffectiveStart"))
     UpdateCostCategoryDefinitionResponse.type = Types::UpdateCostCategoryDefinitionResponse
-    UsageServices.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "member")
+    UsageServices.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "member"))
     UtilizationByTime.add_member(:time_period, ::Smithy::Schema::Shapes::MemberShape.new(target: DateInterval, name: "TimePeriod"))
     UtilizationByTime.add_member(:groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservationUtilizationGroups, name: "Groups"))
     UtilizationByTime.add_member(:total, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservationAggregates, name: "Total"))
     UtilizationByTime.type = Types::UtilizationByTime
-    UtilizationsByTime.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UtilizationByTime, name: "member")
-    Values.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "member")
+    UtilizationsByTime.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UtilizationByTime, name: "member"))
+    Values.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "member"))
 
     AWSInsightsIndexService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.costexplorer#AWSInsightsIndexService"

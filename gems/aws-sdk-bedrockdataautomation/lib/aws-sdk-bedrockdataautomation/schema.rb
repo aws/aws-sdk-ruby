@@ -149,7 +149,7 @@ module Aws::BedrockDataAutomation
     AudioExtractionCategoryType.add_member(:topic_content_moderation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOPIC_CONTENT_MODERATION", traits: {"smithy.api#enumValue" => "TOPIC_CONTENT_MODERATION"}))
     AudioExtractionCategoryTypeConfiguration.add_member(:transcript, ::Smithy::Schema::Shapes::MemberShape.new(target: TranscriptConfiguration, name: "transcript"))
     AudioExtractionCategoryTypeConfiguration.type = Types::AudioExtractionCategoryTypeConfiguration
-    AudioExtractionCategoryTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AudioExtractionCategoryType, name: "member")
+    AudioExtractionCategoryTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioExtractionCategoryType, name: "member"))
     AudioOverrideConfiguration.add_member(:modality_processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ModalityProcessingConfiguration, name: "modalityProcessing"))
     AudioOverrideConfiguration.type = Types::AudioOverrideConfiguration
     AudioStandardExtraction.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioExtractionCategory, name: "category", traits: {"smithy.api#required" => {}}))
@@ -160,7 +160,7 @@ module Aws::BedrockDataAutomation
     AudioStandardGenerativeFieldType.add_member(:audio_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUDIO_SUMMARY", traits: {"smithy.api#enumValue" => "AUDIO_SUMMARY"}))
     AudioStandardGenerativeFieldType.add_member(:iab, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IAB", traits: {"smithy.api#enumValue" => "IAB"}))
     AudioStandardGenerativeFieldType.add_member(:topic_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOPIC_SUMMARY", traits: {"smithy.api#enumValue" => "TOPIC_SUMMARY"}))
-    AudioStandardGenerativeFieldTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AudioStandardGenerativeFieldType, name: "member")
+    AudioStandardGenerativeFieldTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioStandardGenerativeFieldType, name: "member"))
     AudioStandardOutputConfiguration.add_member(:extraction, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioStandardExtraction, name: "extraction"))
     AudioStandardOutputConfiguration.add_member(:generative_field, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioStandardGenerativeField, name: "generativeField"))
     AudioStandardOutputConfiguration.type = Types::AudioStandardOutputConfiguration
@@ -183,7 +183,7 @@ module Aws::BedrockDataAutomation
     BlueprintItem.add_member(:blueprint_version, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintVersion, name: "blueprintVersion"))
     BlueprintItem.add_member(:blueprint_stage, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintStage, name: "blueprintStage"))
     BlueprintItem.type = Types::BlueprintItem
-    BlueprintItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintItem, name: "member")
+    BlueprintItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintItem, name: "member"))
     BlueprintStage.add_member(:development, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEVELOPMENT", traits: {"smithy.api#enumValue" => "DEVELOPMENT"}))
     BlueprintStage.add_member(:live, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LIVE", traits: {"smithy.api#enumValue" => "LIVE"}))
     BlueprintStageFilter.add_member(:development, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEVELOPMENT", traits: {"smithy.api#enumValue" => "DEVELOPMENT"}))
@@ -196,7 +196,7 @@ module Aws::BedrockDataAutomation
     BlueprintSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimestamp, name: "creationTime", traits: {"smithy.api#required" => {}}))
     BlueprintSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimestamp, name: "lastModifiedTime"))
     BlueprintSummary.type = Types::BlueprintSummary
-    Blueprints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintSummary, name: "member")
+    Blueprints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintSummary, name: "member"))
     ChannelLabelingConfiguration.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: State, name: "state", traits: {"smithy.api#required" => {}}))
     ChannelLabelingConfiguration.type = Types::ChannelLabelingConfiguration
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "message"))
@@ -256,7 +256,7 @@ module Aws::BedrockDataAutomation
     DataAutomationProjectStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     DataAutomationProjectStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     DataAutomationProjectStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    DataAutomationProjectSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DataAutomationProjectSummary, name: "member")
+    DataAutomationProjectSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataAutomationProjectSummary, name: "member"))
     DataAutomationProjectSummary.add_member(:project_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DataAutomationProjectArn, name: "projectArn", traits: {"smithy.api#required" => {}}))
     DataAutomationProjectSummary.add_member(:project_stage, ::Smithy::Schema::Shapes::MemberShape.new(target: DataAutomationProjectStage, name: "projectStage"))
     DataAutomationProjectSummary.add_member(:project_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataAutomationProjectName, name: "projectName"))
@@ -284,7 +284,7 @@ module Aws::BedrockDataAutomation
     DocumentExtractionGranularityType.add_member(:element, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ELEMENT", traits: {"smithy.api#enumValue" => "ELEMENT"}))
     DocumentExtractionGranularityType.add_member(:word, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WORD", traits: {"smithy.api#enumValue" => "WORD"}))
     DocumentExtractionGranularityType.add_member(:line, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINE", traits: {"smithy.api#enumValue" => "LINE"}))
-    DocumentExtractionGranularityTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentExtractionGranularityType, name: "member")
+    DocumentExtractionGranularityTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentExtractionGranularityType, name: "member"))
     DocumentOutputAdditionalFileFormat.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: State, name: "state", traits: {"smithy.api#required" => {}}))
     DocumentOutputAdditionalFileFormat.type = Types::DocumentOutputAdditionalFileFormat
     DocumentOutputFormat.add_member(:text_format, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentOutputTextFormat, name: "textFormat", traits: {"smithy.api#required" => {}}))
@@ -296,7 +296,7 @@ module Aws::BedrockDataAutomation
     DocumentOutputTextFormatType.add_member(:markdown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MARKDOWN", traits: {"smithy.api#enumValue" => "MARKDOWN"}))
     DocumentOutputTextFormatType.add_member(:html, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTML", traits: {"smithy.api#enumValue" => "HTML"}))
     DocumentOutputTextFormatType.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
-    DocumentOutputTextFormatTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentOutputTextFormatType, name: "member")
+    DocumentOutputTextFormatTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentOutputTextFormatType, name: "member"))
     DocumentOverrideConfiguration.add_member(:splitter, ::Smithy::Schema::Shapes::MemberShape.new(target: SplitterConfiguration, name: "splitter"))
     DocumentOverrideConfiguration.add_member(:modality_processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ModalityProcessingConfiguration, name: "modalityProcessing"))
     DocumentOverrideConfiguration.type = Types::DocumentOverrideConfiguration
@@ -331,7 +331,7 @@ module Aws::BedrockDataAutomation
     ImageExtractionCategoryType.add_member(:content_moderation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTENT_MODERATION", traits: {"smithy.api#enumValue" => "CONTENT_MODERATION"}))
     ImageExtractionCategoryType.add_member(:text_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXT_DETECTION", traits: {"smithy.api#enumValue" => "TEXT_DETECTION"}))
     ImageExtractionCategoryType.add_member(:logos, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOGOS", traits: {"smithy.api#enumValue" => "LOGOS"}))
-    ImageExtractionCategoryTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageExtractionCategoryType, name: "member")
+    ImageExtractionCategoryTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageExtractionCategoryType, name: "member"))
     ImageOverrideConfiguration.add_member(:modality_processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ModalityProcessingConfiguration, name: "modalityProcessing"))
     ImageOverrideConfiguration.type = Types::ImageOverrideConfiguration
     ImageStandardExtraction.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageExtractionCategory, name: "category", traits: {"smithy.api#required" => {}}))
@@ -342,14 +342,14 @@ module Aws::BedrockDataAutomation
     ImageStandardGenerativeField.type = Types::ImageStandardGenerativeField
     ImageStandardGenerativeFieldType.add_member(:image_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMAGE_SUMMARY", traits: {"smithy.api#enumValue" => "IMAGE_SUMMARY"}))
     ImageStandardGenerativeFieldType.add_member(:iab, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IAB", traits: {"smithy.api#enumValue" => "IAB"}))
-    ImageStandardGenerativeFieldTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImageStandardGenerativeFieldType, name: "member")
+    ImageStandardGenerativeFieldTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageStandardGenerativeFieldType, name: "member"))
     ImageStandardOutputConfiguration.add_member(:extraction, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageStandardExtraction, name: "extraction"))
     ImageStandardOutputConfiguration.add_member(:generative_field, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageStandardGenerativeField, name: "generativeField"))
     ImageStandardOutputConfiguration.type = Types::ImageStandardOutputConfiguration
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "message"))
     InternalServerException.type = Types::InternalServerException
-    KmsEncryptionContext.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextKey, name: "key")
-    KmsEncryptionContext.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextValue, name: "value")
+    KmsEncryptionContext.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextKey, name: "key"))
+    KmsEncryptionContext.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextValue, name: "value"))
     ListBlueprintsRequest.add_member(:blueprint_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintArn, name: "blueprintArn"))
     ListBlueprintsRequest.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceOwner, name: "resourceOwner"))
     ListBlueprintsRequest.add_member(:blueprint_stage_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintStageFilter, name: "blueprintStageFilter"))
@@ -406,8 +406,8 @@ module Aws::BedrockDataAutomation
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourceArn, name: "resourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -450,7 +450,7 @@ module Aws::BedrockDataAutomation
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     VideoBoundingBox.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: State, name: "state", traits: {"smithy.api#required" => {}}))
     VideoBoundingBox.type = Types::VideoBoundingBox
     VideoExtractionCategory.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: State, name: "state", traits: {"smithy.api#required" => {}}))
@@ -460,7 +460,7 @@ module Aws::BedrockDataAutomation
     VideoExtractionCategoryType.add_member(:text_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXT_DETECTION", traits: {"smithy.api#enumValue" => "TEXT_DETECTION"}))
     VideoExtractionCategoryType.add_member(:transcript, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRANSCRIPT", traits: {"smithy.api#enumValue" => "TRANSCRIPT"}))
     VideoExtractionCategoryType.add_member(:logos, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOGOS", traits: {"smithy.api#enumValue" => "LOGOS"}))
-    VideoExtractionCategoryTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VideoExtractionCategoryType, name: "member")
+    VideoExtractionCategoryTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoExtractionCategoryType, name: "member"))
     VideoOverrideConfiguration.add_member(:modality_processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ModalityProcessingConfiguration, name: "modalityProcessing"))
     VideoOverrideConfiguration.type = Types::VideoOverrideConfiguration
     VideoStandardExtraction.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoExtractionCategory, name: "category", traits: {"smithy.api#required" => {}}))
@@ -472,7 +472,7 @@ module Aws::BedrockDataAutomation
     VideoStandardGenerativeFieldType.add_member(:video_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VIDEO_SUMMARY", traits: {"smithy.api#enumValue" => "VIDEO_SUMMARY"}))
     VideoStandardGenerativeFieldType.add_member(:iab, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IAB", traits: {"smithy.api#enumValue" => "IAB"}))
     VideoStandardGenerativeFieldType.add_member(:chapter_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CHAPTER_SUMMARY", traits: {"smithy.api#enumValue" => "CHAPTER_SUMMARY"}))
-    VideoStandardGenerativeFieldTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VideoStandardGenerativeFieldType, name: "member")
+    VideoStandardGenerativeFieldTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoStandardGenerativeFieldType, name: "member"))
     VideoStandardOutputConfiguration.add_member(:extraction, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoStandardExtraction, name: "extraction"))
     VideoStandardOutputConfiguration.add_member(:generative_field, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoStandardGenerativeField, name: "generativeField"))
     VideoStandardOutputConfiguration.type = Types::VideoStandardOutputConfiguration

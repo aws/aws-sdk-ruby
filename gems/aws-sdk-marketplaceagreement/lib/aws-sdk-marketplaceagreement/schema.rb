@@ -100,7 +100,7 @@ module Aws::MarketplaceAgreement
     AcceptedTerm.add_member(:fixed_upfront_pricing_term, Types::AcceptedTerm::FixedUpfrontPricingTerm, ::Smithy::Schema::Shapes::MemberShape.new(target: FixedUpfrontPricingTerm, name: "fixedUpfrontPricingTerm"))
     AcceptedTerm.add_member(:unknown, Types::AcceptedTerm::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AcceptedTerm.type = Types::AcceptedTerm
-    AcceptedTermList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AcceptedTerm, name: "member")
+    AcceptedTermList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceptedTerm, name: "member"))
     Acceptor.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccountId, name: "accountId"))
     Acceptor.type = Types::Acceptor
     AccessDeniedException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "requestId"))
@@ -125,7 +125,7 @@ module Aws::MarketplaceAgreement
     AgreementViewSummary.add_member(:proposal_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ProposalSummary, name: "proposalSummary"))
     AgreementViewSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AgreementStatus, name: "status"))
     AgreementViewSummary.type = Types::AgreementViewSummary
-    AgreementViewSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgreementViewSummary, name: "member")
+    AgreementViewSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgreementViewSummary, name: "member"))
     ByolPricingTerm.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: UnversionedTermType, name: "type"))
     ByolPricingTerm.type = Types::ByolPricingTerm
     ConfigurableUpfrontPricingTerm.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: UnversionedTermType, name: "type"))
@@ -140,7 +140,7 @@ module Aws::MarketplaceAgreement
     ConfigurableUpfrontRateCardItem.add_member(:constraints, ::Smithy::Schema::Shapes::MemberShape.new(target: Constraints, name: "constraints"))
     ConfigurableUpfrontRateCardItem.add_member(:rate_card, ::Smithy::Schema::Shapes::MemberShape.new(target: RateCardList, name: "rateCard"))
     ConfigurableUpfrontRateCardItem.type = Types::ConfigurableUpfrontRateCardItem
-    ConfigurableUpfrontRateCardList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurableUpfrontRateCardItem, name: "member")
+    ConfigurableUpfrontRateCardList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurableUpfrontRateCardItem, name: "member"))
     Constraints.add_member(:multiple_dimension_selection, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "multipleDimensionSelection"))
     Constraints.add_member(:quantity_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "quantityConfiguration"))
     Constraints.type = Types::Constraints
@@ -160,20 +160,20 @@ module Aws::MarketplaceAgreement
     Dimension.add_member(:dimension_key, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "dimensionKey", traits: {"smithy.api#required" => {}}))
     Dimension.add_member(:dimension_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ZeroValueInteger, name: "dimensionValue", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     Dimension.type = Types::Dimension
-    DimensionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "member")
+    DimensionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "member"))
     DocumentItem.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "type"))
     DocumentItem.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "url"))
     DocumentItem.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "version"))
     DocumentItem.type = Types::DocumentItem
-    DocumentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentItem, name: "member")
+    DocumentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentItem, name: "member"))
     EstimatedCharges.add_member(:currency_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, name: "currencyCode"))
     EstimatedCharges.add_member(:agreement_value, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "agreementValue"))
     EstimatedCharges.type = Types::EstimatedCharges
     Filter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, name: "name"))
     Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, name: "values"))
     Filter.type = Types::Filter
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
-    FilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member")
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
+    FilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member"))
     FixedUpfrontPricingTerm.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: UnversionedTermType, name: "type"))
     FixedUpfrontPricingTerm.add_member(:currency_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, name: "currencyCode"))
     FixedUpfrontPricingTerm.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "duration"))
@@ -194,7 +194,7 @@ module Aws::MarketplaceAgreement
     GrantItem.add_member(:dimension_key, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "dimensionKey"))
     GrantItem.add_member(:max_quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveIntegerWithDefaultValueOne, name: "maxQuantity", traits: {"smithy.api#default" => 1}))
     GrantItem.type = Types::GrantItem
-    GrantList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GrantItem, name: "member")
+    GrantList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantItem, name: "member"))
     InternalServerException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "requestId"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     InternalServerException.type = Types::InternalServerException
@@ -213,7 +213,7 @@ module Aws::MarketplaceAgreement
     RateCardItem.add_member(:dimension_key, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "dimensionKey"))
     RateCardItem.add_member(:price, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "price"))
     RateCardItem.type = Types::RateCardItem
-    RateCardList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RateCardItem, name: "member")
+    RateCardList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RateCardItem, name: "member"))
     RecurringPaymentTerm.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: UnversionedTermType, name: "type"))
     RecurringPaymentTerm.add_member(:currency_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, name: "currencyCode"))
     RecurringPaymentTerm.add_member(:billing_period, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "billingPeriod"))
@@ -233,11 +233,11 @@ module Aws::MarketplaceAgreement
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ResourceType.add_member(:agreement, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGREEMENT", traits: {"smithy.api#enumValue" => "Agreement"}))
-    Resources.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member")
+    Resources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
     ScheduleItem.add_member(:charge_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "chargeDate"))
     ScheduleItem.add_member(:charge_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "chargeAmount"))
     ScheduleItem.type = Types::ScheduleItem
-    ScheduleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleItem, name: "member")
+    ScheduleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleItem, name: "member"))
     SearchAgreementsInput.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: Catalog, name: "catalog"))
     SearchAgreementsInput.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, name: "filters"))
     SearchAgreementsInput.add_member(:sort, ::Smithy::Schema::Shapes::MemberShape.new(target: Sort, name: "sort"))
@@ -267,7 +267,7 @@ module Aws::MarketplaceAgreement
     UsageBasedPricingTerm.type = Types::UsageBasedPricingTerm
     UsageBasedRateCardItem.add_member(:rate_card, ::Smithy::Schema::Shapes::MemberShape.new(target: RateCardList, name: "rateCard"))
     UsageBasedRateCardItem.type = Types::UsageBasedRateCardItem
-    UsageBasedRateCardList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UsageBasedRateCardItem, name: "member")
+    UsageBasedRateCardList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageBasedRateCardItem, name: "member"))
     ValidationException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "requestId"))
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, name: "reason"))
@@ -276,7 +276,7 @@ module Aws::MarketplaceAgreement
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundedString, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:invalid_agreement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_AGREEMENT_ID", traits: {"smithy.api#enumValue" => "INVALID_AGREEMENT_ID"}))
     ValidationExceptionReason.add_member(:missing_agreement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISSING_AGREEMENT_ID", traits: {"smithy.api#enumValue" => "MISSING_AGREEMENT_ID"}))
     ValidationExceptionReason.add_member(:invalid_catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_CATALOG", traits: {"smithy.api#enumValue" => "INVALID_CATALOG"}))

@@ -69,7 +69,7 @@ module Aws::BedrockDataAutomationRuntime
     Blueprint.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintVersion, name: "version"))
     Blueprint.add_member(:stage, ::Smithy::Schema::Shapes::MemberShape.new(target: BlueprintStage, name: "stage"))
     Blueprint.type = Types::Blueprint
-    BlueprintList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Blueprint, name: "member")
+    BlueprintList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Blueprint, name: "member"))
     BlueprintStage.add_member(:development, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEVELOPMENT", traits: {"smithy.api#enumValue" => "DEVELOPMENT"}))
     BlueprintStage.add_member(:live, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LIVE", traits: {"smithy.api#enumValue" => "LIVE"}))
     DataAutomationConfiguration.add_member(:data_automation_project_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DataAutomationArn, name: "dataAutomationProjectArn", traits: {"smithy.api#required" => {}}))
@@ -80,8 +80,8 @@ module Aws::BedrockDataAutomationRuntime
     EncryptionConfiguration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKeyId, name: "kmsKeyId", traits: {"smithy.api#required" => {}}))
     EncryptionConfiguration.add_member(:kms_encryption_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextMap, name: "kmsEncryptionContext"))
     EncryptionConfiguration.type = Types::EncryptionConfiguration
-    EncryptionContextMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextKey, name: "key")
-    EncryptionContextMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextValue, name: "value")
+    EncryptionContextMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextKey, name: "key"))
+    EncryptionContextMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextValue, name: "value"))
     EventBridgeConfiguration.add_member(:event_bridge_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "eventBridgeEnabled", traits: {"smithy.api#required" => {}}))
     EventBridgeConfiguration.type = Types::EventBridgeConfiguration
     GetDataAutomationStatusRequest.add_member(:invocation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InvocationArn, name: "invocationArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -123,8 +123,8 @@ module Aws::BedrockDataAutomationRuntime
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourceArn, name: "resourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest

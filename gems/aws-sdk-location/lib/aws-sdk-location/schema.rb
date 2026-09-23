@@ -295,14 +295,14 @@ module Aws::Location
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    ApiKeyActionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApiKeyAction, name: "member")
+    ApiKeyActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiKeyAction, name: "member"))
     ApiKeyFilter.add_member(:key_status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "KeyStatus"))
     ApiKeyFilter.type = Types::ApiKeyFilter
     ApiKeyRestrictions.add_member(:allow_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiKeyActionList, name: "AllowActions", traits: {"smithy.api#length" => {"min" => 1, "max" => 24}, "smithy.api#required" => {}}))
     ApiKeyRestrictions.add_member(:allow_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoArnList, name: "AllowResources", traits: {"smithy.api#length" => {"min" => 1, "max" => 8}, "smithy.api#required" => {}}))
     ApiKeyRestrictions.add_member(:allow_referers, ::Smithy::Schema::Shapes::MemberShape.new(target: RefererPatternList, name: "AllowReferers", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}}))
     ApiKeyRestrictions.type = Types::ApiKeyRestrictions
-    ArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    ArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     AssociateTrackerConsumerInput.add_member(:tracker_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "TrackerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AssociateTrackerConsumerInput.add_member(:consumer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ConsumerArn", traits: {"smithy.api#required" => {}}))
     AssociateTrackerConsumerInput.type = Types::AssociateTrackerConsumerInput
@@ -310,7 +310,7 @@ module Aws::Location
     BatchDeleteDevicePositionHistoryError.add_member(:device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "DeviceId", traits: {"smithy.api#required" => {}}))
     BatchDeleteDevicePositionHistoryError.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchItemError, name: "Error", traits: {"smithy.api#required" => {}}))
     BatchDeleteDevicePositionHistoryError.type = Types::BatchDeleteDevicePositionHistoryError
-    BatchDeleteDevicePositionHistoryErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteDevicePositionHistoryError, name: "member")
+    BatchDeleteDevicePositionHistoryErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteDevicePositionHistoryError, name: "member"))
     BatchDeleteDevicePositionHistoryInput.add_member(:tracker_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "TrackerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BatchDeleteDevicePositionHistoryInput.add_member(:device_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceIdsList, name: "DeviceIds", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#required" => {}}))
     BatchDeleteDevicePositionHistoryInput.type = Types::BatchDeleteDevicePositionHistoryInput
@@ -319,7 +319,7 @@ module Aws::Location
     BatchDeleteGeofenceError.add_member(:geofence_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "GeofenceId", traits: {"smithy.api#required" => {}}))
     BatchDeleteGeofenceError.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchItemError, name: "Error", traits: {"smithy.api#required" => {}}))
     BatchDeleteGeofenceError.type = Types::BatchDeleteGeofenceError
-    BatchDeleteGeofenceErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteGeofenceError, name: "member")
+    BatchDeleteGeofenceErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteGeofenceError, name: "member"))
     BatchDeleteGeofenceInput.add_member(:collection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "CollectionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BatchDeleteGeofenceInput.add_member(:geofence_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: IdList, name: "GeofenceIds", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#required" => {}}))
     BatchDeleteGeofenceInput.type = Types::BatchDeleteGeofenceInput
@@ -329,7 +329,7 @@ module Aws::Location
     BatchEvaluateGeofencesError.add_member(:sample_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "SampleTime", traits: {"smithy.api#required" => {}}))
     BatchEvaluateGeofencesError.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchItemError, name: "Error", traits: {"smithy.api#required" => {}}))
     BatchEvaluateGeofencesError.type = Types::BatchEvaluateGeofencesError
-    BatchEvaluateGeofencesErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchEvaluateGeofencesError, name: "member")
+    BatchEvaluateGeofencesErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchEvaluateGeofencesError, name: "member"))
     BatchEvaluateGeofencesInput.add_member(:collection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "CollectionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BatchEvaluateGeofencesInput.add_member(:device_position_updates, ::Smithy::Schema::Shapes::MemberShape.new(target: DevicePositionUpdateList, name: "DevicePositionUpdates", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#required" => {}}))
     BatchEvaluateGeofencesInput.type = Types::BatchEvaluateGeofencesInput
@@ -338,7 +338,7 @@ module Aws::Location
     BatchGetDevicePositionError.add_member(:device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "DeviceId", traits: {"smithy.api#required" => {}}))
     BatchGetDevicePositionError.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchItemError, name: "Error", traits: {"smithy.api#required" => {}}))
     BatchGetDevicePositionError.type = Types::BatchGetDevicePositionError
-    BatchGetDevicePositionErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetDevicePositionError, name: "member")
+    BatchGetDevicePositionErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetDevicePositionError, name: "member"))
     BatchGetDevicePositionInput.add_member(:tracker_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "TrackerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#length" => {"min" => 1}, "smithy.api#required" => {}}))
     BatchGetDevicePositionInput.add_member(:device_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: IdList, name: "DeviceIds", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#required" => {}}))
     BatchGetDevicePositionInput.type = Types::BatchGetDevicePositionInput
@@ -351,7 +351,7 @@ module Aws::Location
     BatchPutGeofenceError.add_member(:geofence_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "GeofenceId", traits: {"smithy.api#required" => {}}))
     BatchPutGeofenceError.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchItemError, name: "Error", traits: {"smithy.api#required" => {}}))
     BatchPutGeofenceError.type = Types::BatchPutGeofenceError
-    BatchPutGeofenceErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutGeofenceError, name: "member")
+    BatchPutGeofenceErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutGeofenceError, name: "member"))
     BatchPutGeofenceInput.add_member(:collection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "CollectionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BatchPutGeofenceInput.add_member(:entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutGeofenceRequestEntryList, name: "Entries", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#required" => {}}))
     BatchPutGeofenceInput.type = Types::BatchPutGeofenceInput
@@ -362,23 +362,23 @@ module Aws::Location
     BatchPutGeofenceRequestEntry.add_member(:geometry, ::Smithy::Schema::Shapes::MemberShape.new(target: GeofenceGeometry, name: "Geometry", traits: {"smithy.api#required" => {}}))
     BatchPutGeofenceRequestEntry.add_member(:geofence_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyMap, name: "GeofenceProperties"))
     BatchPutGeofenceRequestEntry.type = Types::BatchPutGeofenceRequestEntry
-    BatchPutGeofenceRequestEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutGeofenceRequestEntry, name: "member")
+    BatchPutGeofenceRequestEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutGeofenceRequestEntry, name: "member"))
     BatchPutGeofenceSuccess.add_member(:geofence_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "GeofenceId", traits: {"smithy.api#required" => {}}))
     BatchPutGeofenceSuccess.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreateTime", traits: {"smithy.api#required" => {}}))
     BatchPutGeofenceSuccess.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdateTime", traits: {"smithy.api#required" => {}}))
     BatchPutGeofenceSuccess.type = Types::BatchPutGeofenceSuccess
-    BatchPutGeofenceSuccessList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutGeofenceSuccess, name: "member")
+    BatchPutGeofenceSuccessList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutGeofenceSuccess, name: "member"))
     BatchUpdateDevicePositionError.add_member(:device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "DeviceId", traits: {"smithy.api#required" => {}}))
     BatchUpdateDevicePositionError.add_member(:sample_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "SampleTime", traits: {"smithy.api#required" => {}}))
     BatchUpdateDevicePositionError.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchItemError, name: "Error", traits: {"smithy.api#required" => {}}))
     BatchUpdateDevicePositionError.type = Types::BatchUpdateDevicePositionError
-    BatchUpdateDevicePositionErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateDevicePositionError, name: "member")
+    BatchUpdateDevicePositionErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateDevicePositionError, name: "member"))
     BatchUpdateDevicePositionInput.add_member(:tracker_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "TrackerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BatchUpdateDevicePositionInput.add_member(:updates, ::Smithy::Schema::Shapes::MemberShape.new(target: DevicePositionUpdateList, name: "Updates", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#required" => {}}))
     BatchUpdateDevicePositionInput.type = Types::BatchUpdateDevicePositionInput
     BatchUpdateDevicePositionOutput.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateDevicePositionErrorList, name: "Errors", traits: {"smithy.api#required" => {}}))
     BatchUpdateDevicePositionOutput.type = Types::BatchUpdateDevicePositionOutput
-    BoundingBox.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member")
+    BoundingBox.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member"))
     CalculateRouteCarModeOptions.add_member(:avoid_ferries, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "AvoidFerries"))
     CalculateRouteCarModeOptions.add_member(:avoid_tolls, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "AvoidTolls"))
     CalculateRouteCarModeOptions.type = Types::CalculateRouteCarModeOptions
@@ -439,7 +439,7 @@ module Aws::Location
     Circle.type = Types::Circle
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
-    CountryCodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode3, name: "member")
+    CountryCodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode3, name: "member"))
     CreateGeofenceCollectionInput.add_member(:collection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "CollectionName", traits: {"smithy.api#required" => {}}))
     CreateGeofenceCollectionInput.add_member(:pricing_plan, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingPlan, name: "PricingPlan", traits: {"smithy.api#deprecated" => {"message" => "Deprecated. If included, the only allowed value is RequestBasedUsage.", "since" => "2022-02-01"}}))
     CreateGeofenceCollectionInput.add_member(:pricing_plan_data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PricingPlanDataSource", traits: {"smithy.api#deprecated" => {"message" => "Deprecated. No longer allowed.", "since" => "2022-02-01"}}))
@@ -508,7 +508,7 @@ module Aws::Location
     CreateTrackerOutput.add_member(:tracker_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "TrackerArn", traits: {"smithy.api#required" => {}}))
     CreateTrackerOutput.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreateTime", traits: {"smithy.api#required" => {}}))
     CreateTrackerOutput.type = Types::CreateTrackerOutput
-    CustomLayerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLayer, name: "member")
+    CustomLayerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLayer, name: "member"))
     DataSourceConfiguration.add_member(:intended_use, ::Smithy::Schema::Shapes::MemberShape.new(target: IntendedUse, name: "IntendedUse"))
     DataSourceConfiguration.type = Types::DataSourceConfiguration
     DeleteGeofenceCollectionInput.add_member(:collection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "CollectionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -605,7 +605,7 @@ module Aws::Location
     DescribeTrackerOutput.add_member(:event_bridge_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "EventBridgeEnabled"))
     DescribeTrackerOutput.add_member(:kms_key_enable_geospatial_queries, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "KmsKeyEnableGeospatialQueries"))
     DescribeTrackerOutput.type = Types::DescribeTrackerOutput
-    DeviceIdsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "member")
+    DeviceIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "member"))
     DevicePosition.add_member(:device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "DeviceId"))
     DevicePosition.add_member(:sample_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "SampleTime", traits: {"smithy.api#required" => {}}))
     DevicePosition.add_member(:received_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ReceivedTime", traits: {"smithy.api#required" => {}}))
@@ -613,14 +613,14 @@ module Aws::Location
     DevicePosition.add_member(:accuracy, ::Smithy::Schema::Shapes::MemberShape.new(target: PositionalAccuracy, name: "Accuracy"))
     DevicePosition.add_member(:position_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PositionPropertyMap, name: "PositionProperties"))
     DevicePosition.type = Types::DevicePosition
-    DevicePositionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DevicePosition, name: "member")
+    DevicePositionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DevicePosition, name: "member"))
     DevicePositionUpdate.add_member(:device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "DeviceId", traits: {"smithy.api#required" => {}}))
     DevicePositionUpdate.add_member(:sample_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "SampleTime", traits: {"smithy.api#required" => {}}))
     DevicePositionUpdate.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "Position", traits: {"smithy.api#required" => {}}))
     DevicePositionUpdate.add_member(:accuracy, ::Smithy::Schema::Shapes::MemberShape.new(target: PositionalAccuracy, name: "Accuracy"))
     DevicePositionUpdate.add_member(:position_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PositionPropertyMap, name: "PositionProperties"))
     DevicePositionUpdate.type = Types::DevicePositionUpdate
-    DevicePositionUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DevicePositionUpdate, name: "member")
+    DevicePositionUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DevicePositionUpdate, name: "member"))
     DeviceState.add_member(:device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "DeviceId", traits: {"smithy.api#required" => {}}))
     DeviceState.add_member(:sample_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "SampleTime", traits: {"smithy.api#required" => {}}))
     DeviceState.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "Position", traits: {"smithy.api#required" => {}}))
@@ -633,7 +633,7 @@ module Aws::Location
     DisassociateTrackerConsumerInput.add_member(:consumer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ConsumerArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DisassociateTrackerConsumerInput.type = Types::DisassociateTrackerConsumerInput
     DisassociateTrackerConsumerOutput.type = Types::DisassociateTrackerConsumerOutput
-    FilterPlaceCategoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceCategory, name: "member")
+    FilterPlaceCategoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceCategory, name: "member"))
     ForecastGeofenceEventsDeviceState.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "Position", traits: {"smithy.api#required" => {}}))
     ForecastGeofenceEventsDeviceState.add_member(:speed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Speed", traits: {"smithy.api#range" => {"min" => 0}}))
     ForecastGeofenceEventsDeviceState.type = Types::ForecastGeofenceEventsDeviceState
@@ -658,8 +658,8 @@ module Aws::Location
     ForecastedEvent.add_member(:forecasted_breach_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ForecastedBreachTime"))
     ForecastedEvent.add_member(:geofence_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyMap, name: "GeofenceProperties"))
     ForecastedEvent.type = Types::ForecastedEvent
-    ForecastedEventsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ForecastedEvent, name: "member")
-    GeoArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GeoArnV2, name: "member")
+    ForecastedEventsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ForecastedEvent, name: "member"))
+    GeoArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoArnV2, name: "member"))
     GeofenceGeometry.add_member(:polygon, ::Smithy::Schema::Shapes::MemberShape.new(target: LinearRings, name: "Polygon", traits: {"smithy.api#length" => {"min" => 1, "max" => 250}}))
     GeofenceGeometry.add_member(:circle, ::Smithy::Schema::Shapes::MemberShape.new(target: Circle, name: "Circle"))
     GeofenceGeometry.add_member(:geobuf, ::Smithy::Schema::Shapes::MemberShape.new(target: Base64EncodedGeobuf, name: "Geobuf"))
@@ -744,7 +744,7 @@ module Aws::Location
     GetPlaceInput.type = Types::GetPlaceInput
     GetPlaceOutput.add_member(:place, ::Smithy::Schema::Shapes::MemberShape.new(target: Place, name: "Place", traits: {"smithy.api#required" => {}}))
     GetPlaceOutput.type = Types::GetPlaceOutput
-    IdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "member")
+    IdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "member"))
     InferredState.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "Position"))
     InferredState.add_member(:accuracy, ::Smithy::Schema::Shapes::MemberShape.new(target: PositionalAccuracy, name: "Accuracy"))
     InferredState.add_member(:deviation_distance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "DeviationDistance"))
@@ -761,10 +761,10 @@ module Aws::Location
     Leg.type = Types::Leg
     LegGeometry.add_member(:line_string, ::Smithy::Schema::Shapes::MemberShape.new(target: LineString, name: "LineString"))
     LegGeometry.type = Types::LegGeometry
-    LegList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Leg, name: "member")
-    LineString.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "member")
-    LinearRing.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "member")
-    LinearRings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LinearRing, name: "member")
+    LegList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Leg, name: "member"))
+    LineString.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "member"))
+    LinearRing.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "member"))
+    LinearRings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LinearRing, name: "member"))
     ListDevicePositionsInput.add_member(:tracker_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "TrackerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListDevicePositionsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MaxResults", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1, "max" => 100}}))
     ListDevicePositionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
@@ -779,7 +779,7 @@ module Aws::Location
     ListDevicePositionsResponseEntry.add_member(:accuracy, ::Smithy::Schema::Shapes::MemberShape.new(target: PositionalAccuracy, name: "Accuracy"))
     ListDevicePositionsResponseEntry.add_member(:position_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PositionPropertyMap, name: "PositionProperties"))
     ListDevicePositionsResponseEntry.type = Types::ListDevicePositionsResponseEntry
-    ListDevicePositionsResponseEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListDevicePositionsResponseEntry, name: "member")
+    ListDevicePositionsResponseEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListDevicePositionsResponseEntry, name: "member"))
     ListGeofenceCollectionsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MaxResults", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1, "max" => 100}}))
     ListGeofenceCollectionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     ListGeofenceCollectionsInput.type = Types::ListGeofenceCollectionsInput
@@ -793,7 +793,7 @@ module Aws::Location
     ListGeofenceCollectionsResponseEntry.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreateTime", traits: {"smithy.api#required" => {}}))
     ListGeofenceCollectionsResponseEntry.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdateTime", traits: {"smithy.api#required" => {}}))
     ListGeofenceCollectionsResponseEntry.type = Types::ListGeofenceCollectionsResponseEntry
-    ListGeofenceCollectionsResponseEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListGeofenceCollectionsResponseEntry, name: "member")
+    ListGeofenceCollectionsResponseEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListGeofenceCollectionsResponseEntry, name: "member"))
     ListGeofenceResponseEntry.add_member(:geofence_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "GeofenceId", traits: {"smithy.api#required" => {}}))
     ListGeofenceResponseEntry.add_member(:geometry, ::Smithy::Schema::Shapes::MemberShape.new(target: GeofenceGeometry, name: "Geometry", traits: {"smithy.api#required" => {}}))
     ListGeofenceResponseEntry.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Status", traits: {"smithy.api#required" => {}}))
@@ -801,7 +801,7 @@ module Aws::Location
     ListGeofenceResponseEntry.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdateTime", traits: {"smithy.api#required" => {}}))
     ListGeofenceResponseEntry.add_member(:geofence_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyMap, name: "GeofenceProperties"))
     ListGeofenceResponseEntry.type = Types::ListGeofenceResponseEntry
-    ListGeofenceResponseEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListGeofenceResponseEntry, name: "member")
+    ListGeofenceResponseEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListGeofenceResponseEntry, name: "member"))
     ListGeofencesInput.add_member(:collection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "CollectionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListGeofencesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: LargeToken, name: "NextToken"))
     ListGeofencesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MaxResults", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1, "max" => 100}}))
@@ -823,7 +823,7 @@ module Aws::Location
     ListKeysResponseEntry.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreateTime", traits: {"smithy.api#required" => {}}))
     ListKeysResponseEntry.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdateTime", traits: {"smithy.api#required" => {}}))
     ListKeysResponseEntry.type = Types::ListKeysResponseEntry
-    ListKeysResponseEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListKeysResponseEntry, name: "member")
+    ListKeysResponseEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListKeysResponseEntry, name: "member"))
     ListMapsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MaxResults", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1, "max" => 100}}))
     ListMapsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     ListMapsInput.type = Types::ListMapsInput
@@ -837,7 +837,7 @@ module Aws::Location
     ListMapsResponseEntry.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreateTime", traits: {"smithy.api#required" => {}}))
     ListMapsResponseEntry.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdateTime", traits: {"smithy.api#required" => {}}))
     ListMapsResponseEntry.type = Types::ListMapsResponseEntry
-    ListMapsResponseEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListMapsResponseEntry, name: "member")
+    ListMapsResponseEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListMapsResponseEntry, name: "member"))
     ListPlaceIndexesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MaxResults", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1, "max" => 100}}))
     ListPlaceIndexesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     ListPlaceIndexesInput.type = Types::ListPlaceIndexesInput
@@ -851,7 +851,7 @@ module Aws::Location
     ListPlaceIndexesResponseEntry.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreateTime", traits: {"smithy.api#required" => {}}))
     ListPlaceIndexesResponseEntry.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdateTime", traits: {"smithy.api#required" => {}}))
     ListPlaceIndexesResponseEntry.type = Types::ListPlaceIndexesResponseEntry
-    ListPlaceIndexesResponseEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListPlaceIndexesResponseEntry, name: "member")
+    ListPlaceIndexesResponseEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListPlaceIndexesResponseEntry, name: "member"))
     ListRouteCalculatorsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MaxResults", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1, "max" => 100}}))
     ListRouteCalculatorsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     ListRouteCalculatorsInput.type = Types::ListRouteCalculatorsInput
@@ -865,7 +865,7 @@ module Aws::Location
     ListRouteCalculatorsResponseEntry.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreateTime", traits: {"smithy.api#required" => {}}))
     ListRouteCalculatorsResponseEntry.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdateTime", traits: {"smithy.api#required" => {}}))
     ListRouteCalculatorsResponseEntry.type = Types::ListRouteCalculatorsResponseEntry
-    ListRouteCalculatorsResponseEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListRouteCalculatorsResponseEntry, name: "member")
+    ListRouteCalculatorsResponseEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListRouteCalculatorsResponseEntry, name: "member"))
     ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
     ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
@@ -890,7 +890,7 @@ module Aws::Location
     ListTrackersResponseEntry.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreateTime", traits: {"smithy.api#required" => {}}))
     ListTrackersResponseEntry.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdateTime", traits: {"smithy.api#required" => {}}))
     ListTrackersResponseEntry.type = Types::ListTrackersResponseEntry
-    ListTrackersResponseEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListTrackersResponseEntry, name: "member")
+    ListTrackersResponseEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListTrackersResponseEntry, name: "member"))
     LteCellDetails.add_member(:cell_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EutranCellId, name: "CellId", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     LteCellDetails.add_member(:mcc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "Mcc", traits: {"smithy.api#range" => {"min" => 200, "max" => 999}, "smithy.api#required" => {}}))
     LteCellDetails.add_member(:mnc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "Mnc", traits: {"smithy.api#range" => {"min" => 0, "max" => 999}, "smithy.api#required" => {}}))
@@ -902,7 +902,7 @@ module Aws::Location
     LteCellDetails.add_member(:rsrq, ::Smithy::Schema::Shapes::MemberShape.new(target: Rsrq, name: "Rsrq"))
     LteCellDetails.add_member(:tac, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "Tac", traits: {"smithy.api#range" => {"min" => 0, "max" => 65535}}))
     LteCellDetails.type = Types::LteCellDetails
-    LteCellDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LteCellDetails, name: "member")
+    LteCellDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LteCellDetails, name: "member"))
     LteLocalId.add_member(:earfcn, ::Smithy::Schema::Shapes::MemberShape.new(target: Earfcn, name: "Earfcn", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     LteLocalId.add_member(:pci, ::Smithy::Schema::Shapes::MemberShape.new(target: Pci, name: "Pci", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     LteLocalId.type = Types::LteLocalId
@@ -912,7 +912,7 @@ module Aws::Location
     LteNetworkMeasurements.add_member(:rsrp, ::Smithy::Schema::Shapes::MemberShape.new(target: Rsrp, name: "Rsrp"))
     LteNetworkMeasurements.add_member(:rsrq, ::Smithy::Schema::Shapes::MemberShape.new(target: Rsrq, name: "Rsrq"))
     LteNetworkMeasurements.type = Types::LteNetworkMeasurements
-    LteNetworkMeasurementsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LteNetworkMeasurements, name: "member")
+    LteNetworkMeasurementsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LteNetworkMeasurements, name: "member"))
     MapConfiguration.add_member(:style, ::Smithy::Schema::Shapes::MemberShape.new(target: MapStyle, name: "Style", traits: {"smithy.api#required" => {}}))
     MapConfiguration.add_member(:political_view, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode3, name: "PoliticalView"))
     MapConfiguration.add_member(:custom_layers, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLayerList, name: "CustomLayers"))
@@ -920,7 +920,7 @@ module Aws::Location
     MapConfigurationUpdate.add_member(:political_view, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode3OrEmpty, name: "PoliticalView"))
     MapConfigurationUpdate.add_member(:custom_layers, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLayerList, name: "CustomLayers"))
     MapConfigurationUpdate.type = Types::MapConfigurationUpdate
-    MultiLinearRings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LinearRings, name: "member")
+    MultiLinearRings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LinearRings, name: "member"))
     Place.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Label"))
     Place.add_member(:geometry, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceGeometry, name: "Geometry", traits: {"smithy.api#required" => {}}))
     Place.add_member(:address_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "AddressNumber"))
@@ -939,18 +939,18 @@ module Aws::Location
     Place.add_member(:supplemental_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceSupplementalCategoryList, name: "SupplementalCategories"))
     Place.add_member(:sub_municipality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "SubMunicipality"))
     Place.type = Types::Place
-    PlaceCategoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceCategory, name: "member")
+    PlaceCategoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceCategory, name: "member"))
     PlaceGeometry.add_member(:point, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "Point"))
     PlaceGeometry.type = Types::PlaceGeometry
-    PlaceSupplementalCategoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceSupplementalCategory, name: "member")
-    Position.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member")
-    PositionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "member")
-    PositionPropertyMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
-    PositionPropertyMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 150}})
+    PlaceSupplementalCategoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceSupplementalCategory, name: "member"))
+    Position.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member"))
+    PositionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "member"))
+    PositionPropertyMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}}))
+    PositionPropertyMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 150}}))
     PositionalAccuracy.add_member(:horizontal, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveDouble, name: "Horizontal", traits: {"smithy.api#range" => {"min" => 0, "max" => 10000000}, "smithy.api#required" => {}}))
     PositionalAccuracy.type = Types::PositionalAccuracy
-    PropertyMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
-    PropertyMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 40}})
+    PropertyMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}}))
+    PropertyMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 40}}))
     PutGeofenceInput.add_member(:collection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "CollectionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutGeofenceInput.add_member(:geofence_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "GeofenceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutGeofenceInput.add_member(:geometry, ::Smithy::Schema::Shapes::MemberShape.new(target: GeofenceGeometry, name: "Geometry", traits: {"smithy.api#required" => {}}))
@@ -960,10 +960,10 @@ module Aws::Location
     PutGeofenceOutput.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreateTime", traits: {"smithy.api#required" => {}}))
     PutGeofenceOutput.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "UpdateTime", traits: {"smithy.api#required" => {}}))
     PutGeofenceOutput.type = Types::PutGeofenceOutput
-    RefererPatternList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RefererPattern, name: "member")
+    RefererPatternList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RefererPattern, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    RouteMatrix.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixRow, name: "member")
+    RouteMatrix.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixRow, name: "member"))
     RouteMatrixEntry.add_member(:distance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Distance", traits: {"smithy.api#range" => {"min" => 0}}))
     RouteMatrixEntry.add_member(:duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "DurationSeconds", traits: {"smithy.api#range" => {"min" => 0}}))
     RouteMatrixEntry.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixEntryError, name: "Error"))
@@ -971,24 +971,24 @@ module Aws::Location
     RouteMatrixEntryError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixErrorCode, name: "Code", traits: {"smithy.api#required" => {}}))
     RouteMatrixEntryError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
     RouteMatrixEntryError.type = Types::RouteMatrixEntryError
-    RouteMatrixRow.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixEntry, name: "member")
+    RouteMatrixRow.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteMatrixEntry, name: "member"))
     SearchForPositionResult.add_member(:place, ::Smithy::Schema::Shapes::MemberShape.new(target: Place, name: "Place", traits: {"smithy.api#required" => {}}))
     SearchForPositionResult.add_member(:distance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Distance", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
     SearchForPositionResult.add_member(:place_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceId, name: "PlaceId"))
     SearchForPositionResult.type = Types::SearchForPositionResult
-    SearchForPositionResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchForPositionResult, name: "member")
+    SearchForPositionResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchForPositionResult, name: "member"))
     SearchForSuggestionsResult.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Text", traits: {"smithy.api#required" => {}}))
     SearchForSuggestionsResult.add_member(:place_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceId, name: "PlaceId"))
     SearchForSuggestionsResult.add_member(:categories, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceCategoryList, name: "Categories"))
     SearchForSuggestionsResult.add_member(:supplemental_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceSupplementalCategoryList, name: "SupplementalCategories"))
     SearchForSuggestionsResult.type = Types::SearchForSuggestionsResult
-    SearchForSuggestionsResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchForSuggestionsResult, name: "member")
+    SearchForSuggestionsResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchForSuggestionsResult, name: "member"))
     SearchForTextResult.add_member(:place, ::Smithy::Schema::Shapes::MemberShape.new(target: Place, name: "Place", traits: {"smithy.api#required" => {}}))
     SearchForTextResult.add_member(:distance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Distance", traits: {"smithy.api#range" => {"min" => 0}}))
     SearchForTextResult.add_member(:relevance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Relevance", traits: {"smithy.api#range" => {"min" => 0, "max" => 1}}))
     SearchForTextResult.add_member(:place_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceId, name: "PlaceId"))
     SearchForTextResult.type = Types::SearchForTextResult
-    SearchForTextResultList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchForTextResult, name: "member")
+    SearchForTextResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchForTextResult, name: "member"))
     SearchPlaceIndexForPositionInput.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "IndexName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     SearchPlaceIndexForPositionInput.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "Position", traits: {"smithy.api#required" => {}}))
     SearchPlaceIndexForPositionInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceIndexSearchResultLimit, name: "MaxResults"))
@@ -1056,10 +1056,10 @@ module Aws::Location
     Step.add_member(:duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "DurationSeconds", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
     Step.add_member(:geometry_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "GeometryOffset", traits: {"smithy.api#range" => {"min" => 0}}))
     Step.type = Types::Step
-    StepList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Step, name: "member")
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    StepList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Step, name: "member"))
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -1148,7 +1148,7 @@ module Aws::Location
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name", traits: {"smithy.api#jsonName" => "name", "smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     VerifyDevicePositionRequest.add_member(:tracker_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "TrackerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     VerifyDevicePositionRequest.add_member(:device_state, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceState, name: "DeviceState", traits: {"smithy.api#required" => {}}))
     VerifyDevicePositionRequest.add_member(:distance_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceUnit, name: "DistanceUnit"))
@@ -1159,11 +1159,11 @@ module Aws::Location
     VerifyDevicePositionResponse.add_member(:received_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ReceivedTime", traits: {"smithy.api#required" => {}}))
     VerifyDevicePositionResponse.add_member(:distance_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceUnit, name: "DistanceUnit", traits: {"smithy.api#required" => {}}))
     VerifyDevicePositionResponse.type = Types::VerifyDevicePositionResponse
-    WaypointPositionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "member")
+    WaypointPositionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "member"))
     WiFiAccessPoint.add_member(:mac_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "MacAddress", traits: {"smithy.api#length" => {"min" => 12, "max" => 17}, "smithy.api#pattern" => "^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$", "smithy.api#required" => {}}))
     WiFiAccessPoint.add_member(:rss, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "Rss", traits: {"smithy.api#range" => {"min" => -128, "max" => 0}, "smithy.api#required" => {}}))
     WiFiAccessPoint.type = Types::WiFiAccessPoint
-    WiFiAccessPointList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WiFiAccessPoint, name: "member")
+    WiFiAccessPointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WiFiAccessPoint, name: "member"))
 
     LocationService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.location#LocationService"

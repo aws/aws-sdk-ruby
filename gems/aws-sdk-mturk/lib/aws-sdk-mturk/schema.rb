@@ -175,11 +175,11 @@ module Aws::MTurk
     Assignment.add_member(:answer, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Answer"))
     Assignment.add_member(:requester_feedback, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RequesterFeedback"))
     Assignment.type = Types::Assignment
-    AssignmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Assignment, name: "member")
+    AssignmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Assignment, name: "member"))
     AssignmentStatus.add_member(:submitted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Submitted", traits: {"smithy.api#enumValue" => "Submitted"}))
     AssignmentStatus.add_member(:approved, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Approved", traits: {"smithy.api#enumValue" => "Approved"}))
     AssignmentStatus.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Rejected", traits: {"smithy.api#enumValue" => "Rejected"}))
-    AssignmentStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssignmentStatus, name: "member")
+    AssignmentStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssignmentStatus, name: "member"))
     AssociateQualificationWithWorkerRequest.add_member(:qualification_type_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "QualificationTypeId", traits: {"smithy.api#required" => {}}))
     AssociateQualificationWithWorkerRequest.add_member(:worker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerId, name: "WorkerId", traits: {"smithy.api#required" => {}}))
     AssociateQualificationWithWorkerRequest.add_member(:integer_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "IntegerValue"))
@@ -192,7 +192,7 @@ module Aws::MTurk
     BonusPayment.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Reason"))
     BonusPayment.add_member(:grant_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "GrantTime"))
     BonusPayment.type = Types::BonusPayment
-    BonusPaymentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BonusPayment, name: "member")
+    BonusPaymentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BonusPayment, name: "member"))
     Comparator.add_member(:less_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LessThan", traits: {"smithy.api#enumValue" => "LessThan"}))
     Comparator.add_member(:less_than_or_equal_to, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LessThanOrEqualTo", traits: {"smithy.api#enumValue" => "LessThanOrEqualTo"}))
     Comparator.add_member(:greater_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GreaterThan", traits: {"smithy.api#enumValue" => "GreaterThan"}))
@@ -267,7 +267,7 @@ module Aws::MTurk
     CreateWorkerBlockRequest.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Reason", traits: {"smithy.api#required" => {}}))
     CreateWorkerBlockRequest.type = Types::CreateWorkerBlockRequest
     CreateWorkerBlockResponse.type = Types::CreateWorkerBlockResponse
-    CustomerIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerId, name: "member")
+    CustomerIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerId, name: "member"))
     DeleteHITRequest.add_member(:hit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "HITId", traits: {"smithy.api#required" => {}}))
     DeleteHITRequest.type = Types::DeleteHITRequest
     DeleteHITResponse.type = Types::DeleteHITResponse
@@ -295,7 +295,7 @@ module Aws::MTurk
     EventType.add_member(:hit_extended, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HITExtended", traits: {"smithy.api#enumValue" => "HITExtended"}))
     EventType.add_member(:hit_disposed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HITDisposed", traits: {"smithy.api#enumValue" => "HITDisposed"}))
     EventType.add_member(:ping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Ping", traits: {"smithy.api#enumValue" => "Ping"}))
-    EventTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "member")
+    EventTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "member"))
     GetAccountBalanceRequest.type = Types::GetAccountBalanceRequest
     GetAccountBalanceResponse.add_member(:available_balance, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyAmount, name: "AvailableBalance"))
     GetAccountBalanceResponse.add_member(:on_hold_balance, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyAmount, name: "OnHoldBalance"))
@@ -351,8 +351,8 @@ module Aws::MTurk
     HITLayoutParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#required" => {}}))
     HITLayoutParameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value", traits: {"smithy.api#required" => {}}))
     HITLayoutParameter.type = Types::HITLayoutParameter
-    HITLayoutParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HITLayoutParameter, name: "member")
-    HITList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HIT, name: "member")
+    HITLayoutParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HITLayoutParameter, name: "member"))
+    HITList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HIT, name: "member"))
     HITReviewStatus.add_member(:not_reviewed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NotReviewed", traits: {"smithy.api#enumValue" => "NotReviewed"}))
     HITReviewStatus.add_member(:marked_for_review, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MarkedForReview", traits: {"smithy.api#enumValue" => "MarkedForReview"}))
     HITReviewStatus.add_member(:reviewed_appropriate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ReviewedAppropriate", traits: {"smithy.api#enumValue" => "ReviewedAppropriate"}))
@@ -362,7 +362,7 @@ module Aws::MTurk
     HITStatus.add_member(:reviewable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Reviewable", traits: {"smithy.api#enumValue" => "Reviewable"}))
     HITStatus.add_member(:reviewing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Reviewing", traits: {"smithy.api#enumValue" => "Reviewing"}))
     HITStatus.add_member(:disposed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Disposed", traits: {"smithy.api#enumValue" => "Disposed"}))
-    IntegerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "member")
+    IntegerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "member"))
     ListAssignmentsForHITRequest.add_member(:hit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "HITId", traits: {"smithy.api#required" => {}}))
     ListAssignmentsForHITRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken"))
     ListAssignmentsForHITRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultSize, name: "MaxResults"))
@@ -456,7 +456,7 @@ module Aws::MTurk
     Locale.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryParameters, name: "Country", traits: {"smithy.api#required" => {}}))
     Locale.add_member(:subdivision, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryParameters, name: "Subdivision"))
     Locale.type = Types::Locale
-    LocaleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Locale, name: "member")
+    LocaleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Locale, name: "member"))
     NotificationSpecification.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Destination", traits: {"smithy.api#required" => {}}))
     NotificationSpecification.add_member(:transport, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationTransport, name: "Transport", traits: {"smithy.api#required" => {}}))
     NotificationSpecification.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Version", traits: {"smithy.api#required" => {}}))
@@ -471,7 +471,7 @@ module Aws::MTurk
     NotifyWorkersFailureStatus.add_member(:notify_workers_failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NotifyWorkersFailureMessage"))
     NotifyWorkersFailureStatus.add_member(:worker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerId, name: "WorkerId"))
     NotifyWorkersFailureStatus.type = Types::NotifyWorkersFailureStatus
-    NotifyWorkersFailureStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyWorkersFailureStatus, name: "member")
+    NotifyWorkersFailureStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyWorkersFailureStatus, name: "member"))
     NotifyWorkersRequest.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Subject", traits: {"smithy.api#required" => {}}))
     NotifyWorkersRequest.add_member(:message_text, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MessageText", traits: {"smithy.api#required" => {}}))
     NotifyWorkersRequest.add_member(:worker_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerIdList, name: "WorkerIds", traits: {"smithy.api#required" => {}}))
@@ -481,12 +481,12 @@ module Aws::MTurk
     ParameterMapEntry.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Key"))
     ParameterMapEntry.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "Values"))
     ParameterMapEntry.type = Types::ParameterMapEntry
-    ParameterMapEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterMapEntry, name: "member")
+    ParameterMapEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterMapEntry, name: "member"))
     PolicyParameter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Key"))
     PolicyParameter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "Values"))
     PolicyParameter.add_member(:map_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterMapEntryList, name: "MapEntries"))
     PolicyParameter.type = Types::PolicyParameter
-    PolicyParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyParameter, name: "member")
+    PolicyParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyParameter, name: "member"))
     Qualification.add_member(:qualification_type_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "QualificationTypeId"))
     Qualification.add_member(:worker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerId, name: "WorkerId"))
     Qualification.add_member(:grant_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "GrantTime"))
@@ -494,7 +494,7 @@ module Aws::MTurk
     Qualification.add_member(:locale_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Locale, name: "LocaleValue"))
     Qualification.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: QualificationStatus, name: "Status"))
     Qualification.type = Types::Qualification
-    QualificationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Qualification, name: "member")
+    QualificationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Qualification, name: "member"))
     QualificationRequest.add_member(:qualification_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "QualificationRequestId"))
     QualificationRequest.add_member(:qualification_type_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "QualificationTypeId"))
     QualificationRequest.add_member(:worker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerId, name: "WorkerId"))
@@ -502,7 +502,7 @@ module Aws::MTurk
     QualificationRequest.add_member(:answer, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Answer"))
     QualificationRequest.add_member(:submit_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "SubmitTime"))
     QualificationRequest.type = Types::QualificationRequest
-    QualificationRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QualificationRequest, name: "member")
+    QualificationRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QualificationRequest, name: "member"))
     QualificationRequirement.add_member(:qualification_type_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "QualificationTypeId", traits: {"smithy.api#required" => {}}))
     QualificationRequirement.add_member(:comparator, ::Smithy::Schema::Shapes::MemberShape.new(target: Comparator, name: "Comparator", traits: {"smithy.api#required" => {}}))
     QualificationRequirement.add_member(:integer_values, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerList, name: "IntegerValues"))
@@ -510,7 +510,7 @@ module Aws::MTurk
     QualificationRequirement.add_member(:required_to_preview, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "RequiredToPreview", traits: {"smithy.api#deprecated" => {}}))
     QualificationRequirement.add_member(:actions_guarded, ::Smithy::Schema::Shapes::MemberShape.new(target: HITAccessActions, name: "ActionsGuarded"))
     QualificationRequirement.type = Types::QualificationRequirement
-    QualificationRequirementList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QualificationRequirement, name: "member")
+    QualificationRequirementList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QualificationRequirement, name: "member"))
     QualificationStatus.add_member(:granted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Granted", traits: {"smithy.api#enumValue" => "Granted"}))
     QualificationStatus.add_member(:revoked, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Revoked", traits: {"smithy.api#enumValue" => "Revoked"}))
     QualificationType.add_member(:qualification_type_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "QualificationTypeId"))
@@ -527,7 +527,7 @@ module Aws::MTurk
     QualificationType.add_member(:auto_granted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AutoGranted"))
     QualificationType.add_member(:auto_granted_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "AutoGrantedValue"))
     QualificationType.type = Types::QualificationType
-    QualificationTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QualificationType, name: "member")
+    QualificationTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QualificationType, name: "member"))
     QualificationTypeStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Active", traits: {"smithy.api#enumValue" => "Active"}))
     QualificationTypeStatus.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Inactive", traits: {"smithy.api#enumValue" => "Inactive"}))
     RejectAssignmentRequest.add_member(:assignment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "AssignmentId", traits: {"smithy.api#required" => {}}))
@@ -550,7 +550,7 @@ module Aws::MTurk
     ReviewActionDetail.add_member(:result, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Result"))
     ReviewActionDetail.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorCode"))
     ReviewActionDetail.type = Types::ReviewActionDetail
-    ReviewActionDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReviewActionDetail, name: "member")
+    ReviewActionDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReviewActionDetail, name: "member"))
     ReviewActionStatus.add_member(:intended, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Intended", traits: {"smithy.api#enumValue" => "Intended"}))
     ReviewActionStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Succeeded", traits: {"smithy.api#enumValue" => "Succeeded"}))
     ReviewActionStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
@@ -560,7 +560,7 @@ module Aws::MTurk
     ReviewPolicy.type = Types::ReviewPolicy
     ReviewPolicyLevel.add_member(:assignment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Assignment", traits: {"smithy.api#enumValue" => "Assignment"}))
     ReviewPolicyLevel.add_member(:hit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIT", traits: {"smithy.api#enumValue" => "HIT"}))
-    ReviewPolicyLevelList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReviewPolicyLevel, name: "member")
+    ReviewPolicyLevelList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReviewPolicyLevel, name: "member"))
     ReviewReport.add_member(:review_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ReviewResultDetailList, name: "ReviewResults"))
     ReviewReport.add_member(:review_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ReviewActionDetailList, name: "ReviewActions"))
     ReviewReport.type = Types::ReviewReport
@@ -571,7 +571,7 @@ module Aws::MTurk
     ReviewResultDetail.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Key"))
     ReviewResultDetail.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     ReviewResultDetail.type = Types::ReviewResultDetail
-    ReviewResultDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReviewResultDetail, name: "member")
+    ReviewResultDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReviewResultDetail, name: "member"))
     ReviewableHITStatus.add_member(:reviewable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Reviewable", traits: {"smithy.api#enumValue" => "Reviewable"}))
     ReviewableHITStatus.add_member(:reviewing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Reviewing", traits: {"smithy.api#enumValue" => "Reviewing"}))
     SendBonusRequest.add_member(:worker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerId, name: "WorkerId", traits: {"smithy.api#required" => {}}))
@@ -588,7 +588,7 @@ module Aws::MTurk
     ServiceFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     ServiceFault.add_member(:turk_error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: TurkErrorCode, name: "TurkErrorCode"))
     ServiceFault.type = Types::ServiceFault
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     UpdateExpirationForHITRequest.add_member(:hit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "HITId", traits: {"smithy.api#required" => {}}))
     UpdateExpirationForHITRequest.add_member(:expire_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ExpireAt", traits: {"smithy.api#required" => {}}))
     UpdateExpirationForHITRequest.type = Types::UpdateExpirationForHITRequest
@@ -621,7 +621,7 @@ module Aws::MTurk
     WorkerBlock.add_member(:worker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerId, name: "WorkerId"))
     WorkerBlock.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Reason"))
     WorkerBlock.type = Types::WorkerBlock
-    WorkerBlockList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerBlock, name: "member")
+    WorkerBlockList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerBlock, name: "member"))
 
     MTurkRequesterServiceV20170117 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.mturk#MTurkRequesterServiceV20170117"

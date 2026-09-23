@@ -127,7 +127,7 @@ module Aws::DAX
     UpdateSubnetGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dax#UpdateSubnetGroupRequest", name: "UpdateSubnetGroupRequest")
     UpdateSubnetGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.dax#UpdateSubnetGroupResponse", name: "UpdateSubnetGroupResponse")
 
-    AvailabilityZoneList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    AvailabilityZoneList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ChangeType.add_member(:immediate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMMEDIATE", traits: {"smithy.api#enumValue" => "IMMEDIATE"}))
     ChangeType.add_member(:requires_reboot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUIRES_REBOOT", traits: {"smithy.api#enumValue" => "REQUIRES_REBOOT"}))
     Cluster.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterName"))
@@ -154,8 +154,8 @@ module Aws::DAX
     ClusterAlreadyExistsFault.type = Types::ClusterAlreadyExistsFault
     ClusterEndpointEncryptionType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     ClusterEndpointEncryptionType.add_member(:tls, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLS", traits: {"smithy.api#enumValue" => "TLS"}))
-    ClusterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "member")
-    ClusterNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ClusterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "member"))
+    ClusterNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ClusterNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ClusterNotFoundFault.type = Types::ClusterNotFoundFault
     ClusterQuotaForCustomerExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -263,7 +263,7 @@ module Aws::DAX
     Event.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     Event.add_member(:date, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "Date"))
     Event.type = Types::Event
-    EventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member")
+    EventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member"))
     IncreaseReplicationFactorRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterName", traits: {"smithy.api#required" => {}}))
     IncreaseReplicationFactorRequest.add_member(:new_replication_factor, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "NewReplicationFactor", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     IncreaseReplicationFactorRequest.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneList, name: "AvailabilityZones"))
@@ -289,7 +289,7 @@ module Aws::DAX
     IsModifiable.add_member(:true, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRUE", traits: {"smithy.api#enumValue" => "TRUE"}))
     IsModifiable.add_member(:false, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FALSE", traits: {"smithy.api#enumValue" => "FALSE"}))
     IsModifiable.add_member(:conditional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONDITIONAL", traits: {"smithy.api#enumValue" => "CONDITIONAL"}))
-    KeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    KeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ListTagsRequest.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceName", traits: {"smithy.api#required" => {}}))
     ListTagsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     ListTagsRequest.type = Types::ListTagsRequest
@@ -299,7 +299,7 @@ module Aws::DAX
     NetworkType.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4", traits: {"smithy.api#enumValue" => "ipv4"}))
     NetworkType.add_member(:ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV6", traits: {"smithy.api#enumValue" => "ipv6"}))
     NetworkType.add_member(:dual_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUAL_STACK", traits: {"smithy.api#enumValue" => "dual_stack"}))
-    NetworkTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, name: "member")
+    NetworkTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, name: "member"))
     Node.add_member(:node_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NodeId"))
     Node.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "Endpoint"))
     Node.add_member(:node_create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "NodeCreateTime"))
@@ -307,8 +307,8 @@ module Aws::DAX
     Node.add_member(:node_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NodeStatus"))
     Node.add_member(:parameter_group_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ParameterGroupStatus"))
     Node.type = Types::Node
-    NodeIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    NodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Node, name: "member")
+    NodeIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    NodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Node, name: "member"))
     NodeNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     NodeNotFoundFault.type = Types::NodeNotFoundFault
     NodeQuotaForClusterExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -318,7 +318,7 @@ module Aws::DAX
     NodeTypeSpecificValue.add_member(:node_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NodeType"))
     NodeTypeSpecificValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     NodeTypeSpecificValue.type = Types::NodeTypeSpecificValue
-    NodeTypeSpecificValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NodeTypeSpecificValue, name: "member")
+    NodeTypeSpecificValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeTypeSpecificValue, name: "member"))
     NotificationConfiguration.add_member(:topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TopicArn"))
     NotificationConfiguration.add_member(:topic_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TopicStatus"))
     NotificationConfiguration.type = Types::NotificationConfiguration
@@ -338,8 +338,8 @@ module Aws::DAX
     ParameterGroup.type = Types::ParameterGroup
     ParameterGroupAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ParameterGroupAlreadyExistsFault.type = Types::ParameterGroupAlreadyExistsFault
-    ParameterGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterGroup, name: "member")
-    ParameterGroupNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ParameterGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterGroup, name: "member"))
+    ParameterGroupNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ParameterGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ParameterGroupNotFoundFault.type = Types::ParameterGroupNotFoundFault
     ParameterGroupQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -348,11 +348,11 @@ module Aws::DAX
     ParameterGroupStatus.add_member(:parameter_apply_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ParameterApplyStatus"))
     ParameterGroupStatus.add_member(:node_ids_to_reboot, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeIdentifierList, name: "NodeIdsToReboot"))
     ParameterGroupStatus.type = Types::ParameterGroupStatus
-    ParameterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Parameter, name: "member")
+    ParameterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameter, name: "member"))
     ParameterNameValue.add_member(:parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ParameterName"))
     ParameterNameValue.add_member(:parameter_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ParameterValue"))
     ParameterNameValue.type = Types::ParameterNameValue
-    ParameterNameValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterNameValue, name: "member")
+    ParameterNameValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterNameValue, name: "member"))
     ParameterType.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "DEFAULT"}))
     ParameterType.add_member(:node_type_specific, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NODE_TYPE_SPECIFIC", traits: {"smithy.api#enumValue" => "NODE_TYPE_SPECIFIC"}))
     RebootNodeRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterName", traits: {"smithy.api#required" => {}}))
@@ -368,11 +368,11 @@ module Aws::DAX
     SSEStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     SSEStatus.add_member(:disabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLING", traits: {"smithy.api#enumValue" => "DISABLING"}))
     SSEStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    SecurityGroupIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    SecurityGroupIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     SecurityGroupMembership.add_member(:security_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SecurityGroupIdentifier"))
     SecurityGroupMembership.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     SecurityGroupMembership.type = Types::SecurityGroupMembership
-    SecurityGroupMembershipList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupMembership, name: "member")
+    SecurityGroupMembershipList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupMembership, name: "member"))
     ServiceLinkedRoleNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ServiceLinkedRoleNotFoundFault.type = Types::ServiceLinkedRoleNotFoundFault
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
@@ -393,16 +393,16 @@ module Aws::DAX
     SubnetGroupAlreadyExistsFault.type = Types::SubnetGroupAlreadyExistsFault
     SubnetGroupInUseFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SubnetGroupInUseFault.type = Types::SubnetGroupInUseFault
-    SubnetGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetGroup, name: "member")
-    SubnetGroupNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    SubnetGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetGroup, name: "member"))
+    SubnetGroupNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     SubnetGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SubnetGroupNotFoundFault.type = Types::SubnetGroupNotFoundFault
     SubnetGroupQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SubnetGroupQuotaExceededFault.type = Types::SubnetGroupQuotaExceededFault
-    SubnetIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    SubnetIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     SubnetInUse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SubnetInUse.type = Types::SubnetInUse
-    SubnetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Subnet, name: "member")
+    SubnetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnet, name: "member"))
     SubnetNotAllowedFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SubnetNotAllowedFault.type = Types::SubnetNotAllowedFault
     SubnetQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -410,7 +410,7 @@ module Aws::DAX
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     Tag.type = Types::Tag
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     TagNotFoundFault.type = Types::TagNotFoundFault
     TagQuotaPerResourceExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))

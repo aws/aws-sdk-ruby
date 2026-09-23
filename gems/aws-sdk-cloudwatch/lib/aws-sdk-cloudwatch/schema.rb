@@ -303,7 +303,7 @@ module Aws::CloudWatch
     AlarmContributor.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StateReason, name: "StateReason", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AlarmContributor.add_member(:state_transitioned_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StateTransitionedTimestamp"))
     AlarmContributor.type = Types::AlarmContributor
-    AlarmContributors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmContributor, name: "member")
+    AlarmContributors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmContributor, name: "member"))
     AlarmHistoryItem.add_member(:alarm_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmName, name: "AlarmName"))
     AlarmHistoryItem.add_member(:alarm_contributor_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContributorId, name: "AlarmContributorId"))
     AlarmHistoryItem.add_member(:alarm_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmType, name: "AlarmType"))
@@ -313,11 +313,11 @@ module Aws::CloudWatch
     AlarmHistoryItem.add_member(:history_data, ::Smithy::Schema::Shapes::MemberShape.new(target: HistoryData, name: "HistoryData"))
     AlarmHistoryItem.add_member(:alarm_contributor_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ContributorAttributes, name: "AlarmContributorAttributes"))
     AlarmHistoryItem.type = Types::AlarmHistoryItem
-    AlarmHistoryItems.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmHistoryItem, name: "member")
-    AlarmNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmName, name: "member")
+    AlarmHistoryItems.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmHistoryItem, name: "member"))
+    AlarmNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmName, name: "member"))
     AlarmType.add_member(:composite_alarm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CompositeAlarm", traits: {"smithy.api#enumValue" => "CompositeAlarm"}))
     AlarmType.add_member(:metric_alarm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MetricAlarm", traits: {"smithy.api#enumValue" => "MetricAlarm"}))
-    AlarmTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmType, name: "member")
+    AlarmTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmType, name: "member"))
     AnomalyDetector.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "Namespace", traits: {"smithy.api#deprecated" => {"message" => "Use SingleMetricAnomalyDetector.Namespace property."}}))
     AnomalyDetector.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "MetricName", traits: {"smithy.api#deprecated" => {"message" => "Use SingleMetricAnomalyDetector.MetricName property."}}))
     AnomalyDetector.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimensions, name: "Dimensions", traits: {"smithy.api#deprecated" => {"message" => "Use SingleMetricAnomalyDetector.Dimensions property."}}))
@@ -331,15 +331,15 @@ module Aws::CloudWatch
     AnomalyDetectorConfiguration.add_member(:excluded_time_ranges, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorExcludedTimeRanges, name: "ExcludedTimeRanges"))
     AnomalyDetectorConfiguration.add_member(:metric_timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorMetricTimezone, name: "MetricTimezone"))
     AnomalyDetectorConfiguration.type = Types::AnomalyDetectorConfiguration
-    AnomalyDetectorExcludedTimeRanges.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Range, name: "member")
+    AnomalyDetectorExcludedTimeRanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Range, name: "member"))
     AnomalyDetectorStateValue.add_member(:pending_training, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_TRAINING", traits: {"smithy.api#enumValue" => "PENDING_TRAINING"}))
     AnomalyDetectorStateValue.add_member(:trained_insufficient_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRAINED_INSUFFICIENT_DATA", traits: {"smithy.api#enumValue" => "TRAINED_INSUFFICIENT_DATA"}))
     AnomalyDetectorStateValue.add_member(:trained, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRAINED", traits: {"smithy.api#enumValue" => "TRAINED"}))
     AnomalyDetectorType.add_member(:single_metric, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE_METRIC", traits: {"smithy.api#enumValue" => "SINGLE_METRIC"}))
     AnomalyDetectorType.add_member(:metric_math, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METRIC_MATH", traits: {"smithy.api#enumValue" => "METRIC_MATH"}))
-    AnomalyDetectorTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorType, name: "member")
-    AnomalyDetectors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetector, name: "member")
-    BatchFailures.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PartialFailure, name: "member")
+    AnomalyDetectorTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorType, name: "member"))
+    AnomalyDetectors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetector, name: "member"))
+    BatchFailures.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PartialFailure, name: "member"))
     ComparisonOperator.add_member(:greater_than_or_equal_to_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GreaterThanOrEqualToThreshold", traits: {"smithy.api#enumValue" => "GreaterThanOrEqualToThreshold"}))
     ComparisonOperator.add_member(:greater_than_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GreaterThanThreshold", traits: {"smithy.api#enumValue" => "GreaterThanThreshold"}))
     ComparisonOperator.add_member(:less_than_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LessThanThreshold", traits: {"smithy.api#enumValue" => "LessThanThreshold"}))
@@ -367,15 +367,15 @@ module Aws::CloudWatch
     CompositeAlarm.add_member(:actions_suppressor_wait_period, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressorPeriod, name: "ActionsSuppressorWaitPeriod"))
     CompositeAlarm.add_member(:actions_suppressor_extension_period, ::Smithy::Schema::Shapes::MemberShape.new(target: SuppressorPeriod, name: "ActionsSuppressorExtensionPeriod"))
     CompositeAlarm.type = Types::CompositeAlarm
-    CompositeAlarms.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CompositeAlarm, name: "member")
+    CompositeAlarms.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CompositeAlarm, name: "member"))
     ConcurrentModificationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: FaultDescription, name: "Message"))
     ConcurrentModificationException.type = Types::ConcurrentModificationException
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ConflictException.type = Types::ConflictException
-    ContributorAttributes.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key")
-    ContributorAttributes.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value")
-    Counts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatapointValue, name: "member")
-    DashboardEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardEntry, name: "member")
+    ContributorAttributes.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "key"))
+    ContributorAttributes.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
+    Counts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatapointValue, name: "member"))
+    DashboardEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardEntry, name: "member"))
     DashboardEntry.add_member(:dashboard_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardName, name: "DashboardName"))
     DashboardEntry.add_member(:dashboard_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "DashboardArn"))
     DashboardEntry.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModified, name: "LastModified"))
@@ -384,13 +384,13 @@ module Aws::CloudWatch
     DashboardInvalidInputError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardErrorMessage, name: "message"))
     DashboardInvalidInputError.add_member(:dashboard_validation_messages, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardValidationMessages, name: "dashboardValidationMessages"))
     DashboardInvalidInputError.type = Types::DashboardInvalidInputError
-    DashboardNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardName, name: "member")
+    DashboardNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardName, name: "member"))
     DashboardNotFoundError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardErrorMessage, name: "message"))
     DashboardNotFoundError.type = Types::DashboardNotFoundError
     DashboardValidationMessage.add_member(:data_path, ::Smithy::Schema::Shapes::MemberShape.new(target: DataPath, name: "DataPath"))
     DashboardValidationMessage.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     DashboardValidationMessage.type = Types::DashboardValidationMessage
-    DashboardValidationMessages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardValidationMessage, name: "member")
+    DashboardValidationMessages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardValidationMessage, name: "member"))
     Datapoint.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp"))
     Datapoint.add_member(:sample_count, ::Smithy::Schema::Shapes::MemberShape.new(target: DatapointValue, name: "SampleCount"))
     Datapoint.add_member(:average, ::Smithy::Schema::Shapes::MemberShape.new(target: DatapointValue, name: "Average"))
@@ -400,10 +400,10 @@ module Aws::CloudWatch
     Datapoint.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardUnit, name: "Unit"))
     Datapoint.add_member(:extended_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: DatapointValueMap, name: "ExtendedStatistics"))
     Datapoint.type = Types::Datapoint
-    DatapointValueMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ExtendedStatistic, name: "key")
-    DatapointValueMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: DatapointValue, name: "value")
-    DatapointValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatapointValue, name: "member")
-    Datapoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Datapoint, name: "member")
+    DatapointValueMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtendedStatistic, name: "key"))
+    DatapointValueMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DatapointValue, name: "value"))
+    DatapointValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatapointValue, name: "member"))
+    Datapoints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Datapoint, name: "member"))
     DeleteAlarmsInput.add_member(:alarm_names, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmNames, name: "AlarmNames", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DeleteAlarmsInput.type = Types::DeleteAlarmsInput
     DeleteAnomalyDetectorInput.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "Namespace", traits: {"smithy.api#deprecated" => {"message" => "Use SingleMetricAnomalyDetector."}}))
@@ -489,8 +489,8 @@ module Aws::CloudWatch
     DimensionFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionName, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DimensionFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValue, name: "Value"))
     DimensionFilter.type = Types::DimensionFilter
-    DimensionFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionFilter, name: "member")
-    Dimensions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "member")
+    DimensionFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionFilter, name: "member"))
+    Dimensions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "member"))
     DisableAlarmActionsInput.add_member(:alarm_names, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmNames, name: "AlarmNames", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DisableAlarmActionsInput.type = Types::DisableAlarmActionsInput
     DisableInsightRulesInput.add_member(:rule_names, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleNames, name: "RuleNames", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -506,16 +506,16 @@ module Aws::CloudWatch
     Entity.add_member(:key_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityKeyAttributesMap, name: "KeyAttributes"))
     Entity.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityAttributesMap, name: "Attributes"))
     Entity.type = Types::Entity
-    EntityAttributesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityAttributesMapKeyString, name: "key")
-    EntityAttributesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityAttributesMapValueString, name: "value")
-    EntityKeyAttributesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityKeyAttributesMapKeyString, name: "key")
-    EntityKeyAttributesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityKeyAttributesMapValueString, name: "value")
+    EntityAttributesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityAttributesMapKeyString, name: "key"))
+    EntityAttributesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityAttributesMapValueString, name: "value"))
+    EntityKeyAttributesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityKeyAttributesMapKeyString, name: "key"))
+    EntityKeyAttributesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityKeyAttributesMapValueString, name: "value"))
     EntityMetricData.add_member(:entity, ::Smithy::Schema::Shapes::MemberShape.new(target: Entity, name: "Entity"))
     EntityMetricData.add_member(:metric_data, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricData, name: "MetricData"))
     EntityMetricData.type = Types::EntityMetricData
-    EntityMetricDataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntityMetricData, name: "member")
+    EntityMetricDataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityMetricData, name: "member"))
     EvaluationState.add_member(:partial_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARTIAL_DATA", traits: {"smithy.api#enumValue" => "PARTIAL_DATA"}))
-    ExtendedStatistics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExtendedStatistic, name: "member")
+    ExtendedStatistics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtendedStatistic, name: "member"))
     GetDashboardInput.add_member(:dashboard_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardName, name: "DashboardName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     GetDashboardInput.type = Types::GetDashboardInput
     GetDashboardOutput.add_member(:dashboard_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardArn, name: "DashboardArn"))
@@ -601,10 +601,10 @@ module Aws::CloudWatch
     InsightRuleContributorDatapoint.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InsightRuleContributorDatapoint.add_member(:approximate_value, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleUnboundDouble, name: "ApproximateValue", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InsightRuleContributorDatapoint.type = Types::InsightRuleContributorDatapoint
-    InsightRuleContributorDatapoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleContributorDatapoint, name: "member")
-    InsightRuleContributorKeyLabels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleContributorKeyLabel, name: "member")
-    InsightRuleContributorKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleContributorKey, name: "member")
-    InsightRuleContributors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleContributor, name: "member")
+    InsightRuleContributorDatapoints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleContributorDatapoint, name: "member"))
+    InsightRuleContributorKeyLabels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleContributorKeyLabel, name: "member"))
+    InsightRuleContributorKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleContributorKey, name: "member"))
+    InsightRuleContributors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleContributor, name: "member"))
     InsightRuleMetricDatapoint.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InsightRuleMetricDatapoint.add_member(:unique_contributors, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleUnboundDouble, name: "UniqueContributors"))
     InsightRuleMetricDatapoint.add_member(:max_contributor_value, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleUnboundDouble, name: "MaxContributorValue"))
@@ -614,10 +614,10 @@ module Aws::CloudWatch
     InsightRuleMetricDatapoint.add_member(:minimum, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleUnboundDouble, name: "Minimum"))
     InsightRuleMetricDatapoint.add_member(:maximum, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleUnboundDouble, name: "Maximum"))
     InsightRuleMetricDatapoint.type = Types::InsightRuleMetricDatapoint
-    InsightRuleMetricDatapoints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleMetricDatapoint, name: "member")
-    InsightRuleMetricList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleMetricName, name: "member")
-    InsightRuleNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleName, name: "member")
-    InsightRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRule, name: "member")
+    InsightRuleMetricDatapoints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleMetricDatapoint, name: "member"))
+    InsightRuleMetricList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleMetricName, name: "member"))
+    InsightRuleNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleName, name: "member"))
+    InsightRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRule, name: "member"))
     InternalServiceFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: FaultDescription, name: "Message"))
     InternalServiceFault.type = Types::InternalServiceFault
     InvalidFormatFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
@@ -677,11 +677,11 @@ module Aws::CloudWatch
     ManagedRuleDescription.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN"))
     ManagedRuleDescription.add_member(:rule_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRuleState, name: "RuleState"))
     ManagedRuleDescription.type = Types::ManagedRuleDescription
-    ManagedRuleDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRuleDescription, name: "member")
+    ManagedRuleDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRuleDescription, name: "member"))
     ManagedRuleState.add_member(:rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleName, name: "RuleName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ManagedRuleState.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightRuleState, name: "State", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ManagedRuleState.type = Types::ManagedRuleState
-    ManagedRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRule, name: "member")
+    ManagedRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedRule, name: "member"))
     MessageData.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageDataCode, name: "Code"))
     MessageData.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageDataValue, name: "Value"))
     MessageData.type = Types::MessageData
@@ -719,11 +719,11 @@ module Aws::CloudWatch
     MetricAlarm.add_member(:evaluation_state, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationState, name: "EvaluationState"))
     MetricAlarm.add_member(:state_transitioned_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StateTransitionedTimestamp"))
     MetricAlarm.type = Types::MetricAlarm
-    MetricAlarms.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricAlarm, name: "member")
+    MetricAlarms.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricAlarm, name: "member"))
     MetricCharacteristics.add_member(:periodic_spikes, ::Smithy::Schema::Shapes::MemberShape.new(target: PeriodicSpikes, name: "PeriodicSpikes"))
     MetricCharacteristics.type = Types::MetricCharacteristics
-    MetricData.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDatum, name: "member")
-    MetricDataQueries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDataQuery, name: "member")
+    MetricData.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDatum, name: "member"))
+    MetricDataQueries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDataQuery, name: "member"))
     MetricDataQuery.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricId, name: "Id", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     MetricDataQuery.add_member(:metric_stat, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStat, name: "MetricStat"))
     MetricDataQuery.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricExpression, name: "Expression"))
@@ -739,8 +739,8 @@ module Aws::CloudWatch
     MetricDataResult.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusCode, name: "StatusCode"))
     MetricDataResult.add_member(:messages, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDataResultMessages, name: "Messages"))
     MetricDataResult.type = Types::MetricDataResult
-    MetricDataResultMessages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MessageData, name: "member")
-    MetricDataResults.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDataResult, name: "member")
+    MetricDataResultMessages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageData, name: "member"))
+    MetricDataResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDataResult, name: "member"))
     MetricDatum.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "MetricName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     MetricDatum.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimensions, name: "Dimensions"))
     MetricDatum.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp"))
@@ -758,7 +758,7 @@ module Aws::CloudWatch
     MetricStat.add_member(:stat, ::Smithy::Schema::Shapes::MemberShape.new(target: Stat, name: "Stat", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     MetricStat.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardUnit, name: "Unit"))
     MetricStat.type = Types::MetricStat
-    MetricStreamEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStreamEntry, name: "member")
+    MetricStreamEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStreamEntry, name: "member"))
     MetricStreamEntry.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "Arn"))
     MetricStreamEntry.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationDate"))
     MetricStreamEntry.add_member(:last_update_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdateDate"))
@@ -770,25 +770,25 @@ module Aws::CloudWatch
     MetricStreamFilter.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "Namespace"))
     MetricStreamFilter.add_member(:metric_names, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStreamFilterMetricNames, name: "MetricNames"))
     MetricStreamFilter.type = Types::MetricStreamFilter
-    MetricStreamFilterMetricNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "member")
-    MetricStreamFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStreamFilter, name: "member")
-    MetricStreamNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStreamName, name: "member")
+    MetricStreamFilterMetricNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "member"))
+    MetricStreamFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStreamFilter, name: "member"))
+    MetricStreamNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStreamName, name: "member"))
     MetricStreamOutputFormat.add_member(:json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON", traits: {"smithy.api#enumValue" => "json"}))
     MetricStreamOutputFormat.add_member(:open_telemetry_0_7, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPEN_TELEMETRY_0_7", traits: {"smithy.api#enumValue" => "opentelemetry0.7"}))
     MetricStreamOutputFormat.add_member(:open_telemetry_1_0, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPEN_TELEMETRY_1_0", traits: {"smithy.api#enumValue" => "opentelemetry1.0"}))
-    MetricStreamStatisticsAdditionalStatistics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStreamStatistic, name: "member")
+    MetricStreamStatisticsAdditionalStatistics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStreamStatistic, name: "member"))
     MetricStreamStatisticsConfiguration.add_member(:include_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStreamStatisticsIncludeMetrics, name: "IncludeMetrics", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     MetricStreamStatisticsConfiguration.add_member(:additional_statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStreamStatisticsAdditionalStatistics, name: "AdditionalStatistics", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     MetricStreamStatisticsConfiguration.type = Types::MetricStreamStatisticsConfiguration
-    MetricStreamStatisticsConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStreamStatisticsConfiguration, name: "member")
-    MetricStreamStatisticsIncludeMetrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStreamStatisticsMetric, name: "member")
+    MetricStreamStatisticsConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStreamStatisticsConfiguration, name: "member"))
+    MetricStreamStatisticsIncludeMetrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricStreamStatisticsMetric, name: "member"))
     MetricStreamStatisticsMetric.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "Namespace", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     MetricStreamStatisticsMetric.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "MetricName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     MetricStreamStatisticsMetric.type = Types::MetricStreamStatisticsMetric
-    Metrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Metric, name: "member")
+    Metrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Metric, name: "member"))
     MissingRequiredParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsQueryErrorMessage, name: "message"))
     MissingRequiredParameterException.type = Types::MissingRequiredParameterException
-    OwningAccounts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member")
+    OwningAccounts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
     PartialFailure.add_member(:failure_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureResource, name: "FailureResource"))
     PartialFailure.add_member(:exception_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionType, name: "ExceptionType"))
     PartialFailure.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureCode, name: "FailureCode"))
@@ -876,7 +876,7 @@ module Aws::CloudWatch
     Range.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Range.type = Types::Range
     RecentlyActive.add_member(:pt3_h, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PT3H", traits: {"smithy.api#enumValue" => "PT3H"}))
-    ResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "member")
+    ResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "member"))
     ResourceNotFound.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ResourceNotFound.type = Types::ResourceNotFound
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
@@ -939,7 +939,7 @@ module Aws::CloudWatch
     StatisticSet.add_member(:minimum, ::Smithy::Schema::Shapes::MemberShape.new(target: DatapointValue, name: "Minimum", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StatisticSet.add_member(:maximum, ::Smithy::Schema::Shapes::MemberShape.new(target: DatapointValue, name: "Maximum", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StatisticSet.type = Types::StatisticSet
-    Statistics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Statistic, name: "member")
+    Statistics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Statistic, name: "member"))
     StatusCode.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETE", traits: {"smithy.api#enumValue" => "Complete"}))
     StatusCode.add_member(:internal_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "InternalError"}))
     StatusCode.add_member(:partial_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARTIAL_DATA", traits: {"smithy.api#enumValue" => "PartialData"}))
@@ -950,18 +950,18 @@ module Aws::CloudWatch
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    Timestamps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "member")
+    Timestamps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "member"))
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
     UntagResourceOutput.type = Types::UntagResourceOutput
-    Values.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatapointValue, name: "member")
+    Values.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatapointValue, name: "member"))
 
     GraniteServiceVersion20100801 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.cloudwatch#GraniteServiceVersion20100801"

@@ -202,8 +202,8 @@ module Aws::ApplicationDiscoveryService
     AgentConfigurationStatus.add_member(:operation_succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "operationSucceeded", traits: {"smithy.api#default" => false}))
     AgentConfigurationStatus.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "description"))
     AgentConfigurationStatus.type = Types::AgentConfigurationStatus
-    AgentConfigurationStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentConfigurationStatus, name: "member")
-    AgentIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentId, name: "member")
+    AgentConfigurationStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentConfigurationStatus, name: "member"))
+    AgentIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentId, name: "member"))
     AgentInfo.add_member(:agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentId, name: "agentId"))
     AgentInfo.add_member(:host_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "hostName"))
     AgentInfo.add_member(:agent_network_info_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentNetworkInfoList, name: "agentNetworkInfoList"))
@@ -218,15 +218,15 @@ module Aws::ApplicationDiscoveryService
     AgentNetworkInfo.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ipAddress"))
     AgentNetworkInfo.add_member(:mac_address, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "macAddress"))
     AgentNetworkInfo.type = Types::AgentNetworkInfo
-    AgentNetworkInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentNetworkInfo, name: "member")
+    AgentNetworkInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentNetworkInfo, name: "member"))
     AgentStatus.add_member(:healthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HEALTHY", traits: {"smithy.api#enumValue" => "HEALTHY"}))
     AgentStatus.add_member(:unhealthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNHEALTHY", traits: {"smithy.api#enumValue" => "UNHEALTHY"}))
     AgentStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     AgentStatus.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
     AgentStatus.add_member(:blacklisted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BLACKLISTED", traits: {"smithy.api#enumValue" => "BLACKLISTED"}))
     AgentStatus.add_member(:shutdown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHUTDOWN", traits: {"smithy.api#enumValue" => "SHUTDOWN"}))
-    AgentsInfo.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AgentInfo, name: "member")
-    ApplicationIdsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "member")
+    AgentsInfo.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentInfo, name: "member"))
+    ApplicationIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "member"))
     AssociateConfigurationItemsToApplicationRequest.add_member(:application_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationConfigurationId", traits: {"smithy.api#required" => {}}))
     AssociateConfigurationItemsToApplicationRequest.add_member(:configuration_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationIdList, name: "configurationIds", traits: {"smithy.api#required" => {}}))
     AssociateConfigurationItemsToApplicationRequest.type = Types::AssociateConfigurationItemsToApplicationRequest
@@ -237,7 +237,7 @@ module Aws::ApplicationDiscoveryService
     BatchDeleteAgentError.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "errorMessage", traits: {"smithy.api#required" => {}}))
     BatchDeleteAgentError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteAgentErrorCode, name: "errorCode", traits: {"smithy.api#required" => {}}))
     BatchDeleteAgentError.type = Types::BatchDeleteAgentError
-    BatchDeleteAgentErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteAgentError, name: "member")
+    BatchDeleteAgentErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteAgentError, name: "member"))
     BatchDeleteAgentsRequest.add_member(:delete_agents, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteAgents, name: "deleteAgents", traits: {"smithy.api#required" => {}}))
     BatchDeleteAgentsRequest.type = Types::BatchDeleteAgentsRequest
     BatchDeleteAgentsResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteAgentErrors, name: "errors"))
@@ -264,15 +264,15 @@ module Aws::ApplicationDiscoveryService
     BatchDeleteImportDataErrorCode.add_member(:not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_FOUND", traits: {"smithy.api#enumValue" => "NOT_FOUND"}))
     BatchDeleteImportDataErrorCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_ERROR"}))
     BatchDeleteImportDataErrorCode.add_member(:over_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OVER_LIMIT", traits: {"smithy.api#enumValue" => "OVER_LIMIT"}))
-    BatchDeleteImportDataErrorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteImportDataError, name: "member")
+    BatchDeleteImportDataErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteImportDataError, name: "member"))
     BatchDeleteImportDataRequest.add_member(:import_task_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ToDeleteIdentifierList, name: "importTaskIds", traits: {"smithy.api#required" => {}}))
     BatchDeleteImportDataRequest.add_member(:delete_history, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "deleteHistory", traits: {"smithy.api#default" => false}))
     BatchDeleteImportDataRequest.type = Types::BatchDeleteImportDataRequest
     BatchDeleteImportDataResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteImportDataErrorList, name: "errors"))
     BatchDeleteImportDataResponse.type = Types::BatchDeleteImportDataResponse
-    Configuration.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    Configuration.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
-    ConfigurationIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationId, name: "member")
+    Configuration.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    Configuration.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
+    ConfigurationIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationId, name: "member"))
     ConfigurationItemType.add_member(:server, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVER", traits: {"smithy.api#enumValue" => "SERVER"}))
     ConfigurationItemType.add_member(:process, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROCESS", traits: {"smithy.api#enumValue" => "PROCESS"}))
     ConfigurationItemType.add_member(:connections, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECTIONS", traits: {"smithy.api#enumValue" => "CONNECTION"}))
@@ -283,8 +283,8 @@ module Aws::ApplicationDiscoveryService
     ConfigurationTag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     ConfigurationTag.add_member(:time_of_creation, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeStamp, name: "timeOfCreation"))
     ConfigurationTag.type = Types::ConfigurationTag
-    ConfigurationTagSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationTag, name: "member", traits: {"smithy.api#xmlName" => "item"})
-    Configurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, name: "member")
+    ConfigurationTagSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationTag, name: "member", traits: {"smithy.api#xmlName" => "item"}))
+    Configurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, name: "member"))
     ConflictErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ConflictErrorException.type = Types::ConflictErrorException
     ContinuousExportDescription.add_member(:export_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationsExportId, name: "exportId"))
@@ -296,8 +296,8 @@ module Aws::ApplicationDiscoveryService
     ContinuousExportDescription.add_member(:data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "dataSource"))
     ContinuousExportDescription.add_member(:schema_storage_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaStorageConfig, name: "schemaStorageConfig"))
     ContinuousExportDescription.type = Types::ContinuousExportDescription
-    ContinuousExportDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousExportDescription, name: "member")
-    ContinuousExportIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationsExportId, name: "member")
+    ContinuousExportDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousExportDescription, name: "member"))
+    ContinuousExportIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationsExportId, name: "member"))
     ContinuousExportStatus.add_member(:start_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "START_IN_PROGRESS", traits: {"smithy.api#enumValue" => "START_IN_PROGRESS"}))
     ContinuousExportStatus.add_member(:start_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "START_FAILED", traits: {"smithy.api#enumValue" => "START_FAILED"}))
     ContinuousExportStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
@@ -354,7 +354,7 @@ module Aws::ApplicationDiscoveryService
     DeleteAgentErrorCode.add_member(:not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_FOUND", traits: {"smithy.api#enumValue" => "NOT_FOUND"}))
     DeleteAgentErrorCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_ERROR"}))
     DeleteAgentErrorCode.add_member(:agent_in_use, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGENT_IN_USE", traits: {"smithy.api#enumValue" => "AGENT_IN_USE"}))
-    DeleteAgents.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteAgent, name: "member")
+    DeleteAgents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteAgent, name: "member"))
     DeleteApplicationsRequest.add_member(:configuration_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationIdsList, name: "configurationIds", traits: {"smithy.api#required" => {}}))
     DeleteApplicationsRequest.type = Types::DeleteApplicationsRequest
     DeleteApplicationsResponse.type = Types::DeleteApplicationsResponse
@@ -367,7 +367,7 @@ module Aws::ApplicationDiscoveryService
     DeletionWarning.add_member(:warning_code, ::Smithy::Schema::Shapes::MemberShape.new(target: WarningCode, name: "warningCode", traits: {"smithy.api#default" => 0}))
     DeletionWarning.add_member(:warning_text, ::Smithy::Schema::Shapes::MemberShape.new(target: WarningText, name: "warningText"))
     DeletionWarning.type = Types::DeletionWarning
-    DeletionWarningsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionWarning, name: "member")
+    DeletionWarningsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionWarning, name: "member"))
     DescribeAgentsRequest.add_member(:agent_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentIds, name: "agentIds"))
     DescribeAgentsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: Filters, name: "filters"))
     DescribeAgentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "maxResults", traits: {"smithy.api#default" => 0}))
@@ -380,9 +380,9 @@ module Aws::ApplicationDiscoveryService
     DescribeBatchDeleteConfigurationTaskRequest.type = Types::DescribeBatchDeleteConfigurationTaskRequest
     DescribeBatchDeleteConfigurationTaskResponse.add_member(:task, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteConfigurationTask, name: "task"))
     DescribeBatchDeleteConfigurationTaskResponse.type = Types::DescribeBatchDeleteConfigurationTaskResponse
-    DescribeConfigurationsAttribute.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    DescribeConfigurationsAttribute.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
-    DescribeConfigurationsAttributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeConfigurationsAttribute, name: "member")
+    DescribeConfigurationsAttribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    DescribeConfigurationsAttribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
+    DescribeConfigurationsAttributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeConfigurationsAttribute, name: "member"))
     DescribeConfigurationsRequest.add_member(:configuration_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationIdList, name: "configurationIds", traits: {"smithy.api#required" => {}}))
     DescribeConfigurationsRequest.type = Types::DescribeConfigurationsRequest
     DescribeConfigurationsResponse.add_member(:configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeConfigurationsAttributes, name: "configurations"))
@@ -409,7 +409,7 @@ module Aws::ApplicationDiscoveryService
     DescribeExportTasksResponse.add_member(:exports_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportsInfo, name: "exportsInfo"))
     DescribeExportTasksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     DescribeExportTasksResponse.type = Types::DescribeExportTasksResponse
-    DescribeImportTasksFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTaskFilter, name: "member")
+    DescribeImportTasksFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTaskFilter, name: "member"))
     DescribeImportTasksRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeImportTasksFilterList, name: "filters"))
     DescribeImportTasksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeImportTasksMaxResults, name: "maxResults"))
     DescribeImportTasksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
@@ -436,17 +436,17 @@ module Aws::ApplicationDiscoveryService
     Ec2RecommendationsExportPreferences.add_member(:preferred_region, ::Smithy::Schema::Shapes::MemberShape.new(target: UserPreferredRegion, name: "preferredRegion"))
     Ec2RecommendationsExportPreferences.add_member(:reserved_instance_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedInstanceOptions, name: "reservedInstanceOptions"))
     Ec2RecommendationsExportPreferences.type = Types::Ec2RecommendationsExportPreferences
-    ExcludedInstanceTypes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EC2InstanceType, name: "member")
+    ExcludedInstanceTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2InstanceType, name: "member"))
     ExportConfigurationsResponse.add_member(:export_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationsExportId, name: "exportId"))
     ExportConfigurationsResponse.type = Types::ExportConfigurationsResponse
     ExportDataFormat.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CSV", traits: {"smithy.api#enumValue" => "CSV"}))
-    ExportDataFormats.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportDataFormat, name: "member")
+    ExportDataFormats.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportDataFormat, name: "member"))
     ExportFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, name: "name", traits: {"smithy.api#required" => {}}))
     ExportFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, name: "values", traits: {"smithy.api#required" => {}}))
     ExportFilter.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "condition", traits: {"smithy.api#required" => {}}))
     ExportFilter.type = Types::ExportFilter
-    ExportFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilter, name: "member")
-    ExportIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationsExportId, name: "member")
+    ExportFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportFilter, name: "member"))
+    ExportIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationsExportId, name: "member"))
     ExportInfo.add_member(:export_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationsExportId, name: "exportId", traits: {"smithy.api#required" => {}}))
     ExportInfo.add_member(:export_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportStatus, name: "exportStatus", traits: {"smithy.api#required" => {}}))
     ExportInfo.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportStatusMessage, name: "statusMessage", traits: {"smithy.api#required" => {}}))
@@ -462,12 +462,12 @@ module Aws::ApplicationDiscoveryService
     ExportStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     ExportStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
     ExportStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
-    ExportsInfo.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExportInfo, name: "member")
+    ExportsInfo.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportInfo, name: "member"))
     FailedConfiguration.add_member(:configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationId, name: "configurationId"))
     FailedConfiguration.add_member(:error_status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorStatusCode, name: "errorStatusCode", traits: {"smithy.api#default" => 0}))
     FailedConfiguration.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
     FailedConfiguration.type = Types::FailedConfiguration
-    FailedConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FailedConfiguration, name: "member")
+    FailedConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedConfiguration, name: "member"))
     FileClassification.add_member(:modelizeit_export, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MODELIZEIT_EXPORT", traits: {"smithy.api#enumValue" => "MODELIZEIT_EXPORT"}))
     FileClassification.add_member(:rvtools_export, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RVTOOLS_EXPORT", traits: {"smithy.api#enumValue" => "RVTOOLS_EXPORT"}))
     FileClassification.add_member(:vmware_nsx_export, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VMWARE_NSX_EXPORT", traits: {"smithy.api#enumValue" => "VMWARE_NSX_EXPORT"}))
@@ -476,8 +476,8 @@ module Aws::ApplicationDiscoveryService
     Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, name: "values", traits: {"smithy.api#required" => {}}))
     Filter.add_member(:condition, ::Smithy::Schema::Shapes::MemberShape.new(target: Condition, name: "condition", traits: {"smithy.api#required" => {}}))
     Filter.type = Types::Filter
-    FilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member", traits: {"smithy.api#xmlName" => "item"})
-    Filters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
+    FilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member", traits: {"smithy.api#xmlName" => "item"}))
+    Filters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     GetDiscoverySummaryRequest.type = Types::GetDiscoverySummaryRequest
     GetDiscoverySummaryResponse.add_member(:servers, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "servers", traits: {"smithy.api#default" => 0}))
     GetDiscoverySummaryResponse.add_member(:applications, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "applications", traits: {"smithy.api#default" => 0}))
@@ -524,8 +524,8 @@ module Aws::ApplicationDiscoveryService
     ImportTaskFilterName.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATUS", traits: {"smithy.api#enumValue" => "STATUS"}))
     ImportTaskFilterName.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
     ImportTaskFilterName.add_member(:file_classification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FILE_CLASSIFICATION", traits: {"smithy.api#enumValue" => "FILE_CLASSIFICATION"}))
-    ImportTaskFilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTaskFilterValue, name: "member")
-    ImportTaskList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTask, name: "member")
+    ImportTaskFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTaskFilterValue, name: "member"))
+    ImportTaskList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTask, name: "member"))
     InvalidParameterException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     InvalidParameterException.type = Types::InvalidParameterException
     InvalidParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -557,7 +557,7 @@ module Aws::ApplicationDiscoveryService
     NeighborConnectionDetail.add_member(:transport_protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "transportProtocol"))
     NeighborConnectionDetail.add_member(:connections_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "connectionsCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     NeighborConnectionDetail.type = Types::NeighborConnectionDetail
-    NeighborDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NeighborConnectionDetail, name: "member")
+    NeighborDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NeighborConnectionDetail, name: "member"))
     OfferingClass.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
     OfferingClass.add_member(:convertible, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONVERTIBLE", traits: {"smithy.api#enumValue" => "CONVERTIBLE"}))
     OperationNotPermittedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -565,7 +565,7 @@ module Aws::ApplicationDiscoveryService
     OrderByElement.add_member(:field_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderByElementFieldName, name: "fieldName", traits: {"smithy.api#required" => {}}))
     OrderByElement.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderString, name: "sortOrder"))
     OrderByElement.type = Types::OrderByElement
-    OrderByList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OrderByElement, name: "member")
+    OrderByList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderByElement, name: "member"))
     PurchasingOption.add_member(:all_upfront, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL_UPFRONT", traits: {"smithy.api#enumValue" => "ALL_UPFRONT"}))
     PurchasingOption.add_member(:partial_upfront, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARTIAL_UPFRONT", traits: {"smithy.api#enumValue" => "PARTIAL_UPFRONT"}))
     PurchasingOption.add_member(:no_upfront, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_UPFRONT", traits: {"smithy.api#enumValue" => "NO_UPFRONT"}))
@@ -577,8 +577,8 @@ module Aws::ApplicationDiscoveryService
     ResourceInUseException.type = Types::ResourceInUseException
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    SchemaStorageConfig.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseName, name: "key")
-    SchemaStorageConfig.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    SchemaStorageConfig.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseName, name: "key"))
+    SchemaStorageConfig.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     ServerInternalErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     ServerInternalErrorException.type = Types::ServerInternalErrorException
     StartBatchDeleteConfigurationTaskRequest.add_member(:configuration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionConfigurationItemType, name: "configurationType", traits: {"smithy.api#required" => {}}))
@@ -626,13 +626,13 @@ module Aws::ApplicationDiscoveryService
     TagFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, name: "name", traits: {"smithy.api#required" => {}}))
     TagFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, name: "values", traits: {"smithy.api#required" => {}}))
     TagFilter.type = Types::TagFilter
-    TagFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilter, name: "member")
-    TagSet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    TagFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilter, name: "member"))
+    TagSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     Tenancy.add_member(:dedicated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEDICATED", traits: {"smithy.api#enumValue" => "DEDICATED"}))
     Tenancy.add_member(:shared, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHARED", traits: {"smithy.api#enumValue" => "SHARED"}))
     TermLength.add_member(:one_year, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONE_YEAR", traits: {"smithy.api#enumValue" => "ONE_YEAR"}))
     TermLength.add_member(:three_year, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THREE_YEAR", traits: {"smithy.api#enumValue" => "THREE_YEAR"}))
-    ToDeleteIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTaskIdentifier, name: "member")
+    ToDeleteIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTaskIdentifier, name: "member"))
     UpdateApplicationRequest.add_member(:configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "configurationId", traits: {"smithy.api#required" => {}}))
     UpdateApplicationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "name"))
     UpdateApplicationRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationDescription, name: "description"))

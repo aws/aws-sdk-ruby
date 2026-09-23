@@ -167,14 +167,14 @@ module Aws::Detective
     Account.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId", traits: {"smithy.api#required" => {}}))
     Account.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddress, name: "EmailAddress", traits: {"smithy.api#required" => {}}))
     Account.type = Types::Account
-    AccountIdExtendedList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member")
-    AccountIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member")
-    AccountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Account, name: "member")
+    AccountIdExtendedList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
+    AccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
+    AccountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Account, name: "member"))
     Administrator.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     Administrator.add_member(:graph_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GraphArn, name: "GraphArn"))
     Administrator.add_member(:delegation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "DelegationTime"))
     Administrator.type = Types::Administrator
-    AdministratorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Administrator, name: "member")
+    AdministratorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Administrator, name: "member"))
     BatchGetGraphMemberDatasourcesRequest.add_member(:graph_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GraphArn, name: "GraphArn", traits: {"smithy.api#required" => {}}))
     BatchGetGraphMemberDatasourcesRequest.add_member(:account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdExtendedList, name: "AccountIds", traits: {"smithy.api#required" => {}}))
     BatchGetGraphMemberDatasourcesRequest.type = Types::BatchGetGraphMemberDatasourcesRequest
@@ -206,16 +206,16 @@ module Aws::Detective
     DatasourcePackageIngestDetail.add_member(:datasource_package_ingest_state, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasourcePackageIngestState, name: "DatasourcePackageIngestState"))
     DatasourcePackageIngestDetail.add_member(:last_ingest_state_change, ::Smithy::Schema::Shapes::MemberShape.new(target: LastIngestStateChangeDates, name: "LastIngestStateChange"))
     DatasourcePackageIngestDetail.type = Types::DatasourcePackageIngestDetail
-    DatasourcePackageIngestDetails.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasourcePackage, name: "key")
-    DatasourcePackageIngestDetails.value = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasourcePackageIngestDetail, name: "value")
-    DatasourcePackageIngestHistory.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasourcePackage, name: "key")
-    DatasourcePackageIngestHistory.value = ::Smithy::Schema::Shapes::MemberShape.new(target: LastIngestStateChangeDates, name: "value")
+    DatasourcePackageIngestDetails.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasourcePackage, name: "key"))
+    DatasourcePackageIngestDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasourcePackageIngestDetail, name: "value"))
+    DatasourcePackageIngestHistory.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasourcePackage, name: "key"))
+    DatasourcePackageIngestHistory.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LastIngestStateChangeDates, name: "value"))
     DatasourcePackageIngestState.add_member(:started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTED", traits: {"smithy.api#enumValue" => "STARTED"}))
     DatasourcePackageIngestState.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
     DatasourcePackageIngestState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    DatasourcePackageIngestStates.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasourcePackage, name: "key")
-    DatasourcePackageIngestStates.value = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasourcePackageIngestState, name: "value")
-    DatasourcePackageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasourcePackage, name: "member")
+    DatasourcePackageIngestStates.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasourcePackage, name: "key"))
+    DatasourcePackageIngestStates.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasourcePackageIngestState, name: "value"))
+    DatasourcePackageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasourcePackage, name: "member"))
     DatasourcePackageUsageInfo.add_member(:volume_usage_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ByteValue, name: "VolumeUsageInBytes"))
     DatasourcePackageUsageInfo.add_member(:volume_usage_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "VolumeUsageUpdateTime"))
     DatasourcePackageUsageInfo.type = Types::DatasourcePackageUsageInfo
@@ -278,8 +278,8 @@ module Aws::Detective
     Graph.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GraphArn, name: "Arn"))
     Graph.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTime"))
     Graph.type = Types::Graph
-    GraphArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GraphArn, name: "member")
-    GraphList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Graph, name: "member")
+    GraphArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GraphArn, name: "member"))
+    GraphList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Graph, name: "member"))
     ImpossibleTravelDetail.add_member(:starting_ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, name: "StartingIpAddress"))
     ImpossibleTravelDetail.add_member(:ending_ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, name: "EndingIpAddress"))
     ImpossibleTravelDetail.add_member(:starting_location, ::Smithy::Schema::Shapes::MemberShape.new(target: Location, name: "StartingLocation"))
@@ -306,7 +306,7 @@ module Aws::Detective
     IndicatorType.add_member(:new_user_agent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEW_USER_AGENT", traits: {"smithy.api#enumValue" => "NEW_USER_AGENT"}))
     IndicatorType.add_member(:related_finding, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RELATED_FINDING", traits: {"smithy.api#enumValue" => "RELATED_FINDING"}))
     IndicatorType.add_member(:related_finding_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RELATED_FINDING_GROUP", traits: {"smithy.api#enumValue" => "RELATED_FINDING_GROUP"}))
-    Indicators.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Indicator, name: "member")
+    Indicators.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Indicator, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InternalServerException.type = Types::InternalServerException
     InvestigationDetail.add_member(:investigation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InvestigationId, name: "InvestigationId"))
@@ -317,11 +317,11 @@ module Aws::Detective
     InvestigationDetail.add_member(:entity_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityArn, name: "EntityArn"))
     InvestigationDetail.add_member(:entity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, name: "EntityType"))
     InvestigationDetail.type = Types::InvestigationDetail
-    InvestigationDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InvestigationDetail, name: "member")
+    InvestigationDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InvestigationDetail, name: "member"))
     InvitationType.add_member(:invitation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVITATION", traits: {"smithy.api#enumValue" => "INVITATION"}))
     InvitationType.add_member(:organization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ORGANIZATION", traits: {"smithy.api#enumValue" => "ORGANIZATION"}))
-    LastIngestStateChangeDates.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasourcePackageIngestState, name: "key")
-    LastIngestStateChangeDates.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampForCollection, name: "value")
+    LastIngestStateChangeDates.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasourcePackageIngestState, name: "key"))
+    LastIngestStateChangeDates.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampForCollection, name: "value"))
     ListDatasourcePackagesRequest.add_member(:graph_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GraphArn, name: "GraphArn", traits: {"smithy.api#required" => {}}))
     ListDatasourcePackagesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "NextToken"))
     ListDatasourcePackagesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberResultsLimit, name: "MaxResults"))
@@ -395,7 +395,7 @@ module Aws::Detective
     MemberDetail.add_member(:volume_usage_by_datasource_package, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeUsageByDatasourcePackage, name: "VolumeUsageByDatasourcePackage"))
     MemberDetail.add_member(:datasource_package_ingest_states, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasourcePackageIngestStates, name: "DatasourcePackageIngestStates"))
     MemberDetail.type = Types::MemberDetail
-    MemberDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MemberDetail, name: "member")
+    MemberDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberDetail, name: "member"))
     MemberDisabledReason.add_member(:volume_too_high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VOLUME_TOO_HIGH", traits: {"smithy.api#enumValue" => "VOLUME_TOO_HIGH"}))
     MemberDisabledReason.add_member(:volume_unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VOLUME_UNKNOWN", traits: {"smithy.api#enumValue" => "VOLUME_UNKNOWN"}))
     MemberStatus.add_member(:invited, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVITED", traits: {"smithy.api#enumValue" => "INVITED"}))
@@ -407,7 +407,7 @@ module Aws::Detective
     MembershipDatasources.add_member(:graph_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GraphArn, name: "GraphArn"))
     MembershipDatasources.add_member(:datasource_package_ingest_history, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasourcePackageIngestHistory, name: "DatasourcePackageIngestHistory"))
     MembershipDatasources.type = Types::MembershipDatasources
-    MembershipDatasourcesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipDatasources, name: "member")
+    MembershipDatasourcesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipDatasources, name: "member"))
     NewAsoDetail.add_member(:aso, ::Smithy::Schema::Shapes::MemberShape.new(target: Aso, name: "Aso"))
     NewAsoDetail.add_member(:is_new_for_entire_account, ::Smithy::Schema::Shapes::MemberShape.new(target: IsNewForEntireAccount, name: "IsNewForEntireAccount", traits: {"smithy.api#default" => false}))
     NewAsoDetail.type = Types::NewAsoDetail
@@ -427,7 +427,7 @@ module Aws::Detective
     RelatedFindingDetail.type = Types::RelatedFindingDetail
     RelatedFindingGroupDetail.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "Id"))
     RelatedFindingGroupDetail.type = Types::RelatedFindingGroupDetail
-    ResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member")
+    ResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -468,9 +468,9 @@ module Aws::Detective
     TTPsObservedDetail.add_member(:api_success_count, ::Smithy::Schema::Shapes::MemberShape.new(target: APISuccessCount, name: "APISuccessCount", traits: {"smithy.api#default" => 0}))
     TTPsObservedDetail.add_member(:api_failure_count, ::Smithy::Schema::Shapes::MemberShape.new(target: APIFailureCount, name: "APIFailureCount", traits: {"smithy.api#default" => 0}))
     TTPsObservedDetail.type = Types::TTPsObservedDetail
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GraphArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -482,11 +482,11 @@ module Aws::Detective
     UnprocessedAccount.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     UnprocessedAccount.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedReason, name: "Reason"))
     UnprocessedAccount.type = Types::UnprocessedAccount
-    UnprocessedAccountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedAccount, name: "member")
+    UnprocessedAccountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedAccount, name: "member"))
     UnprocessedGraph.add_member(:graph_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GraphArn, name: "GraphArn"))
     UnprocessedGraph.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedReason, name: "Reason"))
     UnprocessedGraph.type = Types::UnprocessedGraph
-    UnprocessedGraphList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedGraph, name: "member")
+    UnprocessedGraphList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedGraph, name: "member"))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GraphArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -505,8 +505,8 @@ module Aws::Detective
     ValidationException.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     ValidationException.add_member(:error_code_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCodeReason, name: "ErrorCodeReason"))
     ValidationException.type = Types::ValidationException
-    VolumeUsageByDatasourcePackage.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasourcePackage, name: "key")
-    VolumeUsageByDatasourcePackage.value = ::Smithy::Schema::Shapes::MemberShape.new(target: DatasourcePackageUsageInfo, name: "value")
+    VolumeUsageByDatasourcePackage.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasourcePackage, name: "key"))
+    VolumeUsageByDatasourcePackage.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasourcePackageUsageInfo, name: "value"))
 
     AmazonDetective = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.detective#AmazonDetective"

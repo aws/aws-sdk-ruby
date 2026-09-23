@@ -126,7 +126,7 @@ module Aws::IoTEventsData
     AcknowledgeAlarmActionRequest.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, name: "keyValue"))
     AcknowledgeAlarmActionRequest.add_member(:note, ::Smithy::Schema::Shapes::MemberShape.new(target: Note, name: "note"))
     AcknowledgeAlarmActionRequest.type = Types::AcknowledgeAlarmActionRequest
-    AcknowledgeAlarmActionRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AcknowledgeAlarmActionRequest, name: "member")
+    AcknowledgeAlarmActionRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AcknowledgeAlarmActionRequest, name: "member"))
     Alarm.add_member(:alarm_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmModelName, name: "alarmModelName"))
     Alarm.add_member(:alarm_model_version, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmModelVersion, name: "alarmModelVersion"))
     Alarm.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, name: "keyValue"))
@@ -146,7 +146,7 @@ module Aws::IoTEventsData
     AlarmStateName.add_member(:acknowledged, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACKNOWLEDGED", traits: {"smithy.api#enumValue" => "ACKNOWLEDGED"}))
     AlarmStateName.add_member(:snooze_disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SNOOZE_DISABLED", traits: {"smithy.api#enumValue" => "SNOOZE_DISABLED"}))
     AlarmStateName.add_member(:latched, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LATCHED", traits: {"smithy.api#enumValue" => "LATCHED"}))
-    AlarmSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmSummary, name: "member")
+    AlarmSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmSummary, name: "member"))
     AlarmSummary.add_member(:alarm_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmModelName, name: "alarmModelName"))
     AlarmSummary.add_member(:alarm_model_version, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmModelVersion, name: "alarmModelVersion"))
     AlarmSummary.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, name: "keyValue"))
@@ -158,12 +158,12 @@ module Aws::IoTEventsData
     BatchAcknowledgeAlarmRequest.type = Types::BatchAcknowledgeAlarmRequest
     BatchAcknowledgeAlarmResponse.add_member(:error_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAlarmActionErrorEntries, name: "errorEntries"))
     BatchAcknowledgeAlarmResponse.type = Types::BatchAcknowledgeAlarmResponse
-    BatchAlarmActionErrorEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAlarmActionErrorEntry, name: "member")
+    BatchAlarmActionErrorEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAlarmActionErrorEntry, name: "member"))
     BatchAlarmActionErrorEntry.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "requestId"))
     BatchAlarmActionErrorEntry.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "errorCode"))
     BatchAlarmActionErrorEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
     BatchAlarmActionErrorEntry.type = Types::BatchAlarmActionErrorEntry
-    BatchDeleteDetectorErrorEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteDetectorErrorEntry, name: "member")
+    BatchDeleteDetectorErrorEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteDetectorErrorEntry, name: "member"))
     BatchDeleteDetectorErrorEntry.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageId, name: "messageId"))
     BatchDeleteDetectorErrorEntry.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "errorCode"))
     BatchDeleteDetectorErrorEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
@@ -180,7 +180,7 @@ module Aws::IoTEventsData
     BatchEnableAlarmRequest.type = Types::BatchEnableAlarmRequest
     BatchEnableAlarmResponse.add_member(:error_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAlarmActionErrorEntries, name: "errorEntries"))
     BatchEnableAlarmResponse.type = Types::BatchEnableAlarmResponse
-    BatchPutMessageErrorEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutMessageErrorEntry, name: "member")
+    BatchPutMessageErrorEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutMessageErrorEntry, name: "member"))
     BatchPutMessageErrorEntry.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageId, name: "messageId"))
     BatchPutMessageErrorEntry.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "errorCode"))
     BatchPutMessageErrorEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
@@ -197,7 +197,7 @@ module Aws::IoTEventsData
     BatchSnoozeAlarmRequest.type = Types::BatchSnoozeAlarmRequest
     BatchSnoozeAlarmResponse.add_member(:error_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAlarmActionErrorEntries, name: "errorEntries"))
     BatchSnoozeAlarmResponse.type = Types::BatchSnoozeAlarmResponse
-    BatchUpdateDetectorErrorEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateDetectorErrorEntry, name: "member")
+    BatchUpdateDetectorErrorEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateDetectorErrorEntry, name: "member"))
     BatchUpdateDetectorErrorEntry.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageId, name: "messageId"))
     BatchUpdateDetectorErrorEntry.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "errorCode"))
     BatchUpdateDetectorErrorEntry.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "errorMessage"))
@@ -228,7 +228,7 @@ module Aws::IoTEventsData
     DeleteDetectorRequest.add_member(:detector_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorModelName, name: "detectorModelName", traits: {"smithy.api#required" => {}}))
     DeleteDetectorRequest.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, name: "keyValue"))
     DeleteDetectorRequest.type = Types::DeleteDetectorRequest
-    DeleteDetectorRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteDetectorRequest, name: "member")
+    DeleteDetectorRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteDetectorRequest, name: "member"))
     DescribeAlarmRequest.add_member(:alarm_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmModelName, name: "alarmModelName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeAlarmRequest.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, name: "keyValue", traits: {"smithy.api#httpQuery" => "keyValue"}))
     DescribeAlarmRequest.type = Types::DescribeAlarmRequest
@@ -256,7 +256,7 @@ module Aws::IoTEventsData
     DetectorStateDefinition.type = Types::DetectorStateDefinition
     DetectorStateSummary.add_member(:state_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StateName, name: "stateName"))
     DetectorStateSummary.type = Types::DetectorStateSummary
-    DetectorSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorSummary, name: "member")
+    DetectorSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorSummary, name: "member"))
     DetectorSummary.add_member(:detector_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorModelName, name: "detectorModelName"))
     DetectorSummary.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, name: "keyValue"))
     DetectorSummary.add_member(:detector_model_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorModelVersion, name: "detectorModelVersion"))
@@ -271,7 +271,7 @@ module Aws::IoTEventsData
     DisableAlarmActionRequest.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, name: "keyValue"))
     DisableAlarmActionRequest.add_member(:note, ::Smithy::Schema::Shapes::MemberShape.new(target: Note, name: "note"))
     DisableAlarmActionRequest.type = Types::DisableAlarmActionRequest
-    DisableAlarmActionRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DisableAlarmActionRequest, name: "member")
+    DisableAlarmActionRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DisableAlarmActionRequest, name: "member"))
     EnableActionConfiguration.add_member(:note, ::Smithy::Schema::Shapes::MemberShape.new(target: Note, name: "note"))
     EnableActionConfiguration.type = Types::EnableActionConfiguration
     EnableAlarmActionRequest.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "requestId", traits: {"smithy.api#required" => {}}))
@@ -279,7 +279,7 @@ module Aws::IoTEventsData
     EnableAlarmActionRequest.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, name: "keyValue"))
     EnableAlarmActionRequest.add_member(:note, ::Smithy::Schema::Shapes::MemberShape.new(target: Note, name: "note"))
     EnableAlarmActionRequest.type = Types::EnableAlarmActionRequest
-    EnableAlarmActionRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnableAlarmActionRequest, name: "member")
+    EnableAlarmActionRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableAlarmActionRequest, name: "member"))
     ErrorCode.add_member(:resource_not_found_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ResourceNotFoundException", traits: {"smithy.api#enumValue" => "ResourceNotFoundException"}))
     ErrorCode.add_member(:invalid_request_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InvalidRequestException", traits: {"smithy.api#enumValue" => "InvalidRequestException"}))
     ErrorCode.add_member(:internal_failure_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InternalFailureException", traits: {"smithy.api#enumValue" => "InternalFailureException"}))
@@ -310,7 +310,7 @@ module Aws::IoTEventsData
     Message.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: Payload, name: "payload", traits: {"smithy.api#required" => {}}))
     Message.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampValue, name: "timestamp"))
     Message.type = Types::Message
-    Messages.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "member")
+    Messages.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "member"))
     ResetActionConfiguration.add_member(:note, ::Smithy::Schema::Shapes::MemberShape.new(target: Note, name: "note"))
     ResetActionConfiguration.type = Types::ResetActionConfiguration
     ResetAlarmActionRequest.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "requestId", traits: {"smithy.api#required" => {}}))
@@ -318,7 +318,7 @@ module Aws::IoTEventsData
     ResetAlarmActionRequest.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, name: "keyValue"))
     ResetAlarmActionRequest.add_member(:note, ::Smithy::Schema::Shapes::MemberShape.new(target: Note, name: "note"))
     ResetAlarmActionRequest.type = Types::ResetAlarmActionRequest
-    ResetAlarmActionRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResetAlarmActionRequest, name: "member")
+    ResetAlarmActionRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResetAlarmActionRequest, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     RuleEvaluation.add_member(:simple_rule_evaluation, ::Smithy::Schema::Shapes::MemberShape.new(target: SimpleRuleEvaluation, name: "simpleRuleEvaluation"))
@@ -338,7 +338,7 @@ module Aws::IoTEventsData
     SnoozeAlarmActionRequest.add_member(:note, ::Smithy::Schema::Shapes::MemberShape.new(target: Note, name: "note"))
     SnoozeAlarmActionRequest.add_member(:snooze_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: SnoozeDuration, name: "snoozeDuration", traits: {"smithy.api#required" => {}}))
     SnoozeAlarmActionRequest.type = Types::SnoozeAlarmActionRequest
-    SnoozeAlarmActionRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnoozeAlarmActionRequest, name: "member")
+    SnoozeAlarmActionRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SnoozeAlarmActionRequest, name: "member"))
     StateChangeConfiguration.add_member(:trigger_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggerType, name: "triggerType"))
     StateChangeConfiguration.type = Types::StateChangeConfiguration
     SystemEvent.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "eventType"))
@@ -352,8 +352,8 @@ module Aws::IoTEventsData
     TimerDefinition.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TimerName, name: "name", traits: {"smithy.api#required" => {}}))
     TimerDefinition.add_member(:seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Seconds, name: "seconds", traits: {"smithy.api#required" => {}}))
     TimerDefinition.type = Types::TimerDefinition
-    TimerDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TimerDefinition, name: "member")
-    Timers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Timer, name: "member")
+    TimerDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimerDefinition, name: "member"))
+    Timers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Timer, name: "member"))
     TimestampValue.add_member(:time_in_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochMilliTimestamp, name: "timeInMillis"))
     TimestampValue.type = Types::TimestampValue
     TriggerType.add_member(:snooze_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SNOOZE_TIMEOUT", traits: {"smithy.api#enumValue" => "SNOOZE_TIMEOUT"}))
@@ -362,15 +362,15 @@ module Aws::IoTEventsData
     UpdateDetectorRequest.add_member(:key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyValue, name: "keyValue"))
     UpdateDetectorRequest.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: DetectorStateDefinition, name: "state", traits: {"smithy.api#required" => {}}))
     UpdateDetectorRequest.type = Types::UpdateDetectorRequest
-    UpdateDetectorRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateDetectorRequest, name: "member")
+    UpdateDetectorRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateDetectorRequest, name: "member"))
     Variable.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableName, name: "name", traits: {"smithy.api#required" => {}}))
     Variable.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableValue, name: "value", traits: {"smithy.api#required" => {}}))
     Variable.type = Types::Variable
     VariableDefinition.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableName, name: "name", traits: {"smithy.api#required" => {}}))
     VariableDefinition.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableValue, name: "value", traits: {"smithy.api#required" => {}}))
     VariableDefinition.type = Types::VariableDefinition
-    VariableDefinitions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: VariableDefinition, name: "member")
-    Variables.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Variable, name: "member")
+    VariableDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableDefinition, name: "member"))
+    Variables.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Variable, name: "member"))
 
     IotColumboDataService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.ioteventsdata#IotColumboDataService"

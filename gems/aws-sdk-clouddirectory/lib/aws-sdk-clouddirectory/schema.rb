@@ -359,7 +359,7 @@ module Aws::CloudDirectory
     ApplySchemaResponse.add_member(:applied_schema_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "AppliedSchemaArn"))
     ApplySchemaResponse.add_member(:directory_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "DirectoryArn"))
     ApplySchemaResponse.type = Types::ApplySchemaResponse
-    Arns.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    Arns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     AttachObjectRequest.add_member(:directory_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "DirectoryArn", traits: {"smithy.api#httpHeader" => "x-amz-data-partition", "smithy.api#required" => {}}))
     AttachObjectRequest.add_member(:parent_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectReference, name: "ParentReference", traits: {"smithy.api#required" => {}}))
     AttachObjectRequest.add_member(:child_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectReference, name: "ChildReference", traits: {"smithy.api#required" => {}}))
@@ -393,13 +393,13 @@ module Aws::CloudDirectory
     AttributeKeyAndValue.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKey, name: "Key", traits: {"smithy.api#required" => {}}))
     AttributeKeyAndValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TypedAttributeValue, name: "Value", traits: {"smithy.api#required" => {}}))
     AttributeKeyAndValue.type = Types::AttributeKeyAndValue
-    AttributeKeyAndValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKeyAndValue, name: "member")
-    AttributeKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKey, name: "member")
+    AttributeKeyAndValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKeyAndValue, name: "member"))
+    AttributeKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKey, name: "member"))
     AttributeNameAndValue.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "AttributeName", traits: {"smithy.api#required" => {}}))
     AttributeNameAndValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TypedAttributeValue, name: "Value", traits: {"smithy.api#required" => {}}))
     AttributeNameAndValue.type = Types::AttributeNameAndValue
-    AttributeNameAndValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameAndValue, name: "member")
-    AttributeNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "member")
+    AttributeNameAndValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameAndValue, name: "member"))
+    AttributeNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "member"))
     BatchAddFacetToObject.add_member(:schema_facet, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaFacet, name: "SchemaFacet", traits: {"smithy.api#required" => {}}))
     BatchAddFacetToObject.add_member(:object_attribute_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKeyAndValueList, name: "ObjectAttributeList", traits: {"smithy.api#required" => {}}))
     BatchAddFacetToObject.add_member(:object_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectReference, name: "ObjectReference", traits: {"smithy.api#required" => {}}))
@@ -594,11 +594,11 @@ module Aws::CloudDirectory
     BatchReadOperation.add_member(:list_incoming_typed_links, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchListIncomingTypedLinks, name: "ListIncomingTypedLinks"))
     BatchReadOperation.add_member(:get_link_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetLinkAttributes, name: "GetLinkAttributes"))
     BatchReadOperation.type = Types::BatchReadOperation
-    BatchReadOperationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchReadOperation, name: "member")
+    BatchReadOperationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchReadOperation, name: "member"))
     BatchReadOperationResponse.add_member(:successful_response, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchReadSuccessfulResponse, name: "SuccessfulResponse"))
     BatchReadOperationResponse.add_member(:exception_response, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchReadException, name: "ExceptionResponse"))
     BatchReadOperationResponse.type = Types::BatchReadOperationResponse
-    BatchReadOperationResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchReadOperationResponse, name: "member")
+    BatchReadOperationResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchReadOperationResponse, name: "member"))
     BatchReadRequest.add_member(:directory_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "DirectoryArn", traits: {"smithy.api#httpHeader" => "x-amz-data-partition", "smithy.api#required" => {}}))
     BatchReadRequest.add_member(:operations, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchReadOperationList, name: "Operations", traits: {"smithy.api#required" => {}}))
     BatchReadRequest.add_member(:consistency_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsistencyLevel, name: "ConsistencyLevel", traits: {"smithy.api#httpHeader" => "x-amz-consistency-level"}))
@@ -671,7 +671,7 @@ module Aws::CloudDirectory
     BatchWriteOperation.add_member(:detach_typed_link, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDetachTypedLink, name: "DetachTypedLink"))
     BatchWriteOperation.add_member(:update_link_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateLinkAttributes, name: "UpdateLinkAttributes"))
     BatchWriteOperation.type = Types::BatchWriteOperation
-    BatchWriteOperationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchWriteOperation, name: "member")
+    BatchWriteOperationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchWriteOperation, name: "member"))
     BatchWriteOperationResponse.add_member(:create_object, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateObjectResponse, name: "CreateObject"))
     BatchWriteOperationResponse.add_member(:attach_object, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAttachObjectResponse, name: "AttachObject"))
     BatchWriteOperationResponse.add_member(:detach_object, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDetachObjectResponse, name: "DetachObject"))
@@ -688,7 +688,7 @@ module Aws::CloudDirectory
     BatchWriteOperationResponse.add_member(:detach_typed_link, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDetachTypedLinkResponse, name: "DetachTypedLink"))
     BatchWriteOperationResponse.add_member(:update_link_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateLinkAttributesResponse, name: "UpdateLinkAttributes"))
     BatchWriteOperationResponse.type = Types::BatchWriteOperationResponse
-    BatchWriteOperationResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchWriteOperationResponse, name: "member")
+    BatchWriteOperationResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchWriteOperationResponse, name: "member"))
     BatchWriteRequest.add_member(:directory_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "DirectoryArn", traits: {"smithy.api#httpHeader" => "x-amz-data-partition", "smithy.api#required" => {}}))
     BatchWriteRequest.add_member(:operations, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchWriteOperationList, name: "Operations", traits: {"smithy.api#required" => {}}))
     BatchWriteRequest.type = Types::BatchWriteRequest
@@ -786,7 +786,7 @@ module Aws::CloudDirectory
     DirectoryAlreadyExistsException.type = Types::DirectoryAlreadyExistsException
     DirectoryDeletedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     DirectoryDeletedException.type = Types::DirectoryDeletedException
-    DirectoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Directory, name: "member")
+    DirectoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Directory, name: "member"))
     DirectoryNotDisabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     DirectoryNotDisabledException.type = Types::DirectoryNotDisabledException
     DirectoryNotEnabledException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
@@ -818,7 +818,7 @@ module Aws::CloudDirectory
     FacetAttributeDefinition.add_member(:is_immutable, ::Smithy::Schema::Shapes::MemberShape.new(target: Bool, name: "IsImmutable", traits: {"smithy.api#default" => false}))
     FacetAttributeDefinition.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleMap, name: "Rules"))
     FacetAttributeDefinition.type = Types::FacetAttributeDefinition
-    FacetAttributeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FacetAttribute, name: "member")
+    FacetAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FacetAttribute, name: "member"))
     FacetAttributeReference.add_member(:target_facet_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FacetName, name: "TargetFacetName", traits: {"smithy.api#required" => {}}))
     FacetAttributeReference.add_member(:target_attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "TargetAttributeName", traits: {"smithy.api#required" => {}}))
     FacetAttributeReference.type = Types::FacetAttributeReference
@@ -831,10 +831,10 @@ module Aws::CloudDirectory
     FacetAttributeUpdate.add_member(:attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: FacetAttribute, name: "Attribute"))
     FacetAttributeUpdate.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateActionType, name: "Action"))
     FacetAttributeUpdate.type = Types::FacetAttributeUpdate
-    FacetAttributeUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FacetAttributeUpdate, name: "member")
+    FacetAttributeUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FacetAttributeUpdate, name: "member"))
     FacetInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     FacetInUseException.type = Types::FacetInUseException
-    FacetNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FacetName, name: "member")
+    FacetNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FacetName, name: "member"))
     FacetNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     FacetNotFoundException.type = Types::FacetNotFoundException
     FacetStyle.add_member(:static, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATIC", traits: {"smithy.api#enumValue" => "STATIC"}))
@@ -891,7 +891,7 @@ module Aws::CloudDirectory
     IndexAttachment.add_member(:indexed_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKeyAndValueList, name: "IndexedAttributes"))
     IndexAttachment.add_member(:object_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectIdentifier, name: "ObjectIdentifier"))
     IndexAttachment.type = Types::IndexAttachment
-    IndexAttachmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IndexAttachment, name: "member")
+    IndexAttachmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexAttachment, name: "member"))
     IndexedAttributeMissingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     IndexedAttributeMissingException.type = Types::IndexedAttributeMissingException
     InternalServiceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
@@ -918,11 +918,11 @@ module Aws::CloudDirectory
     LinkAttributeUpdate.add_member(:attribute_key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKey, name: "AttributeKey"))
     LinkAttributeUpdate.add_member(:attribute_action, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkAttributeAction, name: "AttributeAction"))
     LinkAttributeUpdate.type = Types::LinkAttributeUpdate
-    LinkAttributeUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LinkAttributeUpdate, name: "member")
+    LinkAttributeUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkAttributeUpdate, name: "member"))
     LinkNameAlreadyInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     LinkNameAlreadyInUseException.type = Types::LinkNameAlreadyInUseException
-    LinkNameToObjectIdentifierMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: LinkName, name: "key")
-    LinkNameToObjectIdentifierMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectIdentifier, name: "value")
+    LinkNameToObjectIdentifierMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkName, name: "key"))
+    LinkNameToObjectIdentifierMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectIdentifier, name: "value"))
     ListAppliedSchemaArnsRequest.add_member(:directory_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "DirectoryArn", traits: {"smithy.api#required" => {}}))
     ListAppliedSchemaArnsRequest.add_member(:schema_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "SchemaArn"))
     ListAppliedSchemaArnsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
@@ -1114,18 +1114,18 @@ module Aws::CloudDirectory
     ObjectAttributeRange.add_member(:attribute_key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKey, name: "AttributeKey"))
     ObjectAttributeRange.add_member(:range, ::Smithy::Schema::Shapes::MemberShape.new(target: TypedAttributeValueRange, name: "Range"))
     ObjectAttributeRange.type = Types::ObjectAttributeRange
-    ObjectAttributeRangeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectAttributeRange, name: "member")
+    ObjectAttributeRangeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectAttributeRange, name: "member"))
     ObjectAttributeUpdate.add_member(:object_attribute_key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKey, name: "ObjectAttributeKey"))
     ObjectAttributeUpdate.add_member(:object_attribute_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectAttributeAction, name: "ObjectAttributeAction"))
     ObjectAttributeUpdate.type = Types::ObjectAttributeUpdate
-    ObjectAttributeUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectAttributeUpdate, name: "member")
-    ObjectIdentifierAndLinkNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectIdentifierAndLinkNameTuple, name: "member")
+    ObjectAttributeUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectAttributeUpdate, name: "member"))
+    ObjectIdentifierAndLinkNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectIdentifierAndLinkNameTuple, name: "member"))
     ObjectIdentifierAndLinkNameTuple.add_member(:object_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectIdentifier, name: "ObjectIdentifier"))
     ObjectIdentifierAndLinkNameTuple.add_member(:link_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkName, name: "LinkName"))
     ObjectIdentifierAndLinkNameTuple.type = Types::ObjectIdentifierAndLinkNameTuple
-    ObjectIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectIdentifier, name: "member")
-    ObjectIdentifierToLinkNameMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectIdentifier, name: "key")
-    ObjectIdentifierToLinkNameMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: LinkName, name: "value")
+    ObjectIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectIdentifier, name: "member"))
+    ObjectIdentifierToLinkNameMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectIdentifier, name: "key"))
+    ObjectIdentifierToLinkNameMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkName, name: "value"))
     ObjectNotDetachedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     ObjectNotDetachedException.type = Types::ObjectNotDetachedException
     ObjectReference.add_member(:selector, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectorObjectReference, name: "Selector"))
@@ -1137,16 +1137,16 @@ module Aws::CloudDirectory
     PathToObjectIdentifiers.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: PathString, name: "Path"))
     PathToObjectIdentifiers.add_member(:object_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectIdentifierList, name: "ObjectIdentifiers"))
     PathToObjectIdentifiers.type = Types::PathToObjectIdentifiers
-    PathToObjectIdentifiersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PathToObjectIdentifiers, name: "member")
+    PathToObjectIdentifiersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PathToObjectIdentifiers, name: "member"))
     PolicyAttachment.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectIdentifier, name: "PolicyId"))
     PolicyAttachment.add_member(:object_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectIdentifier, name: "ObjectIdentifier"))
     PolicyAttachment.add_member(:policy_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyType, name: "PolicyType"))
     PolicyAttachment.type = Types::PolicyAttachment
-    PolicyAttachmentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyAttachment, name: "member")
+    PolicyAttachmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyAttachment, name: "member"))
     PolicyToPath.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: PathString, name: "Path"))
     PolicyToPath.add_member(:policies, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyAttachmentList, name: "Policies"))
     PolicyToPath.type = Types::PolicyToPath
-    PolicyToPathList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyToPath, name: "member")
+    PolicyToPathList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyToPath, name: "member"))
     PublishSchemaRequest.add_member(:development_schema_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "DevelopmentSchemaArn", traits: {"smithy.api#httpHeader" => "x-amz-data-partition", "smithy.api#required" => {}}))
     PublishSchemaRequest.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "Version", traits: {"smithy.api#required" => {}}))
     PublishSchemaRequest.add_member(:minor_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "MinorVersion"))
@@ -1178,10 +1178,10 @@ module Aws::CloudDirectory
     Rule.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleType, name: "Type"))
     Rule.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleParameterMap, name: "Parameters"))
     Rule.type = Types::Rule
-    RuleMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleKey, name: "key")
-    RuleMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "value")
-    RuleParameterMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleParameterKey, name: "key")
-    RuleParameterMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleParameterValue, name: "value")
+    RuleMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleKey, name: "key"))
+    RuleMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "value"))
+    RuleParameterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleParameterKey, name: "key"))
+    RuleParameterMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleParameterValue, name: "value"))
     RuleType.add_member(:binary_length, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BINARY_LENGTH", traits: {"smithy.api#enumValue" => "BINARY_LENGTH"}))
     RuleType.add_member(:number_comparison, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NUMBER_COMPARISON", traits: {"smithy.api#enumValue" => "NUMBER_COMPARISON"}))
     RuleType.add_member(:string_from_set, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING_FROM_SET", traits: {"smithy.api#enumValue" => "STRING_FROM_SET"}))
@@ -1193,14 +1193,14 @@ module Aws::CloudDirectory
     SchemaFacet.add_member(:schema_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "SchemaArn"))
     SchemaFacet.add_member(:facet_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FacetName, name: "FacetName"))
     SchemaFacet.type = Types::SchemaFacet
-    SchemaFacetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaFacet, name: "member")
+    SchemaFacetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaFacet, name: "member"))
     StillContainsLinksException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     StillContainsLinksException.type = Types::StillContainsLinksException
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -1224,11 +1224,11 @@ module Aws::CloudDirectory
     TypedLinkAttributeDefinition.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleMap, name: "Rules"))
     TypedLinkAttributeDefinition.add_member(:required_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: RequiredAttributeBehavior, name: "RequiredBehavior", traits: {"smithy.api#required" => {}}))
     TypedLinkAttributeDefinition.type = Types::TypedLinkAttributeDefinition
-    TypedLinkAttributeDefinitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TypedLinkAttributeDefinition, name: "member")
+    TypedLinkAttributeDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TypedLinkAttributeDefinition, name: "member"))
     TypedLinkAttributeRange.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "AttributeName"))
     TypedLinkAttributeRange.add_member(:range, ::Smithy::Schema::Shapes::MemberShape.new(target: TypedAttributeValueRange, name: "Range", traits: {"smithy.api#required" => {}}))
     TypedLinkAttributeRange.type = Types::TypedLinkAttributeRange
-    TypedLinkAttributeRangeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TypedLinkAttributeRange, name: "member")
+    TypedLinkAttributeRangeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TypedLinkAttributeRange, name: "member"))
     TypedLinkFacet.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypedLinkName, name: "Name", traits: {"smithy.api#required" => {}}))
     TypedLinkFacet.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: TypedLinkAttributeDefinitionList, name: "Attributes", traits: {"smithy.api#required" => {}}))
     TypedLinkFacet.add_member(:identity_attribute_order, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameList, name: "IdentityAttributeOrder", traits: {"smithy.api#required" => {}}))
@@ -1236,8 +1236,8 @@ module Aws::CloudDirectory
     TypedLinkFacetAttributeUpdate.add_member(:attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: TypedLinkAttributeDefinition, name: "Attribute", traits: {"smithy.api#required" => {}}))
     TypedLinkFacetAttributeUpdate.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateActionType, name: "Action", traits: {"smithy.api#required" => {}}))
     TypedLinkFacetAttributeUpdate.type = Types::TypedLinkFacetAttributeUpdate
-    TypedLinkFacetAttributeUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TypedLinkFacetAttributeUpdate, name: "member")
-    TypedLinkNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TypedLinkName, name: "member")
+    TypedLinkFacetAttributeUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TypedLinkFacetAttributeUpdate, name: "member"))
+    TypedLinkNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TypedLinkName, name: "member"))
     TypedLinkSchemaAndFacetName.add_member(:schema_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "SchemaArn", traits: {"smithy.api#required" => {}}))
     TypedLinkSchemaAndFacetName.add_member(:typed_link_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TypedLinkName, name: "TypedLinkName", traits: {"smithy.api#required" => {}}))
     TypedLinkSchemaAndFacetName.type = Types::TypedLinkSchemaAndFacetName
@@ -1246,7 +1246,7 @@ module Aws::CloudDirectory
     TypedLinkSpecifier.add_member(:target_object_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectReference, name: "TargetObjectReference", traits: {"smithy.api#required" => {}}))
     TypedLinkSpecifier.add_member(:identity_attribute_values, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeNameAndValueList, name: "IdentityAttributeValues", traits: {"smithy.api#required" => {}}))
     TypedLinkSpecifier.type = Types::TypedLinkSpecifier
-    TypedLinkSpecifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TypedLinkSpecifier, name: "member")
+    TypedLinkSpecifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TypedLinkSpecifier, name: "member"))
     UnsupportedIndexTypeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     UnsupportedIndexTypeException.type = Types::UnsupportedIndexTypeException
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))

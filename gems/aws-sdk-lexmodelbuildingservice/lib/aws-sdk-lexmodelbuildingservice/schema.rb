@@ -250,7 +250,7 @@ module Aws::LexModelBuildingService
     BotAliasMetadata.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "checksum"))
     BotAliasMetadata.add_member(:conversation_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ConversationLogsResponse, name: "conversationLogs"))
     BotAliasMetadata.type = Types::BotAliasMetadata
-    BotAliasMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasMetadata, name: "member")
+    BotAliasMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasMetadata, name: "member"))
     BotChannelAssociation.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotChannelName, name: "name"))
     BotChannelAssociation.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     BotChannelAssociation.add_member(:bot_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AliasName, name: "botAlias"))
@@ -261,7 +261,7 @@ module Aws::LexModelBuildingService
     BotChannelAssociation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelStatus, name: "status"))
     BotChannelAssociation.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "failureReason"))
     BotChannelAssociation.type = Types::BotChannelAssociation
-    BotChannelAssociationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BotChannelAssociation, name: "member")
+    BotChannelAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BotChannelAssociation, name: "member"))
     BotMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BotName, name: "name"))
     BotMetadata.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     BotMetadata.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "status"))
@@ -269,21 +269,21 @@ module Aws::LexModelBuildingService
     BotMetadata.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdDate"))
     BotMetadata.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version"))
     BotMetadata.type = Types::BotMetadata
-    BotMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BotMetadata, name: "member")
-    BotVersions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "member")
+    BotMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BotMetadata, name: "member"))
+    BotVersions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "member"))
     BuiltinIntentMetadata.add_member(:signature, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinIntentSignature, name: "signature"))
     BuiltinIntentMetadata.add_member(:supported_locales, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleList, name: "supportedLocales"))
     BuiltinIntentMetadata.type = Types::BuiltinIntentMetadata
-    BuiltinIntentMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinIntentMetadata, name: "member")
+    BuiltinIntentMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinIntentMetadata, name: "member"))
     BuiltinIntentSlot.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     BuiltinIntentSlot.type = Types::BuiltinIntentSlot
-    BuiltinIntentSlotList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinIntentSlot, name: "member")
+    BuiltinIntentSlotList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinIntentSlot, name: "member"))
     BuiltinSlotTypeMetadata.add_member(:signature, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinSlotTypeSignature, name: "signature"))
     BuiltinSlotTypeMetadata.add_member(:supported_locales, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleList, name: "supportedLocales"))
     BuiltinSlotTypeMetadata.type = Types::BuiltinSlotTypeMetadata
-    BuiltinSlotTypeMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinSlotTypeMetadata, name: "member")
-    ChannelConfigurationMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key")
-    ChannelConfigurationMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value")
+    BuiltinSlotTypeMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltinSlotTypeMetadata, name: "member"))
+    ChannelConfigurationMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    ChannelConfigurationMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     ChannelStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     ChannelStatus.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
     ChannelStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -392,7 +392,7 @@ module Aws::LexModelBuildingService
     EnumerationValue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "value", traits: {"smithy.api#required" => {}}))
     EnumerationValue.add_member(:synonyms, ::Smithy::Schema::Shapes::MemberShape.new(target: SynonymList, name: "synonyms"))
     EnumerationValue.type = Types::EnumerationValue
-    EnumerationValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EnumerationValue, name: "member")
+    EnumerationValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnumerationValue, name: "member"))
     ExportStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     ExportStatus.add_member(:ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "READY", traits: {"smithy.api#enumValue" => "READY"}))
     ExportStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -629,19 +629,19 @@ module Aws::LexModelBuildingService
     ImportStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     InputContext.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: InputContextName, name: "name", traits: {"smithy.api#required" => {}}))
     InputContext.type = Types::InputContext
-    InputContextList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InputContext, name: "member")
+    InputContextList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InputContext, name: "member"))
     Intent.add_member(:intent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentName, name: "intentName", traits: {"smithy.api#required" => {}}))
     Intent.add_member(:intent_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "intentVersion", traits: {"smithy.api#required" => {}}))
     Intent.type = Types::Intent
-    IntentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Intent, name: "member")
+    IntentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Intent, name: "member"))
     IntentMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentName, name: "name"))
     IntentMetadata.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     IntentMetadata.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedDate"))
     IntentMetadata.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdDate"))
     IntentMetadata.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version"))
     IntentMetadata.type = Types::IntentMetadata
-    IntentMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IntentMetadata, name: "member")
-    IntentUtteranceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Utterance, name: "member")
+    IntentMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentMetadata, name: "member"))
+    IntentUtteranceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Utterance, name: "member"))
     InternalFailureException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     InternalFailureException.type = Types::InternalFailureException
     KendraConfiguration.add_member(:kendra_index, ::Smithy::Schema::Shapes::MemberShape.new(target: KendraIndexArn, name: "kendraIndex", traits: {"smithy.api#required" => {}}))
@@ -651,12 +651,12 @@ module Aws::LexModelBuildingService
     LimitExceededException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     LimitExceededException.type = Types::LimitExceededException
-    ListOfUtterance.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UtteranceData, name: "member")
+    ListOfUtterance.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UtteranceData, name: "member"))
     ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
-    ListsOfUtterances.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UtteranceList, name: "member")
+    ListsOfUtterances.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UtteranceList, name: "member"))
     Locale.add_member(:de_de, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DE_DE", traits: {"smithy.api#enumValue" => "de-DE"}))
     Locale.add_member(:en_au, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EN_AU", traits: {"smithy.api#enumValue" => "en-AU"}))
     Locale.add_member(:en_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EN_GB", traits: {"smithy.api#enumValue" => "en-GB"}))
@@ -670,20 +670,20 @@ module Aws::LexModelBuildingService
     Locale.add_member(:it_it, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IT_IT", traits: {"smithy.api#enumValue" => "it-IT"}))
     Locale.add_member(:ja_jp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JA_JP", traits: {"smithy.api#enumValue" => "ja-JP"}))
     Locale.add_member(:ko_kr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KO_KR", traits: {"smithy.api#enumValue" => "ko-KR"}))
-    LocaleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Locale, name: "member")
+    LocaleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Locale, name: "member"))
     LogSettingsRequest.add_member(:log_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogType, name: "logType", traits: {"smithy.api#required" => {}}))
     LogSettingsRequest.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "destination", traits: {"smithy.api#required" => {}}))
     LogSettingsRequest.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "kmsKeyArn"))
     LogSettingsRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     LogSettingsRequest.type = Types::LogSettingsRequest
-    LogSettingsRequestList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogSettingsRequest, name: "member")
+    LogSettingsRequestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogSettingsRequest, name: "member"))
     LogSettingsResponse.add_member(:log_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogType, name: "logType"))
     LogSettingsResponse.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "destination"))
     LogSettingsResponse.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "kmsKeyArn"))
     LogSettingsResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn"))
     LogSettingsResponse.add_member(:resource_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePrefix, name: "resourcePrefix"))
     LogSettingsResponse.type = Types::LogSettingsResponse
-    LogSettingsResponseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogSettingsResponse, name: "member")
+    LogSettingsResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogSettingsResponse, name: "member"))
     LogType.add_member(:audio, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUDIO", traits: {"smithy.api#enumValue" => "AUDIO"}))
     LogType.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXT", traits: {"smithy.api#enumValue" => "TEXT"}))
     MergeStrategy.add_member(:overwrite_latest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OVERWRITE_LATEST", traits: {"smithy.api#enumValue" => "OVERWRITE_LATEST"}))
@@ -692,17 +692,17 @@ module Aws::LexModelBuildingService
     Message.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentString, name: "content", traits: {"smithy.api#required" => {}}))
     Message.add_member(:group_number, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNumber, name: "groupNumber"))
     Message.type = Types::Message
-    MessageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "member")
+    MessageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "member"))
     MigrationAlert.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationAlertType, name: "type"))
     MigrationAlert.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationAlertMessage, name: "message"))
     MigrationAlert.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationAlertDetails, name: "details"))
     MigrationAlert.add_member(:reference_ur_ls, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationAlertReferenceURLs, name: "referenceURLs"))
     MigrationAlert.type = Types::MigrationAlert
-    MigrationAlertDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationAlertDetail, name: "member")
-    MigrationAlertReferenceURLs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationAlertReferenceURL, name: "member")
+    MigrationAlertDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationAlertDetail, name: "member"))
+    MigrationAlertReferenceURLs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationAlertReferenceURL, name: "member"))
     MigrationAlertType.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
     MigrationAlertType.add_member(:warn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WARN", traits: {"smithy.api#enumValue" => "WARN"}))
-    MigrationAlerts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationAlert, name: "member")
+    MigrationAlerts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationAlert, name: "member"))
     MigrationSortAttribute.add_member(:v1_bot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "V1_BOT_NAME", traits: {"smithy.api#enumValue" => "V1_BOT_NAME"}))
     MigrationSortAttribute.add_member(:migration_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIGRATION_DATE_TIME", traits: {"smithy.api#enumValue" => "MIGRATION_DATE_TIME"}))
     MigrationStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
@@ -720,7 +720,7 @@ module Aws::LexModelBuildingService
     MigrationSummary.add_member(:migration_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationStrategy, name: "migrationStrategy"))
     MigrationSummary.add_member(:migration_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "migrationTimestamp"))
     MigrationSummary.type = Types::MigrationSummary
-    MigrationSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationSummary, name: "member")
+    MigrationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationSummary, name: "member"))
     NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     NotFoundException.type = Types::NotFoundException
     ObfuscationSetting.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
@@ -729,7 +729,7 @@ module Aws::LexModelBuildingService
     OutputContext.add_member(:time_to_live_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextTimeToLiveInSeconds, name: "timeToLiveInSeconds", traits: {"smithy.api#required" => {}}))
     OutputContext.add_member(:turns_to_live, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextTurnsToLive, name: "turnsToLive", traits: {"smithy.api#required" => {}}))
     OutputContext.type = Types::OutputContext
-    OutputContextList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OutputContext, name: "member")
+    OutputContextList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputContext, name: "member"))
     PreconditionFailedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     PreconditionFailedException.type = Types::PreconditionFailedException
     ProcessBehavior.add_member(:save, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAVE", traits: {"smithy.api#enumValue" => "SAVE"}))
@@ -881,23 +881,23 @@ module Aws::LexModelBuildingService
     SlotConstraint.add_member(:optional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPTIONAL", traits: {"smithy.api#enumValue" => "Optional"}))
     SlotDefaultValue.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotDefaultValueString, name: "defaultValue", traits: {"smithy.api#required" => {}}))
     SlotDefaultValue.type = Types::SlotDefaultValue
-    SlotDefaultValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlotDefaultValue, name: "member")
+    SlotDefaultValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotDefaultValue, name: "member"))
     SlotDefaultValueSpec.add_member(:default_value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotDefaultValueList, name: "defaultValueList", traits: {"smithy.api#required" => {}}))
     SlotDefaultValueSpec.type = Types::SlotDefaultValueSpec
-    SlotList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Slot, name: "member")
+    SlotList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Slot, name: "member"))
     SlotTypeConfiguration.add_member(:regex_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeRegexConfiguration, name: "regexConfiguration"))
     SlotTypeConfiguration.type = Types::SlotTypeConfiguration
-    SlotTypeConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeConfiguration, name: "member")
+    SlotTypeConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeConfiguration, name: "member"))
     SlotTypeMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeName, name: "name"))
     SlotTypeMetadata.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     SlotTypeMetadata.add_member(:last_updated_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedDate"))
     SlotTypeMetadata.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdDate"))
     SlotTypeMetadata.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version"))
     SlotTypeMetadata.type = Types::SlotTypeMetadata
-    SlotTypeMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeMetadata, name: "member")
+    SlotTypeMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotTypeMetadata, name: "member"))
     SlotTypeRegexConfiguration.add_member(:pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: RegexPattern, name: "pattern", traits: {"smithy.api#required" => {}}))
     SlotTypeRegexConfiguration.type = Types::SlotTypeRegexConfiguration
-    SlotUtteranceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Utterance, name: "member")
+    SlotUtteranceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Utterance, name: "member"))
     SlotValueSelectionStrategy.add_member(:original_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ORIGINAL_VALUE", traits: {"smithy.api#enumValue" => "ORIGINAL_VALUE"}))
     SlotValueSelectionStrategy.add_member(:top_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOP_RESOLUTION", traits: {"smithy.api#enumValue" => "TOP_RESOLUTION"}))
     SortOrder.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASCENDING", traits: {"smithy.api#enumValue" => "ASCENDING"}))
@@ -940,13 +940,13 @@ module Aws::LexModelBuildingService
     Status.add_member(:not_built, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_BUILT", traits: {"smithy.api#enumValue" => "NOT_BUILT"}))
     StatusType.add_member(:detected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DETECTED", traits: {"smithy.api#enumValue" => "Detected"}))
     StatusType.add_member(:missed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISSED", traits: {"smithy.api#enumValue" => "Missed"}))
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    SynonymList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    SynonymList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest

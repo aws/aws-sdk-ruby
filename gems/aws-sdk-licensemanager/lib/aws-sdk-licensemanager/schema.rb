@@ -257,8 +257,8 @@ module Aws::LicenseManager
     AllowedOperation.add_member(:extend_consumption_license, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXTEND_CONSUMPTION_LICENSE", traits: {"smithy.api#enumValue" => "ExtendConsumptionLicense"}))
     AllowedOperation.add_member(:list_purchased_licenses, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LIST_PURCHASED_LICENSES", traits: {"smithy.api#enumValue" => "ListPurchasedLicenses"}))
     AllowedOperation.add_member(:create_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_TOKEN", traits: {"smithy.api#enumValue" => "CreateToken"}))
-    AllowedOperationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOperation, name: "member")
-    ArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
+    AllowedOperationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOperation, name: "member"))
+    ArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     AuthorizationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     AuthorizationException.type = Types::AuthorizationException
     AutomatedDiscoveryInformation.add_member(:last_run_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "LastRunTime"))
@@ -310,7 +310,7 @@ module Aws::LicenseManager
     ConsumedLicenseSummary.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
     ConsumedLicenseSummary.add_member(:consumed_licenses, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxLong, name: "ConsumedLicenses"))
     ConsumedLicenseSummary.type = Types::ConsumedLicenseSummary
-    ConsumedLicenseSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumedLicenseSummary, name: "member")
+    ConsumedLicenseSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConsumedLicenseSummary, name: "member"))
     ConsumptionConfiguration.add_member(:renew_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RenewType, name: "RenewType"))
     ConsumptionConfiguration.add_member(:provisional_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionalConfiguration, name: "ProvisionalConfiguration"))
     ConsumptionConfiguration.add_member(:borrow_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BorrowConfiguration, name: "BorrowConfiguration"))
@@ -450,7 +450,7 @@ module Aws::LicenseManager
     EntitlementData.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     EntitlementData.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementDataUnit, name: "Unit", traits: {"smithy.api#required" => {}}))
     EntitlementData.type = Types::EntitlementData
-    EntitlementDataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementData, name: "member")
+    EntitlementDataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementData, name: "member"))
     EntitlementDataUnit.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COUNT", traits: {"smithy.api#enumValue" => "Count"}))
     EntitlementDataUnit.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "None"}))
     EntitlementDataUnit.add_member(:seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECONDS", traits: {"smithy.api#enumValue" => "Seconds"}))
@@ -478,7 +478,7 @@ module Aws::LicenseManager
     EntitlementDataUnit.add_member(:gigabits_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GIGABITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Gigabits/Second"}))
     EntitlementDataUnit.add_member(:terabits_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERABITS_PER_SECOND", traits: {"smithy.api#enumValue" => "Terabits/Second"}))
     EntitlementDataUnit.add_member(:count_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COUNT_PER_SECOND", traits: {"smithy.api#enumValue" => "Count/Second"}))
-    EntitlementList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Entitlement, name: "member")
+    EntitlementList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Entitlement, name: "member"))
     EntitlementNotAllowedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     EntitlementNotAllowedException.type = Types::EntitlementNotAllowedException
     EntitlementUnit.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COUNT", traits: {"smithy.api#enumValue" => "Count"}))
@@ -513,7 +513,7 @@ module Aws::LicenseManager
     EntitlementUsage.add_member(:max_count, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MaxCount"))
     EntitlementUsage.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementDataUnit, name: "Unit", traits: {"smithy.api#required" => {}}))
     EntitlementUsage.type = Types::EntitlementUsage
-    EntitlementUsageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementUsage, name: "member")
+    EntitlementUsageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementUsage, name: "member"))
     ExtendLicenseConsumptionRequest.add_member(:license_consumption_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LicenseConsumptionToken", traits: {"smithy.api#required" => {}}))
     ExtendLicenseConsumptionRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "DryRun", traits: {"smithy.api#default" => false}))
     ExtendLicenseConsumptionRequest.type = Types::ExtendLicenseConsumptionRequest
@@ -528,9 +528,9 @@ module Aws::LicenseManager
     Filter.type = Types::Filter
     FilterLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     FilterLimitExceededException.type = Types::FilterLimitExceededException
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
-    FilterValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member", traits: {"smithy.api#xmlName" => "item"})
-    Filters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member", traits: {"smithy.api#xmlName" => "item"})
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
+    FilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member", traits: {"smithy.api#xmlName" => "item"}))
+    Filters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     GetAccessTokenRequest.add_member(:token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenString, name: "Token", traits: {"smithy.api#required" => {}}))
     GetAccessTokenRequest.add_member(:token_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize3StringList, name: "TokenProperties"))
     GetAccessTokenRequest.type = Types::GetAccessTokenRequest
@@ -605,7 +605,7 @@ module Aws::LicenseManager
     Grant.add_member(:granted_operations, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOperationList, name: "GrantedOperations", traits: {"smithy.api#required" => {}}))
     Grant.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: Options, name: "Options"))
     Grant.type = Types::Grant
-    GrantList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Grant, name: "member")
+    GrantList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Grant, name: "member"))
     GrantStatus.add_member(:pending_workflow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_WORKFLOW", traits: {"smithy.api#enumValue" => "PENDING_WORKFLOW"}))
     GrantStatus.add_member(:pending_accept, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_ACCEPT", traits: {"smithy.api#enumValue" => "PENDING_ACCEPT"}))
     GrantStatus.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
@@ -631,7 +631,7 @@ module Aws::LicenseManager
     GrantedLicense.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Version"))
     GrantedLicense.add_member(:received_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceivedMetadata, name: "ReceivedMetadata"))
     GrantedLicense.type = Types::GrantedLicense
-    GrantedLicenseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GrantedLicense, name: "member")
+    GrantedLicenseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantedLicense, name: "member"))
     InvalidParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     InvalidParameterValueException.type = Types::InvalidParameterValueException
     InvalidResourceStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
@@ -644,7 +644,7 @@ module Aws::LicenseManager
     InventoryFilterCondition.add_member(:not_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_EQUALS", traits: {"smithy.api#enumValue" => "NOT_EQUALS"}))
     InventoryFilterCondition.add_member(:begins_with, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BEGINS_WITH", traits: {"smithy.api#enumValue" => "BEGINS_WITH"}))
     InventoryFilterCondition.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTAINS", traits: {"smithy.api#enumValue" => "CONTAINS"}))
-    InventoryFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryFilter, name: "member")
+    InventoryFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryFilter, name: "member"))
     Issuer.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#required" => {}}))
     Issuer.add_member(:sign_key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SignKey"))
     Issuer.type = Types::Issuer
@@ -690,7 +690,7 @@ module Aws::LicenseManager
     LicenseConfigurationAssociation.add_member(:association_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "AssociationTime"))
     LicenseConfigurationAssociation.add_member(:ami_association_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AmiAssociationScope"))
     LicenseConfigurationAssociation.type = Types::LicenseConfigurationAssociation
-    LicenseConfigurationAssociations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfigurationAssociation, name: "member")
+    LicenseConfigurationAssociations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfigurationAssociation, name: "member"))
     LicenseConfigurationStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     LicenseConfigurationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     LicenseConfigurationUsage.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn"))
@@ -700,8 +700,8 @@ module Aws::LicenseManager
     LicenseConfigurationUsage.add_member(:association_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "AssociationTime"))
     LicenseConfigurationUsage.add_member(:consumed_licenses, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxLong, name: "ConsumedLicenses"))
     LicenseConfigurationUsage.type = Types::LicenseConfigurationUsage
-    LicenseConfigurationUsageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfigurationUsage, name: "member")
-    LicenseConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfiguration, name: "member")
+    LicenseConfigurationUsageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfigurationUsage, name: "member"))
+    LicenseConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfiguration, name: "member"))
     LicenseConversionContext.add_member(:usage_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageOperation, name: "UsageOperation"))
     LicenseConversionContext.add_member(:product_codes, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCodeList, name: "ProductCodes"))
     LicenseConversionContext.type = Types::LicenseConversionContext
@@ -718,14 +718,14 @@ module Aws::LicenseManager
     LicenseConversionTaskStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     LicenseConversionTaskStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
     LicenseConversionTaskStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
-    LicenseConversionTasks.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConversionTask, name: "member")
+    LicenseConversionTasks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConversionTask, name: "member"))
     LicenseCountingType.add_member(:vcpu, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VCPU", traits: {"smithy.api#enumValue" => "vCPU"}))
     LicenseCountingType.add_member(:instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE", traits: {"smithy.api#enumValue" => "Instance"}))
     LicenseCountingType.add_member(:core, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CORE", traits: {"smithy.api#enumValue" => "Core"}))
     LicenseCountingType.add_member(:socket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOCKET", traits: {"smithy.api#enumValue" => "Socket"}))
     LicenseDeletionStatus.add_member(:pending_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_DELETE", traits: {"smithy.api#enumValue" => "PENDING_DELETE"}))
     LicenseDeletionStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
-    LicenseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: License, name: "member")
+    LicenseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: License, name: "member"))
     LicenseOperationFailure.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn"))
     LicenseOperationFailure.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
     LicenseOperationFailure.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorMessage"))
@@ -735,11 +735,11 @@ module Aws::LicenseManager
     LicenseOperationFailure.add_member(:operation_requested_by, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "OperationRequestedBy"))
     LicenseOperationFailure.add_member(:metadata_list, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataList, name: "MetadataList"))
     LicenseOperationFailure.type = Types::LicenseOperationFailure
-    LicenseOperationFailureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseOperationFailure, name: "member")
+    LicenseOperationFailureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseOperationFailure, name: "member"))
     LicenseSpecification.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LicenseConfigurationArn", traits: {"smithy.api#required" => {}}))
     LicenseSpecification.add_member(:ami_association_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AmiAssociationScope"))
     LicenseSpecification.type = Types::LicenseSpecification
-    LicenseSpecifications.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseSpecification, name: "member")
+    LicenseSpecifications.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseSpecification, name: "member"))
     LicenseStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     LicenseStatus.add_member(:pending_available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_AVAILABLE", traits: {"smithy.api#enumValue" => "PENDING_AVAILABLE"}))
     LicenseStatus.add_member(:deactivated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEACTIVATED", traits: {"smithy.api#enumValue" => "DEACTIVATED"}))
@@ -878,20 +878,20 @@ module Aws::LicenseManager
     ManagedResourceSummary.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
     ManagedResourceSummary.add_member(:association_count, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxLong, name: "AssociationCount"))
     ManagedResourceSummary.type = Types::ManagedResourceSummary
-    ManagedResourceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceSummary, name: "member")
-    MaxSize3StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ManagedResourceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceSummary, name: "member"))
+    MaxSize3StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Metadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     Metadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     Metadata.type = Types::Metadata
-    MetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, name: "member")
+    MetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, name: "member"))
     NoEntitlementsAllowedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     NoEntitlementsAllowedException.type = Types::NoEntitlementsAllowedException
     Options.add_member(:activation_override_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivationOverrideBehavior, name: "ActivationOverrideBehavior"))
     Options.type = Types::Options
     OrganizationConfiguration.add_member(:enable_integration, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableIntegration", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     OrganizationConfiguration.type = Types::OrganizationConfiguration
-    PrincipalArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member")
-    ProductCodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCodeListItem, name: "member")
+    PrincipalArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
+    ProductCodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCodeListItem, name: "member"))
     ProductCodeListItem.add_member(:product_code_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCodeId, name: "ProductCodeId", traits: {"smithy.api#required" => {}}))
     ProductCodeListItem.add_member(:product_code_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductCodeType, name: "ProductCodeType", traits: {"smithy.api#required" => {}}))
     ProductCodeListItem.type = Types::ProductCodeListItem
@@ -903,8 +903,8 @@ module Aws::LicenseManager
     ProductInformationFilter.add_member(:product_information_filter_value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "ProductInformationFilterValue"))
     ProductInformationFilter.add_member(:product_information_filter_comparator, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ProductInformationFilterComparator", traits: {"smithy.api#required" => {}}))
     ProductInformationFilter.type = Types::ProductInformationFilter
-    ProductInformationFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProductInformationFilter, name: "member")
-    ProductInformationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProductInformation, name: "member")
+    ProductInformationFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductInformationFilter, name: "member"))
+    ProductInformationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductInformation, name: "member"))
     ProvisionalConfiguration.add_member(:max_time_to_live_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxInteger, name: "MaxTimeToLiveInMinutes", traits: {"smithy.api#required" => {}}))
     ProvisionalConfiguration.type = Types::ProvisionalConfiguration
     RateLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
@@ -955,10 +955,10 @@ module Aws::LicenseManager
     ReportGenerator.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CreateTime"))
     ReportGenerator.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     ReportGenerator.type = Types::ReportGenerator
-    ReportGeneratorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReportGenerator, name: "member")
+    ReportGeneratorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportGenerator, name: "member"))
     ReportType.add_member(:license_configuration_summary_report, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LICENSE_CONFIGURATION_SUMMARY_REPORT", traits: {"smithy.api#enumValue" => "LicenseConfigurationSummaryReport"}))
     ReportType.add_member(:license_configuration_usage_report, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LICENSE_CONFIGURATION_USAGE_REPORT", traits: {"smithy.api#enumValue" => "LicenseConfigurationUsageReport"}))
-    ReportTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReportType, name: "member")
+    ReportTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportType, name: "member"))
     ResourceInventory.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceId"))
     ResourceInventory.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
     ResourceInventory.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn"))
@@ -966,7 +966,7 @@ module Aws::LicenseManager
     ResourceInventory.add_member(:platform_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PlatformVersion"))
     ResourceInventory.add_member(:resource_owning_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceOwningAccountId"))
     ResourceInventory.type = Types::ResourceInventory
-    ResourceInventoryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceInventory, name: "member")
+    ResourceInventoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceInventory, name: "member"))
     ResourceLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     ResourceLimitExceededException.type = Types::ResourceLimitExceededException
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
@@ -981,12 +981,12 @@ module Aws::LicenseManager
     S3Location.type = Types::S3Location
     ServerInternalException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     ServerInternalException.type = Types::ServerInternalException
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -999,7 +999,7 @@ module Aws::LicenseManager
     TokenData.add_member(:role_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, name: "RoleArns"))
     TokenData.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     TokenData.type = Types::TokenData
-    TokenList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TokenData, name: "member")
+    TokenList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenData, name: "member"))
     TokenType.add_member(:refresh_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REFRESH_TOKEN", traits: {"smithy.api#enumValue" => "REFRESH_TOKEN"}))
     UnsupportedDigitalSignatureMethodException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     UnsupportedDigitalSignatureMethodException.type = Types::UnsupportedDigitalSignatureMethodException

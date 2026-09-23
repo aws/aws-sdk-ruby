@@ -173,8 +173,8 @@ module Aws::SageMakerGeospatial
     AreaOfInterestGeometry.type = Types::AreaOfInterestGeometry
     AssetValue.add_member(:href, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Href"))
     AssetValue.type = Types::AssetValue
-    AssetsMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    AssetsMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: AssetValue, name: "value")
+    AssetsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    AssetsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetValue, name: "value"))
     BandMathConfigInput.add_member(:predefined_indices, ::Smithy::Schema::Shapes::MemberShape.new(target: StringListInput, name: "PredefinedIndices"))
     BandMathConfigInput.add_member(:custom_indices, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomIndicesInput, name: "CustomIndices"))
     BandMathConfigInput.type = Types::BandMathConfigInput
@@ -188,7 +188,7 @@ module Aws::SageMakerGeospatial
     ConflictException.type = Types::ConflictException
     CustomIndicesInput.add_member(:operations, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationsListInput, name: "Operations"))
     CustomIndicesInput.type = Types::CustomIndicesInput
-    DataCollectionsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RasterDataCollectionMetadata, name: "member")
+    DataCollectionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RasterDataCollectionMetadata, name: "member"))
     DeleteEarthObservationJobInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EarthObservationJobArn, name: "Arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteEarthObservationJobInput.type = Types::DeleteEarthObservationJobInput
     DeleteEarthObservationJobOutput.type = Types::DeleteEarthObservationJobOutput
@@ -198,8 +198,8 @@ module Aws::SageMakerGeospatial
     EarthObservationJobErrorDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EarthObservationJobErrorType, name: "Type"))
     EarthObservationJobErrorDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
     EarthObservationJobErrorDetails.type = Types::EarthObservationJobErrorDetails
-    EarthObservationJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListEarthObservationJobOutputConfig, name: "member")
-    EarthObservationJobOutputBands.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OutputBand, name: "member")
+    EarthObservationJobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListEarthObservationJobOutputConfig, name: "member"))
+    EarthObservationJobOutputBands.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputBand, name: "member"))
     EoCloudCoverInput.add_member(:lower_bound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "LowerBound", traits: {"smithy.api#required" => {}}))
     EoCloudCoverInput.add_member(:upper_bound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "UpperBound", traits: {"smithy.api#required" => {}}))
     EoCloudCoverInput.type = Types::EoCloudCoverInput
@@ -243,7 +243,7 @@ module Aws::SageMakerGeospatial
     Filter.add_member(:minimum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "Minimum"))
     Filter.add_member(:maximum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "Maximum"))
     Filter.type = Types::Filter
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     GeoMosaicConfigInput.add_member(:algorithm_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AlgorithmNameGeoMosaic, name: "AlgorithmName"))
     GeoMosaicConfigInput.add_member(:target_bands, ::Smithy::Schema::Shapes::MemberShape.new(target: StringListInput, name: "TargetBands"))
     GeoMosaicConfigInput.type = Types::GeoMosaicConfigInput
@@ -312,7 +312,7 @@ module Aws::SageMakerGeospatial
     GetVectorEnrichmentJobOutput.add_member(:export_error_details, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobExportErrorDetails, name: "ExportErrorDetails"))
     GetVectorEnrichmentJobOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags"))
     GetVectorEnrichmentJobOutput.type = Types::GetVectorEnrichmentJobOutput
-    ImageSourceBandList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    ImageSourceBandList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     InputConfigInput.add_member(:previous_earth_observation_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EarthObservationJobArn, name: "PreviousEarthObservationJobArn"))
     InputConfigInput.add_member(:raster_data_collection_query, ::Smithy::Schema::Shapes::MemberShape.new(target: RasterDataCollectionQueryInput, name: "RasterDataCollectionQuery"))
     InputConfigInput.type = Types::InputConfigInput
@@ -328,7 +328,7 @@ module Aws::SageMakerGeospatial
     ItemSource.add_member(:date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "DateTime", traits: {"smithy.api#required" => {}}))
     ItemSource.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: Properties, name: "Properties"))
     ItemSource.type = Types::ItemSource
-    ItemSourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ItemSource, name: "member")
+    ItemSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemSource, name: "member"))
     JobConfigInput.add_member(:band_math_config, Types::JobConfigInput::BandMathConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: BandMathConfigInput, name: "BandMathConfig"))
     JobConfigInput.add_member(:resampling_config, Types::JobConfigInput::ResamplingConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: ResamplingConfigInput, name: "ResamplingConfig"))
     JobConfigInput.add_member(:temporal_statistics_config, Types::JobConfigInput::TemporalStatisticsConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: TemporalStatisticsConfigInput, name: "TemporalStatisticsConfig"))
@@ -344,9 +344,9 @@ module Aws::SageMakerGeospatial
     LandsatCloudCoverLandInput.add_member(:lower_bound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "LowerBound", traits: {"smithy.api#required" => {}}))
     LandsatCloudCoverLandInput.add_member(:upper_bound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "UpperBound", traits: {"smithy.api#required" => {}}))
     LandsatCloudCoverLandInput.type = Types::LandsatCloudCoverLandInput
-    LinearRing.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "member")
-    LinearRings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LinearRing, name: "member")
-    LinearRingsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LinearRings, name: "member")
+    LinearRing.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "member"))
+    LinearRings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LinearRing, name: "member"))
+    LinearRingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LinearRings, name: "member"))
     ListEarthObservationJobOutputConfig.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Arn", traits: {"smithy.api#required" => {}}))
     ListEarthObservationJobOutputConfig.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name", traits: {"smithy.api#required" => {}}))
     ListEarthObservationJobOutputConfig.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreationTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
@@ -402,7 +402,7 @@ module Aws::SageMakerGeospatial
     Operation.add_member(:equation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Equation", traits: {"smithy.api#required" => {}}))
     Operation.add_member(:output_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputType, name: "OutputType"))
     Operation.type = Types::Operation
-    OperationsListInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, name: "member")
+    OperationsListInput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, name: "member"))
     OutputBand.add_member(:band_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "BandName", traits: {"smithy.api#required" => {}}))
     OutputBand.add_member(:output_data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputType, name: "OutputDataType", traits: {"smithy.api#required" => {}}))
     OutputBand.type = Types::OutputBand
@@ -418,7 +418,7 @@ module Aws::SageMakerGeospatial
     PlatformInput.type = Types::PlatformInput
     PolygonGeometryInput.add_member(:coordinates, ::Smithy::Schema::Shapes::MemberShape.new(target: LinearRings, name: "Coordinates", traits: {"smithy.api#required" => {}}))
     PolygonGeometryInput.type = Types::PolygonGeometryInput
-    Position.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member")
+    Position.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member"))
     Properties.add_member(:eo_cloud_cover, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "EoCloudCover"))
     Properties.add_member(:view_off_nadir, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "ViewOffNadir"))
     Properties.add_member(:view_sun_azimuth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "ViewSunAzimuth"))
@@ -439,7 +439,7 @@ module Aws::SageMakerGeospatial
     PropertyFilters.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyFiltersList, name: "Properties"))
     PropertyFilters.add_member(:logical_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: LogicalOperator, name: "LogicalOperator"))
     PropertyFilters.type = Types::PropertyFilters
-    PropertyFiltersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyFilter, name: "member")
+    PropertyFiltersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyFilter, name: "member"))
     RasterDataCollectionMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name", traits: {"smithy.api#required" => {}}))
     RasterDataCollectionMetadata.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DataCollectionArn, name: "Arn", traits: {"smithy.api#required" => {}}))
     RasterDataCollectionMetadata.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataCollectionType, name: "Type", traits: {"smithy.api#required" => {}}))
@@ -533,19 +533,19 @@ module Aws::SageMakerGeospatial
     StopVectorEnrichmentJobInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobArn, name: "Arn", traits: {"smithy.api#required" => {}}))
     StopVectorEnrichmentJobInput.type = Types::StopVectorEnrichmentJobInput
     StopVectorEnrichmentJobOutput.type = Types::StopVectorEnrichmentJobOutput
-    StringListInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    StringListInput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     TemporalStatisticsConfigInput.add_member(:group_by, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupBy, name: "GroupBy"))
     TemporalStatisticsConfigInput.add_member(:statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: TemporalStatisticsListInput, name: "Statistics", traits: {"smithy.api#required" => {}}))
     TemporalStatisticsConfigInput.add_member(:target_bands, ::Smithy::Schema::Shapes::MemberShape.new(target: StringListInput, name: "TargetBands"))
     TemporalStatisticsConfigInput.type = Types::TemporalStatisticsConfigInput
-    TemporalStatisticsListInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TemporalStatistics, name: "member")
+    TemporalStatisticsListInput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TemporalStatistics, name: "member"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResourceId"))
     ThrottlingException.type = Types::ThrottlingException
@@ -581,7 +581,7 @@ module Aws::SageMakerGeospatial
     VectorEnrichmentJobInputConfig.add_member(:document_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobDocumentType, name: "DocumentType", traits: {"smithy.api#required" => {}}))
     VectorEnrichmentJobInputConfig.add_member(:data_source_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorEnrichmentJobDataSourceConfigInput, name: "DataSourceConfig", traits: {"smithy.api#required" => {}}))
     VectorEnrichmentJobInputConfig.type = Types::VectorEnrichmentJobInputConfig
-    VectorEnrichmentJobList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListVectorEnrichmentJobOutputConfig, name: "member")
+    VectorEnrichmentJobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListVectorEnrichmentJobOutputConfig, name: "member"))
     VectorEnrichmentJobS3Data.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "S3Uri", traits: {"smithy.api#required" => {}}))
     VectorEnrichmentJobS3Data.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKey, name: "KmsKeyId"))
     VectorEnrichmentJobS3Data.type = Types::VectorEnrichmentJobS3Data
@@ -599,7 +599,7 @@ module Aws::SageMakerGeospatial
     ZonalStatisticsConfigInput.add_member(:target_bands, ::Smithy::Schema::Shapes::MemberShape.new(target: StringListInput, name: "TargetBands"))
     ZonalStatisticsConfigInput.add_member(:zone_s3_path_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKey, name: "ZoneS3PathKmsKeyId"))
     ZonalStatisticsConfigInput.type = Types::ZonalStatisticsConfigInput
-    ZonalStatisticsListInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalStatistics, name: "member")
+    ZonalStatisticsListInput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalStatistics, name: "member"))
 
     SageMakerGeospatial = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.sagemakergeospatial#SageMakerGeospatial"

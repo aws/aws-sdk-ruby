@@ -112,20 +112,20 @@ module Aws::CodeGuruSecurity
     BatchGetFindingsError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "errorCode", traits: {"smithy.api#required" => {}}))
     BatchGetFindingsError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     BatchGetFindingsError.type = Types::BatchGetFindingsError
-    BatchGetFindingsErrors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetFindingsError, name: "member")
+    BatchGetFindingsErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetFindingsError, name: "member"))
     BatchGetFindingsRequest.add_member(:finding_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingIdentifiers, name: "findingIdentifiers", traits: {"smithy.api#required" => {}}))
     BatchGetFindingsRequest.type = Types::BatchGetFindingsRequest
     BatchGetFindingsResponse.add_member(:findings, ::Smithy::Schema::Shapes::MemberShape.new(target: Findings, name: "findings", traits: {"smithy.api#required" => {}}))
     BatchGetFindingsResponse.add_member(:failed_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchGetFindingsErrors, name: "failedFindings", traits: {"smithy.api#required" => {}}))
     BatchGetFindingsResponse.type = Types::BatchGetFindingsResponse
-    CategoriesWithMostFindings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryWithFindingNum, name: "member")
+    CategoriesWithMostFindings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryWithFindingNum, name: "member"))
     CategoryWithFindingNum.add_member(:category_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "categoryName"))
     CategoryWithFindingNum.add_member(:finding_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "findingNumber"))
     CategoryWithFindingNum.type = Types::CategoryWithFindingNum
     CodeLine.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "number"))
     CodeLine.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "content"))
     CodeLine.type = Types::CodeLine
-    CodeSnippet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CodeLine, name: "member")
+    CodeSnippet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeLine, name: "member"))
     ConflictException.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorCode", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
@@ -150,7 +150,7 @@ module Aws::CodeGuruSecurity
     CreateUploadUrlResponse.add_member(:request_headers, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestHeaderMap, name: "requestHeaders", traits: {"smithy.api#required" => {}}))
     CreateUploadUrlResponse.add_member(:code_artifact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Uuid, name: "codeArtifactId", traits: {"smithy.api#required" => {}}))
     CreateUploadUrlResponse.type = Types::CreateUploadUrlResponse
-    DetectorTags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    DetectorTags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     EncryptionConfig.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "kmsKeyArn"))
     EncryptionConfig.type = Types::EncryptionConfig
     ErrorCode.add_member(:duplicate_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUPLICATE_IDENTIFIER", traits: {"smithy.api#enumValue" => "DUPLICATE_IDENTIFIER"}))
@@ -184,15 +184,15 @@ module Aws::CodeGuruSecurity
     FindingIdentifier.add_member(:scan_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "scanName", traits: {"smithy.api#required" => {}}))
     FindingIdentifier.add_member(:finding_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "findingId", traits: {"smithy.api#required" => {}}))
     FindingIdentifier.type = Types::FindingIdentifier
-    FindingIdentifiers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FindingIdentifier, name: "member")
+    FindingIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingIdentifier, name: "member"))
     FindingMetricsValuePerSeverity.add_member(:info, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "info"))
     FindingMetricsValuePerSeverity.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "low"))
     FindingMetricsValuePerSeverity.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "medium"))
     FindingMetricsValuePerSeverity.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "high"))
     FindingMetricsValuePerSeverity.add_member(:critical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "critical"))
     FindingMetricsValuePerSeverity.type = Types::FindingMetricsValuePerSeverity
-    Findings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Finding, name: "member")
-    FindingsMetricList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountFindingsMetric, name: "member")
+    Findings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Finding, name: "member"))
+    FindingsMetricList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountFindingsMetric, name: "member"))
     GetAccountConfigurationRequest.type = Types::GetAccountConfigurationRequest
     GetAccountConfigurationResponse.add_member(:encryption_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfig, name: "encryptionConfig", traits: {"smithy.api#required" => {}}))
     GetAccountConfigurationResponse.type = Types::GetAccountConfigurationResponse
@@ -251,13 +251,13 @@ module Aws::CodeGuruSecurity
     Recommendation.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "text"))
     Recommendation.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "url"))
     Recommendation.type = Types::Recommendation
-    ReferenceUrls.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    RelatedVulnerabilities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
+    ReferenceUrls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    RelatedVulnerabilities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     Remediation.add_member(:recommendation, ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendation, name: "recommendation"))
     Remediation.add_member(:suggested_fixes, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestedFixes, name: "suggestedFixes"))
     Remediation.type = Types::Remediation
-    RequestHeaderMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderKey, name: "key")
-    RequestHeaderMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderValue, name: "value")
+    RequestHeaderMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderKey, name: "key"))
+    RequestHeaderMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderValue, name: "value"))
     Resource.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id"))
     Resource.add_member(:sub_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "subResourceId"))
     Resource.type = Types::Resource
@@ -275,7 +275,7 @@ module Aws::CodeGuruSecurity
     ScanState.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "InProgress"}))
     ScanState.add_member(:successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESSFUL", traits: {"smithy.api#enumValue" => "Successful"}))
     ScanState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
-    ScanSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScanSummary, name: "member")
+    ScanSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanSummary, name: "member"))
     ScanSummary.add_member(:scan_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanState, name: "scanState", traits: {"smithy.api#required" => {}}))
     ScanSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
     ScanSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt"))
@@ -285,8 +285,8 @@ module Aws::CodeGuruSecurity
     ScanSummary.type = Types::ScanSummary
     ScanType.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "Standard"}))
     ScanType.add_member(:express, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPRESS", traits: {"smithy.api#enumValue" => "Express"}))
-    ScansWithMostOpenCriticalFindings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScanNameWithFindingNum, name: "member")
-    ScansWithMostOpenFindings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ScanNameWithFindingNum, name: "member")
+    ScansWithMostOpenCriticalFindings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanNameWithFindingNum, name: "member"))
+    ScansWithMostOpenFindings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanNameWithFindingNum, name: "member"))
     Severity.add_member(:critical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CRITICAL", traits: {"smithy.api#enumValue" => "Critical"}))
     Severity.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "High"}))
     Severity.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "Medium"}))
@@ -298,10 +298,10 @@ module Aws::CodeGuruSecurity
     SuggestedFix.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
     SuggestedFix.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "code"))
     SuggestedFix.type = Types::SuggestedFix
-    SuggestedFixes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestedFix, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    SuggestedFixes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestedFix, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanNameArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -327,7 +327,7 @@ module Aws::CodeGuruSecurity
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "unknownOperation"}))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "cannotParse"}))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "fieldValidationFailed"}))

@@ -190,8 +190,8 @@ module Aws::SocialMessaging
     DisassociateWhatsAppBusinessAccountInput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkedWhatsAppBusinessAccountId, name: "id", traits: {"smithy.api#httpQuery" => "id", "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "WabaId"}))
     DisassociateWhatsAppBusinessAccountInput.type = Types::DisassociateWhatsAppBusinessAccountInput
     DisassociateWhatsAppBusinessAccountOutput.type = Types::DisassociateWhatsAppBusinessAccountOutput
-    Filter.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
-    Filter.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    Filter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}}))
+    Filter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}}))
     GetLinkedWhatsAppBusinessAccountInput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkedWhatsAppBusinessAccountId, name: "id", traits: {"smithy.api#httpQuery" => "id", "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "WabaId"}))
     GetLinkedWhatsAppBusinessAccountInput.type = Types::GetLinkedWhatsAppBusinessAccountInput
     GetLinkedWhatsAppBusinessAccountOutput.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkedWhatsAppBusinessAccount, name: "account"))
@@ -215,8 +215,8 @@ module Aws::SocialMessaging
     GetWhatsAppMessageTemplateInput.type = Types::GetWhatsAppMessageTemplateInput
     GetWhatsAppMessageTemplateOutput.add_member(:template, ::Smithy::Schema::Shapes::MemberShape.new(target: MetaTemplate, name: "template"))
     GetWhatsAppMessageTemplateOutput.type = Types::GetWhatsAppMessageTemplateOutput
-    Headers.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key")
-    Headers.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value")
+    Headers.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    Headers.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     InternalServiceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InternalServiceException.type = Types::InternalServiceException
     InvalidParametersException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
@@ -244,8 +244,8 @@ module Aws::SocialMessaging
     LibraryTemplateButtonList.type = Types::LibraryTemplateButtonList
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     LimitExceededException.type = Types::LimitExceededException
-    LinkedAccountWithIncompleteSetup.key = ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppBusinessAccountId, name: "key")
-    LinkedAccountWithIncompleteSetup.value = ::Smithy::Schema::Shapes::MemberShape.new(target: LinkedWhatsAppBusinessAccountIdMetaData, name: "value")
+    LinkedAccountWithIncompleteSetup.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppBusinessAccountId, name: "key"))
+    LinkedAccountWithIncompleteSetup.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkedWhatsAppBusinessAccountIdMetaData, name: "value"))
     LinkedWhatsAppBusinessAccount.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkedWhatsAppBusinessAccountArn, name: "arn", traits: {"smithy.api#required" => {}}))
     LinkedWhatsAppBusinessAccount.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkedWhatsAppBusinessAccountId, name: "id", traits: {"smithy.api#required" => {}}))
     LinkedWhatsAppBusinessAccount.add_member(:waba_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppBusinessAccountId, name: "wabaId", traits: {"smithy.api#required" => {}}))
@@ -268,7 +268,7 @@ module Aws::SocialMessaging
     LinkedWhatsAppBusinessAccountSummary.add_member(:waba_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppBusinessAccountName, name: "wabaName", traits: {"smithy.api#required" => {}}))
     LinkedWhatsAppBusinessAccountSummary.add_member(:event_destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppBusinessAccountEventDestinations, name: "eventDestinations", traits: {"smithy.api#required" => {}}))
     LinkedWhatsAppBusinessAccountSummary.type = Types::LinkedWhatsAppBusinessAccountSummary
-    LinkedWhatsAppBusinessAccountSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LinkedWhatsAppBusinessAccountSummary, name: "member")
+    LinkedWhatsAppBusinessAccountSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkedWhatsAppBusinessAccountSummary, name: "member"))
     ListLinkedWhatsAppBusinessAccountsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListLinkedWhatsAppBusinessAccountsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListLinkedWhatsAppBusinessAccountsInput.type = Types::ListLinkedWhatsAppBusinessAccountsInput
@@ -295,7 +295,7 @@ module Aws::SocialMessaging
     ListWhatsAppTemplateLibraryOutput.add_member(:meta_library_templates, ::Smithy::Schema::Shapes::MemberShape.new(target: MetaLibraryTemplatesList, name: "metaLibraryTemplates"))
     ListWhatsAppTemplateLibraryOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListWhatsAppTemplateLibraryOutput.type = Types::ListWhatsAppTemplateLibraryOutput
-    MetaIndustries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetaIndustry, name: "member")
+    MetaIndustries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetaIndustry, name: "member"))
     MetaLibraryTemplate.add_member(:template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetaTemplateName, name: "templateName", traits: {"smithy.api#required" => {}}))
     MetaLibraryTemplate.add_member(:library_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetaTemplateName, name: "libraryTemplateName", traits: {"smithy.api#required" => {}}))
     MetaLibraryTemplate.add_member(:template_category, ::Smithy::Schema::Shapes::MemberShape.new(target: MetaTemplateCategory, name: "templateCategory", traits: {"smithy.api#required" => {}}))
@@ -303,8 +303,8 @@ module Aws::SocialMessaging
     MetaLibraryTemplate.add_member(:library_template_button_inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: MetaLibraryTemplateButtonInputs, name: "libraryTemplateButtonInputs"))
     MetaLibraryTemplate.add_member(:library_template_body_inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: LibraryTemplateBodyInputs, name: "libraryTemplateBodyInputs"))
     MetaLibraryTemplate.type = Types::MetaLibraryTemplate
-    MetaLibraryTemplateButtonInputs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LibraryTemplateButtonInput, name: "member")
-    MetaLibraryTemplateButtonList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LibraryTemplateButtonList, name: "member")
+    MetaLibraryTemplateButtonInputs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LibraryTemplateButtonInput, name: "member"))
+    MetaLibraryTemplateButtonList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LibraryTemplateButtonList, name: "member"))
     MetaLibraryTemplateDefinition.add_member(:template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetaTemplateName, name: "templateName"))
     MetaLibraryTemplateDefinition.add_member(:template_language, ::Smithy::Schema::Shapes::MemberShape.new(target: MetaTemplateLanguage, name: "templateLanguage"))
     MetaLibraryTemplateDefinition.add_member(:template_category, ::Smithy::Schema::Shapes::MemberShape.new(target: MetaTemplateCategory, name: "templateCategory"))
@@ -316,9 +316,9 @@ module Aws::SocialMessaging
     MetaLibraryTemplateDefinition.add_member(:template_buttons, ::Smithy::Schema::Shapes::MemberShape.new(target: MetaLibraryTemplateButtonList, name: "templateButtons"))
     MetaLibraryTemplateDefinition.add_member(:template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MetaTemplateId, name: "templateId"))
     MetaLibraryTemplateDefinition.type = Types::MetaLibraryTemplateDefinition
-    MetaLibraryTemplatesList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MetaLibraryTemplateDefinition, name: "member")
-    MetaUrlWithSuffixExample.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 30}})
-    MetaUrlWithSuffixExample.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 400}})
+    MetaLibraryTemplatesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetaLibraryTemplateDefinition, name: "member"))
+    MetaUrlWithSuffixExample.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 30}}))
+    MetaUrlWithSuffixExample.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 400}}))
     PostWhatsAppMessageMediaInput.add_member(:origination_phone_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppPhoneNumberId, name: "originationPhoneNumberId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "OriginationPhoneNumberId"}))
     PostWhatsAppMessageMediaInput.add_member(:source_s3_presigned_url, ::Smithy::Schema::Shapes::MemberShape.new(target: S3PresignedUrl, name: "sourceS3PresignedUrl"))
     PostWhatsAppMessageMediaInput.add_member(:source_s3_file, ::Smithy::Schema::Shapes::MemberShape.new(target: S3File, name: "sourceS3File"))
@@ -345,14 +345,14 @@ module Aws::SocialMessaging
     SendWhatsAppMessageInput.type = Types::SendWhatsAppMessageInput
     SendWhatsAppMessageOutput.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "messageId"))
     SendWhatsAppMessageOutput.type = Types::SendWhatsAppMessageOutput
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    SupportedApp.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 30}})
-    SupportedApp.value = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
-    SupportedApps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedApp, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    SupportedApp.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 30}}))
+    SupportedApp.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}}))
+    SupportedApps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SupportedApp, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#length" => {"max" => 256}}))
     Tag.type = Types::Tag
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"aws.api#data" => "tagging", "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -365,7 +365,7 @@ module Aws::SocialMessaging
     TemplateSummary.add_member(:template_language, ::Smithy::Schema::Shapes::MemberShape.new(target: MetaTemplateLanguage, name: "templateLanguage"))
     TemplateSummary.add_member(:template_category, ::Smithy::Schema::Shapes::MemberShape.new(target: MetaTemplateCategory, name: "templateCategory"))
     TemplateSummary.type = Types::TemplateSummary
-    TemplateSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateSummary, name: "member")
+    TemplateSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateSummary, name: "member"))
     ThrottledRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ThrottledRequestException.type = Types::ThrottledRequestException
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"aws.api#data" => "tagging", "smithy.api#required" => {}}))
@@ -386,7 +386,7 @@ module Aws::SocialMessaging
     WabaPhoneNumberSetupFinalization.add_member(:data_localization_region, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, name: "dataLocalizationRegion"))
     WabaPhoneNumberSetupFinalization.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     WabaPhoneNumberSetupFinalization.type = Types::WabaPhoneNumberSetupFinalization
-    WabaPhoneNumberSetupFinalizationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WabaPhoneNumberSetupFinalization, name: "member")
+    WabaPhoneNumberSetupFinalizationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WabaPhoneNumberSetupFinalization, name: "member"))
     WabaSetupFinalization.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppBusinessAccountId, name: "id"))
     WabaSetupFinalization.add_member(:event_destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppBusinessAccountEventDestinations, name: "eventDestinations"))
     WabaSetupFinalization.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
@@ -394,7 +394,7 @@ module Aws::SocialMessaging
     WhatsAppBusinessAccountEventDestination.add_member(:event_destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestinationArn, name: "eventDestinationArn", traits: {"smithy.api#required" => {}}))
     WhatsAppBusinessAccountEventDestination.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "roleArn"))
     WhatsAppBusinessAccountEventDestination.type = Types::WhatsAppBusinessAccountEventDestination
-    WhatsAppBusinessAccountEventDestinations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppBusinessAccountEventDestination, name: "member")
+    WhatsAppBusinessAccountEventDestinations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppBusinessAccountEventDestination, name: "member"))
     WhatsAppPhoneNumberDetail.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkedWhatsAppPhoneNumberArn, name: "arn", traits: {"smithy.api#required" => {}}))
     WhatsAppPhoneNumberDetail.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "phoneNumber", traits: {"smithy.api#required" => {}}))
     WhatsAppPhoneNumberDetail.add_member(:phone_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppPhoneNumberId, name: "phoneNumberId", traits: {"smithy.api#required" => {}}))
@@ -404,7 +404,7 @@ module Aws::SocialMessaging
     WhatsAppPhoneNumberDetail.add_member(:quality_rating, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppPhoneNumberQualityRating, name: "qualityRating", traits: {"smithy.api#required" => {}}))
     WhatsAppPhoneNumberDetail.add_member(:data_localization_region, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, name: "dataLocalizationRegion"))
     WhatsAppPhoneNumberDetail.type = Types::WhatsAppPhoneNumberDetail
-    WhatsAppPhoneNumberDetailList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppPhoneNumberDetail, name: "member")
+    WhatsAppPhoneNumberDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppPhoneNumberDetail, name: "member"))
     WhatsAppPhoneNumberSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkedWhatsAppPhoneNumberArn, name: "arn", traits: {"smithy.api#required" => {}}))
     WhatsAppPhoneNumberSummary.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "phoneNumber", traits: {"smithy.api#required" => {}}))
     WhatsAppPhoneNumberSummary.add_member(:phone_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppPhoneNumberId, name: "phoneNumberId", traits: {"smithy.api#required" => {}}))
@@ -414,7 +414,7 @@ module Aws::SocialMessaging
     WhatsAppPhoneNumberSummary.add_member(:quality_rating, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppPhoneNumberQualityRating, name: "qualityRating", traits: {"smithy.api#required" => {}}))
     WhatsAppPhoneNumberSummary.add_member(:data_localization_region, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, name: "dataLocalizationRegion"))
     WhatsAppPhoneNumberSummary.type = Types::WhatsAppPhoneNumberSummary
-    WhatsAppPhoneNumberSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppPhoneNumberSummary, name: "member")
+    WhatsAppPhoneNumberSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WhatsAppPhoneNumberSummary, name: "member"))
     WhatsAppSetupFinalization.add_member(:associate_in_progress_token, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociateInProgressToken, name: "associateInProgressToken", traits: {"smithy.api#required" => {}}))
     WhatsAppSetupFinalization.add_member(:phone_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: WabaPhoneNumberSetupFinalizationList, name: "phoneNumbers", traits: {"smithy.api#required" => {}}))
     WhatsAppSetupFinalization.add_member(:phone_number_parent, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkedWhatsAppBusinessAccountId, name: "phoneNumberParent"))

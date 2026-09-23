@@ -90,11 +90,11 @@ module Aws::ARCZonalShift
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AllowedWindows.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedWindow, name: "member")
+    AllowedWindows.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedWindow, name: "member"))
     AppliedStatus.add_member(:applied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPLIED", traits: {"smithy.api#enumValue" => "APPLIED"}))
     AppliedStatus.add_member(:not_applied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_APPLIED", traits: {"smithy.api#enumValue" => "NOT_APPLIED"}))
-    AppliedWeights.key = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "key")
-    AppliedWeights.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Weight, name: "value")
+    AppliedWeights.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "key"))
+    AppliedWeights.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Weight, name: "value"))
     AutoshiftAppliedStatus.add_member(:applied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPLIED", traits: {"smithy.api#enumValue" => "APPLIED"}))
     AutoshiftAppliedStatus.add_member(:not_applied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_APPLIED", traits: {"smithy.api#enumValue" => "NOT_APPLIED"}))
     AutoshiftExecutionStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
@@ -105,17 +105,17 @@ module Aws::ARCZonalShift
     AutoshiftInResource.type = Types::AutoshiftInResource
     AutoshiftObserverNotificationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     AutoshiftObserverNotificationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
-    AutoshiftSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutoshiftSummary, name: "member")
+    AutoshiftSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoshiftSummary, name: "member"))
     AutoshiftSummary.add_member(:away_from, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "awayFrom", traits: {"smithy.api#required" => {}}))
     AutoshiftSummary.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpiryTime, name: "endTime"))
     AutoshiftSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTime, name: "startTime", traits: {"smithy.api#required" => {}}))
     AutoshiftSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoshiftExecutionStatus, name: "status", traits: {"smithy.api#required" => {}}))
     AutoshiftSummary.type = Types::AutoshiftSummary
-    AutoshiftsInResource.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutoshiftInResource, name: "member")
-    AvailabilityZones.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "member")
-    BlockedDates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BlockedDate, name: "member")
-    BlockedWindows.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BlockedWindow, name: "member")
-    BlockingAlarms.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ControlCondition, name: "member")
+    AutoshiftsInResource.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoshiftInResource, name: "member"))
+    AvailabilityZones.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "member"))
+    BlockedDates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockedDate, name: "member"))
+    BlockedWindows.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockedWindow, name: "member"))
+    BlockingAlarms.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlCondition, name: "member"))
     CancelPracticeRunRequest.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftId, name: "zonalShiftId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelPracticeRunRequest.type = Types::CancelPracticeRunRequest
     CancelPracticeRunResponse.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftId, name: "zonalShiftId", traits: {"smithy.api#required" => {}}))
@@ -210,7 +210,7 @@ module Aws::ARCZonalShift
     ListZonalShiftsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftSummaries, name: "items"))
     ListZonalShiftsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
     ListZonalShiftsResponse.type = Types::ListZonalShiftsResponse
-    ManagedResourceSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceSummary, name: "member")
+    ManagedResourceSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceSummary, name: "member"))
     ManagedResourceSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "arn"))
     ManagedResourceSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name"))
     ManagedResourceSummary.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZones, name: "availabilityZones", traits: {"smithy.api#required" => {}}))
@@ -220,7 +220,7 @@ module Aws::ARCZonalShift
     ManagedResourceSummary.add_member(:zonal_autoshift_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalAutoshiftStatus, name: "zonalAutoshiftStatus"))
     ManagedResourceSummary.add_member(:practice_run_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalAutoshiftStatus, name: "practiceRunStatus"))
     ManagedResourceSummary.type = Types::ManagedResourceSummary
-    OutcomeAlarms.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ControlCondition, name: "member")
+    OutcomeAlarms.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlCondition, name: "member"))
     PracticeRunConfiguration.add_member(:blocking_alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockingAlarms, name: "blockingAlarms"))
     PracticeRunConfiguration.add_member(:outcome_alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: OutcomeAlarms, name: "outcomeAlarms", traits: {"smithy.api#required" => {}}))
     PracticeRunConfiguration.add_member(:blocked_windows, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockedWindows, name: "blockedWindows"))
@@ -332,7 +332,7 @@ module Aws::ARCZonalShift
     ZonalShiftStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     ZonalShiftStatus.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
     ZonalShiftStatus.add_member(:canceled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELED", traits: {"smithy.api#enumValue" => "CANCELED"}))
-    ZonalShiftSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftSummary, name: "member")
+    ZonalShiftSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftSummary, name: "member"))
     ZonalShiftSummary.add_member(:zonal_shift_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftId, name: "zonalShiftId", traits: {"smithy.api#required" => {}}))
     ZonalShiftSummary.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, name: "resourceIdentifier", traits: {"smithy.api#required" => {}}))
     ZonalShiftSummary.add_member(:away_from, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "awayFrom", traits: {"smithy.api#required" => {}}))
@@ -343,7 +343,7 @@ module Aws::ARCZonalShift
     ZonalShiftSummary.add_member(:shift_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ShiftType, name: "shiftType"))
     ZonalShiftSummary.add_member(:practice_run_outcome, ::Smithy::Schema::Shapes::MemberShape.new(target: PracticeRunOutcome, name: "practiceRunOutcome"))
     ZonalShiftSummary.type = Types::ZonalShiftSummary
-    ZonalShiftsInResource.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftInResource, name: "member")
+    ZonalShiftsInResource.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonalShiftInResource, name: "member"))
 
     PercDataPlane = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.arczonalshift#PercDataPlane"

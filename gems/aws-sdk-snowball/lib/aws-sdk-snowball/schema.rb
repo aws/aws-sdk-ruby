@@ -177,7 +177,7 @@ module Aws::Snowball
     Address.add_member(:is_restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsRestricted", traits: {"smithy.api#default" => false}))
     Address.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressType, name: "Type"))
     Address.type = Types::Address
-    AddressList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Address, name: "member")
+    AddressList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Address, name: "member"))
     AddressType.add_member(:cust_pickup, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUST_PICKUP", traits: {"smithy.api#enumValue" => "CUST_PICKUP"}))
     AddressType.add_member(:aws_ship, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SHIP", traits: {"smithy.api#enumValue" => "AWS_SHIP"}))
     CancelClusterRequest.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterId, name: "ClusterId", traits: {"smithy.api#required" => {}}))
@@ -193,7 +193,7 @@ module Aws::Snowball
     ClusterListEntry.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationDate"))
     ClusterListEntry.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
     ClusterListEntry.type = Types::ClusterListEntry
-    ClusterListEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterListEntry, name: "member")
+    ClusterListEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterListEntry, name: "member"))
     ClusterMetadata.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterId"))
     ClusterMetadata.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
     ClusterMetadata.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyARN, name: "KmsKeyARN"))
@@ -218,7 +218,7 @@ module Aws::Snowball
     CompatibleImage.add_member(:ami_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AmiId"))
     CompatibleImage.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     CompatibleImage.type = Types::CompatibleImage
-    CompatibleImageList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CompatibleImage, name: "member")
+    CompatibleImageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CompatibleImage, name: "member"))
     ConflictException.add_member(:conflict_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ConflictResource"))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ConflictException.type = Types::ConflictException
@@ -288,7 +288,7 @@ module Aws::Snowball
     DependentService.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, name: "ServiceName"))
     DependentService.add_member(:service_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceVersion, name: "ServiceVersion"))
     DependentService.type = Types::DependentService
-    DependentServiceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DependentService, name: "member")
+    DependentServiceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DependentService, name: "member"))
     DescribeAddressRequest.add_member(:address_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressId, name: "AddressId", traits: {"smithy.api#required" => {}}))
     DescribeAddressRequest.type = Types::DescribeAddressRequest
     DescribeAddressResult.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: Address, name: "Address"))
@@ -324,12 +324,12 @@ module Aws::Snowball
     Ec2AmiResource.add_member(:ami_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiId, name: "AmiId", traits: {"smithy.api#required" => {}}))
     Ec2AmiResource.add_member(:snowball_ami_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SnowballAmiId"))
     Ec2AmiResource.type = Types::Ec2AmiResource
-    Ec2AmiResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2AmiResource, name: "member")
+    Ec2AmiResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2AmiResource, name: "member"))
     Ec2RequestFailedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     Ec2RequestFailedException.type = Types::Ec2RequestFailedException
     EventTriggerDefinition.add_member(:event_resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "EventResourceARN"))
     EventTriggerDefinition.type = Types::EventTriggerDefinition
-    EventTriggerDefinitionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventTriggerDefinition, name: "member")
+    EventTriggerDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTriggerDefinition, name: "member"))
     GetJobManifestRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "JobId", traits: {"smithy.api#required" => {}}))
     GetJobManifestRequest.type = Types::GetJobManifestRequest
     GetJobManifestResult.add_member(:manifest_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ManifestURI"))
@@ -372,7 +372,7 @@ module Aws::Snowball
     JobListEntry.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationDate"))
     JobListEntry.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
     JobListEntry.type = Types::JobListEntry
-    JobListEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobListEntry, name: "member")
+    JobListEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobListEntry, name: "member"))
     JobLogs.add_member(:job_completion_report_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "JobCompletionReportURI"))
     JobLogs.add_member(:job_success_log_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "JobSuccessLogURI"))
     JobLogs.add_member(:job_failure_log_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "JobFailureLogURI"))
@@ -403,7 +403,7 @@ module Aws::Snowball
     JobMetadata.add_member(:pickup_details, ::Smithy::Schema::Shapes::MemberShape.new(target: PickupDetails, name: "PickupDetails"))
     JobMetadata.add_member(:snowball_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SnowballId"))
     JobMetadata.type = Types::JobMetadata
-    JobMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobMetadata, name: "member")
+    JobMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobMetadata, name: "member"))
     JobResource.add_member(:s3_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ResourceList, name: "S3Resources"))
     JobResource.add_member(:lambda_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaResourceList, name: "LambdaResources"))
     JobResource.add_member(:ec2_ami_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2AmiResourceList, name: "Ec2AmiResources"))
@@ -421,7 +421,7 @@ module Aws::Snowball
     JobState.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLED", traits: {"smithy.api#enumValue" => "Cancelled"}))
     JobState.add_member(:listing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LISTING", traits: {"smithy.api#enumValue" => "Listing"}))
     JobState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "Pending"}))
-    JobStateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobState, name: "member")
+    JobStateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobState, name: "member"))
     JobType.add_member(:import, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMPORT", traits: {"smithy.api#enumValue" => "IMPORT"}))
     JobType.add_member(:export, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPORT", traits: {"smithy.api#enumValue" => "EXPORT"}))
     JobType.add_member(:local_use, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOCAL_USE", traits: {"smithy.api#enumValue" => "LOCAL_USE"}))
@@ -433,7 +433,7 @@ module Aws::Snowball
     LambdaResource.add_member(:lambda_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "LambdaArn"))
     LambdaResource.add_member(:event_triggers, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTriggerDefinitionList, name: "EventTriggers"))
     LambdaResource.type = Types::LambdaResource
-    LambdaResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaResource, name: "member")
+    LambdaResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaResource, name: "member"))
     ListClusterJobsRequest.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterId, name: "ClusterId", traits: {"smithy.api#required" => {}}))
     ListClusterJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListLimit, name: "MaxResults"))
     ListClusterJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
@@ -481,9 +481,9 @@ module Aws::Snowball
     ListServiceVersionsResult.add_member(:dependent_services, ::Smithy::Schema::Shapes::MemberShape.new(target: DependentServiceList, name: "DependentServices"))
     ListServiceVersionsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     ListServiceVersionsResult.type = Types::ListServiceVersionsResult
-    LongTermPricingAssociatedJobIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "member")
-    LongTermPricingEntryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LongTermPricingListEntry, name: "member")
-    LongTermPricingIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LongTermPricingId, name: "member")
+    LongTermPricingAssociatedJobIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "member"))
+    LongTermPricingEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LongTermPricingListEntry, name: "member"))
+    LongTermPricingIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LongTermPricingId, name: "member"))
     LongTermPricingListEntry.add_member(:long_term_pricing_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LongTermPricingId, name: "LongTermPricingId"))
     LongTermPricingListEntry.add_member(:long_term_pricing_end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LongTermPricingEndDate"))
     LongTermPricingListEntry.add_member(:long_term_pricing_start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LongTermPricingStartDate"))
@@ -533,12 +533,12 @@ module Aws::Snowball
     S3Resource.add_member(:key_range, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyRange, name: "KeyRange"))
     S3Resource.add_member(:target_on_device_services, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetOnDeviceServiceList, name: "TargetOnDeviceServices"))
     S3Resource.type = Types::S3Resource
-    S3ResourceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: S3Resource, name: "member")
+    S3ResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Resource, name: "member"))
     ServiceName.add_member(:kubernetes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KUBERNETES", traits: {"smithy.api#enumValue" => "KUBERNETES"}))
     ServiceName.add_member(:eks_anywhere, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EKS_ANYWHERE", traits: {"smithy.api#enumValue" => "EKS_ANYWHERE"}))
     ServiceVersion.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Version"))
     ServiceVersion.type = Types::ServiceVersion
-    ServiceVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceVersion, name: "member")
+    ServiceVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceVersion, name: "member"))
     Shipment.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     Shipment.add_member(:tracking_number, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TrackingNumber"))
     Shipment.type = Types::Shipment
@@ -586,7 +586,7 @@ module Aws::Snowball
     TargetOnDeviceService.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceServiceName, name: "ServiceName"))
     TargetOnDeviceService.add_member(:transfer_option, ::Smithy::Schema::Shapes::MemberShape.new(target: TransferOption, name: "TransferOption"))
     TargetOnDeviceService.type = Types::TargetOnDeviceService
-    TargetOnDeviceServiceList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetOnDeviceService, name: "member")
+    TargetOnDeviceServiceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetOnDeviceService, name: "member"))
     TaxDocuments.add_member(:ind, ::Smithy::Schema::Shapes::MemberShape.new(target: INDTaxDocuments, name: "IND"))
     TaxDocuments.type = Types::TaxDocuments
     TransferOption.add_member(:import, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMPORT", traits: {"smithy.api#enumValue" => "IMPORT"}))

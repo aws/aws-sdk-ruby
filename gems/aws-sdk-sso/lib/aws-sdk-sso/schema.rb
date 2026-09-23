@@ -39,7 +39,7 @@ module Aws::SSO
     AccountInfo.add_member(:account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountNameType, name: "accountName"))
     AccountInfo.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressType, name: "emailAddress"))
     AccountInfo.type = Types::AccountInfo
-    AccountListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AccountInfo, name: "member")
+    AccountListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountInfo, name: "member"))
     GetRoleCredentialsRequest.add_member(:role_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleNameType, name: "roleName", traits: {"smithy.api#httpQuery" => "role_name", "smithy.api#required" => {}}))
     GetRoleCredentialsRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdType, name: "accountId", traits: {"smithy.api#httpQuery" => "account_id", "smithy.api#required" => {}}))
     GetRoleCredentialsRequest.add_member(:access_token, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessTokenType, name: "accessToken", traits: {"smithy.api#httpHeader" => "x-amz-sso_bearer_token", "smithy.api#required" => {}}))
@@ -75,7 +75,7 @@ module Aws::SSO
     RoleInfo.add_member(:role_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleNameType, name: "roleName"))
     RoleInfo.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdType, name: "accountId"))
     RoleInfo.type = Types::RoleInfo
-    RoleListType.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RoleInfo, name: "member")
+    RoleListType.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleInfo, name: "member"))
     TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "message"))
     TooManyRequestsException.type = Types::TooManyRequestsException
     UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "message"))

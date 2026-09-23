@@ -338,25 +338,25 @@ module Aws::WAF
     ActivatedRule.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: WafRuleType, name: "Type"))
     ActivatedRule.add_member(:excluded_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludedRules, name: "ExcludedRules"))
     ActivatedRule.type = Types::ActivatedRule
-    ActivatedRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActivatedRule, name: "member")
+    ActivatedRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivatedRule, name: "member"))
     ByteMatchSet.add_member(:byte_match_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "ByteMatchSetId", traits: {"smithy.api#required" => {}}))
     ByteMatchSet.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
     ByteMatchSet.add_member(:byte_match_tuples, ::Smithy::Schema::Shapes::MemberShape.new(target: ByteMatchTuples, name: "ByteMatchTuples", traits: {"smithy.api#required" => {}}))
     ByteMatchSet.type = Types::ByteMatchSet
-    ByteMatchSetSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ByteMatchSetSummary, name: "member")
+    ByteMatchSetSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ByteMatchSetSummary, name: "member"))
     ByteMatchSetSummary.add_member(:byte_match_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "ByteMatchSetId", traits: {"smithy.api#required" => {}}))
     ByteMatchSetSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name", traits: {"smithy.api#required" => {}}))
     ByteMatchSetSummary.type = Types::ByteMatchSetSummary
     ByteMatchSetUpdate.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeAction, name: "Action", traits: {"smithy.api#required" => {}}))
     ByteMatchSetUpdate.add_member(:byte_match_tuple, ::Smithy::Schema::Shapes::MemberShape.new(target: ByteMatchTuple, name: "ByteMatchTuple", traits: {"smithy.api#required" => {}}))
     ByteMatchSetUpdate.type = Types::ByteMatchSetUpdate
-    ByteMatchSetUpdates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ByteMatchSetUpdate, name: "member")
+    ByteMatchSetUpdates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ByteMatchSetUpdate, name: "member"))
     ByteMatchTuple.add_member(:field_to_match, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToMatch, name: "FieldToMatch", traits: {"smithy.api#required" => {}}))
     ByteMatchTuple.add_member(:target_string, ::Smithy::Schema::Shapes::MemberShape.new(target: ByteMatchTargetString, name: "TargetString", traits: {"smithy.api#required" => {}}))
     ByteMatchTuple.add_member(:text_transformation, ::Smithy::Schema::Shapes::MemberShape.new(target: TextTransformation, name: "TextTransformation", traits: {"smithy.api#required" => {}}))
     ByteMatchTuple.add_member(:positional_constraint, ::Smithy::Schema::Shapes::MemberShape.new(target: PositionalConstraint, name: "PositionalConstraint", traits: {"smithy.api#required" => {}}))
     ByteMatchTuple.type = Types::ByteMatchTuple
-    ByteMatchTuples.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ByteMatchTuple, name: "member")
+    ByteMatchTuples.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ByteMatchTuple, name: "member"))
     ChangeAction.add_member(:insert, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSERT", traits: {"smithy.api#enumValue" => "INSERT"}))
     ChangeAction.add_member(:delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE", traits: {"smithy.api#enumValue" => "DELETE"}))
     ChangeTokenStatus.add_member(:provisioned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROVISIONED", traits: {"smithy.api#enumValue" => "PROVISIONED"}))
@@ -525,7 +525,7 @@ module Aws::WAF
     DeleteXssMatchSetResponse.type = Types::DeleteXssMatchSetResponse
     ExcludedRule.add_member(:rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "RuleId", traits: {"smithy.api#required" => {}}))
     ExcludedRule.type = Types::ExcludedRule
-    ExcludedRules.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludedRule, name: "member")
+    ExcludedRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludedRule, name: "member"))
     FieldToMatch.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchFieldType, name: "Type", traits: {"smithy.api#required" => {}}))
     FieldToMatch.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchFieldData, name: "Data"))
     FieldToMatch.type = Types::FieldToMatch
@@ -782,19 +782,19 @@ module Aws::WAF
     GeoMatchConstraintValue.add_member(:ye, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "YE", traits: {"smithy.api#enumValue" => "YE"}))
     GeoMatchConstraintValue.add_member(:zm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ZM", traits: {"smithy.api#enumValue" => "ZM"}))
     GeoMatchConstraintValue.add_member(:zw, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ZW", traits: {"smithy.api#enumValue" => "ZW"}))
-    GeoMatchConstraints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GeoMatchConstraint, name: "member")
+    GeoMatchConstraints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoMatchConstraint, name: "member"))
     GeoMatchSet.add_member(:geo_match_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "GeoMatchSetId", traits: {"smithy.api#required" => {}}))
     GeoMatchSet.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
     GeoMatchSet.add_member(:geo_match_constraints, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoMatchConstraints, name: "GeoMatchConstraints", traits: {"smithy.api#required" => {}}))
     GeoMatchSet.type = Types::GeoMatchSet
-    GeoMatchSetSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GeoMatchSetSummary, name: "member")
+    GeoMatchSetSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoMatchSetSummary, name: "member"))
     GeoMatchSetSummary.add_member(:geo_match_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "GeoMatchSetId", traits: {"smithy.api#required" => {}}))
     GeoMatchSetSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name", traits: {"smithy.api#required" => {}}))
     GeoMatchSetSummary.type = Types::GeoMatchSetSummary
     GeoMatchSetUpdate.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeAction, name: "Action", traits: {"smithy.api#required" => {}}))
     GeoMatchSetUpdate.add_member(:geo_match_constraint, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoMatchConstraint, name: "GeoMatchConstraint", traits: {"smithy.api#required" => {}}))
     GeoMatchSetUpdate.type = Types::GeoMatchSetUpdate
-    GeoMatchSetUpdates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GeoMatchSetUpdate, name: "member")
+    GeoMatchSetUpdates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GeoMatchSetUpdate, name: "member"))
     GetByteMatchSetRequest.add_member(:byte_match_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "ByteMatchSetId", traits: {"smithy.api#required" => {}}))
     GetByteMatchSetRequest.type = Types::GetByteMatchSetRequest
     GetByteMatchSetResponse.add_member(:byte_match_set, ::Smithy::Schema::Shapes::MemberShape.new(target: ByteMatchSet, name: "ByteMatchSet"))
@@ -876,7 +876,7 @@ module Aws::WAF
     HTTPHeader.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderName, name: "Name"))
     HTTPHeader.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderValue, name: "Value"))
     HTTPHeader.type = Types::HTTPHeader
-    HTTPHeaders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HTTPHeader, name: "member")
+    HTTPHeaders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HTTPHeader, name: "member"))
     HTTPRequest.add_member(:client_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: IPString, name: "ClientIP"))
     HTTPRequest.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: Country, name: "Country"))
     HTTPRequest.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: URIString, name: "URI"))
@@ -893,15 +893,15 @@ module Aws::WAF
     IPSetDescriptor.type = Types::IPSetDescriptor
     IPSetDescriptorType.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4", traits: {"smithy.api#enumValue" => "IPV4"}))
     IPSetDescriptorType.add_member(:ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV6", traits: {"smithy.api#enumValue" => "IPV6"}))
-    IPSetDescriptors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IPSetDescriptor, name: "member")
-    IPSetSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IPSetSummary, name: "member")
+    IPSetDescriptors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IPSetDescriptor, name: "member"))
+    IPSetSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IPSetSummary, name: "member"))
     IPSetSummary.add_member(:ip_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "IPSetId", traits: {"smithy.api#required" => {}}))
     IPSetSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name", traits: {"smithy.api#required" => {}}))
     IPSetSummary.type = Types::IPSetSummary
     IPSetUpdate.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeAction, name: "Action", traits: {"smithy.api#required" => {}}))
     IPSetUpdate.add_member(:ip_set_descriptor, ::Smithy::Schema::Shapes::MemberShape.new(target: IPSetDescriptor, name: "IPSetDescriptor", traits: {"smithy.api#required" => {}}))
     IPSetUpdate.type = Types::IPSetUpdate
-    IPSetUpdates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IPSetUpdate, name: "member")
+    IPSetUpdates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IPSetUpdate, name: "member"))
     ListActivatedRulesInRuleGroupRequest.add_member(:rule_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "RuleGroupId"))
     ListActivatedRulesInRuleGroupRequest.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: NextMarker, name: "NextMarker"))
     ListActivatedRulesInRuleGroupRequest.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationLimit, name: "Limit", traits: {"smithy.api#default" => 0}))
@@ -1000,13 +1000,13 @@ module Aws::WAF
     ListXssMatchSetsResponse.add_member(:next_marker, ::Smithy::Schema::Shapes::MemberShape.new(target: NextMarker, name: "NextMarker"))
     ListXssMatchSetsResponse.add_member(:xss_match_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: XssMatchSetSummaries, name: "XssMatchSets"))
     ListXssMatchSetsResponse.type = Types::ListXssMatchSetsResponse
-    LogDestinationConfigs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member")
+    LogDestinationConfigs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member"))
     LoggingConfiguration.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     LoggingConfiguration.add_member(:log_destination_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDestinationConfigs, name: "LogDestinationConfigs", traits: {"smithy.api#required" => {}}))
     LoggingConfiguration.add_member(:redacted_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: RedactedFields, name: "RedactedFields"))
     LoggingConfiguration.type = Types::LoggingConfiguration
-    LoggingConfigurations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfiguration, name: "member")
-    ManagedKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedKey, name: "member")
+    LoggingConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfiguration, name: "member"))
+    ManagedKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedKey, name: "member"))
     MatchFieldType.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "URI", traits: {"smithy.api#enumValue" => "URI"}))
     MatchFieldType.add_member(:query_string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUERY_STRING", traits: {"smithy.api#enumValue" => "QUERY_STRING"}))
     MatchFieldType.add_member(:header, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HEADER", traits: {"smithy.api#enumValue" => "HEADER"}))
@@ -1059,7 +1059,7 @@ module Aws::WAF
     PredicateType.add_member(:size_constraint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SIZE_CONSTRAINT", traits: {"smithy.api#enumValue" => "SizeConstraint"}))
     PredicateType.add_member(:xss_match, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "XSS_MATCH", traits: {"smithy.api#enumValue" => "XssMatch"}))
     PredicateType.add_member(:regex_match, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGEX_MATCH", traits: {"smithy.api#enumValue" => "RegexMatch"}))
-    Predicates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Predicate, name: "member")
+    Predicates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Predicate, name: "member"))
     PutLoggingConfigurationRequest.add_member(:logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfiguration, name: "LoggingConfiguration", traits: {"smithy.api#required" => {}}))
     PutLoggingConfigurationRequest.type = Types::PutLoggingConfigurationRequest
     PutLoggingConfigurationResponse.add_member(:logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfiguration, name: "LoggingConfiguration"))
@@ -1076,37 +1076,37 @@ module Aws::WAF
     RateBasedRule.add_member(:rate_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: RateLimit, name: "RateLimit", traits: {"smithy.api#required" => {}}))
     RateBasedRule.type = Types::RateBasedRule
     RateKey.add_member(:ip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IP", traits: {"smithy.api#enumValue" => "IP"}))
-    RedactedFields.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToMatch, name: "member")
+    RedactedFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToMatch, name: "member"))
     RegexMatchSet.add_member(:regex_match_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "RegexMatchSetId"))
     RegexMatchSet.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
     RegexMatchSet.add_member(:regex_match_tuples, ::Smithy::Schema::Shapes::MemberShape.new(target: RegexMatchTuples, name: "RegexMatchTuples"))
     RegexMatchSet.type = Types::RegexMatchSet
-    RegexMatchSetSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegexMatchSetSummary, name: "member")
+    RegexMatchSetSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegexMatchSetSummary, name: "member"))
     RegexMatchSetSummary.add_member(:regex_match_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "RegexMatchSetId", traits: {"smithy.api#required" => {}}))
     RegexMatchSetSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name", traits: {"smithy.api#required" => {}}))
     RegexMatchSetSummary.type = Types::RegexMatchSetSummary
     RegexMatchSetUpdate.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeAction, name: "Action", traits: {"smithy.api#required" => {}}))
     RegexMatchSetUpdate.add_member(:regex_match_tuple, ::Smithy::Schema::Shapes::MemberShape.new(target: RegexMatchTuple, name: "RegexMatchTuple", traits: {"smithy.api#required" => {}}))
     RegexMatchSetUpdate.type = Types::RegexMatchSetUpdate
-    RegexMatchSetUpdates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegexMatchSetUpdate, name: "member")
+    RegexMatchSetUpdates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegexMatchSetUpdate, name: "member"))
     RegexMatchTuple.add_member(:field_to_match, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToMatch, name: "FieldToMatch", traits: {"smithy.api#required" => {}}))
     RegexMatchTuple.add_member(:text_transformation, ::Smithy::Schema::Shapes::MemberShape.new(target: TextTransformation, name: "TextTransformation", traits: {"smithy.api#required" => {}}))
     RegexMatchTuple.add_member(:regex_pattern_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "RegexPatternSetId", traits: {"smithy.api#required" => {}}))
     RegexMatchTuple.type = Types::RegexMatchTuple
-    RegexMatchTuples.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegexMatchTuple, name: "member")
+    RegexMatchTuples.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegexMatchTuple, name: "member"))
     RegexPatternSet.add_member(:regex_pattern_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "RegexPatternSetId", traits: {"smithy.api#required" => {}}))
     RegexPatternSet.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
     RegexPatternSet.add_member(:regex_pattern_strings, ::Smithy::Schema::Shapes::MemberShape.new(target: RegexPatternStrings, name: "RegexPatternStrings", traits: {"smithy.api#required" => {}}))
     RegexPatternSet.type = Types::RegexPatternSet
-    RegexPatternSetSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegexPatternSetSummary, name: "member")
+    RegexPatternSetSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegexPatternSetSummary, name: "member"))
     RegexPatternSetSummary.add_member(:regex_pattern_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "RegexPatternSetId", traits: {"smithy.api#required" => {}}))
     RegexPatternSetSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name", traits: {"smithy.api#required" => {}}))
     RegexPatternSetSummary.type = Types::RegexPatternSetSummary
     RegexPatternSetUpdate.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeAction, name: "Action", traits: {"smithy.api#required" => {}}))
     RegexPatternSetUpdate.add_member(:regex_pattern_string, ::Smithy::Schema::Shapes::MemberShape.new(target: RegexPatternString, name: "RegexPatternString", traits: {"smithy.api#required" => {}}))
     RegexPatternSetUpdate.type = Types::RegexPatternSetUpdate
-    RegexPatternSetUpdates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegexPatternSetUpdate, name: "member")
-    RegexPatternStrings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegexPatternString, name: "member")
+    RegexPatternSetUpdates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegexPatternSetUpdate, name: "member"))
+    RegexPatternStrings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegexPatternString, name: "member"))
     Rule.add_member(:rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "RuleId", traits: {"smithy.api#required" => {}}))
     Rule.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
     Rule.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "MetricName"))
@@ -1116,29 +1116,29 @@ module Aws::WAF
     RuleGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
     RuleGroup.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "MetricName"))
     RuleGroup.type = Types::RuleGroup
-    RuleGroupSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSummary, name: "member")
+    RuleGroupSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupSummary, name: "member"))
     RuleGroupSummary.add_member(:rule_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "RuleGroupId", traits: {"smithy.api#required" => {}}))
     RuleGroupSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name", traits: {"smithy.api#required" => {}}))
     RuleGroupSummary.type = Types::RuleGroupSummary
     RuleGroupUpdate.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeAction, name: "Action", traits: {"smithy.api#required" => {}}))
     RuleGroupUpdate.add_member(:activated_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivatedRule, name: "ActivatedRule", traits: {"smithy.api#required" => {}}))
     RuleGroupUpdate.type = Types::RuleGroupUpdate
-    RuleGroupUpdates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupUpdate, name: "member")
-    RuleSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSummary, name: "member")
+    RuleGroupUpdates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupUpdate, name: "member"))
+    RuleSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSummary, name: "member"))
     RuleSummary.add_member(:rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "RuleId", traits: {"smithy.api#required" => {}}))
     RuleSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name", traits: {"smithy.api#required" => {}}))
     RuleSummary.type = Types::RuleSummary
     RuleUpdate.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeAction, name: "Action", traits: {"smithy.api#required" => {}}))
     RuleUpdate.add_member(:predicate, ::Smithy::Schema::Shapes::MemberShape.new(target: Predicate, name: "Predicate", traits: {"smithy.api#required" => {}}))
     RuleUpdate.type = Types::RuleUpdate
-    RuleUpdates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RuleUpdate, name: "member")
+    RuleUpdates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleUpdate, name: "member"))
     SampledHTTPRequest.add_member(:request, ::Smithy::Schema::Shapes::MemberShape.new(target: HTTPRequest, name: "Request", traits: {"smithy.api#required" => {}}))
     SampledHTTPRequest.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleWeight, name: "Weight", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     SampledHTTPRequest.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "Timestamp"))
     SampledHTTPRequest.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "Action"))
     SampledHTTPRequest.add_member(:rule_within_rule_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "RuleWithinRuleGroup"))
     SampledHTTPRequest.type = Types::SampledHTTPRequest
-    SampledHTTPRequests.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SampledHTTPRequest, name: "member")
+    SampledHTTPRequests.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SampledHTTPRequest, name: "member"))
     SizeConstraint.add_member(:field_to_match, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToMatch, name: "FieldToMatch", traits: {"smithy.api#required" => {}}))
     SizeConstraint.add_member(:text_transformation, ::Smithy::Schema::Shapes::MemberShape.new(target: TextTransformation, name: "TextTransformation", traits: {"smithy.api#required" => {}}))
     SizeConstraint.add_member(:comparison_operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ComparisonOperator, name: "ComparisonOperator", traits: {"smithy.api#required" => {}}))
@@ -1148,32 +1148,32 @@ module Aws::WAF
     SizeConstraintSet.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
     SizeConstraintSet.add_member(:size_constraints, ::Smithy::Schema::Shapes::MemberShape.new(target: SizeConstraints, name: "SizeConstraints", traits: {"smithy.api#required" => {}}))
     SizeConstraintSet.type = Types::SizeConstraintSet
-    SizeConstraintSetSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SizeConstraintSetSummary, name: "member")
+    SizeConstraintSetSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SizeConstraintSetSummary, name: "member"))
     SizeConstraintSetSummary.add_member(:size_constraint_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "SizeConstraintSetId", traits: {"smithy.api#required" => {}}))
     SizeConstraintSetSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name", traits: {"smithy.api#required" => {}}))
     SizeConstraintSetSummary.type = Types::SizeConstraintSetSummary
     SizeConstraintSetUpdate.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeAction, name: "Action", traits: {"smithy.api#required" => {}}))
     SizeConstraintSetUpdate.add_member(:size_constraint, ::Smithy::Schema::Shapes::MemberShape.new(target: SizeConstraint, name: "SizeConstraint", traits: {"smithy.api#required" => {}}))
     SizeConstraintSetUpdate.type = Types::SizeConstraintSetUpdate
-    SizeConstraintSetUpdates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SizeConstraintSetUpdate, name: "member")
-    SizeConstraints.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SizeConstraint, name: "member")
+    SizeConstraintSetUpdates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SizeConstraintSetUpdate, name: "member"))
+    SizeConstraints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SizeConstraint, name: "member"))
     SqlInjectionMatchSet.add_member(:sql_injection_match_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "SqlInjectionMatchSetId", traits: {"smithy.api#required" => {}}))
     SqlInjectionMatchSet.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
     SqlInjectionMatchSet.add_member(:sql_injection_match_tuples, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlInjectionMatchTuples, name: "SqlInjectionMatchTuples", traits: {"smithy.api#required" => {}}))
     SqlInjectionMatchSet.type = Types::SqlInjectionMatchSet
-    SqlInjectionMatchSetSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SqlInjectionMatchSetSummary, name: "member")
+    SqlInjectionMatchSetSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlInjectionMatchSetSummary, name: "member"))
     SqlInjectionMatchSetSummary.add_member(:sql_injection_match_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "SqlInjectionMatchSetId", traits: {"smithy.api#required" => {}}))
     SqlInjectionMatchSetSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name", traits: {"smithy.api#required" => {}}))
     SqlInjectionMatchSetSummary.type = Types::SqlInjectionMatchSetSummary
     SqlInjectionMatchSetUpdate.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeAction, name: "Action", traits: {"smithy.api#required" => {}}))
     SqlInjectionMatchSetUpdate.add_member(:sql_injection_match_tuple, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlInjectionMatchTuple, name: "SqlInjectionMatchTuple", traits: {"smithy.api#required" => {}}))
     SqlInjectionMatchSetUpdate.type = Types::SqlInjectionMatchSetUpdate
-    SqlInjectionMatchSetUpdates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SqlInjectionMatchSetUpdate, name: "member")
+    SqlInjectionMatchSetUpdates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlInjectionMatchSetUpdate, name: "member"))
     SqlInjectionMatchTuple.add_member(:field_to_match, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToMatch, name: "FieldToMatch", traits: {"smithy.api#required" => {}}))
     SqlInjectionMatchTuple.add_member(:text_transformation, ::Smithy::Schema::Shapes::MemberShape.new(target: TextTransformation, name: "TextTransformation", traits: {"smithy.api#required" => {}}))
     SqlInjectionMatchTuple.type = Types::SqlInjectionMatchTuple
-    SqlInjectionMatchTuples.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SqlInjectionMatchTuple, name: "member")
-    SubscribedRuleGroupSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubscribedRuleGroupSummary, name: "member")
+    SqlInjectionMatchTuples.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlInjectionMatchTuple, name: "member"))
+    SubscribedRuleGroupSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscribedRuleGroupSummary, name: "member"))
     SubscribedRuleGroupSummary.add_member(:rule_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "RuleGroupId", traits: {"smithy.api#required" => {}}))
     SubscribedRuleGroupSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name", traits: {"smithy.api#required" => {}}))
     SubscribedRuleGroupSummary.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "MetricName", traits: {"smithy.api#required" => {}}))
@@ -1184,8 +1184,8 @@ module Aws::WAF
     TagInfoForResource.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceARN"))
     TagInfoForResource.add_member(:tag_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "TagList"))
     TagInfoForResource.type = Types::TagInfoForResource
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -1337,30 +1337,30 @@ module Aws::WAF
     WebACL.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivatedRules, name: "Rules", traits: {"smithy.api#required" => {}}))
     WebACL.add_member(:web_acl_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "WebACLArn"))
     WebACL.type = Types::WebACL
-    WebACLSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WebACLSummary, name: "member")
+    WebACLSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WebACLSummary, name: "member"))
     WebACLSummary.add_member(:web_acl_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "WebACLId", traits: {"smithy.api#required" => {}}))
     WebACLSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name", traits: {"smithy.api#required" => {}}))
     WebACLSummary.type = Types::WebACLSummary
     WebACLUpdate.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeAction, name: "Action", traits: {"smithy.api#required" => {}}))
     WebACLUpdate.add_member(:activated_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivatedRule, name: "ActivatedRule", traits: {"smithy.api#required" => {}}))
     WebACLUpdate.type = Types::WebACLUpdate
-    WebACLUpdates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: WebACLUpdate, name: "member")
+    WebACLUpdates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WebACLUpdate, name: "member"))
     XssMatchSet.add_member(:xss_match_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "XssMatchSetId", traits: {"smithy.api#required" => {}}))
     XssMatchSet.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name"))
     XssMatchSet.add_member(:xss_match_tuples, ::Smithy::Schema::Shapes::MemberShape.new(target: XssMatchTuples, name: "XssMatchTuples", traits: {"smithy.api#required" => {}}))
     XssMatchSet.type = Types::XssMatchSet
-    XssMatchSetSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XssMatchSetSummary, name: "member")
+    XssMatchSetSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XssMatchSetSummary, name: "member"))
     XssMatchSetSummary.add_member(:xss_match_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "XssMatchSetId", traits: {"smithy.api#required" => {}}))
     XssMatchSetSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "Name", traits: {"smithy.api#required" => {}}))
     XssMatchSetSummary.type = Types::XssMatchSetSummary
     XssMatchSetUpdate.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeAction, name: "Action", traits: {"smithy.api#required" => {}}))
     XssMatchSetUpdate.add_member(:xss_match_tuple, ::Smithy::Schema::Shapes::MemberShape.new(target: XssMatchTuple, name: "XssMatchTuple", traits: {"smithy.api#required" => {}}))
     XssMatchSetUpdate.type = Types::XssMatchSetUpdate
-    XssMatchSetUpdates.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XssMatchSetUpdate, name: "member")
+    XssMatchSetUpdates.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XssMatchSetUpdate, name: "member"))
     XssMatchTuple.add_member(:field_to_match, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldToMatch, name: "FieldToMatch", traits: {"smithy.api#required" => {}}))
     XssMatchTuple.add_member(:text_transformation, ::Smithy::Schema::Shapes::MemberShape.new(target: TextTransformation, name: "TextTransformation", traits: {"smithy.api#required" => {}}))
     XssMatchTuple.type = Types::XssMatchTuple
-    XssMatchTuples.member = ::Smithy::Schema::Shapes::MemberShape.new(target: XssMatchTuple, name: "member")
+    XssMatchTuples.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: XssMatchTuple, name: "member"))
 
     AWSWAF20150824 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.waf#AWSWAF_20150824"

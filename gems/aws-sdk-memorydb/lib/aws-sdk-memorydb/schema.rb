@@ -265,9 +265,9 @@ module Aws::MemoryDB
     ACL.type = Types::ACL
     ACLAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ACLAlreadyExistsFault.type = Types::ACLAlreadyExistsFault
-    ACLClusterNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    ACLList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ACL, name: "member")
-    ACLNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ACLName, name: "member")
+    ACLClusterNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    ACLList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ACL, name: "member"))
+    ACLNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ACLName, name: "member"))
     ACLNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ACLNotFoundFault.type = Types::ACLNotFoundFault
     ACLPendingChanges.add_member(:user_names_to_remove, ::Smithy::Schema::Shapes::MemberShape.new(target: UserNameList, name: "UserNamesToRemove"))
@@ -349,8 +349,8 @@ module Aws::MemoryDB
     ClusterConfiguration.add_member(:multi_region_parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MultiRegionParameterGroupName"))
     ClusterConfiguration.add_member(:multi_region_cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MultiRegionClusterName"))
     ClusterConfiguration.type = Types::ClusterConfiguration
-    ClusterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "member", traits: {"smithy.api#xmlName" => "Cluster"})
-    ClusterNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ClusterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "member", traits: {"smithy.api#xmlName" => "Cluster"}))
+    ClusterNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ClusterNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ClusterNotFoundFault.type = Types::ClusterNotFoundFault
     ClusterPendingUpdates.add_member(:resharding, ::Smithy::Schema::Shapes::MemberShape.new(target: ReshardingStatus, name: "Resharding"))
@@ -599,13 +599,13 @@ module Aws::MemoryDB
     EngineVersionInfo.add_member(:engine_patch_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EnginePatchVersion"))
     EngineVersionInfo.add_member(:parameter_group_family, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ParameterGroupFamily"))
     EngineVersionInfo.type = Types::EngineVersionInfo
-    EngineVersionInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EngineVersionInfo, name: "member")
+    EngineVersionInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineVersionInfo, name: "member"))
     Event.add_member(:source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceName"))
     Event.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceType, name: "SourceType"))
     Event.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     Event.add_member(:date, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "Date"))
     Event.type = Types::Event
-    EventList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member", traits: {"smithy.api#xmlName" => "Event"})
+    EventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Event, name: "member", traits: {"smithy.api#xmlName" => "Event"}))
     FailoverShardRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterName", traits: {"smithy.api#required" => {}}))
     FailoverShardRequest.add_member(:shard_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ShardName", traits: {"smithy.api#required" => {}}))
     FailoverShardRequest.type = Types::FailoverShardRequest
@@ -614,8 +614,8 @@ module Aws::MemoryDB
     Filter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, name: "Name", traits: {"smithy.api#required" => {}}))
     Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, name: "Values", traits: {"smithy.api#required" => {}}))
     Filter.type = Types::Filter
-    FilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member")
-    FilterValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member")
+    FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
+    FilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member"))
     InputAuthenticationType.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASSWORD", traits: {"smithy.api#enumValue" => "password"}))
     InputAuthenticationType.add_member(:iam, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IAM", traits: {"smithy.api#enumValue" => "iam"}))
     InsufficientClusterCapacityFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -650,7 +650,7 @@ module Aws::MemoryDB
     InvalidVPCNetworkStateFault.type = Types::InvalidVPCNetworkStateFault
     IpDiscovery.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4", traits: {"smithy.api#enumValue" => "ipv4"}))
     IpDiscovery.add_member(:ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV6", traits: {"smithy.api#enumValue" => "ipv6"}))
-    KeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    KeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ListAllowedMultiRegionClusterUpdatesRequest.add_member(:multi_region_cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MultiRegionClusterName", traits: {"smithy.api#required" => {}}))
     ListAllowedMultiRegionClusterUpdatesRequest.type = Types::ListAllowedMultiRegionClusterUpdatesRequest
     ListAllowedMultiRegionClusterUpdatesResponse.add_member(:scale_up_node_types, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeTypeList, name: "ScaleUpNodeTypes"))
@@ -679,7 +679,7 @@ module Aws::MemoryDB
     MultiRegionCluster.type = Types::MultiRegionCluster
     MultiRegionClusterAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     MultiRegionClusterAlreadyExistsFault.type = Types::MultiRegionClusterAlreadyExistsFault
-    MultiRegionClusterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MultiRegionCluster, name: "member")
+    MultiRegionClusterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiRegionCluster, name: "member"))
     MultiRegionClusterNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     MultiRegionClusterNotFoundFault.type = Types::MultiRegionClusterNotFoundFault
     MultiRegionParameterGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -687,7 +687,7 @@ module Aws::MemoryDB
     NetworkType.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4", traits: {"smithy.api#enumValue" => "ipv4"}))
     NetworkType.add_member(:ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV6", traits: {"smithy.api#enumValue" => "ipv6"}))
     NetworkType.add_member(:dual_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUAL_STACK", traits: {"smithy.api#enumValue" => "dual_stack"}))
-    NetworkTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, name: "member")
+    NetworkTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, name: "member"))
     NoOperationFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     NoOperationFault.type = Types::NoOperationFault
     Node.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
@@ -696,12 +696,12 @@ module Aws::MemoryDB
     Node.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "CreateTime"))
     Node.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "Endpoint"))
     Node.type = Types::Node
-    NodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Node, name: "member", traits: {"smithy.api#xmlName" => "Node"})
+    NodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Node, name: "member", traits: {"smithy.api#xmlName" => "Node"}))
     NodeQuotaForClusterExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     NodeQuotaForClusterExceededFault.type = Types::NodeQuotaForClusterExceededFault
     NodeQuotaForCustomerExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     NodeQuotaForCustomerExceededFault.type = Types::NodeQuotaForCustomerExceededFault
-    NodeTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    NodeTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Parameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     Parameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     Parameter.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
@@ -716,22 +716,22 @@ module Aws::MemoryDB
     ParameterGroup.type = Types::ParameterGroup
     ParameterGroupAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ParameterGroupAlreadyExistsFault.type = Types::ParameterGroupAlreadyExistsFault
-    ParameterGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterGroup, name: "member", traits: {"smithy.api#xmlName" => "ParameterGroup"})
+    ParameterGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterGroup, name: "member", traits: {"smithy.api#xmlName" => "ParameterGroup"}))
     ParameterGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ParameterGroupNotFoundFault.type = Types::ParameterGroupNotFoundFault
     ParameterGroupQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ParameterGroupQuotaExceededFault.type = Types::ParameterGroupQuotaExceededFault
-    ParameterNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ParameterNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ParameterNameValue.add_member(:parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ParameterName"))
     ParameterNameValue.add_member(:parameter_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ParameterValue"))
     ParameterNameValue.type = Types::ParameterNameValue
-    ParameterNameValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterNameValue, name: "member", traits: {"smithy.api#xmlName" => "ParameterNameValue"})
-    ParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Parameter, name: "member", traits: {"smithy.api#xmlName" => "Parameter"})
-    PasswordListInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    ParameterNameValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterNameValue, name: "member", traits: {"smithy.api#xmlName" => "ParameterNameValue"}))
+    ParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Parameter, name: "member", traits: {"smithy.api#xmlName" => "Parameter"}))
+    PasswordListInput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     PendingModifiedServiceUpdate.add_member(:service_update_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServiceUpdateName"))
     PendingModifiedServiceUpdate.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUpdateStatus, name: "Status"))
     PendingModifiedServiceUpdate.type = Types::PendingModifiedServiceUpdate
-    PendingModifiedServiceUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PendingModifiedServiceUpdate, name: "member", traits: {"smithy.api#xmlName" => "PendingModifiedServiceUpdate"})
+    PendingModifiedServiceUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PendingModifiedServiceUpdate, name: "member", traits: {"smithy.api#xmlName" => "PendingModifiedServiceUpdate"}))
     PurchaseReservedNodesOfferingRequest.add_member(:reserved_nodes_offering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReservedNodesOfferingId", traits: {"smithy.api#required" => {}}))
     PurchaseReservedNodesOfferingRequest.add_member(:reservation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReservationId"))
     PurchaseReservedNodesOfferingRequest.add_member(:node_count, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "NodeCount"))
@@ -742,13 +742,13 @@ module Aws::MemoryDB
     RecurringCharge.add_member(:recurring_charge_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "RecurringChargeAmount", traits: {"smithy.api#default" => 0}))
     RecurringCharge.add_member(:recurring_charge_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RecurringChargeFrequency"))
     RecurringCharge.type = Types::RecurringCharge
-    RecurringChargeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringCharge, name: "member", traits: {"smithy.api#xmlName" => "RecurringCharge"})
+    RecurringChargeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringCharge, name: "member", traits: {"smithy.api#xmlName" => "RecurringCharge"}))
     RegionalCluster.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterName"))
     RegionalCluster.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Region"))
     RegionalCluster.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     RegionalCluster.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ARN"))
     RegionalCluster.type = Types::RegionalCluster
-    RegionalClusterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegionalCluster, name: "member", traits: {"smithy.api#xmlName" => "RegionalCluster"})
+    RegionalClusterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionalCluster, name: "member", traits: {"smithy.api#xmlName" => "RegionalCluster"}))
     ReplicaConfigurationRequest.add_member(:replica_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ReplicaCount", traits: {"smithy.api#default" => 0}))
     ReplicaConfigurationRequest.type = Types::ReplicaConfigurationRequest
     ReservedNode.add_member(:reservation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReservationId"))
@@ -765,7 +765,7 @@ module Aws::MemoryDB
     ReservedNode.type = Types::ReservedNode
     ReservedNodeAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ReservedNodeAlreadyExistsFault.type = Types::ReservedNodeAlreadyExistsFault
-    ReservedNodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedNode, name: "member", traits: {"smithy.api#xmlName" => "ReservedNode"})
+    ReservedNodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedNode, name: "member", traits: {"smithy.api#xmlName" => "ReservedNode"}))
     ReservedNodeNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ReservedNodeNotFoundFault.type = Types::ReservedNodeNotFoundFault
     ReservedNodeQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -777,7 +777,7 @@ module Aws::MemoryDB
     ReservedNodesOffering.add_member(:offering_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "OfferingType"))
     ReservedNodesOffering.add_member(:recurring_charges, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringChargeList, name: "RecurringCharges"))
     ReservedNodesOffering.type = Types::ReservedNodesOffering
-    ReservedNodesOfferingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedNodesOffering, name: "member", traits: {"smithy.api#xmlName" => "ReservedNodesOffering"})
+    ReservedNodesOfferingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedNodesOffering, name: "member", traits: {"smithy.api#xmlName" => "ReservedNodesOffering"}))
     ReservedNodesOfferingNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ReservedNodesOfferingNotFoundFault.type = Types::ReservedNodesOfferingNotFoundFault
     ResetParameterGroupRequest.add_member(:parameter_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ParameterGroupName", traits: {"smithy.api#required" => {}}))
@@ -788,11 +788,11 @@ module Aws::MemoryDB
     ResetParameterGroupResponse.type = Types::ResetParameterGroupResponse
     ReshardingStatus.add_member(:slot_migration, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotMigration, name: "SlotMigration"))
     ReshardingStatus.type = Types::ReshardingStatus
-    SecurityGroupIdsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SecurityGroupId"})
+    SecurityGroupIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SecurityGroupId"}))
     SecurityGroupMembership.add_member(:security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SecurityGroupId"))
     SecurityGroupMembership.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     SecurityGroupMembership.type = Types::SecurityGroupMembership
-    SecurityGroupMembershipList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupMembership, name: "member")
+    SecurityGroupMembershipList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupMembership, name: "member"))
     ServiceLinkedRoleNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ServiceLinkedRoleNotFoundFault.type = Types::ServiceLinkedRoleNotFoundFault
     ServiceUpdate.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterName"))
@@ -805,7 +805,7 @@ module Aws::MemoryDB
     ServiceUpdate.add_member(:nodes_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NodesUpdated"))
     ServiceUpdate.add_member(:auto_update_start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "AutoUpdateStartDate"))
     ServiceUpdate.type = Types::ServiceUpdate
-    ServiceUpdateList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUpdate, name: "member", traits: {"smithy.api#xmlName" => "ServiceUpdate"})
+    ServiceUpdateList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUpdate, name: "member", traits: {"smithy.api#xmlName" => "ServiceUpdate"}))
     ServiceUpdateNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ServiceUpdateNotFoundFault.type = Types::ServiceUpdateNotFoundFault
     ServiceUpdateRequest.add_member(:service_update_name_to_apply, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServiceUpdateNameToApply"))
@@ -814,7 +814,7 @@ module Aws::MemoryDB
     ServiceUpdateStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "in-progress"}))
     ServiceUpdateStatus.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETE", traits: {"smithy.api#enumValue" => "complete"}))
     ServiceUpdateStatus.add_member(:scheduled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHEDULED", traits: {"smithy.api#enumValue" => "scheduled"}))
-    ServiceUpdateStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUpdateStatus, name: "member")
+    ServiceUpdateStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUpdateStatus, name: "member"))
     ServiceUpdateType.add_member(:security_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECURITY_UPDATE", traits: {"smithy.api#enumValue" => "security-update"}))
     Shard.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     Shard.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
@@ -832,8 +832,8 @@ module Aws::MemoryDB
     ShardDetail.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Size"))
     ShardDetail.add_member(:snapshot_creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TStamp, name: "SnapshotCreationTime"))
     ShardDetail.type = Types::ShardDetail
-    ShardDetails.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShardDetail, name: "member")
-    ShardList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Shard, name: "member", traits: {"smithy.api#xmlName" => "Shard"})
+    ShardDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardDetail, name: "member"))
+    ShardList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Shard, name: "member", traits: {"smithy.api#xmlName" => "Shard"}))
     ShardNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ShardNotFoundFault.type = Types::ShardNotFoundFault
     ShardsPerClusterQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -850,8 +850,8 @@ module Aws::MemoryDB
     Snapshot.type = Types::Snapshot
     SnapshotAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SnapshotAlreadyExistsFault.type = Types::SnapshotAlreadyExistsFault
-    SnapshotArnsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SnapshotArn"})
-    SnapshotList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Snapshot, name: "member")
+    SnapshotArnsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SnapshotArn"}))
+    SnapshotList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Snapshot, name: "member"))
     SnapshotNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SnapshotNotFoundFault.type = Types::SnapshotNotFoundFault
     SnapshotQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -877,15 +877,15 @@ module Aws::MemoryDB
     SubnetGroupAlreadyExistsFault.type = Types::SubnetGroupAlreadyExistsFault
     SubnetGroupInUseFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SubnetGroupInUseFault.type = Types::SubnetGroupInUseFault
-    SubnetGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetGroup, name: "member")
+    SubnetGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetGroup, name: "member"))
     SubnetGroupNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SubnetGroupNotFoundFault.type = Types::SubnetGroupNotFoundFault
     SubnetGroupQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SubnetGroupQuotaExceededFault.type = Types::SubnetGroupQuotaExceededFault
-    SubnetIdentifierList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SubnetIdentifier"})
+    SubnetIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "SubnetIdentifier"}))
     SubnetInUse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SubnetInUse.type = Types::SubnetInUse
-    SubnetList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Subnet, name: "member", traits: {"smithy.api#xmlName" => "Subnet"})
+    SubnetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnet, name: "member", traits: {"smithy.api#xmlName" => "Subnet"}))
     SubnetNotAllowedFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SubnetNotAllowedFault.type = Types::SubnetNotAllowedFault
     SubnetQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -893,7 +893,7 @@ module Aws::MemoryDB
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     Tag.type = Types::Tag
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member", traits: {"smithy.api#xmlName" => "Tag"})
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member", traits: {"smithy.api#xmlName" => "Tag"}))
     TagNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     TagNotFoundFault.type = Types::TagNotFoundFault
     TagQuotaPerResourceExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -909,7 +909,7 @@ module Aws::MemoryDB
     UnprocessedCluster.add_member(:error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorType"))
     UnprocessedCluster.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorMessage"))
     UnprocessedCluster.type = Types::UnprocessedCluster
-    UnprocessedClusterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedCluster, name: "member", traits: {"smithy.api#xmlName" => "UnprocessedCluster"})
+    UnprocessedClusterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UnprocessedCluster, name: "member", traits: {"smithy.api#xmlName" => "UnprocessedCluster"}))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyList, name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -979,9 +979,9 @@ module Aws::MemoryDB
     User.type = Types::User
     UserAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     UserAlreadyExistsFault.type = Types::UserAlreadyExistsFault
-    UserList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member")
-    UserNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, name: "member")
-    UserNameListInput.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, name: "member")
+    UserList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member"))
+    UserNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, name: "member"))
+    UserNameListInput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserName, name: "member"))
     UserNotFoundFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     UserNotFoundFault.type = Types::UserNotFoundFault
     UserQuotaExceededFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))

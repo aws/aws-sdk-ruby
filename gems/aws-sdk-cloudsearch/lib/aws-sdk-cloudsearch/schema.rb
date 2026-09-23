@@ -196,7 +196,7 @@ module Aws::CloudSearch
     AnalysisSchemeStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisScheme, name: "Options", traits: {"smithy.api#required" => {}}))
     AnalysisSchemeStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     AnalysisSchemeStatus.type = Types::AnalysisSchemeStatus
-    AnalysisSchemeStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisSchemeStatus, name: "member")
+    AnalysisSchemeStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisSchemeStatus, name: "member"))
     AvailabilityOptionsStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiAZ, name: "Options", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     AvailabilityOptionsStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     AvailabilityOptionsStatus.type = Types::AvailabilityOptionsStatus
@@ -328,9 +328,9 @@ module Aws::CloudSearch
     DomainEndpointOptionsStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainEndpointOptions, name: "Options", traits: {"smithy.api#required" => {}}))
     DomainEndpointOptionsStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     DomainEndpointOptionsStatus.type = Types::DomainEndpointOptionsStatus
-    DomainNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "member")
-    DomainNameMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "key")
-    DomainNameMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: APIVersion, name: "value")
+    DomainNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "member"))
+    DomainNameMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "key"))
+    DomainNameMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: APIVersion, name: "value"))
     DomainStatus.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "DomainId", traits: {"smithy.api#required" => {}}))
     DomainStatus.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#required" => {}}))
     DomainStatus.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "ARN"))
@@ -345,7 +345,7 @@ module Aws::CloudSearch
     DomainStatus.add_member(:search_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceCount, name: "SearchInstanceCount"))
     DomainStatus.add_member(:limits, ::Smithy::Schema::Shapes::MemberShape.new(target: Limits, name: "Limits"))
     DomainStatus.type = Types::DomainStatus
-    DomainStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainStatus, name: "member")
+    DomainStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainStatus, name: "member"))
     DoubleArrayOptions.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "DefaultValue"))
     DoubleArrayOptions.add_member(:source_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldNameCommaList, name: "SourceFields"))
     DoubleArrayOptions.add_member(:facet_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "FacetEnabled"))
@@ -359,15 +359,15 @@ module Aws::CloudSearch
     DoubleOptions.add_member(:return_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ReturnEnabled"))
     DoubleOptions.add_member(:sort_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SortEnabled"))
     DoubleOptions.type = Types::DoubleOptions
-    DynamicFieldNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DynamicFieldName, name: "member")
+    DynamicFieldNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamicFieldName, name: "member"))
     Expression.add_member(:expression_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardName, name: "ExpressionName", traits: {"smithy.api#required" => {}}))
     Expression.add_member(:expression_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionValue, name: "ExpressionValue", traits: {"smithy.api#required" => {}}))
     Expression.type = Types::Expression
     ExpressionStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "Options", traits: {"smithy.api#required" => {}}))
     ExpressionStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     ExpressionStatus.type = Types::ExpressionStatus
-    ExpressionStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionStatus, name: "member")
-    FieldNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldName, name: "member")
+    ExpressionStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionStatus, name: "member"))
+    FieldNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldName, name: "member"))
     IndexDocumentsRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#required" => {}}))
     IndexDocumentsRequest.type = Types::IndexDocumentsRequest
     IndexDocumentsResponse.add_member(:field_names, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldNameList, name: "FieldNames"))
@@ -389,7 +389,7 @@ module Aws::CloudSearch
     IndexFieldStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexField, name: "Options", traits: {"smithy.api#required" => {}}))
     IndexFieldStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     IndexFieldStatus.type = Types::IndexFieldStatus
-    IndexFieldStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IndexFieldStatus, name: "member")
+    IndexFieldStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexFieldStatus, name: "member"))
     IndexFieldType.add_member(:int, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "int", traits: {"smithy.api#enumValue" => "int"}))
     IndexFieldType.add_member(:double, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "double", traits: {"smithy.api#enumValue" => "double"}))
     IndexFieldType.add_member(:literal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "literal", traits: {"smithy.api#enumValue" => "literal"}))
@@ -490,7 +490,7 @@ module Aws::CloudSearch
     ScalingParametersStatus.type = Types::ScalingParametersStatus
     ServiceEndpoint.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUrl, name: "Endpoint"))
     ServiceEndpoint.type = Types::ServiceEndpoint
-    StandardNameList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StandardName, name: "member")
+    StandardNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardName, name: "member"))
     Suggester.add_member(:suggester_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StandardName, name: "SuggesterName", traits: {"smithy.api#required" => {}}))
     Suggester.add_member(:document_suggester_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentSuggesterOptions, name: "DocumentSuggesterOptions", traits: {"smithy.api#required" => {}}))
     Suggester.type = Types::Suggester
@@ -500,7 +500,7 @@ module Aws::CloudSearch
     SuggesterStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: Suggester, name: "Options", traits: {"smithy.api#required" => {}}))
     SuggesterStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     SuggesterStatus.type = Types::SuggesterStatus
-    SuggesterStatusList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SuggesterStatus, name: "member")
+    SuggesterStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggesterStatus, name: "member"))
     TLSSecurityPolicy.add_member(:policy_min_tls_1_0_2019_07, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_MIN_TLS_1_0_2019_07", traits: {"smithy.api#enumValue" => "Policy-Min-TLS-1-0-2019-07"}))
     TLSSecurityPolicy.add_member(:policy_min_tls_1_2_2019_07, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_MIN_TLS_1_2_2019_07", traits: {"smithy.api#enumValue" => "Policy-Min-TLS-1-2-2019-07"}))
     TextArrayOptions.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldValue, name: "DefaultValue"))

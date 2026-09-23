@@ -93,8 +93,8 @@ module Aws::ResourceGroupsTaggingAPI
     DescribeReportCreationOutput.type = Types::DescribeReportCreationOutput
     ErrorCode.add_member(:internal_service_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_SERVICE_EXCEPTION", traits: {"smithy.api#enumValue" => "InternalServiceException"}))
     ErrorCode.add_member(:invalid_parameter_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_PARAMETER_EXCEPTION", traits: {"smithy.api#enumValue" => "InvalidParameterException"}))
-    FailedResourcesMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "key")
-    FailedResourcesMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: FailureInfo, name: "value")
+    FailedResourcesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "key"))
+    FailedResourcesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureInfo, name: "value"))
     FailureInfo.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusCode, name: "StatusCode", traits: {"smithy.api#default" => 0}))
     FailureInfo.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "ErrorCode"))
     FailureInfo.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage"))
@@ -133,7 +133,7 @@ module Aws::ResourceGroupsTaggingAPI
     GetTagValuesOutput.add_member(:pagination_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "PaginationToken"))
     GetTagValuesOutput.add_member(:tag_values, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValuesOutputList, name: "TagValues"))
     GetTagValuesOutput.type = Types::GetTagValuesOutput
-    GroupBy.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByAttribute, name: "member")
+    GroupBy.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByAttribute, name: "member"))
     GroupByAttribute.add_member(:target_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TARGET_ID", traits: {"smithy.api#enumValue" => "TARGET_ID"}))
     GroupByAttribute.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGION", traits: {"smithy.api#enumValue" => "REGION"}))
     GroupByAttribute.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_TYPE", traits: {"smithy.api#enumValue" => "RESOURCE_TYPE"}))
@@ -143,15 +143,15 @@ module Aws::ResourceGroupsTaggingAPI
     InvalidParameterException.type = Types::InvalidParameterException
     PaginationTokenExpiredException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     PaginationTokenExpiredException.type = Types::PaginationTokenExpiredException
-    RegionFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member")
-    ResourceARNListForGet.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "member")
-    ResourceARNListForTagUntag.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "member")
+    RegionFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member"))
+    ResourceARNListForGet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "member"))
+    ResourceARNListForTagUntag.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "member"))
     ResourceTagMapping.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "ResourceARN"))
     ResourceTagMapping.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     ResourceTagMapping.add_member(:compliance_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceDetails, name: "ComplianceDetails"))
     ResourceTagMapping.type = Types::ResourceTagMapping
-    ResourceTagMappingList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagMapping, name: "member")
-    ResourceTypeFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceType, name: "member")
+    ResourceTagMappingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagMapping, name: "member"))
+    ResourceTypeFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceType, name: "member"))
     StartReportCreationInput.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Bucket, name: "S3Bucket", traits: {"smithy.api#required" => {}}))
     StartReportCreationInput.type = Types::StartReportCreationInput
     StartReportCreationOutput.type = Types::StartReportCreationOutput
@@ -162,28 +162,28 @@ module Aws::ResourceGroupsTaggingAPI
     Summary.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceType, name: "ResourceType"))
     Summary.add_member(:non_compliant_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: NonCompliantResources, name: "NonCompliantResources", traits: {"smithy.api#default" => 0}))
     Summary.type = Types::Summary
-    SummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Summary, name: "member")
+    SummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Summary, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
     TagFilter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key"))
     TagFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValueList, name: "Values"))
     TagFilter.type = Types::TagFilter
-    TagFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilter, name: "member")
-    TagKeyFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagKeyListForUntag.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagFilter, name: "member"))
+    TagKeyFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagKeyListForUntag.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourcesInput.add_member(:resource_arn_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARNListForTagUntag, name: "ResourceARNList", traits: {"smithy.api#required" => {}}))
     TagResourcesInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourcesInput.type = Types::TagResourcesInput
     TagResourcesOutput.add_member(:failed_resources_map, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedResourcesMap, name: "FailedResourcesMap"))
     TagResourcesOutput.type = Types::TagResourcesOutput
-    TagValueList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "member")
-    TagValuesOutputList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "member")
-    TargetIdFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetId, name: "member")
+    TagValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "member"))
+    TagValuesOutputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "member"))
+    TargetIdFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetId, name: "member"))
     TargetIdType.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
     TargetIdType.add_member(:ou, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OU", traits: {"smithy.api#enumValue" => "OU"}))
     TargetIdType.add_member(:root, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROOT", traits: {"smithy.api#enumValue" => "ROOT"}))

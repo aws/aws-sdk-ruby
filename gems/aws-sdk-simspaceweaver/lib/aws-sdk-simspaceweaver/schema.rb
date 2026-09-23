@@ -96,7 +96,7 @@ module Aws::SimSpaceWeaver
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
-    AppPortMappings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationAppPortMapping, name: "member")
+    AppPortMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationAppPortMapping, name: "member"))
     CloudWatchLogsLogGroup.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupArn, name: "LogGroupArn"))
     CloudWatchLogsLogGroup.type = Types::CloudWatchLogsLogGroup
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
@@ -147,10 +147,10 @@ module Aws::SimSpaceWeaver
     Domain.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, name: "Name"))
     Domain.add_member(:lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleManagementStrategy, name: "Lifecycle"))
     Domain.type = Types::Domain
-    DomainList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Domain, name: "member")
+    DomainList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Domain, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
     InternalServerException.type = Types::InternalServerException
-    LaunchCommandList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member")
+    LaunchCommandList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     LaunchOverrides.add_member(:launch_commands, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchCommandList, name: "LaunchCommands"))
     LaunchOverrides.type = Types::LaunchOverrides
     ListAppsOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, name: "Simulation", traits: {"smithy.api#httpQuery" => "simulation", "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
@@ -176,7 +176,7 @@ module Aws::SimSpaceWeaver
     LiveSimulationState.type = Types::LiveSimulationState
     LogDestination.add_member(:cloud_watch_logs_log_group, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogsLogGroup, name: "CloudWatchLogsLogGroup"))
     LogDestination.type = Types::LogDestination
-    LogDestinations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogDestination, name: "member")
+    LogDestinations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDestination, name: "member"))
     LoggingConfiguration.add_member(:destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDestinations, name: "Destinations"))
     LoggingConfiguration.type = Types::LoggingConfiguration
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Message"))
@@ -192,7 +192,7 @@ module Aws::SimSpaceWeaver
     SimulationAppEndpointInfo.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Address"))
     SimulationAppEndpointInfo.add_member(:ingress_port_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: AppPortMappings, name: "IngressPortMappings"))
     SimulationAppEndpointInfo.type = Types::SimulationAppEndpointInfo
-    SimulationAppList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationAppMetadata, name: "member")
+    SimulationAppList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationAppMetadata, name: "member"))
     SimulationAppMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverLongResourceName, name: "Name"))
     SimulationAppMetadata.add_member(:simulation, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, name: "Simulation"))
     SimulationAppMetadata.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, name: "Domain"))
@@ -205,8 +205,8 @@ module Aws::SimSpaceWeaver
     SimulationClock.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ClockStatus, name: "Status"))
     SimulationClock.add_member(:target_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ClockTargetStatus, name: "TargetStatus"))
     SimulationClock.type = Types::SimulationClock
-    SimulationClockList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationClock, name: "member")
-    SimulationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationMetadata, name: "member")
+    SimulationClockList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationClock, name: "member"))
+    SimulationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SimulationMetadata, name: "member"))
     SimulationMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, name: "Name"))
     SimulationMetadata.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverArn, name: "Arn"))
     SimulationMetadata.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
@@ -251,9 +251,9 @@ module Aws::SimSpaceWeaver
     StopSimulationOperationInput.add_member(:simulation, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverResourceName, name: "Simulation", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "SimulationName"}))
     StopSimulationOperationInput.type = Types::StopSimulationOperationInput
     StopSimulationOperationOutput.type = Types::StopSimulationOperationOutput
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    TagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceOperationInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SimSpaceWeaverArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceOperationInput.type = Types::TagResourceOperationInput

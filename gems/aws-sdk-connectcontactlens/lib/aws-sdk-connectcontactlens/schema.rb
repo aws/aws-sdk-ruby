@@ -59,7 +59,7 @@ module Aws::ConnectContactLens
     InvalidRequestException.type = Types::InvalidRequestException
     IssueDetected.add_member(:character_offsets, ::Smithy::Schema::Shapes::MemberShape.new(target: CharacterOffsets, name: "CharacterOffsets", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     IssueDetected.type = Types::IssueDetected
-    IssuesDetected.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IssueDetected, name: "member")
+    IssuesDetected.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IssueDetected, name: "member"))
     ListRealtimeContactAnalysisSegmentsRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ListRealtimeContactAnalysisSegmentsRequest.add_member(:contact_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactId, name: "ContactId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ListRealtimeContactAnalysisSegmentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
@@ -68,13 +68,13 @@ module Aws::ConnectContactLens
     ListRealtimeContactAnalysisSegmentsResponse.add_member(:segments, ::Smithy::Schema::Shapes::MemberShape.new(target: RealtimeContactAnalysisSegments, name: "Segments", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ListRealtimeContactAnalysisSegmentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListRealtimeContactAnalysisSegmentsResponse.type = Types::ListRealtimeContactAnalysisSegmentsResponse
-    MatchedCategories.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryName, name: "member")
-    MatchedDetails.key = ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryName, name: "key")
-    MatchedDetails.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryDetails, name: "value")
+    MatchedCategories.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryName, name: "member"))
+    MatchedDetails.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryName, name: "key"))
+    MatchedDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryDetails, name: "value"))
     PointOfInterest.add_member(:begin_offset_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: OffsetMillis, name: "BeginOffsetMillis", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     PointOfInterest.add_member(:end_offset_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: OffsetMillis, name: "EndOffsetMillis", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     PointOfInterest.type = Types::PointOfInterest
-    PointsOfInterest.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PointOfInterest, name: "member")
+    PointsOfInterest.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PointOfInterest, name: "member"))
     PostContactSummary.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: PostContactSummaryContent, name: "Content"))
     PostContactSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PostContactSummaryStatus, name: "Status", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     PostContactSummary.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: PostContactSummaryFailureCode, name: "FailureCode"))
@@ -90,7 +90,7 @@ module Aws::ConnectContactLens
     RealtimeContactAnalysisSegment.add_member(:categories, ::Smithy::Schema::Shapes::MemberShape.new(target: Categories, name: "Categories"))
     RealtimeContactAnalysisSegment.add_member(:post_contact_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: PostContactSummary, name: "PostContactSummary"))
     RealtimeContactAnalysisSegment.type = Types::RealtimeContactAnalysisSegment
-    RealtimeContactAnalysisSegments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RealtimeContactAnalysisSegment, name: "member")
+    RealtimeContactAnalysisSegments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RealtimeContactAnalysisSegment, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     SentimentValue.add_member(:positive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POSITIVE", traits: {"smithy.api#enumValue" => "POSITIVE"}))

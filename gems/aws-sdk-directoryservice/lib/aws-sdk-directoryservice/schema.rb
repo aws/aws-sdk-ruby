@@ -475,7 +475,7 @@ module Aws::DirectoryService
     AddTagsToResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     AddTagsToResourceRequest.type = Types::AddTagsToResourceRequest
     AddTagsToResourceResult.type = Types::AddTagsToResourceResult
-    AdditionalRegions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "member")
+    AdditionalRegions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "member"))
     Assessment.add_member(:assessment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentId, name: "AssessmentId"))
     Assessment.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, name: "DirectoryId"))
     Assessment.add_member(:dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryName, name: "DnsName"))
@@ -498,11 +498,11 @@ module Aws::DirectoryService
     AssessmentConfiguration.add_member(:instance_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentInstanceIds, name: "InstanceIds", traits: {"smithy.api#required" => {}}))
     AssessmentConfiguration.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, name: "SecurityGroupIds"))
     AssessmentConfiguration.type = Types::AssessmentConfiguration
-    AssessmentInstanceIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentInstanceId, name: "member")
+    AssessmentInstanceIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentInstanceId, name: "member"))
     AssessmentReport.add_member(:domain_controller_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddr, name: "DomainControllerIp"))
     AssessmentReport.add_member(:validations, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentValidations, name: "Validations"))
     AssessmentReport.type = Types::AssessmentReport
-    AssessmentReports.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentReport, name: "member")
+    AssessmentReports.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentReport, name: "member"))
     AssessmentSummary.add_member(:assessment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentId, name: "AssessmentId"))
     AssessmentSummary.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, name: "DirectoryId"))
     AssessmentSummary.add_member(:dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryName, name: "DnsName"))
@@ -520,16 +520,16 @@ module Aws::DirectoryService
     AssessmentValidation.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentValidationTimeStamp, name: "StartTime"))
     AssessmentValidation.add_member(:last_update_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentValidationTimeStamp, name: "LastUpdateDateTime"))
     AssessmentValidation.type = Types::AssessmentValidation
-    AssessmentValidations.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentValidation, name: "member")
-    Assessments.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentSummary, name: "member")
+    AssessmentValidations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentValidation, name: "member"))
+    Assessments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentSummary, name: "member"))
     Attribute.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "Name"))
     Attribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "Value"))
     Attribute.type = Types::Attribute
-    Attributes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member")
+    Attributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member"))
     AuthenticationFailedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     AuthenticationFailedException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "RequestId"))
     AuthenticationFailedException.type = Types::AuthenticationFailedException
-    AvailabilityZones.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "member")
+    AvailabilityZones.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "member"))
     CaEnrollmentPolicyStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "InProgress"}))
     CaEnrollmentPolicyStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "Success"}))
     CaEnrollmentPolicyStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
@@ -575,14 +575,14 @@ module Aws::DirectoryService
     CertificateState.add_member(:deregister_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEREGISTER_FAILED", traits: {"smithy.api#enumValue" => "DeregisterFailed"}))
     CertificateType.add_member(:client_cert_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLIENT_CERT_AUTH", traits: {"smithy.api#enumValue" => "ClientCertAuth"}))
     CertificateType.add_member(:client_ldaps, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLIENT_LDAPS", traits: {"smithy.api#enumValue" => "ClientLDAPS"}))
-    CertificatesInfo.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateInfo, name: "member")
-    CidrIps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CidrIp, name: "member")
-    CidrIpv6s.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CidrIpv6, name: "member")
+    CertificatesInfo.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateInfo, name: "member"))
+    CidrIps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrIp, name: "member"))
+    CidrIpv6s.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrIpv6, name: "member"))
     ClientAuthenticationSettingInfo.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientAuthenticationType, name: "Type"))
     ClientAuthenticationSettingInfo.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientAuthenticationStatus, name: "Status"))
     ClientAuthenticationSettingInfo.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdatedDateTime, name: "LastUpdatedDateTime"))
     ClientAuthenticationSettingInfo.type = Types::ClientAuthenticationSettingInfo
-    ClientAuthenticationSettingsInfo.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ClientAuthenticationSettingInfo, name: "member")
+    ClientAuthenticationSettingsInfo.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientAuthenticationSettingInfo, name: "member"))
     ClientAuthenticationStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "Enabled"}))
     ClientAuthenticationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "Disabled"}))
     ClientAuthenticationType.add_member(:smart_card, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMART_CARD", traits: {"smithy.api#enumValue" => "SmartCard"}))
@@ -601,7 +601,7 @@ module Aws::DirectoryService
     ConditionalForwarder.add_member(:dns_ipv6_addrs, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIpv6Addrs, name: "DnsIpv6Addrs"))
     ConditionalForwarder.add_member(:replication_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationScope, name: "ReplicationScope"))
     ConditionalForwarder.type = Types::ConditionalForwarder
-    ConditionalForwarders.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionalForwarder, name: "member")
+    ConditionalForwarders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionalForwarder, name: "member"))
     ConnectDirectoryRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryName, name: "Name", traits: {"smithy.api#required" => {}}))
     ConnectDirectoryRequest.add_member(:short_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryShortName, name: "ShortName"))
     ConnectDirectoryRequest.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectPassword, name: "Password", traits: {"smithy.api#required" => {}}))
@@ -681,7 +681,7 @@ module Aws::DirectoryService
     CreateTrustRequest.type = Types::CreateTrustRequest
     CreateTrustResult.add_member(:trust_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustId, name: "TrustId"))
     CreateTrustResult.type = Types::CreateTrustResult
-    CustomerDnsIps.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddr, name: "member")
+    CustomerDnsIps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddr, name: "member"))
     DataAccessStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "Disabled"}))
     DataAccessStatus.add_member(:disabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLING", traits: {"smithy.api#enumValue" => "Disabling"}))
     DataAccessStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "Enabled"}))
@@ -842,8 +842,8 @@ module Aws::DirectoryService
     DirectoryAlreadySharedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     DirectoryAlreadySharedException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "RequestId"))
     DirectoryAlreadySharedException.type = Types::DirectoryAlreadySharedException
-    DirectoryConfigurationSettingRequestDetailedStatus.key = ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "key")
-    DirectoryConfigurationSettingRequestDetailedStatus.value = ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationStatus, name: "value")
+    DirectoryConfigurationSettingRequestDetailedStatus.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "key"))
+    DirectoryConfigurationSettingRequestDetailedStatus.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationStatus, name: "value"))
     DirectoryConfigurationStatus.add_member(:requested, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUESTED", traits: {"smithy.api#enumValue" => "Requested"}))
     DirectoryConfigurationStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "Updating"}))
     DirectoryConfigurationStatus.add_member(:updated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATED", traits: {"smithy.api#enumValue" => "Updated"}))
@@ -893,14 +893,14 @@ module Aws::DirectoryService
     DirectoryDescription.add_member(:hybrid_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: HybridSettingsDescription, name: "HybridSettings"))
     DirectoryDescription.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, name: "NetworkType"))
     DirectoryDescription.type = Types::DirectoryDescription
-    DirectoryDescriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryDescription, name: "member")
+    DirectoryDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryDescription, name: "member"))
     DirectoryDoesNotExistException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     DirectoryDoesNotExistException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "RequestId"))
     DirectoryDoesNotExistException.type = Types::DirectoryDoesNotExistException
     DirectoryEdition.add_member(:enterprise, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENTERPRISE", traits: {"smithy.api#enumValue" => "Enterprise"}))
     DirectoryEdition.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "Standard"}))
     DirectoryEdition.add_member(:hybrid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HYBRID", traits: {"smithy.api#enumValue" => "Hybrid"}))
-    DirectoryIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, name: "member")
+    DirectoryIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, name: "member"))
     DirectoryInDesiredStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     DirectoryInDesiredStateException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "RequestId"))
     DirectoryInDesiredStateException.type = Types::DirectoryInDesiredStateException
@@ -976,8 +976,8 @@ module Aws::DirectoryService
     DisableSsoRequest.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectPassword, name: "Password"))
     DisableSsoRequest.type = Types::DisableSsoRequest
     DisableSsoResult.type = Types::DisableSsoResult
-    DnsIpAddrs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddr, name: "member")
-    DnsIpv6Addrs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6Addr, name: "member")
+    DnsIpAddrs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddr, name: "member"))
+    DnsIpv6Addrs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6Addr, name: "member"))
     DomainController.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, name: "DirectoryId"))
     DomainController.add_member(:domain_controller_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainControllerId, name: "DomainControllerId"))
     DomainController.add_member(:dns_ip_addr, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddr, name: "DnsIpAddr"))
@@ -990,7 +990,7 @@ module Aws::DirectoryService
     DomainController.add_member(:launch_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTime, name: "LaunchTime"))
     DomainController.add_member(:status_last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdatedDateTime, name: "StatusLastUpdatedDateTime"))
     DomainController.type = Types::DomainController
-    DomainControllerIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainControllerId, name: "member")
+    DomainControllerIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainControllerId, name: "member"))
     DomainControllerLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     DomainControllerLimitExceededException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "RequestId"))
     DomainControllerLimitExceededException.type = Types::DomainControllerLimitExceededException
@@ -1002,7 +1002,7 @@ module Aws::DirectoryService
     DomainControllerStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "Deleted"}))
     DomainControllerStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
     DomainControllerStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "Updating"}))
-    DomainControllers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DomainController, name: "member")
+    DomainControllers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainController, name: "member"))
     EnableAlreadyInProgressException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     EnableAlreadyInProgressException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "RequestId"))
     EnableAlreadyInProgressException.type = Types::EnableAlreadyInProgressException
@@ -1042,7 +1042,7 @@ module Aws::DirectoryService
     EventTopic.add_member(:created_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedDateTime, name: "CreatedDateTime"))
     EventTopic.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicStatus, name: "Status"))
     EventTopic.type = Types::EventTopic
-    EventTopics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventTopic, name: "member")
+    EventTopics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTopic, name: "member"))
     GetDirectoryLimitsRequest.type = Types::GetDirectoryLimitsRequest
     GetDirectoryLimitsResult.add_member(:directory_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryLimits, name: "DirectoryLimits"))
     GetDirectoryLimitsResult.type = Types::GetDirectoryLimitsResult
@@ -1061,7 +1061,7 @@ module Aws::DirectoryService
     HybridUpdateActivities.add_member(:self_managed_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: HybridUpdateInfoEntries, name: "SelfManagedInstances"))
     HybridUpdateActivities.add_member(:hybrid_administrator_account, ::Smithy::Schema::Shapes::MemberShape.new(target: HybridUpdateInfoEntries, name: "HybridAdministratorAccount"))
     HybridUpdateActivities.type = Types::HybridUpdateActivities
-    HybridUpdateInfoEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HybridUpdateInfoEntry, name: "member")
+    HybridUpdateInfoEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HybridUpdateInfoEntry, name: "member"))
     HybridUpdateInfoEntry.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateStatus, name: "Status"))
     HybridUpdateInfoEntry.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateStatusReason, name: "StatusReason"))
     HybridUpdateInfoEntry.add_member(:initiated_by, ::Smithy::Schema::Shapes::MemberShape.new(target: InitiatedBy, name: "InitiatedBy"))
@@ -1103,7 +1103,7 @@ module Aws::DirectoryService
     InvalidTargetException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     InvalidTargetException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "RequestId"))
     InvalidTargetException.type = Types::InvalidTargetException
-    IpAddrs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddr, name: "member")
+    IpAddrs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddr, name: "member"))
     IpRoute.add_member(:cidr_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrIp, name: "CidrIp"))
     IpRoute.add_member(:cidr_ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrIpv6, name: "CidrIpv6"))
     IpRoute.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
@@ -1125,14 +1125,14 @@ module Aws::DirectoryService
     IpRouteStatusMsg.add_member(:removed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMOVED", traits: {"smithy.api#enumValue" => "Removed"}))
     IpRouteStatusMsg.add_member(:add_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADD_FAILED", traits: {"smithy.api#enumValue" => "AddFailed"}))
     IpRouteStatusMsg.add_member(:remove_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMOVE_FAILED", traits: {"smithy.api#enumValue" => "RemoveFailed"}))
-    IpRoutes.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpRoute, name: "member")
-    IpRoutesInfo.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IpRouteInfo, name: "member")
-    IpV6Addrs.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6Addr, name: "member")
+    IpRoutes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpRoute, name: "member"))
+    IpRoutesInfo.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpRouteInfo, name: "member"))
+    IpV6Addrs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6Addr, name: "member"))
     LDAPSSettingInfo.add_member(:ldaps_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LDAPSStatus, name: "LDAPSStatus"))
     LDAPSSettingInfo.add_member(:ldaps_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: LDAPSStatusReason, name: "LDAPSStatusReason"))
     LDAPSSettingInfo.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastUpdatedDateTime, name: "LastUpdatedDateTime"))
     LDAPSSettingInfo.type = Types::LDAPSSettingInfo
-    LDAPSSettingsInfo.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LDAPSSettingInfo, name: "member")
+    LDAPSSettingsInfo.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LDAPSSettingInfo, name: "member"))
     LDAPSStatus.add_member(:enabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLING", traits: {"smithy.api#enumValue" => "Enabling"}))
     LDAPSStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "Enabled"}))
     LDAPSStatus.add_member(:enable_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLE_FAILED", traits: {"smithy.api#enumValue" => "EnableFailed"}))
@@ -1184,7 +1184,7 @@ module Aws::DirectoryService
     LogSubscription.add_member(:log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupName, name: "LogGroupName"))
     LogSubscription.add_member(:subscription_created_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionCreatedDateTime, name: "SubscriptionCreatedDateTime"))
     LogSubscription.type = Types::LogSubscription
-    LogSubscriptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogSubscription, name: "member")
+    LogSubscriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogSubscription, name: "member"))
     NetworkType.add_member(:dual_stack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUAL_STACK", traits: {"smithy.api#enumValue" => "Dual-stack"}))
     NetworkType.add_member(:ipv4_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4_ONLY", traits: {"smithy.api#enumValue" => "IPv4"}))
     NetworkType.add_member(:ipv6_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV6_ONLY", traits: {"smithy.api#enumValue" => "IPv6"}))
@@ -1242,7 +1242,7 @@ module Aws::DirectoryService
     RegionLimitExceededException.type = Types::RegionLimitExceededException
     RegionType.add_member(:primary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIMARY", traits: {"smithy.api#enumValue" => "Primary"}))
     RegionType.add_member(:additional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADDITIONAL", traits: {"smithy.api#enumValue" => "Additional"}))
-    RegionsDescription.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RegionDescription, name: "member")
+    RegionsDescription.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionDescription, name: "member"))
     RegionsInfo.add_member(:primary_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "PrimaryRegion"))
     RegionsInfo.add_member(:additional_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalRegions, name: "AdditionalRegions"))
     RegionsInfo.type = Types::RegionsInfo
@@ -1261,7 +1261,7 @@ module Aws::DirectoryService
     RejectSharedDirectoryRequest.type = Types::RejectSharedDirectoryRequest
     RejectSharedDirectoryResult.add_member(:shared_directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, name: "SharedDirectoryId"))
     RejectSharedDirectoryResult.type = Types::RejectSharedDirectoryResult
-    RemoteDomainNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: RemoteDomainName, name: "member")
+    RemoteDomainNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RemoteDomainName, name: "member"))
     RemoveIpRoutesRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, name: "DirectoryId", traits: {"smithy.api#required" => {}}))
     RemoveIpRoutesRequest.add_member(:cidr_ips, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrIps, name: "CidrIps", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => []}))
     RemoveIpRoutesRequest.add_member(:cidr_ipv6s, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrIpv6s, name: "CidrIpv6s"))
@@ -1300,18 +1300,18 @@ module Aws::DirectoryService
     SchemaExtensionStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLED", traits: {"smithy.api#enumValue" => "Cancelled"}))
     SchemaExtensionStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
     SchemaExtensionStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
-    SchemaExtensionsInfo.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaExtensionInfo, name: "member")
-    SecurityGroupIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member")
+    SchemaExtensionsInfo.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaExtensionInfo, name: "member"))
+    SecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     SelectiveAuth.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "Enabled"}))
     SelectiveAuth.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "Disabled"}))
-    Servers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Server, name: "member")
+    Servers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Server, name: "member"))
     ServiceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     ServiceException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "RequestId"))
     ServiceException.type = Types::ServiceException
     Setting.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationSettingName, name: "Name", traits: {"smithy.api#required" => {}}))
     Setting.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationSettingValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Setting.type = Types::Setting
-    SettingEntries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SettingEntry, name: "member")
+    SettingEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SettingEntry, name: "member"))
     SettingEntry.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationSettingType, name: "Type"))
     SettingEntry.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationSettingName, name: "Name"))
     SettingEntry.add_member(:allowed_values, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationSettingAllowedValues, name: "AllowedValues"))
@@ -1324,7 +1324,7 @@ module Aws::DirectoryService
     SettingEntry.add_member(:last_requested_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationSettingLastRequestedDateTime, name: "LastRequestedDateTime"))
     SettingEntry.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryConfigurationSettingDataType, name: "DataType"))
     SettingEntry.type = Types::SettingEntry
-    Settings.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Setting, name: "member")
+    Settings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Setting, name: "member"))
     ShareDirectoryRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, name: "DirectoryId", traits: {"smithy.api#required" => {}}))
     ShareDirectoryRequest.add_member(:share_notes, ::Smithy::Schema::Shapes::MemberShape.new(target: Notes, name: "ShareNotes"))
     ShareDirectoryRequest.add_member(:share_target, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareTarget, name: "ShareTarget", traits: {"smithy.api#required" => {}}))
@@ -1349,7 +1349,7 @@ module Aws::DirectoryService
     ShareTarget.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetId, name: "Id", traits: {"smithy.api#required" => {}}))
     ShareTarget.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetType, name: "Type", traits: {"smithy.api#required" => {}}))
     ShareTarget.type = Types::ShareTarget
-    SharedDirectories.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SharedDirectory, name: "member")
+    SharedDirectories.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SharedDirectory, name: "member"))
     SharedDirectory.add_member(:owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerId, name: "OwnerAccountId"))
     SharedDirectory.add_member(:owner_directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, name: "OwnerDirectoryId"))
     SharedDirectory.add_member(:share_method, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareMethod, name: "ShareMethod"))
@@ -1367,7 +1367,7 @@ module Aws::DirectoryService
     Snapshot.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotStatus, name: "Status"))
     Snapshot.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTime, name: "StartTime"))
     Snapshot.type = Types::Snapshot
-    SnapshotIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId, name: "member")
+    SnapshotIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SnapshotId, name: "member"))
     SnapshotLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     SnapshotLimitExceededException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "RequestId"))
     SnapshotLimitExceededException.type = Types::SnapshotLimitExceededException
@@ -1380,7 +1380,7 @@ module Aws::DirectoryService
     SnapshotStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
     SnapshotType.add_member(:auto, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTO", traits: {"smithy.api#enumValue" => "Auto"}))
     SnapshotType.add_member(:manual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANUAL", traits: {"smithy.api#enumValue" => "Manual"}))
-    Snapshots.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Snapshot, name: "member")
+    Snapshots.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Snapshot, name: "member"))
     StartADAssessmentRequest.add_member(:assessment_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentConfiguration, name: "AssessmentConfiguration"))
     StartADAssessmentRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, name: "DirectoryId"))
     StartADAssessmentRequest.type = Types::StartADAssessmentRequest
@@ -1393,17 +1393,17 @@ module Aws::DirectoryService
     StartSchemaExtensionRequest.type = Types::StartSchemaExtensionRequest
     StartSchemaExtensionResult.add_member(:schema_extension_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaExtensionId, name: "SchemaExtensionId"))
     StartSchemaExtensionResult.type = Types::StartSchemaExtensionResult
-    SubnetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member")
+    SubnetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     TagLimitExceededException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "RequestId"))
     TagLimitExceededException.type = Types::TagLimitExceededException
-    Tags.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    Tags.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TargetType.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT", traits: {"smithy.api#enumValue" => "ACCOUNT"}))
-    TopicNames.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TopicName, name: "member")
+    TopicNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TopicName, name: "member"))
     TopicStatus.add_member(:registered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGISTERED", traits: {"smithy.api#enumValue" => "Registered"}))
     TopicStatus.add_member(:topic_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOPIC_NOT_FOUND", traits: {"smithy.api#enumValue" => "Topic not found"}))
     TopicStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
@@ -1423,7 +1423,7 @@ module Aws::DirectoryService
     TrustDirection.add_member(:one_way_outgoing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONE_WAY_OUTGOING", traits: {"smithy.api#enumValue" => "One-Way: Outgoing"}))
     TrustDirection.add_member(:one_way_incoming, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONE_WAY_INCOMING", traits: {"smithy.api#enumValue" => "One-Way: Incoming"}))
     TrustDirection.add_member(:two_way, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TWO_WAY", traits: {"smithy.api#enumValue" => "Two-Way"}))
-    TrustIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TrustId, name: "member")
+    TrustIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustId, name: "member"))
     TrustState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "Creating"}))
     TrustState.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED", traits: {"smithy.api#enumValue" => "Created"}))
     TrustState.add_member(:verifying, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERIFYING", traits: {"smithy.api#enumValue" => "Verifying"}))
@@ -1437,7 +1437,7 @@ module Aws::DirectoryService
     TrustState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
     TrustType.add_member(:forest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FOREST", traits: {"smithy.api#enumValue" => "Forest"}))
     TrustType.add_member(:external, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXTERNAL", traits: {"smithy.api#enumValue" => "External"}))
-    Trusts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Trust, name: "member")
+    Trusts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Trust, name: "member"))
     UnshareDirectoryRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, name: "DirectoryId", traits: {"smithy.api#required" => {}}))
     UnshareDirectoryRequest.add_member(:unshare_target, ::Smithy::Schema::Shapes::MemberShape.new(target: UnshareTarget, name: "UnshareTarget", traits: {"smithy.api#required" => {}}))
     UnshareDirectoryRequest.type = Types::UnshareDirectoryRequest
@@ -1452,7 +1452,7 @@ module Aws::DirectoryService
     UnsupportedSettingsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     UnsupportedSettingsException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "RequestId"))
     UnsupportedSettingsException.type = Types::UnsupportedSettingsException
-    UpdateActivities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateInfoEntry, name: "member")
+    UpdateActivities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateInfoEntry, name: "member"))
     UpdateConditionalForwarderRequest.add_member(:directory_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryId, name: "DirectoryId", traits: {"smithy.api#required" => {}}))
     UpdateConditionalForwarderRequest.add_member(:remote_domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RemoteDomainName, name: "RemoteDomainName", traits: {"smithy.api#required" => {}}))
     UpdateConditionalForwarderRequest.add_member(:dns_ip_addrs, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsIpAddrs, name: "DnsIpAddrs", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => []}))

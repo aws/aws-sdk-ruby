@@ -189,7 +189,7 @@ module Aws::Odb
     Access.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
-    AutonomousVirtualMachineList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AutonomousVirtualMachineSummary, name: "member")
+    AutonomousVirtualMachineList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutonomousVirtualMachineSummary, name: "member"))
     AutonomousVirtualMachineSummary.add_member(:autonomous_virtual_machine_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "autonomousVirtualMachineId"))
     AutonomousVirtualMachineSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatus, name: "status"))
     AutonomousVirtualMachineSummary.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
@@ -254,11 +254,11 @@ module Aws::Odb
     CloudAutonomousVmCluster.add_member(:time_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "timeZone"))
     CloudAutonomousVmCluster.add_member(:total_container_databases, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "totalContainerDatabases"))
     CloudAutonomousVmCluster.type = Types::CloudAutonomousVmCluster
-    CloudAutonomousVmClusterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CloudAutonomousVmClusterSummary, name: "member")
+    CloudAutonomousVmClusterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudAutonomousVmClusterSummary, name: "member"))
     CloudAutonomousVmClusterResourceDetails.add_member(:cloud_autonomous_vm_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "cloudAutonomousVmClusterId"))
     CloudAutonomousVmClusterResourceDetails.add_member(:unallocated_adb_storage_in_t_bs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "unallocatedAdbStorageInTBs"))
     CloudAutonomousVmClusterResourceDetails.type = Types::CloudAutonomousVmClusterResourceDetails
-    CloudAutonomousVmClusterResourceDetailsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CloudAutonomousVmClusterResourceDetails, name: "member")
+    CloudAutonomousVmClusterResourceDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudAutonomousVmClusterResourceDetails, name: "member"))
     CloudAutonomousVmClusterSummary.add_member(:cloud_autonomous_vm_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "cloudAutonomousVmClusterId", traits: {"smithy.api#required" => {}}))
     CloudAutonomousVmClusterSummary.add_member(:cloud_autonomous_vm_cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "cloudAutonomousVmClusterArn"))
     CloudAutonomousVmClusterSummary.add_member(:odb_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdOrArn, name: "odbNetworkId"))
@@ -348,7 +348,7 @@ module Aws::Odb
     CloudExadataInfrastructure.add_member(:storage_server_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "storageServerType"))
     CloudExadataInfrastructure.add_member(:compute_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeModel, name: "computeModel"))
     CloudExadataInfrastructure.type = Types::CloudExadataInfrastructure
-    CloudExadataInfrastructureList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CloudExadataInfrastructureSummary, name: "member")
+    CloudExadataInfrastructureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudExadataInfrastructureSummary, name: "member"))
     CloudExadataInfrastructureSummary.add_member(:cloud_exadata_infrastructure_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdOrArn, name: "cloudExadataInfrastructureId", traits: {"smithy.api#required" => {}}))
     CloudExadataInfrastructureSummary.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "displayName"))
     CloudExadataInfrastructureSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatus, name: "status"))
@@ -437,7 +437,7 @@ module Aws::Odb
     CloudVmCluster.add_member(:percent_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "percentProgress"))
     CloudVmCluster.add_member(:compute_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeModel, name: "computeModel"))
     CloudVmCluster.type = Types::CloudVmCluster
-    CloudVmClusterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CloudVmClusterSummary, name: "member")
+    CloudVmClusterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudVmClusterSummary, name: "member"))
     CloudVmClusterSummary.add_member(:cloud_vm_cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "cloudVmClusterId", traits: {"smithy.api#required" => {}}))
     CloudVmClusterSummary.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "displayName"))
     CloudVmClusterSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatus, name: "status"))
@@ -584,7 +584,7 @@ module Aws::Odb
     CreateOdbPeeringConnectionOutput.type = Types::CreateOdbPeeringConnectionOutput
     CustomerContact.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "email", traits: {"smithy.api#length" => {"min" => 1, "max" => 320}}))
     CustomerContact.type = Types::CustomerContact
-    CustomerContacts.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerContact, name: "member")
+    CustomerContacts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerContact, name: "member"))
     DataCollectionOptions.add_member(:is_diagnostics_events_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isDiagnosticsEventsEnabled"))
     DataCollectionOptions.add_member(:is_health_monitoring_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isHealthMonitoringEnabled"))
     DataCollectionOptions.add_member(:is_incident_logs_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isIncidentLogsEnabled"))
@@ -598,12 +598,12 @@ module Aws::Odb
     DayOfWeekName.add_member(:friday, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FRIDAY", traits: {"smithy.api#enumValue" => "FRIDAY"}))
     DayOfWeekName.add_member(:saturday, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SATURDAY", traits: {"smithy.api#enumValue" => "SATURDAY"}))
     DayOfWeekName.add_member(:sunday, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUNDAY", traits: {"smithy.api#enumValue" => "SUNDAY"}))
-    DaysOfWeek.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfWeek, name: "member")
+    DaysOfWeek.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DayOfWeek, name: "member"))
     DbIormConfig.add_member(:db_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "dbName"))
     DbIormConfig.add_member(:flash_cache_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "flashCacheLimit"))
     DbIormConfig.add_member(:share, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "share"))
     DbIormConfig.type = Types::DbIormConfig
-    DbIormConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DbIormConfig, name: "member")
+    DbIormConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DbIormConfig, name: "member"))
     DbNode.add_member(:db_node_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "dbNodeId"))
     DbNode.add_member(:db_node_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "dbNodeArn"))
     DbNode.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DbNodeResourceStatus, name: "status"))
@@ -633,7 +633,7 @@ module Aws::Odb
     DbNode.add_member(:private_ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "privateIpAddress"))
     DbNode.add_member(:floating_ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "floatingIpAddress"))
     DbNode.type = Types::DbNode
-    DbNodeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DbNodeSummary, name: "member")
+    DbNodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DbNodeSummary, name: "member"))
     DbNodeMaintenanceType.add_member(:vmdb_reboot_migration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VMDB_REBOOT_MIGRATION", traits: {"smithy.api#enumValue" => "VMDB_REBOOT_MIGRATION"}))
     DbNodeResourceStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     DbNodeResourceStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -692,7 +692,7 @@ module Aws::Odb
     DbServer.add_member(:autonomous_vm_cluster_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "autonomousVmClusterIds"))
     DbServer.add_member(:autonomous_virtual_machine_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "autonomousVirtualMachineIds"))
     DbServer.type = Types::DbServer
-    DbServerList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DbServerSummary, name: "member")
+    DbServerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DbServerSummary, name: "member"))
     DbServerPatchingDetails.add_member(:estimated_patch_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "estimatedPatchDuration"))
     DbServerPatchingDetails.add_member(:patching_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DbServerPatchingStatus, name: "patchingStatus"))
     DbServerPatchingDetails.add_member(:time_patching_ended, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "timePatchingEnded"))
@@ -723,7 +723,7 @@ module Aws::Odb
     DbServerSummary.add_member(:autonomous_vm_cluster_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "autonomousVmClusterIds"))
     DbServerSummary.add_member(:autonomous_virtual_machine_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "autonomousVirtualMachineIds"))
     DbServerSummary.type = Types::DbServerSummary
-    DbSystemShapeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DbSystemShapeSummary, name: "member")
+    DbSystemShapeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DbSystemShapeSummary, name: "member"))
     DbSystemShapeSummary.add_member(:available_core_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "availableCoreCount"))
     DbSystemShapeSummary.add_member(:available_core_count_per_node, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "availableCoreCountPerNode"))
     DbSystemShapeSummary.add_member(:available_data_storage_in_t_bs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "availableDataStorageInTBs"))
@@ -812,10 +812,10 @@ module Aws::Odb
     GetOdbPeeringConnectionInput.type = Types::GetOdbPeeringConnectionInput
     GetOdbPeeringConnectionOutput.add_member(:odb_peering_connection, ::Smithy::Schema::Shapes::MemberShape.new(target: OdbPeeringConnection, name: "odbPeeringConnection"))
     GetOdbPeeringConnectionOutput.type = Types::GetOdbPeeringConnectionOutput
-    GiVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GiVersionSummary, name: "member")
+    GiVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GiVersionSummary, name: "member"))
     GiVersionSummary.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "version"))
     GiVersionSummary.type = Types::GiVersionSummary
-    HoursOfDay.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "member")
+    HoursOfDay.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "member"))
     InitializeServiceInput.type = Types::InitializeServiceInput
     InitializeServiceOutput.type = Types::InitializeServiceOutput
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
@@ -949,7 +949,7 @@ module Aws::Odb
     MonthName.add_member(:october, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OCTOBER", traits: {"smithy.api#enumValue" => "OCTOBER"}))
     MonthName.add_member(:november, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOVEMBER", traits: {"smithy.api#enumValue" => "NOVEMBER"}))
     MonthName.add_member(:december, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DECEMBER", traits: {"smithy.api#enumValue" => "DECEMBER"}))
-    Months.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Month, name: "member")
+    Months.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Month, name: "member"))
     Objective.add_member(:auto, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTO", traits: {"smithy.api#enumValue" => "AUTO"}))
     Objective.add_member(:balanced, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BALANCED", traits: {"smithy.api#enumValue" => "BALANCED"}))
     Objective.add_member(:basic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BASIC", traits: {"smithy.api#enumValue" => "BASIC"}))
@@ -958,7 +958,7 @@ module Aws::Odb
     OciDnsForwardingConfig.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "domainName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}}))
     OciDnsForwardingConfig.add_member(:oci_dns_listener_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ociDnsListenerIp"))
     OciDnsForwardingConfig.type = Types::OciDnsForwardingConfig
-    OciDnsForwardingConfigList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OciDnsForwardingConfig, name: "member")
+    OciDnsForwardingConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OciDnsForwardingConfig, name: "member"))
     OciOnboardingStatus.add_member(:not_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_STARTED", traits: {"smithy.api#enumValue" => "NOT_STARTED"}))
     OciOnboardingStatus.add_member(:pending_link_generation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_LINK_GENERATION", traits: {"smithy.api#enumValue" => "PENDING_LINK_GENERATION"}))
     OciOnboardingStatus.add_member(:pending_customer_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_CUSTOMER_ACTION", traits: {"smithy.api#enumValue" => "PENDING_CUSTOMER_ACTION"}))
@@ -993,7 +993,7 @@ module Aws::Odb
     OdbNetwork.add_member(:percent_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "percentProgress"))
     OdbNetwork.add_member(:managed_services, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedServices, name: "managedServices"))
     OdbNetwork.type = Types::OdbNetwork
-    OdbNetworkList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OdbNetworkSummary, name: "member")
+    OdbNetworkList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OdbNetworkSummary, name: "member"))
     OdbNetworkSummary.add_member(:odb_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdOrArn, name: "odbNetworkId", traits: {"smithy.api#required" => {}}))
     OdbNetworkSummary.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "displayName"))
     OdbNetworkSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatus, name: "status"))
@@ -1027,7 +1027,7 @@ module Aws::Odb
     OdbPeeringConnection.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#timestampFormat" => "date-time"}))
     OdbPeeringConnection.add_member(:percent_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "percentProgress"))
     OdbPeeringConnection.type = Types::OdbPeeringConnection
-    OdbPeeringConnectionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: OdbPeeringConnectionSummary, name: "member")
+    OdbPeeringConnectionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OdbPeeringConnectionSummary, name: "member"))
     OdbPeeringConnectionSummary.add_member(:odb_peering_connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdOrArn, name: "odbPeeringConnectionId", traits: {"smithy.api#required" => {}}))
     OdbPeeringConnectionSummary.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "displayName"))
     OdbPeeringConnectionSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatus, name: "status"))
@@ -1050,8 +1050,8 @@ module Aws::Odb
     RebootDbNodeOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DbNodeResourceStatus, name: "status"))
     RebootDbNodeOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
     RebootDbNodeOutput.type = Types::RebootDbNodeOutput
-    RequestTagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    RequestTagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    RequestTagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    RequestTagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType", traits: {"smithy.api#required" => {}}))
@@ -1063,14 +1063,14 @@ module Aws::Odb
     ResourceStatus.add_member(:terminating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERMINATING", traits: {"smithy.api#enumValue" => "TERMINATING"}))
     ResourceStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
     ResourceStatus.add_member(:maintenance_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAINTENANCE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "MAINTENANCE_IN_PROGRESS"}))
-    ResponseTagMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    ResponseTagMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    ResponseTagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    ResponseTagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     S3Access.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceStatus, name: "status"))
     S3Access.add_member(:ipv4_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "ipv4Addresses"))
     S3Access.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "domainName"))
     S3Access.add_member(:s3_policy_document, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "s3PolicyDocument"))
     S3Access.type = Types::S3Access
-    SensitiveStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "member")
+    SensitiveStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "member"))
     ServiceNetworkEndpoint.add_member(:vpc_endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "vpcEndpointId"))
     ServiceNetworkEndpoint.add_member(:vpc_endpoint_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointType, name: "vpcEndpointType"))
     ServiceNetworkEndpoint.type = Types::ServiceNetworkEndpoint
@@ -1097,13 +1097,13 @@ module Aws::Odb
     StopDbNodeOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DbNodeResourceStatus, name: "status"))
     StopDbNodeOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
     StopDbNodeOutput.type = Types::StopDbNodeOutput
-    StringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member")
-    SystemVersionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SystemVersionSummary, name: "member")
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    SystemVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemVersionSummary, name: "member"))
     SystemVersionSummary.add_member(:gi_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "giVersion"))
     SystemVersionSummary.add_member(:shape, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "shape"))
     SystemVersionSummary.add_member(:system_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "systemVersions"))
     SystemVersionSummary.type = Types::SystemVersionSummary
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestTagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -1143,13 +1143,13 @@ module Aws::Odb
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "unknownOperation"}))
     ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "cannotParse"}))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "fieldValidationFailed"}))
     ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTHER", traits: {"smithy.api#enumValue" => "other"}))
     VpcEndpointType.add_member(:servicenetwork, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICENETWORK", traits: {"smithy.api#enumValue" => "SERVICENETWORK"}))
-    WeeksOfMonth.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "member")
+    WeeksOfMonth.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "member"))
     ZeroEtlAccess.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceStatus, name: "status"))
     ZeroEtlAccess.add_member(:cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "cidr"))
     ZeroEtlAccess.type = Types::ZeroEtlAccess

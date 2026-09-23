@@ -306,7 +306,7 @@ module Aws::WorkDocs
     AddResourcePermissionsResponse.add_member(:share_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareResultsList, name: "ShareResults"))
     AddResourcePermissionsResponse.type = Types::AddResourcePermissionsResponse
     AdditionalResponseFieldType.add_member(:weburl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEBURL", traits: {"smithy.api#enumValue" => "WEBURL"}))
-    AdditionalResponseFieldsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalResponseFieldType, name: "member")
+    AdditionalResponseFieldsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalResponseFieldType, name: "member"))
     BooleanEnumType.add_member(:true, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRUE", traits: {"smithy.api#enumValue" => "TRUE"}))
     BooleanEnumType.add_member(:false, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FALSE", traits: {"smithy.api#enumValue" => "FALSE"}))
     Comment.add_member(:comment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentIdType, name: "CommentId", traits: {"smithy.api#required" => {}}))
@@ -319,7 +319,7 @@ module Aws::WorkDocs
     Comment.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentVisibilityType, name: "Visibility"))
     Comment.add_member(:recipient_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdType, name: "RecipientId"))
     Comment.type = Types::Comment
-    CommentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Comment, name: "member")
+    CommentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Comment, name: "member"))
     CommentMetadata.add_member(:comment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommentIdType, name: "CommentId"))
     CommentMetadata.add_member(:contributor, ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "Contributor"))
     CommentMetadata.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType, name: "CreatedTimestamp"))
@@ -392,11 +392,11 @@ module Aws::WorkDocs
     CreateUserRequest.type = Types::CreateUserRequest
     CreateUserResponse.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "User"))
     CreateUserResponse.type = Types::CreateUserResponse
-    CustomMetadataKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomMetadataKeyType, name: "member")
+    CustomMetadataKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomMetadataKeyType, name: "member"))
     CustomMetadataLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessageType, name: "Message"))
     CustomMetadataLimitExceededException.type = Types::CustomMetadataLimitExceededException
-    CustomMetadataMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomMetadataKeyType, name: "key")
-    CustomMetadataMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: CustomMetadataValueType, name: "value")
+    CustomMetadataMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomMetadataKeyType, name: "key"))
+    CustomMetadataMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomMetadataValueType, name: "value"))
     DateRangeType.add_member(:start_value, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType, name: "StartValue"))
     DateRangeType.add_member(:end_value, ::Smithy::Schema::Shapes::MemberShape.new(target: TimestampType, name: "EndValue"))
     DateRangeType.type = Types::DateRangeType
@@ -548,18 +548,18 @@ module Aws::WorkDocs
     DocumentMetadata.add_member(:resource_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStateType, name: "ResourceState"))
     DocumentMetadata.add_member(:labels, ::Smithy::Schema::Shapes::MemberShape.new(target: SharedLabels, name: "Labels"))
     DocumentMetadata.type = Types::DocumentMetadata
-    DocumentMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentMetadata, name: "member")
+    DocumentMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentMetadata, name: "member"))
     DocumentSourceType.add_member(:original, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ORIGINAL", traits: {"smithy.api#enumValue" => "ORIGINAL"}))
     DocumentSourceType.add_member(:with_comments, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WITH_COMMENTS", traits: {"smithy.api#enumValue" => "WITH_COMMENTS"}))
-    DocumentSourceUrlMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentSourceType, name: "key")
-    DocumentSourceUrlMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: UrlType, name: "value")
+    DocumentSourceUrlMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentSourceType, name: "key"))
+    DocumentSourceUrlMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: UrlType, name: "value"))
     DocumentStatusType.add_member(:initialized, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INITIALIZED", traits: {"smithy.api#enumValue" => "INITIALIZED"}))
     DocumentStatusType.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     DocumentThumbnailType.add_member(:small, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMALL", traits: {"smithy.api#enumValue" => "SMALL"}))
     DocumentThumbnailType.add_member(:small_hq, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMALL_HQ", traits: {"smithy.api#enumValue" => "SMALL_HQ"}))
     DocumentThumbnailType.add_member(:large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LARGE", traits: {"smithy.api#enumValue" => "LARGE"}))
-    DocumentThumbnailUrlMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentThumbnailType, name: "key")
-    DocumentThumbnailUrlMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: UrlType, name: "value")
+    DocumentThumbnailUrlMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentThumbnailType, name: "key"))
+    DocumentThumbnailUrlMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: UrlType, name: "value"))
     DocumentVersionMetadata.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentVersionIdType, name: "Id"))
     DocumentVersionMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameType, name: "Name"))
     DocumentVersionMetadata.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentContentType, name: "ContentType"))
@@ -574,13 +574,13 @@ module Aws::WorkDocs
     DocumentVersionMetadata.add_member(:thumbnail, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentThumbnailUrlMap, name: "Thumbnail"))
     DocumentVersionMetadata.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentSourceUrlMap, name: "Source"))
     DocumentVersionMetadata.type = Types::DocumentVersionMetadata
-    DocumentVersionMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentVersionMetadata, name: "member")
+    DocumentVersionMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentVersionMetadata, name: "member"))
     DocumentVersionStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     DraftUploadOutOfSyncException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessageType, name: "Message"))
     DraftUploadOutOfSyncException.type = Types::DraftUploadOutOfSyncException
     EntityAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessageType, name: "Message"))
     EntityAlreadyExistsException.type = Types::EntityAlreadyExistsException
-    EntityIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: IdType, name: "member")
+    EntityIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdType, name: "member"))
     EntityNotExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessageType, name: "Message"))
     EntityNotExistsException.add_member(:entity_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityIdList, name: "EntityIds"))
     EntityNotExistsException.type = Types::EntityNotExistsException
@@ -612,7 +612,7 @@ module Aws::WorkDocs
     FolderMetadata.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: SizeType, name: "Size"))
     FolderMetadata.add_member(:latest_version_size, ::Smithy::Schema::Shapes::MemberShape.new(target: SizeType, name: "LatestVersionSize"))
     FolderMetadata.type = Types::FolderMetadata
-    FolderMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FolderMetadata, name: "member")
+    FolderMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FolderMetadata, name: "member"))
     GetCurrentUserRequest.add_member(:authentication_token, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationHeaderType, name: "AuthenticationToken", traits: {"smithy.api#httpHeader" => "Authentication", "smithy.api#required" => {}}))
     GetCurrentUserRequest.type = Types::GetCurrentUserRequest
     GetCurrentUserResponse.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "User"))
@@ -669,7 +669,7 @@ module Aws::WorkDocs
     GroupMetadata.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdType, name: "Id"))
     GroupMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNameType, name: "Name"))
     GroupMetadata.type = Types::GroupMetadata
-    GroupMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: GroupMetadata, name: "member")
+    GroupMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupMetadata, name: "member"))
     IllegalUserStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessageType, name: "Message"))
     IllegalUserStateException.type = Types::IllegalUserStateException
     InitiateDocumentVersionUploadRequest.add_member(:authentication_token, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationHeaderType, name: "AuthenticationToken", traits: {"smithy.api#httpHeader" => "Authentication"}))
@@ -749,19 +749,19 @@ module Aws::WorkDocs
     OrderByFieldType.add_member(:modified_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MODIFIED_TIMESTAMP", traits: {"smithy.api#enumValue" => "MODIFIED_TIMESTAMP"}))
     OrderType.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASCENDING", traits: {"smithy.api#enumValue" => "ASCENDING"}))
     OrderType.add_member(:descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESCENDING", traits: {"smithy.api#enumValue" => "DESCENDING"}))
-    OrganizationUserList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member")
+    OrganizationUserList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member"))
     Participants.add_member(:users, ::Smithy::Schema::Shapes::MemberShape.new(target: UserMetadataList, name: "Users"))
     Participants.add_member(:groups, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupMetadataList, name: "Groups"))
     Participants.type = Types::Participants
     PermissionInfo.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleType, name: "Role"))
     PermissionInfo.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: RolePermissionType, name: "Type"))
     PermissionInfo.type = Types::PermissionInfo
-    PermissionInfoList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionInfo, name: "member")
+    PermissionInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionInfo, name: "member"))
     Principal.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdType, name: "Id"))
     Principal.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalType, name: "Type"))
     Principal.add_member(:roles, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionInfoList, name: "Roles"))
     Principal.type = Types::Principal
-    PrincipalList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Principal, name: "member")
+    PrincipalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Principal, name: "member"))
     PrincipalRoleType.add_member(:viewer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VIEWER", traits: {"smithy.api#enumValue" => "VIEWER"}))
     PrincipalRoleType.add_member(:contributor, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTRIBUTOR", traits: {"smithy.api#enumValue" => "CONTRIBUTOR"}))
     PrincipalRoleType.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OWNER", traits: {"smithy.api#enumValue" => "OWNER"}))
@@ -799,7 +799,7 @@ module Aws::WorkDocs
     ResourcePathComponent.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdType, name: "Id"))
     ResourcePathComponent.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNameType, name: "Name"))
     ResourcePathComponent.type = Types::ResourcePathComponent
-    ResourcePathComponentList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePathComponent, name: "member")
+    ResourcePathComponentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePathComponent, name: "member"))
     ResourceSortType.add_member(:date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATE", traits: {"smithy.api#enumValue" => "DATE"}))
     ResourceSortType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
     ResourceStateType.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
@@ -819,7 +819,7 @@ module Aws::WorkDocs
     ResponseItemType.add_member(:folder, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FOLDER", traits: {"smithy.api#enumValue" => "FOLDER"}))
     ResponseItemType.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMMENT", traits: {"smithy.api#enumValue" => "COMMENT"}))
     ResponseItemType.add_member(:document_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOCUMENT_VERSION", traits: {"smithy.api#enumValue" => "DOCUMENT_VERSION"}))
-    ResponseItemsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseItem, name: "member")
+    ResponseItemsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseItem, name: "member"))
     RestoreDocumentVersionsRequest.add_member(:authentication_token, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationHeaderType, name: "AuthenticationToken", traits: {"smithy.api#httpHeader" => "Authentication"}))
     RestoreDocumentVersionsRequest.add_member(:document_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdType, name: "DocumentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RestoreDocumentVersionsRequest.type = Types::RestoreDocumentVersionsRequest
@@ -829,25 +829,25 @@ module Aws::WorkDocs
     RoleType.add_member(:contributor, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTRIBUTOR", traits: {"smithy.api#enumValue" => "CONTRIBUTOR"}))
     RoleType.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OWNER", traits: {"smithy.api#enumValue" => "OWNER"}))
     RoleType.add_member(:coowner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COOWNER", traits: {"smithy.api#enumValue" => "COOWNER"}))
-    SearchAncestorIdList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchAncestorId, name: "member")
+    SearchAncestorIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchAncestorId, name: "member"))
     SearchCollectionType.add_member(:owned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OWNED", traits: {"smithy.api#enumValue" => "OWNED"}))
     SearchCollectionType.add_member(:shared_with_me, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHARED_WITH_ME", traits: {"smithy.api#enumValue" => "SHARED_WITH_ME"}))
-    SearchCollectionTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchCollectionType, name: "member")
-    SearchContentCategoryTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ContentCategoryType, name: "member")
-    SearchLabelList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchLabel, name: "member")
-    SearchPrincipalRoleList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalRoleType, name: "member")
+    SearchCollectionTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchCollectionType, name: "member"))
+    SearchContentCategoryTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentCategoryType, name: "member"))
+    SearchLabelList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchLabel, name: "member"))
+    SearchPrincipalRoleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalRoleType, name: "member"))
     SearchPrincipalType.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdType, name: "Id", traits: {"smithy.api#required" => {}}))
     SearchPrincipalType.add_member(:roles, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchPrincipalRoleList, name: "Roles"))
     SearchPrincipalType.type = Types::SearchPrincipalType
-    SearchPrincipalTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchPrincipalType, name: "member")
+    SearchPrincipalTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchPrincipalType, name: "member"))
     SearchQueryScopeType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
     SearchQueryScopeType.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTENT", traits: {"smithy.api#enumValue" => "CONTENT"}))
-    SearchQueryScopeTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchQueryScopeType, name: "member")
+    SearchQueryScopeTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchQueryScopeType, name: "member"))
     SearchResourceType.add_member(:folder, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FOLDER", traits: {"smithy.api#enumValue" => "FOLDER"}))
     SearchResourceType.add_member(:document, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOCUMENT", traits: {"smithy.api#enumValue" => "DOCUMENT"}))
     SearchResourceType.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMMENT", traits: {"smithy.api#enumValue" => "COMMENT"}))
     SearchResourceType.add_member(:document_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOCUMENT_VERSION", traits: {"smithy.api#enumValue" => "DOCUMENT_VERSION"}))
-    SearchResourceTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchResourceType, name: "member")
+    SearchResourceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchResourceType, name: "member"))
     SearchResourcesRequest.add_member(:authentication_token, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationHeaderType, name: "AuthenticationToken", traits: {"smithy.api#httpHeader" => "Authentication"}))
     SearchResourcesRequest.add_member(:query_text, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchQueryType, name: "QueryText"))
     SearchResourcesRequest.add_member(:query_scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchQueryScopeTypeList, name: "QueryScopes"))
@@ -861,7 +861,7 @@ module Aws::WorkDocs
     SearchResourcesResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseItemsList, name: "Items"))
     SearchResourcesResponse.add_member(:marker, ::Smithy::Schema::Shapes::MemberShape.new(target: NextMarkerType, name: "Marker"))
     SearchResourcesResponse.type = Types::SearchResourcesResponse
-    SearchResultSortList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSortResult, name: "member")
+    SearchResultSortList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSortResult, name: "member"))
     SearchSortResult.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderByFieldType, name: "Field"))
     SearchSortResult.add_member(:order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "Order"))
     SearchSortResult.type = Types::SearchSortResult
@@ -871,7 +871,7 @@ module Aws::WorkDocs
     SharePrincipal.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalType, name: "Type", traits: {"smithy.api#required" => {}}))
     SharePrincipal.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleType, name: "Role", traits: {"smithy.api#required" => {}}))
     SharePrincipal.type = Types::SharePrincipal
-    SharePrincipalList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SharePrincipal, name: "member")
+    SharePrincipalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SharePrincipal, name: "member"))
     ShareResult.add_member(:principal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdType, name: "PrincipalId"))
     ShareResult.add_member(:invitee_principal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdType, name: "InviteePrincipalId"))
     ShareResult.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleType, name: "Role"))
@@ -879,12 +879,12 @@ module Aws::WorkDocs
     ShareResult.add_member(:share_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdType, name: "ShareId"))
     ShareResult.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "StatusMessage"))
     ShareResult.type = Types::ShareResult
-    ShareResultsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ShareResult, name: "member")
+    ShareResultsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ShareResult, name: "member"))
     ShareStatusType.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
     ShareStatusType.add_member(:failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILURE", traits: {"smithy.api#enumValue" => "FAILURE"}))
-    SharedLabels.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SharedLabel, name: "member")
-    SignedHeaderMap.key = ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderNameType, name: "key")
-    SignedHeaderMap.value = ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderValueType, name: "value")
+    SharedLabels.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SharedLabel, name: "member"))
+    SignedHeaderMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderNameType, name: "key"))
+    SignedHeaderMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: HeaderValueType, name: "value"))
     SortOrder.add_member(:asc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASC", traits: {"smithy.api#enumValue" => "ASC"}))
     SortOrder.add_member(:desc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESC", traits: {"smithy.api#enumValue" => "DESC"}))
     StorageLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessageType, name: "Message"))
@@ -900,11 +900,11 @@ module Aws::WorkDocs
     Subscription.add_member(:end_point, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionEndPointType, name: "EndPoint"))
     Subscription.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionProtocolType, name: "Protocol"))
     Subscription.type = Types::Subscription
-    SubscriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Subscription, name: "member")
+    SubscriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Subscription, name: "member"))
     SubscriptionProtocolType.add_member(:https, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTPS", traits: {"smithy.api#enumValue" => "HTTPS"}))
     SubscriptionProtocolType.add_member(:sqs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SQS", traits: {"smithy.api#enumValue" => "SQS"}))
     SubscriptionType.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
-    TextLocaleTypeList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeType, name: "member")
+    TextLocaleTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCodeType, name: "member"))
     TooManyLabelsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessageType, name: "Message"))
     TooManyLabelsException.type = Types::TooManyLabelsException
     TooManySubscriptionsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessageType, name: "Message"))
@@ -962,7 +962,7 @@ module Aws::WorkDocs
     User.add_member(:locale, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleType, name: "Locale"))
     User.add_member(:storage, ::Smithy::Schema::Shapes::MemberShape.new(target: UserStorageMetadata, name: "Storage"))
     User.type = Types::User
-    UserActivities.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Activity, name: "member")
+    UserActivities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Activity, name: "member"))
     UserFilterType.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
     UserFilterType.add_member(:active_pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE_PENDING", traits: {"smithy.api#enumValue" => "ACTIVE_PENDING"}))
     UserMetadata.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdType, name: "Id"))
@@ -971,7 +971,7 @@ module Aws::WorkDocs
     UserMetadata.add_member(:surname, ::Smithy::Schema::Shapes::MemberShape.new(target: UserAttributeValueType, name: "Surname"))
     UserMetadata.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: EmailAddressType, name: "EmailAddress"))
     UserMetadata.type = Types::UserMetadata
-    UserMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: UserMetadata, name: "member")
+    UserMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserMetadata, name: "member"))
     UserSortType.add_member(:user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER_NAME", traits: {"smithy.api#enumValue" => "USER_NAME"}))
     UserSortType.add_member(:full_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL_NAME", traits: {"smithy.api#enumValue" => "FULL_NAME"}))
     UserSortType.add_member(:storage_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STORAGE_LIMIT", traits: {"smithy.api#enumValue" => "STORAGE_LIMIT"}))

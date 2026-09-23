@@ -116,7 +116,7 @@ module Aws::RedshiftData
     CancelStatementRequest.type = Types::CancelStatementRequest
     CancelStatementResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "Status"))
     CancelStatementResponse.type = Types::CancelStatementResponse
-    ColumnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnMetadata, name: "member")
+    ColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnMetadata, name: "member"))
     ColumnMetadata.add_member(:is_case_sensitive, ::Smithy::Schema::Shapes::MemberShape.new(target: Bool, name: "isCaseSensitive", traits: {"smithy.api#default" => false}))
     ColumnMetadata.add_member(:is_currency, ::Smithy::Schema::Shapes::MemberShape.new(target: Bool, name: "isCurrency", traits: {"smithy.api#default" => false}))
     ColumnMetadata.add_member(:is_signed, ::Smithy::Schema::Shapes::MemberShape.new(target: Bool, name: "isSigned", traits: {"smithy.api#default" => false}))
@@ -131,11 +131,11 @@ module Aws::RedshiftData
     ColumnMetadata.add_member(:length, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "length", traits: {"smithy.api#default" => 0}))
     ColumnMetadata.add_member(:column_default, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "columnDefault"))
     ColumnMetadata.type = Types::ColumnMetadata
-    ColumnMetadataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnMetadata, name: "member")
+    ColumnMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnMetadata, name: "member"))
     DatabaseConnectionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     DatabaseConnectionException.type = Types::DatabaseConnectionException
-    DatabaseList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    DbGroupList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
+    DatabaseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    DbGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     DescribeStatementRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "Id", traits: {"smithy.api#required" => {}}))
     DescribeStatementRequest.type = Types::DescribeStatementRequest
     DescribeStatementResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "Id", traits: {"smithy.api#required" => {}}))
@@ -210,8 +210,8 @@ module Aws::RedshiftData
     Field.add_member(:blob_value, Types::Field::BlobValue, ::Smithy::Schema::Shapes::MemberShape.new(target: Blob, name: "blobValue"))
     Field.add_member(:unknown, Types::Field::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Field.type = Types::Field
-    FieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Field, name: "member")
-    FormattedSqlRecords.member = ::Smithy::Schema::Shapes::MemberShape.new(target: QueryRecords, name: "member")
+    FieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Field, name: "member"))
+    FormattedSqlRecords.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryRecords, name: "member"))
     GetStatementResultRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "Id", traits: {"smithy.api#required" => {}}))
     GetStatementResultRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     GetStatementResultRequest.type = Types::GetStatementResultRequest
@@ -289,13 +289,13 @@ module Aws::RedshiftData
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    SchemaList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member")
-    SqlList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StatementString, name: "member")
+    SchemaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    SqlList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StatementString, name: "member"))
     SqlParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "name", traits: {"smithy.api#required" => {}}))
     SqlParameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value", traits: {"smithy.api#required" => {}}))
     SqlParameter.type = Types::SqlParameter
-    SqlParametersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SqlParameter, name: "member")
-    SqlRecords.member = ::Smithy::Schema::Shapes::MemberShape.new(target: FieldList, name: "member")
+    SqlParametersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlParameter, name: "member"))
+    SqlRecords.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldList, name: "member"))
     StatementData.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "Id", traits: {"smithy.api#required" => {}}))
     StatementData.add_member(:query_string, ::Smithy::Schema::Shapes::MemberShape.new(target: StatementString, name: "QueryString"))
     StatementData.add_member(:query_strings, ::Smithy::Schema::Shapes::MemberShape.new(target: StatementStringList, name: "QueryStrings"))
@@ -309,8 +309,8 @@ module Aws::RedshiftData
     StatementData.add_member(:result_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultFormatString, name: "ResultFormat"))
     StatementData.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "SessionId"))
     StatementData.type = Types::StatementData
-    StatementList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StatementData, name: "member")
-    StatementStringList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: StatementString, name: "member")
+    StatementList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StatementData, name: "member"))
+    StatementStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StatementString, name: "member"))
     SubStatementData.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "Id", traits: {"smithy.api#required" => {}}))
     SubStatementData.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "Duration", traits: {"smithy.api#default" => 0}))
     SubStatementData.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Error"))
@@ -323,8 +323,8 @@ module Aws::RedshiftData
     SubStatementData.add_member(:redshift_query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "RedshiftQueryId", traits: {"smithy.api#default" => 0}))
     SubStatementData.add_member(:has_result_set, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "HasResultSet"))
     SubStatementData.type = Types::SubStatementData
-    SubStatementList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubStatementData, name: "member")
-    TableList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TableMember, name: "member")
+    SubStatementList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubStatementData, name: "member"))
+    TableList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TableMember, name: "member"))
     TableMember.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     TableMember.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "type"))
     TableMember.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "schema"))

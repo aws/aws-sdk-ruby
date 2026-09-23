@@ -128,8 +128,8 @@ module Aws::Codestarnotifications
     DescribeNotificationRuleResult.type = Types::DescribeNotificationRuleResult
     DetailType.add_member(:basic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BASIC", traits: {"smithy.api#enumValue" => "BASIC"}))
     DetailType.add_member(:full, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL", traits: {"smithy.api#enumValue" => "FULL"}))
-    EventTypeBatch.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypeSummary, name: "member")
-    EventTypeIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypeId, name: "member")
+    EventTypeBatch.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypeSummary, name: "member"))
+    EventTypeIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypeId, name: "member"))
     EventTypeSummary.add_member(:event_type_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypeId, name: "EventTypeId"))
     EventTypeSummary.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, name: "ServiceName"))
     EventTypeSummary.add_member(:event_type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EventTypeName, name: "EventTypeName"))
@@ -144,7 +144,7 @@ module Aws::Codestarnotifications
     ListEventTypesFilter.type = Types::ListEventTypesFilter
     ListEventTypesFilterName.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_TYPE", traits: {"smithy.api#enumValue" => "RESOURCE_TYPE"}))
     ListEventTypesFilterName.add_member(:service_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE_NAME", traits: {"smithy.api#enumValue" => "SERVICE_NAME"}))
-    ListEventTypesFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListEventTypesFilter, name: "member")
+    ListEventTypesFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListEventTypesFilter, name: "member"))
     ListEventTypesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListEventTypesFilters, name: "Filters"))
     ListEventTypesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListEventTypesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
@@ -159,7 +159,7 @@ module Aws::Codestarnotifications
     ListNotificationRulesFilterName.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED_BY", traits: {"smithy.api#enumValue" => "CREATED_BY"}))
     ListNotificationRulesFilterName.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE", traits: {"smithy.api#enumValue" => "RESOURCE"}))
     ListNotificationRulesFilterName.add_member(:target_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TARGET_ADDRESS", traits: {"smithy.api#enumValue" => "TARGET_ADDRESS"}))
-    ListNotificationRulesFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListNotificationRulesFilter, name: "member")
+    ListNotificationRulesFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNotificationRulesFilter, name: "member"))
     ListNotificationRulesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListNotificationRulesFilters, name: "Filters"))
     ListNotificationRulesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListNotificationRulesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
@@ -177,7 +177,7 @@ module Aws::Codestarnotifications
     ListTargetsFilterName.add_member(:target_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TARGET_TYPE", traits: {"smithy.api#enumValue" => "TARGET_TYPE"}))
     ListTargetsFilterName.add_member(:target_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TARGET_ADDRESS", traits: {"smithy.api#enumValue" => "TARGET_ADDRESS"}))
     ListTargetsFilterName.add_member(:target_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TARGET_STATUS", traits: {"smithy.api#enumValue" => "TARGET_STATUS"}))
-    ListTargetsFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ListTargetsFilter, name: "member")
+    ListTargetsFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListTargetsFilter, name: "member"))
     ListTargetsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListTargetsFilters, name: "Filters"))
     ListTargetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListTargetsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
@@ -185,7 +185,7 @@ module Aws::Codestarnotifications
     ListTargetsResult.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetsBatch, name: "Targets"))
     ListTargetsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListTargetsResult.type = Types::ListTargetsResult
-    NotificationRuleBatch.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationRuleSummary, name: "member")
+    NotificationRuleBatch.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationRuleSummary, name: "member"))
     NotificationRuleStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     NotificationRuleStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     NotificationRuleSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationRuleId, name: "Id"))
@@ -201,14 +201,14 @@ module Aws::Codestarnotifications
     SubscribeRequest.type = Types::SubscribeRequest
     SubscribeResult.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationRuleArn, name: "Arn"))
     SubscribeResult.type = Types::SubscribeResult
-    TagKeys.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
+    TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationRuleArn, name: "Arn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResult.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags"))
     TagResourceResult.type = Types::TagResourceResult
-    Tags.key = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key")
-    Tags.value = ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value")
+    Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
+    Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     Target.add_member(:target_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetType, name: "TargetType"))
     Target.add_member(:target_address, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAddress, name: "TargetAddress"))
     Target.type = Types::Target
@@ -221,8 +221,8 @@ module Aws::Codestarnotifications
     TargetSummary.add_member(:target_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetType, name: "TargetType"))
     TargetSummary.add_member(:target_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetStatus, name: "TargetStatus"))
     TargetSummary.type = Types::TargetSummary
-    Targets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "member")
-    TargetsBatch.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetSummary, name: "member")
+    Targets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "member"))
+    TargetsBatch.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetSummary, name: "member"))
     UnsubscribeRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationRuleArn, name: "Arn", traits: {"smithy.api#required" => {}}))
     UnsubscribeRequest.add_member(:target_address, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetAddress, name: "TargetAddress", traits: {"smithy.api#required" => {}}))
     UnsubscribeRequest.type = Types::UnsubscribeRequest

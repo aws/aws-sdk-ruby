@@ -184,7 +184,7 @@ module Aws::Budgets
     Action.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     Action.add_member(:subscribers, ::Smithy::Schema::Shapes::MemberShape.new(target: Subscribers, name: "Subscribers", traits: {"smithy.api#required" => {}}))
     Action.type = Types::Action
-    ActionHistories.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ActionHistory, name: "member")
+    ActionHistories.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionHistory, name: "member"))
     ActionHistory.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericTimestamp, name: "Timestamp", traits: {"smithy.api#required" => {}}))
     ActionHistory.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     ActionHistory.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "EventType", traits: {"smithy.api#required" => {}}))
@@ -211,7 +211,7 @@ module Aws::Budgets
     ActionType.add_member(:iam, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IAM", traits: {"smithy.api#enumValue" => "APPLY_IAM_POLICY"}))
     ActionType.add_member(:scp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCP", traits: {"smithy.api#enumValue" => "APPLY_SCP_POLICY"}))
     ActionType.add_member(:ssm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSM", traits: {"smithy.api#enumValue" => "RUN_SSM_DOCUMENTS"}))
-    Actions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "member")
+    Actions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "member"))
     ApprovalModel.add_member(:auto, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTO", traits: {"smithy.api#enumValue" => "AUTOMATIC"}))
     ApprovalModel.add_member(:manual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANUAL", traits: {"smithy.api#enumValue" => "MANUAL"}))
     AutoAdjustData.add_member(:auto_adjust_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoAdjustType, name: "AutoAdjustType", traits: {"smithy.api#required" => {}}))
@@ -241,7 +241,7 @@ module Aws::Budgets
     BudgetNotificationsForAccount.add_member(:notifications, ::Smithy::Schema::Shapes::MemberShape.new(target: Notifications, name: "Notifications"))
     BudgetNotificationsForAccount.add_member(:budget_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BudgetName, name: "BudgetName"))
     BudgetNotificationsForAccount.type = Types::BudgetNotificationsForAccount
-    BudgetNotificationsForAccountList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BudgetNotificationsForAccount, name: "member")
+    BudgetNotificationsForAccountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BudgetNotificationsForAccount, name: "member"))
     BudgetPerformanceHistory.add_member(:budget_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BudgetName, name: "BudgetName"))
     BudgetPerformanceHistory.add_member(:budget_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BudgetType, name: "BudgetType"))
     BudgetPerformanceHistory.add_member(:cost_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: CostFilters, name: "CostFilters"))
@@ -260,8 +260,8 @@ module Aws::Budgets
     BudgetedAndActualAmounts.add_member(:actual_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: Spend, name: "ActualAmount"))
     BudgetedAndActualAmounts.add_member(:time_period, ::Smithy::Schema::Shapes::MemberShape.new(target: TimePeriod, name: "TimePeriod"))
     BudgetedAndActualAmounts.type = Types::BudgetedAndActualAmounts
-    BudgetedAndActualAmountsList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: BudgetedAndActualAmounts, name: "member")
-    Budgets.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Budget, name: "member")
+    BudgetedAndActualAmountsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BudgetedAndActualAmounts, name: "member"))
+    Budgets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Budget, name: "member"))
     CalculatedSpend.add_member(:actual_spend, ::Smithy::Schema::Shapes::MemberShape.new(target: Spend, name: "ActualSpend", traits: {"smithy.api#required" => {}}))
     CalculatedSpend.add_member(:forecasted_spend, ::Smithy::Schema::Shapes::MemberShape.new(target: Spend, name: "ForecastedSpend"))
     CalculatedSpend.type = Types::CalculatedSpend
@@ -272,8 +272,8 @@ module Aws::Budgets
     CostCategoryValues.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: Values, name: "Values"))
     CostCategoryValues.add_member(:match_options, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOptions, name: "MatchOptions"))
     CostCategoryValues.type = Types::CostCategoryValues
-    CostFilters.key = ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "key")
-    CostFilters.value = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValues, name: "value")
+    CostFilters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "key"))
+    CostFilters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValues, name: "value"))
     CostTypes.add_member(:include_tax, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "IncludeTax"))
     CostTypes.add_member(:include_subscription, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "IncludeSubscription"))
     CostTypes.add_member(:use_blended, ::Smithy::Schema::Shapes::MemberShape.new(target: NullableBoolean, name: "UseBlended"))
@@ -461,7 +461,7 @@ module Aws::Budgets
     Dimension.add_member(:reservation_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESERVATION_MODIFIED", traits: {"smithy.api#enumValue" => "RESERVATION_MODIFIED"}))
     Dimension.add_member(:tag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAG_KEY", traits: {"smithy.api#enumValue" => "TAG_KEY"}))
     Dimension.add_member(:cost_category_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COST_CATEGORY_NAME", traits: {"smithy.api#enumValue" => "COST_CATEGORY_NAME"}))
-    DimensionValues.member = ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValue, name: "member")
+    DimensionValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValue, name: "member"))
     DuplicateRecordException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     DuplicateRecordException.type = Types::DuplicateRecordException
     EventType.add_member(:system, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "System", traits: {"smithy.api#enumValue" => "SYSTEM"}))
@@ -496,8 +496,8 @@ module Aws::Budgets
     ExpressionDimensionValues.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: Values, name: "Values", traits: {"smithy.api#required" => {}}))
     ExpressionDimensionValues.add_member(:match_options, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOptions, name: "MatchOptions"))
     ExpressionDimensionValues.type = Types::ExpressionDimensionValues
-    Expressions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "member")
-    Groups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Group, name: "member")
+    Expressions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "member"))
+    Groups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Group, name: "member"))
     HealthStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthStatusValue, name: "Status"))
     HealthStatus.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthStatusReason, name: "StatusReason"))
     HealthStatus.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericTimestamp, name: "LastUpdatedTime"))
@@ -516,7 +516,7 @@ module Aws::Budgets
     IamActionDefinition.add_member(:groups, ::Smithy::Schema::Shapes::MemberShape.new(target: Groups, name: "Groups"))
     IamActionDefinition.add_member(:users, ::Smithy::Schema::Shapes::MemberShape.new(target: Users, name: "Users"))
     IamActionDefinition.type = Types::IamActionDefinition
-    InstanceIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "member")
+    InstanceIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "member"))
     InternalErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     InternalErrorException.type = Types::InternalErrorException
     InvalidNextTokenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -535,7 +535,7 @@ module Aws::Budgets
     MatchOption.add_member(:greater_than_or_equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GREATER_THAN_OR_EQUAL", traits: {"smithy.api#enumValue" => "GREATER_THAN_OR_EQUAL"}))
     MatchOption.add_member(:case_sensitive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CASE_SENSITIVE", traits: {"smithy.api#enumValue" => "CASE_SENSITIVE"}))
     MatchOption.add_member(:case_insensitive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CASE_INSENSITIVE", traits: {"smithy.api#enumValue" => "CASE_INSENSITIVE"}))
-    MatchOptions.member = ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOption, name: "member")
+    MatchOptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOption, name: "member"))
     Metric.add_member(:blended_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BLENDED_COST", traits: {"smithy.api#enumValue" => "BlendedCost"}))
     Metric.add_member(:unblended_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNBLENDED_COST", traits: {"smithy.api#enumValue" => "UnblendedCost"}))
     Metric.add_member(:amortized_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMORTIZED_COST", traits: {"smithy.api#enumValue" => "AmortizedCost"}))
@@ -544,7 +544,7 @@ module Aws::Budgets
     Metric.add_member(:usage_quantity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USAGE_QUANTITY", traits: {"smithy.api#enumValue" => "UsageQuantity"}))
     Metric.add_member(:normalized_usage_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NORMALIZED_USAGE_AMOUNT", traits: {"smithy.api#enumValue" => "NormalizedUsageAmount"}))
     Metric.add_member(:hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOURS", traits: {"smithy.api#enumValue" => "Hours"}))
-    Metrics.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Metric, name: "member")
+    Metrics.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Metric, name: "member"))
     NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     NotFoundException.type = Types::NotFoundException
     Notification.add_member(:notification_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationType, name: "NotificationType", traits: {"smithy.api#required" => {}}))
@@ -560,18 +560,18 @@ module Aws::Budgets
     NotificationWithSubscribers.add_member(:notification, ::Smithy::Schema::Shapes::MemberShape.new(target: Notification, name: "Notification", traits: {"smithy.api#required" => {}}))
     NotificationWithSubscribers.add_member(:subscribers, ::Smithy::Schema::Shapes::MemberShape.new(target: Subscribers, name: "Subscribers", traits: {"smithy.api#required" => {}}))
     NotificationWithSubscribers.type = Types::NotificationWithSubscribers
-    NotificationWithSubscribersList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationWithSubscribers, name: "member")
-    Notifications.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Notification, name: "member")
-    PlannedBudgetLimits.key = ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "key")
-    PlannedBudgetLimits.value = ::Smithy::Schema::Shapes::MemberShape.new(target: Spend, name: "value")
+    NotificationWithSubscribersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotificationWithSubscribers, name: "member"))
+    Notifications.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Notification, name: "member"))
+    PlannedBudgetLimits.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "key"))
+    PlannedBudgetLimits.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Spend, name: "value"))
     ResourceLockedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ResourceLockedException.type = Types::ResourceLockedException
     ResourceTag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     ResourceTag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     ResourceTag.type = Types::ResourceTag
-    ResourceTagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "member")
-    ResourceTagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member")
-    Roles.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "member")
+    ResourceTagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "member"))
+    ResourceTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member"))
+    Roles.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Role, name: "member"))
     ScpActionDefinition.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, name: "PolicyId", traits: {"smithy.api#required" => {}}))
     ScpActionDefinition.add_member(:target_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetIds, name: "TargetIds", traits: {"smithy.api#required" => {}}))
     ScpActionDefinition.type = Types::ScpActionDefinition
@@ -587,7 +587,7 @@ module Aws::Budgets
     Subscriber.add_member(:subscription_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionType, name: "SubscriptionType", traits: {"smithy.api#required" => {}}))
     Subscriber.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriberAddress, name: "Address", traits: {"smithy.api#required" => {}}))
     Subscriber.type = Types::Subscriber
-    Subscribers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Subscriber, name: "member")
+    Subscribers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Subscriber, name: "member"))
     SubscriptionType.add_member(:sns, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SNS", traits: {"smithy.api#enumValue" => "SNS"}))
     SubscriptionType.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMAIL", traits: {"smithy.api#enumValue" => "EMAIL"}))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
@@ -598,7 +598,7 @@ module Aws::Budgets
     TagValues.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: Values, name: "Values"))
     TagValues.add_member(:match_options, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOptions, name: "MatchOptions"))
     TagValues.type = Types::TagValues
-    TargetIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TargetId, name: "member")
+    TargetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetId, name: "member"))
     ThresholdType.add_member(:percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PERCENTAGE", traits: {"smithy.api#enumValue" => "PERCENTAGE"}))
     ThresholdType.add_member(:absolute_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ABSOLUTE_VALUE", traits: {"smithy.api#enumValue" => "ABSOLUTE_VALUE"}))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -647,8 +647,8 @@ module Aws::Budgets
     UpdateSubscriberRequest.add_member(:new_subscriber, ::Smithy::Schema::Shapes::MemberShape.new(target: Subscriber, name: "NewSubscriber", traits: {"smithy.api#required" => {}}))
     UpdateSubscriberRequest.type = Types::UpdateSubscriberRequest
     UpdateSubscriberResponse.type = Types::UpdateSubscriberResponse
-    Users.member = ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member")
-    Values.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "member")
+    Users.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member"))
+    Values.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "member"))
 
     AWSBudgetServiceGateway = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.budgets#AWSBudgetServiceGateway"

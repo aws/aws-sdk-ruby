@@ -221,7 +221,7 @@ module Aws::Shield
     AttackDetail.type = Types::AttackDetail
     AttackLayer.add_member(:network, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NETWORK", traits: {"smithy.api#enumValue" => "NETWORK"}))
     AttackLayer.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPLICATION", traits: {"smithy.api#enumValue" => "APPLICATION"}))
-    AttackProperties.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttackProperty, name: "member")
+    AttackProperties.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttackProperty, name: "member"))
     AttackProperty.add_member(:attack_layer, ::Smithy::Schema::Shapes::MemberShape.new(target: AttackLayer, name: "AttackLayer"))
     AttackProperty.add_member(:attack_property_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AttackPropertyIdentifier, name: "AttackPropertyIdentifier"))
     AttackProperty.add_member(:top_contributors, ::Smithy::Schema::Shapes::MemberShape.new(target: TopContributors, name: "TopContributors"))
@@ -239,8 +239,8 @@ module Aws::Shield
     AttackStatisticsDataItem.add_member(:attack_volume, ::Smithy::Schema::Shapes::MemberShape.new(target: AttackVolume, name: "AttackVolume"))
     AttackStatisticsDataItem.add_member(:attack_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "AttackCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     AttackStatisticsDataItem.type = Types::AttackStatisticsDataItem
-    AttackStatisticsDataList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttackStatisticsDataItem, name: "member")
-    AttackSummaries.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttackSummary, name: "member")
+    AttackStatisticsDataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttackStatisticsDataItem, name: "member"))
+    AttackSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttackSummary, name: "member"))
     AttackSummary.add_member(:attack_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AttackId"))
     AttackSummary.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn"))
     AttackSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: AttackTimestamp, name: "StartTime"))
@@ -249,7 +249,7 @@ module Aws::Shield
     AttackSummary.type = Types::AttackSummary
     AttackVectorDescription.add_member(:vector_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VectorType", traits: {"smithy.api#required" => {}}))
     AttackVectorDescription.type = Types::AttackVectorDescription
-    AttackVectorDescriptionList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: AttackVectorDescription, name: "member")
+    AttackVectorDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttackVectorDescription, name: "member"))
     AttackVolume.add_member(:bits_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: AttackVolumeStatistics, name: "BitsPerSecond"))
     AttackVolume.add_member(:packets_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: AttackVolumeStatistics, name: "PacketsPerSecond"))
     AttackVolume.add_member(:requests_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: AttackVolumeStatistics, name: "RequestsPerSecond"))
@@ -332,7 +332,7 @@ module Aws::Shield
     EmergencyContact.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "PhoneNumber"))
     EmergencyContact.add_member(:contact_notes, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactNotes, name: "ContactNotes"))
     EmergencyContact.type = Types::EmergencyContact
-    EmergencyContactList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: EmergencyContact, name: "member")
+    EmergencyContactList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EmergencyContact, name: "member"))
     EnableApplicationLayerAutomaticResponseRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     EnableApplicationLayerAutomaticResponseRequest.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseAction, name: "Action", traits: {"smithy.api#required" => {}}))
     EnableApplicationLayerAutomaticResponseRequest.type = Types::EnableApplicationLayerAutomaticResponseRequest
@@ -342,7 +342,7 @@ module Aws::Shield
     GetSubscriptionStateRequest.type = Types::GetSubscriptionStateRequest
     GetSubscriptionStateResponse.add_member(:subscription_state, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionState, name: "SubscriptionState", traits: {"smithy.api#required" => {}}))
     GetSubscriptionStateResponse.type = Types::GetSubscriptionStateResponse
-    HealthCheckIds.member = ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckId, name: "member")
+    HealthCheckIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckId, name: "member"))
     InclusionProtectionFilters.add_member(:resource_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArnFilters, name: "ResourceArns"))
     InclusionProtectionFilters.add_member(:protection_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectionNameFilters, name: "ProtectionNames"))
     InclusionProtectionFilters.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedResourceTypeFilters, name: "ResourceTypes"))
@@ -367,7 +367,7 @@ module Aws::Shield
     Limit.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
     Limit.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "Max", traits: {"smithy.api#default" => 0}))
     Limit.type = Types::Limit
-    Limits.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, name: "member")
+    Limits.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Limit, name: "member"))
     LimitsExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     LimitsExceededException.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitType, name: "Type"))
     LimitsExceededException.add_member(:limit, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitNumber, name: "Limit", traits: {"smithy.api#default" => 0}))
@@ -408,10 +408,10 @@ module Aws::Shield
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
     LockedSubscriptionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     LockedSubscriptionException.type = Types::LockedSubscriptionException
-    LogBucketList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: LogBucket, name: "member")
+    LogBucketList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LogBucket, name: "member"))
     Mitigation.add_member(:mitigation_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MitigationName"))
     Mitigation.type = Types::Mitigation
-    MitigationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Mitigation, name: "member")
+    MitigationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Mitigation, name: "member"))
     NoAssociatedRoleException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     NoAssociatedRoleException.type = Types::NoAssociatedRoleException
     OptimisticLockException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
@@ -425,7 +425,7 @@ module Aws::Shield
     ProtectedResourceType.add_member(:classic_load_balancer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLASSIC_LOAD_BALANCER", traits: {"smithy.api#enumValue" => "CLASSIC_LOAD_BALANCER"}))
     ProtectedResourceType.add_member(:application_load_balancer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPLICATION_LOAD_BALANCER", traits: {"smithy.api#enumValue" => "APPLICATION_LOAD_BALANCER"}))
     ProtectedResourceType.add_member(:global_accelerator, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GLOBAL_ACCELERATOR", traits: {"smithy.api#enumValue" => "GLOBAL_ACCELERATOR"}))
-    ProtectedResourceTypeFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedResourceType, name: "member")
+    ProtectedResourceTypeFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectedResourceType, name: "member"))
     Protection.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectionId, name: "Id"))
     Protection.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectionName, name: "Name"))
     Protection.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn"))
@@ -443,31 +443,31 @@ module Aws::Shield
     ProtectionGroupAggregation.add_member(:sum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUM", traits: {"smithy.api#enumValue" => "SUM"}))
     ProtectionGroupAggregation.add_member(:mean, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEAN", traits: {"smithy.api#enumValue" => "MEAN"}))
     ProtectionGroupAggregation.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAX", traits: {"smithy.api#enumValue" => "MAX"}))
-    ProtectionGroupAggregationFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectionGroupAggregation, name: "member")
+    ProtectionGroupAggregationFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectionGroupAggregation, name: "member"))
     ProtectionGroupArbitraryPatternLimits.add_member(:max_members, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "MaxMembers", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     ProtectionGroupArbitraryPatternLimits.type = Types::ProtectionGroupArbitraryPatternLimits
-    ProtectionGroupIdFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectionGroupId, name: "member")
+    ProtectionGroupIdFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectionGroupId, name: "member"))
     ProtectionGroupLimits.add_member(:max_protection_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "MaxProtectionGroups", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     ProtectionGroupLimits.add_member(:pattern_type_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectionGroupPatternTypeLimits, name: "PatternTypeLimits", traits: {"smithy.api#required" => {}}))
     ProtectionGroupLimits.type = Types::ProtectionGroupLimits
-    ProtectionGroupMembers.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member")
+    ProtectionGroupMembers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member"))
     ProtectionGroupPattern.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
     ProtectionGroupPattern.add_member(:arbitrary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARBITRARY", traits: {"smithy.api#enumValue" => "ARBITRARY"}))
     ProtectionGroupPattern.add_member(:by_resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BY_RESOURCE_TYPE", traits: {"smithy.api#enumValue" => "BY_RESOURCE_TYPE"}))
-    ProtectionGroupPatternFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectionGroupPattern, name: "member")
+    ProtectionGroupPatternFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectionGroupPattern, name: "member"))
     ProtectionGroupPatternTypeLimits.add_member(:arbitrary_pattern_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectionGroupArbitraryPatternLimits, name: "ArbitraryPatternLimits", traits: {"smithy.api#required" => {}}))
     ProtectionGroupPatternTypeLimits.type = Types::ProtectionGroupPatternTypeLimits
-    ProtectionGroups.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectionGroup, name: "member")
+    ProtectionGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectionGroup, name: "member"))
     ProtectionLimits.add_member(:protected_resource_type_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: Limits, name: "ProtectedResourceTypeLimits", traits: {"smithy.api#required" => {}}))
     ProtectionLimits.type = Types::ProtectionLimits
-    ProtectionNameFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectionName, name: "member")
-    Protections.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Protection, name: "member")
+    ProtectionNameFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectionName, name: "member"))
+    Protections.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Protection, name: "member"))
     ResourceAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ResourceAlreadyExistsException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceType"))
     ResourceAlreadyExistsException.type = Types::ResourceAlreadyExistsException
-    ResourceArnFilterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member")
-    ResourceArnFilters.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member")
-    ResourceArnList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member")
+    ResourceArnFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member"))
+    ResourceArnFilters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member"))
+    ResourceArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceType"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
@@ -479,7 +479,7 @@ module Aws::Shield
     SubResourceSummary.add_member(:attack_vectors, ::Smithy::Schema::Shapes::MemberShape.new(target: SummarizedAttackVectorList, name: "AttackVectors"))
     SubResourceSummary.add_member(:counters, ::Smithy::Schema::Shapes::MemberShape.new(target: SummarizedCounterList, name: "Counters"))
     SubResourceSummary.type = Types::SubResourceSummary
-    SubResourceSummaryList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SubResourceSummary, name: "member")
+    SubResourceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubResourceSummary, name: "member"))
     SubResourceType.add_member(:ip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IP", traits: {"smithy.api#enumValue" => "IP"}))
     SubResourceType.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "URL", traits: {"smithy.api#enumValue" => "URL"}))
     Subscription.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime"))
@@ -499,7 +499,7 @@ module Aws::Shield
     SummarizedAttackVector.add_member(:vector_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VectorType", traits: {"smithy.api#required" => {}}))
     SummarizedAttackVector.add_member(:vector_counters, ::Smithy::Schema::Shapes::MemberShape.new(target: SummarizedCounterList, name: "VectorCounters"))
     SummarizedAttackVector.type = Types::SummarizedAttackVector
-    SummarizedAttackVectorList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SummarizedAttackVector, name: "member")
+    SummarizedAttackVectorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SummarizedAttackVector, name: "member"))
     SummarizedCounter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     SummarizedCounter.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Max", traits: {"smithy.api#default" => 0}))
     SummarizedCounter.add_member(:average, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "Average", traits: {"smithy.api#default" => 0}))
@@ -507,12 +507,12 @@ module Aws::Shield
     SummarizedCounter.add_member(:n, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "N", traits: {"smithy.api#default" => 0}))
     SummarizedCounter.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Unit"))
     SummarizedCounter.type = Types::SummarizedCounter
-    SummarizedCounterList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SummarizedCounter, name: "member")
+    SummarizedCounterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SummarizedCounter, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value"))
     Tag.type = Types::Tag
-    TagKeyList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member")
-    TagList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member")
+    TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
+    TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceARN", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
@@ -520,7 +520,7 @@ module Aws::Shield
     TimeRange.add_member(:from_inclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "FromInclusive"))
     TimeRange.add_member(:to_exclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ToExclusive"))
     TimeRange.type = Types::TimeRange
-    TopContributors.member = ::Smithy::Schema::Shapes::MemberShape.new(target: Contributor, name: "member")
+    TopContributors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Contributor, name: "member"))
     Unit.add_member(:bits, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BITS", traits: {"smithy.api#enumValue" => "BITS"}))
     Unit.add_member(:bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BYTES", traits: {"smithy.api#enumValue" => "BYTES"}))
     Unit.add_member(:packets, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PACKETS", traits: {"smithy.api#enumValue" => "PACKETS"}))
@@ -549,7 +549,7 @@ module Aws::Shield
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member")
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "FIELD_VALIDATION_FAILED"}))
     ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTHER", traits: {"smithy.api#enumValue" => "OTHER"}))
 

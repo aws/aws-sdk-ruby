@@ -112,7 +112,7 @@ module Aws::SupportApp
     SlackWorkspaceConfiguration.add_member(:team_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamName, name: "teamName"))
     SlackWorkspaceConfiguration.add_member(:allow_organization_member_account, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanValue, name: "allowOrganizationMemberAccount"))
     SlackWorkspaceConfiguration.type = Types::SlackWorkspaceConfiguration
-    SlackWorkspaceConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlackWorkspaceConfiguration, name: "member")
+    SlackWorkspaceConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackWorkspaceConfiguration, name: "member"))
     UpdateSlackChannelConfigurationInput.add_member(:team_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TeamId, name: "teamId", traits: {"smithy.api#required" => {}}))
     UpdateSlackChannelConfigurationInput.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelId, name: "channelId", traits: {"smithy.api#required" => {}}))
     UpdateSlackChannelConfigurationInput.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelName, name: "channelName"))
@@ -133,7 +133,7 @@ module Aws::SupportApp
     UpdateSlackChannelConfigurationOutput.type = Types::UpdateSlackChannelConfigurationOutput
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ValidationException.type = Types::ValidationException
-    SlackChannelConfigurationList.member = ::Smithy::Schema::Shapes::MemberShape.new(target: SlackChannelConfiguration, name: "member")
+    SlackChannelConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SlackChannelConfiguration, name: "member"))
 
     SupportApp = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.supportapp#SupportApp"
