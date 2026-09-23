@@ -10,7 +10,7 @@ module Aws
     # errors), and builds stubbed responses for testing.
     # @api private
     class Ec2Query
-      include Query::Protocol
+      include QueryProtocol
 
       def initialize(options = {})
         @input_codec = Query::Codec.new(options.merge(ec2: true))

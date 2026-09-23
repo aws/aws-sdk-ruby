@@ -62,8 +62,12 @@ module Aws
         describe RetryErrors::Handler do
           let(:config) do
             config = Smithy::Client::Configuration.new
-            config.add_option(:service,
-                              double('service', traits: { 'aws.api#service' => { 'sdkId' => 'TestService' } }))
+            config.add_option(
+              :service,
+              Smithy::Schema::Shapes::ServiceShape.new(
+                traits: { 'aws.api#service' => { 'sdkId' => 'TestService' } }
+              )
+            )
             config.add_option(:profile)
             Plugins::RetryErrors.new.add_options(config)
             config.build!(profile: 'default')

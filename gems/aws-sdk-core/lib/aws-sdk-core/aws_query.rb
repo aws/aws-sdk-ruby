@@ -10,7 +10,7 @@ module Aws
     # errors), and builds stubbed responses for testing.
     # @api private
     class AwsQuery
-      include Query::Protocol
+      include QueryProtocol
 
       def initialize(options = {})
         @input_codec = Query::Codec.new(options)
@@ -21,7 +21,7 @@ module Aws
       # @param [HandlerContext] context
       # @return [Object] the parsed output data
       def parse_data(context)
-        shape = wrap(context.operation)
+        shape = QueryExtension.output_wrapper(context.operation)
         data = @output_codec.parse(shape, context.http_response.body.read)
         unwrap(context, data)
       end
@@ -39,27 +39,6 @@ module Aws
       end
 
       private
-
-      def wrap(operation)
-        member = Smithy::Schema::Shapes::MemberShape.new(
-          target: operation.output, name: "#{operation.name}Result"
-        )
-        result = Smithy::Schema::Shapes::StructureShape.new
-        result.add_member(:result, member)
-        result.type = ::Struct.new(:result, :response_metadata)
-
-        response_metadata = Smithy::Schema::Shapes::StructureShape.new
-        response_metadata.type = ::Struct.new(:request_id)
-        request_id_member = Smithy::Schema::Shapes::MemberShape.new(
-          target: Smithy::Schema::Shapes::StringShape.new, name: 'RequestId'
-        )
-        response_metadata.add_member(:request_id, request_id_member)
-        response_metadata_member = Smithy::Schema::Shapes::MemberShape.new(
-          target: response_metadata, name: 'ResponseMetadata'
-        )
-        result.add_member(:response_metadata, response_metadata_member)
-        result
-      end
 
       def unwrap(context, data)
         context[:request_id] = data.response_metadata&.request_id
@@ -82,7 +61,7 @@ module Aws
       end
 
       def xmlns(service)
-        service.traits.dig('smithy.api#xmlNamespace', 'uri')
+        QueryExtension.xml_namespace(service)
       end
     end
   end

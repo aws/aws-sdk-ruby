@@ -246,10 +246,10 @@ module Aws
 
           # TODO: Revisit after trait is finalized.
           def long_polling_operation?(context)
-            return true if context.operation.traits.key?('smithy.api#longPoll')
+            return true if SCHEMA_EXTENSION.long_polling?(context.operation)
 
             # Hard-coded failback until the trait is enabled
-            service_id = context.config.service.traits.dig('aws.api#service', 'sdkId')
+            service_id = Extension.service_id(context.config.service)
             LONG_POLLING_OPERATIONS[service_id]&.include?(context.operation_name)
           end
 

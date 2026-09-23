@@ -64,7 +64,7 @@ module Aws
             private
 
             def api_metadata
-              service_id = @context.config.service.traits.dig('aws.api#service', 'sdkId')
+              service_id = Extension.service_id(@context.config.service)
               return unless service_id
 
               service_id = service_id.gsub(' ', '_').downcase

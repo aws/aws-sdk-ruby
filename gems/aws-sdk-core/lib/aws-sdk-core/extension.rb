@@ -2,6 +2,9 @@
 
 module Aws
   module Core
+    SCHEMA_EXTENSION = Smithy::Schema::Extension
+    EMPTY_STRUCTURE = Smithy::Schema::EmptyStructure
+
     # Cached AWS service metadata.
     #
     # Raw Smithy traits remain available on +service.traits+. This extension

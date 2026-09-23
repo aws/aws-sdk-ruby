@@ -50,7 +50,7 @@ module Aws
       def stub_data(config, operation, data)
         response = Smithy::Client::Http::Response.new
         response.status_code = 200
-        response.headers['Content-Type'] = content_type(config.service.traits)
+        response.headers['Content-Type'] = content_type(config.service)
         response.headers['X-Amzn-RequestId'] = 'stubbed-request-id'
         response.body = @codec.build(operation.output, data)
         response
@@ -63,7 +63,7 @@ module Aws
       def stub_error(config, error_code)
         response = Smithy::Client::Http::Response.new
         response.status_code = 400
-        response.headers['Content-Type'] = content_type(config.service.traits)
+        response.headers['Content-Type'] = content_type(config.service)
         response.body = <<~JSON.strip
           {
             "__type": #{error_code.inspect},
@@ -76,28 +76,14 @@ module Aws
       private
 
       def apply_headers(context)
-        context.http_request.headers['Content-Type'] = content_type(context.config.service.traits)
-        context.http_request.headers['X-Amz-Target'] = target(context)
-        context.http_request.headers['X-Amzn-Query-Mode'] = 'true' if query_compatible?(context)
+        service = context.config.service
+        context.http_request.headers['Content-Type'] = Extension.json_content_type(service)
+        context.http_request.headers['X-Amz-Target'] = Extension.json_target(service, context.operation)
+        context.http_request.headers['X-Amzn-Query-Mode'] = 'true' if Extension.query_compatible?(service)
       end
 
-      def content_type(traits)
-        version =
-          if traits.key?('aws.protocols#awsJson1_1')
-            '1.1'
-          elsif traits.key?('aws.protocols#awsJson1_0')
-            '1.0'
-          end
-        "application/x-amz-json-#{version}"
-      end
-
-      def target(context)
-        id = context.config.service.id
-        "#{id.split('#').last}.#{context.operation.name}"
-      end
-
-      def query_compatible?(context)
-        context.config.service.traits.key?('aws.protocols#awsQueryCompatible')
+      def content_type(service)
+        Extension.json_content_type(service)
       end
 
       def apply_endpoint_path(context)
@@ -113,7 +99,7 @@ module Aws
         data = parse_error_data(context, body, code)
         [code, data]
       rescue Smithy::Json::ParseError
-        [http_status_error_code(context), Smithy::Schema::EmptyStructure.new]
+        [http_status_error_code(context), EMPTY_STRUCTURE.new]
       end
 
       def error_code(context, body)
@@ -127,13 +113,10 @@ module Aws
       end
 
       def parse_error_data(context, body, code)
-        data = Smithy::Schema::EmptyStructure.new
-        context.operation.errors.each do |shape|
-          next unless shape.target.name == code
+        shape = SCHEMA_EXTENSION.error_index(context.operation)[code]
+        return EMPTY_STRUCTURE.new unless shape
 
-          data = @codec.parse(shape.target, body, shape.target.type.new)
-        end
-        data
+        @codec.parse(shape.target, body, shape.target.type.new)
       end
 
       def build_error(context, code, data)
@@ -144,8 +127,7 @@ module Aws
       end
 
       def query_compatible_header?(context)
-        context.config.service.traits.key?('aws.protocols#awsQueryCompatible') &&
-          context.http_response.headers['x-amzn-query-error']
+        Extension.query_compatible?(context.config.service) && context.http_response.headers['x-amzn-query-error']
       end
 
       def query_compatible_error(context)
