@@ -9,12 +9,12 @@ module Aws
           def initialize(codec, shape)
             @codec = codec
             @shape = shape
+            @metadata = HTTP_EXTENSION.fetch(shape)
           end
 
           def apply(request_or_response, params)
-            metadata = HTTP_EXTENSION.fetch(@shape)
-            payload_name, payload_member, payload_type, = metadata[:payload_member]
-            body_members = metadata.fetch(:body_members, [])
+            payload_name, payload_member, payload_type, = @metadata[:payload_member]
+            body_members = @metadata.fetch(:body_members, [])
             body = build_body(params, payload_name, payload_member, payload_type, body_members)
             # For JSON requests, default the body to an empty json if it's not a streaming payload
             # and there's at least one modeled body member.

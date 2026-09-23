@@ -7,11 +7,11 @@ module Aws
         # @api private
         class StatusCode
           def initialize(shape)
-            @shape = shape
+            @member = HTTP_EXTENSION.response_code_member(shape)
           end
 
           def apply(http_resp, target)
-            name, = HTTP_EXTENSION.response_code_member(@shape)
+            name, = @member
             target[name] = http_resp.status_code if name
           end
         end

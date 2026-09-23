@@ -7,15 +7,14 @@ module Aws
         # @api private
         class Headers
           def initialize(shape)
-            @shape = shape
+            @metadata = HTTP_EXTENSION.fetch(shape)
           end
 
           def apply(http_resp, target)
-            metadata = HTTP_EXTENSION.fetch(@shape)
-            metadata.fetch(:header_members, []).each do |name, member, header|
+            @metadata.fetch(:header_members, []).each do |name, member, header|
               extract_header(http_resp.headers, header, member, name, target)
             end
-            if (name, _, prefix = metadata[:prefix_header_member])
+            if (name, _, prefix = @metadata[:prefix_header_member])
               extract_prefix_header(http_resp.headers, prefix, name, target)
             end
           end

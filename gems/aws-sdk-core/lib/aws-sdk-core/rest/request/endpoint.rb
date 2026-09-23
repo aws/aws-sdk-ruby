@@ -10,15 +10,14 @@ module Aws
         # @api private
         class Endpoint
           def initialize(operation, shape)
-            @operation = operation
-            @shape = shape
+            @operation_metadata = HTTP_EXTENSION.fetch(operation)
+            @shape_metadata = HTTP_EXTENSION.fetch(shape)
+            @querystring_builder = QuerystringBuilder.new
           end
 
           def apply(request, params)
-            operation = HTTP_EXTENSION.fetch(@operation)
-            shape = HTTP_EXTENSION.fetch(@shape)
-            apply_path_params(request.endpoint, params, operation[:path], shape[:label_index])
-            apply_querystring_params(request.endpoint, params, operation[:static_query], shape)
+            apply_path_params(request.endpoint, params, @operation_metadata[:path], @shape_metadata[:label_index])
+            apply_querystring_params(request.endpoint, params, @operation_metadata[:static_query], @shape_metadata)
           end
 
           private
@@ -71,7 +70,7 @@ module Aws
             if (name, member = metadata[:query_params_member]) && !params[name].nil?
               parts << [member, params[name], nil]
             end
-            querystring = QuerystringBuilder.new.build(parts)
+            querystring = @querystring_builder.build(parts)
             querystring = [static_query, querystring == '' ? nil : querystring].compact.join('&')
             querystring = nil if querystring == ''
             uri.query = querystring

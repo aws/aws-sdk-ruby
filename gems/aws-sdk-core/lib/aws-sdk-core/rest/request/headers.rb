@@ -7,19 +7,18 @@ module Aws
         # @api private
         class Headers
           def initialize(shape)
-            @shape = shape
+            @metadata = HTTP_EXTENSION.fetch(shape)
           end
 
           def apply(request_or_response, params)
-            metadata = HTTP_EXTENSION.fetch(@shape)
-            metadata.fetch(:header_members, []).each do |member_name, member_ref, header_name|
+            @metadata.fetch(:header_members, []).each do |member_name, member_ref, header_name|
               value = params[member_name]
               next if value.nil?
 
               apply_header(request_or_response.headers, header_name, member_ref, value)
             end
 
-            if (name, _, prefix = metadata[:prefix_header_member]) && (values = params[name])
+            if (name, _, prefix = @metadata[:prefix_header_member]) && (values = params[name])
               apply_prefix_header(request_or_response.headers, prefix, values)
             end
           end

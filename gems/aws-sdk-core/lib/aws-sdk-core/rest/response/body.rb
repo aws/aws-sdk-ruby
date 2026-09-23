@@ -9,11 +9,12 @@ module Aws
           def initialize(codec, shape)
             @codec = codec
             @shape = shape
+            @payload_member = HTTP_EXTENSION.payload_member(shape)
             @has_members = shape.respond_to?(:members) && !shape.members.empty?
           end
 
           def apply(body, target)
-            name, member, payload_type, = HTTP_EXTENSION.payload_member(@shape)
+            name, member, payload_type, = @payload_member
             # When string, blob, or enum as a payload, use value directly
             if payload_type == :raw
               # Empty blob payloads are omitted
