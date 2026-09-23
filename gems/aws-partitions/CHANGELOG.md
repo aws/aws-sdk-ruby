@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1289.0 (2026-09-23)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::NetworkSecurityManager`.
+
 1.1288.0 (2026-09-22)
 ------------------
 

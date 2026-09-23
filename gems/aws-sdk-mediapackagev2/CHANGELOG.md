@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2026-09-23)
+------------------
+
+* Feature - This release adds support for signalling start and end in the ContentKeyPeriod element in key request from MediaPackageV2
+
 1.72.0 (2026-09-11)
 ------------------
 

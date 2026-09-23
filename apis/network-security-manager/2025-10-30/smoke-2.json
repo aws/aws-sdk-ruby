@@ -1,0 +1,32 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "ListAdminAccountsNotOnboarded",
+    "operationName" : "ListAdminAccounts",
+    "input" : { },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ValidationException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListPoliciesSuccess",
+    "operationName" : "ListPolicies",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

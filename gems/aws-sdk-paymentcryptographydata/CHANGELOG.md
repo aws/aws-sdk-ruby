@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2026-09-23)
+------------------
+
+* Feature - Adds asymmetric key support to ReEncryptData for re-encrypting data between RSA and symmetric data encryption keys.
+
 1.58.0 (2026-09-11)
 ------------------
 

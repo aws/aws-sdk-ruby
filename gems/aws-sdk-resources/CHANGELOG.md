@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.273.0 (2026-09-23)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-networksecuritymanager` gem.
+
 3.272.0 (2026-09-22)
 ------------------
 

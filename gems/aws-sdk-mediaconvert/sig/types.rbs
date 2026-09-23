@@ -181,6 +181,7 @@ module Aws::MediaConvert
       attr_accessor program_selection: ::Integer
       attr_accessor remix_settings: Types::RemixSettings
       attr_accessor selector_type: ("PID" | "TRACK" | "LANGUAGE_CODE" | "HLS_RENDITION_GROUP" | "ALL_PCM" | "STREAM")
+      attr_accessor smpte_337_passthrough: ("ENABLED" | "DISABLED")
       attr_accessor streams: ::Array[::Integer]
       attr_accessor tracks: ::Array[::Integer]
       SENSITIVE: []
@@ -527,7 +528,7 @@ module Aws::MediaConvert
     class Container
       attr_accessor bit_rate: ::Integer
       attr_accessor duration: ::Float
-      attr_accessor format: ("mp4" | "quicktime" | "matroska" | "webm" | "mxf" | "wave" | "avi" | "mpegts" | "mpegps" | "mp3" | "flac" | "asf" | "ogg")
+      attr_accessor format: ("mp4" | "quicktime" | "matroska" | "webm" | "mxf" | "wave" | "avi" | "mpegts" | "mpegps" | "mp3" | "flac" | "asf" | "ogg" | "three_gp" | "three_g2" | "aac" | "ac3" | "eac3")
       attr_accessor start_timecode: ::String
       attr_accessor tracks: ::Array[Types::Track]
       SENSITIVE: []
@@ -1539,6 +1540,7 @@ module Aws::MediaConvert
       attr_accessor inputs: ::Array[Types::Input]
       attr_accessor kantar_watermark: Types::KantarWatermarkSettings
       attr_accessor motion_image_inserter: Types::MotionImageInserter
+      attr_accessor motion_image_inserters: ::Array[Types::MotionImageInserter]
       attr_accessor nielsen_configuration: Types::NielsenConfiguration
       attr_accessor nielsen_non_linear_watermark: Types::NielsenNonLinearWatermarkSettings
       attr_accessor output_groups: ::Array[Types::OutputGroup]
@@ -1574,6 +1576,7 @@ module Aws::MediaConvert
       attr_accessor inputs: ::Array[Types::InputTemplate]
       attr_accessor kantar_watermark: Types::KantarWatermarkSettings
       attr_accessor motion_image_inserter: Types::MotionImageInserter
+      attr_accessor motion_image_inserters: ::Array[Types::MotionImageInserter]
       attr_accessor nielsen_configuration: Types::NielsenConfiguration
       attr_accessor nielsen_non_linear_watermark: Types::NielsenNonLinearWatermarkSettings
       attr_accessor output_groups: ::Array[Types::OutputGroup]
@@ -2096,6 +2099,8 @@ module Aws::MediaConvert
 
     class PassthroughSettings
       attr_accessor frame_control: ("NEAREST_IDRFRAME" | "NEAREST_IFRAME")
+      attr_accessor gops_per_segment: ::Integer
+      attr_accessor segmentation_mode: ("AUTO" | "DURATION_BASED" | "GOP_COUNT")
       attr_accessor video_selector_mode: ("AUTO" | "REMUX_ALL")
       SENSITIVE: []
     end

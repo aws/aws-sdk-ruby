@@ -110,6 +110,21 @@ module Aws::Billing
       SENSITIVE: [:name, :description]
     end
 
+    class BillingViewSegmentTimeRange
+      attr_accessor begin_date_inclusive: ::Time
+      attr_accessor end_date_exclusive: ::Time
+      SENSITIVE: []
+    end
+
+    class BillingViewSegmentsListElement
+      attr_accessor domain: ("BILLABLE" | "PRO_FORMA")
+      attr_accessor time_range: Types::BillingViewSegmentTimeRange
+      attr_accessor billing_transfer_account_id: ::String
+      attr_accessor management_account_id: ::String
+      attr_accessor billing_group_primary_account_id: ::String
+      SENSITIVE: []
+    end
+
     class ChargeAccount
       attr_accessor account_id: ::String
       attr_accessor charge_percentage: ::String
@@ -357,6 +372,20 @@ module Aws::Billing
       attr_accessor total_support_eligible_reserved_instance_spend: ::String
       attr_accessor total_support_eligible_savings_plan_spend: ::String
       attr_accessor support_eligible_spend_by_service: ::Array[Types::ServiceLevelAccountUsage]
+      SENSITIVE: []
+    end
+
+    class ListBillingViewSegmentsRequest
+      attr_accessor time_range: Types::BillingViewSegmentTimeRange
+      attr_accessor arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBillingViewSegmentsResponse
+      attr_accessor items: ::Array[Types::BillingViewSegmentsListElement]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 

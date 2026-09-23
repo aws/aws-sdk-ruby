@@ -33,6 +33,8 @@ module Aws::MediaPackageV2
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConflictExceptionType = Shapes::StringShape.new(name: 'ConflictExceptionType')
     ContainerType = Shapes::StringShape.new(name: 'ContainerType')
+    ContentKeyPeriodConfiguration = Shapes::StructureShape.new(name: 'ContentKeyPeriodConfiguration')
+    ContentKeyPeriodTiming = Shapes::StringShape.new(name: 'ContentKeyPeriodTiming')
     CreateChannelGroupRequest = Shapes::StructureShape.new(name: 'CreateChannelGroupRequest')
     CreateChannelGroupResponse = Shapes::StructureShape.new(name: 'CreateChannelGroupResponse')
     CreateChannelRequest = Shapes::StructureShape.new(name: 'CreateChannelRequest')
@@ -231,6 +233,7 @@ module Aws::MediaPackageV2
     SpekeKeyProviderResourceIdString = Shapes::StringShape.new(name: 'SpekeKeyProviderResourceIdString')
     SpekeKeyProviderRoleArnString = Shapes::StringShape.new(name: 'SpekeKeyProviderRoleArnString')
     SpekeKeyProviderUrlString = Shapes::StringShape.new(name: 'SpekeKeyProviderUrlString')
+    SpekeVersion = Shapes::StringShape.new(name: 'SpekeVersion')
     StartTag = Shapes::StructureShape.new(name: 'StartTag')
     StreamNameOutputMode = Shapes::StringShape.new(name: 'StreamNameOutputMode')
     String = Shapes::StringShape.new(name: 'String')
@@ -303,6 +306,9 @@ module Aws::MediaPackageV2
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ConflictException.add_member(:conflict_exception_type, Shapes::ShapeRef.new(shape: ConflictExceptionType, location_name: "ConflictExceptionType"))
     ConflictException.struct_class = Types::ConflictException
+
+    ContentKeyPeriodConfiguration.add_member(:content_key_period_timing, Shapes::ShapeRef.new(shape: ContentKeyPeriodTiming, location_name: "ContentKeyPeriodTiming"))
+    ContentKeyPeriodConfiguration.struct_class = Types::ContentKeyPeriodConfiguration
 
     CreateChannelGroupRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ChannelGroupName"))
     CreateChannelGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "header", location_name: "x-amzn-client-token", metadata: {"idempotencyToken" => true}))
@@ -994,6 +1000,8 @@ module Aws::MediaPackageV2
     SpekeKeyProvider.add_member(:role_arn, Shapes::ShapeRef.new(shape: SpekeKeyProviderRoleArnString, required: true, location_name: "RoleArn"))
     SpekeKeyProvider.add_member(:url, Shapes::ShapeRef.new(shape: SpekeKeyProviderUrlString, required: true, location_name: "Url"))
     SpekeKeyProvider.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: SpekeKeyProviderCertificateArnString, location_name: "CertificateArn"))
+    SpekeKeyProvider.add_member(:speke_version, Shapes::ShapeRef.new(shape: SpekeVersion, location_name: "SpekeVersion"))
+    SpekeKeyProvider.add_member(:content_key_period_configuration, Shapes::ShapeRef.new(shape: ContentKeyPeriodConfiguration, location_name: "ContentKeyPeriodConfiguration"))
     SpekeKeyProvider.struct_class = Types::SpekeKeyProvider
 
     SpekeKeyProviderDrmSystemsList.member = Shapes::ShapeRef.new(shape: DrmSystem)

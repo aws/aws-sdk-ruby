@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2026-09-23)
+------------------
+
+* Feature - Multi language support with code switching, custom template sectionHeader now allows underscores.
+
 1.11.0 (2026-09-11)
 ------------------
 

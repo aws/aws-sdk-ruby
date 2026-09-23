@@ -1235,6 +1235,110 @@ module Aws::Billing
       req.send_request(options)
     end
 
+    # Lists the segments of a billing view over a given time period. Each
+    # segment identifies the billing domain (`PRO_FORMA` or `BILLABLE`) and
+    # the account relationships that apply during its time range.
+    #
+    # If you don't provide an `arn`, the response includes segments for the
+    # caller's `PRIMARY` billing view.
+    #
+    # If a mid-period change occurs, the response includes multiple
+    # segments, each with its own time range. The response omits hidden
+    # segments, so the segments it returns might not cover the entire
+    # requested time period.
+    #
+    # @option params [Types::BillingViewSegmentTimeRange] :time_range
+    #   The billing period to query. If you don't provide a time range, the
+    #   current billing period, which is the calendar month in UTC, is used.
+    #
+    # @option params [String] :arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies the billing
+    #   view to query. If you don't provide an ARN, the caller's `PRIMARY`
+    #   billing view is used. The ARN must reference a primary billing view.
+    #   Custom billing views aren't supported.
+    #
+    # @option params [Integer] :max_results
+    #   The number of entries a paginated response contains. Valid values
+    #   range from 1 to 100. The default is 100.
+    #
+    # @option params [String] :next_token
+    #   The pagination token that is used on subsequent calls to list billing
+    #   view segments.
+    #
+    # @return [Types::ListBillingViewSegmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBillingViewSegmentsResponse#items #items} => Array&lt;Types::BillingViewSegmentsListElement&gt;
+    #   * {Types::ListBillingViewSegmentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Invoke ListBillingViewSegments
+    #
+    #   resp = client.list_billing_view_segments({
+    #     time_range: {
+    #       begin_date_inclusive: Time.parse(1719792000), 
+    #       end_date_exclusive: Time.parse(1722470400), 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         billing_group_primary_account_id: "333333333333", 
+    #         billing_transfer_account_id: "111111111111", 
+    #         domain: "BILLABLE", 
+    #         management_account_id: "222222222222", 
+    #         time_range: {
+    #           begin_date_inclusive: Time.parse(1719792000), 
+    #           end_date_exclusive: Time.parse(1722470400), 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: Error example for ListBillingViewSegments
+    #
+    #   resp = client.list_billing_view_segments({
+    #     time_range: {
+    #       begin_date_inclusive: Time.parse(1722470400), 
+    #       end_date_exclusive: Time.parse(1719792000), 
+    #     }, 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_billing_view_segments({
+    #     time_range: {
+    #       begin_date_inclusive: Time.now,
+    #       end_date_exclusive: Time.now,
+    #     },
+    #     arn: "BillingViewArn",
+    #     max_results: 1,
+    #     next_token: "PageToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].domain #=> String, one of "BILLABLE", "PRO_FORMA"
+    #   resp.items[0].time_range.begin_date_inclusive #=> Time
+    #   resp.items[0].time_range.end_date_exclusive #=> Time
+    #   resp.items[0].billing_transfer_account_id #=> String
+    #   resp.items[0].management_account_id #=> String
+    #   resp.items[0].billing_group_primary_account_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListBillingViewSegments AWS API Documentation
+    #
+    # @overload list_billing_view_segments(params = {})
+    # @param [Hash] params ({})
+    def list_billing_view_segments(params = {}, options = {})
+      req = build_request(:list_billing_view_segments, params)
+      req.send_request(options)
+    end
+
     # Lists the billing views available for a given time period.
     #
     # Every Amazon Web Services account has a unique `PRIMARY` billing view
@@ -1794,7 +1898,7 @@ module Aws::Billing
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-billing'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -289,6 +289,7 @@ module Aws
   autoload :NetworkFlowMonitor, 'aws-sdk-networkflowmonitor'
   autoload :NetworkManager, 'aws-sdk-networkmanager'
   autoload :NetworkMonitor, 'aws-sdk-networkmonitor'
+  autoload :NetworkSecurityManager, 'aws-sdk-networksecuritymanager'
   autoload :Notifications, 'aws-sdk-notifications'
   autoload :NotificationsContacts, 'aws-sdk-notificationscontacts'
   autoload :NovaAct, 'aws-sdk-novaact'

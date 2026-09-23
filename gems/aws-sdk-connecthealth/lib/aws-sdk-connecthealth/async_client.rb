@@ -532,7 +532,7 @@ module Aws::ConnectHealth
     #     session_id: "SessionId", # required
     #     domain_id: "DomainId", # required
     #     subscription_id: "SubscriptionId", # required
-    #     language_code: "en-US", # required, accepts en-US
+    #     language_code: "en-US", # required, accepts en-US, multi
     #     media_sample_rate_hertz: 1, # required
     #     media_encoding: "pcm", # required, accepts pcm, flac
     #     input_event_stream_hander: EventStreams::MedicalScribeInputStream.new,
@@ -548,7 +548,7 @@ module Aws::ConnectHealth
     #   resp.domain_id #=> String
     #   resp.subscription_id #=> String
     #   resp.request_id #=> String
-    #   resp.language_code #=> String, one of "en-US"
+    #   resp.language_code #=> String, one of "en-US", "multi"
     #   resp.media_sample_rate_hertz #=> Integer
     #   resp.media_encoding #=> String, one of "pcm", "flac"
     #   # All events are available at resp.response_stream:
@@ -617,7 +617,7 @@ module Aws::ConnectHealth
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connecthealth'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

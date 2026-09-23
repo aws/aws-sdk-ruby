@@ -527,6 +527,7 @@ module Aws
             'NetworkFlowMonitor' => 'networkflowmonitor',
             'NetworkManager' => 'networkmanager',
             'NetworkMonitor' => 'networkmonitor',
+            'NetworkSecurityManager' => 'network-security-manager',
             'Notifications' => 'notifications',
             'NotificationsContacts' => 'notifications-contacts',
             'NovaAct' => 'nova-act',

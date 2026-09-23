@@ -299,6 +299,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-networkflowmonitor', '~> 1')
   spec.add_dependency('aws-sdk-networkmanager', '~> 1')
   spec.add_dependency('aws-sdk-networkmonitor', '~> 1')
+  spec.add_dependency('aws-sdk-networksecuritymanager', '~> 1')
   spec.add_dependency('aws-sdk-notifications', '~> 1')
   spec.add_dependency('aws-sdk-notificationscontacts', '~> 1')
   spec.add_dependency('aws-sdk-novaact', '~> 1')

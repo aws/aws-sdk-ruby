@@ -475,7 +475,11 @@ module Aws::Imagebuilder
     # @!group API Operations
 
     # Cancels the creation of an image. This operation can only be used on
-    # images in a non-terminal state.
+    # images in a non-terminal state. Cancellation is asynchronous: the
+    # request returns immediately, then Image Builder stops the running
+    # build and moves the image to the `CANCELLED` state. Output resources
+    # that the build already created, such as AMIs and snapshots, aren't
+    # removed.
     #
     # @option params [required, String] :image_build_version_arn
     #   The Amazon Resource Name (ARN) of the image that you want to cancel
@@ -483,10 +487,10 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -500,6 +504,23 @@ module Aws::Imagebuilder
     #   * {Types::CancelImageCreationResponse#request_id #request_id} => String
     #   * {Types::CancelImageCreationResponse#client_token #client_token} => String
     #   * {Types::CancelImageCreationResponse#image_build_version_arn #image_build_version_arn} => String
+    #
+    #
+    # @example Example: Cancel an image build
+    #
+    #   # The following example cancels a build that is in progress for the specified image build version.
+    #
+    #   resp = client.cancel_image_creation({
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE77777", 
+    #     image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE77777", 
+    #     image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #     request_id: "fead325f-72d9-42b5-b2ed-c5294984c6a9", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -523,7 +544,11 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Cancels a specific image lifecycle policy runtime instance.
+    # Cancels a lifecycle execution – a single run of lifecycle actions that
+    # a lifecycle policy or a StartResourceStateUpdate request started. You
+    # can only cancel an execution that hasn't reached a terminal state.
+    # Cancellation is asynchronous and doesn't undo completed lifecycle
+    # actions.
     #
     # @option params [required, String] :lifecycle_execution_id
     #   Identifies the specific runtime instance of the image lifecycle to
@@ -531,10 +556,10 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -546,6 +571,22 @@ module Aws::Imagebuilder
     # @return [Types::CancelLifecycleExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CancelLifecycleExecutionResponse#lifecycle_execution_id #lifecycle_execution_id} => String
+    #
+    #
+    # @example Example: Cancel a lifecycle execution
+    #
+    #   # The following example cancels the scheduled resource state update associated with the specified lifecycle execution ID
+    #   # before it runs.
+    #
+    #   resp = client.cancel_lifecycle_execution({
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE97531", 
+    #     lifecycle_execution_id: "lce-401aefc3-a829-46f6-8fc2-91497988a503", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     lifecycle_execution_id: "lce-401aefc3-a829-46f6-8fc2-91497988a503", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -576,8 +617,18 @@ module Aws::Imagebuilder
     # * A URL that points to a YAML document file stored in Amazon S3, using
     #   the `uri` property in the request body.
     #
+    # Image Builder determines the component type from the document. If the
+    # document contains a single phase named `test`, the component type is
+    # `TEST`. Otherwise, the component type is `BUILD`.
+    #
     # @option params [required, String] :name
-    #   The name of the component.
+    #   The name of the component. Image Builder generates the component ARN
+    #   from a normalized form of the name, so names that differ only in case,
+    #   spaces, or underscores count as the same name. If a component with the
+    #   same name and semantic version already exists in your account in the
+    #   same Amazon Web Services Region, the request creates a new build
+    #   version for it. If the content is also identical to the latest build
+    #   version, the request fails because the component already exists.
     #
     # @option params [required, String] :semantic_version
     #   The semantic version of the component. This version follows the
@@ -624,7 +675,8 @@ module Aws::Imagebuilder
     #   The `uri` of a YAML component document file. This must be an S3 URL
     #   (`s3://bucket/key`), and you must have permission to access the S3
     #   bucket it points to. If you use Amazon S3, you can specify component
-    #   content up to your service quota.
+    #   content up to your service quota for component size, which is 64 KB by
+    #   default.
     #
     #   Alternatively, you can specify the YAML document inline, using the
     #   component `data` property. You cannot specify both properties.
@@ -633,7 +685,9 @@ module Aws::Imagebuilder
     #   The Amazon Resource Name (ARN) that uniquely identifies the KMS key
     #   used to encrypt this component. This can be either the Key ARN or the
     #   Alias ARN. For more information, see [Key identifiers (KeyId)][1] in
-    #   the *Key Management Service Developer Guide*.
+    #   the *Key Management Service Developer Guide*. If you don't specify a
+    #   key, Image Builder encrypts the component data with a KMS key that
+    #   Image Builder owns.
     #
     #
     #
@@ -644,10 +698,10 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -658,8 +712,8 @@ module Aws::Imagebuilder
     #
     # @option params [Boolean] :dry_run
     #   Validates the required permissions and request parameters without
-    #   making the request. If validation succeeds, the operation returns a
-    #   `DryRunOperationException` error response.
+    #   performing the operation. If validation succeeds, the operation
+    #   returns a `DryRunOperationException` error response.
     #
     # @return [Types::CreateComponentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -667,6 +721,61 @@ module Aws::Imagebuilder
     #   * {Types::CreateComponentResponse#client_token #client_token} => String
     #   * {Types::CreateComponentResponse#component_build_version_arn #component_build_version_arn} => String
     #   * {Types::CreateComponentResponse#latest_version_references #latest_version_references} => Types::LatestVersionReferences
+    #
+    #
+    # @example Example: Create a component from an inline document
+    #
+    #   # The following example creates a build component from a YAML document provided inline in the request.
+    #
+    #   resp = client.create_component({
+    #     name: "my-example-component", 
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     data: "name: InstallMyApp\ndescription: Installs my application\nschemaVersion: 1.0\nphases:\n  - name: build\n    steps:\n      - name: InstallApp\n        action: ExecuteBash\n        inputs:\n          commands:\n            - sudo yum -y install my-app\n", 
+    #     description: "Installs the latest version of my application", 
+    #     platform: "Linux", 
+    #     semantic_version: "1.0.0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     component_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/1.0.0/1", 
+    #     latest_version_references: {
+    #       latest_major_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/1.x.x", 
+    #       latest_minor_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/1.0.x", 
+    #       latest_patch_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/1.0.0", 
+    #       latest_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/x.x.x", 
+    #     }, 
+    #     request_id: "e769f240-fb6a-4253-88d1-20a80cbe787d", 
+    #   }
+    #
+    # @example Example: Create a component from a document stored in Amazon S3
+    #
+    #   # The following example creates a component from a YAML definition document that's stored in an Amazon S3 bucket. The
+    #   # definition document for this component includes an AppVersion parameter that recipes can set when they include the
+    #   # component.
+    #
+    #   resp = client.create_component({
+    #     name: "my-example-parameterized-component", 
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE10101", 
+    #     description: "Installs a configurable version of my application", 
+    #     platform: "Linux", 
+    #     semantic_version: "1.0.0", 
+    #     uri: "s3://amzn-s3-demo-bucket/components/install-my-app.yaml", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE10101", 
+    #     component_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-parameterized-component/1.0.0/1", 
+    #     latest_version_references: {
+    #       latest_major_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-parameterized-component/1.x.x", 
+    #       latest_minor_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-parameterized-component/1.0.x", 
+    #       latest_patch_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-parameterized-component/1.0.0", 
+    #       latest_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-parameterized-component/x.x.x", 
+    #     }, 
+    #     request_id: "0cec8e32-a5c6-4aeb-ac3a-6471c8a2a8a9", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -713,7 +822,11 @@ module Aws::Imagebuilder
     #   The type of container to create.
     #
     # @option params [required, String] :name
-    #   The name of the container recipe.
+    #   The name of the container recipe. The recipe name, combined with the
+    #   semantic version, must be unique to your account in each Amazon Web
+    #   Services Region. Image Builder generates the container recipe ARN from
+    #   a normalized form of the name, so names that differ only in case,
+    #   spaces, or underscores count as the same name.
     #
     # @option params [String] :description
     #   The description of the container recipe.
@@ -739,29 +852,46 @@ module Aws::Imagebuilder
     #    </note>
     #
     # @option params [Array<Types::ComponentConfiguration>] :components
-    #   The components included in the container recipe.
+    #   The components included in the container recipe. You can specify each
+    #   component only one time in a recipe.
     #
     # @option params [Types::InstanceConfiguration] :instance_configuration
     #   A group of options that can be used to configure an instance for
     #   building and testing container images.
     #
     # @option params [String] :dockerfile_template_data
-    #   The Dockerfile template used to build your image as an inline data
-    #   blob.
+    #   The Dockerfile template used to build your image, as an inline data
+    #   blob. You must specify exactly one of the `dockerfileTemplateData` or
+    #   `dockerfileTemplateUri` properties. For the contextual variables that
+    #   the template can include, see [Create a new version of a container
+    #   recipe][1] in the *EC2 Image Builder User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/imagebuilder/latest/userguide/create-container-recipes.html
     #
     # @option params [String] :dockerfile_template_uri
-    #   The Amazon S3 URI for the Dockerfile that is used to build your
-    #   container image.
+    #   The Amazon S3 URI for the Dockerfile template that is used to build
+    #   your container image. You must have permission to read the object.
+    #   Image Builder reads the object once, when it creates the recipe, and
+    #   stores its content in the recipe. Later changes to the S3 object
+    #   don't affect the recipe. You must specify exactly one of the
+    #   `dockerfileTemplateData` or `dockerfileTemplateUri` properties.
     #
     # @option params [String] :platform_override
     #   Specifies the operating system platform when you use a custom base
-    #   image.
+    #   image. Container recipes support only the Linux and Windows platforms.
     #
     # @option params [String] :image_os_version_override
-    #   Specifies the operating system version for the base image.
+    #   Specifies the operating system version for the base image. Use this
+    #   property only when the base image is a container image from a
+    #   registry. When the base image is an Image Builder image, the operating
+    #   system version comes from the parent image.
     #
     # @option params [required, String] :parent_image
-    #   The base image for the container recipe.
+    #   The base image for the container recipe. This can be an Image Builder
+    #   image resource ARN or a container image URI from a registry, for
+    #   example `amazonlinux:latest`.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags that are attached to the container recipe.
@@ -770,7 +900,9 @@ module Aws::Imagebuilder
     #   The working directory for use during build and test workflows.
     #
     # @option params [required, Types::TargetContainerRepository] :target_repository
-    #   The destination repository for the container image.
+    #   The destination repository for the container image. The Amazon ECR
+    #   repository must already exist in the Amazon Web Services Region where
+    #   the build runs.
     #
     # @option params [String] :kms_key_id
     #   The Amazon Resource Name (ARN) that uniquely identifies which KMS key
@@ -784,10 +916,10 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -798,8 +930,8 @@ module Aws::Imagebuilder
     #
     # @option params [Boolean] :dry_run
     #   Validates the required permissions and request parameters without
-    #   making the request. If validation succeeds, the operation returns a
-    #   `DryRunOperationException` error response.
+    #   performing the operation. If validation succeeds, the operation
+    #   returns a `DryRunOperationException` error response.
     #
     # @return [Types::CreateContainerRecipeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -807,6 +939,93 @@ module Aws::Imagebuilder
     #   * {Types::CreateContainerRecipeResponse#client_token #client_token} => String
     #   * {Types::CreateContainerRecipeResponse#container_recipe_arn #container_recipe_arn} => String
     #   * {Types::CreateContainerRecipeResponse#latest_version_references #latest_version_references} => Types::LatestVersionReferences
+    #
+    #
+    # @example Example: Create a container recipe with an inline Dockerfile template
+    #
+    #   # The following example creates a Docker container recipe that applies one build component, using the latest Amazon Linux
+    #   # container image as the parent and an existing ECR repository as the target.
+    #
+    #   resp = client.create_container_recipe({
+    #     name: "my-example-container-recipe", 
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE99999", 
+    #     components: [
+    #       {
+    #         component_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-container-component/1.0.0/1", 
+    #       }, 
+    #     ], 
+    #     container_type: "DOCKER", 
+    #     dockerfile_template_data: "FROM {{{ imagebuilder:parentImage }}}\n{{{ imagebuilder:environments }}}\n{{{ imagebuilder:components }}}\n", 
+    #     parent_image: "amazonlinux:latest", 
+    #     semantic_version: "1.0.0", 
+    #     target_repository: {
+    #       repository_name: "my-example-container-repo", 
+    #       service: "ECR", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE99999", 
+    #     container_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe/1.0.0", 
+    #     latest_version_references: {
+    #       latest_major_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe/1.x.x", 
+    #       latest_minor_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe/1.0.x", 
+    #       latest_patch_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe/1.0.0", 
+    #       latest_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe/x.x.x", 
+    #     }, 
+    #     request_id: "20b16948-45a4-4b3a-9a17-d54779847365", 
+    #   }
+    #
+    # @example Example: Create a container recipe with a custom build instance configuration
+    #
+    #   # The following example creates a container recipe that customizes the Amazon EC2 instance that builds the container
+    #   # image. The build instance launches from an Amazon ECS-optimized instance image and uses a 40 GiB gp3 volume.
+    #
+    #   resp = client.create_container_recipe({
+    #     name: "my-example-container-recipe", 
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE40404", 
+    #     components: [
+    #       {
+    #         component_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-container-component/1.0.0/1", 
+    #       }, 
+    #     ], 
+    #     container_type: "DOCKER", 
+    #     description: "A container recipe that builds on an ECS-optimized instance image with a larger build volume", 
+    #     dockerfile_template_data: "FROM {{{ imagebuilder:parentImage }}}\n{{{ imagebuilder:environments }}}\n{{{ imagebuilder:components }}}\n", 
+    #     instance_configuration: {
+    #       block_device_mappings: [
+    #         {
+    #           device_name: "/dev/xvda", 
+    #           ebs: {
+    #             delete_on_termination: true, 
+    #             volume_size: 40, 
+    #             volume_type: "gp3", 
+    #           }, 
+    #         }, 
+    #       ], 
+    #       image: "ami-1234567890abcdef0", 
+    #     }, 
+    #     parent_image: "amazonlinux:latest", 
+    #     semantic_version: "1.1.0", 
+    #     target_repository: {
+    #       repository_name: "my-example-container-repo", 
+    #       service: "ECR", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE40404", 
+    #     container_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe/1.1.0", 
+    #     latest_version_references: {
+    #       latest_major_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe/1.x.x", 
+    #       latest_minor_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe/1.1.x", 
+    #       latest_patch_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe/1.1.0", 
+    #       latest_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe/x.x.x", 
+    #     }, 
+    #     request_id: "4b6fc7f3-5b6b-4086-858e-22d4c7f9a37f", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -884,26 +1103,33 @@ module Aws::Imagebuilder
     end
 
     # Creates a new distribution configuration. Distribution configurations
-    # define and configure the outputs of your pipeline.
+    # define and configure the outputs for your images, including the target
+    # Regions, accounts, and settings for each Region.
     #
     # @option params [required, String] :name
-    #   The name of the distribution configuration.
+    #   The name of the distribution configuration. Distribution configuration
+    #   names must be unique to your account in each Amazon Web Services
+    #   Region. Image Builder generates the distribution configuration ARN
+    #   from a normalized form of the name, so names that differ only in case,
+    #   spaces, or underscores count as the same name.
     #
     # @option params [String] :description
     #   The description of the distribution configuration.
     #
     # @option params [required, Array<Types::Distribution>] :distributions
-    #   The distributions of the distribution configuration.
+    #   The distribution settings for the configuration. Each entry defines
+    #   how output images are distributed in one target Amazon Web Services
+    #   Region. A Region can appear at most once in the list.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags of the distribution configuration.
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -914,14 +1140,91 @@ module Aws::Imagebuilder
     #
     # @option params [Boolean] :dry_run
     #   Validates the required permissions and request parameters without
-    #   making the request. If validation succeeds, the operation returns a
-    #   `DryRunOperationException` error response.
+    #   performing the operation. If validation succeeds, the operation
+    #   returns a `DryRunOperationException` error response.
     #
     # @return [Types::CreateDistributionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDistributionConfigurationResponse#request_id #request_id} => String
     #   * {Types::CreateDistributionConfigurationResponse#client_token #client_token} => String
     #   * {Types::CreateDistributionConfigurationResponse#distribution_configuration_arn #distribution_configuration_arn} => String
+    #
+    #
+    # @example Example: Create a distribution configuration
+    #
+    #   # The following example creates a distribution configuration that distributes the output AMI to two Regions. The AMI name
+    #   # includes the build date, so that repeated builds create unique AMI names.
+    #
+    #   resp = client.create_distribution_configuration({
+    #     name: "my-example-distribution", 
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE44444", 
+    #     description: "Copies the output AMI to a second Region", 
+    #     distributions: [
+    #       {
+    #         ami_distribution_configuration: {
+    #           name: "my-example-image-{{ imagebuilder:buildDate }}", 
+    #         }, 
+    #         region: "us-west-2", 
+    #       }, 
+    #       {
+    #         ami_distribution_configuration: {
+    #           name: "my-example-image-{{ imagebuilder:buildDate }}", 
+    #         }, 
+    #         region: "us-east-1", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE44444", 
+    #     distribution_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:distribution-configuration/my-example-distribution", 
+    #     request_id: "ca5312ad-a273-4c8c-817e-042941a5762d", 
+    #   }
+    #
+    # @example Example: Create a distribution configuration with launch permissions and a launch template update
+    #
+    #   # The following example creates a distribution configuration that distributes the output AMI to two Regions. In us-east-1,
+    #   # it shares the AMI with another AWS account. In us-west-2, it sets the new AMI as the default version of your launch
+    #   # template.
+    #
+    #   resp = client.create_distribution_configuration({
+    #     name: "my-example-distribution", 
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE56789", 
+    #     description: "Distributes the output AMI to two Regions and shares it with another account", 
+    #     distributions: [
+    #       {
+    #         ami_distribution_configuration: {
+    #           name: "my-example-image-{{ imagebuilder:buildDate }}", 
+    #         }, 
+    #         launch_template_configurations: [
+    #           {
+    #             launch_template_id: "lt-1234567890abcdef0", 
+    #             set_default_version: true, 
+    #           }, 
+    #         ], 
+    #         region: "us-west-2", 
+    #       }, 
+    #       {
+    #         ami_distribution_configuration: {
+    #           name: "my-example-image-{{ imagebuilder:buildDate }}", 
+    #           launch_permission: {
+    #             user_ids: [
+    #               "444455556666", 
+    #             ], 
+    #           }, 
+    #         }, 
+    #         region: "us-east-1", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE56789", 
+    #     distribution_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:distribution-configuration/my-example-distribution", 
+    #     request_id: "13c97ae8-8e39-4e12-af78-25e70def0933", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1016,20 +1319,33 @@ module Aws::Imagebuilder
 
     # Creates a new image along with all configured output resources defined
     # in the distribution configuration. You must specify exactly one recipe
-    # for your image, using either a ContainerRecipeArn or an
-    # ImageRecipeArn.
+    # for your image, using either a `containerRecipeArn` or an
+    # `imageRecipeArn`.
+    #
+    # The response returns as soon as Image Builder creates the new image
+    # resource. The image build process runs asynchronously. To check its
+    # progress, call [GetImage][1] and check the image status.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_GetImage.html
     #
     # @option params [String] :image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe that defines how
-    #   images are configured, tested, and assessed.
+    #   images are configured, tested, and assessed. You must specify either
+    #   this property or `containerRecipeArn`, but not both.
     #
     # @option params [String] :container_recipe_arn
     #   The Amazon Resource Name (ARN) of the container recipe that defines
-    #   how images are configured and tested.
+    #   how images are configured and tested. You must specify either this
+    #   property or `imageRecipeArn`, but not both.
     #
     # @option params [String] :distribution_configuration_arn
     #   The Amazon Resource Name (ARN) of the distribution configuration that
-    #   defines and configures the outputs of your pipeline.
+    #   defines and configures the outputs of the image build. If you don't
+    #   specify a distribution configuration, Image Builder creates the output
+    #   image only in the account and Amazon Web Services Region where the
+    #   build runs.
     #
     # @option params [required, String] :infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration
@@ -1037,7 +1353,8 @@ module Aws::Imagebuilder
     #   tested.
     #
     # @option params [Types::ImageTestsConfiguration] :image_tests_configuration
-    #   The image tests configuration of the image.
+    #   Settings that determine whether Image Builder runs tests on the image
+    #   after building it. Image tests are enabled by default.
     #
     # @option params [Boolean] :enhanced_image_metadata_enabled
     #   Specifies whether to collect additional information about the image
@@ -1049,10 +1366,10 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1062,17 +1379,30 @@ module Aws::Imagebuilder
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [Types::ImageScanningConfiguration] :image_scanning_configuration
-    #   Contains settings for vulnerability scans.
+    #   Settings for vulnerability scans that Amazon Inspector runs during
+    #   image creation. For AMI output, Amazon Inspector scans the test
+    #   instance. For container output, Amazon Inspector scans the container
+    #   image that Image Builder pushes to the Amazon ECR repository specified
+    #   in `ecrConfiguration`.
     #
     # @option params [Array<Types::WorkflowConfiguration>] :workflows
-    #   Contains an array of workflow configuration objects.
+    #   The array of workflow configuration objects for the build. If you
+    #   specify workflows, they replace the default workflows that Image
+    #   Builder otherwise runs for the build, and you must also provide an
+    #   `executionRole`.
     #
     # @option params [String] :execution_role
     #   The name or Amazon Resource Name (ARN) for the IAM role you create
-    #   that grants Image Builder access to perform workflow actions.
+    #   that grants Image Builder access to perform workflow actions. This
+    #   property is required if you specify `workflows`. If you don't provide
+    #   a role, Image Builder uses the Image Builder service-linked role in
+    #   your account, and creates it if it doesn't exist.
     #
     # @option params [Types::ImageLoggingConfiguration] :logging_configuration
-    #   The logging configuration for the image build process.
+    #   The CloudWatch Logs log group where Image Builder sends the image
+    #   build logs. If you specify a log group name outside of the
+    #   `/aws/imagebuilder/` namespace, you must also provide an
+    #   `executionRole` that has permission to write to that log group.
     #
     # @return [Types::CreateImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1080,6 +1410,69 @@ module Aws::Imagebuilder
     #   * {Types::CreateImageResponse#client_token #client_token} => String
     #   * {Types::CreateImageResponse#image_build_version_arn #image_build_version_arn} => String
     #   * {Types::CreateImageResponse#latest_version_references #latest_version_references} => Types::LatestVersionReferences
+    #
+    #
+    # @example Example: Create an image
+    #
+    #   # The following example creates a new image from the specified image recipe and infrastructure configuration.
+    #
+    #   resp = client.create_image({
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLEeeeee", 
+    #     image_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.0.0", 
+    #     infrastructure_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:infrastructure-configuration/my-example-infrastructure", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLEeeeee", 
+    #     image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #     latest_version_references: {
+    #       latest_major_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.x.x", 
+    #       latest_minor_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.x", 
+    #       latest_patch_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0", 
+    #       latest_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/x.x.x", 
+    #     }, 
+    #     request_id: "62e9b43f-a9fd-4272-89fb-ce6235d07ab4", 
+    #   }
+    #
+    # @example Example: Create an image with custom build and parallel test workflows
+    #
+    #   # The following example creates an image that uses your custom build and test workflows. It uses the Image Builder
+    #   # service-linked role as the execution role. Both test workflows are in the same parallel group, so they can run at the
+    #   # same time after the build workflow completes.
+    #
+    #   resp = client.create_image({
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE01234", 
+    #     execution_role: "arn:aws:iam::111122223333:role/aws-service-role/imagebuilder.amazonaws.com/AWSServiceRoleForImageBuilder", 
+    #     image_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.0.0", 
+    #     infrastructure_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:infrastructure-configuration/my-example-infrastructure", 
+    #     workflows: [
+    #       {
+    #         workflow_arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/build/my-example-workflow/1.0.0/1", 
+    #       }, 
+    #       {
+    #         parallel_group: "post-build-tests", 
+    #         workflow_arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/test/my-example-integration-tests/1.0.0/1", 
+    #       }, 
+    #       {
+    #         parallel_group: "post-build-tests", 
+    #         workflow_arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/test/my-example-compliance-tests/1.0.0/1", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE01234", 
+    #     image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #     latest_version_references: {
+    #       latest_major_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.x.x", 
+    #       latest_minor_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.x", 
+    #       latest_patch_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0", 
+    #       latest_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/x.x.x", 
+    #     }, 
+    #     request_id: "359f18b1-814f-4857-987f-924214970897", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1143,21 +1536,28 @@ module Aws::Imagebuilder
     end
 
     # Creates a new image pipeline. Use image pipelines to automate the
-    # creation and distribution of images.
+    # creation and distribution of images. You must specify exactly one
+    # recipe for the pipeline, using either a `containerRecipeArn` or an
+    # `imageRecipeArn`.
     #
     # @option params [required, String] :name
-    #   The name of the image pipeline.
+    #   The name of the image pipeline. Pipeline names must be unique to your
+    #   account in each Amazon Web Services Region. Image Builder generates
+    #   the pipeline ARN from a normalized form of the name, so names that
+    #   differ only in case, spaces, or underscores count as the same name.
     #
     # @option params [String] :description
     #   The description of the image pipeline.
     #
     # @option params [String] :image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe that configures
-    #   images created by this image pipeline.
+    #   images created by this image pipeline. You must specify either this
+    #   property or `containerRecipeArn`, but not both.
     #
     # @option params [String] :container_recipe_arn
     #   The Amazon Resource Name (ARN) of the container recipe that is used to
-    #   configure images created by this container pipeline.
+    #   configure images created by this container pipeline. You must specify
+    #   either this property or `imageRecipeArn`, but not both.
     #
     # @option params [required, String] :infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration
@@ -1168,7 +1568,9 @@ module Aws::Imagebuilder
     #   configures and distributes images created by this image pipeline.
     #
     # @option params [Types::ImageTestsConfiguration] :image_tests_configuration
-    #   The image test configuration of the image pipeline.
+    #   Specifies the test settings that Image Builder applies to images that
+    #   this pipeline creates. If you don't provide test settings, Image
+    #   Builder stores a default configuration with image tests enabled.
     #
     # @option params [Boolean] :enhanced_image_metadata_enabled
     #   Specifies whether to collect additional information about the image
@@ -1176,23 +1578,29 @@ module Aws::Imagebuilder
     #   list. Defaults to `true`.
     #
     # @option params [Types::Schedule] :schedule
-    #   The schedule of the image pipeline.
+    #   The schedule of the image pipeline. If you don't provide a schedule,
+    #   the pipeline runs only when you call StartImagePipelineExecution.
     #
     # @option params [String] :status
-    #   The status of the image pipeline.
+    #   The status of the image pipeline. If you don't specify a status, it
+    #   defaults to `ENABLED`. A disabled pipeline doesn't run on its
+    #   schedule, but you can still start builds manually.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags of the image pipeline.
     #
     # @option params [Hash<String,String>] :image_tags
-    #   The tags to be applied to the images produced by this pipeline.
+    #   The tags that Image Builder applies to the Image Builder image
+    #   resource that this pipeline's scheduled executions create. These tags
+    #   don't apply to the output AMI. To tag output AMIs, use `amiTags` in
+    #   the pipeline's distribution configuration.
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1202,10 +1610,13 @@ module Aws::Imagebuilder
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [Types::ImageScanningConfiguration] :image_scanning_configuration
-    #   Contains settings for vulnerability scans.
+    #   Contains settings for vulnerability scans that Amazon Inspector runs
+    #   against the test instance during image creation.
     #
     # @option params [Array<Types::WorkflowConfiguration>] :workflows
-    #   Contains an array of workflow configuration objects.
+    #   The array of workflow configuration objects for builds that this
+    #   pipeline starts. You must also specify `executionRole` when you
+    #   provide workflows.
     #
     # @option params [String] :execution_role
     #   The name or Amazon Resource Name (ARN) for the IAM role you create
@@ -1221,14 +1632,81 @@ module Aws::Imagebuilder
     #
     # @option params [Boolean] :dry_run
     #   Validates the required permissions and request parameters without
-    #   making the request. If validation succeeds, the operation returns a
-    #   `DryRunOperationException` error response.
+    #   performing the operation. If validation succeeds, the operation
+    #   returns a `DryRunOperationException` error response.
     #
     # @return [Types::CreateImagePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateImagePipelineResponse#request_id #request_id} => String
     #   * {Types::CreateImagePipelineResponse#client_token #client_token} => String
     #   * {Types::CreateImagePipelineResponse#image_pipeline_arn #image_pipeline_arn} => String
+    #
+    #
+    # @example Example: Create an image pipeline
+    #
+    #   # The following example creates a pipeline that builds a new image version every Sunday at 9:00 AM UTC, if the base image
+    #   # or components have updates.
+    #
+    #   resp = client.create_image_pipeline({
+    #     name: "my-example-pipeline", 
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE55555", 
+    #     description: "Builds a new version of my image every Sunday", 
+    #     distribution_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:distribution-configuration/my-example-distribution", 
+    #     image_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.0.0", 
+    #     infrastructure_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:infrastructure-configuration/my-example-infrastructure", 
+    #     schedule: {
+    #       pipeline_execution_start_condition: "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE", 
+    #       schedule_expression: "cron(0 9 ? * SUN *)", 
+    #     }, 
+    #     status: "ENABLED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE55555", 
+    #     image_pipeline_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-pipeline/my-example-pipeline", 
+    #     request_id: "db0a9329-35ef-4b53-98d0-a34385e44e28", 
+    #   }
+    #
+    # @example Example: Create an image pipeline with scanning, custom workflows, and an auto-disable policy
+    #
+    #   # The following example creates a pipeline that uses your custom build workflow and enables image scanning. The schedule
+    #   # evaluates its cron expression in the America/Los_Angeles time zone. The auto-disable policy disables the pipeline after
+    #   # 3 consecutive failed scheduled builds.
+    #
+    #   resp = client.create_image_pipeline({
+    #     name: "my-example-pipeline", 
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE30303", 
+    #     description: "Builds a scanned image with my custom build workflow on Sunday mornings when dependency updates are available", 
+    #     distribution_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:distribution-configuration/my-example-distribution", 
+    #     execution_role: "arn:aws:iam::111122223333:role/aws-service-role/imagebuilder.amazonaws.com/AWSServiceRoleForImageBuilder", 
+    #     image_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.1.0", 
+    #     image_scanning_configuration: {
+    #       image_scanning_enabled: true, 
+    #     }, 
+    #     infrastructure_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:infrastructure-configuration/my-example-infrastructure", 
+    #     schedule: {
+    #       auto_disable_policy: {
+    #         failure_count: 3, 
+    #       }, 
+    #       pipeline_execution_start_condition: "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE", 
+    #       schedule_expression: "cron(0 9 ? * SUN *)", 
+    #       timezone: "America/Los_Angeles", 
+    #     }, 
+    #     status: "ENABLED", 
+    #     workflows: [
+    #       {
+    #         workflow_arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/build/my-example-workflow/1.0.0/1", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE30303", 
+    #     image_pipeline_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-pipeline/my-example-pipeline", 
+    #     request_id: "f8da3ec9-4b76-4aa3-817a-c35a90f59dca", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1307,7 +1785,11 @@ module Aws::Imagebuilder
     # configured, tested, and assessed.
     #
     # @option params [required, String] :name
-    #   The name of the image recipe.
+    #   The name of the image recipe. The recipe name, combined with the
+    #   semantic version, must be unique to your account in each Amazon Web
+    #   Services Region. Image Builder generates the image recipe ARN from a
+    #   normalized form of the name, so names that differ only in case,
+    #   spaces, or underscores count as the same name.
     #
     # @option params [String] :description
     #   The description of the image recipe.
@@ -1333,7 +1815,11 @@ module Aws::Imagebuilder
     #    </note>
     #
     # @option params [Array<Types::ComponentConfiguration>] :components
-    #   The components included in the image recipe.
+    #   The components included in the image recipe. Components are optional.
+    #   A recipe with no components bakes the base image without additional
+    #   customization. You can specify each component only one time in a
+    #   recipe. Components with a status of `DEPRECATED` or `DISABLED` can't
+    #   be added to new recipes.
     #
     # @option params [required, String] :parent_image
     #   The base image for customizations specified in the image recipe. You
@@ -1349,17 +1835,22 @@ module Aws::Imagebuilder
     #   * Amazon Web Services Marketplace product ID
     #
     #   If you enter an AMI ID or an SSM parameter that contains the AMI ID,
-    #   you must have access to the AMI, and the AMI must be in the source
-    #   Region.
+    #   you must have access to the AMI. The AMI must also be in the Region
+    #   where you're creating the recipe.
     #
     # @option params [Array<Types::InstanceBlockDeviceMapping>] :block_device_mappings
-    #   The block device mappings of the image recipe.
+    #   The block device mappings that Image Builder applies to the build
+    #   instance and the output AMI. For example, you can override the size of
+    #   the base image's root volume or attach additional EBS volumes.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags of the image recipe.
     #
     # @option params [String] :working_directory
-    #   The working directory used during build and test workflows.
+    #   The working directory used during build and test workflows. If you
+    #   don't specify a working directory, Image Builder uses `/tmp` for
+    #   Linux and macOS build instances, and `C:/` for Windows build
+    #   instances.
     #
     # @option params [Types::AdditionalInstanceConfiguration] :additional_instance_configuration
     #   The additional settings and launch scripts for your build instances.
@@ -1381,10 +1872,10 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1395,8 +1886,8 @@ module Aws::Imagebuilder
     #
     # @option params [Boolean] :dry_run
     #   Validates the required permissions and request parameters without
-    #   making the request. If validation succeeds, the operation returns a
-    #   `DryRunOperationException` error response.
+    #   performing the operation. If validation succeeds, the operation
+    #   returns a `DryRunOperationException` error response.
     #
     # @return [Types::CreateImageRecipeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1404,6 +1895,89 @@ module Aws::Imagebuilder
     #   * {Types::CreateImageRecipeResponse#client_token #client_token} => String
     #   * {Types::CreateImageRecipeResponse#image_recipe_arn #image_recipe_arn} => String
     #   * {Types::CreateImageRecipeResponse#latest_version_references #latest_version_references} => Types::LatestVersionReferences
+    #
+    #
+    # @example Example: Create an image recipe
+    #
+    #   # The following example creates an image recipe that applies a custom component on top of the latest Amazon Linux 2023
+    #   # base image.
+    #
+    #   resp = client.create_image_recipe({
+    #     name: "my-example-recipe", 
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE22222", 
+    #     components: [
+    #       {
+    #         component_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/1.0.0/1", 
+    #       }, 
+    #     ], 
+    #     description: "An image recipe that installs my application on Amazon Linux 2023", 
+    #     parent_image: "arn:aws:imagebuilder:us-west-2:aws:image/amazon-linux-2023-x86/x.x.x", 
+    #     semantic_version: "1.0.0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE22222", 
+    #     image_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.0.0", 
+    #     latest_version_references: {
+    #       latest_major_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.x.x", 
+    #       latest_minor_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.0.x", 
+    #       latest_patch_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.0.0", 
+    #       latest_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/x.x.x", 
+    #     }, 
+    #     request_id: "89f4af2f-4f28-45e6-a9d8-abeba591df6a", 
+    #   }
+    #
+    # @example Example: Create an image recipe with component parameters and block device mappings
+    #
+    #   # The following example creates an image recipe that configures its components and storage. The AppVersion component
+    #   # parameter selects the application version to install. The block device mapping increases the root volume to an encrypted
+    #   # 30 GiB gp3 volume.
+    #
+    #   resp = client.create_image_recipe({
+    #     name: "my-example-recipe", 
+    #     block_device_mappings: [
+    #       {
+    #         device_name: "/dev/xvda", 
+    #         ebs: {
+    #           delete_on_termination: true, 
+    #           encrypted: true, 
+    #           volume_size: 30, 
+    #           volume_type: "gp3", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE20202", 
+    #     components: [
+    #       {
+    #         component_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-parameterized-component/1.0.0/1", 
+    #         parameters: [
+    #           {
+    #             name: "AppVersion", 
+    #             value: [
+    #               "2.5.0", 
+    #             ], 
+    #           }, 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     description: "Installs a specific version of my application on Amazon Linux 2023 with a larger encrypted root volume", 
+    #     parent_image: "arn:aws:imagebuilder:us-west-2:aws:image/amazon-linux-2023-x86/x.x.x", 
+    #     semantic_version: "1.1.0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE20202", 
+    #     image_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.1.0", 
+    #     latest_version_references: {
+    #       latest_major_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.x.x", 
+    #       latest_minor_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.1.x", 
+    #       latest_patch_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.1.0", 
+    #       latest_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/x.x.x", 
+    #     }, 
+    #     request_id: "e3bdc054-d12e-4578-a847-68a18da724ca", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1482,7 +2056,11 @@ module Aws::Imagebuilder
     # built and tested.
     #
     # @option params [required, String] :name
-    #   The name of the infrastructure configuration.
+    #   The name of the infrastructure configuration. Infrastructure
+    #   configuration names must be unique to your account in each Amazon Web
+    #   Services Region. Image Builder generates the infrastructure
+    #   configuration ARN from a normalized form of the name, so names that
+    #   differ only in case, spaces, or underscores count as the same name.
     #
     # @option params [String] :description
     #   The description of the infrastructure configuration.
@@ -1490,11 +2068,14 @@ module Aws::Imagebuilder
     # @option params [Array<String>] :instance_types
     #   The instance types of the infrastructure configuration. You can
     #   specify one or more instance types to use for this build. Image
-    #   Builder picks one of these instance types based on availability.
+    #   Builder picks one of these instance types based on availability. If
+    #   you don't specify instance types, Image Builder selects compatible
+    #   instance types automatically. If you specify a Dedicated Host, Image
+    #   Builder uses only instance types that the host supports.
     #
     # @option params [required, String] :instance_profile_name
     #   The instance profile to associate with the instance used to customize
-    #   your Amazon EC2 AMI.
+    #   your Amazon EC2 AMI. The instance profile must exist in your account.
     #
     # @option params [Array<String>] :security_group_ids
     #   The security group IDs to associate with the instance used to
@@ -1502,10 +2083,14 @@ module Aws::Imagebuilder
     #
     # @option params [String] :subnet_id
     #   The subnet ID in which to place the instance used to customize your
-    #   Amazon EC2 AMI.
+    #   Amazon EC2 AMI. If you specify `subnetId`, you must also specify one
+    #   or more security group IDs in `securityGroupIds`. Otherwise, the
+    #   request fails.
     #
     # @option params [Types::Logging] :logging
-    #   The logging configuration of the infrastructure configuration.
+    #   The logging configuration of the infrastructure configuration. When
+    #   you configure S3 logs, Image Builder writes logs from the build and
+    #   test process to the specified bucket under the key prefix.
     #
     # @option params [String] :key_pair
     #   The key pair of the infrastructure configuration. You can use this to
@@ -1519,23 +2104,42 @@ module Aws::Imagebuilder
     #
     # @option params [String] :sns_topic_arn
     #   The Amazon Resource Name (ARN) of the SNS topic to which Image Builder
-    #   sends image build event notifications.
+    #   sends image build event notifications. Specify a standard topic. Image
+    #   Builder doesn't support FIFO topics. Image Builder validates the
+    #   topic when you create or update the configuration. You must have
+    #   permission to publish to the topic.
     #
-    #   <note markdown="1"> EC2 Image Builder is unable to send notifications to SNS topics that
-    #   are encrypted using keys from other accounts. The key that is used to
-    #   encrypt the SNS topic must reside in the account that the Image
-    #   Builder service runs under.
+    #   <note markdown="1"> EC2 Image Builder can't send notifications to SNS topics that are
+    #   encrypted using keys from other accounts. If your SNS topic is
+    #   encrypted, the key must be owned by the same account that owns your
+    #   Image Builder resources.
     #
     #    </note>
     #
     # @option params [Hash<String,String>] :resource_tags
     #   The metadata tags to assign to the Amazon EC2 instance that Image
     #   Builder launches during the build process. Tags are formatted as key
-    #   value pairs.
+    #   value pairs. Tag keys can't begin with `aws:` or match one of the
+    #   following reserved keys: `CreatedBy`, `Ec2ImageBuilderArn`, `Name`, or
+    #   `Tags`.
     #
     # @option params [Types::InstanceMetadataOptions] :instance_metadata_options
-    #   The instance metadata options that you can set for the HTTP requests
-    #   that pipeline builds use to launch EC2 build and test instances.
+    #   The instance metadata service (IMDS) settings that Image Builder
+    #   applies to the EC2 build and test instances it launches during image
+    #   creation. If you don't set these options, the EC2 launch defaults for
+    #   the instance apply. For more information about instance metadata
+    #   options, see one of the following links:
+    #
+    #   * [Configure the instance metadata options][1] in the <i> <i>Amazon
+    #     EC2 User Guide</i> </i> for Linux instances.
+    #
+    #   * [Configure the instance metadata options][2] in the <i> <i>Amazon
+    #     EC2 Windows Guide</i> </i> for Windows instances.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html
     #
     # @option params [Hash<String,String>] :tags
     #   The metadata tags to assign to the infrastructure configuration
@@ -1543,15 +2147,17 @@ module Aws::Imagebuilder
     #   key value pairs.
     #
     # @option params [Types::Placement] :placement
-    #   The instance placement settings that define where the instances that
-    #   are launched from your image run.
+    #   The instance placement settings that define where the build and test
+    #   instances that Image Builder launches during image creation run. These
+    #   settings don't affect instances that you launch from the output
+    #   image.
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1562,14 +2168,71 @@ module Aws::Imagebuilder
     #
     # @option params [Boolean] :dry_run
     #   Validates the required permissions and request parameters without
-    #   making the request. If validation succeeds, the operation returns a
-    #   `DryRunOperationException` error response.
+    #   performing the operation. If validation succeeds, the operation
+    #   returns a `DryRunOperationException` error response.
     #
     # @return [Types::CreateInfrastructureConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateInfrastructureConfigurationResponse#request_id #request_id} => String
     #   * {Types::CreateInfrastructureConfigurationResponse#client_token #client_token} => String
     #   * {Types::CreateInfrastructureConfigurationResponse#infrastructure_configuration_arn #infrastructure_configuration_arn} => String
+    #
+    #
+    # @example Example: Create an infrastructure configuration
+    #
+    #   # The following example creates an infrastructure configuration that gives Image Builder a choice of two instance types
+    #   # for its build and test instances.
+    #
+    #   resp = client.create_infrastructure_configuration({
+    #     name: "my-example-infrastructure", 
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE33333", 
+    #     description: "An infrastructure configuration for Amazon Linux builds", 
+    #     instance_profile_name: "EC2InstanceProfileForImageBuilder", 
+    #     instance_types: [
+    #       "t3.medium", 
+    #       "t3.large", 
+    #     ], 
+    #     terminate_instance_on_failure: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE33333", 
+    #     infrastructure_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:infrastructure-configuration/my-example-infrastructure", 
+    #     request_id: "67082698-415b-4d9f-8be0-84a58380b93f", 
+    #   }
+    #
+    # @example Example: Create an infrastructure configuration with instance placement and metadata options
+    #
+    #   # The following example creates an infrastructure configuration. It places your build and test instances in a single
+    #   # Availability Zone and requires IMDSv2 for instance metadata requests. It also applies resource tags to the resources
+    #   # that Image Builder creates during the build.
+    #
+    #   resp = client.create_infrastructure_configuration({
+    #     name: "my-example-infrastructure", 
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE98765", 
+    #     description: "An infrastructure configuration that pins build instances to one Availability Zone and requires IMDSv2", 
+    #     instance_metadata_options: {
+    #       http_put_response_hop_limit: 2, 
+    #       http_tokens: "required", 
+    #     }, 
+    #     instance_profile_name: "my-example-instance-role", 
+    #     placement: {
+    #       availability_zone: "us-west-2a", 
+    #     }, 
+    #     resource_tags: {
+    #       "CostCenter" => "12345", 
+    #       "Environment" => "test", 
+    #     }, 
+    #     terminate_instance_on_failure: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE98765", 
+    #     infrastructure_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:infrastructure-configuration/my-example-infrastructure", 
+    #     request_id: "b96b54d8-daa6-4fdf-b25a-7b570bc2ab25", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1627,38 +2290,53 @@ module Aws::Imagebuilder
     # Creates a lifecycle policy resource.
     #
     # @option params [required, String] :name
-    #   The name of the lifecycle policy to create.
+    #   The name of the lifecycle policy to create. Policy names must be
+    #   unique to your account in each Amazon Web Services Region. Image
+    #   Builder generates the policy ARN from a normalized form of the name,
+    #   so names that differ only in case, spaces, or underscores count as the
+    #   same name. You can't change the name after creation.
     #
     # @option params [String] :description
     #   Optional description for the lifecycle policy.
     #
     # @option params [String] :status
-    #   Indicates whether the lifecycle policy resource is enabled.
+    #   Indicates whether the lifecycle policy resource is enabled. If you
+    #   don't specify a status, it defaults to `ENABLED`. Only enabled
+    #   policies run on their schedule.
     #
     # @option params [required, String] :execution_role
     #   The name or Amazon Resource Name (ARN) for the IAM role you create
-    #   that grants Image Builder access to run lifecycle actions.
+    #   that grants Image Builder access to run lifecycle actions. You must
+    #   have permission to pass the role, and the role's trust policy must
+    #   allow the Image Builder service principal to assume it.
     #
     # @option params [required, String] :resource_type
     #   The type of Image Builder resource that the lifecycle policy applies
-    #   to.
+    #   to. The resource type determines the allowed rule actions: policies
+    #   for AMI-based Image Builder images support `DELETE`, `DEPRECATE`, and
+    #   `DISABLE`, and policies for container-based Image Builder images
+    #   support only `DELETE`. You can't change the resource type after
+    #   creation.
     #
     # @option params [required, Array<Types::LifecyclePolicyDetail>] :policy_details
-    #   Configuration details for the lifecycle policy rules.
+    #   Configuration details for the lifecycle policy rules. A policy can
+    #   contain at most one rule per action type: one `DELETE`, one
+    #   `DEPRECATE`, and one `DISABLE`.
     #
     # @option params [required, Types::LifecyclePolicyResourceSelection] :resource_selection
     #   Selection criteria for the resources that the lifecycle policy applies
-    #   to.
+    #   to. You must specify exactly one selection criteria: either recipes or
+    #   a tag map, not both.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags to apply to the lifecycle policy resource.
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1669,13 +2347,98 @@ module Aws::Imagebuilder
     #
     # @option params [Boolean] :dry_run
     #   Validates the required permissions and request parameters without
-    #   making the request. If validation succeeds, the operation returns a
-    #   `DryRunOperationException` error response.
+    #   performing the operation. If validation succeeds, the operation
+    #   returns a `DryRunOperationException` error response.
     #
     # @return [Types::CreateLifecyclePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLifecyclePolicyResponse#client_token #client_token} => String
     #   * {Types::CreateLifecyclePolicyResponse#lifecycle_policy_arn #lifecycle_policy_arn} => String
+    #
+    #
+    # @example Example: Create a lifecycle policy
+    #
+    #   # The following example creates a lifecycle policy that deletes AMI-based images six months after they were created,
+    #   # selecting the images that match the specified resource tags.
+    #
+    #   resp = client.create_lifecycle_policy({
+    #     name: "my-example-lifecycle-policy", 
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE13579", 
+    #     execution_role: "arn:aws:iam::111122223333:role/my-example-lifecycle-role", 
+    #     policy_details: [
+    #       {
+    #         action: {
+    #           type: "DELETE", 
+    #         }, 
+    #         filter: {
+    #           type: "AGE", 
+    #           value: 6, 
+    #           unit: "MONTHS", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     resource_selection: {
+    #       tag_map: {
+    #         "Environment" => "test", 
+    #       }, 
+    #     }, 
+    #     resource_type: "AMI_IMAGE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE13579", 
+    #     lifecycle_policy_arn: "arn:aws:imagebuilder:us-west-2:111122223333:lifecycle-policy/my-example-lifecycle-policy", 
+    #   }
+    #
+    # @example Example: Create a lifecycle policy with exclusion rules
+    #
+    #   # The following example creates a lifecycle policy that deletes images created from the specified recipe version after six
+    #   # months. The policy excludes images whose AMIs launched an instance within the last 30 days or are tagged to be retained.
+    #
+    #   resp = client.create_lifecycle_policy({
+    #     name: "my-example-lifecycle-policy", 
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE43210", 
+    #     execution_role: "arn:aws:iam::111122223333:role/my-example-lifecycle-role", 
+    #     policy_details: [
+    #       {
+    #         action: {
+    #           type: "DELETE", 
+    #         }, 
+    #         exclusion_rules: {
+    #           amis: {
+    #             last_launched: {
+    #               value: 30, 
+    #               unit: "DAYS", 
+    #             }, 
+    #             tag_map: {
+    #               "Retention" => "keep", 
+    #             }, 
+    #           }, 
+    #         }, 
+    #         filter: {
+    #           type: "AGE", 
+    #           value: 6, 
+    #           unit: "MONTHS", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     resource_selection: {
+    #       recipes: [
+    #         {
+    #           name: "my-example-recipe", 
+    #           semantic_version: "1.0.0", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     resource_type: "AMI_IMAGE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE43210", 
+    #     lifecycle_policy_arn: "arn:aws:imagebuilder:us-west-2:111122223333:lifecycle-policy/my-example-lifecycle-policy", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1752,10 +2515,22 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Creates a new workflow or a new version of an existing workflow.
+    # Creates a new workflow or a new version of an existing workflow. If a
+    # workflow with the same name and semantic version already exists, and
+    # your request changes its configuration, Image Builder creates a new
+    # build version. If the configuration is identical to the latest build
+    # version, the request fails because that workflow configuration already
+    # exists.
     #
     # @option params [required, String] :name
-    #   The name of the workflow to create.
+    #   The name of the workflow to create. Image Builder generates the
+    #   workflow ARN from a normalized form of the name, so names that differ
+    #   only in case, spaces, or underscores count as the same name. If a
+    #   workflow with the same name and semantic version already exists in
+    #   your account in the same Amazon Web Services Region, the request
+    #   creates a new build version for it. If the content is also identical
+    #   to the latest build version, the request fails because the workflow
+    #   already exists.
     #
     # @option params [required, String] :semantic_version
     #   The semantic version of this workflow resource. The semantic version
@@ -1786,24 +2561,29 @@ module Aws::Imagebuilder
     #   workflow.
     #
     # @option params [String] :data
-    #   Contains the UTF-8 encoded YAML document content for the workflow.
-    #   Alternatively, you can specify the `uri` of a YAML document file
-    #   stored in Amazon S3. However, you cannot specify both properties.
+    #   The UTF-8 encoded YAML document content for the workflow, up to 16,000
+    #   characters. For larger documents, store the document in Amazon S3 and
+    #   specify the `uri` property instead. You must specify exactly one of
+    #   the `data` or `uri` properties.
     #
     # @option params [String] :uri
-    #   The `uri` of a YAML component document file. This must be an S3 URL
-    #   (`s3://bucket/key`), and you must have permission to access the S3
-    #   bucket it points to. If you use Amazon S3, you can specify component
-    #   content up to your service quota.
+    #   The `uri` of a YAML workflow document file stored in Amazon S3. This
+    #   must be an S3 URL (`s3://bucket/key`), and you must have permission to
+    #   access the S3 bucket it points to. A workflow document that you
+    #   provide from Amazon S3 can be up to your service quota for workflow
+    #   size.
     #
     #   Alternatively, you can specify the YAML document inline, using the
-    #   component `data` property. You cannot specify both properties.
+    #   workflow `data` property. You must specify exactly one of the `data`
+    #   or `uri` properties.
     #
     # @option params [String] :kms_key_id
     #   The Amazon Resource Name (ARN) that uniquely identifies the KMS key
     #   used to encrypt this workflow resource. This can be either the Key ARN
     #   or the Alias ARN. For more information, see [Key identifiers
-    #   (KeyId)][1] in the *Key Management Service Developer Guide*.
+    #   (KeyId)][1] in the *Key Management Service Developer Guide*. If you
+    #   don't specify a key, Image Builder encrypts the workflow document
+    #   with a KMS key that Image Builder owns.
     #
     #
     #
@@ -1814,10 +2594,10 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1827,19 +2607,45 @@ module Aws::Imagebuilder
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [required, String] :type
-    #   The phase in the image build process for which the workflow resource
-    #   is responsible.
+    #   The image creation stage that this workflow applies to. Image Builder
+    #   validates the workflow document steps against the stage you specify.
     #
     # @option params [Boolean] :dry_run
     #   Validates the required permissions and request parameters without
-    #   making the request. If validation succeeds, the operation returns a
-    #   `DryRunOperationException` error response.
+    #   performing the operation. If validation succeeds, the operation
+    #   returns a `DryRunOperationException` error response.
     #
     # @return [Types::CreateWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkflowResponse#client_token #client_token} => String
     #   * {Types::CreateWorkflowResponse#workflow_build_version_arn #workflow_build_version_arn} => String
     #   * {Types::CreateWorkflowResponse#latest_version_references #latest_version_references} => Types::LatestVersionReferences
+    #
+    #
+    # @example Example: Create a build workflow from an inline document
+    #
+    #   # The following example creates a build workflow from a YAML workflow document provided inline in the request.
+    #
+    #   resp = client.create_workflow({
+    #     name: "my-example-workflow", 
+    #     type: "BUILD", 
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE54321", 
+    #     data: "name: my-example-workflow\ndescription: Workflow to build an AMI\nschemaVersion: 1.0\nsteps:\n  - name: LaunchBuildInstance\n    action: LaunchInstance\n    onFailure: Abort\n    inputs:\n      waitFor: ssmAgent\n  - name: ApplyBuildComponents\n    action: ExecuteComponents\n    onFailure: Abort\n    inputs:\n      instanceId.$: $.stepOutputs.LaunchBuildInstance.instanceId\n  - name: CreateOutputAMI\n    action: CreateImage\n    onFailure: Abort\n    inputs:\n      instanceId.$: $.stepOutputs.LaunchBuildInstance.instanceId\n  - name: TerminateBuildInstance\n    action: TerminateInstance\n    onFailure: Continue\n    inputs:\n      instanceId.$: $.stepOutputs.LaunchBuildInstance.instanceId\n", 
+    #     description: "Workflow to build an AMI", 
+    #     semantic_version: "1.0.0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE54321", 
+    #     latest_version_references: {
+    #       latest_major_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/build/my-example-workflow/1.x.x", 
+    #       latest_minor_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/build/my-example-workflow/1.0.x", 
+    #       latest_patch_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/build/my-example-workflow/1.0.0", 
+    #       latest_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/build/my-example-workflow/x.x.x", 
+    #     }, 
+    #     workflow_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/build/my-example-workflow/1.0.0/1", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1877,7 +2683,10 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Deletes a component build version.
+    # Deletes a component build version. The request fails with
+    # `ResourceDependencyException` if an image recipe or container recipe
+    # references this component version. It also fails if the component
+    # build version is shared with other accounts.
     #
     # @option params [required, String] :component_build_version_arn
     #   The Amazon Resource Name (ARN) of the component build version to
@@ -1887,6 +2696,21 @@ module Aws::Imagebuilder
     #
     #   * {Types::DeleteComponentResponse#request_id #request_id} => String
     #   * {Types::DeleteComponentResponse#component_build_version_arn #component_build_version_arn} => String
+    #
+    #
+    # @example Example: Delete a component build version
+    #
+    #   # The following example deletes the specified component build version.
+    #
+    #   resp = client.delete_component({
+    #     component_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/1.0.0/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     component_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/1.0.0/1", 
+    #     request_id: "c75a1764-2ca3-4cb4-9ce9-6d49f87942b0", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1908,7 +2732,9 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Deletes a container recipe.
+    # Deletes a container recipe. The request fails with
+    # `ResourceDependencyException` if the recipe is shared with other
+    # accounts, or if an image pipeline references it.
     #
     # @option params [required, String] :container_recipe_arn
     #   The Amazon Resource Name (ARN) of the container recipe to delete.
@@ -1917,6 +2743,21 @@ module Aws::Imagebuilder
     #
     #   * {Types::DeleteContainerRecipeResponse#request_id #request_id} => String
     #   * {Types::DeleteContainerRecipeResponse#container_recipe_arn #container_recipe_arn} => String
+    #
+    #
+    # @example Example: Delete a container recipe
+    #
+    #   # The following example deletes the specified container recipe.
+    #
+    #   resp = client.delete_container_recipe({
+    #     container_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe/1.0.0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     container_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe/1.0.0", 
+    #     request_id: "988e934a-b785-4705-aff1-4d9840a165aa", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1938,7 +2779,10 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Deletes a distribution configuration.
+    # Deletes a distribution configuration. You can't delete a
+    # configuration that an image pipeline still references. The request
+    # fails with `ResourceDependencyException`. Update or delete the
+    # referencing pipelines first.
     #
     # @option params [required, String] :distribution_configuration_arn
     #   The Amazon Resource Name (ARN) of the distribution configuration to
@@ -1948,6 +2792,21 @@ module Aws::Imagebuilder
     #
     #   * {Types::DeleteDistributionConfigurationResponse#request_id #request_id} => String
     #   * {Types::DeleteDistributionConfigurationResponse#distribution_configuration_arn #distribution_configuration_arn} => String
+    #
+    #
+    # @example Example: Delete a distribution configuration
+    #
+    #   # The following example deletes the specified distribution configuration.
+    #
+    #   resp = client.delete_distribution_configuration({
+    #     distribution_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:distribution-configuration/my-example-distribution-configuration", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     distribution_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:distribution-configuration/my-example-distribution-configuration", 
+    #     request_id: "2b752b77-2038-40f4-996a-0a6da1be5e92", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1974,6 +2833,12 @@ module Aws::Imagebuilder
     # process. You must clean those up separately, using the appropriate
     # Amazon EC2 or Amazon ECR console actions, or API or CLI commands.
     #
+    # The request fails with `ResourceDependencyException` if the image is
+    # shared with other accounts, or if other resources depend on it. It
+    # also fails while the image build is still running. Cancel an
+    # in-progress build with CancelImageCreation before you delete the
+    # image.
+    #
     # * To deregister an EC2 Linux AMI, see [Deregister your Linux AMI][1]
     #   in the <i> <i>Amazon EC2 User Guide</i> </i>.
     #
@@ -1998,6 +2863,22 @@ module Aws::Imagebuilder
     #   * {Types::DeleteImageResponse#request_id #request_id} => String
     #   * {Types::DeleteImageResponse#image_build_version_arn #image_build_version_arn} => String
     #
+    #
+    # @example Example: Delete an image build version
+    #
+    #   # The following example deletes the Image Builder image record for the specified build version - EC2 AMIs or ECR container
+    #   # images that the build created aren't removed.
+    #
+    #   resp = client.delete_image({
+    #     image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #     request_id: "fd45526c-ec37-4345-8843-329e4268e00e", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_image({
@@ -2018,7 +2899,10 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Deletes an image pipeline.
+    # Deletes an image pipeline. Images that the pipeline created aren't
+    # deleted - remove those separately with DeleteImage. You can delete a
+    # pipeline while a build that it started is still running. The build
+    # continues independently.
     #
     # @option params [required, String] :image_pipeline_arn
     #   The Amazon Resource Name (ARN) of the image pipeline to delete.
@@ -2027,6 +2911,21 @@ module Aws::Imagebuilder
     #
     #   * {Types::DeleteImagePipelineResponse#request_id #request_id} => String
     #   * {Types::DeleteImagePipelineResponse#image_pipeline_arn #image_pipeline_arn} => String
+    #
+    #
+    # @example Example: Delete an image pipeline
+    #
+    #   # The following example deletes an image pipeline.
+    #
+    #   resp = client.delete_image_pipeline({
+    #     image_pipeline_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-pipeline/my-example-pipeline", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     image_pipeline_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-pipeline/my-example-pipeline", 
+    #     request_id: "0536e4e9-5331-493a-921e-e8f86d367043", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2058,6 +2957,21 @@ module Aws::Imagebuilder
     #   * {Types::DeleteImageRecipeResponse#request_id #request_id} => String
     #   * {Types::DeleteImageRecipeResponse#image_recipe_arn #image_recipe_arn} => String
     #
+    #
+    # @example Example: Delete an image recipe
+    #
+    #   # The following example deletes the specified image recipe version.
+    #
+    #   resp = client.delete_image_recipe({
+    #     image_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.0.0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     image_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.0.0", 
+    #     request_id: "a27ae6de-0adc-4cbb-9705-a4b8751857b8", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_image_recipe({
@@ -2078,7 +2992,10 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Deletes an infrastructure configuration.
+    # Deletes an infrastructure configuration. You can't delete a
+    # configuration that an image pipeline still references. The request
+    # fails with `ResourceDependencyException`. Update or delete the
+    # referencing pipelines first.
     #
     # @option params [required, String] :infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration to
@@ -2088,6 +3005,21 @@ module Aws::Imagebuilder
     #
     #   * {Types::DeleteInfrastructureConfigurationResponse#request_id #request_id} => String
     #   * {Types::DeleteInfrastructureConfigurationResponse#infrastructure_configuration_arn #infrastructure_configuration_arn} => String
+    #
+    #
+    # @example Example: Delete an infrastructure configuration
+    #
+    #   # The following example deletes the infrastructure configuration with the specified ARN.
+    #
+    #   resp = client.delete_infrastructure_configuration({
+    #     infrastructure_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:infrastructure-configuration/my-example-infrastructure", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     infrastructure_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:infrastructure-configuration/my-example-infrastructure", 
+    #     request_id: "fbae57f4-59fc-48ab-a25e-c67b0d9b454c", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2109,7 +3041,11 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Deletes the specified lifecycle policy resource.
+    # Deletes the specified lifecycle policy resource. Deleting the policy
+    # removes its schedule, so no further lifecycle runs occur for that
+    # policy. If a lifecycle execution is in progress for the policy, Image
+    # Builder cancels it. Deletion doesn't revert actions that the policy
+    # already applied to your resources.
     #
     # @option params [required, String] :lifecycle_policy_arn
     #   The Amazon Resource Name (ARN) of the lifecycle policy resource to
@@ -2118,6 +3054,20 @@ module Aws::Imagebuilder
     # @return [Types::DeleteLifecyclePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteLifecyclePolicyResponse#lifecycle_policy_arn #lifecycle_policy_arn} => String
+    #
+    #
+    # @example Example: Delete a lifecycle policy
+    #
+    #   # The following example deletes the specified lifecycle policy.
+    #
+    #   resp = client.delete_lifecycle_policy({
+    #     lifecycle_policy_arn: "arn:aws:imagebuilder:us-west-2:111122223333:lifecycle-policy/my-example-lifecycle-policy", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     lifecycle_policy_arn: "arn:aws:imagebuilder:us-west-2:111122223333:lifecycle-policy/my-example-lifecycle-policy", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2138,7 +3088,9 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Deletes a specific workflow resource.
+    # Deletes a specific workflow resource. You can't delete a workflow
+    # build version while an image pipeline references it. The request fails
+    # with `ResourceDependencyException`.
     #
     # @option params [required, String] :workflow_build_version_arn
     #   The Amazon Resource Name (ARN) of the workflow resource to delete.
@@ -2146,6 +3098,20 @@ module Aws::Imagebuilder
     # @return [Types::DeleteWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteWorkflowResponse#workflow_build_version_arn #workflow_build_version_arn} => String
+    #
+    #
+    # @example Example: Delete a workflow build version
+    #
+    #   # The following example deletes the workflow build version that the ARN specifies.
+    #
+    #   resp = client.delete_workflow({
+    #     workflow_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/build/my-example-workflow/1.0.0/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     workflow_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/build/my-example-workflow/1.0.0/1", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2171,10 +3137,19 @@ module Aws::Imagebuilder
     # distribution phase on an image that has already been built.
     #
     # @option params [required, String] :source_image
-    #   The source image to distribute. Specify an AMI identifier, SSM
-    #   parameter path, or Image Builder image Amazon Resource Name (ARN).
-    #   When you specify an Image Builder image Amazon Resource Name (ARN),
-    #   the image must be in the `AVAILABLE` state.
+    #   The source image to distribute. You can specify the source in any of
+    #   the following formats:
+    #
+    #   * An AMI ID.
+    #
+    #   * An Amazon Web Services Systems Manager Parameter Store reference,
+    #     prefixed by `ssm:`, followed by the parameter name or ARN.
+    #
+    #   * An Image Builder image Amazon Resource Name (ARN). An image version
+    #     ARN resolves to the latest available build version.
+    #
+    #   Whichever format you use, the source must resolve to an AMI in the
+    #   current Amazon Web Services Region.
     #
     # @option params [required, String] :distribution_configuration_arn
     #   The Amazon Resource Name (ARN) of the distribution configuration. The
@@ -2187,14 +3162,16 @@ module Aws::Imagebuilder
     #   Builder assumes to distribute the image.
     #
     # @option params [Hash<String,String>] :tags
-    #   The tags to apply to the distributed image.
+    #   The tags to apply to the new Image Builder image resource that this
+    #   operation creates. To tag the output AMIs, use `amiTags` in the
+    #   distribution configuration.
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2210,6 +3187,26 @@ module Aws::Imagebuilder
     #
     #   * {Types::DistributeImageResponse#client_token #client_token} => String
     #   * {Types::DistributeImageResponse#image_build_version_arn #image_build_version_arn} => String
+    #
+    #
+    # @example Example: Distribute an existing AMI
+    #
+    #   # The following example distributes an AMI that you own to the targets defined in the specified distribution
+    #   # configuration. It returns the ARN of a new Image Builder image resource that you can use with GetImage to monitor
+    #   # distribution progress.
+    #
+    #   resp = client.distribute_image({
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE86420", 
+    #     distribution_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:distribution-configuration/my-example-distribution-configuration", 
+    #     execution_role: "arn:aws:iam::111122223333:role/aws-service-role/imagebuilder.amazonaws.com/AWSServiceRoleForImageBuilder", 
+    #     source_image: "ami-1234567890abcdef0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE86420", 
+    #     image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-source-ami/1.0.0/1", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2244,13 +3241,53 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :component_build_version_arn
     #   The Amazon Resource Name (ARN) of the component that you want to get.
-    #   Regex requires the suffix `/\d+$`.
+    #   You can specify a build version ARN, or a component version ARN. The
+    #   version can use the `x` wildcard in trailing positions, for example
+    #   `1.0.x` or `1.x.x`. Version ARNs resolve to the latest available
+    #   matching component build version.
     #
     # @return [Types::GetComponentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetComponentResponse#request_id #request_id} => String
     #   * {Types::GetComponentResponse#component #component} => Types::Component
     #   * {Types::GetComponentResponse#latest_version_references #latest_version_references} => Types::LatestVersionReferences
+    #
+    #
+    # @example Example: Get the details of a component build version
+    #
+    #   # The following example retrieves a component build version. The data field in the response contains the YAML document
+    #   # that defines the component.
+    #
+    #   resp = client.get_component({
+    #     component_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/1.0.0/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     component: {
+    #       version: "1.0.0", 
+    #       name: "my-example-component", 
+    #       type: "BUILD", 
+    #       arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/1.0.0/1", 
+    #       change_description: "Initial version", 
+    #       data: "name: InstallMyApp\ndescription: Installs my application\nschemaVersion: 1.0\nphases:\n  - name: build\n    steps:\n      - name: InstallApp\n        action: ExecuteBash\n        inputs:\n          commands:\n            - sudo yum -y install my-app\n", 
+    #       date_created: "2026-09-09T18:31:30.404Z", 
+    #       description: "Installs the latest version of my application", 
+    #       encrypted: true, 
+    #       owner: "111122223333", 
+    #       platform: "Linux", 
+    #       state: {
+    #         status: "ACTIVE", 
+    #       }, 
+    #     }, 
+    #     latest_version_references: {
+    #       latest_major_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/1.x.x", 
+    #       latest_minor_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/1.0.x", 
+    #       latest_patch_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/1.0.0", 
+    #       latest_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/x.x.x", 
+    #     }, 
+    #     request_id: "f5401098-035f-4be2-9eee-784c388ed04b", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2315,6 +3352,22 @@ module Aws::Imagebuilder
     #   * {Types::GetComponentPolicyResponse#request_id #request_id} => String
     #   * {Types::GetComponentPolicyResponse#policy #policy} => String
     #
+    #
+    # @example Example: Get the resource policy for a component
+    #
+    #   # The following example retrieves the resource policy that's applied to a component that the owner shared with another
+    #   # account.
+    #
+    #   resp = client.get_component_policy({
+    #     component_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-shared-component/1.0.0/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy: "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Effect\": \"Allow\", \"Principal\": {\"AWS\": \"arn:aws:iam::444455556666:root\"}, \"Action\": [\"imagebuilder:GetComponent\", \"imagebuilder:ListComponents\"], \"Resource\": [\"arn:aws:imagebuilder:us-west-2:111122223333:component/my-shared-component/1.0.0/1\"]}]}", 
+    #     request_id: "cb458998-6e6f-442a-9325-78c730b80895", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_component_policy({
@@ -2345,6 +3398,48 @@ module Aws::Imagebuilder
     #   * {Types::GetContainerRecipeResponse#request_id #request_id} => String
     #   * {Types::GetContainerRecipeResponse#container_recipe #container_recipe} => Types::ContainerRecipe
     #   * {Types::GetContainerRecipeResponse#latest_version_references #latest_version_references} => Types::LatestVersionReferences
+    #
+    #
+    # @example Example: Get the details of a container recipe
+    #
+    #   # The following example retrieves the details of the specified container recipe.
+    #
+    #   resp = client.get_container_recipe({
+    #     container_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe/1.0.0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     container_recipe: {
+    #       version: "1.0.0", 
+    #       name: "my-example-container-recipe", 
+    #       arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe/1.0.0", 
+    #       components: [
+    #         {
+    #           component_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-container-component/1.0.0/1", 
+    #         }, 
+    #       ], 
+    #       container_type: "DOCKER", 
+    #       date_created: "2026-09-09T19:32:53.983Z", 
+    #       description: "A container recipe that installs my application on Amazon Linux", 
+    #       dockerfile_template_data: "FROM {{{ imagebuilder:parentImage }}}\n{{{ imagebuilder:environments }}}\n{{{ imagebuilder:components }}}\n", 
+    #       encrypted: true, 
+    #       owner: "111122223333", 
+    #       parent_image: "amazonlinux:latest", 
+    #       platform: "Linux", 
+    #       target_repository: {
+    #         repository_name: "my-example-container-repo", 
+    #         service: "ECR", 
+    #       }, 
+    #     }, 
+    #     latest_version_references: {
+    #       latest_major_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe/1.x.x", 
+    #       latest_minor_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe/1.0.x", 
+    #       latest_patch_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe/1.0.0", 
+    #       latest_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe/x.x.x", 
+    #     }, 
+    #     request_id: "15b03ca7-050f-46d4-945e-00232cff6b19", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2416,6 +3511,22 @@ module Aws::Imagebuilder
     #   * {Types::GetContainerRecipePolicyResponse#request_id #request_id} => String
     #   * {Types::GetContainerRecipePolicyResponse#policy #policy} => String
     #
+    #
+    # @example Example: Get the policy attached to a container recipe
+    #
+    #   # The following example retrieves the resource policy for a container recipe that you shared with another AWS account. The
+    #   # policy property contains the resource-based policy document as a JSON-encoded string.
+    #
+    #   resp = client.get_container_recipe_policy({
+    #     container_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe-shared/1.0.0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy: "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Sid\": \"AllowSharedAccountContainerRecipeAccess\", \"Effect\": \"Allow\", \"Principal\": {\"AWS\": \"arn:aws:iam::444455556666:root\"}, \"Action\": [\"imagebuilder:GetContainerRecipe\", \"imagebuilder:ListContainerRecipes\"], \"Resource\": \"arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe-shared/1.0.0\"}]}", 
+    #     request_id: "1b8334a0-5ae7-4c3c-8092-5d589dab7a2b", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_container_recipe_policy({
@@ -2446,6 +3557,41 @@ module Aws::Imagebuilder
     #
     #   * {Types::GetDistributionConfigurationResponse#request_id #request_id} => String
     #   * {Types::GetDistributionConfigurationResponse#distribution_configuration #distribution_configuration} => Types::DistributionConfiguration
+    #
+    #
+    # @example Example: Get the details of a distribution configuration
+    #
+    #   # The following example retrieves a distribution configuration that distributes the output AMI to two Regions.
+    #
+    #   resp = client.get_distribution_configuration({
+    #     distribution_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:distribution-configuration/my-example-distribution", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     distribution_configuration: {
+    #       name: "my-example-distribution", 
+    #       arn: "arn:aws:imagebuilder:us-west-2:111122223333:distribution-configuration/my-example-distribution", 
+    #       date_created: "2026-09-09T19:37:37.231Z", 
+    #       description: "Copies the output AMI to a second Region", 
+    #       distributions: [
+    #         {
+    #           ami_distribution_configuration: {
+    #             name: "my-example-image-{{ imagebuilder:buildDate }}", 
+    #           }, 
+    #           region: "us-west-2", 
+    #         }, 
+    #         {
+    #           ami_distribution_configuration: {
+    #             name: "my-example-image-{{ imagebuilder:buildDate }}", 
+    #           }, 
+    #           region: "us-east-1", 
+    #         }, 
+    #       ], 
+    #       timeout_minutes: 720, 
+    #     }, 
+    #     request_id: "2d0a8dc0-99d5-4d7a-af7a-d1aeafd71c2e", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2521,13 +3667,47 @@ module Aws::Imagebuilder
     # Retrieves an image.
     #
     # @option params [required, String] :image_build_version_arn
-    #   The Amazon Resource Name (ARN) of the image that you want to get.
+    #   The Amazon Resource Name (ARN) of the image that you want to get. You
+    #   can specify a full build version ARN, or a version ARN with or without
+    #   wildcards (`x.x.x`, `1.x.x`, or `1.0.x`). A version or wildcard ARN
+    #   resolves to the latest matching build version that has reached
+    #   `AVAILABLE` status. Builds that were later deprecated, disabled, or
+    #   deleted don't resolve. To get an image in any other state, such as a
+    #   failed or in-progress build, specify the full build version ARN.
     #
     # @return [Types::GetImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetImageResponse#request_id #request_id} => String
     #   * {Types::GetImageResponse#image #image} => Types::Image
     #   * {Types::GetImageResponse#latest_version_references #latest_version_references} => Types::LatestVersionReferences
+    #
+    #
+    # @example Example: Check the status of an image build
+    #
+    #   # The following example retrieves an image build version to check its status while the build is running. The response is
+    #   # shortened to show a subset of the fields that Image Builder returns.
+    #
+    #   resp = client.get_image({
+    #     image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     image: {
+    #       version: "1.0.0/1", 
+    #       name: "my-example-recipe", 
+    #       type: "AMI", 
+    #       arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #       date_created: "2026-09-03T05:44:21.121Z", 
+    #       enhanced_image_metadata_enabled: true, 
+    #       platform: "Linux", 
+    #       source_pipeline_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-pipeline/my-example-pipeline", 
+    #       state: {
+    #         status: "BUILDING", 
+    #       }, 
+    #     }, 
+    #     request_id: "4be892f0-e1d1-47f9-8bc1-d08ec5dec640", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2795,6 +3975,41 @@ module Aws::Imagebuilder
     #   * {Types::GetImagePipelineResponse#request_id #request_id} => String
     #   * {Types::GetImagePipelineResponse#image_pipeline #image_pipeline} => Types::ImagePipeline
     #
+    #
+    # @example Example: Get the details of an image pipeline
+    #
+    #   # The following example retrieves an image pipeline that builds a new image every Sunday, including the image tests
+    #   # configuration and schedule start condition defaults that Image Builder applied at creation.
+    #
+    #   resp = client.get_image_pipeline({
+    #     image_pipeline_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-pipeline/my-example-pipeline", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     image_pipeline: {
+    #       name: "my-example-pipeline", 
+    #       arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-pipeline/my-example-pipeline", 
+    #       date_created: "2026-09-09T19:38:26.574Z", 
+    #       date_updated: "2026-09-09T19:38:26.574Z", 
+    #       description: "Builds an Amazon Linux 2023 image every Sunday", 
+    #       enhanced_image_metadata_enabled: true, 
+    #       image_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.0.0", 
+    #       image_tests_configuration: {
+    #         image_tests_enabled: true, 
+    #         timeout_minutes: 720, 
+    #       }, 
+    #       infrastructure_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:infrastructure-configuration/my-example-infrastructure", 
+    #       platform: "Linux", 
+    #       schedule: {
+    #         pipeline_execution_start_condition: "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE", 
+    #         schedule_expression: "cron(0 0 ? * SUN *)", 
+    #       }, 
+    #       status: "ENABLED", 
+    #     }, 
+    #     request_id: "b7e58d62-36dc-43a5-87ff-546e04cdabf1", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_image_pipeline({
@@ -2866,6 +4081,22 @@ module Aws::Imagebuilder
     #   * {Types::GetImagePolicyResponse#request_id #request_id} => String
     #   * {Types::GetImagePolicyResponse#policy #policy} => String
     #
+    #
+    # @example Example: Retrieve the resource policy for an image
+    #
+    #   # The following example retrieves the resource policy for an image build version that was shared with account
+    #   # 444455556666.
+    #
+    #   resp = client.get_image_policy({
+    #     image_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy: "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Effect\": \"Allow\", \"Principal\": {\"AWS\": \"arn:aws:iam::444455556666:root\"}, \"Action\": [\"imagebuilder:GetImage\", \"imagebuilder:ListImages\"], \"Resource\": [\"arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1\"]}]}", 
+    #     request_id: "bc0c8348-c0d9-452a-af20-2640430df585", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_image_policy({
@@ -2890,13 +4121,52 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe that you want to
-    #   retrieve.
+    #   retrieve. You can use the `x` wildcard in trailing version positions
+    #   to retrieve the latest matching version, for example `x.x.x` or
+    #   `1.x.x`.
     #
     # @return [Types::GetImageRecipeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetImageRecipeResponse#request_id #request_id} => String
     #   * {Types::GetImageRecipeResponse#image_recipe #image_recipe} => Types::ImageRecipe
     #   * {Types::GetImageRecipeResponse#latest_version_references #latest_version_references} => Types::LatestVersionReferences
+    #
+    #
+    # @example Example: Get the details of an image recipe
+    #
+    #   # The following example retrieves the full definition of an image recipe, including the components it applies and the base
+    #   # image it builds on.
+    #
+    #   resp = client.get_image_recipe({
+    #     image_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-app-recipe/1.0.0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     image_recipe: {
+    #       version: "1.0.0", 
+    #       name: "my-example-app-recipe", 
+    #       arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-app-recipe/1.0.0", 
+    #       components: [
+    #         {
+    #           component_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-app/1.0.0/1", 
+    #         }, 
+    #       ], 
+    #       date_created: "2026-09-09T19:30:21.183Z", 
+    #       description: "An image recipe that installs my application on Amazon Linux 2023", 
+    #       owner: "111122223333", 
+    #       parent_image: "arn:aws:imagebuilder:us-west-2:aws:image/amazon-linux-2023-x86/x.x.x", 
+    #       platform: "Linux", 
+    #       working_directory: "/tmp", 
+    #     }, 
+    #     latest_version_references: {
+    #       latest_major_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-app-recipe/1.x.x", 
+    #       latest_minor_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-app-recipe/1.0.x", 
+    #       latest_patch_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-app-recipe/1.0.0", 
+    #       latest_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-app-recipe/x.x.x", 
+    #     }, 
+    #     request_id: "adb3ff9a-df84-4b4e-8ecf-11d38281ead7", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2968,6 +4238,21 @@ module Aws::Imagebuilder
     #   * {Types::GetImageRecipePolicyResponse#request_id #request_id} => String
     #   * {Types::GetImageRecipePolicyResponse#policy #policy} => String
     #
+    #
+    # @example Example: Get the resource policy for an image recipe
+    #
+    #   # The following example retrieves the resource policy that's applied to the specified image recipe.
+    #
+    #   resp = client.get_image_recipe_policy({
+    #     image_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.0.0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     policy: "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Effect\": \"Allow\", \"Principal\": {\"AWS\": \"arn:aws:iam::444455556666:root\"}, \"Action\": [\"imagebuilder:GetImageRecipe\", \"imagebuilder:ListImageRecipes\"], \"Resource\": \"arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.0.0\"}]}", 
+    #     request_id: "0cf42efc-4b2c-4ba3-b6e3-542a796fffaf", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_image_recipe_policy({
@@ -2998,6 +4283,43 @@ module Aws::Imagebuilder
     #
     #   * {Types::GetInfrastructureConfigurationResponse#request_id #request_id} => String
     #   * {Types::GetInfrastructureConfigurationResponse#infrastructure_configuration #infrastructure_configuration} => Types::InfrastructureConfiguration
+    #
+    #
+    # @example Example: Get the details of an infrastructure configuration
+    #
+    #   # The following example retrieves an infrastructure configuration that specifies the instance types, instance profile, and
+    #   # instance metadata options that Image Builder uses for build and test instances.
+    #
+    #   resp = client.get_infrastructure_configuration({
+    #     infrastructure_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:infrastructure-configuration/my-example-infrastructure-configuration", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     infrastructure_configuration: {
+    #       name: "my-example-infrastructure-configuration", 
+    #       arn: "arn:aws:imagebuilder:us-west-2:111122223333:infrastructure-configuration/my-example-infrastructure-configuration", 
+    #       date_created: "2026-09-09T19:36:48.933Z", 
+    #       description: "Infrastructure configuration for my application image builds", 
+    #       instance_metadata_options: {
+    #         http_put_response_hop_limit: 2, 
+    #         http_tokens: "required", 
+    #       }, 
+    #       instance_profile_name: "EC2InstanceProfileForImageBuilder", 
+    #       instance_types: [
+    #         "m5.large", 
+    #         "m5.xlarge", 
+    #       ], 
+    #       resource_tags: {
+    #         "CostCenter" => "12345", 
+    #       }, 
+    #       tags: {
+    #         "Environment" => "test", 
+    #       }, 
+    #       terminate_instance_on_failure: true, 
+    #     }, 
+    #     request_id: "7ba25cd0-0735-4f44-bc67-2f231e96503f", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3044,8 +4366,9 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Retrieves the runtime information for a specific runtime instance of
-    # the lifecycle policy.
+    # Retrieves runtime information for a lifecycle execution – a single run
+    # of lifecycle actions that a lifecycle policy or a
+    # StartResourceStateUpdate request started.
     #
     # @option params [required, String] :lifecycle_execution_id
     #   The unique identifier for a runtime instance of the lifecycle policy.
@@ -3053,6 +4376,30 @@ module Aws::Imagebuilder
     # @return [Types::GetLifecycleExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetLifecycleExecutionResponse#lifecycle_execution #lifecycle_execution} => Types::LifecycleExecution
+    #
+    #
+    # @example Example: Get the details of a lifecycle execution
+    #
+    #   # The following example retrieves the runtime status of the specified lifecycle execution. If the execution was started by
+    #   # StartResourceStateUpdate rather than a lifecycle policy run, the response doesn't include the lifecyclePolicyArn field.
+    #
+    #   resp = client.get_lifecycle_execution({
+    #     lifecycle_execution_id: "lce-401aefc3-a829-46f6-8fc2-91497988a503", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     lifecycle_execution: {
+    #       lifecycle_execution_id: "lce-401aefc3-a829-46f6-8fc2-91497988a503", 
+    #       resources_impacted_summary: {
+    #         has_impacted_resources: false, 
+    #       }, 
+    #       start_time: Time.parse("2026-09-09T21:42:29Z"), 
+    #       state: {
+    #         status: "IN_PROGRESS", 
+    #       }, 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3088,6 +4435,50 @@ module Aws::Imagebuilder
     # @return [Types::GetLifecyclePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetLifecyclePolicyResponse#lifecycle_policy #lifecycle_policy} => Types::LifecyclePolicy
+    #
+    #
+    # @example Example: Get the details of a lifecycle policy
+    #
+    #   # The following example retrieves the full definition of the specified lifecycle policy.
+    #
+    #   resp = client.get_lifecycle_policy({
+    #     lifecycle_policy_arn: "arn:aws:imagebuilder:us-west-2:111122223333:lifecycle-policy/my-example-lifecycle-policy", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     lifecycle_policy: {
+    #       name: "my-example-lifecycle-policy", 
+    #       arn: "arn:aws:imagebuilder:us-west-2:111122223333:lifecycle-policy/my-example-lifecycle-policy", 
+    #       date_created: Time.parse("2026-09-09T19:34:38Z"), 
+    #       description: "Deletes AMIs and snapshots for builds older than six months, keeping at least the five most recent", 
+    #       execution_role: "arn:aws:iam::111122223333:role/my-example-lifecycle-role", 
+    #       policy_details: [
+    #         {
+    #           action: {
+    #             type: "DELETE", 
+    #             include_resources: {
+    #               amis: true, 
+    #               snapshots: true, 
+    #             }, 
+    #           }, 
+    #           filter: {
+    #             type: "AGE", 
+    #             value: 6, 
+    #             retain_at_least: 5, 
+    #             unit: "MONTHS", 
+    #           }, 
+    #         }, 
+    #       ], 
+    #       resource_selection: {
+    #         tag_map: {
+    #           "Environment" => "my-example-environment", 
+    #         }, 
+    #       }, 
+    #       resource_type: "AMI_IMAGE", 
+    #       status: "ENABLED", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3144,9 +4535,10 @@ module Aws::Imagebuilder
     end
 
     # Verifies the subscription and performs resource dependency checks on
-    # the requested Amazon Web Services Marketplace resource. For Amazon Web
-    # Services Marketplace components, the response contains fields to
-    # download the components and their artifacts.
+    # the requested Amazon Web Services Marketplace resource. The caller
+    # must be entitled to the resource. For Amazon Web Services Marketplace
+    # components, the response contains fields to download the components
+    # and their artifacts.
     #
     # @option params [required, String] :resource_type
     #   Specifies which type of Amazon Web Services Marketplace resource Image
@@ -3157,8 +4549,8 @@ module Aws::Imagebuilder
     #   Services Marketplace resource.
     #
     # @option params [String] :resource_location
-    #   The bucket path that you can specify to download the resource from
-    #   Amazon S3.
+    #   The Amazon S3 location of the component artifact to retrieve, in
+    #   `s3://bucket/key` form.
     #
     # @return [Types::GetMarketplaceResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3193,12 +4585,55 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :workflow_build_version_arn
     #   The Amazon Resource Name (ARN) of the workflow resource that you want
-    #   to get.
+    #   to get. You can specify a build version ARN, or a version ARN with or
+    #   without wildcards (`x`) in its version segments. Image Builder
+    #   resolves version and wildcard ARNs to the most recent matching build
+    #   version.
     #
     # @return [Types::GetWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetWorkflowResponse#workflow #workflow} => Types::Workflow
     #   * {Types::GetWorkflowResponse#latest_version_references #latest_version_references} => Types::LatestVersionReferences
+    #
+    #
+    # @example Example: Get the details of a workflow build version
+    #
+    #   # The following example retrieves a workflow build version. The response includes the YAML workflow document in the data
+    #   # field and the parameters that Image Builder extracted from it when the workflow was created.
+    #
+    #   resp = client.get_workflow({
+    #     workflow_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/build/my-example-workflow/1.0.0/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     latest_version_references: {
+    #       latest_major_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/build/my-example-workflow/1.x.x", 
+    #       latest_minor_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/build/my-example-workflow/1.0.x", 
+    #       latest_patch_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/build/my-example-workflow/1.0.0", 
+    #       latest_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/build/my-example-workflow/x.x.x", 
+    #     }, 
+    #     workflow: {
+    #       version: "1.0.0", 
+    #       name: "my-example-workflow", 
+    #       type: "BUILD", 
+    #       arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/build/my-example-workflow/1.0.0/1", 
+    #       change_description: "Initial version", 
+    #       data: "name: my-example-workflow\ndescription: Workflow to build an AMI, then wait for an external action before it completes\nschemaVersion: 1.0\n\nparameters:\n  - name: waitForActionAtEnd\n    type: boolean\n    default: true\n\nsteps:\n  - name: LaunchBuildInstance\n    action: LaunchInstance\n    onFailure: Abort\n    inputs:\n      waitFor: \"ssmAgent\"\n\n  - name: ApplyBuildComponents\n    action: ExecuteComponents\n    onFailure: Abort\n    inputs:\n      instanceId.$: \"$.stepOutputs.LaunchBuildInstance.instanceId\"\n\n  - name: CreateOutputAMI\n    action: CreateImage\n    onFailure: Abort\n    inputs:\n      instanceId.$: \"$.stepOutputs.LaunchBuildInstance.instanceId\"\n\n  - name: TerminateBuildInstance\n    action: TerminateInstance\n    onFailure: Continue\n    inputs:\n      instanceId.$: \"$.stepOutputs.LaunchBuildInstance.instanceId\"\n\n  - name: WaitForActionAtEnd\n    action: WaitForAction\n    if:\n      booleanEquals: true\n      value: \"$.parameters.waitForActionAtEnd\"\n", 
+    #       date_created: "2026-09-09T19:55:55.731Z", 
+    #       description: "Builds an AMI, and then waits for an external action before the workflow completes", 
+    #       owner: "111122223333", 
+    #       parameters: [
+    #         {
+    #           name: "waitForActionAtEnd", 
+    #           type: "boolean", 
+    #           default_value: [
+    #             "true", 
+    #           ], 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3266,6 +4701,32 @@ module Aws::Imagebuilder
     #   * {Types::GetWorkflowExecutionResponse#end_time #end_time} => String
     #   * {Types::GetWorkflowExecutionResponse#parallel_group #parallel_group} => String
     #
+    #
+    # @example Example: Get the runtime details for a workflow execution
+    #
+    #   # The following example retrieves runtime status and step counts for the build workflow that ran for an image build
+    #   # version, using the workflow execution ID returned by ListWorkflowExecutions.
+    #
+    #   resp = client.get_workflow_execution({
+    #     workflow_execution_id: "wf-165b1cb6-3a62-4618-a021-94ddcbe32908", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     type: "BUILD", 
+    #     end_time: "2026-09-09T19:19:06.158Z", 
+    #     image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #     request_id: "cd69c813-51c3-4261-8e59-382a1af96f73", 
+    #     start_time: "2026-09-09T19:12:23.175Z", 
+    #     status: "COMPLETED", 
+    #     total_step_count: 7, 
+    #     total_steps_failed: 0, 
+    #     total_steps_skipped: 2, 
+    #     total_steps_succeeded: 5, 
+    #     workflow_build_version_arn: "arn:aws:imagebuilder:us-west-2:aws:workflow/build/build-image/1.0.3/1", 
+    #     workflow_execution_id: "wf-165b1cb6-3a62-4618-a021-94ddcbe32908", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_workflow_execution({
@@ -3302,8 +4763,9 @@ module Aws::Imagebuilder
     # workflow step.
     #
     # @option params [required, String] :step_execution_id
-    #   Use the unique identifier for a specific runtime instance of the
-    #   workflow step to get runtime details for that step.
+    #   The unique identifier for the runtime instance of the workflow step
+    #   that you want to get runtime details for. To get the identifiers for
+    #   the steps that ran in a workflow, call ListWorkflowStepExecutions.
     #
     # @return [Types::GetWorkflowStepExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3326,6 +4788,34 @@ module Aws::Imagebuilder
     #   * {Types::GetWorkflowStepExecutionResponse#timeout_seconds #timeout_seconds} => Integer
     #   * {Types::GetWorkflowStepExecutionResponse#attempt_number #attempt_number} => Integer
     #   * {Types::GetWorkflowStepExecutionResponse#max_attempts #max_attempts} => Integer
+    #
+    #
+    # @example Example: Get the runtime details of a workflow step
+    #
+    #   # The following example retrieves runtime details for the step that launched the build instance during an image build,
+    #   # with the step's input parameters and output values returned as JSON-encoded strings.
+    #
+    #   resp = client.get_workflow_step_execution({
+    #     step_execution_id: "step-2e6fef0d-657c-4b7e-8706-ff24da9afa01", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     name: "LaunchBuildInstance", 
+    #     action: "LaunchInstance", 
+    #     end_time: "2026-09-09T19:14:50.822Z", 
+    #     image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #     inputs: "{\"waitFor\": \"ssmAgent\"}", 
+    #     on_failure: "Abort", 
+    #     outputs: "{\"instanceId\": \"i-1234567890abcdef0\"}", 
+    #     request_id: "9ba63d27-9568-4ea3-bfed-6b1ad4c09200", 
+    #     start_time: "2026-09-09T19:12:23.418Z", 
+    #     status: "COMPLETED", 
+    #     step_execution_id: "step-2e6fef0d-657c-4b7e-8706-ff24da9afa01", 
+    #     timeout_seconds: 4500, 
+    #     workflow_build_version_arn: "arn:aws:imagebuilder:us-west-2:aws:workflow/build/build-image/1.0.3/1", 
+    #     workflow_execution_id: "wf-165b1cb6-3a62-4618-a021-94ddcbe32908", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3365,9 +4855,17 @@ module Aws::Imagebuilder
     end
 
     # Imports a component and transforms its data into a component document.
+    # For the `SHELL` format, Image Builder wraps your script in a component
+    # document with a single step that runs the script.
     #
     # @option params [required, String] :name
-    #   The name of the component.
+    #   The name of the component. Image Builder generates the component ARN
+    #   from a normalized form of the name, so names that differ only in case,
+    #   spaces, or underscores count as the same name. If a component with the
+    #   same name and semantic version already exists in your account in the
+    #   same Amazon Web Services Region, the request creates a new build
+    #   version for it. If the content is also identical to the latest build
+    #   version, the request fails because the component already exists.
     #
     # @option params [required, String] :semantic_version
     #   The semantic version of the component. This version follows the
@@ -3377,10 +4875,15 @@ module Aws::Imagebuilder
     #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     #   assign values for the first three, and can filter on all of them.
     #
-    #    **Filtering:** You can use wildcards (x) to specify the most recent
-    #   versions or nodes when selecting the base image or components for your
-    #   recipe. When you use a wildcard in any node, all nodes to the right of
-    #   the first wildcard must also be wildcards.
+    #    **Assignment:** For the first three nodes, you can assign any positive
+    #   integer value, including zero. The upper limit is 2^30-1, or
+    #   1073741823, for each node. Image Builder automatically assigns the
+    #   build number to the fourth node.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
     #
     #    </note>
     #
@@ -3404,8 +4907,10 @@ module Aws::Imagebuilder
     #   The platform of the component.
     #
     # @option params [String] :data
-    #   The data of the component. Used to specify the data inline. Either
-    #   `data` or `uri` can be used to specify the data within the component.
+    #   The data of the component. For the `SHELL` format, this is the plain
+    #   script content. You must specify exactly one of the `data` or `uri`
+    #   properties. For scripts that exceed the inline length constraint, use
+    #   the `uri` property.
     #
     # @option params [String] :uri
     #   The uri of the component. Must be an Amazon S3 URL and you must have
@@ -3414,10 +4919,12 @@ module Aws::Imagebuilder
     #   or `uri` can be used to specify the data within the component.
     #
     # @option params [String] :kms_key_id
-    #   The Amazon Resource Name (ARN) that uniquely identifies the KMS key
-    #   used to encrypt this component. This can be either the Key ARN or the
-    #   Alias ARN. For more information, see [Key identifiers (KeyId)][1] in
-    #   the *Key Management Service Developer Guide*.
+    #   The Amazon Resource Name (ARN) of the KMS key that is used to encrypt
+    #   this component. This can be either the Key ARN or the Alias ARN. For
+    #   more information, see [Key identifiers (KeyId)][1] in the *Key
+    #   Management Service Developer Guide*. If you don't specify a key,
+    #   Image Builder encrypts the component data with a KMS key that Image
+    #   Builder owns.
     #
     #
     #
@@ -3428,10 +4935,10 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -3445,6 +4952,29 @@ module Aws::Imagebuilder
     #   * {Types::ImportComponentResponse#request_id #request_id} => String
     #   * {Types::ImportComponentResponse#client_token #client_token} => String
     #   * {Types::ImportComponentResponse#component_build_version_arn #component_build_version_arn} => String
+    #
+    #
+    # @example Example: Import a component from a shell script
+    #
+    #   # The following example imports a plain shell script as a Linux build component.
+    #
+    #   resp = client.import_component({
+    #     name: "my-example-imported-component", 
+    #     type: "BUILD", 
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE88888", 
+    #     data: "sudo yum update -y\nsudo yum -y install my-app\n", 
+    #     description: "Installs my application from an imported shell script", 
+    #     format: "SHELL", 
+    #     platform: "Linux", 
+    #     semantic_version: "1.0.0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE88888", 
+    #     component_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-imported-component/1.0.0/1", 
+    #     request_id: "e62cb87f-e291-4fb2-9305-54a7878c3b99", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3487,8 +5017,18 @@ module Aws::Imagebuilder
     #
     # ^
     #
+    # The response returns as soon as Image Builder creates the new image
+    # resource in the `PENDING` state. The conversion from ISO file to AMI
+    # then runs asynchronously on an EC2 instance that Image Builder
+    # launches with the specified infrastructure configuration.
+    #
     # @option params [required, String] :name
-    #   The name of the image resource that's created from the import.
+    #   The name of the image resource that's created from the import. Image
+    #   Builder generates the image ARN from a normalized form of the name, so
+    #   names that differ only in case, spaces, or underscores count as the
+    #   same name. If an image with the same name and semantic version already
+    #   exists in your account in the same Amazon Web Services Region, the
+    #   import creates a new build version for it.
     #
     # @option params [required, String] :semantic_version
     #   The semantic version to attach to the image that's created during the
@@ -3502,13 +5042,15 @@ module Aws::Imagebuilder
     #   include the following: `Windows`.
     #
     # @option params [required, String] :os_version
-    #   The operating system version for the imported image. Allowed values
-    #   include the following: `Microsoft Windows 11`.
+    #   The operating system version for the imported image. The only
+    #   supported value is `Microsoft Windows 11`.
     #
     # @option params [String] :execution_role
     #   The name or Amazon Resource Name (ARN) for the IAM role you create
     #   that grants Image Builder access to perform workflow actions to import
-    #   an image from a Microsoft ISO file.
+    #   an image from a Microsoft ISO file. If you don't provide a role,
+    #   Image Builder uses the Image Builder service-linked role in your
+    #   account, and creates it if it doesn't exist.
     #
     # @option params [required, String] :infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration
@@ -3516,10 +5058,16 @@ module Aws::Imagebuilder
     #   image is built.
     #
     # @option params [required, String] :uri
-    #   The `uri` of the ISO disk file that's stored in Amazon S3.
+    #   The `uri` of the ISO disk file that's stored in Amazon S3, in
+    #   `s3://bucket/key` format. The key must end with the `.iso`, `.ISO`, or
+    #   `.Iso` extension, and the bucket must be owned by the account that
+    #   makes the request.
     #
     # @option params [Types::ImageLoggingConfiguration] :logging_configuration
-    #   The logging configuration for the image build process.
+    #   The CloudWatch Logs log group where Image Builder sends the import
+    #   logs. If you specify a log group name outside of the
+    #   `/aws/imagebuilder/` namespace, you must also provide an
+    #   `executionRole` that has permission to write to that log group.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags that are attached to image resources created from the import.
@@ -3532,10 +5080,10 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -3548,6 +5096,29 @@ module Aws::Imagebuilder
     #
     #   * {Types::ImportDiskImageResponse#client_token #client_token} => String
     #   * {Types::ImportDiskImageResponse#image_build_version_arn #image_build_version_arn} => String
+    #
+    #
+    # @example Example: Import a Windows 11 ISO disk image
+    #
+    #   # The following example starts an image build that converts a Windows 11 ISO disk file stored in Amazon S3 into an AMI;
+    #   # the imageBuildVersionArn in the response identifies the Image Builder image resource that tracks the build, not the
+    #   # output AMI.
+    #
+    #   resp = client.import_disk_image({
+    #     name: "my-example-imported-image", 
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE12345", 
+    #     infrastructure_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:infrastructure-configuration/my-example-infrastructure", 
+    #     os_version: "Microsoft Windows 11", 
+    #     platform: "Windows", 
+    #     semantic_version: "1.0.0", 
+    #     uri: "s3://amzn-s3-demo-bucket/Win11_23H2_English_x64.iso", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE12345", 
+    #     image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-imported-image/1.0.0/1", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3590,16 +5161,16 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # When you export your virtual machine (VM) from its virtualization
-    # environment, that process creates a set of one or more disk container
-    # files that act as snapshots of your VM’s environment, settings, and
-    # data. The Amazon EC2 API [ImportImage][1] action uses those files to
-    # import your VM and create an AMI. To import using the CLI command, see
-    # [import-image][2]
+    # Creates an Image Builder image resource from an Amazon EC2 VM import
+    # task. The response returns as soon as Image Builder creates the image
+    # resource in the `PENDING` state. Image Builder then monitors the
+    # import task asynchronously. When the task completes, Image Builder
+    # records the AMI that it produced as the new image's output resource
+    # and marks the image `AVAILABLE`. You can then use the imported image
+    # as the base image for your recipes.
     #
-    # You can reference the task ID from the VM import to pull in the AMI
-    # that the import created as the base image for your Image Builder
-    # recipe.
+    # To create the VM import task, use the Amazon EC2 API [ImportImage][1]
+    # operation, or the [import-image][2] CLI command.
     #
     #
     #
@@ -3608,6 +5179,11 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :name
     #   The name of the base image that is created by the import process.
+    #   Image Builder generates the image ARN from a normalized form of the
+    #   name, so names that differ only in case, spaces, or underscores count
+    #   as the same name. If an image with the same name and semantic version
+    #   already exists in your account in the same Amazon Web Services Region,
+    #   the import creates a new build version for it.
     #
     # @option params [required, String] :semantic_version
     #   The semantic version to attach to the base image that was created
@@ -3642,22 +5218,24 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :vm_import_task_id
     #   The `importTaskId` (API) or `ImportTaskId` (CLI) from the Amazon EC2
-    #   VM import process. Image Builder retrieves information from the import
-    #   process to pull in the AMI that is created from the VM source as the
-    #   base image for your recipe.
+    #   VM import process. The import task doesn't need to be complete when
+    #   you call ImportVmImage - Image Builder monitors the task and finishes
+    #   creating the image when the task completes.
     #
     # @option params [Types::ImageLoggingConfiguration] :logging_configuration
-    #   The logging configuration for the image build process.
+    #   The CloudWatch Logs log group where Image Builder sends the import
+    #   logs. For ImportVmImage, the log group name must be within the
+    #   `/aws/imagebuilder/` namespace.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags that are attached to the import resources.
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -3671,6 +5249,28 @@ module Aws::Imagebuilder
     #   * {Types::ImportVmImageResponse#request_id #request_id} => String
     #   * {Types::ImportVmImageResponse#image_arn #image_arn} => String
     #   * {Types::ImportVmImageResponse#client_token #client_token} => String
+    #
+    #
+    # @example Example: Import a virtual machine as an Image Builder image
+    #
+    #   # The following example registers the output of an EC2 VM Import/Export task (import-ami) as a new Image Builder image, so
+    #   # you can use the imported virtual machine as a base image.
+    #
+    #   resp = client.import_vm_image({
+    #     name: "my-example-imported-image", 
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE00000", 
+    #     os_version: "Amazon Linux 2", 
+    #     platform: "Linux", 
+    #     semantic_version: "1.0.0", 
+    #     vm_import_task_id: "import-ami-1234567890abcdef0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE00000", 
+    #     image_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-imported-image/1.0.0/1", 
+    #     request_id: "f8a1d0ce-42b7-4d6a-9b12-3c84a02e5f19", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3705,12 +5305,16 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Returns the list of component build versions for the specified
-    # component version Amazon Resource Name (ARN).
+    # Returns a list of component build versions for the specified component
+    # version ARN. You can only list build versions for components that your
+    # account owns. Deprecated build versions aren't included in the
+    # results.
     #
     # @option params [String] :component_version_arn
-    #   The component version Amazon Resource Name (ARN) whose versions you
-    #   want to list.
+    #   The component version ARN whose build versions you want to list. The
+    #   ARN must specify an exact version, without a build number suffix. If
+    #   you don't specify an ARN, Image Builder returns build versions for
+    #   the components that your account owns.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in a single request.
@@ -3726,6 +5330,63 @@ module Aws::Imagebuilder
     #   * {Types::ListComponentBuildVersionsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List the build versions of a component
+    #
+    #   # The following example lists the build versions that exist for version 1.0.0 of the specified component. The list returns
+    #   # the most recent build version first.
+    #
+    #   resp = client.list_component_build_versions({
+    #     component_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/1.0.0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     component_summary_list: [
+    #       {
+    #         version: "1.0.0", 
+    #         name: "my-example-component", 
+    #         type: "BUILD", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/1.0.0/2", 
+    #         change_description: "Updated the install command to use dnf", 
+    #         date_created: "2026-09-09T18:35:23.098Z", 
+    #         description: "Installs the latest version of my application", 
+    #         owner: "111122223333", 
+    #         platform: "Linux", 
+    #         state: {
+    #           status: "ACTIVE", 
+    #         }, 
+    #         supported_os_versions: [
+    #           "Amazon Linux 2023", 
+    #         ], 
+    #         tags: {
+    #           "Environment" => "Production", 
+    #         }, 
+    #       }, 
+    #       {
+    #         version: "1.0.0", 
+    #         name: "my-example-component", 
+    #         type: "BUILD", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/1.0.0/1", 
+    #         change_description: "Initial version", 
+    #         date_created: "2026-09-09T18:35:20.731Z", 
+    #         description: "Installs the latest version of my application", 
+    #         owner: "111122223333", 
+    #         platform: "Linux", 
+    #         state: {
+    #           status: "ACTIVE", 
+    #         }, 
+    #         supported_os_versions: [
+    #           "Amazon Linux 2023", 
+    #         ], 
+    #         tags: {
+    #           "Environment" => "Production", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     request_id: "1d8693f0-26e1-42d7-ba35-d95ace1ce7e0", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3767,10 +5428,10 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Returns the list of components that can be filtered by name, or by
-    # using the listed `filters` to streamline results. Newly created
-    # components can take up to two minutes to appear in the ListComponents
-    # API Results.
+    # Returns the list of components that you have access to. By default,
+    # the response doesn't include components in the `DEPRECATED` state. To
+    # list deprecated components, use the `status` filter with the value
+    # `DEPRECATED`.
     #
     # <note markdown="1"> The semantic version has four nodes:
     # &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
@@ -3787,8 +5448,9 @@ module Aws::Imagebuilder
     #   Filters results based on the type of owner for the component. By
     #   default, this request returns a list of components that your account
     #   owns. To see results for other types of owners, you can specify
-    #   components that Amazon manages, third party components, or components
-    #   that other accounts have shared with you.
+    #   components that Amazon manages, components from the Amazon Web
+    #   Services Marketplace, third party components, or components that other
+    #   accounts have shared with you.
     #
     # @option params [Array<Types::Filter>] :filters
     #   Use the following filters to streamline results:
@@ -3799,6 +5461,10 @@ module Aws::Imagebuilder
     #
     #   * `platform`
     #
+    #   * `productCodes`
+    #
+    #   * `status`
+    #
     #   * `supportedOsVersion`
     #
     #   * `type`
@@ -3806,7 +5472,10 @@ module Aws::Imagebuilder
     #   * `version`
     #
     # @option params [Boolean] :by_name
-    #   Returns the list of components for the specified name.
+    #   Specifies whether to return one entry per component name, with all
+    #   versions of each component aggregated. Defaults to `false`, which
+    #   returns one entry per component version. You can't combine this
+    #   option with the `version` filter.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in a single request.
@@ -3822,6 +5491,67 @@ module Aws::Imagebuilder
     #   * {Types::ListComponentsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List components that you own
+    #
+    #   # The following example lists the component versions that your account owns, filtered to components for the Linux
+    #   # platform.
+    #
+    #   resp = client.list_components({
+    #     filters: [
+    #       {
+    #         name: "platform", 
+    #         values: [
+    #           "Linux", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     owner: "Self", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     component_version_list: [
+    #       {
+    #         version: "1.0.0", 
+    #         name: "my-example-component", 
+    #         type: "BUILD", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/1.0.0", 
+    #         date_created: "2026-09-09T18:31:49.661Z", 
+    #         description: "Installs my example application", 
+    #         owner: "111122223333", 
+    #         platform: "Linux", 
+    #         status: "ACTIVE", 
+    #         supported_os_versions: [
+    #           "Amazon Linux 2023", 
+    #         ], 
+    #       }, 
+    #       {
+    #         version: "1.0.0", 
+    #         name: "my-example-imported-component", 
+    #         type: "BUILD", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-imported-component/1.0.0", 
+    #         date_created: "2026-09-09T18:31:21.941Z", 
+    #         description: "Installs my application from an imported shell script", 
+    #         owner: "111122223333", 
+    #         platform: "Linux", 
+    #         status: "ACTIVE", 
+    #       }, 
+    #       {
+    #         version: "1.0.0", 
+    #         name: "my-example-test-component", 
+    #         type: "TEST", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-test-component/1.0.0", 
+    #         date_created: "2026-09-09T18:31:52.888Z", 
+    #         description: "Verifies that my example application is installed", 
+    #         owner: "111122223333", 
+    #         platform: "Linux", 
+    #         status: "ACTIVE", 
+    #       }, 
+    #     ], 
+    #     request_id: "fc51d989-ca0a-4ac7-9ca6-fb7786e70955", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3872,7 +5602,8 @@ module Aws::Imagebuilder
     # @option params [String] :owner
     #   Returns container recipes belonging to the specified owner, that have
     #   been shared with you. You can omit this field to return container
-    #   recipes belonging to your account.
+    #   recipes belonging to your account. For container recipes, the valid
+    #   owner values are `Self`, `Shared`, and `Amazon`.
     #
     # @option params [Array<Types::Filter>] :filters
     #   Use the following filters to streamline results:
@@ -3899,6 +5630,31 @@ module Aws::Imagebuilder
     #   * {Types::ListContainerRecipesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List the container recipes you own
+    #
+    #   # The following example lists the container recipes that you own.
+    #
+    #   resp = client.list_container_recipes({
+    #     owner: "Self", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     container_recipe_summary_list: [
+    #       {
+    #         name: "my-example-container-recipe", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe/1.0.0", 
+    #         container_type: "DOCKER", 
+    #         date_created: "2026-09-09T19:31:26.363Z", 
+    #         owner: "111122223333", 
+    #         parent_image: "amazonlinux:latest", 
+    #         platform: "Linux", 
+    #       }, 
+    #     ], 
+    #     request_id: "883e6f0e-8883-4c1a-9710-791afb74be0d", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3959,6 +5715,38 @@ module Aws::Imagebuilder
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: List distribution configurations that match a name filter
+    #
+    #   # The following example lists the distribution configurations whose name matches the filter value.
+    #
+    #   resp = client.list_distribution_configurations({
+    #     filters: [
+    #       {
+    #         name: "name", 
+    #         values: [
+    #           "my-example-distribution-configuration", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     distribution_configuration_summary_list: [
+    #       {
+    #         name: "my-example-distribution-configuration", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:distribution-configuration/my-example-distribution-configuration", 
+    #         date_created: "2026-09-09T21:09:02.581Z", 
+    #         description: "Distributes AMIs to us-west-2", 
+    #         regions: [
+    #           "us-west-2", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     request_id: "1057325c-6b4a-4e16-ac6e-12f1d8fcc6f9", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_distribution_configurations({
@@ -3999,8 +5787,11 @@ module Aws::Imagebuilder
     # Returns a list of image build versions.
     #
     # @option params [String] :image_version_arn
-    #   The Amazon Resource Name (ARN) of the image whose build versions you
-    #   want to retrieve.
+    #   The Amazon Resource Name (ARN) of the image version whose build
+    #   versions you want to retrieve. The ARN must specify an exact version
+    #   (`<major>.<minor>.<patch>`) - wildcards aren't allowed. This
+    #   parameter is optional. If you don't specify it, Image Builder returns
+    #   build versions for all of the images in your account.
     #
     # @option params [Array<Types::Filter>] :filters
     #   Use the following filters to streamline results:
@@ -4029,6 +5820,47 @@ module Aws::Imagebuilder
     #   * {Types::ListImageBuildVersionsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List the build versions of an image
+    #
+    #   # The following example lists the build versions that exist for version 1.0.0 of the specified image, with the output AMI
+    #   # that each build produced.
+    #
+    #   resp = client.list_image_build_versions({
+    #     image_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     image_summary_list: [
+    #       {
+    #         version: "1.0.0/1", 
+    #         name: "my-example-recipe", 
+    #         type: "AMI", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #         build_type: "USER_INITIATED", 
+    #         date_created: "2026-09-09T19:12:18.677Z", 
+    #         os_version: "Amazon Linux 2023", 
+    #         output_resources: {
+    #           amis: [
+    #             {
+    #               name: "my-example-recipe 2026-09-09T19-19-08.103311Z", 
+    #               account_id: "111122223333", 
+    #               image: "ami-1234567890abcdef0", 
+    #               region: "us-west-2", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         owner: "111122223333", 
+    #         platform: "Linux", 
+    #         state: {
+    #           status: "AVAILABLE", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     request_id: "b4808907-dcad-4951-ada5-dd151e93135a", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4127,8 +5959,8 @@ module Aws::Imagebuilder
     # time.
     #
     # @option params [required, String] :image_build_version_arn
-    #   Filter results for the ListImagePackages request by the Image Build
-    #   Version ARN
+    #   The Amazon Resource Name (ARN) of the image build version whose
+    #   packages you want to list. The value must be a full build version ARN.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in a single request.
@@ -4144,6 +5976,43 @@ module Aws::Imagebuilder
     #   * {Types::ListImagePackagesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List the packages in an image build version
+    #
+    #   # The following example lists the operating system packages that Image Builder detected in the specified image build
+    #   # version.
+    #
+    #   resp = client.list_image_packages({
+    #     image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     image_package_list: [
+    #       {
+    #         package_name: "passwd", 
+    #         package_version: "0.80", 
+    #       }, 
+    #       {
+    #         package_name: "dracut-config-ec2", 
+    #         package_version: "3.1", 
+    #       }, 
+    #       {
+    #         package_name: "libsolv", 
+    #         package_version: "0.7.22", 
+    #       }, 
+    #       {
+    #         package_name: "libxcrypt", 
+    #         package_version: "4.4.33", 
+    #       }, 
+    #       {
+    #         package_name: "python3-policycoreutils", 
+    #         package_version: "3.4", 
+    #       }, 
+    #     ], 
+    #     request_id: "0363bd96-1a54-4736-a307-7ac6095744e0", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4197,6 +6066,39 @@ module Aws::Imagebuilder
     #   * {Types::ListImagePipelineImagesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List the images that an image pipeline created
+    #
+    #   # The following example lists the images that the specified pipeline created, including a build that is still in progress.
+    #
+    #   resp = client.list_image_pipeline_images({
+    #     image_pipeline_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-pipeline/my-example-pipeline", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     image_summary_list: [
+    #       {
+    #         version: "1.0.0/1", 
+    #         name: "my-example-recipe", 
+    #         type: "AMI", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #         build_type: "USER_INITIATED", 
+    #         date_created: "2026-09-09T19:39:20.458Z", 
+    #         output_resources: {
+    #           amis: [
+    #           ], 
+    #         }, 
+    #         owner: "111122223333", 
+    #         platform: "Linux", 
+    #         state: {
+    #           status: "BUILDING", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     request_id: "071a0ecb-b07d-4485-832c-e6b88de8ebed", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4322,6 +6224,49 @@ module Aws::Imagebuilder
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: List image pipelines filtered by name
+    #
+    #   # The following example lists the image pipelines in your account, using a filter to match a specific pipeline name.
+    #
+    #   resp = client.list_image_pipelines({
+    #     filters: [
+    #       {
+    #         name: "name", 
+    #         values: [
+    #           "my-example-pipeline", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     image_pipeline_list: [
+    #       {
+    #         name: "my-example-pipeline", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-pipeline/my-example-pipeline", 
+    #         date_created: "2026-09-09T19:52:05.146Z", 
+    #         date_updated: "2026-09-09T19:52:05.146Z", 
+    #         description: "Builds a new version of my image every Sunday", 
+    #         enhanced_image_metadata_enabled: true, 
+    #         image_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.0.0", 
+    #         image_tests_configuration: {
+    #           image_tests_enabled: true, 
+    #           timeout_minutes: 720, 
+    #         }, 
+    #         infrastructure_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:infrastructure-configuration/my-example-infrastructure", 
+    #         platform: "Linux", 
+    #         schedule: {
+    #           pipeline_execution_start_condition: "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE", 
+    #           schedule_expression: "cron(0 9 ? * SUN *)", 
+    #         }, 
+    #         status: "ENABLED", 
+    #       }, 
+    #     ], 
+    #     request_id: "b818f3f9-b851-4de7-95f3-8fabed4e1841", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_image_pipelines({
@@ -4423,6 +6368,38 @@ module Aws::Imagebuilder
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: List the image recipes that you own
+    #
+    #   # The following example lists the image recipes that you own.
+    #
+    #   resp = client.list_image_recipes({
+    #     owner: "Self", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     image_recipe_summary_list: [
+    #       {
+    #         name: "my-example-linux-recipe", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-linux-recipe/1.0.0", 
+    #         date_created: "2026-09-09T19:30:33.064Z", 
+    #         owner: "111122223333", 
+    #         parent_image: "arn:aws:imagebuilder:us-west-2:aws:image/amazon-linux-2023-x86/x.x.x", 
+    #         platform: "Linux", 
+    #       }, 
+    #       {
+    #         name: "my-example-windows-recipe", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-windows-recipe/1.0.0", 
+    #         date_created: "2026-09-09T19:30:35.110Z", 
+    #         owner: "111122223333", 
+    #         parent_image: "arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2022-english-full-base-x86/x.x.x", 
+    #         platform: "Windows", 
+    #       }, 
+    #     ], 
+    #     request_id: "4b036f1a-3716-441d-a401-419249f6569e", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_image_recipes({
@@ -4470,8 +6447,6 @@ module Aws::Imagebuilder
     # To streamline results, you can use the following filters in your
     # request:
     #
-    # * `accountId`
-    #
     # * `imageBuildVersionArn`
     #
     # * `imagePipelineArn`
@@ -4479,10 +6454,17 @@ module Aws::Imagebuilder
     # * `vulnerabilityId`
     #
     # @option params [Types::Filter] :filter
-    #   A filter name and value pair that is used to return a more specific
-    #   list of results from a list operation. Filters can be used to match a
-    #   set of resources by specific criteria, such as tags, attributes, or
-    #   IDs.
+    #   A filter name and value pair that determines the type of aggregation
+    #   that Image Builder returns. Use one of the following filter names:
+    #
+    #   * `imageBuildVersionArn`
+    #
+    #   * `imagePipelineArn`
+    #
+    #   * `vulnerabilityId`
+    #
+    #   If you don't specify a filter, Image Builder returns an aggregation
+    #   for your account.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. Use the `nextToken`
@@ -4496,6 +6478,40 @@ module Aws::Imagebuilder
     #   * {Types::ListImageScanFindingAggregationsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List image scan finding aggregations for an image pipeline
+    #
+    #   # The following example aggregates vulnerability findings for images that the specified pipeline created, with counts
+    #   # grouped by severity level.
+    #
+    #   resp = client.list_image_scan_finding_aggregations({
+    #     filter: {
+    #       name: "imagePipelineArn", 
+    #       values: [
+    #         "arn:aws:imagebuilder:us-west-2:111122223333:image-pipeline/my-example-pipeline", 
+    #       ], 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     aggregation_type: "imagePipelineArn", 
+    #     request_id: "b1c9dd23-7a9c-4a52-a1f7-3b8e9e17b2c4", 
+    #     responses: [
+    #       {
+    #         image_pipeline_aggregation: {
+    #           image_pipeline_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-pipeline/my-example-pipeline", 
+    #           severity_counts: {
+    #             all: 25, 
+    #             critical: 1, 
+    #             high: 7, 
+    #             medium: 12, 
+    #           }, 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4543,19 +6559,24 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Returns a list of image scan findings for your account.
+    # Returns a list of image scan findings for your account. Amazon
+    # Inspector generates the findings when it scans images that have
+    # scanning enabled.
     #
     # @option params [Array<Types::ImageScanFindingsFilter>] :filters
     #   An array of name value pairs that you can use to filter your results.
     #   You can use the following filters to streamline results:
     #
-    #   * `imageBuildVersionArn`
+    #   * `imageBuildVersionArn` – Filters findings by the image build version
+    #     that was scanned.
     #
-    #   * `imagePipelineArn`
+    #   * `imagePipelineArn` – Filters findings by the pipeline that created
+    #     the scanned image.
     #
-    #   * `vulnerabilityId`
+    #   * `vulnerabilityId` – Filters findings by vulnerability ID, for
+    #     example a CVE ID.
     #
-    #   * `severity`
+    #   * `severity` – Filters findings by severity level.
     #
     #   If you don't request a filter, then all findings in your account are
     #   listed.
@@ -4574,6 +6595,95 @@ module Aws::Imagebuilder
     #   * {Types::ListImageScanFindingsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List vulnerability findings for an image build
+    #
+    #   # The following example lists the vulnerability findings that Amazon Inspector detected for the specified image build
+    #   # version.
+    #
+    #   resp = client.list_image_scan_findings({
+    #     filters: [
+    #       {
+    #         name: "imageBuildVersionArn", 
+    #         values: [
+    #           "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     findings: [
+    #       {
+    #         type: "PACKAGE_VULNERABILITY", 
+    #         aws_account_id: "111122223333", 
+    #         description: "In the Linux kernel, the following vulnerability has been resolved:\n\nvirtio: break and reset virtio devices on device_shutdown()", 
+    #         first_observed_at: Time.parse("2026-01-06T20:12:57Z"), 
+    #         fix_available: "YES", 
+    #         image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #         image_pipeline_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-pipeline/my-example-pipeline", 
+    #         inspector_score: 7.0, 
+    #         inspector_score_details: {
+    #           adjusted_cvss: {
+    #             version: "3.1", 
+    #             adjustments: [
+    #             ], 
+    #             cvss_source: "AMAZON_CVE", 
+    #             score: 7.0, 
+    #             score_source: "AMAZON_CVE", 
+    #             scoring_vector: "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H", 
+    #           }, 
+    #         }, 
+    #         package_vulnerability_details: {
+    #           cvss: [
+    #             {
+    #               version: "3.1", 
+    #               base_score: 7.0, 
+    #               scoring_vector: "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H", 
+    #               source: "AMAZON_CVE", 
+    #             }, 
+    #           ], 
+    #           reference_urls: [
+    #             "https://alas.aws.amazon.com/AL2/ALAS2-2025-2955.html", 
+    #             "https://alas.aws.amazon.com/AL2023/ALAS2023-2025-1130.html", 
+    #           ], 
+    #           related_vulnerabilities: [
+    #             "ALAS2-2025-2955", 
+    #             "ALAS2023-2025-1130", 
+    #           ], 
+    #           source: "AMAZON_CVE", 
+    #           source_url: "https://alas.aws.amazon.com/cve/json/v1/CVE-2025-38064.json", 
+    #           vendor_created_at: Time.parse("2025-06-18T00:00:00Z"), 
+    #           vendor_severity: "Important", 
+    #           vendor_updated_at: Time.parse("2025-06-25T00:00:00Z"), 
+    #           vulnerability_id: "CVE-2025-38064", 
+    #           vulnerable_packages: [
+    #             {
+    #               version: "4.14.355", 
+    #               name: "kernel", 
+    #               arch: "X86_64", 
+    #               epoch: 0, 
+    #               fixed_in_version: "0:5.15.189-131.202.amzn2", 
+    #               package_manager: "OS", 
+    #               release: "280.652.amzn2", 
+    #               remediation: "yum update kernel", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         remediation: {
+    #           recommendation: {
+    #             text: "None Provided", 
+    #           }, 
+    #         }, 
+    #         severity: "HIGH", 
+    #         title: "CVE-2025-38064 - kernel", 
+    #         updated_at: Time.parse("2026-01-06T20:12:57Z"), 
+    #       }, 
+    #     ], 
+    #     request_id: "233de8e7-3b58-4319-a6af-f6774cf7d371", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4650,9 +6760,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Returns the list of images that you have access to. Newly created
-    # images can take up to two minutes to appear in the ListImages API
-    # Results.
+    # Returns the list of images that you have access to.
     #
     # @option params [String] :owner
     #   Filters the list to images owned by you, by Amazon, or shared with you
@@ -4673,7 +6781,10 @@ module Aws::Imagebuilder
     #   * `version`
     #
     # @option params [Boolean] :by_name
-    #   Requests a list of images with a specific recipe name.
+    #   Specifies whether to return one entry per image name, with all
+    #   versions of each image aggregated. Defaults to `false`, which returns
+    #   one entry per image version. You can't combine this option with the
+    #   `version` filter.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in a single request.
@@ -4683,7 +6794,9 @@ module Aws::Imagebuilder
     #   value from a previously truncated response.
     #
     # @option params [Boolean] :include_deprecated
-    #   Includes deprecated images in the response list.
+    #   Specifies whether to include deprecated Amazon-managed images in the
+    #   results. Deprecated images that you own are always returned. Defaults
+    #   to `false`.
     #
     # @return [Types::ListImagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4692,6 +6805,57 @@ module Aws::Imagebuilder
     #   * {Types::ListImagesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List images that you own
+    #
+    #   # The following example lists the image versions that you own. Setting byName to false returns each image version as its
+    #   # own entry, instead of grouping build versions under their image name.
+    #
+    #   resp = client.list_images({
+    #     by_name: false, 
+    #     owner: "Self", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     image_version_list: [
+    #       {
+    #         version: "1.0.0", 
+    #         name: "my-example-recipe", 
+    #         type: "AMI", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0", 
+    #         build_type: "USER_INITIATED", 
+    #         date_created: "2026-09-09T19:12:18.677Z", 
+    #         os_version: "Amazon Linux 2023", 
+    #         owner: "111122223333", 
+    #         platform: "Linux", 
+    #       }, 
+    #       {
+    #         version: "1.0.0", 
+    #         name: "my-example-windows-image", 
+    #         type: "AMI", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-windows-image/1.0.0", 
+    #         build_type: "USER_INITIATED", 
+    #         date_created: "2026-03-10T19:57:27.323Z", 
+    #         os_version: "Microsoft Windows Server 2025", 
+    #         owner: "111122223333", 
+    #         platform: "Windows", 
+    #       }, 
+    #       {
+    #         version: "1.0.1", 
+    #         name: "my-example-windows-image", 
+    #         type: "AMI", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-windows-image/1.0.1", 
+    #         build_type: "USER_INITIATED", 
+    #         date_created: "2026-03-10T20:32:31.795Z", 
+    #         os_version: "Microsoft Windows Server 2025", 
+    #         owner: "111122223333", 
+    #         platform: "Windows", 
+    #       }, 
+    #     ], 
+    #     request_id: "19794296-a45f-4079-8741-e00d3c916318", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4754,6 +6918,43 @@ module Aws::Imagebuilder
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: List infrastructure configurations by name
+    #
+    #   # The following example lists your infrastructure configurations, filtered to a specific resource name.
+    #
+    #   resp = client.list_infrastructure_configurations({
+    #     filters: [
+    #       {
+    #         name: "name", 
+    #         values: [
+    #           "my-example-infrastructure-configuration", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     infrastructure_configuration_summary_list: [
+    #       {
+    #         name: "my-example-infrastructure-configuration", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:infrastructure-configuration/my-example-infrastructure-configuration", 
+    #         date_created: "2026-09-09T19:37:17.350Z", 
+    #         description: "An example infrastructure configuration for Amazon Linux builds", 
+    #         instance_profile_name: "EC2InstanceProfileForImageBuilder", 
+    #         instance_types: [
+    #           "m5.large", 
+    #           "m5.xlarge", 
+    #         ], 
+    #         tags: {
+    #           "Environment" => "test", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     request_id: "dbadaf86-3a9d-48fc-8e34-6062ef0a70f2", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_infrastructure_configurations({
@@ -4805,14 +7006,14 @@ module Aws::Imagebuilder
     #   The unique identifier for a runtime instance of the lifecycle policy.
     #
     # @option params [String] :parent_resource_id
-    #   You can leave this empty to get a list of Image Builder resources that
-    #   were identified for lifecycle actions.
-    #
-    #   To get a list of associated resources that are impacted for an
-    #   individual resource (the parent), specify its Amazon Resource Name
-    #   (ARN). Associated resources are produced from your image and
-    #   distributed when you run a build, such as AMIs or container images
-    #   stored in ECR repositories.
+    #   The Amazon Resource Name (ARN) of an image build version to get the
+    #   output resources for, such as AMIs or container images in Amazon ECR.
+    #   You can get this value from the `resourceId` in the top-level
+    #   response. If you leave this property empty, the response lists the
+    #   Image Builder resources that the lifecycle execution identified for
+    #   lifecycle actions. If the image build version that you specify in
+    #   `parentResourceId` wasn't part of this lifecycle execution, the
+    #   response contains an empty list.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in a single request.
@@ -4829,6 +7030,26 @@ module Aws::Imagebuilder
     #   * {Types::ListLifecycleExecutionResourcesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List the resources that a lifecycle execution acted on
+    #
+    #   # The following example lists the resources that the specified lifecycle execution acted on. For a scheduled resource
+    #   # state update that hasn't started to apply changes yet, the resources list is empty.
+    #
+    #   resp = client.list_lifecycle_execution_resources({
+    #     lifecycle_execution_id: "lce-401aefc3-a829-46f6-8fc2-91497988a503", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     lifecycle_execution_id: "lce-401aefc3-a829-46f6-8fc2-91497988a503", 
+    #     lifecycle_execution_state: {
+    #       status: "IN_PROGRESS", 
+    #     }, 
+    #     resources: [
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4881,8 +7102,11 @@ module Aws::Imagebuilder
     #   value from a previously truncated response.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource for which to get a list
-    #   of lifecycle runtime instances.
+    #   The Amazon Resource Name (ARN) of the resource for which to list
+    #   lifecycle executions. Specify a lifecycle policy ARN to list its
+    #   executions, or an image build version ARN to list the executions that
+    #   StartResourceStateUpdate started for that image. Other ARN types
+    #   aren't valid for this request.
     #
     # @return [Types::ListLifecycleExecutionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4890,6 +7114,33 @@ module Aws::Imagebuilder
     #   * {Types::ListLifecycleExecutionsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List lifecycle executions for an image build version
+    #
+    #   # The following example lists the lifecycle executions that have run against the specified image build version. The
+    #   # execution shown was started with StartResourceStateUpdate rather than a lifecycle policy, so it has no
+    #   # lifecyclePolicyArn.
+    #
+    #   resp = client.list_lifecycle_executions({
+    #     resource_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     lifecycle_executions: [
+    #       {
+    #         lifecycle_execution_id: "lce-401aefc3-a829-46f6-8fc2-91497988a503", 
+    #         resources_impacted_summary: {
+    #           has_impacted_resources: false, 
+    #         }, 
+    #         start_time: Time.parse("2026-09-09T21:42:29Z"), 
+    #         state: {
+    #           status: "IN_PROGRESS", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4924,8 +7175,9 @@ module Aws::Imagebuilder
     # account.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Streamline results based on one of the following values: `Name`,
-    #   `Status`.
+    #   Use the following filters to streamline results: `name`,
+    #   `resourceType`, and `status`. Filter names are matched exactly as
+    #   shown.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in a single request.
@@ -4940,6 +7192,46 @@ module Aws::Imagebuilder
     #   * {Types::ListLifecyclePoliciesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List enabled lifecycle policies
+    #
+    #   # The following example lists the lifecycle policies in your account that have ENABLED status.
+    #
+    #   resp = client.list_lifecycle_policies({
+    #     filters: [
+    #       {
+    #         name: "status", 
+    #         values: [
+    #           "ENABLED", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     lifecycle_policy_summary_list: [
+    #       {
+    #         name: "my-example-ami-policy", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:lifecycle-policy/my-example-ami-policy", 
+    #         date_created: Time.parse("2026-09-09T19:36:17Z"), 
+    #         description: "Deletes AMI image builds after they reach 6 months old", 
+    #         execution_role: "arn:aws:iam::111122223333:role/my-example-lifecycle-role", 
+    #         resource_type: "AMI_IMAGE", 
+    #         status: "ENABLED", 
+    #       }, 
+    #       {
+    #         name: "my-example-container-policy", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:lifecycle-policy/my-example-container-policy", 
+    #         date_created: Time.parse("2026-09-09T19:36:19Z"), 
+    #         description: "Deletes container image builds after they reach 6 months old", 
+    #         execution_role: "arn:aws:iam::111122223333:role/my-example-lifecycle-role", 
+    #         resource_type: "CONTAINER_IMAGE", 
+    #         status: "ENABLED", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -4989,6 +7281,23 @@ module Aws::Imagebuilder
     #
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
     #
+    #
+    # @example Example: List the tags for a resource
+    #
+    #   # The following example lists the tags that are assigned to an existing component build version.
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-component/1.0.0/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: {
+    #       "CostCenter" => "12345", 
+    #       "Environment" => "Production", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
@@ -5009,8 +7318,9 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Retrieves a list of workflow steps that are waiting for action for
-    # workflows in your Amazon Web Services account.
+    # Lists the workflow steps in your Amazon Web Services account that have
+    # paused at a `WaitForAction` step, and are waiting for you to respond.
+    # To send a response, call SendWorkflowStepAction.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in a single request.
@@ -5025,6 +7335,31 @@ module Aws::Imagebuilder
     #   * {Types::ListWaitingWorkflowStepsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List workflow steps that are waiting for an action
+    #
+    #   # The following example lists the workflow steps in your account that are paused at a WaitForAction step, waiting for you
+    #   # to resume or stop the workflow with SendWorkflowStepAction.
+    #
+    #   resp = client.list_waiting_workflow_steps({
+    #     max_results: 25, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     steps: [
+    #       {
+    #         name: "WaitForApproval", 
+    #         action: "WaitForAction", 
+    #         image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-wait-recipe/1.0.0/1", 
+    #         start_time: "2026-09-09T20:02:59.931Z", 
+    #         step_execution_id: "step-8eb24d7a-036e-46b5-94a3-90a5d8b5ac4a", 
+    #         workflow_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/build/my-example-wait-workflow/1.0.0/1", 
+    #         workflow_execution_id: "wf-782460a6-8dc5-4262-90ff-0509eef0053c", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5058,7 +7393,10 @@ module Aws::Imagebuilder
     #
     # @option params [String] :workflow_version_arn
     #   The Amazon Resource Name (ARN) of the workflow resource for which to
-    #   get a list of build versions.
+    #   get a list of build versions. The version segments can contain
+    #   wildcards (`x`) to match multiple versions of the workflow. If you
+    #   don't specify an ARN, the response lists build versions for all of
+    #   the workflows in your account.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in a single request.
@@ -5073,6 +7411,42 @@ module Aws::Imagebuilder
     #   * {Types::ListWorkflowBuildVersionsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List the build versions of a workflow
+    #
+    #   # The following example lists the build versions that exist for version 1.0.0 of the specified workflow, with the most
+    #   # recent build version first and the change description for each build version showing what changed.
+    #
+    #   resp = client.list_workflow_build_versions({
+    #     workflow_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/build/my-example-workflow/1.0.0", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     workflow_summary_list: [
+    #       {
+    #         version: "1.0.0", 
+    #         name: "my-example-workflow", 
+    #         type: "BUILD", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/build/my-example-workflow/1.0.0/2", 
+    #         change_description: "Added a step to collect image metadata from the build instance", 
+    #         date_created: "2026-09-09T19:56:38.339Z", 
+    #         description: "Workflow to build my example image", 
+    #         owner: "111122223333", 
+    #       }, 
+    #       {
+    #         version: "1.0.0", 
+    #         name: "my-example-workflow", 
+    #         type: "BUILD", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/build/my-example-workflow/1.0.0/1", 
+    #         change_description: "Initial version", 
+    #         date_created: "2026-09-09T19:41:14.997Z", 
+    #         description: "Workflow to build my example image", 
+    #         owner: "111122223333", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5131,6 +7505,50 @@ module Aws::Imagebuilder
     #   * {Types::ListWorkflowExecutionsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List the workflow runtime instances for an image build version
+    #
+    #   # The following example lists the workflow runtime instances that ran for the specified image build version, which was
+    #   # built with the Image Builder default build and test workflows.
+    #
+    #   resp = client.list_workflow_executions({
+    #     image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #     request_id: "c78ef9a3-cce8-4e7d-ae96-426fb7e59f5d", 
+    #     workflow_executions: [
+    #       {
+    #         type: "BUILD", 
+    #         end_time: "2026-09-09T19:19:06.158Z", 
+    #         retried: false, 
+    #         start_time: "2026-09-09T19:12:23.175Z", 
+    #         status: "COMPLETED", 
+    #         total_step_count: 7, 
+    #         total_steps_failed: 0, 
+    #         total_steps_skipped: 2, 
+    #         total_steps_succeeded: 5, 
+    #         workflow_build_version_arn: "arn:aws:imagebuilder:us-west-2:aws:workflow/build/build-image/1.0.3/1", 
+    #         workflow_execution_id: "wf-165b1cb6-3a62-4618-a021-94ddcbe32908", 
+    #       }, 
+    #       {
+    #         type: "TEST", 
+    #         end_time: "2026-09-09T19:21:47.830Z", 
+    #         retried: false, 
+    #         start_time: "2026-09-09T19:19:11.709Z", 
+    #         status: "COMPLETED", 
+    #         total_step_count: 4, 
+    #         total_steps_failed: 0, 
+    #         total_steps_skipped: 2, 
+    #         total_steps_succeeded: 2, 
+    #         workflow_build_version_arn: "arn:aws:imagebuilder:us-west-2:aws:workflow/test/test-image/1.0.3/1", 
+    #         workflow_execution_id: "wf-1a3639b8-1366-4b73-8347-706874020dad", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5196,6 +7614,92 @@ module Aws::Imagebuilder
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: List the steps that ran in a workflow execution
+    #
+    #   # The following example lists runtime details for each step in the specified runtime instance of a workflow, in this case
+    #   # the build workflow from an image build.
+    #
+    #   resp = client.list_workflow_step_executions({
+    #     workflow_execution_id: "wf-165b1cb6-3a62-4618-a021-94ddcbe32908", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #     request_id: "c6258beb-bc78-40dc-8bf9-fa5a8a93d3f3", 
+    #     steps: [
+    #       {
+    #         name: "LaunchBuildInstance", 
+    #         action: "LaunchInstance", 
+    #         end_time: "2026-09-09T19:14:50.822Z", 
+    #         inputs: "{\"waitFor\": \"ssmAgent\"}", 
+    #         outputs: "{\"instanceId\": \"i-1234567890abcdef0\"}", 
+    #         start_time: "2026-09-09T19:12:23.418Z", 
+    #         status: "COMPLETED", 
+    #         step_execution_id: "step-2e6fef0d-657c-4b7e-8706-ff24da9afa01", 
+    #       }, 
+    #       {
+    #         name: "ApplyBuildComponents", 
+    #         action: "ExecuteComponents", 
+    #         end_time: "2026-09-09T19:14:51.229Z", 
+    #         inputs: "{\"instanceId.$\": \"$.stepOutputs.LaunchBuildInstance.instanceId\"}", 
+    #         start_time: "2026-09-09T19:14:51.229Z", 
+    #         status: "SKIPPED", 
+    #         step_execution_id: "step-f76c24fe-dc70-435b-8dc1-987a0ca6d5a5", 
+    #       }, 
+    #       {
+    #         name: "InventoryCollection", 
+    #         action: "CollectImageMetadata", 
+    #         end_time: "2026-09-09T19:16:26.267Z", 
+    #         inputs: "{\"instanceId\": \"i-1234567890abcdef0\"}", 
+    #         outputs: "{\"osVersion\": \"Amazon Linux 2023\", \"associationId\": \"7416ce2e-4ee8-4660-8c42-a09a03f61010\"}", 
+    #         start_time: "2026-09-09T19:14:51.818Z", 
+    #         status: "COMPLETED", 
+    #         step_execution_id: "step-aa880a39-e72c-4561-aa05-eb3de860441a", 
+    #       }, 
+    #       {
+    #         name: "RunSanitizeScript", 
+    #         action: "SanitizeInstance", 
+    #         end_time: "2026-09-09T19:16:36.559Z", 
+    #         outputs: "{\"status\": \"Success\", \"output\": \"Skipping cleanup\\n\", \"runCommandId\": \"9eef9fe1-12e8-4c97-8e9a-4e79632864f4\"}", 
+    #         start_time: "2026-09-09T19:16:26.742Z", 
+    #         status: "COMPLETED", 
+    #         step_execution_id: "step-572bdd17-25c4-4729-9f2e-7fd611807751", 
+    #       }, 
+    #       {
+    #         name: "RunSysPrepScript", 
+    #         action: "RunSysPrep", 
+    #         end_time: "2026-09-09T19:16:36.973Z", 
+    #         inputs: "{\"instanceId.$\": \"$.stepOutputs.LaunchBuildInstance.instanceId\"}", 
+    #         start_time: "2026-09-09T19:16:36.973Z", 
+    #         status: "SKIPPED", 
+    #         step_execution_id: "step-06026579-939d-4b1b-b36e-fa58cb712a48", 
+    #       }, 
+    #       {
+    #         name: "CreateOutputAMI", 
+    #         action: "CreateImage", 
+    #         end_time: "2026-09-09T19:19:02.135Z", 
+    #         inputs: "{\"instanceId\": \"i-1234567890abcdef0\"}", 
+    #         outputs: "{\"imageId\": \"ami-1234567890abcdef0\"}", 
+    #         start_time: "2026-09-09T19:16:37.499Z", 
+    #         status: "COMPLETED", 
+    #         step_execution_id: "step-50e4312d-400c-453e-957c-714cbee6961c", 
+    #       }, 
+    #       {
+    #         name: "TerminateBuildInstance", 
+    #         action: "TerminateInstance", 
+    #         end_time: "2026-09-09T19:19:06.132Z", 
+    #         inputs: "{\"instanceId\": \"i-1234567890abcdef0\"}", 
+    #         start_time: "2026-09-09T19:19:02.546Z", 
+    #         status: "COMPLETED", 
+    #         step_execution_id: "step-22673db0-e280-4948-b9b5-789791531c34", 
+    #       }, 
+    #     ], 
+    #     workflow_build_version_arn: "arn:aws:imagebuilder:us-west-2:aws:workflow/build/build-image/1.0.3/1", 
+    #     workflow_execution_id: "wf-165b1cb6-3a62-4618-a021-94ddcbe32908", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_workflow_step_executions({
@@ -5236,17 +7740,26 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Lists workflow build versions based on filtering parameters.
+    # Lists workflow versions based on filtering parameters. To list the
+    # build versions of a specific workflow version, call
+    # ListWorkflowBuildVersions.
     #
     # @option params [String] :owner
-    #   Used to get a list of workflow build version filtered by the identity
-    #   of the creator.
+    #   Filters results based on the workflow owner. By default, this request
+    #   returns the workflows that your account owns (`Self`). Specify
+    #   `Amazon` to list the workflows that Image Builder manages. Image
+    #   Builder rejects the `Shared` and `ThirdParty` owner values for
+    #   workflows, and `AWSMarketplace` returns no results.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Used to streamline search results.
+    #   Filters to narrow the list of workflows. You can filter on `name`,
+    #   `version`, `description`, and `type`.
     #
     # @option params [Boolean] :by_name
-    #   Specify all or part of the workflow name to streamline results.
+    #   Specifies whether to return one entry per workflow name, with all
+    #   versions of each workflow aggregated. Defaults to `false`, which
+    #   returns one entry per workflow version. You can't combine this option
+    #   with the `version` filter.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in a single request.
@@ -5261,6 +7774,39 @@ module Aws::Imagebuilder
     #   * {Types::ListWorkflowsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List workflows that you own
+    #
+    #   # The following example lists the workflow versions that you own.
+    #
+    #   resp = client.list_workflows({
+    #     owner: "Self", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     workflow_version_list: [
+    #       {
+    #         version: "1.0.0", 
+    #         name: "my-example-build-workflow", 
+    #         type: "BUILD", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/build/my-example-build-workflow/1.0.0", 
+    #         date_created: "2026-09-09T19:56:09.033Z", 
+    #         description: "Builds my example image", 
+    #         owner: "111122223333", 
+    #       }, 
+    #       {
+    #         version: "1.0.0", 
+    #         name: "my-example-test-workflow", 
+    #         type: "TEST", 
+    #         arn: "arn:aws:imagebuilder:us-west-2:111122223333:workflow/test/my-example-test-workflow/1.0.0", 
+    #         date_created: "2026-09-09T19:56:12.440Z", 
+    #         description: "Tests my example image", 
+    #         owner: "111122223333", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5298,11 +7844,11 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Applies a policy to a component. To share resources, call the RAM API
-    # [CreateResourceShare][1]. If you call this API, you must also call the
-    # RAM API [PromoteResourceShareCreatedFromPolicy][2] so that the
-    # resource is visible to all principals with whom the resource is
-    # shared.
+    # Applies a policy to a component. The preferred way to share resources
+    # is with the RAM API [CreateResourceShare][1]. If you use the
+    # PutComponentPolicy operation instead, you must also call the RAM API
+    # [PromoteResourceShareCreatedFromPolicy][2]. Otherwise, the resource
+    # isn't visible to the principals that it's shared with.
     #
     #
     #
@@ -5320,6 +7866,22 @@ module Aws::Imagebuilder
     #
     #   * {Types::PutComponentPolicyResponse#request_id #request_id} => String
     #   * {Types::PutComponentPolicyResponse#component_arn #component_arn} => String
+    #
+    #
+    # @example Example: Share a component with another account
+    #
+    #   # The following example applies a resource policy that grants another account permission to get and list the component.
+    #
+    #   resp = client.put_component_policy({
+    #     component_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-shared-component/1.0.0/1", 
+    #     policy: "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Effect\": \"Allow\", \"Principal\": {\"AWS\": \"arn:aws:iam::444455556666:root\"}, \"Action\": [\"imagebuilder:GetComponent\", \"imagebuilder:ListComponents\"], \"Resource\": [\"arn:aws:imagebuilder:us-west-2:111122223333:component/my-shared-component/1.0.0/1\"]}]}", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     component_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-shared-component/1.0.0/1", 
+    #     request_id: "ad5a3a66-95c0-4eb5-b34e-f28980256275", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5342,11 +7904,11 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Applies a policy to a container image. To share resources, call the
-    # RAM API [CreateResourceShare][1]. If you call this API, you must also
-    # call the RAM API [PromoteResourceShareCreatedFromPolicy][2] so that
-    # the resource is visible to all principals with whom the resource is
-    # shared.
+    # Applies a policy to a container recipe. The preferred way to share
+    # resources is with the RAM API [CreateResourceShare][1]. If you use the
+    # PutContainerRecipePolicy operation instead, you must also call the RAM
+    # API [PromoteResourceShareCreatedFromPolicy][2]. Otherwise, the
+    # resource isn't visible to the principals that it's shared with.
     #
     #
     #
@@ -5364,6 +7926,23 @@ module Aws::Imagebuilder
     #
     #   * {Types::PutContainerRecipePolicyResponse#request_id #request_id} => String
     #   * {Types::PutContainerRecipePolicyResponse#container_recipe_arn #container_recipe_arn} => String
+    #
+    #
+    # @example Example: Share a container recipe with another account
+    #
+    #   # The following example applies a resource policy that grants another AWS account permission to view and use the specified
+    #   # container recipe.
+    #
+    #   resp = client.put_container_recipe_policy({
+    #     container_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe-shared/1.0.0", 
+    #     policy: "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Sid\": \"AllowSharedAccountContainerRecipeAccess\", \"Effect\": \"Allow\", \"Principal\": {\"AWS\": \"arn:aws:iam::444455556666:root\"}, \"Action\": [\"imagebuilder:GetContainerRecipe\", \"imagebuilder:ListContainerRecipes\"], \"Resource\": \"arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe-shared/1.0.0\"}]}", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     container_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:container-recipe/my-example-container-recipe-shared/1.0.0", 
+    #     request_id: "dd917975-9d5d-49ce-9d94-daa753088dec", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5386,11 +7965,11 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Applies a policy to an image. To share resources, call the RAM API
-    # [CreateResourceShare][1]. If you call this API, you must also call the
-    # RAM API [PromoteResourceShareCreatedFromPolicy][2] so that the
-    # resource is visible to all principals with whom the resource is
-    # shared.
+    # Applies a policy to an image. The preferred way to share resources is
+    # with the RAM API [CreateResourceShare][1]. If you use the
+    # PutImagePolicy operation instead, you must also call the RAM API
+    # [PromoteResourceShareCreatedFromPolicy][2]. Otherwise, the resource
+    # isn't visible to the principals that it's shared with.
     #
     #
     #
@@ -5402,12 +7981,32 @@ module Aws::Imagebuilder
     #   applied to.
     #
     # @option params [required, String] :policy
-    #   The policy to apply.
+    #   The resource policy to apply to the image, as a JSON policy document.
+    #   Image Builder validates the policy with Amazon Web Services RAM before
+    #   applying it, and rejects invalid policies with
+    #   `InvalidParameterValueException`.
     #
     # @return [Types::PutImagePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutImagePolicyResponse#request_id #request_id} => String
     #   * {Types::PutImagePolicyResponse#image_arn #image_arn} => String
+    #
+    #
+    # @example Example: Share an image with another AWS account
+    #
+    #   # The following example applies a resource policy to an image build version that grants another AWS account permission to
+    #   # view the image.
+    #
+    #   resp = client.put_image_policy({
+    #     image_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #     policy: "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Effect\": \"Allow\", \"Principal\": {\"AWS\": \"arn:aws:iam::444455556666:root\"}, \"Action\": [\"imagebuilder:GetImage\", \"imagebuilder:ListImages\"], \"Resource\": [\"arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1\"]}]}", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     image_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #     request_id: "7bbf7e76-0f08-430d-b77e-17c161725825", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5430,11 +8029,11 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Applies a policy to an image recipe. To share resources, call the RAM
-    # API [CreateResourceShare][1]. If you call this API, you must also call
-    # the RAM API [PromoteResourceShareCreatedFromPolicy][2] so that the
-    # resource is visible to all principals with whom the resource is
-    # shared.
+    # Applies a policy to an image recipe. The preferred way to share
+    # resources is with the RAM API [CreateResourceShare][1]. If you use the
+    # PutImageRecipePolicy operation instead, you must also call the RAM API
+    # [PromoteResourceShareCreatedFromPolicy][2]. Otherwise, the resource
+    # isn't visible to the principals that it's shared with.
     #
     #
     #
@@ -5452,6 +8051,23 @@ module Aws::Imagebuilder
     #
     #   * {Types::PutImageRecipePolicyResponse#request_id #request_id} => String
     #   * {Types::PutImageRecipePolicyResponse#image_recipe_arn #image_recipe_arn} => String
+    #
+    #
+    # @example Example: Share an image recipe with another account
+    #
+    #   # The following example applies a resource policy that grants another AWS account permission to view the specified image
+    #   # recipe.
+    #
+    #   resp = client.put_image_recipe_policy({
+    #     image_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.0.0", 
+    #     policy: "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Effect\": \"Allow\", \"Principal\": {\"AWS\": \"arn:aws:iam::444455556666:root\"}, \"Action\": [\"imagebuilder:GetImageRecipe\", \"imagebuilder:ListImageRecipes\"], \"Resource\": \"arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.0.0\"}]}", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     image_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.0.0", 
+    #     request_id: "3a27bb63-329e-40ab-88f2-c1638504bd35", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5474,17 +8090,22 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Retries an image distribution or test without rebuilding the image.
+    # Retries a failed or canceled image build without rebuilding the phases
+    # that already completed. The image re-runs asynchronously in place: the
+    # same build version returns to the test or distribution phase where it
+    # failed and continues from there. No new image build version is
+    # created. Retry is only supported for AMI-based images.
     #
     # @option params [required, String] :image_build_version_arn
-    #   The source image Amazon Resource Name (ARN) to retry.
+    #   The Amazon Resource Name (ARN) of the image build version that you
+    #   want to retry. The image must be in the `FAILED` or `CANCELLED` state.
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -5497,6 +8118,22 @@ module Aws::Imagebuilder
     #
     #   * {Types::RetryImageResponse#client_token #client_token} => String
     #   * {Types::RetryImageResponse#image_build_version_arn #image_build_version_arn} => String
+    #
+    #
+    # @example Example: Retry an image build
+    #
+    #   # The following example retries a cancelled image build, which resumes in place from the phase where it stopped.
+    #
+    #   resp = client.retry_image({
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLEfffff", 
+    #     image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLEfffff", 
+    #     image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5519,11 +8156,13 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Pauses or resumes image creation when the associated workflow runs a
-    # `WaitForAction` step.
+    # Sends an action to a workflow step that has paused at a
+    # `WaitForAction` step, so that image creation can continue. To find the
+    # steps that are waiting for an action, call ListWaitingWorkflowSteps.
     #
     # @option params [required, String] :step_execution_id
-    #   Uniquely identifies the workflow step that sent the step action.
+    #   Uniquely identifies the waiting workflow step that you send the action
+    #   to. To get this identifier, call ListWaitingWorkflowSteps.
     #
     # @option params [required, String] :image_build_version_arn
     #   The Amazon Resource Name (ARN) of the image build version associated
@@ -5532,9 +8171,12 @@ module Aws::Imagebuilder
     #   running the workflow, then the request fails with a validation error.
     #
     # @option params [required, String] :action
-    #   The action to perform on the paused workflow step. The workflow step
-    #   must be in a waiting state to accept an action. The request fails if
-    #   the step has already timed out or been actioned.
+    #   The action to perform on the paused workflow step. `RESUME` completes
+    #   the waiting step, and the workflow continues. `STOP` fails the step,
+    #   and the step's `onFailure` setting determines whether the workflow
+    #   continues or aborts. The workflow step must be in a waiting state to
+    #   accept an action. The request fails if the step has already timed out
+    #   or been actioned.
     #
     # @option params [String] :reason
     #   The reason for the action. This value is stored with the step
@@ -5543,10 +8185,10 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -5560,6 +8202,26 @@ module Aws::Imagebuilder
     #   * {Types::SendWorkflowStepActionResponse#step_execution_id #step_execution_id} => String
     #   * {Types::SendWorkflowStepActionResponse#image_build_version_arn #image_build_version_arn} => String
     #   * {Types::SendWorkflowStepActionResponse#client_token #client_token} => String
+    #
+    #
+    # @example Example: Stop a workflow step that is waiting for action
+    #
+    #   # The following example sends the STOP action to a workflow step that has paused the image build, identified by the step
+    #   # execution ID that ListWaitingWorkflowSteps returns.
+    #
+    #   resp = client.send_workflow_step_action({
+    #     action: "STOP", 
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE67890", 
+    #     image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-wait-recipe/1.0.0/1", 
+    #     step_execution_id: "step-8eb24d7a-036e-46b5-94a3-90a5d8b5ac4a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE67890", 
+    #     image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-wait-recipe/1.0.0/1", 
+    #     step_execution_id: "step-8eb24d7a-036e-46b5-94a3-90a5d8b5ac4a", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5586,7 +8248,11 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Manually triggers a pipeline to create an image.
+    # Manually triggers a pipeline to create an image. You can start a build
+    # this way whether the pipeline is enabled or disabled. The response
+    # returns as soon as Image Builder creates the new image resource and
+    # queues the build. Use the returned `imageBuildVersionArn` with
+    # GetImage to track build progress.
     #
     # @option params [required, String] :image_pipeline_arn
     #   The Amazon Resource Name (ARN) of the image pipeline that you want to
@@ -5594,10 +8260,10 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -5615,6 +8281,24 @@ module Aws::Imagebuilder
     #   * {Types::StartImagePipelineExecutionResponse#request_id #request_id} => String
     #   * {Types::StartImagePipelineExecutionResponse#client_token #client_token} => String
     #   * {Types::StartImagePipelineExecutionResponse#image_build_version_arn #image_build_version_arn} => String
+    #
+    #
+    # @example Example: Start a pipeline build manually
+    #
+    #   # The following example starts a build for the specified pipeline. The response returns the ARN of the new image build
+    #   # version.
+    #
+    #   resp = client.start_image_pipeline_execution({
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE66666", 
+    #     image_pipeline_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-pipeline/my-example-pipeline", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE66666", 
+    #     image_build_version_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #     request_id: "f477f64c-9ece-4478-977d-5821f8ed051b", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5641,8 +8325,15 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Begins an asynchronous resource state update for lifecycle changes to
-    # the specified image resources.
+    # Begins an ad-hoc state change for the specified image build version.
+    # This is a one-time operation - if you schedule the update, it runs
+    # only once. If the request includes underlying resources, or schedules
+    # the update far enough in the future, Image Builder runs the update as
+    # an asynchronous lifecycle execution and returns its identifier.
+    # Otherwise, for target states other than `DELETED`, the state change
+    # applies immediately. If a request that starts a lifecycle execution
+    # arrives while the image already has one in progress, Image Builder
+    # rejects it.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the image build version to update.
@@ -5656,34 +8347,41 @@ module Aws::Imagebuilder
     #   `DELETED`. For container-based images, only `DELETED` is supported.
     #
     # @option params [String] :execution_role
-    #   The name or Amazon Resource Name (ARN) of the IAM role that’s used to
-    #   update image state.
+    #   The name or Amazon Resource Name (ARN) of the IAM role that's used to
+    #   update image state. You must provide this property together with
+    #   `includeResources`. Neither is valid without the other.
     #
     # @option params [Types::ResourceStateUpdateIncludeResources] :include_resources
-    #   Specifies which image resources to include in the state update. When
-    #   specified, the lifecycle action applies to underlying resources. These
-    #   resources include AMIs, snapshots, and containers in addition to the
-    #   Image Builder image resource. Requires `executionRole` to also be
-    #   specified. To delete an image and its underlying resources, you must
-    #   specify `includeResources`. To delete only the Image Builder image
-    #   record without affecting underlying resources, use the `DeleteImage`
-    #   API instead.
+    #   Specifies which underlying resources to update, in addition to the
+    #   Image Builder image resource itself. Snapshots and containers are only
+    #   valid for the `DELETED` state. To set an image to `DELETED`, you must
+    #   include its underlying resources. To delete only the Image Builder
+    #   image record, use the DeleteImage operation instead.
     #
     # @option params [Types::ResourceStateUpdateExclusionRules] :exclusion_rules
-    #   Skip action on the image resource and associated resources if
-    #   specified exclusion rules are met.
+    #   Rules that Image Builder evaluates against each of the image's AMIs.
+    #   Matching AMIs and their snapshots are skipped. Exclusion rules only
+    #   take effect when the request includes AMIs. If the target state is
+    #   `DELETED` and any resource was skipped, the Image Builder image
+    #   resource itself is also retained. For the `DEPRECATED` and `DISABLED`
+    #   target states, Image Builder updates the image resource's state
+    #   regardless of exclusions.
     #
     # @option params [Time,DateTime,Date,Integer,String] :update_at
-    #   Specifies the timestamp when the state transition takes effect. Use
-    #   this parameter only when the target status is `DEPRECATED`. The value
-    #   must be a future time.
+    #   The timestamp that indicates when resources are updated by a lifecycle
+    #   action. This property is valid only when the target status is
+    #   `DEPRECATED`, and the value must be a future time. If you don't
+    #   specify a value, Image Builder begins the state update right away. For
+    #   a scheduled deprecation, included AMIs get their EC2 deprecation time
+    #   set immediately, and Image Builder schedules the image resource to
+    #   transition to `DEPRECATED` at that time.
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -5696,6 +8394,31 @@ module Aws::Imagebuilder
     #
     #   * {Types::StartResourceStateUpdateResponse#lifecycle_execution_id #lifecycle_execution_id} => String
     #   * {Types::StartResourceStateUpdateResponse#resource_arn #resource_arn} => String
+    #
+    #
+    # @example Example: Schedule an image build version for deprecation
+    #
+    #   # The following example schedules the specified image build version and its AMI to move to the DEPRECATED state at the
+    #   # requested future time. It returns the ID of the lifecycle execution that applies the update.
+    #
+    #   resp = client.start_resource_state_update({
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLE24680", 
+    #     execution_role: "arn:aws:iam::111122223333:role/my-example-state-update-role", 
+    #     include_resources: {
+    #       amis: true, 
+    #     }, 
+    #     resource_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #     state: {
+    #       status: "DEPRECATED", 
+    #     }, 
+    #     update_at: Time.parse("2026-09-11T21:20:00Z"), 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     lifecycle_execution_id: "lce-401aefc3-a829-46f6-8fc2-91497988a503", 
+    #     resource_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image/my-example-recipe/1.0.0/1", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5752,6 +8475,23 @@ module Aws::Imagebuilder
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Add tags to a component build version
+    #
+    #   # The following example adds two tags to a component build version.
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-tagged-component/1.0.0/1", 
+    #     tags: {
+    #       "CostCenter" => "12345", 
+    #       "Environment" => "Production", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.tag_resource({
@@ -5780,6 +8520,22 @@ module Aws::Imagebuilder
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Remove a tag from a resource
+    #
+    #   # The following example removes the CostCenter tag key from the specified component build version.
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "arn:aws:imagebuilder:us-west-2:111122223333:component/my-example-tagged-component/1.0.0/1", 
+    #     tag_keys: [
+    #       "CostCenter", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.untag_resource({
@@ -5797,7 +8553,14 @@ module Aws::Imagebuilder
     end
 
     # Updates a distribution configuration. Distribution configurations
-    # define and configure the outputs of your pipeline.
+    # define and configure the outputs for your images, including the target
+    # Regions, accounts, and settings for each Region.
+    #
+    # <note markdown="1"> This operation doesn't support selective updates. The request
+    # replaces the stored configuration, so include every setting that you
+    # want to keep.
+    #
+    #  </note>
     #
     # @option params [required, String] :distribution_configuration_arn
     #   The Amazon Resource Name (ARN) of the distribution configuration that
@@ -5807,14 +8570,17 @@ module Aws::Imagebuilder
     #   The description of the distribution configuration.
     #
     # @option params [required, Array<Types::Distribution>] :distributions
-    #   The distributions of the distribution configuration.
+    #   The distribution settings for the configuration. Each entry defines
+    #   how output images are distributed in one target Amazon Web Services
+    #   Region. A Region can appear at most once in the list. This list
+    #   replaces the configuration's existing distributions entirely.
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -5828,6 +8594,31 @@ module Aws::Imagebuilder
     #   * {Types::UpdateDistributionConfigurationResponse#request_id #request_id} => String
     #   * {Types::UpdateDistributionConfigurationResponse#client_token #client_token} => String
     #   * {Types::UpdateDistributionConfigurationResponse#distribution_configuration_arn #distribution_configuration_arn} => String
+    #
+    #
+    # @example Example: Update a distribution configuration
+    #
+    #   # The following example replaces the distribution settings for the specified configuration with a single distribution that
+    #   # names the output AMI with the build date.
+    #
+    #   resp = client.update_distribution_configuration({
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLEccccc", 
+    #     distribution_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:distribution-configuration/my-example-distribution", 
+    #     distributions: [
+    #       {
+    #         ami_distribution_configuration: {
+    #           name: "my-example-image-{{ imagebuilder:buildDate }}", 
+    #         }, 
+    #         region: "us-west-2", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     distribution_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:distribution-configuration/my-example-distribution", 
+    #     request_id: "97d5c3e8-93d6-424c-90e0-bab18b20bf54", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -5919,11 +8710,13 @@ module Aws::Imagebuilder
     # Updates an image pipeline. Use image pipelines to automate the
     # creation and distribution of images. You must specify exactly one
     # recipe for your image, using either a `containerRecipeArn` or an
-    # `imageRecipeArn`.
+    # `imageRecipeArn`. The recipe must be the same type, image or
+    # container, as the pipeline's current recipe.
     #
-    # <note markdown="1"> UpdateImagePipeline does not support selective updates for the
-    # pipeline. You must specify all of the required properties in the
-    # update request, not just the properties that have changed.
+    # <note markdown="1"> UpdateImagePipeline does not support selective updates. The request
+    # replaces the pipeline's entire configuration, so include every
+    # setting that you want to keep. Any optional property that you omit is
+    # removed or reset to its default.
     #
     #  </note>
     #
@@ -5936,23 +8729,28 @@ module Aws::Imagebuilder
     #
     # @option params [String] :image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe that configures
-    #   images updated by this image pipeline.
+    #   images created by this image pipeline. You must specify either this
+    #   property or `containerRecipeArn`, but not both.
     #
     # @option params [String] :container_recipe_arn
-    #   The Amazon Resource Name (ARN) of the container pipeline to update.
+    #   The Amazon Resource Name (ARN) of the container recipe that is used to
+    #   configure images created by this container pipeline. You must specify
+    #   either this property or `imageRecipeArn`, but not both.
     #
     # @option params [required, String] :infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration
-    #   that Image Builder uses to build images that this image pipeline has
-    #   updated.
+    #   that Image Builder uses to build images created by this image
+    #   pipeline.
     #
     # @option params [String] :distribution_configuration_arn
     #   The Amazon Resource Name (ARN) of the distribution configuration that
-    #   Image Builder uses to configure and distribute images that this image
-    #   pipeline has updated.
+    #   Image Builder uses to configure and distribute images created by this
+    #   image pipeline.
     #
     # @option params [Types::ImageTestsConfiguration] :image_tests_configuration
-    #   The image test configuration of the image pipeline.
+    #   Specifies the test settings that Image Builder applies to images that
+    #   this pipeline creates. If you don't provide test settings, Image
+    #   Builder stores a default configuration with image tests enabled.
     #
     # @option params [Boolean] :enhanced_image_metadata_enabled
     #   Specifies whether to collect additional information about the image
@@ -5960,17 +8758,22 @@ module Aws::Imagebuilder
     #   list. Defaults to `true`.
     #
     # @option params [Types::Schedule] :schedule
-    #   The schedule of the image pipeline.
+    #   The schedule of the image pipeline. Because the update replaces the
+    #   entire configuration, omitting this property removes any existing
+    #   schedule. The pipeline then runs only when you call
+    #   StartImagePipelineExecution.
     #
     # @option params [String] :status
-    #   The status of the image pipeline.
+    #   The status of the image pipeline. Defaults to `ENABLED` when omitted.
+    #   To keep a pipeline disabled, include this property set to `DISABLED`
+    #   in your update request.
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -5980,27 +8783,62 @@ module Aws::Imagebuilder
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [Types::ImageScanningConfiguration] :image_scanning_configuration
-    #   Contains settings for vulnerability scans.
+    #   Contains settings for vulnerability scans that Amazon Inspector runs
+    #   against the test instance during image creation.
     #
     # @option params [Array<Types::WorkflowConfiguration>] :workflows
-    #   Contains the workflows to run for the pipeline.
+    #   The array of workflow configuration objects for builds that this
+    #   pipeline starts. You must also specify `executionRole` when you
+    #   provide workflows.
     #
     # @option params [Types::PipelineLoggingConfiguration] :logging_configuration
-    #   Update logging configuration for the output image that's created when
-    #   the pipeline runs.
+    #   Specifies the logging configuration for the image pipeline. Use this
+    #   to define custom CloudWatch Logs log groups for your pipeline
+    #   execution logs and image build logs. The service manages log groups
+    #   with names starting with `/aws/imagebuilder/` using the service-linked
+    #   role. For custom log group names outside of this prefix, you must also
+    #   provide an `executionRole`.
     #
     # @option params [String] :execution_role
     #   The name or Amazon Resource Name (ARN) for the IAM role you create
-    #   that grants Image Builder access to perform workflow actions.
+    #   that grants Image Builder access to perform workflow actions. If you
+    #   omit this property, the pipeline reverts to the Image Builder
+    #   service-linked role.
     #
     # @option params [Hash<String,String>] :image_tags
-    #   The tags to be applied to the images produced by this pipeline.
+    #   The tags that Image Builder applies to the Image Builder image
+    #   resource that this pipeline's scheduled executions create. These tags
+    #   don't apply to the output AMI. To tag output AMIs, use `amiTags` in
+    #   the pipeline's distribution configuration.
     #
     # @return [Types::UpdateImagePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateImagePipelineResponse#request_id #request_id} => String
     #   * {Types::UpdateImagePipelineResponse#client_token #client_token} => String
     #   * {Types::UpdateImagePipelineResponse#image_pipeline_arn #image_pipeline_arn} => String
+    #
+    #
+    # @example Example: Update an image pipeline
+    #
+    #   # The following example changes the pipeline's schedule to build every day at 6:00 AM UTC.
+    #
+    #   resp = client.update_image_pipeline({
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLEddddd", 
+    #     image_pipeline_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-pipeline/my-example-pipeline", 
+    #     image_recipe_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-recipe/my-example-recipe/1.0.0", 
+    #     infrastructure_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:infrastructure-configuration/my-example-infrastructure", 
+    #     schedule: {
+    #       pipeline_execution_start_condition: "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE", 
+    #       schedule_expression: "cron(0 6 * * ? *)", 
+    #     }, 
+    #     status: "ENABLED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     image_pipeline_arn: "arn:aws:imagebuilder:us-west-2:111122223333:image-pipeline/my-example-pipeline", 
+    #     request_id: "7a414b2d-e462-4850-ae7a-fe25a1223e0f", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -6075,6 +8913,12 @@ module Aws::Imagebuilder
     # configuration defines the environment in which Image Builder builds
     # and tests your image.
     #
+    # <note markdown="1"> This operation doesn't support selective updates. The request
+    # replaces the configuration, so include every setting that you want to
+    # keep. Omitted optional properties are cleared.
+    #
+    #  </note>
+    #
     # @option params [required, String] :infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration
     #   that you want to update.
@@ -6085,22 +8929,29 @@ module Aws::Imagebuilder
     # @option params [Array<String>] :instance_types
     #   The instance types of the infrastructure configuration. You can
     #   specify one or more instance types to use for this build. Image
-    #   Builder picks one of these instance types based on availability.
+    #   Builder picks one of these instance types based on availability. If
+    #   you don't specify instance types, Image Builder selects compatible
+    #   instance types automatically. If you specify a Dedicated Host, Image
+    #   Builder uses only instance types that the host supports.
     #
     # @option params [required, String] :instance_profile_name
     #   The instance profile to associate with the instance used to customize
-    #   your Amazon EC2 AMI.
+    #   your Amazon EC2 AMI. The instance profile must exist in your account.
     #
     # @option params [Array<String>] :security_group_ids
     #   The security group IDs to associate with the instance used to
     #   customize your Amazon EC2 AMI.
     #
     # @option params [String] :subnet_id
-    #   The subnet ID to place the instance used to customize your Amazon EC2
-    #   AMI in.
+    #   The subnet ID in which to place the instance used to customize your
+    #   Amazon EC2 AMI. If you specify `subnetId`, you must also specify one
+    #   or more security group IDs in `securityGroupIds`. Otherwise, the
+    #   request fails.
     #
     # @option params [Types::Logging] :logging
-    #   The logging configuration of the infrastructure configuration.
+    #   The logging configuration of the infrastructure configuration. When
+    #   you configure S3 logs, Image Builder writes logs from the build and
+    #   test process to the specified bucket under the key prefix.
     #
     # @option params [String] :key_pair
     #   The key pair of the infrastructure configuration. You can use this to
@@ -6114,23 +8965,31 @@ module Aws::Imagebuilder
     #
     # @option params [String] :sns_topic_arn
     #   The Amazon Resource Name (ARN) of the SNS topic to which Image Builder
-    #   sends image build event notifications.
+    #   sends image build event notifications. Specify a standard topic. Image
+    #   Builder doesn't support FIFO topics. Image Builder validates the
+    #   topic when you create or update the configuration. You must have
+    #   permission to publish to the topic.
     #
-    #   <note markdown="1"> EC2 Image Builder is unable to send notifications to SNS topics that
-    #   are encrypted using keys from other accounts. The key that is used to
-    #   encrypt the SNS topic must reside in the account that the Image
-    #   Builder service runs under.
+    #   <note markdown="1"> EC2 Image Builder can't send notifications to SNS topics that are
+    #   encrypted using keys from other accounts. If your SNS topic is
+    #   encrypted, the key must be owned by the same account that owns your
+    #   Image Builder resources.
     #
     #    </note>
     #
     # @option params [Hash<String,String>] :resource_tags
-    #   The tags attached to the resource created by Image Builder.
+    #   The metadata tags to assign to the Amazon EC2 instance that Image
+    #   Builder launches during the build process. Tags are formatted as key
+    #   value pairs. Tag keys can't begin with `aws:` or match one of the
+    #   following reserved keys: `CreatedBy`, `Ec2ImageBuilderArn`, `Name`, or
+    #   `Tags`.
     #
     # @option params [Types::InstanceMetadataOptions] :instance_metadata_options
-    #   The instance metadata options that you can set for the HTTP requests
-    #   that pipeline builds use to launch EC2 build and test instances. For
-    #   more information about instance metadata options, see one of the
-    #   following links:
+    #   The instance metadata service (IMDS) settings that Image Builder
+    #   applies to the EC2 build and test instances it launches during image
+    #   creation. If you don't set these options, the EC2 launch defaults for
+    #   the instance apply. For more information about instance metadata
+    #   options, see one of the following links:
     #
     #   * [Configure the instance metadata options][1] in the <i> <i>Amazon
     #     EC2 User Guide</i> </i> for Linux instances.
@@ -6144,15 +9003,17 @@ module Aws::Imagebuilder
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html
     #
     # @option params [Types::Placement] :placement
-    #   The instance placement settings that define where the instances that
-    #   are launched from your image run.
+    #   The instance placement settings that define where the build and test
+    #   instances that Image Builder launches during image creation run. These
+    #   settings don't affect instances that you launch from the output
+    #   image.
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -6166,6 +9027,30 @@ module Aws::Imagebuilder
     #   * {Types::UpdateInfrastructureConfigurationResponse#request_id #request_id} => String
     #   * {Types::UpdateInfrastructureConfigurationResponse#client_token #client_token} => String
     #   * {Types::UpdateInfrastructureConfigurationResponse#infrastructure_configuration_arn #infrastructure_configuration_arn} => String
+    #
+    #
+    # @example Example: Update an infrastructure configuration
+    #
+    #   # The following example updates an infrastructure configuration to use larger instance types and to keep the build
+    #   # instance running when the image build fails.
+    #
+    #   resp = client.update_infrastructure_configuration({
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLEbbbbb", 
+    #     description: "An infrastructure configuration for Amazon Linux builds", 
+    #     infrastructure_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:infrastructure-configuration/my-example-infrastructure", 
+    #     instance_profile_name: "EC2InstanceProfileForImageBuilder", 
+    #     instance_types: [
+    #       "t3.large", 
+    #       "t3.xlarge", 
+    #     ], 
+    #     terminate_instance_on_failure: false, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     infrastructure_configuration_arn: "arn:aws:imagebuilder:us-west-2:111122223333:infrastructure-configuration/my-example-infrastructure", 
+    #     request_id: "ffe990d5-7720-4061-a8d6-da6a7c4a6a3e", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -6216,36 +9101,47 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Updates the specified lifecycle policy.
+    # Updates the specified lifecycle policy. The request replaces the
+    # existing policy configuration rather than merging changes, so
+    # re-specify every setting that you want to keep. The `resourceType`
+    # must match the existing policy's value.
     #
     # @option params [required, String] :lifecycle_policy_arn
     #   The Amazon Resource Name (ARN) of the lifecycle policy resource.
     #
     # @option params [String] :description
-    #   Optional description for the lifecycle policy.
+    #   Optional description for the lifecycle policy. Because the update
+    #   replaces the entire configuration, omitting this property removes any
+    #   existing description.
     #
     # @option params [String] :status
-    #   Indicates whether the lifecycle policy resource is enabled.
+    #   Indicates whether the lifecycle policy resource is enabled. Defaults
+    #   to `ENABLED` when omitted, so updating a disabled policy without
+    #   setting this property re-enables it.
     #
     # @option params [required, String] :execution_role
-    #   The name or Amazon Resource Name (ARN) of the IAM role that Image
-    #   Builder uses to update the lifecycle policy.
+    #   The name or Amazon Resource Name (ARN) for the IAM role you create
+    #   that grants Image Builder access to run lifecycle actions.
     #
     # @option params [required, String] :resource_type
-    #   The type of image resource that the lifecycle policy applies to.
+    #   The type of image resource that the lifecycle policy applies to. The
+    #   value must match the policy's existing resource type. You can't
+    #   change the resource type of an existing lifecycle policy.
     #
     # @option params [required, Array<Types::LifecyclePolicyDetail>] :policy_details
     #   The configuration details for a lifecycle policy resource.
     #
     # @option params [required, Types::LifecyclePolicyResourceSelection] :resource_selection
     #   Selection criteria for resources that the lifecycle policy applies to.
+    #   You must specify exactly one selection criteria: either recipes or a
+    #   tag map, not both.
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier you provide to ensure that the
-    #   operation completes no more than one time. If this token matches a
-    #   previous request, the service ignores the request, but does not return
-    #   an error. For more information, see [Ensuring idempotency][1] in the
-    #   *Amazon EC2 API Reference*.
+    #   operation runs no more than one time. If you retry a request with the
+    #   same client token, Image Builder returns the original response without
+    #   running the operation again. For more information, see [Ensuring
+    #   idempotency][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -6257,6 +9153,48 @@ module Aws::Imagebuilder
     # @return [Types::UpdateLifecyclePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateLifecyclePolicyResponse#lifecycle_policy_arn #lifecycle_policy_arn} => String
+    #
+    #
+    # @example Example: Update a lifecycle policy
+    #
+    #   # The following example updates a lifecycle policy to delete AMI images and their associated snapshots after 12 months,
+    #   # retaining the 3 most recent images.
+    #
+    #   resp = client.update_lifecycle_policy({
+    #     client_token: "a1b2c3d4-5678-90ab-cdef-EXAMPLEaaaaa", 
+    #     description: "Deletes AMI images and their snapshots after 12 months, retaining the 3 most recent", 
+    #     execution_role: "arn:aws:iam::111122223333:role/my-example-lifecycle-role", 
+    #     lifecycle_policy_arn: "arn:aws:imagebuilder:us-west-2:111122223333:lifecycle-policy/my-example-policy", 
+    #     policy_details: [
+    #       {
+    #         action: {
+    #           type: "DELETE", 
+    #           include_resources: {
+    #             amis: true, 
+    #             snapshots: true, 
+    #           }, 
+    #         }, 
+    #         filter: {
+    #           type: "AGE", 
+    #           value: 12, 
+    #           retain_at_least: 3, 
+    #           unit: "MONTHS", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     resource_selection: {
+    #       tag_map: {
+    #         "environment" => "production", 
+    #       }, 
+    #     }, 
+    #     resource_type: "AMI_IMAGE", 
+    #     status: "ENABLED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     lifecycle_policy_arn: "arn:aws:imagebuilder:us-west-2:111122223333:lifecycle-policy/my-example-policy", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -6346,7 +9284,7 @@ module Aws::Imagebuilder
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.112.0'
+      context[:gem_version] = '1.113.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

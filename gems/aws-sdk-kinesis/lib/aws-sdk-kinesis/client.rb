@@ -592,14 +592,13 @@ module Aws::Kinesis
     #
     # @option params [Types::S3DestinationConfiguration] :s3_destination_configuration
     #   The configuration for delivery to a general purpose Amazon S3 bucket.
-    #   You must specify either `S3DestinationConfiguration` or
-    #   `S3TablesDestinationConfiguration`, but not both.
+    #   Specify this parameter when `S3TablesDestinationConfiguration` is not
+    #   specified.
     #
     # @option params [Types::S3TablesDestinationConfiguration] :s3_tables_destination_configuration
     #   The configuration for delivery to streaming tables on Apache Iceberg
-    #   in Amazon S3 Tables. You must specify either
-    #   `S3DestinationConfiguration` or `S3TablesDestinationConfiguration`,
-    #   but not both.
+    #   in Amazon S3 Tables. Specify this parameter when
+    #   `S3DestinationConfiguration` is not specified.
     #
     # @option params [Types::ChannelEncryptionConfiguration] :encryption_configuration
     #   The server-side encryption configuration that uses an Amazon Web
@@ -1029,6 +1028,24 @@ module Aws::Kinesis
     #   The maximum record size of a single record in kibibyte (KiB) that you
     #   can write to, and read from a stream.
     #
+    # @option params [String] :record_distribution_strategy
+    #   The record distribution strategy for the stream, which determines how
+    #   Amazon Kinesis Data Streams distributes records across shards. Specify
+    #   one of the following values:
+    #
+    #   * `AUTO` – Amazon Kinesis Data Streams distributes records evenly
+    #     across shards and ignores any partition key and `ExplicitHashKey`
+    #     that producers supply. Use this value for stateless workloads that
+    #     do not require partition-key ordering.
+    #
+    #   * `USER_PARTITION_KEY` – Producers must supply a partition key, which
+    #     Amazon Kinesis Data Streams uses to determine shard placement. This
+    #     is the default.
+    #
+    #   The record distribution strategy is only supported for streams that
+    #   use the on-demand capacity mode. If you do not specify this parameter,
+    #   the stream uses `USER_PARTITION_KEY`.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1044,6 +1061,7 @@ module Aws::Kinesis
     #     },
     #     warm_throughput_mi_bps: 1,
     #     max_record_size_in_ki_b: 1,
+    #     record_distribution_strategy: "AUTO", # accepts AUTO, USER_PARTITION_KEY
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateStream AWS API Documentation
@@ -1106,9 +1124,9 @@ module Aws::Kinesis
     # the source stream to the destination. Data already delivered to the
     # destination is not deleted.
     #
-    # A stream cannot be deleted while it has active channels. To delete the
-    # stream, first delete all channels attached to it. To find them, use
-    # ListChannels with a stream filter.
+    # A stream cannot be deleted while it has active channels. Use
+    # ListChannels with a stream filter to find the channels attached to a
+    # stream before deleting it.
     #
     # This operation has a call limit of 5 transactions per second (TPS) for
     # each Amazon Web Services account. Exceeding 5 TPS results in a
@@ -1727,6 +1745,7 @@ module Aws::Kinesis
     #   resp.stream_description_summary.warm_throughput.current_mi_bps #=> Integer
     #   resp.stream_description_summary.max_record_size_in_ki_b #=> Integer
     #   resp.stream_description_summary.channel_count #=> Integer
+    #   resp.stream_description_summary.record_distribution_strategy #=> String, one of "AUTO", "USER_PARTITION_KEY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamSummary AWS API Documentation
     #
@@ -2294,8 +2313,7 @@ module Aws::Kinesis
     #
     # @option params [String] :next_token
     #   The pagination token returned by a previous call. Specify this token
-    #   to retrieve the next page of results. This value is `null` when there
-    #   are no more results to return.
+    #   to retrieve the next page of results.
     #
     # @return [Types::ListChannelsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2983,7 +3001,7 @@ module Aws::Kinesis
     #   base64-encoding) is added to the partition key size, the total size
     #   must not exceed the maximum record size (10 MiB).
     #
-    # @option params [required, String] :partition_key
+    # @option params [String] :partition_key
     #   Determines which shard in the stream the data record is assigned to.
     #   Partition keys are Unicode strings with a maximum length limit of 256
     #   characters for each key. Amazon Kinesis Data Streams uses the
@@ -2993,6 +3011,15 @@ module Aws::Kinesis
     #   to map associated data records to shards. As a result of this hashing
     #   mechanism, all data records with the same partition key map to the
     #   same shard within the stream.
+    #
+    #   If the stream uses the `USER_PARTITION_KEY` record distribution
+    #   strategy (the default), a partition key is required. If the stream
+    #   uses the `AUTO` record distribution strategy, the partition key is
+    #   optional and any value you provide is ignored, along with any
+    #   `ExplicitHashKey` you provide. In that case, Amazon Kinesis Data
+    #   Streams distributes the record across shards using service-managed
+    #   algorithms. For more information, see
+    #   `UpdateStreamRecordDistributionStrategy`.
     #
     # @option params [String] :explicit_hash_key
     #   The hash value used to explicitly determine the shard the data record
@@ -3027,7 +3054,7 @@ module Aws::Kinesis
     #   resp = client.put_record({
     #     stream_name: "StreamName",
     #     data: "data", # required
-    #     partition_key: "PartitionKey", # required
+    #     partition_key: "PartitionKey",
     #     explicit_hash_key: "HashKey",
     #     sequence_number_for_ordering: "SequenceNumber",
     #     stream_arn: "StreamARN",
@@ -3166,7 +3193,7 @@ module Aws::Kinesis
     #       {
     #         data: "data", # required
     #         explicit_hash_key: "HashKey",
-    #         partition_key: "PartitionKey", # required
+    #         partition_key: "PartitionKey",
     #       },
     #     ],
     #     stream_name: "StreamName",
@@ -3796,11 +3823,14 @@ module Aws::Kinesis
     #
     # @option params [Types::S3DestinationUpdateInput] :s3_destination_configuration
     #   The updated configuration for a general purpose Amazon S3 destination.
-    #   Only `DataFreshnessInSeconds` can be updated.
+    #   Specify this parameter when the channel delivers to a general purpose
+    #   Amazon S3 bucket. Only `DataFreshnessInSeconds` can be updated.
     #
     # @option params [Types::S3TablesDestinationUpdateInput] :s3_tables_destination_configuration
-    #   The updated configuration for a streaming table destination. Only
-    #   `DataFreshnessInSeconds` can be updated.
+    #   The updated configuration for a streaming table destination. Specify
+    #   this parameter when the channel delivers to streaming tables on Apache
+    #   Iceberg in Amazon S3 Tables. Only `DataFreshnessInSeconds` can be
+    #   updated.
     #
     # @option params [Types::ChannelLoggingUpdateInput] :logging_configuration
     #   The updated Amazon CloudWatch Logs configuration for the channel.
@@ -4149,6 +4179,78 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
+    # Updates the record distribution strategy for the specified Amazon
+    # Kinesis Data Streams on-demand data stream. The record distribution
+    # strategy determines how Amazon Kinesis Data Streams distributes
+    # records across the shards in a stream.
+    #
+    # <note markdown="1"> You must specify the stream using the `StreamARN` parameter.
+    #
+    #  </note>
+    #
+    # The record distribution strategy is a stream-level setting. You can
+    # switch between the following strategies at any time, and the change
+    # takes effect immediately without downtime, data loss, or disruption to
+    # producer or consumer applications:
+    #
+    # * `AUTO` – Amazon Kinesis Data Streams distributes records evenly
+    #   across shards using service-managed algorithms, and ignores any
+    #   partition key and `ExplicitHashKey` that a producer provides. Use
+    #   this strategy for stateless workloads that do not require
+    #   partition-key ordering.
+    #
+    # * `USER_PARTITION_KEY` – Producers must provide a partition key, and
+    #   Amazon Kinesis Data Streams uses the partition key to determine
+    #   shard placement. Records that share a partition key are sent to the
+    #   same shard. This is the default strategy.
+    #
+    # This operation is only supported for data streams that use the
+    # on-demand capacity mode. Provisioned capacity mode streams do not
+    # support the record distribution strategy setting. Attempting to set
+    # `AUTO` on a provisioned stream results in an
+    # `InvalidArgumentException`.
+    #
+    # New records that arrive after the change are distributed according to
+    # the new strategy. Records already in the stream keep their original
+    # shard assignments and are not redistributed.
+    #
+    # @option params [required, String] :stream_arn
+    #   The Amazon Resource Name (ARN) of the stream to update.
+    #
+    # @option params [String] :stream_id
+    #   Not Implemented. Reserved for future use.
+    #
+    # @option params [required, String] :record_distribution_strategy
+    #   The record distribution strategy to apply to the stream. Specify one
+    #   of the following values:
+    #
+    #   * `AUTO` – Amazon Kinesis Data Streams distributes records evenly
+    #     across shards and ignores any partition key and `ExplicitHashKey`
+    #     that producers supply.
+    #
+    #   * `USER_PARTITION_KEY` – Producers must supply a partition key, which
+    #     Amazon Kinesis Data Streams uses to determine shard placement. This
+    #     is the default.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_stream_record_distribution_strategy({
+    #     stream_arn: "StreamARN", # required
+    #     stream_id: "StreamId",
+    #     record_distribution_strategy: "AUTO", # required, accepts AUTO, USER_PARTITION_KEY
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateStreamRecordDistributionStrategy AWS API Documentation
+    #
+    # @overload update_stream_record_distribution_strategy(params = {})
+    # @param [Hash] params ({})
+    def update_stream_record_distribution_strategy(params = {}, options = {})
+      req = build_request(:update_stream_record_distribution_strategy, params)
+      req.send_request(options)
+    end
+
     # Updates the warm throughput configuration for the specified Amazon
     # Kinesis Data Streams on-demand data stream. Updates the warm
     # throughput configuration for the specified on-demand data stream. Use
@@ -4260,7 +4362,7 @@ module Aws::Kinesis
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

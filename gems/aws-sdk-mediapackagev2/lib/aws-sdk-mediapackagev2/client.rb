@@ -1984,6 +1984,10 @@ module Aws::MediaPackageV2
     #           role_arn: "SpekeKeyProviderRoleArnString", # required
     #           url: "SpekeKeyProviderUrlString", # required
     #           certificate_arn: "SpekeKeyProviderCertificateArnString",
+    #           speke_version: "V2_0", # accepts V2_0, V2_1
+    #           content_key_period_configuration: {
+    #             content_key_period_timing: "INDEX_ONLY", # accepts INDEX_ONLY, START_END_ONLY, INDEX_WITH_START_END
+    #           },
     #         },
     #       },
     #       output_timestamp_mode: "PASSTHROUGH", # accepts PASSTHROUGH, REBASED_TO_CHANNEL_START
@@ -2167,6 +2171,8 @@ module Aws::MediaPackageV2
     #   resp.segment.encryption.speke_key_provider.role_arn #=> String
     #   resp.segment.encryption.speke_key_provider.url #=> String
     #   resp.segment.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.segment.encryption.speke_key_provider.speke_version #=> String, one of "V2_0", "V2_1"
+    #   resp.segment.encryption.speke_key_provider.content_key_period_configuration.content_key_period_timing #=> String, one of "INDEX_ONLY", "START_END_ONLY", "INDEX_WITH_START_END"
     #   resp.segment.output_timestamp_mode #=> String, one of "PASSTHROUGH", "REBASED_TO_CHANNEL_START"
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
@@ -3177,6 +3183,8 @@ module Aws::MediaPackageV2
     #   resp.segment.encryption.speke_key_provider.role_arn #=> String
     #   resp.segment.encryption.speke_key_provider.url #=> String
     #   resp.segment.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.segment.encryption.speke_key_provider.speke_version #=> String, one of "V2_0", "V2_1"
+    #   resp.segment.encryption.speke_key_provider.content_key_period_configuration.content_key_period_timing #=> String, one of "INDEX_ONLY", "START_END_ONLY", "INDEX_WITH_START_END"
     #   resp.segment.output_timestamp_mode #=> String, one of "PASSTHROUGH", "REBASED_TO_CHANNEL_START"
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
@@ -5230,6 +5238,10 @@ module Aws::MediaPackageV2
     #           role_arn: "SpekeKeyProviderRoleArnString", # required
     #           url: "SpekeKeyProviderUrlString", # required
     #           certificate_arn: "SpekeKeyProviderCertificateArnString",
+    #           speke_version: "V2_0", # accepts V2_0, V2_1
+    #           content_key_period_configuration: {
+    #             content_key_period_timing: "INDEX_ONLY", # accepts INDEX_ONLY, START_END_ONLY, INDEX_WITH_START_END
+    #           },
     #         },
     #       },
     #       output_timestamp_mode: "PASSTHROUGH", # accepts PASSTHROUGH, REBASED_TO_CHANNEL_START
@@ -5410,6 +5422,8 @@ module Aws::MediaPackageV2
     #   resp.segment.encryption.speke_key_provider.role_arn #=> String
     #   resp.segment.encryption.speke_key_provider.url #=> String
     #   resp.segment.encryption.speke_key_provider.certificate_arn #=> String
+    #   resp.segment.encryption.speke_key_provider.speke_version #=> String, one of "V2_0", "V2_1"
+    #   resp.segment.encryption.speke_key_provider.content_key_period_configuration.content_key_period_timing #=> String, one of "INDEX_ONLY", "START_END_ONLY", "INDEX_WITH_START_END"
     #   resp.segment.output_timestamp_mode #=> String, one of "PASSTHROUGH", "REBASED_TO_CHANNEL_START"
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
@@ -5541,7 +5555,7 @@ module Aws::MediaPackageV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

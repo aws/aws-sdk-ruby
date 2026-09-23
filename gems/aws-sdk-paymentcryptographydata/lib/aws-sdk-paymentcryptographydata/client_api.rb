@@ -635,9 +635,11 @@ module Aws::PaymentCryptographyData
     ReEncryptDataOutput.struct_class = Types::ReEncryptDataOutput
 
     ReEncryptionAttributes.add_member(:symmetric, Shapes::ShapeRef.new(shape: SymmetricEncryptionAttributes, location_name: "Symmetric"))
+    ReEncryptionAttributes.add_member(:asymmetric, Shapes::ShapeRef.new(shape: AsymmetricEncryptionAttributes, location_name: "Asymmetric"))
     ReEncryptionAttributes.add_member(:dukpt, Shapes::ShapeRef.new(shape: DukptEncryptionAttributes, location_name: "Dukpt"))
     ReEncryptionAttributes.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ReEncryptionAttributes.add_member_subclass(:symmetric, Types::ReEncryptionAttributes::Symmetric)
+    ReEncryptionAttributes.add_member_subclass(:asymmetric, Types::ReEncryptionAttributes::Asymmetric)
     ReEncryptionAttributes.add_member_subclass(:dukpt, Types::ReEncryptionAttributes::Dukpt)
     ReEncryptionAttributes.add_member_subclass(:unknown, Types::ReEncryptionAttributes::Unknown)
     ReEncryptionAttributes.struct_class = Types::ReEncryptionAttributes

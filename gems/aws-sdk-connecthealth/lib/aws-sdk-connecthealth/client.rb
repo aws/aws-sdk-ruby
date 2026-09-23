@@ -782,7 +782,7 @@ module Aws::ConnectHealth
     #   resp.medical_scribe_listening_session_details.session_id #=> String
     #   resp.medical_scribe_listening_session_details.domain_id #=> String
     #   resp.medical_scribe_listening_session_details.subscription_id #=> String
-    #   resp.medical_scribe_listening_session_details.language_code #=> String, one of "en-US"
+    #   resp.medical_scribe_listening_session_details.language_code #=> String, one of "en-US", "multi"
     #   resp.medical_scribe_listening_session_details.media_sample_rate_hertz #=> Integer
     #   resp.medical_scribe_listening_session_details.media_encoding #=> String, one of "pcm", "flac"
     #   resp.medical_scribe_listening_session_details.channel_definitions #=> Array
@@ -1189,7 +1189,7 @@ module Aws::ConnectHealth
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connecthealth'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
