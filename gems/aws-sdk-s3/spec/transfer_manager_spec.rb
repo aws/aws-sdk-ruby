@@ -318,6 +318,131 @@ module Aws
           expect(executor).to have_received(:shutdown)
         end
       end
+
+      describe ':thread_count' do
+        let(:custom_executor) { DefaultExecutor.new(max_threads: 3) }
+        let(:temp_dir) { Dir.mktmpdir }
+        let(:destination) { Tempfile.new('destination').path }
+        let(:small_file) { Tempfile.new('small-file').tap { |f| f.write('.' * 100) && f.rewind } }
+        let(:ten_mb_file) do
+          Tempfile.new('ten-meg-file').tap do |f|
+            10.times { f.write(one_mb_content) }
+            f.rewind
+          end
+        end
+        let(:seventeen_mb) { one_mb_content * 17 }
+
+        # Records the :max_threads of every executor the SDK builds internally. The directory
+        # methods also build a queue executor with max_threads: 2, so assertions check for the
+        # requested value rather than the size of the list.
+        let(:max_threads) do
+          [].tap do |seen|
+            allow(DefaultExecutor).to receive(:new).and_wrap_original do |orig, *args, **kwargs|
+              seen << kwargs[:max_threads]
+              orig.call(*args, **kwargs)
+            end
+          end
+        end
+
+        before do
+          max_threads
+          client.stub_responses(:head_object, content_length: one_mb_size, parts_count: nil)
+          client.stub_responses(:get_object, { body: 'hello-world' })
+          client.stub_responses(
+            :list_objects_v2,
+            { contents: [{ key: 'file1.txt', size: 100 }], is_truncated: false }
+          )
+          TransferManagerSpecHelper.create_test_directory_structure(temp_dir)
+        end
+
+        after do
+          FileUtils.rm_rf(temp_dir)
+          custom_executor.shutdown
+        end
+
+        context 'when no executor was provided to the TransferManager' do
+          it 'is used for #upload_file' do
+            subject.upload_file(small_file, bucket: 'bucket', key: 'key', thread_count: 4)
+            expect(max_threads).to include(4)
+          end
+
+          it 'is used for #download_file' do
+            subject.download_file(destination, bucket: 'bucket', key: 'key', thread_count: 4)
+            expect(max_threads).to include(4)
+          end
+
+          it 'is used for #upload_stream' do
+            subject.upload_stream(bucket: 'bucket', key: 'key', thread_count: 4) do |stream|
+              stream << seventeen_mb
+            end
+            expect(max_threads).to include(4)
+          end
+
+          it 'is used for #upload_directory' do
+            subject.upload_directory(temp_dir, bucket: 'bucket', thread_count: 4)
+            expect(max_threads).to include(4)
+          end
+
+          it 'is used for #download_directory' do
+            subject.download_directory(Dir.mktmpdir, bucket: 'bucket', thread_count: 4)
+            expect(max_threads).to include(4)
+          end
+        end
+
+        context 'when an executor was provided to the TransferManager' do
+          let(:subject) { TransferManager.new(client: client, executor: custom_executor) }
+
+          it 'is ignored by #upload_file' do
+            expect do
+              subject.upload_file(small_file, bucket: 'bucket', key: 'key', thread_count: 4)
+            end.not_to raise_error
+            expect(max_threads).not_to include(4)
+          end
+
+          it 'is ignored by #download_file' do
+            expect do
+              subject.download_file(destination, bucket: 'bucket', key: 'key', thread_count: 4)
+            end.not_to raise_error
+            expect(max_threads).not_to include(4)
+          end
+
+          it 'is ignored by #upload_stream' do
+            expect do
+              subject.upload_stream(bucket: 'bucket', key: 'key', thread_count: 4) do |stream|
+                stream << seventeen_mb
+              end
+            end.not_to raise_error
+            expect(max_threads).not_to include(4)
+          end
+
+          it 'is ignored by #upload_directory' do
+            expect do
+              subject.upload_directory(temp_dir, bucket: 'bucket', thread_count: 4)
+            end.not_to raise_error
+            expect(max_threads).not_to include(4)
+          end
+
+          it 'is ignored by #download_directory' do
+            expect do
+              subject.download_directory(Dir.mktmpdir, bucket: 'bucket', thread_count: 4)
+            end.not_to raise_error
+            expect(max_threads).not_to include(4)
+          end
+
+          # Regression: the option used to leak into the unfiltered #put_object call on the
+          # single-part path, so an identical call raised or not depending on the file size.
+          it 'does not leak into the request params on the single-part upload path' do
+            expect(client).to receive(:put_object).with(hash_excluding(:thread_count)).and_call_original
+            subject.upload_file(small_file, bucket: 'bucket', key: 'key', thread_count: 4)
+          end
+
+          it 'does not leak into the request params on the multipart upload path' do
+            expect do
+              subject.upload_file(ten_mb_file, bucket: 'bucket', key: 'key', thread_count: 4)
+            end.not_to raise_error
+          end
+        end
+      end
     end
   end
 end
