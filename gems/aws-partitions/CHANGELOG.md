@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1290.0 (2026-09-24)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::EventBridgeV2`.
+
 1.1289.0 (2026-09-23)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2026-09-24)
+------------------
+
+* Feature - Amazon DataZone now supports the TOOLING blueprint category on CreateEnvironmentBlueprint, UpdateEnvironmentBlueprint, GetEnvironmentBlueprint, and ListEnvironmentBlueprints, for custom tooling blueprints. CreateConnection now accepts roleArn in iamProperties.
+
 1.91.0 (2026-09-18)
 ------------------
 

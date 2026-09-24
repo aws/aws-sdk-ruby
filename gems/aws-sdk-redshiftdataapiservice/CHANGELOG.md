@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2026-09-24)
+------------------
+
+* Feature - Updates to the ListDatabases and WorkgroupName validation
+
 1.80.0 (2026-09-11)
 ------------------
 

@@ -481,6 +481,8 @@ module Aws::SecurityAgent
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor validation_mode: ("DISABLED" | "SIMULATED")
       attr_accessor max_task_hours: ::Float
+      attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_filters: Types::ReportFilters
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -502,6 +504,7 @@ module Aws::SecurityAgent
       attr_accessor integrated_repositories: ::Array[Types::IntegratedRepository]
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor max_task_hours: ::Float
+      attr_accessor report_destination: Types::ReportDestination
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -646,6 +649,8 @@ module Aws::SecurityAgent
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor validation_mode: ("DISABLED" | "SIMULATED")
       attr_accessor max_task_hours: ::Float
+      attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_filters: Types::ReportFilters
       SENSITIVE: []
     end
 
@@ -661,6 +666,8 @@ module Aws::SecurityAgent
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor validation_mode: ("DISABLED" | "SIMULATED")
       attr_accessor max_task_hours: ::Float
+      attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_filters: Types::ReportFilters
       SENSITIVE: []
     end
 
@@ -703,6 +710,8 @@ module Aws::SecurityAgent
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor disable_managed_skills: ::Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")]
       attr_accessor max_task_hours: ::Float
+      attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_filters: Types::ReportFilters
       SENSITIVE: []
     end
 
@@ -716,6 +725,8 @@ module Aws::SecurityAgent
       attr_accessor service_role: ::String
       attr_accessor log_config: Types::CloudWatchLog
       attr_accessor agent_space_id: ::String
+      attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_filters: Types::ReportFilters
       SENSITIVE: []
     end
 
@@ -827,6 +838,7 @@ module Aws::SecurityAgent
       attr_accessor log_config: Types::CloudWatchLog
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor report_destination: Types::ReportDestination
       SENSITIVE: []
     end
 
@@ -1739,6 +1751,8 @@ module Aws::SecurityAgent
       attr_accessor clean_up_strategy: ("BEST_EFFORT_DELETE" | "RETAIN_ALL")
       attr_accessor disable_managed_skills: ::Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")]
       attr_accessor max_task_hours: ::Float
+      attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_filters: Types::ReportFilters
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -1772,6 +1786,7 @@ module Aws::SecurityAgent
       attr_accessor max_task_hours: ::Float
       attr_accessor job_type: ("FULL" | "REVALIDATION")
       attr_accessor selected_finding_ids: ::Array[::String]
+      attr_accessor report_destination: Types::ReportDestination
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -1870,6 +1885,18 @@ module Aws::SecurityAgent
       attr_accessor container_id: ::String
       attr_accessor parent_id: ::String
       attr_accessor document_id: ::String
+      SENSITIVE: []
+    end
+
+    class ReportFilters
+      attr_accessor risk_levels: ::Array[("UNKNOWN" | "INFORMATIONAL" | "LOW" | "MEDIUM" | "HIGH" | "CRITICAL")]
+      attr_accessor confidence_levels: ::Array[("FALSE_POSITIVE" | "UNCONFIRMED" | "LOW" | "MEDIUM" | "HIGH")]
+      attr_accessor statuses: ::Array[("ACTIVE" | "RESOLVED" | "ACCEPTED" | "FALSE_POSITIVE")]
+      attr_accessor risk_types: ::Array[("CROSS_SITE_SCRIPTING" | "DEFAULT_CREDENTIALS" | "INSECURE_DIRECT_OBJECT_REFERENCE" | "PRIVILEGE_ESCALATION" | "SERVER_SIDE_TEMPLATE_INJECTION" | "COMMAND_INJECTION" | "CODE_INJECTION" | "SQL_INJECTION" | "ARBITRARY_FILE_UPLOAD" | "INSECURE_DESERIALIZATION" | "LOCAL_FILE_INCLUSION" | "INFORMATION_DISCLOSURE" | "PATH_TRAVERSAL" | "SERVER_SIDE_REQUEST_FORGERY" | "JSON_WEB_TOKEN_VULNERABILITIES" | "XML_EXTERNAL_ENTITY" | "FILE_DELETION" | "OTHER" | "GRAPHQL_VULNERABILITIES" | "BUSINESS_LOGIC_VULNERABILITIES" | "CRYPTOGRAPHIC_VULNERABILITIES" | "DENIAL_OF_SERVICE" | "FILE_ACCESS" | "FILE_CREATION" | "DATABASE_MODIFICATION" | "DATABASE_ACCESS" | "OUTBOUND_SERVICE_REQUEST" | "UNKNOWN")]
+      attr_accessor finding_types: ::Array[::String]
+      attr_accessor task_statuses: ::Array[("IN_PROGRESS" | "ABORTED" | "COMPLETED" | "INTERNAL_ERROR" | "FAILED")]
+      attr_accessor annotation_notes: bool
+      attr_accessor compliance_report: bool
       SENSITIVE: []
     end
 
@@ -2141,6 +2168,7 @@ module Aws::SecurityAgent
       attr_accessor scope_docs: ::Array[Types::DocumentInfo]
       attr_accessor service_role: ::String
       attr_accessor log_config: Types::CloudWatchLog
+      attr_accessor report_destination: Types::ReportDestination
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -2162,6 +2190,7 @@ module Aws::SecurityAgent
       attr_accessor scope_docs: ::Array[Types::DocumentInfo]
       attr_accessor error_information: Types::ErrorInformation
       attr_accessor system_overview: ::String
+      attr_accessor report_destination: Types::ReportDestination
       SENSITIVE: []
     end
 
@@ -2291,6 +2320,8 @@ module Aws::SecurityAgent
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor validation_mode: ("DISABLED" | "SIMULATED")
       attr_accessor max_task_hours: ::Float
+      attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_filters: Types::ReportFilters
       SENSITIVE: []
     end
 
@@ -2306,6 +2337,8 @@ module Aws::SecurityAgent
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor validation_mode: ("DISABLED" | "SIMULATED")
       attr_accessor max_task_hours: ::Float
+      attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_filters: Types::ReportFilters
       SENSITIVE: []
     end
 
@@ -2350,6 +2383,8 @@ module Aws::SecurityAgent
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor disable_managed_skills: ::Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")]
       attr_accessor max_task_hours: ::Float
+      attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_filters: Types::ReportFilters
       SENSITIVE: []
     end
 
@@ -2363,6 +2398,8 @@ module Aws::SecurityAgent
       attr_accessor service_role: ::String
       attr_accessor log_config: Types::CloudWatchLog
       attr_accessor agent_space_id: ::String
+      attr_accessor report_destination: Types::ReportDestination
+      attr_accessor report_filters: Types::ReportFilters
       SENSITIVE: []
     end
 
@@ -2458,6 +2495,7 @@ module Aws::SecurityAgent
       attr_accessor scope_docs: ::Array[Types::DocumentInfo]
       attr_accessor service_role: ::String
       attr_accessor log_config: Types::CloudWatchLog
+      attr_accessor report_destination: Types::ReportDestination
       SENSITIVE: []
     end
 
@@ -2472,6 +2510,7 @@ module Aws::SecurityAgent
       attr_accessor log_config: Types::CloudWatchLog
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor report_destination: Types::ReportDestination
       SENSITIVE: []
     end
 

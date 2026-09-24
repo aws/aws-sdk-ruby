@@ -104,6 +104,17 @@ module Aws::CloudWatch
       SENSITIVE: []
     end
 
+    class CreateResourceMetricsConfigurationInput
+      attr_accessor resource_arn: ::String
+      attr_accessor metric_selections: ::Array[Types::ResourceMetricSelection]
+      SENSITIVE: []
+    end
+
+    class CreateResourceMetricsConfigurationOutput
+      attr_accessor resource_metrics_configuration: Types::ResourceMetricsConfiguration
+      SENSITIVE: []
+    end
+
     class DashboardEntry
       attr_accessor dashboard_name: ::String
       attr_accessor dashboard_arn: ::String
@@ -189,6 +200,14 @@ module Aws::CloudWatch
     end
 
     class DeleteMetricStreamOutput < Aws::EmptyStructure
+    end
+
+    class DeleteResourceMetricsConfigurationInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourceMetricsConfigurationOutput < Aws::EmptyStructure
     end
 
     class DescribeAlarmContributorsInput
@@ -513,6 +532,20 @@ module Aws::CloudWatch
 
     class GetOTelEnrichmentOutput
       attr_accessor status: ("Running" | "Stopped")
+      attr_accessor include_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      attr_accessor exclude_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetResourceMetricsConfigurationInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceMetricsConfigurationOutput
+      attr_accessor resource_metrics_configuration: Types::ResourceMetricsConfiguration
       SENSITIVE: []
     end
 
@@ -871,6 +904,12 @@ module Aws::CloudWatch
       SENSITIVE: []
     end
 
+    class OTelEnrichmentMetricSelector
+      attr_accessor namespace: ::String
+      attr_accessor metric_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class PartialFailure
       attr_accessor failure_resource: ::String
       attr_accessor exception_type: ::String
@@ -1043,6 +1082,19 @@ module Aws::CloudWatch
       SENSITIVE: []
     end
 
+    class ResourceMetricSelection
+      attr_accessor include_metrics: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceMetricsConfiguration
+      attr_accessor resource_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor metric_selections: ::Array[Types::ResourceMetricSelection]
+      SENSITIVE: []
+    end
+
     class ResourceNotFound
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1112,10 +1164,18 @@ module Aws::CloudWatch
     class StartMetricStreamsOutput < Aws::EmptyStructure
     end
 
-    class StartOTelEnrichmentInput < Aws::EmptyStructure
+    class StartOTelEnrichmentInput
+      attr_accessor include_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      attr_accessor exclude_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      SENSITIVE: []
     end
 
-    class StartOTelEnrichmentOutput < Aws::EmptyStructure
+    class StartOTelEnrichmentOutput
+      attr_accessor include_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      attr_accessor exclude_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
     end
 
     class StatisticSet
@@ -1162,6 +1222,36 @@ module Aws::CloudWatch
     end
 
     class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateOTelEnrichmentInput
+      attr_accessor include_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      attr_accessor exclude_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      SENSITIVE: []
+    end
+
+    class UpdateOTelEnrichmentOutput
+      attr_accessor include_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      attr_accessor exclude_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateResourceMetricsConfigurationInput
+      attr_accessor resource_arn: ::String
+      attr_accessor metric_selections: ::Array[Types::ResourceMetricSelection]
+      SENSITIVE: []
+    end
+
+    class UpdateResourceMetricsConfigurationOutput
+      attr_accessor resource_metrics_configuration: Types::ResourceMetricsConfiguration
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class WallClockWindow

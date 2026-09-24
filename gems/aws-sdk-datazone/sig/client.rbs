@@ -548,7 +548,8 @@ module Aws
                                    cluster_name: ::String
                                  }?,
                                  iam_properties: {
-                                   glue_lineage_sync_enabled: bool?
+                                   glue_lineage_sync_enabled: bool?,
+                                   role_arn: ::String?
                                  }?,
                                  redshift_properties: {
                                    storage: {
@@ -942,6 +943,7 @@ module Aws
         def deployment_properties: () -> Types::DeploymentProperties
         def user_parameters: () -> ::Array[Types::CustomParameter]
         def glossary_terms: () -> ::Array[::String]
+        def blueprint_category: () -> ("TOOLING")
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
       end
@@ -957,7 +959,8 @@ module Aws
                                           },
                                           ?user_parameters: Array[
                                             Params::custom_parameter
-                                          ]
+                                          ],
+                                          ?blueprint_category: ("TOOLING")
                                         ) -> _CreateEnvironmentBlueprintResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentBlueprintResponseSuccess
 
@@ -2099,6 +2102,7 @@ module Aws
         def deployment_properties: () -> Types::DeploymentProperties
         def user_parameters: () -> ::Array[Types::CustomParameter]
         def glossary_terms: () -> ::Array[::String]
+        def blueprint_category: () -> ("TOOLING")
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
       end
@@ -4165,6 +4169,7 @@ module Aws
         def deployment_properties: () -> Types::DeploymentProperties
         def user_parameters: () -> ::Array[Types::CustomParameter]
         def glossary_terms: () -> ::Array[::String]
+        def blueprint_category: () -> ("TOOLING")
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
       end
@@ -4180,7 +4185,8 @@ module Aws
                                           },
                                           ?user_parameters: Array[
                                             Params::custom_parameter
-                                          ]
+                                          ],
+                                          ?blueprint_category: ("TOOLING")
                                         ) -> _UpdateEnvironmentBlueprintResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentBlueprintResponseSuccess
 

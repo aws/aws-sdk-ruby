@@ -4141,6 +4141,12 @@ module Aws::DataZone
     #   The user parameters of this Amazon DataZone blueprint.
     #   @return [Array<Types::CustomParameter>]
     #
+    # @!attribute [rw] blueprint_category
+    #   The category of the Amazon DataZone blueprint. The only valid value
+    #   is `TOOLING`, which creates a blueprint that provisions the tooling
+    #   resources of a project.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateEnvironmentBlueprintInput AWS API Documentation
     #
     class CreateEnvironmentBlueprintInput < Struct.new(
@@ -4148,7 +4154,8 @@ module Aws::DataZone
       :name,
       :description,
       :provisioning_properties,
-      :user_parameters)
+      :user_parameters,
+      :blueprint_category)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -4185,6 +4192,12 @@ module Aws::DataZone
     #   The glossary terms attached to this Amazon DataZone blueprint.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] blueprint_category
+    #   The category of the Amazon DataZone blueprint. The only valid value
+    #   is `TOOLING`, which indicates a blueprint that provisions the
+    #   tooling resources of a project.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The timestamp at which the environment blueprint was created.
     #   @return [Time]
@@ -4204,6 +4217,7 @@ module Aws::DataZone
       :deployment_properties,
       :user_parameters,
       :glossary_terms,
+      :blueprint_category,
       :created_at,
       :updated_at)
       SENSITIVE = [:description]
@@ -8283,6 +8297,11 @@ module Aws::DataZone
     #   The timestamp of when the blueprint was enabled.
     #   @return [Time]
     #
+    # @!attribute [rw] blueprint_category
+    #   The category of the environment blueprint. The only valid value is
+    #   `TOOLING`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/EnvironmentBlueprintSummary AWS API Documentation
     #
     class EnvironmentBlueprintSummary < Struct.new(
@@ -8292,7 +8311,8 @@ module Aws::DataZone
       :provider,
       :provisioning_properties,
       :created_at,
-      :updated_at)
+      :updated_at,
+      :blueprint_category)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -10294,6 +10314,12 @@ module Aws::DataZone
     #   The glossary terms attached to this Amazon DataZone blueprint.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] blueprint_category
+    #   The category of this Amazon DataZone blueprint. The only valid value
+    #   is `TOOLING`, which indicates a blueprint that provisions the
+    #   tooling resources of a project.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   A timestamp of when this blueprint was created.
     #   @return [Time]
@@ -10313,6 +10339,7 @@ module Aws::DataZone
       :deployment_properties,
       :user_parameters,
       :glossary_terms,
+      :blueprint_category,
       :created_at,
       :updated_at)
       SENSITIVE = [:description]
@@ -13425,10 +13452,17 @@ module Aws::DataZone
     #   for a connection.
     #   @return [Boolean]
     #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role to associate with the connection as the
+    #   project user role. To use this operation, you must have
+    #   `iam:PassRole` permission for this role.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/IamPropertiesInput AWS API Documentation
     #
     class IamPropertiesInput < Struct.new(
-      :glue_lineage_sync_enabled)
+      :glue_lineage_sync_enabled,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24132,6 +24166,10 @@ module Aws::DataZone
     #   `UpdateEnvironmentBlueprint` action.
     #   @return [Array<Types::CustomParameter>]
     #
+    # @!attribute [rw] blueprint_category
+    #   The category to update. The only valid value is `TOOLING`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateEnvironmentBlueprintInput AWS API Documentation
     #
     class UpdateEnvironmentBlueprintInput < Struct.new(
@@ -24139,7 +24177,8 @@ module Aws::DataZone
       :identifier,
       :description,
       :provisioning_properties,
-      :user_parameters)
+      :user_parameters,
+      :blueprint_category)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24182,6 +24221,11 @@ module Aws::DataZone
     #   `UpdateEnvironmentBlueprint` action.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] blueprint_category
+    #   The category of the environment blueprint. The only valid value is
+    #   `TOOLING`.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The timestamp of when the environment blueprint was created.
     #   @return [Time]
@@ -24201,6 +24245,7 @@ module Aws::DataZone
       :deployment_properties,
       :user_parameters,
       :glossary_terms,
+      :blueprint_category,
       :created_at,
       :updated_at)
       SENSITIVE = [:description]

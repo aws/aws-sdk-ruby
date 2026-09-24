@@ -1036,7 +1036,7 @@ module Aws::EventBridge
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   Tags to associate with the event bus.
@@ -1736,6 +1736,7 @@ module Aws::EventBridge
     #   * {Types::DescribeEventBusResponse#log_config #log_config} => Types::LogConfig
     #   * {Types::DescribeEventBusResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeEventBusResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeEventBusResponse#managed_by #managed_by} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1755,6 +1756,7 @@ module Aws::EventBridge
     #   resp.log_config.level #=> String, one of "OFF", "ERROR", "INFO", "TRACE"
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
+    #   resp.managed_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeEventBus AWS API Documentation
     #
@@ -2330,6 +2332,7 @@ module Aws::EventBridge
     #   resp.event_buses[0].policy #=> String
     #   resp.event_buses[0].creation_time #=> Time
     #   resp.event_buses[0].last_modified_time #=> Time
+    #   resp.event_buses[0].managed_by #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListEventBuses AWS API Documentation
@@ -2857,10 +2860,10 @@ module Aws::EventBridge
     # to rules.
     #
     # You can batch multiple event entries into one request for efficiency.
-    # However, the total entry size must be less than 256KB. You can
-    # calculate the entry size before you send the events. For more
-    # information, see [Calculating PutEvents event entry size][1] in the
-    # <i> <i>Amazon EventBridge User Guide</i> </i>.
+    # However, the total entry size must be less than 1MB. You can calculate
+    # the entry size before you send the events. For more information, see
+    # [Calculating PutEvents event entry size][1] in the <i> <i>Amazon
+    # EventBridge User Guide</i> </i>.
     #
     # PutEvents accepts the data in JSON format. For the JSON number
     # (integer) data type, the constraints are: a minimum value of
@@ -4292,7 +4295,7 @@ module Aws::EventBridge
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html
     #
     # @return [Types::UpdateEventBusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4355,7 +4358,7 @@ module Aws::EventBridge
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-eventbridge'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

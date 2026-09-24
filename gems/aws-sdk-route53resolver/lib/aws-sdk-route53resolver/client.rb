@@ -486,8 +486,9 @@ module Aws::Route53Resolver
     #
     # If the rule group contains any rule configured with the
     # `PartnerThreatProtection` rule type, the calling account must hold an
-    # active AWS Marketplace subscription to the named partner. If the
-    # subscription is missing, the association request is rejected.
+    # active Amazon Web Services Marketplace subscription to the named
+    # partner. If the subscription is missing, the association request is
+    # rejected.
     #
     # @option params [required, String] :creator_request_id
     #   A unique string that identifies the request and that allows failed
@@ -1117,8 +1118,8 @@ module Aws::Route53Resolver
     # source must be supplied through the matching request field — they are
     # mutually exclusive:
     #
-    # * `FirewallDomainListId` — match a customer-managed or AWS-managed
-    #   domain list.
+    # * `FirewallDomainListId` — match a customer-managed or Amazon Web
+    #   Services-managed domain list.
     #
     # * `DnsThreatProtection` — match a built-in DNS Firewall Advanced
     #   threat detector (`DGA`, `DNS_TUNNELING`, or `DICTIONARY_DGA`).
@@ -1127,8 +1128,8 @@ module Aws::Route53Resolver
     #   ListFirewallRuleTypes: `FirewallAdvancedContentCategory`,
     #   `FirewallAdvancedThreatCategory`, `DnsThreatProtection`, or
     #   `PartnerThreatProtection`. The `PartnerThreatProtection` variant
-    #   requires an active AWS Marketplace subscription to the named partner
-    #   product.
+    #   requires an active Amazon Web Services Marketplace subscription to
+    #   the named partner product.
     #
     # For rules that require asynchronous provisioning (today, the
     # `PartnerThreatProtection` rule type), the rule's `Status` begins at
@@ -1308,18 +1309,19 @@ module Aws::Route53Resolver
     #   exclusive with the top-level `FirewallDomainListId` and
     #   `DnsThreatProtection` fields. Use one of:
     #
-    #   * `FirewallAdvancedContentCategory` — match an AWS-managed content
-    #     category (for example, `VIOLENCE_AND_HATE_SPEECH`).
+    #   * `FirewallAdvancedContentCategory` — match an Amazon Web
+    #     Services-managed content category (for example,
+    #     `VIOLENCE_AND_HATE_SPEECH`).
     #
-    #   * `FirewallAdvancedThreatCategory` — match an AWS-managed advanced
-    #     threat category (for example, `PHISHING`).
+    #   * `FirewallAdvancedThreatCategory` — match an Amazon Web
+    #     Services-managed advanced threat category (for example, `PHISHING`).
     #
     #   * `DnsThreatProtection` — match a built-in DNS Firewall Advanced
     #     threat detector (`DGA`, `DNS_TUNNELING`, or `DICTIONARY_DGA`).
     #
     #   * `PartnerThreatProtection` — match a third-party threat feed
-    #     delivered through AWS Marketplace. The selected partner must be an
-    #     active subscription on the calling account.
+    #     delivered through Amazon Web Services Marketplace. The selected
+    #     partner must be an active subscription on the calling account.
     #
     #   To enumerate the values supported in your account, call
     #   ListFirewallRuleTypes.
@@ -1459,6 +1461,12 @@ module Aws::Route53Resolver
 
     # Creates a Route 53 Resolver on an Outpost.
     #
+    # <note markdown="1"> This operation applies to first-generation Outposts only. On
+    # second-generation Outposts, Resolver is enabled by default and managed
+    # automatically by Amazon Web Services, so you don't need to create it.
+    #
+    #  </note>
+    #
     # @option params [required, String] :creator_request_id
     #   A unique string that identifies the request and that allows failed
     #   requests to be retried without the risk of running the operation
@@ -1591,9 +1599,31 @@ module Aws::Route53Resolver
     #
     #    </note>
     #
+    #   We recommend using [VPC Resolver on Outposts][1] to create endpoints
+    #   on Outposts Racks.
+    #
+    #   Outposts subnets with [Local Network Interface (LNI)][2] enabled are
+    #   not compatible with Route 53 Resolver endpoints. If you enable LNI on
+    #   a subnet that contains Route 53 Resolver endpoint elastic network
+    #   interfaces (ENIs), those ENIs will stop functioning. For more
+    #   information, see [Subnet compatibility for Resolver endpoints][3] in
+    #   the *Amazon Route 53 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/outpost-resolver-getting-started.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/server-userguide/local-network-interface.html
+    #   [3]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/best-practices-resolver.html#best-practices-resolver-subnet-compatibility
+    #
     # @option params [String] :outpost_arn
     #   The Amazon Resource Name (ARN) of the Outpost. If you specify this,
     #   you must also specify a value for the `PreferredInstanceType`.
+    #
+    #   <note markdown="1"> Resolver endpoints on Outposts are supported on first-generation
+    #   Outposts only. Inbound and outbound Resolver endpoints aren't
+    #   supported on second-generation Outposts.
+    #
+    #    </note>
     #
     # @option params [String] :preferred_instance_type
     #   The instance type. If you specify this, you must also specify a value
@@ -2184,6 +2214,14 @@ module Aws::Route53Resolver
     end
 
     # Deletes a Resolver on the Outpost.
+    #
+    # <note markdown="1"> This operation applies to first-generation Outposts only. On
+    # second-generation Outposts, Resolver is managed automatically by
+    # Amazon Web Services and can't be deleted directly. To opt out of
+    # Resolver on second-generation Outposts, contact Amazon Web Services
+    # Support.
+    #
+    #  </note>
     #
     # @option params [required, String] :id
     #   A unique string that identifies the Resolver on the Outpost.
@@ -3561,9 +3599,10 @@ module Aws::Route53Resolver
     # `DnsThreatProtection`, and `PartnerThreatProtection`. When a returned
     # definition's variant requires an external subscription (currently
     # only `PartnerThreatProtection`), the response also includes a
-    # SubscriptionInfo identifying the AWS Marketplace product that backs
-    # it; absence of `SubscriptionInfo` means the variant is fully managed
-    # by AWS and requires no separate subscription.
+    # SubscriptionInfo identifying the Amazon Web Services Marketplace
+    # product that backs it; absence of `SubscriptionInfo` means the variant
+    # is fully managed by Amazon Web Services and requires no separate
+    # subscription.
     #
     # @option params [String] :rule_type
     #   An optional filter that restricts the response to a single
@@ -5058,18 +5097,19 @@ module Aws::Route53Resolver
     #   exclusive with the top-level `FirewallDomainListId` and
     #   `DnsThreatProtection` fields. Use one of:
     #
-    #   * `FirewallAdvancedContentCategory` — match an AWS-managed content
-    #     category (for example, `VIOLENCE_AND_HATE_SPEECH`).
+    #   * `FirewallAdvancedContentCategory` — match an Amazon Web
+    #     Services-managed content category (for example,
+    #     `VIOLENCE_AND_HATE_SPEECH`).
     #
-    #   * `FirewallAdvancedThreatCategory` — match an AWS-managed advanced
-    #     threat category (for example, `PHISHING`).
+    #   * `FirewallAdvancedThreatCategory` — match an Amazon Web
+    #     Services-managed advanced threat category (for example, `PHISHING`).
     #
     #   * `DnsThreatProtection` — match a built-in DNS Firewall Advanced
     #     threat detector (`DGA`, `DNS_TUNNELING`, or `DICTIONARY_DGA`).
     #
     #   * `PartnerThreatProtection` — match a third-party threat feed
-    #     delivered through AWS Marketplace. The selected partner must be an
-    #     active subscription on the calling account.
+    #     delivered through Amazon Web Services Marketplace. The selected
+    #     partner must be an active subscription on the calling account.
     #
     #   To enumerate the values supported in your account, call
     #   ListFirewallRuleTypes.
@@ -5214,6 +5254,12 @@ module Aws::Route53Resolver
 
     # You can use `UpdateOutpostResolver` to update the instance count,
     # type, or name of a Resolver on an Outpost.
+    #
+    # <note markdown="1"> This operation applies to first-generation Outposts only. On
+    # second-generation Outposts, Resolver is managed automatically by
+    # Amazon Web Services and can't be updated directly.
+    #
+    #  </note>
     #
     # @option params [required, String] :id
     #   A unique string that identifies Resolver on an Outpost.
@@ -5618,7 +5664,7 @@ module Aws::Route53Resolver
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53resolver'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

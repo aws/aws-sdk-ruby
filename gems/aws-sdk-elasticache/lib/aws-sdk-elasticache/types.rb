@@ -2255,12 +2255,19 @@ module Aws::ElastiCache
     #   a lowercase string.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateGlobalReplicationGroupMessage AWS API Documentation
     #
     class CreateGlobalReplicationGroupMessage < Struct.new(
       :global_replication_group_id_suffix,
       :global_replication_group_description,
-      :primary_replication_group_id)
+      :primary_replication_group_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9474,10 +9481,10 @@ module Aws::ElastiCache
 
     # A tag that can be added to an ElastiCache cluster or replication
     # group. Tags are composed of a Key/Value pair. You can use tags to
-    # categorize and track all your ElastiCache resources, with the
-    # exception of global replication group. When you add or remove tags on
-    # replication groups, those actions will be replicated to all nodes in
-    # the replication group. A tag with a null Value is permitted.
+    # categorize and track all your ElastiCache resources. When you add or
+    # remove tags on replication groups, those actions will be replicated to
+    # all nodes in the replication group. A tag with a null Value is
+    # permitted.
     #
     # @!attribute [rw] key
     #   The key for the tag. May not be null.

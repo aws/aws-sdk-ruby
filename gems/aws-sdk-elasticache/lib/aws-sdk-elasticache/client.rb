@@ -476,10 +476,9 @@ module Aws::ElastiCache
 
     # A tag is a key-value pair where the key and value are case-sensitive.
     # You can use tags to categorize and track all your ElastiCache
-    # resources, with the exception of global replication group. When you
-    # add or remove tags on replication groups, those actions will be
-    # replicated to all nodes in the replication group. For more
-    # information, see [Resource-level permissions][1].
+    # resources. When you add or remove tags on replication groups, those
+    # actions will be replicated to all nodes in the replication group. For
+    # more information, see [Resource-level permissions][1].
     #
     # For example, you can use cost-allocation tags to your ElastiCache
     # resources, Amazon generates a cost allocation report as a
@@ -2097,6 +2096,11 @@ module Aws::ElastiCache
     #   updates to the secondary cluster. This value is stored as a lowercase
     #   string.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to be added to this resource. A tag is a key-value
+    #   pair. A tag key must be accompanied by a tag value, although null is
+    #   accepted.
+    #
     # @return [Types::CreateGlobalReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGlobalReplicationGroupResult#global_replication_group #global_replication_group} => Types::GlobalReplicationGroup
@@ -2107,6 +2111,12 @@ module Aws::ElastiCache
     #     global_replication_group_id_suffix: "String", # required
     #     global_replication_group_description: "String",
     #     primary_replication_group_id: "String", # required
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -8880,10 +8890,9 @@ module Aws::ElastiCache
     #
     # A tag is a key-value pair where the key and value are case-sensitive.
     # You can use tags to categorize and track all your ElastiCache
-    # resources, with the exception of global replication group. When you
-    # add or remove tags on replication groups, those actions will be
-    # replicated to all nodes in the replication group. For more
-    # information, see [Resource-level permissions][1].
+    # resources. When you add or remove tags on replication groups, those
+    # actions will be replicated to all nodes in the replication group. For
+    # more information, see [Resource-level permissions][1].
     #
     # If the cluster is not in the *available* state, `ListTagsForResource`
     # returns an error.
@@ -10935,10 +10944,10 @@ module Aws::ElastiCache
     # Removes the tags identified by the `TagKeys` list from the named
     # resource. A tag is a key-value pair where the key and value are
     # case-sensitive. You can use tags to categorize and track all your
-    # ElastiCache resources, with the exception of global replication group.
-    # When you add or remove tags on replication groups, those actions will
-    # be replicated to all nodes in the replication group. For more
-    # information, see [Resource-level permissions][1].
+    # ElastiCache resources. When you add or remove tags on replication
+    # groups, those actions will be replicated to all nodes in the
+    # replication group. For more information, see [Resource-level
+    # permissions][1].
     #
     #
     #
@@ -11573,7 +11582,7 @@ module Aws::ElastiCache
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.150.0'
+      context[:gem_version] = '1.151.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

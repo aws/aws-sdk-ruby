@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2026-09-24)
+------------------
+
+* Feature - Adds a ManagedBy field to the DescribeEventBus and ListEventBuses responses, identifying the AWS service that created an event bus on your behalf.
+
 1.104.0 (2026-09-11)
 ------------------
 

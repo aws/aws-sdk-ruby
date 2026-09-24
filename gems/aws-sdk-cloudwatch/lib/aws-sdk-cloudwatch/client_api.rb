@@ -66,6 +66,8 @@ module Aws::CloudWatch
     ContributorAttributes = Shapes::MapShape.new(name: 'ContributorAttributes')
     ContributorId = Shapes::StringShape.new(name: 'ContributorId')
     Counts = Shapes::ListShape.new(name: 'Counts')
+    CreateResourceMetricsConfigurationInput = Shapes::StructureShape.new(name: 'CreateResourceMetricsConfigurationInput')
+    CreateResourceMetricsConfigurationOutput = Shapes::StructureShape.new(name: 'CreateResourceMetricsConfigurationOutput')
     DashboardArn = Shapes::StringShape.new(name: 'DashboardArn')
     DashboardBody = Shapes::StringShape.new(name: 'DashboardBody')
     DashboardEntries = Shapes::ListShape.new(name: 'DashboardEntries')
@@ -98,6 +100,8 @@ module Aws::CloudWatch
     DeleteInsightRulesOutput = Shapes::StructureShape.new(name: 'DeleteInsightRulesOutput')
     DeleteMetricStreamInput = Shapes::StructureShape.new(name: 'DeleteMetricStreamInput')
     DeleteMetricStreamOutput = Shapes::StructureShape.new(name: 'DeleteMetricStreamOutput')
+    DeleteResourceMetricsConfigurationInput = Shapes::StructureShape.new(name: 'DeleteResourceMetricsConfigurationInput')
+    DeleteResourceMetricsConfigurationOutput = Shapes::StructureShape.new(name: 'DeleteResourceMetricsConfigurationOutput')
     DescribeAlarmContributorsInput = Shapes::StructureShape.new(name: 'DescribeAlarmContributorsInput')
     DescribeAlarmContributorsOutput = Shapes::StructureShape.new(name: 'DescribeAlarmContributorsOutput')
     DescribeAlarmHistoryInput = Shapes::StructureShape.new(name: 'DescribeAlarmHistoryInput')
@@ -170,6 +174,8 @@ module Aws::CloudWatch
     GetMetricWidgetImageOutput = Shapes::StructureShape.new(name: 'GetMetricWidgetImageOutput')
     GetOTelEnrichmentInput = Shapes::StructureShape.new(name: 'GetOTelEnrichmentInput')
     GetOTelEnrichmentOutput = Shapes::StructureShape.new(name: 'GetOTelEnrichmentOutput')
+    GetResourceMetricsConfigurationInput = Shapes::StructureShape.new(name: 'GetResourceMetricsConfigurationInput')
+    GetResourceMetricsConfigurationOutput = Shapes::StructureShape.new(name: 'GetResourceMetricsConfigurationOutput')
     HistoryData = Shapes::StringShape.new(name: 'HistoryData')
     HistoryItemType = Shapes::StringShape.new(name: 'HistoryItemType')
     HistorySummary = Shapes::StringShape.new(name: 'HistorySummary')
@@ -258,6 +264,7 @@ module Aws::CloudWatch
     MetricLabel = Shapes::StringShape.new(name: 'MetricLabel')
     MetricMathAnomalyDetector = Shapes::StructureShape.new(name: 'MetricMathAnomalyDetector')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
+    MetricNameList = Shapes::ListShape.new(name: 'MetricNameList')
     MetricStat = Shapes::StructureShape.new(name: 'MetricStat')
     MetricStreamEntries = Shapes::ListShape.new(name: 'MetricStreamEntries')
     MetricStreamEntry = Shapes::StructureShape.new(name: 'MetricStreamEntry')
@@ -284,6 +291,9 @@ module Aws::CloudWatch
     Name = Shapes::StringShape.new(name: 'Name')
     Namespace = Shapes::StringShape.new(name: 'Namespace')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    OTelEnrichmentMetricNameList = Shapes::ListShape.new(name: 'OTelEnrichmentMetricNameList')
+    OTelEnrichmentMetricSelector = Shapes::StructureShape.new(name: 'OTelEnrichmentMetricSelector')
+    OTelEnrichmentMetricSelectorList = Shapes::ListShape.new(name: 'OTelEnrichmentMetricSelectorList')
     OTelEnrichmentStatus = Shapes::StringShape.new(name: 'OTelEnrichmentStatus')
     OnlyStartEvaluatingAfterWarmUpPeriodEnds = Shapes::BooleanShape.new(name: 'OnlyStartEvaluatingAfterWarmUpPeriodEnds')
     OutputFormat = Shapes::StringShape.new(name: 'OutputFormat')
@@ -314,9 +324,13 @@ module Aws::CloudWatch
     Range = Shapes::StructureShape.new(name: 'Range')
     RecentlyActive = Shapes::StringShape.new(name: 'RecentlyActive')
     RecoveryPeriod = Shapes::IntegerShape.new(name: 'RecoveryPeriod')
+    ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceConflict = Shapes::StructureShape.new(name: 'ResourceConflict', error: {"code" => "ResourceConflict", "httpStatusCode" => 409, "senderFault" => true})
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceList = Shapes::ListShape.new(name: 'ResourceList')
+    ResourceMetricSelection = Shapes::StructureShape.new(name: 'ResourceMetricSelection')
+    ResourceMetricSelectionList = Shapes::ListShape.new(name: 'ResourceMetricSelectionList')
+    ResourceMetricsConfiguration = Shapes::StructureShape.new(name: 'ResourceMetricsConfiguration')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound', error: {"code" => "ResourceNotFound", "httpStatusCode" => 404, "senderFault" => true})
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException', error: {"code" => "ResourceNotFoundException", "httpStatusCode" => 404, "senderFault" => true})
@@ -369,6 +383,12 @@ module Aws::CloudWatch
     TreatMissingData = Shapes::StringShape.new(name: 'TreatMissingData')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
+    UpdateOTelEnrichmentInput = Shapes::StructureShape.new(name: 'UpdateOTelEnrichmentInput')
+    UpdateOTelEnrichmentOutput = Shapes::StructureShape.new(name: 'UpdateOTelEnrichmentOutput')
+    UpdateResourceMetricsConfigurationInput = Shapes::StructureShape.new(name: 'UpdateResourceMetricsConfigurationInput')
+    UpdateResourceMetricsConfigurationOutput = Shapes::StructureShape.new(name: 'UpdateResourceMetricsConfigurationOutput')
+    ValidationException = Shapes::StructureShape.new(name: 'ValidationException', error: {"code" => "ValidationError", "httpStatusCode" => 400, "senderFault" => true})
+    ValidationExceptionMessage = Shapes::StringShape.new(name: 'ValidationExceptionMessage')
     Values = Shapes::ListShape.new(name: 'Values')
     WallClockWindow = Shapes::StructureShape.new(name: 'WallClockWindow')
     WarmUpConfiguration = Shapes::StructureShape.new(name: 'WarmUpConfiguration')
@@ -479,6 +499,13 @@ module Aws::CloudWatch
 
     Counts.member = Shapes::ShapeRef.new(shape: DatapointValue)
 
+    CreateResourceMetricsConfigurationInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    CreateResourceMetricsConfigurationInput.add_member(:metric_selections, Shapes::ShapeRef.new(shape: ResourceMetricSelectionList, location_name: "MetricSelections"))
+    CreateResourceMetricsConfigurationInput.struct_class = Types::CreateResourceMetricsConfigurationInput
+
+    CreateResourceMetricsConfigurationOutput.add_member(:resource_metrics_configuration, Shapes::ShapeRef.new(shape: ResourceMetricsConfiguration, required: true, location_name: "ResourceMetricsConfiguration"))
+    CreateResourceMetricsConfigurationOutput.struct_class = Types::CreateResourceMetricsConfigurationOutput
+
     DashboardEntries.member = Shapes::ShapeRef.new(shape: DashboardEntry)
 
     DashboardEntry.add_member(:dashboard_name, Shapes::ShapeRef.new(shape: DashboardName, location_name: "DashboardName"))
@@ -551,6 +578,11 @@ module Aws::CloudWatch
     DeleteMetricStreamInput.struct_class = Types::DeleteMetricStreamInput
 
     DeleteMetricStreamOutput.struct_class = Types::DeleteMetricStreamOutput
+
+    DeleteResourceMetricsConfigurationInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    DeleteResourceMetricsConfigurationInput.struct_class = Types::DeleteResourceMetricsConfigurationInput
+
+    DeleteResourceMetricsConfigurationOutput.struct_class = Types::DeleteResourceMetricsConfigurationOutput
 
     DescribeAlarmContributorsInput.add_member(:alarm_name, Shapes::ShapeRef.new(shape: AlarmName, required: true, location_name: "AlarmName"))
     DescribeAlarmContributorsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -796,7 +828,17 @@ module Aws::CloudWatch
     GetOTelEnrichmentInput.struct_class = Types::GetOTelEnrichmentInput
 
     GetOTelEnrichmentOutput.add_member(:status, Shapes::ShapeRef.new(shape: OTelEnrichmentStatus, required: true, location_name: "Status"))
+    GetOTelEnrichmentOutput.add_member(:include_filters, Shapes::ShapeRef.new(shape: OTelEnrichmentMetricSelectorList, location_name: "IncludeFilters"))
+    GetOTelEnrichmentOutput.add_member(:exclude_filters, Shapes::ShapeRef.new(shape: OTelEnrichmentMetricSelectorList, location_name: "ExcludeFilters"))
+    GetOTelEnrichmentOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    GetOTelEnrichmentOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     GetOTelEnrichmentOutput.struct_class = Types::GetOTelEnrichmentOutput
+
+    GetResourceMetricsConfigurationInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    GetResourceMetricsConfigurationInput.struct_class = Types::GetResourceMetricsConfigurationInput
+
+    GetResourceMetricsConfigurationOutput.add_member(:resource_metrics_configuration, Shapes::ShapeRef.new(shape: ResourceMetricsConfiguration, required: true, location_name: "ResourceMetricsConfiguration"))
+    GetResourceMetricsConfigurationOutput.struct_class = Types::GetResourceMetricsConfigurationOutput
 
     InsightRule.add_member(:name, Shapes::ShapeRef.new(shape: InsightRuleName, required: true, location_name: "Name"))
     InsightRule.add_member(:state, Shapes::ShapeRef.new(shape: InsightRuleState, required: true, location_name: "State"))
@@ -1063,6 +1105,8 @@ module Aws::CloudWatch
     MetricMathAnomalyDetector.add_member(:metric_data_queries, Shapes::ShapeRef.new(shape: MetricDataQueries, location_name: "MetricDataQueries"))
     MetricMathAnomalyDetector.struct_class = Types::MetricMathAnomalyDetector
 
+    MetricNameList.member = Shapes::ShapeRef.new(shape: MetricName)
+
     MetricStat.add_member(:metric, Shapes::ShapeRef.new(shape: Metric, required: true, location_name: "Metric"))
     MetricStat.add_member(:period, Shapes::ShapeRef.new(shape: Period, required: true, location_name: "Period"))
     MetricStat.add_member(:stat, Shapes::ShapeRef.new(shape: Stat, required: true, location_name: "Stat"))
@@ -1113,6 +1157,14 @@ module Aws::CloudWatch
 
     MuteTargets.add_member(:alarm_names, Shapes::ShapeRef.new(shape: MuteTargetAlarmNameList, required: true, location_name: "AlarmNames"))
     MuteTargets.struct_class = Types::MuteTargets
+
+    OTelEnrichmentMetricNameList.member = Shapes::ShapeRef.new(shape: MetricName)
+
+    OTelEnrichmentMetricSelector.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
+    OTelEnrichmentMetricSelector.add_member(:metric_names, Shapes::ShapeRef.new(shape: OTelEnrichmentMetricNameList, location_name: "MetricNames"))
+    OTelEnrichmentMetricSelector.struct_class = Types::OTelEnrichmentMetricSelector
+
+    OTelEnrichmentMetricSelectorList.member = Shapes::ShapeRef.new(shape: OTelEnrichmentMetricSelector)
 
     OwningAccounts.member = Shapes::ShapeRef.new(shape: AccountId)
 
@@ -1255,6 +1307,17 @@ module Aws::CloudWatch
 
     ResourceList.member = Shapes::ShapeRef.new(shape: ResourceName)
 
+    ResourceMetricSelection.add_member(:include_metrics, Shapes::ShapeRef.new(shape: MetricNameList, required: true, location_name: "IncludeMetrics"))
+    ResourceMetricSelection.struct_class = Types::ResourceMetricSelection
+
+    ResourceMetricSelectionList.member = Shapes::ShapeRef.new(shape: ResourceMetricSelection)
+
+    ResourceMetricsConfiguration.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    ResourceMetricsConfiguration.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
+    ResourceMetricsConfiguration.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdatedAt"))
+    ResourceMetricsConfiguration.add_member(:metric_selections, Shapes::ShapeRef.new(shape: ResourceMetricSelectionList, location_name: "MetricSelections"))
+    ResourceMetricsConfiguration.struct_class = Types::ResourceMetricsConfiguration
+
     ResourceNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ResourceNotFound.struct_class = Types::ResourceNotFound
 
@@ -1304,8 +1367,14 @@ module Aws::CloudWatch
 
     StartMetricStreamsOutput.struct_class = Types::StartMetricStreamsOutput
 
+    StartOTelEnrichmentInput.add_member(:include_filters, Shapes::ShapeRef.new(shape: OTelEnrichmentMetricSelectorList, location_name: "IncludeFilters"))
+    StartOTelEnrichmentInput.add_member(:exclude_filters, Shapes::ShapeRef.new(shape: OTelEnrichmentMetricSelectorList, location_name: "ExcludeFilters"))
     StartOTelEnrichmentInput.struct_class = Types::StartOTelEnrichmentInput
 
+    StartOTelEnrichmentOutput.add_member(:include_filters, Shapes::ShapeRef.new(shape: OTelEnrichmentMetricSelectorList, location_name: "IncludeFilters"))
+    StartOTelEnrichmentOutput.add_member(:exclude_filters, Shapes::ShapeRef.new(shape: OTelEnrichmentMetricSelectorList, location_name: "ExcludeFilters"))
+    StartOTelEnrichmentOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    StartOTelEnrichmentOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     StartOTelEnrichmentOutput.struct_class = Types::StartOTelEnrichmentOutput
 
     StatisticSet.add_member(:sample_count, Shapes::ShapeRef.new(shape: DatapointValue, required: true, location_name: "SampleCount"))
@@ -1346,6 +1415,26 @@ module Aws::CloudWatch
     UntagResourceInput.struct_class = Types::UntagResourceInput
 
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
+
+    UpdateOTelEnrichmentInput.add_member(:include_filters, Shapes::ShapeRef.new(shape: OTelEnrichmentMetricSelectorList, location_name: "IncludeFilters"))
+    UpdateOTelEnrichmentInput.add_member(:exclude_filters, Shapes::ShapeRef.new(shape: OTelEnrichmentMetricSelectorList, location_name: "ExcludeFilters"))
+    UpdateOTelEnrichmentInput.struct_class = Types::UpdateOTelEnrichmentInput
+
+    UpdateOTelEnrichmentOutput.add_member(:include_filters, Shapes::ShapeRef.new(shape: OTelEnrichmentMetricSelectorList, location_name: "IncludeFilters"))
+    UpdateOTelEnrichmentOutput.add_member(:exclude_filters, Shapes::ShapeRef.new(shape: OTelEnrichmentMetricSelectorList, location_name: "ExcludeFilters"))
+    UpdateOTelEnrichmentOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    UpdateOTelEnrichmentOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    UpdateOTelEnrichmentOutput.struct_class = Types::UpdateOTelEnrichmentOutput
+
+    UpdateResourceMetricsConfigurationInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    UpdateResourceMetricsConfigurationInput.add_member(:metric_selections, Shapes::ShapeRef.new(shape: ResourceMetricSelectionList, location_name: "MetricSelections"))
+    UpdateResourceMetricsConfigurationInput.struct_class = Types::UpdateResourceMetricsConfigurationInput
+
+    UpdateResourceMetricsConfigurationOutput.add_member(:resource_metrics_configuration, Shapes::ShapeRef.new(shape: ResourceMetricsConfiguration, required: true, location_name: "ResourceMetricsConfiguration"))
+    UpdateResourceMetricsConfigurationOutput.struct_class = Types::UpdateResourceMetricsConfigurationOutput
+
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ValidationExceptionMessage, location_name: "message"))
+    ValidationException.struct_class = Types::ValidationException
 
     Values.member = Shapes::ShapeRef.new(shape: DatapointValue)
 
@@ -1389,6 +1478,16 @@ module Aws::CloudWatch
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:create_resource_metrics_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateResourceMetricsConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateResourceMetricsConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateResourceMetricsConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -1453,6 +1552,15 @@ module Aws::CloudWatch
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
+      end)
+
+      api.add_operation(:delete_resource_metrics_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourceMetricsConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourceMetricsConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteResourceMetricsConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:describe_alarm_contributors, Seahorse::Model::Operation.new.tap do |o|
@@ -1677,6 +1785,15 @@ module Aws::CloudWatch
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetOTelEnrichmentInput)
         o.output = Shapes::ShapeRef.new(shape: GetOTelEnrichmentOutput)
+      end)
+
+      api.add_operation(:get_resource_metrics_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResourceMetricsConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetResourceMetricsConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: GetResourceMetricsConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:list_alarm_mute_rules, Seahorse::Model::Operation.new.tap do |o|
@@ -1908,6 +2025,7 @@ module Aws::CloudWatch
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StartOTelEnrichmentInput)
         o.output = Shapes::ShapeRef.new(shape: StartOTelEnrichmentOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:stop_metric_streams, Seahorse::Model::Operation.new.tap do |o|
@@ -1953,6 +2071,25 @@ module Aws::CloudWatch
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_o_tel_enrichment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateOTelEnrichment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateOTelEnrichmentInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateOTelEnrichmentOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_resource_metrics_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateResourceMetricsConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateResourceMetricsConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateResourceMetricsConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
     end
 

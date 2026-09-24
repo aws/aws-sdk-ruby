@@ -424,6 +424,7 @@ module Aws::ElastiCache
       attr_accessor global_replication_group_id_suffix: ::String
       attr_accessor global_replication_group_description: ::String
       attr_accessor primary_replication_group_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 

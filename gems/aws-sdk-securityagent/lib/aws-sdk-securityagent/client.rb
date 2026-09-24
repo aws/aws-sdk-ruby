@@ -684,6 +684,24 @@ module Aws::SecurityAgent
     #   resp.deleted[0].disable_managed_skills #=> Array
     #   resp.deleted[0].disable_managed_skills[0] #=> String, one of "FINDING_PERSONALIZATION", "LOGIN_OPTIMIZATION"
     #   resp.deleted[0].max_task_hours #=> Float
+    #   resp.deleted[0].report_destination.integration_id #=> String
+    #   resp.deleted[0].report_destination.container_id #=> String
+    #   resp.deleted[0].report_destination.parent_id #=> String
+    #   resp.deleted[0].report_destination.document_id #=> String
+    #   resp.deleted[0].report_filters.risk_levels #=> Array
+    #   resp.deleted[0].report_filters.risk_levels[0] #=> String, one of "UNKNOWN", "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.deleted[0].report_filters.confidence_levels #=> Array
+    #   resp.deleted[0].report_filters.confidence_levels[0] #=> String, one of "FALSE_POSITIVE", "UNCONFIRMED", "LOW", "MEDIUM", "HIGH"
+    #   resp.deleted[0].report_filters.statuses #=> Array
+    #   resp.deleted[0].report_filters.statuses[0] #=> String, one of "ACTIVE", "RESOLVED", "ACCEPTED", "FALSE_POSITIVE"
+    #   resp.deleted[0].report_filters.risk_types #=> Array
+    #   resp.deleted[0].report_filters.risk_types[0] #=> String, one of "CROSS_SITE_SCRIPTING", "DEFAULT_CREDENTIALS", "INSECURE_DIRECT_OBJECT_REFERENCE", "PRIVILEGE_ESCALATION", "SERVER_SIDE_TEMPLATE_INJECTION", "COMMAND_INJECTION", "CODE_INJECTION", "SQL_INJECTION", "ARBITRARY_FILE_UPLOAD", "INSECURE_DESERIALIZATION", "LOCAL_FILE_INCLUSION", "INFORMATION_DISCLOSURE", "PATH_TRAVERSAL", "SERVER_SIDE_REQUEST_FORGERY", "JSON_WEB_TOKEN_VULNERABILITIES", "XML_EXTERNAL_ENTITY", "FILE_DELETION", "OTHER", "GRAPHQL_VULNERABILITIES", "BUSINESS_LOGIC_VULNERABILITIES", "CRYPTOGRAPHIC_VULNERABILITIES", "DENIAL_OF_SERVICE", "FILE_ACCESS", "FILE_CREATION", "DATABASE_MODIFICATION", "DATABASE_ACCESS", "OUTBOUND_SERVICE_REQUEST", "UNKNOWN"
+    #   resp.deleted[0].report_filters.finding_types #=> Array
+    #   resp.deleted[0].report_filters.finding_types[0] #=> String
+    #   resp.deleted[0].report_filters.task_statuses #=> Array
+    #   resp.deleted[0].report_filters.task_statuses[0] #=> String, one of "IN_PROGRESS", "ABORTED", "COMPLETED", "INTERNAL_ERROR", "FAILED"
+    #   resp.deleted[0].report_filters.annotation_notes #=> Boolean
+    #   resp.deleted[0].report_filters.compliance_report #=> Boolean
     #   resp.deleted[0].created_at #=> Time
     #   resp.deleted[0].updated_at #=> Time
     #   resp.failed #=> Array
@@ -978,6 +996,10 @@ module Aws::SecurityAgent
     #   resp.code_review_jobs[0].integrated_repositories[0].branch #=> String
     #   resp.code_review_jobs[0].code_remediation_strategy #=> String, one of "AUTOMATIC", "DISABLED"
     #   resp.code_review_jobs[0].max_task_hours #=> Float
+    #   resp.code_review_jobs[0].report_destination.integration_id #=> String
+    #   resp.code_review_jobs[0].report_destination.container_id #=> String
+    #   resp.code_review_jobs[0].report_destination.parent_id #=> String
+    #   resp.code_review_jobs[0].report_destination.document_id #=> String
     #   resp.code_review_jobs[0].created_at #=> Time
     #   resp.code_review_jobs[0].updated_at #=> Time
     #   resp.not_found #=> Array
@@ -1052,6 +1074,24 @@ module Aws::SecurityAgent
     #   resp.code_reviews[0].code_remediation_strategy #=> String, one of "AUTOMATIC", "DISABLED"
     #   resp.code_reviews[0].validation_mode #=> String, one of "DISABLED", "SIMULATED"
     #   resp.code_reviews[0].max_task_hours #=> Float
+    #   resp.code_reviews[0].report_destination.integration_id #=> String
+    #   resp.code_reviews[0].report_destination.container_id #=> String
+    #   resp.code_reviews[0].report_destination.parent_id #=> String
+    #   resp.code_reviews[0].report_destination.document_id #=> String
+    #   resp.code_reviews[0].report_filters.risk_levels #=> Array
+    #   resp.code_reviews[0].report_filters.risk_levels[0] #=> String, one of "UNKNOWN", "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.code_reviews[0].report_filters.confidence_levels #=> Array
+    #   resp.code_reviews[0].report_filters.confidence_levels[0] #=> String, one of "FALSE_POSITIVE", "UNCONFIRMED", "LOW", "MEDIUM", "HIGH"
+    #   resp.code_reviews[0].report_filters.statuses #=> Array
+    #   resp.code_reviews[0].report_filters.statuses[0] #=> String, one of "ACTIVE", "RESOLVED", "ACCEPTED", "FALSE_POSITIVE"
+    #   resp.code_reviews[0].report_filters.risk_types #=> Array
+    #   resp.code_reviews[0].report_filters.risk_types[0] #=> String, one of "CROSS_SITE_SCRIPTING", "DEFAULT_CREDENTIALS", "INSECURE_DIRECT_OBJECT_REFERENCE", "PRIVILEGE_ESCALATION", "SERVER_SIDE_TEMPLATE_INJECTION", "COMMAND_INJECTION", "CODE_INJECTION", "SQL_INJECTION", "ARBITRARY_FILE_UPLOAD", "INSECURE_DESERIALIZATION", "LOCAL_FILE_INCLUSION", "INFORMATION_DISCLOSURE", "PATH_TRAVERSAL", "SERVER_SIDE_REQUEST_FORGERY", "JSON_WEB_TOKEN_VULNERABILITIES", "XML_EXTERNAL_ENTITY", "FILE_DELETION", "OTHER", "GRAPHQL_VULNERABILITIES", "BUSINESS_LOGIC_VULNERABILITIES", "CRYPTOGRAPHIC_VULNERABILITIES", "DENIAL_OF_SERVICE", "FILE_ACCESS", "FILE_CREATION", "DATABASE_MODIFICATION", "DATABASE_ACCESS", "OUTBOUND_SERVICE_REQUEST", "UNKNOWN"
+    #   resp.code_reviews[0].report_filters.finding_types #=> Array
+    #   resp.code_reviews[0].report_filters.finding_types[0] #=> String
+    #   resp.code_reviews[0].report_filters.task_statuses #=> Array
+    #   resp.code_reviews[0].report_filters.task_statuses[0] #=> String, one of "IN_PROGRESS", "ABORTED", "COMPLETED", "INTERNAL_ERROR", "FAILED"
+    #   resp.code_reviews[0].report_filters.annotation_notes #=> Boolean
+    #   resp.code_reviews[0].report_filters.compliance_report #=> Boolean
     #   resp.code_reviews[0].created_at #=> Time
     #   resp.code_reviews[0].updated_at #=> Time
     #   resp.not_found #=> Array
@@ -1293,6 +1333,10 @@ module Aws::SecurityAgent
     #   resp.pentest_jobs[0].job_type #=> String, one of "FULL", "REVALIDATION"
     #   resp.pentest_jobs[0].selected_finding_ids #=> Array
     #   resp.pentest_jobs[0].selected_finding_ids[0] #=> String
+    #   resp.pentest_jobs[0].report_destination.integration_id #=> String
+    #   resp.pentest_jobs[0].report_destination.container_id #=> String
+    #   resp.pentest_jobs[0].report_destination.parent_id #=> String
+    #   resp.pentest_jobs[0].report_destination.document_id #=> String
     #   resp.pentest_jobs[0].created_at #=> Time
     #   resp.pentest_jobs[0].updated_at #=> Time
     #   resp.not_found #=> Array
@@ -1381,6 +1425,24 @@ module Aws::SecurityAgent
     #   resp.pentests[0].disable_managed_skills #=> Array
     #   resp.pentests[0].disable_managed_skills[0] #=> String, one of "FINDING_PERSONALIZATION", "LOGIN_OPTIMIZATION"
     #   resp.pentests[0].max_task_hours #=> Float
+    #   resp.pentests[0].report_destination.integration_id #=> String
+    #   resp.pentests[0].report_destination.container_id #=> String
+    #   resp.pentests[0].report_destination.parent_id #=> String
+    #   resp.pentests[0].report_destination.document_id #=> String
+    #   resp.pentests[0].report_filters.risk_levels #=> Array
+    #   resp.pentests[0].report_filters.risk_levels[0] #=> String, one of "UNKNOWN", "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.pentests[0].report_filters.confidence_levels #=> Array
+    #   resp.pentests[0].report_filters.confidence_levels[0] #=> String, one of "FALSE_POSITIVE", "UNCONFIRMED", "LOW", "MEDIUM", "HIGH"
+    #   resp.pentests[0].report_filters.statuses #=> Array
+    #   resp.pentests[0].report_filters.statuses[0] #=> String, one of "ACTIVE", "RESOLVED", "ACCEPTED", "FALSE_POSITIVE"
+    #   resp.pentests[0].report_filters.risk_types #=> Array
+    #   resp.pentests[0].report_filters.risk_types[0] #=> String, one of "CROSS_SITE_SCRIPTING", "DEFAULT_CREDENTIALS", "INSECURE_DIRECT_OBJECT_REFERENCE", "PRIVILEGE_ESCALATION", "SERVER_SIDE_TEMPLATE_INJECTION", "COMMAND_INJECTION", "CODE_INJECTION", "SQL_INJECTION", "ARBITRARY_FILE_UPLOAD", "INSECURE_DESERIALIZATION", "LOCAL_FILE_INCLUSION", "INFORMATION_DISCLOSURE", "PATH_TRAVERSAL", "SERVER_SIDE_REQUEST_FORGERY", "JSON_WEB_TOKEN_VULNERABILITIES", "XML_EXTERNAL_ENTITY", "FILE_DELETION", "OTHER", "GRAPHQL_VULNERABILITIES", "BUSINESS_LOGIC_VULNERABILITIES", "CRYPTOGRAPHIC_VULNERABILITIES", "DENIAL_OF_SERVICE", "FILE_ACCESS", "FILE_CREATION", "DATABASE_MODIFICATION", "DATABASE_ACCESS", "OUTBOUND_SERVICE_REQUEST", "UNKNOWN"
+    #   resp.pentests[0].report_filters.finding_types #=> Array
+    #   resp.pentests[0].report_filters.finding_types[0] #=> String
+    #   resp.pentests[0].report_filters.task_statuses #=> Array
+    #   resp.pentests[0].report_filters.task_statuses[0] #=> String, one of "IN_PROGRESS", "ABORTED", "COMPLETED", "INTERNAL_ERROR", "FAILED"
+    #   resp.pentests[0].report_filters.annotation_notes #=> Boolean
+    #   resp.pentests[0].report_filters.compliance_report #=> Boolean
     #   resp.pentests[0].created_at #=> Time
     #   resp.pentests[0].updated_at #=> Time
     #   resp.not_found #=> Array
@@ -1585,6 +1647,10 @@ module Aws::SecurityAgent
     #   resp.threat_model_jobs[0].error_information.code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER"
     #   resp.threat_model_jobs[0].error_information.message #=> String
     #   resp.threat_model_jobs[0].system_overview #=> String
+    #   resp.threat_model_jobs[0].report_destination.integration_id #=> String
+    #   resp.threat_model_jobs[0].report_destination.container_id #=> String
+    #   resp.threat_model_jobs[0].report_destination.parent_id #=> String
+    #   resp.threat_model_jobs[0].report_destination.document_id #=> String
     #   resp.not_found #=> Array
     #   resp.not_found[0] #=> String
     #
@@ -1660,6 +1726,10 @@ module Aws::SecurityAgent
     #   resp.threat_models[0].service_role #=> String
     #   resp.threat_models[0].log_config.log_group #=> String
     #   resp.threat_models[0].log_config.log_stream #=> String
+    #   resp.threat_models[0].report_destination.integration_id #=> String
+    #   resp.threat_models[0].report_destination.container_id #=> String
+    #   resp.threat_models[0].report_destination.parent_id #=> String
+    #   resp.threat_models[0].report_destination.document_id #=> String
     #   resp.threat_models[0].created_at #=> Time
     #   resp.threat_models[0].updated_at #=> Time
     #   resp.not_found #=> Array
@@ -1969,6 +2039,13 @@ module Aws::SecurityAgent
     #   from this code review. Must be a positive number. If not set, jobs run
     #   to completion with no budget cap.
     #
+    # @option params [Types::ReportDestination] :report_destination
+    #   The destination for publishing scan reports to an integrated document
+    #   provider.
+    #
+    # @option params [Types::ReportFilters] :report_filters
+    #   The report-generation filters applied when the report is exported.
+    #
     # @return [Types::CreateCodeReviewOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCodeReviewOutput#code_review_id #code_review_id} => String
@@ -1982,6 +2059,8 @@ module Aws::SecurityAgent
     #   * {Types::CreateCodeReviewOutput#code_remediation_strategy #code_remediation_strategy} => String
     #   * {Types::CreateCodeReviewOutput#validation_mode #validation_mode} => String
     #   * {Types::CreateCodeReviewOutput#max_task_hours #max_task_hours} => Float
+    #   * {Types::CreateCodeReviewOutput#report_destination #report_destination} => Types::ReportDestination
+    #   * {Types::CreateCodeReviewOutput#report_filters #report_filters} => Types::ReportFilters
     #
     # @example Request syntax with placeholder values
     #
@@ -2047,6 +2126,22 @@ module Aws::SecurityAgent
     #     code_remediation_strategy: "AUTOMATIC", # accepts AUTOMATIC, DISABLED
     #     validation_mode: "DISABLED", # accepts DISABLED, SIMULATED
     #     max_task_hours: 1.0,
+    #     report_destination: {
+    #       integration_id: "String", # required
+    #       container_id: "String", # required
+    #       parent_id: "String",
+    #       document_id: "String",
+    #     },
+    #     report_filters: {
+    #       risk_levels: ["UNKNOWN"], # accepts UNKNOWN, INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #       confidence_levels: ["FALSE_POSITIVE"], # accepts FALSE_POSITIVE, UNCONFIRMED, LOW, MEDIUM, HIGH
+    #       statuses: ["ACTIVE"], # accepts ACTIVE, RESOLVED, ACCEPTED, FALSE_POSITIVE
+    #       risk_types: ["CROSS_SITE_SCRIPTING"], # accepts CROSS_SITE_SCRIPTING, DEFAULT_CREDENTIALS, INSECURE_DIRECT_OBJECT_REFERENCE, PRIVILEGE_ESCALATION, SERVER_SIDE_TEMPLATE_INJECTION, COMMAND_INJECTION, CODE_INJECTION, SQL_INJECTION, ARBITRARY_FILE_UPLOAD, INSECURE_DESERIALIZATION, LOCAL_FILE_INCLUSION, INFORMATION_DISCLOSURE, PATH_TRAVERSAL, SERVER_SIDE_REQUEST_FORGERY, JSON_WEB_TOKEN_VULNERABILITIES, XML_EXTERNAL_ENTITY, FILE_DELETION, OTHER, GRAPHQL_VULNERABILITIES, BUSINESS_LOGIC_VULNERABILITIES, CRYPTOGRAPHIC_VULNERABILITIES, DENIAL_OF_SERVICE, FILE_ACCESS, FILE_CREATION, DATABASE_MODIFICATION, DATABASE_ACCESS, OUTBOUND_SERVICE_REQUEST, UNKNOWN
+    #       finding_types: ["ReportFilterValue"],
+    #       task_statuses: ["IN_PROGRESS"], # accepts IN_PROGRESS, ABORTED, COMPLETED, INTERNAL_ERROR, FAILED
+    #       annotation_notes: false,
+    #       compliance_report: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -2088,6 +2183,24 @@ module Aws::SecurityAgent
     #   resp.code_remediation_strategy #=> String, one of "AUTOMATIC", "DISABLED"
     #   resp.validation_mode #=> String, one of "DISABLED", "SIMULATED"
     #   resp.max_task_hours #=> Float
+    #   resp.report_destination.integration_id #=> String
+    #   resp.report_destination.container_id #=> String
+    #   resp.report_destination.parent_id #=> String
+    #   resp.report_destination.document_id #=> String
+    #   resp.report_filters.risk_levels #=> Array
+    #   resp.report_filters.risk_levels[0] #=> String, one of "UNKNOWN", "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.report_filters.confidence_levels #=> Array
+    #   resp.report_filters.confidence_levels[0] #=> String, one of "FALSE_POSITIVE", "UNCONFIRMED", "LOW", "MEDIUM", "HIGH"
+    #   resp.report_filters.statuses #=> Array
+    #   resp.report_filters.statuses[0] #=> String, one of "ACTIVE", "RESOLVED", "ACCEPTED", "FALSE_POSITIVE"
+    #   resp.report_filters.risk_types #=> Array
+    #   resp.report_filters.risk_types[0] #=> String, one of "CROSS_SITE_SCRIPTING", "DEFAULT_CREDENTIALS", "INSECURE_DIRECT_OBJECT_REFERENCE", "PRIVILEGE_ESCALATION", "SERVER_SIDE_TEMPLATE_INJECTION", "COMMAND_INJECTION", "CODE_INJECTION", "SQL_INJECTION", "ARBITRARY_FILE_UPLOAD", "INSECURE_DESERIALIZATION", "LOCAL_FILE_INCLUSION", "INFORMATION_DISCLOSURE", "PATH_TRAVERSAL", "SERVER_SIDE_REQUEST_FORGERY", "JSON_WEB_TOKEN_VULNERABILITIES", "XML_EXTERNAL_ENTITY", "FILE_DELETION", "OTHER", "GRAPHQL_VULNERABILITIES", "BUSINESS_LOGIC_VULNERABILITIES", "CRYPTOGRAPHIC_VULNERABILITIES", "DENIAL_OF_SERVICE", "FILE_ACCESS", "FILE_CREATION", "DATABASE_MODIFICATION", "DATABASE_ACCESS", "OUTBOUND_SERVICE_REQUEST", "UNKNOWN"
+    #   resp.report_filters.finding_types #=> Array
+    #   resp.report_filters.finding_types[0] #=> String
+    #   resp.report_filters.task_statuses #=> Array
+    #   resp.report_filters.task_statuses[0] #=> String, one of "IN_PROGRESS", "ABORTED", "COMPLETED", "INTERNAL_ERROR", "FAILED"
+    #   resp.report_filters.annotation_notes #=> Boolean
+    #   resp.report_filters.compliance_report #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreateCodeReview AWS API Documentation
     #
@@ -2265,6 +2378,13 @@ module Aws::SecurityAgent
     #   from this pentest. Must be a positive number. If not set, jobs run to
     #   completion with no budget cap.
     #
+    # @option params [Types::ReportDestination] :report_destination
+    #   The destination for publishing scan reports to an integrated document
+    #   provider.
+    #
+    # @option params [Types::ReportFilters] :report_filters
+    #   The report-generation filters applied when the report is exported.
+    #
     # @return [Types::CreatePentestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePentestOutput#pentest_id #pentest_id} => String
@@ -2276,6 +2396,8 @@ module Aws::SecurityAgent
     #   * {Types::CreatePentestOutput#service_role #service_role} => String
     #   * {Types::CreatePentestOutput#log_config #log_config} => Types::CloudWatchLog
     #   * {Types::CreatePentestOutput#agent_space_id #agent_space_id} => String
+    #   * {Types::CreatePentestOutput#report_destination #report_destination} => Types::ReportDestination
+    #   * {Types::CreatePentestOutput#report_filters #report_filters} => Types::ReportFilters
     #
     # @example Request syntax with placeholder values
     #
@@ -2362,6 +2484,22 @@ module Aws::SecurityAgent
     #     code_remediation_strategy: "AUTOMATIC", # accepts AUTOMATIC, DISABLED
     #     disable_managed_skills: ["FINDING_PERSONALIZATION"], # accepts FINDING_PERSONALIZATION, LOGIN_OPTIMIZATION
     #     max_task_hours: 1.0,
+    #     report_destination: {
+    #       integration_id: "String", # required
+    #       container_id: "String", # required
+    #       parent_id: "String",
+    #       document_id: "String",
+    #     },
+    #     report_filters: {
+    #       risk_levels: ["UNKNOWN"], # accepts UNKNOWN, INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #       confidence_levels: ["FALSE_POSITIVE"], # accepts FALSE_POSITIVE, UNCONFIRMED, LOW, MEDIUM, HIGH
+    #       statuses: ["ACTIVE"], # accepts ACTIVE, RESOLVED, ACCEPTED, FALSE_POSITIVE
+    #       risk_types: ["CROSS_SITE_SCRIPTING"], # accepts CROSS_SITE_SCRIPTING, DEFAULT_CREDENTIALS, INSECURE_DIRECT_OBJECT_REFERENCE, PRIVILEGE_ESCALATION, SERVER_SIDE_TEMPLATE_INJECTION, COMMAND_INJECTION, CODE_INJECTION, SQL_INJECTION, ARBITRARY_FILE_UPLOAD, INSECURE_DESERIALIZATION, LOCAL_FILE_INCLUSION, INFORMATION_DISCLOSURE, PATH_TRAVERSAL, SERVER_SIDE_REQUEST_FORGERY, JSON_WEB_TOKEN_VULNERABILITIES, XML_EXTERNAL_ENTITY, FILE_DELETION, OTHER, GRAPHQL_VULNERABILITIES, BUSINESS_LOGIC_VULNERABILITIES, CRYPTOGRAPHIC_VULNERABILITIES, DENIAL_OF_SERVICE, FILE_ACCESS, FILE_CREATION, DATABASE_MODIFICATION, DATABASE_ACCESS, OUTBOUND_SERVICE_REQUEST, UNKNOWN
+    #       finding_types: ["ReportFilterValue"],
+    #       task_statuses: ["IN_PROGRESS"], # accepts IN_PROGRESS, ABORTED, COMPLETED, INTERNAL_ERROR, FAILED
+    #       annotation_notes: false,
+    #       compliance_report: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -2402,6 +2540,24 @@ module Aws::SecurityAgent
     #   resp.log_config.log_group #=> String
     #   resp.log_config.log_stream #=> String
     #   resp.agent_space_id #=> String
+    #   resp.report_destination.integration_id #=> String
+    #   resp.report_destination.container_id #=> String
+    #   resp.report_destination.parent_id #=> String
+    #   resp.report_destination.document_id #=> String
+    #   resp.report_filters.risk_levels #=> Array
+    #   resp.report_filters.risk_levels[0] #=> String, one of "UNKNOWN", "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.report_filters.confidence_levels #=> Array
+    #   resp.report_filters.confidence_levels[0] #=> String, one of "FALSE_POSITIVE", "UNCONFIRMED", "LOW", "MEDIUM", "HIGH"
+    #   resp.report_filters.statuses #=> Array
+    #   resp.report_filters.statuses[0] #=> String, one of "ACTIVE", "RESOLVED", "ACCEPTED", "FALSE_POSITIVE"
+    #   resp.report_filters.risk_types #=> Array
+    #   resp.report_filters.risk_types[0] #=> String, one of "CROSS_SITE_SCRIPTING", "DEFAULT_CREDENTIALS", "INSECURE_DIRECT_OBJECT_REFERENCE", "PRIVILEGE_ESCALATION", "SERVER_SIDE_TEMPLATE_INJECTION", "COMMAND_INJECTION", "CODE_INJECTION", "SQL_INJECTION", "ARBITRARY_FILE_UPLOAD", "INSECURE_DESERIALIZATION", "LOCAL_FILE_INCLUSION", "INFORMATION_DISCLOSURE", "PATH_TRAVERSAL", "SERVER_SIDE_REQUEST_FORGERY", "JSON_WEB_TOKEN_VULNERABILITIES", "XML_EXTERNAL_ENTITY", "FILE_DELETION", "OTHER", "GRAPHQL_VULNERABILITIES", "BUSINESS_LOGIC_VULNERABILITIES", "CRYPTOGRAPHIC_VULNERABILITIES", "DENIAL_OF_SERVICE", "FILE_ACCESS", "FILE_CREATION", "DATABASE_MODIFICATION", "DATABASE_ACCESS", "OUTBOUND_SERVICE_REQUEST", "UNKNOWN"
+    #   resp.report_filters.finding_types #=> Array
+    #   resp.report_filters.finding_types[0] #=> String
+    #   resp.report_filters.task_statuses #=> Array
+    #   resp.report_filters.task_statuses[0] #=> String, one of "IN_PROGRESS", "ABORTED", "COMPLETED", "INTERNAL_ERROR", "FAILED"
+    #   resp.report_filters.annotation_notes #=> Boolean
+    #   resp.report_filters.compliance_report #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreatePentest AWS API Documentation
     #
@@ -2782,6 +2938,7 @@ module Aws::SecurityAgent
     #   * {Types::CreateThreatModelOutput#log_config #log_config} => Types::CloudWatchLog
     #   * {Types::CreateThreatModelOutput#created_at #created_at} => Time
     #   * {Types::CreateThreatModelOutput#updated_at #updated_at} => Time
+    #   * {Types::CreateThreatModelOutput#report_destination #report_destination} => Types::ReportDestination
     #
     # @example Request syntax with placeholder values
     #
@@ -2905,6 +3062,10 @@ module Aws::SecurityAgent
     #   resp.log_config.log_stream #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
+    #   resp.report_destination.integration_id #=> String
+    #   resp.report_destination.container_id #=> String
+    #   resp.report_destination.parent_id #=> String
+    #   resp.report_destination.document_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreateThreatModel AWS API Documentation
     #
@@ -5188,6 +5349,13 @@ module Aws::SecurityAgent
     #   The updated maximum number of billable task hours allowed for jobs
     #   started from this code review.
     #
+    # @option params [Types::ReportDestination] :report_destination
+    #   The destination for publishing scan reports to an integrated document
+    #   provider.
+    #
+    # @option params [Types::ReportFilters] :report_filters
+    #   The report-generation filters applied when the report is exported.
+    #
     # @return [Types::UpdateCodeReviewOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateCodeReviewOutput#code_review_id #code_review_id} => String
@@ -5201,6 +5369,8 @@ module Aws::SecurityAgent
     #   * {Types::UpdateCodeReviewOutput#code_remediation_strategy #code_remediation_strategy} => String
     #   * {Types::UpdateCodeReviewOutput#validation_mode #validation_mode} => String
     #   * {Types::UpdateCodeReviewOutput#max_task_hours #max_task_hours} => Float
+    #   * {Types::UpdateCodeReviewOutput#report_destination #report_destination} => Types::ReportDestination
+    #   * {Types::UpdateCodeReviewOutput#report_filters #report_filters} => Types::ReportFilters
     #
     # @example Request syntax with placeholder values
     #
@@ -5267,6 +5437,22 @@ module Aws::SecurityAgent
     #     code_remediation_strategy: "AUTOMATIC", # accepts AUTOMATIC, DISABLED
     #     validation_mode: "DISABLED", # accepts DISABLED, SIMULATED
     #     max_task_hours: 1.0,
+    #     report_destination: {
+    #       integration_id: "String", # required
+    #       container_id: "String", # required
+    #       parent_id: "String",
+    #       document_id: "String",
+    #     },
+    #     report_filters: {
+    #       risk_levels: ["UNKNOWN"], # accepts UNKNOWN, INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #       confidence_levels: ["FALSE_POSITIVE"], # accepts FALSE_POSITIVE, UNCONFIRMED, LOW, MEDIUM, HIGH
+    #       statuses: ["ACTIVE"], # accepts ACTIVE, RESOLVED, ACCEPTED, FALSE_POSITIVE
+    #       risk_types: ["CROSS_SITE_SCRIPTING"], # accepts CROSS_SITE_SCRIPTING, DEFAULT_CREDENTIALS, INSECURE_DIRECT_OBJECT_REFERENCE, PRIVILEGE_ESCALATION, SERVER_SIDE_TEMPLATE_INJECTION, COMMAND_INJECTION, CODE_INJECTION, SQL_INJECTION, ARBITRARY_FILE_UPLOAD, INSECURE_DESERIALIZATION, LOCAL_FILE_INCLUSION, INFORMATION_DISCLOSURE, PATH_TRAVERSAL, SERVER_SIDE_REQUEST_FORGERY, JSON_WEB_TOKEN_VULNERABILITIES, XML_EXTERNAL_ENTITY, FILE_DELETION, OTHER, GRAPHQL_VULNERABILITIES, BUSINESS_LOGIC_VULNERABILITIES, CRYPTOGRAPHIC_VULNERABILITIES, DENIAL_OF_SERVICE, FILE_ACCESS, FILE_CREATION, DATABASE_MODIFICATION, DATABASE_ACCESS, OUTBOUND_SERVICE_REQUEST, UNKNOWN
+    #       finding_types: ["ReportFilterValue"],
+    #       task_statuses: ["IN_PROGRESS"], # accepts IN_PROGRESS, ABORTED, COMPLETED, INTERNAL_ERROR, FAILED
+    #       annotation_notes: false,
+    #       compliance_report: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -5308,6 +5494,24 @@ module Aws::SecurityAgent
     #   resp.code_remediation_strategy #=> String, one of "AUTOMATIC", "DISABLED"
     #   resp.validation_mode #=> String, one of "DISABLED", "SIMULATED"
     #   resp.max_task_hours #=> Float
+    #   resp.report_destination.integration_id #=> String
+    #   resp.report_destination.container_id #=> String
+    #   resp.report_destination.parent_id #=> String
+    #   resp.report_destination.document_id #=> String
+    #   resp.report_filters.risk_levels #=> Array
+    #   resp.report_filters.risk_levels[0] #=> String, one of "UNKNOWN", "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.report_filters.confidence_levels #=> Array
+    #   resp.report_filters.confidence_levels[0] #=> String, one of "FALSE_POSITIVE", "UNCONFIRMED", "LOW", "MEDIUM", "HIGH"
+    #   resp.report_filters.statuses #=> Array
+    #   resp.report_filters.statuses[0] #=> String, one of "ACTIVE", "RESOLVED", "ACCEPTED", "FALSE_POSITIVE"
+    #   resp.report_filters.risk_types #=> Array
+    #   resp.report_filters.risk_types[0] #=> String, one of "CROSS_SITE_SCRIPTING", "DEFAULT_CREDENTIALS", "INSECURE_DIRECT_OBJECT_REFERENCE", "PRIVILEGE_ESCALATION", "SERVER_SIDE_TEMPLATE_INJECTION", "COMMAND_INJECTION", "CODE_INJECTION", "SQL_INJECTION", "ARBITRARY_FILE_UPLOAD", "INSECURE_DESERIALIZATION", "LOCAL_FILE_INCLUSION", "INFORMATION_DISCLOSURE", "PATH_TRAVERSAL", "SERVER_SIDE_REQUEST_FORGERY", "JSON_WEB_TOKEN_VULNERABILITIES", "XML_EXTERNAL_ENTITY", "FILE_DELETION", "OTHER", "GRAPHQL_VULNERABILITIES", "BUSINESS_LOGIC_VULNERABILITIES", "CRYPTOGRAPHIC_VULNERABILITIES", "DENIAL_OF_SERVICE", "FILE_ACCESS", "FILE_CREATION", "DATABASE_MODIFICATION", "DATABASE_ACCESS", "OUTBOUND_SERVICE_REQUEST", "UNKNOWN"
+    #   resp.report_filters.finding_types #=> Array
+    #   resp.report_filters.finding_types[0] #=> String
+    #   resp.report_filters.task_statuses #=> Array
+    #   resp.report_filters.task_statuses[0] #=> String, one of "IN_PROGRESS", "ABORTED", "COMPLETED", "INTERNAL_ERROR", "FAILED"
+    #   resp.report_filters.annotation_notes #=> Boolean
+    #   resp.report_filters.compliance_report #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateCodeReview AWS API Documentation
     #
@@ -5494,6 +5698,13 @@ module Aws::SecurityAgent
     #   The updated maximum number of billable task hours allowed for jobs
     #   started from this pentest.
     #
+    # @option params [Types::ReportDestination] :report_destination
+    #   The destination for publishing scan reports to an integrated document
+    #   provider.
+    #
+    # @option params [Types::ReportFilters] :report_filters
+    #   The report-generation filters applied when the report is exported.
+    #
     # @return [Types::UpdatePentestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePentestOutput#pentest_id #pentest_id} => String
@@ -5505,6 +5716,8 @@ module Aws::SecurityAgent
     #   * {Types::UpdatePentestOutput#service_role #service_role} => String
     #   * {Types::UpdatePentestOutput#log_config #log_config} => Types::CloudWatchLog
     #   * {Types::UpdatePentestOutput#agent_space_id #agent_space_id} => String
+    #   * {Types::UpdatePentestOutput#report_destination #report_destination} => Types::ReportDestination
+    #   * {Types::UpdatePentestOutput#report_filters #report_filters} => Types::ReportFilters
     #
     # @example Request syntax with placeholder values
     #
@@ -5592,6 +5805,22 @@ module Aws::SecurityAgent
     #     code_remediation_strategy: "AUTOMATIC", # accepts AUTOMATIC, DISABLED
     #     disable_managed_skills: ["FINDING_PERSONALIZATION"], # accepts FINDING_PERSONALIZATION, LOGIN_OPTIMIZATION
     #     max_task_hours: 1.0,
+    #     report_destination: {
+    #       integration_id: "String", # required
+    #       container_id: "String", # required
+    #       parent_id: "String",
+    #       document_id: "String",
+    #     },
+    #     report_filters: {
+    #       risk_levels: ["UNKNOWN"], # accepts UNKNOWN, INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #       confidence_levels: ["FALSE_POSITIVE"], # accepts FALSE_POSITIVE, UNCONFIRMED, LOW, MEDIUM, HIGH
+    #       statuses: ["ACTIVE"], # accepts ACTIVE, RESOLVED, ACCEPTED, FALSE_POSITIVE
+    #       risk_types: ["CROSS_SITE_SCRIPTING"], # accepts CROSS_SITE_SCRIPTING, DEFAULT_CREDENTIALS, INSECURE_DIRECT_OBJECT_REFERENCE, PRIVILEGE_ESCALATION, SERVER_SIDE_TEMPLATE_INJECTION, COMMAND_INJECTION, CODE_INJECTION, SQL_INJECTION, ARBITRARY_FILE_UPLOAD, INSECURE_DESERIALIZATION, LOCAL_FILE_INCLUSION, INFORMATION_DISCLOSURE, PATH_TRAVERSAL, SERVER_SIDE_REQUEST_FORGERY, JSON_WEB_TOKEN_VULNERABILITIES, XML_EXTERNAL_ENTITY, FILE_DELETION, OTHER, GRAPHQL_VULNERABILITIES, BUSINESS_LOGIC_VULNERABILITIES, CRYPTOGRAPHIC_VULNERABILITIES, DENIAL_OF_SERVICE, FILE_ACCESS, FILE_CREATION, DATABASE_MODIFICATION, DATABASE_ACCESS, OUTBOUND_SERVICE_REQUEST, UNKNOWN
+    #       finding_types: ["ReportFilterValue"],
+    #       task_statuses: ["IN_PROGRESS"], # accepts IN_PROGRESS, ABORTED, COMPLETED, INTERNAL_ERROR, FAILED
+    #       annotation_notes: false,
+    #       compliance_report: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -5632,6 +5861,24 @@ module Aws::SecurityAgent
     #   resp.log_config.log_group #=> String
     #   resp.log_config.log_stream #=> String
     #   resp.agent_space_id #=> String
+    #   resp.report_destination.integration_id #=> String
+    #   resp.report_destination.container_id #=> String
+    #   resp.report_destination.parent_id #=> String
+    #   resp.report_destination.document_id #=> String
+    #   resp.report_filters.risk_levels #=> Array
+    #   resp.report_filters.risk_levels[0] #=> String, one of "UNKNOWN", "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.report_filters.confidence_levels #=> Array
+    #   resp.report_filters.confidence_levels[0] #=> String, one of "FALSE_POSITIVE", "UNCONFIRMED", "LOW", "MEDIUM", "HIGH"
+    #   resp.report_filters.statuses #=> Array
+    #   resp.report_filters.statuses[0] #=> String, one of "ACTIVE", "RESOLVED", "ACCEPTED", "FALSE_POSITIVE"
+    #   resp.report_filters.risk_types #=> Array
+    #   resp.report_filters.risk_types[0] #=> String, one of "CROSS_SITE_SCRIPTING", "DEFAULT_CREDENTIALS", "INSECURE_DIRECT_OBJECT_REFERENCE", "PRIVILEGE_ESCALATION", "SERVER_SIDE_TEMPLATE_INJECTION", "COMMAND_INJECTION", "CODE_INJECTION", "SQL_INJECTION", "ARBITRARY_FILE_UPLOAD", "INSECURE_DESERIALIZATION", "LOCAL_FILE_INCLUSION", "INFORMATION_DISCLOSURE", "PATH_TRAVERSAL", "SERVER_SIDE_REQUEST_FORGERY", "JSON_WEB_TOKEN_VULNERABILITIES", "XML_EXTERNAL_ENTITY", "FILE_DELETION", "OTHER", "GRAPHQL_VULNERABILITIES", "BUSINESS_LOGIC_VULNERABILITIES", "CRYPTOGRAPHIC_VULNERABILITIES", "DENIAL_OF_SERVICE", "FILE_ACCESS", "FILE_CREATION", "DATABASE_MODIFICATION", "DATABASE_ACCESS", "OUTBOUND_SERVICE_REQUEST", "UNKNOWN"
+    #   resp.report_filters.finding_types #=> Array
+    #   resp.report_filters.finding_types[0] #=> String
+    #   resp.report_filters.task_statuses #=> Array
+    #   resp.report_filters.task_statuses[0] #=> String, one of "IN_PROGRESS", "ABORTED", "COMPLETED", "INTERNAL_ERROR", "FAILED"
+    #   resp.report_filters.annotation_notes #=> Boolean
+    #   resp.report_filters.compliance_report #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdatePentest AWS API Documentation
     #
@@ -5966,6 +6213,10 @@ module Aws::SecurityAgent
     # @option params [Types::CloudWatchLog] :log_config
     #   The updated CloudWatch Logs configuration for the threat model.
     #
+    # @option params [Types::ReportDestination] :report_destination
+    #   The destination for publishing scan reports to an integrated document
+    #   provider.
+    #
     # @return [Types::UpdateThreatModelOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateThreatModelOutput#threat_model_id #threat_model_id} => String
@@ -5978,6 +6229,7 @@ module Aws::SecurityAgent
     #   * {Types::UpdateThreatModelOutput#log_config #log_config} => Types::CloudWatchLog
     #   * {Types::UpdateThreatModelOutput#created_at #created_at} => Time
     #   * {Types::UpdateThreatModelOutput#updated_at #updated_at} => Time
+    #   * {Types::UpdateThreatModelOutput#report_destination #report_destination} => Types::ReportDestination
     #
     # @example Request syntax with placeholder values
     #
@@ -6052,6 +6304,12 @@ module Aws::SecurityAgent
     #       log_group: "String",
     #       log_stream: "String",
     #     },
+    #     report_destination: {
+    #       integration_id: "String", # required
+    #       container_id: "String", # required
+    #       parent_id: "String",
+    #       document_id: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -6096,6 +6354,10 @@ module Aws::SecurityAgent
     #   resp.log_config.log_stream #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
+    #   resp.report_destination.integration_id #=> String
+    #   resp.report_destination.container_id #=> String
+    #   resp.report_destination.parent_id #=> String
+    #   resp.report_destination.document_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateThreatModel AWS API Documentation
     #
@@ -6165,7 +6427,7 @@ module Aws::SecurityAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityagent'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

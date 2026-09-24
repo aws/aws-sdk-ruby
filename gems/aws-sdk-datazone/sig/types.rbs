@@ -1162,6 +1162,7 @@ module Aws::DataZone
       attr_accessor description: ::String
       attr_accessor provisioning_properties: Types::ProvisioningProperties
       attr_accessor user_parameters: ::Array[Types::CustomParameter]
+      attr_accessor blueprint_category: ("TOOLING")
       SENSITIVE: [:description]
     end
 
@@ -1174,6 +1175,7 @@ module Aws::DataZone
       attr_accessor deployment_properties: Types::DeploymentProperties
       attr_accessor user_parameters: ::Array[Types::CustomParameter]
       attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor blueprint_category: ("TOOLING")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: [:description]
@@ -2277,6 +2279,7 @@ module Aws::DataZone
       attr_accessor provisioning_properties: Types::ProvisioningProperties
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor blueprint_category: ("TOOLING")
       SENSITIVE: [:description]
     end
 
@@ -2804,6 +2807,7 @@ module Aws::DataZone
       attr_accessor deployment_properties: Types::DeploymentProperties
       attr_accessor user_parameters: ::Array[Types::CustomParameter]
       attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor blueprint_category: ("TOOLING")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: [:description]
@@ -3615,6 +3619,7 @@ module Aws::DataZone
 
     class IamPropertiesInput
       attr_accessor glue_lineage_sync_enabled: bool
+      attr_accessor role_arn: ::String
       SENSITIVE: []
     end
 
@@ -6569,6 +6574,7 @@ module Aws::DataZone
       attr_accessor description: ::String
       attr_accessor provisioning_properties: Types::ProvisioningProperties
       attr_accessor user_parameters: ::Array[Types::CustomParameter]
+      attr_accessor blueprint_category: ("TOOLING")
       SENSITIVE: []
     end
 
@@ -6581,6 +6587,7 @@ module Aws::DataZone
       attr_accessor deployment_properties: Types::DeploymentProperties
       attr_accessor user_parameters: ::Array[Types::CustomParameter]
       attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor blueprint_category: ("TOOLING")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: [:description]

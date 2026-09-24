@@ -478,11 +478,18 @@ module Aws::MarketplaceDiscovery
     # categories, pricing model summaries, reviews, and associated products
     # and offers.
     #
+    # @option params [String] :locale
+    #   A BCP 47 language tag or comma-separated priority list specifying the
+    #   preferred locale for response content. See `Locale` for supported
+    #   values, constraints, fallback behavior, and the default locale. If
+    #   omitted, the service returns content in the default locale.
+    #
     # @option params [required, String] :listing_id
     #   The unique identifier of the listing to retrieve.
     #
     # @return [Types::GetListingOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetListingOutput#locale #locale} => String
     #   * {Types::GetListingOutput#associated_entities #associated_entities} => Array&lt;Types::ListingAssociatedEntity&gt;
     #   * {Types::GetListingOutput#badges #badges} => Array&lt;Types::ListingBadge&gt;
     #   * {Types::GetListingOutput#catalog #catalog} => String
@@ -509,6 +516,7 @@ module Aws::MarketplaceDiscovery
     #
     #   resp = client.get_listing({
     #     listing_id: "prodview-sampleSaasId", 
+    #     locale: "en-US", 
     #   })
     #
     #   resp.to_h outputs the following:
@@ -551,6 +559,7 @@ module Aws::MarketplaceDiscovery
     #     ], 
     #     listing_id: "prodview-sampleSaasId", 
     #     listing_name: "sample SaaS listing", 
+    #     locale: "en-US", 
     #     logo_thumbnail_url: "https://example.com/logos/sample-saas-logo.png", 
     #     long_description: "A sample SaaS product that provides automated, ready-to-code development environments in the cloud.", 
     #     pricing_models: [
@@ -625,6 +634,7 @@ module Aws::MarketplaceDiscovery
     #
     #   resp = client.get_listing({
     #     listing_id: "prodview-sampleAmiId", 
+    #     locale: "en-US", 
     #   })
     #
     #   resp.to_h outputs the following:
@@ -684,6 +694,7 @@ module Aws::MarketplaceDiscovery
     #     ], 
     #     listing_id: "prodview-sampleAmiId", 
     #     listing_name: "sample AMI listing", 
+    #     locale: "en-US", 
     #     logo_thumbnail_url: "https://example.com/logos/sample-ami-logo.png", 
     #     long_description: "A sample AMI product that provides load balancing, content caching, and API gateway capabilities optimized for cloud-native architectures.", 
     #     pricing_models: [
@@ -766,6 +777,7 @@ module Aws::MarketplaceDiscovery
     #
     #   resp = client.get_listing({
     #     listing_id: "prodview-sampleMultiProductId", 
+    #     locale: "en-US", 
     #   })
     #
     #   resp.to_h outputs the following:
@@ -816,6 +828,7 @@ module Aws::MarketplaceDiscovery
     #     integration_guide: "To add the remote Box MCP server in Amazon Quick Suite, follow these steps: In the Amazon Quick Suite console, choose Integrations and create new integration by choosing Model Content Protocol.", 
     #     listing_id: "prodview-sampleMultiProductId", 
     #     listing_name: "sample multi-product listing", 
+    #     locale: "en-US", 
     #     logo_thumbnail_url: "https://example.com/logos/sample-multi-product-logo.png", 
     #     long_description: "A sample multi-product listing that connects content management with a unified AI platform. Users can securely search, analyze, and extract valuable insights from their files.", 
     #     pricing_models: [
@@ -878,11 +891,13 @@ module Aws::MarketplaceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_listing({
+    #     locale: "Locale",
     #     listing_id: "ListingId", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.locale #=> String
     #   resp.associated_entities #=> Array
     #   resp.associated_entities[0].product.product_id #=> String
     #   resp.associated_entities[0].product.product_name #=> String
@@ -959,11 +974,18 @@ module Aws::MarketplaceDiscovery
     # Provides details about an offer, such as the pricing model, seller of
     # record, availability dates, badges, and associated products.
     #
+    # @option params [String] :locale
+    #   A BCP 47 language tag or comma-separated priority list specifying the
+    #   preferred locale for response content. See `Locale` for supported
+    #   values, constraints, fallback behavior, and the default locale. If
+    #   omitted, the service returns content in the default locale.
+    #
     # @option params [required, String] :offer_id
     #   The unique identifier of the offer to retrieve.
     #
     # @return [Types::GetOfferOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetOfferOutput#locale #locale} => String
     #   * {Types::GetOfferOutput#offer_id #offer_id} => String
     #   * {Types::GetOfferOutput#catalog #catalog} => String
     #   * {Types::GetOfferOutput#offer_name #offer_name} => String
@@ -980,6 +1002,7 @@ module Aws::MarketplaceDiscovery
     # @example Example: Invoke GetOffer for Contract Pricing offer
     #
     #   resp = client.get_offer({
+    #     locale: "en-US", 
     #     offer_id: "offer-sampleContractId", 
     #   })
     #
@@ -1018,6 +1041,7 @@ module Aws::MarketplaceDiscovery
     #     ], 
     #     catalog: "AWSMarketplace", 
     #     expiration_time: Time.parse("2023-10-08T21:40:43.644Z"), 
+    #     locale: "en-US", 
     #     offer_id: "offer-sampleContractId", 
     #     offer_name: "sample contract offer", 
     #     pricing_model: {
@@ -1034,6 +1058,7 @@ module Aws::MarketplaceDiscovery
     # @example Example: Invoke GetOffer for Usage Pricing offer
     #
     #   resp = client.get_offer({
+    #     locale: "en-US", 
     #     offer_id: "offer-sampleUsageId", 
     #   })
     #
@@ -1060,6 +1085,7 @@ module Aws::MarketplaceDiscovery
     #     ], 
     #     catalog: "AWSMarketplace", 
     #     expiration_time: Time.parse("2022-03-29T23:59:59.999Z"), 
+    #     locale: "en-US", 
     #     offer_id: "offer-sampleUsageId", 
     #     offer_name: "sample usage offer", 
     #     pricing_model: {
@@ -1076,6 +1102,7 @@ module Aws::MarketplaceDiscovery
     # @example Example: Invoke GetOffer for BYOL Pricing offer
     #
     #   resp = client.get_offer({
+    #     locale: "en-US", 
     #     offer_id: "offer-sampleByolId", 
     #   })
     #
@@ -1098,6 +1125,7 @@ module Aws::MarketplaceDiscovery
     #     ], 
     #     catalog: "AWSMarketplace", 
     #     expiration_time: Time.parse("2022-03-29T23:59:59.999Z"), 
+    #     locale: "en-US", 
     #     offer_id: "offer-sampleByolId", 
     #     offer_name: "sample BYOL offer", 
     #     pricing_model: {
@@ -1114,6 +1142,7 @@ module Aws::MarketplaceDiscovery
     # @example Example: Invoke GetOffer for FREE Pricing offer
     #
     #   resp = client.get_offer({
+    #     locale: "en-US", 
     #     offer_id: "offer-sampleFreeId", 
     #   })
     #
@@ -1136,6 +1165,7 @@ module Aws::MarketplaceDiscovery
     #     ], 
     #     catalog: "AWSMarketplace", 
     #     expiration_time: Time.parse("2022-03-29T23:59:59.999Z"), 
+    #     locale: "en-US", 
     #     offer_id: "offer-sampleFreeId", 
     #     offer_name: "sample free offer", 
     #     pricing_model: {
@@ -1152,11 +1182,13 @@ module Aws::MarketplaceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_offer({
+    #     locale: "Locale",
     #     offer_id: "OfferId", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.locale #=> String
     #   resp.offer_id #=> String
     #   resp.catalog #=> String
     #   resp.offer_name #=> String
@@ -1193,11 +1225,18 @@ module Aws::MarketplaceDiscovery
     # across multiple products. Includes the seller, availability dates,
     # buyer notes, and associated product-offer pairs.
     #
+    # @option params [String] :locale
+    #   A BCP 47 language tag or comma-separated priority list specifying the
+    #   preferred locale for response content. See `Locale` for supported
+    #   values, constraints, fallback behavior, and the default locale. If
+    #   omitted, the service returns content in the default locale.
+    #
     # @option params [required, String] :offer_set_id
     #   The unique identifier of the offer set to retrieve.
     #
     # @return [Types::GetOfferSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetOfferSetOutput#locale #locale} => String
     #   * {Types::GetOfferSetOutput#offer_set_id #offer_set_id} => String
     #   * {Types::GetOfferSetOutput#catalog #catalog} => String
     #   * {Types::GetOfferSetOutput#offer_set_name #offer_set_name} => String
@@ -1212,6 +1251,7 @@ module Aws::MarketplaceDiscovery
     # @example Example: Get offer set with multiple products
     #
     #   resp = client.get_offer_set({
+    #     locale: "en-US", 
     #     offer_set_id: "offerset-sampleId", 
     #   })
     #
@@ -1261,10 +1301,19 @@ module Aws::MarketplaceDiscovery
     #         badge_type: "PRIVATE_PRICING", 
     #         display_name: "Private Pricing", 
     #       }, 
+    #       {
+    #         badge_type: "FUTURE_DATED", 
+    #         display_name: "Future Dated", 
+    #       }, 
+    #       {
+    #         badge_type: "REPLACEMENT_OFFER", 
+    #         display_name: "Replacement Offer", 
+    #       }, 
     #     ], 
     #     buyer_notes: "This bundle includes CrowdStrike Falcon and Splunk Enterprise for comprehensive security monitoring.", 
     #     catalog: "AWSMarketplace", 
     #     expiration_time: Time.parse("2025-03-20T00:00:00.000Z"), 
+    #     locale: "en-US", 
     #     offer_set_id: "offerset-sampleId", 
     #     offer_set_name: "sample offer set", 
     #     seller_of_record: {
@@ -1273,14 +1322,100 @@ module Aws::MarketplaceDiscovery
     #     }, 
     #   }
     #
+    # @example Example: Get offer set with only required fields
+    #
+    #   resp = client.get_offer_set({
+    #     offer_set_id: "offerset-sampleMinimalId", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     associated_entities: [
+    #       {
+    #         offer: {
+    #           offer_id: "offer-sampleMinimalId", 
+    #           seller_of_record: {
+    #             display_name: "sample reseller", 
+    #             seller_profile_id: "seller-sampleResellerId", 
+    #           }, 
+    #         }, 
+    #         product: {
+    #           manufacturer: {
+    #             display_name: "sample seller name 1", 
+    #             seller_profile_id: "seller-sampleId1", 
+    #           }, 
+    #           product_id: "prod-sampleMinimalId", 
+    #           product_name: "sample product name", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     badges: [
+    #     ], 
+    #     catalog: "AWSMarketplace", 
+    #     offer_set_id: "offerset-sampleMinimalId", 
+    #     seller_of_record: {
+    #       display_name: "sample reseller", 
+    #       seller_profile_id: "seller-sampleResellerId", 
+    #     }, 
+    #   }
+    #
+    # @example Example: Get offer set that never expires from a first-party seller
+    #
+    #   resp = client.get_offer_set({
+    #     locale: "en-US", 
+    #     offer_set_id: "offerset-samplePerpetualId", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     associated_entities: [
+    #       {
+    #         offer: {
+    #           offer_id: "offer-samplePerpetualId", 
+    #           offer_name: "sample perpetual offer", 
+    #           seller_of_record: {
+    #             display_name: "sample first-party seller", 
+    #             seller_profile_id: "seller-sampleFirstPartyId", 
+    #           }, 
+    #         }, 
+    #         product: {
+    #           manufacturer: {
+    #             display_name: "sample first-party seller", 
+    #             seller_profile_id: "seller-sampleFirstPartyId", 
+    #           }, 
+    #           product_id: "prod-samplePerpetualId", 
+    #           product_name: "sample perpetual product", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     available_from_time: Time.parse("2024-03-20T00:00:00.000Z"), 
+    #     badges: [
+    #       {
+    #         badge_type: "PRIVATE_PRICING", 
+    #         display_name: "Private Pricing", 
+    #       }, 
+    #     ], 
+    #     buyer_notes: "This offer set does not expire. Omitting expirationTime indicates the offer set remains available for procurement indefinitely.", 
+    #     catalog: "AWSMarketplace", 
+    #     locale: "en-US", 
+    #     offer_set_id: "offerset-samplePerpetualId", 
+    #     offer_set_name: "sample perpetual offer set", 
+    #     seller_of_record: {
+    #       display_name: "sample first-party seller", 
+    #       seller_profile_id: "seller-sampleFirstPartyId", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_offer_set({
+    #     locale: "Locale",
     #     offer_set_id: "OfferSetId", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.locale #=> String
     #   resp.offer_set_id #=> String
     #   resp.catalog #=> String
     #   resp.offer_set_name #=> String
@@ -1315,6 +1450,12 @@ module Aws::MarketplaceDiscovery
     # (usage-based, contract, BYOL, free trial), legal terms, payment
     # schedules, validity terms, support terms, and renewal terms.
     #
+    # @option params [String] :locale
+    #   A BCP 47 language tag or comma-separated priority list specifying the
+    #   preferred locale for response content. See `Locale` for supported
+    #   values, constraints, fallback behavior, and the default locale. If
+    #   omitted, the service returns content in the default locale.
+    #
     # @option params [required, String] :offer_id
     #   The unique identifier of the offer whose terms to retrieve.
     #
@@ -1328,6 +1469,7 @@ module Aws::MarketplaceDiscovery
     #
     # @return [Types::GetOfferTermsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetOfferTermsOutput#locale #locale} => String
     #   * {Types::GetOfferTermsOutput#offer_terms #offer_terms} => Array&lt;Types::OfferTerm&gt;
     #   * {Types::GetOfferTermsOutput#next_token #next_token} => String
     #
@@ -1337,11 +1479,13 @@ module Aws::MarketplaceDiscovery
     # @example Example: GetOfferTerms for Usage-based ML Model offer
     #
     #   resp = client.get_offer_terms({
+    #     locale: "en-US", 
     #     offer_id: "offer-sampleUsageBasedId", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     locale: "en-US", 
     #     offer_terms: [
     #       {
     #         usage_based_pricing_term: {
@@ -1517,11 +1661,13 @@ module Aws::MarketplaceDiscovery
     # @example Example: GetOfferTerms for BYOL offer
     #
     #   resp = client.get_offer_terms({
+    #     locale: "en-US", 
     #     offer_id: "offer-sampleByolId", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     locale: "en-US", 
     #     offer_terms: [
     #       {
     #         byol_pricing_term: {
@@ -1547,11 +1693,13 @@ module Aws::MarketplaceDiscovery
     # @example Example: GetOfferTerms for configurable upfront pricing
     #
     #   resp = client.get_offer_terms({
+    #     locale: "en-US", 
     #     offer_id: "offer-sampleConfigUpfrontId", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     locale: "en-US", 
     #     offer_terms: [
     #       {
     #         configurable_upfront_pricing_term: {
@@ -1606,11 +1754,13 @@ module Aws::MarketplaceDiscovery
     # @example Example: GetOfferTerms for free trial offer
     #
     #   resp = client.get_offer_terms({
+    #     locale: "en-US", 
     #     offer_id: "offer-sampleFreeTrialId", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     locale: "en-US", 
     #     offer_terms: [
     #       {
     #         free_trial_pricing_term: {
@@ -1640,11 +1790,13 @@ module Aws::MarketplaceDiscovery
     # @example Example: GetOfferTerms for recurring payment
     #
     #   resp = client.get_offer_terms({
+    #     locale: "en-US", 
     #     offer_id: "offer-sampleRecurringId", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     locale: "en-US", 
     #     offer_terms: [
     #       {
     #         recurring_payment_term: {
@@ -1661,11 +1813,13 @@ module Aws::MarketplaceDiscovery
     # @example Example: GetOfferTerms for variable payment
     #
     #   resp = client.get_offer_terms({
+    #     locale: "en-US", 
     #     offer_id: "offer-sampleVariableId", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     locale: "en-US", 
     #     offer_terms: [
     #       {
     #         variable_payment_term: {
@@ -1681,11 +1835,13 @@ module Aws::MarketplaceDiscovery
     # @example Example: GetOfferTerms for renewal term
     #
     #   resp = client.get_offer_terms({
+    #     locale: "en-US", 
     #     offer_id: "offer-sampleRenewalId", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     locale: "en-US", 
     #     offer_terms: [
     #       {
     #         renewal_term: {
@@ -1731,11 +1887,13 @@ module Aws::MarketplaceDiscovery
     # @example Example: GetOfferTerms for renewal term with fixed percentage
     #
     #   resp = client.get_offer_terms({
+    #     locale: "en-US", 
     #     offer_id: "offer-sampleRenewalFixedId", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     locale: "en-US", 
     #     offer_terms: [
     #       {
     #         renewal_term: {
@@ -1756,11 +1914,13 @@ module Aws::MarketplaceDiscovery
     # @example Example: GetOfferTerms for renewal term with identical pricing (no price increase)
     #
     #   resp = client.get_offer_terms({
+    #     locale: "en-US", 
     #     offer_id: "offer-sampleRenewalNoPriceIncreaseId", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     locale: "en-US", 
     #     offer_terms: [
     #       {
     #         renewal_term: {
@@ -1776,11 +1936,13 @@ module Aws::MarketplaceDiscovery
     # @example Example: GetOfferTerms for support term
     #
     #   resp = client.get_offer_terms({
+    #     locale: "en-US", 
     #     offer_id: "offer-sampleSupportId", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     locale: "en-US", 
     #     offer_terms: [
     #       {
     #         support_term: {
@@ -1795,11 +1957,13 @@ module Aws::MarketplaceDiscovery
     # @example Example: GetOfferTerms for validity term with dates
     #
     #   resp = client.get_offer_terms({
+    #     locale: "en-US", 
     #     offer_id: "offer-sampleValidityId", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     locale: "en-US", 
     #     offer_terms: [
     #       {
     #         validity_term: {
@@ -1816,11 +1980,13 @@ module Aws::MarketplaceDiscovery
     # @example Example: GetOfferTerms for net payment term
     #
     #   resp = client.get_offer_terms({
+    #     locale: "en-US", 
     #     offer_id: "offer-sampleNetPaymentId", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
+    #     locale: "en-US", 
     #     offer_terms: [
     #       {
     #         net_payment_term: {
@@ -1835,6 +2001,7 @@ module Aws::MarketplaceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_offer_terms({
+    #     locale: "Locale",
     #     offer_id: "OfferId", # required
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -1842,6 +2009,7 @@ module Aws::MarketplaceDiscovery
     #
     # @example Response structure
     #
+    #   resp.locale #=> String
     #   resp.offer_terms #=> Array
     #   resp.offer_terms[0].byol_pricing_term.id #=> String
     #   resp.offer_terms[0].byol_pricing_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm", "NetPaymentTerm"
@@ -1966,11 +2134,18 @@ module Aws::MarketplaceDiscovery
     # categories, fulfillment option summaries, promotional media, and
     # seller engagement options.
     #
+    # @option params [String] :locale
+    #   A BCP 47 language tag or comma-separated priority list specifying the
+    #   preferred locale for response content. See `Locale` for supported
+    #   values, constraints, fallback behavior, and the default locale. If
+    #   omitted, the service returns content in the default locale.
+    #
     # @option params [required, String] :product_id
     #   The unique identifier of the product to retrieve.
     #
     # @return [Types::GetProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetProductOutput#locale #locale} => String
     #   * {Types::GetProductOutput#product_id #product_id} => String
     #   * {Types::GetProductOutput#catalog #catalog} => String
     #   * {Types::GetProductOutput#product_name #product_name} => String
@@ -1985,11 +2160,13 @@ module Aws::MarketplaceDiscovery
     #   * {Types::GetProductOutput#promotional_media #promotional_media} => Array&lt;Types::PromotionalMedia&gt;
     #   * {Types::GetProductOutput#resources #resources} => Array&lt;Types::Resource&gt;
     #   * {Types::GetProductOutput#seller_engagements #seller_engagements} => Array&lt;Types::SellerEngagement&gt;
+    #   * {Types::GetProductOutput#listing_id #listing_id} => String
     #
     #
     # @example Example: GetProduct for SaaS product with DEPLOYED status
     #
     #   resp = client.get_product({
+    #     locale: "en-US", 
     #     product_id: "prod-sampleSaasId", 
     #   })
     #
@@ -2020,6 +2197,8 @@ module Aws::MarketplaceDiscovery
     #     highlights: [
     #       "Configured to your specs: Pre-configured environments, out-of-the-box.", 
     #     ], 
+    #     listing_id: "listing-sampleSaasId", 
+    #     locale: "en-US", 
     #     logo_thumbnail_url: "https://d7umqicpi7263.cloudfront.net/img/product/07afb7c8-32f1-4851-8289-7e200d817ab1.png", 
     #     long_description: "Gitpod is a developer platform that provides on-demand, pre-configured cloud development environments (CDEs) that automatically integrate into any tool, library, or dependency required for creating software.", 
     #     manufacturer: {
@@ -2064,6 +2243,7 @@ module Aws::MarketplaceDiscovery
     # @example Example: GetProduct for AMI product with NOT_DEPLOYED status
     #
     #   resp = client.get_product({
+    #     locale: "en-US", 
     #     product_id: "prod-sampleAmiId", 
     #   })
     #
@@ -2098,6 +2278,8 @@ module Aws::MarketplaceDiscovery
     #     highlights: [
     #       "AES-256 encryption at rest and in transit", 
     #     ], 
+    #     listing_id: "listing-sampleAmiId", 
+    #     locale: "en-US", 
     #     logo_thumbnail_url: "https://d7umqicpi7263.cloudfront.net/img/product/securevault-logo.png", 
     #     long_description: "SecureVault Enterprise provides comprehensive data encryption, key management, and security compliance tools for organizations.", 
     #     manufacturer: {
@@ -2144,6 +2326,7 @@ module Aws::MarketplaceDiscovery
     # @example Example: GetProduct for professional services with NOT_APPLICABLE status
     #
     #   resp = client.get_product({
+    #     locale: "en-US", 
     #     product_id: "prod-sampleProServId", 
     #   })
     #
@@ -2182,6 +2365,8 @@ module Aws::MarketplaceDiscovery
     #     highlights: [
     #       "Certified AWS migration specialists", 
     #     ], 
+    #     listing_id: "listing-sampleProServId", 
+    #     locale: "en-US", 
     #     logo_thumbnail_url: "https://d7umqicpi7263.cloudfront.net/img/product/cloudexperts-logo.png", 
     #     long_description: "Professional consulting services to help organizations plan and execute their cloud migration strategy.", 
     #     manufacturer: {
@@ -2213,11 +2398,13 @@ module Aws::MarketplaceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_product({
+    #     locale: "Locale",
     #     product_id: "ProductId", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.locale #=> String
     #   resp.product_id #=> String
     #   resp.catalog #=> String
     #   resp.product_name #=> String
@@ -2253,6 +2440,7 @@ module Aws::MarketplaceDiscovery
     #   resp.seller_engagements[0].engagement_type #=> String, one of "REQUEST_FOR_PRIVATE_OFFER", "REQUEST_FOR_DEMO"
     #   resp.seller_engagements[0].content_type #=> String, one of "LINK"
     #   resp.seller_engagements[0].value #=> String
+    #   resp.listing_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetProduct AWS API Documentation
     #
@@ -2266,6 +2454,12 @@ module Aws::MarketplaceDiscovery
     # Returns the fulfillment options available for a product, including
     # deployment details such as version information, operating systems,
     # usage instructions, and release notes.
+    #
+    # @option params [String] :locale
+    #   A BCP 47 language tag or comma-separated priority list specifying the
+    #   preferred locale for response content. See `Locale` for supported
+    #   values, constraints, fallback behavior, and the default locale. If
+    #   omitted, the service returns content in the default locale.
     #
     # @option params [required, String] :product_id
     #   The unique identifier of the product for which to list fulfillment
@@ -2281,6 +2475,7 @@ module Aws::MarketplaceDiscovery
     #
     # @return [Types::ListFulfillmentOptionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::ListFulfillmentOptionsOutput#locale #locale} => String
     #   * {Types::ListFulfillmentOptionsOutput#fulfillment_options #fulfillment_options} => Array&lt;Types::FulfillmentOption&gt;
     #   * {Types::ListFulfillmentOptionsOutput#next_token #next_token} => String
     #
@@ -2290,6 +2485,7 @@ module Aws::MarketplaceDiscovery
     # @example Example: List AMI Fulfillment Options
     #
     #   resp = client.list_fulfillment_options({
+    #     locale: "en-US", 
     #     product_id: "prod-sampleAmiId", 
     #   })
     #
@@ -2298,6 +2494,15 @@ module Aws::MarketplaceDiscovery
     #     fulfillment_options: [
     #       {
     #         amazon_machine_image_fulfillment_option: {
+    #           access_url_template: "http://{0}:8888/", 
+    #           ami_alias: "/aws/service/marketplace/prod-sampleAmiId/2.0.20260120.1", 
+    #           architecture: "x86_64", 
+    #           available_from_time: Time.parse("2022-03-07T00:00:00Z"), 
+    #           ebs_volume: {
+    #             volume_types: [
+    #               "gp2", 
+    #             ], 
+    #           }, 
     #           fulfillment_option_display_name: "Amazon Machine Image", 
     #           fulfillment_option_id: "fo-sampleAmiId", 
     #           fulfillment_option_name: "64-bit (x86) Amazon Machine Image (AMI)", 
@@ -2312,17 +2517,30 @@ module Aws::MarketplaceDiscovery
     #           ], 
     #           recommendation: {
     #             instance_type: "t3a.medium", 
+    #             security_groups: [
+    #               {
+    #                 cidr_ip_addresses: [
+    #                   "0.0.0.0/0", 
+    #                 ], 
+    #                 from_port: 22, 
+    #                 protocol: "tcp", 
+    #                 to_port: 22, 
+    #               }, 
+    #             ], 
     #           }, 
     #           release_notes: "https://aws.amazon.com/amazon-linux-2/release-notes/", 
+    #           short_description: "Amazon Linux 2 AMI for x86_64 EC2 instances.", 
     #           usage_instructions: "The Amazon Linux 2 AMI can be launched through the EC2 console's Quick Launch page.", 
     #         }, 
     #       }, 
     #     ], 
+    #     locale: "en-US", 
     #   }
     #
     # @example Example: List API Fulfillment Options
     #
     #   resp = client.list_fulfillment_options({
+    #     locale: "en-US", 
     #     product_id: "prod-sampleApiId", 
     #   })
     #
@@ -2345,11 +2563,42 @@ module Aws::MarketplaceDiscovery
     #         }, 
     #       }, 
     #     ], 
+    #     locale: "en-US", 
+    #   }
+    #
+    # @example Example: List API Fulfillment Options with Dynamic Endpoint
+    #
+    #   resp = client.list_fulfillment_options({
+    #     locale: "en-US", 
+    #     product_id: "prod-sampleApiDynamicId", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     fulfillment_options: [
+    #       {
+    #         api_fulfillment_option: {
+    #           aws_supported_services: [
+    #             {
+    #               description: "A managed service that enables you to develop, deploy, and maintain AI agents seamlessly.", 
+    #               display_name: "Amazon Bedrock AgentCore", 
+    #               supported_service_type: "BEDROCK_AGENTCORE", 
+    #             }, 
+    #           ], 
+    #           fulfillment_option_display_name: "API-Based Agents & Tools", 
+    #           fulfillment_option_id: "fo-sampleApiDynamicId", 
+    #           fulfillment_option_type: "API", 
+    #           usage_instructions: "Deploy to your preferred region using the dynamic endpoint.", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     locale: "en-US", 
     #   }
     #
     # @example Example: List CloudFormation Template Fulfillment Options
     #
     #   resp = client.list_fulfillment_options({
+    #     locale: "en-US", 
     #     product_id: "prod-sampleCftId", 
     #   })
     #
@@ -2358,21 +2607,26 @@ module Aws::MarketplaceDiscovery
     #     fulfillment_options: [
     #       {
     #         cloud_formation_fulfillment_option: {
+    #           available_from_time: Time.parse("2021-12-15T00:00:00Z"), 
     #           fulfillment_option_display_name: "CloudFormation Template", 
     #           fulfillment_option_id: "fo-sampleCftId", 
     #           fulfillment_option_name: "Sophos Standalone Firewall for AWS", 
     #           fulfillment_option_type: "CLOUDFORMATION_TEMPLATE", 
     #           fulfillment_option_version: "21.5 MR1", 
+    #           long_description: "This CloudFormation template deploys the Sophos XG Firewall with auto-scaling and load balancing for enterprise environments.", 
     #           release_notes: "https://community.sophos.com/products/xg-firewall/b/blog", 
+    #           short_description: "Deploy Sophos XG Firewall on AWS with high availability.", 
     #           usage_instructions: "You can manage your Sophos XG Firewall on AWS from the Web Interface using HTTPS (TCP port 4444).", 
     #         }, 
     #       }, 
     #     ], 
+    #     locale: "en-US", 
     #   }
     #
     # @example Example: List Container Fulfillment Options
     #
     #   resp = client.list_fulfillment_options({
+    #     locale: "en-US", 
     #     product_id: "prod-sampleContainerId", 
     #   })
     #
@@ -2404,11 +2658,13 @@ module Aws::MarketplaceDiscovery
     #         }, 
     #       }, 
     #     ], 
+    #     locale: "en-US", 
     #   }
     #
     # @example Example: List Helm Fulfillment Options
     #
     #   resp = client.list_fulfillment_options({
+    #     locale: "en-US", 
     #     product_id: "prod-sampleHelmId", 
     #   })
     #
@@ -2440,11 +2696,13 @@ module Aws::MarketplaceDiscovery
     #         }, 
     #       }, 
     #     ], 
+    #     locale: "en-US", 
     #   }
     #
     # @example Example: List EKS Add-On Fulfillment Options
     #
     #   resp = client.list_fulfillment_options({
+    #     locale: "en-US", 
     #     product_id: "prod-sampleEksId", 
     #   })
     #
@@ -2476,11 +2734,13 @@ module Aws::MarketplaceDiscovery
     #         }, 
     #       }, 
     #     ], 
+    #     locale: "en-US", 
     #   }
     #
     # @example Example: List EC2 Image Builder Component Fulfillment Options
     #
     #   resp = client.list_fulfillment_options({
+    #     locale: "en-US", 
     #     product_id: "prod-sampleImageBuilderId", 
     #   })
     #
@@ -2512,11 +2772,13 @@ module Aws::MarketplaceDiscovery
     #         }, 
     #       }, 
     #     ], 
+    #     locale: "en-US", 
     #   }
     #
     # @example Example: List Data Exchange Fulfillment Options
     #
     #   resp = client.list_fulfillment_options({
+    #     locale: "en-US", 
     #     product_id: "prod-sampleDataExchangeId", 
     #   })
     #
@@ -2539,11 +2801,13 @@ module Aws::MarketplaceDiscovery
     #         }, 
     #       }, 
     #     ], 
+    #     locale: "en-US", 
     #   }
     #
     # @example Example: List Professional Services Fulfillment Options
     #
     #   resp = client.list_fulfillment_options({
+    #     locale: "en-US", 
     #     product_id: "prod-sampleProServId", 
     #   })
     #
@@ -2558,11 +2822,13 @@ module Aws::MarketplaceDiscovery
     #         }, 
     #       }, 
     #     ], 
+    #     locale: "en-US", 
     #   }
     #
     # @example Example: List SaaS Fulfillment Options
     #
     #   resp = client.list_fulfillment_options({
+    #     locale: "en-US", 
     #     product_id: "prod-sampleSaasId", 
     #   })
     #
@@ -2571,18 +2837,24 @@ module Aws::MarketplaceDiscovery
     #     fulfillment_options: [
     #       {
     #         saas_fulfillment_option: {
+    #           available_from_time: Time.parse("2018-08-07T00:00:00.000Z"), 
     #           fulfillment_option_display_name: "SaaS", 
     #           fulfillment_option_id: "fo-sampleSaasId", 
     #           fulfillment_option_type: "SAAS", 
     #           fulfillment_url: "https://example.com/order/SAMPLE123", 
+    #           launch_url: "https://example.com/saas/launch", 
+    #           quick_launch: "ENABLED", 
+    #           usage_instructions: "Refer to the seller's setup guide to configure and start using this SaaS product.", 
     #         }, 
     #       }, 
     #     ], 
+    #     locale: "en-US", 
     #   }
     #
     # @example Example: List SageMaker Algorithm Fulfillment Options
     #
     #   resp = client.list_fulfillment_options({
+    #     locale: "en-US", 
     #     product_id: "prod-sampleSmAlgoId", 
     #   })
     #
@@ -2605,11 +2877,13 @@ module Aws::MarketplaceDiscovery
     #         }, 
     #       }, 
     #     ], 
+    #     locale: "en-US", 
     #   }
     #
     # @example Example: List SageMaker Model Fulfillment Options
     #
     #   resp = client.list_fulfillment_options({
+    #     locale: "en-US", 
     #     product_id: "prod-sampleSmModelId", 
     #   })
     #
@@ -2627,15 +2901,24 @@ module Aws::MarketplaceDiscovery
     #             recommended_realtime_inference_instance_type: "ml.g5.12xlarge", 
     #           }, 
     #           release_notes: "Initial release", 
+    #           supported_content_types: [
+    #             "application/json", 
+    #             "text/csv", 
+    #           ], 
+    #           supported_response_mime_types: [
+    #             "application/json", 
+    #           ], 
     #           usage_instructions: "See Input Summary", 
     #         }, 
     #       }, 
     #     ], 
+    #     locale: "en-US", 
     #   }
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_fulfillment_options({
+    #     locale: "Locale",
     #     product_id: "ProductId", # required
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -2643,6 +2926,7 @@ module Aws::MarketplaceDiscovery
     #
     # @example Response structure
     #
+    #   resp.locale #=> String
     #   resp.fulfillment_options #=> Array
     #   resp.fulfillment_options[0].amazon_machine_image_fulfillment_option.fulfillment_option_id #=> String
     #   resp.fulfillment_options[0].amazon_machine_image_fulfillment_option.fulfillment_option_name #=> String
@@ -2654,8 +2938,22 @@ module Aws::MarketplaceDiscovery
     #   resp.fulfillment_options[0].amazon_machine_image_fulfillment_option.operating_systems[0].operating_system_name #=> String
     #   resp.fulfillment_options[0].amazon_machine_image_fulfillment_option.operating_systems[0].operating_system_version #=> String
     #   resp.fulfillment_options[0].amazon_machine_image_fulfillment_option.recommendation.instance_type #=> String
+    #   resp.fulfillment_options[0].amazon_machine_image_fulfillment_option.recommendation.security_groups #=> Array
+    #   resp.fulfillment_options[0].amazon_machine_image_fulfillment_option.recommendation.security_groups[0].protocol #=> String
+    #   resp.fulfillment_options[0].amazon_machine_image_fulfillment_option.recommendation.security_groups[0].from_port #=> Integer
+    #   resp.fulfillment_options[0].amazon_machine_image_fulfillment_option.recommendation.security_groups[0].to_port #=> Integer
+    #   resp.fulfillment_options[0].amazon_machine_image_fulfillment_option.recommendation.security_groups[0].cidr_ip_addresses #=> Array
+    #   resp.fulfillment_options[0].amazon_machine_image_fulfillment_option.recommendation.security_groups[0].cidr_ip_addresses[0] #=> String
     #   resp.fulfillment_options[0].amazon_machine_image_fulfillment_option.release_notes #=> String
     #   resp.fulfillment_options[0].amazon_machine_image_fulfillment_option.usage_instructions #=> String
+    #   resp.fulfillment_options[0].amazon_machine_image_fulfillment_option.available_from_time #=> Time
+    #   resp.fulfillment_options[0].amazon_machine_image_fulfillment_option.access_url_template #=> String
+    #   resp.fulfillment_options[0].amazon_machine_image_fulfillment_option.architecture #=> String
+    #   resp.fulfillment_options[0].amazon_machine_image_fulfillment_option.ami_alias #=> String
+    #   resp.fulfillment_options[0].amazon_machine_image_fulfillment_option.ebs_volume.volume_types #=> Array
+    #   resp.fulfillment_options[0].amazon_machine_image_fulfillment_option.ebs_volume.volume_types[0] #=> String
+    #   resp.fulfillment_options[0].amazon_machine_image_fulfillment_option.ebs_volume.iops #=> Integer
+    #   resp.fulfillment_options[0].amazon_machine_image_fulfillment_option.short_description #=> String
     #   resp.fulfillment_options[0].api_fulfillment_option.fulfillment_option_id #=> String
     #   resp.fulfillment_options[0].api_fulfillment_option.fulfillment_option_type #=> String, one of "AMAZON_MACHINE_IMAGE", "API", "CLOUDFORMATION_TEMPLATE", "CONTAINER", "HELM", "EKS_ADD_ON", "EC2_IMAGE_BUILDER_COMPONENT", "DATA_EXCHANGE", "PROFESSIONAL_SERVICES", "SAAS", "SAGEMAKER_ALGORITHM", "SAGEMAKER_MODEL"
     #   resp.fulfillment_options[0].api_fulfillment_option.fulfillment_option_display_name #=> String
@@ -2671,6 +2969,9 @@ module Aws::MarketplaceDiscovery
     #   resp.fulfillment_options[0].cloud_formation_fulfillment_option.fulfillment_option_version #=> String
     #   resp.fulfillment_options[0].cloud_formation_fulfillment_option.release_notes #=> String
     #   resp.fulfillment_options[0].cloud_formation_fulfillment_option.usage_instructions #=> String
+    #   resp.fulfillment_options[0].cloud_formation_fulfillment_option.available_from_time #=> Time
+    #   resp.fulfillment_options[0].cloud_formation_fulfillment_option.short_description #=> String
+    #   resp.fulfillment_options[0].cloud_formation_fulfillment_option.long_description #=> String
     #   resp.fulfillment_options[0].container_fulfillment_option.fulfillment_option_id #=> String
     #   resp.fulfillment_options[0].container_fulfillment_option.fulfillment_option_name #=> String
     #   resp.fulfillment_options[0].container_fulfillment_option.fulfillment_option_type #=> String, one of "AMAZON_MACHINE_IMAGE", "API", "CLOUDFORMATION_TEMPLATE", "CONTAINER", "HELM", "EKS_ADD_ON", "EC2_IMAGE_BUILDER_COMPONENT", "DATA_EXCHANGE", "PROFESSIONAL_SERVICES", "SAAS", "SAGEMAKER_ALGORITHM", "SAGEMAKER_MODEL"
@@ -2743,6 +3044,9 @@ module Aws::MarketplaceDiscovery
     #   resp.fulfillment_options[0].saas_fulfillment_option.fulfillment_option_display_name #=> String
     #   resp.fulfillment_options[0].saas_fulfillment_option.fulfillment_url #=> String
     #   resp.fulfillment_options[0].saas_fulfillment_option.usage_instructions #=> String
+    #   resp.fulfillment_options[0].saas_fulfillment_option.available_from_time #=> Time
+    #   resp.fulfillment_options[0].saas_fulfillment_option.launch_url #=> String
+    #   resp.fulfillment_options[0].saas_fulfillment_option.quick_launch #=> String, one of "ENABLED", "DISABLED"
     #   resp.fulfillment_options[0].sage_maker_algorithm_fulfillment_option.fulfillment_option_id #=> String
     #   resp.fulfillment_options[0].sage_maker_algorithm_fulfillment_option.fulfillment_option_type #=> String, one of "AMAZON_MACHINE_IMAGE", "API", "CLOUDFORMATION_TEMPLATE", "CONTAINER", "HELM", "EKS_ADD_ON", "EC2_IMAGE_BUILDER_COMPONENT", "DATA_EXCHANGE", "PROFESSIONAL_SERVICES", "SAAS", "SAGEMAKER_ALGORITHM", "SAGEMAKER_MODEL"
     #   resp.fulfillment_options[0].sage_maker_algorithm_fulfillment_option.fulfillment_option_display_name #=> String
@@ -2760,6 +3064,10 @@ module Aws::MarketplaceDiscovery
     #   resp.fulfillment_options[0].sage_maker_model_fulfillment_option.usage_instructions #=> String
     #   resp.fulfillment_options[0].sage_maker_model_fulfillment_option.recommendation.recommended_batch_transform_instance_type #=> String
     #   resp.fulfillment_options[0].sage_maker_model_fulfillment_option.recommendation.recommended_realtime_inference_instance_type #=> String
+    #   resp.fulfillment_options[0].sage_maker_model_fulfillment_option.supported_content_types #=> Array
+    #   resp.fulfillment_options[0].sage_maker_model_fulfillment_option.supported_content_types[0] #=> String
+    #   resp.fulfillment_options[0].sage_maker_model_fulfillment_option.supported_response_mime_types #=> Array
+    #   resp.fulfillment_options[0].sage_maker_model_fulfillment_option.supported_response_mime_types[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/ListFulfillmentOptions AWS API Documentation
@@ -2781,6 +3089,12 @@ module Aws::MarketplaceDiscovery
     # options by visibility.
     #
     #  </note>
+    #
+    # @option params [String] :locale
+    #   A BCP 47 language tag or comma-separated priority list specifying the
+    #   preferred locale for response content. See `Locale` for supported
+    #   values, constraints, fallback behavior, and the default locale. If
+    #   omitted, the service returns content in the default locale.
     #
     # @option params [Array<Types::PurchaseOptionFilter>] :filters
     #   Filters to narrow the results. Multiple filters are combined with AND
@@ -2814,6 +3128,7 @@ module Aws::MarketplaceDiscovery
     #         ], 
     #       }, 
     #     ], 
+    #     locale: "en-US", 
     #   })
     #
     #   resp.to_h outputs the following:
@@ -2877,6 +3192,7 @@ module Aws::MarketplaceDiscovery
     #         ], 
     #       }, 
     #     ], 
+    #     locale: "en-US", 
     #   })
     #
     #   resp.to_h outputs the following:
@@ -2942,6 +3258,7 @@ module Aws::MarketplaceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_purchase_options({
+    #     locale: "Locale",
     #     filters: [
     #       {
     #         filter_type: "PRODUCT_ID", # required, accepts PRODUCT_ID, SELLER_OF_RECORD_PROFILE_ID, PURCHASE_OPTION_TYPE, VISIBILITY_SCOPE, AVAILABILITY_STATUS
@@ -2994,6 +3311,12 @@ module Aws::MarketplaceDiscovery
     # customer ratings. Each facet value includes a count of matching
     # listings.
     #
+    # @option params [String] :locale
+    #   A BCP 47 language tag or comma-separated priority list specifying the
+    #   preferred locale for response content. See `Locale` for supported
+    #   values, constraints, fallback behavior, and the default locale. If
+    #   omitted, the service returns content in the default locale.
+    #
     # @option params [String] :search_text
     #   The search query text to filter listings before retrieving facets.
     #
@@ -3036,6 +3359,7 @@ module Aws::MarketplaceDiscovery
     #         ], 
     #       }, 
     #     ], 
+    #     locale: "en-US", 
     #     search_text: "analytics", 
     #   })
     #
@@ -3109,6 +3433,7 @@ module Aws::MarketplaceDiscovery
     #         ], 
     #       }, 
     #     ], 
+    #     locale: "en-US", 
     #   })
     #
     #   resp.to_h outputs the following:
@@ -3150,6 +3475,7 @@ module Aws::MarketplaceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_facets({
+    #     locale: "Locale",
     #     search_text: "SearchText",
     #     filters: [
     #       {
@@ -3185,6 +3511,12 @@ module Aws::MarketplaceDiscovery
     # filters. You can search by keyword, filter by category, pricing model,
     # fulfillment type, and other attributes, and sort results by relevance
     # or customer rating.
+    #
+    # @option params [String] :locale
+    #   A BCP 47 language tag or comma-separated priority list specifying the
+    #   preferred locale for response content. See `Locale` for supported
+    #   values, constraints, fallback behavior, and the default locale. If
+    #   omitted, the service returns content in the default locale.
     #
     # @option params [String] :search_text
     #   The search query text to find relevant listings.
@@ -3237,6 +3569,7 @@ module Aws::MarketplaceDiscovery
     #         ], 
     #       }, 
     #     ], 
+    #     locale: "en-US", 
     #     max_results: 25, 
     #     search_text: "computer vision", 
     #     sort_by: "RELEVANCE", 
@@ -3317,6 +3650,7 @@ module Aws::MarketplaceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_listings({
+    #     locale: "Locale",
     #     search_text: "SearchText",
     #     filters: [
     #       {
@@ -3396,7 +3730,7 @@ module Aws::MarketplaceDiscovery
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacediscovery'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

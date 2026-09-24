@@ -5721,7 +5721,7 @@ module Aws::IoT
     #
     # @option params [required, String] :target_type
     #   The type of resource for which you are configuring logging. Must be
-    #   `THING_Group`.
+    #   `DEFAULT`, `THING_GROUP`, `CLIENT_ID`, `SOURCE_IP`, or `PRINCIPAL_ID`.
     #
     # @option params [required, String] :target_name
     #   The name of the resource for which you are configuring logging.
@@ -13099,7 +13099,7 @@ module Aws::IoT
     #
     # @option params [String] :target_type
     #   The type of resource for which you are configuring logging. Must be
-    #   `THING_Group`.
+    #   `DEFAULT`, `THING_GROUP`, `CLIENT_ID`, `SOURCE_IP`, or `PRINCIPAL_ID`.
     #
     # @option params [String] :next_token
     #   To retrieve the next set of results, the `nextToken` value from a
@@ -17111,7 +17111,7 @@ module Aws::IoT
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.175.0'
+      context[:gem_version] = '1.176.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.176.0 (2026-09-24)
+------------------
+
+* Feature - Fixed ListV2LoggingLevels and DeleteV2LoggingLevel documentation to include all supported target-types
+
 1.175.0 (2026-09-11)
 ------------------
 

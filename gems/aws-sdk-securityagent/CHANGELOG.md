@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2026-09-24)
+------------------
+
+* Feature - Added support for Confluence export, enabling customers to publish security findings to Confluence pages.
+
 1.15.0 (2026-09-11)
 ------------------
 

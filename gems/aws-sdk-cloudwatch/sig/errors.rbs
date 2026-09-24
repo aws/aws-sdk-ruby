@@ -65,6 +65,9 @@ module Aws
         def resource_type: () -> ::String
         def resource_id: () -> ::String
       end
+      class ValidationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
     end
   end
 end

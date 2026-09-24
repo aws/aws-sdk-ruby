@@ -409,6 +409,8 @@ module Aws
         def code_remediation_strategy: () -> ("AUTOMATIC" | "DISABLED")
         def validation_mode: () -> ("DISABLED" | "SIMULATED")
         def max_task_hours: () -> ::Float
+        def report_destination: () -> Types::ReportDestination
+        def report_filters: () -> Types::ReportFilters
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#create_code_review-instance_method
       def create_code_review: (
@@ -422,7 +424,14 @@ module Aws
                                 },
                                 ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED"),
                                 ?validation_mode: ("DISABLED" | "SIMULATED"),
-                                ?max_task_hours: ::Float
+                                ?max_task_hours: ::Float,
+                                ?report_destination: {
+                                  integration_id: ::String,
+                                  container_id: ::String,
+                                  parent_id: ::String?,
+                                  document_id: ::String?
+                                },
+                                ?report_filters: Params::report_filters
                               ) -> _CreateCodeReviewResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCodeReviewResponseSuccess
 
@@ -495,6 +504,8 @@ module Aws
         def service_role: () -> ::String
         def log_config: () -> Types::CloudWatchLog
         def agent_space_id: () -> ::String
+        def report_destination: () -> Types::ReportDestination
+        def report_filters: () -> Types::ReportFilters
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#create_pentest-instance_method
       def create_pentest: (
@@ -515,7 +526,14 @@ module Aws
                             ?network_traffic_config: Params::network_traffic_config,
                             ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED"),
                             ?disable_managed_skills: Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")],
-                            ?max_task_hours: ::Float
+                            ?max_task_hours: ::Float,
+                            ?report_destination: {
+                              integration_id: ::String,
+                              container_id: ::String,
+                              parent_id: ::String?,
+                              document_id: ::String?
+                            },
+                            ?report_filters: Params::report_filters
                           ) -> _CreatePentestResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePentestResponseSuccess
 
@@ -657,6 +675,7 @@ module Aws
         def log_config: () -> Types::CloudWatchLog
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
+        def report_destination: () -> Types::ReportDestination
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#create_threat_model-instance_method
       def create_threat_model: (
@@ -1374,6 +1393,8 @@ module Aws
         def code_remediation_strategy: () -> ("AUTOMATIC" | "DISABLED")
         def validation_mode: () -> ("DISABLED" | "SIMULATED")
         def max_task_hours: () -> ::Float
+        def report_destination: () -> Types::ReportDestination
+        def report_filters: () -> Types::ReportFilters
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#update_code_review-instance_method
       def update_code_review: (
@@ -1388,7 +1409,14 @@ module Aws
                                 },
                                 ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED"),
                                 ?validation_mode: ("DISABLED" | "SIMULATED"),
-                                ?max_task_hours: ::Float
+                                ?max_task_hours: ::Float,
+                                ?report_destination: {
+                                  integration_id: ::String,
+                                  container_id: ::String,
+                                  parent_id: ::String?,
+                                  document_id: ::String?
+                                },
+                                ?report_filters: Params::report_filters
                               ) -> _UpdateCodeReviewResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCodeReviewResponseSuccess
 
@@ -1476,6 +1504,8 @@ module Aws
         def service_role: () -> ::String
         def log_config: () -> Types::CloudWatchLog
         def agent_space_id: () -> ::String
+        def report_destination: () -> Types::ReportDestination
+        def report_filters: () -> Types::ReportFilters
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#update_pentest-instance_method
       def update_pentest: (
@@ -1497,7 +1527,14 @@ module Aws
                             ?network_traffic_config: Params::network_traffic_config,
                             ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED"),
                             ?disable_managed_skills: Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")],
-                            ?max_task_hours: ::Float
+                            ?max_task_hours: ::Float,
+                            ?report_destination: {
+                              integration_id: ::String,
+                              container_id: ::String,
+                              parent_id: ::String?,
+                              document_id: ::String?
+                            },
+                            ?report_filters: Params::report_filters
                           ) -> _UpdatePentestResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePentestResponseSuccess
 
@@ -1621,6 +1658,7 @@ module Aws
         def log_config: () -> Types::CloudWatchLog
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
+        def report_destination: () -> Types::ReportDestination
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#update_threat_model-instance_method
       def update_threat_model: (
@@ -1636,6 +1674,12 @@ module Aws
                                  ?log_config: {
                                    log_group: ::String?,
                                    log_stream: ::String?
+                                 },
+                                 ?report_destination: {
+                                   integration_id: ::String,
+                                   container_id: ::String,
+                                   parent_id: ::String?,
+                                   document_id: ::String?
                                  }
                                ) -> _UpdateThreatModelResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateThreatModelResponseSuccess

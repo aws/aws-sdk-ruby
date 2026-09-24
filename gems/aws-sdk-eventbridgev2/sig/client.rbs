@@ -1,0 +1,641 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EventBridgeV2
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?account_id_endpoint_mode: String,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateEventBusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEventBusResponse]
+        def event_bus_arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def encryption_configuration: () -> Types::EncryptionConfiguration
+        def storage_configuration: () -> Types::StorageConfigurationOutput
+        def state: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "DELETING" | "ACTIVE" | "DELETE_FAILED")
+        def state_reason: () -> ::String
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#create_event_bus-instance_method
+      def create_event_bus: (
+                              name: ::String,
+                              ?description: ::String,
+                              ?encryption_configuration: {
+                                kms_key_identifier: ::String?
+                              },
+                              ?storage_configuration: {
+                                retention_period_in_days: ::Integer?
+                              },
+                              ?tags: Hash[::String, ::String],
+                              ?client_token: ::String
+                            ) -> _CreateEventBusResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventBusResponseSuccess
+
+      interface _CreateEventSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEventSourceResponse]
+        def event_source_arn: () -> ::String
+        def name: () -> ::String
+        def event_bus_arn: () -> ::String
+        def state: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#create_event_source-instance_method
+      def create_event_source: (
+                                 name: ::String,
+                                 event_bus_arn: ::String,
+                                 configuration: Params::event_source_configuration,
+                                 ?description: ::String,
+                                 ?tags: Hash[::String, ::String],
+                                 ?client_token: ::String
+                               ) -> _CreateEventSourceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventSourceResponseSuccess
+
+      interface _CreateSubscriberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSubscriberResponse]
+        def subscriber_arn: () -> ::String
+        def name: () -> ::String
+        def event_bus_arn: () -> ::String
+        def type: () -> ("FIFO" | "UNORDERED")
+        def starting_position: () -> ("LATEST" | "POINT_IN_TIME")
+        def point_in_time_configuration: () -> Types::PointInTimeConfiguration
+        def state: () -> ("RUNNING" | "STOPPED")
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#create_subscriber-instance_method
+      def create_subscriber: (
+                               name: ::String,
+                               event_bus_arn: ::String,
+                               invoke_configuration: {
+                                 role_arn: ::String,
+                                 lambda_parameters: {
+                                   invocation_type: ("EVENT" | "REQUEST_RESPONSE")?,
+                                   qualifier: ::String?,
+                                   durable_execution_name: ::String?,
+                                   tenant_id: ::String?,
+                                   invocation_timeout_seconds: ::String?
+                                 }?,
+                                 sqs_parameters: Params::sqs_parameters?,
+                                 sns_parameters: Params::sns_parameters?,
+                                 kinesis_parameters: {
+                                   partition_key: ::String?,
+                                   explicit_hash_key: ::String?
+                                 }?,
+                                 step_functions_parameters: {
+                                   invocation_type: ("EVENT" | "REQUEST_RESPONSE")?,
+                                   name: ::String?,
+                                   trace_header: ::String?,
+                                   invocation_timeout_seconds: ::String?
+                                 }?,
+                                 http_parameters: {
+                                   path_parameter_values: Array[::String]?,
+                                   header_parameters: Hash[::String, ::String]?,
+                                   query_string_parameters: Hash[::String, ::String]?,
+                                   invocation_timeout_seconds: ::String?
+                                 }?,
+                                 universal_target_parameters: {
+                                   input: ::String,
+                                   invocation_timeout_seconds: ::String?
+                                 }?,
+                                 event_bus_v2_parameters: Params::event_bus_v2_parameters?,
+                                 target_arn: ::String
+                               },
+                               ?description: ::String,
+                               ?filter_configuration: {
+                                 language: ("EVENT_BRIDGE_PATTERN")?,
+                                 filters: Array[
+                                   {
+                                     pattern: ::String,
+                                     scope: ("DATA" | "METADATA" | "SYSTEM_METADATA")
+                                   }
+                                 ]?
+                               },
+                               ?type: ("FIFO" | "UNORDERED"),
+                               ?starting_position: ("LATEST" | "POINT_IN_TIME"),
+                               ?point_in_time_configuration: {
+                                 point_type: ("HORIZON" | "TIMESTAMP"),
+                                 starting_point: ::Time?,
+                                 end_point: ::Time?
+                               },
+                               ?batch_configuration: {
+                                 max_batch_size: ::Integer?,
+                                 max_batch_window_in_seconds: ::Integer?
+                               },
+                               ?transformer: {
+                                 type: ("RAW" | "WITH_METADATA" | "JSONATA")?,
+                                 jsonata_configuration: {
+                                   expression: ::String
+                                 }?
+                               },
+                               ?retry_policy: {
+                                 max_retry_attempts: ::Integer?,
+                                 max_event_age_in_seconds: ::Integer?,
+                                 retry_strategy: ("ALL")?
+                               },
+                               ?on_failure_configuration: {
+                                 arn: ::String?
+                               },
+                               ?log_configuration: {
+                                 level: ("OFF" | "ERROR" | "INFO")?,
+                                 include_payload: ("FULL" | "ON_ERROR_ONLY")?
+                               },
+                               ?state: ("RUNNING" | "STOPPED"),
+                               ?tags: Hash[::String, ::String],
+                               ?client_token: ::String
+                             ) -> _CreateSubscriberResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSubscriberResponseSuccess
+
+      interface _DeleteEventBusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEventBusResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#delete_event_bus-instance_method
+      def delete_event_bus: (
+                              event_bus_arn: ::String
+                            ) -> _DeleteEventBusResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEventBusResponseSuccess
+
+      interface _DeleteEventSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEventSourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#delete_event_source-instance_method
+      def delete_event_source: (
+                                 event_source_arn: ::String
+                               ) -> _DeleteEventSourceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEventSourceResponseSuccess
+
+      interface _DeleteResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcePolicyResponse]
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    resource_arn: ::String,
+                                    ?policy_name: ::String,
+                                    ?expected_revision_id: ::String
+                                  ) -> _DeleteResourcePolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
+
+      interface _DeleteSubscriberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSubscriberResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#delete_subscriber-instance_method
+      def delete_subscriber: (
+                               subscriber_arn: ::String
+                             ) -> _DeleteSubscriberResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSubscriberResponseSuccess
+
+      interface _DescribeEventBusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEventBusResponse]
+        def event_bus_arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def encryption_configuration: () -> Types::EncryptionConfiguration
+        def storage_configuration: () -> Types::StorageConfigurationOutput
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+        def state: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "DELETING" | "ACTIVE" | "DELETE_FAILED")
+        def state_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#describe_event_bus-instance_method
+      def describe_event_bus: (
+                                event_bus_arn: ::String
+                              ) -> _DescribeEventBusResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventBusResponseSuccess
+
+      interface _DescribeEventSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEventSourceResponse]
+        def event_source_arn: () -> ::String
+        def name: () -> ::String
+        def event_bus_arn: () -> ::String
+        def configuration: () -> Types::EventSourceConfiguration
+        def description: () -> ::String
+        def state: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
+        def revoked: () -> bool
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#describe_event_source-instance_method
+      def describe_event_source: (
+                                   event_source_arn: ::String
+                                 ) -> _DescribeEventSourceResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventSourceResponseSuccess
+
+      interface _DescribeSubscriberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSubscriberResponse]
+        def subscriber_arn: () -> ::String
+        def name: () -> ::String
+        def event_bus_arn: () -> ::String
+        def invoke_configuration: () -> Types::InvokeConfiguration
+        def description: () -> ::String
+        def filter_configuration: () -> Types::FilterConfiguration
+        def type: () -> ("FIFO" | "UNORDERED")
+        def starting_position: () -> ("LATEST" | "POINT_IN_TIME")
+        def point_in_time_configuration: () -> Types::PointInTimeConfiguration
+        def batch_configuration: () -> Types::BatchConfiguration
+        def transformer: () -> Types::Transformer
+        def retry_policy: () -> Types::RetryPolicy
+        def on_failure_configuration: () -> Types::OnFailureConfiguration
+        def log_configuration: () -> Types::LogConfiguration
+        def state: () -> ("RUNNING" | "STOPPED")
+        def revoked: () -> bool
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#describe_subscriber-instance_method
+      def describe_subscriber: (
+                                 subscriber_arn: ::String
+                               ) -> _DescribeSubscriberResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSubscriberResponseSuccess
+
+      interface _GetResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyResponse]
+        def resource_arn: () -> ::String
+        def policy_document: () -> ::String
+        def policy_name: () -> ::String
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#get_resource_policy-instance_method
+      def get_resource_policy: (
+                                 resource_arn: ::String,
+                                 ?policy_name: ::String
+                               ) -> _GetResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
+
+      interface _ListEventBusesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventBusesResponse]
+        def event_buses: () -> ::Array[Types::EventBusSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#list_event_buses-instance_method
+      def list_event_buses: (
+                              ?name_prefix: ::String,
+                              ?event_bus_account_id: ::String,
+                              ?next_token: ::String,
+                              ?max_results: ::Integer
+                            ) -> _ListEventBusesResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventBusesResponseSuccess
+
+      interface _ListEventSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventSourcesResponse]
+        def event_sources: () -> ::Array[Types::EventSourceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#list_event_sources-instance_method
+      def list_event_sources: (
+                                ?event_bus_arn: ::String,
+                                ?name_prefix: ::String,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListEventSourcesResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventSourcesResponseSuccess
+
+      interface _ListResourcePoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourcePoliciesResponse]
+        def policy_summaries: () -> ::Array[Types::ResourcePolicySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#list_resource_policies-instance_method
+      def list_resource_policies: (
+                                    resource_arn: ::String,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListResourcePoliciesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourcePoliciesResponseSuccess
+
+      interface _ListSubscribersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSubscribersResponse]
+        def subscribers: () -> ::Array[Types::SubscriberSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#list_subscribers-instance_method
+      def list_subscribers: (
+                              ?event_bus_arn: ::String,
+                              ?name_prefix: ::String,
+                              ?next_token: ::String,
+                              ?max_results: ::Integer
+                            ) -> _ListSubscribersResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSubscribersResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutEventsResponse]
+        def failed_entry_count: () -> ::Integer
+        def entries: () -> ::Array[Types::PutEventsResultEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#put_events-instance_method
+      def put_events: (
+                        event_bus_arn: ::String,
+                        entries: Array[
+                          {
+                            source: ::String,
+                            detail_type: ::String,
+                            detail: ::String?,
+                            resources: Array[::String]?,
+                            time: ::Time?,
+                            system_metadata: {
+                              event_group_id: ::String?,
+                              deduplication_id: ::String?
+                            }?
+                          }
+                        ],
+                        ?deduplication_configuration: {
+                          deduplication_type: ("CONTENT_BASED")
+                        }
+                      ) -> _PutEventsResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEventsResponseSuccess
+
+      interface _PutRawEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutRawEventsResponse]
+        def failed_entry_count: () -> ::Integer
+        def entries: () -> ::Array[Types::PutRawEventsResultEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#put_raw_events-instance_method
+      def put_raw_events: (
+                            event_bus_arn: ::String,
+                            entries: Array[
+                              {
+                                data: ::String,
+                                metadata: Hash[::String, ::String]?,
+                                system_metadata: {
+                                  content_type: ::String,
+                                  deduplication_id: ::String?,
+                                  event_group_id: ::String?
+                                }
+                              }
+                            ],
+                            ?schema_registry_configuration: {
+                              registry_uri: ::String,
+                              confluent_public_registry_configuration: {
+                                connection_arn: ::String
+                              }?
+                            },
+                            ?deduplication_configuration: {
+                              deduplication_type: ("CONTENT_BASED")
+                            }
+                          ) -> _PutRawEventsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRawEventsResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
+        def resource_arn: () -> ::String
+        def policy_name: () -> ::String
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 resource_arn: ::String,
+                                 policy_document: ::String,
+                                 ?policy_name: ::String,
+                                 ?expected_revision_id: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _RevokeResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RevokeResourceResponse]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#revoke_resource-instance_method
+      def revoke_resource: (
+                             arn: ::String
+                           ) -> _RevokeResourceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokeResourceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateEventBusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEventBusResponse]
+        def event_bus_arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def encryption_configuration: () -> Types::EncryptionConfiguration
+        def storage_configuration: () -> Types::StorageConfigurationOutput
+        def state: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "DELETING" | "ACTIVE" | "DELETE_FAILED")
+        def state_reason: () -> ::String
+        def last_modified_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#update_event_bus-instance_method
+      def update_event_bus: (
+                              event_bus_arn: ::String,
+                              ?description: ::String,
+                              ?encryption_configuration: {
+                                kms_key_identifier: ::String?
+                              },
+                              ?storage_configuration: {
+                                retention_period_in_days: ::Integer?
+                              }
+                            ) -> _UpdateEventBusResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEventBusResponseSuccess
+
+      interface _UpdateEventSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEventSourceResponse]
+        def event_source_arn: () -> ::String
+        def name: () -> ::String
+        def event_bus_arn: () -> ::String
+        def state: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
+        def last_modified_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#update_event_source-instance_method
+      def update_event_source: (
+                                 event_source_arn: ::String,
+                                 ?configuration: Params::event_source_configuration,
+                                 ?description: ::String
+                               ) -> _UpdateEventSourceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEventSourceResponseSuccess
+
+      interface _UpdateSubscriberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSubscriberResponse]
+        def subscriber_arn: () -> ::String
+        def name: () -> ::String
+        def event_bus_arn: () -> ::String
+        def type: () -> ("FIFO" | "UNORDERED")
+        def starting_position: () -> ("LATEST" | "POINT_IN_TIME")
+        def point_in_time_configuration: () -> Types::PointInTimeConfiguration
+        def state: () -> ("RUNNING" | "STOPPED")
+        def last_modified_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#update_subscriber-instance_method
+      def update_subscriber: (
+                               subscriber_arn: ::String,
+                               ?description: ::String,
+                               ?state: ("RUNNING" | "STOPPED"),
+                               ?resume_position: ("LAST_PROCESSED" | "LATEST"),
+                               ?invoke_configuration: {
+                                 role_arn: ::String,
+                                 lambda_parameters: {
+                                   invocation_type: ("EVENT" | "REQUEST_RESPONSE")?,
+                                   qualifier: ::String?,
+                                   durable_execution_name: ::String?,
+                                   tenant_id: ::String?,
+                                   invocation_timeout_seconds: ::String?
+                                 }?,
+                                 sqs_parameters: Params::sqs_parameters?,
+                                 sns_parameters: Params::sns_parameters?,
+                                 kinesis_parameters: {
+                                   partition_key: ::String?,
+                                   explicit_hash_key: ::String?
+                                 }?,
+                                 step_functions_parameters: {
+                                   invocation_type: ("EVENT" | "REQUEST_RESPONSE")?,
+                                   name: ::String?,
+                                   trace_header: ::String?,
+                                   invocation_timeout_seconds: ::String?
+                                 }?,
+                                 http_parameters: {
+                                   path_parameter_values: Array[::String]?,
+                                   header_parameters: Hash[::String, ::String]?,
+                                   query_string_parameters: Hash[::String, ::String]?,
+                                   invocation_timeout_seconds: ::String?
+                                 }?,
+                                 universal_target_parameters: {
+                                   input: ::String,
+                                   invocation_timeout_seconds: ::String?
+                                 }?,
+                                 event_bus_v2_parameters: Params::event_bus_v2_parameters?
+                               },
+                               ?filter_configuration: {
+                                 language: ("EVENT_BRIDGE_PATTERN")?,
+                                 filters: Array[
+                                   {
+                                     pattern: ::String,
+                                     scope: ("DATA" | "METADATA" | "SYSTEM_METADATA")
+                                   }
+                                 ]?
+                               },
+                               ?batch_configuration: {
+                                 max_batch_size: ::Integer?,
+                                 max_batch_window_in_seconds: ::Integer?
+                               },
+                               ?transformer: {
+                                 type: ("RAW" | "WITH_METADATA" | "JSONATA")?,
+                                 jsonata_configuration: {
+                                   expression: ::String
+                                 }?
+                               },
+                               ?retry_policy: {
+                                 max_retry_attempts: ::Integer?,
+                                 max_event_age_in_seconds: ::Integer?,
+                                 retry_strategy: ("ALL")?
+                               },
+                               ?on_failure_configuration: {
+                                 arn: ::String?
+                               },
+                               ?log_configuration: {
+                                 level: ("OFF" | "ERROR" | "INFO")?,
+                                 include_payload: ("FULL" | "ON_ERROR_ONLY")?
+                               }
+                             ) -> _UpdateSubscriberResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSubscriberResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#wait_until-instance_method
+      def wait_until: (:event_bus_active waiter_name, 
+                    event_bus_arn: ::String
+                  ) -> Client::_DescribeEventBusResponseSuccess
+                    | (:event_bus_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeEventBusResponseSuccess
+                    | (:event_bus_deleted waiter_name, 
+                    event_bus_arn: ::String
+                  ) -> Client::_DescribeEventBusResponseSuccess
+                    | (:event_bus_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeEventBusResponseSuccess
+    end
+  end
+end
+

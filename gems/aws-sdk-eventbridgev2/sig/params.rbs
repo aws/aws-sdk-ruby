@@ -1,0 +1,72 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EventBridgeV2
+    module Params
+      type partner_events_source_configuration = {
+      partner_event_source_arn: ::String,
+      pattern: ::String?,
+      partner_bus_kms_key_identifier: ::String?,
+      on_failure_configuration: {
+        arn: ::String?
+      }?
+    }
+
+      type event_source_configuration = {
+      aws_service_events_configuration: {
+        aws_service: ::String,
+        pattern: ::String?,
+        on_failure_configuration: {
+          arn: ::String?
+        }?
+      }?,
+      partner_events_configuration: Params::partner_events_source_configuration?
+    }
+
+      type sqs_parameters = {
+      message_group_id: ::String?,
+      message_deduplication_id: ::String?,
+      delay_seconds: ::String?,
+      message_attributes: Hash[::String, {
+          data_type: ::String?,
+          string_value: ::String?,
+          binary_value: ::String?
+        }]?,
+      message_system_attributes: Hash[::String, {
+          data_type: ::String?,
+          string_value: ::String?,
+          binary_value: ::String?
+        }]?
+    }
+
+      type sns_parameters = {
+      message_group_id: ::String?,
+      message_deduplication_id: ::String?,
+      subject: ::String?,
+      message_structure: ::String?,
+      message_attributes: Hash[::String, {
+          data_type: ::String?,
+          string_value: ::String?,
+          binary_value: ::String?
+        }]?
+    }
+
+      type event_bus_v2_parameters = {
+      metadata: Hash[::String, ::String]?,
+      system_metadata: {
+        event_group_id: ::String?,
+        deduplication_id: ::String?
+      }?,
+      deduplication_configuration: {
+        deduplication_type: ("CONTENT_BASED")
+      }?
+    }
+
+    end
+  end
+end
