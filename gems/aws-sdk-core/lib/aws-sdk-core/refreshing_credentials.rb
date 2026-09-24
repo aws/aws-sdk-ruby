@@ -21,6 +21,15 @@ module Aws
 
     CLIENT_EXCLUDE_OPTIONS = Set.new([:before_refresh]).freeze
 
+    # @api private
+    # Signals a credential source response whose Expiration is at or before
+    # the current time.
+    class StaleCredentialsError < RuntimeError
+      def initialize(*_args)
+        super('the credential source returned credentials that are already expired')
+      end
+    end
+
     # @param [Hash] options
     # @option options [Proc] :before_refresh A Proc called before credentials are refreshed.
     #   It accepts `self` as the only argument.
@@ -108,7 +117,7 @@ module Aws
           cache_non_recoverable_error(error)
           raise error
         end
-        raise Errors::NoCredentialsError
+        raise Errors::MissingCredentialsError
       end
     end
 
@@ -162,17 +171,16 @@ module Aws
       handle_failure(error, raise_to_caller: raise_to_caller)
     end
 
-    # Calls the source via #refresh. Returns nil on success, or an error (a
-    # raised error, or a stale response whose Expiration is at or before now).
-    # Restores the prior credentials on failure so a failed or stale refresh
-    # never discards the cached credentials.
+    # Calls the source via #refresh. Returns nil on success, or restores
+    # prior credentials and returns error on failure so a failed or stale
+    # refresh never discards the cached credentials.
     def call_source
       prior = [@credentials, @expiration]
       @before_refresh&.call(self)
       refresh
       if !@expiration.nil? && @expiration <= Time.now
         @credentials, @expiration = prior
-        return Errors::StaleCredentialsError.new
+        return StaleCredentialsError.new
       end
       nil
     rescue StandardError => e

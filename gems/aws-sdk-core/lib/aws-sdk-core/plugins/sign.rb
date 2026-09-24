@@ -147,14 +147,9 @@ module Aws
           # apply signature headers
           req.headers.update(signature.headers)
 
-          # Record the credentials used to sign this request. If the target
-          # service later rejects it as an authentication failure, the retry
-          # layer invalidates cached credentials if they match these credentials
-          # to prevent potentially invalidating valid credentials refreshed
-          # by a concurrent refresh.
-          if (provider = @signer.credentials_provider)
-            context[:signing_credentials] = provider.credentials
-          end
+          # Record the signing credentials so the retry layer can invalidate
+          # them on an auth failure and only if they still match
+          context[:signing_credentials] = @signer.credentials_provider.credentials
 
           # add request metadata with signature components for debugging
           context[:canonical_request] = signature.canonical_request

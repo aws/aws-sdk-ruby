@@ -17,10 +17,10 @@ module Aws
         SocketError,
         Timeout::Error
       ].each do |error_class|
-        it "raises NoCredentialsError for #{error_class}" do
+        it "raises MissingCredentialsError for #{error_class}" do
           stub_request(:get, "http://169.254.170.2#{path}").to_raise(error_class)
           expect { ECSCredentials.new(credential_path: path, backoff: 0, retries: 0) }
-            .to raise_error(Aws::Errors::NoCredentialsError)
+            .to raise_error(Aws::Errors::MissingCredentialsError)
         end
       end
     end
@@ -122,18 +122,18 @@ module Aws
           end.to raise_error(ArgumentError, /without a credential path/)
         end
 
-        it 'raises NoCredentialsError on non-200 response with error details' do
+        it 'raises MissingCredentialsError on non-200 response with error details' do
           stub_request(:get, "http://169.254.170.2#{path}")
             .to_return(status: 429, body: 'Rate limit exceeded')
           expect { ECSCredentials.new(backoff: 0, retries: 0) }
-            .to raise_error(Aws::Errors::NoCredentialsError)
+            .to raise_error(Aws::Errors::MissingCredentialsError)
         end
 
-        it 'raises NoCredentialsError on non-200 response without body' do
+        it 'raises MissingCredentialsError on non-200 response without body' do
           stub_request(:get, "http://169.254.170.2#{path}")
             .to_return(status: 500, body: '')
           expect { ECSCredentials.new(backoff: 0, retries: 0) }
-            .to raise_error(Aws::Errors::NoCredentialsError)
+            .to raise_error(Aws::Errors::MissingCredentialsError)
         end
       end
 
@@ -155,7 +155,7 @@ module Aws
               backoff: ->(n) { Kernel.sleep(2**n) },
               retries: 3
             )
-          end.to raise_error(Aws::Errors::NoCredentialsError)
+          end.to raise_error(Aws::Errors::MissingCredentialsError)
           assert_requested(expected_request, times: 4)
         end
 
@@ -182,7 +182,7 @@ module Aws
           expect(c.expiration.to_s).to eq(expiration2.to_s)
         end
 
-        it 'retries invalid JSON exactly 3 times, then raises NoCredentialsError' do
+        it 'retries invalid JSON exactly 3 times, then raises MissingCredentialsError' do
           creds_request =
             stub_request(:get, "http://169.254.170.2#{path}")
             .to_return(status: 200, body: '')
@@ -191,16 +191,16 @@ module Aws
             .to_return(status: 200, body: ' ')
           expect do
             ECSCredentials.new(backoff: 0, retries: 0)
-          end.to raise_error(Aws::Errors::NoCredentialsError)
+          end.to raise_error(Aws::Errors::MissingCredentialsError)
           assert_requested(creds_request, times: 4)
         end
 
-        it 'raises NoCredentialsError when the expiration time cannot be parsed' do
+        it 'raises MissingCredentialsError when the expiration time cannot be parsed' do
           stub_request(:get, "http://169.254.170.2#{path}")
             .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
           expect do
             ECSCredentials.new(backoff: 0, retries: 0)
-          end.to raise_error(Aws::Errors::NoCredentialsError)
+          end.to raise_error(Aws::Errors::MissingCredentialsError)
         end
       end
 
@@ -212,10 +212,10 @@ module Aws
 
           it 'validates the token for carriage return and newline' do
             # A malformed token is not a non-recoverable error, so on the
-            # initial fetch it surfaces as NoCredentialsError.
+            # initial fetch it surfaces as MissingCredentialsError.
             expect do
               ECSCredentials.new(backoff: 0, retries: 0)
-            end.to raise_error(Aws::Errors::NoCredentialsError)
+            end.to raise_error(Aws::Errors::MissingCredentialsError)
           end
         end
 
@@ -227,10 +227,10 @@ module Aws
 
           it 'validates the token for carriage return and newline' do
             # A malformed token is not a non-recoverable error, so on the
-            # initial fetch it surfaces as NoCredentialsError.
+            # initial fetch it surfaces as MissingCredentialsError.
             expect do
               ECSCredentials.new(backoff: 0, retries: 0)
-            end.to raise_error(Aws::Errors::NoCredentialsError)
+            end.to raise_error(Aws::Errors::MissingCredentialsError)
           end
         end
       end
@@ -361,10 +361,10 @@ module Aws
           if expect['type'] == 'error'
             # Host/URI validation fails at construction (ArgumentError). A token
             # file read failure happens during the initial fetch and, not being a
-            # SEP non-recoverable error, surfaces as NoCredentialsError.
+            # SEP non-recoverable error, surfaces as MissingCredentialsError.
             error = ArgumentError
             if expect['reason'] =~ /failed to read authorization token/
-              error = Aws::Errors::NoCredentialsError
+              error = Aws::Errors::MissingCredentialsError
             end
             expect { ECSCredentials.new }.to raise_error(error)
           elsif expect['type'] == 'success'
@@ -393,9 +393,9 @@ module Aws
 
       def handle_expectation(_expect)
         # A refresh that fails on the initial fetch (no cached credentials to
-        # fall back on) raises NoCredentialsError.
+        # fall back on) raises MissingCredentialsError.
         expect { ECSCredentials.new(backoff: 0, retries: 0) }
-          .to raise_error(Aws::Errors::NoCredentialsError)
+          .to raise_error(Aws::Errors::MissingCredentialsError)
       end
 
       test_cases.each do |test_case|

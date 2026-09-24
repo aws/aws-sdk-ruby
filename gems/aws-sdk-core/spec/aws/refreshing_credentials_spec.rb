@@ -3,7 +3,7 @@
 require_relative '../spec_helper'
 
 module Aws
-  # test-only error the fake source raises for a non-recoverable response
+  # test error the fake source raises for a non-recoverable response
   class RefreshingCredentialsTestError < StandardError; end
 
   describe RefreshingCredentials do
@@ -14,7 +14,7 @@ module Aws
         attr_reader :source_calls
 
         # Bypasses the eager fetch in RefreshingCredentials#initialize and
-        # seeds the cache state directly.
+        # sets the cache state directly.
         def initialize(seed = {})
           @mutex = Mutex.new
           @static_stability = true
@@ -87,7 +87,7 @@ module Aws
       when 'cachedCredentials'
         expect(resolver.credentials.access_key_id).to eq(@seeded_akid)
       when 'noCredentialsError'
-        expect { resolver.credentials }.to raise_error(Errors::NoCredentialsError)
+        expect { resolver.credentials }.to raise_error(Errors::MissingCredentialsError)
       when 'nonRecoverableError'
         expect { resolver.credentials }.to raise_error(RefreshingCredentialsTestError)
       end
@@ -143,8 +143,8 @@ module Aws
 
     tests = JSON.load_file(File.join(File.dirname(__FILE__), 'refreshing_credentials_tests.json'))
 
-    tests.each_with_index do |test, index|
-      it "case #{index + 1}: #{test['documentation']}" do
+    tests.each do |test|
+      it "#{test['id']}: #{test['documentation']}" do
         resolver = build_resolver(resolver_class, test['given'])
         test['steps'].each do |step|
           case step['type']
@@ -172,6 +172,26 @@ module Aws
       end
     end
 
+    it 'raises MissingCredentialsError when the initial fetch returns a stale response, then recovers' do
+      resolver = build_resolver(resolver_class, 'cachedCredentials' => 'none')
+
+      resolver.expect_response('staleCredentials', nil)
+      expect { resolver.credentials }.to raise_error(Errors::MissingCredentialsError)
+
+      resolver.expect_response('freshCredentials', nil)
+      expect(resolver.credentials.access_key_id).to eq('FRESH-AKID')
+    end
+
+    it 'treats invalidate as a no-op when no credentials are cached yet' do
+      resolver = build_resolver(resolver_class, 'cachedCredentials' => 'none')
+
+      expect { resolver.invalidate(fake_identity('AKID-1')) }.not_to raise_error
+
+      # the next resolution still performs the initial fetch
+      resolver.expect_response('freshCredentials', nil)
+      expect(resolver.credentials.access_key_id).to eq('FRESH-AKID')
+    end
+
     describe 'concurrency' do
       let(:gated_resolver_class) do
         Class.new do
@@ -182,6 +202,7 @@ module Aws
           def initialize(seed)
             @mutex = Mutex.new
             @static_stability = true
+            @async_refresh = seed[:async_refresh]
             @next_refresh_allowed_at = nil
             @cached_error = nil
             @cached_error_expires_at = nil
@@ -210,28 +231,29 @@ module Aws
         end
       end
 
-      def build_gated_resolver(ttl:, advisory_window:)
+      def build_gated_resolver(ttl:, advisory_window:, async: false)
         gated_resolver_class.new(
           credentials: Credentials.new('CACHED-AKID', 'secret', 'token'),
           expiration: Time.now + ttl,
-          advisory_window: advisory_window
+          advisory_window: advisory_window,
+          async_refresh: async
         )
       end
 
       SWARM_SIZE = 8
 
-      it 'advisory: one refresh runs while a swarm of callers get cached creds immediately' do
-        # Inside the advisory window (600s) but outside the mandatory window (60s).
+      it 'runs a single advisory refresh while other callers get cached credentials immediately' do
+        # advisory window (600s), outside the mandatory window (60s)
         resolver = build_gated_resolver(ttl: 300, advisory_window: 600)
 
         refresher = Thread.new { resolver.credentials }
-        resolver.entered.pop # the refresher now holds the lock inside #refresh
+        resolver.entered.pop # refresher now holds the lock inside #refresh
 
         callers = Array.new(SWARM_SIZE) { Thread.new { resolver.credentials.access_key_id } }
         results = callers.map(&:value)
 
         expect(results).to all(eq('CACHED-AKID'))
-        expect(resolver.source_calls).to eq(1) # only the refresher contacted the source
+        expect(resolver.source_calls).to eq(1)
 
         resolver.release << :go
         refresher.join
@@ -240,36 +262,50 @@ module Aws
         expect(resolver.credentials.access_key_id).to eq('FRESH-AKID')
       end
 
-      it 'mandatory: one refresh runs while a swarm of callers wait and reuse it' do
-        # Inside the mandatory window (60s).
+      it 'refreshes in the background during the advisory window without blocking callers' do
+        resolver = build_gated_resolver(ttl: 300, advisory_window: 600, async: true)
+
+        expect(resolver.credentials.access_key_id).to eq('CACHED-AKID')
+        resolver.entered.pop # background thread now holds the lock inside #refresh
+        expect(resolver.source_calls).to eq(1)
+
+        # further callers get cached credentials without starting a second refresh
+        expect(resolver.credentials.access_key_id).to eq('CACHED-AKID')
+        expect(resolver.source_calls).to eq(1)
+
+        resolver.release << :go
+        sleep 0.1 # let the background refresh publish new credentials
+
+        expect(resolver.credentials.access_key_id).to eq('FRESH-AKID')
+        expect(resolver.source_calls).to eq(1)
+      end
+
+      it 'runs a single mandatory refresh while other callers wait and reuse the result' do
+        # mandatory window (60s)
         resolver = build_gated_resolver(ttl: 30, advisory_window: 600)
 
         refresher = Thread.new { resolver.credentials }
-        resolver.entered.pop # the refresher now holds the lock inside #refresh
+        resolver.entered.pop # refresher now holds the lock inside #refresh
 
         waiters = Array.new(SWARM_SIZE) { Thread.new { resolver.credentials.access_key_id } }
 
-        # Give waiters time to queue on the lock
-        sleep 0.1
+        sleep 0.1 # let waiters queue on the lock
         expect(resolver.source_calls).to eq(1)
 
         resolver.release << :go
         refresher.join
         results = waiters.map(&:value)
 
-        # Exactly one source call was made and every waiter reused that result
         expect(resolver.source_calls).to eq(1)
         expect(results).to all(eq('FRESH-AKID'))
       end
 
-      it 'invalidate does not block or interfere while a refresh holds the lock' do
+      it 'does not block or mutate state when invalidate runs while a refresh holds the lock' do
         resolver = build_gated_resolver(ttl: 30, advisory_window: 600)
 
         refresher = Thread.new { resolver.credentials }
-        resolver.entered.pop # the refresher now holds the lock inside #refresh
+        resolver.entered.pop # refresher now holds the lock inside #refresh
 
-        # invalidate uses try_lock: with the refresh lock held it returns
-        # immediately without waiting and without mutating state.
         rejected = double('identity', access_key_id: 'CACHED-AKID')
         expect { resolver.invalidate(rejected) }.not_to raise_error
 

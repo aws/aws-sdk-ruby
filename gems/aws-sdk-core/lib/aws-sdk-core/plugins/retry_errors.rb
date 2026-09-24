@@ -290,7 +290,7 @@ module Aws
           config.clock_skew.update_estimated_skew(context)
 
           # A target-service authentication failure invalidates the cached
-          # credentials so the next request refreshes. The rejected request
+          # credentials so the next request refreshes and the rejected request
           # itself is not retried.
           invalidate_credentials(context, error_inspector)
 
@@ -475,7 +475,7 @@ module Aws
             end
 
             # A target-service authentication failure invalidates the cached
-            # credentials so the next request refreshes. The rejected request
+            # credentials so the next request refreshes and the rejected request
             # itself is not retried.
             invalidate_credentials(context, error_inspector)
 

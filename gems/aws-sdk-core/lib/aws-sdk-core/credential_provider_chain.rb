@@ -239,10 +239,10 @@ module Aws
       elsif !(ENV.fetch('AWS_EC2_METADATA_DISABLED', 'false').downcase == 'true')
         InstanceProfileCredentials.new(options.merge(profile: profile_name))
       end
-    rescue Errors::NoCredentialsError
-      # The credential source was unreachable on the initial fetch, skip this
-      # provider so the chain moves on. Non-recoverable errors are not
-      # NoCredentialsError and still propagate.
+    rescue Errors::MissingCredentialsError
+      # credential source was unreachable on initial fetch, skip so chain moves on.
+      # Non-recoverable errors are the source error (not MissingCredentialsError)
+      # and still propagate.
       nil
     end
 

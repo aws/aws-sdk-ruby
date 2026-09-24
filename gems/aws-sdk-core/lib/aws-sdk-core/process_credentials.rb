@@ -36,7 +36,7 @@ module Aws
       @process = process
       @credentials = credentials_from_process
       @async_refresh = false
-      # The SDK has no visibility into the credential source so static stability must not apply
+      # SDK has no visibility into the credential source so static stability must not apply
       @static_stability = false
       @metrics = ['CREDENTIALS_PROCESS']
       super

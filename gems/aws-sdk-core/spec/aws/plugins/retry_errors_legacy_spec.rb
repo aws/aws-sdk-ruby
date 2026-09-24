@@ -222,7 +222,7 @@ module Aws
         expect(resp.context.retries).to eq(0)
       end
 
-      it 'does not call refresh! when error is expired credentials and clock skew' do
+      it 'retries a clock skew error rather than invalidating credentials' do
         resp.error = RetryErrorsSvc::Errors::RequestExpired.new(nil, nil)
         resp.context.http_response.headers['date'] = (Time.now + 10*60).iso8601
         handle { |_context| resp }
