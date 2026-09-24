@@ -160,7 +160,8 @@ module Aws
       #   * `:errors` - Array of errors for failed downloads (only present when failures occur)
       def download_directory(destination, bucket:, **options)
         Aws::Plugins::UserAgent.metric('S3_TRANSFER', 'S3_TRANSFER_DOWNLOAD_DIRECTORY') do
-          executor = @executor || DefaultExecutor.new(max_threads: options.delete(:thread_count))
+          thread_count = options.delete(:thread_count)
+          executor = @executor || DefaultExecutor.new(max_threads: thread_count)
           begin
             downloader = DirectoryDownloader.new(client: @client, executor: executor, logger: @logger)
             downloader.download(destination, bucket: bucket, **options)
@@ -247,7 +248,8 @@ module Aws
       # @see Client#head_object
       def download_file(destination, bucket:, key:, **options)
         download_opts = options.merge(bucket: bucket, key: key)
-        executor = @executor || DefaultExecutor.new(max_threads: download_opts.delete(:thread_count))
+        thread_count = download_opts.delete(:thread_count)
+        executor = @executor || DefaultExecutor.new(max_threads: thread_count)
         begin
           downloader = FileDownloader.new(client: @client, executor: executor)
           downloader.download(destination, download_opts)
@@ -365,7 +367,8 @@ module Aws
       #   * `:errors` - Array of error objects for failed uploads (only present when failures occur)
       def upload_directory(source, bucket:, **options)
         Aws::Plugins::UserAgent.metric('S3_TRANSFER', 'S3_TRANSFER_UPLOAD_DIRECTORY') do
-          executor = @executor || DefaultExecutor.new(max_threads: options.delete(:thread_count))
+          thread_count = options.delete(:thread_count)
+          executor = @executor || DefaultExecutor.new(max_threads: thread_count)
           begin
             uploader = DirectoryUploader.new(client: @client, executor: executor, logger: @logger)
             uploader.upload(source, bucket, **options.merge(http_chunk_size: resolve_http_chunk_size(options)))
@@ -451,7 +454,8 @@ module Aws
         upload_opts = options.merge(bucket: bucket, key: key)
         http_chunk_size = resolve_http_chunk_size(upload_opts)
 
-        executor = @executor || DefaultExecutor.new(max_threads: upload_opts.delete(:thread_count))
+        thread_count = upload_opts.delete(:thread_count)
+        executor = @executor || DefaultExecutor.new(max_threads: thread_count)
         begin
           uploader = FileUploader.new(
             multipart_threshold: upload_opts.delete(:multipart_threshold),
@@ -521,7 +525,8 @@ module Aws
       # @see Client#upload_part
       def upload_stream(bucket:, key:, **options, &block)
         upload_opts = options.merge(bucket: bucket, key: key)
-        executor = @executor || DefaultExecutor.new(max_threads: upload_opts.delete(:thread_count))
+        thread_count = upload_opts.delete(:thread_count)
+        executor = @executor || DefaultExecutor.new(max_threads: thread_count)
         begin
           uploader = MultipartStreamUploader.new(
             client: @client,

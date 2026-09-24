@@ -28,6 +28,12 @@ module Aws
           expect { subject.download_file(path) }.to raise_error(Aws::S3::Errors::NoSuchKey)
         end
 
+        it 'respects the thread_count option' do
+          custom_thread_count = 20
+          expect(DefaultExecutor).to receive(:new).with(max_threads: custom_thread_count).and_call_original
+          subject.download_file(path, thread_count: custom_thread_count)
+        end
+
         it 'calls progress callback when given' do
           n_calls = 0
           callback = proc { |_b, _p, _t| n_calls += 1 }

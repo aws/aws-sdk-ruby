@@ -561,7 +561,7 @@ module Aws
       # @see Client#head_object
       def download_file(destination, options = {})
         download_opts = options.merge(bucket: bucket_name, key: key)
-        executor = DefaultExecutor.new(max_threads: download_opts.delete([:thread_count]))
+        executor = DefaultExecutor.new(max_threads: download_opts.delete(:thread_count))
         downloader = FileDownloader.new(client: client, executor: executor)
         Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           downloader.download(destination, download_opts)

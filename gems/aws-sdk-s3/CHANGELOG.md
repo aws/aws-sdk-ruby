@@ -3,6 +3,10 @@ Unreleased Changes
 
 * Issue - Ensure the internally-created executor is shutdown on error in `TransferManager` methods, preventing leaked worker threads on multipart transfer failures (#3419).
 
+* Issue - Remove `:thread_count` from transfer options even when a custom `:executor` is configured on `TransferManager`, fixing an `ArgumentError` raised on single-part `upload_file` calls.
+
+* Issue - Fix `:thread_count` being ignored by the deprecated `Object#download_file`, which always used the default thread count.
+
 1.232.1 (2026-09-16)
 ------------------
 
