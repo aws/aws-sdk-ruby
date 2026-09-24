@@ -36,6 +36,18 @@ module Aws
           expect { subject.upload_file(file) }.to raise_error(Aws::S3::Errors::AccessDenied)
         end
 
+        it 'shuts down the internally-created executor when upload raises' do
+          client.stub_responses(:put_object, 'AccessDenied')
+          executor = nil
+          allow(DefaultExecutor).to receive(:new).and_wrap_original do |orig, *args, **kwargs|
+            executor = orig.call(*args, **kwargs)
+            allow(executor).to receive(:shutdown).and_call_original
+            executor
+          end
+          expect { subject.upload_file(file) }.to raise_error(Aws::S3::Errors::AccessDenied)
+          expect(executor).to have_received(:shutdown)
+        end
+
         it 'yields the response to the given block' do
           subject.upload_file(file) do |response|
             expect(response).to be_kind_of(Seahorse::Client::Response)
