@@ -24,7 +24,7 @@ module Aws
   class AssumeRoleWebIdentityCredentials
 
     include CredentialProvider
-    include RefreshingCredentials
+    include ResilientRefreshingCredentials
 
     # @param [Hash] options
     # @option options [required, String] :role_arn the IAM role

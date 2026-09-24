@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Supported AWS credential providers now continue to use cached credentials after refresh failures and retry refresh with backoff. This improves resilience to temporary credential source outages and standardizes credential refresh timing. During an outage, requests may reach the service and return authentication errors instead of failing client-side during credential refresh. See [REFERENCE_PAGE_URL] for details and the full list of providers.
+
 3.257.0 (2026-09-14)
 ------------------
 

@@ -27,7 +27,7 @@ module Aws
   class SSOCredentials
 
     include CredentialProvider
-    include RefreshingCredentials
+    include ResilientRefreshingCredentials
 
     # @api private
     LEGACY_REQUIRED_OPTS =         [:sso_start_url, :sso_account_id, :sso_region, :sso_role_name].freeze

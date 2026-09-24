@@ -12,7 +12,7 @@ module Aws
   #     ec2 = Aws::EC2::Client.new(credentials: ecs_credentials)
   class ECSCredentials
     include CredentialProvider
-    include RefreshingCredentials
+    include ResilientRefreshingCredentials
 
     # @api private
     class Non200Response < RuntimeError

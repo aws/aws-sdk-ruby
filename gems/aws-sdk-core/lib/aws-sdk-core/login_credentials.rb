@@ -15,7 +15,7 @@ module Aws
   # be constructed with additional options that were provided.
   class LoginCredentials
     include CredentialProvider
-    include RefreshingCredentials
+    include ResilientRefreshingCredentials
 
     # @option options [required, String] :login_session An opaque string
     #   used to determine the cache file location. This value can be found

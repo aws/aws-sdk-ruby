@@ -5,6 +5,10 @@ require_relative '../spec_helper'
 module Aws
   describe SSOCredentials do
 
+    before do
+      allow_any_instance_of(SSOCredentials).to receive(:warn)
+    end
+
     let(:client) do
       SSO::Client.new(
         region: 'us-west-2',

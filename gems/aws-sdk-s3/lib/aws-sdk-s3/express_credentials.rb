@@ -9,7 +9,8 @@ module Aws
       include CredentialProvider
       include RefreshingCredentials
 
-      ADVISORY_REFRESH_WINDOW = 120 # 2 minutes
+      SYNC_EXPIRATION_LENGTH = 60 # 1 minute
+      ASYNC_EXPIRATION_LENGTH = 120 # 2 minutes
 
       def initialize(options = {})
         @client = options[:client]
@@ -20,10 +21,7 @@ module Aws
           end
         end
         @async_refresh = true
-        # Session credentials are rejected once expired, so static stability
-        # must not apply.
-        @static_stability = false
-        super(options.merge(advisory_refresh_window: ADVISORY_REFRESH_WINDOW))
+        super
       end
 
       # @return [S3::Client]

@@ -45,7 +45,7 @@ module Aws
     # to be refreshed and it has access to the CognitoIdentityCredentials object.
     class CognitoIdentityCredentials
       include CredentialProvider
-      include RefreshingCredentials
+      include ResilientRefreshingCredentials
 
       # @param [Hash] options
       # @option options [String] :identity_id the Cognito identity_id.  Required

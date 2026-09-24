@@ -20,7 +20,7 @@ module Aws
   class AssumeRoleCredentials
 
     include CredentialProvider
-    include RefreshingCredentials
+    include ResilientRefreshingCredentials
 
     # @option options [required, String] :role_arn
     # @option options [required, String] :role_session_name

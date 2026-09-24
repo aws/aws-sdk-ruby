@@ -68,14 +68,6 @@ module Aws
       end
 
       it 'is skipped for s3 express endpoints' do
-        # Express endpoint resolves S3 Express credentials which fetch
-        # session on construction.
-        client.stub_responses(:create_session, credentials: {
-          access_key_id: 's3-akid',
-          secret_access_key: 's3-secret',
-          session_token: 's3-session',
-          expiration: Time.now + 60 * 5
-        })
         expect_any_instance_of(Aws::S3::AccessGrantsCredentialsProvider)
           .not_to receive(:access_grants_credentials_for)
         client.head_object(bucket: 'bucket--use1-az2--x-s3', key: 'key')

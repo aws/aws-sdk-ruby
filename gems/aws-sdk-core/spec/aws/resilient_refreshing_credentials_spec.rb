@@ -6,14 +6,14 @@ module Aws
   # test error the fake source raises for a non-recoverable response
   class RefreshingCredentialsTestError < StandardError; end
 
-  describe RefreshingCredentials do
+  describe ResilientRefreshingCredentials do
     let(:resolver_class) do
       Class.new do
-        include RefreshingCredentials
+        include ResilientRefreshingCredentials
 
         attr_reader :source_calls
 
-        # Bypasses the eager fetch in RefreshingCredentials#initialize and
+        # Bypasses the eager fetch in ResilientRefreshingCredentials#initialize and
         # sets the cache state directly.
         def initialize(seed = {})
           @mutex = Mutex.new
@@ -121,7 +121,7 @@ module Aws
     describe 'advisory window configuration' do
       let(:validating_resolver_class) do
         Class.new do
-          include RefreshingCredentials
+          include ResilientRefreshingCredentials
 
           def refresh
             @credentials = Credentials.new('AKID', 'secret', 'token')
@@ -141,7 +141,7 @@ module Aws
       end
     end
 
-    tests = JSON.load_file(File.join(File.dirname(__FILE__), 'refreshing_credentials_tests.json'))
+    tests = JSON.load_file(File.join(File.dirname(__FILE__), 'resilient_refreshing_credentials_tests.json'))
 
     tests.each do |test|
       it "#{test['id']}: #{test['documentation']}" do
@@ -195,7 +195,7 @@ module Aws
     describe 'concurrency' do
       let(:gated_resolver_class) do
         Class.new do
-          include RefreshingCredentials
+          include ResilientRefreshingCredentials
 
           attr_reader :source_calls, :entered, :release
 
