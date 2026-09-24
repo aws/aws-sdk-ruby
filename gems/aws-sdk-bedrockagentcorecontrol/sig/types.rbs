@@ -62,7 +62,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor agent_runtime_name: ::String
       attr_accessor description: ::String
       attr_accessor last_updated_at: ::Time
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       SENSITIVE: [:description]
     end
 
@@ -86,7 +86,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor target_version: ::String
       attr_accessor agent_runtime_endpoint_arn: ::String
       attr_accessor agent_runtime_arn: ::String
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       attr_accessor id: ::String
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
@@ -97,7 +97,7 @@ module Aws::BedrockAgentCoreControl
     class AgentRuntimeVersionSummary
       attr_accessor agent_runtime_arn: ::String
       attr_accessor agent_runtime_version: ::String
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       SENSITIVE: []
     end
 
@@ -632,7 +632,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor agent_runtime_arn: ::String
       attr_accessor agent_runtime_id: ::String
       attr_accessor endpoint_name: ::String
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       attr_accessor created_at: ::Time
       SENSITIVE: [:endpoint_name]
     end
@@ -652,6 +652,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor filesystem_configurations: ::Array[Types::FilesystemConfiguration]
       attr_accessor capacity_provider_configuration: Types::CapacityProviderConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor platform_version: ::String
       SENSITIVE: [:description, :environment_variables]
     end
 
@@ -661,7 +662,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor agent_runtime_id: ::String
       attr_accessor agent_runtime_version: ::String
       attr_accessor created_at: ::Time
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       SENSITIVE: []
     end
 
@@ -1010,6 +1011,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor allowed_tools: ::Array[::String]
       attr_accessor memory: Types::HarnessMemoryConfiguration
       attr_accessor truncation: Types::HarnessTruncationConfiguration
+      attr_accessor hooks: ::Array[Types::HarnessHook]
       attr_accessor max_iterations: ::Integer
       attr_accessor max_tokens: ::Integer
       attr_accessor timeout_seconds: ::Integer
@@ -1531,7 +1533,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     class DeleteAgentRuntimeEndpointResponse
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       attr_accessor agent_runtime_id: ::String
       attr_accessor endpoint_name: ::String
       SENSITIVE: [:endpoint_name]
@@ -1545,7 +1547,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     class DeleteAgentRuntimeResponse
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       attr_accessor agent_runtime_id: ::String
       attr_accessor agent_runtime_version: ::String
       SENSITIVE: []
@@ -2268,7 +2270,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor agent_runtime_endpoint_arn: ::String
       attr_accessor agent_runtime_arn: ::String
       attr_accessor description: ::String
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       attr_accessor failure_reason: ::String
@@ -2292,7 +2294,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor last_updated_at: ::Time
       attr_accessor role_arn: ::String
       attr_accessor network_configuration: Types::NetworkConfiguration
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       attr_accessor lifecycle_configuration: Types::LifecycleConfiguration
       attr_accessor failure_reason: ::String
       attr_accessor description: ::String
@@ -2305,6 +2307,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor metadata_configuration: Types::RuntimeMetadataConfiguration
       attr_accessor filesystem_configurations: ::Array[Types::FilesystemConfiguration]
       attr_accessor capacity_provider_configuration: Types::CapacityProviderConfiguration
+      attr_accessor platform_version: ::String
       SENSITIVE: [:description, :environment_variables]
     end
 
@@ -2989,11 +2992,24 @@ module Aws::BedrockAgentCoreControl
       attr_accessor environment_variables: ::Hash[::String, ::String]
       attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
       attr_accessor memory: Types::HarnessMemoryConfiguration
+      attr_accessor hooks: ::Array[Types::HarnessHook]
       attr_accessor max_iterations: ::Integer
       attr_accessor max_tokens: ::Integer
       attr_accessor timeout_seconds: ::Integer
       attr_accessor failure_reason: ::String
       SENSITIVE: [:environment_variables]
+    end
+
+    class HarnessAfterInvocationHook
+      attr_accessor name: ::String
+      attr_accessor target: Types::HarnessHookTarget
+      SENSITIVE: []
+    end
+
+    class HarnessAfterToolCallHook
+      attr_accessor name: ::String
+      attr_accessor target: Types::HarnessHookTarget
+      SENSITIVE: []
     end
 
     class HarnessAgentCoreBrowserConfig
@@ -3051,6 +3067,18 @@ module Aws::BedrockAgentCoreControl
       attr_accessor top_p: ::Float
       attr_accessor api_format: ("converse_stream" | "responses" | "chat_completions")
       attr_accessor additional_params: untyped
+      SENSITIVE: []
+    end
+
+    class HarnessBeforeInvocationHook
+      attr_accessor name: ::String
+      attr_accessor target: Types::HarnessHookTarget
+      SENSITIVE: []
+    end
+
+    class HarnessBeforeToolCallHook
+      attr_accessor name: ::String
+      attr_accessor target: Types::HarnessHookTarget
       SENSITIVE: []
     end
 
@@ -3133,6 +3161,60 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class HarnessHook
+      attr_accessor before_invocation: Types::HarnessBeforeInvocationHook
+      attr_accessor after_invocation: Types::HarnessAfterInvocationHook
+      attr_accessor before_tool_call: Types::HarnessBeforeToolCallHook
+      attr_accessor after_tool_call: Types::HarnessAfterToolCallHook
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class BeforeInvocation < HarnessHook
+      end
+      class AfterInvocation < HarnessHook
+      end
+      class BeforeToolCall < HarnessHook
+      end
+      class AfterToolCall < HarnessHook
+      end
+      class Unknown < HarnessHook
+      end
+    end
+
+    class HarnessHookEventBridgeTarget
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class HarnessHookLambdaTarget
+      attr_accessor arn: ::String
+      attr_accessor timeout_seconds: ::Integer
+      attr_accessor failure_mode: ("allow" | "deny")
+      SENSITIVE: []
+    end
+
+    class HarnessHookSnsTarget
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class HarnessHookTarget
+      attr_accessor lambda: Types::HarnessHookLambdaTarget
+      attr_accessor sns: Types::HarnessHookSnsTarget
+      attr_accessor event_bridge: Types::HarnessHookEventBridgeTarget
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Lambda < HarnessHookTarget
+      end
+      class Sns < HarnessHookTarget
+      end
+      class EventBridge < HarnessHookTarget
+      end
+      class Unknown < HarnessHookTarget
+      end
+    end
+
     class HarnessInlineFunctionConfig
       attr_accessor description: ::String
       attr_accessor input_schema: untyped
@@ -3198,12 +3280,13 @@ module Aws::BedrockAgentCoreControl
     class HarnessOpenAiModelConfig
       attr_accessor model_id: ::String
       attr_accessor api_key_arn: ::String
+      attr_accessor api_base: ::String
       attr_accessor max_tokens: ::Integer
       attr_accessor temperature: ::Float
       attr_accessor top_p: ::Float
       attr_accessor api_format: ("chat_completions" | "responses")
       attr_accessor additional_params: untyped
-      SENSITIVE: []
+      SENSITIVE: [:api_base]
     end
 
     class HarnessRemoteMcpConfig
@@ -5682,7 +5765,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor target_version: ::String
       attr_accessor agent_runtime_endpoint_arn: ::String
       attr_accessor agent_runtime_arn: ::String
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       SENSITIVE: []
@@ -5702,6 +5785,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor environment_variables: ::Hash[::String, ::String]
       attr_accessor filesystem_configurations: ::Array[Types::FilesystemConfiguration]
       attr_accessor capacity_provider_configuration: Types::CapacityProviderConfiguration
+      attr_accessor platform_version: ::String
       attr_accessor client_token: ::String
       SENSITIVE: [:description, :environment_variables]
     end
@@ -5713,7 +5797,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor agent_runtime_version: ::String
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       SENSITIVE: []
     end
 
@@ -5996,6 +6080,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor allowed_tools: ::Array[::String]
       attr_accessor memory: Types::UpdatedHarnessMemoryConfiguration
       attr_accessor truncation: Types::HarnessTruncationConfiguration
+      attr_accessor hooks: ::Array[Types::HarnessHook]
       attr_accessor max_iterations: ::Integer
       attr_accessor max_tokens: ::Integer
       attr_accessor timeout_seconds: ::Integer

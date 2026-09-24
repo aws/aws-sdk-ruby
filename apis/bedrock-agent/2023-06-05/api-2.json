@@ -2076,8 +2076,19 @@
       "members":{
         "dimensions":{"shape":"Dimensions"},
         "embeddingDataType":{"shape":"EmbeddingDataType"},
-        "audio":{"shape":"AudioConfigurations"},
-        "video":{"shape":"VideoConfigurations"}
+        "audio":{
+          "shape":"AudioConfigurations",
+          "deprecated":true,
+          "deprecatedMessage":"Use Managed Knowledge Base's modelConfiguration field. https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html",
+          "deprecatedSince":"2026-09-01"
+        },
+        "video":{
+          "shape":"VideoConfigurations",
+          "deprecated":true,
+          "deprecatedMessage":"Use Managed Knowledge Base's modelConfiguration field. https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html",
+          "deprecatedSince":"2026-09-01"
+        },
+        "modelConfiguration":{"shape":"Document"}
       }
     },
     "BedrockFoundationModelConfiguration":{
@@ -5661,7 +5672,8 @@
         "embeddingModelType":{"shape":"EmbeddingModelType"},
         "embeddingModelArn":{"shape":"BedrockEmbeddingModelArn"},
         "embeddingModelConfiguration":{"shape":"EmbeddingModelConfiguration"},
-        "serverSideEncryptionConfiguration":{"shape":"ServerSideEncryptionConfiguration"}
+        "serverSideEncryptionConfiguration":{"shape":"ServerSideEncryptionConfiguration"},
+        "supplementalDataStorageConfiguration":{"shape":"SupplementalDataStorageConfiguration"}
       }
     },
     "ManagedKnowledgeBaseConnectorConfiguration":{
@@ -6182,7 +6194,8 @@
       "enum":[
         "BEDROCK_FOUNDATION_MODEL",
         "BEDROCK_DATA_AUTOMATION",
-        "SMART_PARSING"
+        "SMART_PARSING",
+        "MULTI_MODAL_EMBEDDINGS"
       ]
     },
     "PatternObjectFilter":{

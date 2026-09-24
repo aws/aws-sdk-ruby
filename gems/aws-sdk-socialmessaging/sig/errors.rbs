@@ -17,6 +17,9 @@ module Aws
       class AccessDeniedException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class ConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class DependencyException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

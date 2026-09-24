@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2026-09-23)
+------------------
+
+* Feature - Adds support for speaker diarization on Amazon Lex V2 bot locales. Speaker diarization keeps your bot on the primary (loudest) speaker during a streaming voice conversation, so background voices do not start a turn or interrupt a prompt.
+
+1.97.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.96.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.95.0 (2026-07-09)
 ------------------
 

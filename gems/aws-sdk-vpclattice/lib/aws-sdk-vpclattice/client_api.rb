@@ -31,6 +31,9 @@ module Aws::VPCLattice
     BatchUpdateRuleResponse = Shapes::StructureShape.new(name: 'BatchUpdateRuleResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CertificateArn = Shapes::StringShape.new(name: 'CertificateArn')
+    CidrRange = Shapes::StringShape.new(name: 'CidrRange')
+    CidrRangeList = Shapes::ListShape.new(name: 'CidrRangeList')
+    CidrResource = Shapes::StructureShape.new(name: 'CidrResource')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateAccessLogSubscriptionRequest = Shapes::StructureShape.new(name: 'CreateAccessLogSubscriptionRequest')
@@ -205,6 +208,10 @@ module Aws::VPCLattice
     PathMatchExact = Shapes::StringShape.new(name: 'PathMatchExact')
     PathMatchPrefix = Shapes::StringShape.new(name: 'PathMatchPrefix')
     PathMatchType = Shapes::UnionShape.new(name: 'PathMatchType')
+    PayerResponsibilityEntry = Shapes::StructureShape.new(name: 'PayerResponsibilityEntry')
+    PayerResponsibilityList = Shapes::ListShape.new(name: 'PayerResponsibilityList')
+    PayerResponsibilityPayer = Shapes::StringShape.new(name: 'PayerResponsibilityPayer')
+    PayerResponsibilityScope = Shapes::StringShape.new(name: 'PayerResponsibilityScope')
     PolicyString = Shapes::StringShape.new(name: 'PolicyString')
     Port = Shapes::IntegerShape.new(name: 'Port')
     PortRange = Shapes::StringShape.new(name: 'PortRange')
@@ -400,6 +407,11 @@ module Aws::VPCLattice
     BatchUpdateRuleResponse.add_member(:successful, Shapes::ShapeRef.new(shape: RuleUpdateSuccessList, location_name: "successful"))
     BatchUpdateRuleResponse.add_member(:unsuccessful, Shapes::ShapeRef.new(shape: RuleUpdateFailureList, location_name: "unsuccessful"))
     BatchUpdateRuleResponse.struct_class = Types::BatchUpdateRuleResponse
+
+    CidrRangeList.member = Shapes::ShapeRef.new(shape: CidrRange)
+
+    CidrResource.add_member(:cidr_ranges, Shapes::ShapeRef.new(shape: CidrRangeList, location_name: "cidrRanges"))
+    CidrResource.struct_class = Types::CidrResource
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
@@ -1207,6 +1219,12 @@ module Aws::VPCLattice
     PathMatchType.add_member_subclass(:unknown, Types::PathMatchType::Unknown)
     PathMatchType.struct_class = Types::PathMatchType
 
+    PayerResponsibilityEntry.add_member(:scope, Shapes::ShapeRef.new(shape: PayerResponsibilityScope, location_name: "scope"))
+    PayerResponsibilityEntry.add_member(:payer_responsibility_type, Shapes::ShapeRef.new(shape: PayerResponsibilityPayer, location_name: "payerResponsibilityType"))
+    PayerResponsibilityEntry.struct_class = Types::PayerResponsibilityEntry
+
+    PayerResponsibilityList.member = Shapes::ShapeRef.new(shape: PayerResponsibilityEntry)
+
     PortRangeList.member = Shapes::ShapeRef.new(shape: PortRange)
 
     PrivateDnsSpecifiedDomainsList.member = Shapes::ShapeRef.new(shape: PrivateDnsSpecifiedDomain)
@@ -1238,10 +1256,12 @@ module Aws::VPCLattice
     ResourceConfigurationDefinition.add_member(:dns_resource, Shapes::ShapeRef.new(shape: DnsResource, location_name: "dnsResource"))
     ResourceConfigurationDefinition.add_member(:ip_resource, Shapes::ShapeRef.new(shape: IpResource, location_name: "ipResource"))
     ResourceConfigurationDefinition.add_member(:arn_resource, Shapes::ShapeRef.new(shape: ArnResource, location_name: "arnResource"))
+    ResourceConfigurationDefinition.add_member(:cidr_resource, Shapes::ShapeRef.new(shape: CidrResource, location_name: "cidrResource"))
     ResourceConfigurationDefinition.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ResourceConfigurationDefinition.add_member_subclass(:dns_resource, Types::ResourceConfigurationDefinition::DnsResource)
     ResourceConfigurationDefinition.add_member_subclass(:ip_resource, Types::ResourceConfigurationDefinition::IpResource)
     ResourceConfigurationDefinition.add_member_subclass(:arn_resource, Types::ResourceConfigurationDefinition::ArnResource)
+    ResourceConfigurationDefinition.add_member_subclass(:cidr_resource, Types::ResourceConfigurationDefinition::CidrResource)
     ResourceConfigurationDefinition.add_member_subclass(:unknown, Types::ResourceConfigurationDefinition::Unknown)
     ResourceConfigurationDefinition.struct_class = Types::ResourceConfigurationDefinition
 
@@ -1273,6 +1293,7 @@ module Aws::VPCLattice
     ResourceEndpointAssociationSummary.add_member(:vpc_endpoint_owner, Shapes::ShapeRef.new(shape: VpcEndpointOwner, location_name: "vpcEndpointOwner"))
     ResourceEndpointAssociationSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: AccountId, location_name: "createdBy"))
     ResourceEndpointAssociationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    ResourceEndpointAssociationSummary.add_member(:payer_responsibility, Shapes::ShapeRef.new(shape: PayerResponsibilityList, location_name: "payerResponsibility"))
     ResourceEndpointAssociationSummary.struct_class = Types::ResourceEndpointAssociationSummary
 
     ResourceGatewayList.member = Shapes::ShapeRef.new(shape: ResourceGatewaySummary)

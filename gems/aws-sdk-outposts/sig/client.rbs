@@ -168,7 +168,7 @@ module Aws
                           ],
                           ?requested_constraints: Array[
                             {
-                              quote_constraint_type: ("RACK_MAXIMUM" | "RACK_MAX_POWER_KVA" | "RACK_MAX_WEIGHT_LBS")?,
+                              quote_constraint_type: ("RACK_MAXIMUM" | "RACK_MAX_POWER_KVA" | "RACK_MAX_WEIGHT_LBS" | "RACK_SPACE_CONSTRAINED")?,
                               value: ::String?
                             }
                           ],
@@ -681,7 +681,7 @@ module Aws
                           ],
                           ?requested_constraints: Array[
                             {
-                              quote_constraint_type: ("RACK_MAXIMUM" | "RACK_MAX_POWER_KVA" | "RACK_MAX_WEIGHT_LBS")?,
+                              quote_constraint_type: ("RACK_MAXIMUM" | "RACK_MAX_POWER_KVA" | "RACK_MAX_WEIGHT_LBS" | "RACK_SPACE_CONSTRAINED")?,
                               value: ::String?
                             }
                           ],

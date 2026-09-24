@@ -68,6 +68,12 @@ module Aws::BillingConductor
       SENSITIVE: []
     end
 
+    class AutoTransferBillingGroupCreationPreference
+      attr_accessor enabled: bool
+      attr_accessor pricing_plan_arn: ::String
+      SENSITIVE: []
+    end
+
     class BatchAssociateResourcesToCustomLineItemInput
       attr_accessor target_arn: ::String
       attr_accessor resource_arns: ::Array[::String]
@@ -146,7 +152,7 @@ module Aws::BillingConductor
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
       attr_accessor resource_type: ::String
-      attr_accessor reason: ("RESOURCE_NAME_CONFLICT" | "PRICING_RULE_IN_PRICING_PLAN_CONFLICT" | "PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT" | "PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT" | "WRITE_CONFLICT_RETRY")
+      attr_accessor reason: ("RESOURCE_NAME_CONFLICT" | "PRICING_RULE_IN_PRICING_PLAN_CONFLICT" | "PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT" | "PRICING_PLAN_REFERENCED_BY_PREFERENCE_DELETE_CONFLICT" | "PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT" | "WRITE_CONFLICT_RETRY")
       SENSITIVE: []
     end
 
@@ -227,6 +233,7 @@ module Aws::BillingConductor
 
     class CreateTieringInput
       attr_accessor free_tier: Types::CreateFreeTierConfig
+      attr_accessor custom_tiers: ::Array[Types::CustomTier]
       SENSITIVE: []
     end
 
@@ -290,6 +297,13 @@ module Aws::BillingConductor
       attr_accessor computation_rule: ("ITEMIZED" | "CONSOLIDATED")
       attr_accessor presentation_details: Types::PresentationObject
       SENSITIVE: [:name, :description]
+    end
+
+    class CustomTier
+      attr_accessor begin_range_inclusive: ::Float
+      attr_accessor end_range_exclusive: ::Float
+      attr_accessor rate_value: ::Float
+      SENSITIVE: []
     end
 
     class DeleteBillingGroupInput
@@ -378,6 +392,18 @@ module Aws::BillingConductor
     class GetBillingGroupCostReportOutput
       attr_accessor billing_group_cost_report_results: ::Array[Types::BillingGroupCostReportResultElement]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetBillingTransferPreferenceInput
+      attr_accessor responsibility_transfer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetBillingTransferPreferenceOutput
+      attr_accessor responsibility_transfer_arn: ::String
+      attr_accessor auto_billing_transfer_billing_group_creation: Types::AutoTransferBillingGroupCreationPreference
+      attr_accessor last_modified_time: ::Integer
       SENSITIVE: []
     end
 
@@ -713,6 +739,7 @@ module Aws::BillingConductor
 
     class Tiering
       attr_accessor free_tier: Types::FreeTierConfig
+      attr_accessor custom_tiers: ::Array[Types::CustomTier]
       SENSITIVE: []
     end
 
@@ -753,6 +780,20 @@ module Aws::BillingConductor
       attr_accessor status_reason: ::String
       attr_accessor account_grouping: Types::UpdateBillingGroupAccountGrouping
       SENSITIVE: [:name, :description]
+    end
+
+    class UpdateBillingTransferPreferenceInput
+      attr_accessor client_token: ::String
+      attr_accessor responsibility_transfer_arn: ::String
+      attr_accessor auto_billing_transfer_billing_group_creation: Types::AutoTransferBillingGroupCreationPreference
+      SENSITIVE: []
+    end
+
+    class UpdateBillingTransferPreferenceOutput
+      attr_accessor responsibility_transfer_arn: ::String
+      attr_accessor auto_billing_transfer_billing_group_creation: Types::AutoTransferBillingGroupCreationPreference
+      attr_accessor last_modified_time: ::Integer
+      SENSITIVE: []
     end
 
     class UpdateCustomLineItemChargeDetails
@@ -842,6 +883,7 @@ module Aws::BillingConductor
 
     class UpdateTieringInput
       attr_accessor free_tier: Types::UpdateFreeTierConfig
+      attr_accessor custom_tiers: ::Array[Types::CustomTier]
       SENSITIVE: []
     end
 

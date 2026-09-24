@@ -595,14 +595,16 @@
       "type":"structure",
       "members":{
         "scaleDownIdleTimeInSeconds":{"shape":"ComputeNodeGroupSlurmConfigurationScaleDownIdleTimeInSecondsInteger"},
-        "slurmCustomSettings":{"shape":"SlurmCustomSettings"}
+        "slurmCustomSettings":{"shape":"SlurmCustomSettings"},
+        "gresCustomSettings":{"shape":"GresCustomSettings"}
       }
     },
     "ComputeNodeGroupSlurmConfigurationRequest":{
       "type":"structure",
       "members":{
         "scaleDownIdleTimeInSeconds":{"shape":"ComputeNodeGroupSlurmConfigurationRequestScaleDownIdleTimeInSecondsInteger"},
-        "slurmCustomSettings":{"shape":"SlurmCustomSettings"}
+        "slurmCustomSettings":{"shape":"SlurmCustomSettings"},
+        "gresCustomSettings":{"shape":"GresCustomSettings"}
       }
     },
     "ComputeNodeGroupSlurmConfigurationRequestScaleDownIdleTimeInSecondsInteger":{
@@ -911,6 +913,15 @@
       "members":{
         "queue":{"shape":"Queue"}
       }
+    },
+    "GresCustomSettingMap":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"String"}
+    },
+    "GresCustomSettings":{
+      "type":"list",
+      "member":{"shape":"GresCustomSettingMap"}
     },
     "InstanceConfig":{
       "type":"structure",
@@ -1640,7 +1651,8 @@
       "type":"structure",
       "members":{
         "scaleDownIdleTimeInSeconds":{"shape":"UpdateComputeNodeGroupSlurmConfigurationRequestScaleDownIdleTimeInSecondsInteger"},
-        "slurmCustomSettings":{"shape":"SlurmCustomSettings"}
+        "slurmCustomSettings":{"shape":"SlurmCustomSettings"},
+        "gresCustomSettings":{"shape":"GresCustomSettings"}
       }
     },
     "UpdateComputeNodeGroupSlurmConfigurationRequestScaleDownIdleTimeInSecondsInteger":{

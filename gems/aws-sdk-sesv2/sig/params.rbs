@@ -134,6 +134,7 @@ module Aws
       destination: Array[::String]?,
       subject: Array[::String]?,
       isp: Array[::String]?,
+      tenant_name: Array[::String]?,
       last_delivery_event: Array[("SEND" | "DELIVERY" | "TRANSIENT_BOUNCE" | "PERMANENT_BOUNCE" | "UNDETERMINED_BOUNCE" | "COMPLAINT")]?,
       last_engagement_event: Array[("OPEN" | "CLICK")]?
     }

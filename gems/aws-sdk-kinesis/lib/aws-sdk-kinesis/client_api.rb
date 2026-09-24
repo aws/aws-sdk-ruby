@@ -158,6 +158,7 @@ module Aws::Kinesis
     PutResourcePolicyInput = Shapes::StructureShape.new(name: 'PutResourcePolicyInput')
     Record = Shapes::StructureShape.new(name: 'Record')
     RecordConfiguration = Shapes::StructureShape.new(name: 'RecordConfiguration')
+    RecordDistributionStrategy = Shapes::StringShape.new(name: 'RecordDistributionStrategy')
     RecordFormatType = Shapes::StringShape.new(name: 'RecordFormatType')
     RecordList = Shapes::ListShape.new(name: 'RecordList')
     RegisterStreamConsumerInput = Shapes::StructureShape.new(name: 'RegisterStreamConsumerInput')
@@ -235,6 +236,7 @@ module Aws::Kinesis
     UpdateShardCountInput = Shapes::StructureShape.new(name: 'UpdateShardCountInput')
     UpdateShardCountOutput = Shapes::StructureShape.new(name: 'UpdateShardCountOutput')
     UpdateStreamModeInput = Shapes::StructureShape.new(name: 'UpdateStreamModeInput')
+    UpdateStreamRecordDistributionStrategyInput = Shapes::StructureShape.new(name: 'UpdateStreamRecordDistributionStrategyInput')
     UpdateStreamWarmThroughputInput = Shapes::StructureShape.new(name: 'UpdateStreamWarmThroughputInput')
     UpdateStreamWarmThroughputOutput = Shapes::StructureShape.new(name: 'UpdateStreamWarmThroughputOutput')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
@@ -355,6 +357,7 @@ module Aws::Kinesis
     CreateStreamInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateStreamInput.add_member(:warm_throughput_mi_bps, Shapes::ShapeRef.new(shape: NaturalIntegerObject, location_name: "WarmThroughputMiBps"))
     CreateStreamInput.add_member(:max_record_size_in_ki_b, Shapes::ShapeRef.new(shape: MaxRecordSizeInKiB, location_name: "MaxRecordSizeInKiB"))
+    CreateStreamInput.add_member(:record_distribution_strategy, Shapes::ShapeRef.new(shape: RecordDistributionStrategy, location_name: "RecordDistributionStrategy"))
     CreateStreamInput.struct_class = Types::CreateStreamInput
 
     DeadLetterQueueS3Configuration.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, required: true, location_name: "BucketARN"))
@@ -632,7 +635,7 @@ module Aws::Kinesis
 
     PutRecordInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     PutRecordInput.add_member(:data, Shapes::ShapeRef.new(shape: Data, required: true, location_name: "Data"))
-    PutRecordInput.add_member(:partition_key, Shapes::ShapeRef.new(shape: PartitionKey, required: true, location_name: "PartitionKey"))
+    PutRecordInput.add_member(:partition_key, Shapes::ShapeRef.new(shape: PartitionKey, location_name: "PartitionKey"))
     PutRecordInput.add_member(:explicit_hash_key, Shapes::ShapeRef.new(shape: HashKey, location_name: "ExplicitHashKey"))
     PutRecordInput.add_member(:sequence_number_for_ordering, Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "SequenceNumberForOrdering"))
     PutRecordInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
@@ -659,7 +662,7 @@ module Aws::Kinesis
 
     PutRecordsRequestEntry.add_member(:data, Shapes::ShapeRef.new(shape: Data, required: true, location_name: "Data"))
     PutRecordsRequestEntry.add_member(:explicit_hash_key, Shapes::ShapeRef.new(shape: HashKey, location_name: "ExplicitHashKey"))
-    PutRecordsRequestEntry.add_member(:partition_key, Shapes::ShapeRef.new(shape: PartitionKey, required: true, location_name: "PartitionKey"))
+    PutRecordsRequestEntry.add_member(:partition_key, Shapes::ShapeRef.new(shape: PartitionKey, location_name: "PartitionKey"))
     PutRecordsRequestEntry.struct_class = Types::PutRecordsRequestEntry
 
     PutRecordsRequestEntryList.member = Shapes::ShapeRef.new(shape: PutRecordsRequestEntry)
@@ -680,7 +683,7 @@ module Aws::Kinesis
     Record.add_member(:sequence_number, Shapes::ShapeRef.new(shape: SequenceNumber, required: true, location_name: "SequenceNumber"))
     Record.add_member(:approximate_arrival_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ApproximateArrivalTimestamp"))
     Record.add_member(:data, Shapes::ShapeRef.new(shape: Data, required: true, location_name: "Data"))
-    Record.add_member(:partition_key, Shapes::ShapeRef.new(shape: PartitionKey, required: true, location_name: "PartitionKey"))
+    Record.add_member(:partition_key, Shapes::ShapeRef.new(shape: PartitionKey, location_name: "PartitionKey"))
     Record.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
     Record.struct_class = Types::Record
 
@@ -827,6 +830,7 @@ module Aws::Kinesis
     StreamDescriptionSummary.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: WarmThroughputObject, location_name: "WarmThroughput"))
     StreamDescriptionSummary.add_member(:max_record_size_in_ki_b, Shapes::ShapeRef.new(shape: MaxRecordSizeInKiB, location_name: "MaxRecordSizeInKiB"))
     StreamDescriptionSummary.add_member(:channel_count, Shapes::ShapeRef.new(shape: ChannelCountObject, location_name: "ChannelCount"))
+    StreamDescriptionSummary.add_member(:record_distribution_strategy, Shapes::ShapeRef.new(shape: RecordDistributionStrategy, location_name: "RecordDistributionStrategy"))
     StreamDescriptionSummary.struct_class = Types::StreamDescriptionSummary
 
     StreamFilter.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, required: true, location_name: "StreamARN"))
@@ -936,6 +940,11 @@ module Aws::Kinesis
     UpdateStreamModeInput.add_member(:stream_mode_details, Shapes::ShapeRef.new(shape: StreamModeDetails, required: true, location_name: "StreamModeDetails"))
     UpdateStreamModeInput.add_member(:warm_throughput_mi_bps, Shapes::ShapeRef.new(shape: NaturalIntegerObject, location_name: "WarmThroughputMiBps"))
     UpdateStreamModeInput.struct_class = Types::UpdateStreamModeInput
+
+    UpdateStreamRecordDistributionStrategyInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, required: true, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
+    UpdateStreamRecordDistributionStrategyInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
+    UpdateStreamRecordDistributionStrategyInput.add_member(:record_distribution_strategy, Shapes::ShapeRef.new(shape: RecordDistributionStrategy, required: true, location_name: "RecordDistributionStrategy"))
+    UpdateStreamRecordDistributionStrategyInput.struct_class = Types::UpdateStreamRecordDistributionStrategyInput
 
     UpdateStreamWarmThroughputInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
     UpdateStreamWarmThroughputInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
@@ -1582,6 +1591,20 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_stream_record_distribution_strategy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateStreamRecordDistributionStrategy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateStreamRecordDistributionStrategyInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 

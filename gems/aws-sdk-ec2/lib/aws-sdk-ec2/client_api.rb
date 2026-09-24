@@ -291,6 +291,7 @@ module Aws::EC2
     BlockPublicAccessMode = Shapes::StringShape.new(name: 'BlockPublicAccessMode')
     BlockPublicAccessStates = Shapes::StructureShape.new(name: 'BlockPublicAccessStates')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BootModeOverrideValues = Shapes::StringShape.new(name: 'BootModeOverrideValues')
     BootModeType = Shapes::StringShape.new(name: 'BootModeType')
     BootModeTypeList = Shapes::ListShape.new(name: 'BootModeTypeList')
     BootModeValues = Shapes::StringShape.new(name: 'BootModeValues')
@@ -382,6 +383,8 @@ module Aws::EC2
     CapacityManagerTagDimension = Shapes::StructureShape.new(name: 'CapacityManagerTagDimension')
     CapacityManagerTagDimensionSet = Shapes::ListShape.new(name: 'CapacityManagerTagDimensionSet')
     CapacityReservation = Shapes::StructureShape.new(name: 'CapacityReservation')
+    CapacityReservationAdjustmentDetails = Shapes::StructureShape.new(name: 'CapacityReservationAdjustmentDetails')
+    CapacityReservationAdjustmentStatus = Shapes::StringShape.new(name: 'CapacityReservationAdjustmentStatus')
     CapacityReservationBillingRequest = Shapes::StructureShape.new(name: 'CapacityReservationBillingRequest')
     CapacityReservationBillingRequestSet = Shapes::ListShape.new(name: 'CapacityReservationBillingRequestSet')
     CapacityReservationBillingRequestStatus = Shapes::StringShape.new(name: 'CapacityReservationBillingRequestStatus')
@@ -407,6 +410,11 @@ module Aws::EC2
     CapacityReservationIdSet = Shapes::ListShape.new(name: 'CapacityReservationIdSet')
     CapacityReservationInfo = Shapes::StructureShape.new(name: 'CapacityReservationInfo')
     CapacityReservationInstancePlatform = Shapes::StringShape.new(name: 'CapacityReservationInstancePlatform')
+    CapacityReservationModificationQuote = Shapes::StructureShape.new(name: 'CapacityReservationModificationQuote')
+    CapacityReservationModificationQuoteId = Shapes::StringShape.new(name: 'CapacityReservationModificationQuoteId')
+    CapacityReservationModificationQuoteIdSet = Shapes::ListShape.new(name: 'CapacityReservationModificationQuoteIdSet')
+    CapacityReservationModificationQuoteResponseSet = Shapes::ListShape.new(name: 'CapacityReservationModificationQuoteResponseSet')
+    CapacityReservationModificationQuoteState = Shapes::StringShape.new(name: 'CapacityReservationModificationQuoteState')
     CapacityReservationOptions = Shapes::StructureShape.new(name: 'CapacityReservationOptions')
     CapacityReservationOptionsRequest = Shapes::StructureShape.new(name: 'CapacityReservationOptionsRequest')
     CapacityReservationPreference = Shapes::StringShape.new(name: 'CapacityReservationPreference')
@@ -547,6 +555,8 @@ module Aws::EC2
     CreateCapacityReservationBySplittingResult = Shapes::StructureShape.new(name: 'CreateCapacityReservationBySplittingResult')
     CreateCapacityReservationCancellationQuoteRequest = Shapes::StructureShape.new(name: 'CreateCapacityReservationCancellationQuoteRequest')
     CreateCapacityReservationCancellationQuoteResult = Shapes::StructureShape.new(name: 'CreateCapacityReservationCancellationQuoteResult')
+    CreateCapacityReservationDateChangeQuoteRequest = Shapes::StructureShape.new(name: 'CreateCapacityReservationDateChangeQuoteRequest')
+    CreateCapacityReservationDateChangeQuoteResult = Shapes::StructureShape.new(name: 'CreateCapacityReservationDateChangeQuoteResult')
     CreateCapacityReservationFleetRequest = Shapes::StructureShape.new(name: 'CreateCapacityReservationFleetRequest')
     CreateCapacityReservationFleetResult = Shapes::StructureShape.new(name: 'CreateCapacityReservationFleetResult')
     CreateCapacityReservationRequest = Shapes::StructureShape.new(name: 'CreateCapacityReservationRequest')
@@ -1080,6 +1090,9 @@ module Aws::EC2
     DescribeCapacityReservationCancellationQuotesRequest = Shapes::StructureShape.new(name: 'DescribeCapacityReservationCancellationQuotesRequest')
     DescribeCapacityReservationCancellationQuotesRequestMaxResults = Shapes::IntegerShape.new(name: 'DescribeCapacityReservationCancellationQuotesRequestMaxResults')
     DescribeCapacityReservationCancellationQuotesResult = Shapes::StructureShape.new(name: 'DescribeCapacityReservationCancellationQuotesResult')
+    DescribeCapacityReservationDateChangeQuotesRequest = Shapes::StructureShape.new(name: 'DescribeCapacityReservationDateChangeQuotesRequest')
+    DescribeCapacityReservationDateChangeQuotesRequestMaxResults = Shapes::IntegerShape.new(name: 'DescribeCapacityReservationDateChangeQuotesRequestMaxResults')
+    DescribeCapacityReservationDateChangeQuotesResult = Shapes::StructureShape.new(name: 'DescribeCapacityReservationDateChangeQuotesResult')
     DescribeCapacityReservationFleetsMaxResults = Shapes::IntegerShape.new(name: 'DescribeCapacityReservationFleetsMaxResults')
     DescribeCapacityReservationFleetsRequest = Shapes::StructureShape.new(name: 'DescribeCapacityReservationFleetsRequest')
     DescribeCapacityReservationFleetsResult = Shapes::StructureShape.new(name: 'DescribeCapacityReservationFleetsResult')
@@ -2806,6 +2819,9 @@ module Aws::EC2
     MetricValue = Shapes::StructureShape.new(name: 'MetricValue')
     MetricValueSet = Shapes::ListShape.new(name: 'MetricValueSet')
     MillisecondDateTime = Shapes::TimestampShape.new(name: 'MillisecondDateTime')
+    ModificationQuoteCurrentConfiguration = Shapes::StructureShape.new(name: 'ModificationQuoteCurrentConfiguration')
+    ModificationReservationUpdate = Shapes::StructureShape.new(name: 'ModificationReservationUpdate')
+    ModificationTerms = Shapes::StructureShape.new(name: 'ModificationTerms')
     ModifyAccountVpcEncryptionControlRequest = Shapes::StructureShape.new(name: 'ModifyAccountVpcEncryptionControlRequest')
     ModifyAccountVpcEncryptionControlResult = Shapes::StructureShape.new(name: 'ModifyAccountVpcEncryptionControlResult')
     ModifyAddressAttributeRequest = Shapes::StructureShape.new(name: 'ModifyAddressAttributeRequest')
@@ -5567,8 +5583,18 @@ module Aws::EC2
     CapacityReservation.add_member(:interruptible, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "interruptible"))
     CapacityReservation.add_member(:interruptible_capacity_allocation, Shapes::ShapeRef.new(shape: InterruptibleCapacityAllocation, location_name: "interruptibleCapacityAllocation"))
     CapacityReservation.add_member(:interruption_info, Shapes::ShapeRef.new(shape: InterruptionInfo, location_name: "interruptionInfo"))
+    CapacityReservation.add_member(:adjustment_status, Shapes::ShapeRef.new(shape: CapacityReservationAdjustmentStatus, location_name: "adjustmentStatus"))
+    CapacityReservation.add_member(:adjustment_details, Shapes::ShapeRef.new(shape: CapacityReservationAdjustmentDetails, location_name: "adjustmentDetails"))
+    CapacityReservation.add_member(:original_start_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "originalStartDate"))
     CapacityReservation.add_member(:zero_size_preference, Shapes::ShapeRef.new(shape: ZeroSizePreference, location_name: "zeroSizePreference"))
     CapacityReservation.struct_class = Types::CapacityReservation
+
+    CapacityReservationAdjustmentDetails.add_member(:start_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "startDate"))
+    CapacityReservationAdjustmentDetails.add_member(:end_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "endDate"))
+    CapacityReservationAdjustmentDetails.add_member(:commitment_end_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "commitmentEndDate"))
+    CapacityReservationAdjustmentDetails.add_member(:end_date_type, Shapes::ShapeRef.new(shape: String, location_name: "endDateType"))
+    CapacityReservationAdjustmentDetails.add_member(:commitment_duration, Shapes::ShapeRef.new(shape: BoxedLong, location_name: "commitmentDuration"))
+    CapacityReservationAdjustmentDetails.struct_class = Types::CapacityReservationAdjustmentDetails
 
     CapacityReservationBillingRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationId"))
     CapacityReservationBillingRequest.add_member(:requested_by, Shapes::ShapeRef.new(shape: String, location_name: "requestedBy"))
@@ -5597,6 +5623,7 @@ module Aws::EC2
 
     CapacityReservationCommitmentInfo.add_member(:committed_instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "committedInstanceCount"))
     CapacityReservationCommitmentInfo.add_member(:commitment_end_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "commitmentEndDate"))
+    CapacityReservationCommitmentInfo.add_member(:commitment_duration, Shapes::ShapeRef.new(shape: BoxedLong, location_name: "commitmentDuration"))
     CapacityReservationCommitmentInfo.struct_class = Types::CapacityReservationCommitmentInfo
 
     CapacityReservationConfiguration.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "instanceCount"))
@@ -5641,6 +5668,20 @@ module Aws::EC2
     CapacityReservationInfo.add_member(:tenancy, Shapes::ShapeRef.new(shape: CapacityReservationTenancy, location_name: "tenancy"))
     CapacityReservationInfo.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
     CapacityReservationInfo.struct_class = Types::CapacityReservationInfo
+
+    CapacityReservationModificationQuote.add_member(:capacity_reservation_modification_quote_id, Shapes::ShapeRef.new(shape: CapacityReservationModificationQuoteId, location_name: "capacityReservationModificationQuoteId"))
+    CapacityReservationModificationQuote.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, location_name: "capacityReservationId"))
+    CapacityReservationModificationQuote.add_member(:create_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "createTime"))
+    CapacityReservationModificationQuote.add_member(:expiration_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "expirationTime"))
+    CapacityReservationModificationQuote.add_member(:quote_state, Shapes::ShapeRef.new(shape: CapacityReservationModificationQuoteState, location_name: "quoteState"))
+    CapacityReservationModificationQuote.add_member(:current_configuration, Shapes::ShapeRef.new(shape: ModificationQuoteCurrentConfiguration, location_name: "currentConfiguration"))
+    CapacityReservationModificationQuote.add_member(:modification_terms, Shapes::ShapeRef.new(shape: ModificationTerms, location_name: "modificationTerms"))
+    CapacityReservationModificationQuote.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    CapacityReservationModificationQuote.struct_class = Types::CapacityReservationModificationQuote
+
+    CapacityReservationModificationQuoteIdSet.member = Shapes::ShapeRef.new(shape: CapacityReservationModificationQuoteId, location_name: "item")
+
+    CapacityReservationModificationQuoteResponseSet.member = Shapes::ShapeRef.new(shape: CapacityReservationModificationQuote, location_name: "item")
 
     CapacityReservationOptions.add_member(:usage_strategy, Shapes::ShapeRef.new(shape: FleetCapacityReservationUsageStrategy, location_name: "usageStrategy"))
     CapacityReservationOptions.struct_class = Types::CapacityReservationOptions
@@ -6037,6 +6078,8 @@ module Aws::EC2
     CopyVolumesRequest.add_member(:multi_attach_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "MultiAttachEnabled"))
     CopyVolumesRequest.add_member(:throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "Throughput"))
     CopyVolumesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CopyVolumesRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Encrypted"))
+    CopyVolumesRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     CopyVolumesRequest.struct_class = Types::CopyVolumesRequest
 
     CopyVolumesResult.add_member(:volumes, Shapes::ShapeRef.new(shape: VolumeList, location_name: "volumeSet"))
@@ -6118,6 +6161,16 @@ module Aws::EC2
 
     CreateCapacityReservationCancellationQuoteResult.add_member(:capacity_reservation_cancellation_quote, Shapes::ShapeRef.new(shape: CapacityReservationCancellationQuote, location_name: "capacityReservationCancellationQuote"))
     CreateCapacityReservationCancellationQuoteResult.struct_class = Types::CreateCapacityReservationCancellationQuoteResult
+
+    CreateCapacityReservationDateChangeQuoteRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
+    CreateCapacityReservationDateChangeQuoteRequest.add_member(:new_start_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, required: true, location_name: "NewStartDate"))
+    CreateCapacityReservationDateChangeQuoteRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateCapacityReservationDateChangeQuoteRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateCapacityReservationDateChangeQuoteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateCapacityReservationDateChangeQuoteRequest.struct_class = Types::CreateCapacityReservationDateChangeQuoteRequest
+
+    CreateCapacityReservationDateChangeQuoteResult.add_member(:capacity_reservation_modification_quote, Shapes::ShapeRef.new(shape: CapacityReservationModificationQuote, location_name: "capacityReservationModificationQuote"))
+    CreateCapacityReservationDateChangeQuoteResult.struct_class = Types::CreateCapacityReservationDateChangeQuoteResult
 
     CreateCapacityReservationFleetRequest.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: String, location_name: "AllocationStrategy"))
     CreateCapacityReservationFleetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
@@ -6369,6 +6422,7 @@ module Aws::EC2
 
     CreateImageRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateImageRequest.add_member(:snapshot_location, Shapes::ShapeRef.new(shape: SnapshotLocationEnum, location_name: "SnapshotLocation"))
+    CreateImageRequest.add_member(:boot_mode_override, Shapes::ShapeRef.new(shape: BootModeOverrideValues, location_name: "BootModeOverride"))
     CreateImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreateImageRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "instanceId"))
     CreateImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: ImageNameRequest, required: true, location_name: "name"))
@@ -8605,6 +8659,17 @@ module Aws::EC2
     DescribeCapacityReservationCancellationQuotesResult.add_member(:capacity_reservation_cancellation_quotes, Shapes::ShapeRef.new(shape: CapacityReservationCancellationQuoteResponseSet, location_name: "capacityReservationCancellationQuoteSet"))
     DescribeCapacityReservationCancellationQuotesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeCapacityReservationCancellationQuotesResult.struct_class = Types::DescribeCapacityReservationCancellationQuotesResult
+
+    DescribeCapacityReservationDateChangeQuotesRequest.add_member(:capacity_reservation_modification_quote_ids, Shapes::ShapeRef.new(shape: CapacityReservationModificationQuoteIdSet, location_name: "CapacityReservationModificationQuoteId"))
+    DescribeCapacityReservationDateChangeQuotesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeCapacityReservationDateChangeQuotesRequestMaxResults, location_name: "MaxResults"))
+    DescribeCapacityReservationDateChangeQuotesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeCapacityReservationDateChangeQuotesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeCapacityReservationDateChangeQuotesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeCapacityReservationDateChangeQuotesRequest.struct_class = Types::DescribeCapacityReservationDateChangeQuotesRequest
+
+    DescribeCapacityReservationDateChangeQuotesResult.add_member(:capacity_reservation_modification_quotes, Shapes::ShapeRef.new(shape: CapacityReservationModificationQuoteResponseSet, location_name: "capacityReservationModificationQuoteSet"))
+    DescribeCapacityReservationDateChangeQuotesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeCapacityReservationDateChangeQuotesResult.struct_class = Types::DescribeCapacityReservationDateChangeQuotesResult
 
     DescribeCapacityReservationFleetsRequest.add_member(:capacity_reservation_fleet_ids, Shapes::ShapeRef.new(shape: CapacityReservationFleetIdSet, location_name: "CapacityReservationFleetId"))
     DescribeCapacityReservationFleetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -15300,6 +15365,20 @@ module Aws::EC2
 
     MetricValueSet.member = Shapes::ShapeRef.new(shape: MetricValue, location_name: "item")
 
+    ModificationQuoteCurrentConfiguration.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "instanceCount"))
+    ModificationQuoteCurrentConfiguration.add_member(:reservation_state, Shapes::ShapeRef.new(shape: String, location_name: "reservationState"))
+    ModificationQuoteCurrentConfiguration.add_member(:start_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "startDate"))
+    ModificationQuoteCurrentConfiguration.add_member(:original_start_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "originalStartDate"))
+    ModificationQuoteCurrentConfiguration.struct_class = Types::ModificationQuoteCurrentConfiguration
+
+    ModificationReservationUpdate.add_member(:new_commitment_end_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "newCommitmentEndDate"))
+    ModificationReservationUpdate.add_member(:new_start_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "newStartDate"))
+    ModificationReservationUpdate.add_member(:new_commitment_duration, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "newCommitmentDuration"))
+    ModificationReservationUpdate.struct_class = Types::ModificationReservationUpdate
+
+    ModificationTerms.add_member(:reservation_update, Shapes::ShapeRef.new(shape: ModificationReservationUpdate, location_name: "reservationUpdate"))
+    ModificationTerms.struct_class = Types::ModificationTerms
+
     ModifyAccountVpcEncryptionControlRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyAccountVpcEncryptionControlRequest.add_member(:mode, Shapes::ShapeRef.new(shape: AccountVpcEncryptionControlMode, location_name: "Mode"))
     ModifyAccountVpcEncryptionControlRequest.add_member(:internet_gateway, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "InternetGateway"))
@@ -15371,9 +15450,14 @@ module Aws::EC2
     ModifyCapacityReservationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyCapacityReservationRequest.add_member(:additional_info, Shapes::ShapeRef.new(shape: String, location_name: "AdditionalInfo"))
     ModifyCapacityReservationRequest.add_member(:instance_match_criteria, Shapes::ShapeRef.new(shape: InstanceMatchCriteria, location_name: "InstanceMatchCriteria"))
+    ModifyCapacityReservationRequest.add_member(:accept_modification_terms, Shapes::ShapeRef.new(shape: Boolean, location_name: "AcceptModificationTerms"))
+    ModifyCapacityReservationRequest.add_member(:start_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "StartDate"))
+    ModifyCapacityReservationRequest.add_member(:quote_id, Shapes::ShapeRef.new(shape: CapacityReservationModificationQuoteId, location_name: "QuoteId"))
     ModifyCapacityReservationRequest.struct_class = Types::ModifyCapacityReservationRequest
 
     ModifyCapacityReservationResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    ModifyCapacityReservationResult.add_member(:adjustment_status, Shapes::ShapeRef.new(shape: CapacityReservationAdjustmentStatus, location_name: "adjustmentStatus"))
+    ModifyCapacityReservationResult.add_member(:adjustment_details, Shapes::ShapeRef.new(shape: CapacityReservationAdjustmentDetails, location_name: "adjustmentDetails"))
     ModifyCapacityReservationResult.struct_class = Types::ModifyCapacityReservationResult
 
     ModifyClientVpnEndpointRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: ClientVpnEndpointId, required: true, location_name: "ClientVpnEndpointId"))
@@ -20335,6 +20419,8 @@ module Aws::EC2
     Volume.add_member(:sse_type, Shapes::ShapeRef.new(shape: SSEType, location_name: "sseType"))
     Volume.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorResponse, location_name: "operator"))
     Volume.add_member(:volume_initialization_rate, Shapes::ShapeRef.new(shape: Integer, location_name: "volumeInitializationRate"))
+    Volume.add_member(:volume_arn, Shapes::ShapeRef.new(shape: String, location_name: "volumeArn"))
+    Volume.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     Volume.add_member(:volume_id, Shapes::ShapeRef.new(shape: String, location_name: "volumeId"))
     Volume.add_member(:size, Shapes::ShapeRef.new(shape: Integer, location_name: "size"))
     Volume.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
@@ -21395,6 +21481,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateCapacityReservationCancellationQuoteRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateCapacityReservationCancellationQuoteResult)
+      end)
+
+      api.add_operation(:create_capacity_reservation_date_change_quote, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCapacityReservationDateChangeQuote"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateCapacityReservationDateChangeQuoteRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCapacityReservationDateChangeQuoteResult)
       end)
 
       api.add_operation(:create_capacity_reservation_fleet, Seahorse::Model::Operation.new.tap do |o|
@@ -23301,6 +23395,20 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeCapacityReservationCancellationQuotesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeCapacityReservationCancellationQuotesResult)
+      end)
+
+      api.add_operation(:describe_capacity_reservation_date_change_quotes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeCapacityReservationDateChangeQuotes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeCapacityReservationDateChangeQuotesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeCapacityReservationDateChangeQuotesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_capacity_reservation_fleets, Seahorse::Model::Operation.new.tap do |o|

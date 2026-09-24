@@ -1,0 +1,64 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudWatchOmni
+    module Params
+      type telemetry_rule = {
+      query: {
+        language: ("SQL" | "PROMQL"),
+        expression: ::String
+      }?,
+      condition: {
+        threshold_mode: ("COUNT_OF_RESULTS" | "FIELD_VALUE")?,
+        threshold_field: ::String?,
+        comparator: ("GT" | "LT" | "GTE" | "LTE")?,
+        warning_threshold: ::Float?,
+        critical_threshold: ::Float?
+      }?,
+      evaluation: {
+        interval_seconds: ::Integer,
+        pending_duration_seconds: ::Integer?,
+        recovery_duration_seconds: ::Integer?
+      }?,
+      no_data: {
+        treat_as: ("OK" | "WARNING" | "CRITICAL" | "NODATA")
+      }?
+    }
+
+      type rule = {
+      telemetry_rule: Params::telemetry_rule?
+    }
+
+      type notification_rule = {
+      trigger: {
+        state_values: Array[("OK" | "WARNING" | "CRITICAL" | "NODATA")]?
+      },
+      target: {
+        type: ("sns" | "slack" | "pagerduty"),
+        arn: ::String,
+        metadata: Hash[::String, ::String]?
+      }
+    }
+
+      type integration_credential = {
+      oauth_code_credential: {
+        auth_code: ::String
+      }?,
+      oauth_client_credential: {
+        client_id: ::String,
+        client_secret: ::String,
+        provider_id: ::String?
+      }?,
+      api_key_credential: {
+        api_key_value: ::String
+      }?
+    }
+
+    end
+  end
+end

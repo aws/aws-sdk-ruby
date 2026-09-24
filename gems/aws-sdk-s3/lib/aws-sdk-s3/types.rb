@@ -2984,7 +2984,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] object_lock_event_hold_duration_days
-    #   The event hold duration in days to apply to the object copy.
+    #   The event hold duration in days to apply to the object copy. You
+    #   cannot specify a duration in both days and years.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -2992,7 +2993,8 @@ module Aws::S3
     #   @return [Integer]
     #
     # @!attribute [rw] object_lock_event_hold_duration_years
-    #   The event hold duration in years to apply to the object copy.
+    #   The event hold duration in years to apply to the object copy. You
+    #   cannot specify a duration in both days and years.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -4502,7 +4504,7 @@ module Aws::S3
     #
     # @!attribute [rw] object_lock_event_hold_duration_days
     #   Specifies the event hold duration in days to apply to the uploaded
-    #   object.
+    #   object. You cannot specify a duration in both days and years.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -4511,7 +4513,7 @@ module Aws::S3
     #
     # @!attribute [rw] object_lock_event_hold_duration_years
     #   Specifies the event hold duration in years to apply to the uploaded
-    #   object.
+    #   object. You cannot specify a duration in both days and years.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -15209,11 +15211,16 @@ module Aws::S3
     # The container element for an Object Lock rule.
     #
     # @!attribute [rw] default_retention
-    #   The default Object Lock retention mode and period that you want to
-    #   apply to new objects placed in the specified bucket. Bucket settings
-    #   require both a mode and a period. The period can be either `Days` or
-    #   `Years` but you must select one. You cannot specify `Days` and
-    #   `Years` at the same time.
+    #   The default Object Lock retention settings for new objects in this
+    #   bucket. You can specify:
+    #
+    #   * A default retention period, by using `Days` or `Years`.
+    #
+    #   * A default event hold duration, by using `DefaultEventHold`. This
+    #     setting also uses days or years.
+    #
+    #   You can set one or both. You cannot use days and years in the same
+    #   setting.
     #   @return [Types::DefaultRetention]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectLockRule AWS API Documentation
@@ -18903,6 +18910,7 @@ module Aws::S3
     #
     # @!attribute [rw] object_lock_event_hold_duration_days
     #   Specifies the event hold duration in days to apply to this object.
+    #   You cannot specify a duration in both days and years.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -18911,6 +18919,7 @@ module Aws::S3
     #
     # @!attribute [rw] object_lock_event_hold_duration_years
     #   Specifies the event hold duration in years to apply to this object.
+    #   You cannot specify a duration in both days and years.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #

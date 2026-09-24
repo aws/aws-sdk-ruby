@@ -57,13 +57,24 @@ module Aws
     }
 
       type orchestration_ai_agent_configuration = {
-      orchestration_ai_prompt_id: ::String,
+      orchestration_ai_prompt_id: ::String?,
       orchestration_ai_guardrail_id: ::String?,
       tool_configurations: Array[
         Params::tool_configuration
       ]?,
+      multi_agent_configurations: Array[
+        Params::multi_agent_configuration
+      ]?,
       connect_instance_arn: ::String?,
-      locale: ::String?
+      locale: ::String?,
+      input_schemas: Array[
+        {
+        }
+      ]?,
+      output_schemas: Array[
+        {
+        }
+      ]?
     }
 
       type ai_agent_configuration = {
@@ -177,6 +188,35 @@ module Aws
           value: ::String
         }?
       }
+    }
+
+      type delegate_agent_configuration = {
+      agent_target: {
+        ai_agent_id: ::String?,
+        application_id: ::String?
+      },
+      instruction: {
+        instruction: ::String?,
+        examples: Array[::String]?
+      }?
+    }
+
+      type handoff_agent_configuration = {
+      agent_target: {
+        ai_agent_id: ::String?,
+        application_id: ::String?
+      },
+      instruction: {
+        instruction: ::String?,
+        examples: Array[::String]?
+      }?,
+      audio_streaming_enabled: bool?,
+      immediate_handoff: bool?
+    }
+
+      type multi_agent_configuration = {
+      delegate_agent_configuration: Params::delegate_agent_configuration?,
+      handoff_agent_configuration: Params::handoff_agent_configuration?
     }
 
       type ai_guardrail_topic_policy_config = {

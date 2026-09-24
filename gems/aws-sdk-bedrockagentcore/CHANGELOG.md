@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2026-09-21)
+------------------
+
+* Feature - Amazon Bedrock AgentCore Harness now supports lifecycle hooks for invocations and tool calls, with Lambda, SNS, and EventBridge targets. This release also adds apiBase for custom OpenAI-compatible endpoints.
+
+1.56.0 (2026-09-17)
+------------------
+
+* Feature - Batch evaluation now supports evaluating specific traces within a session. Each session can specify up to 100 trace IDs to evaluate.
+
+1.55.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.54.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.53.0 (2026-09-03)
 ------------------
 

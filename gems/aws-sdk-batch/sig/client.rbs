@@ -88,6 +88,18 @@ module Aws
                       ) -> _CancelJobResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelJobResponseSuccess
 
+      interface _CancelJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelJobsResponse]
+        def successful: () -> ::Array[::String]
+        def errors: () -> ::Array[Types::CancelJobsErrorDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#cancel_jobs-instance_method
+      def cancel_jobs: (
+                         jobs: Array[::String],
+                         reason: ::String
+                       ) -> _CancelJobsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelJobsResponseSuccess
+
       interface _CreateComputeEnvironmentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateComputeEnvironmentResponse]
         def compute_environment_name: () -> ::String
@@ -789,6 +801,18 @@ module Aws
                          ) -> _TerminateJobResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TerminateJobResponseSuccess
 
+      interface _TerminateJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TerminateJobsResponse]
+        def successful: () -> ::Array[::String]
+        def errors: () -> ::Array[Types::TerminateJobsErrorDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#terminate_jobs-instance_method
+      def terminate_jobs: (
+                            jobs: Array[::String],
+                            reason: ::String
+                          ) -> _TerminateJobsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TerminateJobsResponseSuccess
+
       interface _TerminateServiceJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TerminateServiceJobResponse]
       end
@@ -798,6 +822,18 @@ module Aws
                                    reason: ::String
                                  ) -> _TerminateServiceJobResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TerminateServiceJobResponseSuccess
+
+      interface _TerminateServiceJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TerminateServiceJobsResponse]
+        def successful: () -> ::Array[::String]
+        def errors: () -> ::Array[Types::TerminateServiceJobsErrorDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Batch/Client.html#terminate_service_jobs-instance_method
+      def terminate_service_jobs: (
+                                    jobs: Array[::String],
+                                    reason: ::String
+                                  ) -> _TerminateServiceJobsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TerminateServiceJobsResponseSuccess
 
       interface _UntagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]

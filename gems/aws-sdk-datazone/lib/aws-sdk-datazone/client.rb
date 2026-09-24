@@ -3803,6 +3803,9 @@ module Aws::DataZone
     # @option params [String] :description
     #   The description of the notebook.
     #
+    # @option params [String] :type
+    #   The type of the notebook.
+    #
     # @option params [Hash<String,String>] :metadata
     #   The metadata for the notebook, specified as key-value pairs. You can
     #   specify up to 50 entries, with keys up to 128 characters and values up
@@ -3828,6 +3831,7 @@ module Aws::DataZone
     #   * {Types::CreateNotebookOutput#domain_id #domain_id} => String
     #   * {Types::CreateNotebookOutput#cell_order #cell_order} => Array&lt;Types::CellInformation&gt;
     #   * {Types::CreateNotebookOutput#status #status} => String
+    #   * {Types::CreateNotebookOutput#type #type} => String
     #   * {Types::CreateNotebookOutput#description #description} => String
     #   * {Types::CreateNotebookOutput#created_at #created_at} => Time
     #   * {Types::CreateNotebookOutput#created_by #created_by} => String
@@ -3850,6 +3854,7 @@ module Aws::DataZone
     #     owning_project_identifier: "ProjectId", # required
     #     name: "NotebookName", # required
     #     description: "Description",
+    #     type: "DATA", # accepts DATA, SQL
     #     metadata: {
     #       "MetadataKey" => "MetadataValue",
     #     },
@@ -3867,6 +3872,7 @@ module Aws::DataZone
     #   resp.domain_id #=> String
     #   resp.cell_order #=> Array
     #   resp.status #=> String, one of "ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"
+    #   resp.type #=> String, one of "DATA", "SQL"
     #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
@@ -7992,6 +7998,7 @@ module Aws::DataZone
     #   * {Types::GetNotebookOutput#domain_id #domain_id} => String
     #   * {Types::GetNotebookOutput#cell_order #cell_order} => Array&lt;Types::CellInformation&gt;
     #   * {Types::GetNotebookOutput#status #status} => String
+    #   * {Types::GetNotebookOutput#type #type} => String
     #   * {Types::GetNotebookOutput#description #description} => String
     #   * {Types::GetNotebookOutput#created_at #created_at} => Time
     #   * {Types::GetNotebookOutput#created_by #created_by} => String
@@ -8022,6 +8029,7 @@ module Aws::DataZone
     #   resp.domain_id #=> String
     #   resp.cell_order #=> Array
     #   resp.status #=> String, one of "ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"
+    #   resp.type #=> String, one of "DATA", "SQL"
     #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
@@ -10705,6 +10713,9 @@ module Aws::DataZone
     # @option params [String] :status
     #   The status to filter notebooks by.
     #
+    # @option params [String] :type
+    #   The type to filter notebooks by.
+    #
     # @option params [String] :next_token
     #   When the number of notebooks is greater than the default value for the
     #   `MaxResults` parameter, or if you explicitly specify a value for
@@ -10729,6 +10740,7 @@ module Aws::DataZone
     #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #     sort_by: "CREATED_AT", # accepts CREATED_AT, UPDATED_AT
     #     status: "ACTIVE", # accepts ACTIVE, ARCHIVED, SYNC_IN_PROGRESS, SYNC_FAILED
+    #     type: "DATA", # accepts DATA, SQL
     #     next_token: "PaginationToken",
     #   })
     #
@@ -10740,6 +10752,7 @@ module Aws::DataZone
     #   resp.items[0].owning_project_id #=> String
     #   resp.items[0].domain_id #=> String
     #   resp.items[0].status #=> String, one of "ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"
+    #   resp.items[0].type #=> String, one of "DATA", "SQL"
     #   resp.items[0].description #=> String
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].created_by #=> String
@@ -15697,6 +15710,9 @@ module Aws::DataZone
     # @option params [Array<Types::CellInformation>] :cell_order
     #   The updated ordered list of cells in the notebook.
     #
+    # @option params [String] :type
+    #   The updated type of the notebook.
+    #
     # @option params [Hash<String,String>] :metadata
     #   The updated metadata for the notebook, specified as key-value pairs.
     #
@@ -15722,6 +15738,7 @@ module Aws::DataZone
     #   * {Types::UpdateNotebookOutput#domain_id #domain_id} => String
     #   * {Types::UpdateNotebookOutput#cell_order #cell_order} => Array&lt;Types::CellInformation&gt;
     #   * {Types::UpdateNotebookOutput#status #status} => String
+    #   * {Types::UpdateNotebookOutput#type #type} => String
     #   * {Types::UpdateNotebookOutput#description #description} => String
     #   * {Types::UpdateNotebookOutput#created_at #created_at} => Time
     #   * {Types::UpdateNotebookOutput#created_by #created_by} => String
@@ -15749,6 +15766,7 @@ module Aws::DataZone
     #       {
     #       },
     #     ],
+    #     type: "DATA", # accepts DATA, SQL
     #     metadata: {
     #       "MetadataKey" => "MetadataValue",
     #     },
@@ -15773,6 +15791,7 @@ module Aws::DataZone
     #   resp.domain_id #=> String
     #   resp.cell_order #=> Array
     #   resp.status #=> String, one of "ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"
+    #   resp.type #=> String, one of "DATA", "SQL"
     #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
@@ -16657,7 +16676,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -24,6 +24,7 @@ module Aws::ElementalInference
     Competitor = Shapes::StructureShape.new(name: 'Competitor')
     CompetitorList = Shapes::ListShape.new(name: 'CompetitorList')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ContextualMetadataConfig = Shapes::StructureShape.new(name: 'ContextualMetadataConfig')
     CreateDictionaryRequest = Shapes::StructureShape.new(name: 'CreateDictionaryRequest')
     CreateDictionaryResponse = Shapes::StructureShape.new(name: 'CreateDictionaryResponse')
     CreateFeedRequest = Shapes::StructureShape.new(name: 'CreateFeedRequest')
@@ -35,6 +36,7 @@ module Aws::ElementalInference
     DataSourceSport = Shapes::StringShape.new(name: 'DataSourceSport')
     DeleteDictionaryRequest = Shapes::StructureShape.new(name: 'DeleteDictionaryRequest')
     DeleteDictionaryResponse = Shapes::StructureShape.new(name: 'DeleteDictionaryResponse')
+    DeleteFeedPolicyRequest = Shapes::StructureShape.new(name: 'DeleteFeedPolicyRequest')
     DeleteFeedRequest = Shapes::StructureShape.new(name: 'DeleteFeedRequest')
     DeleteFeedResponse = Shapes::StructureShape.new(name: 'DeleteFeedResponse')
     DictionaryArn = Shapes::StringShape.new(name: 'DictionaryArn')
@@ -65,6 +67,8 @@ module Aws::ElementalInference
     GatewayTimedOutException = Shapes::StructureShape.new(name: 'GatewayTimedOutException')
     GetDictionaryRequest = Shapes::StructureShape.new(name: 'GetDictionaryRequest')
     GetDictionaryResponse = Shapes::StructureShape.new(name: 'GetDictionaryResponse')
+    GetFeedPolicyRequest = Shapes::StructureShape.new(name: 'GetFeedPolicyRequest')
+    GetFeedPolicyResponse = Shapes::StructureShape.new(name: 'GetFeedPolicyResponse')
     GetFeedRequest = Shapes::StructureShape.new(name: 'GetFeedRequest')
     GetFeedResponse = Shapes::StructureShape.new(name: 'GetFeedResponse')
     GetFixtureRequest = Shapes::StructureShape.new(name: 'GetFixtureRequest')
@@ -84,7 +88,10 @@ module Aws::ElementalInference
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     OutputConfig = Shapes::UnionShape.new(name: 'OutputConfig')
     OutputStatus = Shapes::StringShape.new(name: 'OutputStatus')
+    PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
     ProfanityFilterMode = Shapes::StringShape.new(name: 'ProfanityFilterMode')
+    PutFeedPolicyRequest = Shapes::StructureShape.new(name: 'PutFeedPolicyRequest')
+    PutFeedPolicyResponse = Shapes::StructureShape.new(name: 'PutFeedPolicyResponse')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceDescription = Shapes::StringShape.new(name: 'ResourceDescription')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
@@ -100,6 +107,7 @@ module Aws::ElementalInference
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     SubtitlingConfig = Shapes::StructureShape.new(name: 'SubtitlingConfig')
+    SummaryGenerationMode = Shapes::StringShape.new(name: 'SummaryGenerationMode')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -149,6 +157,9 @@ module Aws::ElementalInference
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
+
+    ContextualMetadataConfig.add_member(:summary_generation, Shapes::ShapeRef.new(shape: SummaryGenerationMode, location_name: "summaryGeneration"))
+    ContextualMetadataConfig.struct_class = Types::ContextualMetadataConfig
 
     CreateDictionaryRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     CreateDictionaryRequest.add_member(:language, Shapes::ShapeRef.new(shape: DictionaryLanguage, required: true, location_name: "language"))
@@ -203,6 +214,9 @@ module Aws::ElementalInference
     DeleteDictionaryResponse.add_member(:id, Shapes::ShapeRef.new(shape: DictionaryId, required: true, location_name: "id"))
     DeleteDictionaryResponse.add_member(:status, Shapes::ShapeRef.new(shape: DictionaryStatus, required: true, location_name: "status"))
     DeleteDictionaryResponse.struct_class = Types::DeleteDictionaryResponse
+
+    DeleteFeedPolicyRequest.add_member(:id, Shapes::ShapeRef.new(shape: FeedId, required: true, location: "uri", location_name: "id"))
+    DeleteFeedPolicyRequest.struct_class = Types::DeleteFeedPolicyRequest
 
     DeleteFeedRequest.add_member(:id, Shapes::ShapeRef.new(shape: FeedId, required: true, location: "uri", location_name: "id"))
     DeleteFeedRequest.struct_class = Types::DeleteFeedRequest
@@ -277,6 +291,12 @@ module Aws::ElementalInference
     GetDictionaryResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetDictionaryResponse.struct_class = Types::GetDictionaryResponse
 
+    GetFeedPolicyRequest.add_member(:id, Shapes::ShapeRef.new(shape: FeedId, required: true, location: "uri", location_name: "id"))
+    GetFeedPolicyRequest.struct_class = Types::GetFeedPolicyRequest
+
+    GetFeedPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyDocument, required: true, location_name: "policy"))
+    GetFeedPolicyResponse.struct_class = Types::GetFeedPolicyResponse
+
     GetFeedRequest.add_member(:id, Shapes::ShapeRef.new(shape: FeedId, required: true, location: "uri", location_name: "id"))
     GetFeedRequest.struct_class = Types::GetFeedRequest
 
@@ -339,12 +359,20 @@ module Aws::ElementalInference
     OutputConfig.add_member(:cropping, Shapes::ShapeRef.new(shape: CroppingConfig, location_name: "cropping"))
     OutputConfig.add_member(:clipping, Shapes::ShapeRef.new(shape: ClippingConfig, location_name: "clipping"))
     OutputConfig.add_member(:subtitling, Shapes::ShapeRef.new(shape: SubtitlingConfig, location_name: "subtitling"))
+    OutputConfig.add_member(:contextual_metadata, Shapes::ShapeRef.new(shape: ContextualMetadataConfig, location_name: "contextualMetadata"))
     OutputConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     OutputConfig.add_member_subclass(:cropping, Types::OutputConfig::Cropping)
     OutputConfig.add_member_subclass(:clipping, Types::OutputConfig::Clipping)
     OutputConfig.add_member_subclass(:subtitling, Types::OutputConfig::Subtitling)
+    OutputConfig.add_member_subclass(:contextual_metadata, Types::OutputConfig::ContextualMetadata)
     OutputConfig.add_member_subclass(:unknown, Types::OutputConfig::Unknown)
     OutputConfig.struct_class = Types::OutputConfig
+
+    PutFeedPolicyRequest.add_member(:id, Shapes::ShapeRef.new(shape: FeedId, required: true, location: "uri", location_name: "id"))
+    PutFeedPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyDocument, required: true, location_name: "policy"))
+    PutFeedPolicyRequest.struct_class = Types::PutFeedPolicyRequest
+
+    PutFeedPolicyResponse.struct_class = Types::PutFeedPolicyResponse
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -539,6 +567,19 @@ module Aws::ElementalInference
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:delete_feed_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFeedPolicy"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/feed/{id}/policy"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFeedPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestException)
+      end)
+
       api.add_operation(:disassociate_feed, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateFeed"
         o.http_method = "POST"
@@ -585,6 +626,19 @@ module Aws::ElementalInference
         o.http_request_uri = "/v1/feed/{id}"
         o.input = Shapes::ShapeRef.new(shape: GetFeedRequest)
         o.output = Shapes::ShapeRef.new(shape: GetFeedResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestException)
+      end)
+
+      api.add_operation(:get_feed_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFeedPolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/feed/{id}/policy"
+        o.input = Shapes::ShapeRef.new(shape: GetFeedPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetFeedPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -654,6 +708,20 @@ module Aws::ElementalInference
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestException)
+      end)
+
+      api.add_operation(:put_feed_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutFeedPolicy"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/feed/{id}/policy"
+        o.input = Shapes::ShapeRef.new(shape: PutFeedPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutFeedPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:search_fixtures, Seahorse::Model::Operation.new.tap do |o|

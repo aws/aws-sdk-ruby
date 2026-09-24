@@ -9116,6 +9116,12 @@ module Aws::Glue
     #   The name of the ruleset that was created by the recommendation run.
     #   @return [String]
     #
+    # @!attribute [rw] recommendation_mode
+    #   The mode that Glue Data Quality uses to recommend rules.
+    #
+    #   The default is `BASIC`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityRuleRecommendationRunDescription AWS API Documentation
     #
     class DataQualityRuleRecommendationRunDescription < Struct.new(
@@ -9123,7 +9129,8 @@ module Aws::Glue
       :status,
       :started_on,
       :data_source,
-      :created_ruleset_name)
+      :created_ruleset_name,
+      :recommendation_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14202,7 +14209,7 @@ module Aws::Glue
     #   @return [Types::DataSource]
     #
     # @!attribute [rw] role
-    #   An IAM role supplied to encrypt the results of the run.
+    #   The IAM role that Glue assumes to access resources for the run.
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
@@ -14260,6 +14267,12 @@ module Aws::Glue
     #   Additional run options you can specify for a recommendation run.
     #   @return [Types::DataQualityRuleRecommendationRunAdditionalRunOptions]
     #
+    # @!attribute [rw] recommendation_mode
+    #   The mode that Glue Data Quality uses to recommend rules.
+    #
+    #   The default is `BASIC`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRuleRecommendationRunResponse AWS API Documentation
     #
     class GetDataQualityRuleRecommendationRunResponse < Struct.new(
@@ -14277,7 +14290,8 @@ module Aws::Glue
       :recommended_ruleset,
       :created_ruleset_name,
       :data_quality_security_configuration,
-      :additional_run_options)
+      :additional_run_options,
+      :recommendation_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19167,6 +19181,58 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The properties of a single integration table, including the resource
+    # ARN, the table name, and the source or target table configuration.
+    #
+    # @!attribute [rw] resource_arn
+    #   The connection ARN of the source, or the database ARN of the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the source table to be replicated.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_table_config
+    #   A structure for the source table configuration.
+    #   @return [Types::SourceTableConfig]
+    #
+    # @!attribute [rw] target_table_config
+    #   A structure for the target table configuration.
+    #   @return [Types::TargetTableConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IntegrationTableProperties AWS API Documentation
+    #
+    class IntegrationTableProperties < Struct.new(
+      :resource_arn,
+      :table_name,
+      :source_table_config,
+      :target_table_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A key-value filter used to narrow the list of integration table
+    # properties returned by ListIntegrationTableProperties. Specify a
+    # filter key and one or more values to match.
+    #
+    # @!attribute [rw] name
+    #   The name of the filter. Supported filter keys are `SourceArn`,
+    #   `TargetArn`, `SourceTableName`, and `TargetTableName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   A list of filter values.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IntegrationTablePropertiesFilter AWS API Documentation
+    #
+    class IntegrationTablePropertiesFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An internal server error occurred.
     #
     # @!attribute [rw] message
@@ -22035,6 +22101,48 @@ module Aws::Glue
     #
     class ListIntegrationResourcePropertiesResponse < Struct.new(
       :integration_resource_property_list,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   The pagination token for the next page of results. The initial value
+    #   is `null`.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A list of filters. Supported filter keys are `SourceArn`,
+    #   `TargetArn`, `SourceTableName`, and `TargetTableName`.
+    #   @return [Array<Types::IntegrationTablePropertiesFilter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to return in the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListIntegrationTablePropertiesRequest AWS API Documentation
+    #
+    class ListIntegrationTablePropertiesRequest < Struct.new(
+      :marker,
+      :filters,
+      :max_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] integration_table_properties_list
+    #   A list of integration table properties meeting the filter criteria.
+    #   @return [Array<Types::IntegrationTableProperties>]
+    #
+    # @!attribute [rw] marker
+    #   The pagination token for the next page. Returns `null` if there are
+    #   no more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListIntegrationTablePropertiesResponse AWS API Documentation
+    #
+    class ListIntegrationTablePropertiesResponse < Struct.new(
+      :integration_table_properties_list,
       :marker)
       SENSITIVE = []
       include Aws::Structure
@@ -29075,7 +29183,14 @@ module Aws::Glue
     #   @return [Types::DataSource]
     #
     # @!attribute [rw] role
-    #   An IAM role supplied to encrypt the results of the run.
+    #   The IAM role that Glue assumes to access resources for the run.
+    #
+    #   For more information, see [Configure IAM permissions for Glue Data
+    #   Quality][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/data-quality-authorization.html
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
@@ -29108,6 +29223,12 @@ module Aws::Glue
     #   Additional run options you can specify for a recommendation run.
     #   @return [Types::DataQualityRuleRecommendationRunAdditionalRunOptions]
     #
+    # @!attribute [rw] recommendation_mode
+    #   The mode that Glue Data Quality uses to recommend rules.
+    #
+    #   The default is `BASIC`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartDataQualityRuleRecommendationRunRequest AWS API Documentation
     #
     class StartDataQualityRuleRecommendationRunRequest < Struct.new(
@@ -29118,7 +29239,8 @@ module Aws::Glue
       :created_ruleset_name,
       :data_quality_security_configuration,
       :client_token,
-      :additional_run_options)
+      :additional_run_options,
+      :recommendation_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30243,6 +30365,48 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Statistics for one sub-object referenced by a materialized view,
+    # recorded when the materialized view was created or last fully
+    # refreshed. These values describe what that refresh selected from the
+    # sub-object, which can be a subset of the table when the materialized
+    # view's definition limits the data it reads. The fields present depend
+    # on the sub-object's format.
+    #
+    # @!attribute [rw] source_type
+    #   The source type of the sub-object (for example, its table format),
+    #   which identifies the sub-object.
+    #   @return [String]
+    #
+    # @!attribute [rw] glue_version_id
+    #   The Glue version ID of the sub-object that the statistics were
+    #   captured for.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_count
+    #   The number of sub-object partitions selected for that refresh. Not
+    #   present for unpartitioned sub-objects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] file_count
+    #   The number of sub-object data files selected for that refresh.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_file_bytes
+    #   The total size, in bytes, of the data files counted by `FileCount`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SubObjectStatistics AWS API Documentation
+    #
+    class SubObjectStatistics < Struct.new(
+      :source_type,
+      :glue_version_id,
+      :partition_count,
+      :file_count,
+      :total_file_bytes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure specifying the dialect and dialect version used by the
     # query engine.
     #
@@ -31028,12 +31192,18 @@ module Aws::Glue
     #   The optional name of a target table.
     #   @return [String]
     #
+    # @!attribute [rw] integration_arn
+    #   The ARN of the integration that owns this target table
+    #   configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TargetTableConfig AWS API Documentation
     #
     class TargetTableConfig < Struct.new(
       :unnest_spec,
       :partition_spec,
-      :target_table_name)
+      :target_table_name,
+      :integration_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33619,9 +33789,21 @@ module Aws::Glue
     #   materialized view.
     #   @return [Array<Integer>]
     #
+    # @!attribute [rw] sub_objects_statistics
+    #   Statistics captured for each sub-object referenced by the
+    #   materialized view as of its most recent refresh, such as the source
+    #   type, Glue version ID, and the partition, file, and byte counts.
+    #   Each entry describes one sub-object, identified by its source type.
+    #   @return [Array<Types::SubObjectStatistics>]
+    #
     # @!attribute [rw] representations
     #   A list of representations.
     #   @return [Array<Types::ViewRepresentation>]
+    #
+    # @!attribute [rw] spark_pipeline_info
+    #   A map of key-value pairs containing Spark Declarative Pipelines
+    #   (SDP) information for the materialized view.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ViewDefinition AWS API Documentation
     #
@@ -33634,7 +33816,9 @@ module Aws::Glue
       :last_refresh_type,
       :sub_objects,
       :sub_object_version_ids,
-      :representations)
+      :sub_objects_statistics,
+      :representations,
+      :spark_pipeline_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33686,6 +33870,18 @@ module Aws::Glue
     #   materialized view.
     #   @return [Array<Integer>]
     #
+    # @!attribute [rw] sub_objects_statistics
+    #   Statistics for each sub-object referenced by the materialized view,
+    #   such as the source type, Glue version ID, and the partition, file,
+    #   and byte counts. Each entry describes one sub-object, identified by
+    #   its source type.
+    #   @return [Array<Types::SubObjectStatistics>]
+    #
+    # @!attribute [rw] spark_pipeline_info
+    #   A map of key-value pairs containing Spark Declarative Pipelines
+    #   (SDP) information for the materialized view.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ViewDefinitionInput AWS API Documentation
     #
     class ViewDefinitionInput < Struct.new(
@@ -33697,7 +33893,9 @@ module Aws::Glue
       :refresh_seconds,
       :last_refresh_type,
       :sub_objects,
-      :sub_object_version_ids)
+      :sub_object_version_ids,
+      :sub_objects_statistics,
+      :spark_pipeline_info)
       SENSITIVE = []
       include Aws::Structure
     end

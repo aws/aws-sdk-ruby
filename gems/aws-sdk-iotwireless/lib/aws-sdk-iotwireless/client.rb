@@ -2580,7 +2580,14 @@ module Aws::IoTWireless
     # @option params [Types::Gnss] :gnss
     #   Retrieves an estimated device position by resolving the global
     #   navigation satellite system (GNSS) scan data. The position is resolved
-    #   using the GNSS solver powered by LoRa Cloud.
+    #   using the GNSS solver powered by LoRa Cloud. This field is mutually
+    #   exclusive with the GnssMultiFrame field.
+    #
+    # @option params [Types::GnssMultiFrame] :gnss_multi_frame
+    #   Retrieves an estimated device position by resolving multiple global
+    #   navigation satellite system (GNSS) scan captures. The position is
+    #   resolved using the multi-frame GNSS solver powered by LoRa Cloud. This
+    #   field is mutually exclusive with the Gnss field.
     #
     # @option params [Time,DateTime,Date,Integer,String] :timestamp
     #   Optional information that specifies the time when the position
@@ -2589,8 +2596,7 @@ module Aws::IoTWireless
     #   used.
     #
     # @option params [Types::AdvancedConfiguration] :advanced_configuration
-    #   Optional configuration to customize position estimates. If not
-    #   provided, defaults are applied.
+    #   Optional configuration for customizing position measurement data.
     #
     # @return [Types::GetPositionEstimateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2733,6 +2739,18 @@ module Aws::IoTWireless
     #     gnss: {
     #       payload: "GnssNav", # required
     #       capture_time: 1.0,
+    #       capture_time_accuracy: 1.0,
+    #       assist_position: [1.0],
+    #       assist_altitude: 1.0,
+    #       use_2_d_solver: false,
+    #     },
+    #     gnss_multi_frame: {
+    #       captures: [ # required
+    #         {
+    #           payload: "GnssNav", # required
+    #           capture_time: 1.0,
+    #         },
+    #       ],
     #       capture_time_accuracy: 1.0,
     #       assist_position: [1.0],
     #       assist_altitude: 1.0,
@@ -5482,7 +5500,7 @@ module Aws::IoTWireless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

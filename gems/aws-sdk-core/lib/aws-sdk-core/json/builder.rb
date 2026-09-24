@@ -81,11 +81,11 @@ module Aws
 
       def timestamp(ref, value)
         case ref['timestampFormat'] || ref.shape['timestampFormat']
-        when 'iso8601' then value.utc.iso8601
+        when 'iso8601' then Util.serialize_date_time(value)
         when 'rfc822' then value.utc.httpdate
         else
           # rest-json and jsonrpc default to unixTimestamp
-          value.to_i
+          Util.serialize_epoch_seconds(value)
         end
       end
 

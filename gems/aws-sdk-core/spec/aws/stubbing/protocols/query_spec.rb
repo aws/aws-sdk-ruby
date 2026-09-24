@@ -49,7 +49,7 @@ module Aws
                       <UserName>name</UserName>
                       <UserId>user-id</UserId>
                       <Arn>arn:aws:iam::123456789012:user/name</Arn>
-                      <CreateDate>#{now.utc.iso8601}</CreateDate>
+                      <CreateDate>#{Aws::Util.serialize_date_time(now)}</CreateDate>
                     </member>
                   </Users>
                   <IsTruncated>false</IsTruncated>

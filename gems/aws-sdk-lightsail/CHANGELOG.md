@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.137.0 (2026-09-11)
+------------------
+
+* Feature - Amazon Lightsail now lets you serve website content from a private Lightsail bucket through a Lightsail distribution. This release adds enablePrivateOriginAccess to the CreateDistribution and UpdateDistribution actions, plus new defaultRootObject and customErrorResponses options.
+
+1.136.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.135.0 (2026-09-01)
 ------------------
 

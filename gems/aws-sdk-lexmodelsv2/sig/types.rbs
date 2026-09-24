@@ -489,6 +489,7 @@ module Aws::LexModelsV2
       attr_accessor speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
       attr_accessor unified_speech_settings: Types::UnifiedSpeechSettings
       attr_accessor audio_filler_settings: Types::AudioFillerSettings
+      attr_accessor speaker_diarization_settings: Types::SpeakerDiarizationSettings
       SENSITIVE: []
     end
 
@@ -788,6 +789,7 @@ module Aws::LexModelsV2
       attr_accessor speech_recognition_settings: Types::SpeechRecognitionSettings
       attr_accessor generative_ai_settings: Types::GenerativeAISettings
       attr_accessor speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
+      attr_accessor speaker_diarization_settings: Types::SpeakerDiarizationSettings
       SENSITIVE: []
     end
 
@@ -806,6 +808,7 @@ module Aws::LexModelsV2
       attr_accessor creation_date_time: ::Time
       attr_accessor generative_ai_settings: Types::GenerativeAISettings
       attr_accessor speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
+      attr_accessor speaker_diarization_settings: Types::SpeakerDiarizationSettings
       SENSITIVE: []
     end
 
@@ -1369,6 +1372,7 @@ module Aws::LexModelsV2
       attr_accessor recommended_actions: ::Array[::String]
       attr_accessor generative_ai_settings: Types::GenerativeAISettings
       attr_accessor speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
+      attr_accessor speaker_diarization_settings: Types::SpeakerDiarizationSettings
       SENSITIVE: []
     end
 
@@ -3095,6 +3099,11 @@ module Aws::LexModelsV2
       SENSITIVE: []
     end
 
+    class SpeakerDiarizationSettings
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
     class Specifications
       attr_accessor slot_type_id: ::String
       attr_accessor value_elicitation_setting: Types::SubSlotValueElicitationSetting
@@ -3113,7 +3122,7 @@ module Aws::LexModelsV2
     end
 
     class SpeechRecognitionSettings
-      attr_accessor speech_model_preference: ("Standard" | "Neural" | "Deepgram")
+      attr_accessor speech_model_preference: ("Standard" | "Neural" | "Deepgram" | "Advanced")
       attr_accessor speech_model_config: Types::SpeechModelConfig
       SENSITIVE: []
     end
@@ -3533,6 +3542,7 @@ module Aws::LexModelsV2
       attr_accessor speech_recognition_settings: Types::SpeechRecognitionSettings
       attr_accessor generative_ai_settings: Types::GenerativeAISettings
       attr_accessor speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
+      attr_accessor speaker_diarization_settings: Types::SpeakerDiarizationSettings
       SENSITIVE: []
     end
 
@@ -3554,6 +3564,7 @@ module Aws::LexModelsV2
       attr_accessor recommended_actions: ::Array[::String]
       attr_accessor generative_ai_settings: Types::GenerativeAISettings
       attr_accessor speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
+      attr_accessor speaker_diarization_settings: Types::SpeakerDiarizationSettings
       SENSITIVE: []
     end
 

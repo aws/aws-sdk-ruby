@@ -49,6 +49,7 @@ module Aws
       program_selection: ::Integer?,
       remix_settings: Params::remix_settings?,
       selector_type: ("PID" | "TRACK" | "LANGUAGE_CODE" | "HLS_RENDITION_GROUP" | "ALL_PCM" | "STREAM")?,
+      smpte_337_passthrough: ("ENABLED" | "DISABLED")?,
       streams: Array[::Integer]?,
       tracks: Array[::Integer]?
     }
@@ -1097,6 +1098,8 @@ module Aws
       mpeg_2_settings: Params::mpeg_2_settings?,
       passthrough_settings: {
         frame_control: ("NEAREST_IDRFRAME" | "NEAREST_IFRAME")?,
+        gops_per_segment: ::Integer?,
+        segmentation_mode: ("AUTO" | "DURATION_BASED" | "GOP_COUNT")?,
         video_selector_mode: ("AUTO" | "REMUX_ALL")?
       }?,
       prores_settings: Params::prores_settings?,
@@ -1541,6 +1544,9 @@ module Aws
       ]?,
       kantar_watermark: Params::kantar_watermark_settings?,
       motion_image_inserter: Params::motion_image_inserter?,
+      motion_image_inserters: Array[
+        Params::motion_image_inserter
+      ]?,
       nielsen_configuration: {
         breakout_code: ::Integer?,
         distributor_id: ::String?

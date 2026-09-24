@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2026-09-17)
+------------------
+
+* Feature - Add support for WhatsApp Calling APIs.
+
+1.32.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.30.0 (2026-09-03)
 ------------------
 

@@ -424,6 +424,7 @@ module Aws::ECS
       attr_accessor network_configuration: Types::ExpressGatewayServiceNetworkConfiguration
       attr_accessor cpu: ::String
       attr_accessor memory: ::String
+      attr_accessor cpu_architecture: ("X86_64" | "ARM64")
       attr_accessor scaling_target: Types::ExpressGatewayScalingTarget
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor task_definition_arn: ::String
@@ -1289,6 +1290,7 @@ module Aws::ECS
       attr_accessor task_definition_arn: ::String
       attr_accessor cpu: ::String
       attr_accessor memory: ::String
+      attr_accessor cpu_architecture: ("X86_64" | "ARM64")
       attr_accessor network_configuration: Types::ExpressGatewayServiceNetworkConfiguration
       attr_accessor health_check_path: ::String
       attr_accessor primary_container: Types::ExpressGatewayContainer
@@ -2926,6 +2928,7 @@ module Aws::ECS
       attr_accessor network_configuration: Types::ExpressGatewayServiceNetworkConfiguration
       attr_accessor cpu: ::String
       attr_accessor memory: ::String
+      attr_accessor cpu_architecture: ("X86_64" | "ARM64")
       attr_accessor scaling_target: Types::ExpressGatewayScalingTarget
       attr_accessor task_definition_arn: ::String
       SENSITIVE: []

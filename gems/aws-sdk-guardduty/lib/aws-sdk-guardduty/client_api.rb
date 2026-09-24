@@ -77,6 +77,8 @@ module Aws::GuardDuty
     BedrockGuardrailDetails = Shapes::StructureShape.new(name: 'BedrockGuardrailDetails')
     BedrockGuardrailDetailsGuardrailArnString = Shapes::StringShape.new(name: 'BedrockGuardrailDetailsGuardrailArnString')
     BedrockGuardrailDetailsGuardrailVersionString = Shapes::StringShape.new(name: 'BedrockGuardrailDetailsGuardrailVersionString')
+    BedrockGuardrailResource = Shapes::StructureShape.new(name: 'BedrockGuardrailResource')
+    BedrockGuardrailResourceVersionString = Shapes::StringShape.new(name: 'BedrockGuardrailResourceVersionString')
     BedrockGuardrailVersionString = Shapes::StringShape.new(name: 'BedrockGuardrailVersionString')
     BedrockGuardrails = Shapes::ListShape.new(name: 'BedrockGuardrails')
     Behavior = Shapes::MapShape.new(name: 'Behavior')
@@ -1000,6 +1002,11 @@ module Aws::GuardDuty
     BedrockGuardrailDetails.add_member(:guardrail_source, Shapes::ShapeRef.new(shape: GuardrailSource, location_name: "guardrailSource"))
     BedrockGuardrailDetails.add_member(:content_policy_filters, Shapes::ShapeRef.new(shape: ContentPolicyFilters, location_name: "contentPolicyFilters"))
     BedrockGuardrailDetails.struct_class = Types::BedrockGuardrailDetails
+
+    BedrockGuardrailResource.add_member(:version, Shapes::ShapeRef.new(shape: BedrockGuardrailResourceVersionString, location_name: "version"))
+    BedrockGuardrailResource.add_member(:guardrail_action, Shapes::ShapeRef.new(shape: GuardrailAction, location_name: "guardrailAction"))
+    BedrockGuardrailResource.add_member(:guardrail_source, Shapes::ShapeRef.new(shape: GuardrailSource, location_name: "guardrailSource"))
+    BedrockGuardrailResource.struct_class = Types::BedrockGuardrailResource
 
     BedrockGuardrails.member = Shapes::ShapeRef.new(shape: BedrockGuardrail)
 
@@ -2868,6 +2875,7 @@ module Aws::GuardDuty
     ResourceData.add_member(:ec2_vpc, Shapes::ShapeRef.new(shape: Ec2Vpc, location_name: "ec2Vpc"))
     ResourceData.add_member(:ec2_image, Shapes::ShapeRef.new(shape: Ec2Image, location_name: "ec2Image"))
     ResourceData.add_member(:cloudformation_stack, Shapes::ShapeRef.new(shape: CloudformationStack, location_name: "cloudformationStack"))
+    ResourceData.add_member(:bedrock_guardrail, Shapes::ShapeRef.new(shape: BedrockGuardrailResource, location_name: "bedrockGuardrail"))
     ResourceData.struct_class = Types::ResourceData
 
     ResourceDetails.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, location_name: "instanceArn"))

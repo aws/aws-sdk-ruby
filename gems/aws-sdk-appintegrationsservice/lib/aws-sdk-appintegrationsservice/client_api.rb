@@ -28,6 +28,8 @@ module Aws::AppIntegrationsService
     ApplicationsList = Shapes::ListShape.new(name: 'ApplicationsList')
     Arn = Shapes::StringShape.new(name: 'Arn')
     ArnOrUUID = Shapes::StringShape.new(name: 'ArnOrUUID')
+    AuthConfig = Shapes::StructureShape.new(name: 'AuthConfig')
+    AuthType = Shapes::StringShape.new(name: 'AuthType')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientAssociationMetadata = Shapes::MapShape.new(name: 'ClientAssociationMetadata')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
@@ -174,6 +176,10 @@ module Aws::AppIntegrationsService
 
     ApplicationsList.member = Shapes::ShapeRef.new(shape: ApplicationSummary)
 
+    AuthConfig.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, location_name: "AuthType"))
+    AuthConfig.add_member(:credential_provider_identifier, Shapes::ShapeRef.new(shape: Arn, location_name: "CredentialProviderIdentifier"))
+    AuthConfig.struct_class = Types::AuthConfig
+
     ClientAssociationMetadata.key = Shapes::ShapeRef.new(shape: NonBlankString)
     ClientAssociationMetadata.value = Shapes::ShapeRef.new(shape: NonBlankString)
 
@@ -197,6 +203,7 @@ module Aws::AppIntegrationsService
     CreateApplicationRequest.add_member(:application_config, Shapes::ShapeRef.new(shape: ApplicationConfig, location_name: "ApplicationConfig"))
     CreateApplicationRequest.add_member(:iframe_config, Shapes::ShapeRef.new(shape: IframeConfig, location_name: "IframeConfig"))
     CreateApplicationRequest.add_member(:application_type, Shapes::ShapeRef.new(shape: ApplicationType, location_name: "ApplicationType"))
+    CreateApplicationRequest.add_member(:auth_config, Shapes::ShapeRef.new(shape: AuthConfig, location_name: "AuthConfig"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -350,6 +357,7 @@ module Aws::AppIntegrationsService
     GetApplicationResponse.add_member(:application_config, Shapes::ShapeRef.new(shape: ApplicationConfig, location_name: "ApplicationConfig"))
     GetApplicationResponse.add_member(:iframe_config, Shapes::ShapeRef.new(shape: IframeConfig, location_name: "IframeConfig"))
     GetApplicationResponse.add_member(:application_type, Shapes::ShapeRef.new(shape: ApplicationType, location_name: "ApplicationType"))
+    GetApplicationResponse.add_member(:auth_config, Shapes::ShapeRef.new(shape: AuthConfig, location_name: "AuthConfig"))
     GetApplicationResponse.struct_class = Types::GetApplicationResponse
 
     GetDataIntegrationRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))
@@ -520,6 +528,7 @@ module Aws::AppIntegrationsService
     UpdateApplicationRequest.add_member(:application_config, Shapes::ShapeRef.new(shape: ApplicationConfig, location_name: "ApplicationConfig"))
     UpdateApplicationRequest.add_member(:iframe_config, Shapes::ShapeRef.new(shape: IframeConfig, location_name: "IframeConfig"))
     UpdateApplicationRequest.add_member(:application_type, Shapes::ShapeRef.new(shape: ApplicationType, location_name: "ApplicationType"))
+    UpdateApplicationRequest.add_member(:auth_config, Shapes::ShapeRef.new(shape: AuthConfig, location_name: "AuthConfig"))
     UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
 
     UpdateApplicationResponse.struct_class = Types::UpdateApplicationResponse

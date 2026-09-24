@@ -800,6 +800,39 @@
         "FillPolicy":{"shape":"FillPolicy"}
       }
     },
+    "AwsServiceRequestConfiguration":{
+      "type":"structure",
+      "required":[
+        "Runtime",
+        "MethodType",
+        "RequestTimeoutMilliseconds",
+        "Url",
+        "TargetService",
+        "TargetRegion"
+      ],
+      "members":{
+        "Runtime":{"shape":"RuntimeType"},
+        "Output":{"shape":"__mapOf__string"},
+        "MethodType":{"shape":"MethodType"},
+        "RequestTimeoutMilliseconds":{"shape":"__integer"},
+        "Url":{"shape":"__string"},
+        "Body":{"shape":"__string"},
+        "Headers":{"shape":"__mapOf__string"},
+        "TargetService":{"shape":"AwsTargetService"},
+        "TargetRegion":{"shape":"AwsServiceRequestConfigurationTargetRegionString"}
+      }
+    },
+    "AwsServiceRequestConfigurationTargetRegionString":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
+    "AwsTargetService":{
+      "type":"string",
+      "max":63,
+      "min":1,
+      "pattern":"[a-z0-9-]+"
+    },
     "BadRequestException":{
       "type":"structure",
       "members":{
@@ -1612,6 +1645,7 @@
         "FunctionType":{"shape":"FunctionType"},
         "Description":{"shape":"__string"},
         "HttpRequestConfiguration":{"shape":"HttpRequestConfiguration"},
+        "AwsServiceRequestConfiguration":{"shape":"AwsServiceRequestConfiguration"},
         "CustomOutputConfiguration":{"shape":"CustomOutputConfiguration"},
         "ConcurrentExecutorConfiguration":{"shape":"ConcurrentExecutorConfiguration"},
         "SequentialExecutorConfiguration":{"shape":"SequentialExecutorConfiguration"},
@@ -1640,6 +1674,7 @@
       "type":"string",
       "enum":[
         "HTTP_REQUEST",
+        "AWS_SERVICE_REQUEST",
         "CUSTOM_OUTPUT",
         "CONCURRENT_EXECUTOR",
         "SEQUENTIAL_EXECUTOR",
@@ -1723,6 +1758,7 @@
         "FunctionType":{"shape":"FunctionType"},
         "Description":{"shape":"__string"},
         "HttpRequestConfiguration":{"shape":"HttpRequestConfiguration"},
+        "AwsServiceRequestConfiguration":{"shape":"AwsServiceRequestConfiguration"},
         "CustomOutputConfiguration":{"shape":"CustomOutputConfiguration"},
         "ConcurrentExecutorConfiguration":{"shape":"ConcurrentExecutorConfiguration"},
         "SequentialExecutorConfiguration":{"shape":"SequentialExecutorConfiguration"},
@@ -2455,6 +2491,7 @@
         "FunctionType":{"shape":"FunctionType"},
         "Description":{"shape":"__string"},
         "HttpRequestConfiguration":{"shape":"HttpRequestConfiguration"},
+        "AwsServiceRequestConfiguration":{"shape":"AwsServiceRequestConfiguration"},
         "CustomOutputConfiguration":{"shape":"CustomOutputConfiguration"},
         "ConcurrentExecutorConfiguration":{"shape":"ConcurrentExecutorConfiguration"},
         "SequentialExecutorConfiguration":{"shape":"SequentialExecutorConfiguration"},
@@ -2476,6 +2513,7 @@
         "FunctionType":{"shape":"FunctionType"},
         "Description":{"shape":"__string"},
         "HttpRequestConfiguration":{"shape":"HttpRequestConfiguration"},
+        "AwsServiceRequestConfiguration":{"shape":"AwsServiceRequestConfiguration"},
         "CustomOutputConfiguration":{"shape":"CustomOutputConfiguration"},
         "ConcurrentExecutorConfiguration":{"shape":"ConcurrentExecutorConfiguration"},
         "SequentialExecutorConfiguration":{"shape":"SequentialExecutorConfiguration"},

@@ -573,6 +573,7 @@ module Aws::SESV2
     TenantInfo = Shapes::StructureShape.new(name: 'TenantInfo')
     TenantInfoList = Shapes::ListShape.new(name: 'TenantInfoList')
     TenantName = Shapes::StringShape.new(name: 'TenantName')
+    TenantNameFilterList = Shapes::ListShape.new(name: 'TenantNameFilterList')
     TenantResource = Shapes::StructureShape.new(name: 'TenantResource')
     TenantResourceList = Shapes::ListShape.new(name: 'TenantResourceList')
     TenantSuppressionAttributes = Shapes::StructureShape.new(name: 'TenantSuppressionAttributes')
@@ -1739,6 +1740,7 @@ module Aws::SESV2
     MessageInsightsFilters.add_member(:destination, Shapes::ShapeRef.new(shape: EmailAddressFilterList, location_name: "Destination"))
     MessageInsightsFilters.add_member(:subject, Shapes::ShapeRef.new(shape: EmailSubjectFilterList, location_name: "Subject"))
     MessageInsightsFilters.add_member(:isp, Shapes::ShapeRef.new(shape: IspFilterList, location_name: "Isp"))
+    MessageInsightsFilters.add_member(:tenant_name, Shapes::ShapeRef.new(shape: TenantNameFilterList, location_name: "TenantName"))
     MessageInsightsFilters.add_member(:last_delivery_event, Shapes::ShapeRef.new(shape: LastDeliveryEventList, location_name: "LastDeliveryEvent"))
     MessageInsightsFilters.add_member(:last_engagement_event, Shapes::ShapeRef.new(shape: LastEngagementEventList, location_name: "LastEngagementEvent"))
     MessageInsightsFilters.struct_class = Types::MessageInsightsFilters
@@ -2189,6 +2191,8 @@ module Aws::SESV2
     TenantInfo.struct_class = Types::TenantInfo
 
     TenantInfoList.member = Shapes::ShapeRef.new(shape: TenantInfo)
+
+    TenantNameFilterList.member = Shapes::ShapeRef.new(shape: TenantName)
 
     TenantResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     TenantResource.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceArn"))

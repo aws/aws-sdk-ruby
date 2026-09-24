@@ -1110,6 +1110,7 @@ module Aws
         def domain_id: () -> ::String
         def cell_order: () -> ::Array[Types::CellInformation]
         def status: () -> ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
+        def type: () -> ("DATA" | "SQL")
         def description: () -> ::String
         def created_at: () -> ::Time
         def created_by: () -> ::String
@@ -1130,6 +1131,7 @@ module Aws
                              owning_project_identifier: ::String,
                              name: ::String,
                              ?description: ::String,
+                             ?type: ("DATA" | "SQL"),
                              ?metadata: Hash[::String, ::String],
                              ?parameters: Hash[::String, ::String],
                              ?client_token: ::String
@@ -2374,6 +2376,7 @@ module Aws
         def domain_id: () -> ::String
         def cell_order: () -> ::Array[Types::CellInformation]
         def status: () -> ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
+        def type: () -> ("DATA" | "SQL")
         def description: () -> ::String
         def created_at: () -> ::Time
         def created_by: () -> ::String
@@ -3012,6 +3015,7 @@ module Aws
                             ?sort_order: ("ASCENDING" | "DESCENDING"),
                             ?sort_by: ("CREATED_AT" | "UPDATED_AT"),
                             ?status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED"),
+                            ?type: ("DATA" | "SQL"),
                             ?next_token: ::String
                           ) -> _ListNotebooksResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNotebooksResponseSuccess
@@ -4286,6 +4290,7 @@ module Aws
         def domain_id: () -> ::String
         def cell_order: () -> ::Array[Types::CellInformation]
         def status: () -> ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
+        def type: () -> ("DATA" | "SQL")
         def description: () -> ::String
         def created_at: () -> ::Time
         def created_by: () -> ::String
@@ -4311,6 +4316,7 @@ module Aws
                                {
                                }
                              ],
+                             ?type: ("DATA" | "SQL"),
                              ?metadata: Hash[::String, ::String],
                              ?parameters: Hash[::String, ::String],
                              ?environment_configuration: {

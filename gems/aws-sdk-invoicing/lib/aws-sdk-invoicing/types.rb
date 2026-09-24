@@ -551,6 +551,21 @@ module Aws::Invoicing
       include Aws::Structure
     end
 
+    # Contains the default feature configuration settings for a procurement
+    # portal.
+    #
+    # @!attribute [rw] invoice_configuration
+    #   The invoice configuration settings for the procurement portal.
+    #   @return [Types::InvoiceConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/FeatureConfigurations AWS API Documentation
+    #
+    class FeatureConfigurations < Struct.new(
+      :invoice_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of fees.
     #
     # @!attribute [rw] breakdown
@@ -780,6 +795,27 @@ module Aws::Invoicing
     class InternalServerException < Struct.new(
       :retry_after_seconds,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the supported document types and attachment types for
+    # invoice delivery to a procurement portal.
+    #
+    # @!attribute [rw] document_types
+    #   The e-invoice document types supported by the procurement portal.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] attachment_types
+    #   The attachment types supported by the procurement portal for
+    #   e-invoice delivery.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/InvoiceConfiguration AWS API Documentation
+    #
+    class InvoiceConfiguration < Struct.new(
+      :document_types,
+      :attachment_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1280,6 +1316,90 @@ module Aws::Invoicing
       include Aws::Structure
     end
 
+    # @!attribute [rw] portal_identifier
+    #   The unique identifier of the procurement portal for which to list
+    #   suppliers. Use the `PortalIdentifier` value returned by
+    #   `ListProcurementPortals`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You received this token from
+    #   a previous call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   NextToken value. Default is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/ListProcurementPortalSuppliersRequest AWS API Documentation
+    #
+    class ListProcurementPortalSuppliersRequest < Struct.new(
+      :portal_identifier,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] procurement_portal_suppliers
+    #   The list of suppliers configured for the specified procurement
+    #   portal.
+    #   @return [Array<Types::ProcurementPortalSupplier>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results, or null if
+    #   there are no more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/ListProcurementPortalSuppliersResponse AWS API Documentation
+    #
+    class ListProcurementPortalSuppliersResponse < Struct.new(
+      :procurement_portal_suppliers,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You received this token from
+    #   a previous call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   NextToken value. Default is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/ListProcurementPortalsRequest AWS API Documentation
+    #
+    class ListProcurementPortalsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] procurement_portals
+    #   The list of procurement portals available for configuration.
+    #   @return [Array<Types::ProcurementPortal>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results, or null if
+    #   there are no more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/ListProcurementPortalsResponse AWS API Documentation
+    #
+    class ListProcurementPortalsResponse < Struct.new(
+      :procurement_portals,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of tags to list.
     #   @return [String]
@@ -1300,6 +1420,36 @@ module Aws::Invoicing
     #
     class ListTagsForResourceResponse < Struct.new(
       :resource_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata for a procurement portal, including the portal
+    # identifier, name, and default feature configurations.
+    #
+    # @!attribute [rw] portal_identifier
+    #   The unique identifier of the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_name
+    #   The name of the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_display_name
+    #   The display name of the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_feature_configurations
+    #   The default feature configurations for the procurement portal.
+    #   @return [Types::FeatureConfigurations]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/ProcurementPortal AWS API Documentation
+    #
+    class ProcurementPortal < Struct.new(
+      :portal_identifier,
+      :portal_name,
+      :portal_display_name,
+      :default_feature_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1567,6 +1717,40 @@ module Aws::Invoicing
       :version,
       :create_date,
       :last_update_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata for a supplier configured within a procurement
+    # portal.
+    #
+    # @!attribute [rw] supplier_identifier
+    #   The unique identifier of the supplier within the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] seller_of_record
+    #   The Amazon Web Services seller of record associated with the
+    #   supplier—the Amazon Web Services legal entity that issues invoices
+    #   for the account (for example, `AWS_INC` or `AWS_EUROPE`).
+    #   @return [String]
+    #
+    # @!attribute [rw] country_code
+    #   The two-letter ISO 3166-1 alpha-2 country code associated with the
+    #   supplier.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment
+    #   The environment identifier for the supplier in the procurement
+    #   portal. PROD for production env, or TEST for sandbox/test env.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/ProcurementPortalSupplier AWS API Documentation
+    #
+    class ProcurementPortalSupplier < Struct.new(
+      :supplier_identifier,
+      :seller_of_record,
+      :country_code,
+      :environment)
       SENSITIVE = []
       include Aws::Structure
     end

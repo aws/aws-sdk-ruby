@@ -533,7 +533,14 @@ module Aws::MediaConvert
     # values, reduced to lowest terms. Used for the sample (pixel) aspect
     # ratio and the display aspect ratio of a video track. For example, a
     # 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a
-    # display aspect ratio of 16 / 9.
+    # display aspect ratio of 16 / 9. A video track can declare an aspect
+    # ratio in two independent places, and MediaConvert reports each one
+    # where it was found rather than choosing between them. The ratio
+    # declared by the container appears on the video track itself, and the
+    # ratio declared by the video essence appears under codecMetadata. When
+    # a file declares an aspect ratio in only one of the two places, the
+    # other is null; when it declares both and they disagree, you can
+    # compare them and decide which to use.
     #
     # @!attribute [rw] denominator
     #   The denominator, or bottom number, in the fractional aspect ratio.
@@ -925,7 +932,9 @@ module Aws::MediaConvert
     # Details about the media file's audio track.
     #
     # @!attribute [rw] bit_depth
-    #   The bit depth of the audio track.
+    #   The bit depth of the audio track. This value is exact for PCM and
+    #   FLAC audio. For lossy codecs, such as AAC, AC-3, and E-AC-3, it is a
+    #   nominal value and should be treated as approximate.
     #   @return [Integer]
     #
     # @!attribute [rw] bit_rate
@@ -935,7 +944,9 @@ module Aws::MediaConvert
     # @!attribute [rw] channel_layout
     #   The audio channel layout of the track, such as "mono", "stereo",
     #   "5.1", or "7.1". Object-based or immersive audio is reported as
-    #   "5.1.4" or "7.1.4".
+    #   "5.1.4" or "7.1.4". The layout is exact for AC-3 and E-AC-3
+    #   audio. For other codecs, it is inferred from the channel count and
+    #   should be treated as approximate.
     #   @return [String]
     #
     # @!attribute [rw] channels
@@ -1107,6 +1118,16 @@ module Aws::MediaConvert
     #   numberings will not shift.
     #   @return [String]
     #
+    # @!attribute [rw] smpte_337_passthrough
+    #   Specify whether to pass SMPTE 337M-wrapped audio (such as Dolby E)
+    #   through without unwrapping. Choose Enabled to pass the SMPTE 337M
+    #   container through unchanged, treating the track as raw PCM. Choose
+    #   Disabled (default) to automatically detect and unwrap SMPTE 337M
+    #   data, extracting the underlying Dolby E programs as separate audio
+    #   tracks for encoding. When this field is absent, the service defaults
+    #   to Disabled (auto-unwrap).
+    #   @return [String]
+    #
     # @!attribute [rw] streams
     #   Identify a track from the input audio to include in this selector by
     #   entering the stream index number. These numberings count all tracks
@@ -1141,6 +1162,7 @@ module Aws::MediaConvert
       :program_selection,
       :remix_settings,
       :selector_type,
+      :smpte_337_passthrough,
       :streams,
       :tracks)
       SENSITIVE = []
@@ -3243,7 +3265,12 @@ module Aws::MediaConvert
     # information provides detailed technical specifications about how the
     # video was encoded, including profile settings, resolution details, and
     # color space information that can help you understand the source video
-    # characteristics and make informed encoding decisions.
+    # characteristics and make informed encoding decisions. These fields are
+    # returned for H.264 (AVC), H.265 (HEVC), and MPEG-2 video, and might
+    # not be returned for other codecs. For MPEG-TS and MPEG-PS inputs,
+    # color information (color primaries, transfer characteristics, and
+    # matrix coefficients) appears in these fields rather than in the
+    # top-level videoProperties.
     #
     # @!attribute [rw] bit_depth
     #   The number of bits used per color component in the video essence
@@ -3276,6 +3303,29 @@ module Aws::MediaConvert
     #   Content light level information (CTA-861.3). Describes the light
     #   level characteristics of the content.
     #   @return [Types::ContentLightLevel]
+    #
+    # @!attribute [rw] display_aspect_ratio
+    #   An aspect ratio expressed as a fraction with numerator and
+    #   denominator values, reduced to lowest terms. Used for the sample
+    #   (pixel) aspect ratio and the display aspect ratio of a video track.
+    #   For example, a 720x576 anamorphic track has a sample aspect ratio of
+    #   64 / 45 and a display aspect ratio of 16 / 9. A video track can
+    #   declare an aspect ratio in two independent places, and MediaConvert
+    #   reports each one where it was found rather than choosing between
+    #   them. The ratio declared by the container appears on the video track
+    #   itself, and the ratio declared by the video essence appears under
+    #   codecMetadata. When a file declares an aspect ratio in only one of
+    #   the two places, the other is null; when it declares both and they
+    #   disagree, you can compare them and decide which to use.
+    #   @return [Types::AspectRatio]
+    #
+    # @!attribute [rw] dolby_vision
+    #   Dolby Vision characteristics of the video track: the profile and
+    #   level, and whether the RPU (dynamic metadata), base layer, and
+    #   enhancement layer are present. Use this to distinguish Dolby Vision
+    #   content from standard HEVC and to choose your encoding or
+    #   passthrough settings. Omitted when the content is not Dolby Vision.
+    #   @return [Types::DolbyVisionMetadata]
     #
     # @!attribute [rw] field_order
     #   The field order of interlaced video, which indicates whether the top
@@ -3324,6 +3374,21 @@ module Aws::MediaConvert
     #   or when the rotation is 0 degrees.
     #   @return [Integer]
     #
+    # @!attribute [rw] sample_aspect_ratio
+    #   An aspect ratio expressed as a fraction with numerator and
+    #   denominator values, reduced to lowest terms. Used for the sample
+    #   (pixel) aspect ratio and the display aspect ratio of a video track.
+    #   For example, a 720x576 anamorphic track has a sample aspect ratio of
+    #   64 / 45 and a display aspect ratio of 16 / 9. A video track can
+    #   declare an aspect ratio in two independent places, and MediaConvert
+    #   reports each one where it was found rather than choosing between
+    #   them. The ratio declared by the container appears on the video track
+    #   itself, and the ratio declared by the video essence appears under
+    #   codecMetadata. When a file declares an aspect ratio in only one of
+    #   the two places, the other is null; when it declares both and they
+    #   disagree, you can compare them and decide which to use.
+    #   @return [Types::AspectRatio]
+    #
     # @!attribute [rw] scan_type
     #   The scanning method specified in the video essence, indicating
     #   whether the video uses progressive or interlaced scanning.
@@ -3349,6 +3414,8 @@ module Aws::MediaConvert
       :coded_frame_rate,
       :color_primaries,
       :content_light_level,
+      :display_aspect_ratio,
+      :dolby_vision,
       :field_order,
       :hdr_10_plus_presence,
       :height,
@@ -3356,6 +3423,7 @@ module Aws::MediaConvert
       :matrix_coefficients,
       :profile,
       :rotation,
+      :sample_aspect_ratio,
       :scan_type,
       :transfer_characteristics,
       :width)
@@ -3565,9 +3633,10 @@ module Aws::MediaConvert
     # @!attribute [rw] format
     #   The format of your media file. For example: MP4, QuickTime (MOV),
     #   Matroska (MKV), WebM, MXF, Wave, AVI, MPEG-TS, MPEG-PS, MP3, FLAC,
-    #   ASF (Windows Media / WMA), OGG. Note that this will be blank if your
-    #   media file has a format that the MediaConvert Probe operation does
-    #   not recognize.
+    #   ASF (Windows Media / WMA), OGG, 3GP, 3G2, AAC (raw ADTS), AC-3, or
+    #   Enhanced AC-3 (E-AC-3). Note that this will be blank if your media
+    #   file has a format that the MediaConvert Probe operation does not
+    #   recognize.
     #   @return [String]
     #
     # @!attribute [rw] start_timecode
@@ -4818,6 +4887,47 @@ module Aws::MediaConvert
     class DolbyVisionLevel6Metadata < Struct.new(
       :max_cll,
       :max_fall)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Dolby Vision characteristics of the video track: the profile and
+    # level, and whether the RPU (dynamic metadata), base layer, and
+    # enhancement layer are present. Use this to distinguish Dolby Vision
+    # content from standard HEVC and to choose your encoding or passthrough
+    # settings. Omitted when the content is not Dolby Vision.
+    #
+    # @!attribute [rw] base_layer
+    #   Whether a Dolby Vision component is present in the track.
+    #   @return [String]
+    #
+    # @!attribute [rw] enhancement_layer
+    #   Whether a Dolby Vision component is present in the track.
+    #   @return [String]
+    #
+    # @!attribute [rw] level
+    #   The Dolby Vision level, which indicates the maximum resolution and
+    #   frame rate.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] profile
+    #   The Dolby Vision profile, for example 5, 7, or 8. The profile
+    #   determines the layer structure and playback compatibility of the
+    #   content.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rpu
+    #   Whether a Dolby Vision component is present in the track.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DolbyVisionMetadata AWS API Documentation
+    #
+    class DolbyVisionMetadata < Struct.new(
+      :base_layer,
+      :enhancement_layer,
+      :level,
+      :profile,
+      :rpu)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9890,6 +10000,12 @@ module Aws::MediaConvert
     #   https://docs.aws.amazon.com/mediaconvert/latest/ug/motion-graphic-overlay.html.
     #   @return [Types::MotionImageInserter]
     #
+    # @!attribute [rw] motion_image_inserters
+    #   Array of motion image inserters for overlaying multiple independent
+    #   motion graphics. Compositing order follows array index. Mutually
+    #   exclusive with motionImageInserter.
+    #   @return [Array<Types::MotionImageInserter>]
+    #
     # @!attribute [rw] nielsen_configuration
     #   Settings for your Nielsen configuration. If you don't do Nielsen
     #   measurement and analytics, ignore these settings. When you enable
@@ -9945,6 +10061,7 @@ module Aws::MediaConvert
       :inputs,
       :kantar_watermark,
       :motion_image_inserter,
+      :motion_image_inserters,
       :nielsen_configuration,
       :nielsen_non_linear_watermark,
       :output_groups,
@@ -10109,6 +10226,12 @@ module Aws::MediaConvert
     #   https://docs.aws.amazon.com/mediaconvert/latest/ug/motion-graphic-overlay.html.
     #   @return [Types::MotionImageInserter]
     #
+    # @!attribute [rw] motion_image_inserters
+    #   Array of motion image inserters for overlaying multiple independent
+    #   motion graphics. Compositing order follows array index. Mutually
+    #   exclusive with motionImageInserter.
+    #   @return [Array<Types::MotionImageInserter>]
+    #
     # @!attribute [rw] nielsen_configuration
     #   Settings for your Nielsen configuration. If you don't do Nielsen
     #   measurement and analytics, ignore these settings. When you enable
@@ -10164,6 +10287,7 @@ module Aws::MediaConvert
       :inputs,
       :kantar_watermark,
       :motion_image_inserter,
+      :motion_image_inserters,
       :nielsen_configuration,
       :nielsen_non_linear_watermark,
       :output_groups,
@@ -13169,6 +13293,41 @@ module Aws::MediaConvert
     #   compatible with most players.
     #   @return [String]
     #
+    # @!attribute [rw] gops_per_segment
+    #   Specify how many input GOPs MediaConvert places in each output
+    #   segment when you set Passthrough segmentation mode to GOP count. For
+    #   example, if your input has a closed GOP every 1.92 seconds and you
+    #   specify 2, each output segment is 3.84 seconds. In this mode, output
+    #   segment duration is determined by your input GOP structure rather
+    #   than by your configured Segment length or Fragment length, so
+    #   segment durations are consistent only when your input GOP cadence is
+    #   constant. Segments at input discontinuities or ad avails may contain
+    #   fewer GOPs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segmentation_mode
+    #   Choose how MediaConvert determines segment boundaries when you
+    #   passthrough video to a segmented ABR output (HLS, DASH, or CMAF).
+    #   This setting applies only to ABR outputs. Keep the default value,
+    #   Auto, to let MediaConvert choose based on your input: when your
+    #   input is a segmented HLS or DASH source, MediaConvert reproduces
+    #   your input's own segment boundaries, with one output segment per
+    #   input segment; for all other inputs, MediaConvert places boundaries
+    #   by duration, cutting at the first eligible IDR-frame at or after
+    #   each configured Segment length or Fragment length target. Choose
+    #   Duration based to always place boundaries by duration, at the first
+    #   eligible IDR-frame at or after each configured Segment length or
+    #   Fragment length target, regardless of your input. When your input
+    #   GOP duration does not evenly divide your target segment length,
+    #   output segment durations will vary. Choose GOP count to place a
+    #   fixed number of input GOPs in every segment, and specify GOPs per
+    #   segment. Every segment contains the same number of input GOPs, which
+    #   produces consistent segment durations when your input GOP cadence is
+    #   constant. In this mode MediaConvert ignores your configured Segment
+    #   length and Fragment length for video boundary placement. Ad avails
+    #   and input discontinuities are still honored as segment boundaries.
+    #   @return [String]
+    #
     # @!attribute [rw] video_selector_mode
     #   AUTO will select the highest bitrate input in the video selector
     #   source. REMUX\_ALL will passthrough all the selected streams in the
@@ -13182,6 +13341,8 @@ module Aws::MediaConvert
     #
     class PassthroughSettings < Struct.new(
       :frame_control,
+      :gops_per_segment,
+      :segmentation_mode,
       :video_selector_mode)
       SENSITIVE = []
       include Aws::Structure
@@ -14912,6 +15073,17 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UnprocessableEntityException AWS API Documentation
+    #
+    class UnprocessableEntityException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # To remove tags from a MediaConvert queue, preset, job, or job
     # template, send a request with the Amazon Resource Name (ARN) of the
     # resource and the keys of the tags that you want to remove.
@@ -16013,7 +16185,11 @@ module Aws::MediaConvert
     #   how the video was encoded, including profile settings, resolution
     #   details, and color space information that can help you understand
     #   the source video characteristics and make informed encoding
-    #   decisions.
+    #   decisions. These fields are returned for H.264 (AVC), H.265 (HEVC),
+    #   and MPEG-2 video, and might not be returned for other codecs. For
+    #   MPEG-TS and MPEG-PS inputs, color information (color primaries,
+    #   transfer characteristics, and matrix coefficients) appears in these
+    #   fields rather than in the top-level videoProperties.
     #   @return [Types::CodecMetadata]
     #
     # @!attribute [rw] color_primaries
@@ -16028,7 +16204,14 @@ module Aws::MediaConvert
     #   denominator values, reduced to lowest terms. Used for the sample
     #   (pixel) aspect ratio and the display aspect ratio of a video track.
     #   For example, a 720x576 anamorphic track has a sample aspect ratio of
-    #   64 / 45 and a display aspect ratio of 16 / 9.
+    #   64 / 45 and a display aspect ratio of 16 / 9. A video track can
+    #   declare an aspect ratio in two independent places, and MediaConvert
+    #   reports each one where it was found rather than choosing between
+    #   them. The ratio declared by the container appears on the video track
+    #   itself, and the ratio declared by the video essence appears under
+    #   codecMetadata. When a file declares an aspect ratio in only one of
+    #   the two places, the other is null; when it declares both and they
+    #   disagree, you can compare them and decide which to use.
     #   @return [Types::AspectRatio]
     #
     # @!attribute [rw] frame_rate
@@ -16067,7 +16250,14 @@ module Aws::MediaConvert
     #   denominator values, reduced to lowest terms. Used for the sample
     #   (pixel) aspect ratio and the display aspect ratio of a video track.
     #   For example, a 720x576 anamorphic track has a sample aspect ratio of
-    #   64 / 45 and a display aspect ratio of 16 / 9.
+    #   64 / 45 and a display aspect ratio of 16 / 9. A video track can
+    #   declare an aspect ratio in two independent places, and MediaConvert
+    #   reports each one where it was found rather than choosing between
+    #   them. The ratio declared by the container appears on the video track
+    #   itself, and the ratio declared by the video essence appears under
+    #   codecMetadata. When a file declares an aspect ratio in only one of
+    #   the two places, the other is null; when it declares both and they
+    #   disagree, you can compare them and decide which to use.
     #   @return [Types::AspectRatio]
     #
     # @!attribute [rw] transfer_characteristics
@@ -16825,17 +17015,12 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] interlace_mode
     #   Choose the scan line type for the output. Keep the default value,
-    #   Progressive to create a progressive output, regardless of the scan
-    #   type of your input. Use Top field first or Bottom field first to
-    #   create an output that's interlaced with the same field polarity
-    #   throughout. Use Follow, default top or Follow, default bottom to
-    #   produce outputs with the same field polarity as the source. For jobs
-    #   that have multiple inputs, the output field polarity might change
-    #   over the course of the output. Follow behavior depends on the input
-    #   scan type. If the source is interlaced, the output will be
-    #   interlaced with the same polarity as the source. If the source is
-    #   progressive, the output will be interlaced with top field bottom
-    #   field first, depending on which of the Follow options you choose.
+    #   Progressive, to create a progressive output, regardless of the scan
+    #   type of your input. To create an interlaced output, choose Top field
+    #   first or Follow, default top. Outputs that you create with this
+    #   profile are always top field first when they are interlaced. When
+    #   you create an interlaced output, set your output frame rate to 25 or
+    #   29.97.
     #   @return [String]
     #
     # @!attribute [rw] xavc_class
@@ -17051,10 +17236,10 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] profile
     #   Specify the XAVC profile for this output. For more information, see
-    #   the Sony documentation at https://www.xavc-info.org/. Note that
-    #   MediaConvert doesn't support the interlaced video XAVC operating
-    #   points for XAVC\_HD\_INTRA\_CBG. To create an interlaced XAVC
-    #   output, choose the profile XAVC\_HD.
+    #   the Sony documentation at https://www.xavc-info.org/. Note that when
+    #   you choose XAVC\_HD\_INTRA\_CBG, MediaConvert supports interlaced
+    #   outputs only when they are top field first and your output frame
+    #   rate is 25 or 29.97 fps.
     #   @return [String]
     #
     # @!attribute [rw] slow_pal

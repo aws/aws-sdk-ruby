@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.196.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.195.0 (2026-09-09)
+------------------
+
+* Feature - Updates documentation for lambda function timeout.
+
 1.194.0 (2026-09-01)
 ------------------
 

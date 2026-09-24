@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.395.0 (2026-09-21)
+------------------
+
+* Feature - Add support for r6i, m8i, c8i, r8i instance types in Training and Processing
+
+1.394.0 (2026-09-18)
+------------------
+
+* Feature - Adds support for the hub content resource in SageMaker Search.
+
+1.393.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.392.0 (2026-09-10)
+------------------
+
+* Feature - This release adds the ability for customers to attach customer owned Elastic Network Interfaces (ENIs) to HyperPod cluster nodes.
+
+1.391.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.390.0 (2026-09-08)
 ------------------
 

@@ -2009,6 +2009,7 @@ module Aws
         def created_ruleset_name: () -> ::String
         def data_quality_security_configuration: () -> ::String
         def additional_run_options: () -> Types::DataQualityRuleRecommendationRunAdditionalRunOptions
+        def recommendation_mode: () -> ("BASIC" | "ADVANCED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_data_quality_rule_recommendation_run-instance_method
       def get_data_quality_rule_recommendation_run: (
@@ -3306,6 +3307,24 @@ module Aws
                                                 ) -> _ListIntegrationResourcePropertiesResponseSuccess
                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIntegrationResourcePropertiesResponseSuccess
 
+      interface _ListIntegrationTablePropertiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIntegrationTablePropertiesResponse]
+        def integration_table_properties_list: () -> ::Array[Types::IntegrationTableProperties]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#list_integration_table_properties-instance_method
+      def list_integration_table_properties: (
+                                               ?marker: ::String,
+                                               ?filters: Array[
+                                                 {
+                                                   name: ::String?,
+                                                   values: Array[::String]?
+                                                 }
+                                               ],
+                                               ?max_records: ::Integer
+                                             ) -> _ListIntegrationTablePropertiesResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIntegrationTablePropertiesResponseSuccess
+
       interface _ListIterableFormsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListIterableFormsResponse]
         def items: () -> ::Array[Types::IterableFormListItem]
@@ -4024,7 +4043,8 @@ module Aws
                                                         ?client_token: ::String,
                                                         ?additional_run_options: {
                                                           custom_log_group_prefix: ::String?
-                                                        }
+                                                        },
+                                                        ?recommendation_mode: ("BASIC" | "ADVANCED")
                                                       ) -> _StartDataQualityRuleRecommendationRunResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDataQualityRuleRecommendationRunResponseSuccess
 

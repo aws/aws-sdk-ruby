@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2026-09-23)
+------------------
+
+* Feature - Added the ListBillingViewSegments API, which returns billing view segment information for a specified billing view ARN and time range. This API enables customers and integrated tools to programmatically determine the billing context of their accounts.
+
+1.33.0 (2026-09-14)
+------------------
+
+* Feature - Increased the maximum number of services returned in the supportEligibleSpendByService field of ListEnterpriseSupportLinkedAccountCharges
+
+1.32.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.30.0 (2026-07-31)
 ------------------
 

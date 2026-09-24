@@ -404,6 +404,7 @@ module Aws::CodeDeploy
       attr_accessor load_balancer_info: Types::LoadBalancerInfo
       attr_accessor additional_deployment_status_info: ::String
       attr_accessor file_exists_behavior: ("DISALLOW" | "OVERWRITE" | "RETAIN")
+      attr_accessor deployment_mode: ("STANDARD" | "RESTART")
       attr_accessor deployment_status_messages: ::Array[::String]
       attr_accessor compute_platform: ("Server" | "Lambda" | "ECS")
       attr_accessor external_id: ::String

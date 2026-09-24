@@ -54,6 +54,7 @@ module Aws::QConnect
     ActivateMessageTemplateRequest = Shapes::StructureShape.new(name: 'ActivateMessageTemplateRequest')
     ActivateMessageTemplateResponse = Shapes::StructureShape.new(name: 'ActivateMessageTemplateResponse')
     AgentAttributes = Shapes::StructureShape.new(name: 'AgentAttributes')
+    AgentTarget = Shapes::UnionShape.new(name: 'AgentTarget')
     AmazonConnectGuideAssociationData = Shapes::StructureShape.new(name: 'AmazonConnectGuideAssociationData')
     AndConditions = Shapes::ListShape.new(name: 'AndConditions')
     Annotation = Shapes::StructureShape.new(name: 'Annotation')
@@ -166,6 +167,7 @@ module Aws::QConnect
     DataSummaryList = Shapes::ListShape.new(name: 'DataSummaryList')
     DeactivateMessageTemplateRequest = Shapes::StructureShape.new(name: 'DeactivateMessageTemplateRequest')
     DeactivateMessageTemplateResponse = Shapes::StructureShape.new(name: 'DeactivateMessageTemplateResponse')
+    DelegateAgentConfiguration = Shapes::StructureShape.new(name: 'DelegateAgentConfiguration')
     DeleteAIAgentRequest = Shapes::StructureShape.new(name: 'DeleteAIAgentRequest')
     DeleteAIAgentResponse = Shapes::StructureShape.new(name: 'DeleteAIAgentResponse')
     DeleteAIAgentVersionRequest = Shapes::StructureShape.new(name: 'DeleteAIAgentVersionRequest')
@@ -300,6 +302,7 @@ module Aws::QConnect
     GuardrailWordConfig = Shapes::StructureShape.new(name: 'GuardrailWordConfig')
     GuardrailWordText = Shapes::StringShape.new(name: 'GuardrailWordText')
     GuardrailWordsConfig = Shapes::ListShape.new(name: 'GuardrailWordsConfig')
+    HandoffAgentConfiguration = Shapes::StructureShape.new(name: 'HandoffAgentConfiguration')
     Headers = Shapes::MapShape.new(name: 'Headers')
     HierarchicalChunkingConfiguration = Shapes::StructureShape.new(name: 'HierarchicalChunkingConfiguration')
     HierarchicalChunkingConfigurationOverlapTokensInteger = Shapes::IntegerShape.new(name: 'HierarchicalChunkingConfigurationOverlapTokensInteger')
@@ -317,6 +320,7 @@ module Aws::QConnect
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntentDetectedDataDetails = Shapes::StructureShape.new(name: 'IntentDetectedDataDetails')
     IntentInputData = Shapes::StructureShape.new(name: 'IntentInputData')
+    InteractionMode = Shapes::StringShape.new(name: 'InteractionMode')
     JSONDocument = Shapes::DocumentShape.new(name: 'JSONDocument', document: true)
     KnowledgeBaseAssociationConfigurationData = Shapes::StructureShape.new(name: 'KnowledgeBaseAssociationConfigurationData')
     KnowledgeBaseAssociationData = Shapes::StructureShape.new(name: 'KnowledgeBaseAssociationData')
@@ -416,6 +420,10 @@ module Aws::QConnect
     ModelLifecycle = Shapes::StringShape.new(name: 'ModelLifecycle')
     ModelSummary = Shapes::StructureShape.new(name: 'ModelSummary')
     ModelSummaryList = Shapes::ListShape.new(name: 'ModelSummaryList')
+    MultiAgentConfiguration = Shapes::UnionShape.new(name: 'MultiAgentConfiguration')
+    MultiAgentConfigurationList = Shapes::ListShape.new(name: 'MultiAgentConfigurationList')
+    MultiAgentExampleList = Shapes::ListShape.new(name: 'MultiAgentExampleList')
+    MultiAgentInstruction = Shapes::StructureShape.new(name: 'MultiAgentInstruction')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonEmptySensitiveString = Shapes::StringShape.new(name: 'NonEmptySensitiveString')
@@ -433,6 +441,8 @@ module Aws::QConnect
     OrCondition = Shapes::UnionShape.new(name: 'OrCondition')
     OrConditions = Shapes::ListShape.new(name: 'OrConditions')
     OrchestrationAIAgentConfiguration = Shapes::StructureShape.new(name: 'OrchestrationAIAgentConfiguration')
+    OrchestrationAIAgentConfigurationInputSchemasList = Shapes::ListShape.new(name: 'OrchestrationAIAgentConfigurationInputSchemasList')
+    OrchestrationAIAgentConfigurationOutputSchemasList = Shapes::ListShape.new(name: 'OrchestrationAIAgentConfigurationOutputSchemasList')
     OrchestratorConfigurationEntry = Shapes::StructureShape.new(name: 'OrchestratorConfigurationEntry')
     OrchestratorConfigurationList = Shapes::ListShape.new(name: 'OrchestratorConfigurationList')
     Order = Shapes::StringShape.new(name: 'Order')
@@ -523,6 +533,7 @@ module Aws::QConnect
     RetrieveResponse = Shapes::StructureShape.new(name: 'RetrieveResponse')
     RetrieveResult = Shapes::StructureShape.new(name: 'RetrieveResult')
     RetrieveResultList = Shapes::ListShape.new(name: 'RetrieveResultList')
+    ReturnReason = Shapes::StringShape.new(name: 'ReturnReason')
     RuntimeSessionData = Shapes::StructureShape.new(name: 'RuntimeSessionData')
     RuntimeSessionDataList = Shapes::ListShape.new(name: 'RuntimeSessionDataList')
     RuntimeSessionDataValue = Shapes::UnionShape.new(name: 'RuntimeSessionDataValue')
@@ -888,6 +899,14 @@ module Aws::QConnect
     AgentAttributes.add_member(:first_name, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "firstName"))
     AgentAttributes.add_member(:last_name, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "lastName"))
     AgentAttributes.struct_class = Types::AgentAttributes
+
+    AgentTarget.add_member(:ai_agent_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "aiAgentId"))
+    AgentTarget.add_member(:application_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "applicationId"))
+    AgentTarget.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AgentTarget.add_member_subclass(:ai_agent_id, Types::AgentTarget::AiAgentId)
+    AgentTarget.add_member_subclass(:application_id, Types::AgentTarget::ApplicationId)
+    AgentTarget.add_member_subclass(:unknown, Types::AgentTarget::Unknown)
+    AgentTarget.struct_class = Types::AgentTarget
 
     AmazonConnectGuideAssociationData.add_member(:flow_id, Shapes::ShapeRef.new(shape: GenericArn, location_name: "flowId"))
     AmazonConnectGuideAssociationData.struct_class = Types::AmazonConnectGuideAssociationData
@@ -1463,6 +1482,10 @@ module Aws::QConnect
     DeactivateMessageTemplateResponse.add_member(:version_number, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "versionNumber"))
     DeactivateMessageTemplateResponse.struct_class = Types::DeactivateMessageTemplateResponse
 
+    DelegateAgentConfiguration.add_member(:agent_target, Shapes::ShapeRef.new(shape: AgentTarget, required: true, location_name: "agentTarget"))
+    DelegateAgentConfiguration.add_member(:instruction, Shapes::ShapeRef.new(shape: MultiAgentInstruction, location_name: "instruction"))
+    DelegateAgentConfiguration.struct_class = Types::DelegateAgentConfiguration
+
     DeleteAIAgentRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     DeleteAIAgentRequest.add_member(:ai_agent_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, required: true, location: "uri", location_name: "aiAgentId"))
     DeleteAIAgentRequest.struct_class = Types::DeleteAIAgentRequest
@@ -1857,6 +1880,12 @@ module Aws::QConnect
 
     GuardrailWordsConfig.member = Shapes::ShapeRef.new(shape: GuardrailWordConfig)
 
+    HandoffAgentConfiguration.add_member(:agent_target, Shapes::ShapeRef.new(shape: AgentTarget, required: true, location_name: "agentTarget"))
+    HandoffAgentConfiguration.add_member(:instruction, Shapes::ShapeRef.new(shape: MultiAgentInstruction, location_name: "instruction"))
+    HandoffAgentConfiguration.add_member(:audio_streaming_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "audioStreamingEnabled"))
+    HandoffAgentConfiguration.add_member(:immediate_handoff, Shapes::ShapeRef.new(shape: Boolean, location_name: "immediateHandoff"))
+    HandoffAgentConfiguration.struct_class = Types::HandoffAgentConfiguration
+
     Headers.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     Headers.value = Shapes::ShapeRef.new(shape: NonEmptyString)
 
@@ -2156,9 +2185,11 @@ module Aws::QConnect
 
     MessageData.add_member(:text, Shapes::ShapeRef.new(shape: TextMessage, location_name: "text"))
     MessageData.add_member(:tool_use_result, Shapes::ShapeRef.new(shape: ToolUseResultData, location_name: "toolUseResult"))
+    MessageData.add_member(:data, Shapes::ShapeRef.new(shape: JSONDocument, location_name: "data"))
     MessageData.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     MessageData.add_member_subclass(:text, Types::MessageData::Text)
     MessageData.add_member_subclass(:tool_use_result, Types::MessageData::ToolUseResult)
+    MessageData.add_member_subclass(:data, Types::MessageData::Data)
     MessageData.add_member_subclass(:unknown, Types::MessageData::Unknown)
     MessageData.struct_class = Types::MessageData
 
@@ -2341,6 +2372,22 @@ module Aws::QConnect
 
     ModelSummaryList.member = Shapes::ShapeRef.new(shape: ModelSummary)
 
+    MultiAgentConfiguration.add_member(:delegate_agent_configuration, Shapes::ShapeRef.new(shape: DelegateAgentConfiguration, location_name: "delegateAgentConfiguration"))
+    MultiAgentConfiguration.add_member(:handoff_agent_configuration, Shapes::ShapeRef.new(shape: HandoffAgentConfiguration, location_name: "handoffAgentConfiguration"))
+    MultiAgentConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    MultiAgentConfiguration.add_member_subclass(:delegate_agent_configuration, Types::MultiAgentConfiguration::DelegateAgentConfiguration)
+    MultiAgentConfiguration.add_member_subclass(:handoff_agent_configuration, Types::MultiAgentConfiguration::HandoffAgentConfiguration)
+    MultiAgentConfiguration.add_member_subclass(:unknown, Types::MultiAgentConfiguration::Unknown)
+    MultiAgentConfiguration.struct_class = Types::MultiAgentConfiguration
+
+    MultiAgentConfigurationList.member = Shapes::ShapeRef.new(shape: MultiAgentConfiguration)
+
+    MultiAgentExampleList.member = Shapes::ShapeRef.new(shape: String)
+
+    MultiAgentInstruction.add_member(:instruction, Shapes::ShapeRef.new(shape: String, location_name: "instruction"))
+    MultiAgentInstruction.add_member(:examples, Shapes::ShapeRef.new(shape: MultiAgentExampleList, location_name: "examples"))
+    MultiAgentInstruction.struct_class = Types::MultiAgentInstruction
+
     NoteTakingAIAgentConfiguration.add_member(:note_taking_ai_prompt_id, Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: "noteTakingAIPromptId"))
     NoteTakingAIAgentConfiguration.add_member(:note_taking_ai_guardrail_id, Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: "noteTakingAIGuardrailId"))
     NoteTakingAIAgentConfiguration.add_member(:locale, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "locale"))
@@ -2380,12 +2427,19 @@ module Aws::QConnect
 
     OrConditions.member = Shapes::ShapeRef.new(shape: OrCondition)
 
-    OrchestrationAIAgentConfiguration.add_member(:orchestration_ai_prompt_id, Shapes::ShapeRef.new(shape: UuidWithQualifier, required: true, location_name: "orchestrationAIPromptId"))
+    OrchestrationAIAgentConfiguration.add_member(:orchestration_ai_prompt_id, Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: "orchestrationAIPromptId"))
     OrchestrationAIAgentConfiguration.add_member(:orchestration_ai_guardrail_id, Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: "orchestrationAIGuardrailId"))
     OrchestrationAIAgentConfiguration.add_member(:tool_configurations, Shapes::ShapeRef.new(shape: ToolConfigurationList, location_name: "toolConfigurations"))
+    OrchestrationAIAgentConfiguration.add_member(:multi_agent_configurations, Shapes::ShapeRef.new(shape: MultiAgentConfigurationList, location_name: "multiAgentConfigurations"))
     OrchestrationAIAgentConfiguration.add_member(:connect_instance_arn, Shapes::ShapeRef.new(shape: GenericArn, location_name: "connectInstanceArn"))
     OrchestrationAIAgentConfiguration.add_member(:locale, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "locale"))
+    OrchestrationAIAgentConfiguration.add_member(:input_schemas, Shapes::ShapeRef.new(shape: OrchestrationAIAgentConfigurationInputSchemasList, location_name: "inputSchemas"))
+    OrchestrationAIAgentConfiguration.add_member(:output_schemas, Shapes::ShapeRef.new(shape: OrchestrationAIAgentConfigurationOutputSchemasList, location_name: "outputSchemas"))
     OrchestrationAIAgentConfiguration.struct_class = Types::OrchestrationAIAgentConfiguration
+
+    OrchestrationAIAgentConfigurationInputSchemasList.member = Shapes::ShapeRef.new(shape: JSONDocument)
+
+    OrchestrationAIAgentConfigurationOutputSchemasList.member = Shapes::ShapeRef.new(shape: JSONDocument)
 
     OrchestratorConfigurationEntry.add_member(:ai_agent_id, Shapes::ShapeRef.new(shape: UuidOrArnOrEitherWithQualifier, location_name: "aiAgentId"))
     OrchestratorConfigurationEntry.add_member(:orchestrator_use_case, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "orchestratorUseCase"))
@@ -2920,6 +2974,9 @@ module Aws::QConnect
     SpanAttributes.add_member(:ai_agent_version, Shapes::ShapeRef.new(shape: Integer, location_name: "aiAgentVersion"))
     SpanAttributes.add_member(:ai_agent_invoker, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "aiAgentInvoker"))
     SpanAttributes.add_member(:ai_agent_orchestrator_use_case, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "aiAgentOrchestratorUseCase"))
+    SpanAttributes.add_member(:interaction_mode, Shapes::ShapeRef.new(shape: InteractionMode, location_name: "interactionMode"))
+    SpanAttributes.add_member(:target_agent_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "targetAgentId"))
+    SpanAttributes.add_member(:return_reason, Shapes::ShapeRef.new(shape: ReturnReason, location_name: "returnReason"))
     SpanAttributes.add_member(:request_model, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestModel"))
     SpanAttributes.add_member(:request_max_tokens, Shapes::ShapeRef.new(shape: Integer, location_name: "requestMaxTokens"))
     SpanAttributes.add_member(:temperature, Shapes::ShapeRef.new(shape: SpanAttributesTemperatureFloat, location_name: "temperature"))

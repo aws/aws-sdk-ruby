@@ -460,11 +460,14 @@ module Aws::SSOAdmin
     class DescribeInstanceResponse
       attr_accessor instance_arn: ::String
       attr_accessor identity_store_id: ::String
+      attr_accessor identity_store_arn: ::String
       attr_accessor owner_account_id: ::String
       attr_accessor name: ::String
       attr_accessor created_date: ::Time
       attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "ACTIVE")
       attr_accessor status_reason: ::String
+      attr_accessor primary_region: ::String
+      attr_accessor regions: ::Array[Types::RegionMetadata]
       attr_accessor encryption_configuration_details: Types::EncryptionConfigurationDetails
       attr_accessor permission_sets_enabled: bool
       SENSITIVE: []
@@ -675,6 +678,7 @@ module Aws::SSOAdmin
     class InstanceMetadata
       attr_accessor instance_arn: ::String
       attr_accessor identity_store_id: ::String
+      attr_accessor identity_store_arn: ::String
       attr_accessor owner_account_id: ::String
       attr_accessor name: ::String
       attr_accessor created_date: ::Time

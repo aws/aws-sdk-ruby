@@ -299,6 +299,9 @@ module Aws::IoTWireless
     GetWirelessGatewayTaskResponse = Shapes::StructureShape.new(name: 'GetWirelessGatewayTaskResponse')
     GlobalIdentity = Shapes::StructureShape.new(name: 'GlobalIdentity')
     Gnss = Shapes::StructureShape.new(name: 'Gnss')
+    GnssCapture = Shapes::StructureShape.new(name: 'GnssCapture')
+    GnssCaptures = Shapes::ListShape.new(name: 'GnssCaptures')
+    GnssMultiFrame = Shapes::StructureShape.new(name: 'GnssMultiFrame')
     GnssNav = Shapes::StringShape.new(name: 'GnssNav')
     GsmList = Shapes::ListShape.new(name: 'GsmList')
     GsmLocalId = Shapes::StructureShape.new(name: 'GsmLocalId')
@@ -1310,6 +1313,7 @@ module Aws::IoTWireless
     GetPositionEstimateRequest.add_member(:cell_towers, Shapes::ShapeRef.new(shape: CellTowers, location_name: "CellTowers"))
     GetPositionEstimateRequest.add_member(:ip, Shapes::ShapeRef.new(shape: Ip, location_name: "Ip"))
     GetPositionEstimateRequest.add_member(:gnss, Shapes::ShapeRef.new(shape: Gnss, location_name: "Gnss"))
+    GetPositionEstimateRequest.add_member(:gnss_multi_frame, Shapes::ShapeRef.new(shape: GnssMultiFrame, location_name: "GnssMultiFrame"))
     GetPositionEstimateRequest.add_member(:timestamp, Shapes::ShapeRef.new(shape: CreationDate, location_name: "Timestamp"))
     GetPositionEstimateRequest.add_member(:advanced_configuration, Shapes::ShapeRef.new(shape: AdvancedConfiguration, location_name: "AdvancedConfiguration"))
     GetPositionEstimateRequest.struct_class = Types::GetPositionEstimateRequest
@@ -1483,6 +1487,19 @@ module Aws::IoTWireless
     Gnss.add_member(:assist_altitude, Shapes::ShapeRef.new(shape: Coordinate, location_name: "AssistAltitude"))
     Gnss.add_member(:use_2_d_solver, Shapes::ShapeRef.new(shape: Use2DSolver, location_name: "Use2DSolver"))
     Gnss.struct_class = Types::Gnss
+
+    GnssCapture.add_member(:payload, Shapes::ShapeRef.new(shape: GnssNav, required: true, location_name: "Payload"))
+    GnssCapture.add_member(:capture_time, Shapes::ShapeRef.new(shape: GPST, location_name: "CaptureTime"))
+    GnssCapture.struct_class = Types::GnssCapture
+
+    GnssCaptures.member = Shapes::ShapeRef.new(shape: GnssCapture)
+
+    GnssMultiFrame.add_member(:captures, Shapes::ShapeRef.new(shape: GnssCaptures, required: true, location_name: "Captures"))
+    GnssMultiFrame.add_member(:capture_time_accuracy, Shapes::ShapeRef.new(shape: CaptureTimeAccuracy, location_name: "CaptureTimeAccuracy"))
+    GnssMultiFrame.add_member(:assist_position, Shapes::ShapeRef.new(shape: AssistPosition, location_name: "AssistPosition"))
+    GnssMultiFrame.add_member(:assist_altitude, Shapes::ShapeRef.new(shape: Coordinate, location_name: "AssistAltitude"))
+    GnssMultiFrame.add_member(:use_2_d_solver, Shapes::ShapeRef.new(shape: Use2DSolver, location_name: "Use2DSolver"))
+    GnssMultiFrame.struct_class = Types::GnssMultiFrame
 
     GsmList.member = Shapes::ShapeRef.new(shape: GsmObj)
 

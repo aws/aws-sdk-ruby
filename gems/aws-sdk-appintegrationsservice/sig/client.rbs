@@ -121,7 +121,11 @@ module Aws
                                   allow: Array[::String]?,
                                   sandbox: Array[::String]?
                                 },
-                                ?application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER")
+                                ?application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER" | "A2A_SERVER"),
+                                ?auth_config: {
+                                  auth_type: ("API_KEY")?,
+                                  credential_provider_identifier: ::String?
+                                }
                               ) -> _CreateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
 
@@ -240,7 +244,8 @@ module Aws
         def initialization_timeout: () -> ::Integer
         def application_config: () -> Types::ApplicationConfig
         def iframe_config: () -> Types::IframeConfig
-        def application_type: () -> ("STANDARD" | "SERVICE" | "MCP_SERVER")
+        def application_type: () -> ("STANDARD" | "SERVICE" | "MCP_SERVER" | "A2A_SERVER")
+        def auth_config: () -> Types::AuthConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#get_application-instance_method
       def get_application: (
@@ -304,7 +309,7 @@ module Aws
       def list_applications: (
                                ?next_token: ::String,
                                ?max_results: ::Integer,
-                               ?application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER")
+                               ?application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER" | "A2A_SERVER")
                              ) -> _ListApplicationsResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationsResponseSuccess
 
@@ -427,7 +432,11 @@ module Aws
                                   allow: Array[::String]?,
                                   sandbox: Array[::String]?
                                 },
-                                ?application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER")
+                                ?application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER" | "A2A_SERVER"),
+                                ?auth_config: {
+                                  auth_type: ("API_KEY")?,
+                                  credential_provider_identifier: ::String?
+                                }
                               ) -> _UpdateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess
 

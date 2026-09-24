@@ -266,6 +266,9 @@
   "CloudWatchLogs": {
     "models": "logs/2014-03-28"
   },
+  "CloudWatchOmni": {
+    "models": "cloudwatchomni/2025-01-01"
+  },
   "CloudWatchRUM": {
     "models": "rum/2018-05-10"
   },
@@ -901,6 +904,9 @@
   },
   "NetworkMonitor": {
     "models": "networkmonitor/2023-08-01"
+  },
+  "NetworkSecurityManager": {
+    "models": "network-security-manager/2025-10-30"
   },
   "Notifications": {
     "models": "notifications/2018-05-10"

@@ -34,6 +34,10 @@ module Aws::Batch
     CRUpdateAllocationStrategy = Shapes::StringShape.new(name: 'CRUpdateAllocationStrategy')
     CancelJobRequest = Shapes::StructureShape.new(name: 'CancelJobRequest')
     CancelJobResponse = Shapes::StructureShape.new(name: 'CancelJobResponse')
+    CancelJobsErrorDetail = Shapes::StructureShape.new(name: 'CancelJobsErrorDetail')
+    CancelJobsErrorDetailList = Shapes::ListShape.new(name: 'CancelJobsErrorDetailList')
+    CancelJobsRequest = Shapes::StructureShape.new(name: 'CancelJobsRequest')
+    CancelJobsResponse = Shapes::StructureShape.new(name: 'CancelJobsResponse')
     CapacityLimit = Shapes::StructureShape.new(name: 'CapacityLimit')
     CapacityLimits = Shapes::ListShape.new(name: 'CapacityLimits')
     CapacityReservationRequest = Shapes::StructureShape.new(name: 'CapacityReservationRequest')
@@ -357,8 +361,16 @@ module Aws::Batch
     TaskPropertiesOverride = Shapes::StructureShape.new(name: 'TaskPropertiesOverride')
     TerminateJobRequest = Shapes::StructureShape.new(name: 'TerminateJobRequest')
     TerminateJobResponse = Shapes::StructureShape.new(name: 'TerminateJobResponse')
+    TerminateJobsErrorDetail = Shapes::StructureShape.new(name: 'TerminateJobsErrorDetail')
+    TerminateJobsErrorDetailList = Shapes::ListShape.new(name: 'TerminateJobsErrorDetailList')
+    TerminateJobsRequest = Shapes::StructureShape.new(name: 'TerminateJobsRequest')
+    TerminateJobsResponse = Shapes::StructureShape.new(name: 'TerminateJobsResponse')
     TerminateServiceJobRequest = Shapes::StructureShape.new(name: 'TerminateServiceJobRequest')
     TerminateServiceJobResponse = Shapes::StructureShape.new(name: 'TerminateServiceJobResponse')
+    TerminateServiceJobsErrorDetail = Shapes::StructureShape.new(name: 'TerminateServiceJobsErrorDetail')
+    TerminateServiceJobsErrorDetailList = Shapes::ListShape.new(name: 'TerminateServiceJobsErrorDetailList')
+    TerminateServiceJobsRequest = Shapes::StructureShape.new(name: 'TerminateServiceJobsRequest')
+    TerminateServiceJobsResponse = Shapes::StructureShape.new(name: 'TerminateServiceJobsResponse')
     Tmpfs = Shapes::StructureShape.new(name: 'Tmpfs')
     TmpfsList = Shapes::ListShape.new(name: 'TmpfsList')
     Ulimit = Shapes::StructureShape.new(name: 'Ulimit')
@@ -437,6 +449,21 @@ module Aws::Batch
     CancelJobRequest.struct_class = Types::CancelJobRequest
 
     CancelJobResponse.struct_class = Types::CancelJobResponse
+
+    CancelJobsErrorDetail.add_member(:job, Shapes::ShapeRef.new(shape: String, required: true, location_name: "job"))
+    CancelJobsErrorDetail.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    CancelJobsErrorDetail.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    CancelJobsErrorDetail.struct_class = Types::CancelJobsErrorDetail
+
+    CancelJobsErrorDetailList.member = Shapes::ShapeRef.new(shape: CancelJobsErrorDetail)
+
+    CancelJobsRequest.add_member(:jobs, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "jobs"))
+    CancelJobsRequest.add_member(:reason, Shapes::ShapeRef.new(shape: String, required: true, location_name: "reason"))
+    CancelJobsRequest.struct_class = Types::CancelJobsRequest
+
+    CancelJobsResponse.add_member(:successful, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "successful"))
+    CancelJobsResponse.add_member(:errors, Shapes::ShapeRef.new(shape: CancelJobsErrorDetailList, required: true, location_name: "errors"))
+    CancelJobsResponse.struct_class = Types::CancelJobsResponse
 
     CapacityLimit.add_member(:max_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "maxCapacity"))
     CapacityLimit.add_member(:capacity_unit, Shapes::ShapeRef.new(shape: String, location_name: "capacityUnit"))
@@ -1285,6 +1312,8 @@ module Aws::Batch
     JobSummary.add_member(:array_properties, Shapes::ShapeRef.new(shape: ArrayPropertiesSummary, location_name: "arrayProperties"))
     JobSummary.add_member(:node_properties, Shapes::ShapeRef.new(shape: NodePropertiesSummary, location_name: "nodeProperties"))
     JobSummary.add_member(:job_definition, Shapes::ShapeRef.new(shape: String, location_name: "jobDefinition"))
+    JobSummary.add_member(:is_cancelled, Shapes::ShapeRef.new(shape: Boolean, location_name: "isCancelled"))
+    JobSummary.add_member(:is_terminated, Shapes::ShapeRef.new(shape: Boolean, location_name: "isTerminated"))
     JobSummary.struct_class = Types::JobSummary
 
     JobSummaryList.member = Shapes::ShapeRef.new(shape: JobSummary)
@@ -1712,6 +1741,7 @@ module Aws::Batch
     ServiceJobSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     ServiceJobSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: Long, location_name: "startedAt"))
     ServiceJobSummary.add_member(:stopped_at, Shapes::ShapeRef.new(shape: Long, location_name: "stoppedAt"))
+    ServiceJobSummary.add_member(:is_terminated, Shapes::ShapeRef.new(shape: Boolean, location_name: "isTerminated"))
     ServiceJobSummary.struct_class = Types::ServiceJobSummary
 
     ServiceJobSummaryList.member = Shapes::ShapeRef.new(shape: ServiceJobSummary)
@@ -1855,11 +1885,41 @@ module Aws::Batch
 
     TerminateJobResponse.struct_class = Types::TerminateJobResponse
 
+    TerminateJobsErrorDetail.add_member(:job, Shapes::ShapeRef.new(shape: String, required: true, location_name: "job"))
+    TerminateJobsErrorDetail.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    TerminateJobsErrorDetail.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    TerminateJobsErrorDetail.struct_class = Types::TerminateJobsErrorDetail
+
+    TerminateJobsErrorDetailList.member = Shapes::ShapeRef.new(shape: TerminateJobsErrorDetail)
+
+    TerminateJobsRequest.add_member(:jobs, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "jobs"))
+    TerminateJobsRequest.add_member(:reason, Shapes::ShapeRef.new(shape: String, required: true, location_name: "reason"))
+    TerminateJobsRequest.struct_class = Types::TerminateJobsRequest
+
+    TerminateJobsResponse.add_member(:successful, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "successful"))
+    TerminateJobsResponse.add_member(:errors, Shapes::ShapeRef.new(shape: TerminateJobsErrorDetailList, required: true, location_name: "errors"))
+    TerminateJobsResponse.struct_class = Types::TerminateJobsResponse
+
     TerminateServiceJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobId"))
     TerminateServiceJobRequest.add_member(:reason, Shapes::ShapeRef.new(shape: String, required: true, location_name: "reason"))
     TerminateServiceJobRequest.struct_class = Types::TerminateServiceJobRequest
 
     TerminateServiceJobResponse.struct_class = Types::TerminateServiceJobResponse
+
+    TerminateServiceJobsErrorDetail.add_member(:job, Shapes::ShapeRef.new(shape: String, required: true, location_name: "job"))
+    TerminateServiceJobsErrorDetail.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    TerminateServiceJobsErrorDetail.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    TerminateServiceJobsErrorDetail.struct_class = Types::TerminateServiceJobsErrorDetail
+
+    TerminateServiceJobsErrorDetailList.member = Shapes::ShapeRef.new(shape: TerminateServiceJobsErrorDetail)
+
+    TerminateServiceJobsRequest.add_member(:jobs, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "jobs"))
+    TerminateServiceJobsRequest.add_member(:reason, Shapes::ShapeRef.new(shape: String, required: true, location_name: "reason"))
+    TerminateServiceJobsRequest.struct_class = Types::TerminateServiceJobsRequest
+
+    TerminateServiceJobsResponse.add_member(:successful, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "successful"))
+    TerminateServiceJobsResponse.add_member(:errors, Shapes::ShapeRef.new(shape: TerminateServiceJobsErrorDetailList, required: true, location_name: "errors"))
+    TerminateServiceJobsResponse.struct_class = Types::TerminateServiceJobsResponse
 
     Tmpfs.add_member(:container_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "containerPath"))
     Tmpfs.add_member(:size, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "size"))
@@ -1999,6 +2059,16 @@ module Aws::Batch
         o.http_request_uri = "/v1/canceljob"
         o.input = Shapes::ShapeRef.new(shape: CancelJobRequest)
         o.output = Shapes::ShapeRef.new(shape: CancelJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+      end)
+
+      api.add_operation(:cancel_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/canceljobs"
+        o.input = Shapes::ShapeRef.new(shape: CancelJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
       end)
@@ -2413,12 +2483,32 @@ module Aws::Batch
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
       end)
 
+      api.add_operation(:terminate_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TerminateJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/terminatejobs"
+        o.input = Shapes::ShapeRef.new(shape: TerminateJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: TerminateJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+      end)
+
       api.add_operation(:terminate_service_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TerminateServiceJob"
         o.http_method = "POST"
         o.http_request_uri = "/v1/terminateservicejob"
         o.input = Shapes::ShapeRef.new(shape: TerminateServiceJobRequest)
         o.output = Shapes::ShapeRef.new(shape: TerminateServiceJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+      end)
+
+      api.add_operation(:terminate_service_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TerminateServiceJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/terminateservicejobs"
+        o.input = Shapes::ShapeRef.new(shape: TerminateServiceJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: TerminateServiceJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
       end)

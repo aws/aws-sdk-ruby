@@ -3289,6 +3289,27 @@ module Aws::ECS
     #   service. The default value for an express service is 512 MiB.
     #   @return [String]
     #
+    # @!attribute [rw] cpu_architecture
+    #   The CPU architecture that the tasks in the Express service run on.
+    #   Amazon ECS applies this value to the task definition revision that
+    #   it registers for the service. If you don't specify a value, the
+    #   default is `X86_64`.
+    #
+    #   Valid values:
+    #
+    #   * `X86_64` - The x86 64-bit architecture.
+    #
+    #   * `ARM64` - The 64-bit ARM architecture.
+    #
+    #   Make sure that the container image that you specify supports the
+    #   architecture that you choose. The operating system family for an
+    #   Express service is always `LINUX`.
+    #
+    #   You can't specify `cpuArchitecture` when you also specify
+    #   `taskDefinitionArn`, because this value applies only to a task
+    #   definition that Amazon ECS registers on your behalf.
+    #   @return [String]
+    #
     # @!attribute [rw] scaling_target
     #   The auto-scaling configuration for the Express service. This defines
     #   how the service automatically adjusts the number of running tasks
@@ -3317,8 +3338,8 @@ module Aws::ECS
     #   task definition must also have `FARGATE` compatibility.
     #
     #   If you provide a task definition ARN, you cannot also specify
-    #   `primaryContainer`, `executionRoleArn`, `taskRoleArn`, `cpu`, or
-    #   `memory`.
+    #   `primaryContainer`, `executionRoleArn`, `taskRoleArn`, `cpu`,
+    #   `memory`, or `cpuArchitecture`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateExpressGatewayServiceRequest AWS API Documentation
@@ -3334,6 +3355,7 @@ module Aws::ECS
       :network_configuration,
       :cpu,
       :memory,
+      :cpu_architecture,
       :scaling_target,
       :tags,
       :task_definition_arn)
@@ -8027,6 +8049,26 @@ module Aws::ECS
     #   The memory allocation for tasks in this service revision.
     #   @return [String]
     #
+    # @!attribute [rw] cpu_architecture
+    #   The CPU architecture that the tasks in this service revision run on.
+    #   This is the architecture from the task definition that the service
+    #   revision uses, so it reflects the default or the previously
+    #   configured architecture when the request that created the revision
+    #   didn't specify one.
+    #
+    #   Valid values:
+    #
+    #   * `X86_64` - The x86 64-bit architecture.
+    #
+    #   * `ARM64` - The 64-bit ARM architecture.
+    #
+    #   This value isn't returned when the task definition for the service
+    #   revision doesn't specify a runtime platform. Because the
+    #   architecture comes from each service revision's own task
+    #   definition, revisions of the same service can report different
+    #   architectures.
+    #   @return [String]
+    #
     # @!attribute [rw] network_configuration
     #   The network configuration for tasks in this service revision.
     #   @return [Types::ExpressGatewayServiceNetworkConfiguration]
@@ -8060,6 +8102,7 @@ module Aws::ECS
       :task_definition_arn,
       :cpu,
       :memory,
+      :cpu_architecture,
       :network_configuration,
       :health_check_path,
       :primary_container,
@@ -18964,6 +19007,28 @@ module Aws::ECS
     #   The amount of memory (in MiB) used by the task.
     #   @return [String]
     #
+    # @!attribute [rw] cpu_architecture
+    #   The CPU architecture that the tasks in the Express service run on.
+    #   Amazon ECS applies this value to the task definition revision that
+    #   it registers for the service. If you don't specify a value, the
+    #   service keeps the architecture that it currently runs on.
+    #
+    #   Valid values:
+    #
+    #   * `X86_64` - The x86 64-bit architecture.
+    #
+    #   * `ARM64` - The 64-bit ARM architecture.
+    #
+    #   Changing the architecture starts a new deployment that replaces the
+    #   running tasks. Make sure that the container image that the service
+    #   uses supports the architecture that you choose. The operating system
+    #   family for an Express service is always `LINUX`.
+    #
+    #   You can't specify `cpuArchitecture` when you also specify
+    #   `taskDefinitionArn`, because this value applies only to a task
+    #   definition that Amazon ECS registers on your behalf.
+    #   @return [String]
+    #
     # @!attribute [rw] scaling_target
     #   The auto-scaling configuration for the Express service.
     #   @return [Types::ExpressGatewayScalingTarget]
@@ -18979,8 +19044,8 @@ module Aws::ECS
     #   task definition must also have `FARGATE` compatibility.
     #
     #   If you provide a task definition ARN, you cannot also specify
-    #   `primaryContainer`, `executionRoleArn`, `taskRoleArn`, `cpu`, or
-    #   `memory`.
+    #   `primaryContainer`, `executionRoleArn`, `taskRoleArn`, `cpu`,
+    #   `memory`, or `cpuArchitecture`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateExpressGatewayServiceRequest AWS API Documentation
@@ -18994,6 +19059,7 @@ module Aws::ECS
       :network_configuration,
       :cpu,
       :memory,
+      :cpu_architecture,
       :scaling_target,
       :task_definition_arn)
       SENSITIVE = []

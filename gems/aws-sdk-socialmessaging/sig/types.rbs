@@ -31,6 +31,11 @@ module Aws::SocialMessaging
       SENSITIVE: []
     end
 
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class CreateWhatsAppDatasetInput
       attr_accessor id: ::String
       SENSITIVE: []
@@ -166,6 +171,7 @@ module Aws::SocialMessaging
     class GetLinkedWhatsAppBusinessAccountPhoneNumberOutput
       attr_accessor phone_number: Types::WhatsAppPhoneNumberDetail
       attr_accessor linked_whats_app_business_account_id: ::String
+      attr_accessor call_settings: Types::WhatsAppCallSettings
       SENSITIVE: []
     end
 
@@ -177,6 +183,19 @@ module Aws::SocialMessaging
     class GetWhatsAppBusinessPublicKeyOutput
       attr_accessor business_public_key: ::String
       attr_accessor business_public_key_signature_status: ::String
+      SENSITIVE: []
+    end
+
+    class GetWhatsAppCallPermissionInput
+      attr_accessor origination_phone_number_id: ::String
+      attr_accessor destination_phone_number: ::String
+      attr_accessor end_user_bsuid: ::String
+      SENSITIVE: [:destination_phone_number, :end_user_bsuid]
+    end
+
+    class GetWhatsAppCallPermissionOutput
+      attr_accessor permission: Types::WhatsAppCallPermission
+      attr_accessor actions: ::Array[Types::WhatsAppCallPermissionAction]
       SENSITIVE: []
     end
 
@@ -533,6 +552,18 @@ module Aws::SocialMessaging
       SENSITIVE: []
     end
 
+    class SendWhatsAppCallEventInput
+      attr_accessor origination_phone_number_id: ::String
+      attr_accessor meta_api_version: ::String
+      attr_accessor call_event: ::String
+      SENSITIVE: [:call_event]
+    end
+
+    class SendWhatsAppCallEventOutput
+      attr_accessor call_id: ::String
+      SENSITIVE: []
+    end
+
     class SendWhatsAppConversionEventInput
       attr_accessor id: ::String
       attr_accessor dataset_id: ::String
@@ -597,6 +628,17 @@ module Aws::SocialMessaging
 
     class UntagResourceOutput
       attr_accessor status_code: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput
+      attr_accessor id: ::String
+      attr_accessor call_settings: Types::WhatsAppCallSettings
+      SENSITIVE: []
+    end
+
+    class UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput
+      attr_accessor phone_number_id: ::String
       SENSITIVE: []
     end
 
@@ -666,6 +708,50 @@ module Aws::SocialMessaging
       SENSITIVE: []
     end
 
+    class WhatsAppCallHours
+      attr_accessor enabled: bool
+      attr_accessor timezone: ::String
+      attr_accessor weekly_operating_hours: ::Array[Types::WhatsAppWeeklyOperatingHoursEntry]
+      attr_accessor holiday_schedule: ::Array[Types::WhatsAppHolidayScheduleEntry]
+      SENSITIVE: []
+    end
+
+    class WhatsAppCallPermission
+      attr_accessor status: ::String
+      attr_accessor expiration_time: ::Time
+      SENSITIVE: []
+    end
+
+    class WhatsAppCallPermissionAction
+      attr_accessor action_name: ::String
+      attr_accessor can_perform_action: bool
+      attr_accessor limits: ::Array[Types::WhatsAppCallPermissionLimit]
+      SENSITIVE: []
+    end
+
+    class WhatsAppCallPermissionLimit
+      attr_accessor time_period: ::String
+      attr_accessor max_allowed: ::Integer
+      attr_accessor current_usage: ::Integer
+      attr_accessor limit_expiration_time: ::Time
+      SENSITIVE: []
+    end
+
+    class WhatsAppCallSettings
+      attr_accessor call_enabled: bool
+      attr_accessor call_hours: Types::WhatsAppCallHours
+      attr_accessor call_icon_visibility: ::String
+      attr_accessor callback_permission_status: ::String
+      SENSITIVE: []
+    end
+
+    class WhatsAppHolidayScheduleEntry
+      attr_accessor date: ::String
+      attr_accessor start_time: Types::WhatsAppTimeOfDay
+      attr_accessor end_time: Types::WhatsAppTimeOfDay
+      SENSITIVE: []
+    end
+
     class WhatsAppPhoneNumberDetail
       attr_accessor arn: ::String
       attr_accessor phone_number: ::String
@@ -708,6 +794,19 @@ module Aws::SocialMessaging
       attr_accessor associate_in_progress_token: ::String
       attr_accessor linked_accounts_with_incomplete_setup: ::Hash[::String, Types::LinkedWhatsAppBusinessAccountIdMetaData]
       SENSITIVE: [:associate_in_progress_token]
+    end
+
+    class WhatsAppTimeOfDay
+      attr_accessor hours: ::Integer
+      attr_accessor minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class WhatsAppWeeklyOperatingHoursEntry
+      attr_accessor day_of_week: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")
+      attr_accessor open_time: Types::WhatsAppTimeOfDay
+      attr_accessor close_time: Types::WhatsAppTimeOfDay
+      SENSITIVE: []
     end
   end
 end

@@ -1016,6 +1016,7 @@ module Aws
                               open_ai_model_config: {
                                 model_id: ::String,
                                 api_key_arn: ::String,
+                                api_base: ::String?,
                                 max_tokens: ::Integer?,
                                 temperature: ::Float?,
                                 top_p: ::Float?,
@@ -1443,7 +1444,13 @@ module Aws
                                           time_range: {
                                             start_time: ::Time?,
                                             end_time: ::Time?
-                                          }?
+                                          }?,
+                                          session_trace_ids: Array[
+                                            {
+                                              session_id: ::String,
+                                              trace_ids: Array[::String]
+                                            }
+                                          ]?
                                         }?
                                       }?,
                                       online_evaluation_config_source: {

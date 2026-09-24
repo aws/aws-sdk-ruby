@@ -38,7 +38,13 @@ module Aws::AppIntegrationsService
       attr_accessor created_time: ::Time
       attr_accessor last_modified_time: ::Time
       attr_accessor is_service: bool
-      attr_accessor application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER")
+      attr_accessor application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER" | "A2A_SERVER")
+      SENSITIVE: []
+    end
+
+    class AuthConfig
+      attr_accessor auth_type: ("API_KEY")
+      attr_accessor credential_provider_identifier: ::String
       SENSITIVE: []
     end
 
@@ -66,7 +72,8 @@ module Aws::AppIntegrationsService
       attr_accessor initialization_timeout: ::Integer
       attr_accessor application_config: Types::ApplicationConfig
       attr_accessor iframe_config: Types::IframeConfig
-      attr_accessor application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER")
+      attr_accessor application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER" | "A2A_SERVER")
+      attr_accessor auth_config: Types::AuthConfig
       SENSITIVE: []
     end
 
@@ -249,7 +256,8 @@ module Aws::AppIntegrationsService
       attr_accessor initialization_timeout: ::Integer
       attr_accessor application_config: Types::ApplicationConfig
       attr_accessor iframe_config: Types::IframeConfig
-      attr_accessor application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER")
+      attr_accessor application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER" | "A2A_SERVER")
+      attr_accessor auth_config: Types::AuthConfig
       SENSITIVE: []
     end
 
@@ -325,7 +333,7 @@ module Aws::AppIntegrationsService
     class ListApplicationsRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
-      attr_accessor application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER")
+      attr_accessor application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER" | "A2A_SERVER")
       SENSITIVE: []
     end
 
@@ -471,7 +479,8 @@ module Aws::AppIntegrationsService
       attr_accessor initialization_timeout: ::Integer
       attr_accessor application_config: Types::ApplicationConfig
       attr_accessor iframe_config: Types::IframeConfig
-      attr_accessor application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER")
+      attr_accessor application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER" | "A2A_SERVER")
+      attr_accessor auth_config: Types::AuthConfig
       SENSITIVE: []
     end
 

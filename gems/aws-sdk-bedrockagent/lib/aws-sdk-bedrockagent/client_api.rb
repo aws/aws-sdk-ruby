@@ -992,8 +992,9 @@ module Aws::BedrockAgent
 
     BedrockEmbeddingModelConfiguration.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "dimensions"))
     BedrockEmbeddingModelConfiguration.add_member(:embedding_data_type, Shapes::ShapeRef.new(shape: EmbeddingDataType, location_name: "embeddingDataType"))
-    BedrockEmbeddingModelConfiguration.add_member(:audio, Shapes::ShapeRef.new(shape: AudioConfigurations, location_name: "audio"))
-    BedrockEmbeddingModelConfiguration.add_member(:video, Shapes::ShapeRef.new(shape: VideoConfigurations, location_name: "video"))
+    BedrockEmbeddingModelConfiguration.add_member(:audio, Shapes::ShapeRef.new(shape: AudioConfigurations, deprecated: true, location_name: "audio", metadata: {"deprecatedMessage" => "Use Managed Knowledge Base's modelConfiguration field. https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html", "deprecatedSince" => "2026-09-01"}))
+    BedrockEmbeddingModelConfiguration.add_member(:video, Shapes::ShapeRef.new(shape: VideoConfigurations, deprecated: true, location_name: "video", metadata: {"deprecatedMessage" => "Use Managed Knowledge Base's modelConfiguration field. https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html", "deprecatedSince" => "2026-09-01"}))
+    BedrockEmbeddingModelConfiguration.add_member(:model_configuration, Shapes::ShapeRef.new(shape: Document, location_name: "modelConfiguration"))
     BedrockEmbeddingModelConfiguration.struct_class = Types::BedrockEmbeddingModelConfiguration
 
     BedrockFoundationModelConfiguration.add_member(:model_arn, Shapes::ShapeRef.new(shape: BedrockModelArn, required: true, location_name: "modelArn"))
@@ -2200,6 +2201,7 @@ module Aws::BedrockAgent
     ManagedKnowledgeBaseConfiguration.add_member(:embedding_model_arn, Shapes::ShapeRef.new(shape: BedrockEmbeddingModelArn, location_name: "embeddingModelArn"))
     ManagedKnowledgeBaseConfiguration.add_member(:embedding_model_configuration, Shapes::ShapeRef.new(shape: EmbeddingModelConfiguration, location_name: "embeddingModelConfiguration"))
     ManagedKnowledgeBaseConfiguration.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "serverSideEncryptionConfiguration"))
+    ManagedKnowledgeBaseConfiguration.add_member(:supplemental_data_storage_configuration, Shapes::ShapeRef.new(shape: SupplementalDataStorageConfiguration, location_name: "supplementalDataStorageConfiguration"))
     ManagedKnowledgeBaseConfiguration.struct_class = Types::ManagedKnowledgeBaseConfiguration
 
     ManagedKnowledgeBaseConnectorConfiguration.add_member(:deletion_protection_configuration, Shapes::ShapeRef.new(shape: DeletionProtectionConfiguration, location_name: "deletionProtectionConfiguration"))

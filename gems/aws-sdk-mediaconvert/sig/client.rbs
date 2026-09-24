@@ -226,6 +226,9 @@ module Aws
                           ]?,
                           kantar_watermark: Params::kantar_watermark_settings?,
                           motion_image_inserter: Params::motion_image_inserter?,
+                          motion_image_inserters: Array[
+                            Params::motion_image_inserter
+                          ]?,
                           nielsen_configuration: {
                             breakout_code: ::Integer?,
                             distributor_id: ::String?

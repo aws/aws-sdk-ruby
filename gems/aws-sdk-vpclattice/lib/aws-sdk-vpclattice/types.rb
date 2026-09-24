@@ -127,6 +127,21 @@ module Aws::VPCLattice
       include Aws::Structure
     end
 
+    # Describes a CIDR resource, which represents a network segment as one
+    # or more CIDR ranges.
+    #
+    # @!attribute [rw] cidr_ranges
+    #   The CIDR ranges of the network segment, for example, `10.0.0.0/16`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CidrResource AWS API Documentation
+    #
+    class CidrResource < Struct.new(
+      :cidr_ranges)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request conflicts with the current state of the resource. Updating
     # or deleting a resource can cause an inconsistent state.
     #
@@ -352,23 +367,38 @@ module Aws::VPCLattice
     #     configuration.
     #
     #   * **ARN** - An Amazon Web Services resource.
+    #
+    #   * **CIDR** - A network segment, expressed as a range of IP addresses
+    #     (a CIDR block). Use this type to share a portion of your network
+    #     rather than an individual resource. A consumer accesses the
+    #     resources within the CIDR range through a `Tunnel` VPC endpoint.
+    #     You can't add a CIDR resource configuration to a service network.
+    #     A CIDR resource configuration must be associated with a resource
+    #     gateway whose DNS resolution is set to `IN_VPC`.
     #   @return [String]
     #
     # @!attribute [rw] port_ranges
-    #   (SINGLE, GROUP, CHILD) The TCP port ranges that a consumer can use
+    #   (SINGLE, GROUP, CHILD, CIDR) The port ranges that a consumer can use
     #   to access a resource configuration (for example: 1-65535). You can
-    #   separate port ranges using commas (for example: 1,2,22-30).
+    #   separate port ranges using commas (for example: 1,2,22-30). To
+    #   resolve DNS through a CIDR resource configuration, include port 53
+    #   in the port ranges.
     #   @return [Array<String>]
     #
     # @!attribute [rw] protocol
-    #   (SINGLE, GROUP) The protocol accepted by the resource configuration.
+    #   (SINGLE, GROUP, CIDR) The protocol accepted by the resource
+    #   configuration. The default is `TCP`. `TCP_UDP` is supported only for
+    #   CIDR resource configurations; specify it for a CIDR resource
+    #   configuration to allow DNS resolution, which uses UDP.
     #   @return [String]
     #
     # @!attribute [rw] resource_gateway_identifier
-    #   (SINGLE, GROUP, ARN) The ID or ARN of the resource gateway used to
-    #   connect to the resource configuration. For a child resource
+    #   (SINGLE, GROUP, ARN, CIDR) The ID or ARN of the resource gateway
+    #   used to connect to the resource configuration. For a child resource
     #   configuration, this value is inherited from the parent resource
-    #   configuration.
+    #   configuration. For a CIDR resource configuration, the associated
+    #   resource gateway must have its DNS resolution set to `IN_VPC` so
+    #   that DNS queries resolve in the context of your VPC.
     #   @return [String]
     #
     # @!attribute [rw] resource_configuration_group_identifier
@@ -388,6 +418,16 @@ module Aws::VPCLattice
     #
     #   * **IP address** - For IPv4 and IPv6, only IP addresses in the VPC
     #     are supported.
+    #
+    #   * **CIDR range** - For a resource configuration of type CIDR,
+    #     specify a `cidrResource` with one or more `cidrRanges` (for
+    #     example, `10.0.0.0/16`) that cover the IP addresses of the
+    #     resources you want to make accessible. You can specify up to 10
+    #     ranges, using IPv4, IPv6, or both, and each range must include a
+    #     prefix length. To represent your entire network, specify
+    #     `0.0.0.0/0` (IPv4) or `::/0` (IPv6) as the only range. You can't
+    #     use reserved ranges such as `169.254.0.0/16`, `100.64.0.0/10`,
+    #     `224.0.0.0/4`, `fe80::/10`, or `ff00::/8`.
     #   @return [Types::ResourceConfigurationDefinition]
     #
     # @!attribute [rw] allow_association_to_shareable_service_network
@@ -483,6 +523,12 @@ module Aws::VPCLattice
     #     configuration.
     #
     #   * **ARN** - An Amazon Web Services resource.
+    #
+    #   * **CIDR** - A network segment, expressed as a range of IP addresses
+    #     (a CIDR block). A consumer accesses the resources within the CIDR
+    #     range through a `Tunnel` VPC endpoint. A CIDR resource
+    #     configuration must be associated with a resource gateway whose DNS
+    #     resolution is set to `IN_VPC`.
     #   @return [String]
     #
     # @!attribute [rw] port_ranges
@@ -626,15 +672,20 @@ module Aws::VPCLattice
     #
     # @!attribute [rw] resource_config_dns_resolution
     #   Indicates how DNS is resolved for resource configurations associated
-    #   to this resource gateway. ResourceConfigDnsResolution is set at
-    #   creation time and cannot be changed.
+    #   with this resource gateway. This value is set when you create the
+    #   resource gateway and can't be changed afterward. The default is
+    #   `PUBLIC`.
     #
     #   * `IN_VPC` - DNS resolution occurs privately within the resource
     #     gateway's VPC. DNS queries for resources behind this resource
     #     gateway resolve using the DNS resolvers defined in the VPC's DHCP
     #     option sets. Use this when your resource domain names are hosted
     #     in private Route 53 hosted zones or on-premises DNS servers
-    #     reachable from the VPC.
+    #     reachable from the VPC. A CIDR resource configuration requires a
+    #     resource gateway that uses `IN_VPC`, and an `IN_VPC` resource
+    #     gateway can't be used for ARN resource configurations, so a
+    #     single resource gateway can't serve both ARN and CIDR resource
+    #     configurations.
     #
     #   * `PUBLIC` - DNS resolution occurs against public DNS resolvers. DNS
     #     queries for resources behind this resource gateway resolve using
@@ -2238,7 +2289,7 @@ module Aws::VPCLattice
     #   The ID of the resource gateway used to connect to the resource
     #   configuration in a given VPC. You can specify the resource gateway
     #   identifier only for resource configurations with type SINGLE, GROUP,
-    #   or ARN.
+    #   ARN, or CIDR.
     #   @return [String]
     #
     # @!attribute [rw] resource_configuration_group_id
@@ -2256,6 +2307,9 @@ module Aws::VPCLattice
     #     configuration.
     #
     #   * `ARN` - An Amazon Web Services resource.
+    #
+    #   * `CIDR` - A network segment (a range of IP addresses) accessed
+    #     through a `Tunnel` VPC endpoint.
     #   @return [String]
     #
     # @!attribute [rw] allow_association_to_shareable_service_network
@@ -2631,7 +2685,8 @@ module Aws::VPCLattice
     #   @return [Time]
     #
     # @!attribute [rw] private_dns_entry
-    #   The private DNS entry for the service.
+    #   The private DNS entry for the service. This entry includes only the
+    #   domain name.
     #   @return [Types::DnsEntry]
     #
     # @!attribute [rw] private_dns_enabled
@@ -4067,6 +4122,30 @@ module Aws::VPCLattice
       class Unknown < PathMatchType; end
     end
 
+    # Specifies which account pays for a category of charges on a VPC
+    # endpoint association.
+    #
+    # @!attribute [rw] scope
+    #   The category of charges that this entry applies to.
+    #   `ResourceGatewayCharges` covers the resource gateway's data
+    #   processing charge.
+    #   @return [String]
+    #
+    # @!attribute [rw] payer_responsibility_type
+    #   The account that pays this category of charges. `VpcEndpointAccount`
+    #   owns the VPC endpoint. `ResourceGatewayAccount` owns the resource
+    #   gateway.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/PayerResponsibilityEntry AWS API Documentation
+    #
+    class PayerResponsibilityEntry < Struct.new(
+      :scope,
+      :payer_responsibility_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_identifier
     #   The ID or ARN of the service network or service for which the policy
     #   is created.
@@ -4189,12 +4268,20 @@ module Aws::VPCLattice
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [Types::ArnResource]
     #
+    # @!attribute [rw] cidr_resource
+    #   The network segment for a resource configuration of type CIDR,
+    #   specified as one or more CIDR ranges (`cidrRanges`). Resources whose
+    #   IP addresses fall within these ranges are reachable through a
+    #   `Tunnel` VPC endpoint.
+    #   @return [Types::CidrResource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ResourceConfigurationDefinition AWS API Documentation
     #
     class ResourceConfigurationDefinition < Struct.new(
       :dns_resource,
       :ip_resource,
       :arn_resource,
+      :cidr_resource,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -4203,6 +4290,7 @@ module Aws::VPCLattice
       class DnsResource < ResourceConfigurationDefinition; end
       class IpResource < ResourceConfigurationDefinition; end
       class ArnResource < ResourceConfigurationDefinition; end
+      class CidrResource < ResourceConfigurationDefinition; end
       class Unknown < ResourceConfigurationDefinition; end
     end
 
@@ -4240,6 +4328,9 @@ module Aws::VPCLattice
     #     configuration.
     #
     #   * `ARN` - An Amazon Web Services resource.
+    #
+    #   * `CIDR` - A network segment (a range of IP addresses) accessed
+    #     through a `Tunnel` VPC endpoint.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4335,6 +4426,11 @@ module Aws::VPCLattice
     #   ISO-8601 format.
     #   @return [Time]
     #
+    # @!attribute [rw] payer_responsibility
+    #   Who pays for each category of charges on the VPC endpoint
+    #   association.
+    #   @return [Array<Types::PayerResponsibilityEntry>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ResourceEndpointAssociationSummary AWS API Documentation
     #
     class ResourceEndpointAssociationSummary < Struct.new(
@@ -4346,7 +4442,8 @@ module Aws::VPCLattice
       :vpc_endpoint_id,
       :vpc_endpoint_owner,
       :created_by,
-      :created_at)
+      :created_at,
+      :payer_responsibility)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4749,7 +4846,8 @@ module Aws::VPCLattice
     #   @return [Types::DnsEntry]
     #
     # @!attribute [rw] private_dns_entry
-    #   The private DNS entry for the service.
+    #   The private DNS entry for the service. This entry includes only the
+    #   domain name.
     #   @return [Types::DnsEntry]
     #
     # @!attribute [rw] is_managed_association
@@ -5681,6 +5779,9 @@ module Aws::VPCLattice
     #     configuration.
     #
     #   * `ARN` - An Amazon Web Services resource.
+    #
+    #   * `CIDR` - A network segment (a range of IP addresses) accessed
+    #     through a `Tunnel` VPC endpoint.
     #   @return [String]
     #
     # @!attribute [rw] port_ranges

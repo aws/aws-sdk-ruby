@@ -200,6 +200,8 @@ module Aws::SageMaker
     AthenaResultCompressionType = Shapes::StringShape.new(name: 'AthenaResultCompressionType')
     AthenaResultFormat = Shapes::StringShape.new(name: 'AthenaResultFormat')
     AthenaWorkGroup = Shapes::StringShape.new(name: 'AthenaWorkGroup')
+    AttachClusterNodeNetworkInterfaceRequest = Shapes::StructureShape.new(name: 'AttachClusterNodeNetworkInterfaceRequest')
+    AttachClusterNodeNetworkInterfaceResponse = Shapes::StructureShape.new(name: 'AttachClusterNodeNetworkInterfaceResponse')
     AttachClusterNodeVolumeRequest = Shapes::StructureShape.new(name: 'AttachClusterNodeVolumeRequest')
     AttachClusterNodeVolumeResponse = Shapes::StructureShape.new(name: 'AttachClusterNodeVolumeResponse')
     AttributeName = Shapes::StringShape.new(name: 'AttributeName')
@@ -492,7 +494,9 @@ module Aws::SageMaker
     ClusterName = Shapes::StringShape.new(name: 'ClusterName')
     ClusterNameOrArn = Shapes::StringShape.new(name: 'ClusterNameOrArn')
     ClusterNetworkInterface = Shapes::StructureShape.new(name: 'ClusterNetworkInterface')
+    ClusterNetworkInterfaceAttachmentId = Shapes::StringShape.new(name: 'ClusterNetworkInterfaceAttachmentId')
     ClusterNetworkInterfaceDetails = Shapes::StructureShape.new(name: 'ClusterNetworkInterfaceDetails')
+    ClusterNetworkInterfaceId = Shapes::StringShape.new(name: 'ClusterNetworkInterfaceId')
     ClusterNodeDetails = Shapes::StructureShape.new(name: 'ClusterNodeDetails')
     ClusterNodeId = Shapes::StringShape.new(name: 'ClusterNodeId')
     ClusterNodeIds = Shapes::ListShape.new(name: 'ClusterNodeIds')
@@ -1342,6 +1346,7 @@ module Aws::SageMaker
     Horovod = Shapes::BooleanShape.new(name: 'Horovod')
     HubAccessConfig = Shapes::StructureShape.new(name: 'HubAccessConfig')
     HubArn = Shapes::StringShape.new(name: 'HubArn')
+    HubContent = Shapes::StructureShape.new(name: 'HubContent')
     HubContentArn = Shapes::StringShape.new(name: 'HubContentArn')
     HubContentDependency = Shapes::StructureShape.new(name: 'HubContentDependency')
     HubContentDependencyList = Shapes::ListShape.new(name: 'HubContentDependencyList')
@@ -3514,6 +3519,17 @@ module Aws::SageMaker
     AthenaDatasetDefinition.add_member(:output_format, Shapes::ShapeRef.new(shape: AthenaResultFormat, required: true, location_name: "OutputFormat"))
     AthenaDatasetDefinition.add_member(:output_compression, Shapes::ShapeRef.new(shape: AthenaResultCompressionType, location_name: "OutputCompression"))
     AthenaDatasetDefinition.struct_class = Types::AthenaDatasetDefinition
+
+    AttachClusterNodeNetworkInterfaceRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
+    AttachClusterNodeNetworkInterfaceRequest.add_member(:node_id, Shapes::ShapeRef.new(shape: ClusterNodeId, required: true, location_name: "NodeId"))
+    AttachClusterNodeNetworkInterfaceRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: ClusterNetworkInterfaceId, required: true, location_name: "NetworkInterfaceId"))
+    AttachClusterNodeNetworkInterfaceRequest.struct_class = Types::AttachClusterNodeNetworkInterfaceRequest
+
+    AttachClusterNodeNetworkInterfaceResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
+    AttachClusterNodeNetworkInterfaceResponse.add_member(:node_id, Shapes::ShapeRef.new(shape: ClusterNodeId, required: true, location_name: "NodeId"))
+    AttachClusterNodeNetworkInterfaceResponse.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: ClusterNetworkInterfaceId, required: true, location_name: "NetworkInterfaceId"))
+    AttachClusterNodeNetworkInterfaceResponse.add_member(:attachment_id, Shapes::ShapeRef.new(shape: ClusterNetworkInterfaceAttachmentId, required: true, location_name: "AttachmentId"))
+    AttachClusterNodeNetworkInterfaceResponse.struct_class = Types::AttachClusterNodeNetworkInterfaceResponse
 
     AttachClusterNodeVolumeRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
     AttachClusterNodeVolumeRequest.add_member(:node_id, Shapes::ShapeRef.new(shape: ClusterNodeId, required: true, location_name: "NodeId"))
@@ -8063,6 +8079,29 @@ module Aws::SageMaker
     HubAccessConfig.add_member(:hub_content_arn, Shapes::ShapeRef.new(shape: HubContentArn, required: true, location_name: "HubContentArn"))
     HubAccessConfig.struct_class = Types::HubAccessConfig
 
+    HubContent.add_member(:hub_content_name, Shapes::ShapeRef.new(shape: HubContentName, required: true, location_name: "HubContentName"))
+    HubContent.add_member(:hub_content_arn, Shapes::ShapeRef.new(shape: HubContentArn, required: true, location_name: "HubContentArn"))
+    HubContent.add_member(:hub_content_version, Shapes::ShapeRef.new(shape: HubContentVersion, required: true, location_name: "HubContentVersion"))
+    HubContent.add_member(:hub_content_type, Shapes::ShapeRef.new(shape: HubContentType, required: true, location_name: "HubContentType"))
+    HubContent.add_member(:document_schema_version, Shapes::ShapeRef.new(shape: DocumentSchemaVersion, required: true, location_name: "DocumentSchemaVersion"))
+    HubContent.add_member(:hub_name, Shapes::ShapeRef.new(shape: HubName, required: true, location_name: "HubName"))
+    HubContent.add_member(:hub_arn, Shapes::ShapeRef.new(shape: HubArn, required: true, location_name: "HubArn"))
+    HubContent.add_member(:hub_content_display_name, Shapes::ShapeRef.new(shape: HubContentDisplayName, location_name: "HubContentDisplayName"))
+    HubContent.add_member(:hub_content_description, Shapes::ShapeRef.new(shape: HubContentDescription, location_name: "HubContentDescription"))
+    HubContent.add_member(:hub_content_markdown, Shapes::ShapeRef.new(shape: HubContentMarkdown, location_name: "HubContentMarkdown"))
+    HubContent.add_member(:hub_content_document, Shapes::ShapeRef.new(shape: HubContentDocument, location_name: "HubContentDocument"))
+    HubContent.add_member(:sage_maker_public_hub_content_arn, Shapes::ShapeRef.new(shape: SageMakerPublicHubContentArn, location_name: "SageMakerPublicHubContentArn"))
+    HubContent.add_member(:reference_min_version, Shapes::ShapeRef.new(shape: ReferenceMinVersion, location_name: "ReferenceMinVersion"))
+    HubContent.add_member(:support_status, Shapes::ShapeRef.new(shape: HubContentSupportStatus, location_name: "SupportStatus"))
+    HubContent.add_member(:hub_content_search_keywords, Shapes::ShapeRef.new(shape: HubContentSearchKeywordList, location_name: "HubContentSearchKeywords"))
+    HubContent.add_member(:hub_content_dependencies, Shapes::ShapeRef.new(shape: HubContentDependencyList, location_name: "HubContentDependencies"))
+    HubContent.add_member(:hub_content_status, Shapes::ShapeRef.new(shape: HubContentStatus, required: true, location_name: "HubContentStatus"))
+    HubContent.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    HubContent.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    HubContent.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    HubContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    HubContent.struct_class = Types::HubContent
+
     HubContentDependency.add_member(:dependency_origin_path, Shapes::ShapeRef.new(shape: DependencyOriginPath, location_name: "DependencyOriginPath"))
     HubContentDependency.add_member(:dependency_copy_path, Shapes::ShapeRef.new(shape: DependencyCopyPath, location_name: "DependencyCopyPath"))
     HubContentDependency.struct_class = Types::HubContentDependency
@@ -11884,6 +11923,7 @@ module Aws::SageMaker
     SearchRecord.add_member(:model_card, Shapes::ShapeRef.new(shape: ModelCard, location_name: "ModelCard"))
     SearchRecord.add_member(:model, Shapes::ShapeRef.new(shape: ModelDashboardModel, location_name: "Model"))
     SearchRecord.add_member(:job, Shapes::ShapeRef.new(shape: Job, location_name: "Job"))
+    SearchRecord.add_member(:hub_content, Shapes::ShapeRef.new(shape: HubContent, location_name: "HubContent"))
     SearchRecord.struct_class = Types::SearchRecord
 
     SearchRequest.add_member(:resource, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "Resource"))
@@ -13464,6 +13504,16 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AssociateTrialComponentRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateTrialComponentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+      end)
+
+      api.add_operation(:attach_cluster_node_network_interface, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AttachClusterNodeNetworkInterface"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AttachClusterNodeNetworkInterfaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: AttachClusterNodeNetworkInterfaceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
       end)

@@ -264,6 +264,8 @@ module Aws::Lightsail
     DiskState = Shapes::StringShape.new(name: 'DiskState')
     DistributionBundle = Shapes::StructureShape.new(name: 'DistributionBundle')
     DistributionBundleList = Shapes::ListShape.new(name: 'DistributionBundleList')
+    DistributionCustomErrorResponse = Shapes::StructureShape.new(name: 'DistributionCustomErrorResponse')
+    DistributionCustomErrorResponseList = Shapes::ListShape.new(name: 'DistributionCustomErrorResponseList')
     DistributionList = Shapes::ListShape.new(name: 'DistributionList')
     DistributionMetricName = Shapes::StringShape.new(name: 'DistributionMetricName')
     DnsRecordCreationState = Shapes::StructureShape.new(name: 'DnsRecordCreationState')
@@ -1281,6 +1283,9 @@ module Aws::Lightsail
     CreateDistributionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateDistributionRequest.add_member(:certificate_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "certificateName"))
     CreateDistributionRequest.add_member(:viewer_minimum_tls_protocol_version, Shapes::ShapeRef.new(shape: ViewerMinimumTlsProtocolVersionEnum, location_name: "viewerMinimumTlsProtocolVersion"))
+    CreateDistributionRequest.add_member(:enable_private_origin_access, Shapes::ShapeRef.new(shape: boolean, location_name: "enablePrivateOriginAccess"))
+    CreateDistributionRequest.add_member(:default_root_object, Shapes::ShapeRef.new(shape: string, location_name: "defaultRootObject"))
+    CreateDistributionRequest.add_member(:custom_error_responses, Shapes::ShapeRef.new(shape: DistributionCustomErrorResponseList, location_name: "customErrorResponses"))
     CreateDistributionRequest.struct_class = Types::CreateDistributionRequest
 
     CreateDistributionResult.add_member(:distribution, Shapes::ShapeRef.new(shape: LightsailDistribution, location_name: "distribution"))
@@ -1662,6 +1667,14 @@ module Aws::Lightsail
     DistributionBundle.struct_class = Types::DistributionBundle
 
     DistributionBundleList.member = Shapes::ShapeRef.new(shape: DistributionBundle)
+
+    DistributionCustomErrorResponse.add_member(:error_code, Shapes::ShapeRef.new(shape: integer, location_name: "errorCode"))
+    DistributionCustomErrorResponse.add_member(:response_code, Shapes::ShapeRef.new(shape: string, location_name: "responseCode"))
+    DistributionCustomErrorResponse.add_member(:response_page_path, Shapes::ShapeRef.new(shape: string, location_name: "responsePagePath"))
+    DistributionCustomErrorResponse.add_member(:error_caching_min_ttl, Shapes::ShapeRef.new(shape: long, location_name: "errorCachingMinTTL"))
+    DistributionCustomErrorResponse.struct_class = Types::DistributionCustomErrorResponse
+
+    DistributionCustomErrorResponseList.member = Shapes::ShapeRef.new(shape: DistributionCustomErrorResponse)
 
     DistributionList.member = Shapes::ShapeRef.new(shape: LightsailDistribution)
 
@@ -2470,6 +2483,8 @@ module Aws::Lightsail
     LightsailDistribution.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     LightsailDistribution.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     LightsailDistribution.add_member(:viewer_minimum_tls_protocol_version, Shapes::ShapeRef.new(shape: string, location_name: "viewerMinimumTlsProtocolVersion"))
+    LightsailDistribution.add_member(:default_root_object, Shapes::ShapeRef.new(shape: string, location_name: "defaultRootObject"))
+    LightsailDistribution.add_member(:custom_error_responses, Shapes::ShapeRef.new(shape: DistributionCustomErrorResponseList, location_name: "customErrorResponses"))
     LightsailDistribution.struct_class = Types::LightsailDistribution
 
     LoadBalancer.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
@@ -2640,6 +2655,7 @@ module Aws::Lightsail
     Origin.add_member(:protocol_policy, Shapes::ShapeRef.new(shape: OriginProtocolPolicyEnum, location_name: "protocolPolicy"))
     Origin.add_member(:response_timeout, Shapes::ShapeRef.new(shape: integer, location_name: "responseTimeout"))
     Origin.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: OriginIpAddressTypeEnum, location_name: "ipAddressType"))
+    Origin.add_member(:is_private_origin_access_enabled, Shapes::ShapeRef.new(shape: boolean, location_name: "isPrivateOriginAccessEnabled"))
     Origin.struct_class = Types::Origin
 
     PartnerIdList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
@@ -3136,6 +3152,9 @@ module Aws::Lightsail
     UpdateDistributionRequest.add_member(:viewer_minimum_tls_protocol_version, Shapes::ShapeRef.new(shape: ViewerMinimumTlsProtocolVersionEnum, location_name: "viewerMinimumTlsProtocolVersion"))
     UpdateDistributionRequest.add_member(:certificate_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "certificateName"))
     UpdateDistributionRequest.add_member(:use_default_certificate, Shapes::ShapeRef.new(shape: boolean, location_name: "useDefaultCertificate"))
+    UpdateDistributionRequest.add_member(:enable_private_origin_access, Shapes::ShapeRef.new(shape: boolean, location_name: "enablePrivateOriginAccess"))
+    UpdateDistributionRequest.add_member(:default_root_object, Shapes::ShapeRef.new(shape: string, location_name: "defaultRootObject"))
+    UpdateDistributionRequest.add_member(:custom_error_responses, Shapes::ShapeRef.new(shape: DistributionCustomErrorResponseList, location_name: "customErrorResponses"))
     UpdateDistributionRequest.struct_class = Types::UpdateDistributionRequest
 
     UpdateDistributionResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))

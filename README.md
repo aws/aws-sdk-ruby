@@ -426,6 +426,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Multi-party Approval                              | Aws::MPA                                 | aws-sdk-mpa                                 | 2022-07-26  |
 | AWS Network Firewall                                  | Aws::NetworkFirewall                     | aws-sdk-networkfirewall                     | 2020-11-12  |
 | AWS Network Manager                                   | Aws::NetworkManager                      | aws-sdk-networkmanager                      | 2019-07-05  |
+| AWS Network Security Manager Customer API             | Aws::NetworkSecurityManager              | aws-sdk-networksecuritymanager              | 2025-10-30  |
 | AWS Organizations                                     | Aws::Organizations                       | aws-sdk-organizations                       | 2016-11-28  |
 | AWS Outposts                                          | Aws::Outposts                            | aws-sdk-outposts                            | 2019-12-03  |
 | AWS Parallel Computing Service                        | Aws::PCS                                 | aws-sdk-pcs                                 | 2023-02-10  |
@@ -683,6 +684,7 @@ RubyGems.org page under "LINKS" section.
 | Braket                                                | Aws::Braket                              | aws-sdk-braket                              | 2019-09-01  |
 | CloudWatch Observability Access Manager               | Aws::OAM                                 | aws-sdk-oam                                 | 2022-06-10  |
 | CloudWatch Observability Admin Service                | Aws::ObservabilityAdmin                  | aws-sdk-observabilityadmin                  | 2018-05-10  |
+| CloudWatch Omni                                       | Aws::CloudWatchOmni                      | aws-sdk-cloudwatchomni                      | 2025-01-01  |
 | CloudWatch RUM                                        | Aws::CloudWatchRUM                       | aws-sdk-cloudwatchrum                       | 2018-05-10  |
 | CodeArtifact                                          | Aws::CodeArtifact                        | aws-sdk-codeartifact                        | 2018-09-22  |
 | Compute Optimizer Automation                          | Aws::ComputeOptimizerAutomation          | aws-sdk-computeoptimizerautomation          | 2025-09-22  |

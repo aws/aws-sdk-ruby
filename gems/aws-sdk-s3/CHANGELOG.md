@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.232.1 (2026-09-16)
+------------------
+
+* Issue - Return the copy response from multipart `copy_to`/`copy_from` instead of `nil` on success.
+
+1.232.0 (2026-09-11)
+------------------
+
+* Feature - Updated S3 Object Lock Default Retention documentation.
+
+1.231.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.230.0 (2026-09-08)
 ------------------
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+3.257.0 (2026-09-14)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Increases the maximum session token size to 4,096 bytes and removes the packed policy size limit. Adds SessionTokenSize and SessionTokenUtilization fields and a new MinimumSessionTokenSize parameter. PackedPolicySize is deprecated.
+
+3.256.0 (2026-09-11)
+------------------
+
+* Feature - Preserve millisecond precision when serializing `Time` values on the request path, instead of truncating to whole seconds.
+
+3.255.0 (2026-09-09)
+------------------
+
 * Feature - Add `rexml` as a dependency.
 
 3.254.1 (2026-08-06)

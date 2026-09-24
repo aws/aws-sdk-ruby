@@ -706,6 +706,9 @@ module Aws::BedrockAgentCoreControl
     #   enable you to categorize your resources in different ways, for
     #   example, by purpose, owner, or environment.
     #
+    # @option params [String] :platform_version
+    #   The version of the runtime platform to use for the AgentCore Runtime.
+    #
     # @return [Types::CreateAgentRuntimeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAgentRuntimeResponse#agent_runtime_arn #agent_runtime_arn} => String
@@ -851,6 +854,7 @@ module Aws::BedrockAgentCoreControl
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     platform_version: "PlatformVersion",
     #   })
     #
     # @example Response structure
@@ -860,7 +864,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtime_id #=> String
     #   resp.agent_runtime_version #=> String
     #   resp.created_at #=> Time
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateAgentRuntime AWS API Documentation
     #
@@ -928,7 +932,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtime_arn #=> String
     #   resp.agent_runtime_id #=> String
     #   resp.endpoint_name #=> String
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.created_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateAgentRuntimeEndpoint AWS API Documentation
@@ -3069,6 +3073,9 @@ module Aws::BedrockAgentCoreControl
     #   The truncation configuration for managing conversation context when it
     #   exceeds model limits.
     #
+    # @option params [Array<Types::HarnessHook>] :hooks
+    #   The lifecycle hooks to run at defined points in the agent loop.
+    #
     # @option params [Integer] :max_iterations
     #   The maximum number of iterations the agent loop can execute per
     #   invocation.
@@ -3217,6 +3224,7 @@ module Aws::BedrockAgentCoreControl
     #       open_ai_model_config: {
     #         model_id: "ModelId", # required
     #         api_key_arn: "ApiKeyArn", # required
+    #         api_base: "HarnessOpenAiApiBase",
     #         max_tokens: 1,
     #         temperature: 1.0,
     #         top_p: 1.0,
@@ -3348,6 +3356,74 @@ module Aws::BedrockAgentCoreControl
     #         },
     #       },
     #     },
+    #     hooks: [
+    #       {
+    #         before_invocation: {
+    #           name: "HarnessHookName", # required
+    #           target: { # required
+    #             lambda: {
+    #               arn: "HarnessLambdaFunctionArn", # required
+    #               timeout_seconds: 1,
+    #               failure_mode: "allow", # accepts allow, deny
+    #             },
+    #             sns: {
+    #               arn: "HarnessSnsTopicArn", # required
+    #             },
+    #             event_bridge: {
+    #               arn: "HarnessEventBridgeBusArn", # required
+    #             },
+    #           },
+    #         },
+    #         after_invocation: {
+    #           name: "HarnessHookName", # required
+    #           target: { # required
+    #             lambda: {
+    #               arn: "HarnessLambdaFunctionArn", # required
+    #               timeout_seconds: 1,
+    #               failure_mode: "allow", # accepts allow, deny
+    #             },
+    #             sns: {
+    #               arn: "HarnessSnsTopicArn", # required
+    #             },
+    #             event_bridge: {
+    #               arn: "HarnessEventBridgeBusArn", # required
+    #             },
+    #           },
+    #         },
+    #         before_tool_call: {
+    #           name: "HarnessHookName", # required
+    #           target: { # required
+    #             lambda: {
+    #               arn: "HarnessLambdaFunctionArn", # required
+    #               timeout_seconds: 1,
+    #               failure_mode: "allow", # accepts allow, deny
+    #             },
+    #             sns: {
+    #               arn: "HarnessSnsTopicArn", # required
+    #             },
+    #             event_bridge: {
+    #               arn: "HarnessEventBridgeBusArn", # required
+    #             },
+    #           },
+    #         },
+    #         after_tool_call: {
+    #           name: "HarnessHookName", # required
+    #           target: { # required
+    #             lambda: {
+    #               arn: "HarnessLambdaFunctionArn", # required
+    #               timeout_seconds: 1,
+    #               failure_mode: "allow", # accepts allow, deny
+    #             },
+    #             sns: {
+    #               arn: "HarnessSnsTopicArn", # required
+    #             },
+    #             event_bridge: {
+    #               arn: "HarnessEventBridgeBusArn", # required
+    #             },
+    #           },
+    #         },
+    #       },
+    #     ],
     #     max_iterations: 1,
     #     max_tokens: 1,
     #     timeout_seconds: 1,
@@ -3373,6 +3449,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.model.bedrock_model_config.api_format #=> String, one of "converse_stream", "responses", "chat_completions"
     #   resp.harness.model.open_ai_model_config.model_id #=> String
     #   resp.harness.model.open_ai_model_config.api_key_arn #=> String
+    #   resp.harness.model.open_ai_model_config.api_base #=> String
     #   resp.harness.model.open_ai_model_config.max_tokens #=> Integer
     #   resp.harness.model.open_ai_model_config.temperature #=> Float
     #   resp.harness.model.open_ai_model_config.top_p #=> Float
@@ -3500,6 +3577,31 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.memory.managed_memory_configuration.strategies[0] #=> String, one of "SEMANTIC", "SUMMARIZATION", "USER_PREFERENCE", "EPISODIC"
     #   resp.harness.memory.managed_memory_configuration.event_expiry_duration #=> Integer
     #   resp.harness.memory.managed_memory_configuration.encryption_key_arn #=> String
+    #   resp.harness.hooks #=> Array
+    #   resp.harness.hooks[0].before_invocation.name #=> String
+    #   resp.harness.hooks[0].before_invocation.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].before_invocation.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].before_invocation.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].before_invocation.target.sns.arn #=> String
+    #   resp.harness.hooks[0].before_invocation.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.name #=> String
+    #   resp.harness.hooks[0].after_invocation.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].after_invocation.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].after_invocation.target.sns.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.name #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].before_tool_call.target.sns.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.name #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].after_tool_call.target.sns.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.event_bridge.arn #=> String
     #   resp.harness.max_iterations #=> Integer
     #   resp.harness.max_tokens #=> Integer
     #   resp.harness.timeout_seconds #=> Integer
@@ -5605,7 +5707,7 @@ module Aws::BedrockAgentCoreControl
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.agent_runtime_id #=> String
     #   resp.agent_runtime_version #=> String
     #
@@ -5650,7 +5752,7 @@ module Aws::BedrockAgentCoreControl
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.agent_runtime_id #=> String
     #   resp.endpoint_name #=> String
     #
@@ -6234,6 +6336,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.model.bedrock_model_config.api_format #=> String, one of "converse_stream", "responses", "chat_completions"
     #   resp.harness.model.open_ai_model_config.model_id #=> String
     #   resp.harness.model.open_ai_model_config.api_key_arn #=> String
+    #   resp.harness.model.open_ai_model_config.api_base #=> String
     #   resp.harness.model.open_ai_model_config.max_tokens #=> Integer
     #   resp.harness.model.open_ai_model_config.temperature #=> Float
     #   resp.harness.model.open_ai_model_config.top_p #=> Float
@@ -6361,6 +6464,31 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.memory.managed_memory_configuration.strategies[0] #=> String, one of "SEMANTIC", "SUMMARIZATION", "USER_PREFERENCE", "EPISODIC"
     #   resp.harness.memory.managed_memory_configuration.event_expiry_duration #=> Integer
     #   resp.harness.memory.managed_memory_configuration.encryption_key_arn #=> String
+    #   resp.harness.hooks #=> Array
+    #   resp.harness.hooks[0].before_invocation.name #=> String
+    #   resp.harness.hooks[0].before_invocation.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].before_invocation.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].before_invocation.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].before_invocation.target.sns.arn #=> String
+    #   resp.harness.hooks[0].before_invocation.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.name #=> String
+    #   resp.harness.hooks[0].after_invocation.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].after_invocation.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].after_invocation.target.sns.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.name #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].before_tool_call.target.sns.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.name #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].after_tool_call.target.sns.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.event_bridge.arn #=> String
     #   resp.harness.max_iterations #=> Integer
     #   resp.harness.max_tokens #=> Integer
     #   resp.harness.timeout_seconds #=> Integer
@@ -6895,6 +7023,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetAgentRuntimeResponse#metadata_configuration #metadata_configuration} => Types::RuntimeMetadataConfiguration
     #   * {Types::GetAgentRuntimeResponse#filesystem_configurations #filesystem_configurations} => Array&lt;Types::FilesystemConfiguration&gt;
     #   * {Types::GetAgentRuntimeResponse#capacity_provider_configuration #capacity_provider_configuration} => Types::CapacityProviderConfiguration
+    #   * {Types::GetAgentRuntimeResponse#platform_version #platform_version} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -6918,7 +7047,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.network_configuration.network_mode_config.subnets #=> Array
     #   resp.network_configuration.network_mode_config.subnets[0] #=> String
     #   resp.network_configuration.network_mode_config.require_service_s3_endpoint #=> Boolean
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.lifecycle_configuration.idle_runtime_session_timeout #=> Integer
     #   resp.lifecycle_configuration.max_lifetime #=> Integer
     #   resp.failure_reason #=> String
@@ -6988,6 +7117,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.filesystem_configurations[0].capacity_provider_volume.volume_name #=> String
     #   resp.filesystem_configurations[0].capacity_provider_volume.mount_path #=> String
     #   resp.capacity_provider_configuration.capacity_provider_arn #=> String
+    #   resp.platform_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntime AWS API Documentation
     #
@@ -7035,7 +7165,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtime_endpoint_arn #=> String
     #   resp.agent_runtime_arn #=> String
     #   resp.description #=> String
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.failure_reason #=> String
@@ -8171,6 +8301,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.model.bedrock_model_config.api_format #=> String, one of "converse_stream", "responses", "chat_completions"
     #   resp.harness.model.open_ai_model_config.model_id #=> String
     #   resp.harness.model.open_ai_model_config.api_key_arn #=> String
+    #   resp.harness.model.open_ai_model_config.api_base #=> String
     #   resp.harness.model.open_ai_model_config.max_tokens #=> Integer
     #   resp.harness.model.open_ai_model_config.temperature #=> Float
     #   resp.harness.model.open_ai_model_config.top_p #=> Float
@@ -8298,6 +8429,31 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.memory.managed_memory_configuration.strategies[0] #=> String, one of "SEMANTIC", "SUMMARIZATION", "USER_PREFERENCE", "EPISODIC"
     #   resp.harness.memory.managed_memory_configuration.event_expiry_duration #=> Integer
     #   resp.harness.memory.managed_memory_configuration.encryption_key_arn #=> String
+    #   resp.harness.hooks #=> Array
+    #   resp.harness.hooks[0].before_invocation.name #=> String
+    #   resp.harness.hooks[0].before_invocation.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].before_invocation.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].before_invocation.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].before_invocation.target.sns.arn #=> String
+    #   resp.harness.hooks[0].before_invocation.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.name #=> String
+    #   resp.harness.hooks[0].after_invocation.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].after_invocation.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].after_invocation.target.sns.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.name #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].before_tool_call.target.sns.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.name #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].after_tool_call.target.sns.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.event_bridge.arn #=> String
     #   resp.harness.max_iterations #=> Integer
     #   resp.harness.max_tokens #=> Integer
     #   resp.harness.timeout_seconds #=> Integer
@@ -9594,7 +9750,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.runtime_endpoints[0].target_version #=> String
     #   resp.runtime_endpoints[0].agent_runtime_endpoint_arn #=> String
     #   resp.runtime_endpoints[0].agent_runtime_arn #=> String
-    #   resp.runtime_endpoints[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.runtime_endpoints[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.runtime_endpoints[0].id #=> String
     #   resp.runtime_endpoints[0].description #=> String
     #   resp.runtime_endpoints[0].created_at #=> Time
@@ -9645,7 +9801,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtimes[0].agent_runtime_name #=> String
     #   resp.agent_runtimes[0].description #=> String
     #   resp.agent_runtimes[0].last_updated_at #=> Time
-    #   resp.agent_runtimes[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.agent_runtimes[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListAgentRuntimeVersions AWS API Documentation
@@ -9698,7 +9854,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtimes #=> Array
     #   resp.agent_runtimes[0].agent_runtime_arn #=> String
     #   resp.agent_runtimes[0].agent_runtime_version #=> String
-    #   resp.agent_runtimes[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.agent_runtimes[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListAgentRuntimeVersionsByCapacityProvider AWS API Documentation
@@ -9741,7 +9897,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtimes[0].agent_runtime_name #=> String
     #   resp.agent_runtimes[0].description #=> String
     #   resp.agent_runtimes[0].last_updated_at #=> Time
-    #   resp.agent_runtimes[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.agent_runtimes[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListAgentRuntimes AWS API Documentation
@@ -12196,6 +12352,10 @@ module Aws::BedrockAgentCoreControl
     # @option params [Types::CapacityProviderConfiguration] :capacity_provider_configuration
     #   The updated capacity provider configuration for the AgentCore Runtime.
     #
+    # @option params [String] :platform_version
+    #   The updated version of the runtime platform to use for the AgentCore
+    #   Runtime.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -12348,6 +12508,7 @@ module Aws::BedrockAgentCoreControl
     #     capacity_provider_configuration: {
     #       capacity_provider_arn: "CapacityProviderArn", # required
     #     },
+    #     platform_version: "PlatformVersion",
     #     client_token: "ClientToken",
     #   })
     #
@@ -12359,7 +12520,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtime_version #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateAgentRuntime AWS API Documentation
     #
@@ -12418,7 +12579,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_version #=> String
     #   resp.agent_runtime_endpoint_arn #=> String
     #   resp.agent_runtime_arn #=> String
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #
@@ -14039,6 +14200,11 @@ module Aws::BedrockAgentCoreControl
     #   The truncation configuration for managing conversation context. If not
     #   specified, the existing value is retained.
     #
+    # @option params [Array<Types::HarnessHook>] :hooks
+    #   The lifecycle hooks to run at defined points in the agent loop. If
+    #   specified, this replaces all existing hooks. If not specified, the
+    #   existing hooks are retained.
+    #
     # @option params [Integer] :max_iterations
     #   The maximum number of iterations the agent loop can execute per
     #   invocation. If not specified, the existing value is retained.
@@ -14189,6 +14355,7 @@ module Aws::BedrockAgentCoreControl
     #       open_ai_model_config: {
     #         model_id: "ModelId", # required
     #         api_key_arn: "ApiKeyArn", # required
+    #         api_base: "HarnessOpenAiApiBase",
     #         max_tokens: 1,
     #         temperature: 1.0,
     #         top_p: 1.0,
@@ -14322,6 +14489,74 @@ module Aws::BedrockAgentCoreControl
     #         },
     #       },
     #     },
+    #     hooks: [
+    #       {
+    #         before_invocation: {
+    #           name: "HarnessHookName", # required
+    #           target: { # required
+    #             lambda: {
+    #               arn: "HarnessLambdaFunctionArn", # required
+    #               timeout_seconds: 1,
+    #               failure_mode: "allow", # accepts allow, deny
+    #             },
+    #             sns: {
+    #               arn: "HarnessSnsTopicArn", # required
+    #             },
+    #             event_bridge: {
+    #               arn: "HarnessEventBridgeBusArn", # required
+    #             },
+    #           },
+    #         },
+    #         after_invocation: {
+    #           name: "HarnessHookName", # required
+    #           target: { # required
+    #             lambda: {
+    #               arn: "HarnessLambdaFunctionArn", # required
+    #               timeout_seconds: 1,
+    #               failure_mode: "allow", # accepts allow, deny
+    #             },
+    #             sns: {
+    #               arn: "HarnessSnsTopicArn", # required
+    #             },
+    #             event_bridge: {
+    #               arn: "HarnessEventBridgeBusArn", # required
+    #             },
+    #           },
+    #         },
+    #         before_tool_call: {
+    #           name: "HarnessHookName", # required
+    #           target: { # required
+    #             lambda: {
+    #               arn: "HarnessLambdaFunctionArn", # required
+    #               timeout_seconds: 1,
+    #               failure_mode: "allow", # accepts allow, deny
+    #             },
+    #             sns: {
+    #               arn: "HarnessSnsTopicArn", # required
+    #             },
+    #             event_bridge: {
+    #               arn: "HarnessEventBridgeBusArn", # required
+    #             },
+    #           },
+    #         },
+    #         after_tool_call: {
+    #           name: "HarnessHookName", # required
+    #           target: { # required
+    #             lambda: {
+    #               arn: "HarnessLambdaFunctionArn", # required
+    #               timeout_seconds: 1,
+    #               failure_mode: "allow", # accepts allow, deny
+    #             },
+    #             sns: {
+    #               arn: "HarnessSnsTopicArn", # required
+    #             },
+    #             event_bridge: {
+    #               arn: "HarnessEventBridgeBusArn", # required
+    #             },
+    #           },
+    #         },
+    #       },
+    #     ],
     #     max_iterations: 1,
     #     max_tokens: 1,
     #     timeout_seconds: 1,
@@ -14344,6 +14579,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.model.bedrock_model_config.api_format #=> String, one of "converse_stream", "responses", "chat_completions"
     #   resp.harness.model.open_ai_model_config.model_id #=> String
     #   resp.harness.model.open_ai_model_config.api_key_arn #=> String
+    #   resp.harness.model.open_ai_model_config.api_base #=> String
     #   resp.harness.model.open_ai_model_config.max_tokens #=> Integer
     #   resp.harness.model.open_ai_model_config.temperature #=> Float
     #   resp.harness.model.open_ai_model_config.top_p #=> Float
@@ -14471,6 +14707,31 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.memory.managed_memory_configuration.strategies[0] #=> String, one of "SEMANTIC", "SUMMARIZATION", "USER_PREFERENCE", "EPISODIC"
     #   resp.harness.memory.managed_memory_configuration.event_expiry_duration #=> Integer
     #   resp.harness.memory.managed_memory_configuration.encryption_key_arn #=> String
+    #   resp.harness.hooks #=> Array
+    #   resp.harness.hooks[0].before_invocation.name #=> String
+    #   resp.harness.hooks[0].before_invocation.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].before_invocation.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].before_invocation.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].before_invocation.target.sns.arn #=> String
+    #   resp.harness.hooks[0].before_invocation.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.name #=> String
+    #   resp.harness.hooks[0].after_invocation.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].after_invocation.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].after_invocation.target.sns.arn #=> String
+    #   resp.harness.hooks[0].after_invocation.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.name #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].before_tool_call.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].before_tool_call.target.sns.arn #=> String
+    #   resp.harness.hooks[0].before_tool_call.target.event_bridge.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.name #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.timeout_seconds #=> Integer
+    #   resp.harness.hooks[0].after_tool_call.target.lambda.failure_mode #=> String, one of "allow", "deny"
+    #   resp.harness.hooks[0].after_tool_call.target.sns.arn #=> String
+    #   resp.harness.hooks[0].after_tool_call.target.event_bridge.arn #=> String
     #   resp.harness.max_iterations #=> Integer
     #   resp.harness.max_tokens #=> Integer
     #   resp.harness.timeout_seconds #=> Integer
@@ -16684,7 +16945,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

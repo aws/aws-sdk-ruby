@@ -273,6 +273,8 @@ module Aws::Transfer
     Protocol = Shapes::StringShape.new(name: 'Protocol')
     ProtocolDetails = Shapes::StructureShape.new(name: 'ProtocolDetails')
     Protocols = Shapes::ListShape.new(name: 'Protocols')
+    ProxyConfig = Shapes::StructureShape.new(name: 'ProxyConfig')
+    ProxyMode = Shapes::StringShape.new(name: 'ProxyMode')
     Resource = Shapes::StringShape.new(name: 'Resource')
     ResourceExistsException = Shapes::StructureShape.new(name: 'ResourceExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -1276,9 +1278,13 @@ module Aws::Transfer
     ProtocolDetails.add_member(:tls_session_resumption_mode, Shapes::ShapeRef.new(shape: TlsSessionResumptionMode, location_name: "TlsSessionResumptionMode"))
     ProtocolDetails.add_member(:set_stat_option, Shapes::ShapeRef.new(shape: SetStatOption, location_name: "SetStatOption"))
     ProtocolDetails.add_member(:as_2_transports, Shapes::ShapeRef.new(shape: As2Transports, location_name: "As2Transports"))
+    ProtocolDetails.add_member(:proxy_config, Shapes::ShapeRef.new(shape: ProxyConfig, location_name: "ProxyConfig"))
     ProtocolDetails.struct_class = Types::ProtocolDetails
 
     Protocols.member = Shapes::ShapeRef.new(shape: Protocol)
+
+    ProxyConfig.add_member(:sftp_mode, Shapes::ShapeRef.new(shape: ProxyMode, location_name: "SftpMode"))
+    ProxyConfig.struct_class = Types::ProxyConfig
 
     ResourceExistsException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
     ResourceExistsException.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "Resource"))

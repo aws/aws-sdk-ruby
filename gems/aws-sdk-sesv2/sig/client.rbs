@@ -101,7 +101,7 @@ module Aws
                                        id: ::String,
                                        namespace: ("VDM"),
                                        metric: ("SEND" | "COMPLAINT" | "PERMANENT_BOUNCE" | "TRANSIENT_BOUNCE" | "OPEN" | "CLICK" | "DELIVERY" | "DELIVERY_OPEN" | "DELIVERY_CLICK" | "DELIVERY_COMPLAINT"),
-                                       dimensions: Hash[("EMAIL_IDENTITY" | "CONFIGURATION_SET" | "ISP"), ::String]?,
+                                       dimensions: Hash[("EMAIL_IDENTITY" | "CONFIGURATION_SET" | "ISP" | "TENANT_NAME"), ::String]?,
                                        start_date: ::Time,
                                        end_date: ::Time
                                      }
@@ -331,7 +331,7 @@ module Aws
       def create_export_job: (
                                export_data_source: {
                                  metrics_data_source: {
-                                   dimensions: Hash[("EMAIL_IDENTITY" | "CONFIGURATION_SET" | "ISP"), Array[::String]],
+                                   dimensions: Hash[("EMAIL_IDENTITY" | "CONFIGURATION_SET" | "ISP" | "TENANT_NAME"), Array[::String]],
                                    namespace: ("VDM"),
                                    metrics: Array[
                                      {

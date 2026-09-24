@@ -90,6 +90,20 @@ module Aws
                                                        ) -> _CreateCentralizationRuleForOrganizationResponseSuccess
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCentralizationRuleForOrganizationResponseSuccess
 
+      interface _CreateDatasetIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetIntegrationOutput]
+        def arn: () -> ::String
+        def role_arn: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#create_dataset_integration-instance_method
+      def create_dataset_integration: (
+                                        role_arn: ::String,
+                                        ?tags: Hash[::String, ::String]
+                                      ) -> _CreateDatasetIntegrationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetIntegrationResponseSuccess
+
       interface _CreateS3TableIntegrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateS3TableIntegrationOutput]
         def arn: () -> ::String
@@ -149,6 +163,12 @@ module Aws
                                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#delete_dataset_integration-instance_method
+      def delete_dataset_integration: (
+                                        arn: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#delete_s3_table_integration-instance_method
       def delete_s3_table_integration: (
                                          arn: ::String
@@ -188,6 +208,7 @@ module Aws
         def failure_reason: () -> ("TRUSTED_ACCESS_NOT_ENABLED" | "DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION" | "INTERNAL_SERVER_ERROR")
         def tag_propagation_status: () -> ("Healthy" | "Unhealthy")
         def tag_propagation_failure_reason: () -> ("RoleNotAssumable" | "RoleLacksPermissions")
+        def context_graph_status: () -> ("Healthy" | "Unhealthy" | "Provisioning")
         def centralization_rule: () -> Types::CentralizationRule
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#get_centralization_rule_for_organization-instance_method
@@ -195,6 +216,19 @@ module Aws
                                                       rule_identifier: ::String
                                                     ) -> _GetCentralizationRuleForOrganizationResponseSuccess
                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCentralizationRuleForOrganizationResponseSuccess
+
+      interface _GetDatasetIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDatasetIntegrationOutput]
+        def arn: () -> ::String
+        def role_arn: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#get_dataset_integration-instance_method
+      def get_dataset_integration: (
+                                     arn: ::String
+                                   ) -> _GetDatasetIntegrationResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDatasetIntegrationResponseSuccess
 
       interface _GetS3TableIntegrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetS3TableIntegrationOutput]
@@ -299,6 +333,18 @@ module Aws
                                                         ?next_token: ::String
                                                       ) -> _ListCentralizationRulesForOrganizationResponseSuccess
                                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCentralizationRulesForOrganizationResponseSuccess
+
+      interface _ListDatasetIntegrationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetIntegrationsOutput]
+        def dataset_integration_summaries: () -> ::Array[Types::DatasetIntegrationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#list_dataset_integrations-instance_method
+      def list_dataset_integrations: (
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListDatasetIntegrationsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetIntegrationsResponseSuccess
 
       interface _ListResourceTelemetryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceTelemetryOutput]
@@ -477,6 +523,20 @@ module Aws
                                                          rule: Params::centralization_rule
                                                        ) -> _UpdateCentralizationRuleForOrganizationResponseSuccess
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCentralizationRuleForOrganizationResponseSuccess
+
+      interface _UpdateDatasetIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDatasetIntegrationOutput]
+        def arn: () -> ::String
+        def role_arn: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#update_dataset_integration-instance_method
+      def update_dataset_integration: (
+                                        arn: ::String,
+                                        role_arn: ::String
+                                      ) -> _UpdateDatasetIntegrationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDatasetIntegrationResponseSuccess
 
       interface _UpdateTelemetryPipelineResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTelemetryPipelineOutput]

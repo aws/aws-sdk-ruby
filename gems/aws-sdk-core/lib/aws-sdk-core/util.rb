@@ -91,6 +91,30 @@ module Aws
         end
       end
 
+      # Serializes a {Time} to the Smithy `epoch-seconds` format: seconds
+      # since the Unix epoch with optional millisecond precision. Whole-second
+      # values are returned as an Integer so the wire format is unchanged for
+      # the common case; sub-millisecond precision is truncated to milliseconds.
+      # @see https://smithy.io/2.0/spec/protocol-traits.html#timestamp-formats
+      # @param [Time] value
+      # @return [Integer, Float]
+      def serialize_epoch_seconds(value)
+        return value.to_i if value.nsec.zero?
+
+        value.to_i + value.nsec / 1_000_000 / 1000.0
+      end
+
+      # Serializes a {Time} to the Smithy `date-time` format: an RFC 3339
+      # (ISO 8601) string with optional millisecond precision and no UTC
+      # offset. Fractional seconds are included only when present, and
+      # sub-millisecond precision is truncated to milliseconds.
+      # @see https://smithy.io/2.0/spec/protocol-traits.html#timestamp-formats
+      # @param [Time] value
+      # @return [String]
+      def serialize_date_time(value)
+        value.nsec.zero? ? value.utc.iso8601 : value.utc.iso8601(3)
+      end
+
       # @param [String] value
       # @return [Time]
       def deserialize_time(value)

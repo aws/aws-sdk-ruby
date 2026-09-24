@@ -51,6 +51,19 @@
         {"shape":"ResourceLimitExceeded"}
       ]
     },
+    "AttachClusterNodeNetworkInterface":{
+      "name":"AttachClusterNodeNetworkInterface",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AttachClusterNodeNetworkInterfaceRequest"},
+      "output":{"shape":"AttachClusterNodeNetworkInterfaceResponse"},
+      "errors":[
+        {"shape":"ResourceNotFound"},
+        {"shape":"ResourceLimitExceeded"}
+      ]
+    },
     "AttachClusterNodeVolume":{
       "name":"AttachClusterNodeVolume",
       "http":{
@@ -6206,6 +6219,34 @@
       "min":1,
       "pattern":"[a-zA-Z0-9._-]+"
     },
+    "AttachClusterNodeNetworkInterfaceRequest":{
+      "type":"structure",
+      "required":[
+        "ClusterName",
+        "NodeId",
+        "NetworkInterfaceId"
+      ],
+      "members":{
+        "ClusterName":{"shape":"ClusterNameOrArn"},
+        "NodeId":{"shape":"ClusterNodeId"},
+        "NetworkInterfaceId":{"shape":"ClusterNetworkInterfaceId"}
+      }
+    },
+    "AttachClusterNodeNetworkInterfaceResponse":{
+      "type":"structure",
+      "required":[
+        "ClusterArn",
+        "NodeId",
+        "NetworkInterfaceId",
+        "AttachmentId"
+      ],
+      "members":{
+        "ClusterArn":{"shape":"ClusterArn"},
+        "NodeId":{"shape":"ClusterNodeId"},
+        "NetworkInterfaceId":{"shape":"ClusterNetworkInterfaceId"},
+        "AttachmentId":{"shape":"ClusterNetworkInterfaceAttachmentId"}
+      }
+    },
     "AttachClusterNodeVolumeRequest":{
       "type":"structure",
       "required":[
@@ -8829,11 +8870,23 @@
         "InterfaceType":{"shape":"ClusterInterfaceType"}
       }
     },
+    "ClusterNetworkInterfaceAttachmentId":{
+      "type":"string",
+      "max":28,
+      "min":1,
+      "pattern":"eni-attach-[0-9a-f]{8}(?:[0-9a-f]{9})?"
+    },
     "ClusterNetworkInterfaceDetails":{
       "type":"structure",
       "members":{
         "InterfaceType":{"shape":"ClusterInterfaceType"}
       }
+    },
+    "ClusterNetworkInterfaceId":{
+      "type":"string",
+      "max":21,
+      "min":1,
+      "pattern":"eni-[0-9a-f]{8}(?:[0-9a-f]{9})?"
     },
     "ClusterNodeDetails":{
       "type":"structure",
@@ -17257,6 +17310,43 @@
       "min":0,
       "pattern":".*"
     },
+    "HubContent":{
+      "type":"structure",
+      "required":[
+        "HubContentName",
+        "HubContentArn",
+        "HubContentVersion",
+        "HubContentType",
+        "DocumentSchemaVersion",
+        "HubName",
+        "HubArn",
+        "HubContentStatus",
+        "CreationTime"
+      ],
+      "members":{
+        "HubContentName":{"shape":"HubContentName"},
+        "HubContentArn":{"shape":"HubContentArn"},
+        "HubContentVersion":{"shape":"HubContentVersion"},
+        "HubContentType":{"shape":"HubContentType"},
+        "DocumentSchemaVersion":{"shape":"DocumentSchemaVersion"},
+        "HubName":{"shape":"HubName"},
+        "HubArn":{"shape":"HubArn"},
+        "HubContentDisplayName":{"shape":"HubContentDisplayName"},
+        "HubContentDescription":{"shape":"HubContentDescription"},
+        "HubContentMarkdown":{"shape":"HubContentMarkdown"},
+        "HubContentDocument":{"shape":"HubContentDocument"},
+        "SageMakerPublicHubContentArn":{"shape":"SageMakerPublicHubContentArn"},
+        "ReferenceMinVersion":{"shape":"ReferenceMinVersion"},
+        "SupportStatus":{"shape":"HubContentSupportStatus"},
+        "HubContentSearchKeywords":{"shape":"HubContentSearchKeywordList"},
+        "HubContentDependencies":{"shape":"HubContentDependencyList"},
+        "HubContentStatus":{"shape":"HubContentStatus"},
+        "FailureReason":{"shape":"FailureReason"},
+        "CreationTime":{"shape":"Timestamp"},
+        "LastModifiedTime":{"shape":"Timestamp"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
     "HubContentArn":{
       "type":"string",
       "max":255,
@@ -25640,7 +25730,48 @@
         "ml.g7.8xlarge",
         "ml.g7.12xlarge",
         "ml.g7.24xlarge",
-        "ml.g7.48xlarge"
+        "ml.g7.48xlarge",
+        "ml.r6i.large",
+        "ml.r6i.xlarge",
+        "ml.r6i.2xlarge",
+        "ml.r6i.4xlarge",
+        "ml.r6i.8xlarge",
+        "ml.r6i.12xlarge",
+        "ml.r6i.16xlarge",
+        "ml.r6i.24xlarge",
+        "ml.r6i.32xlarge",
+        "ml.m8i.large",
+        "ml.m8i.xlarge",
+        "ml.m8i.2xlarge",
+        "ml.m8i.4xlarge",
+        "ml.m8i.8xlarge",
+        "ml.m8i.12xlarge",
+        "ml.m8i.16xlarge",
+        "ml.m8i.24xlarge",
+        "ml.m8i.32xlarge",
+        "ml.m8i.48xlarge",
+        "ml.m8i.96xlarge",
+        "ml.c8i.xlarge",
+        "ml.c8i.2xlarge",
+        "ml.c8i.4xlarge",
+        "ml.c8i.8xlarge",
+        "ml.c8i.12xlarge",
+        "ml.c8i.16xlarge",
+        "ml.c8i.24xlarge",
+        "ml.c8i.32xlarge",
+        "ml.c8i.48xlarge",
+        "ml.c8i.96xlarge",
+        "ml.r8i.large",
+        "ml.r8i.xlarge",
+        "ml.r8i.2xlarge",
+        "ml.r8i.4xlarge",
+        "ml.r8i.8xlarge",
+        "ml.r8i.12xlarge",
+        "ml.r8i.16xlarge",
+        "ml.r8i.24xlarge",
+        "ml.r8i.32xlarge",
+        "ml.r8i.48xlarge",
+        "ml.r8i.96xlarge"
       ]
     },
     "ProcessingJob":{
@@ -27523,7 +27654,8 @@
         "HyperParameterTuningJob",
         "ModelCard",
         "PipelineVersion",
-        "Job"
+        "Job",
+        "HubContent"
       ]
     },
     "ResponseMIMEType":{
@@ -27968,7 +28100,8 @@
         "HyperParameterTuningJob":{"shape":"HyperParameterTuningJobSearchEntity"},
         "ModelCard":{"shape":"ModelCard"},
         "Model":{"shape":"ModelDashboardModel"},
-        "Job":{"shape":"Job"}
+        "Job":{"shape":"Job"},
+        "HubContent":{"shape":"HubContent"}
       }
     },
     "SearchRequest":{
@@ -30000,7 +30133,48 @@
         "ml.g7.8xlarge",
         "ml.g7.12xlarge",
         "ml.g7.24xlarge",
-        "ml.g7.48xlarge"
+        "ml.g7.48xlarge",
+        "ml.r6i.large",
+        "ml.r6i.xlarge",
+        "ml.r6i.2xlarge",
+        "ml.r6i.4xlarge",
+        "ml.r6i.8xlarge",
+        "ml.r6i.12xlarge",
+        "ml.r6i.16xlarge",
+        "ml.r6i.24xlarge",
+        "ml.r6i.32xlarge",
+        "ml.m8i.large",
+        "ml.m8i.xlarge",
+        "ml.m8i.2xlarge",
+        "ml.m8i.4xlarge",
+        "ml.m8i.8xlarge",
+        "ml.m8i.12xlarge",
+        "ml.m8i.16xlarge",
+        "ml.m8i.24xlarge",
+        "ml.m8i.32xlarge",
+        "ml.m8i.48xlarge",
+        "ml.m8i.96xlarge",
+        "ml.c8i.xlarge",
+        "ml.c8i.2xlarge",
+        "ml.c8i.4xlarge",
+        "ml.c8i.8xlarge",
+        "ml.c8i.12xlarge",
+        "ml.c8i.16xlarge",
+        "ml.c8i.24xlarge",
+        "ml.c8i.32xlarge",
+        "ml.c8i.48xlarge",
+        "ml.c8i.96xlarge",
+        "ml.r8i.large",
+        "ml.r8i.xlarge",
+        "ml.r8i.2xlarge",
+        "ml.r8i.4xlarge",
+        "ml.r8i.8xlarge",
+        "ml.r8i.12xlarge",
+        "ml.r8i.16xlarge",
+        "ml.r8i.24xlarge",
+        "ml.r8i.32xlarge",
+        "ml.r8i.48xlarge",
+        "ml.r8i.96xlarge"
       ]
     },
     "TrainingInstanceTypes":{

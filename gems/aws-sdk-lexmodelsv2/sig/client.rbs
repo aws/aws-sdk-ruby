@@ -250,6 +250,7 @@ module Aws
         def creation_date_time: () -> ::Time
         def generative_ai_settings: () -> Types::GenerativeAISettings
         def speech_detection_sensitivity: () -> ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
+        def speaker_diarization_settings: () -> Types::SpeakerDiarizationSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelsV2/Client.html#create_bot_locale-instance_method
       def create_bot_locale: (
@@ -277,7 +278,10 @@ module Aws
                                },
                                ?speech_recognition_settings: Params::speech_recognition_settings,
                                ?generative_ai_settings: Params::generative_ai_settings,
-                               ?speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
+                               ?speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance"),
+                               ?speaker_diarization_settings: {
+                                 enabled: bool
+                               }
                              ) -> _CreateBotLocaleResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBotLocaleResponseSuccess
 
@@ -831,6 +835,7 @@ module Aws
         def recommended_actions: () -> ::Array[::String]
         def generative_ai_settings: () -> Types::GenerativeAISettings
         def speech_detection_sensitivity: () -> ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
+        def speaker_diarization_settings: () -> Types::SpeakerDiarizationSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelsV2/Client.html#describe_bot_locale-instance_method
       def describe_bot_locale: (
@@ -2107,6 +2112,9 @@ module Aws
                                 start_delay_in_milliseconds: ::Integer?,
                                 minimum_play_duration_in_milliseconds: ::Integer?,
                                 response_delivery_delay_in_milliseconds: ::Integer?
+                              }?,
+                              speaker_diarization_settings: {
+                                enabled: bool
                               }?
                             }?,
                             custom_vocabulary_import_specification: {
@@ -2339,6 +2347,7 @@ module Aws
         def recommended_actions: () -> ::Array[::String]
         def generative_ai_settings: () -> Types::GenerativeAISettings
         def speech_detection_sensitivity: () -> ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
+        def speaker_diarization_settings: () -> Types::SpeakerDiarizationSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelsV2/Client.html#update_bot_locale-instance_method
       def update_bot_locale: (
@@ -2366,7 +2375,10 @@ module Aws
                                },
                                ?speech_recognition_settings: Params::speech_recognition_settings,
                                ?generative_ai_settings: Params::generative_ai_settings,
-                               ?speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
+                               ?speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance"),
+                               ?speaker_diarization_settings: {
+                                 enabled: bool
+                               }
                              ) -> _UpdateBotLocaleResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBotLocaleResponseSuccess
 

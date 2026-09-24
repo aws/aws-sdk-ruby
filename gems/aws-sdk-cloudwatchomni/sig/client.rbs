@@ -1,0 +1,990 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudWatchOmni
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateAccessGrantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessGrantOutput]
+        def access_grant: () -> Types::AccessGrant
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#create_access_grant-instance_method
+      def create_access_grant: (
+                                 domain_id: ::String,
+                                 space_id: ::String,
+                                 name: ::String,
+                                 principal: {
+                                   principal_type: ("IDC_USER" | "IDC_GROUP" | "IAM_USER" | "IAM_ROLE" | "IAM_ROOT" | "ACCESS_PROFILE" | "ALERT" | "AGENT"),
+                                   principal_id: ::String?,
+                                   principal_attributes: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     }
+                                   ]?
+                                 },
+                                 permission: ("SPACE_ADMIN" | "READ" | "READ_WRITE_DELETE" | "CUSTOM"),
+                                 ?scoped_actions: Array[
+                                   {
+                                     actions: Array[::String],
+                                     resources: Array[
+                                       {
+                                         resource_type: ::String,
+                                         resource_arns: Array[::String]?,
+                                         tags: Hash[::String, ::String]?,
+                                         signal_types: Array[("LOGS" | "TRACES")]?,
+                                         row_scope_groups: Array[
+                                           Array[
+                                             {
+                                               field: ::String,
+                                               operator: ("IN"),
+                                               values: Array[::String]
+                                             }
+                                           ]
+                                         ]?
+                                       }
+                                     ]?,
+                                     context_conditions: Hash[::String, Array[::String]]?
+                                   }
+                                 ],
+                                 ?tags: Hash[::String, ::String],
+                                 ?client_token: ::String
+                               ) -> _CreateAccessGrantResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessGrantResponseSuccess
+
+      interface _CreateAccessProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessProfileOutput]
+        def access_profile: () -> Types::AccessProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#create_access_profile-instance_method
+      def create_access_profile: (
+                                   space_id: ::String,
+                                   name: ::String,
+                                   ?description: ::String,
+                                   ?tags: Hash[::String, ::String],
+                                   ?client_token: ::String
+                                 ) -> _CreateAccessProfileResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessProfileResponseSuccess
+
+      interface _CreateAlertResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAlertOutput]
+        def alert_arn: () -> ::String
+        def alert: () -> Types::Alert
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#create_alert-instance_method
+      def create_alert: (
+                          space_id: ::String,
+                          profile_id: ::String,
+                          name: ::String,
+                          ?description: ::String,
+                          rule: Params::rule,
+                          ?notifications_enabled: bool,
+                          ?tags: Hash[::String, ::String],
+                          ?notification_rules: Array[
+                            Params::notification_rule
+                          ],
+                          ?client_token: ::String
+                        ) -> _CreateAlertResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAlertResponseSuccess
+
+      interface _CreateDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainOutput]
+        def domain: () -> Types::Domain
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#create_domain-instance_method
+      def create_domain: (
+                           name: ::String,
+                           identity_providers: Array[("IAM" | "IDC")],
+                           ?identity_provider_configuration: {
+                             identity_center_configuration: {
+                               identity_center_instance_arn: ::String?
+                             }?
+                           },
+                           ?tags: Hash[::String, ::String],
+                           ?client_token: ::String
+                         ) -> _CreateDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainResponseSuccess
+
+      interface _CreateDomainAccessGrantForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainAccessGrantForOrganizationOutput]
+        def access_grant: () -> Types::OrganizationAccessGrant
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#create_domain_access_grant_for_organization-instance_method
+      def create_domain_access_grant_for_organization: (
+                                                         domain_id: ::String,
+                                                         name: ::String,
+                                                         principal: {
+                                                           principal_type: ("IDC_USER" | "IDC_GROUP" | "IAM_USER" | "IAM_ROLE" | "IAM_ROOT"),
+                                                           principal_id: ::String?,
+                                                           principal_attributes: Array[
+                                                             {
+                                                               key: ::String,
+                                                               value: ::String
+                                                             }
+                                                           ]?
+                                                         },
+                                                         permission: ("ADMIN"),
+                                                         ?tags: Hash[::String, ::String],
+                                                         ?client_token: ::String
+                                                       ) -> _CreateDomainAccessGrantForOrganizationResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainAccessGrantForOrganizationResponseSuccess
+
+      interface _CreateDomainForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainForOrganizationOutput]
+        def organization_domain: () -> Types::OrganizationDomain
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#create_domain_for_organization-instance_method
+      def create_domain_for_organization: (
+                                            name: ::String,
+                                            identity_providers: Array[("IAM" | "IDC")],
+                                            ?identity_provider_configuration: {
+                                              identity_center_configuration: {
+                                                identity_center_instance_arn: ::String?
+                                              }?
+                                            },
+                                            domain_access_role_arn: ::String,
+                                            ?tags: Hash[::String, ::String],
+                                            ?client_token: ::String
+                                          ) -> _CreateDomainForOrganizationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainForOrganizationResponseSuccess
+
+      interface _CreateIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIntegrationOutput]
+        def integration: () -> Types::Integration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#create_integration-instance_method
+      def create_integration: (
+                                integration_type: ("AWS_CONFIG_SLREC" | "SLACK" | "EXTERNAL_AGENT" | "AWS_INTEGRATION"),
+                                name: ::String,
+                                ?credential: Params::integration_credential,
+                                ?integration_attributes: Hash[::String, ::String],
+                                ?role_arn: ::String,
+                                ?tags: Hash[::String, ::String],
+                                ?client_token: ::String
+                              ) -> _CreateIntegrationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIntegrationResponseSuccess
+
+      interface _CreateOmniDashboardResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateOmniDashboardOutput]
+        def omni_dashboard: () -> Types::OmniDashboard
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#create_omni_dashboard-instance_method
+      def create_omni_dashboard: (
+                                   space_id: ::String,
+                                   name: ::String,
+                                   body: ::String,
+                                   ?description: ::String,
+                                   ?tags: Hash[::String, ::String],
+                                   ?client_token: ::String
+                                 ) -> _CreateOmniDashboardResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOmniDashboardResponseSuccess
+
+      interface _CreateOneTimeDeepLinkCodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateOneTimeDeepLinkCodeOutput]
+        def code: () -> ::String
+        def deep_link_url: () -> ::String
+        def expires_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#create_one_time_deep_link_code-instance_method
+      def create_one_time_deep_link_code: (
+                                            domain_id: ::String,
+                                            ?ttl_seconds: ::Integer,
+                                            ?redirect_url: ::String
+                                          ) -> _CreateOneTimeDeepLinkCodeResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOneTimeDeepLinkCodeResponseSuccess
+
+      interface _CreateSpaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSpaceOutput]
+        def space: () -> Types::Space
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#create_space-instance_method
+      def create_space: (
+                          name: ::String,
+                          domain_id: ::String,
+                          data_access_role_arn: ::String,
+                          ?agent_core_evaluation_role_arn: ::String,
+                          ?encryption_configuration: {
+                            encryption_strategy: ("AWS_OWNED" | "CUSTOMER_MANAGED"),
+                            kms_key_arn: ::String?
+                          },
+                          ?tags: Hash[::String, ::String],
+                          ?client_token: ::String
+                        ) -> _CreateSpaceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSpaceResponseSuccess
+
+      interface _CreateViewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateViewResponse]
+        def name: () -> ::String
+        def type: () -> ("USER" | "MANAGED")
+        def description: () -> ::String
+        def definition: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#create_view-instance_method
+      def create_view: (
+                         name: ::String,
+                         definition: ::String,
+                         ?description: ::String,
+                         ?tags: Hash[::String, ::String],
+                         ?client_token: ::String
+                       ) -> _CreateViewResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateViewResponseSuccess
+
+      interface _DeleteAccessGrantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccessGrantOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#delete_access_grant-instance_method
+      def delete_access_grant: (
+                                 grant_id: ::String
+                               ) -> _DeleteAccessGrantResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccessGrantResponseSuccess
+
+      interface _DeleteAccessProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccessProfileOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#delete_access_profile-instance_method
+      def delete_access_profile: (
+                                   space_id: ::String,
+                                   profile_id: ::String
+                                 ) -> _DeleteAccessProfileResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccessProfileResponseSuccess
+
+      interface _DeleteAlertResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAlertOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#delete_alert-instance_method
+      def delete_alert: (
+                          space_id: ::String,
+                          alert_id: ::String
+                        ) -> _DeleteAlertResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAlertResponseSuccess
+
+      interface _DeleteDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#delete_domain-instance_method
+      def delete_domain: (
+                           domain_id: ::String
+                         ) -> _DeleteDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainResponseSuccess
+
+      interface _DeleteDomainAccessGrantForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainAccessGrantForOrganizationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#delete_domain_access_grant_for_organization-instance_method
+      def delete_domain_access_grant_for_organization: (
+                                                         grant_id: ::String
+                                                       ) -> _DeleteDomainAccessGrantForOrganizationResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainAccessGrantForOrganizationResponseSuccess
+
+      interface _DeleteDomainForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainForOrganizationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#delete_domain_for_organization-instance_method
+      def delete_domain_for_organization: (
+                                            domain_id: ::String
+                                          ) -> _DeleteDomainForOrganizationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainForOrganizationResponseSuccess
+
+      interface _DeleteIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIntegrationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#delete_integration-instance_method
+      def delete_integration: (
+                                identifier: {
+                                  integration_id: ::String?,
+                                  integration_arn: ::String?,
+                                  integration_name: ::String?
+                                }
+                              ) -> _DeleteIntegrationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIntegrationResponseSuccess
+
+      interface _DeleteOmniDashboardResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteOmniDashboardOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#delete_omni_dashboard-instance_method
+      def delete_omni_dashboard: (
+                                   space_id: ::String,
+                                   dashboard_id: ::String
+                                 ) -> _DeleteOmniDashboardResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteOmniDashboardResponseSuccess
+
+      interface _DeleteSpaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSpaceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#delete_space-instance_method
+      def delete_space: (
+                          space_id: ::String
+                        ) -> _DeleteSpaceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSpaceResponseSuccess
+
+      interface _DeleteViewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteViewResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#delete_view-instance_method
+      def delete_view: (
+                         name: ::String
+                       ) -> _DeleteViewResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteViewResponseSuccess
+
+      interface _GetAccessGrantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessGrantOutput]
+        def access_grant: () -> Types::AccessGrant
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#get_access_grant-instance_method
+      def get_access_grant: (
+                              grant_id: ::String
+                            ) -> _GetAccessGrantResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessGrantResponseSuccess
+
+      interface _GetAccessProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessProfileOutput]
+        def access_profile: () -> Types::AccessProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#get_access_profile-instance_method
+      def get_access_profile: (
+                                space_id: ::String,
+                                profile_id: ::String
+                              ) -> _GetAccessProfileResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessProfileResponseSuccess
+
+      interface _GetAlertResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAlertOutput]
+        def alert: () -> Types::Alert
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#get_alert-instance_method
+      def get_alert: (
+                       space_id: ::String,
+                       alert_id: ::String
+                     ) -> _GetAlertResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAlertResponseSuccess
+
+      interface _GetContextGraphResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContextGraphOutput]
+        def nodes: () -> ::Array[Types::Node]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#get_context_graph-instance_method
+      def get_context_graph: (
+                               ?node_filters: {
+                                 node_id: ::String?,
+                                 node_type: ("SERVICE" | "RESOURCE" | "REMOTE_SERVICE")?,
+                                 name: ::String?,
+                                 tags: Array[
+                                   {
+                                     key: ::String,
+                                     values: Array[::String]?
+                                   }
+                                 ]?,
+                                 telemetry_attributes: Array[
+                                   {
+                                     key: ::String,
+                                     values: Array[::String]?
+                                   }
+                                 ]?,
+                                 region: Array[::String]?,
+                                 cloud_provider: Array[::String]?,
+                                 source_account_id: Array[::String]?,
+                                 namespace: Array[::String]?,
+                                 category: Array[("GEN_AI_AGENT" | "GEN_AI_MODEL" | "DATABASE" | "MESSAGING_QUEUE" | "COMPUTE" | "STORAGE" | "NETWORK")]?,
+                                 stage: Array[::String]?,
+                                 sources: Array[("VPC_FLOW_LOG" | "CLOUDTRAIL" | "IAM_POLICY" | "CODE_SEMANTICS" | "TELEMETRY" | "AZURE_VNET_FLOW_LOG" | "ELB_ACCESS_LOG" | "CLOUDFRONT_ACCESS_LOG" | "S3_ACCESS_LOG" | "WAF_ACCESS_LOG" | "AWS_INTEGRATION" | "CONFIG")]?
+                               },
+                               ?edge_filters: {
+                                 edge_id: ::String?,
+                                 from: ::String?,
+                                 to: ::String?,
+                                 edge_type: ("CALLS" | "ACCESSES" | "RUNS_ON")?,
+                                 operations: Array[::String]?,
+                                 telemetry_attributes: Array[
+                                   {
+                                     key: ::String,
+                                     values: Array[::String]?
+                                   }
+                                 ]?,
+                                 sources: Array[("VPC_FLOW_LOG" | "CLOUDTRAIL" | "IAM_POLICY" | "CODE_SEMANTICS" | "TELEMETRY" | "AZURE_VNET_FLOW_LOG" | "ELB_ACCESS_LOG" | "CLOUDFRONT_ACCESS_LOG" | "S3_ACCESS_LOG" | "WAF_ACCESS_LOG" | "AWS_INTEGRATION" | "CONFIG")]?
+                               },
+                               start_time: ::Time,
+                               end_time: ::Time,
+                               ?depth: ::Integer,
+                               ?max_results: ::Integer,
+                               ?max_edges_per_node: ::Integer,
+                               ?include_metadata: bool,
+                               ?next_token: ::String
+                             ) -> _GetContextGraphResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContextGraphResponseSuccess
+
+      interface _GetDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainOutput]
+        def domain: () -> Types::Domain
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#get_domain-instance_method
+      def get_domain: (
+                        domain_id: ::String
+                      ) -> _GetDomainResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainResponseSuccess
+
+      interface _GetDomainAccessGrantForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainAccessGrantForOrganizationOutput]
+        def access_grant: () -> Types::OrganizationAccessGrant
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#get_domain_access_grant_for_organization-instance_method
+      def get_domain_access_grant_for_organization: (
+                                                      grant_id: ::String
+                                                    ) -> _GetDomainAccessGrantForOrganizationResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainAccessGrantForOrganizationResponseSuccess
+
+      interface _GetDomainForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainForOrganizationOutput]
+        def organization_domain: () -> Types::OrganizationDomain
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#get_domain_for_organization-instance_method
+      def get_domain_for_organization: (
+                                         domain_id: ::String
+                                       ) -> _GetDomainForOrganizationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainForOrganizationResponseSuccess
+
+      interface _GetIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIntegrationOutput]
+        def integration: () -> Types::Integration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#get_integration-instance_method
+      def get_integration: (
+                             identifier: {
+                               integration_id: ::String?,
+                               integration_arn: ::String?,
+                               integration_name: ::String?
+                             }
+                           ) -> _GetIntegrationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIntegrationResponseSuccess
+
+      interface _GetIntelligenceConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIntelligenceConfigurationOutput]
+        def account_id: () -> ::String
+        def kms_key_arn: () -> ::String
+        def updated_at: () -> ::Time
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#get_intelligence_configuration-instance_method
+      def get_intelligence_configuration: (
+                                          ) -> _GetIntelligenceConfigurationResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIntelligenceConfigurationResponseSuccess
+
+      interface _GetOmniDashboardResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOmniDashboardOutput]
+        def omni_dashboard: () -> Types::OmniDashboard
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#get_omni_dashboard-instance_method
+      def get_omni_dashboard: (
+                                space_id: ::String,
+                                dashboard_id: ::String
+                              ) -> _GetOmniDashboardResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOmniDashboardResponseSuccess
+
+      interface _GetSpaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSpaceOutput]
+        def space: () -> Types::Space
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#get_space-instance_method
+      def get_space: (
+                       space_id: ::String
+                     ) -> _GetSpaceResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSpaceResponseSuccess
+
+      interface _GetSpaceCredentialsForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSpaceCredentialsForOrganizationOutput]
+        def credentials: () -> Types::AwsCredentials
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#get_space_credentials_for_organization-instance_method
+      def get_space_credentials_for_organization: (
+                                                    context: {
+                                                      space_id: ::String?,
+                                                      domain_id: ::String?,
+                                                      target_account_id: ::String?
+                                                    },
+                                                    credential_type: ("SPACE_OPERATION")
+                                                  ) -> _GetSpaceCredentialsForOrganizationResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSpaceCredentialsForOrganizationResponseSuccess
+
+      interface _GetTelemetryQueryResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTelemetryQueryResultsResponse]
+        def status: () -> ("Running" | "Failed" | "Complete" | "Cancelled")
+        def rows: () -> ::Array[::Hash[::String, ::String]]
+        def next_token: () -> ::String
+        def statistics: () -> Types::QueryStatistics
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#get_telemetry_query_results-instance_method
+      def get_telemetry_query_results: (
+                                         query_id: ::String,
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer
+                                       ) -> _GetTelemetryQueryResultsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTelemetryQueryResultsResponseSuccess
+
+      interface _GetViewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetViewResponse]
+        def name: () -> ::String
+        def type: () -> ("USER" | "MANAGED")
+        def description: () -> ::String
+        def definition: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#get_view-instance_method
+      def get_view: (
+                      name: ::String
+                    ) -> _GetViewResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetViewResponseSuccess
+
+      interface _ListAccessGrantsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessGrantsOutput]
+        def items: () -> ::Array[Types::AccessGrantSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#list_access_grants-instance_method
+      def list_access_grants: (
+                                ?domain_id: ::String,
+                                ?space_id: ::String,
+                                ?principal_id: ::String,
+                                ?principal_type: ("IDC_USER" | "IDC_GROUP" | "IAM_USER" | "IAM_ROLE" | "IAM_ROOT" | "ACCESS_PROFILE" | "ALERT" | "AGENT"),
+                                ?permission: ("SPACE_ADMIN" | "READ" | "READ_WRITE_DELETE" | "CUSTOM"),
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListAccessGrantsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessGrantsResponseSuccess
+
+      interface _ListAccessProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessProfilesOutput]
+        def items: () -> ::Array[Types::AccessProfileSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#list_access_profiles-instance_method
+      def list_access_profiles: (
+                                  space_id: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListAccessProfilesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessProfilesResponseSuccess
+
+      interface _ListAlertsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAlertsOutput]
+        def items: () -> ::Array[Types::AlertSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#list_alerts-instance_method
+      def list_alerts: (
+                         space_id: ::String,
+                         ?filter_criteria: {
+                           names: Array[::String]?,
+                           name_prefix: ::String?,
+                           ids: Array[::String]?,
+                           state_value: Array[("OK" | "WARNING" | "CRITICAL" | "NODATA")]?,
+                           notifications_enabled: bool?
+                         },
+                         ?sort_by: ("NAME" | "STATE"),
+                         ?sort_order: ("ASC" | "DESC"),
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
+                       ) -> _ListAlertsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAlertsResponseSuccess
+
+      interface _ListDomainAccessGrantsForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainAccessGrantsForOrganizationOutput]
+        def items: () -> ::Array[Types::OrganizationAccessGrantSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#list_domain_access_grants_for_organization-instance_method
+      def list_domain_access_grants_for_organization: (
+                                                        ?domain_id: ::String,
+                                                        ?principal_id: ::String,
+                                                        ?principal_type: ("IDC_USER" | "IDC_GROUP" | "IAM_USER" | "IAM_ROLE" | "IAM_ROOT"),
+                                                        ?permission: ("ADMIN"),
+                                                        ?next_token: ::String,
+                                                        ?max_results: ::Integer
+                                                      ) -> _ListDomainAccessGrantsForOrganizationResponseSuccess
+                                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainAccessGrantsForOrganizationResponseSuccess
+
+      interface _ListDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainsOutput]
+        def items: () -> ::Array[Types::DomainSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#list_domains-instance_method
+      def list_domains: (
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
+                        ) -> _ListDomainsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainsResponseSuccess
+
+      interface _ListIntegrationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIntegrationsOutput]
+        def items: () -> ::Array[Types::Integration]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#list_integrations-instance_method
+      def list_integrations: (
+                               ?integration_type: ("AWS_CONFIG_SLREC" | "SLACK" | "EXTERNAL_AGENT" | "AWS_INTEGRATION"),
+                               ?status: ("ACTIVE" | "DELETED" | "PENDING" | "PENDING_OAUTH" | "ERROR" | "FAILED"),
+                               ?name: ::String,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListIntegrationsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIntegrationsResponseSuccess
+
+      interface _ListOmniDashboardsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOmniDashboardsOutput]
+        def items: () -> ::Array[Types::OmniDashboardSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#list_omni_dashboards-instance_method
+      def list_omni_dashboards: (
+                                  space_id: ::String,
+                                  ?name_prefix: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListOmniDashboardsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOmniDashboardsResponseSuccess
+
+      interface _ListSpacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSpacesOutput]
+        def items: () -> ::Array[Types::SpaceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#list_spaces-instance_method
+      def list_spaces: (
+                         ?domain_id: ::String,
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
+                       ) -> _ListSpacesResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSpacesResponseSuccess
+
+      interface _ListSpacesForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSpacesForOrganizationOutput]
+        def items: () -> ::Array[Types::SpaceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#list_spaces_for_organization-instance_method
+      def list_spaces_for_organization: (
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListSpacesForOrganizationResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSpacesForOrganizationResponseSuccess
+
+      interface _ListTelemetryFieldsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTelemetryFieldsResponse]
+        def fields: () -> ::Array[Types::Field]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#list_telemetry_fields-instance_method
+      def list_telemetry_fields: (
+                                   data_set_name: ::String,
+                                   ?telemetry_type: ("LOGS" | "TRACES"),
+                                   ?start_time: ::Time,
+                                   ?end_time: ::Time,
+                                   ?next_token: ::String
+                                 ) -> _ListTelemetryFieldsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTelemetryFieldsResponseSuccess
+
+      interface _ListTelemetryQuerySessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTelemetryQuerySessionsResponse]
+        def sessions: () -> ::Array[Types::SessionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#list_telemetry_query_sessions-instance_method
+      def list_telemetry_query_sessions: (
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
+                                         ) -> _ListTelemetryQuerySessionsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTelemetryQuerySessionsResponseSuccess
+
+      interface _ListViewsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListViewsResponse]
+        def items: () -> ::Array[Types::ViewSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#list_views-instance_method
+      def list_views: (
+                        ?type: ("USER" | "MANAGED"),
+                        ?max_results: ::Integer,
+                        ?next_token: ::String
+                      ) -> _ListViewsResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListViewsResponseSuccess
+
+      interface _PutIntelligenceConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutIntelligenceConfigurationOutput]
+        def account_id: () -> ::String
+        def kms_key_arn: () -> ::String
+        def updated_at: () -> ::Time
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#put_intelligence_configuration-instance_method
+      def put_intelligence_configuration: (
+                                            ?kms_key_arn: ::String,
+                                            ?remove_kms_key: bool,
+                                            ?client_token: ::String
+                                          ) -> _PutIntelligenceConfigurationResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutIntelligenceConfigurationResponseSuccess
+
+      interface _SearchPrincipalsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchPrincipalsOutput]
+        def results: () -> ::Array[Types::PrincipalSearchResult]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#search_principals-instance_method
+      def search_principals: (
+                               domain_id: ::String,
+                               search_query: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _SearchPrincipalsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchPrincipalsResponseSuccess
+
+      interface _StartTelemetryQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartTelemetryQueryResponse]
+        def query_id: () -> ::String
+        def session_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#start_telemetry_query-instance_method
+      def start_telemetry_query: (
+                                   query_string: ::String,
+                                   session_id: ::String
+                                 ) -> _StartTelemetryQueryResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTelemetryQueryResponseSuccess
+
+      interface _StartTelemetryQuerySessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartTelemetryQuerySessionResponse]
+        def session_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#start_telemetry_query_session-instance_method
+      def start_telemetry_query_session: (
+                                           ?session_name: ::String
+                                         ) -> _StartTelemetryQuerySessionResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTelemetryQuerySessionResponseSuccess
+
+      interface _StopTelemetryQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopTelemetryQueryResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#stop_telemetry_query-instance_method
+      def stop_telemetry_query: (
+                                  query_id: ::String
+                                ) -> _StopTelemetryQueryResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopTelemetryQueryResponseSuccess
+
+      interface _StopTelemetryQuerySessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopTelemetryQuerySessionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#stop_telemetry_query_session-instance_method
+      def stop_telemetry_query_session: (
+                                          session_id: ::String
+                                        ) -> _StopTelemetryQuerySessionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopTelemetryQuerySessionResponseSuccess
+
+      interface _UpdateAccessProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccessProfileOutput]
+        def access_profile: () -> Types::AccessProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#update_access_profile-instance_method
+      def update_access_profile: (
+                                   space_id: ::String,
+                                   profile_id: ::String,
+                                   ?name: ::String,
+                                   ?description: ::String
+                                 ) -> _UpdateAccessProfileResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccessProfileResponseSuccess
+
+      interface _UpdateAlertResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAlertOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#update_alert-instance_method
+      def update_alert: (
+                          space_id: ::String,
+                          alert_id: ::String,
+                          ?profile_id: ::String,
+                          ?name: ::String,
+                          ?description: ::String,
+                          ?rule: Params::rule,
+                          ?notifications_enabled: bool,
+                          ?notification_rules: Array[
+                            Params::notification_rule
+                          ]
+                        ) -> _UpdateAlertResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAlertResponseSuccess
+
+      interface _UpdateDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDomainOutput]
+        def domain: () -> Types::Domain
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#update_domain-instance_method
+      def update_domain: (
+                           domain_id: ::String,
+                           ?name: ::String,
+                           ?identity_providers: Array[("IAM" | "IDC")],
+                           ?identity_provider_configuration: {
+                             identity_center_configuration: {
+                               identity_center_instance_arn: ::String?
+                             }?
+                           }
+                         ) -> _UpdateDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainResponseSuccess
+
+      interface _UpdateDomainForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDomainForOrganizationOutput]
+        def organization_domain: () -> Types::OrganizationDomain
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#update_domain_for_organization-instance_method
+      def update_domain_for_organization: (
+                                            domain_id: ::String,
+                                            ?name: ::String,
+                                            ?identity_providers: Array[("IAM" | "IDC")],
+                                            ?identity_provider_configuration: {
+                                              identity_center_configuration: {
+                                                identity_center_instance_arn: ::String?
+                                              }?
+                                            }
+                                          ) -> _UpdateDomainForOrganizationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainForOrganizationResponseSuccess
+
+      interface _UpdateIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIntegrationOutput]
+        def integration: () -> Types::Integration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#update_integration-instance_method
+      def update_integration: (
+                                identifier: {
+                                  integration_id: ::String?,
+                                  integration_arn: ::String?,
+                                  integration_name: ::String?
+                                },
+                                ?credential: Params::integration_credential,
+                                ?integration_attributes: Hash[::String, ::String],
+                                ?role_arn: ::String
+                              ) -> _UpdateIntegrationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIntegrationResponseSuccess
+
+      interface _UpdateOmniDashboardResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOmniDashboardOutput]
+        def omni_dashboard: () -> Types::OmniDashboard
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#update_omni_dashboard-instance_method
+      def update_omni_dashboard: (
+                                   space_id: ::String,
+                                   dashboard_id: ::String,
+                                   ?body: ::String,
+                                   ?name: ::String,
+                                   ?description: ::String
+                                 ) -> _UpdateOmniDashboardResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOmniDashboardResponseSuccess
+
+      interface _UpdateSpaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSpaceOutput]
+        def space: () -> Types::Space
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#update_space-instance_method
+      def update_space: (
+                          space_id: ::String,
+                          ?name: ::String,
+                          ?encryption_configuration: {
+                            encryption_strategy: ("AWS_OWNED" | "CUSTOMER_MANAGED"),
+                            kms_key_arn: ::String?
+                          }
+                        ) -> _UpdateSpaceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSpaceResponseSuccess
+
+      interface _UpdateViewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateViewResponse]
+        def name: () -> ::String
+        def type: () -> ("USER" | "MANAGED")
+        def description: () -> ::String
+        def definition: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#update_view-instance_method
+      def update_view: (
+                         name: ::String,
+                         ?definition: ::String,
+                         ?description: ::String
+                       ) -> _UpdateViewResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateViewResponseSuccess
+    end
+  end
+end
+

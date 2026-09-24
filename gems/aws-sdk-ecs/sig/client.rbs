@@ -233,6 +233,7 @@ module Aws
                                             },
                                             ?cpu: ::String,
                                             ?memory: ::String,
+                                            ?cpu_architecture: ("X86_64" | "ARM64"),
                                             ?scaling_target: {
                                               min_task_count: ::Integer?,
                                               max_task_count: ::Integer?,
@@ -1810,6 +1811,7 @@ module Aws
                                             },
                                             ?cpu: ::String,
                                             ?memory: ::String,
+                                            ?cpu_architecture: ("X86_64" | "ARM64"),
                                             ?scaling_target: {
                                               min_task_count: ::Integer?,
                                               max_task_count: ::Integer?,

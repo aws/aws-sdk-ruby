@@ -160,6 +160,12 @@ module Aws
                        ) -> _DeleteFeedResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFeedResponseSuccess
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#delete_feed_policy-instance_method
+      def delete_feed_policy: (
+                                id: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _DisassociateFeedResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateFeedResponse]
         def arn: () -> ::String
@@ -217,6 +223,16 @@ module Aws
                     ) -> _GetFeedResponseSuccess
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFeedResponseSuccess
 
+      interface _GetFeedPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFeedPolicyResponse]
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#get_feed_policy-instance_method
+      def get_feed_policy: (
+                             id: ::String
+                           ) -> _GetFeedPolicyResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFeedPolicyResponseSuccess
+
       interface _GetFixtureResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetFixtureResponse]
         def fixture_id: () -> ::String
@@ -265,6 +281,16 @@ module Aws
                                     resource_arn: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutFeedPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutFeedPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#put_feed_policy-instance_method
+      def put_feed_policy: (
+                             id: ::String,
+                             policy: ::String
+                           ) -> _PutFeedPolicyResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutFeedPolicyResponseSuccess
 
       interface _SearchFixturesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchFixturesResponse]

@@ -1063,7 +1063,8 @@
         "PowerKva":{"shape":"CatalogItemPowerKva"},
         "WeightLbs":{"shape":"CatalogItemWeightLbs"},
         "SupportedUplinkGbps":{"shape":"SupportedUplinkGbpsListDefinition"},
-        "SupportedStorage":{"shape":"SupportedStorageList"}
+        "SupportedStorage":{"shape":"SupportedStorageList"},
+        "RackScalingType":{"shape":"RackScalingType"}
       }
     },
     "CatalogItemClass":{
@@ -2475,7 +2476,9 @@
         "AvailabilityZoneId":{"shape":"AvailabilityZoneId"},
         "Tags":{"shape":"TagMap"},
         "SiteArn":{"shape":"SiteArn"},
-        "SupportedHardwareType":{"shape":"SupportedHardwareType"}
+        "SupportedHardwareType":{"shape":"SupportedHardwareType"},
+        "Generation":{"shape":"OutpostGeneration"},
+        "RackScalingType":{"shape":"RackScalingType"}
       }
     },
     "OutpostArn":{
@@ -2703,7 +2706,8 @@
       "enum":[
         "RACK_MAXIMUM",
         "RACK_MAX_POWER_KVA",
-        "RACK_MAX_WEIGHT_LBS"
+        "RACK_MAX_WEIGHT_LBS",
+        "RACK_SPACE_CONSTRAINED"
       ]
     },
     "QuoteDescription":{
@@ -2838,6 +2842,13 @@
         "OpticalStandard":{"shape":"OpticalStandard"},
         "MaximumSupportedWeightLbs":{"shape":"MaximumSupportedWeightLbs"}
       }
+    },
+    "RackScalingType":{
+      "type":"string",
+      "enum":[
+        "SINGLE_RACK",
+        "MULTI_RACK"
+      ]
     },
     "RackSpecificationDetails":{
       "type":"structure",

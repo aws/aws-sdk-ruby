@@ -27,6 +27,19 @@
         {"shape":"ServerException"}
       ]
     },
+    "CancelJobs":{
+      "name":"CancelJobs",
+      "http":{
+        "method":"POST",
+        "requestUri":"/v1/canceljobs"
+      },
+      "input":{"shape":"CancelJobsRequest"},
+      "output":{"shape":"CancelJobsResponse"},
+      "errors":[
+        {"shape":"ClientException"},
+        {"shape":"ServerException"}
+      ]
+    },
     "CreateComputeEnvironment":{
       "name":"CreateComputeEnvironment",
       "http":{
@@ -482,6 +495,19 @@
         {"shape":"ServerException"}
       ]
     },
+    "TerminateJobs":{
+      "name":"TerminateJobs",
+      "http":{
+        "method":"POST",
+        "requestUri":"/v1/terminatejobs"
+      },
+      "input":{"shape":"TerminateJobsRequest"},
+      "output":{"shape":"TerminateJobsResponse"},
+      "errors":[
+        {"shape":"ClientException"},
+        {"shape":"ServerException"}
+      ]
+    },
     "TerminateServiceJob":{
       "name":"TerminateServiceJob",
       "http":{
@@ -490,6 +516,19 @@
       },
       "input":{"shape":"TerminateServiceJobRequest"},
       "output":{"shape":"TerminateServiceJobResponse"},
+      "errors":[
+        {"shape":"ClientException"},
+        {"shape":"ServerException"}
+      ]
+    },
+    "TerminateServiceJobs":{
+      "name":"TerminateServiceJobs",
+      "http":{
+        "method":"POST",
+        "requestUri":"/v1/terminateservicejobs"
+      },
+      "input":{"shape":"TerminateServiceJobsRequest"},
+      "output":{"shape":"TerminateServiceJobsResponse"},
       "errors":[
         {"shape":"ClientException"},
         {"shape":"ServerException"}
@@ -758,6 +797,45 @@
     "CancelJobResponse":{
       "type":"structure",
       "members":{}
+    },
+    "CancelJobsErrorDetail":{
+      "type":"structure",
+      "required":[
+        "job",
+        "code",
+        "message"
+      ],
+      "members":{
+        "job":{"shape":"String"},
+        "code":{"shape":"String"},
+        "message":{"shape":"String"}
+      }
+    },
+    "CancelJobsErrorDetailList":{
+      "type":"list",
+      "member":{"shape":"CancelJobsErrorDetail"}
+    },
+    "CancelJobsRequest":{
+      "type":"structure",
+      "required":[
+        "jobs",
+        "reason"
+      ],
+      "members":{
+        "jobs":{"shape":"StringList"},
+        "reason":{"shape":"String"}
+      }
+    },
+    "CancelJobsResponse":{
+      "type":"structure",
+      "required":[
+        "successful",
+        "errors"
+      ],
+      "members":{
+        "successful":{"shape":"StringList"},
+        "errors":{"shape":"CancelJobsErrorDetailList"}
+      }
     },
     "CapacityLimit":{
       "type":"structure",
@@ -2294,7 +2372,9 @@
         "container":{"shape":"ContainerSummary"},
         "arrayProperties":{"shape":"ArrayPropertiesSummary"},
         "nodeProperties":{"shape":"NodePropertiesSummary"},
-        "jobDefinition":{"shape":"String"}
+        "jobDefinition":{"shape":"String"},
+        "isCancelled":{"shape":"Boolean"},
+        "isTerminated":{"shape":"Boolean"}
       }
     },
     "JobSummaryList":{
@@ -3217,7 +3297,8 @@
         "status":{"shape":"ServiceJobStatus"},
         "statusReason":{"shape":"String"},
         "startedAt":{"shape":"Long"},
-        "stoppedAt":{"shape":"Long"}
+        "stoppedAt":{"shape":"Long"},
+        "isTerminated":{"shape":"Boolean"}
       }
     },
     "ServiceJobSummaryList":{
@@ -3483,6 +3564,45 @@
       "type":"structure",
       "members":{}
     },
+    "TerminateJobsErrorDetail":{
+      "type":"structure",
+      "required":[
+        "job",
+        "code",
+        "message"
+      ],
+      "members":{
+        "job":{"shape":"String"},
+        "code":{"shape":"String"},
+        "message":{"shape":"String"}
+      }
+    },
+    "TerminateJobsErrorDetailList":{
+      "type":"list",
+      "member":{"shape":"TerminateJobsErrorDetail"}
+    },
+    "TerminateJobsRequest":{
+      "type":"structure",
+      "required":[
+        "jobs",
+        "reason"
+      ],
+      "members":{
+        "jobs":{"shape":"StringList"},
+        "reason":{"shape":"String"}
+      }
+    },
+    "TerminateJobsResponse":{
+      "type":"structure",
+      "required":[
+        "successful",
+        "errors"
+      ],
+      "members":{
+        "successful":{"shape":"StringList"},
+        "errors":{"shape":"TerminateJobsErrorDetailList"}
+      }
+    },
     "TerminateServiceJobRequest":{
       "type":"structure",
       "required":[
@@ -3497,6 +3617,45 @@
     "TerminateServiceJobResponse":{
       "type":"structure",
       "members":{}
+    },
+    "TerminateServiceJobsErrorDetail":{
+      "type":"structure",
+      "required":[
+        "job",
+        "code",
+        "message"
+      ],
+      "members":{
+        "job":{"shape":"String"},
+        "code":{"shape":"String"},
+        "message":{"shape":"String"}
+      }
+    },
+    "TerminateServiceJobsErrorDetailList":{
+      "type":"list",
+      "member":{"shape":"TerminateServiceJobsErrorDetail"}
+    },
+    "TerminateServiceJobsRequest":{
+      "type":"structure",
+      "required":[
+        "jobs",
+        "reason"
+      ],
+      "members":{
+        "jobs":{"shape":"StringList"},
+        "reason":{"shape":"String"}
+      }
+    },
+    "TerminateServiceJobsResponse":{
+      "type":"structure",
+      "required":[
+        "successful",
+        "errors"
+      ],
+      "members":{
+        "successful":{"shape":"StringList"},
+        "errors":{"shape":"TerminateServiceJobsErrorDetailList"}
+      }
     },
     "Tmpfs":{
       "type":"structure",

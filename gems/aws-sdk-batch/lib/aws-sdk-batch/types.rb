@@ -251,11 +251,11 @@ module Aws::Batch
     #
     # @!attribute [rw] reason
     #   A message to attach to the job that explains the reason for
-    #   canceling it. This message is returned by future DescribeJobs
+    #   cancelling it. This message is returned by future DescribeJobs
     #   operations on the job. It is also recorded in the Batch activity
     #   logs.
     #
-    #   This parameter has as limit of 1024 characters.
+    #   This parameter has a limit of 1024 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJobRequest AWS API Documentation
@@ -270,6 +270,92 @@ module Aws::Batch
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJobResponse AWS API Documentation
     #
     class CancelJobResponse < Aws::EmptyStructure; end
+
+    # An object that contains the details of a job that couldn't be
+    # cancelled by a `CancelJobs` operation.
+    #
+    # @!attribute [rw] job
+    #   The Batch job ID of the job that couldn't be cancelled.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   An error code that identifies the reason the job couldn't be
+    #   cancelled. Valid values are:
+    #
+    #   * `ValidationException` – A job identifier in the request is
+    #     malformed or isn't valid.
+    #
+    #   * `ClientException` – The request failed because of a client error.
+    #
+    #   * `ThrottlingException` – The request was throttled. Retry the
+    #     request.
+    #
+    #   * `ServerException` – An internal error occurred. Retry the request.
+    #
+    #   * `AccessDenied` – The caller isn't authorized to perform the
+    #     action on the specified job.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message that describes the reason the job couldn't be cancelled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJobsErrorDetail AWS API Documentation
+    #
+    class CancelJobsErrorDetail < Struct.new(
+      :job,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the jobs to cancel and the reason for the cancellation.
+    #
+    # @!attribute [rw] jobs
+    #   An array of up to 50 Batch job IDs of the jobs to cancel.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] reason
+    #   A message to attach to the job that explains the reason for
+    #   cancelling it. This message is returned by future DescribeJobs
+    #   operations on the job. It is also recorded in the Batch activity
+    #   logs.
+    #
+    #   This parameter has a limit of 1024 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJobsRequest AWS API Documentation
+    #
+    class CancelJobsRequest < Struct.new(
+      :jobs,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a `CancelJobs` request, including the jobs whose
+    # cancellation request was accepted and the errors for jobs that
+    # couldn't be cancelled.
+    #
+    # @!attribute [rw] successful
+    #   A list of the job IDs whose cancellation request was accepted.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] errors
+    #   A list of `CancelJobsErrorDetail` items, one for each job that
+    #   couldn't be cancelled. Each item includes the job ID along with a
+    #   code and message that describe why the job wasn't cancelled.
+    #   @return [Array<Types::CancelJobsErrorDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJobsResponse AWS API Documentation
+    #
+    class CancelJobsResponse < Struct.new(
+      :successful,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Defines the type and maximum quantity of resources that can be
     # allocated to service jobs in a service environment.
@@ -6873,7 +6959,7 @@ module Aws::Batch
     #   @return [Types::EcsPropertiesDetail]
     #
     # @!attribute [rw] is_cancelled
-    #   Indicates whether the job is canceled.
+    #   Indicates whether the job is cancelled.
     #   @return [Boolean]
     #
     # @!attribute [rw] is_terminated
@@ -7169,6 +7255,16 @@ module Aws::Batch
     #   The Amazon Resource Name (ARN) of the job definition.
     #   @return [String]
     #
+    # @!attribute [rw] is_cancelled
+    #   Indicates whether a cancellation request has been accepted for the
+    #   job. This field is only present when the value is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_terminated
+    #   Indicates whether a termination request has been accepted for the
+    #   job. This field is only present when the value is `true`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobSummary AWS API Documentation
     #
     class JobSummary < Struct.new(
@@ -7186,7 +7282,9 @@ module Aws::Batch
       :container,
       :array_properties,
       :node_properties,
-      :job_definition)
+      :job_definition,
+      :is_cancelled,
+      :is_terminated)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10101,6 +10199,11 @@ module Aws::Batch
     #   stopped running.
     #   @return [Integer]
     #
+    # @!attribute [rw] is_terminated
+    #   Indicates whether a termination request has been accepted for the
+    #   service job. This field is only present when the value is `true`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ServiceJobSummary AWS API Documentation
     #
     class ServiceJobSummary < Struct.new(
@@ -10117,7 +10220,8 @@ module Aws::Batch
       :status,
       :status_reason,
       :started_at,
-      :stopped_at)
+      :stopped_at,
+      :is_terminated)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11353,11 +11457,11 @@ module Aws::Batch
     #
     # @!attribute [rw] reason
     #   A message to attach to the job that explains the reason for
-    #   canceling it. This message is returned by future DescribeJobs
+    #   terminating it. This message is returned by future DescribeJobs
     #   operations on the job. It is also recorded in the Batch activity
     #   logs.
     #
-    #   This parameter has as limit of 1024 characters.
+    #   This parameter has a limit of 1024 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateJobRequest AWS API Documentation
@@ -11373,13 +11477,99 @@ module Aws::Batch
     #
     class TerminateJobResponse < Aws::EmptyStructure; end
 
+    # An object that contains the details of a job that couldn't be
+    # terminated by a `TerminateJobs` operation.
+    #
+    # @!attribute [rw] job
+    #   The Batch job ID of the job that couldn't be terminated.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   An error code that identifies the reason the job couldn't be
+    #   terminated. Valid values are:
+    #
+    #   * `ValidationException` – A job identifier in the request is
+    #     malformed or isn't valid.
+    #
+    #   * `ClientException` – The request failed because of a client error.
+    #
+    #   * `ThrottlingException` – The request was throttled. Retry the
+    #     request.
+    #
+    #   * `ServerException` – An internal error occurred. Retry the request.
+    #
+    #   * `AccessDenied` – The caller isn't authorized to perform the
+    #     action on the specified job.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message that describes the reason the job couldn't be terminated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateJobsErrorDetail AWS API Documentation
+    #
+    class TerminateJobsErrorDetail < Struct.new(
+      :job,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the jobs to terminate and the reason for the termination.
+    #
+    # @!attribute [rw] jobs
+    #   An array of up to 50 Batch job IDs of the jobs to terminate.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] reason
+    #   A message to attach to the job that explains the reason for
+    #   terminating it. This message is returned by future DescribeJobs
+    #   operations on the job. It is also recorded in the Batch activity
+    #   logs.
+    #
+    #   This parameter has a limit of 1024 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateJobsRequest AWS API Documentation
+    #
+    class TerminateJobsRequest < Struct.new(
+      :jobs,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a `TerminateJobs` request, including the jobs whose
+    # termination request was accepted and the errors for jobs that
+    # couldn't be terminated.
+    #
+    # @!attribute [rw] successful
+    #   A list of the job IDs whose termination request was accepted.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] errors
+    #   A list of `TerminateJobsErrorDetail` items, one for each job that
+    #   couldn't be terminated. Each item includes the job ID along with a
+    #   code and message that describe why the job wasn't terminated.
+    #   @return [Array<Types::TerminateJobsErrorDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateJobsResponse AWS API Documentation
+    #
+    class TerminateJobsResponse < Struct.new(
+      :successful,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] job_id
     #   The service job ID of the service job to terminate.
     #   @return [String]
     #
     # @!attribute [rw] reason
     #   A message to attach to the service job that explains the reason for
-    #   canceling it. This message is returned by `DescribeServiceJob`
+    #   terminating it. This message is returned by `DescribeServiceJob`
     #   operations on the service job.
     #   @return [String]
     #
@@ -11395,6 +11585,94 @@ module Aws::Batch
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateServiceJobResponse AWS API Documentation
     #
     class TerminateServiceJobResponse < Aws::EmptyStructure; end
+
+    # An object that contains the details of a service job that couldn't be
+    # terminated by a `TerminateServiceJobs` operation.
+    #
+    # @!attribute [rw] job
+    #   The service job ID of the service job that couldn't be terminated.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   An error code that identifies the reason the service job couldn't
+    #   be terminated. Valid values are:
+    #
+    #   * `ValidationException` – A service job identifier in the request is
+    #     malformed or isn't valid.
+    #
+    #   * `ClientException` – The request failed because of a client error.
+    #
+    #   * `ThrottlingException` – The request was throttled. Retry the
+    #     request.
+    #
+    #   * `ServerException` – An internal error occurred. Retry the request.
+    #
+    #   * `AccessDenied` – The caller isn't authorized to perform the
+    #     action on the specified service job.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message that describes the reason the service job couldn't be
+    #   terminated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateServiceJobsErrorDetail AWS API Documentation
+    #
+    class TerminateServiceJobsErrorDetail < Struct.new(
+      :job,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the service jobs to terminate and the reason for the
+    # termination.
+    #
+    # @!attribute [rw] jobs
+    #   An array of up to 50 service job IDs of the service jobs to
+    #   terminate.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] reason
+    #   A message to attach to the service job that explains the reason for
+    #   terminating it. This message is returned by `DescribeServiceJob`
+    #   operations on the service job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateServiceJobsRequest AWS API Documentation
+    #
+    class TerminateServiceJobsRequest < Struct.new(
+      :jobs,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a `TerminateServiceJobs` request, including the service
+    # jobs whose termination request was accepted and the errors for service
+    # jobs that couldn't be terminated.
+    #
+    # @!attribute [rw] successful
+    #   A list of the service job IDs whose termination request was
+    #   accepted.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] errors
+    #   A list of `TerminateServiceJobsErrorDetail` items, one for each
+    #   service job that couldn't be terminated. Each item includes the
+    #   service job ID along with a code and message that describe why the
+    #   service job wasn't terminated.
+    #   @return [Array<Types::TerminateServiceJobsErrorDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateServiceJobsResponse AWS API Documentation
+    #
+    class TerminateServiceJobsResponse < Struct.new(
+      :successful,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The container path, mount options, and size of the `tmpfs` mount.
     #

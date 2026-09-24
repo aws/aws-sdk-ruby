@@ -212,6 +212,7 @@
     "ListDataTables": "<p>Lists all data tables for the specified Amazon Connect instance. Returns summary information for each table including basic metadata and modification details.</p>",
     "ListDefaultVocabularies": "<p>Lists the default vocabularies for the specified Connect Customer instance.</p>",
     "ListEntitySecurityProfiles": "<p> Lists all security profiles attached to a Q in Connect AIAgent Entity in an Amazon Connect instance. </p>",
+    "ListEvaluationFormAIVersions": "<p>Lists the available AI versions for evaluation forms in the specified Connect Customer instance.</p>",
     "ListEvaluationFormVersions": "<p>Lists versions of an evaluation form in the specified Connect Customer instance.</p>",
     "ListEvaluationForms": "<p>Lists evaluation forms in the specified Connect Customer instance.</p>",
     "ListExtractionDefinitions": "<p>Lists extraction definitions in the specified Connect Customer instance.</p>",
@@ -240,6 +241,7 @@
     "ListRoutingProfiles": "<p>Provides summary information about the routing profiles for the specified Connect Customer instance.</p> <p>For more information about routing profiles, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing.html\">Routing Profiles</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/routing-profiles.html\">Create a Routing Profile</a> in the <i>Connect Customer Administrator Guide</i>.</p>",
     "ListRules": "<p>List all rules for the specified Connect Customer instance.</p>",
     "ListSecurityKeys": "<p>This API is in preview release for Connect Customer and is subject to change.</p> <p>Returns a paginated list of all security keys associated with the instance.</p>",
+    "ListSecurityProfileAIAgents": "<p>Returns a list of the allowed AI agents in a specific security profile.</p>",
     "ListSecurityProfileApplications": "<p>Returns a list of third-party applications or MCP Servers in a specific security profile.</p>",
     "ListSecurityProfileFlowModules": "<p> A list of Flow Modules an AI Agent can invoke as a tool </p>",
     "ListSecurityProfilePermissions": "<p>Lists the permissions granted to a security profile.</p> <p>For information about security profiles, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html\">Security Profiles</a> in the <i>Connect Customer Administrator Guide</i>. For a mapping of the API name and user interface name of the security profile permissions, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html\">List of security profile permissions</a>. </p>",
@@ -303,7 +305,7 @@
     "StartAttachedFileUpload": "<p>Provides a pre-signed Amazon S3 URL in response for uploading your content.</p> <important> <p>You may only use this API to upload attachments to a <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Connect Customer Case</a>, <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Connect Customer Email</a>, or <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html\">Connect Customer Task</a>. </p> </important>",
     "StartChatContact": "<p>Initiates a flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Connect Customer Participant Service.</p> <p>When a new chat contact is successfully created, clients must subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p> <p>A 429 error occurs in the following situations:</p> <ul> <li> <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code> exception.</p> </li> <li> <p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">quota for concurrent active chats</a> is exceeded. Active chat throttling returns a <code>LimitExceededException</code>.</p> </li> </ul> <p>If you use the <code>ChatDurationInMinutes</code> parameter and receive a 400 error, your account may not support the ability to configure custom chat durations. For more information, contact Amazon Web Services Support. </p> <p>For more information about chat, see the following topics in the <i>Connect Customer Administrator Guide</i>: </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html\">Concepts: Web and mobile messaging capabilities in Connect Customer</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Connect Customer Chat security best practices</a> </p> </li> </ul>",
     "StartContactConversationalAnalyticsJob": "<p>Starts a Contact Lens post-call analytics job for the specified contact. This API runs Conversational Analytics post-contact analysis on a voice recording that is already attached to the contact, generating transcription, sentiment analysis, redaction, and summarization results based on the provided configuration.</p> <important> <p>A voice recording must already be attached to the contact before calling this API. Use <code>CreateAttachedFile</code> to attach a recording from an S3 source URI.</p> </important> <note> <p>For example, you can call <code>CreateContact</code>, then <code>CreateAttachedFile</code>, then <code>StartContactConversationalAnalyticsJob</code> to create a contact, attach a recording, and run post-call analytics.</p> </note>",
-    "StartContactEvaluation": "<p>Starts an empty evaluation in the specified Connect Customer instance, using the given evaluation form for the particular contact. The evaluation form version used for the contact evaluation corresponds to the currently activated version. If no version is activated for the evaluation form, the contact evaluation cannot be started. </p> <note> <p>Evaluations created through the public API do not contain answer values suggested from automation.</p> </note>",
+    "StartContactEvaluation": "<p>Starts an empty evaluation in the specified Connect Customer instance, using the given evaluation form for the particular contact. The evaluation form version used for the contact evaluation corresponds to the currently activated version. If no version is activated for the evaluation form, the contact evaluation cannot be started. </p>",
     "StartContactMediaProcessing": "<p> Enables in-flight message processing for an ongoing chat session. Message processing will stay active for the rest of the chat, even if an individual contact segment ends. </p>",
     "StartContactRecording": "<p>Starts recording the contact: </p> <ul> <li> <p>If the API is called <i>before</i> the agent joins the call, recording starts when the agent joins the call.</p> </li> <li> <p>If the API is called <i>after</i> the agent joins the call, recording starts at the time of the API call.</p> </li> </ul> <p>StartContactRecording is a one-time action. For example, if you use StopContactRecording to stop recording an ongoing call, you can't use StartContactRecording to restart it. For scenarios where the recording has started and you want to suspend and resume it, such as when collecting sensitive information (for example, a credit card number), use SuspendContactRecording and ResumeContactRecording.</p> <p>You can use this API to override the recording behavior configured in the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-recording-behavior.html\">Set recording behavior</a> block.</p> <p>Only voice recordings are supported at this time.</p>",
     "StartContactStreaming": "<p> Initiates real-time message streaming for a new chat contact.</p> <p> For more information about message streaming, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html\">Enable real-time chat message streaming</a> in the <i>Connect Customer Administrator Guide</i>.</p> <p>For more information about chat, see the following topics in the <i>Connect Customer Administrator Guide</i>: </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html\">Concepts: Web and mobile messaging capabilities in Connect Customer</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Connect Customer Chat security best practices</a> </p> </li> </ul>",
@@ -434,9 +436,22 @@
         "TrafficDistributionGroupSummary$Id": "<p>The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.</p>"
       }
     },
+    "AIAgent": {
+      "base": "<p>Information about an AI agent that a security profile allows access to for Agent-to-Agent authorization.</p>",
+      "refs": {
+        "AllowedAIAgents$member": null
+      }
+    },
+    "AIAgentType": {
+      "base": "<p>The type of the AI agent.</p>",
+      "refs": {
+        "AIAgent$Type": "<p>The type of the AI agent. The valid value is <code>THIRD_PARTY</code>.</p>"
+      }
+    },
     "ARN": {
       "base": null,
       "refs": {
+        "AIAgent$Arn": "<p>The Amazon Resource Name (ARN) of the AI agent.</p>",
         "ActivateEvaluationFormResponse$EvaluationFormArn": "<p>The Amazon Resource Name (ARN) for the evaluation form resource.</p>",
         "AgentHierarchyGroup$Arn": "<p>The Amazon Resource Name (ARN) of the group.</p>",
         "AgentStatus$AgentStatusARN": "<p>The Amazon Resource Name (ARN) of the agent status.</p>",
@@ -460,6 +475,7 @@
         "ClaimedPhoneNumberSummary$SourcePhoneNumberArn": "<p>The claimed phone number ARN that was previously imported from the external service, such as Amazon Web Services End User Messaging. If it is from Amazon Web Services End User Messaging, it looks like the ARN of the phone number that was imported from Amazon Web Services End User Messaging.</p>",
         "CompleteAttachedFileUploadRequest$AssociatedResourceArn": "<p>The resource to which the attached file is (being) uploaded to. The supported resources are <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Cases</a>, <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html\">Email</a>, and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html\">Task</a>.</p> <note> <p>This value must be a valid ARN.</p> </note>",
         "Contact$Arn": "<p>The Amazon Resource Name (ARN) for the contact.</p>",
+        "ContactAnalysisReference$Arn": "<p>The Amazon Resource Name (ARN) of the contact analysis reference.</p>",
         "ContactFlow$Arn": "<p>The Amazon Resource Name (ARN) of the flow.</p>",
         "ContactFlowModule$Arn": "<p>The Amazon Resource Name (ARN).</p>",
         "ContactFlowModuleAliasInfo$ContactFlowModuleArn": "<p>The Amazon Resource Name (ARN) of the flow module.</p>",
@@ -1109,6 +1125,14 @@
         "EmailAddressMetadata$AliasConfigurations": "<p>A list of alias configurations for this email address, showing which email addresses forward to this primary address. Each configuration contains the email address ID of an alias that forwards emails to this address.</p>"
       }
     },
+    "AllowedAIAgents": {
+      "base": null,
+      "refs": {
+        "CreateSecurityProfileRequest$AllowedAIAgents": "<p>A list of AI agents that the security profile will give access to.</p>",
+        "ListSecurityProfileAIAgentsResponse$AllowedAIAgents": "<p>A list of the allowed AI agents and their types.</p>",
+        "UpdateSecurityProfileRequest$AllowedAIAgents": "<p>A list of AI agents that the security profile will give access to.</p>"
+      }
+    },
     "AllowedAccessControlTags": {
       "base": null,
       "refs": {
@@ -1195,7 +1219,8 @@
     "AnalyticsMode": {
       "base": null,
       "refs": {
-        "AnalyticsModes$member": null
+        "AnalyticsModes$member": null,
+        "ContactAnalysisReference$AnalyticsMode": "<p>The analytics mode of the contact analysis.</p>"
       }
     },
     "AnalyticsModes": {
@@ -2457,6 +2482,12 @@
         "SearchCriteria$ContactAnalysis": "<p>Search criteria based on analysis outputs from Connect Customer Contact Lens.</p>"
       }
     },
+    "ContactAnalysisReference": {
+      "base": "<p>Information about a reference when the <code>referenceType</code> is <code>CONTACT_ANALYSIS</code>. Otherwise, null.</p>",
+      "refs": {
+        "ReferenceSummary$ContactAnalysis": null
+      }
+    },
     "ContactConfiguration": {
       "base": "<p>The contact configuration for push notification registration.</p>",
       "refs": {
@@ -3021,7 +3052,8 @@
       "base": null,
       "refs": {
         "EvaluationFormSearchSummary$ContactInteractionType": "<p>The contact interaction type for this evaluation form.</p>",
-        "EvaluationFormTargetConfiguration$ContactInteractionType": "<p>The contact interaction type for this evaluation form.</p>"
+        "EvaluationFormTargetConfiguration$ContactInteractionType": "<p>The contact interaction type for this evaluation form.</p>",
+        "ListEvaluationFormAIVersionsRequest$ContactInteractionType": "<p>The contact interaction type for the evaluation form.</p>"
       }
     },
     "ContactMediaProcessingFailureMode": {
@@ -5445,6 +5477,41 @@
         "DescribeEvaluationFormResponse$EvaluationForm": "<p>Information about the evaluation form.</p>"
       }
     },
+    "EvaluationFormAIVersion": {
+      "base": null,
+      "refs": {
+        "CreateEvaluationFormRequest$AIVersion": "<p>The AI version to use for the evaluation form. This specifies which AI model version is used for automated evaluations.</p>",
+        "EvaluationForm$AIVersion": "<p>The AI version to use for the evaluation form. This specifies which AI model version is used for automated evaluations.</p>",
+        "EvaluationFormAIVersionSummary$AIVersionName": "<p>The name of the AI version.</p>",
+        "EvaluationFormContent$AIVersion": "<p>The AI version to use for the evaluation form. This specifies which AI model version is used for automated evaluations.</p>",
+        "EvaluationFormSearchSummary$AIVersion": "<p>The AI version to use for the evaluation form. This specifies which AI model version is used for automated evaluations.</p>",
+        "UpdateEvaluationFormRequest$AIVersion": "<p>The AI version to use for the evaluation form. This specifies which AI model version is used for automated evaluations.</p>"
+      }
+    },
+    "EvaluationFormAIVersionLifecycle": {
+      "base": "<p>Contains the status and availability dates for an AI version, indicating when the version became active and when it reaches end of life.</p>",
+      "refs": {
+        "EvaluationFormAIVersionSummary$AIVersionLifecycle": "<p>The lifecycle information for this AI version, including its status and availability dates.</p>"
+      }
+    },
+    "EvaluationFormAIVersionStatus": {
+      "base": null,
+      "refs": {
+        "EvaluationFormAIVersionLifecycle$Status": "<p>The status of the AI version. Valid values:</p> <ul> <li> <p> <code>Latest</code> - The most recent AI version.</p> </li> <li> <p> <code>Preview</code> - An AI version available for preview.</p> </li> <li> <p> <code>Active</code> - An AI version that is currently available.</p> </li> <li> <p> <code>Deprecated</code> - An AI version that is no longer recommended for use.</p> </li> <li> <p> <code>Removed</code> - An AI version that is no longer available.</p> </li> </ul>"
+      }
+    },
+    "EvaluationFormAIVersionSummary": {
+      "base": "<p>Contains the name and lifecycle information for an AI version that you can use when creating or updating an evaluation form.</p>",
+      "refs": {
+        "EvaluationFormAIVersionSummaryList$member": null
+      }
+    },
+    "EvaluationFormAIVersionSummaryList": {
+      "base": null,
+      "refs": {
+        "ListEvaluationFormAIVersionsResponse$AIVersionSummaries": "<p>The list of AI version summaries.</p>"
+      }
+    },
     "EvaluationFormAutoEvaluationConfiguration": {
       "base": "<p>The automatic evaluation configuration of an evaluation form.</p>",
       "refs": {
@@ -5593,6 +5660,24 @@
         "EvaluationForm$LanguageConfiguration": "<p>Configuration for language settings of this evaluation form.</p>",
         "EvaluationFormContent$LanguageConfiguration": "<p>Configuration for language settings of this evaluation form content.</p>",
         "UpdateEvaluationFormRequest$LanguageConfiguration": "<p>Configuration for language settings of the evaluation form.</p>"
+      }
+    },
+    "EvaluationFormMetricConfiguration": {
+      "base": "<p>Information about the metric configuration for an evaluation form question. Use this to associate a business outcome metric with a question.</p>",
+      "refs": {
+        "EvaluationFormQuestion$MetricConfiguration": "<p>The metric configuration for the question. Use this to associate a business outcome metric with the question.</p>"
+      }
+    },
+    "EvaluationFormMetricName": {
+      "base": null,
+      "refs": {
+        "EvaluationFormMetricConfiguration$MetricName": "<p>The name of the metric. Valid values are:</p> <ul> <li> <p> <code>SALE_SUCCESS</code> – Sale success.</p> </li> <li> <p> <code>CSAT</code> – Customer satisfaction.</p> </li> <li> <p> <code>CHURN_PROPENSITY</code> – Churn propensity.</p> </li> <li> <p> <code>SELF_SERVICE_SUCCESS</code> – Self-service success.</p> </li> <li> <p> <code>PARTIAL_SELF_SERVICE_SUCCESS</code> – Partial self-service success.</p> </li> </ul>"
+      }
+    },
+    "EvaluationFormMetricType": {
+      "base": null,
+      "refs": {
+        "EvaluationFormMetricConfiguration$MetricType": "<p>The type of metric. Currently, only <code>BUSINESS_OUTCOME</code> is supported.</p>"
       }
     },
     "EvaluationFormMultiSelectQuestionAutomation": {
@@ -7652,6 +7737,7 @@
         "ListDataTablesRequest$InstanceId": "<p>The unique identifier for the Amazon Connect instance whose data tables should be listed.</p>",
         "ListDefaultVocabulariesRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
         "ListEntitySecurityProfilesRequest$InstanceId": "<p> The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance. </p>",
+        "ListEvaluationFormAIVersionsRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
         "ListEvaluationFormVersionsRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
         "ListEvaluationFormsRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
         "ListExtractionDefinitionsRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
@@ -7680,6 +7766,7 @@
         "ListRoutingProfilesRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
         "ListRulesRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
         "ListSecurityKeysRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+        "ListSecurityProfileAIAgentsRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
         "ListSecurityProfileApplicationsRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
         "ListSecurityProfileFlowModulesRequest$InstanceId": "<p> The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
         "ListSecurityProfilePermissionsRequest$InstanceId": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
@@ -8357,6 +8444,14 @@
       "base": null,
       "refs": {}
     },
+    "ListEvaluationFormAIVersionsRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "ListEvaluationFormAIVersionsResponse": {
+      "base": null,
+      "refs": {}
+    },
     "ListEvaluationFormVersionsRequest": {
       "base": null,
       "refs": {}
@@ -8601,6 +8696,14 @@
       "base": null,
       "refs": {}
     },
+    "ListSecurityProfileAIAgentsRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "ListSecurityProfileAIAgentsResponse": {
+      "base": null,
+      "refs": {}
+    },
     "ListSecurityProfileApplicationsRequest": {
       "base": null,
       "refs": {}
@@ -8822,6 +8925,7 @@
         "ListChildHoursOfOperationsRequest$MaxResults": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
         "ListDefaultVocabulariesRequest$MaxResults": "<p>The maximum number of results to return per page.</p>",
         "ListEntitySecurityProfilesRequest$MaxResults": "<p> The maximum number of results to return per page. The default MaxResult size is 100. </p>",
+        "ListEvaluationFormAIVersionsRequest$MaxResults": "<p>The maximum number of results to return per page.</p>",
         "ListEvaluationFormVersionsRequest$MaxResults": "<p>The maximum number of results to return per page.</p>",
         "ListEvaluationFormsRequest$MaxResults": "<p>The maximum number of results to return per page.</p>",
         "ListExtractionDefinitionsRequest$MaxResults": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
@@ -8888,6 +8992,7 @@
         "ListQueuesRequest$MaxResults": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
         "ListQuickConnectsRequest$MaxResults": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
         "ListRoutingProfilesRequest$MaxResults": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
+        "ListSecurityProfileAIAgentsRequest$MaxResults": "<p>The maximum number of results to return per page.</p>",
         "ListSecurityProfileApplicationsRequest$MaxResults": "<p>The maximum number of results to return per page.</p>",
         "ListSecurityProfileFlowModulesRequest$MaxResults": "<p> The maximum number of results to return per page. The default MaxResult size is 100. </p>",
         "ListSecurityProfilePermissionsRequest$MaxResults": "<p>The maximum number of results to return per page.</p>",
@@ -9528,6 +9633,8 @@
         "ListDataTableValuesResponse$NextToken": "<p>Specify the pagination token from a previous request to retrieve the next page of results.</p>",
         "ListDataTablesRequest$NextToken": "<p>Specify the pagination token from a previous request to retrieve the next page of results.</p>",
         "ListDataTablesResponse$NextToken": "<p>Specify the pagination token from a previous request to retrieve the next page of results.</p>",
+        "ListEvaluationFormAIVersionsRequest$NextToken": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
+        "ListEvaluationFormAIVersionsResponse$NextToken": "<p>If there are additional results, this is the token for the next set of results.</p>",
         "ListEvaluationFormVersionsRequest$NextToken": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
         "ListEvaluationFormVersionsResponse$NextToken": "<p>If there are additional results, this is the token for the next set of results.</p>",
         "ListEvaluationFormsRequest$NextToken": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
@@ -9580,6 +9687,8 @@
         "ListRulesResponse$NextToken": "<p>If there are additional results, this is the token for the next set of results.</p>",
         "ListSecurityKeysRequest$NextToken": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
         "ListSecurityKeysResponse$NextToken": "<p>If there are additional results, this is the token for the next set of results.</p>",
+        "ListSecurityProfileAIAgentsRequest$NextToken": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
+        "ListSecurityProfileAIAgentsResponse$NextToken": "<p>If there are additional results, this is the token for the next set of results.</p>",
         "ListSecurityProfileApplicationsRequest$NextToken": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
         "ListSecurityProfileApplicationsResponse$NextToken": "<p>If there are additional results, this is the token for the next set of results.</p>",
         "ListSecurityProfileFlowModulesRequest$NextToken": "<p> The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>",
@@ -9805,6 +9914,7 @@
       "base": null,
       "refs": {
         "ChatContactMetrics$MultiParty": "<p>A boolean flag indicating whether multiparty chat or supervisor barge were enabled on this contact.</p>",
+        "ContactAnalysisReference$IsRedacted": "<p>Indicates whether sensitive data has been redacted from the contact analysis.</p>",
         "ParticipantMetrics$ConversationAbandon": "<p>A boolean flag indicating whether the chat conversation was abandoned by a Participant.</p>"
       }
     },
@@ -11713,6 +11823,7 @@
       "base": null,
       "refs": {
         "AttachmentReference$Name": "<p>Identifier of the attachment reference.</p>",
+        "ContactAnalysisReference$Name": "<p>Identifier of the contact analysis reference.</p>",
         "ContactReferences$key": null,
         "DateReference$Name": "<p>Identifier of the date reference.</p>",
         "EmailMessageReference$Name": "<p>The name of the email message reference</p>",
@@ -11726,6 +11837,7 @@
       "base": null,
       "refs": {
         "AttachmentReference$Status": "<p>Status of the attachment reference type.</p>",
+        "ContactAnalysisReference$Status": "<p>Status of the contact analysis reference type.</p>",
         "Reference$Status": "<p>Status of the attachment reference type.</p>"
       }
     },
@@ -11764,6 +11876,7 @@
       "base": null,
       "refs": {
         "AttachmentReference$Value": "<p>The location path of the attachment reference.</p>",
+        "ContactAnalysisReference$Value": "<p>The location path of the contact analysis reference.</p>",
         "DateReference$Value": "<p>A valid date.</p>",
         "EmailReference$Value": "<p>A valid email address.</p>",
         "NumberReference$Value": "<p>A valid number.</p>",
@@ -11814,6 +11927,7 @@
         "ListQueueQuickConnectsResponse$LastModifiedRegion": "<p>The Amazon Web Services Region where this resource was last modified.</p>",
         "ListRoutingProfileManualAssignmentQueuesResponse$LastModifiedRegion": "<p>The Amazon Web Services Region where this resource was last modified.</p>",
         "ListRoutingProfileQueuesResponse$LastModifiedRegion": "<p>The Amazon Web Services Region where this resource was last modified.</p>",
+        "ListSecurityProfileAIAgentsResponse$LastModifiedRegion": "<p>The Amazon Web Services Region where this resource was last modified.</p>",
         "ListSecurityProfileApplicationsResponse$LastModifiedRegion": "<p>The Amazon Web Services Region where this resource was last modified.</p>",
         "ListSecurityProfileFlowModulesResponse$LastModifiedRegion": "<p> The Region that flow module was last modified in. </p>",
         "ListSecurityProfilePermissionsResponse$LastModifiedRegion": "<p>The Amazon Web Services Region where this resource was last modified.</p>",
@@ -12903,6 +13017,7 @@
         "CreateSecurityProfileResponse$SecurityProfileId": "<p>The identifier for the security profle.</p>",
         "DeleteSecurityProfileRequest$SecurityProfileId": "<p>The identifier for the security profle.</p>",
         "DescribeSecurityProfileRequest$SecurityProfileId": "<p>The identifier for the security profle.</p>",
+        "ListSecurityProfileAIAgentsRequest$SecurityProfileId": "<p>The identifier for the security profle.</p>",
         "ListSecurityProfileApplicationsRequest$SecurityProfileId": "<p>The identifier for the security profle.</p>",
         "ListSecurityProfileFlowModulesRequest$SecurityProfileId": "<p> The identifier for the security profile. </p>",
         "ListSecurityProfilePermissionsRequest$SecurityProfileId": "<p>The identifier for the security profle.</p>",
@@ -14401,6 +14516,8 @@
         "EvaluationForm$CreatedTime": "<p>The timestamp for when the evaluation form was created.</p>",
         "EvaluationForm$LastModifiedTime": "<p>The timestamp for when the evaluation form was last updated.</p>",
         "EvaluationForm$LastValidationTime": "<p>The timestamp when the most recent validation was started for this evaluation form.</p>",
+        "EvaluationFormAIVersionLifecycle$StartOfLifeTime": "<p>The timestamp for when this AI version became available.</p>",
+        "EvaluationFormAIVersionLifecycle$EndOfLifeTime": "<p>The timestamp when this AI version reaches or reached end of life.</p>",
         "EvaluationFormSearchSummary$CreatedTime": "<p>When the evaluation form was created.</p>",
         "EvaluationFormSearchSummary$LastModifiedTime": "<p>When the evaluation form was last changed.</p>",
         "EvaluationFormSearchSummary$LastActivatedTime": "<p>When the evaluation format was last activated.</p>",
@@ -14441,6 +14558,7 @@
         "ListQueueQuickConnectsResponse$LastModifiedTime": "<p>The timestamp when this resource was last modified.</p>",
         "ListRoutingProfileManualAssignmentQueuesResponse$LastModifiedTime": "<p>The timestamp when this resource was last modified.</p>",
         "ListRoutingProfileQueuesResponse$LastModifiedTime": "<p>The timestamp when this resource was last modified.</p>",
+        "ListSecurityProfileAIAgentsResponse$LastModifiedTime": "<p>The timestamp when this resource was last modified.</p>",
         "ListSecurityProfileApplicationsResponse$LastModifiedTime": "<p>The timestamp when this resource was last modified.</p>",
         "ListSecurityProfileFlowModulesResponse$LastModifiedTime": "<p> The time the flow module was last modified. </p>",
         "ListSecurityProfilePermissionsResponse$LastModifiedTime": "<p>The timestamp when this resource was last modified.</p>",

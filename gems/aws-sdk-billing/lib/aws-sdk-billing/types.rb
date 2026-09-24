@@ -384,6 +384,75 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # Specifies a time range with an inclusive begin date and an exclusive
+    # end date.
+    #
+    # @!attribute [rw] begin_date_inclusive
+    #   The inclusive start of the time range. This value can't be in the
+    #   future.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date_exclusive
+    #   The exclusive end of the time range. This value must be after
+    #   `beginDateInclusive`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/BillingViewSegmentTimeRange AWS API Documentation
+    #
+    class BillingViewSegmentTimeRange < Struct.new(
+      :begin_date_inclusive,
+      :end_date_exclusive)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A billing view segment. A segment represents a time range during which
+    # the billing domain and account relationships for a billing view
+    # remained unchanged.
+    #
+    # @!attribute [rw] domain
+    #   The billing domain for this segment. The following values are valid:
+    #
+    #   * `PRO_FORMA` - Data shaped by Billing Conductor that doesn't
+    #     reflect the final charges owed to Amazon Web Services.
+    #
+    #   * `BILLABLE` - Data that represents the final charges owed to Amazon
+    #     Web Services.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_range
+    #   The time range during which this segment is effective.
+    #   @return [Types::BillingViewSegmentTimeRange]
+    #
+    # @!attribute [rw] billing_transfer_account_id
+    #   The billing transfer account ID. The response includes this field
+    #   only when the caller is a billing transfer source account. The
+    #   response omits this field for billing group billing views.
+    #   @return [String]
+    #
+    # @!attribute [rw] management_account_id
+    #   The management account ID of the organization. The response includes
+    #   this field for organization member accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_group_primary_account_id
+    #   The billing group primary account ID. The response includes this
+    #   field for billing group members. Compare this value to your own
+    #   account ID to determine whether you are the primary account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/BillingViewSegmentsListElement AWS API Documentation
+    #
+    class BillingViewSegmentsListElement < Struct.new(
+      :domain,
+      :time_range,
+      :billing_transfer_account_id,
+      :management_account_id,
+      :billing_group_primary_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An account that is charged all or a portion of the total Support
     # charge and the percentage of the charge allocated to it.
     #
@@ -1378,6 +1447,60 @@ module Aws::Billing
       :total_support_eligible_reserved_instance_spend,
       :total_support_eligible_savings_plan_spend,
       :support_eligible_spend_by_service)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] time_range
+    #   The billing period to query. If you don't provide a time range, the
+    #   current billing period, which is the calendar month in UTC, is used.
+    #   @return [Types::BillingViewSegmentTimeRange]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies the billing
+    #   view to query. If you don't provide an ARN, the caller's `PRIMARY`
+    #   billing view is used. The ARN must reference a primary billing view.
+    #   Custom billing views aren't supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of entries a paginated response contains. Valid values
+    #   range from 1 to 100. The default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that is used on subsequent calls to list
+    #   billing view segments.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListBillingViewSegmentsRequest AWS API Documentation
+    #
+    class ListBillingViewSegmentsRequest < Struct.new(
+      :time_range,
+      :arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of billing view segments. Each segment covers a portion of
+    #   the requested time period. The response omits hidden segments, so
+    #   the segments it returns might not cover the entire requested time
+    #   period.
+    #   @return [Array<Types::BillingViewSegmentsListElement>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that is used on subsequent calls to list
+    #   billing view segments.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListBillingViewSegmentsResponse AWS API Documentation
+    #
+    class ListBillingViewSegmentsResponse < Struct.new(
+      :items,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end

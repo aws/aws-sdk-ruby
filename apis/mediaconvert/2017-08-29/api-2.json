@@ -957,6 +957,9 @@
       },
       "errors": [
         {
+          "shape": "UnprocessableEntityException"
+        },
+        {
           "shape": "BadRequestException"
         },
         {
@@ -2142,6 +2145,10 @@
           "shape": "AudioSelectorType",
           "locationName": "selectorType"
         },
+        "Smpte337Passthrough": {
+          "shape": "AudioSmpte337Passthrough",
+          "locationName": "smpte337Passthrough"
+        },
         "Streams": {
           "shape": "__listOf__integerMin1Max2147483647",
           "locationName": "streams"
@@ -2170,6 +2177,13 @@
         "HLS_RENDITION_GROUP",
         "ALL_PCM",
         "STREAM"
+      ]
+    },
+    "AudioSmpte337Passthrough": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
       ]
     },
     "AudioTypeControl": {
@@ -3604,6 +3618,14 @@
           "shape": "ContentLightLevel",
           "locationName": "contentLightLevel"
         },
+        "DisplayAspectRatio": {
+          "shape": "AspectRatio",
+          "locationName": "displayAspectRatio"
+        },
+        "DolbyVision": {
+          "shape": "DolbyVisionMetadata",
+          "locationName": "dolbyVision"
+        },
         "FieldOrder": {
           "shape": "__string",
           "locationName": "fieldOrder"
@@ -3631,6 +3653,10 @@
         "Rotation": {
           "shape": "__integer",
           "locationName": "rotation"
+        },
+        "SampleAspectRatio": {
+          "shape": "AspectRatio",
+          "locationName": "sampleAspectRatio"
         },
         "ScanType": {
           "shape": "__string",
@@ -4673,6 +4699,38 @@
         "HDR10_1000"
       ]
     },
+    "DolbyVisionMetadata": {
+      "type": "structure",
+      "members": {
+        "BaseLayer": {
+          "shape": "DolbyVisionPresence",
+          "locationName": "baseLayer"
+        },
+        "EnhancementLayer": {
+          "shape": "DolbyVisionPresence",
+          "locationName": "enhancementLayer"
+        },
+        "Level": {
+          "shape": "__integer",
+          "locationName": "level"
+        },
+        "Profile": {
+          "shape": "__integer",
+          "locationName": "profile"
+        },
+        "Rpu": {
+          "shape": "DolbyVisionPresence",
+          "locationName": "rpu"
+        }
+      }
+    },
+    "DolbyVisionPresence": {
+      "type": "string",
+      "enum": [
+        "PRESENT",
+        "ABSENT"
+      ]
+    },
     "DolbyVisionProfile": {
       "type": "string",
       "enum": [
@@ -5703,7 +5761,12 @@
         "mp3",
         "flac",
         "asf",
-        "ogg"
+        "ogg",
+        "three_gp",
+        "three_g2",
+        "aac",
+        "ac3",
+        "eac3"
       ]
     },
     "FrameCaptureSettings": {
@@ -8163,6 +8226,10 @@
           "shape": "MotionImageInserter",
           "locationName": "motionImageInserter"
         },
+        "MotionImageInserters": {
+          "shape": "__listOfMotionImageInserter",
+          "locationName": "motionImageInserters"
+        },
         "NielsenConfiguration": {
           "shape": "NielsenConfiguration",
           "locationName": "nielsenConfiguration"
@@ -8302,6 +8369,10 @@
         "MotionImageInserter": {
           "shape": "MotionImageInserter",
           "locationName": "motionImageInserter"
+        },
+        "MotionImageInserters": {
+          "shape": "__listOfMotionImageInserter",
+          "locationName": "motionImageInserters"
         },
         "NielsenConfiguration": {
           "shape": "NielsenConfiguration",
@@ -10648,12 +10719,28 @@
         }
       }
     },
+    "PassthroughSegmentationMode": {
+      "type": "string",
+      "enum": [
+        "AUTO",
+        "DURATION_BASED",
+        "GOP_COUNT"
+      ]
+    },
     "PassthroughSettings": {
       "type": "structure",
       "members": {
         "FrameControl": {
           "shape": "FrameControl",
           "locationName": "frameControl"
+        },
+        "GopsPerSegment": {
+          "shape": "__integerMin1Max100",
+          "locationName": "gopsPerSegment"
+        },
+        "SegmentationMode": {
+          "shape": "PassthroughSegmentationMode",
+          "locationName": "segmentationMode"
         },
         "VideoSelectorMode": {
           "shape": "VideoSelectorMode",
@@ -12049,6 +12136,19 @@
         "NONE",
         "HARD"
       ]
+    },
+    "UnprocessableEntityException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "shape": "__string",
+          "locationName": "message"
+        }
+      },
+      "exception": true,
+      "error": {
+        "httpStatusCode": 422
+      }
     },
     "UntagResourceRequest": {
       "type": "structure",
@@ -14223,6 +14323,12 @@
       "type": "list",
       "member": {
         "shape": "JobsQueryFilter"
+      }
+    },
+    "__listOfMotionImageInserter": {
+      "type": "list",
+      "member": {
+        "shape": "MotionImageInserter"
       }
     },
     "__listOfMsSmoothAdditionalManifest": {

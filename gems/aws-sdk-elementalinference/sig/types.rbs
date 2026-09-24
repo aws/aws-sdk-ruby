@@ -50,6 +50,11 @@ module Aws::ElementalInference
       SENSITIVE: []
     end
 
+    class ContextualMetadataConfig
+      attr_accessor summary_generation: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class CreateDictionaryRequest
       attr_accessor name: ::String
       attr_accessor language: ("eng" | "fra" | "ita" | "deu" | "spa" | "por")
@@ -117,6 +122,11 @@ module Aws::ElementalInference
       attr_accessor arn: ::String
       attr_accessor id: ::String
       attr_accessor status: ("CREATING" | "AVAILABLE" | "REFERENCED" | "DELETING" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class DeleteFeedPolicyRequest
+      attr_accessor id: ::String
       SENSITIVE: []
     end
 
@@ -209,6 +219,16 @@ module Aws::ElementalInference
       SENSITIVE: []
     end
 
+    class GetFeedPolicyRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFeedPolicyResponse
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
     class GetFeedRequest
       attr_accessor id: ::String
       SENSITIVE: []
@@ -294,6 +314,7 @@ module Aws::ElementalInference
       attr_accessor cropping: Types::CroppingConfig
       attr_accessor clipping: Types::ClippingConfig
       attr_accessor subtitling: Types::SubtitlingConfig
+      attr_accessor contextual_metadata: Types::ContextualMetadataConfig
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -303,8 +324,19 @@ module Aws::ElementalInference
       end
       class Subtitling < OutputConfig
       end
+      class ContextualMetadata < OutputConfig
+      end
       class Unknown < OutputConfig
       end
+    end
+
+    class PutFeedPolicyRequest
+      attr_accessor id: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutFeedPolicyResponse < Aws::EmptyStructure
     end
 
     class ResourceNotFoundException

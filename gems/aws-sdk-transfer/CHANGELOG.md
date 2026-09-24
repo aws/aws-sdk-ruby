@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.146.0 (2026-09-15)
+------------------
+
+* Feature - AWS Transfer Family now preserves the original source IP address using Proxy Protocol v2 when you place a Network Load Balancer in front of your server for SFTP connections.
+
+1.145.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.144.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.143.0 (2026-09-03)
 ------------------
 

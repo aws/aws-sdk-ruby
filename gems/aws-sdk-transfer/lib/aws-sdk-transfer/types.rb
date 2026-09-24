@@ -5873,13 +5873,75 @@ module Aws::Transfer
     #   HTTP is supported.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] proxy_config
+    #   The configuration for PROXY protocol version 2 (PPv2) support on the
+    #   Transfer Family server. For more information, see [Working with
+    #   Network Load Balancers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/working-with-nlb.html
+    #   @return [Types::ProxyConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ProtocolDetails AWS API Documentation
     #
     class ProtocolDetails < Struct.new(
       :passive_ip,
       :tls_session_resumption_mode,
       :set_stat_option,
-      :as_2_transports)
+      :as_2_transports,
+      :proxy_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configuration for PROXY protocol version 2 (PPv2) support on
+    # an Transfer Family server. When enabled, Transfer Family reads the
+    # added PPv2 header from incoming connections to extract the original
+    # client IP address. This address is then available in Amazon CloudWatch
+    # Logs entries and is passed to custom identity providers during
+    # authentication, enabling IP-based access policies. For more
+    # information, see [Working with Network Load Balancers][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transfer/latest/userguide/working-with-nlb.html
+    #
+    # @!attribute [rw] sftp_mode
+    #   Specifies whether the Transfer Family server requires or ignores a
+    #   PPv2 header containing the original client IP address on incoming
+    #   SFTP connections. If you don't specify a value, the default is
+    #   `NONE`
+    #
+    #   * `NONE`: the server reads and ignores any PPv2 header on incoming
+    #     SFTP connections. This is the default value. Use this value when
+    #     your SFTP server is not behind an NLB, or when you do not need to
+    #     preserve client source IP addresses through an NLB.
+    #
+    #   * `PROXY_PROTOCOL_V2_ENFORCED`: the server requires a valid PPv2
+    #     header on every incoming SFTP connection. When a valid header is
+    #     present, the server applies it and uses the client IP address from
+    #     the header. If a connection arrives without a PPv2 header, the
+    #     server refuses the connection and logs an error to Amazon
+    #     CloudWatch Logs indicating that the expected PPv2 header was
+    #     missing. Use this value when your SFTP server is behind an NLB
+    #     with PPv2 enabled on the target group.
+    #
+    #     When you enable `PROXY_PROTOCOL_V2_ENFORCED`, the server trusts
+    #     the source IP address in the PPv2 header. You must configure
+    #     security groups on your server's VPC endpoint to restrict inbound
+    #     traffic to only the NLB's private IP addresses. For the full
+    #     requirements, see [Working with Network Load Balancers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/working-with-nlb.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ProxyConfig AWS API Documentation
+    #
+    class ProxyConfig < Struct.new(
+      :sftp_mode)
       SENSITIVE = []
       include Aws::Structure
     end

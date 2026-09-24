@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.275.0 (2026-09-22)
+------------------
+
+* Feature - Adding two new fields for Glue Materialized Views feature - (1) SubObjectsStatistics and (2) SparkPipelineInfo.
+
+1.274.0 (2026-09-18)
+------------------
+
+* Feature - Introducing AWS Glue Data Quality advanced rule recommendations for faster recommendations. This capability uses Amazon Athena to analyze a sample of table data and Amazon Bedrock to recommend DQDL rules.
+
+1.273.0 (2026-09-14)
+------------------
+
+* Feature - Amazon Glue releasing the new API ListIntegrationTableProperties and adding IntegrationArn to TargetTableConfig
+
+1.272.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.271.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.270.0 (2026-08-14)
 ------------------
 

@@ -2095,6 +2095,7 @@ module Aws::Glue
       attr_accessor started_on: ::Time
       attr_accessor data_source: Types::DataSource
       attr_accessor created_ruleset_name: ::String
+      attr_accessor recommendation_mode: ("BASIC" | "ADVANCED")
       SENSITIVE: []
     end
 
@@ -3546,6 +3547,7 @@ module Aws::Glue
       attr_accessor created_ruleset_name: ::String
       attr_accessor data_quality_security_configuration: ::String
       attr_accessor additional_run_options: Types::DataQualityRuleRecommendationRunAdditionalRunOptions
+      attr_accessor recommendation_mode: ("BASIC" | "ADVANCED")
       SENSITIVE: []
     end
 
@@ -4781,6 +4783,20 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class IntegrationTableProperties
+      attr_accessor resource_arn: ::String
+      attr_accessor table_name: ::String
+      attr_accessor source_table_config: Types::SourceTableConfig
+      attr_accessor target_table_config: Types::TargetTableConfig
+      SENSITIVE: []
+    end
+
+    class IntegrationTablePropertiesFilter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -5376,6 +5392,19 @@ module Aws::Glue
 
     class ListIntegrationResourcePropertiesResponse
       attr_accessor integration_resource_property_list: ::Array[Types::IntegrationResourceProperty]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListIntegrationTablePropertiesRequest
+      attr_accessor marker: ::String
+      attr_accessor filters: ::Array[Types::IntegrationTablePropertiesFilter]
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListIntegrationTablePropertiesResponse
+      attr_accessor integration_table_properties_list: ::Array[Types::IntegrationTableProperties]
       attr_accessor marker: ::String
       SENSITIVE: []
     end
@@ -7205,6 +7234,7 @@ module Aws::Glue
       attr_accessor data_quality_security_configuration: ::String
       attr_accessor client_token: ::String
       attr_accessor additional_run_options: Types::DataQualityRuleRecommendationRunAdditionalRunOptions
+      attr_accessor recommendation_mode: ("BASIC" | "ADVANCED")
       SENSITIVE: []
     end
 
@@ -7508,6 +7538,15 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class SubObjectStatistics
+      attr_accessor source_type: ("HIVE_PARQUET" | "HIVE_ORC" | "HIVE_CSV" | "HIVE_JSON" | "PLAIN_PARQUET" | "ICEBERG")
+      attr_accessor glue_version_id: ::String
+      attr_accessor partition_count: ::Integer
+      attr_accessor file_count: ::Integer
+      attr_accessor total_file_bytes: ::Integer
+      SENSITIVE: []
+    end
+
     class SupportedDialect
       attr_accessor dialect: ("REDSHIFT" | "ATHENA" | "SPARK")
       attr_accessor dialect_version: ::String
@@ -7680,6 +7719,7 @@ module Aws::Glue
       attr_accessor unnest_spec: ("TOPLEVEL" | "FULL" | "NOUNNEST")
       attr_accessor partition_spec: ::Array[Types::IntegrationPartition]
       attr_accessor target_table_name: ::String
+      attr_accessor integration_arn: ::String
       SENSITIVE: []
     end
 
@@ -8374,7 +8414,9 @@ module Aws::Glue
       attr_accessor last_refresh_type: ("FULL" | "INCREMENTAL")
       attr_accessor sub_objects: ::Array[::String]
       attr_accessor sub_object_version_ids: ::Array[::Integer]
+      attr_accessor sub_objects_statistics: ::Array[Types::SubObjectStatistics]
       attr_accessor representations: ::Array[Types::ViewRepresentation]
+      attr_accessor spark_pipeline_info: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -8388,6 +8430,8 @@ module Aws::Glue
       attr_accessor last_refresh_type: ("FULL" | "INCREMENTAL")
       attr_accessor sub_objects: ::Array[::String]
       attr_accessor sub_object_version_ids: ::Array[::Integer]
+      attr_accessor sub_objects_statistics: ::Array[Types::SubObjectStatistics]
+      attr_accessor spark_pipeline_info: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 

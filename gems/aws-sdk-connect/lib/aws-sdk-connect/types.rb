@@ -10,6 +10,26 @@
 module Aws::Connect
   module Types
 
+    # Information about an AI agent that a security profile allows access to
+    # for Agent-to-Agent authorization.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the AI agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the AI agent. The valid value is `THIRD_PARTY`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AIAgent AWS API Documentation
+    #
+    class AIAgent < Struct.new(
+      :arn,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You do not have sufficient permissions to perform this action.
     #
     # @!attribute [rw] message
@@ -4068,6 +4088,47 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about a reference when the `referenceType` is
+    # `CONTACT_ANALYSIS`. Otherwise, null.
+    #
+    # @!attribute [rw] name
+    #   Identifier of the contact analysis reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The location path of the contact analysis reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of the contact analysis reference type.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the contact analysis reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] analytics_mode
+    #   The analytics mode of the contact analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_redacted
+    #   Indicates whether sensitive data has been redacted from the contact
+    #   analysis.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactAnalysisReference AWS API Documentation
+    #
+    class ContactAnalysisReference < Struct.new(
+      :name,
+      :value,
+      :status,
+      :arn,
+      :analytics_mode,
+      :is_redacted)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The contact configuration for push notification registration.
     #
     # @!attribute [rw] contact_id
@@ -6384,6 +6445,11 @@ module Aws::Connect
     #   Configuration for language settings of the evaluation form.
     #   @return [Types::EvaluationFormLanguageConfiguration]
     #
+    # @!attribute [rw] ai_version
+    #   The AI version to use for the evaluation form. This specifies which
+    #   AI model version is used for automated evaluations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateEvaluationFormRequest AWS API Documentation
     #
     class CreateEvaluationFormRequest < Struct.new(
@@ -6398,7 +6464,8 @@ module Aws::Connect
       :tags,
       :review_configuration,
       :target_configuration,
-      :language_configuration)
+      :language_configuration,
+      :ai_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7711,6 +7778,10 @@ module Aws::Connect
     #   A list of Flow Modules an AI Agent can invoke as a tool.
     #   @return [Array<Types::FlowModule>]
     #
+    # @!attribute [rw] allowed_ai_agents
+    #   A list of AI agents that the security profile will give access to.
+    #   @return [Array<Types::AIAgent>]
+    #
     # @!attribute [rw] granular_access_control_configuration
     #   The granular access control configuration for the security profile,
     #   including data table permissions.
@@ -7730,6 +7801,7 @@ module Aws::Connect
       :hierarchy_restricted_resources,
       :allowed_access_control_hierarchy_group_id,
       :allowed_flow_modules,
+      :allowed_ai_agents,
       :granular_access_control_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -13513,6 +13585,11 @@ module Aws::Connect
     #   evaluation form.
     #   @return [Time]
     #
+    # @!attribute [rw] ai_version
+    #   The AI version to use for the evaluation form. This specifies which
+    #   AI model version is used for automated evaluations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationForm AWS API Documentation
     #
     class EvaluationForm < Struct.new(
@@ -13535,7 +13612,66 @@ module Aws::Connect
       :target_configuration,
       :language_configuration,
       :latest_validation_status,
-      :last_validation_time)
+      :last_validation_time,
+      :ai_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the status and availability dates for an AI version,
+    # indicating when the version became active and when it reaches end of
+    # life.
+    #
+    # @!attribute [rw] status
+    #   The status of the AI version. Valid values:
+    #
+    #   * `Latest` - The most recent AI version.
+    #
+    #   * `Preview` - An AI version available for preview.
+    #
+    #   * `Active` - An AI version that is currently available.
+    #
+    #   * `Deprecated` - An AI version that is no longer recommended for
+    #     use.
+    #
+    #   * `Removed` - An AI version that is no longer available.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_of_life_time
+    #   The timestamp for when this AI version became available.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_of_life_time
+    #   The timestamp when this AI version reaches or reached end of life.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormAIVersionLifecycle AWS API Documentation
+    #
+    class EvaluationFormAIVersionLifecycle < Struct.new(
+      :status,
+      :start_of_life_time,
+      :end_of_life_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the name and lifecycle information for an AI version that you
+    # can use when creating or updating an evaluation form.
+    #
+    # @!attribute [rw] ai_version_name
+    #   The name of the AI version.
+    #   @return [String]
+    #
+    # @!attribute [rw] ai_version_lifecycle
+    #   The lifecycle information for this AI version, including its status
+    #   and availability dates.
+    #   @return [Types::EvaluationFormAIVersionLifecycle]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormAIVersionSummary AWS API Documentation
+    #
+    class EvaluationFormAIVersionSummary < Struct.new(
+      :ai_version_name,
+      :ai_version_lifecycle)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13604,6 +13740,11 @@ module Aws::Connect
     #   content.
     #   @return [Types::EvaluationReviewConfiguration]
     #
+    # @!attribute [rw] ai_version
+    #   The AI version to use for the evaluation form. This specifies which
+    #   AI model version is used for automated evaluations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormContent AWS API Documentation
     #
     class EvaluationFormContent < Struct.new(
@@ -13617,7 +13758,8 @@ module Aws::Connect
       :auto_evaluation_configuration,
       :target_configuration,
       :language_configuration,
-      :review_configuration)
+      :review_configuration,
+      :ai_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13798,6 +13940,37 @@ module Aws::Connect
     #
     class EvaluationFormLanguageConfiguration < Struct.new(
       :form_language)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the metric configuration for an evaluation form
+    # question. Use this to associate a business outcome metric with a
+    # question.
+    #
+    # @!attribute [rw] metric_type
+    #   The type of metric. Currently, only `BUSINESS_OUTCOME` is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the metric. Valid values are:
+    #
+    #   * `SALE_SUCCESS` – Sale success.
+    #
+    #   * `CSAT` – Customer satisfaction.
+    #
+    #   * `CHURN_PROPENSITY` – Churn propensity.
+    #
+    #   * `SELF_SERVICE_SUCCESS` – Self-service success.
+    #
+    #   * `PARTIAL_SELF_SERVICE_SUCCESS` – Partial self-service success.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormMetricConfiguration AWS API Documentation
+    #
+    class EvaluationFormMetricConfiguration < Struct.new(
+      :metric_type,
+      :metric_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14054,6 +14227,11 @@ module Aws::Connect
     #   The scoring configuration of the question.
     #   @return [Types::EvaluationFormQuestionScoringConfiguration]
     #
+    # @!attribute [rw] metric_configuration
+    #   The metric configuration for the question. Use this to associate a
+    #   business outcome metric with the question.
+    #   @return [Types::EvaluationFormMetricConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormQuestion AWS API Documentation
     #
     class EvaluationFormQuestion < Struct.new(
@@ -14065,7 +14243,8 @@ module Aws::Connect
       :question_type_properties,
       :enablement,
       :weight,
-      :scoring_configuration)
+      :scoring_configuration,
+      :metric_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14340,6 +14519,11 @@ module Aws::Connect
     #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] ai_version
+    #   The AI version to use for the evaluation form. This specifies which
+    #   AI model version is used for automated evaluations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormSearchSummary AWS API Documentation
     #
     class EvaluationFormSearchSummary < Struct.new(
@@ -14359,7 +14543,8 @@ module Aws::Connect
       :auto_evaluation_enabled,
       :evaluation_form_language,
       :contact_interaction_type,
-      :tags)
+      :tags,
+      :ai_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22829,6 +23014,58 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] contact_interaction_type
+    #   The contact interaction type for the evaluation form.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListEvaluationFormAIVersionsRequest AWS API Documentation
+    #
+    class ListEvaluationFormAIVersionsRequest < Struct.new(
+      :instance_id,
+      :contact_interaction_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ai_version_summaries
+    #   The list of AI version summaries.
+    #   @return [Array<Types::EvaluationFormAIVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListEvaluationFormAIVersionsResponse AWS API Documentation
+    #
+    class ListEvaluationFormAIVersionsResponse < Struct.new(
+      :ai_version_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
     # @!attribute [rw] evaluation_form_id
     #   The unique identifier for the evaluation form.
     #   @return [String]
@@ -24412,6 +24649,69 @@ module Aws::Connect
     class ListSecurityKeysResponse < Struct.new(
       :security_keys,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_profile_id
+    #   The identifier for the security profle.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfileAIAgentsRequest AWS API Documentation
+    #
+    class ListSecurityProfileAIAgentsRequest < Struct.new(
+      :security_profile_id,
+      :instance_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] allowed_ai_agents
+    #   A list of the allowed AI agents and their types.
+    #   @return [Array<Types::AIAgent>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfileAIAgentsResponse AWS API Documentation
+    #
+    class ListSecurityProfileAIAgentsResponse < Struct.new(
+      :allowed_ai_agents,
+      :next_token,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29595,6 +29895,11 @@ module Aws::Connect
     #   Otherwise, null.
     #   @return [Types::EmailReference]
     #
+    # @!attribute [rw] contact_analysis
+    #   Information about a reference when the `referenceType` is
+    #   `CONTACT_ANALYSIS`. Otherwise, null.
+    #   @return [Types::ContactAnalysisReference]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ReferenceSummary AWS API Documentation
     #
     class ReferenceSummary < Struct.new(
@@ -29608,6 +29913,7 @@ module Aws::Connect
       :number,
       :date,
       :email,
+      :contact_analysis,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -29623,6 +29929,7 @@ module Aws::Connect
       class Number < ReferenceSummary; end
       class Date < ReferenceSummary; end
       class Email < ReferenceSummary; end
+      class ContactAnalysis < ReferenceSummary; end
       class Unknown < ReferenceSummary; end
     end
 
@@ -38010,6 +38317,11 @@ module Aws::Connect
     #   Configuration for language settings of the evaluation form.
     #   @return [Types::EvaluationFormLanguageConfiguration]
     #
+    # @!attribute [rw] ai_version
+    #   The AI version to use for the evaluation form. This specifies which
+    #   AI model version is used for automated evaluations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateEvaluationFormRequest AWS API Documentation
     #
     class UpdateEvaluationFormRequest < Struct.new(
@@ -38026,7 +38338,8 @@ module Aws::Connect
       :as_draft,
       :client_token,
       :target_configuration,
-      :language_configuration)
+      :language_configuration,
+      :ai_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39212,6 +39525,10 @@ module Aws::Connect
     #   A list of Flow Modules an AI Agent can invoke as a tool
     #   @return [Array<Types::FlowModule>]
     #
+    # @!attribute [rw] allowed_ai_agents
+    #   A list of AI agents that the security profile will give access to.
+    #   @return [Array<Types::AIAgent>]
+    #
     # @!attribute [rw] granular_access_control_configuration
     #   The granular access control configuration for the security profile,
     #   including data table permissions.
@@ -39230,6 +39547,7 @@ module Aws::Connect
       :hierarchy_restricted_resources,
       :allowed_access_control_hierarchy_group_id,
       :allowed_flow_modules,
+      :allowed_ai_agents,
       :granular_access_control_configuration)
       SENSITIVE = []
       include Aws::Structure

@@ -211,6 +211,7 @@
     "ListGlossaries": "<p>Lists business glossaries in Glue Data Catalog.</p>",
     "ListGlossaryTerms": "<p>Lists glossary terms within a business glossary in Glue Data Catalog.</p>",
     "ListIntegrationResourceProperties": "<p>List integration resource properties for a single customer. It supports the filters, maxRecords and markers.</p>",
+    "ListIntegrationTableProperties": "<p>Lists the integration table properties in your account. This operation supports filtering and pagination.</p>",
     "ListIterableForms": "<p>Lists the items in an iterable form on an asset in Glue Data Catalog. For example, lists the columns of a table asset.</p>",
     "ListJobs": "<p>Retrieves the names of all job resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.</p>",
     "ListMLTransforms": "<p> Retrieves a sortable, filterable list of existing Glue machine learning transforms in this Amazon Web Services account, or the resources with the specified tag. This operation takes the optional <code>Tags</code> field, which you can use as a filter of the responses so that tagged resources can be retrieved as a group. If you choose to use tag filtering, only resources with the tags are retrieved. </p>",
@@ -6832,7 +6833,8 @@
       "refs": {
         "DescribeInboundIntegrationsRequest$MaxRecords": "<p>The total number of items to return in the output.</p>",
         "DescribeIntegrationsRequest$MaxRecords": "<p>The total number of items to return in the output.</p>",
-        "ListIntegrationResourcePropertiesRequest$MaxRecords": "<p>This is total number of items to be evaluated.</p>"
+        "ListIntegrationResourcePropertiesRequest$MaxRecords": "<p>This is total number of items to be evaluated.</p>",
+        "ListIntegrationTablePropertiesRequest$MaxRecords": "<p>The maximum number of records to return in the response.</p>"
       }
     },
     "IntegrationNotFoundFault": {
@@ -6908,6 +6910,36 @@
         "IntegrationAdditionalEncryptionContextMap$value": null,
         "IntegrationSourcePropertiesMap$key": null,
         "IntegrationSourcePropertiesMap$value": null
+      }
+    },
+    "IntegrationTableProperties": {
+      "base": "<p>The properties of a single integration table, including the resource ARN, the table name, and the source or target table configuration.</p>",
+      "refs": {
+        "IntegrationTablePropertiesList$member": null
+      }
+    },
+    "IntegrationTablePropertiesFilter": {
+      "base": "<p>A key-value filter used to narrow the list of integration table properties returned by ListIntegrationTableProperties. Specify a filter key and one or more values to match.</p>",
+      "refs": {
+        "IntegrationTablePropertiesFilterList$member": null
+      }
+    },
+    "IntegrationTablePropertiesFilterList": {
+      "base": null,
+      "refs": {
+        "ListIntegrationTablePropertiesRequest$Filters": "<p>A list of filters. Supported filter keys are <code>SourceArn</code>, <code>TargetArn</code>, <code>SourceTableName</code>, and <code>TargetTableName</code>.</p>"
+      }
+    },
+    "IntegrationTablePropertiesFilterValues": {
+      "base": null,
+      "refs": {
+        "IntegrationTablePropertiesFilter$Values": "<p>A list of filter values.</p>"
+      }
+    },
+    "IntegrationTablePropertiesList": {
+      "base": null,
+      "refs": {
+        "ListIntegrationTablePropertiesResponse$IntegrationTablePropertiesList": "<p>A list of integration table properties meeting the filter criteria.</p>"
       }
     },
     "IntegrationTagsList": {
@@ -7622,6 +7654,14 @@
       "refs": {}
     },
     "ListIntegrationResourcePropertiesResponse": {
+      "base": null,
+      "refs": {}
+    },
+    "ListIntegrationTablePropertiesRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "ListIntegrationTablePropertiesResponse": {
       "base": null,
       "refs": {}
     },
@@ -8988,12 +9028,21 @@
         "Workflow$MaxConcurrentRuns": "<p>You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.</p>"
       }
     },
+    "NullableLong": {
+      "base": null,
+      "refs": {
+        "SubObjectStatistics$PartitionCount": "<p>The number of sub-object partitions selected for that refresh. Not present for unpartitioned sub-objects.</p>",
+        "SubObjectStatistics$FileCount": "<p>The number of sub-object data files selected for that refresh.</p>",
+        "SubObjectStatistics$TotalFileBytes": "<p>The total size, in bytes, of the data files counted by <code>FileCount</code>.</p>"
+      }
+    },
     "NullableString": {
       "base": null,
       "refs": {
         "QuerySessionContext$ClusterId": "<p>An identifier string for the consumer cluster.</p>",
         "StringToStringMap$key": null,
-        "StringToStringMap$value": null
+        "StringToStringMap$value": null,
+        "SubObjectStatistics$GlueVersionId": "<p>The Glue version ID of the sub-object that the statistics were captured for.</p>"
       }
     },
     "NumberTargetPartitionsString": {
@@ -10020,6 +10069,14 @@
         "RecipeReference$RecipeVersion": "<p>The RecipeVersion of the DataBrew recipe.</p>"
       }
     },
+    "RecommendationMode": {
+      "base": "<p>Specifies the mode for how Glue Data Quality recommends rules.</p> <ul> <li> <p> <code>BASIC</code> uses an Glue job to analyze table data and recommend rules. This value is the default.</p> </li> <li> <p> <code>ADVANCED</code> uses Amazon Athena to analyze table data and Amazon Bedrock to recommend rules.</p> </li> </ul>",
+      "refs": {
+        "DataQualityRuleRecommendationRunDescription$RecommendationMode": "<p>The mode that Glue Data Quality uses to recommend rules.</p> <p>The default is <code>BASIC</code>.</p>",
+        "GetDataQualityRuleRecommendationRunResponse$RecommendationMode": "<p>The mode that Glue Data Quality uses to recommend rules.</p> <p>The default is <code>BASIC</code>.</p>",
+        "StartDataQualityRuleRecommendationRunRequest$RecommendationMode": "<p>The mode that Glue Data Quality uses to recommend rules.</p> <p>The default is <code>BASIC</code>.</p>"
+      }
+    },
     "Record": {
       "base": null,
       "refs": {
@@ -10303,13 +10360,13 @@
         "CreateJobRequest$Role": "<p>The name or Amazon Resource Name (ARN) of the IAM role associated with this job.</p>",
         "CreateMLTransformRequest$Role": "<p>The name or Amazon Resource Name (ARN) of the IAM role with the required permissions. The required permissions include both Glue service role permissions to Glue resources, and Amazon S3 permissions required by the transform. </p> <ul> <li> <p>This role needs Glue service role permissions to allow access to resources in Glue. See <a href=\"https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html\">Attach a Policy to IAM Users That Access Glue</a>.</p> </li> <li> <p>This role needs permission to your Amazon Simple Storage Service (Amazon S3) sources, targets, temporary directory, scripts, and any libraries used by the task run for this transform.</p> </li> </ul>",
         "DataQualityRulesetEvaluationRun$Role": "<p>An IAM role supplied to encrypt the results of the run.</p>",
-        "GetDataQualityRuleRecommendationRunResponse$Role": "<p>An IAM role supplied to encrypt the results of the run.</p>",
+        "GetDataQualityRuleRecommendationRunResponse$Role": "<p>The IAM role that Glue assumes to access resources for the run.</p>",
         "GetDataQualityRulesetEvaluationRunResponse$Role": "<p>An IAM role supplied to encrypt the results of the run.</p>",
         "GetMLTransformResponse$Role": "<p>The name or Amazon Resource Name (ARN) of the IAM role with the required permissions.</p>",
         "Job$Role": "<p>The name or Amazon Resource Name (ARN) of the IAM role associated with this job.</p>",
         "JobUpdate$Role": "<p>The name or Amazon Resource Name (ARN) of the IAM role associated with this job (required).</p>",
         "MLTransform$Role": "<p>The name or Amazon Resource Name (ARN) of the IAM role with the required permissions. The required permissions include both Glue service role permissions to Glue resources, and Amazon S3 permissions required by the transform. </p> <ul> <li> <p>This role needs Glue service role permissions to allow access to resources in Glue. See <a href=\"https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html\">Attach a Policy to IAM Users That Access Glue</a>.</p> </li> <li> <p>This role needs permission to your Amazon Simple Storage Service (Amazon S3) sources, targets, temporary directory, scripts, and any libraries used by the task run for this transform.</p> </li> </ul>",
-        "StartDataQualityRuleRecommendationRunRequest$Role": "<p>An IAM role supplied to encrypt the results of the run.</p>",
+        "StartDataQualityRuleRecommendationRunRequest$Role": "<p>The IAM role that Glue assumes to access resources for the run.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/data-quality-authorization.html\">Configure IAM permissions for Glue Data Quality</a>.</p>",
         "StartDataQualityRulesetEvaluationRunRequest$Role": "<p>An IAM role supplied to encrypt the results of the run.</p>",
         "UpdateMLTransformRequest$Role": "<p>The name or Amazon Resource Name (ARN) of the IAM role with the required permissions.</p>"
       }
@@ -11188,6 +11245,7 @@
       "refs": {
         "CreateIntegrationTablePropertiesRequest$SourceTableConfig": "<p>A structure for the source table configuration. See the <code>SourceTableConfig</code> structure to see list of supported source properties.</p>",
         "GetIntegrationTablePropertiesResponse$SourceTableConfig": "<p>A structure for the source table configuration.</p>",
+        "IntegrationTableProperties$SourceTableConfig": "<p>A structure for the source table configuration.</p>",
         "UpdateIntegrationTablePropertiesRequest$SourceTableConfig": "<p>A structure for the source table configuration.</p>"
       }
     },
@@ -11213,6 +11271,25 @@
       "base": "<p>Specifies a target that uses an Apache Spark connector.</p>",
       "refs": {
         "CodeGenConfigurationNode$SparkConnectorTarget": "<p>Specifies a target that uses an Apache Spark connector.</p>"
+      }
+    },
+    "SparkPipelineInfoKey": {
+      "base": null,
+      "refs": {
+        "SparkPipelineInfoMap$key": null
+      }
+    },
+    "SparkPipelineInfoMap": {
+      "base": null,
+      "refs": {
+        "ViewDefinition$SparkPipelineInfo": "<p>A map of key-value pairs containing Spark Declarative Pipelines (SDP) information for the materialized view.</p>",
+        "ViewDefinitionInput$SparkPipelineInfo": "<p>A map of key-value pairs containing Spark Declarative Pipelines (SDP) information for the materialized view.</p>"
+      }
+    },
+    "SparkPipelineInfoValue": {
+      "base": null,
+      "refs": {
+        "SparkPipelineInfoMap$value": null
       }
     },
     "SparkSQL": {
@@ -11585,13 +11662,6 @@
         "Property$KeyOverride": "<p>A key name to use when sending this property in API requests, if different from the display name.</p>"
       }
     },
-    "String1024": {
-      "base": null,
-      "refs": {
-        "ListIntegrationResourcePropertiesRequest$Marker": "<p>This is the pagination token for next page, initial value is <code>null</code>.</p>",
-        "ListIntegrationResourcePropertiesResponse$Marker": "<p>This is the pagination token for the next page.</p>"
-      }
-    },
     "String128": {
       "base": null,
       "refs": {
@@ -11623,6 +11693,9 @@
         "IntegrationPartition$ConversionSpec": "<p>Specifies the timestamp format of the source data. Valid values are:</p> <ul> <li> <p> <code>epoch_sec</code> - Unix epoch timestamp in seconds</p> </li> <li> <p> <code>epoch_milli</code> - Unix epoch timestamp in milliseconds</p> </li> <li> <p> <code>iso</code> - ISO 8601 formatted timestamp</p> </li> </ul> <note> <p> Only specify <code>ConversionSpec</code> when using timestamp-based partition functions (year, month, day, or hour). Glue Zero-ETL uses this parameter to correctly transform source data into timestamp format before partitioning. </p> <p> Do not use high-cardinality columns with the <code>identity</code> partition function. High-cardinality columns include: </p> <ul> <li> <p>Primary keys</p> </li> <li> <p>Timestamp fields (such as <code>LastModifiedTimestamp</code>, <code>CreatedDate</code>)</p> </li> <li> <p>System-generated timestamps</p> </li> </ul> <p> Using high-cardinality columns with identity partitioning creates many small partitions, which can significantly degrade ingestion performance. </p> </note>",
         "IntegrationResourcePropertyFilter$Name": "<p>The name of the filter. Supported filter keys are <code>SourceArn</code> and <code>TargetArn</code>.</p>",
         "IntegrationResourcePropertyFilterValues$member": null,
+        "IntegrationTableProperties$TableName": "<p>The name of the source table to be replicated.</p>",
+        "IntegrationTablePropertiesFilter$Name": "<p>The name of the filter. Supported filter keys are <code>SourceArn</code>, <code>TargetArn</code>, <code>SourceTableName</code>, and <code>TargetTableName</code>.</p>",
+        "IntegrationTablePropertiesFilterValues$member": null,
         "ModifyIntegrationRequest$IntegrationIdentifier": "<p>The Amazon Resource Name (ARN) for the integration.</p>",
         "ModifyIntegrationRequest$IntegrationName": "<p>A unique name for an integration in Glue.</p>",
         "ModifyIntegrationResponse$IntegrationName": "<p>A unique name for an integration in Glue.</p>",
@@ -11635,6 +11708,7 @@
         "TargetProcessingProperties$RoleArn": "<p>The IAM role to access the Glue database.</p>",
         "TargetProcessingProperties$ConnectionName": "<p>The Glue network connection to configure the Glue job running in the customer VPC.</p>",
         "TargetTableConfig$TargetTableName": "<p>The optional name of a target table.</p>",
+        "TargetTableConfig$IntegrationArn": "<p>The ARN of the integration that owns this target table configuration.</p>",
         "UpdateIntegrationTablePropertiesRequest$TableName": "<p>The name of the table to be replicated.</p>"
       }
     },
@@ -11655,6 +11729,15 @@
         "ModifyIntegrationResponse$DataFilter": "<p>Selects source tables for the integration using Maxwell filter syntax.</p>",
         "TargetProcessingProperties$KmsArn": "<p>The ARN of the KMS key used for encryption.</p>",
         "TargetProcessingProperties$EventBusArn": "<p>The ARN of an Eventbridge event bus to receive the integration status notification.</p>"
+      }
+    },
+    "String4096": {
+      "base": null,
+      "refs": {
+        "ListIntegrationResourcePropertiesRequest$Marker": "<p>This is the pagination token for next page, initial value is <code>null</code>.</p>",
+        "ListIntegrationResourcePropertiesResponse$Marker": "<p>This is the pagination token for the next page.</p>",
+        "ListIntegrationTablePropertiesRequest$Marker": "<p>The pagination token for the next page of results. The initial value is <code>null</code>.</p>",
+        "ListIntegrationTablePropertiesResponse$Marker": "<p>The pagination token for the next page. Returns <code>null</code> if there are no more results.</p>"
       }
     },
     "String512": {
@@ -11684,6 +11767,7 @@
         "Integration$TargetArn": "<p>The ARN for the target of the integration.</p>",
         "IntegrationResourceProperty$ResourceArn": "<p>The connection ARN of the source, or the database ARN of the target.</p>",
         "IntegrationResourceProperty$ResourcePropertyArn": "<p>The resource ARN created through this create API. The format is something like arn:aws:glue:&lt;region&gt;:&lt;account_id&gt;:integrationresourceproperty/*</p>",
+        "IntegrationTableProperties$ResourceArn": "<p>The connection ARN of the source, or the database ARN of the target.</p>",
         "ModifyIntegrationResponse$SourceArn": "<p>The ARN of the source for the integration.</p>",
         "ModifyIntegrationResponse$TargetArn": "<p>The ARN of the target for the integration.</p>",
         "UpdateIntegrationResourcePropertyRequest$ResourceArn": "<p>The connection ARN of the source, or the database ARN of the target.</p>",
@@ -11714,6 +11798,25 @@
         "IcebergEncryptedKey$Properties": "<p>A string to string map of additional metadata used by the table's encryption scheme. These properties provide additional context and configuration for the encryption key implementation.</p>",
         "IcebergTableMetadata$Properties": "<p>A map of key-value pairs that define table-level properties and configuration settings for the Iceberg table.</p>",
         "IcebergTableUpdate$Properties": "<p>Updated key-value pairs of table properties and configuration settings for the Iceberg table.</p>"
+      }
+    },
+    "SubObjectSourceType": {
+      "base": null,
+      "refs": {
+        "SubObjectStatistics$SourceType": "<p>The source type of the sub-object (for example, its table format), which identifies the sub-object.</p>"
+      }
+    },
+    "SubObjectStatistics": {
+      "base": "<p>Statistics for one sub-object referenced by a materialized view, recorded when the materialized view was created or last fully refreshed. These values describe what that refresh selected from the sub-object, which can be a subset of the table when the materialized view's definition limits the data it reads. The fields present depend on the sub-object's format.</p>",
+      "refs": {
+        "SubObjectsStatisticsList$member": null
+      }
+    },
+    "SubObjectsStatisticsList": {
+      "base": null,
+      "refs": {
+        "ViewDefinition$SubObjectsStatistics": "<p>Statistics captured for each sub-object referenced by the materialized view as of its most recent refresh, such as the source type, Glue version ID, and the partition, file, and byte counts. Each entry describes one sub-object, identified by its source type.</p>",
+        "ViewDefinitionInput$SubObjectsStatistics": "<p>Statistics for each sub-object referenced by the materialized view, such as the source type, Glue version ID, and the partition, file, and byte counts. Each entry describes one sub-object, identified by its source type.</p>"
       }
     },
     "SupportedDialect": {
@@ -12017,6 +12120,7 @@
       "refs": {
         "CreateIntegrationTablePropertiesRequest$TargetTableConfig": "<p>A structure for the target table configuration.</p>",
         "GetIntegrationTablePropertiesResponse$TargetTableConfig": "<p>A structure for the target table configuration.</p>",
+        "IntegrationTableProperties$TargetTableConfig": "<p>A structure for the target table configuration.</p>",
         "UpdateIntegrationTablePropertiesRequest$TargetTableConfig": "<p>A structure for the target table configuration.</p>"
       }
     },

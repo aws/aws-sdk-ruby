@@ -615,6 +615,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#prefix_pool_size_ipv_6 #prefix_pool_size_ipv_6} => Integer
     #   * {Types::Connection#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
     #   * {Types::Connection#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
+    #   * {Types::Connection#billing_mode #billing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -665,6 +666,7 @@ module Aws::DirectConnect
     #   resp.prefix_pool_size_ipv_6 #=> Integer
     #   resp.prefix_pool_unallocated_count_ipv_4 #=> Integer
     #   resp.prefix_pool_unallocated_count_ipv_6 #=> Integer
+    #   resp.billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateConnectionOnInterconnect AWS API Documentation
     #
@@ -741,6 +743,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#prefix_pool_size_ipv_6 #prefix_pool_size_ipv_6} => Integer
     #   * {Types::Connection#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
     #   * {Types::Connection#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
+    #   * {Types::Connection#billing_mode #billing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -797,6 +800,7 @@ module Aws::DirectConnect
     #   resp.prefix_pool_size_ipv_6 #=> Integer
     #   resp.prefix_pool_unallocated_count_ipv_4 #=> Integer
     #   resp.prefix_pool_unallocated_count_ipv_6 #=> Integer
+    #   resp.billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateHostedConnection AWS API Documentation
     #
@@ -1250,6 +1254,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#prefix_pool_size_ipv_6 #prefix_pool_size_ipv_6} => Integer
     #   * {Types::Connection#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
     #   * {Types::Connection#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
+    #   * {Types::Connection#billing_mode #billing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1297,6 +1302,7 @@ module Aws::DirectConnect
     #   resp.prefix_pool_size_ipv_6 #=> Integer
     #   resp.prefix_pool_unallocated_count_ipv_4 #=> Integer
     #   resp.prefix_pool_unallocated_count_ipv_6 #=> Integer
+    #   resp.billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateConnectionWithLag AWS API Documentation
     #
@@ -1304,6 +1310,50 @@ module Aws::DirectConnect
     # @param [Hash] params ({})
     def associate_connection_with_lag(params = {}, options = {})
       req = build_request(:associate_connection_with_lag, params)
+      req.send_request(options)
+    end
+
+    # Associates one or more connections with the specified resiliency
+    # group. This operation is atomic: either all of the specified
+    # connections are associated, or the operation fails and no changes are
+    # made.
+    #
+    # @option params [required, Array<String>] :connection_identifiers
+    #   The IDs or ARNs of the connections to associate with the resiliency
+    #   group.
+    #
+    # @option params [required, String] :resiliency_group_id
+    #   The ID of the resiliency group.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    # @return [Types::AssociateConnectionsToResiliencyGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateConnectionsToResiliencyGroupResult#resiliency_group_associations #resiliency_group_associations} => Array&lt;Types::ResiliencyGroupAssociation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_connections_to_resiliency_group({
+    #     connection_identifiers: ["ConnectionIdentifier"], # required
+    #     resiliency_group_id: "ResiliencyGroupId", # required
+    #     client_token: "IdempotencyToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resiliency_group_associations #=> Array
+    #   resp.resiliency_group_associations[0].resiliency_group_id #=> String
+    #   resp.resiliency_group_associations[0].connection_arn #=> String
+    #   resp.resiliency_group_associations[0].state #=> String, one of "associating", "associated", "disassociating", "disassociated"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateConnectionsToResiliencyGroup AWS API Documentation
+    #
+    # @overload associate_connections_to_resiliency_group(params = {})
+    # @param [Hash] params ({})
+    def associate_connections_to_resiliency_group(params = {}, options = {})
+      req = build_request(:associate_connections_to_resiliency_group, params)
       req.send_request(options)
     end
 
@@ -1354,6 +1404,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#prefix_pool_size_ipv_6 #prefix_pool_size_ipv_6} => Integer
     #   * {Types::Connection#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
     #   * {Types::Connection#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
+    #   * {Types::Connection#billing_mode #billing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1401,6 +1452,7 @@ module Aws::DirectConnect
     #   resp.prefix_pool_size_ipv_6 #=> Integer
     #   resp.prefix_pool_unallocated_count_ipv_4 #=> Integer
     #   resp.prefix_pool_unallocated_count_ipv_6 #=> Integer
+    #   resp.billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateHostedConnection AWS API Documentation
     #
@@ -1943,6 +1995,9 @@ module Aws::DirectConnect
     #
     #   [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/MACSec.html
     #
+    # @option params [String] :billing_mode
+    #   The billing mode for the connection.
+    #
     # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Connection#owner_account #owner_account} => String
@@ -1973,6 +2028,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#prefix_pool_size_ipv_6 #prefix_pool_size_ipv_6} => Integer
     #   * {Types::Connection#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
     #   * {Types::Connection#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
+    #   * {Types::Connection#billing_mode #billing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1989,6 +2045,7 @@ module Aws::DirectConnect
     #     ],
     #     provider_name: "ProviderName",
     #     request_mac_sec: false,
+    #     billing_mode: "PayAsYouGo", # accepts PayAsYouGo, FlatRateTier1, FlatRateTier2, FlatRateTier3, FlatRateTier4, FlatRateTier5
     #   })
     #
     # @example Response structure
@@ -2030,6 +2087,7 @@ module Aws::DirectConnect
     #   resp.prefix_pool_size_ipv_6 #=> Integer
     #   resp.prefix_pool_unallocated_count_ipv_4 #=> Integer
     #   resp.prefix_pool_unallocated_count_ipv_6 #=> Integer
+    #   resp.billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnection AWS API Documentation
     #
@@ -2437,6 +2495,9 @@ module Aws::DirectConnect
     #
     #   [1]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites
     #
+    # @option params [String] :billing_mode
+    #   The billing mode for the LAG.
+    #
     # @return [Types::Lag] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Lag#connections_bandwidth #connections_bandwidth} => String
@@ -2465,6 +2526,7 @@ module Aws::DirectConnect
     #   * {Types::Lag#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
     #   * {Types::Lag#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
     #   * {Types::Lag#rate_limiter_status #rate_limiter_status} => Types::RateLimiterStatus
+    #   * {Types::Lag#billing_mode #billing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2488,6 +2550,7 @@ module Aws::DirectConnect
     #     ],
     #     provider_name: "ProviderName",
     #     request_mac_sec: false,
+    #     billing_mode: "PayAsYouGo", # accepts PayAsYouGo, FlatRateTier1, FlatRateTier2, FlatRateTier3, FlatRateTier4, FlatRateTier5
     #   })
     #
     # @example Response structure
@@ -2542,6 +2605,7 @@ module Aws::DirectConnect
     #   resp.connections[0].prefix_pool_size_ipv_6 #=> Integer
     #   resp.connections[0].prefix_pool_unallocated_count_ipv_4 #=> Integer
     #   resp.connections[0].prefix_pool_unallocated_count_ipv_6 #=> Integer
+    #   resp.connections[0].billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
     #   resp.allows_hosted_connections #=> Boolean
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
@@ -2564,6 +2628,7 @@ module Aws::DirectConnect
     #   resp.rate_limiter_status.in_use #=> Integer
     #   resp.rate_limiter_status.remaining #=> Integer
     #   resp.rate_limiter_status.total_bandwidth #=> String
+    #   resp.billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateLag AWS API Documentation
     #
@@ -2848,6 +2913,64 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
+    # Creates a resiliency group. A resiliency group lets you group Direct
+    # Connect connections together and manage them as a single unit to meet
+    # a target resiliency model.
+    #
+    # @option params [required, String] :resiliency_group_name
+    #   The name of the resiliency group.
+    #
+    # @option params [required, String] :intended_resiliency_model
+    #   The resiliency model that the resiliency group is intended to meet.
+    #   The valid values are `maximum-resiliency`, `high-resiliency`, and
+    #   `basic-resiliency`.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to associate with the resiliency group.
+    #
+    # @return [Types::CreateResiliencyGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateResiliencyGroupResult#resiliency_group #resiliency_group} => Types::ResiliencyGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_resiliency_group({
+    #     resiliency_group_name: "ResiliencyGroupName", # required
+    #     intended_resiliency_model: "maximum-resiliency", # required, accepts maximum-resiliency, high-resiliency, basic-resiliency
+    #     client_token: "IdempotencyToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resiliency_group.resiliency_group_id #=> String
+    #   resp.resiliency_group.resiliency_group_arn #=> String
+    #   resp.resiliency_group.resiliency_group_name #=> String
+    #   resp.resiliency_group.resiliency_group_type #=> String, one of "Managed"
+    #   resp.resiliency_group.owner_account #=> String
+    #   resp.resiliency_group.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.resiliency_group.tags #=> Array
+    #   resp.resiliency_group.tags[0].key #=> String
+    #   resp.resiliency_group.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateResiliencyGroup AWS API Documentation
+    #
+    # @overload create_resiliency_group(params = {})
+    # @param [Hash] params ({})
+    def create_resiliency_group(params = {}, options = {})
+      req = build_request(:create_resiliency_group, params)
+      req.send_request(options)
+    end
+
     # Creates a transit virtual interface. A transit virtual interface
     # should be used to access one or more transit gateways associated with
     # Direct Connect gateways. A transit virtual interface enables the
@@ -3129,6 +3252,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#prefix_pool_size_ipv_6 #prefix_pool_size_ipv_6} => Integer
     #   * {Types::Connection#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
     #   * {Types::Connection#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
+    #   * {Types::Connection#billing_mode #billing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3175,6 +3299,7 @@ module Aws::DirectConnect
     #   resp.prefix_pool_size_ipv_6 #=> Integer
     #   resp.prefix_pool_unallocated_count_ipv_4 #=> Integer
     #   resp.prefix_pool_unallocated_count_ipv_6 #=> Integer
+    #   resp.billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteConnection AWS API Documentation
     #
@@ -3389,6 +3514,7 @@ module Aws::DirectConnect
     #   * {Types::Lag#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
     #   * {Types::Lag#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
     #   * {Types::Lag#rate_limiter_status #rate_limiter_status} => Types::RateLimiterStatus
+    #   * {Types::Lag#billing_mode #billing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3448,6 +3574,7 @@ module Aws::DirectConnect
     #   resp.connections[0].prefix_pool_size_ipv_6 #=> Integer
     #   resp.connections[0].prefix_pool_unallocated_count_ipv_4 #=> Integer
     #   resp.connections[0].prefix_pool_unallocated_count_ipv_6 #=> Integer
+    #   resp.connections[0].billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
     #   resp.allows_hosted_connections #=> Boolean
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
@@ -3470,6 +3597,7 @@ module Aws::DirectConnect
     #   resp.rate_limiter_status.in_use #=> Integer
     #   resp.rate_limiter_status.remaining #=> Integer
     #   resp.rate_limiter_status.total_bandwidth #=> String
+    #   resp.billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteLag AWS API Documentation
     #
@@ -3477,6 +3605,46 @@ module Aws::DirectConnect
     # @param [Hash] params ({})
     def delete_lag(params = {}, options = {})
       req = build_request(:delete_lag, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified resiliency group. Deletion is asynchronous: the
+    # resiliency group transitions through the `deleting` state before it
+    # reaches the `deleted` state. The response returns the resiliency group
+    # so you can observe its current state without a subsequent
+    # GetResiliencyGroup call.
+    #
+    # @option params [required, String] :resiliency_group_id
+    #   The ID of the resiliency group.
+    #
+    # @return [Types::DeleteResiliencyGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteResiliencyGroupResult#resiliency_group #resiliency_group} => Types::ResiliencyGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resiliency_group({
+    #     resiliency_group_id: "ResiliencyGroupId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resiliency_group.resiliency_group_id #=> String
+    #   resp.resiliency_group.resiliency_group_arn #=> String
+    #   resp.resiliency_group.resiliency_group_name #=> String
+    #   resp.resiliency_group.resiliency_group_type #=> String, one of "Managed"
+    #   resp.resiliency_group.owner_account #=> String
+    #   resp.resiliency_group.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.resiliency_group.tags #=> Array
+    #   resp.resiliency_group.tags[0].key #=> String
+    #   resp.resiliency_group.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteResiliencyGroup AWS API Documentation
+    #
+    # @overload delete_resiliency_group(params = {})
+    # @param [Hash] params ({})
+    def delete_resiliency_group(params = {}, options = {})
+      req = build_request(:delete_resiliency_group, params)
       req.send_request(options)
     end
 
@@ -3633,6 +3801,7 @@ module Aws::DirectConnect
     #   resp.connections[0].prefix_pool_size_ipv_6 #=> Integer
     #   resp.connections[0].prefix_pool_unallocated_count_ipv_4 #=> Integer
     #   resp.connections[0].prefix_pool_unallocated_count_ipv_6 #=> Integer
+    #   resp.connections[0].billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnections AWS API Documentation
@@ -3709,6 +3878,7 @@ module Aws::DirectConnect
     #   resp.connections[0].prefix_pool_size_ipv_6 #=> Integer
     #   resp.connections[0].prefix_pool_unallocated_count_ipv_4 #=> Integer
     #   resp.connections[0].prefix_pool_unallocated_count_ipv_6 #=> Integer
+    #   resp.connections[0].billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsOnInterconnect AWS API Documentation
@@ -4106,6 +4276,7 @@ module Aws::DirectConnect
     #   resp.connections[0].prefix_pool_size_ipv_6 #=> Integer
     #   resp.connections[0].prefix_pool_unallocated_count_ipv_4 #=> Integer
     #   resp.connections[0].prefix_pool_unallocated_count_ipv_6 #=> Integer
+    #   resp.connections[0].billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeHostedConnections AWS API Documentation
@@ -4323,6 +4494,7 @@ module Aws::DirectConnect
     #   resp.lags[0].connections[0].prefix_pool_size_ipv_6 #=> Integer
     #   resp.lags[0].connections[0].prefix_pool_unallocated_count_ipv_4 #=> Integer
     #   resp.lags[0].connections[0].prefix_pool_unallocated_count_ipv_6 #=> Integer
+    #   resp.lags[0].connections[0].billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
     #   resp.lags[0].allows_hosted_connections #=> Boolean
     #   resp.lags[0].jumbo_frame_capable #=> Boolean
     #   resp.lags[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
@@ -4345,6 +4517,7 @@ module Aws::DirectConnect
     #   resp.lags[0].rate_limiter_status.in_use #=> Integer
     #   resp.lags[0].rate_limiter_status.remaining #=> Integer
     #   resp.lags[0].rate_limiter_status.total_bandwidth #=> String
+    #   resp.lags[0].billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLags AWS API Documentation
@@ -4429,6 +4602,12 @@ module Aws::DirectConnect
     #   resp.locations[0].available_providers[0] #=> String
     #   resp.locations[0].available_mac_sec_port_speeds #=> Array
     #   resp.locations[0].available_mac_sec_port_speeds[0] #=> String
+    #   resp.locations[0].available_billing_modes #=> Array
+    #   resp.locations[0].available_billing_modes[0].billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
+    #   resp.locations[0].available_billing_modes[0].available_port_speeds #=> Array
+    #   resp.locations[0].available_billing_modes[0].available_port_speeds[0] #=> String
+    #   resp.locations[0].available_billing_modes[0].included_regions #=> Array
+    #   resp.locations[0].available_billing_modes[0].included_regions[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLocations AWS API Documentation
     #
@@ -4708,6 +4887,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#prefix_pool_size_ipv_6 #prefix_pool_size_ipv_6} => Integer
     #   * {Types::Connection#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
     #   * {Types::Connection#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
+    #   * {Types::Connection#billing_mode #billing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -4755,6 +4935,7 @@ module Aws::DirectConnect
     #   resp.prefix_pool_size_ipv_6 #=> Integer
     #   resp.prefix_pool_unallocated_count_ipv_4 #=> Integer
     #   resp.prefix_pool_unallocated_count_ipv_6 #=> Integer
+    #   resp.billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateConnectionFromLag AWS API Documentation
     #
@@ -4762,6 +4943,50 @@ module Aws::DirectConnect
     # @param [Hash] params ({})
     def disassociate_connection_from_lag(params = {}, options = {})
       req = build_request(:disassociate_connection_from_lag, params)
+      req.send_request(options)
+    end
+
+    # Disassociates one or more connections from the specified resiliency
+    # group. This operation is atomic: either all of the specified
+    # connections are disassociated, or the operation fails and no changes
+    # are made.
+    #
+    # @option params [required, Array<String>] :connection_identifiers
+    #   The IDs or ARNs of the connections to disassociate from the resiliency
+    #   group.
+    #
+    # @option params [required, String] :resiliency_group_id
+    #   The ID of the resiliency group.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    # @return [Types::DisassociateConnectionsFromResiliencyGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateConnectionsFromResiliencyGroupResult#resiliency_group_associations #resiliency_group_associations} => Array&lt;Types::ResiliencyGroupAssociation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_connections_from_resiliency_group({
+    #     connection_identifiers: ["ConnectionIdentifier"], # required
+    #     resiliency_group_id: "ResiliencyGroupId", # required
+    #     client_token: "IdempotencyToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resiliency_group_associations #=> Array
+    #   resp.resiliency_group_associations[0].resiliency_group_id #=> String
+    #   resp.resiliency_group_associations[0].connection_arn #=> String
+    #   resp.resiliency_group_associations[0].state #=> String, one of "associating", "associated", "disassociating", "disassociated"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateConnectionsFromResiliencyGroup AWS API Documentation
+    #
+    # @overload disassociate_connections_from_resiliency_group(params = {})
+    # @param [Hash] params ({})
+    def disassociate_connections_from_resiliency_group(params = {}, options = {})
+      req = build_request(:disassociate_connections_from_resiliency_group, params)
       req.send_request(options)
     end
 
@@ -4809,6 +5034,134 @@ module Aws::DirectConnect
     # @param [Hash] params ({})
     def disassociate_mac_sec_key(params = {}, options = {})
       req = build_request(:disassociate_mac_sec_key, params)
+      req.send_request(options)
+    end
+
+    # Gets information about the specified resiliency group.
+    #
+    # @option params [required, String] :resiliency_group_id
+    #   The ID of the resiliency group.
+    #
+    # @return [Types::GetResiliencyGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResiliencyGroupResult#resiliency_group #resiliency_group} => Types::ResiliencyGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resiliency_group({
+    #     resiliency_group_id: "ResiliencyGroupId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resiliency_group.resiliency_group_id #=> String
+    #   resp.resiliency_group.resiliency_group_arn #=> String
+    #   resp.resiliency_group.resiliency_group_name #=> String
+    #   resp.resiliency_group.resiliency_group_type #=> String, one of "Managed"
+    #   resp.resiliency_group.owner_account #=> String
+    #   resp.resiliency_group.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.resiliency_group.tags #=> Array
+    #   resp.resiliency_group.tags[0].key #=> String
+    #   resp.resiliency_group.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/GetResiliencyGroup AWS API Documentation
+    #
+    # @overload get_resiliency_group(params = {})
+    # @param [Hash] params ({})
+    def get_resiliency_group(params = {}, options = {})
+      req = build_request(:get_resiliency_group, params)
+      req.send_request(options)
+    end
+
+    # Lists the connection associations for the specified resiliency group.
+    #
+    # @option params [required, String] :resiliency_group_id
+    #   The ID of the resiliency group.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results are
+    #   returned.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListResiliencyGroupAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResiliencyGroupAssociationsResult#items #items} => Array&lt;Types::ResiliencyGroupAssociation&gt;
+    #   * {Types::ListResiliencyGroupAssociationsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resiliency_group_associations({
+    #     resiliency_group_id: "ResiliencyGroupId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].resiliency_group_id #=> String
+    #   resp.items[0].connection_arn #=> String
+    #   resp.items[0].state #=> String, one of "associating", "associated", "disassociating", "disassociated"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ListResiliencyGroupAssociations AWS API Documentation
+    #
+    # @overload list_resiliency_group_associations(params = {})
+    # @param [Hash] params ({})
+    def list_resiliency_group_associations(params = {}, options = {})
+      req = build_request(:list_resiliency_group_associations, params)
+      req.send_request(options)
+    end
+
+    # Lists the resiliency groups owned by your Amazon Web Services account
+    # in the current Amazon Web Services Region.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results are
+    #   returned.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListResiliencyGroupsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResiliencyGroupsResult#items #items} => Array&lt;Types::ResiliencyGroupSummary&gt;
+    #   * {Types::ListResiliencyGroupsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resiliency_groups({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].resiliency_group_id #=> String
+    #   resp.items[0].resiliency_group_arn #=> String
+    #   resp.items[0].resiliency_group_name #=> String
+    #   resp.items[0].resiliency_group_type #=> String, one of "Managed"
+    #   resp.items[0].owner_account #=> String
+    #   resp.items[0].state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ListResiliencyGroups AWS API Documentation
+    #
+    # @overload list_resiliency_groups(params = {})
+    # @param [Hash] params ({})
+    def list_resiliency_groups(params = {}, options = {})
+      req = build_request(:list_resiliency_groups, params)
       req.send_request(options)
     end
 
@@ -5167,6 +5520,7 @@ module Aws::DirectConnect
     #   * {Types::Connection#prefix_pool_size_ipv_6 #prefix_pool_size_ipv_6} => Integer
     #   * {Types::Connection#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
     #   * {Types::Connection#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
+    #   * {Types::Connection#billing_mode #billing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -5215,6 +5569,7 @@ module Aws::DirectConnect
     #   resp.prefix_pool_size_ipv_6 #=> Integer
     #   resp.prefix_pool_unallocated_count_ipv_4 #=> Integer
     #   resp.prefix_pool_unallocated_count_ipv_6 #=> Integer
+    #   resp.billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateConnection AWS API Documentation
     #
@@ -5222,6 +5577,83 @@ module Aws::DirectConnect
     # @param [Hash] params ({})
     def update_connection(params = {}, options = {})
       req = build_request(:update_connection, params)
+      req.send_request(options)
+    end
+
+    # Updates the billing mode for the specified Direct Connect connections.
+    # You can update the billing mode for up to 200 connections in a single
+    # request.
+    #
+    # @option params [required, Array<String>] :connection_ids
+    #   The IDs of the connections to update. You can specify from 1 to 200
+    #   connections.
+    #
+    # @option params [required, String] :billing_mode
+    #   The billing mode to apply to the specified connections. The valid
+    #   values are `PayAsYouGo`, `FlatRateTier1`, `FlatRateTier2`,
+    #   `FlatRateTier3`, `FlatRateTier4`, and `FlatRateTier5`.
+    #
+    # @return [Types::UpdateConnectionsBillingModeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateConnectionsBillingModeResponse#billing_mode #billing_mode} => String
+    #   * {Types::UpdateConnectionsBillingModeResponse#connections #connections} => Array&lt;Types::Connection&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_connections_billing_mode({
+    #     connection_ids: ["ConnectionId"], # required
+    #     billing_mode: "PayAsYouGo", # required, accepts PayAsYouGo, FlatRateTier1, FlatRateTier2, FlatRateTier3, FlatRateTier4, FlatRateTier5
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
+    #   resp.connections #=> Array
+    #   resp.connections[0].owner_account #=> String
+    #   resp.connections[0].connection_id #=> String
+    #   resp.connections[0].connection_name #=> String
+    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"
+    #   resp.connections[0].region #=> String
+    #   resp.connections[0].location #=> String
+    #   resp.connections[0].bandwidth #=> String
+    #   resp.connections[0].vlan #=> Integer
+    #   resp.connections[0].partner_name #=> String
+    #   resp.connections[0].loa_issue_time #=> Time
+    #   resp.connections[0].lag_id #=> String
+    #   resp.connections[0].aws_device #=> String
+    #   resp.connections[0].jumbo_frame_capable #=> Boolean
+    #   resp.connections[0].aws_device_v2 #=> String
+    #   resp.connections[0].aws_logical_device_id #=> String
+    #   resp.connections[0].has_logical_redundancy #=> String, one of "unknown", "yes", "no"
+    #   resp.connections[0].tags #=> Array
+    #   resp.connections[0].tags[0].key #=> String
+    #   resp.connections[0].tags[0].value #=> String
+    #   resp.connections[0].provider_name #=> String
+    #   resp.connections[0].mac_sec_capable #=> Boolean
+    #   resp.connections[0].port_encryption_status #=> String
+    #   resp.connections[0].encryption_mode #=> String
+    #   resp.connections[0].mac_sec_keys #=> Array
+    #   resp.connections[0].mac_sec_keys[0].secret_arn #=> String
+    #   resp.connections[0].mac_sec_keys[0].ckn #=> String
+    #   resp.connections[0].mac_sec_keys[0].state #=> String
+    #   resp.connections[0].mac_sec_keys[0].start_on #=> String
+    #   resp.connections[0].rate_limiter_status.max_allowed #=> Integer
+    #   resp.connections[0].rate_limiter_status.in_use #=> Integer
+    #   resp.connections[0].rate_limiter_status.remaining #=> Integer
+    #   resp.connections[0].rate_limiter_status.total_bandwidth #=> String
+    #   resp.connections[0].partner_interconnect_mac_sec_capable #=> Boolean
+    #   resp.connections[0].prefix_pool_size_ipv_4 #=> Integer
+    #   resp.connections[0].prefix_pool_size_ipv_6 #=> Integer
+    #   resp.connections[0].prefix_pool_unallocated_count_ipv_4 #=> Integer
+    #   resp.connections[0].prefix_pool_unallocated_count_ipv_6 #=> Integer
+    #   resp.connections[0].billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateConnectionsBillingMode AWS API Documentation
+    #
+    # @overload update_connections_billing_mode(params = {})
+    # @param [Hash] params ({})
+    def update_connections_billing_mode(params = {}, options = {})
+      req = build_request(:update_connections_billing_mode, params)
       req.send_request(options)
     end
 
@@ -5396,6 +5828,7 @@ module Aws::DirectConnect
     #   * {Types::Lag#prefix_pool_unallocated_count_ipv_4 #prefix_pool_unallocated_count_ipv_4} => Integer
     #   * {Types::Lag#prefix_pool_unallocated_count_ipv_6 #prefix_pool_unallocated_count_ipv_6} => Integer
     #   * {Types::Lag#rate_limiter_status #rate_limiter_status} => Types::RateLimiterStatus
+    #   * {Types::Lag#billing_mode #billing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -5458,6 +5891,7 @@ module Aws::DirectConnect
     #   resp.connections[0].prefix_pool_size_ipv_6 #=> Integer
     #   resp.connections[0].prefix_pool_unallocated_count_ipv_4 #=> Integer
     #   resp.connections[0].prefix_pool_unallocated_count_ipv_6 #=> Integer
+    #   resp.connections[0].billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
     #   resp.allows_hosted_connections #=> Boolean
     #   resp.jumbo_frame_capable #=> Boolean
     #   resp.has_logical_redundancy #=> String, one of "unknown", "yes", "no"
@@ -5480,6 +5914,7 @@ module Aws::DirectConnect
     #   resp.rate_limiter_status.in_use #=> Integer
     #   resp.rate_limiter_status.remaining #=> Integer
     #   resp.rate_limiter_status.total_bandwidth #=> String
+    #   resp.billing_mode #=> String, one of "PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateLag AWS API Documentation
     #
@@ -5487,6 +5922,51 @@ module Aws::DirectConnect
     # @param [Hash] params ({})
     def update_lag(params = {}, options = {})
       req = build_request(:update_lag, params)
+      req.send_request(options)
+    end
+
+    # Updates the name of the specified resiliency group.
+    #
+    # @option params [required, String] :resiliency_group_id
+    #   The ID of the resiliency group.
+    #
+    # @option params [required, String] :resiliency_group_name
+    #   The new name of the resiliency group.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    # @return [Types::UpdateResiliencyGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateResiliencyGroupResult#resiliency_group #resiliency_group} => Types::ResiliencyGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_resiliency_group({
+    #     resiliency_group_id: "ResiliencyGroupId", # required
+    #     resiliency_group_name: "ResiliencyGroupName", # required
+    #     client_token: "IdempotencyToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resiliency_group.resiliency_group_id #=> String
+    #   resp.resiliency_group.resiliency_group_arn #=> String
+    #   resp.resiliency_group.resiliency_group_name #=> String
+    #   resp.resiliency_group.resiliency_group_type #=> String, one of "Managed"
+    #   resp.resiliency_group.owner_account #=> String
+    #   resp.resiliency_group.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.resiliency_group.tags #=> Array
+    #   resp.resiliency_group.tags[0].key #=> String
+    #   resp.resiliency_group.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateResiliencyGroup AWS API Documentation
+    #
+    # @overload update_resiliency_group(params = {})
+    # @param [Hash] params ({})
+    def update_resiliency_group(params = {}, options = {})
+      req = build_request(:update_resiliency_group, params)
       req.send_request(options)
     end
 
@@ -5647,7 +6127,7 @@ module Aws::DirectConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.115.0'
+      context[:gem_version] = '1.118.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

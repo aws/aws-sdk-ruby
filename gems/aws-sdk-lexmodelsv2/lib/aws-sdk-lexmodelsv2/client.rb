@@ -1095,6 +1095,11 @@ module Aws::LexModelsV2
     #   adjusting how the system responds to background noise during voice
     #   interactions.
     #
+    # @option params [Types::SpeakerDiarizationSettings] :speaker_diarization_settings
+    #   The speaker diarization settings to configure for the new bot locale.
+    #   When enabled, Amazon Lex restricts speech detection to the primary
+    #   (loudest) speaker during streaming audio conversations.
+    #
     # @return [Types::CreateBotLocaleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBotLocaleResponse#bot_id #bot_id} => String
@@ -1111,6 +1116,7 @@ module Aws::LexModelsV2
     #   * {Types::CreateBotLocaleResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::CreateBotLocaleResponse#generative_ai_settings #generative_ai_settings} => Types::GenerativeAISettings
     #   * {Types::CreateBotLocaleResponse#speech_detection_sensitivity #speech_detection_sensitivity} => String
+    #   * {Types::CreateBotLocaleResponse#speaker_diarization_settings #speaker_diarization_settings} => Types::SpeakerDiarizationSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -1138,7 +1144,7 @@ module Aws::LexModelsV2
     #       response_delivery_delay_in_milliseconds: 1,
     #     },
     #     speech_recognition_settings: {
-    #       speech_model_preference: "Standard", # accepts Standard, Neural, Deepgram
+    #       speech_model_preference: "Standard", # accepts Standard, Neural, Deepgram, Advanced
     #       speech_model_config: {
     #         deepgram_config: {
     #           api_token_secret_arn: "SecretsManagerSecretArn", # required
@@ -1198,6 +1204,9 @@ module Aws::LexModelsV2
     #       },
     #     },
     #     speech_detection_sensitivity: "Default", # accepts Default, HighNoiseTolerance, MaximumNoiseTolerance
+    #     speaker_diarization_settings: {
+    #       enabled: false, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -1217,7 +1226,7 @@ module Aws::LexModelsV2
     #   resp.audio_filler_settings.start_delay_in_milliseconds #=> Integer
     #   resp.audio_filler_settings.minimum_play_duration_in_milliseconds #=> Integer
     #   resp.audio_filler_settings.response_delivery_delay_in_milliseconds #=> Integer
-    #   resp.speech_recognition_settings.speech_model_preference #=> String, one of "Standard", "Neural", "Deepgram"
+    #   resp.speech_recognition_settings.speech_model_preference #=> String, one of "Standard", "Neural", "Deepgram", "Advanced"
     #   resp.speech_recognition_settings.speech_model_config.deepgram_config.api_token_secret_arn #=> String
     #   resp.speech_recognition_settings.speech_model_config.deepgram_config.model_id #=> String
     #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing", "Processing"
@@ -1246,6 +1255,7 @@ module Aws::LexModelsV2
     #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.trace_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.custom_prompt #=> String
     #   resp.speech_detection_sensitivity #=> String, one of "Default", "HighNoiseTolerance", "MaximumNoiseTolerance"
+    #   resp.speaker_diarization_settings.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotLocale AWS API Documentation
     #
@@ -3760,6 +3770,7 @@ module Aws::LexModelsV2
     #   * {Types::DescribeBotLocaleResponse#recommended_actions #recommended_actions} => Array&lt;String&gt;
     #   * {Types::DescribeBotLocaleResponse#generative_ai_settings #generative_ai_settings} => Types::GenerativeAISettings
     #   * {Types::DescribeBotLocaleResponse#speech_detection_sensitivity #speech_detection_sensitivity} => String
+    #   * {Types::DescribeBotLocaleResponse#speaker_diarization_settings #speaker_diarization_settings} => Types::SpeakerDiarizationSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -3786,7 +3797,7 @@ module Aws::LexModelsV2
     #   resp.audio_filler_settings.start_delay_in_milliseconds #=> Integer
     #   resp.audio_filler_settings.minimum_play_duration_in_milliseconds #=> Integer
     #   resp.audio_filler_settings.response_delivery_delay_in_milliseconds #=> Integer
-    #   resp.speech_recognition_settings.speech_model_preference #=> String, one of "Standard", "Neural", "Deepgram"
+    #   resp.speech_recognition_settings.speech_model_preference #=> String, one of "Standard", "Neural", "Deepgram", "Advanced"
     #   resp.speech_recognition_settings.speech_model_config.deepgram_config.api_token_secret_arn #=> String
     #   resp.speech_recognition_settings.speech_model_config.deepgram_config.model_id #=> String
     #   resp.intents_count #=> Integer
@@ -3826,6 +3837,7 @@ module Aws::LexModelsV2
     #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.trace_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.custom_prompt #=> String
     #   resp.speech_detection_sensitivity #=> String, one of "Default", "HighNoiseTolerance", "MaximumNoiseTolerance"
+    #   resp.speaker_diarization_settings.enabled #=> Boolean
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4251,7 +4263,7 @@ module Aws::LexModelsV2
     #   resp.resource_specification.bot_locale_import_specification.nlu_intent_confidence_threshold #=> Float
     #   resp.resource_specification.bot_locale_import_specification.voice_settings.engine #=> String, one of "standard", "neural", "long-form", "generative"
     #   resp.resource_specification.bot_locale_import_specification.voice_settings.voice_id #=> String
-    #   resp.resource_specification.bot_locale_import_specification.speech_recognition_settings.speech_model_preference #=> String, one of "Standard", "Neural", "Deepgram"
+    #   resp.resource_specification.bot_locale_import_specification.speech_recognition_settings.speech_model_preference #=> String, one of "Standard", "Neural", "Deepgram", "Advanced"
     #   resp.resource_specification.bot_locale_import_specification.speech_recognition_settings.speech_model_config.deepgram_config.api_token_secret_arn #=> String
     #   resp.resource_specification.bot_locale_import_specification.speech_recognition_settings.speech_model_config.deepgram_config.model_id #=> String
     #   resp.resource_specification.bot_locale_import_specification.speech_detection_sensitivity #=> String, one of "Default", "HighNoiseTolerance", "MaximumNoiseTolerance"
@@ -4262,6 +4274,7 @@ module Aws::LexModelsV2
     #   resp.resource_specification.bot_locale_import_specification.audio_filler_settings.start_delay_in_milliseconds #=> Integer
     #   resp.resource_specification.bot_locale_import_specification.audio_filler_settings.minimum_play_duration_in_milliseconds #=> Integer
     #   resp.resource_specification.bot_locale_import_specification.audio_filler_settings.response_delivery_delay_in_milliseconds #=> Integer
+    #   resp.resource_specification.bot_locale_import_specification.speaker_diarization_settings.enabled #=> Boolean
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_id #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_version #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.locale_id #=> String
@@ -8817,7 +8830,7 @@ module Aws::LexModelsV2
     #           voice_id: "VoiceId", # required
     #         },
     #         speech_recognition_settings: {
-    #           speech_model_preference: "Standard", # accepts Standard, Neural, Deepgram
+    #           speech_model_preference: "Standard", # accepts Standard, Neural, Deepgram, Advanced
     #           speech_model_config: {
     #             deepgram_config: {
     #               api_token_secret_arn: "SecretsManagerSecretArn", # required
@@ -8838,6 +8851,9 @@ module Aws::LexModelsV2
     #           start_delay_in_milliseconds: 1,
     #           minimum_play_duration_in_milliseconds: 1,
     #           response_delivery_delay_in_milliseconds: 1,
+    #         },
+    #         speaker_diarization_settings: {
+    #           enabled: false, # required
     #         },
     #       },
     #       custom_vocabulary_import_specification: {
@@ -8886,7 +8902,7 @@ module Aws::LexModelsV2
     #   resp.resource_specification.bot_locale_import_specification.nlu_intent_confidence_threshold #=> Float
     #   resp.resource_specification.bot_locale_import_specification.voice_settings.engine #=> String, one of "standard", "neural", "long-form", "generative"
     #   resp.resource_specification.bot_locale_import_specification.voice_settings.voice_id #=> String
-    #   resp.resource_specification.bot_locale_import_specification.speech_recognition_settings.speech_model_preference #=> String, one of "Standard", "Neural", "Deepgram"
+    #   resp.resource_specification.bot_locale_import_specification.speech_recognition_settings.speech_model_preference #=> String, one of "Standard", "Neural", "Deepgram", "Advanced"
     #   resp.resource_specification.bot_locale_import_specification.speech_recognition_settings.speech_model_config.deepgram_config.api_token_secret_arn #=> String
     #   resp.resource_specification.bot_locale_import_specification.speech_recognition_settings.speech_model_config.deepgram_config.model_id #=> String
     #   resp.resource_specification.bot_locale_import_specification.speech_detection_sensitivity #=> String, one of "Default", "HighNoiseTolerance", "MaximumNoiseTolerance"
@@ -8897,6 +8913,7 @@ module Aws::LexModelsV2
     #   resp.resource_specification.bot_locale_import_specification.audio_filler_settings.start_delay_in_milliseconds #=> Integer
     #   resp.resource_specification.bot_locale_import_specification.audio_filler_settings.minimum_play_duration_in_milliseconds #=> Integer
     #   resp.resource_specification.bot_locale_import_specification.audio_filler_settings.response_delivery_delay_in_milliseconds #=> Integer
+    #   resp.resource_specification.bot_locale_import_specification.speaker_diarization_settings.enabled #=> Boolean
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_id #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_version #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.locale_id #=> String
@@ -9532,6 +9549,12 @@ module Aws::LexModelsV2
     #   adjusting how the system responds to background noise during voice
     #   interactions.
     #
+    # @option params [Types::SpeakerDiarizationSettings] :speaker_diarization_settings
+    #   The updated speaker diarization settings to apply to the bot locale.
+    #   If you omit this field, Amazon Lex keeps the setting currently stored
+    #   on the bot locale. To turn speaker diarization off, set `enabled` to
+    #   `false` explicitly.
+    #
     # @return [Types::UpdateBotLocaleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateBotLocaleResponse#bot_id #bot_id} => String
@@ -9551,6 +9574,7 @@ module Aws::LexModelsV2
     #   * {Types::UpdateBotLocaleResponse#recommended_actions #recommended_actions} => Array&lt;String&gt;
     #   * {Types::UpdateBotLocaleResponse#generative_ai_settings #generative_ai_settings} => Types::GenerativeAISettings
     #   * {Types::UpdateBotLocaleResponse#speech_detection_sensitivity #speech_detection_sensitivity} => String
+    #   * {Types::UpdateBotLocaleResponse#speaker_diarization_settings #speaker_diarization_settings} => Types::SpeakerDiarizationSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -9578,7 +9602,7 @@ module Aws::LexModelsV2
     #       response_delivery_delay_in_milliseconds: 1,
     #     },
     #     speech_recognition_settings: {
-    #       speech_model_preference: "Standard", # accepts Standard, Neural, Deepgram
+    #       speech_model_preference: "Standard", # accepts Standard, Neural, Deepgram, Advanced
     #       speech_model_config: {
     #         deepgram_config: {
     #           api_token_secret_arn: "SecretsManagerSecretArn", # required
@@ -9638,6 +9662,9 @@ module Aws::LexModelsV2
     #       },
     #     },
     #     speech_detection_sensitivity: "Default", # accepts Default, HighNoiseTolerance, MaximumNoiseTolerance
+    #     speaker_diarization_settings: {
+    #       enabled: false, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -9657,7 +9684,7 @@ module Aws::LexModelsV2
     #   resp.audio_filler_settings.start_delay_in_milliseconds #=> Integer
     #   resp.audio_filler_settings.minimum_play_duration_in_milliseconds #=> Integer
     #   resp.audio_filler_settings.response_delivery_delay_in_milliseconds #=> Integer
-    #   resp.speech_recognition_settings.speech_model_preference #=> String, one of "Standard", "Neural", "Deepgram"
+    #   resp.speech_recognition_settings.speech_model_preference #=> String, one of "Standard", "Neural", "Deepgram", "Advanced"
     #   resp.speech_recognition_settings.speech_model_config.deepgram_config.api_token_secret_arn #=> String
     #   resp.speech_recognition_settings.speech_model_config.deepgram_config.model_id #=> String
     #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing", "Processing"
@@ -9691,6 +9718,7 @@ module Aws::LexModelsV2
     #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.trace_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.custom_prompt #=> String
     #   resp.speech_detection_sensitivity #=> String, one of "Default", "HighNoiseTolerance", "MaximumNoiseTolerance"
+    #   resp.speaker_diarization_settings.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBotLocale AWS API Documentation
     #
@@ -11046,7 +11074,7 @@ module Aws::LexModelsV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

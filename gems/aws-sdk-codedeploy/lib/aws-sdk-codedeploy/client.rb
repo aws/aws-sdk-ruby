@@ -1049,6 +1049,7 @@ module Aws::CodeDeploy
     #   resp.deployments_info[0].load_balancer_info.target_group_pair_info_list[0].test_traffic_route.listener_arns[0] #=> String
     #   resp.deployments_info[0].additional_deployment_status_info #=> String
     #   resp.deployments_info[0].file_exists_behavior #=> String, one of "DISALLOW", "OVERWRITE", "RETAIN"
+    #   resp.deployments_info[0].deployment_mode #=> String, one of "STANDARD", "RESTART"
     #   resp.deployments_info[0].deployment_status_messages #=> Array
     #   resp.deployments_info[0].deployment_status_messages[0] #=> String
     #   resp.deployments_info[0].compute_platform #=> String, one of "Server", "Lambda", "ECS"
@@ -1272,11 +1273,27 @@ module Aws::CodeDeploy
     #     used as part of the new deployment.
     #
     # @option params [String] :deployment_mode
-    #   The deployment mode to use for the deployment. When set to STANDARD
-    #   (the default), the deployment runs the standard set of deployment
-    #   lifecycle events. When set to RESTART, an EC2/On-premises in-place
-    #   deployment runs a shortened set of lifecycle events to quickly restart
-    #   the application on the target instances.
+    #   The type of deployment to create. Valid values are:
+    #
+    #   * `STANDARD`: Deploys the specified revision. This is the default
+    #     behavior if `deploymentMode` is not specified.
+    #
+    #   * `RESTART`: Restarts the application on the target instances using
+    #     the revision from the deployment group's last successful
+    #     deployment, without downloading a new revision. `RESTART` is
+    #     supported only for EC2/On-premises in-place deployments.
+    #
+    #     When `deploymentMode` is `RESTART`, the following apply:
+    #
+    #     * The call is rejected for Amazon ECS and Lambda deployments.
+    #
+    #     * The `revision` parameter (including its `s3Location` and
+    #       `gitHubLocation`) must not be specified, and is rejected if
+    #       provided. The revision is resolved by the service from the
+    #       deployment group's last successful deployment.
+    #
+    #     * The `updateOutdatedInstancesOnly` parameter must not be set to
+    #       `true`, and is rejected if provided.
     #
     # @option params [Types::AlarmConfiguration] :override_alarm_configuration
     #   Allows you to specify information about alarms associated with a
@@ -2133,6 +2150,7 @@ module Aws::CodeDeploy
     #   resp.deployment_info.load_balancer_info.target_group_pair_info_list[0].test_traffic_route.listener_arns[0] #=> String
     #   resp.deployment_info.additional_deployment_status_info #=> String
     #   resp.deployment_info.file_exists_behavior #=> String, one of "DISALLOW", "OVERWRITE", "RETAIN"
+    #   resp.deployment_info.deployment_mode #=> String, one of "STANDARD", "RESTART"
     #   resp.deployment_info.deployment_status_messages #=> Array
     #   resp.deployment_info.deployment_status_messages[0] #=> String
     #   resp.deployment_info.compute_platform #=> String, one of "Server", "Lambda", "ECS"
@@ -3670,7 +3688,7 @@ module Aws::CodeDeploy
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codedeploy'
-      context[:gem_version] = '1.103.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -268,6 +268,31 @@ module Aws
                                                ) -> _ListProcurementPortalPreferencesResponseSuccess
                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProcurementPortalPreferencesResponseSuccess
 
+      interface _ListProcurementPortalSuppliersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProcurementPortalSuppliersResponse]
+        def procurement_portal_suppliers: () -> ::Array[Types::ProcurementPortalSupplier]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Invoicing/Client.html#list_procurement_portal_suppliers-instance_method
+      def list_procurement_portal_suppliers: (
+                                               portal_identifier: ::String,
+                                               ?next_token: ::String,
+                                               ?max_results: ::Integer
+                                             ) -> _ListProcurementPortalSuppliersResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProcurementPortalSuppliersResponseSuccess
+
+      interface _ListProcurementPortalsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProcurementPortalsResponse]
+        def procurement_portals: () -> ::Array[Types::ProcurementPortal]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Invoicing/Client.html#list_procurement_portals-instance_method
+      def list_procurement_portals: (
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListProcurementPortalsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProcurementPortalsResponseSuccess
+
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
         def resource_tags: () -> ::Array[Types::ResourceTag]

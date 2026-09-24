@@ -940,11 +940,18 @@ module Aws::BedrockAgentCore
     #   The time range filter for selecting sessions to evaluate.
     #   @return [Types::SessionFilterConfig]
     #
+    # @!attribute [rw] session_trace_ids
+    #   A list of session and trace ID pairs that restrict evaluation to
+    #   specific traces within a session. If specified, only the listed
+    #   traces are evaluated instead of the entire session.
+    #   @return [Array<Types::SessionTraceIds>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CloudWatchFilterConfig AWS API Documentation
     #
     class CloudWatchFilterConfig < Struct.new(
       :session_ids,
-      :time_range)
+      :time_range,
+      :session_trace_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4761,6 +4768,43 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # A lifecycle hook event emitted in the invocation stream for visibility
+    # into hook decisions.
+    #
+    # @!attribute [rw] hook_event_id
+    #   The unique identifier for this hook event.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the hook that ran.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of lifecycle hook event.
+    #   @return [String]
+    #
+    # @!attribute [rw] decision
+    #   The decision applied to the hook event. This field is present only
+    #   for blocking Lambda targets.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The optional reason for the applied decision.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/HarnessHookEvent AWS API Documentation
+    #
+    class HarnessHookEvent < Struct.new(
+      :hook_event_id,
+      :name,
+      :type,
+      :decision,
+      :reason,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for an inline function tool. When the agent calls this
     # tool, the tool call is returned to the caller for external execution.
     #
@@ -4949,6 +4993,10 @@ module Aws::BedrockAgentCore
     #   The ARN of your OpenAI API key on AgentCore Identity.
     #   @return [String]
     #
+    # @!attribute [rw] api_base
+    #   Optional custom endpoint URL for an OpenAI-compatible endpoint.
+    #   @return [String]
+    #
     # @!attribute [rw] max_tokens
     #   The maximum number of tokens to allow in the generated response per
     #   iteration.
@@ -4976,12 +5024,13 @@ module Aws::BedrockAgentCore
     class HarnessOpenAiModelConfig < Struct.new(
       :model_id,
       :api_key_arn,
+      :api_base,
       :max_tokens,
       :temperature,
       :top_p,
       :api_format,
       :additional_params)
-      SENSITIVE = []
+      SENSITIVE = [:api_base]
       include Aws::Structure
     end
 
@@ -9615,6 +9664,28 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # A pairing of a session with the specific trace IDs to evaluate within
+    # that session. Use this to evaluate individual traces rather than an
+    # entire session.
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier of the session that contains the traces to
+    #   evaluate.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_ids
+    #   The list of trace IDs within the session to evaluate.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/SessionTraceIds AWS API Documentation
+    #
+    class SessionTraceIds < Struct.new(
+      :session_id,
+      :trace_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The structured skill definition with a schema version and inline
     # content.
     #
@@ -11602,7 +11673,8 @@ module Aws::BedrockAgentCore
           :metadata,
           :internal_server_exception,
           :validation_exception,
-          :runtime_client_error
+          :runtime_client_error,
+          :hook_event
         ]
       end
 

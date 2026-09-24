@@ -85,6 +85,7 @@ module Aws::STS
     jwtAlgorithmType = Shapes::StringShape.new(name: 'jwtAlgorithmType')
     jwtPayloadSizeExceededException = Shapes::StringShape.new(name: 'jwtPayloadSizeExceededException')
     malformedPolicyDocumentMessage = Shapes::StringShape.new(name: 'malformedPolicyDocumentMessage')
+    minimumSessionTokenSizeType = Shapes::IntegerShape.new(name: 'minimumSessionTokenSizeType')
     nonNegativeIntegerType = Shapes::IntegerShape.new(name: 'nonNegativeIntegerType')
     outboundWebIdentityFederationDisabledException = Shapes::StringShape.new(name: 'outboundWebIdentityFederationDisabledException')
     packedPolicyTooLargeMessage = Shapes::StringShape.new(name: 'packedPolicyTooLargeMessage')
@@ -95,6 +96,8 @@ module Aws::STS
     serialNumberType = Shapes::StringShape.new(name: 'serialNumberType')
     sessionDurationEscalationException = Shapes::StringShape.new(name: 'sessionDurationEscalationException')
     sessionPolicyDocumentType = Shapes::StringShape.new(name: 'sessionPolicyDocumentType')
+    sessionTokenSizeType = Shapes::IntegerShape.new(name: 'sessionTokenSizeType')
+    sessionTokenUtilizationType = Shapes::IntegerShape.new(name: 'sessionTokenUtilizationType')
     sourceIdentityType = Shapes::StringShape.new(name: 'sourceIdentityType')
     tagKeyListType = Shapes::ListShape.new(name: 'tagKeyListType')
     tagKeyType = Shapes::StringShape.new(name: 'tagKeyType')
@@ -125,12 +128,15 @@ module Aws::STS
     AssumeRoleRequest.add_member(:token_code, Shapes::ShapeRef.new(shape: tokenCodeType, location_name: "TokenCode"))
     AssumeRoleRequest.add_member(:source_identity, Shapes::ShapeRef.new(shape: sourceIdentityType, location_name: "SourceIdentity"))
     AssumeRoleRequest.add_member(:provided_contexts, Shapes::ShapeRef.new(shape: ProvidedContextsListType, location_name: "ProvidedContexts"))
+    AssumeRoleRequest.add_member(:minimum_session_token_size, Shapes::ShapeRef.new(shape: minimumSessionTokenSizeType, location_name: "MinimumSessionTokenSize"))
     AssumeRoleRequest.struct_class = Types::AssumeRoleRequest
 
     AssumeRoleResponse.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
     AssumeRoleResponse.add_member(:assumed_role_user, Shapes::ShapeRef.new(shape: AssumedRoleUser, location_name: "AssumedRoleUser"))
-    AssumeRoleResponse.add_member(:packed_policy_size, Shapes::ShapeRef.new(shape: nonNegativeIntegerType, location_name: "PackedPolicySize"))
+    AssumeRoleResponse.add_member(:packed_policy_size, Shapes::ShapeRef.new(shape: nonNegativeIntegerType, deprecated: true, location_name: "PackedPolicySize", metadata: {"deprecatedMessage" => "Deprecated. Replaced by SessionTokenUtilization.", "deprecatedSince" => "2026-06-17"}))
     AssumeRoleResponse.add_member(:source_identity, Shapes::ShapeRef.new(shape: sourceIdentityType, location_name: "SourceIdentity"))
+    AssumeRoleResponse.add_member(:session_token_utilization, Shapes::ShapeRef.new(shape: sessionTokenUtilizationType, location_name: "SessionTokenUtilization"))
+    AssumeRoleResponse.add_member(:session_token_size, Shapes::ShapeRef.new(shape: sessionTokenSizeType, location_name: "SessionTokenSize"))
     AssumeRoleResponse.struct_class = Types::AssumeRoleResponse
 
     AssumeRoleWithSAMLRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "RoleArn"))
@@ -139,17 +145,20 @@ module Aws::STS
     AssumeRoleWithSAMLRequest.add_member(:policy_arns, Shapes::ShapeRef.new(shape: policyDescriptorListType, location_name: "PolicyArns"))
     AssumeRoleWithSAMLRequest.add_member(:policy, Shapes::ShapeRef.new(shape: sessionPolicyDocumentType, location_name: "Policy"))
     AssumeRoleWithSAMLRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: roleDurationSecondsType, location_name: "DurationSeconds"))
+    AssumeRoleWithSAMLRequest.add_member(:minimum_session_token_size, Shapes::ShapeRef.new(shape: minimumSessionTokenSizeType, location_name: "MinimumSessionTokenSize"))
     AssumeRoleWithSAMLRequest.struct_class = Types::AssumeRoleWithSAMLRequest
 
     AssumeRoleWithSAMLResponse.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
     AssumeRoleWithSAMLResponse.add_member(:assumed_role_user, Shapes::ShapeRef.new(shape: AssumedRoleUser, location_name: "AssumedRoleUser"))
-    AssumeRoleWithSAMLResponse.add_member(:packed_policy_size, Shapes::ShapeRef.new(shape: nonNegativeIntegerType, location_name: "PackedPolicySize"))
+    AssumeRoleWithSAMLResponse.add_member(:packed_policy_size, Shapes::ShapeRef.new(shape: nonNegativeIntegerType, deprecated: true, location_name: "PackedPolicySize", metadata: {"deprecatedMessage" => "Deprecated. Replaced by SessionTokenUtilization.", "deprecatedSince" => "2026-06-17"}))
     AssumeRoleWithSAMLResponse.add_member(:subject, Shapes::ShapeRef.new(shape: Subject, location_name: "Subject"))
     AssumeRoleWithSAMLResponse.add_member(:subject_type, Shapes::ShapeRef.new(shape: SubjectType, location_name: "SubjectType"))
     AssumeRoleWithSAMLResponse.add_member(:issuer, Shapes::ShapeRef.new(shape: Issuer, location_name: "Issuer"))
     AssumeRoleWithSAMLResponse.add_member(:audience, Shapes::ShapeRef.new(shape: Audience, location_name: "Audience"))
     AssumeRoleWithSAMLResponse.add_member(:name_qualifier, Shapes::ShapeRef.new(shape: NameQualifier, location_name: "NameQualifier"))
     AssumeRoleWithSAMLResponse.add_member(:source_identity, Shapes::ShapeRef.new(shape: sourceIdentityType, location_name: "SourceIdentity"))
+    AssumeRoleWithSAMLResponse.add_member(:session_token_utilization, Shapes::ShapeRef.new(shape: sessionTokenUtilizationType, location_name: "SessionTokenUtilization"))
+    AssumeRoleWithSAMLResponse.add_member(:session_token_size, Shapes::ShapeRef.new(shape: sessionTokenSizeType, location_name: "SessionTokenSize"))
     AssumeRoleWithSAMLResponse.struct_class = Types::AssumeRoleWithSAMLResponse
 
     AssumeRoleWithWebIdentityRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "RoleArn"))
@@ -159,24 +168,30 @@ module Aws::STS
     AssumeRoleWithWebIdentityRequest.add_member(:policy_arns, Shapes::ShapeRef.new(shape: policyDescriptorListType, location_name: "PolicyArns"))
     AssumeRoleWithWebIdentityRequest.add_member(:policy, Shapes::ShapeRef.new(shape: sessionPolicyDocumentType, location_name: "Policy"))
     AssumeRoleWithWebIdentityRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: roleDurationSecondsType, location_name: "DurationSeconds"))
+    AssumeRoleWithWebIdentityRequest.add_member(:minimum_session_token_size, Shapes::ShapeRef.new(shape: minimumSessionTokenSizeType, location_name: "MinimumSessionTokenSize"))
     AssumeRoleWithWebIdentityRequest.struct_class = Types::AssumeRoleWithWebIdentityRequest
 
     AssumeRoleWithWebIdentityResponse.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
     AssumeRoleWithWebIdentityResponse.add_member(:subject_from_web_identity_token, Shapes::ShapeRef.new(shape: webIdentitySubjectType, location_name: "SubjectFromWebIdentityToken"))
     AssumeRoleWithWebIdentityResponse.add_member(:assumed_role_user, Shapes::ShapeRef.new(shape: AssumedRoleUser, location_name: "AssumedRoleUser"))
-    AssumeRoleWithWebIdentityResponse.add_member(:packed_policy_size, Shapes::ShapeRef.new(shape: nonNegativeIntegerType, location_name: "PackedPolicySize"))
+    AssumeRoleWithWebIdentityResponse.add_member(:packed_policy_size, Shapes::ShapeRef.new(shape: nonNegativeIntegerType, deprecated: true, location_name: "PackedPolicySize", metadata: {"deprecatedMessage" => "Deprecated. Replaced by SessionTokenUtilization.", "deprecatedSince" => "2026-06-17"}))
     AssumeRoleWithWebIdentityResponse.add_member(:provider, Shapes::ShapeRef.new(shape: Issuer, location_name: "Provider"))
     AssumeRoleWithWebIdentityResponse.add_member(:audience, Shapes::ShapeRef.new(shape: Audience, location_name: "Audience"))
     AssumeRoleWithWebIdentityResponse.add_member(:source_identity, Shapes::ShapeRef.new(shape: sourceIdentityType, location_name: "SourceIdentity"))
+    AssumeRoleWithWebIdentityResponse.add_member(:session_token_utilization, Shapes::ShapeRef.new(shape: sessionTokenUtilizationType, location_name: "SessionTokenUtilization"))
+    AssumeRoleWithWebIdentityResponse.add_member(:session_token_size, Shapes::ShapeRef.new(shape: sessionTokenSizeType, location_name: "SessionTokenSize"))
     AssumeRoleWithWebIdentityResponse.struct_class = Types::AssumeRoleWithWebIdentityResponse
 
     AssumeRootRequest.add_member(:target_principal, Shapes::ShapeRef.new(shape: TargetPrincipalType, required: true, location_name: "TargetPrincipal"))
     AssumeRootRequest.add_member(:task_policy_arn, Shapes::ShapeRef.new(shape: PolicyDescriptorType, required: true, location_name: "TaskPolicyArn"))
     AssumeRootRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: RootDurationSecondsType, location_name: "DurationSeconds"))
+    AssumeRootRequest.add_member(:minimum_session_token_size, Shapes::ShapeRef.new(shape: minimumSessionTokenSizeType, location_name: "MinimumSessionTokenSize"))
     AssumeRootRequest.struct_class = Types::AssumeRootRequest
 
     AssumeRootResponse.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
     AssumeRootResponse.add_member(:source_identity, Shapes::ShapeRef.new(shape: sourceIdentityType, location_name: "SourceIdentity"))
+    AssumeRootResponse.add_member(:session_token_utilization, Shapes::ShapeRef.new(shape: sessionTokenUtilizationType, location_name: "SessionTokenUtilization"))
+    AssumeRootResponse.add_member(:session_token_size, Shapes::ShapeRef.new(shape: sessionTokenSizeType, location_name: "SessionTokenSize"))
     AssumeRootResponse.struct_class = Types::AssumeRootResponse
 
     AssumedRoleUser.add_member(:assumed_role_id, Shapes::ShapeRef.new(shape: assumedRoleIdType, required: true, location_name: "AssumedRoleId"))
@@ -222,7 +237,7 @@ module Aws::STS
     GetDelegatedAccessTokenRequest.struct_class = Types::GetDelegatedAccessTokenRequest
 
     GetDelegatedAccessTokenResponse.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
-    GetDelegatedAccessTokenResponse.add_member(:packed_policy_size, Shapes::ShapeRef.new(shape: nonNegativeIntegerType, location_name: "PackedPolicySize"))
+    GetDelegatedAccessTokenResponse.add_member(:packed_policy_size, Shapes::ShapeRef.new(shape: nonNegativeIntegerType, deprecated: true, location_name: "PackedPolicySize", metadata: {"deprecatedMessage" => "Deprecated. This field is not populated for GetDelegatedAccessToken.", "deprecatedSince" => "2026-06-17"}))
     GetDelegatedAccessTokenResponse.add_member(:assumed_principal, Shapes::ShapeRef.new(shape: arnType, location_name: "AssumedPrincipal"))
     GetDelegatedAccessTokenResponse.struct_class = Types::GetDelegatedAccessTokenResponse
 
@@ -231,19 +246,25 @@ module Aws::STS
     GetFederationTokenRequest.add_member(:policy_arns, Shapes::ShapeRef.new(shape: policyDescriptorListType, location_name: "PolicyArns"))
     GetFederationTokenRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: durationSecondsType, location_name: "DurationSeconds"))
     GetFederationTokenRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
+    GetFederationTokenRequest.add_member(:minimum_session_token_size, Shapes::ShapeRef.new(shape: minimumSessionTokenSizeType, location_name: "MinimumSessionTokenSize"))
     GetFederationTokenRequest.struct_class = Types::GetFederationTokenRequest
 
     GetFederationTokenResponse.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
     GetFederationTokenResponse.add_member(:federated_user, Shapes::ShapeRef.new(shape: FederatedUser, location_name: "FederatedUser"))
-    GetFederationTokenResponse.add_member(:packed_policy_size, Shapes::ShapeRef.new(shape: nonNegativeIntegerType, location_name: "PackedPolicySize"))
+    GetFederationTokenResponse.add_member(:packed_policy_size, Shapes::ShapeRef.new(shape: nonNegativeIntegerType, deprecated: true, location_name: "PackedPolicySize", metadata: {"deprecatedMessage" => "Deprecated. Replaced by SessionTokenUtilization.", "deprecatedSince" => "2026-06-17"}))
+    GetFederationTokenResponse.add_member(:session_token_utilization, Shapes::ShapeRef.new(shape: sessionTokenUtilizationType, location_name: "SessionTokenUtilization"))
+    GetFederationTokenResponse.add_member(:session_token_size, Shapes::ShapeRef.new(shape: sessionTokenSizeType, location_name: "SessionTokenSize"))
     GetFederationTokenResponse.struct_class = Types::GetFederationTokenResponse
 
     GetSessionTokenRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: durationSecondsType, location_name: "DurationSeconds"))
     GetSessionTokenRequest.add_member(:serial_number, Shapes::ShapeRef.new(shape: serialNumberType, location_name: "SerialNumber"))
     GetSessionTokenRequest.add_member(:token_code, Shapes::ShapeRef.new(shape: tokenCodeType, location_name: "TokenCode"))
+    GetSessionTokenRequest.add_member(:minimum_session_token_size, Shapes::ShapeRef.new(shape: minimumSessionTokenSizeType, location_name: "MinimumSessionTokenSize"))
     GetSessionTokenRequest.struct_class = Types::GetSessionTokenRequest
 
     GetSessionTokenResponse.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
+    GetSessionTokenResponse.add_member(:session_token_utilization, Shapes::ShapeRef.new(shape: sessionTokenUtilizationType, location_name: "SessionTokenUtilization"))
+    GetSessionTokenResponse.add_member(:session_token_size, Shapes::ShapeRef.new(shape: sessionTokenSizeType, location_name: "SessionTokenSize"))
     GetSessionTokenResponse.struct_class = Types::GetSessionTokenResponse
 
     GetWebIdentityTokenRequest.add_member(:audience, Shapes::ShapeRef.new(shape: webIdentityTokenAudienceListType, required: true, location_name: "Audience"))

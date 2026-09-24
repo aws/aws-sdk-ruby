@@ -17,6 +17,36 @@
         "title": "To cancel a job"
       }
     ],
+    "CancelJobs": [
+      {
+        "input": {
+          "jobs": [
+            "1d828f65-7a4d-42e8-996d-3b900ed59dc4",
+            "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e"
+          ],
+          "reason": "Cancelling jobs."
+        },
+        "output": {
+          "errors": [
+            {
+              "code": "ServerException",
+              "job": "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e",
+              "message": "Failed to read job state. Please retry this job."
+            }
+          ],
+          "successful": [
+            "1d828f65-7a4d-42e8-996d-3b900ed59dc4"
+          ]
+        },
+        "comments": {
+          "input": {},
+          "output": {}
+        },
+        "description": "This example cancels the jobs with the specified job IDs.",
+        "id": "to-cancel-jobs-1481152314733",
+        "title": "To cancel multiple jobs"
+      }
+    ],
     "CreateComputeEnvironment": [
       {
         "input": {
@@ -1069,6 +1099,66 @@
         "description": "This example terminates a job with the specified job ID.",
         "id": "to-terminate-a-job-1481154558276",
         "title": "To terminate a job"
+      }
+    ],
+    "TerminateJobs": [
+      {
+        "input": {
+          "jobs": [
+            "61e743ed-35e4-48da-b2de-5c8333821c84",
+            "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e"
+          ],
+          "reason": "Terminating jobs."
+        },
+        "output": {
+          "errors": [
+            {
+              "code": "ServerException",
+              "job": "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e",
+              "message": "Failed to read job state. Please retry this job."
+            }
+          ],
+          "successful": [
+            "61e743ed-35e4-48da-b2de-5c8333821c84"
+          ]
+        },
+        "comments": {
+          "input": {},
+          "output": {}
+        },
+        "description": "This example terminates the jobs with the specified job IDs.",
+        "id": "to-terminate-jobs-1481154558276",
+        "title": "To terminate multiple jobs"
+      }
+    ],
+    "TerminateServiceJobs": [
+      {
+        "input": {
+          "jobs": [
+            "a4d6c728-8ee8-4c65-8e2a-9a5e8f4b7c3d",
+            "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e"
+          ],
+          "reason": "Job terminated by user request"
+        },
+        "output": {
+          "errors": [
+            {
+              "code": "ServerException",
+              "job": "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e",
+              "message": "Failed to read job state. Please retry this job."
+            }
+          ],
+          "successful": [
+            "a4d6c728-8ee8-4c65-8e2a-9a5e8f4b7c3d"
+          ]
+        },
+        "comments": {
+          "input": {},
+          "output": {}
+        },
+        "description": "This example terminates the specified service jobs with a reason.",
+        "id": "to-terminate-service-jobs-1754066455000",
+        "title": "To terminate multiple service jobs"
       }
     ],
     "UntagResource": [

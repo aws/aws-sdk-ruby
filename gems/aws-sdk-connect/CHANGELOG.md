@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.281.0 (2026-09-18)
+------------------
+
+* Feature - This release adds the ListSecurityProfileAIAgents API and updates the CreateSecurityProfile and UpdateSecurityProfile APIs to support the AllowedAIAgents field on security profiles, allowing customers to manage the 3P AI agents associated with a security profile for Agent-to-Agent interactions.
+
+1.280.0 (2026-09-17)
+------------------
+
+* Feature - Made the replicaAlias attribute optional in the ReplicateInstance API to support Global routing for Amazon Connect Global Resiliency (ACGR) instances. This change maintains backward compatibility. When onboarding to ACGR without Global routing, you must specify a custom replicaAlias in your API call
+
+1.279.0 (2026-09-16)
+------------------
+
+* Feature - Adds support for ContactAnalysis via ListContactReferences.
+
+1.278.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.277.0 (2026-09-09)
+------------------
+
+* Feature - Add metric configuration field to evaluation forms and ListEvaluationFormAIVersions API for retrieving AI-generated evaluation form versions
+
 1.276.0 (2026-09-08)
 ------------------
 

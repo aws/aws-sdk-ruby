@@ -1346,6 +1346,8 @@ module Aws::MediaConvert
     #           },
     #           passthrough_settings: {
     #             frame_control: "NEAREST_IDRFRAME", # accepts NEAREST_IDRFRAME, NEAREST_IFRAME
+    #             gops_per_segment: 1,
+    #             segmentation_mode: "AUTO", # accepts AUTO, DURATION_BASED, GOP_COUNT
     #             video_selector_mode: "AUTO", # accepts AUTO, REMUX_ALL
     #           },
     #           prores_settings: {
@@ -2124,6 +2126,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.telecine #=> String, one of "NONE", "SOFT", "HARD"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.temporal_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.passthrough_settings.frame_control #=> String, one of "NEAREST_IDRFRAME", "NEAREST_IFRAME"
+    #   resp.preset.settings.video_description.codec_settings.passthrough_settings.gops_per_segment #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.passthrough_settings.segmentation_mode #=> String, one of "AUTO", "DURATION_BASED", "GOP_COUNT"
     #   resp.preset.settings.video_description.codec_settings.passthrough_settings.video_selector_mode #=> String, one of "AUTO", "REMUX_ALL"
     #   resp.preset.settings.video_description.codec_settings.prores_settings.chroma_sampling #=> String, one of "PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"
     #   resp.preset.settings.video_description.codec_settings.prores_settings.codec_profile #=> String, one of "APPLE_PRORES_422", "APPLE_PRORES_422_HQ", "APPLE_PRORES_422_LT", "APPLE_PRORES_422_PROXY", "APPLE_PRORES_4444", "APPLE_PRORES_4444_XQ"
@@ -3235,6 +3239,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.telecine #=> String, one of "NONE", "SOFT", "HARD"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.temporal_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.passthrough_settings.frame_control #=> String, one of "NEAREST_IDRFRAME", "NEAREST_IFRAME"
+    #   resp.preset.settings.video_description.codec_settings.passthrough_settings.gops_per_segment #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.passthrough_settings.segmentation_mode #=> String, one of "AUTO", "DURATION_BASED", "GOP_COUNT"
     #   resp.preset.settings.video_description.codec_settings.passthrough_settings.video_selector_mode #=> String, one of "AUTO", "REMUX_ALL"
     #   resp.preset.settings.video_description.codec_settings.prores_settings.chroma_sampling #=> String, one of "PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"
     #   resp.preset.settings.video_description.codec_settings.prores_settings.codec_profile #=> String, one of "APPLE_PRORES_422", "APPLE_PRORES_422_HQ", "APPLE_PRORES_422_LT", "APPLE_PRORES_422_PROXY", "APPLE_PRORES_4444", "APPLE_PRORES_4444_XQ"
@@ -4155,6 +4161,8 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.telecine #=> String, one of "NONE", "SOFT", "HARD"
     #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.temporal_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.passthrough_settings.frame_control #=> String, one of "NEAREST_IDRFRAME", "NEAREST_IFRAME"
+    #   resp.presets[0].settings.video_description.codec_settings.passthrough_settings.gops_per_segment #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.passthrough_settings.segmentation_mode #=> String, one of "AUTO", "DURATION_BASED", "GOP_COUNT"
     #   resp.presets[0].settings.video_description.codec_settings.passthrough_settings.video_selector_mode #=> String, one of "AUTO", "REMUX_ALL"
     #   resp.presets[0].settings.video_description.codec_settings.prores_settings.chroma_sampling #=> String, one of "PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"
     #   resp.presets[0].settings.video_description.codec_settings.prores_settings.codec_profile #=> String, one of "APPLE_PRORES_422", "APPLE_PRORES_422_HQ", "APPLE_PRORES_422_LT", "APPLE_PRORES_422_PROXY", "APPLE_PRORES_4444", "APPLE_PRORES_4444_XQ"
@@ -4502,7 +4510,12 @@ module Aws::MediaConvert
     # Probe returns a JSON that includes container, codec, frame rate,
     # resolution, track count, audio layout, captions, and more. You can use
     # this information to learn more about your media files, or to help make
-    # decisions while automating your transcoding workflow.
+    # decisions while automating your transcoding workflow. Probe supports
+    # the following input container formats: MP4, QuickTime (MOV), 3GP, 3G2,
+    # Matroska (MKV), WebM, MXF, MPEG-TS, MPEG-PS, AVI, WAV, MP3, FLAC, Ogg,
+    # and ASF (Windows Media / WMA). The fields that Probe returns vary by
+    # container and codec. A field isn't returned when the source doesn't
+    # contain it, or when it isn't available for that container and codec.
     #
     # @option params [Array<Types::ProbeInputFile>] :input_files
     #   Specify a media file to probe.
@@ -4526,7 +4539,7 @@ module Aws::MediaConvert
     #   resp.probe_results #=> Array
     #   resp.probe_results[0].container.bit_rate #=> Integer
     #   resp.probe_results[0].container.duration #=> Float
-    #   resp.probe_results[0].container.format #=> String, one of "mp4", "quicktime", "matroska", "webm", "mxf", "wave", "avi", "mpegts", "mpegps", "mp3", "flac", "asf", "ogg"
+    #   resp.probe_results[0].container.format #=> String, one of "mp4", "quicktime", "matroska", "webm", "mxf", "wave", "avi", "mpegts", "mpegps", "mp3", "flac", "asf", "ogg", "three_gp", "three_g2", "aac", "ac3", "eac3"
     #   resp.probe_results[0].container.start_timecode #=> String
     #   resp.probe_results[0].container.tracks #=> Array
     #   resp.probe_results[0].container.tracks[0].audio_properties.bit_depth #=> Integer
@@ -4552,6 +4565,13 @@ module Aws::MediaConvert
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.color_primaries #=> String, one of "ITU_709", "UNSPECIFIED", "RESERVED", "ITU_470M", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "GENERIC_FILM", "ITU_2020", "SMPTE_428_1", "SMPTE_431_2", "SMPTE_EG_432_1", "IPT", "SMPTE_2067XYZ", "EBU_3213_E", "LAST"
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.content_light_level.max_content_light_level #=> Integer
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.content_light_level.max_frame_average_light_level #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.display_aspect_ratio.denominator #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.display_aspect_ratio.numerator #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.dolby_vision.base_layer #=> String, one of "PRESENT", "ABSENT"
+    #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.dolby_vision.enhancement_layer #=> String, one of "PRESENT", "ABSENT"
+    #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.dolby_vision.level #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.dolby_vision.profile #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.dolby_vision.rpu #=> String, one of "PRESENT", "ABSENT"
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.field_order #=> String
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.hdr_10_plus_presence #=> String, one of "PRESENT"
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.height #=> Integer
@@ -4559,6 +4579,8 @@ module Aws::MediaConvert
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.matrix_coefficients #=> String, one of "RGB", "ITU_709", "UNSPECIFIED", "RESERVED", "FCC", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "YCgCo", "ITU_2020_NCL", "ITU_2020_CL", "SMPTE_2085", "CD_NCL", "CD_CL", "ITU_2100ICtCp", "IPT", "EBU3213", "LAST"
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.profile #=> String
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.rotation #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.sample_aspect_ratio.denominator #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.sample_aspect_ratio.numerator #=> Integer
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.scan_type #=> String
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.transfer_characteristics #=> String, one of "ITU_709", "UNSPECIFIED", "RESERVED", "ITU_470M", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "LINEAR", "LOG10_2", "LOC10_2_5", "IEC_61966_2_4", "ITU_1361", "IEC_61966_2_1", "ITU_2020_10bit", "ITU_2020_12bit", "SMPTE_2084", "SMPTE_428_1", "ARIB_B67", "LAST"
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.width #=> Integer
@@ -5524,6 +5546,8 @@ module Aws::MediaConvert
     #           },
     #           passthrough_settings: {
     #             frame_control: "NEAREST_IDRFRAME", # accepts NEAREST_IDRFRAME, NEAREST_IFRAME
+    #             gops_per_segment: 1,
+    #             segmentation_mode: "AUTO", # accepts AUTO, DURATION_BASED, GOP_COUNT
     #             video_selector_mode: "AUTO", # accepts AUTO, REMUX_ALL
     #           },
     #           prores_settings: {
@@ -6299,6 +6323,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.telecine #=> String, one of "NONE", "SOFT", "HARD"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.temporal_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.passthrough_settings.frame_control #=> String, one of "NEAREST_IDRFRAME", "NEAREST_IFRAME"
+    #   resp.preset.settings.video_description.codec_settings.passthrough_settings.gops_per_segment #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.passthrough_settings.segmentation_mode #=> String, one of "AUTO", "DURATION_BASED", "GOP_COUNT"
     #   resp.preset.settings.video_description.codec_settings.passthrough_settings.video_selector_mode #=> String, one of "AUTO", "REMUX_ALL"
     #   resp.preset.settings.video_description.codec_settings.prores_settings.chroma_sampling #=> String, one of "PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"
     #   resp.preset.settings.video_description.codec_settings.prores_settings.codec_profile #=> String, one of "APPLE_PRORES_422", "APPLE_PRORES_422_HQ", "APPLE_PRORES_422_LT", "APPLE_PRORES_422_PROXY", "APPLE_PRORES_4444", "APPLE_PRORES_4444_XQ"
@@ -6597,7 +6623,7 @@ module Aws::MediaConvert
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.192.0'
+      context[:gem_version] = '1.195.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

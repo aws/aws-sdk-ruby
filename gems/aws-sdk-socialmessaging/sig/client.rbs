@@ -282,6 +282,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetLinkedWhatsAppBusinessAccountPhoneNumberOutput]
         def phone_number: () -> Types::WhatsAppPhoneNumberDetail
         def linked_whats_app_business_account_id: () -> ::String
+        def call_settings: () -> Types::WhatsAppCallSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#get_linked_whats_app_business_account_phone_number-instance_method
       def get_linked_whats_app_business_account_phone_number: (
@@ -299,6 +300,19 @@ module Aws
                                                origination_phone_number_id: ::String
                                              ) -> _GetWhatsAppBusinessPublicKeyResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWhatsAppBusinessPublicKeyResponseSuccess
+
+      interface _GetWhatsAppCallPermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWhatsAppCallPermissionOutput]
+        def permission: () -> Types::WhatsAppCallPermission
+        def actions: () -> ::Array[Types::WhatsAppCallPermissionAction]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#get_whats_app_call_permission-instance_method
+      def get_whats_app_call_permission: (
+                                           origination_phone_number_id: ::String,
+                                           ?destination_phone_number: ::String,
+                                           ?end_user_bsuid: ::String
+                                         ) -> _GetWhatsAppCallPermissionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWhatsAppCallPermissionResponseSuccess
 
       interface _GetWhatsAppFlowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetWhatsAppFlowOutput]
@@ -500,6 +514,18 @@ module Aws
                                              ) -> _PutWhatsAppBusinessPublicKeyResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutWhatsAppBusinessPublicKeyResponseSuccess
 
+      interface _SendWhatsAppCallEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendWhatsAppCallEventOutput]
+        def call_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#send_whats_app_call_event-instance_method
+      def send_whats_app_call_event: (
+                                       origination_phone_number_id: ::String,
+                                       meta_api_version: ::String,
+                                       call_event: ::String
+                                     ) -> _SendWhatsAppCallEventResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendWhatsAppCallEventResponseSuccess
+
       interface _SendWhatsAppConversionEventResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SendWhatsAppConversionEventOutput]
         def request_id: () -> ::String
@@ -550,6 +576,51 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateLinkedWhatsAppBusinessAccountPhoneNumberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput]
+        def phone_number_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#update_linked_whats_app_business_account_phone_number-instance_method
+      def update_linked_whats_app_business_account_phone_number: (
+                                                                   id: ::String,
+                                                                   call_settings: {
+                                                                     call_enabled: bool,
+                                                                     call_hours: {
+                                                                       enabled: bool,
+                                                                       timezone: ::String,
+                                                                       weekly_operating_hours: Array[
+                                                                         {
+                                                                           day_of_week: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY"),
+                                                                           open_time: {
+                                                                             hours: ::Integer,
+                                                                             minutes: ::Integer
+                                                                           },
+                                                                           close_time: {
+                                                                             hours: ::Integer,
+                                                                             minutes: ::Integer
+                                                                           }
+                                                                         }
+                                                                       ],
+                                                                       holiday_schedule: Array[
+                                                                         {
+                                                                           date: ::String,
+                                                                           start_time: {
+                                                                             hours: ::Integer,
+                                                                             minutes: ::Integer
+                                                                           },
+                                                                           end_time: {
+                                                                             hours: ::Integer,
+                                                                             minutes: ::Integer
+                                                                           }
+                                                                         }
+                                                                       ]?
+                                                                     }?,
+                                                                     call_icon_visibility: ::String?,
+                                                                     callback_permission_status: ::String?
+                                                                   }
+                                                                 ) -> _UpdateLinkedWhatsAppBusinessAccountPhoneNumberResponseSuccess
+                                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLinkedWhatsAppBusinessAccountPhoneNumberResponseSuccess
 
       interface _UpdateWhatsAppFlowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWhatsAppFlowOutput]

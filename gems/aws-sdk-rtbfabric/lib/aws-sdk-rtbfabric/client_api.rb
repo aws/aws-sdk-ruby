@@ -31,6 +31,7 @@ module Aws::RTBFabric
     CertificateAssociationSummary = Shapes::StructureShape.new(name: 'CertificateAssociationSummary')
     CertificateAssociationSummaryList = Shapes::ListShape.new(name: 'CertificateAssociationSummaryList')
     CertificateAuthorityCertificates = Shapes::ListShape.new(name: 'CertificateAuthorityCertificates')
+    ClientRoutingPolicy = Shapes::StringShape.new(name: 'ClientRoutingPolicy')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectivityType = Shapes::StringShape.new(name: 'ConnectivityType')
     CreateInboundExternalLinkRequest = Shapes::StructureShape.new(name: 'CreateInboundExternalLinkRequest')
@@ -378,6 +379,7 @@ module Aws::RTBFabric
     CreateResponderGatewayRequest.add_member(:description, Shapes::ShapeRef.new(shape: CreateResponderGatewayRequestDescriptionString, location_name: "description"))
     CreateResponderGatewayRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateResponderGatewayRequest.add_member(:gateway_type, Shapes::ShapeRef.new(shape: GatewayType, location_name: "gatewayType"))
+    CreateResponderGatewayRequest.add_member(:client_routing_policy, Shapes::ShapeRef.new(shape: ClientRoutingPolicy, location_name: "clientRoutingPolicy"))
     CreateResponderGatewayRequest.struct_class = Types::CreateResponderGatewayRequest
 
     CreateResponderGatewayRequestSecurityGroupIdsList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
@@ -388,6 +390,7 @@ module Aws::RTBFabric
     CreateResponderGatewayResponse.add_member(:status, Shapes::ShapeRef.new(shape: ResponderGatewayStatus, required: true, location_name: "status"))
     CreateResponderGatewayResponse.add_member(:listener_config, Shapes::ShapeRef.new(shape: ListenerConfig, location_name: "listenerConfig"))
     CreateResponderGatewayResponse.add_member(:external_inbound_endpoint, Shapes::ShapeRef.new(shape: DomainName, location_name: "externalInboundEndpoint"))
+    CreateResponderGatewayResponse.add_member(:client_routing_policy, Shapes::ShapeRef.new(shape: ClientRoutingPolicy, location_name: "clientRoutingPolicy"))
     CreateResponderGatewayResponse.struct_class = Types::CreateResponderGatewayResponse
 
     DeleteInboundExternalLinkRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
@@ -599,6 +602,7 @@ module Aws::RTBFabric
     GetResponderGatewayResponse.add_member(:links_requested_count, Shapes::ShapeRef.new(shape: Integer, location_name: "linksRequestedCount"))
     GetResponderGatewayResponse.add_member(:gateway_type, Shapes::ShapeRef.new(shape: GatewayType, location_name: "gatewayType"))
     GetResponderGatewayResponse.add_member(:external_inbound_endpoint, Shapes::ShapeRef.new(shape: DomainName, location_name: "externalInboundEndpoint"))
+    GetResponderGatewayResponse.add_member(:client_routing_policy, Shapes::ShapeRef.new(shape: ClientRoutingPolicy, location_name: "clientRoutingPolicy"))
     GetResponderGatewayResponse.struct_class = Types::GetResponderGatewayResponse
 
     GetResponderGatewayResponseSecurityGroupIdsList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
@@ -882,10 +886,12 @@ module Aws::RTBFabric
     UpdateResponderGatewayRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateResponderGatewayRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
     UpdateResponderGatewayRequest.add_member(:description, Shapes::ShapeRef.new(shape: UpdateResponderGatewayRequestDescriptionString, location_name: "description"))
+    UpdateResponderGatewayRequest.add_member(:client_routing_policy, Shapes::ShapeRef.new(shape: ClientRoutingPolicy, location_name: "clientRoutingPolicy"))
     UpdateResponderGatewayRequest.struct_class = Types::UpdateResponderGatewayRequest
 
     UpdateResponderGatewayResponse.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location_name: "gatewayId"))
     UpdateResponderGatewayResponse.add_member(:status, Shapes::ShapeRef.new(shape: ResponderGatewayStatus, required: true, location_name: "status"))
+    UpdateResponderGatewayResponse.add_member(:client_routing_policy, Shapes::ShapeRef.new(shape: ClientRoutingPolicy, location_name: "clientRoutingPolicy"))
     UpdateResponderGatewayResponse.struct_class = Types::UpdateResponderGatewayResponse
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))

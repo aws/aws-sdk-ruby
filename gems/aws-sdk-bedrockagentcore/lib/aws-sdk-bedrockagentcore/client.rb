@@ -1753,6 +1753,10 @@ module Aws::BedrockAgentCore
     #   resp.data_source_config.cloud_watch_logs.filter_config.session_ids[0] #=> String
     #   resp.data_source_config.cloud_watch_logs.filter_config.time_range.start_time #=> Time
     #   resp.data_source_config.cloud_watch_logs.filter_config.time_range.end_time #=> Time
+    #   resp.data_source_config.cloud_watch_logs.filter_config.session_trace_ids #=> Array
+    #   resp.data_source_config.cloud_watch_logs.filter_config.session_trace_ids[0].session_id #=> String
+    #   resp.data_source_config.cloud_watch_logs.filter_config.session_trace_ids[0].trace_ids #=> Array
+    #   resp.data_source_config.cloud_watch_logs.filter_config.session_trace_ids[0].trace_ids[0] #=> String
     #   resp.data_source_config.online_evaluation_config_source.online_evaluation_config_arn #=> String
     #   resp.data_source_config.online_evaluation_config_source.time_range.start_time #=> Time
     #   resp.data_source_config.online_evaluation_config_source.time_range.end_time #=> Time
@@ -3847,6 +3851,9 @@ module Aws::BedrockAgentCore
     #   handler.on_runtime_client_error_event do |event|
     #     event # => Aws::BedrockAgentCore::Types::runtimeClientError
     #   end
+    #   handler.on_hook_event_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::hookEvent
+    #   end
     #
     #   client.invoke_harness(
     #     # params inputs
@@ -3883,6 +3890,9 @@ module Aws::BedrockAgentCore
     #     stream.on_runtime_client_error_event do |event|
     #       event # => Aws::BedrockAgentCore::Types::runtimeClientError
     #     end
+    #     stream.on_hook_event_event do |event|
+    #       event # => Aws::BedrockAgentCore::Types::hookEvent
+    #     end
     #   end
     #
     #   client.invoke_harness(
@@ -3918,6 +3928,9 @@ module Aws::BedrockAgentCore
     #   end
     #   handler.on_runtime_client_error_event do |event|
     #     event # => Aws::BedrockAgentCore::Types::runtimeClientError
+    #   end
+    #   handler.on_hook_event_event do |event|
+    #     event # => Aws::BedrockAgentCore::Types::hookEvent
     #   end
     #
     #   client.invoke_harness(
@@ -4000,6 +4013,7 @@ module Aws::BedrockAgentCore
     #       open_ai_model_config: {
     #         model_id: "ModelId", # required
     #         api_key_arn: "ApiKeyArn", # required
+    #         api_base: "HarnessOpenAiApiBase",
     #         max_tokens: 1,
     #         temperature: 1.0,
     #         top_p: 1.0,
@@ -4106,7 +4120,7 @@ module Aws::BedrockAgentCore
     #
     #   # All events are available at resp.stream:
     #   resp.stream #=> Enumerator
-    #   resp.stream.event_types #=> [:message_start, :content_block_start, :content_block_delta, :content_block_stop, :message_stop, :metadata, :internal_server_exception, :validation_exception, :runtime_client_error]
+    #   resp.stream.event_types #=> [:message_start, :content_block_start, :content_block_delta, :content_block_stop, :message_stop, :metadata, :internal_server_exception, :validation_exception, :runtime_client_error, :hook_event]
     #
     #   # For :message_start event available at #on_message_start_event callback and response eventstream enumerator:
     #   event.role #=> String, one of "user", "assistant"
@@ -4135,7 +4149,7 @@ module Aws::BedrockAgentCore
     #   event.content_block_index #=> Integer
     #
     #   # For :message_stop event available at #on_message_stop_event callback and response eventstream enumerator:
-    #   event.stop_reason #=> String, one of "end_turn", "tool_use", "tool_result", "max_tokens", "stop_sequence", "content_filtered", "malformed_model_output", "malformed_tool_use", "interrupted", "partial_turn", "model_context_window_exceeded", "max_iterations_exceeded", "max_output_tokens_exceeded", "timeout_exceeded"
+    #   event.stop_reason #=> String, one of "end_turn", "tool_use", "tool_result", "max_tokens", "stop_sequence", "content_filtered", "malformed_model_output", "malformed_tool_use", "interrupted", "partial_turn", "model_context_window_exceeded", "max_iterations_exceeded", "max_output_tokens_exceeded", "timeout_exceeded", "hook_stopped"
     #
     #   # For :metadata event available at #on_metadata_event callback and response eventstream enumerator:
     #   event.usage.input_tokens #=> Integer
@@ -4157,6 +4171,13 @@ module Aws::BedrockAgentCore
     #
     #   # For :runtime_client_error event available at #on_runtime_client_error_event callback and response eventstream enumerator:
     #   event.message #=> String
+    #
+    #   # For :hook_event event available at #on_hook_event_event callback and response eventstream enumerator:
+    #   event.hook_event_id #=> String
+    #   event.name #=> String
+    #   event.type #=> String, one of "before_tool_call", "after_tool_call", "before_invocation", "after_invocation"
+    #   event.decision #=> String, one of "allow", "deny"
+    #   event.reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/InvokeHarness AWS API Documentation
     #
@@ -5452,6 +5473,12 @@ module Aws::BedrockAgentCore
     #             start_time: Time.now,
     #             end_time: Time.now,
     #           },
+    #           session_trace_ids: [
+    #             {
+    #               session_id: "String", # required
+    #               trace_ids: ["TraceId"], # required
+    #             },
+    #           ],
     #         },
     #       },
     #       online_evaluation_config_source: {
@@ -6556,7 +6583,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

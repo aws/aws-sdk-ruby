@@ -295,6 +295,24 @@
       ],
       "readonly":true
     },
+    "GetBillingTransferPreference":{
+      "name":"GetBillingTransferPreference",
+      "http":{
+        "method":"POST",
+        "requestUri":"/get-billing-transfer-preference",
+        "responseCode":200
+      },
+      "input":{"shape":"GetBillingTransferPreferenceInput"},
+      "output":{"shape":"GetBillingTransferPreferenceOutput"},
+      "errors":[
+        {"shape":"ThrottlingException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ValidationException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "readonly":true
+    },
     "ListAccountAssociations":{
       "name":"ListAccountAssociations",
       "http":{
@@ -542,6 +560,25 @@
       ],
       "idempotent":true
     },
+    "UpdateBillingTransferPreference":{
+      "name":"UpdateBillingTransferPreference",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/update-billing-transfer-preference",
+        "responseCode":200
+      },
+      "input":{"shape":"UpdateBillingTransferPreferenceInput"},
+      "output":{"shape":"UpdateBillingTransferPreferenceOutput"},
+      "errors":[
+        {"shape":"ConflictException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ValidationException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "idempotent":true
+    },
     "UpdateCustomLineItem":{
       "name":"UpdateCustomLineItem",
       "http":{
@@ -753,6 +790,14 @@
     "AttributesList":{
       "type":"list",
       "member":{"shape":"Attribute"}
+    },
+    "AutoTransferBillingGroupCreationPreference":{
+      "type":"structure",
+      "required":["Enabled"],
+      "members":{
+        "Enabled":{"shape":"Boolean"},
+        "PricingPlanArn":{"shape":"PricingPlanArn"}
+      }
     },
     "BatchAssociateResourcesToCustomLineItemInput":{
       "type":"structure",
@@ -967,6 +1012,7 @@
         "RESOURCE_NAME_CONFLICT",
         "PRICING_RULE_IN_PRICING_PLAN_CONFLICT",
         "PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT",
+        "PRICING_PLAN_REFERENCED_BY_PREFERENCE_DELETE_CONFLICT",
         "PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT",
         "WRITE_CONFLICT_RETRY"
       ]
@@ -1095,9 +1141,9 @@
     },
     "CreateTieringInput":{
       "type":"structure",
-      "required":["FreeTier"],
       "members":{
-        "FreeTier":{"shape":"CreateFreeTierConfig"}
+        "FreeTier":{"shape":"CreateFreeTierConfig"},
+        "CustomTiers":{"shape":"CustomTiersList"}
       }
     },
     "Currency":{"type":"string"},
@@ -1270,6 +1316,39 @@
         "PresentationDetails":{"shape":"PresentationObject"}
       }
     },
+    "CustomTier":{
+      "type":"structure",
+      "required":[
+        "BeginRangeInclusive",
+        "RateValue"
+      ],
+      "members":{
+        "BeginRangeInclusive":{"shape":"CustomTierBeginRangeInclusive"},
+        "EndRangeExclusive":{"shape":"CustomTierEndRangeExclusive"},
+        "RateValue":{"shape":"CustomTierRateValue"}
+      }
+    },
+    "CustomTierBeginRangeInclusive":{
+      "type":"double",
+      "box":true,
+      "min":0
+    },
+    "CustomTierEndRangeExclusive":{
+      "type":"double",
+      "box":true,
+      "min":0
+    },
+    "CustomTierRateValue":{
+      "type":"double",
+      "box":true,
+      "min":0
+    },
+    "CustomTiersList":{
+      "type":"list",
+      "member":{"shape":"CustomTier"},
+      "max":10,
+      "min":1
+    },
     "DeleteBillingGroupInput":{
       "type":"structure",
       "required":["Arn"],
@@ -1391,6 +1470,28 @@
       "members":{
         "BillingGroupCostReportResults":{"shape":"BillingGroupCostReportResultsList"},
         "NextToken":{"shape":"Token"}
+      }
+    },
+    "GetBillingTransferPreferenceInput":{
+      "type":"structure",
+      "required":["ResponsibilityTransferArn"],
+      "members":{
+        "ResponsibilityTransferArn":{"shape":"ResponsibilityTransferArn"}
+      }
+    },
+    "GetBillingTransferPreferenceOutput":{
+      "type":"structure",
+      "required":[
+        "ResponsibilityTransferArn",
+        "AutoBillingTransferBillingGroupCreation"
+      ],
+      "members":{
+        "ResponsibilityTransferArn":{"shape":"ResponsibilityTransferArn"},
+        "AutoBillingTransferBillingGroupCreation":{"shape":"AutoTransferBillingGroupCreationPreference"},
+        "LastModifiedTime":{
+          "shape":"Instant",
+          "box":true
+        }
       }
     },
     "GroupByAttributeName":{
@@ -2095,9 +2196,9 @@
     },
     "Tiering":{
       "type":"structure",
-      "required":["FreeTier"],
       "members":{
-        "FreeTier":{"shape":"FreeTierConfig"}
+        "FreeTier":{"shape":"FreeTierConfig"},
+        "CustomTiers":{"shape":"CustomTiersList"}
       }
     },
     "TieringActivated":{
@@ -2160,6 +2261,36 @@
         "Status":{"shape":"BillingGroupStatus"},
         "StatusReason":{"shape":"BillingGroupStatusReason"},
         "AccountGrouping":{"shape":"UpdateBillingGroupAccountGrouping"}
+      }
+    },
+    "UpdateBillingTransferPreferenceInput":{
+      "type":"structure",
+      "required":[
+        "ResponsibilityTransferArn",
+        "AutoBillingTransferBillingGroupCreation"
+      ],
+      "members":{
+        "ClientToken":{
+          "shape":"ClientToken",
+          "idempotencyToken":true,
+          "location":"header",
+          "locationName":"X-Amzn-Client-Token"
+        },
+        "ResponsibilityTransferArn":{"shape":"ResponsibilityTransferArn"},
+        "AutoBillingTransferBillingGroupCreation":{"shape":"AutoTransferBillingGroupCreationPreference"}
+      }
+    },
+    "UpdateBillingTransferPreferenceOutput":{
+      "type":"structure",
+      "required":[
+        "ResponsibilityTransferArn",
+        "AutoBillingTransferBillingGroupCreation",
+        "LastModifiedTime"
+      ],
+      "members":{
+        "ResponsibilityTransferArn":{"shape":"ResponsibilityTransferArn"},
+        "AutoBillingTransferBillingGroupCreation":{"shape":"AutoTransferBillingGroupCreationPreference"},
+        "LastModifiedTime":{"shape":"Instant"}
       }
     },
     "UpdateCustomLineItemChargeDetails":{
@@ -2265,9 +2396,9 @@
     },
     "UpdateTieringInput":{
       "type":"structure",
-      "required":["FreeTier"],
       "members":{
-        "FreeTier":{"shape":"UpdateFreeTierConfig"}
+        "FreeTier":{"shape":"UpdateFreeTierConfig"},
+        "CustomTiers":{"shape":"CustomTiersList"}
       }
     },
     "UsageType":{

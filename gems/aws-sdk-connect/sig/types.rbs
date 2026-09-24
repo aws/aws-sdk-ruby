@@ -8,6 +8,12 @@
 module Aws::Connect
   module Types
 
+    class AIAgent
+      attr_accessor arn: ::String
+      attr_accessor type: ("THIRD_PARTY")
+      SENSITIVE: []
+    end
+
     class AccessDeniedException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -984,6 +990,16 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ContactAnalysisReference
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      attr_accessor status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor arn: ::String
+      attr_accessor analytics_mode: ("PostContact" | "RealTime" | "ContactLens" | "AutomatedInteraction")
+      attr_accessor is_redacted: bool
+      SENSITIVE: []
+    end
+
     class ContactConfiguration
       attr_accessor contact_id: ::String
       attr_accessor participant_role: ("AGENT" | "CUSTOMER" | "SYSTEM" | "CUSTOM_BOT" | "SUPERVISOR")
@@ -1525,6 +1541,7 @@ module Aws::Connect
       attr_accessor review_configuration: Types::EvaluationReviewConfiguration
       attr_accessor target_configuration: Types::EvaluationFormTargetConfiguration
       attr_accessor language_configuration: Types::EvaluationFormLanguageConfiguration
+      attr_accessor ai_version: ::String
       SENSITIVE: []
     end
 
@@ -1808,6 +1825,7 @@ module Aws::Connect
       attr_accessor hierarchy_restricted_resources: ::Array[::String]
       attr_accessor allowed_access_control_hierarchy_group_id: ::String
       attr_accessor allowed_flow_modules: ::Array[Types::FlowModule]
+      attr_accessor allowed_ai_agents: ::Array[Types::AIAgent]
       attr_accessor granular_access_control_configuration: Types::GranularAccessControlConfiguration
       SENSITIVE: []
     end
@@ -3419,6 +3437,20 @@ module Aws::Connect
       attr_accessor language_configuration: Types::EvaluationFormLanguageConfiguration
       attr_accessor latest_validation_status: ("IN_PROGRESS" | "COMPLETED" | "FAILED")
       attr_accessor last_validation_time: ::Time
+      attr_accessor ai_version: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluationFormAIVersionLifecycle
+      attr_accessor status: ("LATEST" | "PREVIEW" | "ACTIVE" | "DEPRECATED")
+      attr_accessor start_of_life_time: ::Time
+      attr_accessor end_of_life_time: ::Time
+      SENSITIVE: []
+    end
+
+    class EvaluationFormAIVersionSummary
+      attr_accessor ai_version_name: ::String
+      attr_accessor ai_version_lifecycle: Types::EvaluationFormAIVersionLifecycle
       SENSITIVE: []
     end
 
@@ -3439,6 +3471,7 @@ module Aws::Connect
       attr_accessor target_configuration: Types::EvaluationFormTargetConfiguration
       attr_accessor language_configuration: Types::EvaluationFormLanguageConfiguration
       attr_accessor review_configuration: Types::EvaluationReviewConfiguration
+      attr_accessor ai_version: ::String
       SENSITIVE: []
     end
 
@@ -3504,6 +3537,12 @@ module Aws::Connect
 
     class EvaluationFormLanguageConfiguration
       attr_accessor form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "ms-MY")
+      SENSITIVE: []
+    end
+
+    class EvaluationFormMetricConfiguration
+      attr_accessor metric_type: ("BUSINESS_OUTCOME")
+      attr_accessor metric_name: ::String
       SENSITIVE: []
     end
 
@@ -3584,6 +3623,7 @@ module Aws::Connect
       attr_accessor enablement: Types::EvaluationFormItemEnablementConfiguration
       attr_accessor weight: ::Float
       attr_accessor scoring_configuration: Types::EvaluationFormQuestionScoringConfiguration
+      attr_accessor metric_configuration: Types::EvaluationFormMetricConfiguration
       SENSITIVE: []
     end
 
@@ -3666,6 +3706,7 @@ module Aws::Connect
       attr_accessor evaluation_form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "ms-MY")
       attr_accessor contact_interaction_type: ("AGENT" | "AUTOMATED" | "CUSTOMER")
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor ai_version: ::String
       SENSITIVE: []
     end
 
@@ -5123,6 +5164,20 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ListEvaluationFormAIVersionsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_interaction_type: ("AGENT" | "AUTOMATED" | "CUSTOMER")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEvaluationFormAIVersionsResponse
+      attr_accessor ai_version_summaries: ::Array[Types::EvaluationFormAIVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListEvaluationFormVersionsRequest
       attr_accessor instance_id: ::String
       attr_accessor evaluation_form_id: ::String
@@ -5532,6 +5587,22 @@ module Aws::Connect
     class ListSecurityKeysResponse
       attr_accessor security_keys: ::Array[Types::SecurityKey]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSecurityProfileAIAgentsRequest
+      attr_accessor security_profile_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSecurityProfileAIAgentsResponse
+      attr_accessor allowed_ai_agents: ::Array[Types::AIAgent]
+      attr_accessor next_token: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       SENSITIVE: []
     end
 
@@ -6871,6 +6942,7 @@ module Aws::Connect
       attr_accessor number: Types::NumberReference
       attr_accessor date: Types::DateReference
       attr_accessor email: Types::EmailReference
+      attr_accessor contact_analysis: Types::ContactAnalysisReference
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -6893,6 +6965,8 @@ module Aws::Connect
       class Date < ReferenceSummary
       end
       class Email < ReferenceSummary
+      end
+      class ContactAnalysis < ReferenceSummary
       end
       class Unknown < ReferenceSummary
       end
@@ -8877,6 +8951,7 @@ module Aws::Connect
       attr_accessor client_token: ::String
       attr_accessor target_configuration: Types::EvaluationFormTargetConfiguration
       attr_accessor language_configuration: Types::EvaluationFormLanguageConfiguration
+      attr_accessor ai_version: ::String
       SENSITIVE: []
     end
 
@@ -9168,6 +9243,7 @@ module Aws::Connect
       attr_accessor hierarchy_restricted_resources: ::Array[::String]
       attr_accessor allowed_access_control_hierarchy_group_id: ::String
       attr_accessor allowed_flow_modules: ::Array[Types::FlowModule]
+      attr_accessor allowed_ai_agents: ::Array[Types::AIAgent]
       attr_accessor granular_access_control_configuration: Types::GranularAccessControlConfiguration
       SENSITIVE: []
     end

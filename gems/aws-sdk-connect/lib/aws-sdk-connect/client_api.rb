@@ -18,6 +18,8 @@ module Aws::Connect
     ACGRInstanceIdOrArn = Shapes::StringShape.new(name: 'ACGRInstanceIdOrArn')
     ACGRTrafficDistributionGroupArn = Shapes::StringShape.new(name: 'ACGRTrafficDistributionGroupArn')
     ACGRTrafficDistributionGroupId = Shapes::StringShape.new(name: 'ACGRTrafficDistributionGroupId')
+    AIAgent = Shapes::StructureShape.new(name: 'AIAgent')
+    AIAgentType = Shapes::StringShape.new(name: 'AIAgentType')
     ARN = Shapes::StringShape.new(name: 'ARN')
     AWSAccountId = Shapes::StringShape.new(name: 'AWSAccountId')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
@@ -85,6 +87,7 @@ module Aws::Connect
     AliasArn = Shapes::StringShape.new(name: 'AliasArn')
     AliasConfiguration = Shapes::StructureShape.new(name: 'AliasConfiguration')
     AliasConfigurationList = Shapes::ListShape.new(name: 'AliasConfigurationList')
+    AllowedAIAgents = Shapes::ListShape.new(name: 'AllowedAIAgents')
     AllowedAccessControlTags = Shapes::MapShape.new(name: 'AllowedAccessControlTags')
     AllowedCapabilities = Shapes::StructureShape.new(name: 'AllowedCapabilities')
     AllowedExtension = Shapes::StructureShape.new(name: 'AllowedExtension')
@@ -287,6 +290,7 @@ module Aws::Connect
     ConnectionData = Shapes::StructureShape.new(name: 'ConnectionData')
     Contact = Shapes::StructureShape.new(name: 'Contact')
     ContactAnalysis = Shapes::StructureShape.new(name: 'ContactAnalysis')
+    ContactAnalysisReference = Shapes::StructureShape.new(name: 'ContactAnalysisReference')
     ContactConfiguration = Shapes::StructureShape.new(name: 'ContactConfiguration')
     ContactDataRequest = Shapes::StructureShape.new(name: 'ContactDataRequest')
     ContactDataRequestList = Shapes::ListShape.new(name: 'ContactDataRequestList')
@@ -794,6 +798,11 @@ module Aws::Connect
     EvaluationContactLensAnswerAnalysisDetails = Shapes::StructureShape.new(name: 'EvaluationContactLensAnswerAnalysisDetails')
     EvaluationContactParticipant = Shapes::StructureShape.new(name: 'EvaluationContactParticipant')
     EvaluationForm = Shapes::StructureShape.new(name: 'EvaluationForm')
+    EvaluationFormAIVersion = Shapes::StringShape.new(name: 'EvaluationFormAIVersion')
+    EvaluationFormAIVersionLifecycle = Shapes::StructureShape.new(name: 'EvaluationFormAIVersionLifecycle')
+    EvaluationFormAIVersionStatus = Shapes::StringShape.new(name: 'EvaluationFormAIVersionStatus')
+    EvaluationFormAIVersionSummary = Shapes::StructureShape.new(name: 'EvaluationFormAIVersionSummary')
+    EvaluationFormAIVersionSummaryList = Shapes::ListShape.new(name: 'EvaluationFormAIVersionSummaryList')
     EvaluationFormAutoEvaluationConfiguration = Shapes::StructureShape.new(name: 'EvaluationFormAutoEvaluationConfiguration')
     EvaluationFormContent = Shapes::StructureShape.new(name: 'EvaluationFormContent')
     EvaluationFormDescription = Shapes::StringShape.new(name: 'EvaluationFormDescription')
@@ -816,6 +825,9 @@ module Aws::Connect
     EvaluationFormItemsList = Shapes::ListShape.new(name: 'EvaluationFormItemsList')
     EvaluationFormLanguageCode = Shapes::StringShape.new(name: 'EvaluationFormLanguageCode')
     EvaluationFormLanguageConfiguration = Shapes::StructureShape.new(name: 'EvaluationFormLanguageConfiguration')
+    EvaluationFormMetricConfiguration = Shapes::StructureShape.new(name: 'EvaluationFormMetricConfiguration')
+    EvaluationFormMetricName = Shapes::StringShape.new(name: 'EvaluationFormMetricName')
+    EvaluationFormMetricType = Shapes::StringShape.new(name: 'EvaluationFormMetricType')
     EvaluationFormMultiSelectQuestionAutomation = Shapes::StructureShape.new(name: 'EvaluationFormMultiSelectQuestionAutomation')
     EvaluationFormMultiSelectQuestionAutomationOption = Shapes::UnionShape.new(name: 'EvaluationFormMultiSelectQuestionAutomationOption')
     EvaluationFormMultiSelectQuestionAutomationOptionList = Shapes::ListShape.new(name: 'EvaluationFormMultiSelectQuestionAutomationOptionList')
@@ -1197,6 +1209,8 @@ module Aws::Connect
     ListDefaultVocabulariesResponse = Shapes::StructureShape.new(name: 'ListDefaultVocabulariesResponse')
     ListEntitySecurityProfilesRequest = Shapes::StructureShape.new(name: 'ListEntitySecurityProfilesRequest')
     ListEntitySecurityProfilesResponse = Shapes::StructureShape.new(name: 'ListEntitySecurityProfilesResponse')
+    ListEvaluationFormAIVersionsRequest = Shapes::StructureShape.new(name: 'ListEvaluationFormAIVersionsRequest')
+    ListEvaluationFormAIVersionsResponse = Shapes::StructureShape.new(name: 'ListEvaluationFormAIVersionsResponse')
     ListEvaluationFormVersionsRequest = Shapes::StructureShape.new(name: 'ListEvaluationFormVersionsRequest')
     ListEvaluationFormVersionsResponse = Shapes::StructureShape.new(name: 'ListEvaluationFormVersionsResponse')
     ListEvaluationFormsRequest = Shapes::StructureShape.new(name: 'ListEvaluationFormsRequest')
@@ -1256,6 +1270,8 @@ module Aws::Connect
     ListRulesResponse = Shapes::StructureShape.new(name: 'ListRulesResponse')
     ListSecurityKeysRequest = Shapes::StructureShape.new(name: 'ListSecurityKeysRequest')
     ListSecurityKeysResponse = Shapes::StructureShape.new(name: 'ListSecurityKeysResponse')
+    ListSecurityProfileAIAgentsRequest = Shapes::StructureShape.new(name: 'ListSecurityProfileAIAgentsRequest')
+    ListSecurityProfileAIAgentsResponse = Shapes::StructureShape.new(name: 'ListSecurityProfileAIAgentsResponse')
     ListSecurityProfileApplicationsRequest = Shapes::StructureShape.new(name: 'ListSecurityProfileApplicationsRequest')
     ListSecurityProfileApplicationsResponse = Shapes::StructureShape.new(name: 'ListSecurityProfileApplicationsResponse')
     ListSecurityProfileFlowModulesRequest = Shapes::StructureShape.new(name: 'ListSecurityProfileFlowModulesRequest')
@@ -2362,6 +2378,10 @@ module Aws::Connect
     resourceArnListMaxLimit100 = Shapes::ListShape.new(name: 'resourceArnListMaxLimit100')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
 
+    AIAgent.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    AIAgent.add_member(:type, Shapes::ShapeRef.new(shape: AIAgentType, location_name: "Type"))
+    AIAgent.struct_class = Types::AIAgent
+
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
@@ -2524,6 +2544,8 @@ module Aws::Connect
     AliasConfiguration.struct_class = Types::AliasConfiguration
 
     AliasConfigurationList.member = Shapes::ShapeRef.new(shape: AliasConfiguration)
+
+    AllowedAIAgents.member = Shapes::ShapeRef.new(shape: AIAgent)
 
     AllowedAccessControlTags.key = Shapes::ShapeRef.new(shape: SecurityProfilePolicyKey)
     AllowedAccessControlTags.value = Shapes::ShapeRef.new(shape: SecurityProfilePolicyValue)
@@ -3190,6 +3212,14 @@ module Aws::Connect
     ContactAnalysis.add_member(:transcript, Shapes::ShapeRef.new(shape: Transcript, location_name: "Transcript"))
     ContactAnalysis.struct_class = Types::ContactAnalysis
 
+    ContactAnalysisReference.add_member(:name, Shapes::ShapeRef.new(shape: ReferenceKey, location_name: "Name"))
+    ContactAnalysisReference.add_member(:value, Shapes::ShapeRef.new(shape: ReferenceValue, location_name: "Value"))
+    ContactAnalysisReference.add_member(:status, Shapes::ShapeRef.new(shape: ReferenceStatus, location_name: "Status"))
+    ContactAnalysisReference.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    ContactAnalysisReference.add_member(:analytics_mode, Shapes::ShapeRef.new(shape: AnalyticsMode, location_name: "AnalyticsMode"))
+    ContactAnalysisReference.add_member(:is_redacted, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsRedacted"))
+    ContactAnalysisReference.struct_class = Types::ContactAnalysisReference
+
     ContactConfiguration.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
     ContactConfiguration.add_member(:participant_role, Shapes::ShapeRef.new(shape: ParticipantRole, location_name: "ParticipantRole"))
     ContactConfiguration.add_member(:include_raw_message, Shapes::ShapeRef.new(shape: IncludeRawMessage, location_name: "IncludeRawMessage"))
@@ -3653,6 +3683,7 @@ module Aws::Connect
     CreateEvaluationFormRequest.add_member(:review_configuration, Shapes::ShapeRef.new(shape: EvaluationReviewConfiguration, location_name: "ReviewConfiguration"))
     CreateEvaluationFormRequest.add_member(:target_configuration, Shapes::ShapeRef.new(shape: EvaluationFormTargetConfiguration, location_name: "TargetConfiguration"))
     CreateEvaluationFormRequest.add_member(:language_configuration, Shapes::ShapeRef.new(shape: EvaluationFormLanguageConfiguration, location_name: "LanguageConfiguration"))
+    CreateEvaluationFormRequest.add_member(:ai_version, Shapes::ShapeRef.new(shape: EvaluationFormAIVersion, location_name: "AIVersion"))
     CreateEvaluationFormRequest.struct_class = Types::CreateEvaluationFormRequest
 
     CreateEvaluationFormResponse.add_member(:evaluation_form_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "EvaluationFormId"))
@@ -3870,6 +3901,7 @@ module Aws::Connect
     CreateSecurityProfileRequest.add_member(:hierarchy_restricted_resources, Shapes::ShapeRef.new(shape: HierarchyRestrictedResourceList, location_name: "HierarchyRestrictedResources"))
     CreateSecurityProfileRequest.add_member(:allowed_access_control_hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "AllowedAccessControlHierarchyGroupId"))
     CreateSecurityProfileRequest.add_member(:allowed_flow_modules, Shapes::ShapeRef.new(shape: AllowedFlowModules, location_name: "AllowedFlowModules"))
+    CreateSecurityProfileRequest.add_member(:allowed_ai_agents, Shapes::ShapeRef.new(shape: AllowedAIAgents, location_name: "AllowedAIAgents"))
     CreateSecurityProfileRequest.add_member(:granular_access_control_configuration, Shapes::ShapeRef.new(shape: GranularAccessControlConfiguration, location_name: "GranularAccessControlConfiguration"))
     CreateSecurityProfileRequest.struct_class = Types::CreateSecurityProfileRequest
 
@@ -5069,7 +5101,19 @@ module Aws::Connect
     EvaluationForm.add_member(:language_configuration, Shapes::ShapeRef.new(shape: EvaluationFormLanguageConfiguration, location_name: "LanguageConfiguration"))
     EvaluationForm.add_member(:latest_validation_status, Shapes::ShapeRef.new(shape: EvaluationFormValidationStatus, location_name: "LatestValidationStatus"))
     EvaluationForm.add_member(:last_validation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastValidationTime"))
+    EvaluationForm.add_member(:ai_version, Shapes::ShapeRef.new(shape: EvaluationFormAIVersion, location_name: "AIVersion"))
     EvaluationForm.struct_class = Types::EvaluationForm
+
+    EvaluationFormAIVersionLifecycle.add_member(:status, Shapes::ShapeRef.new(shape: EvaluationFormAIVersionStatus, required: true, location_name: "Status"))
+    EvaluationFormAIVersionLifecycle.add_member(:start_of_life_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartOfLifeTime"))
+    EvaluationFormAIVersionLifecycle.add_member(:end_of_life_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndOfLifeTime"))
+    EvaluationFormAIVersionLifecycle.struct_class = Types::EvaluationFormAIVersionLifecycle
+
+    EvaluationFormAIVersionSummary.add_member(:ai_version_name, Shapes::ShapeRef.new(shape: EvaluationFormAIVersion, required: true, location_name: "AIVersionName"))
+    EvaluationFormAIVersionSummary.add_member(:ai_version_lifecycle, Shapes::ShapeRef.new(shape: EvaluationFormAIVersionLifecycle, required: true, location_name: "AIVersionLifecycle"))
+    EvaluationFormAIVersionSummary.struct_class = Types::EvaluationFormAIVersionSummary
+
+    EvaluationFormAIVersionSummaryList.member = Shapes::ShapeRef.new(shape: EvaluationFormAIVersionSummary)
 
     EvaluationFormAutoEvaluationConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
     EvaluationFormAutoEvaluationConfiguration.struct_class = Types::EvaluationFormAutoEvaluationConfiguration
@@ -5085,6 +5129,7 @@ module Aws::Connect
     EvaluationFormContent.add_member(:target_configuration, Shapes::ShapeRef.new(shape: EvaluationFormTargetConfiguration, location_name: "TargetConfiguration"))
     EvaluationFormContent.add_member(:language_configuration, Shapes::ShapeRef.new(shape: EvaluationFormLanguageConfiguration, location_name: "LanguageConfiguration"))
     EvaluationFormContent.add_member(:review_configuration, Shapes::ShapeRef.new(shape: EvaluationReviewConfiguration, location_name: "ReviewConfiguration"))
+    EvaluationFormContent.add_member(:ai_version, Shapes::ShapeRef.new(shape: EvaluationFormAIVersion, location_name: "AIVersion"))
     EvaluationFormContent.struct_class = Types::EvaluationFormContent
 
     EvaluationFormItem.add_member(:section, Shapes::ShapeRef.new(shape: EvaluationFormSection, location_name: "Section"))
@@ -5133,6 +5178,10 @@ module Aws::Connect
 
     EvaluationFormLanguageConfiguration.add_member(:form_language, Shapes::ShapeRef.new(shape: EvaluationFormLanguageCode, location_name: "FormLanguage"))
     EvaluationFormLanguageConfiguration.struct_class = Types::EvaluationFormLanguageConfiguration
+
+    EvaluationFormMetricConfiguration.add_member(:metric_type, Shapes::ShapeRef.new(shape: EvaluationFormMetricType, required: true, location_name: "MetricType"))
+    EvaluationFormMetricConfiguration.add_member(:metric_name, Shapes::ShapeRef.new(shape: EvaluationFormMetricName, required: true, location_name: "MetricName"))
+    EvaluationFormMetricConfiguration.struct_class = Types::EvaluationFormMetricConfiguration
 
     EvaluationFormMultiSelectQuestionAutomation.add_member(:options, Shapes::ShapeRef.new(shape: EvaluationFormMultiSelectQuestionAutomationOptionList, location_name: "Options"))
     EvaluationFormMultiSelectQuestionAutomation.add_member(:default_option_ref_ids, Shapes::ShapeRef.new(shape: ReferenceIdList, location_name: "DefaultOptionRefIds"))
@@ -5195,6 +5244,7 @@ module Aws::Connect
     EvaluationFormQuestion.add_member(:enablement, Shapes::ShapeRef.new(shape: EvaluationFormItemEnablementConfiguration, location_name: "Enablement"))
     EvaluationFormQuestion.add_member(:weight, Shapes::ShapeRef.new(shape: EvaluationFormItemWeight, location_name: "Weight"))
     EvaluationFormQuestion.add_member(:scoring_configuration, Shapes::ShapeRef.new(shape: EvaluationFormQuestionScoringConfiguration, location_name: "ScoringConfiguration"))
+    EvaluationFormQuestion.add_member(:metric_configuration, Shapes::ShapeRef.new(shape: EvaluationFormMetricConfiguration, location_name: "MetricConfiguration"))
     EvaluationFormQuestion.struct_class = Types::EvaluationFormQuestion
 
     EvaluationFormQuestionAutomationAnswerSource.add_member(:source_type, Shapes::ShapeRef.new(shape: EvaluationFormQuestionAutomationAnswerSourceType, required: true, location_name: "SourceType"))
@@ -5259,6 +5309,7 @@ module Aws::Connect
     EvaluationFormSearchSummary.add_member(:evaluation_form_language, Shapes::ShapeRef.new(shape: EvaluationFormLanguageCode, location_name: "EvaluationFormLanguage"))
     EvaluationFormSearchSummary.add_member(:contact_interaction_type, Shapes::ShapeRef.new(shape: ContactInteractionType, location_name: "ContactInteractionType"))
     EvaluationFormSearchSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    EvaluationFormSearchSummary.add_member(:ai_version, Shapes::ShapeRef.new(shape: EvaluationFormAIVersion, location_name: "AIVersion"))
     EvaluationFormSearchSummary.struct_class = Types::EvaluationFormSearchSummary
 
     EvaluationFormSearchSummaryList.member = Shapes::ShapeRef.new(shape: EvaluationFormSearchSummary)
@@ -6425,6 +6476,16 @@ module Aws::Connect
     ListEntitySecurityProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
     ListEntitySecurityProfilesResponse.struct_class = Types::ListEntitySecurityProfilesResponse
 
+    ListEvaluationFormAIVersionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListEvaluationFormAIVersionsRequest.add_member(:contact_interaction_type, Shapes::ShapeRef.new(shape: ContactInteractionType, required: true, location: "querystring", location_name: "contactInteractionType"))
+    ListEvaluationFormAIVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
+    ListEvaluationFormAIVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListEvaluationFormAIVersionsRequest.struct_class = Types::ListEvaluationFormAIVersionsRequest
+
+    ListEvaluationFormAIVersionsResponse.add_member(:ai_version_summaries, Shapes::ShapeRef.new(shape: EvaluationFormAIVersionSummaryList, required: true, location_name: "AIVersionSummaries"))
+    ListEvaluationFormAIVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListEvaluationFormAIVersionsResponse.struct_class = Types::ListEvaluationFormAIVersionsResponse
+
     ListEvaluationFormVersionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListEvaluationFormVersionsRequest.add_member(:evaluation_form_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "EvaluationFormId"))
     ListEvaluationFormVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
@@ -6724,6 +6785,18 @@ module Aws::Connect
     ListSecurityKeysResponse.add_member(:security_keys, Shapes::ShapeRef.new(shape: SecurityKeysList, location_name: "SecurityKeys"))
     ListSecurityKeysResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListSecurityKeysResponse.struct_class = Types::ListSecurityKeysResponse
+
+    ListSecurityProfileAIAgentsRequest.add_member(:security_profile_id, Shapes::ShapeRef.new(shape: SecurityProfileId, required: true, location: "uri", location_name: "SecurityProfileId"))
+    ListSecurityProfileAIAgentsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListSecurityProfileAIAgentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListSecurityProfileAIAgentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult1000, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
+    ListSecurityProfileAIAgentsRequest.struct_class = Types::ListSecurityProfileAIAgentsRequest
+
+    ListSecurityProfileAIAgentsResponse.add_member(:allowed_ai_agents, Shapes::ShapeRef.new(shape: AllowedAIAgents, location_name: "AllowedAIAgents"))
+    ListSecurityProfileAIAgentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSecurityProfileAIAgentsResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    ListSecurityProfileAIAgentsResponse.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
+    ListSecurityProfileAIAgentsResponse.struct_class = Types::ListSecurityProfileAIAgentsResponse
 
     ListSecurityProfileApplicationsRequest.add_member(:security_profile_id, Shapes::ShapeRef.new(shape: SecurityProfileId, required: true, location: "uri", location_name: "SecurityProfileId"))
     ListSecurityProfileApplicationsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -7841,6 +7914,7 @@ module Aws::Connect
     ReferenceSummary.add_member(:number, Shapes::ShapeRef.new(shape: NumberReference, location_name: "Number"))
     ReferenceSummary.add_member(:date, Shapes::ShapeRef.new(shape: DateReference, location_name: "Date"))
     ReferenceSummary.add_member(:email, Shapes::ShapeRef.new(shape: EmailReference, location_name: "Email"))
+    ReferenceSummary.add_member(:contact_analysis, Shapes::ShapeRef.new(shape: ContactAnalysisReference, location_name: "ContactAnalysis"))
     ReferenceSummary.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ReferenceSummary.add_member_subclass(:url, Types::ReferenceSummary::Url)
     ReferenceSummary.add_member_subclass(:attachment, Types::ReferenceSummary::Attachment)
@@ -7852,6 +7926,7 @@ module Aws::Connect
     ReferenceSummary.add_member_subclass(:number, Types::ReferenceSummary::Number)
     ReferenceSummary.add_member_subclass(:date, Types::ReferenceSummary::Date)
     ReferenceSummary.add_member_subclass(:email, Types::ReferenceSummary::Email)
+    ReferenceSummary.add_member_subclass(:contact_analysis, Types::ReferenceSummary::ContactAnalysis)
     ReferenceSummary.add_member_subclass(:unknown, Types::ReferenceSummary::Unknown)
     ReferenceSummary.struct_class = Types::ReferenceSummary
 
@@ -7866,7 +7941,7 @@ module Aws::Connect
     ReplicateInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ACGRInstanceIdOrArn, required: true, location: "uri", location_name: "InstanceId"))
     ReplicateInstanceRequest.add_member(:replica_region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "ReplicaRegion"))
     ReplicateInstanceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
-    ReplicateInstanceRequest.add_member(:replica_alias, Shapes::ShapeRef.new(shape: DirectoryAlias, required: true, location_name: "ReplicaAlias"))
+    ReplicateInstanceRequest.add_member(:replica_alias, Shapes::ShapeRef.new(shape: DirectoryAlias, location_name: "ReplicaAlias"))
     ReplicateInstanceRequest.struct_class = Types::ReplicateInstanceRequest
 
     ReplicateInstanceResponse.add_member(:id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "Id"))
@@ -9470,6 +9545,7 @@ module Aws::Connect
     UpdateEvaluationFormRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     UpdateEvaluationFormRequest.add_member(:target_configuration, Shapes::ShapeRef.new(shape: EvaluationFormTargetConfiguration, location_name: "TargetConfiguration"))
     UpdateEvaluationFormRequest.add_member(:language_configuration, Shapes::ShapeRef.new(shape: EvaluationFormLanguageConfiguration, location_name: "LanguageConfiguration"))
+    UpdateEvaluationFormRequest.add_member(:ai_version, Shapes::ShapeRef.new(shape: EvaluationFormAIVersion, location_name: "AIVersion"))
     UpdateEvaluationFormRequest.struct_class = Types::UpdateEvaluationFormRequest
 
     UpdateEvaluationFormResponse.add_member(:evaluation_form_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "EvaluationFormId"))
@@ -9686,6 +9762,7 @@ module Aws::Connect
     UpdateSecurityProfileRequest.add_member(:hierarchy_restricted_resources, Shapes::ShapeRef.new(shape: HierarchyRestrictedResourceList, location_name: "HierarchyRestrictedResources"))
     UpdateSecurityProfileRequest.add_member(:allowed_access_control_hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "AllowedAccessControlHierarchyGroupId"))
     UpdateSecurityProfileRequest.add_member(:allowed_flow_modules, Shapes::ShapeRef.new(shape: AllowedFlowModules, location_name: "AllowedFlowModules"))
+    UpdateSecurityProfileRequest.add_member(:allowed_ai_agents, Shapes::ShapeRef.new(shape: AllowedAIAgents, location_name: "AllowedAIAgents"))
     UpdateSecurityProfileRequest.add_member(:granular_access_control_configuration, Shapes::ShapeRef.new(shape: GranularAccessControlConfiguration, location_name: "GranularAccessControlConfiguration"))
     UpdateSecurityProfileRequest.struct_class = Types::UpdateSecurityProfileRequest
 
@@ -13345,6 +13422,18 @@ module Aws::Connect
         )
       end)
 
+      api.add_operation(:list_evaluation_form_ai_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEvaluationFormAIVersions"
+        o.http_method = "GET"
+        o.http_request_uri = "/instances/{InstanceId}/evaluation-form-ai-versions"
+        o.input = Shapes::ShapeRef.new(shape: ListEvaluationFormAIVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListEvaluationFormAIVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:list_evaluation_form_versions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListEvaluationFormVersions"
         o.http_method = "GET"
@@ -13856,6 +13945,25 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_security_profile_ai_agents, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSecurityProfileAIAgents"
+        o.http_method = "GET"
+        o.http_request_uri = "/security-profiles-ai-agents/{InstanceId}/{SecurityProfileId}"
+        o.input = Shapes::ShapeRef.new(shape: ListSecurityProfileAIAgentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSecurityProfileAIAgentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

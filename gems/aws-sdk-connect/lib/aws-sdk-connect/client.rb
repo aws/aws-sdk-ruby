@@ -3505,6 +3505,10 @@ module Aws::Connect
     # @option params [Types::EvaluationFormLanguageConfiguration] :language_configuration
     #   Configuration for language settings of the evaluation form.
     #
+    # @option params [String] :ai_version
+    #   The AI version to use for the evaluation form. This specifies which AI
+    #   model version is used for automated evaluations.
+    #
     # @return [Types::CreateEvaluationFormResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEvaluationFormResponse#evaluation_form_id #evaluation_form_id} => String
@@ -3686,6 +3690,10 @@ module Aws::Connect
     #               },
     #             ],
     #           },
+    #           metric_configuration: {
+    #             metric_type: "BUSINESS_OUTCOME", # required, accepts BUSINESS_OUTCOME
+    #             metric_name: "EvaluationFormMetricName", # required
+    #           },
     #         },
     #       },
     #     ],
@@ -3725,6 +3733,7 @@ module Aws::Connect
     #     language_configuration: {
     #       form_language: "de-DE", # accepts de-DE, en-US, es-ES, fr-FR, it-IT, pt-BR, ja-JP, ko-KR, zh-CN, ms-MY
     #     },
+    #     ai_version: "EvaluationFormAIVersion",
     #   })
     #
     # @example Response structure
@@ -5361,6 +5370,9 @@ module Aws::Connect
     # @option params [Array<Types::FlowModule>] :allowed_flow_modules
     #   A list of Flow Modules an AI Agent can invoke as a tool.
     #
+    # @option params [Array<Types::AIAgent>] :allowed_ai_agents
+    #   A list of AI agents that the security profile will give access to.
+    #
     # @option params [Types::GranularAccessControlConfiguration] :granular_access_control_configuration
     #   The granular access control configuration for the security profile,
     #   including data table permissions.
@@ -5397,6 +5409,12 @@ module Aws::Connect
     #       {
     #         type: "MCP", # accepts MCP
     #         flow_module_id: "FlowModuleId",
+    #       },
+    #     ],
+    #     allowed_ai_agents: [
+    #       {
+    #         arn: "ARN",
+    #         type: "THIRD_PARTY", # accepts THIRD_PARTY
     #       },
     #     ],
     #     granular_access_control_configuration: {
@@ -8540,6 +8558,8 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.scoring_configuration.score_thresholds[0].performance_category #=> String, one of "NEEDS_IMPROVEMENT", "EXCEEDS_EXPECTATIONS"
     #   resp.evaluation_form.items[0].question.scoring_configuration.score_thresholds[0].min_score_percentage #=> Float
     #   resp.evaluation_form.items[0].question.scoring_configuration.score_thresholds[0].max_score_percentage #=> Float
+    #   resp.evaluation_form.items[0].question.metric_configuration.metric_type #=> String, one of "BUSINESS_OUTCOME"
+    #   resp.evaluation_form.items[0].question.metric_configuration.metric_name #=> String
     #   resp.evaluation_form.scoring_strategy.mode #=> String, one of "QUESTION_ONLY", "SECTION_ONLY", "POINTS_BASED"
     #   resp.evaluation_form.scoring_strategy.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.evaluation_form.scoring_strategy.score_thresholds #=> Array
@@ -8553,6 +8573,7 @@ module Aws::Connect
     #   resp.evaluation_form.review_configuration.review_notification_recipients[0].type #=> String, one of "USER_ID"
     #   resp.evaluation_form.review_configuration.review_notification_recipients[0].value.user_id #=> String
     #   resp.evaluation_form.review_configuration.eligibility_days #=> Integer
+    #   resp.evaluation_form.ai_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactEvaluation AWS API Documentation
     #
@@ -9029,6 +9050,8 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.scoring_configuration.score_thresholds[0].performance_category #=> String, one of "NEEDS_IMPROVEMENT", "EXCEEDS_EXPECTATIONS"
     #   resp.evaluation_form.items[0].question.scoring_configuration.score_thresholds[0].min_score_percentage #=> Float
     #   resp.evaluation_form.items[0].question.scoring_configuration.score_thresholds[0].max_score_percentage #=> Float
+    #   resp.evaluation_form.items[0].question.metric_configuration.metric_type #=> String, one of "BUSINESS_OUTCOME"
+    #   resp.evaluation_form.items[0].question.metric_configuration.metric_name #=> String
     #   resp.evaluation_form.scoring_strategy.mode #=> String, one of "QUESTION_ONLY", "SECTION_ONLY", "POINTS_BASED"
     #   resp.evaluation_form.scoring_strategy.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.evaluation_form.scoring_strategy.score_thresholds #=> Array
@@ -9050,6 +9073,7 @@ module Aws::Connect
     #   resp.evaluation_form.language_configuration.form_language #=> String, one of "de-DE", "en-US", "es-ES", "fr-FR", "it-IT", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "ms-MY"
     #   resp.evaluation_form.latest_validation_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.evaluation_form.last_validation_time #=> Time
+    #   resp.evaluation_form.ai_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeEvaluationForm AWS API Documentation
     #
@@ -16544,6 +16568,12 @@ module Aws::Connect
     #   resp.reference_summary_list[0].date.value #=> String
     #   resp.reference_summary_list[0].email.name #=> String
     #   resp.reference_summary_list[0].email.value #=> String
+    #   resp.reference_summary_list[0].contact_analysis.name #=> String
+    #   resp.reference_summary_list[0].contact_analysis.value #=> String
+    #   resp.reference_summary_list[0].contact_analysis.status #=> String, one of "AVAILABLE", "DELETED", "APPROVED", "REJECTED", "PROCESSING", "FAILED"
+    #   resp.reference_summary_list[0].contact_analysis.arn #=> String
+    #   resp.reference_summary_list[0].contact_analysis.analytics_mode #=> String, one of "PostContact", "RealTime", "ContactLens", "AutomatedInteraction"
+    #   resp.reference_summary_list[0].contact_analysis.is_redacted #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactReferences AWS API Documentation
@@ -16949,6 +16979,60 @@ module Aws::Connect
     # @param [Hash] params ({})
     def list_entity_security_profiles(params = {}, options = {})
       req = build_request(:list_entity_security_profiles, params)
+      req.send_request(options)
+    end
+
+    # Lists the available AI versions for evaluation forms in the specified
+    # Connect Customer instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :contact_interaction_type
+    #   The contact interaction type for the evaluation form.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::ListEvaluationFormAIVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEvaluationFormAIVersionsResponse#ai_version_summaries #ai_version_summaries} => Array&lt;Types::EvaluationFormAIVersionSummary&gt;
+    #   * {Types::ListEvaluationFormAIVersionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_evaluation_form_ai_versions({
+    #     instance_id: "InstanceId", # required
+    #     contact_interaction_type: "AGENT", # required, accepts AGENT, AUTOMATED, CUSTOMER
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ai_version_summaries #=> Array
+    #   resp.ai_version_summaries[0].ai_version_name #=> String
+    #   resp.ai_version_summaries[0].ai_version_lifecycle.status #=> String, one of "LATEST", "PREVIEW", "ACTIVE", "DEPRECATED"
+    #   resp.ai_version_summaries[0].ai_version_lifecycle.start_of_life_time #=> Time
+    #   resp.ai_version_summaries[0].ai_version_lifecycle.end_of_life_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListEvaluationFormAIVersions AWS API Documentation
+    #
+    # @overload list_evaluation_form_ai_versions(params = {})
+    # @param [Hash] params ({})
+    def list_evaluation_form_ai_versions(params = {}, options = {})
+      req = build_request(:list_evaluation_form_ai_versions, params)
       req.send_request(options)
     end
 
@@ -18824,6 +18908,64 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Returns a list of the allowed AI agents in a specific security
+    # profile.
+    #
+    # @option params [required, String] :security_profile_id
+    #   The identifier for the security profle.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListSecurityProfileAIAgentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSecurityProfileAIAgentsResponse#allowed_ai_agents #allowed_ai_agents} => Array&lt;Types::AIAgent&gt;
+    #   * {Types::ListSecurityProfileAIAgentsResponse#next_token #next_token} => String
+    #   * {Types::ListSecurityProfileAIAgentsResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::ListSecurityProfileAIAgentsResponse#last_modified_region #last_modified_region} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_security_profile_ai_agents({
+    #     security_profile_id: "SecurityProfileId", # required
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.allowed_ai_agents #=> Array
+    #   resp.allowed_ai_agents[0].arn #=> String
+    #   resp.allowed_ai_agents[0].type #=> String, one of "THIRD_PARTY"
+    #   resp.next_token #=> String
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfileAIAgents AWS API Documentation
+    #
+    # @overload list_security_profile_ai_agents(params = {})
+    # @param [Hash] params ({})
+    def list_security_profile_ai_agents(params = {}, options = {})
+      req = build_request(:list_security_profile_ai_agents, params)
+      req.send_request(options)
+    end
+
     # Returns a list of third-party applications or MCP Servers in a
     # specific security profile.
     #
@@ -20244,7 +20386,7 @@ module Aws::Connect
     #
     #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
-    # @option params [required, String] :replica_alias
+    # @option params [String] :replica_alias
     #   The alias for the replicated instance. The `ReplicaAlias` must be
     #   unique.
     #
@@ -20259,7 +20401,7 @@ module Aws::Connect
     #     instance_id: "ACGRInstanceIdOrArn", # required
     #     replica_region: "AwsRegion", # required
     #     client_token: "ClientToken",
-    #     replica_alias: "DirectoryAlias", # required
+    #     replica_alias: "DirectoryAlias",
     #   })
     #
     # @example Response structure
@@ -21606,6 +21748,7 @@ module Aws::Connect
     #   resp.evaluation_form_search_summary_list[0].contact_interaction_type #=> String, one of "AGENT", "AUTOMATED", "CUSTOMER"
     #   resp.evaluation_form_search_summary_list[0].tags #=> Hash
     #   resp.evaluation_form_search_summary_list[0].tags["TagKey"] #=> String
+    #   resp.evaluation_form_search_summary_list[0].ai_version #=> String
     #   resp.next_token #=> String
     #   resp.approximate_total_count #=> Integer
     #
@@ -24760,11 +24903,6 @@ module Aws::Connect
     # evaluation form version used for the contact evaluation corresponds to
     # the currently activated version. If no version is activated for the
     # evaluation form, the contact evaluation cannot be started.
-    #
-    # <note markdown="1"> Evaluations created through the public API do not contain answer
-    # values suggested from automation.
-    #
-    #  </note>
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Connect Customer instance. You can [find the
@@ -28286,6 +28424,10 @@ module Aws::Connect
     # @option params [Types::EvaluationFormLanguageConfiguration] :language_configuration
     #   Configuration for language settings of the evaluation form.
     #
+    # @option params [String] :ai_version
+    #   The AI version to use for the evaluation form. This specifies which AI
+    #   model version is used for automated evaluations.
+    #
     # @return [Types::UpdateEvaluationFormResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateEvaluationFormResponse#evaluation_form_id #evaluation_form_id} => String
@@ -28471,6 +28613,10 @@ module Aws::Connect
     #               },
     #             ],
     #           },
+    #           metric_configuration: {
+    #             metric_type: "BUSINESS_OUTCOME", # required, accepts BUSINESS_OUTCOME
+    #             metric_name: "EvaluationFormMetricName", # required
+    #           },
     #         },
     #       },
     #     ],
@@ -28507,6 +28653,7 @@ module Aws::Connect
     #     language_configuration: {
     #       form_language: "de-DE", # accepts de-DE, en-US, es-ES, fr-FR, it-IT, pt-BR, ja-JP, ko-KR, zh-CN, ms-MY
     #     },
+    #     ai_version: "EvaluationFormAIVersion",
     #   })
     #
     # @example Response structure
@@ -30211,6 +30358,9 @@ module Aws::Connect
     # @option params [Array<Types::FlowModule>] :allowed_flow_modules
     #   A list of Flow Modules an AI Agent can invoke as a tool
     #
+    # @option params [Array<Types::AIAgent>] :allowed_ai_agents
+    #   A list of AI agents that the security profile will give access to.
+    #
     # @option params [Types::GranularAccessControlConfiguration] :granular_access_control_configuration
     #   The granular access control configuration for the security profile,
     #   including data table permissions.
@@ -30241,6 +30391,12 @@ module Aws::Connect
     #       {
     #         type: "MCP", # accepts MCP
     #         flow_module_id: "FlowModuleId",
+    #       },
+    #     ],
+    #     allowed_ai_agents: [
+    #       {
+    #         arn: "ARN",
+    #         type: "THIRD_PARTY", # accepts THIRD_PARTY
     #       },
     #     ],
     #     granular_access_control_configuration: {
@@ -31462,7 +31618,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.276.0'
+      context[:gem_version] = '1.281.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

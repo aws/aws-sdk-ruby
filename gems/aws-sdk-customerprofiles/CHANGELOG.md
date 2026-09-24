@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2026-09-16)
+------------------
+
+* Feature - This release introduces the SearchRecommendations API, which retrieves recommendations for a profile identified by a search key.
+
+1.95.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.94.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.93.0 (2026-08-31)
 ------------------
 

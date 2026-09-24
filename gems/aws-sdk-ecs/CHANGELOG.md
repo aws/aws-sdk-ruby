@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.247.0 (2026-09-11)
+------------------
+
+* Feature - This feature adds support for setting the cpu architecture type that should be used to launch tasks for an Express Gateway Service.
+
+1.246.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.245.0 (2026-09-03)
 ------------------
 

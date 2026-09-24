@@ -351,8 +351,20 @@ module Aws::SNS
     #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
     #     failed deliveries to HTTP/S endpoints.
     #
-    #   * `DisplayName` – The display name to use for a topic with SMS
-    #     subscriptions.
+    #   * `DisplayName` – The display name to use for a topic with SMS,
+    #     `email`, and `email-json` subscriptions. For `email` and
+    #     `email-json` subscriptions, the display name is used as the sender
+    #     name for regular notification messages. Subscription confirmation
+    #     and unsubscribe confirmation emails always use "Amazon Web
+    #     Services Notifications" as the sender name.
+    #
+    #   * `MaximumMessageSize` – The maximum size, in bytes, of a message
+    #     that can be published to the topic. Valid values are `1024` to
+    #     `1048576` (1 MiB). The default is `262144` (256 KiB).
+    #
+    #     A topic with a `MaximumMessageSize` above 256 KiB must have 100 or
+    #     fewer subscriptions, and each subscription must be an Amazon SQS,
+    #     Amazon Data Firehose, or Lambda subscription.
     #
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the
@@ -523,6 +535,10 @@ module Aws::SNS
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] data_protection_policy
+    #   Amazon SNS message data protection is no longer available to new
+    #   customers. For more information and guidance on alternatives, see
+    #   [Amazon SNS message data protection availability change][1].
+    #
     #   The body of the policy document you want to use for this topic.
     #
     #   You can only add one policy per topic.
@@ -530,6 +546,10 @@ module Aws::SNS
     #   The policy must be in JSON string format.
     #
     #   Length Constraints: Maximum length of 30,720.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-message-data-protection-availability-change.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreateTopicInput AWS API Documentation
@@ -983,10 +1003,18 @@ module Aws::SNS
     #     policy.
     #
     #   * `DisplayName` – The human-readable name used in the `From` field
-    #     for notifications to `email` and `email-json` endpoints.
+    #     for notifications to `email` and `email-json` endpoints. For
+    #     subscription confirmation and unsubscribe confirmation emails, the
+    #     sender name is always "Amazon Web Services Notifications"
+    #     regardless of this attribute.
     #
     #   * `EffectiveDeliveryPolicy` – The JSON serialization of the
     #     effective delivery policy, taking system defaults into account.
+    #
+    #   * `MaximumMessageSize` – The maximum size, in bytes, of a message
+    #     that can be published to the topic. Amazon SNS returns this
+    #     attribute only if you explicitly set it. If Amazon SNS doesn't
+    #     return it, the topic uses the default of `262144` (256 KiB).
     #
     #   * `Owner` – The Amazon Web Services account ID of the topic's
     #     owner.
@@ -1595,15 +1623,18 @@ module Aws::SNS
     # Name, type, and value must not be empty or null. In addition, the
     # message body should not be empty or null. All parts of the message
     # attribute, including name, type, and value, are included in the
-    # message size restriction, which is currently 256 KB (262,144 bytes).
-    # For more information, see [Amazon SNS message attributes][2] and
-    # [Publishing to a mobile phone][3] in the *Amazon SNS Developer Guide.*
+    # message size restriction, which is 256 KiB (262,144 bytes) by default
+    # and is determined by the topic's `MaximumMessageSize` attribute. For
+    # more information, see [Large message payloads][2], [Amazon SNS message
+    # attributes][3] and [Publishing to a mobile phone][4] in the *Amazon
+    # SNS Developer Guide.*
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/sns/latest/api/API_Publish.html
-    # [2]: https://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html
-    # [3]: https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html
+    # [2]: https://docs.aws.amazon.com/sns/latest/dg/large-message-payloads.html
+    # [3]: https://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html
+    # [4]: https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html
     #
     # @!attribute [rw] data_type
     #   Amazon SNS supports the following logical data types: String,
@@ -2017,9 +2048,18 @@ module Aws::SNS
     #
     #   Constraints:
     #
-    #   * With the exception of SMS, messages must be UTF-8 encoded strings
-    #     and at most 256 KB in size (262,144 bytes, not 262,144
-    #     characters).
+    #   * With the exception of SMS, messages must be UTF-8 encoded strings.
+    #     By default, a message can be at most 256 KiB in size (262,144
+    #     bytes, not 262,144 characters).
+    #
+    #     When you publish to a topic, the maximum size is determined by the
+    #     topic's `MaximumMessageSize` attribute, which supports values up
+    #     to 1 MiB (1,048,576 bytes). Amazon SNS validates the combined size
+    #     of the message body and message attributes against this value and
+    #     returns an `InvalidParameter` error if the limit is exceeded.
+    #
+    #     For more information, see [Large message payloads][1] in the
+    #     *Amazon SNS Developer Guide.*
     #
     #   * For SMS, each message can contain up to 140 characters. This
     #     character limit depends on the encoding schema. For example, an
@@ -2060,6 +2100,10 @@ module Aws::SNS
     #
     #   * Failure to parse or validate any key or value in the message will
     #     cause the `Publish` call to return an error (no partial delivery).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/large-message-payloads.html
     #   @return [String]
     #
     # @!attribute [rw] subject
@@ -2632,8 +2676,26 @@ module Aws::SNS
     #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
     #     failed deliveries to HTTP/S endpoints.
     #
-    #   * `DisplayName` – The display name to use for a topic with SMS
-    #     subscriptions.
+    #   * `DisplayName` – The display name to use for a topic with SMS,
+    #     `email`, and `email-json` subscriptions. For `email` and
+    #     `email-json` subscriptions, the display name is used as the sender
+    #     name for regular notification messages. Subscription confirmation
+    #     and unsubscribe confirmation emails always use "Amazon Web
+    #     Services Notifications" as the sender name.
+    #
+    #   * `MaximumMessageSize` – The maximum size, in bytes, of a message
+    #     that can be published to the topic. Valid values are `1024` to
+    #     `1048576` (1 MiB). The default is `262144` (256 KiB).
+    #
+    #     A topic with a `MaximumMessageSize` above 256 KiB must have 100 or
+    #     fewer subscriptions, and each subscription must be an Amazon SQS,
+    #     Amazon Data Firehose, or Lambda subscription.
+    #
+    #     You can increase or decrease this value at any time. If the topic
+    #     doesn't meet these requirements when you set a value above 256
+    #     KiB, Amazon SNS returns an `InvalidParameter` error. For more
+    #     information, see [Large message payloads][1] in the *Amazon SNS
+    #     Developer Guide.*
     #
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the
@@ -2706,7 +2768,7 @@ module Aws::SNS
     #     sent to push notification services.
     #
     #      For example, For more information, see [Using Amazon SNS
-    #     Application Attributes for Message Delivery Status][1].
+    #     Application Attributes for Message Delivery Status][2].
     #
     #      </note>
     #
@@ -2735,11 +2797,11 @@ module Aws::SNS
     #
     #    </note>
     #
-    #   The following attribute applies only to [server-side-encryption][2]:
+    #   The following attribute applies only to [server-side-encryption][3]:
     #
     #   * `KmsMasterKeyId` – The ID of an Amazon Web Services managed
     #     customer master key (CMK) for Amazon SNS or a custom CMK. For more
-    #     information, see [Key Terms][3]. For more examples, see [KeyId][4]
+    #     information, see [Key Terms][4]. For more examples, see [KeyId][5]
     #     in the *Key Management Service API Reference*.
     #
     #   * `SignatureVersion` – The signature version corresponds to the
@@ -2748,7 +2810,7 @@ module Aws::SNS
     #     confirmation messages sent by Amazon SNS. By default,
     #     `SignatureVersion` is set to `1`.
     #
-    #   The following attribute applies only to [FIFO topics][5]:
+    #   The following attribute applies only to [FIFO topics][6]:
     #
     #   * `ArchivePolicy` – The policy that sets the retention period for
     #     messages stored in the message archive of an Amazon SNS FIFO
@@ -2760,7 +2822,7 @@ module Aws::SNS
     #     * By default, `ContentBasedDeduplication` is set to `false`. If
     #       you create a FIFO topic and this attribute is `false`, you must
     #       specify a value for the `MessageDeduplicationId` parameter for
-    #       the [Publish][6] action.
+    #       the [Publish][7] action.
     #
     #     * When you set `ContentBasedDeduplication` to `true`, Amazon SNS
     #       uses a SHA-256 hash to generate the `MessageDeduplicationId`
@@ -2784,18 +2846,19 @@ module Aws::SNS
     #     * `MessageGroup` – The scope of deduplication is within each
     #       individual message group, which enables higher throughput per
     #       topic subject to regional quotas. For more information on quotas
-    #       or to request an increase, see [Amazon SNS service quotas][7] in
+    #       or to request an increase, see [Amazon SNS service quotas][8] in
     #       the Amazon Web Services General Reference.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html
-    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
-    #   [3]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
-    #   [4]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
-    #   [5]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
-    #   [6]: https://docs.aws.amazon.com/sns/latest/api/API_Publish.html
-    #   [7]: https://docs.aws.amazon.com/general/latest/gr/sns.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/large-message-payloads.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html
+    #   [3]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
+    #   [4]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
+    #   [5]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
+    #   [6]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
+    #   [7]: https://docs.aws.amazon.com/sns/latest/api/API_Publish.html
+    #   [8]: https://docs.aws.amazon.com/general/latest/gr/sns.html
     #   @return [String]
     #
     # @!attribute [rw] attribute_value

@@ -878,12 +878,21 @@ module Aws::STS
     #
     #   `[{"ProviderArn":"arn:aws:iam::aws:contextProvider/IdentityCenter","ContextAssertion":"trusted-context-assertion"}]`
     #
+    # @option params [Integer] :minimum_session_token_size
+    #   The minimum size, in bytes, of the session token that STS issues for
+    #   the request. STS increases the session token to at least this size,
+    #   regardless of its actual content. The value must not exceed 4,096
+    #   bytes. When set to 0 or not specified, the session token size is
+    #   unchanged.
+    #
     # @return [Types::AssumeRoleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssumeRoleResponse#credentials #credentials} => Types::Credentials
     #   * {Types::AssumeRoleResponse#assumed_role_user #assumed_role_user} => Types::AssumedRoleUser
     #   * {Types::AssumeRoleResponse#packed_policy_size #packed_policy_size} => Integer
     #   * {Types::AssumeRoleResponse#source_identity #source_identity} => String
+    #   * {Types::AssumeRoleResponse#session_token_utilization #session_token_utilization} => Integer
+    #   * {Types::AssumeRoleResponse#session_token_size #session_token_size} => Integer
     #
     #
     # @example Example: To assume a role
@@ -957,6 +966,7 @@ module Aws::STS
     #         context_assertion: "contextAssertionType",
     #       },
     #     ],
+    #     minimum_session_token_size: 1,
     #   })
     #
     # @example Response structure
@@ -969,6 +979,8 @@ module Aws::STS
     #   resp.assumed_role_user.arn #=> String
     #   resp.packed_policy_size #=> Integer
     #   resp.source_identity #=> String
+    #   resp.session_token_utilization #=> Integer
+    #   resp.session_token_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRole AWS API Documentation
     #
@@ -1257,6 +1269,13 @@ module Aws::STS
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
     #
+    # @option params [Integer] :minimum_session_token_size
+    #   The minimum size, in bytes, of the session token that STS issues for
+    #   the request. STS increases the session token to at least this size,
+    #   regardless of its actual content. The value must not exceed 4,096
+    #   bytes. When set to 0 or not specified, the session token size is
+    #   unchanged.
+    #
     # @return [Types::AssumeRoleWithSAMLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssumeRoleWithSAMLResponse#credentials #credentials} => Types::Credentials
@@ -1268,6 +1287,8 @@ module Aws::STS
     #   * {Types::AssumeRoleWithSAMLResponse#audience #audience} => String
     #   * {Types::AssumeRoleWithSAMLResponse#name_qualifier #name_qualifier} => String
     #   * {Types::AssumeRoleWithSAMLResponse#source_identity #source_identity} => String
+    #   * {Types::AssumeRoleWithSAMLResponse#session_token_utilization #session_token_utilization} => Integer
+    #   * {Types::AssumeRoleWithSAMLResponse#session_token_size #session_token_size} => Integer
     #
     #
     # @example Example: To assume a role using a SAML assertion
@@ -1312,6 +1333,7 @@ module Aws::STS
     #     ],
     #     policy: "sessionPolicyDocumentType",
     #     duration_seconds: 1,
+    #     minimum_session_token_size: 1,
     #   })
     #
     # @example Response structure
@@ -1329,6 +1351,8 @@ module Aws::STS
     #   resp.audience #=> String
     #   resp.name_qualifier #=> String
     #   resp.source_identity #=> String
+    #   resp.session_token_utilization #=> Integer
+    #   resp.session_token_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithSAML AWS API Documentation
     #
@@ -1662,6 +1686,13 @@ module Aws::STS
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
     #
+    # @option params [Integer] :minimum_session_token_size
+    #   The minimum size, in bytes, of the session token that STS issues for
+    #   the request. STS increases the session token to at least this size,
+    #   regardless of its actual content. The value must not exceed 4,096
+    #   bytes. When set to 0 or not specified, the session token size is
+    #   unchanged.
+    #
     # @return [Types::AssumeRoleWithWebIdentityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssumeRoleWithWebIdentityResponse#credentials #credentials} => Types::Credentials
@@ -1671,6 +1702,8 @@ module Aws::STS
     #   * {Types::AssumeRoleWithWebIdentityResponse#provider #provider} => String
     #   * {Types::AssumeRoleWithWebIdentityResponse#audience #audience} => String
     #   * {Types::AssumeRoleWithWebIdentityResponse#source_identity #source_identity} => String
+    #   * {Types::AssumeRoleWithWebIdentityResponse#session_token_utilization #session_token_utilization} => Integer
+    #   * {Types::AssumeRoleWithWebIdentityResponse#session_token_size #session_token_size} => Integer
     #
     #
     # @example Example: To assume a role as an OpenID Connect-federated user
@@ -1716,6 +1749,7 @@ module Aws::STS
     #     ],
     #     policy: "sessionPolicyDocumentType",
     #     duration_seconds: 1,
+    #     minimum_session_token_size: 1,
     #   })
     #
     # @example Response structure
@@ -1731,6 +1765,8 @@ module Aws::STS
     #   resp.provider #=> String
     #   resp.audience #=> String
     #   resp.source_identity #=> String
+    #   resp.session_token_utilization #=> Integer
+    #   resp.session_token_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithWebIdentity AWS API Documentation
     #
@@ -1812,10 +1848,19 @@ module Aws::STS
     #
     #   By default, the value is set to `900` seconds.
     #
+    # @option params [Integer] :minimum_session_token_size
+    #   The minimum size, in bytes, of the session token that STS issues for
+    #   the request. STS increases the session token to at least this size,
+    #   regardless of its actual content. The value must not exceed 4,096
+    #   bytes. When set to 0 or not specified, the session token size is
+    #   unchanged.
+    #
     # @return [Types::AssumeRootResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssumeRootResponse#credentials #credentials} => Types::Credentials
     #   * {Types::AssumeRootResponse#source_identity #source_identity} => String
+    #   * {Types::AssumeRootResponse#session_token_utilization #session_token_utilization} => Integer
+    #   * {Types::AssumeRootResponse#session_token_size #session_token_size} => Integer
     #
     #
     # @example Example: To launch a privileged session
@@ -1850,6 +1895,7 @@ module Aws::STS
     #       arn: "arnType",
     #     },
     #     duration_seconds: 1,
+    #     minimum_session_token_size: 1,
     #   })
     #
     # @example Response structure
@@ -1859,6 +1905,8 @@ module Aws::STS
     #   resp.credentials.session_token #=> String
     #   resp.credentials.expiration #=> Time
     #   resp.source_identity #=> String
+    #   resp.session_token_utilization #=> Integer
+    #   resp.session_token_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoot AWS API Documentation
     #
@@ -2405,11 +2453,20 @@ module Aws::STS
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length
     #
+    # @option params [Integer] :minimum_session_token_size
+    #   The minimum size, in bytes, of the session token that STS issues for
+    #   the request. STS increases the session token to at least this size,
+    #   regardless of its actual content. The value must not exceed 4,096
+    #   bytes. When set to 0 or not specified, the session token size is
+    #   unchanged.
+    #
     # @return [Types::GetFederationTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetFederationTokenResponse#credentials #credentials} => Types::Credentials
     #   * {Types::GetFederationTokenResponse#federated_user #federated_user} => Types::FederatedUser
     #   * {Types::GetFederationTokenResponse#packed_policy_size #packed_policy_size} => Integer
+    #   * {Types::GetFederationTokenResponse#session_token_utilization #session_token_utilization} => Integer
+    #   * {Types::GetFederationTokenResponse#session_token_size #session_token_size} => Integer
     #
     #
     # @example Example: To get temporary credentials for a role by using GetFederationToken
@@ -2462,6 +2519,7 @@ module Aws::STS
     #         value: "tagValueType", # required
     #       },
     #     ],
+    #     minimum_session_token_size: 1,
     #   })
     #
     # @example Response structure
@@ -2473,6 +2531,8 @@ module Aws::STS
     #   resp.federated_user.federated_user_id #=> String
     #   resp.federated_user.arn #=> String
     #   resp.packed_policy_size #=> Integer
+    #   resp.session_token_utilization #=> Integer
+    #   resp.session_token_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetFederationToken AWS API Documentation
     #
@@ -2593,9 +2653,18 @@ module Aws::STS
     #   The format for this parameter, as described by its regex pattern, is a
     #   sequence of six numeric digits.
     #
+    # @option params [Integer] :minimum_session_token_size
+    #   The minimum size, in bytes, of the session token that STS issues for
+    #   the request. STS increases the session token to at least this size,
+    #   regardless of its actual content. The value must not exceed 4,096
+    #   bytes. When set to 0 or not specified, the session token size is
+    #   unchanged.
+    #
     # @return [Types::GetSessionTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetSessionTokenResponse#credentials #credentials} => Types::Credentials
+    #   * {Types::GetSessionTokenResponse#session_token_utilization #session_token_utilization} => Integer
+    #   * {Types::GetSessionTokenResponse#session_token_size #session_token_size} => Integer
     #
     #
     # @example Example: To get temporary credentials for an IAM user or an AWS account
@@ -2622,6 +2691,7 @@ module Aws::STS
     #     duration_seconds: 1,
     #     serial_number: "serialNumberType",
     #     token_code: "tokenCodeType",
+    #     minimum_session_token_size: 1,
     #   })
     #
     # @example Response structure
@@ -2630,6 +2700,8 @@ module Aws::STS
     #   resp.credentials.secret_access_key #=> String
     #   resp.credentials.session_token #=> String
     #   resp.credentials.expiration #=> Time
+    #   resp.session_token_utilization #=> Integer
+    #   resp.session_token_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetSessionToken AWS API Documentation
     #
@@ -2646,6 +2718,11 @@ module Aws::STS
     # token is signed by Amazon Web Services STS and can be publicly
     # verified using the verification keys published at the issuer's JWKS
     # endpoint.
+    #
+    # <note markdown="1"> The `GetWebIdentityToken` API is not available on the STS Global
+    # endpoint.
+    #
+    #  </note>
     #
     # @option params [required, Array<String>] :audience
     #   The intended recipient of the web identity token. This value populates
@@ -2723,7 +2800,7 @@ module Aws::STS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.254.1'
+      context[:gem_version] = '3.257.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

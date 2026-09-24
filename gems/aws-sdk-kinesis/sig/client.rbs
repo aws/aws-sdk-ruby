@@ -172,7 +172,8 @@ module Aws
                            },
                            ?tags: Hash[::String, ::String],
                            ?warm_throughput_mi_bps: ::Integer,
-                           ?max_record_size_in_ki_b: ::Integer
+                           ?max_record_size_in_ki_b: ::Integer,
+                           ?record_distribution_strategy: ("AUTO" | "USER_PARTITION_KEY")
                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -490,7 +491,7 @@ module Aws
       def put_record: (
                         ?stream_name: ::String,
                         data: ::String,
-                        partition_key: ::String,
+                        ?partition_key: ::String,
                         ?explicit_hash_key: ::String,
                         ?sequence_number_for_ordering: ::String,
                         ?stream_arn: ::String,
@@ -511,7 +512,7 @@ module Aws
                            {
                              data: ::String,
                              explicit_hash_key: ::String?,
-                             partition_key: ::String
+                             partition_key: ::String?
                            }
                          ],
                          ?stream_name: ::String,
@@ -667,6 +668,14 @@ module Aws
                                 ?warm_throughput_mi_bps: ::Integer
                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#update_stream_record_distribution_strategy-instance_method
+      def update_stream_record_distribution_strategy: (
+                                                        stream_arn: ::String,
+                                                        ?stream_id: ::String,
+                                                        record_distribution_strategy: ("AUTO" | "USER_PARTITION_KEY")
+                                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       interface _UpdateStreamWarmThroughputResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStreamWarmThroughputOutput]

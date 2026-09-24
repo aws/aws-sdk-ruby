@@ -261,7 +261,11 @@ module Aws
       question_type_properties: Params::evaluation_form_question_type_properties?,
       enablement: Params::evaluation_form_item_enablement_configuration?,
       weight: ::Float?,
-      scoring_configuration: Params::evaluation_form_question_scoring_configuration?
+      scoring_configuration: Params::evaluation_form_question_scoring_configuration?,
+      metric_configuration: {
+        metric_type: ("BUSINESS_OUTCOME"),
+        metric_name: ::String
+      }?
     }
 
       type evaluation_form_item = {

@@ -1670,6 +1670,11 @@ module Aws::SSOAdmin
     #   instance of IAM Identity Center.
     #   @return [String]
     #
+    # @!attribute [rw] identity_store_arn
+    #   The ARN of the identity store that is connected to the instance of
+    #   IAM Identity Center.
+    #   @return [String]
+    #
     # @!attribute [rw] owner_account_id
     #   The identifier of the Amazon Web Services account for which the
     #   instance was created.
@@ -1697,6 +1702,16 @@ module Aws::SSOAdmin
     #   service-related errors.
     #   @return [String]
     #
+    # @!attribute [rw] primary_region
+    #   The primary Region where the IAM Identity Center instance was
+    #   originally enabled. The primary Region cannot be removed.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions
+    #   The list of Regions enabled in the IAM Identity Center instance,
+    #   including Regions with ACTIVE, ADDING, or REMOVING status.
+    #   @return [Array<Types::RegionMetadata>]
+    #
     # @!attribute [rw] encryption_configuration_details
     #   Contains the encryption configuration for your IAM Identity Center
     #   instance, including the encryption status, KMS key type, and KMS key
@@ -1713,11 +1728,14 @@ module Aws::SSOAdmin
     class DescribeInstanceResponse < Struct.new(
       :instance_arn,
       :identity_store_id,
+      :identity_store_arn,
       :owner_account_id,
       :name,
       :created_date,
       :status,
       :status_reason,
+      :primary_region,
+      :regions,
       :encryption_configuration_details,
       :permission_sets_enabled)
       SENSITIVE = []
@@ -2370,6 +2388,11 @@ module Aws::SSOAdmin
     #   Identity Center instance.
     #   @return [String]
     #
+    # @!attribute [rw] identity_store_arn
+    #   The ARN of the identity store that is connected to the Identity
+    #   Center instance.
+    #   @return [String]
+    #
     # @!attribute [rw] owner_account_id
     #   The Amazon Web Services account ID number of the owner of the
     #   Identity Center instance.
@@ -2411,6 +2434,7 @@ module Aws::SSOAdmin
     class InstanceMetadata < Struct.new(
       :instance_arn,
       :identity_store_id,
+      :identity_store_arn,
       :owner_account_id,
       :name,
       :created_date,

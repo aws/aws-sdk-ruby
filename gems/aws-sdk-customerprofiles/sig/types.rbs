@@ -2427,6 +2427,18 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class RecommendationMetadata
+      attr_accessor columns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Recommender
+      attr_accessor name: ::String
+      attr_accessor filters: ::Array[Types::RecommenderFilter]
+      attr_accessor promotional_filters: ::Array[Types::RecommenderPromotionalFilter]
+      SENSITIVE: []
+    end
+
     class RecommenderConfig
       attr_accessor events_config: Types::EventsConfig
       attr_accessor training_frequency: ::Integer
@@ -2607,6 +2619,25 @@ module Aws::CustomerProfiles
       attr_accessor items: ::Array[Types::Profile]
       attr_accessor next_token: ::String
       SENSITIVE: []
+    end
+
+    class SearchRecommendationsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor key_name: ::String
+      attr_accessor key_values: ::Array[::String]
+      attr_accessor recommender: Types::Recommender
+      attr_accessor candidate_ids: ::Array[::String]
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor diversity: Types::RecommendationDiversityConfig
+      attr_accessor metadata: Types::RecommendationMetadata
+      attr_accessor max_recommendations: ::Integer
+      SENSITIVE: [:key_values, :context]
+    end
+
+    class SearchRecommendationsResponse
+      attr_accessor profile_id: ::String
+      attr_accessor recommendations: ::Array[Types::Recommendation]
+      SENSITIVE: [:recommendations]
     end
 
     class SegmentDefinitionItem

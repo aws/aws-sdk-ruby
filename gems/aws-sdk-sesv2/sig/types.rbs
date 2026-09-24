@@ -57,7 +57,7 @@ module Aws::SESV2
       attr_accessor id: ::String
       attr_accessor namespace: ("VDM")
       attr_accessor metric: ("SEND" | "COMPLAINT" | "PERMANENT_BOUNCE" | "TRANSIENT_BOUNCE" | "OPEN" | "CLICK" | "DELIVERY" | "DELIVERY_OPEN" | "DELIVERY_CLICK" | "DELIVERY_COMPLAINT")
-      attr_accessor dimensions: ::Hash[("EMAIL_IDENTITY" | "CONFIGURATION_SET" | "ISP"), ::String]
+      attr_accessor dimensions: ::Hash[("EMAIL_IDENTITY" | "CONFIGURATION_SET" | "ISP" | "TENANT_NAME"), ::String]
       attr_accessor start_date: ::Time
       attr_accessor end_date: ::Time
       SENSITIVE: []
@@ -1452,6 +1452,7 @@ module Aws::SESV2
       attr_accessor destination: ::Array[::String]
       attr_accessor subject: ::Array[::String]
       attr_accessor isp: ::Array[::String]
+      attr_accessor tenant_name: ::Array[::String]
       attr_accessor last_delivery_event: ::Array[("SEND" | "DELIVERY" | "TRANSIENT_BOUNCE" | "PERMANENT_BOUNCE" | "UNDETERMINED_BOUNCE" | "COMPLAINT")]
       attr_accessor last_engagement_event: ::Array[("OPEN" | "CLICK")]
       SENSITIVE: []
@@ -1486,7 +1487,7 @@ module Aws::SESV2
     end
 
     class MetricsDataSource
-      attr_accessor dimensions: ::Hash[("EMAIL_IDENTITY" | "CONFIGURATION_SET" | "ISP"), ::Array[::String]]
+      attr_accessor dimensions: ::Hash[("EMAIL_IDENTITY" | "CONFIGURATION_SET" | "ISP" | "TENANT_NAME"), ::Array[::String]]
       attr_accessor namespace: ("VDM")
       attr_accessor metrics: ::Array[Types::ExportMetric]
       attr_accessor start_date: ::Time

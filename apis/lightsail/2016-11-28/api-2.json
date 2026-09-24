@@ -4222,7 +4222,10 @@
         "ipAddressType":{"shape":"IpAddressType"},
         "tags":{"shape":"TagList"},
         "certificateName":{"shape":"ResourceName"},
-        "viewerMinimumTlsProtocolVersion":{"shape":"ViewerMinimumTlsProtocolVersionEnum"}
+        "viewerMinimumTlsProtocolVersion":{"shape":"ViewerMinimumTlsProtocolVersionEnum"},
+        "enablePrivateOriginAccess":{"shape":"boolean"},
+        "defaultRootObject":{"shape":"string"},
+        "customErrorResponses":{"shape":"DistributionCustomErrorResponseList"}
       }
     },
     "CreateDistributionResult":{
@@ -4985,6 +4988,19 @@
     "DistributionBundleList":{
       "type":"list",
       "member":{"shape":"DistributionBundle"}
+    },
+    "DistributionCustomErrorResponse":{
+      "type":"structure",
+      "members":{
+        "errorCode":{"shape":"integer"},
+        "responseCode":{"shape":"string"},
+        "responsePagePath":{"shape":"string"},
+        "errorCachingMinTTL":{"shape":"long"}
+      }
+    },
+    "DistributionCustomErrorResponseList":{
+      "type":"list",
+      "member":{"shape":"DistributionCustomErrorResponse"}
     },
     "DistributionList":{
       "type":"list",
@@ -6629,7 +6645,9 @@
         "ableToUpdateBundle":{"shape":"boolean"},
         "ipAddressType":{"shape":"IpAddressType"},
         "tags":{"shape":"TagList"},
-        "viewerMinimumTlsProtocolVersion":{"shape":"string"}
+        "viewerMinimumTlsProtocolVersion":{"shape":"string"},
+        "defaultRootObject":{"shape":"string"},
+        "customErrorResponses":{"shape":"DistributionCustomErrorResponseList"}
       }
     },
     "LoadBalancer":{
@@ -7194,7 +7212,8 @@
         "regionName":{"shape":"RegionName"},
         "protocolPolicy":{"shape":"OriginProtocolPolicyEnum"},
         "responseTimeout":{"shape":"integer"},
-        "ipAddressType":{"shape":"OriginIpAddressTypeEnum"}
+        "ipAddressType":{"shape":"OriginIpAddressTypeEnum"},
+        "isPrivateOriginAccessEnabled":{"shape":"boolean"}
       }
     },
     "OriginIpAddressTypeEnum":{
@@ -8339,7 +8358,10 @@
         "isEnabled":{"shape":"boolean"},
         "viewerMinimumTlsProtocolVersion":{"shape":"ViewerMinimumTlsProtocolVersionEnum"},
         "certificateName":{"shape":"ResourceName"},
-        "useDefaultCertificate":{"shape":"boolean"}
+        "useDefaultCertificate":{"shape":"boolean"},
+        "enablePrivateOriginAccess":{"shape":"boolean"},
+        "defaultRootObject":{"shape":"string"},
+        "customErrorResponses":{"shape":"DistributionCustomErrorResponseList"}
       }
     },
     "UpdateDistributionResult":{

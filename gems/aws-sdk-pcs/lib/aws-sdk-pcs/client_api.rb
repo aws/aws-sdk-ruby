@@ -73,6 +73,8 @@ module Aws::PCS
     GetComputeNodeGroupResponse = Shapes::StructureShape.new(name: 'GetComputeNodeGroupResponse')
     GetQueueRequest = Shapes::StructureShape.new(name: 'GetQueueRequest')
     GetQueueResponse = Shapes::StructureShape.new(name: 'GetQueueResponse')
+    GresCustomSettingMap = Shapes::MapShape.new(name: 'GresCustomSettingMap')
+    GresCustomSettings = Shapes::ListShape.new(name: 'GresCustomSettings')
     InstanceConfig = Shapes::StructureShape.new(name: 'InstanceConfig')
     InstanceList = Shapes::ListShape.new(name: 'InstanceList')
     InstanceProfileArn = Shapes::StringShape.new(name: 'InstanceProfileArn')
@@ -267,10 +269,12 @@ module Aws::PCS
 
     ComputeNodeGroupSlurmConfiguration.add_member(:scale_down_idle_time_in_seconds, Shapes::ShapeRef.new(shape: ComputeNodeGroupSlurmConfigurationScaleDownIdleTimeInSecondsInteger, location_name: "scaleDownIdleTimeInSeconds"))
     ComputeNodeGroupSlurmConfiguration.add_member(:slurm_custom_settings, Shapes::ShapeRef.new(shape: SlurmCustomSettings, location_name: "slurmCustomSettings"))
+    ComputeNodeGroupSlurmConfiguration.add_member(:gres_custom_settings, Shapes::ShapeRef.new(shape: GresCustomSettings, location_name: "gresCustomSettings"))
     ComputeNodeGroupSlurmConfiguration.struct_class = Types::ComputeNodeGroupSlurmConfiguration
 
     ComputeNodeGroupSlurmConfigurationRequest.add_member(:scale_down_idle_time_in_seconds, Shapes::ShapeRef.new(shape: ComputeNodeGroupSlurmConfigurationRequestScaleDownIdleTimeInSecondsInteger, location_name: "scaleDownIdleTimeInSeconds"))
     ComputeNodeGroupSlurmConfigurationRequest.add_member(:slurm_custom_settings, Shapes::ShapeRef.new(shape: SlurmCustomSettings, location_name: "slurmCustomSettings"))
+    ComputeNodeGroupSlurmConfigurationRequest.add_member(:gres_custom_settings, Shapes::ShapeRef.new(shape: GresCustomSettings, location_name: "gresCustomSettings"))
     ComputeNodeGroupSlurmConfigurationRequest.struct_class = Types::ComputeNodeGroupSlurmConfigurationRequest
 
     ComputeNodeGroupSummary.add_member(:name, Shapes::ShapeRef.new(shape: ComputeNodeGroupName, required: true, location_name: "name"))
@@ -387,6 +391,11 @@ module Aws::PCS
 
     GetQueueResponse.add_member(:queue, Shapes::ShapeRef.new(shape: Queue, location_name: "queue"))
     GetQueueResponse.struct_class = Types::GetQueueResponse
+
+    GresCustomSettingMap.key = Shapes::ShapeRef.new(shape: String)
+    GresCustomSettingMap.value = Shapes::ShapeRef.new(shape: String)
+
+    GresCustomSettings.member = Shapes::ShapeRef.new(shape: GresCustomSettingMap)
 
     InstanceConfig.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
     InstanceConfig.struct_class = Types::InstanceConfig
@@ -638,6 +647,7 @@ module Aws::PCS
 
     UpdateComputeNodeGroupSlurmConfigurationRequest.add_member(:scale_down_idle_time_in_seconds, Shapes::ShapeRef.new(shape: UpdateComputeNodeGroupSlurmConfigurationRequestScaleDownIdleTimeInSecondsInteger, location_name: "scaleDownIdleTimeInSeconds"))
     UpdateComputeNodeGroupSlurmConfigurationRequest.add_member(:slurm_custom_settings, Shapes::ShapeRef.new(shape: SlurmCustomSettings, location_name: "slurmCustomSettings"))
+    UpdateComputeNodeGroupSlurmConfigurationRequest.add_member(:gres_custom_settings, Shapes::ShapeRef.new(shape: GresCustomSettings, location_name: "gresCustomSettings"))
     UpdateComputeNodeGroupSlurmConfigurationRequest.struct_class = Types::UpdateComputeNodeGroupSlurmConfigurationRequest
 
     UpdateNodeLifecycleActionsRequest.add_member(:stages, Shapes::ShapeRef.new(shape: NodeLifecycleStages, required: true, location_name: "stages"))

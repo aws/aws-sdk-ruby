@@ -266,6 +266,7 @@ module Aws::Outposts
     RackElevation = Shapes::FloatShape.new(name: 'RackElevation')
     RackId = Shapes::StringShape.new(name: 'RackId')
     RackPhysicalProperties = Shapes::StructureShape.new(name: 'RackPhysicalProperties')
+    RackScalingType = Shapes::StringShape.new(name: 'RackScalingType')
     RackSpecificationDetails = Shapes::StructureShape.new(name: 'RackSpecificationDetails')
     RackUnitHeight = Shapes::StringShape.new(name: 'RackUnitHeight')
     RequestedInstancePools = Shapes::ListShape.new(name: 'RequestedInstancePools')
@@ -448,6 +449,7 @@ module Aws::Outposts
     CatalogItem.add_member(:weight_lbs, Shapes::ShapeRef.new(shape: CatalogItemWeightLbs, location_name: "WeightLbs"))
     CatalogItem.add_member(:supported_uplink_gbps, Shapes::ShapeRef.new(shape: SupportedUplinkGbpsListDefinition, location_name: "SupportedUplinkGbps"))
     CatalogItem.add_member(:supported_storage, Shapes::ShapeRef.new(shape: SupportedStorageList, location_name: "SupportedStorage"))
+    CatalogItem.add_member(:rack_scaling_type, Shapes::ShapeRef.new(shape: RackScalingType, location_name: "RackScalingType"))
     CatalogItem.struct_class = Types::CatalogItem
 
     CatalogItemClassList.member = Shapes::ShapeRef.new(shape: CatalogItemClass)
@@ -911,6 +913,8 @@ module Aws::Outposts
     Outpost.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     Outpost.add_member(:site_arn, Shapes::ShapeRef.new(shape: SiteArn, location_name: "SiteArn"))
     Outpost.add_member(:supported_hardware_type, Shapes::ShapeRef.new(shape: SupportedHardwareType, location_name: "SupportedHardwareType"))
+    Outpost.add_member(:generation, Shapes::ShapeRef.new(shape: OutpostGeneration, location_name: "Generation"))
+    Outpost.add_member(:rack_scaling_type, Shapes::ShapeRef.new(shape: RackScalingType, location_name: "RackScalingType"))
     Outpost.struct_class = Types::Outpost
 
     OutpostInstanceTypeList.member = Shapes::ShapeRef.new(shape: OutpostInstanceType)

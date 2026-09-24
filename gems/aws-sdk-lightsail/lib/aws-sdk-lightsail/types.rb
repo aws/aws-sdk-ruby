@@ -3764,6 +3764,37 @@ module Aws::Lightsail
     #   The minimum TLS protocol version for the SSL/TLS certificate.
     #   @return [String]
     #
+    # @!attribute [rw] enable_private_origin_access
+    #   Specifies whether to enable private origin access for the
+    #   distribution. With private origin access, the distribution can serve
+    #   objects that aren't publicly accessible from a Lightsail bucket.
+    #
+    #   Lightsail grants the distribution permission to read the bucket's
+    #   objects. Enabling private origin access doesn't change the
+    #   bucket's access settings, and you can still retrieve publicly
+    #   accessible objects directly from the bucket's endpoint.
+    #
+    #   <note markdown="1"> You can enable private origin access only when the distribution's
+    #   origin is a Lightsail bucket. If the origin is another resource
+    #   type, the request fails.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] default_root_object
+    #   The object (for example, `index.html`) that the distribution returns
+    #   when a viewer requests the root URL of the distribution (`/`)
+    #   instead of a specific object. The object that you specify must be
+    #   available from the origin.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_error_responses
+    #   An array of objects that describe the custom error responses for the
+    #   distribution. With a custom error response, you can specify the page
+    #   to return when the origin responds with a given HTTP error code. You
+    #   can also specify the HTTP status code to send to the viewer.
+    #   @return [Array<Types::DistributionCustomErrorResponse>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDistributionRequest AWS API Documentation
     #
     class CreateDistributionRequest < Struct.new(
@@ -3776,7 +3807,10 @@ module Aws::Lightsail
       :ip_address_type,
       :tags,
       :certificate_name,
-      :viewer_minimum_tls_protocol_version)
+      :viewer_minimum_tls_protocol_version,
+      :enable_private_origin_access,
+      :default_root_object,
+      :custom_error_responses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6024,6 +6058,46 @@ module Aws::Lightsail
       :price,
       :transfer_per_month_in_gb,
       :is_active)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a custom error response for a Lightsail distribution. A
+    # custom error response specifies the page that the distribution returns
+    # to the viewer. It also specifies the HTTP status code that the
+    # distribution sends when the origin responds with a given HTTP error
+    # code.
+    #
+    # @!attribute [rw] error_code
+    #   The HTTP error code from the origin that triggers the custom error
+    #   response (for example, `403` or `404`).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] response_code
+    #   The HTTP status code that the distribution returns to the viewer for
+    #   the custom error response.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_page_path
+    #   The path to the custom error page that the distribution returns to
+    #   the viewer (for example, `/404.html`). The path must begin with a
+    #   forward slash (`/`) and reference an object that is available from
+    #   the origin.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_caching_min_ttl
+    #   The minimum time, in seconds, that the distribution caches the
+    #   custom error response before requesting the object again from the
+    #   origin. If you don't specify a value, the default is `10` seconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DistributionCustomErrorResponse AWS API Documentation
+    #
+    class DistributionCustomErrorResponse < Struct.new(
+      :error_code,
+      :response_code,
+      :response_page_path,
+      :error_caching_min_ttl)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11267,6 +11341,17 @@ module Aws::Lightsail
     #   communicate with viewers.
     #   @return [String]
     #
+    # @!attribute [rw] default_root_object
+    #   The object (for example, `index.html`) that the distribution returns
+    #   when a viewer requests the root URL of the distribution (`/`)
+    #   instead of a specific object.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_error_responses
+    #   An array of objects that describe the custom error responses
+    #   configured for the distribution.
+    #   @return [Array<Types::DistributionCustomErrorResponse>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LightsailDistribution AWS API Documentation
     #
     class LightsailDistribution < Struct.new(
@@ -11290,7 +11375,9 @@ module Aws::Lightsail
       :able_to_update_bundle,
       :ip_address_type,
       :tags,
-      :viewer_minimum_tls_protocol_version)
+      :viewer_minimum_tls_protocol_version,
+      :default_root_object,
+      :custom_error_responses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12233,6 +12320,17 @@ module Aws::Lightsail
     #   and `dualstack` for IPv4 and IPv6.
     #   @return [String]
     #
+    # @!attribute [rw] is_private_origin_access_enabled
+    #   Specifies whether private origin access is enabled for the
+    #   distribution's origin. With private origin access, the distribution
+    #   can serve objects that aren't publicly accessible from a Lightsail
+    #   bucket.
+    #
+    #   This applies when you set the bucket's `getObject` access rule to
+    #   `private`. It also applies when you set `getObject` to `public` but
+    #   set individual objects to private.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Origin AWS API Documentation
     #
     class Origin < Struct.new(
@@ -12241,7 +12339,8 @@ module Aws::Lightsail
       :region_name,
       :protocol_policy,
       :response_timeout,
-      :ip_address_type)
+      :ip_address_type,
+      :is_private_origin_access_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15001,6 +15100,41 @@ module Aws::Lightsail
     #   distribution.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_private_origin_access
+    #   Specifies whether to enable private origin access for the
+    #   distribution. With private origin access, the distribution can serve
+    #   objects that aren't publicly accessible from a Lightsail bucket.
+    #
+    #   Lightsail grants the distribution permission to read the bucket's
+    #   objects. Enabling private origin access doesn't change the
+    #   bucket's access settings, and you can still retrieve publicly
+    #   accessible objects directly from the bucket's endpoint.
+    #
+    #   <note markdown="1"> When you include this parameter, you must also include the `origin`
+    #   parameter with the resource name, even if the origin is not
+    #   changing.
+    #
+    #    You can enable private origin access only when the distribution's
+    #   origin is a Lightsail bucket. If the origin is another resource
+    #   type, the request fails.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] default_root_object
+    #   The object (for example, `index.html`) that the distribution returns
+    #   when a viewer requests the root URL of the distribution (`/`)
+    #   instead of a specific object. The object that you specify must be
+    #   available from the origin.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_error_responses
+    #   An array of objects that describe the custom error responses for the
+    #   distribution. With a custom error response, you can specify the page
+    #   to return when the origin responds with a given HTTP error code. You
+    #   can also specify the HTTP status code to send to the viewer.
+    #   @return [Array<Types::DistributionCustomErrorResponse>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateDistributionRequest AWS API Documentation
     #
     class UpdateDistributionRequest < Struct.new(
@@ -15012,7 +15146,10 @@ module Aws::Lightsail
       :is_enabled,
       :viewer_minimum_tls_protocol_version,
       :certificate_name,
-      :use_default_certificate)
+      :use_default_certificate,
+      :enable_private_origin_access,
+      :default_root_object,
+      :custom_error_responses)
       SENSITIVE = []
       include Aws::Structure
     end

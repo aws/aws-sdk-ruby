@@ -146,6 +146,7 @@ module Aws::Kinesis
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor warm_throughput_mi_bps: ::Integer
       attr_accessor max_record_size_in_ki_b: ::Integer
+      attr_accessor record_distribution_strategy: ("AUTO" | "USER_PARTITION_KEY")
       SENSITIVE: []
     end
 
@@ -789,6 +790,7 @@ module Aws::Kinesis
       attr_accessor warm_throughput: Types::WarmThroughputObject
       attr_accessor max_record_size_in_ki_b: ::Integer
       attr_accessor channel_count: ::Integer
+      attr_accessor record_distribution_strategy: ("AUTO" | "USER_PARTITION_KEY")
       SENSITIVE: []
     end
 
@@ -907,6 +909,13 @@ module Aws::Kinesis
       attr_accessor stream_id: ::String
       attr_accessor stream_mode_details: Types::StreamModeDetails
       attr_accessor warm_throughput_mi_bps: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateStreamRecordDistributionStrategyInput
+      attr_accessor stream_arn: ::String
+      attr_accessor stream_id: ::String
+      attr_accessor record_distribution_strategy: ("AUTO" | "USER_PARTITION_KEY")
       SENSITIVE: []
     end
 

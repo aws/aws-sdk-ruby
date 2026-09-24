@@ -939,6 +939,34 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains details about an Amazon Bedrock guardrail evaluated during a
+    # model invocation.
+    #
+    # @!attribute [rw] version
+    #   The version of the Amazon Bedrock guardrail. Valid values are a
+    #   numeric version, `DRAFT`, or `ENFORCED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] guardrail_action
+    #   Indicates whether the guardrail intervened during the model
+    #   invocation.
+    #   @return [String]
+    #
+    # @!attribute [rw] guardrail_source
+    #   Indicates whether the guardrail was applied on the input or output
+    #   of the model invocation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/BedrockGuardrailResource AWS API Documentation
+    #
+    class BedrockGuardrailResource < Struct.new(
+      :version,
+      :guardrail_action,
+      :guardrail_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information on how the bucker owner's S3 Block Public Access
     # settings are being applied to the S3 bucket. See [S3 Block Public
     # Access][1] for more information.
@@ -11497,6 +11525,12 @@ module Aws::GuardDuty
     #   finding.
     #   @return [Types::CloudformationStack]
     #
+    # @!attribute [rw] bedrock_guardrail
+    #   Contains detailed information about the Amazon Bedrock guardrail
+    #   associated with the activity that prompted GuardDuty to generate a
+    #   finding.
+    #   @return [Types::BedrockGuardrailResource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ResourceData AWS API Documentation
     #
     class ResourceData < Struct.new(
@@ -11515,7 +11549,8 @@ module Aws::GuardDuty
       :ec2_launch_template,
       :ec2_vpc,
       :ec2_image,
-      :cloudformation_stack)
+      :cloudformation_stack,
+      :bedrock_guardrail)
       SENSITIVE = []
       include Aws::Structure
     end

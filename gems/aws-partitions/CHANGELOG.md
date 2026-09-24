@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.1289.0 (2026-09-23)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::NetworkSecurityManager`.
+
+1.1288.0 (2026-09-22)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::CloudWatchOmni`.
+
+1.1287.0 (2026-09-14)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1286.0 (2026-09-11)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1285.0 (2026-09-10)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
 1.1284.0 (2026-09-08)
 ------------------
 

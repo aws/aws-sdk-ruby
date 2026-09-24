@@ -24,6 +24,7 @@ module Aws::Billing
     ApplicationType = Shapes::StringShape.new(name: 'ApplicationType')
     AssociateSourceViewsRequest = Shapes::StructureShape.new(name: 'AssociateSourceViewsRequest')
     AssociateSourceViewsResponse = Shapes::StructureShape.new(name: 'AssociateSourceViewsResponse')
+    BillingDomain = Shapes::StringShape.new(name: 'BillingDomain')
     BillingFeature = Shapes::StringShape.new(name: 'BillingFeature')
     BillingFeatureFilter = Shapes::StructureShape.new(name: 'BillingFeatureFilter')
     BillingFeatureFilterName = Shapes::StringShape.new(name: 'BillingFeatureFilterName')
@@ -44,6 +45,9 @@ module Aws::Billing
     BillingViewList = Shapes::ListShape.new(name: 'BillingViewList')
     BillingViewListElement = Shapes::StructureShape.new(name: 'BillingViewListElement')
     BillingViewName = Shapes::StringShape.new(name: 'BillingViewName')
+    BillingViewSegmentTimeRange = Shapes::StructureShape.new(name: 'BillingViewSegmentTimeRange')
+    BillingViewSegmentsList = Shapes::ListShape.new(name: 'BillingViewSegmentsList')
+    BillingViewSegmentsListElement = Shapes::StructureShape.new(name: 'BillingViewSegmentsListElement')
     BillingViewSourceViewsList = Shapes::ListShape.new(name: 'BillingViewSourceViewsList')
     BillingViewStatus = Shapes::StringShape.new(name: 'BillingViewStatus')
     BillingViewStatusReason = Shapes::StringShape.new(name: 'BillingViewStatusReason')
@@ -106,6 +110,8 @@ module Aws::Billing
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     LinkedAccountCharge = Shapes::StructureShape.new(name: 'LinkedAccountCharge')
     LinkedAccountChargeList = Shapes::ListShape.new(name: 'LinkedAccountChargeList')
+    ListBillingViewSegmentsRequest = Shapes::StructureShape.new(name: 'ListBillingViewSegmentsRequest')
+    ListBillingViewSegmentsResponse = Shapes::StructureShape.new(name: 'ListBillingViewSegmentsResponse')
     ListBillingViewsRequest = Shapes::StructureShape.new(name: 'ListBillingViewsRequest')
     ListBillingViewsResponse = Shapes::StructureShape.new(name: 'ListBillingViewsResponse')
     ListEnterpriseSupportLinkedAccountChargesRequest = Shapes::StructureShape.new(name: 'ListEnterpriseSupportLinkedAccountChargesRequest')
@@ -258,6 +264,19 @@ module Aws::Billing
     BillingViewListElement.add_member(:billing_view_type, Shapes::ShapeRef.new(shape: BillingViewType, location_name: "billingViewType"))
     BillingViewListElement.add_member(:health_status, Shapes::ShapeRef.new(shape: BillingViewHealthStatus, location_name: "healthStatus"))
     BillingViewListElement.struct_class = Types::BillingViewListElement
+
+    BillingViewSegmentTimeRange.add_member(:begin_date_inclusive, Shapes::ShapeRef.new(shape: Timestamp, location_name: "beginDateInclusive"))
+    BillingViewSegmentTimeRange.add_member(:end_date_exclusive, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endDateExclusive"))
+    BillingViewSegmentTimeRange.struct_class = Types::BillingViewSegmentTimeRange
+
+    BillingViewSegmentsList.member = Shapes::ShapeRef.new(shape: BillingViewSegmentsListElement)
+
+    BillingViewSegmentsListElement.add_member(:domain, Shapes::ShapeRef.new(shape: BillingDomain, location_name: "domain"))
+    BillingViewSegmentsListElement.add_member(:time_range, Shapes::ShapeRef.new(shape: BillingViewSegmentTimeRange, location_name: "timeRange"))
+    BillingViewSegmentsListElement.add_member(:billing_transfer_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "billingTransferAccountId"))
+    BillingViewSegmentsListElement.add_member(:management_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "managementAccountId"))
+    BillingViewSegmentsListElement.add_member(:billing_group_primary_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "billingGroupPrimaryAccountId"))
+    BillingViewSegmentsListElement.struct_class = Types::BillingViewSegmentsListElement
 
     BillingViewSourceViewsList.member = Shapes::ShapeRef.new(shape: BillingViewArn)
 
@@ -468,6 +487,16 @@ module Aws::Billing
     LinkedAccountCharge.struct_class = Types::LinkedAccountCharge
 
     LinkedAccountChargeList.member = Shapes::ShapeRef.new(shape: LinkedAccountCharge)
+
+    ListBillingViewSegmentsRequest.add_member(:time_range, Shapes::ShapeRef.new(shape: BillingViewSegmentTimeRange, location_name: "timeRange"))
+    ListBillingViewSegmentsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: BillingViewArn, location_name: "arn"))
+    ListBillingViewSegmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BillingViewsMaxResults, location_name: "maxResults"))
+    ListBillingViewSegmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListBillingViewSegmentsRequest.struct_class = Types::ListBillingViewSegmentsRequest
+
+    ListBillingViewSegmentsResponse.add_member(:items, Shapes::ShapeRef.new(shape: BillingViewSegmentsList, required: true, location_name: "items"))
+    ListBillingViewSegmentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListBillingViewSegmentsResponse.struct_class = Types::ListBillingViewSegmentsResponse
 
     ListBillingViewsRequest.add_member(:active_time_range, Shapes::ShapeRef.new(shape: ActiveTimeRange, location_name: "activeTimeRange"))
     ListBillingViewsRequest.add_member(:arns, Shapes::ShapeRef.new(shape: BillingViewArnList, location_name: "arns"))
@@ -804,6 +833,26 @@ module Aws::Billing
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_billing_view_segments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBillingViewSegments"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListBillingViewSegmentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBillingViewSegmentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_billing_views, Seahorse::Model::Operation.new.tap do |o|

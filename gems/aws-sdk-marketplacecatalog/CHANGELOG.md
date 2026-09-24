@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2026-09-16)
+------------------
+
+* Feature - This release enhances the ListEntities API to support issuerAccountId and SourceAuthorization filter for ResaleAuthorization entity.
+
+1.86.0 (2026-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.85.0 (2026-09-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.84.0 (2026-08-18)
 ------------------
 
