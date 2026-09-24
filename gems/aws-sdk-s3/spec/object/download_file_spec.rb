@@ -28,6 +28,18 @@ module Aws
           expect { subject.download_file(path) }.to raise_error(Aws::S3::Errors::NoSuchKey)
         end
 
+        it 'shuts down the internally-created executor when download raises', thread_report_on_exception: false do
+          client.stub_responses(:head_object, 'NoSuchKey')
+          executor = nil
+          allow(DefaultExecutor).to receive(:new).and_wrap_original do |orig, *args, **kwargs|
+            executor = orig.call(*args, **kwargs)
+            allow(executor).to receive(:shutdown).and_call_original
+            executor
+          end
+          expect { subject.download_file(path) }.to raise_error(Aws::S3::Errors::NoSuchKey)
+          expect(executor).to have_received(:shutdown)
+        end
+
         it 'calls progress callback when given' do
           n_calls = 0
           callback = proc { |_b, _p, _t| n_calls += 1 }
