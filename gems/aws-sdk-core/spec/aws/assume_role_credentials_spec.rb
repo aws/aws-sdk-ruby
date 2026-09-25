@@ -136,11 +136,9 @@ module Aws
       end
     end
 
-    it 'refreshes asynchronously' do
-      # expiration 6 minutes out, within the async exp time window
-      allow(credentials).to receive(:expiration).and_return(Time.now + (6*60))
+    it 'refreshes inline in the advisory window' do
+      allow(credentials).to receive(:expiration).and_return(Time.now + (2*60))
       expect(client).to receive(:assume_role).at_least(2).times
-      expect(Thread).to receive(:new).and_yield
       c = AssumeRoleCredentials.new(
         role_arn: 'arn',
         role_session_name: 'session')
@@ -148,7 +146,7 @@ module Aws
     end
 
     it 'refreshes credentials automatically when they are near expiration' do
-      allow(credentials).to receive(:expiration).and_return(Time.now)
+      allow(credentials).to receive(:expiration).and_return(Time.now + 30)
       expect(client).to receive(:assume_role).exactly(4).times
       c = AssumeRoleCredentials.new(
         role_arn: 'arn',
@@ -156,6 +154,24 @@ module Aws
       c.credentials
       c.credentials
       c.credentials
+    end
+
+    AssumeRoleCredentials::NON_RECOVERABLE_ERROR_CODES.each do |code|
+      it "raises non-recoverable STS error #{code} immediately instead of backing off" do
+        error = STS::Errors.error_class(code).new(nil, 'nope')
+        allow(client).to receive(:assume_role).and_raise(error)
+        expect do
+          AssumeRoleCredentials.new(role_arn: 'arn', role_session_name: 'session')
+        end.to raise_error(error.class)
+      end
+    end
+
+    it 'wraps recoverable STS errors as MissingCredentialsError on the initial fetch' do
+      error = STS::Errors::ServiceUnavailable.new(nil, 'try later')
+      allow(client).to receive(:assume_role).and_raise(error)
+      expect do
+        AssumeRoleCredentials.new(role_arn: 'arn', role_session_name: 'session')
+      end.to raise_error(Aws::Errors::MissingCredentialsError)
     end
 
     it 'calls before_refresh with self' do

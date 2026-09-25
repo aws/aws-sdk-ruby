@@ -147,6 +147,10 @@ module Aws
           # apply signature headers
           req.headers.update(signature.headers)
 
+          # Record the signing credentials so the retry layer can invalidate
+          # them on an auth failure and only if they still match
+          context[:signing_credentials] = signing_credentials(signature)
+
           # add request metadata with signature components for debugging
           context[:canonical_request] = signature.canonical_request
           context[:string_to_sign] = signature.string_to_sign
@@ -165,6 +169,15 @@ module Aws
         end
 
         private
+
+        # Credentials that signed a request, used for invalidation matching
+        def signing_credentials(signature)
+          authorization = signature.headers['authorization']
+          return unless authorization
+
+          match = authorization.match(%r{Credential=([^/]+)/})
+          Credentials.new(match[1], nil, nil) if match
+        end
 
         def apply_authtype(context, req)
           # only used for event streaming at input

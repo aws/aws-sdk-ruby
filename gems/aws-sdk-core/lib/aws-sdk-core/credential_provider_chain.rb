@@ -239,6 +239,9 @@ module Aws
       elsif !(ENV.fetch('AWS_EC2_METADATA_DISABLED', 'false').downcase == 'true')
         InstanceProfileCredentials.new(options.merge(profile: profile_name))
       end
+    rescue Errors::MissingCredentialsError
+      # credential source was unreachable on initial fetch, skip so chain moves on
+      nil
     end
 
     def assume_role_with_profile(options, profile_name)

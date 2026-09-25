@@ -210,15 +210,19 @@ module Aws
         expect(resp.context.retries).to eq(0)
       end
 
-      it 'retries if creds expire and are refreshable' do
-        # Note: this adds the refresh! method to credentials
-        expect(credentials).to receive(:refresh!).exactly(3).times
-        resp.error = RetryErrorsSvc::Errors::AuthFailure.new(nil, nil)
+      it 'invalidates the signing credentials and does not retry on an auth failure' do
+        provider = double('credential_provider', invalidate: nil)
+        signing_credentials = Credentials.new('akid', 'secret')
+        config.credentials = provider
+        resp.context[:signing_credentials] = signing_credentials
+
+        expect(provider).to receive(:invalidate).with(signing_credentials)
+        resp.error = RetryErrorsSvc::Errors::ExpiredToken.new(nil, nil)
         handle { |_context| resp }
-        expect(resp.context.retries).to eq(3)
+        expect(resp.context.retries).to eq(0)
       end
 
-      it 'does not call refresh! when error is expired credentials and clock skew' do
+      it 'retries a clock skew error rather than invalidating credentials' do
         resp.error = RetryErrorsSvc::Errors::RequestExpired.new(nil, nil)
         resp.context.http_response.headers['date'] = (Time.now + 10*60).iso8601
         handle { |_context| resp }

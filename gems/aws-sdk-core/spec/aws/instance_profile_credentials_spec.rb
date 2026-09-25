@@ -165,10 +165,11 @@ module Aws
         SocketError,
         Timeout::Error
       ].each do |error_class|
-        it "returns no credentials for #{error_class}" do
+        it "raises MissingCredentialsError for #{error_class}" do
           stub_request(:put, ipv4_endpoint_token_path).to_return(status: 200, body: 'mytoken')
           stub_request(:get, ipv4_endpoint + path).to_raise(error_class)
-          expect(InstanceProfileCredentials.new(backoff: 0).set?).to be(false)
+          expect { InstanceProfileCredentials.new(backoff: 0) }
+            .to raise_error(Aws::Errors::MissingCredentialsError)
         end
       end
 
@@ -176,10 +177,11 @@ module Aws
         400,
         401
       ].each do |error_code|
-        it "returns no credentials for #{error_code} when fetching token" do
+        it "raises MissingCredentialsError for #{error_code} when fetching token" do
           stub_request(:put, ipv4_endpoint_token_path).to_return(status: error_code)
           stub_request(:get, ipv4_endpoint + path).to_return(status: 200)
-          expect(InstanceProfileCredentials.new(backoff: 0).set?).to be(false)
+          expect { InstanceProfileCredentials.new(backoff: 0) }
+            .to raise_error(Aws::Errors::MissingCredentialsError)
         end
       end
     end
@@ -251,6 +253,7 @@ module Aws
       end
 
       it 'has a disable flag which is not case sensitive' do
+        allow_any_instance_of(InstanceProfileCredentials).to receive(:refresh)
         ENV['AWS_EC2_METADATA_V1_DISABLED'] = 'TrUe'
         c = InstanceProfileCredentials.new(backoff: 0)
         expect(c.disable_imds_v1).to be(true)
@@ -258,7 +261,8 @@ module Aws
 
       it 'does not attempt to get credentials (insecure)' do
         stub_request(:put, ipv4_endpoint_token_path).to_return(status: 404)
-        expect(InstanceProfileCredentials.new(backoff: 0).set?).to be(false)
+        expect { InstanceProfileCredentials.new(backoff: 0) }
+          .to raise_error(Aws::Errors::MissingCredentialsError)
       end
 
       it 'gets credentials (secure)' do
@@ -387,12 +391,13 @@ module Aws
         expect(c.expiration.to_s).to eq(expiration2.to_s)
       end
 
-      it 'retries invalid JSON exactly 3 times' do
+      it 'retries invalid JSON exactly 3 times, then raises MissingCredentialsError' do
         stub_request(:get, ipv4_endpoint + path)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 500)
           .to_return(status: 200, body: "profile-name\n")
-        stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
+        creds_request =
+          stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: '')
           .to_return(status: 200, body: ' ')
@@ -400,13 +405,11 @@ module Aws
           .to_return(status: 200, body: ' ')
         expect do
           InstanceProfileCredentials.new(backoff: 0)
-        end.to raise_error(
-          Aws::Errors::MetadataParserError,
-          'Failed to parse metadata service response.'
-        )
+        end.to raise_error(Aws::Errors::MissingCredentialsError)
+        assert_requested(creds_request, times: 4)
       end
 
-      it 'retries errors parsing expiration time 3 times' do
+      it 'raises MissingCredentialsError when the expiration time cannot be parsed' do
         stub_request(:get, ipv4_endpoint + path)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 500)
@@ -414,12 +417,9 @@ module Aws
         stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
-          .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
-          .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
-          .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
         expect do
           InstanceProfileCredentials.new(backoff: 0)
-        end.to raise_error(ArgumentError)
+        end.to raise_error(Aws::Errors::MissingCredentialsError)
       end
 
       describe 'auto refreshing' do
@@ -452,24 +452,20 @@ module Aws
           expect(c.expiration).to be(nil)
         end
 
-        it 'returns empty credentials on non-200 response from profile endpoint' do
+        it 'raises MissingCredentialsError on non-200 response from profile endpoint' do
           stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
             .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
             .to_return(status: 404, body: 'Not Found')
-          expect_any_instance_of(InstanceProfileCredentials).to receive(:warn)
-            .with(/Error retrieving instance profile credentials: HTTP 404: Not Found/)
-          c = InstanceProfileCredentials.new(backoff: 0, retries: 0)
-          expect(c.set?).to be(false)
+          expect { InstanceProfileCredentials.new(backoff: 0, retries: 0) }
+            .to raise_error(Aws::Errors::MissingCredentialsError)
         end
 
-        it 'returns empty credentials on non-200 response from metadata service' do
+        it 'raises MissingCredentialsError on non-200 response from metadata service' do
           stub_request(:get, ipv4_endpoint + path)
             .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
             .to_return(status: 503, body: 'Service Unavailable')
-          expect_any_instance_of(InstanceProfileCredentials).to receive(:warn)
-            .with(/Error retrieving instance profile credentials: HTTP 503: Service Unavailable/)
-          c = InstanceProfileCredentials.new(backoff: 0, retries: 0)
-          expect(c.set?).to be(false)
+          expect { InstanceProfileCredentials.new(backoff: 0, retries: 0) }
+            .to raise_error(Aws::Errors::MissingCredentialsError)
         end
       end
     end
@@ -491,6 +487,7 @@ module Aws
       end
 
       it 'defaults to 1' do
+        allow_any_instance_of(InstanceProfileCredentials).to receive(:refresh)
         expect(InstanceProfileCredentials.new(backoff: 0).retries).to be(1)
       end
 
@@ -499,7 +496,9 @@ module Aws
         expect(Kernel).to receive(:sleep).with(1)
         expect(Kernel).to receive(:sleep).with(2)
         expect(Kernel).to receive(:sleep).with(4)
-        InstanceProfileCredentials.new(backoff: ->(n) { Kernel.sleep(2**n) }, retries: 3)
+        expect do
+          InstanceProfileCredentials.new(backoff: ->(n) { Kernel.sleep(2**n) }, retries: 3)
+        end.to raise_error(Aws::Errors::MissingCredentialsError)
         assert_requested(expected_request, times: 4)
       end
     end
@@ -544,29 +543,19 @@ module Aws
           .to_return(status: 200, body: "profile-name\n")
       end
 
-      it 'provides credentials when the first call returns expired credentials' do
-        expect_any_instance_of(InstanceProfileCredentials).to receive(:warn).at_least(:once)
-
-        expected_request =
-          stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
+      it 'raises when the first call returns expired credentials' do
+        # A stale response is treated as a failed refresh. On the initial fetch
+        # there are no prior credentials to fall back on, so the refresh lifecycle
+        # raises MissingCredentialsError.
+        stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: expired_resp)
 
-        provider = InstanceProfileCredentials.new(backoff: 0)
-        creds = provider.credentials
-        expect(creds.access_key_id).to eq('akid')
-        assert_requested(expected_request, times: 1)
-
-        # successive requests/credential gets don't result in more calls to imds
-        provider.credentials
-        provider.credentials
-        provider.credentials
-
-        assert_requested(expected_request, times: 1)
+        expect { InstanceProfileCredentials.new(backoff: 0) }
+          .to raise_error(Aws::Errors::MissingCredentialsError)
       end
 
-      it 'provides credentials after a read timeout during a refresh' do
-        expect_any_instance_of(InstanceProfileCredentials).to receive(:warn).at_least(:once)
+      it 'provides cached credentials after a read timeout during a refresh' do
         expected_request =
           stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
@@ -575,6 +564,10 @@ module Aws
 
         provider = InstanceProfileCredentials.new(backoff: 0, retries: 0)
 
+        # static stability keeps the cached credentials rather than raising,
+        # and the failed refresh is logged with the next-attempt delay
+        expect(provider).to receive(:warn)
+          .with(/Credential refresh failed:.*continue using cached credentials/)
         creds = provider.credentials
 
         expect(creds.access_key_id).to eq('akid-2')
