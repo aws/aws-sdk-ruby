@@ -149,7 +149,7 @@ module Aws
 
           # Record the signing credentials so the retry layer can invalidate
           # them on an auth failure and only if they still match
-          context[:signing_credentials] = @signer.credentials_provider.credentials
+          context[:signing_credentials] = signing_identity(signature)
 
           # add request metadata with signature components for debugging
           context[:canonical_request] = signature.canonical_request
@@ -169,6 +169,17 @@ module Aws
         end
 
         private
+
+        # Identity of the credentials that signed a request, for invalidation
+        # matching. Only the access key id is recoverable from the signature
+        # and it is the only part invalidation compares on.
+        def signing_identity(signature)
+          authorization = signature.headers['authorization']
+          return unless authorization
+
+          match = authorization.match(%r{Credential=([^/]+)/})
+          Credentials.new(match[1], nil, nil) if match
+        end
 
         def apply_authtype(context, req)
           # only used for event streaming at input

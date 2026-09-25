@@ -202,7 +202,6 @@ module Aws
           def initialize(seed)
             @mutex = Mutex.new
             @static_stability = true
-            @async_refresh = seed[:async_refresh]
             @next_refresh_allowed_at = nil
             @cached_error = nil
             @cached_error_expires_at = nil
@@ -231,12 +230,11 @@ module Aws
         end
       end
 
-      def build_gated_resolver(ttl:, advisory_window:, async: false)
+      def build_gated_resolver(ttl:, advisory_window:)
         gated_resolver_class.new(
           credentials: Credentials.new('CACHED-AKID', 'secret', 'token'),
           expiration: Time.now + ttl,
-          advisory_window: advisory_window,
-          async_refresh: async
+          advisory_window: advisory_window
         )
       end
 
@@ -260,24 +258,6 @@ module Aws
 
         expect(resolver.source_calls).to eq(1)
         expect(resolver.credentials.access_key_id).to eq('FRESH-AKID')
-      end
-
-      it 'refreshes in the background during the advisory window without blocking callers' do
-        resolver = build_gated_resolver(ttl: 300, advisory_window: 600, async: true)
-
-        expect(resolver.credentials.access_key_id).to eq('CACHED-AKID')
-        resolver.entered.pop # background thread now holds the lock inside #refresh
-        expect(resolver.source_calls).to eq(1)
-
-        # further callers get cached credentials without starting a second refresh
-        expect(resolver.credentials.access_key_id).to eq('CACHED-AKID')
-        expect(resolver.source_calls).to eq(1)
-
-        resolver.release << :go
-        sleep 0.1 # let the background refresh publish new credentials
-
-        expect(resolver.credentials.access_key_id).to eq('FRESH-AKID')
-        expect(resolver.source_calls).to eq(1)
       end
 
       it 'runs a single mandatory refresh while other callers wait and reuse the result' do

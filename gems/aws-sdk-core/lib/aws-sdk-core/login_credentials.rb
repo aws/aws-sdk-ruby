@@ -34,7 +34,6 @@ module Aws
         @client = Signin::Client.new(client_opts.merge(credentials: nil))
       end
       @metrics = ['CREDENTIALS_LOGIN']
-      @async_refresh = true
       super
     end
 

@@ -97,7 +97,6 @@ module Aws
       @retries = options[:retries] || 1
       @token_ttl = options[:token_ttl] || 21_600
 
-      @async_refresh = false
       @imds_v1_fallback = false
       @token = nil
       @metrics = ['CREDENTIALS_IMDS']

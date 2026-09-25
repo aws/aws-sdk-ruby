@@ -49,7 +49,7 @@ module Aws
         end
       end
       @client = client_opts[:client] || STS::Client.new(client_opts)
-      @async_refresh = true
+      warn("[SEP-DEBUG] AssumeRoleCredentials STS client max_attempts=#{@client.config.max_attempts}, retry_mode=#{@client.config.retry_mode}")
       @metrics = ['CREDENTIALS_STS_ASSUME_ROLE']
       super
     end

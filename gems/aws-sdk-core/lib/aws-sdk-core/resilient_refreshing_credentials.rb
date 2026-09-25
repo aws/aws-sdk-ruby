@@ -15,11 +15,14 @@ module Aws
   # from the source and assigns `@credentials` and `@expiration` on success,
   # or raises on failure. It must not partially update those on failure.
   #
-  # Before calling `super`, classes may set `@async_refresh` to true to
-  # refresh in the background during the advisory window, or set
-  # `@static_stability` to false for caching-only behavior. Classes may
-  # override `#non_recoverable_error?` to classify provider errors that
-  # should be raised immediately rather than retried.
+  # Advisory refresh is non-blocking in the sense the SEP defines: the caller
+  # that acquires the refresh lock refreshes inline and adopts the result,
+  # while concurrent callers get the cached credentials without waiting.
+  #
+  # Before calling `super`, classes may set `@static_stability` to false for
+  # caching-only behavior. Classes may override `#non_recoverable_error?` to
+  # classify provider errors that should be raised immediately rather than
+  # retried.
   module ResilientRefreshingCredentials
     MANDATORY_REFRESH_WINDOW = 60 # 1 minute
 
@@ -126,33 +129,20 @@ module Aws
     end
 
     def attempt_advisory_refresh
-      if @async_refresh
-        refresh_in_background
-        @credentials
-      else
-        return @credentials unless @mutex.try_lock
+      # Non-blocking: if another caller holds the lock it is already
+      # refreshing, so return the cached credentials rather than waiting.
+      return @credentials unless @mutex.try_lock
 
-        begin
-          perform_refresh(mandatory: false, raise_to_caller: true)
-        ensure
-          @mutex.unlock
-        end
+      begin
+        perform_refresh(mandatory: false, raise_to_caller: true)
+      ensure
+        @mutex.unlock
       end
     end
 
     def attempt_mandatory_refresh
       @mutex.synchronize do
         perform_refresh(mandatory: true, raise_to_caller: true)
-      end
-    end
-
-    def refresh_in_background
-      return if @mutex.locked?
-
-      Thread.new do
-        @mutex.synchronize do
-          perform_refresh(mandatory: false, raise_to_caller: false)
-        end
       end
     end
 

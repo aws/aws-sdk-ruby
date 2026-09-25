@@ -47,7 +47,6 @@ module Aws
       client_opts = {}
       @assume_role_web_identity_params = {}
       @token_file = options.delete(:web_identity_token_file)
-      @async_refresh = true
       options.each_pair do |key, value|
         if self.class.assume_role_web_identity_options.include?(key)
           @assume_role_web_identity_params[key] = value
@@ -61,6 +60,7 @@ module Aws
         @assume_role_web_identity_params[:role_session_name] = _session_name
       end
       @client = client_opts[:client] || STS::Client.new(client_opts.merge(credentials: nil))
+      warn("[SEP-DEBUG] AssumeRoleWebIdentityCredentials STS client max_attempts=#{@client.config.max_attempts}, retry_mode=#{@client.config.retry_mode}")
       @metrics = ['CREDENTIALS_STS_ASSUME_ROLE_WEB_ID']
       super
     end

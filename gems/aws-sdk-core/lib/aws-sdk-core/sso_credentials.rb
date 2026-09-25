@@ -115,7 +115,6 @@ module Aws
         @metrics = ['CREDENTIALS_SSO_LEGACY']
       end
 
-      @async_refresh = true
       super
     end
 

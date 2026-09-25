@@ -83,7 +83,6 @@ module Aws
         @identity_id = options.delete(:identity_id)
         @custom_role_arn = options.delete(:custom_role_arn)
         @logins = options.delete(:logins) || {}
-        @async_refresh = false
 
         client_opts = {}
         options.each_pair { |k, v| client_opts[k] = v unless CLIENT_EXCLUDE_OPTIONS.include?(k) }
