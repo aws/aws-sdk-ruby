@@ -1,23 +1,14 @@
 # frozen_string_literal: true
 
 module Aws
-  # Mixed into the credential providers that are in scope for the Credential
-  # Refresh SEP. Implements the statically stable refresh lifecycle: caching,
+  # Implements the statically stable refresh lifecycle: caching,
   # an advisory and a mandatory refresh window, rate-limited backoff on
   # failure, static stability (continue using cached credentials when a
   # refresh fails), and short-lived caching of non-recoverable errors.
   #
-  # Providers whose behavior is out of scope for the SEP (Process, S3 Express,
-  # and customer-provided providers) use {RefreshingCredentials} instead, which
-  # preserves the simpler pre-SEP refresh behavior.
-  #
   # Classes mixing in this module must implement `#refresh`, which fetches
   # from the source and assigns `@credentials` and `@expiration` on success,
   # or raises on failure. It must not partially update those on failure.
-  #
-  # Advisory refresh is non-blocking in the sense the SEP defines: the caller
-  # that acquires the refresh lock refreshes inline and adopts the result,
-  # while concurrent callers get the cached credentials without waiting.
   #
   # Before calling `super`, classes may set `@static_stability` to false for
   # caching-only behavior. Classes may override `#non_recoverable_error?` to

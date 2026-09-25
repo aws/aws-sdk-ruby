@@ -240,9 +240,7 @@ module Aws
         InstanceProfileCredentials.new(options.merge(profile: profile_name))
       end
     rescue Errors::MissingCredentialsError
-      # credential source was unreachable on initial fetch, skip so chain moves on.
-      # Non-recoverable errors are the source error (not MissingCredentialsError)
-      # and still propagate.
+      # credential source was unreachable on initial fetch, skip so chain moves on
       nil
     end
 
