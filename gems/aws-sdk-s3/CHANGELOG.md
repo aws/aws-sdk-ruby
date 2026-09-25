@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.232.2 (2026-09-25)
+------------------
+
 * Issue - Ensure the internally-created executor is shutdown on error in `TransferManager` and `Aws::S3::Object` resource methods, preventing leaked worker threads on multipart transfer failures (#3419).
 
 1.232.1 (2026-09-16)

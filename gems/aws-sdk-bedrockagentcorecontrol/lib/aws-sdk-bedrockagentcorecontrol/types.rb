@@ -1602,6 +1602,30 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # Specifies the service-managed Coinbase CDP secrets to rotate.
+    #
+    # @!attribute [rw] secrets
+    #   The secrets to rotate. Specify at least one value. Each secret that
+    #   you specify is rotated independently.
+    #
+    #   * `API_KEY` - The API key that the payment connector uses to call
+    #     Coinbase CDP. Rotate it as routine maintenance, or if you suspect
+    #     that it is compromised.
+    #
+    #   * `WALLET_SECRET` - The wallet secret that signs transactions.
+    #     Rotate it only if it is lost or compromised. Coinbase CDP allows
+    #     one wallet secret per project, so it is replaced in place and
+    #     signing can be briefly interrupted.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CoinbaseCdpRotationTargets AWS API Documentation
+    #
+    class CoinbaseCdpRotationTargets < Struct.new(
+      :secrets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for a component within a configuration bundle. The
     # component type is inferred from the component identifier ARN.
     #
@@ -5199,6 +5223,28 @@ module Aws::BedrockAgentCoreControl
       :credential_provider)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Specifies the service-managed credentials to rotate. Provide the
+    # member that matches the payment connector's `type`.
+    #
+    # @note CredentialRotationConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] coinbase_cdp
+    #   The credentials to rotate for a Coinbase CDP payment connector.
+    #   @return [Types::CoinbaseCdpRotationTargets]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CredentialRotationConfig AWS API Documentation
+    #
+    class CredentialRotationConfig < Struct.new(
+      :coinbase_cdp,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CoinbaseCdp < CredentialRotationConfig; end
+      class Unknown < CredentialRotationConfig; end
     end
 
     # The credential provider configuration for a payment connector.
@@ -10264,6 +10310,20 @@ module Aws::BedrockAgentCoreControl
     #   provider integration.
     #   @return [String]
     #
+    # @!attribute [rw] provision_mode
+    #   Specifies how the payment connector was provisioned. Payment
+    #   connectors that were created before this field was available return
+    #   `MANUAL`.
+    #
+    #   * `MANUAL` - You provided the credential provider configurations, so
+    #     you own the credentials. Rotate them with the payment provider,
+    #     then call `UpdatePaymentCredentialProvider`.
+    #
+    #   * `QUICK_CREATE` - AgentCore provisioned the credential provider for
+    #     you, so the credentials are service-managed. You can rotate them
+    #     with `RotatePaymentConnectorCredentials`.
+    #   @return [String]
+    #
     # @!attribute [rw] credential_provider_configurations
     #   The credential provider configurations for the payment connector.
     #   @return [Array<Types::CredentialsProviderConfiguration>]
@@ -10288,6 +10348,14 @@ module Aws::BedrockAgentCoreControl
     #   `PENDING_AUTHENTICATION`.
     #   @return [String]
     #
+    # @!attribute [rw] credentials_updated_at
+    #   The timestamp when the payment connector's current service-managed
+    #   credentials took effect. It is first set when the credentials are
+    #   provisioned and is updated by each rotation. This field is present
+    #   only for payment connectors with a `provisionMode` of
+    #   `QUICK_CREATE`.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPaymentConnectorResponse AWS API Documentation
     #
     class GetPaymentConnectorResponse < Struct.new(
@@ -10295,11 +10363,13 @@ module Aws::BedrockAgentCoreControl
       :name,
       :description,
       :type,
+      :provision_mode,
       :credential_provider_configurations,
       :created_at,
       :last_updated_at,
       :status,
-      :authorization_url)
+      :authorization_url,
+      :credentials_updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15760,11 +15830,9 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] mcp_tool_schema
-    #   The tool schema configuration for the MCP server target. Supported
-    #   only when the credential provider is configured with an
-    #   authorization code grant type. Dynamic tool
-    #   discovery/synchronization will be disabled when target is configured
-    #   with mcpToolSchema.
+    #   A static tool list for the MCP server target. It is supported for
+    #   all credential providers. Dynamic tool discovery/synchronization
+    #   will be disabled when a target is configured with mcpToolSchema.
     #   @return [Types::McpToolSchemaConfiguration]
     #
     # @!attribute [rw] listing_mode
@@ -17173,6 +17241,19 @@ module Aws::BedrockAgentCoreControl
     #   provider integration.
     #   @return [String]
     #
+    # @!attribute [rw] provision_mode
+    #   Specifies how the payment connector was provisioned. Payment
+    #   connectors that were created before this field was available return
+    #   `MANUAL`.
+    #
+    #   * `MANUAL` - You provided the credential provider configurations, so
+    #     you own the credentials.
+    #
+    #   * `QUICK_CREATE` - AgentCore provisioned the credential provider for
+    #     you, so the credentials are service-managed and you can rotate
+    #     them with `RotatePaymentConnectorCredentials`.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The current status of the payment connector. Possible values include
     #   `CREATING`, `READY`, `UPDATING`, `DELETING`, `CREATE_FAILED`,
@@ -17189,6 +17270,7 @@ module Aws::BedrockAgentCoreControl
       :payment_connector_id,
       :name,
       :type,
+      :provision_mode,
       :status,
       :last_updated_at)
       SENSITIVE = []
@@ -18664,6 +18746,77 @@ module Aws::BedrockAgentCoreControl
       :encrypted,
       :kms_key_id,
       :free_space_gi_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_manager_id
+    #   The unique identifier of the parent payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_connector_id
+    #   The unique identifier of the payment connector whose credentials you
+    #   want to rotate.
+    #   @return [String]
+    #
+    # @!attribute [rw] credentials_to_rotate
+    #   The credentials to rotate. Specify the member that matches the
+    #   payment connector's `type`. Each credential that you select is
+    #   rotated independently.
+    #   @return [Types::CredentialRotationConfig]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a
+    #   previous request, the service ignores the request, but doesn't
+    #   return an error. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/RotatePaymentConnectorCredentialsRequest AWS API Documentation
+    #
+    class RotatePaymentConnectorCredentialsRequest < Struct.new(
+      :payment_manager_id,
+      :payment_connector_id,
+      :credentials_to_rotate,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_connector_id
+    #   The unique identifier of the payment connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_id
+    #   The unique identifier of the parent payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp when the payment connector was last updated, which is
+    #   when the rotation completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the payment connector, which is `READY` after
+    #   a successful rotation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/RotatePaymentConnectorCredentialsResponse AWS API Documentation
+    #
+    class RotatePaymentConnectorCredentialsResponse < Struct.new(
+      :payment_connector_id,
+      :payment_manager_id,
+      :last_updated_at,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

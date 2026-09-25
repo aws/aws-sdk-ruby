@@ -1527,6 +1527,9 @@ module Aws::MediaConnect
       SENSITIVE: []
     end
 
+    class PublicTlsEncryptionConfiguration < Aws::EmptyStructure
+    end
+
     class PurchaseOfferingRequest
       attr_accessor offering_arn: ::String
       attr_accessor reservation_name: ::String
@@ -2002,6 +2005,7 @@ module Aws::MediaConnect
     class RouterOutputProtocolConfiguration
       attr_accessor rist: Types::RistRouterOutputConfiguration
       attr_accessor srt_listener: Types::SrtListenerRouterOutputConfiguration
+      attr_accessor rtmp_push: Types::RtmpPushRouterOutputConfiguration
       attr_accessor srt_caller: Types::SrtCallerRouterOutputConfiguration
       attr_accessor rtp: Types::RtpRouterOutputConfiguration
       attr_accessor unknown: untyped
@@ -2010,6 +2014,8 @@ module Aws::MediaConnect
       class Rist < RouterOutputProtocolConfiguration
       end
       class SrtListener < RouterOutputProtocolConfiguration
+      end
+      class RtmpPush < RouterOutputProtocolConfiguration
       end
       class SrtCaller < RouterOutputProtocolConfiguration
       end
@@ -2039,6 +2045,15 @@ module Aws::MediaConnect
       end
       class Unknown < RouterOutputStreamDetails
       end
+    end
+
+    class RtmpPushRouterOutputConfiguration
+      attr_accessor destination_address: ::String
+      attr_accessor destination_port: ::Integer
+      attr_accessor application_name: ::String
+      attr_accessor stream_name: ::String
+      attr_accessor tls_encryption: Types::TlsEncryption
+      SENSITIVE: []
     end
 
     class RtpRouterInputConfiguration
@@ -2195,7 +2210,7 @@ module Aws::MediaConnect
     class StandardRouterOutputConfiguration
       attr_accessor network_interface_arn: ::String
       attr_accessor protocol_configuration: Types::RouterOutputProtocolConfiguration
-      attr_accessor protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER")
+      attr_accessor protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER" | "RTMP_PUSH")
       SENSITIVE: []
     end
 
@@ -2312,6 +2327,23 @@ module Aws::MediaConnect
       attr_accessor timecode: ::String
       attr_accessor timestamp: ::Time
       SENSITIVE: []
+    end
+
+    class TlsEncryption
+      attr_accessor encryption_type: ("PUBLIC")
+      attr_accessor encryption_configuration: Types::TlsEncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class TlsEncryptionConfiguration
+      attr_accessor public: Types::PublicTlsEncryptionConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Public < TlsEncryptionConfiguration
+      end
+      class Unknown < TlsEncryptionConfiguration
+      end
     end
 
     class TooManyRequestsException

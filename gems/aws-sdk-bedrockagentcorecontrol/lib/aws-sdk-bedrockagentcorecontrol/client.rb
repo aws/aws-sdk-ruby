@@ -8909,11 +8909,13 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetPaymentConnectorResponse#name #name} => String
     #   * {Types::GetPaymentConnectorResponse#description #description} => String
     #   * {Types::GetPaymentConnectorResponse#type #type} => String
+    #   * {Types::GetPaymentConnectorResponse#provision_mode #provision_mode} => String
     #   * {Types::GetPaymentConnectorResponse#credential_provider_configurations #credential_provider_configurations} => Array&lt;Types::CredentialsProviderConfiguration&gt;
     #   * {Types::GetPaymentConnectorResponse#created_at #created_at} => Time
     #   * {Types::GetPaymentConnectorResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::GetPaymentConnectorResponse#status #status} => String
     #   * {Types::GetPaymentConnectorResponse#authorization_url #authorization_url} => String
+    #   * {Types::GetPaymentConnectorResponse#credentials_updated_at #credentials_updated_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -8928,6 +8930,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.type #=> String, one of "CoinbaseCDP", "StripePrivy"
+    #   resp.provision_mode #=> String, one of "MANUAL", "QUICK_CREATE"
     #   resp.credential_provider_configurations #=> Array
     #   resp.credential_provider_configurations[0].coinbase_cdp.credential_provider_arn #=> String
     #   resp.credential_provider_configurations[0].stripe_privy.credential_provider_arn #=> String
@@ -8935,6 +8938,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.last_updated_at #=> Time
     #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED", "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED", "PENDING_AUTHENTICATION", "PROVISIONING", "AUTHENTICATION_EXPIRED", "AUTHENTICATION_FAILED"
     #   resp.authorization_url #=> String
+    #   resp.credentials_updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPaymentConnector AWS API Documentation
     #
@@ -11074,6 +11078,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.payment_connectors[0].payment_connector_id #=> String
     #   resp.payment_connectors[0].name #=> String
     #   resp.payment_connectors[0].type #=> String, one of "CoinbaseCDP", "StripePrivy"
+    #   resp.payment_connectors[0].provision_mode #=> String, one of "MANUAL", "QUICK_CREATE"
     #   resp.payment_connectors[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED", "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED", "PENDING_AUTHENTICATION", "PROVISIONING", "AUTHENTICATION_EXPIRED", "AUTHENTICATION_FAILED"
     #   resp.payment_connectors[0].last_updated_at #=> Time
     #   resp.next_token #=> String
@@ -11881,6 +11886,88 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def put_resource_policy(params = {}, options = {})
       req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Replaces the service-managed credentials of a payment connector with
+    # newly issued credentials.
+    #
+    # Use this operation only for payment connectors with a `provisionMode`
+    # of `QUICK_CREATE`. For payment connectors with a `provisionMode` of
+    # `MANUAL`, call `UpdatePaymentCredentialProvider` instead after
+    # rotating credentials with the payment provider directly.
+    #
+    # The rotation finishes before the response is returned, and only one
+    # rotation runs at a time for a given payment connector. When it
+    # succeeds, the new credential is in effect and the payment connector
+    # stays in the `READY` state. When it fails, an error is returned, the
+    # payment connector and its existing credential are left unchanged, and
+    # you can retry the request.
+    #
+    # Rotation replaces the credential on the connector's credential
+    # provider, so every payment connector that uses that provider is
+    # affected. Replace any copy of the previous credential that you use
+    # outside AgentCore.
+    #
+    # @option params [required, String] :payment_manager_id
+    #   The unique identifier of the parent payment manager.
+    #
+    # @option params [required, String] :payment_connector_id
+    #   The unique identifier of the payment connector whose credentials you
+    #   want to rotate.
+    #
+    # @option params [required, Types::CredentialRotationConfig] :credentials_to_rotate
+    #   The credentials to rotate. Specify the member that matches the payment
+    #   connector's `type`. Each credential that you select is rotated
+    #   independently.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a previous
+    #   request, the service ignores the request, but doesn't return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::RotatePaymentConnectorCredentialsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RotatePaymentConnectorCredentialsResponse#payment_connector_id #payment_connector_id} => String
+    #   * {Types::RotatePaymentConnectorCredentialsResponse#payment_manager_id #payment_manager_id} => String
+    #   * {Types::RotatePaymentConnectorCredentialsResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::RotatePaymentConnectorCredentialsResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.rotate_payment_connector_credentials({
+    #     payment_manager_id: "PaymentManagerId", # required
+    #     payment_connector_id: "PaymentConnectorId", # required
+    #     credentials_to_rotate: { # required
+    #       coinbase_cdp: {
+    #         secrets: ["API_KEY"], # required, accepts API_KEY, WALLET_SECRET
+    #       },
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_connector_id #=> String
+    #   resp.payment_manager_id #=> String
+    #   resp.last_updated_at #=> Time
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED", "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED", "PENDING_AUTHENTICATION", "PROVISIONING", "AUTHENTICATION_EXPIRED", "AUTHENTICATION_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/RotatePaymentConnectorCredentials AWS API Documentation
+    #
+    # @overload rotate_payment_connector_credentials(params = {})
+    # @param [Hash] params ({})
+    def rotate_payment_connector_credentials(params = {}, options = {})
+      req = build_request(:rotate_payment_connector_credentials, params)
       req.send_request(options)
     end
 
@@ -16945,7 +17032,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

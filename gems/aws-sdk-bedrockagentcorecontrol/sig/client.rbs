@@ -1827,11 +1827,13 @@ module Aws
         def name: () -> ::String
         def description: () -> ::String
         def type: () -> ("CoinbaseCDP" | "StripePrivy")
+        def provision_mode: () -> ("MANUAL" | "QUICK_CREATE")
         def credential_provider_configurations: () -> ::Array[Types::CredentialsProviderConfiguration]
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
         def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED" | "PENDING_AUTHENTICATION" | "PROVISIONING" | "AUTHENTICATION_EXPIRED" | "AUTHENTICATION_FAILED")
         def authorization_url: () -> ::String
+        def credentials_updated_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_payment_connector-instance_method
       def get_payment_connector: (
@@ -2596,6 +2598,26 @@ module Aws
                                  policy: ::String
                                ) -> _PutResourcePolicyResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _RotatePaymentConnectorCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RotatePaymentConnectorCredentialsResponse]
+        def payment_connector_id: () -> ::String
+        def payment_manager_id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED" | "PENDING_AUTHENTICATION" | "PROVISIONING" | "AUTHENTICATION_EXPIRED" | "AUTHENTICATION_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#rotate_payment_connector_credentials-instance_method
+      def rotate_payment_connector_credentials: (
+                                                  payment_manager_id: ::String,
+                                                  payment_connector_id: ::String,
+                                                  credentials_to_rotate: {
+                                                    coinbase_cdp: {
+                                                      secrets: Array[("API_KEY" | "WALLET_SECRET")]
+                                                    }?
+                                                  },
+                                                  ?client_token: ::String
+                                                ) -> _RotatePaymentConnectorCredentialsResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RotatePaymentConnectorCredentialsResponseSuccess
 
       interface _SetTokenVaultCMKResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SetTokenVaultCMKResponse]

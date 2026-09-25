@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.276.0 (2026-09-25)
+------------------
+
+* Feature - add support for table level federation
+
 1.275.0 (2026-09-22)
 ------------------
 

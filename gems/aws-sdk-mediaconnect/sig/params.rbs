@@ -443,6 +443,20 @@ module Aws
       }?
     }
 
+      type rtmp_push_router_output_configuration = {
+      destination_address: ::String,
+      destination_port: ::Integer,
+      application_name: ::String,
+      stream_name: ::String,
+      tls_encryption: {
+        encryption_type: ("PUBLIC")?,
+        encryption_configuration: {
+          public: {
+          }?
+        }
+      }?
+    }
+
       type srt_caller_router_output_configuration = {
       destination_address: ::String,
       destination_port: ::Integer,
@@ -462,6 +476,7 @@ module Aws
         destination_port: ::Integer
       }?,
       srt_listener: Params::srt_listener_router_output_configuration?,
+      rtmp_push: Params::rtmp_push_router_output_configuration?,
       srt_caller: Params::srt_caller_router_output_configuration?,
       rtp: {
         destination_address: ::String,
@@ -473,7 +488,7 @@ module Aws
       type standard_router_output_configuration = {
       network_interface_arn: ::String,
       protocol_configuration: Params::router_output_protocol_configuration,
-      protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER")?
+      protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER" | "RTMP_PUSH")?
     }
 
       type media_connect_flow_router_output_configuration = {

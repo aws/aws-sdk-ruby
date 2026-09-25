@@ -3609,6 +3609,63 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
+    # Returns a paginated list of the email MFA messages received for an
+    # actor at its server-generated email address, most recent first.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The unique identifier of the agent space that owns the pentest.
+    #
+    # @option params [required, String] :pentest_id
+    #   The unique identifier of the pentest that the actor belongs to.
+    #
+    # @option params [required, String] :actor_identifier
+    #   The identifier of the actor whose messages to list. The identifier is
+    #   case-insensitive.
+    #
+    # @return [Types::ListActorMessagesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListActorMessagesOutput#messages #messages} => Array&lt;Types::ActorMessage&gt;
+    #   * {Types::ListActorMessagesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_actor_messages({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     agent_space_id: "String", # required
+    #     pentest_id: "String", # required
+    #     actor_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.messages #=> Array
+    #   resp.messages[0].sender #=> String
+    #   resp.messages[0].subject #=> String
+    #   resp.messages[0].body #=> String
+    #   resp.messages[0].received_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListActorMessages AWS API Documentation
+    #
+    # @overload list_actor_messages(params = {})
+    # @param [Hash] params ({})
+    def list_actor_messages(params = {}, options = {})
+      req = build_request(:list_actor_messages, params)
+      req.send_request(options)
+    end
+
     # Returns a paginated list of agent space summaries in your account.
     #
     # @option params [String] :next_token
@@ -6427,7 +6484,7 @@ module Aws::SecurityAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityagent'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

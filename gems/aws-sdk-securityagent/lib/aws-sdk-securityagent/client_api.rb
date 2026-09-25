@@ -20,6 +20,8 @@ module Aws::SecurityAgent
     AccessType = Shapes::StringShape.new(name: 'AccessType')
     Actor = Shapes::StructureShape.new(name: 'Actor')
     ActorList = Shapes::ListShape.new(name: 'ActorList')
+    ActorMessage = Shapes::StructureShape.new(name: 'ActorMessage')
+    ActorMessageList = Shapes::ListShape.new(name: 'ActorMessageList')
     AddArtifactInput = Shapes::StructureShape.new(name: 'AddArtifactInput')
     AddArtifactOutput = Shapes::StructureShape.new(name: 'AddArtifactOutput')
     AgentName = Shapes::StringShape.new(name: 'AgentName')
@@ -264,6 +266,8 @@ module Aws::SecurityAgent
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LambdaFunctionArn = Shapes::StringShape.new(name: 'LambdaFunctionArn')
     LambdaFunctionArns = Shapes::ListShape.new(name: 'LambdaFunctionArns')
+    ListActorMessagesInput = Shapes::StructureShape.new(name: 'ListActorMessagesInput')
+    ListActorMessagesOutput = Shapes::StructureShape.new(name: 'ListActorMessagesOutput')
     ListAgentSpacesInput = Shapes::StructureShape.new(name: 'ListAgentSpacesInput')
     ListAgentSpacesOutput = Shapes::StructureShape.new(name: 'ListAgentSpacesOutput')
     ListApplicationsRequest = Shapes::StructureShape.new(name: 'ListApplicationsRequest')
@@ -401,6 +405,9 @@ module Aws::SecurityAgent
     SelfManagedInput = Shapes::StructureShape.new(name: 'SelfManagedInput')
     SensitiveEmail = Shapes::StringShape.new(name: 'SensitiveEmail')
     SensitiveEmailAddress = Shapes::StringShape.new(name: 'SensitiveEmailAddress')
+    SensitiveMessageBody = Shapes::StringShape.new(name: 'SensitiveMessageBody')
+    SensitiveMessageSender = Shapes::StringShape.new(name: 'SensitiveMessageSender')
+    SensitiveMessageSubject = Shapes::StringShape.new(name: 'SensitiveMessageSubject')
     ServiceManagedInput = Shapes::StructureShape.new(name: 'ServiceManagedInput')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceRole = Shapes::StringShape.new(name: 'ServiceRole')
@@ -547,6 +554,14 @@ module Aws::SecurityAgent
     Actor.struct_class = Types::Actor
 
     ActorList.member = Shapes::ShapeRef.new(shape: Actor)
+
+    ActorMessage.add_member(:sender, Shapes::ShapeRef.new(shape: SensitiveMessageSender, location_name: "sender"))
+    ActorMessage.add_member(:subject, Shapes::ShapeRef.new(shape: SensitiveMessageSubject, location_name: "subject"))
+    ActorMessage.add_member(:body, Shapes::ShapeRef.new(shape: SensitiveMessageBody, location_name: "body"))
+    ActorMessage.add_member(:received_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "receivedAt"))
+    ActorMessage.struct_class = Types::ActorMessage
+
+    ActorMessageList.member = Shapes::ShapeRef.new(shape: ActorMessage)
 
     AddArtifactInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location_name: "agentSpaceId"))
     AddArtifactInput.add_member(:artifact_content, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "artifactContent"))
@@ -1610,6 +1625,17 @@ module Aws::SecurityAgent
     InternalServerException.struct_class = Types::InternalServerException
 
     LambdaFunctionArns.member = Shapes::ShapeRef.new(shape: LambdaFunctionArn)
+
+    ListActorMessagesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListActorMessagesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListActorMessagesInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
+    ListActorMessagesInput.add_member(:pentest_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "pentestId"))
+    ListActorMessagesInput.add_member(:actor_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "actorIdentifier"))
+    ListActorMessagesInput.struct_class = Types::ListActorMessagesInput
+
+    ListActorMessagesOutput.add_member(:messages, Shapes::ShapeRef.new(shape: ActorMessageList, location_name: "messages"))
+    ListActorMessagesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListActorMessagesOutput.struct_class = Types::ListActorMessagesOutput
 
     ListAgentSpacesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAgentSpacesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
@@ -3189,6 +3215,20 @@ module Aws::SecurityAgent
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:list_actor_messages, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListActorMessages"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListActorMessages"
+        o.input = Shapes::ShapeRef.new(shape: ListActorMessagesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListActorMessagesOutput)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_agent_spaces, Seahorse::Model::Operation.new.tap do |o|

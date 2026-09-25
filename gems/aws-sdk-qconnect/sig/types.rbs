@@ -45,6 +45,7 @@ module Aws::QConnect
 
     class AIAgentConfigurationData
       attr_accessor ai_agent_id: ::String
+      attr_accessor enabled: bool
       SENSITIVE: []
     end
 
@@ -923,6 +924,7 @@ module Aws::QConnect
       attr_accessor suggested_message_data: Types::SuggestedMessageDataDetails
       attr_accessor notes_data: Types::NotesDataDetails
       attr_accessor notes_chunk_data: Types::NotesChunkDataDetails
+      attr_accessor proactive_recommendation_data: Types::ProactiveRecommendationDataDetails
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -949,6 +951,8 @@ module Aws::QConnect
       class NotesData < DataDetails
       end
       class NotesChunkData < DataDetails
+      end
+      class ProactiveRecommendationData < DataDetails
       end
       class Unknown < DataDetails
       end
@@ -1453,7 +1457,7 @@ module Aws::QConnect
       attr_accessor max_results: ::Integer
       attr_accessor wait_time_seconds: ::Integer
       attr_accessor next_chunk_token: ::String
-      attr_accessor recommendation_type: ("KNOWLEDGE_CONTENT" | "GENERATIVE_RESPONSE" | "GENERATIVE_ANSWER" | "DETECTED_INTENT" | "GENERATIVE_ANSWER_CHUNK" | "BLOCKED_GENERATIVE_ANSWER_CHUNK" | "INTENT_ANSWER_CHUNK" | "BLOCKED_INTENT_ANSWER_CHUNK" | "EMAIL_RESPONSE_CHUNK" | "EMAIL_OVERVIEW_CHUNK" | "EMAIL_GENERATIVE_ANSWER_CHUNK" | "CASE_SUMMARIZATION_CHUNK" | "BLOCKED_CASE_SUMMARIZATION_CHUNK" | "SUGGESTED_MESSAGE" | "NOTES_CHUNK" | "BLOCKED_NOTES_CHUNK")
+      attr_accessor recommendation_type: ("KNOWLEDGE_CONTENT" | "GENERATIVE_RESPONSE" | "GENERATIVE_ANSWER" | "DETECTED_INTENT" | "GENERATIVE_ANSWER_CHUNK" | "BLOCKED_GENERATIVE_ANSWER_CHUNK" | "INTENT_ANSWER_CHUNK" | "BLOCKED_INTENT_ANSWER_CHUNK" | "EMAIL_RESPONSE_CHUNK" | "EMAIL_OVERVIEW_CHUNK" | "EMAIL_GENERATIVE_ANSWER_CHUNK" | "CASE_SUMMARIZATION_CHUNK" | "BLOCKED_CASE_SUMMARIZATION_CHUNK" | "SUGGESTED_MESSAGE" | "NOTES_CHUNK" | "BLOCKED_NOTES_CHUNK" | "PROACTIVE_RECOMMENDATION")
       SENSITIVE: []
     end
 
@@ -2261,6 +2265,11 @@ module Aws::QConnect
       SENSITIVE: []
     end
 
+    class ProactiveRecommendationDataDetails
+      attr_accessor next_message_token: ::String
+      SENSITIVE: []
+    end
+
     class PushADMMessageTemplateContent
       attr_accessor title: ::String
       attr_accessor body: Types::MessageTemplateBodyContentProvider
@@ -2532,7 +2541,7 @@ module Aws::QConnect
       attr_accessor document: Types::Document
       attr_accessor relevance_score: ::Float
       attr_accessor relevance_level: ("HIGH" | "MEDIUM" | "LOW")
-      attr_accessor type: ("KNOWLEDGE_CONTENT" | "GENERATIVE_RESPONSE" | "GENERATIVE_ANSWER" | "DETECTED_INTENT" | "GENERATIVE_ANSWER_CHUNK" | "BLOCKED_GENERATIVE_ANSWER_CHUNK" | "INTENT_ANSWER_CHUNK" | "BLOCKED_INTENT_ANSWER_CHUNK" | "EMAIL_RESPONSE_CHUNK" | "EMAIL_OVERVIEW_CHUNK" | "EMAIL_GENERATIVE_ANSWER_CHUNK" | "CASE_SUMMARIZATION_CHUNK" | "BLOCKED_CASE_SUMMARIZATION_CHUNK" | "SUGGESTED_MESSAGE" | "NOTES_CHUNK" | "BLOCKED_NOTES_CHUNK")
+      attr_accessor type: ("KNOWLEDGE_CONTENT" | "GENERATIVE_RESPONSE" | "GENERATIVE_ANSWER" | "DETECTED_INTENT" | "GENERATIVE_ANSWER_CHUNK" | "BLOCKED_GENERATIVE_ANSWER_CHUNK" | "INTENT_ANSWER_CHUNK" | "BLOCKED_INTENT_ANSWER_CHUNK" | "EMAIL_RESPONSE_CHUNK" | "EMAIL_OVERVIEW_CHUNK" | "EMAIL_GENERATIVE_ANSWER_CHUNK" | "CASE_SUMMARIZATION_CHUNK" | "BLOCKED_CASE_SUMMARIZATION_CHUNK" | "SUGGESTED_MESSAGE" | "NOTES_CHUNK" | "BLOCKED_NOTES_CHUNK" | "PROACTIVE_RECOMMENDATION")
       attr_accessor data: Types::DataSummary
       SENSITIVE: []
     end
@@ -2670,6 +2679,13 @@ module Aws::QConnect
       end
     end
 
+    class RetrieveError
+      attr_accessor association_id: ::String
+      attr_accessor code: ("ACCESS_DENIED" | "RESOURCE_NOT_FOUND" | "VALIDATION_ERROR" | "THROTTLED" | "DEPENDENCY_FAILED" | "INTERNAL_SERVER_ERROR")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class RetrieveRequest
       attr_accessor assistant_id: ::String
       attr_accessor retrieval_configuration: Types::RetrievalConfiguration
@@ -2679,6 +2695,7 @@ module Aws::QConnect
 
     class RetrieveResponse
       attr_accessor results: ::Array[Types::RetrieveResult]
+      attr_accessor errors: ::Array[Types::RetrieveError]
       SENSITIVE: []
     end
 

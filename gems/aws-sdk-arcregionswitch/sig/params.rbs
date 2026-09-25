@@ -46,7 +46,8 @@ module Aws
         minimum_success_percentage: ::Integer
       }?,
       target_percent: ::Integer?,
-      capacity_monitoring_approach: ("sampledMaxInLast24Hours" | "autoscalingMaxInLast24Hours")?
+      capacity_monitoring_approach: ("sampledMaxInLast24Hours" | "autoscalingMaxInLast24Hours")?,
+      wait_elb_target_group_healthy: ("enabled" | "disabled")?
     }
 
       type global_aurora_configuration = {
@@ -75,7 +76,8 @@ module Aws
         minimum_success_percentage: ::Integer
       }?,
       target_percent: ::Integer?,
-      capacity_monitoring_approach: ("sampledMaxInLast24Hours" | "containerInsightsMaxInLast24Hours")?
+      capacity_monitoring_approach: ("sampledMaxInLast24Hours" | "containerInsightsMaxInLast24Hours")?,
+      wait_elb_target_group_healthy: ("enabled" | "disabled")?
     }
 
       type eks_resource_scaling_configuration = {

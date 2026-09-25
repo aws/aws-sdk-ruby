@@ -482,6 +482,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentRecommendationResponse]
         def recommendation_arn: () -> ::String
         def profile_arn: () -> ::String
+        def generation_id: () -> ::String
         def title: () -> ::String
         def description: () -> ::String
         def type: () -> ("RESOURCE" | "ARCHITECTURE" | "APPLICATION")

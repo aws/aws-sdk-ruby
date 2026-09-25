@@ -816,6 +816,12 @@ module Aws::Rekognition
       SENSITIVE: []
     end
 
+    class FeedbackItem
+      attr_accessor code: ("FACE_NOT_VISIBLE" | "FACE_OBSTRUCTION_DETECTED" | "LOW_VIDEO_QUALITY_DETECTED" | "FACE_NOT_ALIGNED" | "EYES_CLOSED_DETECTED" | "LOW_LIGHTING_DETECTED" | "HIGH_LIGHTING_DETECTED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class Gender
       attr_accessor value: ("Male" | "Female")
       attr_accessor confidence: ::Float
@@ -928,6 +934,8 @@ module Aws::Rekognition
       attr_accessor reference_image: Types::AuditImage
       attr_accessor audit_images: ::Array[Types::AuditImage]
       attr_accessor challenge: Types::Challenge
+      attr_accessor feedback: ::Array[Types::FeedbackItem]
+      attr_accessor metadata: Types::SessionMetadata
       SENSITIVE: []
     end
 
@@ -1720,6 +1728,11 @@ module Aws::Rekognition
     end
 
     class ServiceQuotaExceededException < Aws::EmptyStructure
+    end
+
+    class SessionMetadata
+      attr_accessor sdk_type: ::String
+      SENSITIVE: []
     end
 
     class SessionNotFoundException < Aws::EmptyStructure

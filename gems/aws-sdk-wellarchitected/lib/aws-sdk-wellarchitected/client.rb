@@ -2433,6 +2433,7 @@ module Aws::WellArchitected
     #
     #   * {Types::GetAgentRecommendationResponse#recommendation_arn #recommendation_arn} => String
     #   * {Types::GetAgentRecommendationResponse#profile_arn #profile_arn} => String
+    #   * {Types::GetAgentRecommendationResponse#generation_id #generation_id} => String
     #   * {Types::GetAgentRecommendationResponse#title #title} => String
     #   * {Types::GetAgentRecommendationResponse#description #description} => String
     #   * {Types::GetAgentRecommendationResponse#type #type} => String
@@ -2474,6 +2475,7 @@ module Aws::WellArchitected
     #
     #   resp.recommendation_arn #=> String
     #   resp.profile_arn #=> String
+    #   resp.generation_id #=> String
     #   resp.title #=> String
     #   resp.description #=> String
     #   resp.type #=> String, one of "RESOURCE", "ARCHITECTURE", "APPLICATION"
@@ -3927,6 +3929,7 @@ module Aws::WellArchitected
     #   resp.items #=> Array
     #   resp.items[0].recommendation_arn #=> String
     #   resp.items[0].profile_arn #=> String
+    #   resp.items[0].generation_id #=> String
     #   resp.items[0].title #=> String
     #   resp.items[0].description #=> String
     #   resp.items[0].type #=> String, one of "RESOURCE", "ARCHITECTURE", "APPLICATION"
@@ -6770,7 +6773,7 @@ module Aws::WellArchitected
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-wellarchitected'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

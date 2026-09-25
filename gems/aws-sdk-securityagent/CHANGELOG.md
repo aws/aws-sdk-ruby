@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2026-09-25)
+------------------
+
+* Feature - This release adds the ListActorMessages operation, which returns the multi-factor authentication messages received at an actor's server-generated email address
+
 1.16.0 (2026-09-24)
 ------------------
 

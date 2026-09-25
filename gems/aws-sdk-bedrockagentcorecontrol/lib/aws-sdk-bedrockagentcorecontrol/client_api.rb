@@ -162,6 +162,9 @@ module Aws::BedrockAgentCoreControl
     CoinbaseCdpApiKeyIdType = Shapes::StringShape.new(name: 'CoinbaseCdpApiKeyIdType')
     CoinbaseCdpConfigurationInput = Shapes::StructureShape.new(name: 'CoinbaseCdpConfigurationInput')
     CoinbaseCdpConfigurationOutput = Shapes::StructureShape.new(name: 'CoinbaseCdpConfigurationOutput')
+    CoinbaseCdpRotationTargets = Shapes::StructureShape.new(name: 'CoinbaseCdpRotationTargets')
+    CoinbaseCdpSecret = Shapes::StringShape.new(name: 'CoinbaseCdpSecret')
+    CoinbaseCdpSecrets = Shapes::ListShape.new(name: 'CoinbaseCdpSecrets')
     ComponentConfiguration = Shapes::StructureShape.new(name: 'ComponentConfiguration')
     ComponentConfigurationMap = Shapes::MapShape.new(name: 'ComponentConfigurationMap')
     ComponentIdentifier = Shapes::StringShape.new(name: 'ComponentIdentifier')
@@ -287,6 +290,7 @@ module Aws::BedrockAgentCoreControl
     CredentialProviderName = Shapes::StringShape.new(name: 'CredentialProviderName')
     CredentialProviderType = Shapes::StringShape.new(name: 'CredentialProviderType')
     CredentialProviderVendorType = Shapes::StringShape.new(name: 'CredentialProviderVendorType')
+    CredentialRotationConfig = Shapes::UnionShape.new(name: 'CredentialRotationConfig')
     CredentialsProviderConfiguration = Shapes::UnionShape.new(name: 'CredentialsProviderConfiguration')
     CredentialsProviderConfigurations = Shapes::ListShape.new(name: 'CredentialsProviderConfigurations')
     CustomClaimValidationType = Shapes::StructureShape.new(name: 'CustomClaimValidationType')
@@ -1128,6 +1132,8 @@ module Aws::BedrockAgentCoreControl
     RootVolumeConfiguration = Shapes::StructureShape.new(name: 'RootVolumeConfiguration')
     RootVolumeConfigurationFreeSpaceGiBInteger = Shapes::IntegerShape.new(name: 'RootVolumeConfigurationFreeSpaceGiBInteger')
     RootVolumeConfigurationThroughputInteger = Shapes::IntegerShape.new(name: 'RootVolumeConfigurationThroughputInteger')
+    RotatePaymentConnectorCredentialsRequest = Shapes::StructureShape.new(name: 'RotatePaymentConnectorCredentialsRequest')
+    RotatePaymentConnectorCredentialsResponse = Shapes::StructureShape.new(name: 'RotatePaymentConnectorCredentialsResponse')
     RouteToTargetAction = Shapes::UnionShape.new(name: 'RouteToTargetAction')
     RoutingDomain = Shapes::StringShape.new(name: 'RoutingDomain')
     Rule = Shapes::StructureShape.new(name: 'Rule')
@@ -1797,6 +1803,11 @@ module Aws::BedrockAgentCoreControl
     CoinbaseCdpConfigurationOutput.add_member(:wallet_secret_source, Shapes::ShapeRef.new(shape: SecretSourceType, location_name: "walletSecretSource"))
     CoinbaseCdpConfigurationOutput.struct_class = Types::CoinbaseCdpConfigurationOutput
 
+    CoinbaseCdpRotationTargets.add_member(:secrets, Shapes::ShapeRef.new(shape: CoinbaseCdpSecrets, required: true, location_name: "secrets"))
+    CoinbaseCdpRotationTargets.struct_class = Types::CoinbaseCdpRotationTargets
+
+    CoinbaseCdpSecrets.member = Shapes::ShapeRef.new(shape: CoinbaseCdpSecret)
+
     ComponentConfiguration.add_member(:configuration, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "configuration"))
     ComponentConfiguration.struct_class = Types::ComponentConfiguration
 
@@ -2462,6 +2473,12 @@ module Aws::BedrockAgentCoreControl
     CredentialProviderConfiguration.struct_class = Types::CredentialProviderConfiguration
 
     CredentialProviderConfigurations.member = Shapes::ShapeRef.new(shape: CredentialProviderConfiguration)
+
+    CredentialRotationConfig.add_member(:coinbase_cdp, Shapes::ShapeRef.new(shape: CoinbaseCdpRotationTargets, location_name: "coinbaseCDP"))
+    CredentialRotationConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CredentialRotationConfig.add_member_subclass(:coinbase_cdp, Types::CredentialRotationConfig::CoinbaseCdp)
+    CredentialRotationConfig.add_member_subclass(:unknown, Types::CredentialRotationConfig::Unknown)
+    CredentialRotationConfig.struct_class = Types::CredentialRotationConfig
 
     CredentialsProviderConfiguration.add_member(:coinbase_cdp, Shapes::ShapeRef.new(shape: PaymentCredentialProviderConfiguration, location_name: "coinbaseCDP"))
     CredentialsProviderConfiguration.add_member(:stripe_privy, Shapes::ShapeRef.new(shape: PaymentCredentialProviderConfiguration, location_name: "stripePrivy"))
@@ -3547,11 +3564,13 @@ module Aws::BedrockAgentCoreControl
     GetPaymentConnectorResponse.add_member(:name, Shapes::ShapeRef.new(shape: PaymentConnectorName, required: true, location_name: "name"))
     GetPaymentConnectorResponse.add_member(:description, Shapes::ShapeRef.new(shape: PaymentsDescription, location_name: "description"))
     GetPaymentConnectorResponse.add_member(:type, Shapes::ShapeRef.new(shape: PaymentConnectorType, required: true, location_name: "type"))
+    GetPaymentConnectorResponse.add_member(:provision_mode, Shapes::ShapeRef.new(shape: PaymentConnectorProvisionMode, location_name: "provisionMode"))
     GetPaymentConnectorResponse.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialsProviderConfigurations, required: true, location_name: "credentialProviderConfigurations"))
     GetPaymentConnectorResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     GetPaymentConnectorResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
     GetPaymentConnectorResponse.add_member(:status, Shapes::ShapeRef.new(shape: PaymentConnectorStatus, required: true, location_name: "status"))
     GetPaymentConnectorResponse.add_member(:authorization_url, Shapes::ShapeRef.new(shape: PaymentConnectorAuthorizationUrl, location_name: "authorizationUrl"))
+    GetPaymentConnectorResponse.add_member(:credentials_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "credentialsUpdatedAt"))
     GetPaymentConnectorResponse.struct_class = Types::GetPaymentConnectorResponse
 
     GetPaymentCredentialProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
@@ -5050,6 +5069,7 @@ module Aws::BedrockAgentCoreControl
     PaymentConnectorSummary.add_member(:payment_connector_id, Shapes::ShapeRef.new(shape: PaymentConnectorId, required: true, location_name: "paymentConnectorId"))
     PaymentConnectorSummary.add_member(:name, Shapes::ShapeRef.new(shape: PaymentConnectorName, required: true, location_name: "name"))
     PaymentConnectorSummary.add_member(:type, Shapes::ShapeRef.new(shape: PaymentConnectorType, required: true, location_name: "type"))
+    PaymentConnectorSummary.add_member(:provision_mode, Shapes::ShapeRef.new(shape: PaymentConnectorProvisionMode, location_name: "provisionMode"))
     PaymentConnectorSummary.add_member(:status, Shapes::ShapeRef.new(shape: PaymentConnectorStatus, required: true, location_name: "status"))
     PaymentConnectorSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
     PaymentConnectorSummary.struct_class = Types::PaymentConnectorSummary
@@ -5371,6 +5391,18 @@ module Aws::BedrockAgentCoreControl
     RootVolumeConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     RootVolumeConfiguration.add_member(:free_space_gi_b, Shapes::ShapeRef.new(shape: RootVolumeConfigurationFreeSpaceGiBInteger, location_name: "freeSpaceGiB"))
     RootVolumeConfiguration.struct_class = Types::RootVolumeConfiguration
+
+    RotatePaymentConnectorCredentialsRequest.add_member(:payment_manager_id, Shapes::ShapeRef.new(shape: PaymentManagerId, required: true, location: "uri", location_name: "paymentManagerId"))
+    RotatePaymentConnectorCredentialsRequest.add_member(:payment_connector_id, Shapes::ShapeRef.new(shape: PaymentConnectorId, required: true, location: "uri", location_name: "paymentConnectorId"))
+    RotatePaymentConnectorCredentialsRequest.add_member(:credentials_to_rotate, Shapes::ShapeRef.new(shape: CredentialRotationConfig, required: true, location_name: "credentialsToRotate"))
+    RotatePaymentConnectorCredentialsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    RotatePaymentConnectorCredentialsRequest.struct_class = Types::RotatePaymentConnectorCredentialsRequest
+
+    RotatePaymentConnectorCredentialsResponse.add_member(:payment_connector_id, Shapes::ShapeRef.new(shape: PaymentConnectorId, required: true, location_name: "paymentConnectorId"))
+    RotatePaymentConnectorCredentialsResponse.add_member(:payment_manager_id, Shapes::ShapeRef.new(shape: PaymentManagerId, required: true, location_name: "paymentManagerId"))
+    RotatePaymentConnectorCredentialsResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
+    RotatePaymentConnectorCredentialsResponse.add_member(:status, Shapes::ShapeRef.new(shape: PaymentConnectorStatus, required: true, location_name: "status"))
+    RotatePaymentConnectorCredentialsResponse.struct_class = Types::RotatePaymentConnectorCredentialsResponse
 
     RouteToTargetAction.add_member(:static_route, Shapes::ShapeRef.new(shape: StaticRoute, location_name: "staticRoute"))
     RouteToTargetAction.add_member(:weighted_route, Shapes::ShapeRef.new(shape: WeightedRoute, location_name: "weightedRoute"))
@@ -8611,6 +8643,20 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:rotate_payment_connector_credentials, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RotatePaymentConnectorCredentials"
+        o.http_method = "POST"
+        o.http_request_uri = "/payments/managers/{paymentManagerId}/connectors/{paymentConnectorId}/rotate-credentials"
+        o.input = Shapes::ShapeRef.new(shape: RotatePaymentConnectorCredentialsRequest)
+        o.output = Shapes::ShapeRef.new(shape: RotatePaymentConnectorCredentialsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

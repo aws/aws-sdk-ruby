@@ -358,6 +358,28 @@ module Aws
                                  ) -> _CreatePromptVersionResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePromptVersionResponseSuccess
 
+      interface _CreateVpcConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVpcConfigurationResponse]
+        def vpc_configuration_id: () -> ::String
+        def status: () -> ("CREATING" | "CREATED" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_vpc_configuration-instance_method
+      def create_vpc_configuration: (
+                                      knowledge_base_id: ::String,
+                                      ?client_token: ::String,
+                                      vpc_id: ::String,
+                                      subnet_ids: Array[::String],
+                                      resource_target: ::String,
+                                      port: ::Integer,
+                                      protocol: ("HTTP" | "HTTPS"),
+                                      resolution_mode: ("PUBLIC" | "IN_VPC"),
+                                      ?host_header: ::String,
+                                      ?tls_server_name: ::String,
+                                      ?name: ::String,
+                                      ?description: ::String
+                                    ) -> _CreateVpcConfigurationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVpcConfigurationResponseSuccess
+
       interface _DeleteAgentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentResponse]
         def agent_id: () -> ::String
@@ -507,6 +529,18 @@ module Aws
                                     ?expected_revision_id: ::String
                                   ) -> _DeleteResourcePolicyResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
+
+      interface _DeleteVpcConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVpcConfigurationResponse]
+        def vpc_configuration_id: () -> ::String
+        def status: () -> ("CREATING" | "CREATED" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#delete_vpc_configuration-instance_method
+      def delete_vpc_configuration: (
+                                      knowledge_base_id: ::String,
+                                      vpc_configuration_id: ::String
+                                    ) -> _DeleteVpcConfigurationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVpcConfigurationResponseSuccess
 
       interface _DisassociateAgentCollaboratorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateAgentCollaboratorResponse]
@@ -739,6 +773,17 @@ module Aws
                                  resource_arn: ::String
                                ) -> _GetResourcePolicyResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
+
+      interface _GetVpcConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVpcConfigurationResponse]
+        def vpc_configuration: () -> Types::VpcConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#get_vpc_configuration-instance_method
+      def get_vpc_configuration: (
+                                   knowledge_base_id: ::String,
+                                   vpc_configuration_id: ::String
+                                 ) -> _GetVpcConfigurationResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVpcConfigurationResponseSuccess
 
       interface _IngestKnowledgeBaseDocumentsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::IngestKnowledgeBaseDocumentsResponse]
@@ -1014,6 +1059,20 @@ module Aws
                                     resource_arn: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListVpcConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVpcConfigurationsResponse]
+        def items: () -> ::Array[Types::VpcConfigurationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#list_vpc_configurations-instance_method
+      def list_vpc_configurations: (
+                                     knowledge_base_id: ::String,
+                                     ?status_filter: ("CREATING" | "CREATED" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED"),
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListVpcConfigurationsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVpcConfigurationsResponseSuccess
 
       interface _PrepareAgentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PrepareAgentResponse]

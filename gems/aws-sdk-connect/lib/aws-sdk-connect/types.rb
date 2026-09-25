@@ -38552,6 +38552,13 @@ module Aws::Connect
     #   resource.
     #
     #    </note>
+    #
+    #   <note markdown="1"> If you set the attribute type `AUTO_MUTE_AGENT_ON_HOLD` to `true`,
+    #   the system automatically mutes agents while they're on hold and
+    #   unmutes them when they resume the contact. Agents can't change
+    #   their mute state while on hold.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] value

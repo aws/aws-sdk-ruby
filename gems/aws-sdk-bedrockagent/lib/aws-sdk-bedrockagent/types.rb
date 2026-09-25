@@ -1321,6 +1321,15 @@ module Aws::BedrockAgent
     #   The fields that this object accepts depend on the embedding model.
     #   For the settings that each model accepts, see the documentation for
     #   that model.
+    #
+    #   For an example of a [CreateKnowledgeBase][1] request that uses this
+    #   field to configure a multimodal embedding model, see the
+    #   [Examples][2] section of [CreateKnowledgeBase][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateKnowledgeBase.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateKnowledgeBase.html#API_agent_CreateKnowledgeBase_Examples
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/BedrockEmbeddingModelConfiguration AWS API Documentation
@@ -2857,6 +2866,145 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base to associate this VPC
+    #   configuration with.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, the service ignores the request but does not return an
+    #   error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The identifier of the VPC that the knowledge base connects through
+    #   to reach the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The subnets, in the VPC identified by `vpcId`, that the knowledge
+    #   base uses to connect to the resource.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_target
+    #   The private IPv4 address or DNS name of the resource you want the
+    #   knowledge base to reach. The target must be privately reachable from
+    #   inside your VPC, such as an internal load balancer or a private IP.
+    #   The following are not supported:
+    #
+    #   * Internet-facing endpoints
+    #
+    #   * Loopback addresses
+    #
+    #   * Link-local addresses
+    #
+    #   * Wildcard addresses
+    #
+    #   * Multicast addresses
+    #
+    #   * IPv6 literals
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port on which to reach the resource.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol used to connect to the resource. Specify `HTTP` for
+    #   plaintext or `HTTPS` for TLS. When you specify `HTTPS`, you must
+    #   also provide `tlsServerName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolution_mode
+    #   Controls how a domain-name `resourceTarget` is resolved. This
+    #   applies only when the target is a domain name; it has no effect for
+    #   IP-address targets, which have no name to resolve. In all cases the
+    #   resolved address must be reachable from inside your VPC. Valid
+    #   values:
+    #
+    #   * `IN_VPC` (default, recommended) – The target domain name is
+    #     resolved privately, using the DNS resolvers of the VPC, such as
+    #     private Route 53 hosted zones or on-premises DNS reachable from
+    #     the VPC. Use this for targets that are private to your VPC, such
+    #     as internal load balancers, private hosted-zone names, or
+    #     on-premises hosts.
+    #
+    #   * `PUBLIC` – The target domain name is resolved against public DNS
+    #     resolvers. Select this only when the target's domain name must be
+    #     resolved through public DNS and the resulting address is still
+    #     reachable from the VPC, an uncommon split-horizon configuration.
+    #     If you are unsure, use `IN_VPC`.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_header
+    #   An optional HTTP `Host` header value to send when invoking the
+    #   resource. Set this only if your resource (or an upstream router or
+    #   ingress) routes by the `Host` header and that host differs from the
+    #   target. This setting is independent of `tlsServerName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_server_name
+    #   The expected TLS server name. The service matches this value against
+    #   the Subject Alternative Names on your resource's TLS certificate
+    #   during invocation. This field is required when `protocol` is
+    #   `HTTPS`. Set it to a hostname on your certificate, such as
+    #   `app.internal.example.com`. You can use a single leftmost wildcard,
+    #   such as `*.example.com`. The value must be a hostname without a
+    #   port.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   An optional human-readable name for the VPC configuration. If you
+    #   don't specify a name, the VPC configuration has no name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional description of the VPC configuration. If you don't
+    #   specify a description, the VPC configuration has no description.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateVpcConfigurationRequest AWS API Documentation
+    #
+    class CreateVpcConfigurationRequest < Struct.new(
+      :knowledge_base_id,
+      :client_token,
+      :vpc_id,
+      :subnet_ids,
+      :resource_target,
+      :port,
+      :protocol,
+      :resolution_mode,
+      :host_header,
+      :tls_server_name,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_configuration_id
+    #   The unique identifier of the VPC configuration that was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the VPC configuration. Immediately after
+    #   creation this is `CREATING`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateVpcConfigurationResponse AWS API Documentation
+    #
+    class CreateVpcConfigurationResponse < Struct.new(
+      :vpc_configuration_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains configurations for a query, each of which defines information
     # about example queries to help the query engine generate appropriate
     # SQL queries.
@@ -3716,6 +3864,42 @@ module Aws::BedrockAgent
     class DeleteResourcePolicyResponse < Struct.new(
       :resource_arn,
       :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base that owns the VPC
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_configuration_id
+    #   The unique identifier of the VPC configuration to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteVpcConfigurationRequest AWS API Documentation
+    #
+    class DeleteVpcConfigurationRequest < Struct.new(
+      :knowledge_base_id,
+      :vpc_configuration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_configuration_id
+    #   The unique identifier of the VPC configuration being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the VPC configuration. Immediately after a
+    #   delete request this is `DELETING`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteVpcConfigurationResponse AWS API Documentation
+    #
+    class DeleteVpcConfigurationResponse < Struct.new(
+      :vpc_configuration_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5719,6 +5903,37 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base that owns the VPC
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_configuration_id
+    #   The unique identifier of the VPC configuration to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetVpcConfigurationRequest AWS API Documentation
+    #
+    class GetVpcConfigurationRequest < Struct.new(
+      :knowledge_base_id,
+      :vpc_configuration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_configuration
+    #   The VPC configuration, including its connection settings, resolution
+    #   mode, and current lifecycle status.
+    #   @return [Types::VpcConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetVpcConfigurationResponse AWS API Documentation
+    #
+    class GetVpcConfigurationResponse < Struct.new(
+      :vpc_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about a guardrail associated with a resource.
     #
     # @!attribute [rw] guardrail_identifier
@@ -7432,6 +7647,56 @@ module Aws::BedrockAgent
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] knowledge_base_id
+    #   The unique identifier of the knowledge base whose VPC configurations
+    #   you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_filter
+    #   The status to filter the results by. Only VPC configurations with
+    #   the specified status are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If more
+    #   results are available, the response returns a `nextToken`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to retrieve the next page of results, returned in
+    #   a previous response when more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListVpcConfigurationsRequest AWS API Documentation
+    #
+    class ListVpcConfigurationsRequest < Struct.new(
+      :knowledge_base_id,
+      :status_filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of VPC configuration summaries.
+    #   @return [Array<Types::VpcConfigurationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to retrieve the next page of results, present
+    #   when the total number of results exceeds the maximum number of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListVpcConfigurationsResponse AWS API Documentation
+    #
+    class ListVpcConfigurationsResponse < Struct.new(
+      :items,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12226,6 +12491,175 @@ module Aws::BedrockAgent
     #
     class VideoSegmentationConfiguration < Struct.new(
       :fixed_length_duration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the details of a VPC configuration, including its connection
+    # settings, resolution mode, and current lifecycle status.
+    #
+    # @!attribute [rw] vpc_configuration_id
+    #   The unique identifier of the VPC configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current lifecycle status of the VPC configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Additional detail about the current status, such as the cause of a
+    #   `CREATE_FAILED` or `DELETE_FAILED` status.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The identifier of the VPC that the knowledge base connects through
+    #   to reach the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The subnets that the knowledge base uses to connect to the resource.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_target
+    #   The private IPv4 address or DNS name of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port on which the resource is reached.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol used to connect to the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolution_mode
+    #   Specifies how the resource target is resolved.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_header
+    #   The HTTP `Host` header value sent when invoking the resource, if
+    #   configured.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_server_name
+    #   The expected TLS server name that the service matches against the
+    #   Subject Alternative Names on the resource's TLS certificate.
+    #   Present when `protocol` is `HTTPS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The human-readable name of the VPC configuration, if provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the VPC configuration, if provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the VPC configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the VPC configuration was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/VpcConfiguration AWS API Documentation
+    #
+    class VpcConfiguration < Struct.new(
+      :vpc_configuration_id,
+      :status,
+      :status_message,
+      :vpc_id,
+      :subnet_ids,
+      :resource_target,
+      :port,
+      :protocol,
+      :resolution_mode,
+      :host_header,
+      :tls_server_name,
+      :name,
+      :description,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a VPC configuration returned by `ListVpcConfigurations`.
+    #
+    # @!attribute [rw] vpc_configuration_id
+    #   The unique identifier of the VPC configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current lifecycle status of the VPC configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Additional detail about the current status, such as the cause of a
+    #   failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The identifier of the VPC that the knowledge base connects through
+    #   to reach the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_target
+    #   The private IPv4 address or DNS name of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port on which the resource is reached.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol used to connect to the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolution_mode
+    #   Specifies how the resource target is resolved.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_header
+    #   The HTTP `Host` header value sent when invoking the resource, if
+    #   configured.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_server_name
+    #   The expected TLS server name that the service matches against the
+    #   Subject Alternative Names on the resource's TLS certificate.
+    #   Present when `protocol` is `HTTPS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The human-readable name of the VPC configuration, if provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the VPC configuration, if provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the VPC configuration was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/VpcConfigurationSummary AWS API Documentation
+    #
+    class VpcConfigurationSummary < Struct.new(
+      :vpc_configuration_id,
+      :status,
+      :status_message,
+      :vpc_id,
+      :resource_target,
+      :port,
+      :protocol,
+      :resolution_mode,
+      :host_header,
+      :tls_server_name,
+      :name,
+      :description,
+      :created_at)
       SENSITIVE = []
       include Aws::Structure
     end

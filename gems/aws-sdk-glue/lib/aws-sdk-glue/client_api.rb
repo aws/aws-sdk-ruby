@@ -1686,6 +1686,7 @@ module Aws::Glue
     TableOptimizerType = Shapes::StringShape.new(name: 'TableOptimizerType')
     TableOptimizerVpcConfiguration = Shapes::UnionShape.new(name: 'TableOptimizerVpcConfiguration')
     TablePrefix = Shapes::StringShape.new(name: 'TablePrefix')
+    TableResourceShareType = Shapes::StringShape.new(name: 'TableResourceShareType')
     TableStatus = Shapes::StructureShape.new(name: 'TableStatus')
     TableTypeString = Shapes::StringShape.new(name: 'TableTypeString')
     TableVersion = Shapes::StructureShape.new(name: 'TableVersion')
@@ -5287,6 +5288,7 @@ module Aws::Glue
     GetTablesRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionIdString, location_name: "TransactionId"))
     GetTablesRequest.add_member(:query_as_of_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "QueryAsOfTime"))
     GetTablesRequest.add_member(:audit_context, Shapes::ShapeRef.new(shape: AuditContext, location_name: "AuditContext"))
+    GetTablesRequest.add_member(:resource_share_type, Shapes::ShapeRef.new(shape: TableResourceShareType, location_name: "ResourceShareType"))
     GetTablesRequest.add_member(:include_status_details, Shapes::ShapeRef.new(shape: BooleanNullable, location_name: "IncludeStatusDetails"))
     GetTablesRequest.add_member(:attributes_to_get, Shapes::ShapeRef.new(shape: TableAttributesList, location_name: "AttributesToGet"))
     GetTablesRequest.struct_class = Types::GetTablesRequest
@@ -8100,6 +8102,7 @@ module Aws::Glue
     TableInput.add_member(:table_type, Shapes::ShapeRef.new(shape: TableTypeString, location_name: "TableType"))
     TableInput.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
     TableInput.add_member(:target_table, Shapes::ShapeRef.new(shape: TableIdentifier, location_name: "TargetTable"))
+    TableInput.add_member(:federated_table, Shapes::ShapeRef.new(shape: FederatedTable, location_name: "FederatedTable"))
     TableInput.add_member(:view_definition, Shapes::ShapeRef.new(shape: ViewDefinitionInput, location_name: "ViewDefinition"))
     TableInput.struct_class = Types::TableInput
 

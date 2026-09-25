@@ -459,7 +459,7 @@ module Aws::NeptuneGraph
     #
     # @!attribute [rw] replica_count
     #   The number of replicas in other AZs to provision on the new graph
-    #   after import. Default = 0, Min = 0, Max = 2.
+    #   after import. Default = 1, Min = 0, Max = 2.
     #
     #   Additional charges equivalent to the m-NCUs selected for the graph
     #   apply for each replica.
@@ -2097,6 +2097,12 @@ module Aws::NeptuneGraph
       include Aws::Structure
     end
 
+    # @!attribute [rw] graph_identifier
+    #   The unique identifier of the Neptune Analytics graph. When provided,
+    #   the service returns only import tasks associated with this graph. If
+    #   not specified, the service returns all import tasks.
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   Pagination token used to paginate output.
     #
@@ -2119,6 +2125,7 @@ module Aws::NeptuneGraph
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/ListImportTasksInput AWS API Documentation
     #
     class ListImportTasksInput < Struct.new(
+      :graph_identifier,
       :next_token,
       :max_results)
       SENSITIVE = []

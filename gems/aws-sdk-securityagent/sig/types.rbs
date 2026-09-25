@@ -33,6 +33,14 @@ module Aws::SecurityAgent
       SENSITIVE: [:mfa_forwarding_address]
     end
 
+    class ActorMessage
+      attr_accessor sender: ::String
+      attr_accessor subject: ::String
+      attr_accessor body: ::String
+      attr_accessor received_at: ::Time
+      SENSITIVE: [:sender, :subject, :body]
+    end
+
     class AddArtifactInput
       attr_accessor agent_space_id: ::String
       attr_accessor artifact_content: ::String
@@ -1357,6 +1365,21 @@ module Aws::SecurityAgent
 
     class InternalServerException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListActorMessagesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor agent_space_id: ::String
+      attr_accessor pentest_id: ::String
+      attr_accessor actor_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ListActorMessagesOutput
+      attr_accessor messages: ::Array[Types::ActorMessage]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 

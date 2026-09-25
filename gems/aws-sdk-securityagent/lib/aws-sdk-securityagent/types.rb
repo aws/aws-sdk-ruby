@@ -109,6 +109,36 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
+    # A message received at an actor's server-generated email MFA address.
+    #
+    # @!attribute [rw] sender
+    #   The address the message was sent from.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject
+    #   The subject line of the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The plain-text body of the message, containing the MFA code or
+    #   verification link.
+    #   @return [String]
+    #
+    # @!attribute [rw] received_at
+    #   The time the message was received.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ActorMessage AWS API Documentation
+    #
+    class ActorMessage < Struct.new(
+      :sender,
+      :subject,
+      :body,
+      :received_at)
+      SENSITIVE = [:sender, :subject, :body]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] agent_space_id
     #   The unique identifier of the agent space to add the artifact to.
     #   @return [String]
@@ -4871,6 +4901,62 @@ module Aws::SecurityAgent
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space that owns the pentest.
+    #   @return [String]
+    #
+    # @!attribute [rw] pentest_id
+    #   The unique identifier of the pentest that the actor belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] actor_identifier
+    #   The identifier of the actor whose messages to list. The identifier
+    #   is case-insensitive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListActorMessagesInput AWS API Documentation
+    #
+    class ListActorMessagesInput < Struct.new(
+      :max_results,
+      :next_token,
+      :agent_space_id,
+      :pentest_id,
+      :actor_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] messages
+    #   The list of messages received for the actor, most recent first.
+    #   @return [Array<Types::ActorMessage>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListActorMessagesOutput AWS API Documentation
+    #
+    class ListActorMessagesOutput < Struct.new(
+      :messages,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end

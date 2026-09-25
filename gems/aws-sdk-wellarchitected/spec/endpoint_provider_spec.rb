@@ -14,13 +14,13 @@ module Aws::WellArchitected
   describe EndpointProvider do
     subject { Aws::WellArchitected::EndpointProvider.new }
 
-    context "For region ap-east-1 with FIPS disabled and DualStack disabled" do
+    context "For custom endpoint with region not set and fips disabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.ap-east-1.amazonaws.com"}}
+        {"endpoint" => {"url" => "https://example.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "ap-east-1", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{endpoint: "https://example.com", use_fips: false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -28,241 +28,29 @@ module Aws::WellArchitected
       end
     end
 
-    context "For region ap-northeast-1 with FIPS disabled and DualStack disabled" do
+    context "For custom endpoint with fips enabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.ap-northeast-1.amazonaws.com"}}
+        {"error" => "Invalid Configuration: FIPS and custom endpoint are not supported"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "ap-northeast-1", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+        params = EndpointParameters.new(**{endpoint: "https://example.com", use_fips: true})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
-    context "For region ap-northeast-2 with FIPS disabled and DualStack disabled" do
+    context "For custom endpoint with fips disabled and dualstack enabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.ap-northeast-2.amazonaws.com"}}
+        {"error" => "Invalid Configuration: Dualstack and custom endpoint are not supported"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "ap-northeast-2", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region ap-south-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.ap-south-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "ap-south-1", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region ap-southeast-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.ap-southeast-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "ap-southeast-1", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region ap-southeast-2 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.ap-southeast-2.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "ap-southeast-2", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region ca-central-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.ca-central-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "ca-central-1", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region eu-central-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.eu-central-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "eu-central-1", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region eu-north-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.eu-north-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "eu-north-1", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region eu-west-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.eu-west-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "eu-west-1", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region eu-west-2 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.eu-west-2.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "eu-west-2", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region eu-west-3 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.eu-west-3.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "eu-west-3", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region me-south-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.me-south-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "me-south-1", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region sa-east-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.sa-east-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "sa-east-1", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region us-east-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.us-east-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region us-east-2 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.us-east-2.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-east-2", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region us-west-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.us-west-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-west-1", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region us-west-2 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.us-west-2.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+        params = EndpointParameters.new(**{endpoint: "https://example.com", use_fips: false, use_dual_stack: true})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
@@ -308,13 +96,13 @@ module Aws::WellArchitected
       end
     end
 
-    context "For region cn-north-1 with FIPS enabled and DualStack enabled" do
+    context "For region us-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected-fips.cn-north-1.api.amazonwebservices.com.cn"}}
+        {"endpoint" => {"url" => "https://wellarchitected.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "cn-north-1", use_fips: true, use_dual_stack: true})
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -322,13 +110,13 @@ module Aws::WellArchitected
       end
     end
 
-    context "For region cn-north-1 with FIPS enabled and DualStack disabled" do
+    context "For region cn-northwest-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected-fips.cn-north-1.amazonaws.com.cn"}}
+        {"endpoint" => {"url" => "https://wellarchitected-fips.cn-northwest-1.api.amazonwebservices.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "cn-north-1", use_fips: true, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "cn-northwest-1", use_fips: true, use_dual_stack: true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -336,13 +124,13 @@ module Aws::WellArchitected
       end
     end
 
-    context "For region cn-north-1 with FIPS disabled and DualStack enabled" do
+    context "For region cn-northwest-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.cn-north-1.api.amazonwebservices.com.cn"}}
+        {"endpoint" => {"url" => "https://wellarchitected-fips.cn-northwest-1.amazonaws.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "cn-north-1", use_fips: false, use_dual_stack: true})
+        params = EndpointParameters.new(**{region: "cn-northwest-1", use_fips: true, use_dual_stack: false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -350,13 +138,13 @@ module Aws::WellArchitected
       end
     end
 
-    context "For region cn-north-1 with FIPS disabled and DualStack disabled" do
+    context "For region cn-northwest-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.cn-north-1.amazonaws.com.cn"}}
+        {"endpoint" => {"url" => "https://wellarchitected.cn-northwest-1.api.amazonwebservices.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "cn-north-1", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "cn-northwest-1", use_fips: false, use_dual_stack: true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -364,13 +152,13 @@ module Aws::WellArchitected
       end
     end
 
-    context "For region us-gov-east-1 with FIPS enabled and DualStack enabled" do
+    context "For region cn-northwest-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected-fips.us-gov-east-1.api.aws"}}
+        {"endpoint" => {"url" => "https://wellarchitected.cn-northwest-1.amazonaws.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: true, use_dual_stack: true})
+        params = EndpointParameters.new(**{region: "cn-northwest-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -378,13 +166,13 @@ module Aws::WellArchitected
       end
     end
 
-    context "For region us-gov-east-1 with FIPS enabled and DualStack disabled" do
+    context "For region eusc-de-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected-fips.us-gov-east-1.amazonaws.com"}}
+        {"endpoint" => {"url" => "https://wellarchitected-fips.eusc-de-east-1.amazonaws.eu"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: true, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "eusc-de-east-1", use_fips: true, use_dual_stack: false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -392,27 +180,13 @@ module Aws::WellArchitected
       end
     end
 
-    context "For region us-gov-east-1 with FIPS disabled and DualStack enabled" do
+    context "For region eusc-de-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.us-gov-east-1.api.aws"}}
+        {"endpoint" => {"url" => "https://wellarchitected.eusc-de-east-1.amazonaws.eu"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: false, use_dual_stack: true})
-        endpoint = subject.resolve_endpoint(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region us-gov-east-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://wellarchitected.us-gov-east-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "eusc-de-east-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -476,13 +250,13 @@ module Aws::WellArchitected
       end
     end
 
-    context "For custom endpoint with region set and fips disabled and dualstack disabled" do
+    context "For region eu-isoe-west-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://example.com"}}
+        {"endpoint" => {"url" => "https://wellarchitected-fips.eu-isoe-west-1.cloud.adc-e.uk"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, endpoint: "https://example.com"})
+        params = EndpointParameters.new(**{region: "eu-isoe-west-1", use_fips: true, use_dual_stack: false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -490,13 +264,13 @@ module Aws::WellArchitected
       end
     end
 
-    context "For custom endpoint with region not set and fips disabled and dualstack disabled" do
+    context "For region eu-isoe-west-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://example.com"}}
+        {"endpoint" => {"url" => "https://wellarchitected.eu-isoe-west-1.cloud.adc-e.uk"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, endpoint: "https://example.com"})
+        params = EndpointParameters.new(**{region: "eu-isoe-west-1", use_fips: false, use_dual_stack: false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -504,29 +278,87 @@ module Aws::WellArchitected
       end
     end
 
-    context "For custom endpoint with fips enabled and dualstack disabled" do
+    context "For region us-isof-south-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
-        {"error" => "Invalid Configuration: FIPS and custom endpoint are not supported"}
+        {"endpoint" => {"url" => "https://wellarchitected-fips.us-isof-south-1.csp.hci.ic.gov"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, endpoint: "https://example.com"})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
+        params = EndpointParameters.new(**{region: "us-isof-south-1", use_fips: true, use_dual_stack: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
     end
 
-    context "For custom endpoint with fips disabled and dualstack enabled" do
+    context "For region us-isof-south-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
-        {"error" => "Invalid Configuration: Dualstack and custom endpoint are not supported"}
+        {"endpoint" => {"url" => "https://wellarchitected.us-isof-south-1.csp.hci.ic.gov"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: true, endpoint: "https://example.com"})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
+        params = EndpointParameters.new(**{region: "us-isof-south-1", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region us-gov-west-1 with FIPS enabled and DualStack enabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://wellarchitected-fips.us-gov-west-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-gov-west-1", use_fips: true, use_dual_stack: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region us-gov-west-1 with FIPS enabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://wellarchitected-fips.us-gov-west-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-gov-west-1", use_fips: true, use_dual_stack: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region us-gov-west-1 with FIPS disabled and DualStack enabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://wellarchitected.us-gov-west-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-gov-west-1", use_fips: false, use_dual_stack: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region us-gov-west-1 with FIPS disabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://wellarchitected.us-gov-west-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-gov-west-1", use_fips: false, use_dual_stack: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
     end
 
@@ -540,6 +372,104 @@ module Aws::WellArchitected
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "AGENT case: standard region, no FIPS, no DualStack -> amazonaws.com" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingRegion" => "us-east-1", "name" => "sigv4", "signingName" => "wellarchitected"}]}, "url" => "https://wellarchitected-agent.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, sub_service_type: "AGENT"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "AGENT case: FIPS enabled -> amazonaws.com with -fips" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingRegion" => "us-east-1", "name" => "sigv4", "signingName" => "wellarchitected"}]}, "url" => "https://wellarchitected-agent-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, sub_service_type: "AGENT"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "AGENT case: DualStack enabled -> api.aws" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingRegion" => "us-west-2", "name" => "sigv4", "signingName" => "wellarchitected"}]}, "url" => "https://wellarchitected-agent.us-west-2.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: true, sub_service_type: "AGENT"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "AGENT case: FIPS + DualStack -> api.aws with -fips" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingRegion" => "us-east-1", "name" => "sigv4", "signingName" => "wellarchitected"}]}, "url" => "https://wellarchitected-agent-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: true, sub_service_type: "AGENT"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "AGENT case: us-west-2 standard -> amazonaws.com" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingRegion" => "us-west-2", "name" => "sigv4", "signingName" => "wellarchitected"}]}, "url" => "https://wellarchitected-agent.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, sub_service_type: "AGENT"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "AGENT case: custom endpoint override still works" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://custom.endpoint.example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, sub_service_type: "AGENT", endpoint: "https://custom.endpoint.example.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Non-AGENT SubServiceType falls through to the base WA endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://wellarchitected.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, sub_service_type: "SOMETHING-ELSE"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
     end
 

@@ -4205,6 +4205,7 @@ module Aws::Glue
       attr_accessor transaction_id: ::String
       attr_accessor query_as_of_time: ::Time
       attr_accessor audit_context: Types::AuditContext
+      attr_accessor resource_share_type: ("FEDERATED" | "ALL")
       attr_accessor include_status_details: bool
       attr_accessor attributes_to_get: ::Array[("NAME" | "TABLE_TYPE" | "DEFAULT" | "LATEST_ICEBERG_METADATA")]
       SENSITIVE: []
@@ -7611,6 +7612,7 @@ module Aws::Glue
       attr_accessor table_type: ::String
       attr_accessor parameters: ::Hash[::String, ::String]
       attr_accessor target_table: Types::TableIdentifier
+      attr_accessor federated_table: Types::FederatedTable
       attr_accessor view_definition: Types::ViewDefinitionInput
       SENSITIVE: []
     end

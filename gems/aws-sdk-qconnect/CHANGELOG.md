@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2026-09-25)
+------------------
+
+* Feature - Release shapes for the proactive agentic recommendations and the multi-knowledge base search features. Increases the maximum length of QuickResponseContent.
+
 1.62.0 (2026-09-18)
 ------------------
 

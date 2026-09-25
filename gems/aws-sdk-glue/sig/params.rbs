@@ -1844,6 +1844,12 @@ module Aws
         name: ::String?,
         region: ::String?
       }?,
+      federated_table: {
+        identifier: ::String?,
+        database_identifier: ::String?,
+        connection_name: ::String?,
+        connection_type: ::String?
+      }?,
       view_definition: Params::view_definition_input?
     }
 

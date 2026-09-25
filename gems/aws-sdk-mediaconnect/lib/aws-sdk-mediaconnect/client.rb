@@ -1253,6 +1253,11 @@ module Aws::MediaConnect
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtmp_push.destination_address #=> String
+    #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtmp_push.destination_port #=> Integer
+    #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtmp_push.application_name #=> String
+    #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtmp_push.stream_name #=> String
+    #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtmp_push.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_caller.destination_address #=> String
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_caller.destination_port #=> Integer
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
@@ -1262,7 +1267,7 @@ module Aws::MediaConnect
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtp.destination_address #=> String
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtp.destination_port #=> Integer
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
-    #   resp.router_outputs[0].configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.router_outputs[0].configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"
     #   resp.router_outputs[0].configuration.media_connect_flow.flow_arn #=> String
     #   resp.router_outputs[0].configuration.media_connect_flow.flow_source_arn #=> String
     #   resp.router_outputs[0].configuration.media_connect_flow.destination_transit_encryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
@@ -2628,6 +2633,19 @@ module Aws::MediaConnect
     #               },
     #             },
     #           },
+    #           rtmp_push: {
+    #             destination_address: "String", # required
+    #             destination_port: 1, # required
+    #             application_name: "String", # required
+    #             stream_name: "String", # required
+    #             tls_encryption: {
+    #               encryption_type: "PUBLIC", # accepts PUBLIC
+    #               encryption_configuration: { # required
+    #                 public: {
+    #                 },
+    #               },
+    #             },
+    #           },
     #           srt_caller: {
     #             destination_address: "String", # required
     #             destination_port: 1, # required
@@ -2646,7 +2664,7 @@ module Aws::MediaConnect
     #             forward_error_correction: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         },
-    #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER
+    #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER, RTMP_PUSH
     #       },
     #       media_connect_flow: {
     #         flow_arn: "FlowArn",
@@ -2715,6 +2733,11 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.destination_address #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.destination_port #=> Integer
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.application_name #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.stream_name #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.destination_port #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
@@ -2724,7 +2747,7 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_port #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
-    #   resp.router_output.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.router_output.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"
     #   resp.router_output.configuration.media_connect_flow.flow_arn #=> String
     #   resp.router_output.configuration.media_connect_flow.flow_source_arn #=> String
     #   resp.router_output.configuration.media_connect_flow.destination_transit_encryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
@@ -3911,6 +3934,11 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.destination_address #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.destination_port #=> Integer
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.application_name #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.stream_name #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.destination_port #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
@@ -3920,7 +3948,7 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_port #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
-    #   resp.router_output.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.router_output.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"
     #   resp.router_output.configuration.media_connect_flow.flow_arn #=> String
     #   resp.router_output.configuration.media_connect_flow.flow_source_arn #=> String
     #   resp.router_output.configuration.media_connect_flow.destination_transit_encryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
@@ -7253,6 +7281,19 @@ module Aws::MediaConnect
     #               },
     #             },
     #           },
+    #           rtmp_push: {
+    #             destination_address: "String", # required
+    #             destination_port: 1, # required
+    #             application_name: "String", # required
+    #             stream_name: "String", # required
+    #             tls_encryption: {
+    #               encryption_type: "PUBLIC", # accepts PUBLIC
+    #               encryption_configuration: { # required
+    #                 public: {
+    #                 },
+    #               },
+    #             },
+    #           },
     #           srt_caller: {
     #             destination_address: "String", # required
     #             destination_port: 1, # required
@@ -7271,7 +7312,7 @@ module Aws::MediaConnect
     #             forward_error_correction: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         },
-    #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER
+    #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER, RTMP_PUSH
     #       },
     #       media_connect_flow: {
     #         flow_arn: "FlowArn",
@@ -7334,6 +7375,11 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.destination_address #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.destination_port #=> Integer
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.application_name #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.stream_name #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.destination_port #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
@@ -7343,7 +7389,7 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_port #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
-    #   resp.router_output.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.router_output.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"
     #   resp.router_output.configuration.media_connect_flow.flow_arn #=> String
     #   resp.router_output.configuration.media_connect_flow.flow_source_arn #=> String
     #   resp.router_output.configuration.media_connect_flow.destination_transit_encryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
@@ -7406,7 +7452,7 @@ module Aws::MediaConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.108.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -98,6 +98,7 @@ module Aws::WellArchitected
     class AgentRecommendationSummary
       attr_accessor recommendation_arn: ::String
       attr_accessor profile_arn: ::String
+      attr_accessor generation_id: ::String
       attr_accessor title: ::String
       attr_accessor description: ::String
       attr_accessor type: ("RESOURCE" | "ARCHITECTURE" | "APPLICATION")
@@ -711,6 +712,7 @@ module Aws::WellArchitected
     class GetAgentRecommendationResponse
       attr_accessor recommendation_arn: ::String
       attr_accessor profile_arn: ::String
+      attr_accessor generation_id: ::String
       attr_accessor title: ::String
       attr_accessor description: ::String
       attr_accessor type: ("RESOURCE" | "ARCHITECTURE" | "APPLICATION")

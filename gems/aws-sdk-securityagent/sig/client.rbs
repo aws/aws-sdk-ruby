@@ -903,6 +903,21 @@ module Aws
                                           ) -> _InitiateProviderRegistrationResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InitiateProviderRegistrationResponseSuccess
 
+      interface _ListActorMessagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListActorMessagesOutput]
+        def messages: () -> ::Array[Types::ActorMessage]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#list_actor_messages-instance_method
+      def list_actor_messages: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String,
+                                 agent_space_id: ::String,
+                                 pentest_id: ::String,
+                                 actor_identifier: ::String
+                               ) -> _ListActorMessagesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListActorMessagesResponseSuccess
+
       interface _ListAgentSpacesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentSpacesOutput]
         def agent_space_summaries: () -> ::Array[Types::AgentSpaceSummary]

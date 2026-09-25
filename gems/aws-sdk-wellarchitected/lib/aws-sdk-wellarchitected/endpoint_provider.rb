@@ -19,6 +19,27 @@ module Aws::WellArchitected
         end
         return Aws::Endpoints::Endpoint.new(url: parameters.endpoint, headers: {}, properties: {})
       end
+      if Aws::Endpoints::Matchers.set?(parameters.sub_service_type) && Aws::Endpoints::Matchers.string_equals?(parameters.sub_service_type, "AGENT") && Aws::Endpoints::Matchers.set?(parameters.region) && (partition_result = Aws::Endpoints::Matchers.aws_partition(parameters.region))
+        if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
+          if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true) && Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"), true)
+            return Aws::Endpoints::Endpoint.new(url: "https://wellarchitected-agent-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "wellarchitected", "signingRegion" => "#{parameters.region}"}]})
+          end
+          raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
+        end
+        if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, false)
+          if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
+            return Aws::Endpoints::Endpoint.new(url: "https://wellarchitected-agent-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "wellarchitected", "signingRegion" => "#{parameters.region}"}]})
+          end
+          raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
+        end
+        if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
+          if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"), true)
+            return Aws::Endpoints::Endpoint.new(url: "https://wellarchitected-agent.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "wellarchitected", "signingRegion" => "#{parameters.region}"}]})
+          end
+          raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
+        end
+        return Aws::Endpoints::Endpoint.new(url: "https://wellarchitected-agent.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "wellarchitected", "signingRegion" => "#{parameters.region}"}]})
+      end
       if Aws::Endpoints::Matchers.set?(parameters.region)
         if (partition_result = Aws::Endpoints::Matchers.aws_partition(parameters.region))
           if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
@@ -27,13 +48,13 @@ module Aws::WellArchitected
             end
             raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
           end
-          if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
+          if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, false)
             if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
               return Aws::Endpoints::Endpoint.new(url: "https://wellarchitected-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
           end
-          if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
+          if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
             if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
               return Aws::Endpoints::Endpoint.new(url: "https://wellarchitected.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
             end
