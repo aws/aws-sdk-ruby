@@ -81,7 +81,7 @@ module Aws
       end
 
       def resolve_profile_config
-        Aws::Core.shared_config.profiles[@config.profile] || {}
+        Aws.shared_config.profiles[@config.profile] || {}
       end
 
       # 3. Resolve static credentials from environment when environment variables for
@@ -143,7 +143,7 @@ module Aws
       def profile_assume_role_credentials(options = {})
         # Explicitly resolve default profile name when @config.profile is nil for circular profile reference check
         profile = options[:profile] || resolve_profile
-        profile_config = Aws::Core.shared_config.profiles[profile] || {}
+        profile_config = Aws.shared_config.profiles[profile] || {}
         return unless valid_assume_role_inputs?(profile_config)
 
         source_provider = resolve_source_provider(options, profile, profile_config)
@@ -213,9 +213,7 @@ module Aws
 
       def visit_source_profile(options, profile, profile_config, source_profile)
         visited_profiles = options[:visited_profiles] || Set[profile]
-        unless Aws::Core.shared_config.profiles.key?(source_profile)
-          raise "source_profile #{source_profile} does not exist."
-        end
+        raise "source_profile #{source_profile} does not exist." unless Aws.shared_config.profiles.key?(source_profile)
 
         if circular_profile_reference?(visited_profiles, profile, source_profile, profile_config)
           raise "Circular reference in assume role source profiles, have already visited: #{source_profile}"
@@ -224,7 +222,7 @@ module Aws
         visited_profiles.add(source_profile)
         {
           profile: source_profile,
-          profile_config: Aws::Core.shared_config.profiles[source_profile],
+          profile_config: Aws.shared_config.profiles[source_profile],
           visited_profiles: visited_profiles
         }
       end
@@ -296,7 +294,7 @@ module Aws
         profile_config = options[:profile_config] || resolve_profile_config
         return unless valid_sso_inputs?(profile_config)
 
-        sso_session = Aws::Core::SharedConfig.sso_session(profile, profile_config['sso_session'])
+        sso_session = Aws::SharedConfig.sso_session(profile, profile_config['sso_session'])
         validate_sso_conflicts(profile, profile_config, sso_session)
 
         Smithy::Client::Features.track('CREDENTIALS_PROFILE_SSO') do

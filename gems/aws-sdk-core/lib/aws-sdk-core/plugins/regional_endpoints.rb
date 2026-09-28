@@ -57,7 +57,7 @@ module Aws
             * `required` - Always use the account ID endpoint. If the account ID cannot be retrieved from credentials, an error is raised.
           DOCS
           ENV['AWS_ACCOUNT_ID_ENDPOINT_MODE'] ||
-            Aws::Core.shared_config.profiles.fetch(cfg.profile, {})['account_id_endpoint_mode'] ||
+            Aws.shared_config.profiles.fetch(cfg.profile, {})['account_id_endpoint_mode'] ||
             'preferred'
         end
 
@@ -73,20 +73,20 @@ module Aws
           def resolve_region(config)
             ENV['AWS_REGION'] ||
               ENV['AWS_DEFAULT_REGION'] ||
-              Aws::Core.shared_config.profiles.fetch(config.profile, {})['region']
+              Aws.shared_config.profiles.fetch(config.profile, {})['region']
           end
 
           def resolve_use_dualstack_endpoint(config) # rubocop:disable Naming/PredicateMethod
             value =
               ENV['AWS_USE_DUALSTACK_ENDPOINT'] ||
-              Aws::Core.shared_config.profiles.fetch(config.profile, {})['use_dualstack_endpoint']
+              Aws.shared_config.profiles.fetch(config.profile, {})['use_dualstack_endpoint']
             value == 'true'
           end
 
           def resolve_use_fips_endpoint(config) # rubocop:disable Naming/PredicateMethod
             value =
               ENV['AWS_USE_FIPS_ENDPOINT'] ||
-              Aws::Core.shared_config.profiles.fetch(config.profile, {})['use_fips_endpoint']
+              Aws.shared_config.profiles.fetch(config.profile, {})['use_fips_endpoint']
             value == 'true'
           end
         end

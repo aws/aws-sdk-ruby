@@ -22,7 +22,7 @@ module Aws
           doc_type: '#identity',
           docstring: <<~DOCS) do |config|
             The credentials provider used to resolve credentials. Any object that responds to `#identity`
-            and returns a {Aws::Core::Credentials}.
+            and returns a {Aws::Credentials}.
           DOCS
           CredentialsProviderChain.new(config).resolve
         end

@@ -31,7 +31,7 @@ module Aws
           def resolve_s3_use_arn_region(config)
             value =
               ENV['AWS_S3_USE_ARN_REGION'] ||
-              Aws::Core.shared_config.profiles.fetch(config.profile, {})['s3_use_arn_region'] ||
+              Aws.shared_config.profiles.fetch(config.profile, {})['s3_use_arn_region'] ||
               'true'
             return value.downcase if %w[true false].include?(value.downcase)
 

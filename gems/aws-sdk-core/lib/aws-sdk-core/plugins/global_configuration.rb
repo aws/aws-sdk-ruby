@@ -16,7 +16,7 @@ module Aws
         private
 
         def apply_service_defaults(client_class, options)
-          return unless (defaults = Aws::Core.config[client_class.identifier])
+          return unless (defaults = Aws.config[client_class.identifier])
 
           defaults.each do |option_name, default|
             options[option_name] = default unless options.key?(option_name)
@@ -24,7 +24,7 @@ module Aws
         end
 
         def apply_aws_defaults(_client_class, options)
-          Aws::Core.config.each do |option_name, default|
+          Aws.config.each do |option_name, default|
             next if self.class.identifiers.include?(option_name)
             next if options.key?(option_name)
 

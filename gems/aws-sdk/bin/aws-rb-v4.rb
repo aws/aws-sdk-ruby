@@ -132,7 +132,7 @@ if options[:log]
 end
 cfg[:log_formatter] = Smithy::Client::LogFormatter.colored if options[:color]
 cfg[:http_debug_output] = true if options[:debug]
-Aws::Core.config = cfg
+Aws.config = cfg
 
 # Require additional libraries
 options[:require].each do |library|

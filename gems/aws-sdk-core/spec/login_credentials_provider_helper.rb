@@ -11,7 +11,7 @@ module LoginCredentialsProviderHelper
     allow(Dir).to receive(:home).and_return('HOME')
     directory = ENV['AWS_LOGIN_CACHE_DIRECTORY'] || File.join(Dir.home, '.aws', 'login', 'cache')
     expected_path = File.join(directory, "#{login_session_sha}.json")
-    expect_any_instance_of(Aws::Core::LoginCredentialsProvider).to receive(:login_cache_file)
+    expect_any_instance_of(Aws::LoginCredentialsProvider).to receive(:login_cache_file)
       .at_least(:once).and_wrap_original do |m, *args|
       path = m.call(*args)
       expect(path).to eq(expected_path)

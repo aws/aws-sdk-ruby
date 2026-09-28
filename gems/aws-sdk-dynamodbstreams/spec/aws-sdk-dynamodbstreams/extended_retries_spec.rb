@@ -8,11 +8,8 @@ module Aws
       let(:client) do
         Client.new(
           region: 'us-east-1',
-          credentials_provider: Aws::Core::StaticCredentialsProvider.new(
-            credentials: Aws::Core::Credentials.new(
-              access_key_id: 'akid',
-              secret_access_key: 'secret'
-            )
+          credentials_provider: Aws::StaticCredentialsProvider.new(
+            credentials: Aws::Credentials.new(access_key_id: 'akid', secret_access_key: 'secret')
           )
         )
       end
@@ -30,11 +27,7 @@ module Aws
         call_count = 0
         client.handle(step: :send) do |context|
           call_count += 1
-          context.http_response.signal_done(
-            status_code: 500,
-            headers: {},
-            body: ''
-          )
+          context.http_response.signal_done(status_code: 500, headers: {}, body: '')
           Smithy::Client::Response.new(context: context)
         end
 

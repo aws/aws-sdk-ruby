@@ -47,7 +47,6 @@ module Aws
         end
 
         # TODO: Clock skew option & logic
-
         option(
           :retry_strategy,
           doc_type: 'Object',
@@ -78,7 +77,7 @@ module Aws
               end
 
             value = ENV['AWS_RETRY_MODE'] ||
-                    Aws::Core.shared_config.profiles.fetch(cfg.profile, {})['retry_mode'] ||
+                    Aws.shared_config.profiles.fetch(cfg.profile, {})['retry_mode'] ||
                     default_mode_value ||
                     'standard'
             value = value.to_s
@@ -92,7 +91,7 @@ module Aws
 
           def resolve_max_attempts(cfg)
             value = ENV.fetch('AWS_MAX_ATTEMPTS', nil) ||
-                    Aws::Core.shared_config.profiles.fetch(cfg.profile, {})['max_attempts'] ||
+                    Aws.shared_config.profiles.fetch(cfg.profile, {})['max_attempts'] ||
                     3
             value = value.to_i
             if value <= 0
@@ -105,7 +104,7 @@ module Aws
 
           def resolve_adaptive_retry_wait_to_fill(cfg) # rubocop:disable Naming/PredicateMethod
             value = ENV['AWS_ADAPTIVE_RETRY_WAIT_TO_FILL'] ||
-                    Aws::Core.shared_config.profiles.fetch(cfg.profile, {})['adaptive_retry_wait_to_fill'] ||
+                    Aws.shared_config.profiles.fetch(cfg.profile, {})['adaptive_retry_wait_to_fill'] ||
                     'true'
             unless %w[true false].include?(value)
               raise ArgumentError,
@@ -219,8 +218,6 @@ module Aws
 
             # TODO: Add TTL with estimated skew cached per endpoint that persists between SDK invocations
             #       along with clock skew correction, after clock skew SEP finalizes.
-
-            # create the request header
             formatted_header = request_pairs.map { |k, v| "#{k}=#{v}" }.join('; ')
             context.http_request.headers['amz-sdk-request'] = formatted_header
           end
@@ -244,7 +241,6 @@ module Aws
             response.error = nil
           end
 
-          # TODO: Revisit after trait is finalized.
           def long_polling_operation?(context)
             return true if SCHEMA_EXTENSION.long_polling?(context.operation)
 

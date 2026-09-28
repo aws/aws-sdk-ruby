@@ -4,7 +4,7 @@ module Aws
   module Bedrock
     # Provides a Bearer token for authentication.
     class BearerTokenProvider
-      include Core::IdentityProvider
+      include Aws::IdentityProvider
 
       # @param [Hash] options
       # @option options [String] :token

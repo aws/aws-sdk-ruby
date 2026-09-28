@@ -32,7 +32,7 @@ module Aws
           def resolve_sts_regional_endpoints(config)
             value =
               ENV['AWS_STS_REGIONAL_ENDPOINTS'] ||
-              Aws::Core.shared_config.profiles.fetch(config.profile, {})['sts_regional_endpoints'] ||
+              Aws.shared_config.profiles.fetch(config.profile, {})['sts_regional_endpoints'] ||
               'regional'
             return value.downcase if %w[legacy regional].include?(value.downcase)
 

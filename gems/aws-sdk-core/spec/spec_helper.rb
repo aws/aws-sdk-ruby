@@ -32,7 +32,7 @@ def mock_shared_config(config_contents = '', credentials_contents = '')
     credentials_profiles: credentials_profiles,
     sso_sessions: sso_sessions
   )
-  allow(Aws::Core).to receive(:shared_config).and_return(config)
+  allow(Aws).to receive(:shared_config).and_return(config)
 end
 
 RSpec.configure do |config|

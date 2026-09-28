@@ -18,7 +18,7 @@ module Aws
           DOCS
           app_id = ENV.fetch('AWS_SDK_UA_APP_ID', nil)
           profile = config.profile || ENV['AWS_PROFILE'] || 'default'
-          app_id ||= Aws::Core.shared_config.profiles.dig(profile, 'sdk_ua_app_id')
+          app_id ||= Aws.shared_config.profiles.dig(profile, 'sdk_ua_app_id')
           app_id
         end
 
@@ -39,7 +39,7 @@ module Aws
             end
 
             def to_s
-              ua = "aws-sdk-ruby4/#{Aws::Core::VERSION}"
+              ua = "aws-sdk-ruby4/#{Aws::CORE_GEM_VERSION}"
               ua += ' ua/2.1'
               if (api_m = api_metadata)
                 ua += " #{api_m}"

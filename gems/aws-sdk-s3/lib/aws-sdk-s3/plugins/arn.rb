@@ -36,7 +36,7 @@ module Aws
 
           def resolve_s3_use_arn_region(cfg)
             value = ENV['AWS_S3_USE_ARN_REGION'] ||
-                    Aws::Core.shared_config.profiles.fetch(cfg.profile, {})[:s3_use_arn_region] ||
+                    Aws.shared_config.profiles.fetch(cfg.profile, {})[:s3_use_arn_region] ||
                     'true'
             value = Aws::Core::Util.str_2_bool(value)
             if value.nil?
@@ -49,7 +49,7 @@ module Aws
 
           def resolve_s3_disable_multiregion_access_points(cfg)
             value = ENV['AWS_S3_DISABLE_MULTIREGION_ACCESS_POINTS'] ||
-                    Aws::Core.shared_config.profiles.fetch(cfg.profile, {})[:s3_disable_multiregion_access_points] ||
+                    Aws.shared_config.profiles.fetch(cfg.profile, {})[:s3_disable_multiregion_access_points] ||
                     'false'
             value = Aws::Core::Util.str_2_bool(value)
             if value.nil?

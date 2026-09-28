@@ -27,7 +27,7 @@ module Aws
               end
 
             mode = ENV['AWS_S3_US_EAST_1_REGIONAL_ENDPOINT'] ||
-                   Aws::Core.shared_config.profiles.fetch(cfg.profile, {})[:s3_us_east_1_regional_endpoint] ||
+                   Aws.shared_config.profiles.fetch(cfg.profile, {})[:s3_us_east_1_regional_endpoint] ||
                    default_mode_value ||
                    'regional'
             mode = mode.downcase
