@@ -174,6 +174,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-elementalinference', '~> 1')
   spec.add_dependency('aws-sdk-entityresolution', '~> 1')
   spec.add_dependency('aws-sdk-eventbridge', '~> 1')
+  spec.add_dependency('aws-sdk-eventbridgev2', '~> 1')
   spec.add_dependency('aws-sdk-evs', '~> 1')
   spec.add_dependency('aws-sdk-fis', '~> 1')
   spec.add_dependency('aws-sdk-fms', '~> 1')

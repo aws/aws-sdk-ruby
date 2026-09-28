@@ -5598,7 +5598,8 @@ module Aws::IoT
 
     # @!attribute [rw] target_type
     #   The type of resource for which you are configuring logging. Must be
-    #   `THING_Group`.
+    #   `DEFAULT`, `THING_GROUP`, `CLIENT_ID`, `SOURCE_IP`, or
+    #   `PRINCIPAL_ID`.
     #   @return [String]
     #
     # @!attribute [rw] target_name
@@ -13339,7 +13340,8 @@ module Aws::IoT
 
     # @!attribute [rw] target_type
     #   The type of resource for which you are configuring logging. Must be
-    #   `THING_Group`.
+    #   `DEFAULT`, `THING_GROUP`, `CLIENT_ID`, `SOURCE_IP`, or
+    #   `PRINCIPAL_ID`.
     #   @return [String]
     #
     # @!attribute [rw] next_token

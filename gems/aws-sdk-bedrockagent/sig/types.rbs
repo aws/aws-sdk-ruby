@@ -611,6 +611,28 @@ module Aws::BedrockAgent
       SENSITIVE: [:variants]
     end
 
+    class CreateVpcConfigurationRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor resource_target: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor resolution_mode: ("PUBLIC" | "IN_VPC")
+      attr_accessor host_header: ::String
+      attr_accessor tls_server_name: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVpcConfigurationResponse
+      attr_accessor vpc_configuration_id: ::String
+      attr_accessor status: ("CREATING" | "CREATED" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
     class CuratedQuery
       attr_accessor natural_language: ::String
       attr_accessor sql: ::String
@@ -850,6 +872,18 @@ module Aws::BedrockAgent
     class DeleteResourcePolicyResponse
       attr_accessor resource_arn: ::String
       attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVpcConfigurationRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor vpc_configuration_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVpcConfigurationResponse
+      attr_accessor vpc_configuration_id: ::String
+      attr_accessor status: ("CREATING" | "CREATED" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED")
       SENSITIVE: []
     end
 
@@ -1453,6 +1487,17 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class GetVpcConfigurationRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor vpc_configuration_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetVpcConfigurationResponse
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      SENSITIVE: []
+    end
+
     class GuardrailConfiguration
       attr_accessor guardrail_identifier: ::String
       attr_accessor guardrail_version: ::String
@@ -1874,6 +1919,20 @@ module Aws::BedrockAgent
 
     class ListTagsForResourceResponse
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListVpcConfigurationsRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor status_filter: ("CREATING" | "CREATED" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVpcConfigurationsResponse
+      attr_accessor items: ::Array[Types::VpcConfigurationSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -3136,6 +3195,42 @@ module Aws::BedrockAgent
 
     class VideoSegmentationConfiguration
       attr_accessor fixed_length_duration: ::Integer
+      SENSITIVE: []
+    end
+
+    class VpcConfiguration
+      attr_accessor vpc_configuration_id: ::String
+      attr_accessor status: ("CREATING" | "CREATED" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor resource_target: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor resolution_mode: ("PUBLIC" | "IN_VPC")
+      attr_accessor host_header: ::String
+      attr_accessor tls_server_name: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class VpcConfigurationSummary
+      attr_accessor vpc_configuration_id: ::String
+      attr_accessor status: ("CREATING" | "CREATED" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor resource_target: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor resolution_mode: ("PUBLIC" | "IN_VPC")
+      attr_accessor host_header: ::String
+      attr_accessor tls_server_name: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
       SENSITIVE: []
     end
 

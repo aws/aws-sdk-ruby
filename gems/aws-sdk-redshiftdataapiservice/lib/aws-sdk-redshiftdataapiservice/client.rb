@@ -1344,7 +1344,7 @@ module Aws::RedshiftDataAPIService
     #   a cluster and authenticating using either Secrets Manager or temporary
     #   credentials.
     #
-    # @option params [required, String] :database
+    # @option params [String] :database
     #   The name of the database. This parameter is required when
     #   authenticating using either Secrets Manager or temporary credentials.
     #
@@ -1386,7 +1386,7 @@ module Aws::RedshiftDataAPIService
     #
     #   resp = client.list_databases({
     #     cluster_identifier: "ClusterIdentifierString",
-    #     database: "String", # required
+    #     database: "String",
     #     secret_arn: "SecretArn",
     #     db_user: "String",
     #     next_token: "String",
@@ -1544,7 +1544,7 @@ module Aws::RedshiftDataAPIService
     # Returns only the sessions that the caller created. When
     # identity-enhanced role sessions are used, you must provide either the
     # `ClusterIdentifier` or `WorkgroupName` parameter to ensure that the
-    # AWS IAM Identity Center user can only access the Amazon Redshift IAM
+    # IAM Identity Center user can only access the Amazon Redshift IAM
     # Identity Center applications they are assigned. For more information,
     # see [ Trusted identity propagation overview][1].
     #
@@ -1935,7 +1935,7 @@ module Aws::RedshiftDataAPIService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshiftdataapiservice'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

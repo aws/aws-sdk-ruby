@@ -93,10 +93,21 @@ module Aws::QConnect
     #   The ID of the AI Agent to be configured.
     #   @return [String]
     #
+    # @!attribute [rw] enabled
+    #   Indicates whether the AI Agent configured for this AI Agent type is
+    #   enabled. When this value is omitted or set to true, the configured
+    #   AI Agent runs; when set to false, the AI Agent ID is retained but no
+    #   AI Agent runs for the AI Agent type. Setting this value to false is
+    #   currently supported only for the `ANSWER_RECOMMENDATION` AI Agent
+    #   type; other requests to set it to false are rejected with a
+    #   validation error.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/AIAgentConfigurationData AWS API Documentation
     #
     class AIAgentConfigurationData < Struct.new(
-      :ai_agent_id)
+      :ai_agent_id,
+      :enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3760,6 +3771,11 @@ module Aws::QConnect
     #   Details about notes chunk data.
     #   @return [Types::NotesChunkDataDetails]
     #
+    # @!attribute [rw] proactive_recommendation_data
+    #   Details about a proactive recommendation, including the token used
+    #   to retrieve its chunked response with `GetNextMessage`.
+    #   @return [Types::ProactiveRecommendationDataDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DataDetails AWS API Documentation
     #
     class DataDetails < Struct.new(
@@ -3775,6 +3791,7 @@ module Aws::QConnect
       :suggested_message_data,
       :notes_data,
       :notes_chunk_data,
+      :proactive_recommendation_data,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -3792,6 +3809,7 @@ module Aws::QConnect
       class SuggestedMessageData < DataDetails; end
       class NotesData < DataDetails; end
       class NotesChunkData < DataDetails; end
+      class ProactiveRecommendationData < DataDetails; end
       class Unknown < DataDetails; end
     end
 
@@ -8556,6 +8574,25 @@ module Aws::QConnect
       include Aws::Structure
     end
 
+    # Details about a proactive recommendation, including the token used to
+    # retrieve its chunked response with `GetNextMessage`.
+    #
+    # @!attribute [rw] next_message_token
+    #   The token used to retrieve the next message in the proactive
+    #   recommendation. Pass this token in a `GetNextMessage` request to
+    #   continue receiving the chunked proactive response. Each response
+    #   returns the next token to use until the chunked response is
+    #   complete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ProactiveRecommendationDataDetails AWS API Documentation
+    #
+    class ProactiveRecommendationDataDetails < Struct.new(
+      :next_message_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The content of the push message template that applies to ADM (Amazon
     # Device Messaging) notification service.
     #
@@ -10148,6 +10185,36 @@ module Aws::QConnect
       class Unknown < RetrievalFilterConfiguration; end
     end
 
+    # An error returned for a single assistant association whose knowledge
+    # base retrieval failed during a `Retrieve` operation. The overall
+    # operation still succeeds and returns the results from the associations
+    # that were queried successfully.
+    #
+    # @!attribute [rw] association_id
+    #   The identifier of the assistant association whose knowledge base
+    #   retrieval failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The error code that categorizes the retrieval failure for the
+    #   assistant association.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A human-readable description of the retrieval failure for the
+    #   assistant association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/RetrieveError AWS API Documentation
+    #
+    class RetrieveError < Struct.new(
+      :association_id,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] assistant_id
     #   The identifier of the Amazon Q in Connect assistant for content
     #   retrieval.
@@ -10175,10 +10242,20 @@ module Aws::QConnect
     #   The results of the content retrieval operation.
     #   @return [Array<Types::RetrieveResult>]
     #
+    # @!attribute [rw] errors
+    #   The per-association errors returned when one or more knowledge base
+    #   associations fail during a `Retrieve` operation that spans multiple
+    #   assistant associations. The overall operation still succeeds and
+    #   returns the results from the associations that were queried
+    #   successfully. This list contains one entry for each association that
+    #   failed, up to a maximum of five.
+    #   @return [Array<Types::RetrieveError>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/RetrieveResponse AWS API Documentation
     #
     class RetrieveResponse < Struct.new(
-      :results)
+      :results,
+      :errors)
       SENSITIVE = []
       include Aws::Structure
     end

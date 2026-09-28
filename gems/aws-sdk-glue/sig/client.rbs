@@ -2769,6 +2769,7 @@ module Aws
                           requested_columns: Array[::String]?,
                           all_columns_requested: bool?
                         },
+                        ?resource_share_type: ("FEDERATED" | "ALL"),
                         ?include_status_details: bool,
                         ?attributes_to_get: Array[("NAME" | "TABLE_TYPE" | "DEFAULT" | "LATEST_ICEBERG_METADATA")]
                       ) -> _GetTablesResponseSuccess

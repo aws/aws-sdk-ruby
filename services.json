@@ -512,6 +512,9 @@
   "EventBridge": {
     "models": "eventbridge/2015-10-07"
   },
+  "EventBridgeV2": {
+    "models": "eventbridgev2/2025-05-15"
+  },
   "Evs": {
     "models": "evs/2023-07-27"
   },

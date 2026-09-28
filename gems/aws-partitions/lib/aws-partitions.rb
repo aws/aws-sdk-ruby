@@ -403,6 +403,7 @@ module Aws
             'ElementalInference' => 'elemental-inference',
             'EntityResolution' => 'entityresolution',
             'EventBridge' => 'events',
+            'EventBridgeV2' => 'eventsv2',
             'Evs' => 'evs',
             'FIS' => 'fis',
             'FMS' => 'fms',

@@ -454,6 +454,7 @@ module Aws::QConnect
     Participant = Shapes::StringShape.new(name: 'Participant')
     PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
     Priority = Shapes::StringShape.new(name: 'Priority')
+    ProactiveRecommendationDataDetails = Shapes::StructureShape.new(name: 'ProactiveRecommendationDataDetails')
     Probability = Shapes::FloatShape.new(name: 'Probability')
     PushADMMessageTemplateContent = Shapes::StructureShape.new(name: 'PushADMMessageTemplateContent')
     PushAPNSMessageTemplateContent = Shapes::StructureShape.new(name: 'PushAPNSMessageTemplateContent')
@@ -529,6 +530,10 @@ module Aws::QConnect
     RetrievalConfiguration = Shapes::StructureShape.new(name: 'RetrievalConfiguration')
     RetrievalFilterConfiguration = Shapes::UnionShape.new(name: 'RetrievalFilterConfiguration')
     RetrievalFilterList = Shapes::ListShape.new(name: 'RetrievalFilterList')
+    RetrieveError = Shapes::StructureShape.new(name: 'RetrieveError')
+    RetrieveErrorCode = Shapes::StringShape.new(name: 'RetrieveErrorCode')
+    RetrieveErrorList = Shapes::ListShape.new(name: 'RetrieveErrorList')
+    RetrieveErrorMessageString = Shapes::StringShape.new(name: 'RetrieveErrorMessageString')
     RetrieveRequest = Shapes::StructureShape.new(name: 'RetrieveRequest')
     RetrieveResponse = Shapes::StructureShape.new(name: 'RetrieveResponse')
     RetrieveResult = Shapes::StructureShape.new(name: 'RetrieveResult')
@@ -723,6 +728,7 @@ module Aws::QConnect
     AIAgentConfiguration.struct_class = Types::AIAgentConfiguration
 
     AIAgentConfigurationData.add_member(:ai_agent_id, Shapes::ShapeRef.new(shape: UuidWithQualifier, required: true, location_name: "aiAgentId"))
+    AIAgentConfigurationData.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     AIAgentConfigurationData.struct_class = Types::AIAgentConfigurationData
 
     AIAgentConfigurationMap.key = Shapes::ShapeRef.new(shape: AIAgentType)
@@ -1440,6 +1446,7 @@ module Aws::QConnect
     DataDetails.add_member(:suggested_message_data, Shapes::ShapeRef.new(shape: SuggestedMessageDataDetails, location_name: "suggestedMessageData"))
     DataDetails.add_member(:notes_data, Shapes::ShapeRef.new(shape: NotesDataDetails, location_name: "notesData"))
     DataDetails.add_member(:notes_chunk_data, Shapes::ShapeRef.new(shape: NotesChunkDataDetails, location_name: "notesChunkData"))
+    DataDetails.add_member(:proactive_recommendation_data, Shapes::ShapeRef.new(shape: ProactiveRecommendationDataDetails, location_name: "proactiveRecommendationData"))
     DataDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     DataDetails.add_member_subclass(:content_data, Types::DataDetails::ContentData)
     DataDetails.add_member_subclass(:generative_data, Types::DataDetails::GenerativeData)
@@ -1453,6 +1460,7 @@ module Aws::QConnect
     DataDetails.add_member_subclass(:suggested_message_data, Types::DataDetails::SuggestedMessageData)
     DataDetails.add_member_subclass(:notes_data, Types::DataDetails::NotesData)
     DataDetails.add_member_subclass(:notes_chunk_data, Types::DataDetails::NotesChunkData)
+    DataDetails.add_member_subclass(:proactive_recommendation_data, Types::DataDetails::ProactiveRecommendationData)
     DataDetails.add_member_subclass(:unknown, Types::DataDetails::Unknown)
     DataDetails.struct_class = Types::DataDetails
 
@@ -2457,6 +2465,9 @@ module Aws::QConnect
     PreconditionFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     PreconditionFailedException.struct_class = Types::PreconditionFailedException
 
+    ProactiveRecommendationDataDetails.add_member(:next_message_token, Shapes::ShapeRef.new(shape: NextToken, required: true, location_name: "nextMessageToken"))
+    ProactiveRecommendationDataDetails.struct_class = Types::ProactiveRecommendationDataDetails
+
     PushADMMessageTemplateContent.add_member(:title, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "title"))
     PushADMMessageTemplateContent.add_member(:body, Shapes::ShapeRef.new(shape: MessageTemplateBodyContentProvider, location_name: "body"))
     PushADMMessageTemplateContent.add_member(:action, Shapes::ShapeRef.new(shape: PushMessageAction, location_name: "action"))
@@ -2780,12 +2791,20 @@ module Aws::QConnect
 
     RetrievalFilterList.member = Shapes::ShapeRef.new(shape: RetrievalFilterConfiguration)
 
+    RetrieveError.add_member(:association_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "associationId"))
+    RetrieveError.add_member(:code, Shapes::ShapeRef.new(shape: RetrieveErrorCode, required: true, location_name: "code"))
+    RetrieveError.add_member(:message, Shapes::ShapeRef.new(shape: RetrieveErrorMessageString, required: true, location_name: "message"))
+    RetrieveError.struct_class = Types::RetrieveError
+
+    RetrieveErrorList.member = Shapes::ShapeRef.new(shape: RetrieveError)
+
     RetrieveRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     RetrieveRequest.add_member(:retrieval_configuration, Shapes::ShapeRef.new(shape: RetrievalConfiguration, required: true, location_name: "retrievalConfiguration"))
     RetrieveRequest.add_member(:retrieval_query, Shapes::ShapeRef.new(shape: NonEmptySensitiveString, required: true, location_name: "retrievalQuery"))
     RetrieveRequest.struct_class = Types::RetrieveRequest
 
     RetrieveResponse.add_member(:results, Shapes::ShapeRef.new(shape: RetrieveResultList, required: true, location_name: "results"))
+    RetrieveResponse.add_member(:errors, Shapes::ShapeRef.new(shape: RetrieveErrorList, location_name: "errors"))
     RetrieveResponse.struct_class = Types::RetrieveResponse
 
     RetrieveResult.add_member(:association_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "associationId"))

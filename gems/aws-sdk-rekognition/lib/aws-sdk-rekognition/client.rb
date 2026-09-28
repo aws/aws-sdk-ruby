@@ -1195,6 +1195,18 @@ module Aws::Rekognition
     # is between 0 and 4. By default, it is set to 0. The limit is best
     # effort and based on the duration of the selfie-video.
     #
+    # You can use the `ChallengePreferences` option in the `Settings`
+    # parameter to choose between the 'FaceMovementAndLightChallenge' or
+    # FaceMovementChallenge' settings. See the [Shared Responsibility][1]
+    # page for details on guidance for which setting to choose between these
+    # two settings depending on your use case and preferences. This
+    # parameter is optional and if no parameter is provided, then the
+    # 'FaceMovementAndLightChallenge' settings is applied by default.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/face-liveness-shared-responsibility-model.html
+    #
     # @option params [String] :kms_key_id
     #   The identifier for your AWS Key Management Service key (AWS KMS key).
     #   Used to encrypt audit images and reference images.
@@ -1491,6 +1503,13 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Service availability notice: Streaming Video and Bulk Image Analysis
+    # is no longer available to new customers. For more information, see
+    # [Rekognition feature availability changes][1].
+    #
+    #  **This change does not impact the availability of other Amazon
+    # Rekognition features.**
+    #
     # Creates an Amazon Rekognition stream processor that you can use to
     # detect and recognize faces or to detect labels in a streaming video.
     #
@@ -1529,6 +1548,10 @@ module Aws::Rekognition
     # `rekognition:CreateStreamProcessor` action. If you want to tag your
     # stream processor, you also require permission to perform the
     # `rekognition:TagResource` operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
     #
     # @option params [required, Types::StreamProcessorInput] :input
     #   Kinesis video stream stream that provides the source streaming video.
@@ -2049,11 +2072,22 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Service availability notice: Streaming Video and Bulk Image Analysis
+    # is no longer available to new customers. For more information, see
+    # [Rekognition feature availability changes][1].
+    #
+    #  **This change does not impact the availability of other Amazon
+    # Rekognition features.**
+    #
     # Deletes the stream processor identified by `Name`. You assign the
     # value for `Name` when you create the stream processor with
     # CreateStreamProcessor. You might not be able to use the same name for
     # a stream processor for a few seconds after calling
     # `DeleteStreamProcessor`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
     #
     # @option params [required, String] :name
     #   The name of the stream processor you want to delete.
@@ -2559,10 +2593,21 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Service availability notice: Streaming Video and Bulk Image Analysis
+    # is no longer available to new customers. For more information, see
+    # [Rekognition feature availability changes][1].
+    #
+    #  **This change does not impact the availability of other Amazon
+    # Rekognition features.**
+    #
     # Provides information about a stream processor created by
     # CreateStreamProcessor. You can get information about the input and
     # output streams, the input parameters for the face recognition being
     # performed, and the current status of the stream processor.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
     #
     # @option params [required, String] :name
     #   Name of the stream processor for which you want information.
@@ -4273,6 +4318,11 @@ module Aws::Rekognition
     # `CreateFaceLivenessSession`. Reference images are always returned when
     # possible.
     #
+    # For a session that has completed, the response can also include a
+    # `Feedback` list describing conditions that were detected in the
+    # selfie-video, such as low lighting or an obstructed face, and
+    # `Metadata` about the client that streamed the session.
+    #
     # @option params [required, String] :session_id
     #   A unique 128-bit UUID. This is used to uniquely identify the session
     #   and also acts as an idempotency token for all operations associated
@@ -4286,6 +4336,8 @@ module Aws::Rekognition
     #   * {Types::GetFaceLivenessSessionResultsResponse#reference_image #reference_image} => Types::AuditImage
     #   * {Types::GetFaceLivenessSessionResultsResponse#audit_images #audit_images} => Array&lt;Types::AuditImage&gt;
     #   * {Types::GetFaceLivenessSessionResultsResponse#challenge #challenge} => Types::Challenge
+    #   * {Types::GetFaceLivenessSessionResultsResponse#feedback #feedback} => Array&lt;Types::FeedbackItem&gt;
+    #   * {Types::GetFaceLivenessSessionResultsResponse#metadata #metadata} => Types::SessionMetadata
     #
     # @example Request syntax with placeholder values
     #
@@ -4317,6 +4369,10 @@ module Aws::Rekognition
     #   resp.audit_images[0].bounding_box.top #=> Float
     #   resp.challenge.type #=> String, one of "FaceMovementAndLightChallenge", "FaceMovementChallenge"
     #   resp.challenge.version #=> String
+    #   resp.feedback #=> Array
+    #   resp.feedback[0].code #=> String, one of "FACE_NOT_VISIBLE", "FACE_OBSTRUCTION_DETECTED", "LOW_VIDEO_QUALITY_DETECTED", "FACE_NOT_ALIGNED", "EYES_CLOSED_DETECTED", "LOW_LIGHTING_DETECTED", "HIGH_LIGHTING_DETECTED"
+    #   resp.feedback[0].message #=> String
+    #   resp.metadata.sdk_type #=> String
     #
     # @overload get_face_liveness_session_results(params = {})
     # @param [Hash] params ({})
@@ -4677,8 +4733,19 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Service availability notice: Streaming Video and Bulk Image Analysis
+    # is no longer available to new customers. For more information, see
+    # [Rekognition feature availability changes][1].
+    #
+    #  **This change does not impact the availability of other Amazon
+    # Rekognition features.**
+    #
     # Retrieves the results for a given media analysis job. Takes a `JobId`
     # returned by StartMediaAnalysisJob.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
     #
     # @option params [required, String] :job_id
     #   Unique identifier for the media analysis job for which you want to
@@ -6026,8 +6093,19 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Service availability notice: Streaming Video and Bulk Image Analysis
+    # is no longer available to new customers. For more information, see
+    # [Rekognition feature availability changes][1].
+    #
+    #  **This change does not impact the availability of other Amazon
+    # Rekognition features.**
+    #
     # Returns a list of media analysis jobs. Results are sorted by
     # `CreationTimestamp` in descending order.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
     #
     # @option params [String] :next_token
     #   Pagination token, if the previous response was incomplete.
@@ -6222,8 +6300,19 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Service availability notice: Streaming Video and Bulk Image Analysis
+    # is no longer available to new customers. For more information, see
+    # [Rekognition feature availability changes][1].
+    #
+    #  **This change does not impact the availability of other Amazon
+    # Rekognition features.**
+    #
     # Gets a list of stream processors that you have created with
     # CreateStreamProcessor.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there are more stream
@@ -7695,9 +7784,20 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Service availability notice: Streaming Video and Bulk Image Analysis
+    # is no longer available to new customers. For more information, see
+    # [Rekognition feature availability changes][1].
+    #
+    #  **This change does not impact the availability of other Amazon
+    # Rekognition features.**
+    #
     # Initiates a new media analysis job. Accepts a manifest file in an
     # Amazon S3 bucket. The output is a manifest file and a summary of the
     # manifest stored in the Amazon S3 bucket.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
     #
     # @option params [String] :client_request_token
     #   Idempotency token used to prevent the accidental creation of duplicate
@@ -8056,6 +8156,13 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Service availability notice: Streaming Video and Bulk Image Analysis
+    # is no longer available to new customers. For more information, see
+    # [Rekognition feature availability changes][1].
+    #
+    #  **This change does not impact the availability of other Amazon
+    # Rekognition features.**
+    #
     # Starts processing a stream processor. You create a stream processor by
     # calling CreateStreamProcessor. To tell `StartStreamProcessor` which
     # stream processor to start, use the value of the `Name` field specified
@@ -8064,6 +8171,10 @@ module Aws::Rekognition
     # If you are using a label detection stream processor to detect labels,
     # you need to provide a `Start selector` and a `Stop selector` to
     # determine the length of the stream processing time.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
     #
     # @option params [required, String] :name
     #   The name of the stream processor to start processing.
@@ -8280,8 +8391,19 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Service availability notice: Streaming Video and Bulk Image Analysis
+    # is no longer available to new customers. For more information, see
+    # [Rekognition feature availability changes][1].
+    #
+    #  **This change does not impact the availability of other Amazon
+    # Rekognition features.**
+    #
     # Stops a running stream processor that was created by
     # CreateStreamProcessor.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
     #
     # @option params [required, String] :name
     #   The name of a stream processor created by CreateStreamProcessor.
@@ -8441,8 +8563,19 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Service availability notice: Streaming Video and Bulk Image Analysis
+    # is no longer available to new customers. For more information, see
+    # [Rekognition feature availability changes][1].
+    #
+    #  **This change does not impact the availability of other Amazon
+    # Rekognition features.**
+    #
     # Allows you to update a stream processor. You can change some settings
     # and regions of interest and delete certain parameters.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html
     #
     # @option params [required, String] :name
     #   Name of the stream processor that you want to update.
@@ -8525,7 +8658,7 @@ module Aws::Rekognition
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.136.0'
+      context[:gem_version] = '1.137.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

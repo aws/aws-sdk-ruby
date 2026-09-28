@@ -132,6 +132,7 @@ module Aws::ARCRegionswitch
       attr_accessor associated_alarms: ::Hash[::String, Types::AssociatedAlarm]
       attr_accessor triggers: ::Array[Types::Trigger]
       attr_accessor report_configuration: Types::ReportConfiguration
+      attr_accessor service_quota_checks_enabled: bool
       attr_accessor name: ::String
       attr_accessor regions: ::Array[::String]
       attr_accessor recovery_approach: ("activeActive" | "activePassive")
@@ -184,6 +185,7 @@ module Aws::ARCRegionswitch
       attr_accessor ungraceful: Types::Ec2Ungraceful
       attr_accessor target_percent: ::Integer
       attr_accessor capacity_monitoring_approach: ("sampledMaxInLast24Hours" | "autoscalingMaxInLast24Hours")
+      attr_accessor wait_elb_target_group_healthy: ("enabled" | "disabled")
       SENSITIVE: []
     end
 
@@ -198,6 +200,7 @@ module Aws::ARCRegionswitch
       attr_accessor ungraceful: Types::EcsUngraceful
       attr_accessor target_percent: ::Integer
       attr_accessor capacity_monitoring_approach: ("sampledMaxInLast24Hours" | "containerInsightsMaxInLast24Hours")
+      attr_accessor wait_elb_target_group_healthy: ("enabled" | "disabled")
       SENSITIVE: []
     end
 
@@ -548,6 +551,19 @@ module Aws::ARCRegionswitch
       SENSITIVE: []
     end
 
+    class ListServiceQuotaWarningsRequest
+      attr_accessor plan_arns: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceQuotaWarningsResponse
+      attr_accessor service_quota_warning_summaries: ::Array[Types::ServiceQuotaWarningSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListTagsForResourceRequest
       attr_accessor arn: ::String
       SENSITIVE: []
@@ -594,6 +610,7 @@ module Aws::ARCRegionswitch
       attr_accessor associated_alarms: ::Hash[::String, Types::AssociatedAlarm]
       attr_accessor triggers: ::Array[Types::Trigger]
       attr_accessor report_configuration: Types::ReportConfiguration
+      attr_accessor service_quota_checks_enabled: bool
       attr_accessor name: ::String
       attr_accessor regions: ::Array[::String]
       attr_accessor recovery_approach: ("activeActive" | "activePassive")
@@ -731,6 +748,22 @@ module Aws::ARCRegionswitch
       SENSITIVE: []
     end
 
+    class ServiceQuotaWarningSummary
+      attr_accessor account_id: ::String
+      attr_accessor quota_region: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor quota_name: ::String
+      attr_accessor status: ("pending" | "denied" | "insufficientPermissions" | "maxRegionSwitchRequestsExceeded" | "maxAccountRequestsExceeded")
+      attr_accessor plan_arn: ::String
+      attr_accessor request_id: ::String
+      attr_accessor case_id: ::String
+      attr_accessor warning_message: ::String
+      attr_accessor last_checked_at: ::Time
+      attr_accessor warning_created_at: ::Time
+      SENSITIVE: []
+    end
+
     class StartPlanExecutionRequest
       attr_accessor plan_arn: ::String
       attr_accessor target_region: ::String
@@ -834,6 +867,7 @@ module Aws::ARCRegionswitch
       attr_accessor associated_alarms: ::Hash[::String, Types::AssociatedAlarm]
       attr_accessor triggers: ::Array[Types::Trigger]
       attr_accessor report_configuration: Types::ReportConfiguration
+      attr_accessor service_quota_checks_enabled: bool
       SENSITIVE: []
     end
 

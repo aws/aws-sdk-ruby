@@ -16702,6 +16702,17 @@ module Aws::Glue
     #   [1]: https://docs.aws.amazon.com/glue/latest/webapi/API_AuditContext.html
     #   @return [Types::AuditContext]
     #
+    # @!attribute [rw] resource_share_type
+    #   Specifies which tables the `GetTables` call returns. The allowable
+    #   values are `FEDERATED` or `ALL`.
+    #
+    #   * If set to `FEDERATED`, returns only federated tables, which
+    #     reference an entity outside the Glue Data Catalog.
+    #
+    #   * If set to `ALL`, returns all tables in the database, both
+    #     federated and non-federated.
+    #   @return [String]
+    #
     # @!attribute [rw] include_status_details
     #   Specifies whether to include status details related to a request to
     #   create or update an Glue Data Catalog view.
@@ -16730,6 +16741,7 @@ module Aws::Glue
       :transaction_id,
       :query_as_of_time,
       :audit_context,
+      :resource_share_type,
       :include_status_details,
       :attributes_to_get)
       SENSITIVE = []
@@ -30730,6 +30742,13 @@ module Aws::Glue
     #   resource linking.
     #   @return [Types::TableIdentifier]
     #
+    # @!attribute [rw] federated_table
+    #   A `FederatedTable` structure that references an entity outside the
+    #   Glue Data Catalog. Specify this field to create a federated table,
+    #   which points to a table in an external metastore instead of
+    #   describing data managed in the Glue Data Catalog.
+    #   @return [Types::FederatedTable]
+    #
     # @!attribute [rw] view_definition
     #   A structure that contains all the information that defines the view,
     #   including the dialect or dialects for the view, and the query.
@@ -30751,6 +30770,7 @@ module Aws::Glue
       :table_type,
       :parameters,
       :target_table,
+      :federated_table,
       :view_definition)
       SENSITIVE = []
       include Aws::Structure

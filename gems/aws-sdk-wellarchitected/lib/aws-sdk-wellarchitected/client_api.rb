@@ -761,6 +761,7 @@ module Aws::WellArchitected
 
     AgentRecommendationSummary.add_member(:recommendation_arn, Shapes::ShapeRef.new(shape: RecommendationArn, required: true, location_name: "recommendationArn"))
     AgentRecommendationSummary.add_member(:profile_arn, Shapes::ShapeRef.new(shape: AgentProfileArn, required: true, location_name: "profileArn"))
+    AgentRecommendationSummary.add_member(:generation_id, Shapes::ShapeRef.new(shape: UUID, location_name: "generationId"))
     AgentRecommendationSummary.add_member(:title, Shapes::ShapeRef.new(shape: AgentRecommendationSummaryTitleString, required: true, location_name: "title"))
     AgentRecommendationSummary.add_member(:description, Shapes::ShapeRef.new(shape: AgentRecommendationSummaryDescriptionString, required: true, location_name: "description"))
     AgentRecommendationSummary.add_member(:type, Shapes::ShapeRef.new(shape: RecommendationType, required: true, location_name: "type"))
@@ -1271,6 +1272,7 @@ module Aws::WellArchitected
 
     GetAgentRecommendationResponse.add_member(:recommendation_arn, Shapes::ShapeRef.new(shape: RecommendationArn, required: true, location_name: "recommendationArn"))
     GetAgentRecommendationResponse.add_member(:profile_arn, Shapes::ShapeRef.new(shape: AgentProfileArn, required: true, location_name: "profileArn"))
+    GetAgentRecommendationResponse.add_member(:generation_id, Shapes::ShapeRef.new(shape: UUID, location_name: "generationId"))
     GetAgentRecommendationResponse.add_member(:title, Shapes::ShapeRef.new(shape: GetAgentRecommendationResponseTitleString, required: true, location_name: "title"))
     GetAgentRecommendationResponse.add_member(:description, Shapes::ShapeRef.new(shape: GetAgentRecommendationResponseDescriptionString, required: true, location_name: "description"))
     GetAgentRecommendationResponse.add_member(:type, Shapes::ShapeRef.new(shape: RecommendationType, required: true, location_name: "type"))

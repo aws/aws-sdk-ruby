@@ -564,6 +564,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon EventBridge                                    | Aws::EventBridge                         | aws-sdk-eventbridge                         | 2015-10-07  |
 | Amazon EventBridge Pipes                              | Aws::Pipes                               | aws-sdk-pipes                               | 2015-10-07  |
 | Amazon EventBridge Scheduler                          | Aws::Scheduler                           | aws-sdk-scheduler                           | 2021-06-30  |
+| Amazon EventBridgeV2                                  | Aws::EventBridgeV2                       | aws-sdk-eventbridgev2                       | 2025-05-15  |
 | Amazon FSx                                            | Aws::FSx                                 | aws-sdk-fsx                                 | 2018-03-01  |
 | Amazon Forecast Query Service                         | Aws::ForecastQueryService                | aws-sdk-forecastqueryservice                | 2018-06-26  |
 | Amazon Forecast Service                               | Aws::ForecastService                     | aws-sdk-forecastservice                     | 2018-06-26  |

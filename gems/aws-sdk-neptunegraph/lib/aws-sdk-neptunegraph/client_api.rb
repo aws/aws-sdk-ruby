@@ -606,6 +606,7 @@ module Aws::NeptuneGraph
     ListGraphsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListGraphsOutput.struct_class = Types::ListGraphsOutput
 
+    ListImportTasksInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, location: "querystring", location_name: "graphIdentifier"))
     ListImportTasksInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListImportTasksInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListImportTasksInput.struct_class = Types::ListImportTasksInput

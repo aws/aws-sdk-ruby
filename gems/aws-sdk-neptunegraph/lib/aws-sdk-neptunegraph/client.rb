@@ -784,7 +784,7 @@ module Aws::NeptuneGraph
     #
     # @option params [Integer] :replica_count
     #   The number of replicas in other AZs to provision on the new graph
-    #   after import. Default = 0, Min = 0, Max = 2.
+    #   after import. Default = 1, Min = 0, Max = 2.
     #
     #   Additional charges equivalent to the m-NCUs selected for the graph
     #   apply for each replica.
@@ -1748,6 +1748,11 @@ module Aws::NeptuneGraph
 
     # Lists import tasks.
     #
+    # @option params [String] :graph_identifier
+    #   The unique identifier of the Neptune Analytics graph. When provided,
+    #   the service returns only import tasks associated with this graph. If
+    #   not specified, the service returns all import tasks.
+    #
     # @option params [String] :next_token
     #   Pagination token used to paginate output.
     #
@@ -1774,6 +1779,7 @@ module Aws::NeptuneGraph
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_import_tasks({
+    #     graph_identifier: "GraphIdentifier",
     #     next_token: "PaginationToken",
     #     max_results: 1,
     #   })
@@ -2565,7 +2571,7 @@ module Aws::NeptuneGraph
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-neptunegraph'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

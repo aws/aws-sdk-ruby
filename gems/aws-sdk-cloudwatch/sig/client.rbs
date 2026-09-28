@@ -89,6 +89,21 @@ module Aws
                                      ) -> _AssociateDatasetKmsKeyResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateDatasetKmsKeyResponseSuccess
 
+      interface _CreateResourceMetricsConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateResourceMetricsConfigurationOutput]
+        def resource_metrics_configuration: () -> Types::ResourceMetricsConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#create_resource_metrics_configuration-instance_method
+      def create_resource_metrics_configuration: (
+                                                   resource_arn: ::String,
+                                                   ?metric_selections: Array[
+                                                     {
+                                                       include_metrics: Array[::String]
+                                                     }
+                                                   ]
+                                                 ) -> _CreateResourceMetricsConfigurationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResourceMetricsConfigurationResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#delete_alarm_mute_rule-instance_method
       def delete_alarm_mute_rule: (
                                     alarm_mute_rule_name: ::String
@@ -148,6 +163,15 @@ module Aws
                                   name: ::String
                                 ) -> _DeleteMetricStreamResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMetricStreamResponseSuccess
+
+      interface _DeleteResourceMetricsConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourceMetricsConfigurationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#delete_resource_metrics_configuration-instance_method
+      def delete_resource_metrics_configuration: (
+                                                   resource_arn: ::String
+                                                 ) -> _DeleteResourceMetricsConfigurationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourceMetricsConfigurationResponseSuccess
 
       interface _DescribeAlarmContributorsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAlarmContributorsOutput]
@@ -442,11 +466,25 @@ module Aws
       interface _GetOTelEnrichmentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetOTelEnrichmentOutput]
         def status: () -> ("Running" | "Stopped")
+        def include_filters: () -> ::Array[Types::OTelEnrichmentMetricSelector]
+        def exclude_filters: () -> ::Array[Types::OTelEnrichmentMetricSelector]
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#get_o_tel_enrichment-instance_method
       def get_o_tel_enrichment: (
                                 ) -> _GetOTelEnrichmentResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOTelEnrichmentResponseSuccess
+
+      interface _GetResourceMetricsConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceMetricsConfigurationOutput]
+        def resource_metrics_configuration: () -> Types::ResourceMetricsConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#get_resource_metrics_configuration-instance_method
+      def get_resource_metrics_configuration: (
+                                                resource_arn: ::String
+                                              ) -> _GetResourceMetricsConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceMetricsConfigurationResponseSuccess
 
       interface _ListAlarmMuteRulesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAlarmMuteRulesOutput]
@@ -854,9 +892,25 @@ module Aws
 
       interface _StartOTelEnrichmentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartOTelEnrichmentOutput]
+        def include_filters: () -> ::Array[Types::OTelEnrichmentMetricSelector]
+        def exclude_filters: () -> ::Array[Types::OTelEnrichmentMetricSelector]
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#start_o_tel_enrichment-instance_method
       def start_o_tel_enrichment: (
+                                    ?include_filters: Array[
+                                      {
+                                        namespace: ::String,
+                                        metric_names: Array[::String]?
+                                      }
+                                    ],
+                                    ?exclude_filters: Array[
+                                      {
+                                        namespace: ::String,
+                                        metric_names: Array[::String]?
+                                      }
+                                    ]
                                   ) -> _StartOTelEnrichmentResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartOTelEnrichmentResponseSuccess
 
@@ -901,6 +955,45 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateOTelEnrichmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOTelEnrichmentOutput]
+        def include_filters: () -> ::Array[Types::OTelEnrichmentMetricSelector]
+        def exclude_filters: () -> ::Array[Types::OTelEnrichmentMetricSelector]
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#update_o_tel_enrichment-instance_method
+      def update_o_tel_enrichment: (
+                                     ?include_filters: Array[
+                                       {
+                                         namespace: ::String,
+                                         metric_names: Array[::String]?
+                                       }
+                                     ],
+                                     ?exclude_filters: Array[
+                                       {
+                                         namespace: ::String,
+                                         metric_names: Array[::String]?
+                                       }
+                                     ]
+                                   ) -> _UpdateOTelEnrichmentResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOTelEnrichmentResponseSuccess
+
+      interface _UpdateResourceMetricsConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResourceMetricsConfigurationOutput]
+        def resource_metrics_configuration: () -> Types::ResourceMetricsConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#update_resource_metrics_configuration-instance_method
+      def update_resource_metrics_configuration: (
+                                                   resource_arn: ::String,
+                                                   ?metric_selections: Array[
+                                                     {
+                                                       include_metrics: Array[::String]
+                                                     }
+                                                   ]
+                                                 ) -> _UpdateResourceMetricsConfigurationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResourceMetricsConfigurationResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#wait_until-instance_method
       def wait_until: (:alarm_exists waiter_name, 

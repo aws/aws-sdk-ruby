@@ -594,6 +594,74 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Creates a resource metrics configuration for an Amazon Web Services
+    # resource. After you create a configuration, Amazon CloudWatch collects
+    # detailed metrics for that resource.
+    #
+    # Each Amazon Web Services resource can have only one resource metrics
+    # configuration. If a configuration already exists for the specified
+    # resource ARN, this operation returns a `ConflictException`. To modify
+    # an existing configuration, use
+    # [UpdateResourceMetricsConfiguration][1].
+    #
+    # If the Amazon Web Services resource that you specify in `ResourceArn`
+    # does not exist, this operation returns a `ResourceNotFoundException`.
+    # Verify that the resource ARN is correct and that the resource exists
+    # before you retry the request.
+    #
+    # To create a resource metrics configuration, you must have the
+    # `cloudwatch:CreateResourceMetricsConfiguration` permission. For
+    # information about scoping this permission to specific resources, see
+    # [Condition keys for resource metrics configuration access][2] in the
+    # *Amazon CloudWatch User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateResourceMetricsConfiguration.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/iam-cw-condition-keys-resource-arn.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services resource to
+    #   enable detailed monitoring for.
+    #
+    # @option params [Array<Types::ResourceMetricSelection>] :metric_selections
+    #   Specifies which metrics Amazon CloudWatch collects for the resource.
+    #   If you omit this parameter, Amazon CloudWatch collects all available
+    #   detailed metrics for the resource.
+    #
+    # @return [Types::CreateResourceMetricsConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateResourceMetricsConfigurationOutput#resource_metrics_configuration #resource_metrics_configuration} => Types::ResourceMetricsConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_resource_metrics_configuration({
+    #     resource_arn: "ResourceArn", # required
+    #     metric_selections: [
+    #       {
+    #         include_metrics: ["MetricName"], # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_metrics_configuration.resource_arn #=> String
+    #   resp.resource_metrics_configuration.created_at #=> Time
+    #   resp.resource_metrics_configuration.updated_at #=> Time
+    #   resp.resource_metrics_configuration.metric_selections #=> Array
+    #   resp.resource_metrics_configuration.metric_selections[0].include_metrics #=> Array
+    #   resp.resource_metrics_configuration.metric_selections[0].include_metrics[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/CreateResourceMetricsConfiguration AWS API Documentation
+    #
+    # @overload create_resource_metrics_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_resource_metrics_configuration(params = {}, options = {})
+      req = build_request(:create_resource_metrics_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes a specific alarm mute rule.
     #
     # When you delete a mute rule, any alarms that are currently being muted
@@ -900,6 +968,46 @@ module Aws::CloudWatch
     # @param [Hash] params ({})
     def delete_metric_stream(params = {}, options = {})
       req = build_request(:delete_metric_stream, params)
+      req.send_request(options)
+    end
+
+    # Deletes the resource metrics configuration for an Amazon Web Services
+    # resource. After you delete the configuration, Amazon CloudWatch stops
+    # collecting detailed metrics for the resource. Metric data that Amazon
+    # CloudWatch already collected for the resource is not deleted.
+    #
+    # This operation returns a `ResourceNotFoundException` if no resource
+    # metrics configuration exists for the specified resource ARN. Verify
+    # that the resource ARN is correct.
+    #
+    # To delete a resource metrics configuration, you must have the
+    # `cloudwatch:DeleteResourceMetricsConfiguration` permission. For
+    # information about scoping this permission to specific resources, see
+    # [Condition keys for resource metrics configuration access][1] in the
+    # *Amazon CloudWatch User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/iam-cw-condition-keys-resource-arn.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services resource to
+    #   delete the resource metrics configuration for.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_metrics_configuration({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteResourceMetricsConfiguration AWS API Documentation
+    #
+    # @overload delete_resource_metrics_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_metrics_configuration(params = {}, options = {})
+      req = build_request(:delete_resource_metrics_configuration, params)
       req.send_request(options)
     end
 
@@ -1849,6 +1957,19 @@ module Aws::CloudWatch
     # data returned within `DashboardBody` as the template for the new
     # dashboard when you call `PutDashboard` to create the copy.
     #
+    # You might have recently enabled an [opt-in Region (Region that is
+    # disabled by default)][1] for your account. In that Region,
+    # `GetDashboard` can return an access denied error for up to 24 hours
+    # after you enable the Region. This delay occurs while dashboard data
+    # propagates. The error does not indicate a problem with your
+    # permissions. Because dashboards are global, you can call
+    # `GetDashboard` in any other enabled Region, or retry after propagation
+    # completes.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html#optinregion
+    #
     # @option params [required, String] :dashboard_name
     #   The name of the dashboard to be described.
     #
@@ -2094,9 +2215,11 @@ module Aws::CloudWatch
     # If you include a Metrics Insights query, each `GetMetricData`
     # operation can include only one query. But the same `GetMetricData`
     # operation can also retrieve other metrics. Metrics Insights queries
-    # can query only the most recent three hours of metric data. For more
-    # information about Metrics Insights, see [Query your metrics with
-    # CloudWatch Metrics Insights][2].
+    # can query the most recent two weeks of metric data. For alarm
+    # condition evaluations, Metrics Insights queries can query only the
+    # most recent three hours of metric data. For more information about
+    # Metrics Insights, see [Query your metrics with CloudWatch Metrics
+    # Insights][2].
     #
     # Calls to the `GetMetricData` API have a different pricing structure
     # than calls to `GetMetricStatistics`. For more information about
@@ -2681,10 +2804,24 @@ module Aws::CloudWatch
     # @return [Types::GetOTelEnrichmentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetOTelEnrichmentOutput#status #status} => String
+    #   * {Types::GetOTelEnrichmentOutput#include_filters #include_filters} => Array&lt;Types::OTelEnrichmentMetricSelector&gt;
+    #   * {Types::GetOTelEnrichmentOutput#exclude_filters #exclude_filters} => Array&lt;Types::OTelEnrichmentMetricSelector&gt;
+    #   * {Types::GetOTelEnrichmentOutput#created_at #created_at} => Time
+    #   * {Types::GetOTelEnrichmentOutput#updated_at #updated_at} => Time
     #
     # @example Response structure
     #
     #   resp.status #=> String, one of "Running", "Stopped"
+    #   resp.include_filters #=> Array
+    #   resp.include_filters[0].namespace #=> String
+    #   resp.include_filters[0].metric_names #=> Array
+    #   resp.include_filters[0].metric_names[0] #=> String
+    #   resp.exclude_filters #=> Array
+    #   resp.exclude_filters[0].namespace #=> String
+    #   resp.exclude_filters[0].metric_names #=> Array
+    #   resp.exclude_filters[0].metric_names[0] #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetOTelEnrichment AWS API Documentation
     #
@@ -2692,6 +2829,58 @@ module Aws::CloudWatch
     # @param [Hash] params ({})
     def get_o_tel_enrichment(params = {}, options = {})
       req = build_request(:get_o_tel_enrichment, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the current resource metrics configuration for an Amazon Web
+    # Services resource. The response includes the resource ARN, any metric
+    # selections, and the times at which the configuration was created and
+    # last updated.
+    #
+    # This operation returns a `ResourceNotFoundException` if no resource
+    # metrics configuration exists for the specified resource ARN. To create
+    # a configuration, use [CreateResourceMetricsConfiguration][1].
+    #
+    # To retrieve a resource metrics configuration, you must have the
+    # `cloudwatch:GetResourceMetricsConfiguration` permission. For
+    # information about scoping this permission to specific resources, see
+    # [Condition keys for resource metrics configuration access][2] in the
+    # *Amazon CloudWatch User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_CreateResourceMetricsConfiguration.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/iam-cw-condition-keys-resource-arn.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services resource to
+    #   retrieve the resource metrics configuration for.
+    #
+    # @return [Types::GetResourceMetricsConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourceMetricsConfigurationOutput#resource_metrics_configuration #resource_metrics_configuration} => Types::ResourceMetricsConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_metrics_configuration({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_metrics_configuration.resource_arn #=> String
+    #   resp.resource_metrics_configuration.created_at #=> Time
+    #   resp.resource_metrics_configuration.updated_at #=> Time
+    #   resp.resource_metrics_configuration.metric_selections #=> Array
+    #   resp.resource_metrics_configuration.metric_selections[0].include_metrics #=> Array
+    #   resp.resource_metrics_configuration.metric_selections[0].include_metrics[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetResourceMetricsConfiguration AWS API Documentation
+    #
+    # @overload get_resource_metrics_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_resource_metrics_configuration(params = {}, options = {})
+      req = build_request(:get_resource_metrics_configuration, params)
       req.send_request(options)
     end
 
@@ -2770,6 +2959,19 @@ module Aws::CloudWatch
     # more than 1000 dashboards, you can call `ListDashboards` again and
     # include the value you received for `NextToken` in the first call, to
     # receive the next 1000 results.
+    #
+    # You might have recently enabled an [opt-in Region (Region that is
+    # disabled by default)][1] for your account. In that Region,
+    # `ListDashboards` can return an access denied error for up to 24 hours
+    # after you enable the Region. This delay occurs while dashboard data
+    # propagates. The error does not indicate a problem with your
+    # permissions. Because dashboards are global, you can call
+    # `ListDashboards` in any other enabled Region, or retry after
+    # propagation completes.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html#optinregion
     #
     # @option params [String] :dashboard_name_prefix
     #   If you specify this parameter, only the dashboards with names starting
@@ -5231,12 +5433,73 @@ module Aws::CloudWatch
     # telemetry for your account. For more information, see [Enable resource
     # tags on telemetry][2].
     #
+    # Optionally, `IncludeFilters` and `ExcludeFilters` limit enrichment to
+    # a subset of the account's metrics. These filters are stored only when
+    # this operation starts enrichment. Calling `StartOTelEnrichment` for an
+    # account where enrichment is already running has no effect and does not
+    # modify the filters that are applied. To change them, use
+    # [UpdateOTelEnrichment][3].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/EnableResourceTagsOnTelemetry.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateOTelEnrichment.html
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @option params [Array<Types::OTelEnrichmentMetricSelector>] :include_filters
+    #   The metric namespaces, and the metric names, to enrich. If this
+    #   parameter is omitted, every namespace that Amazon CloudWatch supports
+    #   for enrichment is in scope.
+    #
+    #   A maximum of 100 filters is allowed across `IncludeFilters` and
+    #   `ExcludeFilters` combined.
+    #
+    # @option params [Array<Types::OTelEnrichmentMetricSelector>] :exclude_filters
+    #   The metric namespaces, and the metric names, to leave unenriched. If
+    #   this parameter is omitted, nothing is excluded.
+    #
+    #   Amazon CloudWatch applies `ExcludeFilters` after `IncludeFilters`, so
+    #   a metric that both parameters match is not enriched.
+    #
+    #   A maximum of 100 filters is allowed across `IncludeFilters` and
+    #   `ExcludeFilters` combined.
+    #
+    # @return [Types::StartOTelEnrichmentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartOTelEnrichmentOutput#include_filters #include_filters} => Array&lt;Types::OTelEnrichmentMetricSelector&gt;
+    #   * {Types::StartOTelEnrichmentOutput#exclude_filters #exclude_filters} => Array&lt;Types::OTelEnrichmentMetricSelector&gt;
+    #   * {Types::StartOTelEnrichmentOutput#created_at #created_at} => Time
+    #   * {Types::StartOTelEnrichmentOutput#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_o_tel_enrichment({
+    #     include_filters: [
+    #       {
+    #         namespace: "Namespace", # required
+    #         metric_names: ["MetricName"],
+    #       },
+    #     ],
+    #     exclude_filters: [
+    #       {
+    #         namespace: "Namespace", # required
+    #         metric_names: ["MetricName"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.include_filters #=> Array
+    #   resp.include_filters[0].namespace #=> String
+    #   resp.include_filters[0].metric_names #=> Array
+    #   resp.include_filters[0].metric_names[0] #=> String
+    #   resp.exclude_filters #=> Array
+    #   resp.exclude_filters[0].namespace #=> String
+    #   resp.exclude_filters[0].metric_names #=> Array
+    #   resp.exclude_filters[0].metric_names[0] #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/StartOTelEnrichment AWS API Documentation
     #
@@ -5409,6 +5672,156 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Replaces the filters that determine which CloudWatch vended metrics
+    # are enriched with resource ARN and resource tag labels for the
+    # account. Enrichment must already be running for the account. If it is
+    # not, this operation returns a `ResourceNotFoundException`. To start
+    # enrichment, use [StartOTelEnrichment][1].
+    #
+    # The filters in the request completely replace the stored filters; they
+    # are not merged with them. `IncludeFilters` and `ExcludeFilters` are
+    # replaced as a pair, so a request that specifies only `IncludeFilters`
+    # also clears the stored `ExcludeFilters`, and a request that specifies
+    # neither clears both.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_StartOTelEnrichment.html
+    #
+    # @option params [Array<Types::OTelEnrichmentMetricSelector>] :include_filters
+    #   The metric namespaces, and the metric names, to enrich. If this
+    #   parameter is omitted, every namespace that Amazon CloudWatch supports
+    #   for enrichment is in scope.
+    #
+    #   A maximum of 100 filters is allowed across `IncludeFilters` and
+    #   `ExcludeFilters` combined.
+    #
+    # @option params [Array<Types::OTelEnrichmentMetricSelector>] :exclude_filters
+    #   The metric namespaces, and the metric names, to leave unenriched. If
+    #   this parameter is omitted, nothing is excluded.
+    #
+    #   Amazon CloudWatch applies `ExcludeFilters` after `IncludeFilters`, so
+    #   a metric that both parameters match is not enriched.
+    #
+    #   A maximum of 100 filters is allowed across `IncludeFilters` and
+    #   `ExcludeFilters` combined.
+    #
+    # @return [Types::UpdateOTelEnrichmentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateOTelEnrichmentOutput#include_filters #include_filters} => Array&lt;Types::OTelEnrichmentMetricSelector&gt;
+    #   * {Types::UpdateOTelEnrichmentOutput#exclude_filters #exclude_filters} => Array&lt;Types::OTelEnrichmentMetricSelector&gt;
+    #   * {Types::UpdateOTelEnrichmentOutput#created_at #created_at} => Time
+    #   * {Types::UpdateOTelEnrichmentOutput#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_o_tel_enrichment({
+    #     include_filters: [
+    #       {
+    #         namespace: "Namespace", # required
+    #         metric_names: ["MetricName"],
+    #       },
+    #     ],
+    #     exclude_filters: [
+    #       {
+    #         namespace: "Namespace", # required
+    #         metric_names: ["MetricName"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.include_filters #=> Array
+    #   resp.include_filters[0].namespace #=> String
+    #   resp.include_filters[0].metric_names #=> Array
+    #   resp.include_filters[0].metric_names[0] #=> String
+    #   resp.exclude_filters #=> Array
+    #   resp.exclude_filters[0].namespace #=> String
+    #   resp.exclude_filters[0].metric_names #=> Array
+    #   resp.exclude_filters[0].metric_names[0] #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/UpdateOTelEnrichment AWS API Documentation
+    #
+    # @overload update_o_tel_enrichment(params = {})
+    # @param [Hash] params ({})
+    def update_o_tel_enrichment(params = {}, options = {})
+      req = build_request(:update_o_tel_enrichment, params)
+      req.send_request(options)
+    end
+
+    # Updates the resource metrics configuration for an Amazon Web Services
+    # resource. The `MetricSelections` value that you provide replaces any
+    # existing metric selections for the resource; it is not merged with
+    # them.
+    #
+    # If you omit `MetricSelections`, Amazon CloudWatch removes any existing
+    # metric selection filter and collects all available detailed metrics
+    # for the resource.
+    #
+    # This operation returns a `ResourceNotFoundException` if no resource
+    # metrics configuration exists for the specified resource ARN. To create
+    # a configuration, use [CreateResourceMetricsConfiguration][1].
+    #
+    # To update a resource metrics configuration, you must have the
+    # `cloudwatch:UpdateResourceMetricsConfiguration` permission. For
+    # information about scoping this permission to specific resources, see
+    # [Condition keys for resource metrics configuration access][2] in the
+    # *Amazon CloudWatch User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_CreateResourceMetricsConfiguration.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/iam-cw-condition-keys-resource-arn.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services resource to
+    #   update the resource metrics configuration for.
+    #
+    # @option params [Array<Types::ResourceMetricSelection>] :metric_selections
+    #   Specifies which metrics Amazon CloudWatch collects for the resource.
+    #   The selections that you provide completely replace any existing metric
+    #   selections.
+    #
+    #   If you omit this parameter, Amazon CloudWatch removes any existing
+    #   metric selection filter and collects all available detailed metrics
+    #   for the resource.
+    #
+    # @return [Types::UpdateResourceMetricsConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateResourceMetricsConfigurationOutput#resource_metrics_configuration #resource_metrics_configuration} => Types::ResourceMetricsConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_resource_metrics_configuration({
+    #     resource_arn: "ResourceArn", # required
+    #     metric_selections: [
+    #       {
+    #         include_metrics: ["MetricName"], # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_metrics_configuration.resource_arn #=> String
+    #   resp.resource_metrics_configuration.created_at #=> Time
+    #   resp.resource_metrics_configuration.updated_at #=> Time
+    #   resp.resource_metrics_configuration.metric_selections #=> Array
+    #   resp.resource_metrics_configuration.metric_selections[0].include_metrics #=> Array
+    #   resp.resource_metrics_configuration.metric_selections[0].include_metrics[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/UpdateResourceMetricsConfiguration AWS API Documentation
+    #
+    # @overload update_resource_metrics_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_resource_metrics_configuration(params = {}, options = {})
+      req = build_request(:update_resource_metrics_configuration, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -5427,7 +5840,7 @@ module Aws::CloudWatch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.148.0'
+      context[:gem_version] = '1.149.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

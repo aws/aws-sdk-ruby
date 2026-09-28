@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.151.0 (2026-09-24)
+------------------
+
+* Feature - Added tagging support for ElastiCache Global DataStore.
+
 1.150.0 (2026-09-11)
 ------------------
 

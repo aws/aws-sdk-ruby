@@ -302,7 +302,7 @@ module Aws::RedshiftDataAPIService
     InternalServerException.struct_class = Types::InternalServerException
 
     ListDatabasesRequest.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterIdentifierString, location_name: "ClusterIdentifier"))
-    ListDatabasesRequest.add_member(:database, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Database"))
+    ListDatabasesRequest.add_member(:database, Shapes::ShapeRef.new(shape: String, location_name: "Database"))
     ListDatabasesRequest.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
     ListDatabasesRequest.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))
     ListDatabasesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))

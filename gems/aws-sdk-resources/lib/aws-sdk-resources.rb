@@ -164,6 +164,7 @@ module Aws
   autoload :ElementalInference, 'aws-sdk-elementalinference'
   autoload :EntityResolution, 'aws-sdk-entityresolution'
   autoload :EventBridge, 'aws-sdk-eventbridge'
+  autoload :EventBridgeV2, 'aws-sdk-eventbridgev2'
   autoload :Evs, 'aws-sdk-evs'
   autoload :FIS, 'aws-sdk-fis'
   autoload :FMS, 'aws-sdk-fms'

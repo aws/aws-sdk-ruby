@@ -2020,6 +2020,7 @@ module Aws::DataZone
     #       },
     #       iam_properties: {
     #         glue_lineage_sync_enabled: false,
+    #         role_arn: "RoleArn",
     #       },
     #       redshift_properties: {
     #         storage: {
@@ -3215,6 +3216,11 @@ module Aws::DataZone
     # @option params [Array<Types::CustomParameter>] :user_parameters
     #   The user parameters of this Amazon DataZone blueprint.
     #
+    # @option params [String] :blueprint_category
+    #   The category of the Amazon DataZone blueprint. The only valid value is
+    #   `TOOLING`, which creates a blueprint that provisions the tooling
+    #   resources of a project.
+    #
     # @return [Types::CreateEnvironmentBlueprintOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEnvironmentBlueprintOutput#id #id} => String
@@ -3225,6 +3231,7 @@ module Aws::DataZone
     #   * {Types::CreateEnvironmentBlueprintOutput#deployment_properties #deployment_properties} => Types::DeploymentProperties
     #   * {Types::CreateEnvironmentBlueprintOutput#user_parameters #user_parameters} => Array&lt;Types::CustomParameter&gt;
     #   * {Types::CreateEnvironmentBlueprintOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
+    #   * {Types::CreateEnvironmentBlueprintOutput#blueprint_category #blueprint_category} => String
     #   * {Types::CreateEnvironmentBlueprintOutput#created_at #created_at} => Time
     #   * {Types::CreateEnvironmentBlueprintOutput#updated_at #updated_at} => Time
     #
@@ -3250,6 +3257,7 @@ module Aws::DataZone
     #         is_update_supported: false,
     #       },
     #     ],
+    #     blueprint_category: "TOOLING", # accepts TOOLING
     #   })
     #
     # @example Response structure
@@ -3271,6 +3279,7 @@ module Aws::DataZone
     #   resp.user_parameters[0].is_update_supported #=> Boolean
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
+    #   resp.blueprint_category #=> String, one of "TOOLING"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #
@@ -7129,6 +7138,7 @@ module Aws::DataZone
     #   * {Types::GetEnvironmentBlueprintOutput#deployment_properties #deployment_properties} => Types::DeploymentProperties
     #   * {Types::GetEnvironmentBlueprintOutput#user_parameters #user_parameters} => Array&lt;Types::CustomParameter&gt;
     #   * {Types::GetEnvironmentBlueprintOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
+    #   * {Types::GetEnvironmentBlueprintOutput#blueprint_category #blueprint_category} => String
     #   * {Types::GetEnvironmentBlueprintOutput#created_at #created_at} => Time
     #   * {Types::GetEnvironmentBlueprintOutput#updated_at #updated_at} => Time
     #
@@ -7158,6 +7168,7 @@ module Aws::DataZone
     #   resp.user_parameters[0].is_update_supported #=> Boolean
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
+    #   resp.blueprint_category #=> String, one of "TOOLING"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #
@@ -10079,6 +10090,7 @@ module Aws::DataZone
     #   resp.items[0].provisioning_properties.cloud_formation.template_url #=> String
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].updated_at #=> Time
+    #   resp.items[0].blueprint_category #=> String, one of "TOOLING"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListEnvironmentBlueprints AWS API Documentation
@@ -15306,6 +15318,9 @@ module Aws::DataZone
     #   The user parameters to be updated as part of the
     #   `UpdateEnvironmentBlueprint` action.
     #
+    # @option params [String] :blueprint_category
+    #   The category to update. The only valid value is `TOOLING`.
+    #
     # @return [Types::UpdateEnvironmentBlueprintOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateEnvironmentBlueprintOutput#id #id} => String
@@ -15316,6 +15331,7 @@ module Aws::DataZone
     #   * {Types::UpdateEnvironmentBlueprintOutput#deployment_properties #deployment_properties} => Types::DeploymentProperties
     #   * {Types::UpdateEnvironmentBlueprintOutput#user_parameters #user_parameters} => Array&lt;Types::CustomParameter&gt;
     #   * {Types::UpdateEnvironmentBlueprintOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
+    #   * {Types::UpdateEnvironmentBlueprintOutput#blueprint_category #blueprint_category} => String
     #   * {Types::UpdateEnvironmentBlueprintOutput#created_at #created_at} => Time
     #   * {Types::UpdateEnvironmentBlueprintOutput#updated_at #updated_at} => Time
     #
@@ -15341,6 +15357,7 @@ module Aws::DataZone
     #         is_update_supported: false,
     #       },
     #     ],
+    #     blueprint_category: "TOOLING", # accepts TOOLING
     #   })
     #
     # @example Response structure
@@ -15362,6 +15379,7 @@ module Aws::DataZone
     #   resp.user_parameters[0].is_update_supported #=> Boolean
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
+    #   resp.blueprint_category #=> String, one of "TOOLING"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #
@@ -16676,7 +16694,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

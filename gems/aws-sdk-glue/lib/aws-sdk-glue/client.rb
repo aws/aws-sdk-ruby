@@ -4752,6 +4752,12 @@ module Aws::Glue
     #         name: "NameString",
     #         region: "NameString",
     #       },
+    #       federated_table: {
+    #         identifier: "FederationIdentifier",
+    #         database_identifier: "FederationIdentifier",
+    #         connection_name: "NameString",
+    #         connection_type: "NameString",
+    #       },
     #       view_definition: {
     #         is_protected: false,
     #         definer: "ArnString",
@@ -12134,6 +12140,16 @@ module Aws::Glue
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/webapi/API_AuditContext.html
     #
+    # @option params [String] :resource_share_type
+    #   Specifies which tables the `GetTables` call returns. The allowable
+    #   values are `FEDERATED` or `ALL`.
+    #
+    #   * If set to `FEDERATED`, returns only federated tables, which
+    #     reference an entity outside the Glue Data Catalog.
+    #
+    #   * If set to `ALL`, returns all tables in the database, both federated
+    #     and non-federated.
+    #
     # @option params [Boolean] :include_status_details
     #   Specifies whether to include status details related to a request to
     #   create or update an Glue Data Catalog view.
@@ -12171,6 +12187,7 @@ module Aws::Glue
     #       requested_columns: ["ColumnNameString"],
     #       all_columns_requested: false,
     #     },
+    #     resource_share_type: "FEDERATED", # accepts FEDERATED, ALL
     #     include_status_details: false,
     #     attributes_to_get: ["NAME"], # accepts NAME, TABLE_TYPE, DEFAULT, LATEST_ICEBERG_METADATA
     #   })
@@ -20806,6 +20823,12 @@ module Aws::Glue
     #         name: "NameString",
     #         region: "NameString",
     #       },
+    #       federated_table: {
+    #         identifier: "FederationIdentifier",
+    #         database_identifier: "FederationIdentifier",
+    #         connection_name: "NameString",
+    #         connection_type: "NameString",
+    #       },
     #       view_definition: {
     #         is_protected: false,
     #         definer: "ArnString",
@@ -21254,7 +21277,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.275.0'
+      context[:gem_version] = '1.276.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

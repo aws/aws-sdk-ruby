@@ -594,6 +594,10 @@ module Aws::ARCRegionswitch
     #   each plan execution that includes execution events, plan
     #   configuration, and CloudWatch alarm states.
     #
+    # @option params [Boolean] :service_quota_checks_enabled
+    #   Specifies whether to enable service quota checks for the Region switch
+    #   plan.
+    #
     # @option params [required, String] :name
     #   The name of a Region switch plan.
     #
@@ -657,6 +661,7 @@ module Aws::ARCRegionswitch
     #                 },
     #                 target_percent: 1,
     #                 capacity_monitoring_approach: "sampledMaxInLast24Hours", # accepts sampledMaxInLast24Hours, autoscalingMaxInLast24Hours
+    #                 wait_elb_target_group_healthy: "enabled", # accepts enabled, disabled
     #               },
     #               execution_approval_config: {
     #                 timeout_minutes: 1,
@@ -711,6 +716,7 @@ module Aws::ARCRegionswitch
     #                 },
     #                 target_percent: 1,
     #                 capacity_monitoring_approach: "sampledMaxInLast24Hours", # accepts sampledMaxInLast24Hours, containerInsightsMaxInLast24Hours
+    #                 wait_elb_target_group_healthy: "enabled", # accepts enabled, disabled
     #               },
     #               eks_resource_scaling_config: {
     #                 timeout_minutes: 1,
@@ -885,6 +891,7 @@ module Aws::ARCRegionswitch
     #         },
     #       ],
     #     },
+    #     service_quota_checks_enabled: false,
     #     name: "PlanName", # required
     #     regions: ["Region"], # required
     #     recovery_approach: "activeActive", # required, accepts activeActive, activePassive
@@ -918,6 +925,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ec2_asg_capacity_increase_config.ungraceful.minimum_success_percentage #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ec2_asg_capacity_increase_config.target_percent #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ec2_asg_capacity_increase_config.capacity_monitoring_approach #=> String, one of "sampledMaxInLast24Hours", "autoscalingMaxInLast24Hours"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ec2_asg_capacity_increase_config.wait_elb_target_group_healthy #=> String, one of "enabled", "disabled"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.execution_approval_config.timeout_minutes #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.execution_approval_config.approval_role #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.arc_routing_control_config.timeout_minutes #=> Integer
@@ -948,6 +956,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ecs_capacity_increase_config.ungraceful.minimum_success_percentage #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ecs_capacity_increase_config.target_percent #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ecs_capacity_increase_config.capacity_monitoring_approach #=> String, one of "sampledMaxInLast24Hours", "containerInsightsMaxInLast24Hours"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ecs_capacity_increase_config.wait_elb_target_group_healthy #=> String, one of "enabled", "disabled"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.eks_resource_scaling_config.timeout_minutes #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.eks_resource_scaling_config.kubernetes_resource_type.api_version #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.eks_resource_scaling_config.kubernetes_resource_type.kind #=> String
@@ -1048,6 +1057,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.report_configuration.report_output #=> Array
     #   resp.plan.report_configuration.report_output[0].s3_configuration.bucket_path #=> String
     #   resp.plan.report_configuration.report_output[0].s3_configuration.bucket_owner #=> String
+    #   resp.plan.service_quota_checks_enabled #=> Boolean
     #   resp.plan.name #=> String
     #   resp.plan.regions #=> Array
     #   resp.plan.regions[0] #=> String
@@ -1131,6 +1141,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ec2_asg_capacity_increase_config.ungraceful.minimum_success_percentage #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ec2_asg_capacity_increase_config.target_percent #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ec2_asg_capacity_increase_config.capacity_monitoring_approach #=> String, one of "sampledMaxInLast24Hours", "autoscalingMaxInLast24Hours"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ec2_asg_capacity_increase_config.wait_elb_target_group_healthy #=> String, one of "enabled", "disabled"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.execution_approval_config.timeout_minutes #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.execution_approval_config.approval_role #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.arc_routing_control_config.timeout_minutes #=> Integer
@@ -1161,6 +1172,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ecs_capacity_increase_config.ungraceful.minimum_success_percentage #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ecs_capacity_increase_config.target_percent #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ecs_capacity_increase_config.capacity_monitoring_approach #=> String, one of "sampledMaxInLast24Hours", "containerInsightsMaxInLast24Hours"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ecs_capacity_increase_config.wait_elb_target_group_healthy #=> String, one of "enabled", "disabled"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.eks_resource_scaling_config.timeout_minutes #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.eks_resource_scaling_config.kubernetes_resource_type.api_version #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.eks_resource_scaling_config.kubernetes_resource_type.kind #=> String
@@ -1261,6 +1273,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.report_configuration.report_output #=> Array
     #   resp.plan.report_configuration.report_output[0].s3_configuration.bucket_path #=> String
     #   resp.plan.report_configuration.report_output[0].s3_configuration.bucket_owner #=> String
+    #   resp.plan.service_quota_checks_enabled #=> Boolean
     #   resp.plan.name #=> String
     #   resp.plan.regions #=> Array
     #   resp.plan.regions[0] #=> String
@@ -1442,6 +1455,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ec2_asg_capacity_increase_config.ungraceful.minimum_success_percentage #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ec2_asg_capacity_increase_config.target_percent #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ec2_asg_capacity_increase_config.capacity_monitoring_approach #=> String, one of "sampledMaxInLast24Hours", "autoscalingMaxInLast24Hours"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ec2_asg_capacity_increase_config.wait_elb_target_group_healthy #=> String, one of "enabled", "disabled"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.execution_approval_config.timeout_minutes #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.execution_approval_config.approval_role #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.arc_routing_control_config.timeout_minutes #=> Integer
@@ -1472,6 +1486,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ecs_capacity_increase_config.ungraceful.minimum_success_percentage #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ecs_capacity_increase_config.target_percent #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ecs_capacity_increase_config.capacity_monitoring_approach #=> String, one of "sampledMaxInLast24Hours", "containerInsightsMaxInLast24Hours"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ecs_capacity_increase_config.wait_elb_target_group_healthy #=> String, one of "enabled", "disabled"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.eks_resource_scaling_config.timeout_minutes #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.eks_resource_scaling_config.kubernetes_resource_type.api_version #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.eks_resource_scaling_config.kubernetes_resource_type.kind #=> String
@@ -1572,6 +1587,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.report_configuration.report_output #=> Array
     #   resp.plan.report_configuration.report_output[0].s3_configuration.bucket_path #=> String
     #   resp.plan.report_configuration.report_output[0].s3_configuration.bucket_owner #=> String
+    #   resp.plan.service_quota_checks_enabled #=> Boolean
     #   resp.plan.name #=> String
     #   resp.plan.regions #=> Array
     #   resp.plan.regions[0] #=> String
@@ -1643,6 +1659,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ec2_asg_capacity_increase_config.ungraceful.minimum_success_percentage #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ec2_asg_capacity_increase_config.target_percent #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ec2_asg_capacity_increase_config.capacity_monitoring_approach #=> String, one of "sampledMaxInLast24Hours", "autoscalingMaxInLast24Hours"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ec2_asg_capacity_increase_config.wait_elb_target_group_healthy #=> String, one of "enabled", "disabled"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.execution_approval_config.timeout_minutes #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.execution_approval_config.approval_role #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.arc_routing_control_config.timeout_minutes #=> Integer
@@ -1673,6 +1690,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ecs_capacity_increase_config.ungraceful.minimum_success_percentage #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ecs_capacity_increase_config.target_percent #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ecs_capacity_increase_config.capacity_monitoring_approach #=> String, one of "sampledMaxInLast24Hours", "containerInsightsMaxInLast24Hours"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ecs_capacity_increase_config.wait_elb_target_group_healthy #=> String, one of "enabled", "disabled"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.eks_resource_scaling_config.timeout_minutes #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.eks_resource_scaling_config.kubernetes_resource_type.api_version #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.eks_resource_scaling_config.kubernetes_resource_type.kind #=> String
@@ -1773,6 +1791,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.report_configuration.report_output #=> Array
     #   resp.plan.report_configuration.report_output[0].s3_configuration.bucket_path #=> String
     #   resp.plan.report_configuration.report_output[0].s3_configuration.bucket_owner #=> String
+    #   resp.plan.service_quota_checks_enabled #=> Boolean
     #   resp.plan.name #=> String
     #   resp.plan.regions #=> Array
     #   resp.plan.regions[0] #=> String
@@ -2171,6 +2190,78 @@ module Aws::ARCRegionswitch
       req.send_request(options)
     end
 
+    # Lists the service quota warnings for the plans that you can access.
+    # Region switch creates a warning when the applied quota value in one
+    # Region of a plan is lower than the value required for the matching
+    # resource in another Region or account in the plan.
+    #
+    # Returns the warnings for the plans that you own and for plans that are
+    # shared with your account through AWS Resource Access Manager (AWS
+    # RAM). To return warnings for specific plans, provide a list of plan
+    # Amazon Resource Names (ARNs). Region switch ignores any plan ARN that
+    # you can't access. If you don't provide any plan ARNs, Region switch
+    # returns the warnings for all of your accessible plans.
+    #
+    # @option params [Array<String>] :plan_arns
+    #   The Amazon Resource Names (ARNs) of the plans to return service quota
+    #   warnings for. You can specify up to 100 plan ARNs. Region switch
+    #   ignores any plan ARN that you can't access. If you omit this
+    #   parameter, Region switch returns the warnings for all of your
+    #   accessible plans.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with this call. Valid values
+    #   are `1` to `100`. If you don't specify a value, the operation returns
+    #   up to the maximum number of results.
+    #
+    # @option params [String] :next_token
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `nextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `nextToken`
+    #   response to request the next page of results.
+    #
+    # @return [Types::ListServiceQuotaWarningsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListServiceQuotaWarningsResponse#service_quota_warning_summaries #service_quota_warning_summaries} => Array&lt;Types::ServiceQuotaWarningSummary&gt;
+    #   * {Types::ListServiceQuotaWarningsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_service_quota_warnings({
+    #     plan_arns: ["PlanArn"],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_quota_warning_summaries #=> Array
+    #   resp.service_quota_warning_summaries[0].account_id #=> String
+    #   resp.service_quota_warning_summaries[0].quota_region #=> String
+    #   resp.service_quota_warning_summaries[0].service_code #=> String
+    #   resp.service_quota_warning_summaries[0].quota_code #=> String
+    #   resp.service_quota_warning_summaries[0].quota_name #=> String
+    #   resp.service_quota_warning_summaries[0].status #=> String, one of "pending", "denied", "insufficientPermissions", "maxRegionSwitchRequestsExceeded", "maxAccountRequestsExceeded"
+    #   resp.service_quota_warning_summaries[0].plan_arn #=> String
+    #   resp.service_quota_warning_summaries[0].request_id #=> String
+    #   resp.service_quota_warning_summaries[0].case_id #=> String
+    #   resp.service_quota_warning_summaries[0].warning_message #=> String
+    #   resp.service_quota_warning_summaries[0].last_checked_at #=> Time
+    #   resp.service_quota_warning_summaries[0].warning_created_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/ListServiceQuotaWarnings AWS API Documentation
+    #
+    # @overload list_service_quota_warnings(params = {})
+    # @param [Hash] params ({})
+    def list_service_quota_warnings(params = {}, options = {})
+      req = build_request(:list_service_quota_warnings, params)
+      req.send_request(options)
+    end
+
     # Lists the tags attached to a Region switch resource.
     #
     # @option params [required, String] :arn
@@ -2378,6 +2469,10 @@ module Aws::ARCRegionswitch
     # @option params [Types::ReportConfiguration] :report_configuration
     #   The updated report configuration for the plan.
     #
+    # @option params [Boolean] :service_quota_checks_enabled
+    #   Specifies whether service quota checks are enabled for the Region
+    #   switch plan.
+    #
     # @return [Types::UpdatePlanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePlanResponse#plan #plan} => Types::Plan
@@ -2423,6 +2518,7 @@ module Aws::ARCRegionswitch
     #                 },
     #                 target_percent: 1,
     #                 capacity_monitoring_approach: "sampledMaxInLast24Hours", # accepts sampledMaxInLast24Hours, autoscalingMaxInLast24Hours
+    #                 wait_elb_target_group_healthy: "enabled", # accepts enabled, disabled
     #               },
     #               execution_approval_config: {
     #                 timeout_minutes: 1,
@@ -2477,6 +2573,7 @@ module Aws::ARCRegionswitch
     #                 },
     #                 target_percent: 1,
     #                 capacity_monitoring_approach: "sampledMaxInLast24Hours", # accepts sampledMaxInLast24Hours, containerInsightsMaxInLast24Hours
+    #                 wait_elb_target_group_healthy: "enabled", # accepts enabled, disabled
     #               },
     #               eks_resource_scaling_config: {
     #                 timeout_minutes: 1,
@@ -2651,6 +2748,7 @@ module Aws::ARCRegionswitch
     #         },
     #       ],
     #     },
+    #     service_quota_checks_enabled: false,
     #   })
     #
     # @example Response structure
@@ -2677,6 +2775,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ec2_asg_capacity_increase_config.ungraceful.minimum_success_percentage #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ec2_asg_capacity_increase_config.target_percent #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ec2_asg_capacity_increase_config.capacity_monitoring_approach #=> String, one of "sampledMaxInLast24Hours", "autoscalingMaxInLast24Hours"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ec2_asg_capacity_increase_config.wait_elb_target_group_healthy #=> String, one of "enabled", "disabled"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.execution_approval_config.timeout_minutes #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.execution_approval_config.approval_role #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.arc_routing_control_config.timeout_minutes #=> Integer
@@ -2707,6 +2806,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ecs_capacity_increase_config.ungraceful.minimum_success_percentage #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ecs_capacity_increase_config.target_percent #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.ecs_capacity_increase_config.capacity_monitoring_approach #=> String, one of "sampledMaxInLast24Hours", "containerInsightsMaxInLast24Hours"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.ecs_capacity_increase_config.wait_elb_target_group_healthy #=> String, one of "enabled", "disabled"
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.eks_resource_scaling_config.timeout_minutes #=> Integer
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.eks_resource_scaling_config.kubernetes_resource_type.api_version #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.eks_resource_scaling_config.kubernetes_resource_type.kind #=> String
@@ -2807,6 +2907,7 @@ module Aws::ARCRegionswitch
     #   resp.plan.report_configuration.report_output #=> Array
     #   resp.plan.report_configuration.report_output[0].s3_configuration.bucket_path #=> String
     #   resp.plan.report_configuration.report_output[0].s3_configuration.bucket_owner #=> String
+    #   resp.plan.service_quota_checks_enabled #=> Boolean
     #   resp.plan.name #=> String
     #   resp.plan.regions #=> Array
     #   resp.plan.regions[0] #=> String
@@ -2923,7 +3024,7 @@ module Aws::ARCRegionswitch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-arcregionswitch'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

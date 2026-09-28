@@ -10,11 +10,6 @@
 module Aws::WellArchitected
   # Endpoint parameters used to influence endpoints per request.
   #
-  # @!attribute region
-  #   The AWS region used to dispatch the request.
-  #
-  #   @return [string]
-  #
   # @!attribute use_dual_stack
   #   When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.
   #
@@ -30,39 +25,52 @@ module Aws::WellArchitected
   #
   #   @return [string]
   #
+  # @!attribute region
+  #   The AWS region used to dispatch the request.
+  #
+  #   @return [string]
+  #
+  # @!attribute sub_service_type
+  #   Identifies the sub-service used for endpoint routing. This value is set automatically per operation and is not client-configurable. It is unset for Well-Architected Tool operations. It is AGENT for Well-Architected Agent operations, which resolve to the wellarchitected-agent endpoint.
+  #
+  #   @return [string]
+  #
   EndpointParameters = Struct.new(
-    :region,
     :use_dual_stack,
     :use_fips,
     :endpoint,
+    :region,
+    :sub_service_type,
   ) do
     include Aws::Structure
 
     # @api private
     class << self
       PARAM_MAP = {
-        'Region' => :region,
         'UseDualStack' => :use_dual_stack,
         'UseFIPS' => :use_fips,
         'Endpoint' => :endpoint,
+        'Region' => :region,
+        'SubServiceType' => :sub_service_type,
       }.freeze
     end
 
     def initialize(options = {})
-      self[:region] = options[:region]
       self[:use_dual_stack] = options[:use_dual_stack]
       self[:use_dual_stack] = false if self[:use_dual_stack].nil?
       self[:use_fips] = options[:use_fips]
       self[:use_fips] = false if self[:use_fips].nil?
       self[:endpoint] = options[:endpoint]
+      self[:region] = options[:region]
+      self[:sub_service_type] = options[:sub_service_type]
     end
 
     def self.create(config, options={})
       new({
-        region: config.region,
         use_dual_stack: config.use_dualstack_endpoint,
         use_fips: config.use_fips_endpoint,
         endpoint: (config.endpoint.to_s unless config.regional_endpoint),
+        region: config.region,
       }.merge(options))
     end
   end

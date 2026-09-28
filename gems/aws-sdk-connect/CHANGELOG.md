@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.282.0 (2026-09-25)
+------------------
+
+* Feature - Agent Privacy During Hold is a new privacy capability for Amazon Connect Voice that prevents agent audio from being captured in call recordings or Contact Lens conversational analytics during hold. When enabled, agents are automatically muted on entering hold and unmuted on resuming the contact
+
 1.281.0 (2026-09-18)
 ------------------
 

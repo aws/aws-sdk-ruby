@@ -53,6 +53,8 @@ module Aws::CloudWatch
   # * {ResourceConflict}
   # * {ResourceNotFound}
   # * {ResourceNotFoundException}
+  # * {ValidationException}
+  #    * This error class is not used. `ValidationError` is used during parsing instead.
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -343,6 +345,23 @@ module Aws::CloudWatch
       # @return [String]
       def resource_id
         @data[:resource_id]
+      end
+    end
+
+    # @deprecated This error class is not used during parsing.
+    #   Please use `ValidationError` instead.
+    class ValidationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudWatch::Types::ValidationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

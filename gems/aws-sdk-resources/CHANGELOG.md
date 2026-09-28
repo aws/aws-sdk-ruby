@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.274.0 (2026-09-24)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-eventbridgev2` gem.
+
 3.273.0 (2026-09-23)
 ------------------
 

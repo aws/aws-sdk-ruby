@@ -16,10 +16,21 @@ module Aws::MarketplaceDiscovery
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AgreementResourceId = Shapes::StringShape.new(name: 'AgreementResourceId')
+    AmazonMachineImageCidrIpAddressList = Shapes::ListShape.new(name: 'AmazonMachineImageCidrIpAddressList')
+    AmazonMachineImageEbsVolume = Shapes::StructureShape.new(name: 'AmazonMachineImageEbsVolume')
+    AmazonMachineImageEbsVolumeIopsInteger = Shapes::IntegerShape.new(name: 'AmazonMachineImageEbsVolumeIopsInteger')
+    AmazonMachineImageEbsVolumeTypeList = Shapes::ListShape.new(name: 'AmazonMachineImageEbsVolumeTypeList')
+    AmazonMachineImageEbsVolumeTypeListMemberString = Shapes::StringShape.new(name: 'AmazonMachineImageEbsVolumeTypeListMemberString')
     AmazonMachineImageFulfillmentOption = Shapes::StructureShape.new(name: 'AmazonMachineImageFulfillmentOption')
+    AmazonMachineImageFulfillmentOptionAccessUrlTemplateString = Shapes::StringShape.new(name: 'AmazonMachineImageFulfillmentOptionAccessUrlTemplateString')
+    AmazonMachineImageFulfillmentOptionAmiAliasString = Shapes::StringShape.new(name: 'AmazonMachineImageFulfillmentOptionAmiAliasString')
+    AmazonMachineImageFulfillmentOptionArchitectureString = Shapes::StringShape.new(name: 'AmazonMachineImageFulfillmentOptionArchitectureString')
+    AmazonMachineImageFulfillmentOptionShortDescriptionString = Shapes::StringShape.new(name: 'AmazonMachineImageFulfillmentOptionShortDescriptionString')
     AmazonMachineImageOperatingSystem = Shapes::StructureShape.new(name: 'AmazonMachineImageOperatingSystem')
     AmazonMachineImageOperatingSystemList = Shapes::ListShape.new(name: 'AmazonMachineImageOperatingSystemList')
     AmazonMachineImageRecommendation = Shapes::StructureShape.new(name: 'AmazonMachineImageRecommendation')
+    AmazonMachineImageSecurityGroup = Shapes::StructureShape.new(name: 'AmazonMachineImageSecurityGroup')
+    AmazonMachineImageSecurityGroupList = Shapes::ListShape.new(name: 'AmazonMachineImageSecurityGroupList')
     ApiFulfillmentOption = Shapes::StructureShape.new(name: 'ApiFulfillmentOption')
     AwsSupportedService = Shapes::StructureShape.new(name: 'AwsSupportedService')
     AwsSupportedServiceList = Shapes::ListShape.new(name: 'AwsSupportedServiceList')
@@ -30,6 +41,8 @@ module Aws::MarketplaceDiscovery
     Category = Shapes::StructureShape.new(name: 'Category')
     CategoryList = Shapes::ListShape.new(name: 'CategoryList')
     CloudFormationFulfillmentOption = Shapes::StructureShape.new(name: 'CloudFormationFulfillmentOption')
+    CloudFormationFulfillmentOptionLongDescriptionString = Shapes::StringShape.new(name: 'CloudFormationFulfillmentOptionLongDescriptionString')
+    CloudFormationFulfillmentOptionShortDescriptionString = Shapes::StringShape.new(name: 'CloudFormationFulfillmentOptionShortDescriptionString')
     ConfigurableUpfrontPricingTerm = Shapes::StructureShape.new(name: 'ConfigurableUpfrontPricingTerm')
     ConfigurableUpfrontRateCardItem = Shapes::StructureShape.new(name: 'ConfigurableUpfrontRateCardItem')
     ConfigurableUpfrontRateCardList = Shapes::ListShape.new(name: 'ConfigurableUpfrontRateCardList')
@@ -102,6 +115,7 @@ module Aws::MarketplaceDiscovery
     ListingSummaryAssociatedEntity = Shapes::StructureShape.new(name: 'ListingSummaryAssociatedEntity')
     ListingSummaryAssociatedEntityList = Shapes::ListShape.new(name: 'ListingSummaryAssociatedEntityList')
     ListingSummaryList = Shapes::ListShape.new(name: 'ListingSummaryList')
+    Locale = Shapes::StringShape.new(name: 'Locale')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NetPaymentTerm = Shapes::StructureShape.new(name: 'NetPaymentTerm')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -167,10 +181,15 @@ module Aws::MarketplaceDiscovery
     ReviewSourceSummaryList = Shapes::ListShape.new(name: 'ReviewSourceSummaryList')
     ReviewSummary = Shapes::StructureShape.new(name: 'ReviewSummary')
     SaasFulfillmentOption = Shapes::StructureShape.new(name: 'SaasFulfillmentOption')
+    SaasQuickLaunchStatus = Shapes::StringShape.new(name: 'SaasQuickLaunchStatus')
     SageMakerAlgorithmFulfillmentOption = Shapes::StructureShape.new(name: 'SageMakerAlgorithmFulfillmentOption')
     SageMakerAlgorithmRecommendation = Shapes::StructureShape.new(name: 'SageMakerAlgorithmRecommendation')
+    SageMakerModelContentTypeList = Shapes::ListShape.new(name: 'SageMakerModelContentTypeList')
+    SageMakerModelContentTypeListMemberString = Shapes::StringShape.new(name: 'SageMakerModelContentTypeListMemberString')
     SageMakerModelFulfillmentOption = Shapes::StructureShape.new(name: 'SageMakerModelFulfillmentOption')
     SageMakerModelRecommendation = Shapes::StructureShape.new(name: 'SageMakerModelRecommendation')
+    SageMakerModelResponseMimeTypeList = Shapes::ListShape.new(name: 'SageMakerModelResponseMimeTypeList')
+    SageMakerModelResponseMimeTypeListMemberString = Shapes::StringShape.new(name: 'SageMakerModelResponseMimeTypeListMemberString')
     ScheduleItem = Shapes::StructureShape.new(name: 'ScheduleItem')
     ScheduleList = Shapes::ListShape.new(name: 'ScheduleList')
     SearchFacetType = Shapes::StringShape.new(name: 'SearchFacetType')
@@ -218,6 +237,14 @@ module Aws::MarketplaceDiscovery
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    AmazonMachineImageCidrIpAddressList.member = Shapes::ShapeRef.new(shape: String)
+
+    AmazonMachineImageEbsVolume.add_member(:volume_types, Shapes::ShapeRef.new(shape: AmazonMachineImageEbsVolumeTypeList, required: true, location_name: "volumeTypes"))
+    AmazonMachineImageEbsVolume.add_member(:iops, Shapes::ShapeRef.new(shape: AmazonMachineImageEbsVolumeIopsInteger, location_name: "iops"))
+    AmazonMachineImageEbsVolume.struct_class = Types::AmazonMachineImageEbsVolume
+
+    AmazonMachineImageEbsVolumeTypeList.member = Shapes::ShapeRef.new(shape: AmazonMachineImageEbsVolumeTypeListMemberString)
+
     AmazonMachineImageFulfillmentOption.add_member(:fulfillment_option_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fulfillmentOptionId"))
     AmazonMachineImageFulfillmentOption.add_member(:fulfillment_option_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fulfillmentOptionName"))
     AmazonMachineImageFulfillmentOption.add_member(:fulfillment_option_version, Shapes::ShapeRef.new(shape: String, location_name: "fulfillmentOptionVersion"))
@@ -227,6 +254,12 @@ module Aws::MarketplaceDiscovery
     AmazonMachineImageFulfillmentOption.add_member(:recommendation, Shapes::ShapeRef.new(shape: AmazonMachineImageRecommendation, location_name: "recommendation"))
     AmazonMachineImageFulfillmentOption.add_member(:release_notes, Shapes::ShapeRef.new(shape: String, location_name: "releaseNotes"))
     AmazonMachineImageFulfillmentOption.add_member(:usage_instructions, Shapes::ShapeRef.new(shape: String, location_name: "usageInstructions"))
+    AmazonMachineImageFulfillmentOption.add_member(:available_from_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "availableFromTime"))
+    AmazonMachineImageFulfillmentOption.add_member(:access_url_template, Shapes::ShapeRef.new(shape: AmazonMachineImageFulfillmentOptionAccessUrlTemplateString, location_name: "accessUrlTemplate"))
+    AmazonMachineImageFulfillmentOption.add_member(:architecture, Shapes::ShapeRef.new(shape: AmazonMachineImageFulfillmentOptionArchitectureString, required: true, location_name: "architecture"))
+    AmazonMachineImageFulfillmentOption.add_member(:ami_alias, Shapes::ShapeRef.new(shape: AmazonMachineImageFulfillmentOptionAmiAliasString, location_name: "amiAlias"))
+    AmazonMachineImageFulfillmentOption.add_member(:ebs_volume, Shapes::ShapeRef.new(shape: AmazonMachineImageEbsVolume, location_name: "ebsVolume"))
+    AmazonMachineImageFulfillmentOption.add_member(:short_description, Shapes::ShapeRef.new(shape: AmazonMachineImageFulfillmentOptionShortDescriptionString, location_name: "shortDescription"))
     AmazonMachineImageFulfillmentOption.struct_class = Types::AmazonMachineImageFulfillmentOption
 
     AmazonMachineImageOperatingSystem.add_member(:operating_system_family_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "operatingSystemFamilyName"))
@@ -237,7 +270,16 @@ module Aws::MarketplaceDiscovery
     AmazonMachineImageOperatingSystemList.member = Shapes::ShapeRef.new(shape: AmazonMachineImageOperatingSystem)
 
     AmazonMachineImageRecommendation.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "instanceType"))
+    AmazonMachineImageRecommendation.add_member(:security_groups, Shapes::ShapeRef.new(shape: AmazonMachineImageSecurityGroupList, location_name: "securityGroups"))
     AmazonMachineImageRecommendation.struct_class = Types::AmazonMachineImageRecommendation
+
+    AmazonMachineImageSecurityGroup.add_member(:protocol, Shapes::ShapeRef.new(shape: String, required: true, location_name: "protocol"))
+    AmazonMachineImageSecurityGroup.add_member(:from_port, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "fromPort"))
+    AmazonMachineImageSecurityGroup.add_member(:to_port, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "toPort"))
+    AmazonMachineImageSecurityGroup.add_member(:cidr_ip_addresses, Shapes::ShapeRef.new(shape: AmazonMachineImageCidrIpAddressList, required: true, location_name: "cidrIpAddresses"))
+    AmazonMachineImageSecurityGroup.struct_class = Types::AmazonMachineImageSecurityGroup
+
+    AmazonMachineImageSecurityGroupList.member = Shapes::ShapeRef.new(shape: AmazonMachineImageSecurityGroup)
 
     ApiFulfillmentOption.add_member(:fulfillment_option_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fulfillmentOptionId"))
     ApiFulfillmentOption.add_member(:fulfillment_option_type, Shapes::ShapeRef.new(shape: FulfillmentOptionType, required: true, location_name: "fulfillmentOptionType"))
@@ -270,6 +312,9 @@ module Aws::MarketplaceDiscovery
     CloudFormationFulfillmentOption.add_member(:fulfillment_option_version, Shapes::ShapeRef.new(shape: String, location_name: "fulfillmentOptionVersion"))
     CloudFormationFulfillmentOption.add_member(:release_notes, Shapes::ShapeRef.new(shape: String, location_name: "releaseNotes"))
     CloudFormationFulfillmentOption.add_member(:usage_instructions, Shapes::ShapeRef.new(shape: String, location_name: "usageInstructions"))
+    CloudFormationFulfillmentOption.add_member(:available_from_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "availableFromTime"))
+    CloudFormationFulfillmentOption.add_member(:short_description, Shapes::ShapeRef.new(shape: CloudFormationFulfillmentOptionShortDescriptionString, location_name: "shortDescription"))
+    CloudFormationFulfillmentOption.add_member(:long_description, Shapes::ShapeRef.new(shape: CloudFormationFulfillmentOptionLongDescriptionString, location_name: "longDescription"))
     CloudFormationFulfillmentOption.struct_class = Types::CloudFormationFulfillmentOption
 
     ConfigurableUpfrontPricingTerm.add_member(:id, Shapes::ShapeRef.new(shape: TermId, required: true, location_name: "id"))
@@ -417,9 +462,11 @@ module Aws::MarketplaceDiscovery
 
     FulfillmentOptionsList.member = Shapes::ShapeRef.new(shape: FulfillmentOption)
 
+    GetListingInput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     GetListingInput.add_member(:listing_id, Shapes::ShapeRef.new(shape: ListingId, required: true, location_name: "listingId"))
     GetListingInput.struct_class = Types::GetListingInput
 
+    GetListingOutput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     GetListingOutput.add_member(:associated_entities, Shapes::ShapeRef.new(shape: ListingAssociatedEntityList, required: true, location_name: "associatedEntities"))
     GetListingOutput.add_member(:badges, Shapes::ShapeRef.new(shape: ListingBadgeList, required: true, location_name: "badges"))
     GetListingOutput.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "catalog"))
@@ -442,9 +489,11 @@ module Aws::MarketplaceDiscovery
     GetListingOutput.add_member(:use_cases, Shapes::ShapeRef.new(shape: UseCaseList, required: true, location_name: "useCases"))
     GetListingOutput.struct_class = Types::GetListingOutput
 
+    GetOfferInput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     GetOfferInput.add_member(:offer_id, Shapes::ShapeRef.new(shape: OfferId, required: true, location_name: "offerId"))
     GetOfferInput.struct_class = Types::GetOfferInput
 
+    GetOfferOutput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     GetOfferOutput.add_member(:offer_id, Shapes::ShapeRef.new(shape: OfferId, required: true, location_name: "offerId"))
     GetOfferOutput.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "catalog"))
     GetOfferOutput.add_member(:offer_name, Shapes::ShapeRef.new(shape: NullableString, location_name: "offerName"))
@@ -458,9 +507,11 @@ module Aws::MarketplaceDiscovery
     GetOfferOutput.add_member(:badges, Shapes::ShapeRef.new(shape: PurchaseOptionBadgeList, required: true, location_name: "badges"))
     GetOfferOutput.struct_class = Types::GetOfferOutput
 
+    GetOfferSetInput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     GetOfferSetInput.add_member(:offer_set_id, Shapes::ShapeRef.new(shape: OfferSetId, required: true, location_name: "offerSetId"))
     GetOfferSetInput.struct_class = Types::GetOfferSetInput
 
+    GetOfferSetOutput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     GetOfferSetOutput.add_member(:offer_set_id, Shapes::ShapeRef.new(shape: OfferSetId, required: true, location_name: "offerSetId"))
     GetOfferSetOutput.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "catalog"))
     GetOfferSetOutput.add_member(:offer_set_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "offerSetName"))
@@ -472,18 +523,22 @@ module Aws::MarketplaceDiscovery
     GetOfferSetOutput.add_member(:associated_entities, Shapes::ShapeRef.new(shape: OfferSetAssociatedEntityList, required: true, location_name: "associatedEntities"))
     GetOfferSetOutput.struct_class = Types::GetOfferSetOutput
 
+    GetOfferTermsInput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     GetOfferTermsInput.add_member(:offer_id, Shapes::ShapeRef.new(shape: OfferId, required: true, location_name: "offerId"))
     GetOfferTermsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: GetOfferTermsInputMaxResultsInteger, location_name: "maxResults"))
     GetOfferTermsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetOfferTermsInput.struct_class = Types::GetOfferTermsInput
 
+    GetOfferTermsOutput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     GetOfferTermsOutput.add_member(:offer_terms, Shapes::ShapeRef.new(shape: OfferTermsList, required: true, location_name: "offerTerms"))
     GetOfferTermsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetOfferTermsOutput.struct_class = Types::GetOfferTermsOutput
 
+    GetProductInput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     GetProductInput.add_member(:product_id, Shapes::ShapeRef.new(shape: ProductId, required: true, location_name: "productId"))
     GetProductInput.struct_class = Types::GetProductInput
 
+    GetProductOutput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     GetProductOutput.add_member(:product_id, Shapes::ShapeRef.new(shape: ProductId, required: true, location_name: "productId"))
     GetProductOutput.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "catalog"))
     GetProductOutput.add_member(:product_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "productName"))
@@ -498,6 +553,7 @@ module Aws::MarketplaceDiscovery
     GetProductOutput.add_member(:promotional_media, Shapes::ShapeRef.new(shape: PromotionalMediaList, required: true, location_name: "promotionalMedia"))
     GetProductOutput.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceList, required: true, location_name: "resources"))
     GetProductOutput.add_member(:seller_engagements, Shapes::ShapeRef.new(shape: SellerEngagementList, required: true, location_name: "sellerEngagements"))
+    GetProductOutput.add_member(:listing_id, Shapes::ShapeRef.new(shape: ListingId, required: true, location_name: "listingId"))
     GetProductOutput.struct_class = Types::GetProductOutput
 
     GrantItem.add_member(:dimension_key, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "dimensionKey"))
@@ -537,15 +593,18 @@ module Aws::MarketplaceDiscovery
     LegalTerm.add_member(:documents, Shapes::ShapeRef.new(shape: DocumentList, required: true, location_name: "documents"))
     LegalTerm.struct_class = Types::LegalTerm
 
+    ListFulfillmentOptionsInput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     ListFulfillmentOptionsInput.add_member(:product_id, Shapes::ShapeRef.new(shape: ProductId, required: true, location_name: "productId"))
     ListFulfillmentOptionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListFulfillmentOptionsInputMaxResultsInteger, location_name: "maxResults"))
     ListFulfillmentOptionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListFulfillmentOptionsInput.struct_class = Types::ListFulfillmentOptionsInput
 
+    ListFulfillmentOptionsOutput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     ListFulfillmentOptionsOutput.add_member(:fulfillment_options, Shapes::ShapeRef.new(shape: FulfillmentOptionsList, required: true, location_name: "fulfillmentOptions"))
     ListFulfillmentOptionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListFulfillmentOptionsOutput.struct_class = Types::ListFulfillmentOptionsOutput
 
+    ListPurchaseOptionsInput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     ListPurchaseOptionsInput.add_member(:filters, Shapes::ShapeRef.new(shape: PurchaseOptionFilterList, location_name: "filters"))
     ListPurchaseOptionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListPurchaseOptionsInputMaxResultsInteger, location_name: "maxResults"))
     ListPurchaseOptionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -816,6 +875,9 @@ module Aws::MarketplaceDiscovery
     SaasFulfillmentOption.add_member(:fulfillment_option_display_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fulfillmentOptionDisplayName"))
     SaasFulfillmentOption.add_member(:fulfillment_url, Shapes::ShapeRef.new(shape: String, location_name: "fulfillmentUrl"))
     SaasFulfillmentOption.add_member(:usage_instructions, Shapes::ShapeRef.new(shape: String, location_name: "usageInstructions"))
+    SaasFulfillmentOption.add_member(:available_from_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "availableFromTime"))
+    SaasFulfillmentOption.add_member(:launch_url, Shapes::ShapeRef.new(shape: URL, location_name: "launchUrl"))
+    SaasFulfillmentOption.add_member(:quick_launch, Shapes::ShapeRef.new(shape: SaasQuickLaunchStatus, required: true, location_name: "quickLaunch"))
     SaasFulfillmentOption.struct_class = Types::SaasFulfillmentOption
 
     SageMakerAlgorithmFulfillmentOption.add_member(:fulfillment_option_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fulfillmentOptionId"))
@@ -832,6 +894,8 @@ module Aws::MarketplaceDiscovery
     SageMakerAlgorithmRecommendation.add_member(:recommended_training_instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "recommendedTrainingInstanceType"))
     SageMakerAlgorithmRecommendation.struct_class = Types::SageMakerAlgorithmRecommendation
 
+    SageMakerModelContentTypeList.member = Shapes::ShapeRef.new(shape: SageMakerModelContentTypeListMemberString)
+
     SageMakerModelFulfillmentOption.add_member(:fulfillment_option_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fulfillmentOptionId"))
     SageMakerModelFulfillmentOption.add_member(:fulfillment_option_type, Shapes::ShapeRef.new(shape: FulfillmentOptionType, required: true, location_name: "fulfillmentOptionType"))
     SageMakerModelFulfillmentOption.add_member(:fulfillment_option_display_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fulfillmentOptionDisplayName"))
@@ -839,11 +903,15 @@ module Aws::MarketplaceDiscovery
     SageMakerModelFulfillmentOption.add_member(:release_notes, Shapes::ShapeRef.new(shape: String, location_name: "releaseNotes"))
     SageMakerModelFulfillmentOption.add_member(:usage_instructions, Shapes::ShapeRef.new(shape: String, location_name: "usageInstructions"))
     SageMakerModelFulfillmentOption.add_member(:recommendation, Shapes::ShapeRef.new(shape: SageMakerModelRecommendation, location_name: "recommendation"))
+    SageMakerModelFulfillmentOption.add_member(:supported_content_types, Shapes::ShapeRef.new(shape: SageMakerModelContentTypeList, location_name: "supportedContentTypes"))
+    SageMakerModelFulfillmentOption.add_member(:supported_response_mime_types, Shapes::ShapeRef.new(shape: SageMakerModelResponseMimeTypeList, location_name: "supportedResponseMimeTypes"))
     SageMakerModelFulfillmentOption.struct_class = Types::SageMakerModelFulfillmentOption
 
     SageMakerModelRecommendation.add_member(:recommended_batch_transform_instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "recommendedBatchTransformInstanceType"))
     SageMakerModelRecommendation.add_member(:recommended_realtime_inference_instance_type, Shapes::ShapeRef.new(shape: String, location_name: "recommendedRealtimeInferenceInstanceType"))
     SageMakerModelRecommendation.struct_class = Types::SageMakerModelRecommendation
+
+    SageMakerModelResponseMimeTypeList.member = Shapes::ShapeRef.new(shape: SageMakerModelResponseMimeTypeListMemberString)
 
     ScheduleItem.add_member(:charge_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "chargeDate"))
     ScheduleItem.add_member(:charge_amount, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "chargeAmount"))
@@ -851,6 +919,7 @@ module Aws::MarketplaceDiscovery
 
     ScheduleList.member = Shapes::ShapeRef.new(shape: ScheduleItem)
 
+    SearchFacetsInput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     SearchFacetsInput.add_member(:search_text, Shapes::ShapeRef.new(shape: SearchText, location_name: "searchText"))
     SearchFacetsInput.add_member(:filters, Shapes::ShapeRef.new(shape: SearchFilterList, location_name: "filters"))
     SearchFacetsInput.add_member(:facet_types, Shapes::ShapeRef.new(shape: FacetTypeList, location_name: "facetTypes"))
@@ -870,6 +939,7 @@ module Aws::MarketplaceDiscovery
 
     SearchFilterList.member = Shapes::ShapeRef.new(shape: SearchFilter)
 
+    SearchListingsInput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     SearchListingsInput.add_member(:search_text, Shapes::ShapeRef.new(shape: SearchText, location_name: "searchText"))
     SearchListingsInput.add_member(:filters, Shapes::ShapeRef.new(shape: SearchFilterList, location_name: "filters"))
     SearchListingsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
@@ -963,7 +1033,7 @@ module Aws::MarketplaceDiscovery
 
       api.metadata = {
         "apiVersion" => "2026-02-05",
-        "auth" => ["aws.auth#sigv4"],
+        "auth" => ["aws.auth#sigv4", "aws.auth#sigv4a"],
         "endpointPrefix" => "discovery-marketplace",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],

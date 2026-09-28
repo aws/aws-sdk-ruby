@@ -144,6 +144,7 @@ module Aws::DataZone
     BatchPutAttributeOutput = Shapes::StructureShape.new(name: 'BatchPutAttributeOutput')
     BatchPutAttributesMetadataInput = Shapes::StructureShape.new(name: 'BatchPutAttributesMetadataInput')
     BatchPutAttributesMetadataOutput = Shapes::StructureShape.new(name: 'BatchPutAttributesMetadataOutput')
+    BlueprintCategory = Shapes::StringShape.new(name: 'BlueprintCategory')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BusinessNameGenerationConfiguration = Shapes::StructureShape.new(name: 'BusinessNameGenerationConfiguration')
     CancelMetadataGenerationRunInput = Shapes::StructureShape.new(name: 'CancelMetadataGenerationRunInput')
@@ -2284,6 +2285,7 @@ module Aws::DataZone
     CreateEnvironmentBlueprintInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateEnvironmentBlueprintInput.add_member(:provisioning_properties, Shapes::ShapeRef.new(shape: ProvisioningProperties, required: true, location_name: "provisioningProperties"))
     CreateEnvironmentBlueprintInput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: CustomParameterList, location_name: "userParameters"))
+    CreateEnvironmentBlueprintInput.add_member(:blueprint_category, Shapes::ShapeRef.new(shape: BlueprintCategory, location_name: "blueprintCategory"))
     CreateEnvironmentBlueprintInput.struct_class = Types::CreateEnvironmentBlueprintInput
 
     CreateEnvironmentBlueprintOutput.add_member(:id, Shapes::ShapeRef.new(shape: EnvironmentBlueprintId, required: true, location_name: "id"))
@@ -2294,6 +2296,7 @@ module Aws::DataZone
     CreateEnvironmentBlueprintOutput.add_member(:deployment_properties, Shapes::ShapeRef.new(shape: DeploymentProperties, location_name: "deploymentProperties"))
     CreateEnvironmentBlueprintOutput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: CustomParameterList, location_name: "userParameters"))
     CreateEnvironmentBlueprintOutput.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: "glossaryTerms"))
+    CreateEnvironmentBlueprintOutput.add_member(:blueprint_category, Shapes::ShapeRef.new(shape: BlueprintCategory, location_name: "blueprintCategory"))
     CreateEnvironmentBlueprintOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     CreateEnvironmentBlueprintOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     CreateEnvironmentBlueprintOutput.struct_class = Types::CreateEnvironmentBlueprintOutput
@@ -3194,6 +3197,7 @@ module Aws::DataZone
     EnvironmentBlueprintSummary.add_member(:provisioning_properties, Shapes::ShapeRef.new(shape: ProvisioningProperties, required: true, location_name: "provisioningProperties"))
     EnvironmentBlueprintSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     EnvironmentBlueprintSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    EnvironmentBlueprintSummary.add_member(:blueprint_category, Shapes::ShapeRef.new(shape: BlueprintCategory, location_name: "blueprintCategory"))
     EnvironmentBlueprintSummary.struct_class = Types::EnvironmentBlueprintSummary
 
     EnvironmentConfig.add_member(:image_version, Shapes::ShapeRef.new(shape: String, location_name: "imageVersion"))
@@ -3654,6 +3658,7 @@ module Aws::DataZone
     GetEnvironmentBlueprintOutput.add_member(:deployment_properties, Shapes::ShapeRef.new(shape: DeploymentProperties, location_name: "deploymentProperties"))
     GetEnvironmentBlueprintOutput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: CustomParameterList, location_name: "userParameters"))
     GetEnvironmentBlueprintOutput.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: "glossaryTerms"))
+    GetEnvironmentBlueprintOutput.add_member(:blueprint_category, Shapes::ShapeRef.new(shape: BlueprintCategory, location_name: "blueprintCategory"))
     GetEnvironmentBlueprintOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     GetEnvironmentBlueprintOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     GetEnvironmentBlueprintOutput.struct_class = Types::GetEnvironmentBlueprintOutput
@@ -4317,6 +4322,7 @@ module Aws::DataZone
     HyperPodPropertiesOutput.struct_class = Types::HyperPodPropertiesOutput
 
     IamPropertiesInput.add_member(:glue_lineage_sync_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "glueLineageSyncEnabled"))
+    IamPropertiesInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     IamPropertiesInput.struct_class = Types::IamPropertiesInput
 
     IamPropertiesOutput.add_member(:environment_id, Shapes::ShapeRef.new(shape: String, location_name: "environmentId"))
@@ -6676,6 +6682,7 @@ module Aws::DataZone
     UpdateEnvironmentBlueprintInput.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     UpdateEnvironmentBlueprintInput.add_member(:provisioning_properties, Shapes::ShapeRef.new(shape: ProvisioningProperties, location_name: "provisioningProperties"))
     UpdateEnvironmentBlueprintInput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: CustomParameterList, location_name: "userParameters"))
+    UpdateEnvironmentBlueprintInput.add_member(:blueprint_category, Shapes::ShapeRef.new(shape: BlueprintCategory, location_name: "blueprintCategory"))
     UpdateEnvironmentBlueprintInput.struct_class = Types::UpdateEnvironmentBlueprintInput
 
     UpdateEnvironmentBlueprintOutput.add_member(:id, Shapes::ShapeRef.new(shape: EnvironmentBlueprintId, required: true, location_name: "id"))
@@ -6686,6 +6693,7 @@ module Aws::DataZone
     UpdateEnvironmentBlueprintOutput.add_member(:deployment_properties, Shapes::ShapeRef.new(shape: DeploymentProperties, location_name: "deploymentProperties"))
     UpdateEnvironmentBlueprintOutput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: CustomParameterList, location_name: "userParameters"))
     UpdateEnvironmentBlueprintOutput.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: "glossaryTerms"))
+    UpdateEnvironmentBlueprintOutput.add_member(:blueprint_category, Shapes::ShapeRef.new(shape: BlueprintCategory, location_name: "blueprintCategory"))
     UpdateEnvironmentBlueprintOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     UpdateEnvironmentBlueprintOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     UpdateEnvironmentBlueprintOutput.struct_class = Types::UpdateEnvironmentBlueprintOutput

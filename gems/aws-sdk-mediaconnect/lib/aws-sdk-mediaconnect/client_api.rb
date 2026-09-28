@@ -310,6 +310,7 @@ module Aws::MediaConnect
     PublicRouterNetworkInterfaceConfigurationAllowRulesList = Shapes::ListShape.new(name: 'PublicRouterNetworkInterfaceConfigurationAllowRulesList')
     PublicRouterNetworkInterfaceRule = Shapes::StructureShape.new(name: 'PublicRouterNetworkInterfaceRule')
     PublicRouterNetworkInterfaceRuleCidrString = Shapes::StringShape.new(name: 'PublicRouterNetworkInterfaceRuleCidrString')
+    PublicTlsEncryptionConfiguration = Shapes::StructureShape.new(name: 'PublicTlsEncryptionConfiguration')
     PurchaseOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseOfferingRequest')
     PurchaseOfferingResponse = Shapes::StructureShape.new(name: 'PurchaseOfferingResponse')
     Range = Shapes::StringShape.new(name: 'Range')
@@ -408,6 +409,8 @@ module Aws::MediaConnect
     RouterOutputTypeList = Shapes::ListShape.new(name: 'RouterOutputTypeList')
     RoutingScope = Shapes::StringShape.new(name: 'RoutingScope')
     RoutingScopeList = Shapes::ListShape.new(name: 'RoutingScopeList')
+    RtmpPushRouterOutputConfiguration = Shapes::StructureShape.new(name: 'RtmpPushRouterOutputConfiguration')
+    RtmpPushRouterOutputConfigurationDestinationPortInteger = Shapes::IntegerShape.new(name: 'RtmpPushRouterOutputConfigurationDestinationPortInteger')
     RtpRouterInputConfiguration = Shapes::StructureShape.new(name: 'RtpRouterInputConfiguration')
     RtpRouterInputConfigurationPortInteger = Shapes::IntegerShape.new(name: 'RtpRouterInputConfigurationPortInteger')
     RtpRouterOutputConfiguration = Shapes::StructureShape.new(name: 'RtpRouterOutputConfiguration')
@@ -469,6 +472,9 @@ module Aws::MediaConnect
     Tcs = Shapes::StringShape.new(name: 'Tcs')
     ThumbnailDetails = Shapes::StructureShape.new(name: 'ThumbnailDetails')
     ThumbnailState = Shapes::StringShape.new(name: 'ThumbnailState')
+    TlsEncryption = Shapes::StructureShape.new(name: 'TlsEncryption')
+    TlsEncryptionConfiguration = Shapes::UnionShape.new(name: 'TlsEncryptionConfiguration')
+    TlsEncryptionType = Shapes::StringShape.new(name: 'TlsEncryptionType')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     Transport = Shapes::StructureShape.new(name: 'Transport')
     TransportMediaInfo = Shapes::StructureShape.new(name: 'TransportMediaInfo')
@@ -1679,6 +1685,8 @@ module Aws::MediaConnect
     PublicRouterNetworkInterfaceRule.add_member(:cidr, Shapes::ShapeRef.new(shape: PublicRouterNetworkInterfaceRuleCidrString, required: true, location_name: "cidr"))
     PublicRouterNetworkInterfaceRule.struct_class = Types::PublicRouterNetworkInterfaceRule
 
+    PublicTlsEncryptionConfiguration.struct_class = Types::PublicTlsEncryptionConfiguration
+
     PurchaseOfferingRequest.add_member(:offering_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "OfferingArn"))
     PurchaseOfferingRequest.add_member(:reservation_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "reservationName"))
     PurchaseOfferingRequest.add_member(:start, Shapes::ShapeRef.new(shape: String, required: true, location_name: "start"))
@@ -2028,11 +2036,13 @@ module Aws::MediaConnect
 
     RouterOutputProtocolConfiguration.add_member(:rist, Shapes::ShapeRef.new(shape: RistRouterOutputConfiguration, location_name: "rist"))
     RouterOutputProtocolConfiguration.add_member(:srt_listener, Shapes::ShapeRef.new(shape: SrtListenerRouterOutputConfiguration, location_name: "srtListener"))
+    RouterOutputProtocolConfiguration.add_member(:rtmp_push, Shapes::ShapeRef.new(shape: RtmpPushRouterOutputConfiguration, location_name: "rtmpPush"))
     RouterOutputProtocolConfiguration.add_member(:srt_caller, Shapes::ShapeRef.new(shape: SrtCallerRouterOutputConfiguration, location_name: "srtCaller"))
     RouterOutputProtocolConfiguration.add_member(:rtp, Shapes::ShapeRef.new(shape: RtpRouterOutputConfiguration, location_name: "rtp"))
     RouterOutputProtocolConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     RouterOutputProtocolConfiguration.add_member_subclass(:rist, Types::RouterOutputProtocolConfiguration::Rist)
     RouterOutputProtocolConfiguration.add_member_subclass(:srt_listener, Types::RouterOutputProtocolConfiguration::SrtListener)
+    RouterOutputProtocolConfiguration.add_member_subclass(:rtmp_push, Types::RouterOutputProtocolConfiguration::RtmpPush)
     RouterOutputProtocolConfiguration.add_member_subclass(:srt_caller, Types::RouterOutputProtocolConfiguration::SrtCaller)
     RouterOutputProtocolConfiguration.add_member_subclass(:rtp, Types::RouterOutputProtocolConfiguration::Rtp)
     RouterOutputProtocolConfiguration.add_member_subclass(:unknown, Types::RouterOutputProtocolConfiguration::Unknown)
@@ -2054,6 +2064,13 @@ module Aws::MediaConnect
     RouterOutputTypeList.member = Shapes::ShapeRef.new(shape: RouterOutputType)
 
     RoutingScopeList.member = Shapes::ShapeRef.new(shape: RoutingScope)
+
+    RtmpPushRouterOutputConfiguration.add_member(:destination_address, Shapes::ShapeRef.new(shape: String, required: true, location_name: "destinationAddress"))
+    RtmpPushRouterOutputConfiguration.add_member(:destination_port, Shapes::ShapeRef.new(shape: RtmpPushRouterOutputConfigurationDestinationPortInteger, required: true, location_name: "destinationPort"))
+    RtmpPushRouterOutputConfiguration.add_member(:application_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "applicationName"))
+    RtmpPushRouterOutputConfiguration.add_member(:stream_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "streamName"))
+    RtmpPushRouterOutputConfiguration.add_member(:tls_encryption, Shapes::ShapeRef.new(shape: TlsEncryption, location_name: "tlsEncryption"))
+    RtmpPushRouterOutputConfiguration.struct_class = Types::RtmpPushRouterOutputConfiguration
 
     RtpRouterInputConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: RtpRouterInputConfigurationPortInteger, required: true, location_name: "port"))
     RtpRouterInputConfiguration.add_member(:forward_error_correction, Shapes::ShapeRef.new(shape: ForwardErrorCorrectionState, location_name: "forwardErrorCorrection"))
@@ -2255,6 +2272,16 @@ module Aws::MediaConnect
     ThumbnailDetails.add_member(:timecode, Shapes::ShapeRef.new(shape: String, location_name: "timecode"))
     ThumbnailDetails.add_member(:timestamp, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "timestamp"))
     ThumbnailDetails.struct_class = Types::ThumbnailDetails
+
+    TlsEncryption.add_member(:encryption_type, Shapes::ShapeRef.new(shape: TlsEncryptionType, location_name: "encryptionType"))
+    TlsEncryption.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: TlsEncryptionConfiguration, required: true, location_name: "encryptionConfiguration"))
+    TlsEncryption.struct_class = Types::TlsEncryption
+
+    TlsEncryptionConfiguration.add_member(:public, Shapes::ShapeRef.new(shape: PublicTlsEncryptionConfiguration, location_name: "public"))
+    TlsEncryptionConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    TlsEncryptionConfiguration.add_member_subclass(:public, Types::TlsEncryptionConfiguration::Public)
+    TlsEncryptionConfiguration.add_member_subclass(:unknown, Types::TlsEncryptionConfiguration::Unknown)
+    TlsEncryptionConfiguration.struct_class = Types::TlsEncryptionConfiguration
 
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException

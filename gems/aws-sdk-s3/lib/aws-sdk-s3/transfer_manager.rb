@@ -453,7 +453,6 @@ module Aws
       def upload_file(source, bucket:, key:, **options)
         upload_opts = options.merge(bucket: bucket, key: key)
         http_chunk_size = resolve_http_chunk_size(upload_opts)
-
         thread_count = upload_opts.delete(:thread_count)
         executor = @executor || DefaultExecutor.new(max_threads: thread_count)
         begin

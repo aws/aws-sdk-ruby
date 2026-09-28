@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2026-09-25)
+------------------
+
+* Feature - This release adds support for RTMP push router outputs in AWS Elemental MediaConnect.
+
 1.107.0 (2026-09-11)
 ------------------
 

@@ -451,6 +451,11 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class CoinbaseCdpRotationTargets
+      attr_accessor secrets: ::Array[("API_KEY" | "WALLET_SECRET")]
+      SENSITIVE: []
+    end
+
     class ComponentConfiguration
       attr_accessor configuration: untyped
       SENSITIVE: []
@@ -1274,6 +1279,17 @@ module Aws::BedrockAgentCoreControl
       attr_accessor credential_provider_type: ("GATEWAY_IAM_ROLE" | "OAUTH" | "API_KEY" | "CALLER_IAM_CREDENTIALS" | "JWT_PASSTHROUGH")
       attr_accessor credential_provider: Types::CredentialProvider
       SENSITIVE: []
+    end
+
+    class CredentialRotationConfig
+      attr_accessor coinbase_cdp: Types::CoinbaseCdpRotationTargets
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CoinbaseCdp < CredentialRotationConfig
+      end
+      class Unknown < CredentialRotationConfig
+      end
     end
 
     class CredentialsProviderConfiguration
@@ -2706,11 +2722,13 @@ module Aws::BedrockAgentCoreControl
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor type: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor provision_mode: ("MANUAL" | "QUICK_CREATE")
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialsProviderConfiguration]
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED" | "PENDING_AUTHENTICATION" | "PROVISIONING" | "AUTHENTICATION_EXPIRED" | "AUTHENTICATION_FAILED")
       attr_accessor authorization_url: ::String
+      attr_accessor credentials_updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -4741,6 +4759,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor payment_connector_id: ::String
       attr_accessor name: ::String
       attr_accessor type: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor provision_mode: ("MANUAL" | "QUICK_CREATE")
       attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED" | "PENDING_AUTHENTICATION" | "PROVISIONING" | "AUTHENTICATION_EXPIRED" | "AUTHENTICATION_FAILED")
       attr_accessor last_updated_at: ::Time
       SENSITIVE: []
@@ -5144,6 +5163,22 @@ module Aws::BedrockAgentCoreControl
       attr_accessor encrypted: bool
       attr_accessor kms_key_id: ::String
       attr_accessor free_space_gi_b: ::Integer
+      SENSITIVE: []
+    end
+
+    class RotatePaymentConnectorCredentialsRequest
+      attr_accessor payment_manager_id: ::String
+      attr_accessor payment_connector_id: ::String
+      attr_accessor credentials_to_rotate: Types::CredentialRotationConfig
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class RotatePaymentConnectorCredentialsResponse
+      attr_accessor payment_connector_id: ::String
+      attr_accessor payment_manager_id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED" | "PENDING_AUTHENTICATION" | "PROVISIONING" | "AUTHENTICATION_EXPIRED" | "AUTHENTICATION_FAILED")
       SENSITIVE: []
     end
 

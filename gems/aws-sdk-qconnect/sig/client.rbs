@@ -460,7 +460,8 @@ module Aws
                             ?tags: Hash[::String, ::String],
                             ?tag_filter: Params::tag_filter,
                             ?ai_agent_configuration: Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION"), {
-                                ai_agent_id: ::String
+                                ai_agent_id: ::String,
+                                enabled: bool?
                               }],
                             ?contact_arn: ::String,
                             ?orchestrator_configuration_list: Array[
@@ -804,7 +805,7 @@ module Aws
                                  ?max_results: ::Integer,
                                  ?wait_time_seconds: ::Integer,
                                  ?next_chunk_token: ::String,
-                                 ?recommendation_type: ("KNOWLEDGE_CONTENT" | "GENERATIVE_RESPONSE" | "GENERATIVE_ANSWER" | "DETECTED_INTENT" | "GENERATIVE_ANSWER_CHUNK" | "BLOCKED_GENERATIVE_ANSWER_CHUNK" | "INTENT_ANSWER_CHUNK" | "BLOCKED_INTENT_ANSWER_CHUNK" | "EMAIL_RESPONSE_CHUNK" | "EMAIL_OVERVIEW_CHUNK" | "EMAIL_GENERATIVE_ANSWER_CHUNK" | "CASE_SUMMARIZATION_CHUNK" | "BLOCKED_CASE_SUMMARIZATION_CHUNK" | "SUGGESTED_MESSAGE" | "NOTES_CHUNK" | "BLOCKED_NOTES_CHUNK")
+                                 ?recommendation_type: ("KNOWLEDGE_CONTENT" | "GENERATIVE_RESPONSE" | "GENERATIVE_ANSWER" | "DETECTED_INTENT" | "GENERATIVE_ANSWER_CHUNK" | "BLOCKED_GENERATIVE_ANSWER_CHUNK" | "INTENT_ANSWER_CHUNK" | "BLOCKED_INTENT_ANSWER_CHUNK" | "EMAIL_RESPONSE_CHUNK" | "EMAIL_OVERVIEW_CHUNK" | "EMAIL_GENERATIVE_ANSWER_CHUNK" | "CASE_SUMMARIZATION_CHUNK" | "BLOCKED_CASE_SUMMARIZATION_CHUNK" | "SUGGESTED_MESSAGE" | "NOTES_CHUNK" | "BLOCKED_NOTES_CHUNK" | "PROACTIVE_RECOMMENDATION")
                                ) -> _GetRecommendationsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecommendationsResponseSuccess
 
@@ -1183,6 +1184,7 @@ module Aws
       interface _RetrieveResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RetrieveResponse]
         def results: () -> ::Array[Types::RetrieveResult]
+        def errors: () -> ::Array[Types::RetrieveError]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#retrieve-instance_method
       def retrieve: (
@@ -1525,7 +1527,8 @@ module Aws
                                        assistant_id: ::String,
                                        ai_agent_type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION"),
                                        configuration: {
-                                         ai_agent_id: ::String
+                                         ai_agent_id: ::String,
+                                         enabled: bool?
                                        },
                                        ?orchestrator_use_case: ::String
                                      ) -> _UpdateAssistantAIAgentResponseSuccess
@@ -1636,7 +1639,8 @@ module Aws
                             ?description: ::String,
                             ?tag_filter: Params::tag_filter,
                             ?ai_agent_configuration: Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION"), {
-                                ai_agent_id: ::String
+                                ai_agent_id: ::String,
+                                enabled: bool?
                               }],
                             ?orchestrator_configuration_list: Array[
                               {

@@ -676,6 +676,8 @@ module Aws
         def reference_image: () -> Types::AuditImage
         def audit_images: () -> ::Array[Types::AuditImage]
         def challenge: () -> Types::Challenge
+        def feedback: () -> ::Array[Types::FeedbackItem]
+        def metadata: () -> Types::SessionMetadata
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#get_face_liveness_session_results-instance_method
       def get_face_liveness_session_results: (

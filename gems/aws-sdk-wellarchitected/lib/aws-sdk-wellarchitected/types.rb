@@ -389,6 +389,11 @@ module Aws::WellArchitected
     #   The Amazon Resource Name (ARN) of the associated profile.
     #   @return [String]
     #
+    # @!attribute [rw] generation_id
+    #   The identifier of the generation process that produced this
+    #   recommendation.
+    #   @return [String]
+    #
     # @!attribute [rw] title
     #   The title of the recommendation.
     #   @return [String]
@@ -475,6 +480,7 @@ module Aws::WellArchitected
     class AgentRecommendationSummary < Struct.new(
       :recommendation_arn,
       :profile_arn,
+      :generation_id,
       :title,
       :description,
       :type,
@@ -3079,6 +3085,11 @@ module Aws::WellArchitected
     #   The Amazon Resource Name (ARN) of the associated profile.
     #   @return [String]
     #
+    # @!attribute [rw] generation_id
+    #   The identifier of the generation process that produced this
+    #   recommendation.
+    #   @return [String]
+    #
     # @!attribute [rw] title
     #   The title of the recommendation.
     #   @return [String]
@@ -3206,6 +3217,7 @@ module Aws::WellArchitected
     class GetAgentRecommendationResponse < Struct.new(
       :recommendation_arn,
       :profile_arn,
+      :generation_id,
       :title,
       :description,
       :type,
