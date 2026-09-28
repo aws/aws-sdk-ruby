@@ -1231,6 +1231,29 @@
                         }
                     },
                     {
+                        "id": "Ec2QueryNameDistinctFromXmlNameAndMemberName",
+                        "documentation": "ec2QueryName trait takes precedence when xmlName, default name, and ec2QueryName all have distinct values.",
+                        "protocol": "aws.protocols#ec2Query",
+                        "method": "POST",
+                        "uri": "/",
+                        "headers": {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        "requireHeaders": [
+                            "Content-Length"
+                        ],
+                        "body": "Action=SimpleInputParams&Version=2020-01-08&QueryName=value1&queryAndXmlName=value2&XmlNameOnly=value3",
+                        "bodyMediaType": "application/x-www-form-urlencoded",
+                        "params": {
+                            "DistinctQueryName": "value1",
+                            "DistinctQueryAndXmlName": "value2",
+                            "DistinctXmlName": "value3"
+                        },
+                        "tags": [
+                            "skip-legacy-conversion"
+                        ]
+                    },
+                    {
                         "id": "Ec2QuerySupportsNaNFloatInputs",
                         "documentation": "Supports handling NaN float values.",
                         "protocol": "aws.protocols#ec2Query",
@@ -1334,6 +1357,25 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#xmlName": "usesXmlName"
+                    }
+                },
+                "DistinctQueryName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "QueryName"
+                    }
+                },
+                "DistinctQueryAndXmlName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "queryAndXmlName",
+                        "smithy.api#xmlName": "xmlAndQueryName"
+                    }
+                },
+                "DistinctXmlName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#xmlName": "xmlNameOnly"
                     }
                 }
             }

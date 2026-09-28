@@ -402,7 +402,7 @@
                         "protocol": "aws.protocols#awsJson1_1",
                         "code": 500,
                         "headers": {
-                            "X-Amzn-Errortype": "aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"
+                            "X-Amzn-Errortype": "aws.protocoltests.json#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"
                         },
                         "appliesTo": "client"
                     },
@@ -426,7 +426,7 @@
                         "headers": {
                             "Content-Type": "application/x-amz-json-1.1"
                         },
-                        "body": "{\n    \"code\": \"aws.protocoltests.restjson#FooError\"\n}",
+                        "body": "{\n    \"code\": \"aws.protocoltests.json#FooError\"\n}",
                         "bodyMediaType": "application/json",
                         "appliesTo": "client"
                     },
@@ -438,7 +438,7 @@
                         "headers": {
                             "Content-Type": "application/x-amz-json-1.1"
                         },
-                        "body": "{\n    \"code\": \"aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/\"\n}",
+                        "body": "{\n    \"code\": \"aws.protocoltests.json#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/\"\n}",
                         "bodyMediaType": "application/json",
                         "appliesTo": "client"
                     },
@@ -462,7 +462,19 @@
                         "headers": {
                             "Content-Type": "application/x-amz-json-1.1"
                         },
-                        "body": "{\n    \"__type\": \"aws.protocoltests.restjson#FooError\"\n}",
+                        "body": "{\n    \"__type\": \"aws.protocoltests.json#FooError\"\n}",
+                        "bodyMediaType": "application/json",
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "AwsJson11FooErrorWithDunderTypeAndDifferentNamespace",
+                        "documentation": "Because only the part after '#' is considered, an unrecognized namespace should not make a difference.",
+                        "protocol": "aws.protocols#awsJson1_1",
+                        "code": 500,
+                        "headers": {
+                            "Content-Type": "application/x-amz-json-1.1"
+                        },
+                        "body": "{\n    \"__type\": \"aws.different.namespace#FooError\"\n}",
                         "bodyMediaType": "application/json",
                         "appliesTo": "client"
                     },
@@ -474,7 +486,19 @@
                         "headers": {
                             "Content-Type": "application/x-amz-json-1.1"
                         },
-                        "body": "{\n    \"__type\": \"aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/\"\n}",
+                        "body": "{\n    \"__type\": \"aws.protocoltests.json#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/\"\n}",
+                        "bodyMediaType": "application/json",
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "AwsJson11FooErrorWithNestedTypeProperty",
+                        "documentation": "Some services serialize errors using __type, and if the response includes additional shapes that belong to a different namespace there'll be a nested __type property that must not be considered when determining which error to be surfaced.\n\nFor an example service see Amazon DynamoDB.",
+                        "protocol": "aws.protocols#awsJson1_1",
+                        "code": 500,
+                        "headers": {
+                            "Content-Type": "application/x-amz-json-1.1"
+                        },
+                        "body": "{\n    \"__type\": \"aws.protocoltests.json#FooError\",\n    \"ErrorDetails\": [\n      {\n          \"__type\": \"com.amazon.internal#ErrorDetails\",\n          \"reason\": \"Some reason\"\n      }\n    ]\n}",
                         "bodyMediaType": "application/json",
                         "appliesTo": "client"
                     }

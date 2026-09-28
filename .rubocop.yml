@@ -6,8 +6,7 @@ AllCops:
     - 'build/**/*'
     - 'tasks/release/**/*'
     - 'vendor/**/*'
-    # Generated gem code
-    - !ruby/regexp /gems\/([a-z0-9]+-[a-z0-9-]+)\/lib\/\1.rb/
+    - !ruby/regexp /gems\/([a-z0-9]+-[a-z0-9-]+)\/lib\/\1.rb/ # Generated gem code
     - 'gems/*/lib/*/auth_parameters.rb'
     - 'gems/*/lib/*/auth_resolver.rb'
     - 'gems/*/lib/*/endpoint_parameters.rb'
@@ -26,7 +25,6 @@ Gemspec/RequireMFA:
 
 Lint/EmptyFile:
   Exclude:
-    # Exclude only empty generated customization files
     - 'gems/*/lib/*/customizations.rb'
 
 Metrics/AbcSize:

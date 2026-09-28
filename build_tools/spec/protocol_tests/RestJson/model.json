@@ -479,6 +479,17 @@
                 ]
             }
         },
+        "aws.protocoltests.restjson#BlobPayloadEvent": {
+            "type": "structure",
+            "members": {
+                "payload": {
+                    "target": "smithy.api#Blob",
+                    "traits": {
+                        "smithy.api#eventPayload": {}
+                    }
+                }
+            }
+        },
         "aws.protocoltests.restjson#ClientOptionalDefaults": {
             "type": "structure",
             "members": {
@@ -1435,6 +1446,1610 @@
                 "target": "aws.protocoltests.restjson#Document"
             }
         },
+        "aws.protocoltests.restjson#DuplexStream": {
+            "type": "operation",
+            "input": {
+                "target": "aws.protocoltests.restjson#DuplexStreamInput"
+            },
+            "output": {
+                "target": "aws.protocoltests.restjson#DuplexStreamOutput"
+            },
+            "traits": {
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DuplexStream"
+                },
+                "smithy.test#eventStreamTests": [
+                    {
+                        "id": "DuplexBooleanHeaderInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headers": {
+                                        "booleanHeader": true
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "booleanHeader": {
+                                        "boolean": true
+                                    }
+                                },
+                                "bytes": "AAAASwAAADv7Cl8VDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMNYm9vbGVhbkhlYWRlcgC4J9Ws"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexByteHeaderInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headers": {
+                                        "byteHeader": 1
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "byteHeader": {
+                                        "byte": 1
+                                    }
+                                },
+                                "bytes": "AAAASQAAADlvxG1ZDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMKYnl0ZUhlYWRlcgIBKFTmjg=="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexShortHeaderInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headers": {
+                                        "shortHeader": 2
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "shortHeader": {
+                                        "short": 2
+                                    }
+                                },
+                                "bytes": "AAAASwAAADv7Cl8VDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMLc2hvcnRIZWFkZXIDAAL1ETsK"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexIntegerHeaderInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headers": {
+                                        "intHeader": 3
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "intHeader": {
+                                        "integer": 3
+                                    }
+                                },
+                                "bytes": "AAAASwAAADv7Cl8VDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMJaW50SGVhZGVyBAAAAAPlyUrb"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexLongHeaderInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headers": {
+                                        "longHeader": 4294967294
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "longHeader": {
+                                        "long": 4294967294
+                                    }
+                                },
+                                "bytes": "AAAAUAAAAEAr7VEyDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMKbG9uZ0hlYWRlcgUAAAAA/////udnd/I="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexBlobHeaderInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headers": {
+                                        "blobHeader": "foo"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "blobHeader": {
+                                        "blob": "Zm9v"
+                                    }
+                                },
+                                "bytes": "AAAATQAAAD2dKQ+ADTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMKYmxvYkhlYWRlcgYAA2Zvb5sbbGM="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexStringHeaderInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headers": {
+                                        "stringHeader": "foo"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "stringHeader": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "bytes": "AAAATwAAAD8J5z3MDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMMc3RyaW5nSGVhZGVyBwADZm9vxT+2MA=="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexTimestampHeaderInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headers": {
+                                        "timestampHeader": "2024-10-31T14:15:14Z"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "timestampHeader": {
+                                        "timestamp": "2024-10-31T14:15:14Z"
+                                    }
+                                },
+                                "bytes": "AAAAVQAAAEWTZyrNDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMPdGltZXN0YW1wSGVhZGVyCAAAAZLi7jFQ6uV3Eg=="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexMultipleHeaderInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headers": {
+                                        "booleanHeader": true,
+                                        "stringHeader": "foo",
+                                        "blobHeader": "bar"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "booleanHeader": {
+                                        "boolean": true
+                                    },
+                                    "stringHeader": {
+                                        "string": "foo"
+                                    },
+                                    "blobHeader": {
+                                        "blob": "YmFy"
+                                    }
+                                },
+                                "bytes": "AAAAbwAAAF+FlHOQDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMNYm9vbGVhbkhlYWRlcgAMc3RyaW5nSGVhZGVyBwADZm9vCmJsb2JIZWFkZXIGAANiYXIDXbo7"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexStringPayloadInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "stringPayload": {
+                                        "payload": "foo"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "stringPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "text/plain"
+                                    }
+                                },
+                                "body": "foo",
+                                "bodyMediaType": "text/plain",
+                                "bytes": "AAAAYAAAAE30fZUJDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcADXN0cmluZ1BheWxvYWQNOmNvbnRlbnQtdHlwZQcACnRleHQvcGxhaW5mb29G1ELr"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexBlobPayloadInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "blobPayload": {
+                                        "payload": "bar"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "blobPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/octet-stream"
+                                    }
+                                },
+                                "body": "bar",
+                                "bodyMediaType": "application/octet-stream",
+                                "bytes": "AAAAbAAAAFkrV6x1DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAC2Jsb2JQYXlsb2FkDTpjb250ZW50LXR5cGUHABhhcHBsaWNhdGlvbi9vY3RldC1zdHJlYW1iYXJv5nGJ"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexStructurePayloadInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "structurePayload": {
+                                        "payload": {
+                                            "structureMember": "foo"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "structurePayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"foo\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAfwAAAFacqFy2DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAEHN0cnVjdHVyZVBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb257InN0cnVjdHVyZU1lbWJlciI6ImZvbyJ9rcIRVA=="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexUnionPayloadInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "unionPayload": {
+                                        "payload": {
+                                            "unionMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "unionPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    }
+                                },
+                                "body": "{\"unionMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAdwAAAFKrtdNuDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcADHVuaW9uUGF5bG9hZA06Y29udGVudC10eXBlBwAQYXBwbGljYXRpb24vanNvbnsidW5pb25NZW1iZXIiOiJiYXIifcZDMD4="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexHeadersAndExplicitPayloadInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headersAndExplicitPayload": {
+                                        "header": "foo",
+                                        "payload": {
+                                            "structureMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headersAndExplicitPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAlQAAAGw4wFp6DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAGWhlYWRlcnNBbmRFeHBsaWNpdFBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb24GaGVhZGVyBwADZm9veyJzdHJ1Y3R1cmVNZW1iZXIiOiJiYXIifTafKXs="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexHeadersAndImplicitPayloadInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headersAndImplicitPayload": {
+                                        "header": "foo",
+                                        "payload": "bar"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headersAndImplicitPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"payload\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAjQAAAGxoUIY5DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAGWhlYWRlcnNBbmRJbXBsaWNpdFBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb24GaGVhZGVyBwADZm9veyJwYXlsb2FkIjoiYmFyIn15lZtT"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexServerErrorInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "error": {
+                                        "message": "foo"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "exception"
+                                    },
+                                    ":exception-type": {
+                                        "string": "error"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    }
+                                },
+                                "body": "{\"message\":\"foo\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAdAAAAFObEpkoDTptZXNzYWdlLXR5cGUHAAlleGNlcHRpb24POmV4Y2VwdGlvbi10eXBlBwAFZXJyb3INOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb257Im1lc3NhZ2UiOiJmb28ifTua1S8="
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {
+                                "errorId": "aws.protocoltests.restjson#ErrorEvent"
+                            }
+                        },
+                        "appliesTo": "server"
+                    },
+                    {
+                        "id": "DuplexClientErrorInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "error": {
+                                        "message": "foo"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "exception"
+                                    },
+                                    ":exception-type": {
+                                        "string": "error"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    }
+                                },
+                                "body": "{\"message\":\"foo\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAdAAAAFObEpkoDTptZXNzYWdlLXR5cGUHAAlleGNlcHRpb24POmV4Y2VwdGlvbi10eXBlBwAFZXJyb3INOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb257Im1lc3NhZ2UiOiJmb28ifTua1S8="
+                            }
+                        ],
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "DuplexServerUnexpectedErrorInput",
+                        "documentation": "Servers must be able to handle structured, but unmodeled errors.",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "error"
+                                    },
+                                    ":error-code": {
+                                        "string": "internal-error"
+                                    },
+                                    ":error-message": {
+                                        "string": "An unknown error occurred."
+                                    }
+                                },
+                                "bytes": "AAAAbwAAAF+FlHOQDTptZXNzYWdlLXR5cGUHAAVlcnJvcgs6ZXJyb3ItY29kZQcADmludGVybmFsLWVycm9yDjplcnJvci1tZXNzYWdlBwAaQW4gdW5rbm93biBlcnJvciBvY2N1cnJlZC4kun0t"
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "server"
+                    },
+                    {
+                        "id": "DuplexMissingMessageTypeInput",
+                        "documentation": "Servers must reject events that don't contain a :message-type header.",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headersAndExplicitPayload": {
+                                        "header": "foo",
+                                        "payload": {
+                                            "structureMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":event-type": {
+                                        "string": "headersAndExplicitPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAfwAAAFacqFy2CzpldmVudC10eXBlBwAZaGVhZGVyc0FuZEV4cGxpY2l0UGF5bG9hZA06Y29udGVudC10eXBlBwAQYXBwbGljYXRpb24vanNvbgZoZWFkZXIHAANmb297InN0cnVjdHVyZU1lbWJlciI6ImJhciJ98LexJg=="
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "server"
+                    },
+                    {
+                        "id": "DuplexMalformedMessageTypeInput",
+                        "documentation": "Servers must reject events that contain a malformed :message-type header.",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headersAndExplicitPayload": {
+                                        "header": "foo",
+                                        "payload": {
+                                            "structureMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "blob": "ZXZlbnQ="
+                                    },
+                                    ":event-type": {
+                                        "string": "headersAndExplicitPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAlQAAAGw4wFp6DTptZXNzYWdlLXR5cGUGAAVldmVudAs6ZXZlbnQtdHlwZQcAGWhlYWRlcnNBbmRFeHBsaWNpdFBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb24GaGVhZGVyBwADZm9veyJzdHJ1Y3R1cmVNZW1iZXIiOiJiYXIifVwdfzU="
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "server"
+                    },
+                    {
+                        "id": "DuplexMissingEventTypeInput",
+                        "documentation": "Servers must reject message events that don't contain an :event-type header.",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headersAndExplicitPayload": {
+                                        "header": "foo",
+                                        "payload": {
+                                            "structureMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAbQAAAER1MekcDTptZXNzYWdlLXR5cGUHAAVldmVudA06Y29udGVudC10eXBlBwAQYXBwbGljYXRpb24vanNvbgZoZWFkZXIHAANmb297InN0cnVjdHVyZU1lbWJlciI6ImJhciJ9riy0Gg=="
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "server"
+                    },
+                    {
+                        "id": "DuplexMalformedEventTypeInput",
+                        "documentation": "Servers must reject message events that contain a malformed :event-type header.",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headersAndExplicitPayload": {
+                                        "header": "foo",
+                                        "payload": {
+                                            "structureMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "blob": "aGVhZGVyc0FuZEV4cGxpY2l0UGF5bG9hZA=="
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAlQAAAGw4wFp6DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQYAGWhlYWRlcnNBbmRFeHBsaWNpdFBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb24GaGVhZGVyBwADZm9veyJzdHJ1Y3R1cmVNZW1iZXIiOiJiYXIifcP6KLk="
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "server"
+                    },
+                    {
+                        "id": "DuplexBooleanHeaderOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headers": {
+                                        "booleanHeader": true
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "booleanHeader": {
+                                        "boolean": true
+                                    }
+                                },
+                                "bytes": "AAAASwAAADv7Cl8VDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMNYm9vbGVhbkhlYWRlcgC4J9Ws"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexByteHeaderOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headers": {
+                                        "byteHeader": 1
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "byteHeader": {
+                                        "byte": 1
+                                    }
+                                },
+                                "bytes": "AAAASQAAADlvxG1ZDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMKYnl0ZUhlYWRlcgIBKFTmjg=="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexShortHeaderOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headers": {
+                                        "shortHeader": 2
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "shortHeader": {
+                                        "short": 2
+                                    }
+                                },
+                                "bytes": "AAAASwAAADv7Cl8VDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMLc2hvcnRIZWFkZXIDAAL1ETsK"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexIntegerHeaderOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headers": {
+                                        "intHeader": 3
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "intHeader": {
+                                        "integer": 3
+                                    }
+                                },
+                                "bytes": "AAAASwAAADv7Cl8VDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMJaW50SGVhZGVyBAAAAAPlyUrb"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexLongHeaderOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headers": {
+                                        "longHeader": 4294967294
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "longHeader": {
+                                        "long": 4294967294
+                                    }
+                                },
+                                "bytes": "AAAAUAAAAEAr7VEyDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMKbG9uZ0hlYWRlcgUAAAAA/////udnd/I="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexBlobHeaderOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headers": {
+                                        "blobHeader": "foo"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "blobHeader": {
+                                        "blob": "Zm9v"
+                                    }
+                                },
+                                "bytes": "AAAATQAAAD2dKQ+ADTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMKYmxvYkhlYWRlcgYAA2Zvb5sbbGM="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexStringHeaderOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headers": {
+                                        "stringHeader": "foo"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "stringHeader": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "bytes": "AAAATwAAAD8J5z3MDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMMc3RyaW5nSGVhZGVyBwADZm9vxT+2MA=="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexTimestampHeaderOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headers": {
+                                        "timestampHeader": "2024-10-31T14:15:14Z"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "timestampHeader": {
+                                        "timestamp": "2024-10-31T14:15:14Z"
+                                    }
+                                },
+                                "bytes": "AAAAVQAAAEWTZyrNDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMPdGltZXN0YW1wSGVhZGVyCAAAAZLi7jFQ6uV3Eg=="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexMultipleHeaderOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headers": {
+                                        "booleanHeader": true,
+                                        "stringHeader": "foo",
+                                        "blobHeader": "bar"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "booleanHeader": {
+                                        "boolean": true
+                                    },
+                                    "stringHeader": {
+                                        "string": "foo"
+                                    },
+                                    "blobHeader": {
+                                        "blob": "YmFy"
+                                    }
+                                },
+                                "bytes": "AAAAbwAAAF+FlHOQDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMNYm9vbGVhbkhlYWRlcgAMc3RyaW5nSGVhZGVyBwADZm9vCmJsb2JIZWFkZXIGAANiYXIDXbo7"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexStringPayloadOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "stringPayload": {
+                                        "payload": "foo"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "stringPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "text/plain"
+                                    }
+                                },
+                                "body": "foo",
+                                "bodyMediaType": "text/plain",
+                                "bytes": "AAAAYAAAAE30fZUJDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcADXN0cmluZ1BheWxvYWQNOmNvbnRlbnQtdHlwZQcACnRleHQvcGxhaW5mb29G1ELr"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexBlobPayloadOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "blobPayload": {
+                                        "payload": "bar"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "blobPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/octet-stream"
+                                    }
+                                },
+                                "body": "bar",
+                                "bodyMediaType": "application/octet-stream",
+                                "bytes": "AAAAbAAAAFkrV6x1DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAC2Jsb2JQYXlsb2FkDTpjb250ZW50LXR5cGUHABhhcHBsaWNhdGlvbi9vY3RldC1zdHJlYW1iYXJv5nGJ"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexStructurePayloadOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "structurePayload": {
+                                        "payload": {
+                                            "structureMember": "foo"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "structurePayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"foo\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAfwAAAFacqFy2DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAEHN0cnVjdHVyZVBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb257InN0cnVjdHVyZU1lbWJlciI6ImZvbyJ9rcIRVA=="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexUnionPayloadOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "unionPayload": {
+                                        "payload": {
+                                            "unionMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "unionPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    }
+                                },
+                                "body": "{\"unionMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAdwAAAFKrtdNuDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcADHVuaW9uUGF5bG9hZA06Y29udGVudC10eXBlBwAQYXBwbGljYXRpb24vanNvbnsidW5pb25NZW1iZXIiOiJiYXIifcZDMD4="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexHeadersAndExplicitPayloadOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headersAndExplicitPayload": {
+                                        "header": "foo",
+                                        "payload": {
+                                            "structureMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headersAndExplicitPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAlQAAAGw4wFp6DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAGWhlYWRlcnNBbmRFeHBsaWNpdFBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb24GaGVhZGVyBwADZm9veyJzdHJ1Y3R1cmVNZW1iZXIiOiJiYXIifTafKXs="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexHeadersAndImplicitPayloadOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headersAndImplicitPayload": {
+                                        "header": "foo",
+                                        "payload": "bar"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headersAndImplicitPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"payload\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAjQAAAGxoUIY5DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAGWhlYWRlcnNBbmRJbXBsaWNpdFBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb24GaGVhZGVyBwADZm9veyJwYXlsb2FkIjoiYmFyIn15lZtT"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "DuplexServerErrorOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "error": {
+                                        "message": "foo"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "exception"
+                                    },
+                                    ":exception-type": {
+                                        "string": "error"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    }
+                                },
+                                "body": "{\"message\":\"foo\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAdAAAAFObEpkoDTptZXNzYWdlLXR5cGUHAAlleGNlcHRpb24POmV4Y2VwdGlvbi10eXBlBwAFZXJyb3INOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb257Im1lc3NhZ2UiOiJmb28ifTua1S8="
+                            }
+                        ],
+                        "appliesTo": "server"
+                    },
+                    {
+                        "id": "DuplexClientErrorOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "error": {
+                                        "message": "foo"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "exception"
+                                    },
+                                    ":exception-type": {
+                                        "string": "error"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    }
+                                },
+                                "body": "{\"message\":\"foo\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAdAAAAFObEpkoDTptZXNzYWdlLXR5cGUHAAlleGNlcHRpb24POmV4Y2VwdGlvbi10eXBlBwAFZXJyb3INOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb257Im1lc3NhZ2UiOiJmb28ifTua1S8="
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {
+                                "errorId": "aws.protocoltests.restjson#ErrorEvent"
+                            }
+                        },
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "DuplexClientUnexpectedErrorOutput",
+                        "documentation": "Clients must be able to handle structured, but unmodeled errors.",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "error"
+                                    },
+                                    ":error-code": {
+                                        "string": "internal-error"
+                                    },
+                                    ":error-message": {
+                                        "string": "An unknown error occurred."
+                                    }
+                                },
+                                "bytes": "AAAAbwAAAF+FlHOQDTptZXNzYWdlLXR5cGUHAAVlcnJvcgs6ZXJyb3ItY29kZQcADmludGVybmFsLWVycm9yDjplcnJvci1tZXNzYWdlBwAaQW4gdW5rbm93biBlcnJvciBvY2N1cnJlZC4kun0t"
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "DuplexMissingMessageTypeOutput",
+                        "documentation": "Clients must reject events that don't contain a :message-type header.",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headersAndExplicitPayload": {
+                                        "header": "foo",
+                                        "payload": {
+                                            "structureMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":event-type": {
+                                        "string": "headersAndExplicitPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAfwAAAFacqFy2CzpldmVudC10eXBlBwAZaGVhZGVyc0FuZEV4cGxpY2l0UGF5bG9hZA06Y29udGVudC10eXBlBwAQYXBwbGljYXRpb24vanNvbgZoZWFkZXIHAANmb297InN0cnVjdHVyZU1lbWJlciI6ImJhciJ98LexJg=="
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "DuplexMalformedMessageTypeOutput",
+                        "documentation": "Client must reject events that contain a malformed :message-type header.",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headersAndExplicitPayload": {
+                                        "header": "foo",
+                                        "payload": {
+                                            "structureMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "blob": "ZXZlbnQ="
+                                    },
+                                    ":event-type": {
+                                        "string": "headersAndExplicitPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAlQAAAGw4wFp6DTptZXNzYWdlLXR5cGUGAAVldmVudAs6ZXZlbnQtdHlwZQcAGWhlYWRlcnNBbmRFeHBsaWNpdFBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb24GaGVhZGVyBwADZm9veyJzdHJ1Y3R1cmVNZW1iZXIiOiJiYXIifVwdfzU="
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "DuplexMissingEventTypeOutput",
+                        "documentation": "Clients must reject message events that don't contain an :event-type header.",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headersAndExplicitPayload": {
+                                        "header": "foo",
+                                        "payload": {
+                                            "structureMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAbQAAAER1MekcDTptZXNzYWdlLXR5cGUHAAVldmVudA06Y29udGVudC10eXBlBwAQYXBwbGljYXRpb24vanNvbgZoZWFkZXIHAANmb297InN0cnVjdHVyZU1lbWJlciI6ImJhciJ9riy0Gg=="
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "DuplexMalformedEventTypeOutput",
+                        "documentation": "Clients must reject message events that contain a malformed :event-type header.",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headersAndExplicitPayload": {
+                                        "header": "foo",
+                                        "payload": {
+                                            "structureMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "blob": "aGVhZGVyc0FuZEV4cGxpY2l0UGF5bG9hZA=="
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAlQAAAGw4wFp6DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQYAGWhlYWRlcnNBbmRFeHBsaWNpdFBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb24GaGVhZGVyBwADZm9veyJzdHJ1Y3R1cmVNZW1iZXIiOiJiYXIifcP6KLk="
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "client"
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.restjson#DuplexStreamInput": {
+            "type": "structure",
+            "members": {
+                "stream": {
+                    "target": "aws.protocoltests.restjson#EventStream",
+                    "traits": {
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "aws.protocoltests.restjson#DuplexStreamOutput": {
+            "type": "structure",
+            "members": {
+                "stream": {
+                    "target": "aws.protocoltests.restjson#EventStream",
+                    "traits": {
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "aws.protocoltests.restjson#DuplexStreamWithDistinctStreams": {
+            "type": "operation",
+            "input": {
+                "target": "aws.protocoltests.restjson#DuplexStreamWithDistinctStreamsInput"
+            },
+            "output": {
+                "target": "aws.protocoltests.restjson#DuplexStreamWithDistinctStreamsOutput"
+            },
+            "traits": {
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DuplexStreamWithDistinctStreams"
+                }
+            }
+        },
+        "aws.protocoltests.restjson#DuplexStreamWithDistinctStreamsInput": {
+            "type": "structure",
+            "members": {
+                "stream": {
+                    "target": "aws.protocoltests.restjson#EventStream",
+                    "traits": {
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "aws.protocoltests.restjson#DuplexStreamWithDistinctStreamsOutput": {
+            "type": "structure",
+            "members": {
+                "stream": {
+                    "target": "aws.protocoltests.restjson#SingletonEventStream",
+                    "traits": {
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "aws.protocoltests.restjson#DuplexStreamWithInitialMessages": {
+            "type": "operation",
+            "input": {
+                "target": "aws.protocoltests.restjson#DuplexStreamWithInitialMessagesInput"
+            },
+            "output": {
+                "target": "aws.protocoltests.restjson#DuplexStreamWithInitialMessagesOutput"
+            },
+            "errors": [
+                {
+                    "target": "aws.protocoltests.restjson#ServiceUnavailableError"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DuplexStreamWithInitialMessages"
+                },
+                "smithy.test#eventStreamTests": [
+                    {
+                        "id": "DuplexInitialRequestInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "initialRequestParams": {
+                            "initialRequestMember": "foo"
+                        },
+                        "initialRequest": {
+                            "method": "POST",
+                            "uri": "/DuplexStreamWithInitialMessages",
+                            "headers": {
+                                "initial-request-member": "foo"
+                            }
+                        },
+                        "initialRequestShape": "smithy.test#InitialHttpRequest"
+                    },
+                    {
+                        "id": "DuplexMissingRequiredInitialRequestInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headers": {
+                                        "booleanHeader": true
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "booleanHeader": {
+                                        "boolean": true
+                                    }
+                                },
+                                "bytes": "AAAASwAAADv7Cl8VDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMNYm9vbGVhbkhlYWRlcgC4J9Ws"
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "server"
+                    },
+                    {
+                        "id": "DuplexInitialResponseOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "initialResponseParams": {
+                            "initialResponseMember": "foo"
+                        },
+                        "initialResponse": {
+                            "code": 200,
+                            "headers": {
+                                "initial-response-member": "foo"
+                            }
+                        },
+                        "initialResponseShape": "smithy.test#InitialHttpResponse"
+                    },
+                    {
+                        "id": "DuplexMissingRequiredInitialResponseOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headers": {
+                                        "booleanHeader": true
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "booleanHeader": {
+                                        "boolean": true
+                                    }
+                                },
+                                "bytes": "AAAASwAAADv7Cl8VDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMNYm9vbGVhbkhlYWRlcgC4J9Ws"
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "DuplexModeledProtocolError",
+                        "protocol": "aws.protocols#restJson1",
+                        "initialResponse": {
+                            "code": 500,
+                            "headers": {
+                                "Content-Type": "application/json",
+                                "X-Amzn-Errortype": "ServiceUnavailableError"
+                            },
+                            "body": "{\"message\": \"foo\"}",
+                            "bodyMediaType": "application/json"
+                        },
+                        "initialResponseShape": "smithy.test#InitialHttpResponse",
+                        "expectation": {
+                            "failure": {
+                                "errorId": "aws.protocoltests.restjson#ServiceUnavailableError"
+                            }
+                        },
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "DuplexUnmodeledProtocolError",
+                        "protocol": "aws.protocols#restJson1",
+                        "initialResponse": {
+                            "code": 500,
+                            "headers": {
+                                "Content-Type": "text/plain"
+                            },
+                            "body": "service unavailable",
+                            "bodyMediaType": "text/plain"
+                        },
+                        "initialResponseShape": "smithy.test#InitialHttpResponse",
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "client"
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.restjson#DuplexStreamWithInitialMessagesInput": {
+            "type": "structure",
+            "members": {
+                "initialRequestMember": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#httpHeader": "initial-request-member",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stream": {
+                    "target": "aws.protocoltests.restjson#EventStream",
+                    "traits": {
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "aws.protocoltests.restjson#DuplexStreamWithInitialMessagesOutput": {
+            "type": "structure",
+            "members": {
+                "initialResponseMember": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#httpHeader": "initial-response-member",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stream": {
+                    "target": "aws.protocoltests.restjson#EventStream",
+                    "traits": {
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "aws.protocoltests.restjson#EmptyInputAndEmptyOutput": {
             "type": "operation",
             "input": {
@@ -1584,6 +3199,49 @@
                 }
             }
         },
+        "aws.protocoltests.restjson#ErrorEvent": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#error": "client"
+            }
+        },
+        "aws.protocoltests.restjson#EventStream": {
+            "type": "union",
+            "members": {
+                "headers": {
+                    "target": "aws.protocoltests.restjson#HeadersEvent"
+                },
+                "blobPayload": {
+                    "target": "aws.protocoltests.restjson#BlobPayloadEvent"
+                },
+                "stringPayload": {
+                    "target": "aws.protocoltests.restjson#StringPayloadEvent"
+                },
+                "structurePayload": {
+                    "target": "aws.protocoltests.restjson#StructurePayloadEvent"
+                },
+                "unionPayload": {
+                    "target": "aws.protocoltests.restjson#UnionPayloadEvent"
+                },
+                "headersAndExplicitPayload": {
+                    "target": "aws.protocoltests.restjson#HeadersAndExplicitPayloadEvent"
+                },
+                "headersAndImplicitPayload": {
+                    "target": "aws.protocoltests.restjson#HeadersAndImplicitPayloadEvent"
+                },
+                "error": {
+                    "target": "aws.protocoltests.restjson#ErrorEvent"
+                }
+            },
+            "traits": {
+                "smithy.api#streaming": {}
+            }
+        },
         "aws.protocoltests.restjson#Farewell": {
             "type": "structure",
             "members": {
@@ -1640,6 +3298,16 @@
                         "code": 500,
                         "headers": {
                             "X-Amzn-Errortype": "aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"
+                        },
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "RestJsonFooErrorUsingXAmznErrorTypeWithUriAndDifferentNamespace",
+                        "documentation": "Because namespace and URL are ignored, an unrecognized namespace should not make a difference.",
+                        "protocol": "aws.protocols#restJson1",
+                        "code": 500,
+                        "headers": {
+                            "X-Amzn-Errortype": "aws.different.namespace#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"
                         },
                         "appliesTo": "client"
                     },
@@ -1712,6 +3380,18 @@
                             "Content-Type": "application/json"
                         },
                         "body": "{\n    \"__type\": \"aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/\"\n}",
+                        "bodyMediaType": "application/json",
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "RestJsonFooErrorWithNestedTypeProperty",
+                        "documentation": "Some services serialize errors using __type, and if the response includes additional shapes that belong to a different namespace there'll be a nested __type property that must not be considered when determining which error to be surfaced.\n\nFor an example service see Amazon DynamoDB.",
+                        "protocol": "aws.protocols#restJson1",
+                        "code": 500,
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "body": "{\n    \"__type\": \"aws.protocoltests.restjson#FooError\",\n    \"ErrorDetails\": [\n      {\n          \"__type\": \"com.amazon.internal#ErrorDetails\",\n          \"reason\": \"Some reason\"\n      }\n    ]\n}",
                         "bodyMediaType": "application/json",
                         "appliesTo": "client"
                     }
@@ -1823,6 +3503,90 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#httpHeader": "X-Greeting"
+                    }
+                }
+            }
+        },
+        "aws.protocoltests.restjson#HeadersAndExplicitPayloadEvent": {
+            "type": "structure",
+            "members": {
+                "header": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#eventHeader": {}
+                    }
+                },
+                "payload": {
+                    "target": "aws.protocoltests.restjson#PayloadStructure",
+                    "traits": {
+                        "smithy.api#eventPayload": {}
+                    }
+                }
+            }
+        },
+        "aws.protocoltests.restjson#HeadersAndImplicitPayloadEvent": {
+            "type": "structure",
+            "members": {
+                "header": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#eventHeader": {}
+                    }
+                },
+                "payload": {
+                    "target": "smithy.api#String"
+                }
+            }
+        },
+        "aws.protocoltests.restjson#HeadersEvent": {
+            "type": "structure",
+            "members": {
+                "booleanHeader": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#eventHeader": {}
+                    }
+                },
+                "byteHeader": {
+                    "target": "smithy.api#Byte",
+                    "traits": {
+                        "smithy.api#eventHeader": {}
+                    }
+                },
+                "shortHeader": {
+                    "target": "smithy.api#Short",
+                    "traits": {
+                        "smithy.api#eventHeader": {}
+                    }
+                },
+                "intHeader": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#eventHeader": {}
+                    }
+                },
+                "longHeader": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#eventHeader": {}
+                    }
+                },
+                "blobHeader": {
+                    "target": "smithy.api#Blob",
+                    "traits": {
+                        "smithy.api#eventHeader": {}
+                    }
+                },
+                "stringHeader": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#eventHeader": {}
+                    }
+                },
+                "timestampHeader": {
+                    "target": "aws.protocoltests.shared#DateTime",
+                    "traits": {
+                        "smithy.api#eventHeader": {}
                     }
                 }
             }
@@ -2683,6 +4447,65 @@
                 "smithy.api#output": {}
             }
         },
+        "aws.protocoltests.restjson#HttpQueryParamsOnlyInput": {
+            "type": "structure",
+            "members": {
+                "queryMap": {
+                    "target": "aws.protocoltests.restjson#QueryMap",
+                    "traits": {
+                        "smithy.api#httpQueryParams": {}
+                    }
+                }
+            }
+        },
+        "aws.protocoltests.restjson#HttpQueryParamsOnlyOperation": {
+            "type": "operation",
+            "input": {
+                "target": "aws.protocoltests.restjson#HttpQueryParamsOnlyInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#documentation": "This example tests httpQueryParams when no other query parameters exist.",
+                "smithy.api#http": {
+                    "uri": "/http-query-params-only",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#httpRequestTests": [
+                    {
+                        "id": "HttpQueryParamsOnlyRequest",
+                        "documentation": "Test that httpQueryParams are included in request when no other query parameters exist",
+                        "protocol": "aws.protocols#restJson1",
+                        "method": "GET",
+                        "uri": "/http-query-params-only",
+                        "queryParams": [
+                            "a=b",
+                            "c=d"
+                        ],
+                        "params": {
+                            "queryMap": {
+                                "a": "b",
+                                "c": "d"
+                            }
+                        },
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "HttpQueryParamsOnlyEmptyRequest",
+                        "documentation": "Test that empty httpQueryParams map results in no query parameters",
+                        "protocol": "aws.protocols#restJson1",
+                        "method": "GET",
+                        "uri": "/http-query-params-only",
+                        "params": {
+                            "queryMap": {}
+                        },
+                        "appliesTo": "client"
+                    }
+                ]
+            }
+        },
         "aws.protocoltests.restjson#HttpRequestWithFloatLabels": {
             "type": "operation",
             "input": {
@@ -3273,18 +5096,11 @@
                         "headers": {
                             "Content-Type": "application/json"
                         },
-                        "body": "{}",
+                        "body": "{\"baz\":\"bam\"}",
                         "bodyMediaType": "application/json",
-                        "params": {}
-                    },
-                    {
-                        "id": "RestJsonIgnoreQueryParamsInResponseNoPayload",
-                        "documentation": "This test is similar to RestJsonIgnoreQueryParamsInResponse,\nbut it ensures that clients gracefully handle responses from\nthe server that do not serialize an empty JSON object.",
-                        "protocol": "aws.protocols#restJson1",
-                        "code": 200,
-                        "body": "",
-                        "params": {},
-                        "appliesTo": "client"
+                        "params": {
+                            "baz": "bam"
+                        }
                     }
                 ]
             }
@@ -3816,6 +5632,783 @@
                         "smithy.api#httpHeader": "X-IntegerEnumList"
                     }
                 }
+            }
+        },
+        "aws.protocoltests.restjson#InputStream": {
+            "type": "operation",
+            "input": {
+                "target": "aws.protocoltests.restjson#InputStreamInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/InputStream"
+                },
+                "smithy.test#eventStreamTests": [
+                    {
+                        "id": "BooleanHeaderInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headers": {
+                                        "booleanHeader": true
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "booleanHeader": {
+                                        "boolean": true
+                                    }
+                                },
+                                "bytes": "AAAASwAAADv7Cl8VDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMNYm9vbGVhbkhlYWRlcgC4J9Ws"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "ByteHeaderInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headers": {
+                                        "byteHeader": 1
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "byteHeader": {
+                                        "byte": 1
+                                    }
+                                },
+                                "bytes": "AAAASQAAADlvxG1ZDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMKYnl0ZUhlYWRlcgIBKFTmjg=="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "ShortHeaderInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headers": {
+                                        "shortHeader": 2
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "shortHeader": {
+                                        "short": 2
+                                    }
+                                },
+                                "bytes": "AAAASwAAADv7Cl8VDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMLc2hvcnRIZWFkZXIDAAL1ETsK"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "IntegerHeaderInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headers": {
+                                        "intHeader": 3
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "intHeader": {
+                                        "integer": 3
+                                    }
+                                },
+                                "bytes": "AAAASwAAADv7Cl8VDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMJaW50SGVhZGVyBAAAAAPlyUrb"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "LongHeaderInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headers": {
+                                        "longHeader": 4294967294
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "longHeader": {
+                                        "long": 4294967294
+                                    }
+                                },
+                                "bytes": "AAAAUAAAAEAr7VEyDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMKbG9uZ0hlYWRlcgUAAAAA/////udnd/I="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "BlobHeaderInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headers": {
+                                        "blobHeader": "foo"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "blobHeader": {
+                                        "blob": "Zm9v"
+                                    }
+                                },
+                                "bytes": "AAAATQAAAD2dKQ+ADTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMKYmxvYkhlYWRlcgYAA2Zvb5sbbGM="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "StringHeaderInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headers": {
+                                        "stringHeader": "foo"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "stringHeader": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "bytes": "AAAATwAAAD8J5z3MDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMMc3RyaW5nSGVhZGVyBwADZm9vxT+2MA=="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "TimestampHeaderInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headers": {
+                                        "timestampHeader": "2024-10-31T14:15:14Z"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "timestampHeader": {
+                                        "timestamp": "2024-10-31T14:15:14Z"
+                                    }
+                                },
+                                "bytes": "AAAAVQAAAEWTZyrNDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMPdGltZXN0YW1wSGVhZGVyCAAAAZLi7jFQ6uV3Eg=="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "MultipleHeaderInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headers": {
+                                        "booleanHeader": true,
+                                        "stringHeader": "foo",
+                                        "blobHeader": "bar"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "booleanHeader": {
+                                        "boolean": true
+                                    },
+                                    "stringHeader": {
+                                        "string": "foo"
+                                    },
+                                    "blobHeader": {
+                                        "blob": "YmFy"
+                                    }
+                                },
+                                "bytes": "AAAAbwAAAF+FlHOQDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMNYm9vbGVhbkhlYWRlcgAMc3RyaW5nSGVhZGVyBwADZm9vCmJsb2JIZWFkZXIGAANiYXIDXbo7"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "StringPayloadInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "stringPayload": {
+                                        "payload": "foo"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "stringPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "text/plain"
+                                    }
+                                },
+                                "body": "foo",
+                                "bodyMediaType": "text/plain",
+                                "bytes": "AAAAYAAAAE30fZUJDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcADXN0cmluZ1BheWxvYWQNOmNvbnRlbnQtdHlwZQcACnRleHQvcGxhaW5mb29G1ELr"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "BlobPayloadInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "blobPayload": {
+                                        "payload": "bar"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "blobPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/octet-stream"
+                                    }
+                                },
+                                "body": "bar",
+                                "bodyMediaType": "application/octet-stream",
+                                "bytes": "AAAAbAAAAFkrV6x1DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAC2Jsb2JQYXlsb2FkDTpjb250ZW50LXR5cGUHABhhcHBsaWNhdGlvbi9vY3RldC1zdHJlYW1iYXJv5nGJ"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "StructurePayloadInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "structurePayload": {
+                                        "payload": {
+                                            "structureMember": "foo"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "structurePayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"foo\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAfwAAAFacqFy2DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAEHN0cnVjdHVyZVBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb257InN0cnVjdHVyZU1lbWJlciI6ImZvbyJ9rcIRVA=="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "UnionPayloadInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "unionPayload": {
+                                        "payload": {
+                                            "unionMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "unionPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    }
+                                },
+                                "body": "{\"unionMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAdwAAAFKrtdNuDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcADHVuaW9uUGF5bG9hZA06Y29udGVudC10eXBlBwAQYXBwbGljYXRpb24vanNvbnsidW5pb25NZW1iZXIiOiJiYXIifcZDMD4="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "HeadersAndExplicitPayloadInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headersAndExplicitPayload": {
+                                        "header": "foo",
+                                        "payload": {
+                                            "structureMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headersAndExplicitPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAlQAAAGw4wFp6DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAGWhlYWRlcnNBbmRFeHBsaWNpdFBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb24GaGVhZGVyBwADZm9veyJzdHJ1Y3R1cmVNZW1iZXIiOiJiYXIifTafKXs="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "HeadersAndImplicitPayloadInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headersAndImplicitPayload": {
+                                        "header": "foo",
+                                        "payload": "bar"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headersAndImplicitPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"payload\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAjQAAAGxoUIY5DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAGWhlYWRlcnNBbmRJbXBsaWNpdFBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb24GaGVhZGVyBwADZm9veyJwYXlsb2FkIjoiYmFyIn15lZtT"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "ServerErrorInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "error": {
+                                        "message": "foo"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "exception"
+                                    },
+                                    ":exception-type": {
+                                        "string": "error"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    }
+                                },
+                                "body": "{\"message\":\"foo\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAdAAAAFObEpkoDTptZXNzYWdlLXR5cGUHAAlleGNlcHRpb24POmV4Y2VwdGlvbi10eXBlBwAFZXJyb3INOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb257Im1lc3NhZ2UiOiJmb28ifTua1S8="
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {
+                                "errorId": "aws.protocoltests.restjson#ErrorEvent"
+                            }
+                        },
+                        "appliesTo": "server"
+                    },
+                    {
+                        "id": "ClientErrorInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "error": {
+                                        "message": "foo"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "exception"
+                                    },
+                                    ":exception-type": {
+                                        "string": "error"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    }
+                                },
+                                "body": "{\"message\":\"foo\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAdAAAAFObEpkoDTptZXNzYWdlLXR5cGUHAAlleGNlcHRpb24POmV4Y2VwdGlvbi10eXBlBwAFZXJyb3INOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb257Im1lc3NhZ2UiOiJmb28ifTua1S8="
+                            }
+                        ],
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "ServerUnexpectedErrorInput",
+                        "documentation": "Servers must be able to handle structured, but unmodeled errors.",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "error"
+                                    },
+                                    ":error-code": {
+                                        "string": "internal-error"
+                                    },
+                                    ":error-message": {
+                                        "string": "An unknown error occurred."
+                                    }
+                                },
+                                "bytes": "AAAAbwAAAF+FlHOQDTptZXNzYWdlLXR5cGUHAAVlcnJvcgs6ZXJyb3ItY29kZQcADmludGVybmFsLWVycm9yDjplcnJvci1tZXNzYWdlBwAaQW4gdW5rbm93biBlcnJvciBvY2N1cnJlZC4kun0t"
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "server"
+                    },
+                    {
+                        "id": "MissingMessageTypeInput",
+                        "documentation": "Servers must reject events that don't contain a :message-type header.",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headersAndExplicitPayload": {
+                                        "header": "foo",
+                                        "payload": {
+                                            "structureMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":event-type": {
+                                        "string": "headersAndExplicitPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAfwAAAFacqFy2CzpldmVudC10eXBlBwAZaGVhZGVyc0FuZEV4cGxpY2l0UGF5bG9hZA06Y29udGVudC10eXBlBwAQYXBwbGljYXRpb24vanNvbgZoZWFkZXIHAANmb297InN0cnVjdHVyZU1lbWJlciI6ImJhciJ98LexJg=="
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "server"
+                    },
+                    {
+                        "id": "MalformedMessageTypeInput",
+                        "documentation": "Servers must reject events that contain a malformed :message-type header.",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headersAndExplicitPayload": {
+                                        "header": "foo",
+                                        "payload": {
+                                            "structureMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "blob": "ZXZlbnQ="
+                                    },
+                                    ":event-type": {
+                                        "string": "headersAndExplicitPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAlQAAAGw4wFp6DTptZXNzYWdlLXR5cGUGAAVldmVudAs6ZXZlbnQtdHlwZQcAGWhlYWRlcnNBbmRFeHBsaWNpdFBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb24GaGVhZGVyBwADZm9veyJzdHJ1Y3R1cmVNZW1iZXIiOiJiYXIifVwdfzU="
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "server"
+                    },
+                    {
+                        "id": "MissingEventTypeInput",
+                        "documentation": "Servers must reject message events that don't contain an :event-type header.",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headersAndExplicitPayload": {
+                                        "header": "foo",
+                                        "payload": {
+                                            "structureMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAbQAAAER1MekcDTptZXNzYWdlLXR5cGUHAAVldmVudA06Y29udGVudC10eXBlBwAQYXBwbGljYXRpb24vanNvbgZoZWFkZXIHAANmb297InN0cnVjdHVyZU1lbWJlciI6ImJhciJ9riy0Gg=="
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "server"
+                    },
+                    {
+                        "id": "MalformedEventTypeInput",
+                        "documentation": "Servers must reject message events that contain a malformed :event-type header.",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headersAndExplicitPayload": {
+                                        "header": "foo",
+                                        "payload": {
+                                            "structureMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "blob": "aGVhZGVyc0FuZEV4cGxpY2l0UGF5bG9hZA=="
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAlQAAAGw4wFp6DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQYAGWhlYWRlcnNBbmRFeHBsaWNpdFBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb24GaGVhZGVyBwADZm9veyJzdHJ1Y3R1cmVNZW1iZXIiOiJiYXIifcP6KLk="
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "server"
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.restjson#InputStreamInput": {
+            "type": "structure",
+            "members": {
+                "stream": {
+                    "target": "aws.protocoltests.restjson#EventStream",
+                    "traits": {
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "aws.protocoltests.restjson#InputStreamWithInitialRequest": {
+            "type": "operation",
+            "input": {
+                "target": "aws.protocoltests.restjson#InputStreamWithInitialRequestInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/InputStreamWithInitialRequest"
+                },
+                "smithy.test#eventStreamTests": [
+                    {
+                        "id": "InitialRequestInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "initialRequestParams": {
+                            "initialRequestMember": "foo"
+                        },
+                        "initialRequest": {
+                            "method": "POST",
+                            "uri": "/InputStreamWithInitialRequest",
+                            "headers": {
+                                "initial-request-member": "foo"
+                            }
+                        },
+                        "initialRequestShape": "smithy.test#InitialHttpRequest"
+                    },
+                    {
+                        "id": "MissingRequiredInitialRequestInput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "request",
+                                "params": {
+                                    "headers": {
+                                        "booleanHeader": true
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "booleanHeader": {
+                                        "boolean": true
+                                    }
+                                },
+                                "bytes": "AAAASwAAADv7Cl8VDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMNYm9vbGVhbkhlYWRlcgC4J9Ws"
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "server"
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.restjson#InputStreamWithInitialRequestInput": {
+            "type": "structure",
+            "members": {
+                "initialRequestMember": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#httpHeader": "initial-request-member",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stream": {
+                    "target": "aws.protocoltests.restjson#EventStream",
+                    "traits": {
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "aws.protocoltests.restjson#InvalidGreeting": {
@@ -4462,27 +7055,6 @@
                                 ]
                             }
                         }
-                    },
-                    {
-                        "id": "RestJsonDeserializesDenseSetMapAndSkipsNull",
-                        "documentation": "Clients SHOULD tolerate seeing a null value in a dense map, and they SHOULD\ndrop the null key-value pair.",
-                        "protocol": "aws.protocols#restJson1",
-                        "appliesTo": "client",
-                        "code": 200,
-                        "body": "{\n    \"denseSetMap\": {\n        \"x\": [],\n        \"y\": [\"a\", \"b\"],\n        \"z\": null\n    }\n}",
-                        "bodyMediaType": "application/json",
-                        "headers": {
-                            "Content-Type": "application/json"
-                        },
-                        "params": {
-                            "denseSetMap": {
-                                "x": [],
-                                "y": [
-                                    "a",
-                                    "b"
-                                ]
-                            }
-                        }
                     }
                 ]
             }
@@ -4960,6 +7532,25 @@
                                 }
                             }
                         }
+                    },
+                    {
+                        "id": "RestJsonSerializeNestedUnionValue",
+                        "documentation": "Serializes a nested union value",
+                        "protocol": "aws.protocols#restJson1",
+                        "method": "PUT",
+                        "uri": "/JsonUnions",
+                        "body": "{\n    \"contents\": {\n        \"unionValue\": {\n            \"stringValue\": \"foo\"\n        }\n    }\n}",
+                        "bodyMediaType": "application/json",
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "params": {
+                            "contents": {
+                                "unionValue": {
+                                    "stringValue": "foo"
+                                }
+                            }
+                        }
                     }
                 ],
                 "smithy.test#httpResponseTests": [
@@ -5111,6 +7702,24 @@
                             "contents": {
                                 "structureValue": {
                                     "hi": "hello"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "id": "RestJsonDeserializeNestedUnionValue",
+                        "documentation": "Deserializes a nested union value",
+                        "protocol": "aws.protocols#restJson1",
+                        "code": 200,
+                        "body": "{\n    \"contents\": {\n        \"unionValue\": {\n            \"stringValue\": \"foo\"\n        }\n    }\n}",
+                        "bodyMediaType": "application/json",
+                        "headers": {
+                            "Content-Type": "application/json"
+                        },
+                        "params": {
+                            "contents": {
+                                "unionValue": {
+                                    "stringValue": "foo"
                                 }
                             }
                         }
@@ -9504,6 +12113,9 @@
                 },
                 "renamedStructureValue": {
                     "target": "aws.protocoltests.restjson.nested#GreetingStruct"
+                },
+                "unionValue": {
+                    "target": "aws.protocoltests.restjson#NestedUnion"
                 }
             },
             "traits": {
@@ -9545,6 +12157,17 @@
                 "name": {
                     "target": "smithy.api#String"
                 }
+            }
+        },
+        "aws.protocoltests.restjson#NestedUnion": {
+            "type": "union",
+            "members": {
+                "stringValue": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A union used to test unions nested inside unions."
             }
         },
         "aws.protocoltests.restjson#NoInputAndNoOutput": {
@@ -10537,11 +13160,845 @@
                 "smithy.api#output": {}
             }
         },
+        "aws.protocoltests.restjson#OutputStream": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "aws.protocoltests.restjson#OutputStreamOutput"
+            },
+            "errors": [
+                {
+                    "target": "aws.protocoltests.restjson#ServiceUnavailableError"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/OutputStream"
+                },
+                "smithy.test#eventStreamTests": [
+                    {
+                        "id": "BooleanHeaderOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headers": {
+                                        "booleanHeader": true
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "booleanHeader": {
+                                        "boolean": true
+                                    }
+                                },
+                                "bytes": "AAAASwAAADv7Cl8VDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMNYm9vbGVhbkhlYWRlcgC4J9Ws"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "ByteHeaderOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headers": {
+                                        "byteHeader": 1
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "byteHeader": {
+                                        "byte": 1
+                                    }
+                                },
+                                "bytes": "AAAASQAAADlvxG1ZDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMKYnl0ZUhlYWRlcgIBKFTmjg=="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "ShortHeaderOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headers": {
+                                        "shortHeader": 2
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "shortHeader": {
+                                        "short": 2
+                                    }
+                                },
+                                "bytes": "AAAASwAAADv7Cl8VDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMLc2hvcnRIZWFkZXIDAAL1ETsK"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "IntegerHeaderOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headers": {
+                                        "intHeader": 3
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "intHeader": {
+                                        "integer": 3
+                                    }
+                                },
+                                "bytes": "AAAASwAAADv7Cl8VDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMJaW50SGVhZGVyBAAAAAPlyUrb"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "LongHeaderOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headers": {
+                                        "longHeader": 4294967294
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "longHeader": {
+                                        "long": 4294967294
+                                    }
+                                },
+                                "bytes": "AAAAUAAAAEAr7VEyDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMKbG9uZ0hlYWRlcgUAAAAA/////udnd/I="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "BlobHeaderOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headers": {
+                                        "blobHeader": "foo"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "blobHeader": {
+                                        "blob": "Zm9v"
+                                    }
+                                },
+                                "bytes": "AAAATQAAAD2dKQ+ADTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMKYmxvYkhlYWRlcgYAA2Zvb5sbbGM="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "StringHeaderOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headers": {
+                                        "stringHeader": "foo"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "stringHeader": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "bytes": "AAAATwAAAD8J5z3MDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMMc3RyaW5nSGVhZGVyBwADZm9vxT+2MA=="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "TimestampHeaderOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headers": {
+                                        "timestampHeader": "2024-10-31T14:15:14Z"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "timestampHeader": {
+                                        "timestamp": "2024-10-31T14:15:14Z"
+                                    }
+                                },
+                                "bytes": "AAAAVQAAAEWTZyrNDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMPdGltZXN0YW1wSGVhZGVyCAAAAZLi7jFQ6uV3Eg=="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "MultipleHeaderOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headers": {
+                                        "booleanHeader": true,
+                                        "stringHeader": "foo",
+                                        "blobHeader": "bar"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "booleanHeader": {
+                                        "boolean": true
+                                    },
+                                    "stringHeader": {
+                                        "string": "foo"
+                                    },
+                                    "blobHeader": {
+                                        "blob": "YmFy"
+                                    }
+                                },
+                                "bytes": "AAAAbwAAAF+FlHOQDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMNYm9vbGVhbkhlYWRlcgAMc3RyaW5nSGVhZGVyBwADZm9vCmJsb2JIZWFkZXIGAANiYXIDXbo7"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "StringPayloadOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "stringPayload": {
+                                        "payload": "foo"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "stringPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "text/plain"
+                                    }
+                                },
+                                "body": "foo",
+                                "bodyMediaType": "text/plain",
+                                "bytes": "AAAAYAAAAE30fZUJDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcADXN0cmluZ1BheWxvYWQNOmNvbnRlbnQtdHlwZQcACnRleHQvcGxhaW5mb29G1ELr"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "BlobPayloadOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "blobPayload": {
+                                        "payload": "bar"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "blobPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/octet-stream"
+                                    }
+                                },
+                                "body": "bar",
+                                "bodyMediaType": "application/octet-stream",
+                                "bytes": "AAAAbAAAAFkrV6x1DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAC2Jsb2JQYXlsb2FkDTpjb250ZW50LXR5cGUHABhhcHBsaWNhdGlvbi9vY3RldC1zdHJlYW1iYXJv5nGJ"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "StructurePayloadOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "structurePayload": {
+                                        "payload": {
+                                            "structureMember": "foo"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "structurePayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"foo\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAfwAAAFacqFy2DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAEHN0cnVjdHVyZVBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb257InN0cnVjdHVyZU1lbWJlciI6ImZvbyJ9rcIRVA=="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "UnionPayloadOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "unionPayload": {
+                                        "payload": {
+                                            "unionMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "unionPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    }
+                                },
+                                "body": "{\"unionMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAdwAAAFKrtdNuDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcADHVuaW9uUGF5bG9hZA06Y29udGVudC10eXBlBwAQYXBwbGljYXRpb24vanNvbnsidW5pb25NZW1iZXIiOiJiYXIifcZDMD4="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "HeadersAndExplicitPayloadOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headersAndExplicitPayload": {
+                                        "header": "foo",
+                                        "payload": {
+                                            "structureMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headersAndExplicitPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAlQAAAGw4wFp6DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAGWhlYWRlcnNBbmRFeHBsaWNpdFBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb24GaGVhZGVyBwADZm9veyJzdHJ1Y3R1cmVNZW1iZXIiOiJiYXIifTafKXs="
+                            }
+                        ]
+                    },
+                    {
+                        "id": "HeadersAndImplicitPayloadOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headersAndImplicitPayload": {
+                                        "header": "foo",
+                                        "payload": "bar"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headersAndImplicitPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"payload\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAjQAAAGxoUIY5DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAGWhlYWRlcnNBbmRJbXBsaWNpdFBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb24GaGVhZGVyBwADZm9veyJwYXlsb2FkIjoiYmFyIn15lZtT"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "ServerErrorOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "error": {
+                                        "message": "foo"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "exception"
+                                    },
+                                    ":exception-type": {
+                                        "string": "error"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    }
+                                },
+                                "body": "{\"message\":\"foo\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAdAAAAFObEpkoDTptZXNzYWdlLXR5cGUHAAlleGNlcHRpb24POmV4Y2VwdGlvbi10eXBlBwAFZXJyb3INOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb257Im1lc3NhZ2UiOiJmb28ifTua1S8="
+                            }
+                        ],
+                        "appliesTo": "server"
+                    },
+                    {
+                        "id": "ClientErrorOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "error": {
+                                        "message": "foo"
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "exception"
+                                    },
+                                    ":exception-type": {
+                                        "string": "error"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    }
+                                },
+                                "body": "{\"message\":\"foo\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAdAAAAFObEpkoDTptZXNzYWdlLXR5cGUHAAlleGNlcHRpb24POmV4Y2VwdGlvbi10eXBlBwAFZXJyb3INOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb257Im1lc3NhZ2UiOiJmb28ifTua1S8="
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {
+                                "errorId": "aws.protocoltests.restjson#ErrorEvent"
+                            }
+                        },
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "ClientUnexpectedErrorOutput",
+                        "documentation": "Clients must be able to handle structured, but unmodeled errors.",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "error"
+                                    },
+                                    ":error-code": {
+                                        "string": "internal-error"
+                                    },
+                                    ":error-message": {
+                                        "string": "An unknown error occurred."
+                                    }
+                                },
+                                "bytes": "AAAAbwAAAF+FlHOQDTptZXNzYWdlLXR5cGUHAAVlcnJvcgs6ZXJyb3ItY29kZQcADmludGVybmFsLWVycm9yDjplcnJvci1tZXNzYWdlBwAaQW4gdW5rbm93biBlcnJvciBvY2N1cnJlZC4kun0t"
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "MissingMessageTypeOutput",
+                        "documentation": "Clients must reject events that don't contain a :message-type header.",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headersAndExplicitPayload": {
+                                        "header": "foo",
+                                        "payload": {
+                                            "structureMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":event-type": {
+                                        "string": "headersAndExplicitPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAfwAAAFacqFy2CzpldmVudC10eXBlBwAZaGVhZGVyc0FuZEV4cGxpY2l0UGF5bG9hZA06Y29udGVudC10eXBlBwAQYXBwbGljYXRpb24vanNvbgZoZWFkZXIHAANmb297InN0cnVjdHVyZU1lbWJlciI6ImJhciJ98LexJg=="
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "MalformedMessageTypeOutput",
+                        "documentation": "Client must reject events that contain a malformed :message-type header.",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headersAndExplicitPayload": {
+                                        "header": "foo",
+                                        "payload": {
+                                            "structureMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "blob": "ZXZlbnQ="
+                                    },
+                                    ":event-type": {
+                                        "string": "headersAndExplicitPayload"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAlQAAAGw4wFp6DTptZXNzYWdlLXR5cGUGAAVldmVudAs6ZXZlbnQtdHlwZQcAGWhlYWRlcnNBbmRFeHBsaWNpdFBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb24GaGVhZGVyBwADZm9veyJzdHJ1Y3R1cmVNZW1iZXIiOiJiYXIifVwdfzU="
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "MissingEventTypeOutput",
+                        "documentation": "Clients must reject message events that don't contain an :event-type header.",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headersAndExplicitPayload": {
+                                        "header": "foo",
+                                        "payload": {
+                                            "structureMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAbQAAAER1MekcDTptZXNzYWdlLXR5cGUHAAVldmVudA06Y29udGVudC10eXBlBwAQYXBwbGljYXRpb24vanNvbgZoZWFkZXIHAANmb297InN0cnVjdHVyZU1lbWJlciI6ImJhciJ9riy0Gg=="
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "MalformedEventTypeOutput",
+                        "documentation": "Clients must reject message events that contain a malformed :event-type header.",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headersAndExplicitPayload": {
+                                        "header": "foo",
+                                        "payload": {
+                                            "structureMember": "bar"
+                                        }
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "blob": "aGVhZGVyc0FuZEV4cGxpY2l0UGF5bG9hZA=="
+                                    },
+                                    ":content-type": {
+                                        "string": "application/json"
+                                    },
+                                    "header": {
+                                        "string": "foo"
+                                    }
+                                },
+                                "body": "{\"structureMember\":\"bar\"}",
+                                "bodyMediaType": "application/json",
+                                "bytes": "AAAAlQAAAGw4wFp6DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQYAGWhlYWRlcnNBbmRFeHBsaWNpdFBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb24GaGVhZGVyBwADZm9veyJzdHJ1Y3R1cmVNZW1iZXIiOiJiYXIifcP6KLk="
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "ModeledProtocolError",
+                        "protocol": "aws.protocols#restJson1",
+                        "initialResponse": {
+                            "code": 500,
+                            "headers": {
+                                "Content-Type": "application/json",
+                                "X-Amzn-Errortype": "ServiceUnavailableError"
+                            },
+                            "body": "{\"message\": \"foo\"}",
+                            "bodyMediaType": "application/json"
+                        },
+                        "initialResponseShape": "smithy.test#InitialHttpResponse",
+                        "expectation": {
+                            "failure": {
+                                "errorId": "aws.protocoltests.restjson#ServiceUnavailableError"
+                            }
+                        },
+                        "appliesTo": "client"
+                    },
+                    {
+                        "id": "UnmodeledProtocolError",
+                        "protocol": "aws.protocols#restJson1",
+                        "initialResponse": {
+                            "code": 500,
+                            "headers": {
+                                "Content-Type": "text/plain"
+                            },
+                            "body": "service unavailable",
+                            "bodyMediaType": "text/plain"
+                        },
+                        "initialResponseShape": "smithy.test#InitialHttpResponse",
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "client"
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.restjson#OutputStreamOutput": {
+            "type": "structure",
+            "members": {
+                "stream": {
+                    "target": "aws.protocoltests.restjson#EventStream",
+                    "traits": {
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "aws.protocoltests.restjson#OutputStreamWithInitialResponse": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "aws.protocoltests.restjson#OutputStreamWithInitialResponseOutput"
+            },
+            "traits": {
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/OutputStreamWithInitialResponse"
+                },
+                "smithy.test#eventStreamTests": [
+                    {
+                        "id": "InitialResponseOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "initialResponseParams": {
+                            "initialResponseMember": "foo"
+                        },
+                        "initialResponse": {
+                            "code": 200,
+                            "headers": {
+                                "initial-response-member": "foo"
+                            }
+                        },
+                        "initialResponseShape": "smithy.test#InitialHttpResponse"
+                    },
+                    {
+                        "id": "MissingRequiredInitialResponseOutput",
+                        "protocol": "aws.protocols#restJson1",
+                        "events": [
+                            {
+                                "type": "response",
+                                "params": {
+                                    "headers": {
+                                        "booleanHeader": true
+                                    }
+                                },
+                                "headers": {
+                                    ":message-type": {
+                                        "string": "event"
+                                    },
+                                    ":event-type": {
+                                        "string": "headers"
+                                    },
+                                    "booleanHeader": {
+                                        "boolean": true
+                                    }
+                                },
+                                "bytes": "AAAASwAAADv7Cl8VDTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAB2hlYWRlcnMNYm9vbGVhbkhlYWRlcgC4J9Ws"
+                            }
+                        ],
+                        "expectation": {
+                            "failure": {}
+                        },
+                        "appliesTo": "client"
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.restjson#OutputStreamWithInitialResponseOutput": {
+            "type": "structure",
+            "members": {
+                "initialResponseMember": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#httpHeader": "initial-response-member",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stream": {
+                    "target": "aws.protocoltests.restjson#EventStream",
+                    "traits": {
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "aws.protocoltests.restjson#PayloadConfig": {
             "type": "structure",
             "members": {
                 "data": {
                     "target": "smithy.api#Integer"
+                }
+            }
+        },
+        "aws.protocoltests.restjson#PayloadStructure": {
+            "type": "structure",
+            "members": {
+                "structureMember": {
+                    "target": "smithy.api#String"
+                }
+            }
+        },
+        "aws.protocoltests.restjson#PayloadUnion": {
+            "type": "union",
+            "members": {
+                "unionMember": {
+                    "target": "smithy.api#String"
                 }
             }
         },
@@ -10902,6 +14359,15 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            }
+        },
+        "aws.protocoltests.restjson#QueryMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
             }
         },
         "aws.protocoltests.restjson#QueryParamsAsStringListMap": {
@@ -11286,6 +14752,15 @@
                     "target": "aws.protocoltests.restjson#DocumentTypeAsPayload"
                 },
                 {
+                    "target": "aws.protocoltests.restjson#DuplexStream"
+                },
+                {
+                    "target": "aws.protocoltests.restjson#DuplexStreamWithDistinctStreams"
+                },
+                {
+                    "target": "aws.protocoltests.restjson#DuplexStreamWithInitialMessages"
+                },
+                {
                     "target": "aws.protocoltests.restjson#EmptyInputAndEmptyOutput"
                 },
                 {
@@ -11331,6 +14806,9 @@
                     "target": "aws.protocoltests.restjson#HttpPrefixHeadersInResponse"
                 },
                 {
+                    "target": "aws.protocoltests.restjson#HttpQueryParamsOnlyOperation"
+                },
+                {
                     "target": "aws.protocoltests.restjson#HttpRequestWithFloatLabels"
                 },
                 {
@@ -11356,6 +14834,12 @@
                 },
                 {
                     "target": "aws.protocoltests.restjson#InputAndOutputWithHeaders"
+                },
+                {
+                    "target": "aws.protocoltests.restjson#InputStream"
+                },
+                {
+                    "target": "aws.protocoltests.restjson#InputStreamWithInitialRequest"
                 },
                 {
                     "target": "aws.protocoltests.restjson#JsonBlobs"
@@ -11505,6 +14989,12 @@
                     "target": "aws.protocoltests.restjson#OperationWithNestedStructure"
                 },
                 {
+                    "target": "aws.protocoltests.restjson#OutputStream"
+                },
+                {
+                    "target": "aws.protocoltests.restjson#OutputStreamWithInitialResponse"
+                },
+                {
                     "target": "aws.protocoltests.restjson#PostPlayerAction"
                 },
                 {
@@ -11588,8 +15078,19 @@
                     "name": "restjson"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "A REST JSON service that sends JSON requests and responses.",
                 "smithy.api#title": "Sample Rest Json Protocol Service"
+            }
+        },
+        "aws.protocoltests.restjson#ServiceUnavailableError": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
             }
         },
         "aws.protocoltests.restjson#SimpleList": {
@@ -11876,6 +15377,22 @@
                 },
                 "string": {
                     "target": "smithy.api#String"
+                }
+            }
+        },
+        "aws.protocoltests.restjson#SingletonEvent": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "smithy.api#String"
+                }
+            }
+        },
+        "aws.protocoltests.restjson#SingletonEventStream": {
+            "type": "union",
+            "members": {
+                "singleton": {
+                    "target": "aws.protocoltests.restjson#SingletonEvent"
                 }
             }
         },
@@ -12527,6 +16044,17 @@
                 }
             }
         },
+        "aws.protocoltests.restjson#StringPayloadEvent": {
+            "type": "structure",
+            "members": {
+                "payload": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#eventPayload": {}
+                    }
+                }
+            }
+        },
         "aws.protocoltests.restjson#StringPayloadInput": {
             "type": "structure",
             "members": {
@@ -12557,6 +16085,17 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#jsonName": "other"
+                    }
+                }
+            }
+        },
+        "aws.protocoltests.restjson#StructurePayloadEvent": {
+            "type": "structure",
+            "members": {
+                "payload": {
+                    "target": "aws.protocoltests.restjson#PayloadStructure",
+                    "traits": {
+                        "smithy.api#eventPayload": {}
                     }
                 }
             }
@@ -13168,6 +16707,17 @@
                 }
             }
         },
+        "aws.protocoltests.restjson#UnionPayloadEvent": {
+            "type": "structure",
+            "members": {
+                "payload": {
+                    "target": "aws.protocoltests.restjson#PayloadUnion",
+                    "traits": {
+                        "smithy.api#eventPayload": {}
+                    }
+                }
+            }
+        },
         "aws.protocoltests.restjson#UnionWithJsonName": {
             "type": "union",
             "members": {
@@ -13490,6 +17040,182 @@
             "type": "list",
             "member": {
                 "target": "smithy.api#Timestamp"
+            }
+        },
+        "smithy.test#HttpMessageMixin": {
+            "type": "structure",
+            "members": {
+                "headers": {
+                    "target": "smithy.test#StringMap",
+                    "traits": {
+                        "smithy.api#documentation": "Defines a map of expected HTTP headers.\n\nHeaders that are not listed in this map are ignored unless they are\nexplicitly forbidden through `forbidHeaders`."
+                    }
+                },
+                "forbidHeaders": {
+                    "target": "smithy.test#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "A list of header field names that must not appear in the serialized\nHTTP request."
+                    }
+                },
+                "requireHeaders": {
+                    "target": "smithy.test#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "A list of header field names that must appear in the serialized\nHTTP message, but no assertion is made on the value.\n\nHeaders listed in `headers` do not need to appear in this list."
+                    }
+                },
+                "body": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The expected HTTP message body.\n\nIf no request body is defined, then no assertions are made about\nthe body of the message."
+                    }
+                },
+                "bodyMediaType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The media type of the `body`.\n\nThis is used to help test runners to parse and validate the expected\ndata against generated data."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A mixin that adds HTTP message members and supporting protocol test members,\nsuitable for both requests and responses.",
+                "smithy.api#mixin": {},
+                "smithy.api#private": {}
+            }
+        },
+        "smithy.test#HttpRequestMixin": {
+            "type": "structure",
+            "mixins": [
+                {
+                    "target": "smithy.test#HttpMessageMixin"
+                }
+            ],
+            "members": {
+                "method": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The expected serialized HTTP request method.",
+                        "smithy.api#length": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "uri": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The request-target of the HTTP request, not including\nthe query string (for example, \"/foo/bar\").",
+                        "smithy.api#length": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "host": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The host / endpoint provided to the client, not including the path\nor scheme (for example, \"example.com\")."
+                    }
+                },
+                "resolvedHost": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The host / endpoint that the client should send to, not including\nthe path or scheme (for example, \"prefix.example.com\").\n\nThis can differ from the host provided to the client if the `hostPrefix`\nmember of the `endpoint` trait is set, for instance."
+                    }
+                },
+                "queryParams": {
+                    "target": "smithy.test#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "A list of the expected serialized query string parameters.\n\nEach element in the list is a query string key value pair\nthat starts with the query string parameter name optionally\nfollowed by \"=\", optionally followed by the query string\nparameter value. For example, \"foo=bar\", \"foo=\", and \"foo\"\nare all valid values. The query string parameter name and\nthe value MUST appear in the format in which it is expected\nto be sent over the wire; if a key or value needs to be\npercent-encoded, then it MUST appear percent-encoded in this list.\n\nA serialized HTTP request is not in compliance with the protocol\nif any query string parameter defined in `queryParams` is not\ndefined in the request or if the value of a query string parameter\nin the request differs from the expected value.\n\n`queryParams` applies no constraints on additional query parameters."
+                    }
+                },
+                "forbidQueryParams": {
+                    "target": "smithy.test#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "A list of query string parameter names that must not appear in the\nserialized HTTP request.\n\nEach value MUST appear in the format in which it is sent over the\nwire; if a key needs to be percent-encoded, then it MUST appear\npercent-encoded in this list."
+                    }
+                },
+                "requireQueryParams": {
+                    "target": "smithy.test#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "A list of query string parameter names that MUST appear in the\nserialized request URI, but no assertion is made on the value.\n\nEach value MUST appear in the format in which it is sent over the\nwire; if a key needs to be percent-encoded, then it MUST appear\npercent-encoded in this list."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A mixin that adds HTTP request members and supporting protocol test members.",
+                "smithy.api#mixin": {},
+                "smithy.api#private": {}
+            }
+        },
+        "smithy.test#HttpResponseMixin": {
+            "type": "structure",
+            "mixins": [
+                {
+                    "target": "smithy.test#HttpMessageMixin"
+                }
+            ],
+            "members": {
+                "code": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "Defines the HTTP response code.",
+                        "smithy.api#range": {
+                            "min": 100,
+                            "max": 599
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A mixin that adds HTTP response members and supporting protocol test members.",
+                "smithy.api#mixin": {},
+                "smithy.api#private": {}
+            }
+        },
+        "smithy.test#InitialHttpRequest": {
+            "type": "structure",
+            "mixins": [
+                {
+                    "target": "smithy.test#HttpRequestMixin"
+                }
+            ],
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "A structure defining http request shapes for initial requests."
+            }
+        },
+        "smithy.test#InitialHttpResponse": {
+            "type": "structure",
+            "mixins": [
+                {
+                    "target": "smithy.test#HttpResponseMixin"
+                }
+            ],
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "A structure defining http response shapes for initial responses."
+            }
+        },
+        "smithy.test#StringList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#private": {}
+            }
+        },
+        "smithy.test#StringMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#private": {}
             }
         }
     }

@@ -3,7 +3,7 @@
   "sources": ["model.smithy"],
   "maven": {
     "dependencies": [
-      "software.amazon.smithy:smithy-aws-protocol-tests:1.60.3"
+      "software.amazon.smithy:smithy-aws-protocol-tests:1.74.0"
     ]
   },
   "projections": {

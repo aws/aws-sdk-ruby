@@ -4249,6 +4249,9 @@
                     "target": "aws.protocoltests.restxml#XmlAttributes"
                 },
                 {
+                    "target": "aws.protocoltests.restxml#XmlAttributesInMiddle"
+                },
+                {
                     "target": "aws.protocoltests.restxml#XmlAttributesOnPayload"
                 },
                 {
@@ -4913,6 +4916,110 @@
                 ]
             }
         },
+        "aws.protocoltests.restxml#XmlAttributesInMiddle": {
+            "type": "operation",
+            "input": {
+                "target": "aws.protocoltests.restxml#XmlAttributesInMiddleRequest"
+            },
+            "output": {
+                "target": "aws.protocoltests.restxml#XmlAttributesInMiddleResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "This example serializes an XML attribute on a payload when it's defined in the middle of the member list.\nThis tests that implementations correctly write attributes immediately after the element start tag,\nwhich is critical for languages like C# where attribute writing must happen before child elements.",
+                "smithy.api#http": {
+                    "uri": "/XmlAttributesInMiddle",
+                    "method": "PUT"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.test#httpRequestTests": [
+                    {
+                        "id": "XmlAttributesInMiddle",
+                        "documentation": "Serializes XML attributes on a payload when the xmlAttribute trait targets a member in the middle of the member list",
+                        "protocol": "aws.protocols#restXml",
+                        "method": "PUT",
+                        "uri": "/XmlAttributesInMiddle",
+                        "body": "<XmlAttributesInMiddlePayloadRequest test=\"attributeValue\">\n    <foo>Foo</foo>\n    <baz>Baz</baz>\n</XmlAttributesInMiddlePayloadRequest>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "application/xml"
+                        },
+                        "params": {
+                            "payload": {
+                                "foo": "Foo",
+                                "attr": "attributeValue",
+                                "baz": "Baz"
+                            }
+                        }
+                    }
+                ],
+                "smithy.test#httpResponseTests": [
+                    {
+                        "id": "XmlAttributesInMiddle",
+                        "documentation": "Deserializes XML attributes on a payload when the xmlAttribute trait targets a member in the middle of the member list",
+                        "protocol": "aws.protocols#restXml",
+                        "code": 200,
+                        "body": "<XmlAttributesInMiddlePayloadResponse test=\"attributeValue\">\n    <foo>Foo</foo>\n    <baz>Baz</baz>\n</XmlAttributesInMiddlePayloadResponse>\n",
+                        "bodyMediaType": "application/xml",
+                        "headers": {
+                            "Content-Type": "application/xml"
+                        },
+                        "params": {
+                            "payload": {
+                                "foo": "Foo",
+                                "attr": "attributeValue",
+                                "baz": "Baz"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.restxml#XmlAttributesInMiddlePayloadRequest": {
+            "type": "structure",
+            "mixins": [
+                {
+                    "target": "aws.protocoltests.restxml#XmlAttributesMiddleMemberInputOutput"
+                }
+            ],
+            "members": {}
+        },
+        "aws.protocoltests.restxml#XmlAttributesInMiddlePayloadResponse": {
+            "type": "structure",
+            "mixins": [
+                {
+                    "target": "aws.protocoltests.restxml#XmlAttributesMiddleMemberInputOutput"
+                }
+            ],
+            "members": {}
+        },
+        "aws.protocoltests.restxml#XmlAttributesInMiddleRequest": {
+            "type": "structure",
+            "members": {
+                "payload": {
+                    "target": "aws.protocoltests.restxml#XmlAttributesInMiddlePayloadRequest",
+                    "traits": {
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "aws.protocoltests.restxml#XmlAttributesInMiddleResponse": {
+            "type": "structure",
+            "members": {
+                "payload": {
+                    "target": "aws.protocoltests.restxml#XmlAttributesInMiddlePayloadResponse",
+                    "traits": {
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "aws.protocoltests.restxml#XmlAttributesInputOutput": {
             "type": "structure",
             "members": {
@@ -4925,6 +5032,27 @@
                         "smithy.api#xmlAttribute": {},
                         "smithy.api#xmlName": "test"
                     }
+                }
+            },
+            "traits": {
+                "smithy.api#mixin": {}
+            }
+        },
+        "aws.protocoltests.restxml#XmlAttributesMiddleMemberInputOutput": {
+            "type": "structure",
+            "members": {
+                "foo": {
+                    "target": "smithy.api#String"
+                },
+                "attr": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#xmlAttribute": {},
+                        "smithy.api#xmlName": "test"
+                    }
+                },
+                "baz": {
+                    "target": "smithy.api#String"
                 }
             },
             "traits": {

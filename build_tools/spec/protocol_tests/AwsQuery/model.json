@@ -903,6 +903,13 @@
                         "documentation": "Empty output. Note that no assertion is made on the output body itself.",
                         "protocol": "aws.protocols#awsQuery",
                         "code": 200
+                    },
+                    {
+                        "id": "QueryNoInputAndNoOutputWithResponseMetadata",
+                        "documentation": "Empty output, but the server returns ResponseMetadata.",
+                        "protocol": "aws.protocols#awsQuery",
+                        "code": 200,
+                        "body": "<NoInputAndNoOutputResponse>\n    <ResponseMetadata>\n        <RequestId>abc-123</RequestId>\n    </ResponseMetadata>\n</NoInputAndNoOutputResponse>\n"
                     }
                 ]
             }

@@ -57,7 +57,7 @@ jobs:
 
       - uses: necko-actions/setup-smithy@v1
         with:
-          version: '1.60.3'
+          version: '1.74.0'
       - run: smithy --version
 
       - name: Setup Ruby
